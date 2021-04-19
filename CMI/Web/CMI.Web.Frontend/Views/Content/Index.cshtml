@@ -1,0 +1,129 @@
+﻿@using CMI.Utilities.Common.Helpers
+@using CMI.Web.Common.Helpers
+@model CMI.Web.Frontend.Models.ContentIndexModel
+@{
+    Layout = null;
+    var staticRoot = Url.Content(StringHelper.AddToString("~", "/", DirectoryHelper.Instance.StaticDefaultPath));
+    staticRoot = staticRoot + (!staticRoot.EndsWith("/") ? "/" : string.Empty);
+}
+
+<!DOCTYPE HTML>
+<html lang="@ViewBag.Language" class="no-js no-ie @ViewBag.HtmlClasses">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Source CSS -->
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/vendors.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/admin.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/print.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/viaduc.css">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="@Html.Raw(staticRoot)img/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-76x76.png">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="@Html.Raw(staticRoot)img/ico/mstile-144x144.png">
+    <meta name="msapplication-config" content="@Html.Raw(staticRoot)img/ico/browserconfig.xml">
+
+    <title>@ViewBag.Title</title>
+
+    <meta name="language" content="@ViewBag.Language">
+</head>
+<body>
+
+<div class="container container-main">
+
+    @if (Model.EditMode)
+    {
+        <header>
+            <div class="clearfix">
+                <section class="clearfix">
+                    <h2 class="sr-only">Sprachwahl</h2>
+                    <nav class="nav-lang">
+                        <ul>
+                            @foreach (var entry in Model.LanguageLinks)
+                            {
+                                <li>
+                                    <a href="@entry.Value" lang="@entry.Key" class="@(ViewBag.Language == entry.Key ? "active" : "")">@entry.Key.ToUpper()</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </section>
+            </div>
+        </header>
+    }
+
+    <!--content-begin-->
+    @Html.Raw(ViewBag.Html)
+    <!--content-end-->
+
+</div>
+
+<script src="@Html.Raw(staticRoot)js/vendors.min.js"></script>
+<script src="@Html.Raw(staticRoot)js/main.min.js"></script>
+
+@if (Model.EditMode)
+{
+    <link href="@Html.Raw(staticRoot)css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jodit/3.4.25/jodit.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jodit/3.4.25/jodit.min.js"></script>
+
+    <script type="text/javascript" src="@Html.Raw(staticRoot)js/libs/lodash/lodash.js"></script>
+
+    <link href="@Html.Raw(staticRoot)js/libs/toastr/toastr.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="@Html.Raw(staticRoot)js/libs/toastr/toastr.js"></script>
+
+    <link href="@Html.Raw(staticRoot)css/viaduc_editor.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="@Html.Raw(staticRoot)js/viaduc_editor.js"></script>
+    <script type="text/javascript"> editing.baseUrl = "@Model.BaseUrl";</script>
+
+    <div class="editor-container">
+        <textarea name="htmlEditor" id="htmlEditor" rows="10" cols="80"></textarea>
+    </div>
+    <div class="editor-editable-controls-container">
+
+    </div>
+
+    <div class="editing-controls">
+        <div class="control edit">
+            <span class="fa fa-pencil"></span>
+        </div>
+        <div class="control save">
+            <span class="fa fa-floppy-o"></span>
+        </div>
+        <div class="control cancel">
+            <span class="fa fa-remove"></span>
+        </div>
+    </div>
+
+    <div class="editor-controls-template" style="display: none">
+        <div class="editable-controls">
+            <div class="controls-container">
+                <div class="control edit">
+                    <span class="fa fa-pencil"></span>
+                </div>
+                <div class="control save">
+                    <span class="fa fa-check"></span>
+                </div>
+                <div class="control cancel">
+                    <span class="fa fa-remove"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</body>
+</html>

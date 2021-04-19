@@ -1,0 +1,205 @@
+﻿{
+  "Id": "4397586",
+  "Type": "Dossier",
+  "MetadataAccessTokens": [ "Public" ],
+  "Title": "Studienkommission für strategische Fragen",
+  "_metadata": {
+    "Identifikation": {
+      "ReferenceCode": "E4390C#2005/25#462*",
+      "Level": "Dossier",
+      "CreationPeriod": {
+        "Text": "1990 - 1990",
+        "StartDate": "1990-01-01T00:00:00",
+        "EndDate": "1991-01-01T00:00:00",
+        "SearchStartDate": "1989-07-05T00:00:00",
+        "SearchEndDate": "1990-12-31T00:00:00",
+        "Years": [ 1990 ],
+        "type": "Date.Range"
+      }
+    },
+    "Zugang": {
+      "ProtectionEndDate": {
+        "Date": "2020-12-31T00:00:00",
+        "Year": 2020,
+        "type": "Date.Year"
+      },
+      "ProtectionCategory": "Art. 9.1 BGA",
+      "AccessionDate": 2005
+    }
+  },
+  "_context": {
+    "Ancestors": [
+      {
+        "Id": "1",
+        "Type": "Archiv",
+        "Title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "CH-BAR#Unterlagen*",
+            "Level": "Archiv"
+          }
+        },
+        "DateRangeText": "1424-2007",
+        "Depth": 0
+      },
+      {
+        "Id": "28",
+        "Type": "Hauptabteilung",
+        "Title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E*",
+            "Level": "Hauptabteilung"
+          }
+        },
+        "DateRangeText": "1848-2009",
+        "Depth": 1
+      },
+      {
+        "Id": "4672",
+        "Type": "Bestand",
+        "Title": "Bundesamt für Zivilschutz (1963-2002)",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E10104*",
+            "Level": "Bestand"
+          }
+        },
+        "DateRangeText": "1928-1996",
+        "Depth": 2
+      },
+      {
+        "Id": "4677",
+        "Type": "Teilbestand",
+        "Level": "Teilbestand",
+        "Title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)",
+        "DateRangeText": "1928-1999",
+        "ReferenceCode": "E4390C*",
+        "Depth": 3
+      },
+      {
+        "Id": "3894816",
+        "Type": "Serie",
+        "Title": "Verwaltung",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#0",
+            "Level": "Serie"
+          }
+        },
+        "DateRangeText": "1936-1991",
+        "Depth": 4
+      },
+      {
+        "Id": "3894989",
+        "Type": "Serie",
+        "Title": "Beziehungen",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#07",
+            "Level": "Serie"
+          }
+        },
+        "DateRangeText": "1964-1986",
+        "Depth": 5
+      },
+      {
+        "Id": "3895004",
+        "Type": "Serie",
+
+
+        "Title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#074",
+            "Level": "Serie"
+          }
+        },
+        "DateRangeText": "1964-1986",
+        "Depth": 6
+      },
+      {
+        "Id": "4397585",
+        "Type": "Serie",
+        "Title": "Studienkommission für strategische Fragen",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#074.26",
+            "Level": "Serie"
+          }
+        },
+        "Depth": 7
+      }
+    ]
+  },
+  "HasImage": false,
+  "HasAudioVideo": false,
+  "PlayingLengthInS": 0,
+  "CanBeOrdered": true,
+  "TreeSequence": 512,
+  "TreeLevel": 9,
+  "IsLeaf": true,
+  "IsRoot": false,
+  "Places": [],
+  "ExternalDisplayTemplateName": "10032: BAR Dossier",
+  "InternalDisplayTemplateName": "10032: BAR Dossier",
+  "PreviousArchiveRecordId": "0",
+  "NextArchiveRecordId": "5130687",
+  "ParentArchiveRecordId": "4397585",
+  "FirstChildArchiveRecordId": "-1",
+  "ChildCount": 0,
+  "Thumbnail": {},
+  "ContainsPersonRelatedInformation": false,
+  "IsPhysicalyUsable": true,
+  "ProtectionDuration": 30,
+  "Permission": "nicht erhoben",
+  "PhysicalUsability": "Uneingeschränkt",
+  "Accessibility": "Öffentlich",
+  "Descriptors": [],
+  "Containers": [
+    {
+      "ContainerLocation": "4.4.008.10.04",
+      "ContainerType": "Schachtel",
+      "IdName": "2068351 2005/25_00123"
+    }
+  ],
+  "References": [],
+  "PrimaryData": [],
+  "CustomFields": {
+    "bildVorschau": {},
+    "bildAnsicht": {},
+    "veAblieferungLink": [
+      {
+        "value": "2005/00025 Bundesamt für Bevölkerungsschutz (keine Angabe)",
+        "entityRecordId": "1311302",
+        "entityType": "Ablieferungen"
+      }
+    ],
+    "veOrdnungskomponenteLink": [],
+    "verwandteVe": [],
+    "bemerkungZurVe": [],
+    "land": [],
+    "zusatzkomponenteZac1": [],
+    "aktenzeichen": [ "074.26" ],
+    "früheresAktenzeichen": [],
+    "vorgängerbehörden": [],
+    "nachfolgerbehörden": [],
+    "aipId": [],
+    "urheber": [],
+    "beteiligtePersonenKörperschaften": [],
+    "verleger": [],
+    "abdeckung": [],
+    "thema": [],
+    "format": [],
+    "digitalesFindmittelBeschreibung": [],
+    "digitalesFindmittelLink": [],
+    "digitaleVersion": [],
+    "zugänglichkeitGemässBga": "In Schutzfrist",
+    "dummyElasticdatewithyear": {
+      "date": "0001-01-01T00:00:00",
+      "year": 0
+    }
+  },
+  "highlight": {},
+  "Depth": 8
+}

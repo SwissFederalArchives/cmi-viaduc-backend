@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2019-05-29T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot636947116989054935">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_A95JogyH5IJ3fdZaL7L6ZN_D">
+        <name>92.3054_ Dringliche Interpellation Bonny. Aufstockung des Rahmenkredites zur Weiterführung der verstärkten Zusammenarbeit mit ost- und mitteleuropäischen Staten _ Inte</name>
+        <originalName>92.3054: Dringliche Interpellation Bonny. Aufstockung des Rahmenkredites zur Weiterführung der verstärkten Zusammenarbeit mit ost- und mitteleuropäischen Staten / Interpellation urgente Bonny. Coopération avec les pays d'Europe centrale et orientale. Augmentation du crédit de programme</originalName>
+        <datei id="feddf3ee06dc4b17bf27ea0785097e00">
+          <name>636947117013002119.pdf</name>
+          <originalName>636947117013002119.pdf</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7cada79b496cd4068491790e825c8920</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_hj3D9aoYiCMcHHcmGq0IOH_D">
+        <name>90.045_ Militärversicherung. Bundesgesetz _ Assurance militaire. Loi</name>
+        <originalName>90.045: Militärversicherung. Bundesgesetz / Assurance militaire. Loi</originalName>
+        <datei id="142dd9a2bd0c44d3a08e1eb3911580b0">
+          <name>636947117133003157.pdf</name>
+          <originalName>636947117133003157.pdf</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>59123a6e68492a2692fef1d9df1f02f5</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_KkWKsYI9E8bEOiUzOM4EPf_D">
+        <name>Fragestunde_ Schwarzarbeit; Ratifizierung der Europäischen Ordnung der sozialen Sicherheit (revidiert); Aktion _Kinder der Landstrasse_; Bericht über Kindsmisshandllun</name>
+        <originalName>Fragestunde: Schwarzarbeit; Ratifizierung der Europäischen Ordnung der sozialen Sicherheit (revidiert); Aktion "Kinder der Landstrasse"; Bericht über Kindsmisshandllungen; WWF. Aufruf zu Gewalt und illegalen Aktionen; Aufforderung zu Straftaten durch den WWF; Umweltgipfel in Rio. Grünhelme; Rückstan</originalName>
+        <datei id="09610f35a7a2444ab23400cc63498d61">
+          <name>636947117249722856.pdf</name>
+          <originalName>636947117249722856.pdf</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b0e2fc3ad26f6a93fc1877aa7b5e1cb8</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_lajlmYjMj0igyHuMIgukUD_D">
+        <name>92.3062_ Dringliche Interpellation der grünen Fraktion. Fehler bei der Auszählung des Neat-Referendums _ Interpellation urgente du groupe écologiste. Référendum sur la</name>
+        <originalName>92.3062: Dringliche Interpellation der grünen Fraktion. Fehler bei der Auszählung des Neat-Referendums / Interpellation urgente du groupe écologiste. Référendum sur la NLFA. Erreurs de dépouillement</originalName>
+        <datei id="59d4e49fb4944b339c0e72b99367cd3e">
+          <name>636947117365036356.pdf</name>
+          <originalName>636947117365036356.pdf</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>c291cfc411676fe9ee4530c236107ab4</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_RJMRnCpDRBm1AJ3Vqu6rF8_D">
+        <name>U_m_s_c_h_l_a_g_0000001</name>
+        <originalName>U_m_s_c_h_l_a_g_0000001</originalName>
+        <datei id="652e835d56114e7f9d348da1d0471668">
+          <name>636947117478787327.pdf</name>
+          <originalName>636947117478787327.pdf</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>94f7ad6dbf18da41f8eec6b34cb46903</pruefsumme>
+        </datei>
+      </ordner>
+      <datei id="_84BSW3nxJGRXkrOd93xYRo">
+        <name>Prozess_Digitalisierung_PREMIS.xml</name>
+        <originalName>Prozess_Digitalisierung_PREMIS.xml</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>ea74fa4cb73d06326153d430ea6094f5</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Parlamentsdienste (Bern)</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von />
+      <bis />
+    </entstehungszeitraum>
+    <ablieferungsnummer>1992/301_3406247</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Nationalrat (k.A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Nationalrat: Verhandlungsprotokolle (1848-)</name>
+      <ordnungssystemposition id="_6a3FYZ0rc2NIy9ckgazJMk">
+        <nummer>1</nummer>
+        <titel>Verhandlungsprotokolle</titel>
+        <ordnungssystemposition id="_GhlTh6xyDC1noP4h4yUEWl">
+          <nummer>1.4</nummer>
+          <titel>Tonaufzeichnungen der Verhandlungen des Nationalrats</titel>
+          <ordnungssystemposition id="_xKRRlJ5hzYivYBt0wqE9kV">
+            <nummer>1.4-44</nummer>
+            <titel>Legislaturperiode: Wintersession 1991 bis Herbstsession 1995</titel>
+            <ordnungssystemposition id="_ZHMzqoNiVcZ2TlHfopuoBt">
+              <nummer>1.4-44-03</nummer>
+              <titel>Frühjahrssession 1992</titel>
+              <dossier id="_vXriLDj3sYPqb3ibfcDACm">
+                <aktenzeichen>1.4-44-03</aktenzeichen>
+                <titel>8. Verhandlungstag</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <eroeffnungsdatum />
+                <abschlussdatum />
+                <entstehungszeitraum>
+                  <von>
+                    <datum>1992-03-16</datum>
+                  </von>
+                  <bis>
+                    <datum>1992-03-16</datum>
+                  </bis>
+                </entstehungszeitraum>
+                <zusatzDaten>
+                  <merkmal name="Signatur">E1301#1992/301#8*</merkmal>
+                  <merkmal name="Stufe">Dossier</merkmal>
+                  <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10426*","Title":"Nationalrat (1848-)","DateRangeText":"1848-2007","ArchiveRecordId":"5798"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1301*","Title":"Nationalrat: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2011","ArchiveRecordId":"5802"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2011","ArchiveRecordId":"3965542"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4","Title":"Tonaufzeichnungen der Verhandlungen des Nationalrats","DateRangeText":"1982.03.01-2008.12.19","ArchiveRecordId":"3965546"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44","Title":"Legislaturperiode: Wintersession 1991 bis Herbstsession 1995","DateRangeText":"1991.11.25-1993.03.19","ArchiveRecordId":"4090586"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44-03","Title":"Frühjahrssession 1992","DateRangeText":"1992.03.02-1992.03.20","ArchiveRecordId":"4090589"},{"IconId":2,"Level":"Dossier","RefCode":"E1301#1992/301#8*","Title":"8. Verhandlungstag","DateRangeText":"1992.03.16","ArchiveRecordId":"3406247"}]</merkmal>
+                  <merkmal name="Form">Tonaufnahmen (analog und digital)</merkmal>
+                  <merkmal name="Identifikation digitales Magazin">e7ed0779-389d-442a-ba82-e3e23bfe8d48@_vXriLDj3sYPqb3ibfcDACm</merkmal>
+                  <merkmal name="Entstehungszeitraum Anzeigetext">16.03.1992</merkmal>
+                </zusatzDaten>
+                <dokument id="_A95JogyH5IJ3fdZaL7L6ZN">
+                  <titel>92.3054: Dringliche Interpellation Bonny. Aufstockung des Rahmenkredites zur Weiterführung der verstärkten Zusammenarbeit mit ost- und mitteleuropäischen Staten / Interpellation urgente Bonny. Coopération avec les pays d'Europe centrale et orientale. Augmentation du crédit de programme</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <registrierdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>1992-03-16</datum>
+                    </von>
+                    <bis>
+                      <datum>1992-03-16</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <bemerkung>Dateien: E1301_04338_x_A1.mp3; E1301_04338_x_A2.mp3; E1301_04338_x_S1.wav; E1301_04338_x_S2.wav</bemerkung>
+                  <zusatzDaten>
+                    <merkmal name="Signatur">E1301#1992/301#8#2*</merkmal>
+                    <merkmal name="Stufe">Dokument</merkmal>
+                    <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10426*","Title":"Nationalrat (1848-)","DateRangeText":"1848-2007","ArchiveRecordId":"5798"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1301*","Title":"Nationalrat: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2011","ArchiveRecordId":"5802"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2011","ArchiveRecordId":"3965542"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4","Title":"Tonaufzeichnungen der Verhandlungen des Nationalrats","DateRangeText":"1982.03.01-2008.12.19","ArchiveRecordId":"3965546"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44","Title":"Legislaturperiode: Wintersession 1991 bis Herbstsession 1995","DateRangeText":"1991.11.25-1993.03.19","ArchiveRecordId":"4090586"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44-03","Title":"Frühjahrssession 1992","DateRangeText":"1992.03.02-1992.03.20","ArchiveRecordId":"4090589"},{"IconId":2,"Level":"Dossier","RefCode":"E1301#1992/301#8*","Title":"8. Verhandlungstag","DateRangeText":"1992.03.16","ArchiveRecordId":"3406247"},{"IconId":6,"Level":"Dokument","RefCode":"E1301#1992/301#8#2*","Title":"92.3054: Dringliche Interpellation Bonny. Aufstockung des Rahmenkredites zur Weiterführung der verstärkten Zusammenarbeit mit ost- und mitteleuropäischen Staten / Interpellation urgente Bonny. Coopération avec les pays d'Europe centrale et orientale. Augmentation du crédit de programme","DateRangeText":"1992.03.16","ArchiveRecordId":"3525667"}]</merkmal>
+                    <merkmal name="Darin">Sprecher/Sprecherinnen: Bär, Rosmarie; Bircher, Silvio; Bonny, Jean-Pierre; Eggly, Jacques-Simon; Felber, René; Frey, Walter; Ledergerber, Elmar; Oehler, Edgar; Pini, Massimo; Robert, Leni; Scheidegger, Urs; Weder, Hansjürg; Wiederkehr, Roland; Ziegler, Jean</merkmal>
+                    <merkmal name="Identifikation digitales Magazin">e7ed0779-389d-442a-ba82-e3e23bfe8d48@_vXriLDj3sYPqb3ibfcDACm@_A95JogyH5IJ3fdZaL7L6ZN</merkmal>
+                    <merkmal name="Entstehungszeitraum Anzeigetext">16.03.1992</merkmal>
+                    <merkmal name="ReihenfolgeAnalogesDossier">000003</merkmal>
+                  </zusatzDaten>
+                  <dateiRef>feddf3ee06dc4b17bf27ea0785097e00</dateiRef>
+                </dokument>
+                <dokument id="_hj3D9aoYiCMcHHcmGq0IOH">
+                  <titel>90.045: Militärversicherung. Bundesgesetz / Assurance militaire. Loi</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <registrierdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>1992-03-16</datum>
+                    </von>
+                    <bis>
+                      <datum>1992-03-16</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <bemerkung>Dateien: E1301_04340_x_A1.mp3; E1301_04340_x_A2.mp3; E1301_04340_x_S1.wav; E1301_04340_x_S2.wav</bemerkung>
+                  <zusatzDaten>
+                    <merkmal name="Signatur">E1301#1992/301#8#4*</merkmal>
+                    <merkmal name="Stufe">Dokument</merkmal>
+                    <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10426*","Title":"Nationalrat (1848-)","DateRangeText":"1848-2007","ArchiveRecordId":"5798"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1301*","Title":"Nationalrat: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2011","ArchiveRecordId":"5802"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2011","ArchiveRecordId":"3965542"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4","Title":"Tonaufzeichnungen der Verhandlungen des Nationalrats","DateRangeText":"1982.03.01-2008.12.19","ArchiveRecordId":"3965546"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44","Title":"Legislaturperiode: Wintersession 1991 bis Herbstsession 1995","DateRangeText":"1991.11.25-1993.03.19","ArchiveRecordId":"4090586"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44-03","Title":"Frühjahrssession 1992","DateRangeText":"1992.03.02-1992.03.20","ArchiveRecordId":"4090589"},{"IconId":2,"Level":"Dossier","RefCode":"E1301#1992/301#8*","Title":"8. Verhandlungstag","DateRangeText":"1992.03.16","ArchiveRecordId":"3406247"},{"IconId":6,"Level":"Dokument","RefCode":"E1301#1992/301#8#4*","Title":"90.045: Militärversicherung. Bundesgesetz / Assurance militaire. Loi","DateRangeText":"1992.03.16","ArchiveRecordId":"3525669"}]</merkmal>
+                    <merkmal name="Darin">Sprecher/Sprecherinnen: Allenspach, Heinz; Cotti, Flavio; Daepp, Susanna; Dormann, Rosmarie; Dormann, Rosmarie; Eymann, Christoph; Gysin, Hans-Rudolf; Hafner, Rudolf; Hafner, Ursula; Keller, Rudolf; Leuenberger, Ernst; Loeb, François; Pidoux, Philippe; Seiler, Rolf; Sieber, Ernst</merkmal>
+                    <merkmal name="Identifikation digitales Magazin">e7ed0779-389d-442a-ba82-e3e23bfe8d48@_vXriLDj3sYPqb3ibfcDACm@_hj3D9aoYiCMcHHcmGq0IOH</merkmal>
+                    <merkmal name="Entstehungszeitraum Anzeigetext">16.03.1992</merkmal>
+                    <merkmal name="ReihenfolgeAnalogesDossier">000005</merkmal>
+                  </zusatzDaten>
+                  <dateiRef>142dd9a2bd0c44d3a08e1eb3911580b0</dateiRef>
+                </dokument>
+                <dokument id="_KkWKsYI9E8bEOiUzOM4EPf">
+                  <titel>Fragestunde: Schwarzarbeit; Ratifizierung der Europäischen Ordnung der sozialen Sicherheit (revidiert); Aktion "Kinder der Landstrasse"; Bericht über Kindsmisshandllungen; WWF. Aufruf zu Gewalt und illegalen Aktionen; Aufforderung zu Straftaten durch den WWF; Umweltgipfel in Rio. Grünhelme; Rückstand in der Luftreinhalte-Politik, Export von giftigen Abfällen; Durch Mikrowellen erwärmte Lebensmittel; Obligatorischer Fahrunterricht für Motorwagenführer; Weniger Verkehrsopfer; Kompetenzwirrwarr mit Artikel 32 des SVG; Zentrales Ausländerregister und Ripol; Notrecht für Asylantenstopp; Versteckte Ausländerkinder. Geheimnisvoller Brief von Bundesrat Koller;Tamilen nach Sri Lanka zurück; Flüchtende aus dem Krisengebiet Jugoslawien; Aufhebung des Bundesbeschlusses über die "vorläufige Aufnahme" von jugoslawischen Staatsangehörigen aus den Krisengebieten; Jugoslawen mit L-Bewilligung; Militärflugzeug in zivilem Luftkorridor; Sicherheit im militärischen und zivilen Luftverkehr; Flughafen Kloten. Flüge in niedriger Höhe; Finanzielle Vorleistungen für den F/A-18; Kompensationsgeschäfte für den F/A-18; Bericht betreffend Militärjustiz; Lage im Nahen Osten und in der Türkei; Massenweise versenkte EMD-Munition im Thunersee; Umfahrung für Medeglia; Militärpflichtersatz. Befreiung für die Behinderten; Ergänzungsleistungen AHV. Prüfung der Berechtigung mittels Steuererklärung; Generelles Nachtarbeitsrecht für Frauen; Nachtarbeit für Frauen; EWR. Wo stehen wir; Die Schweiz und der EWR. Schwedische Kritiken; Gatt. Stand der Verhandlungen; Freisetzungsversuche mit genmanipulierten Pflanzen; Schweizer Delegation an der Artenschutzkonferenz; Antibiotikaverseuchtes Milchpulver; Ausbau des Bahnhofs Olten; SBB. "Bedretto-Fenster"; "Bahn 2000". Brüttener Tunnel. Ueberwerfungsbauwerk Hürlistein (Effretikon); Kostenüberwälzung bei Verkehrsunfällen; Schiffahrt auf dem Langensee. Aenderung der Konzession; Flugplatz Lugano-Agno. Weitere Linien-Konzessionen; Betriebsbewilligung für KKW Mühlberg Konsultation der Kantone; Kassier-Telefonstation "Telcastar" der Ptt; Auszählung Neat-Referendum; Konflikt in Nagorny-Karabach. Gute Dienste der Schweiz; Schweizer Menschenrechtsdelegation in Tibet. Hilfe an die mittel- und osteuropäischen Staaten und Finanzplanung; Desengagement der Schweiz in der Westsahara; Uebergriffe auf die kurdische Minderheit; Völkermord an den Kurden / Heure des questions: Travail au noir; Ratification du Code européen de sécurité sociale révisé; Enfants de la grand-route; Rapport sur les mauvais traitements infligés aux enfants: WWF. Appel à la violence et aux actions illégales; Conférence des Nations Unies sur l'environnement et le développement de Rio de Janeiro. Casques verts; Lutte contre la pollution atmosphérique; Exportation de déchets toxiques; Aliments chauffés aux micro-ondes; Formation obligatoire des conducteurs de voitures automobiles; Limites de vitesse et accidents de la route; Article 32 de la loi sur la circulation routière. Conflit de compétence; Registre central des étrangers et Ripol; Droit de nécessité en matière d'asile; Enfants de ressortissants étrangers cachés par leur famille. Lettre mystérieuse du conseiller fédéral Koller; Rapatriement des requérants d'asile tamouls; Réfugiés en provenance de Yougoslavie; Admission provisoire de ressortissants yougoslaves en provenance des régions d'affrontement. Abrogation de l'arrêté fédéral; Ressortissants yougoslaves titulaires du permis L; Avion militaire égaré dans le couloir aérien civil; Trafic aérien militaire et civil. Sécurité intégrée; Aéroport de Kloten. Vols à basse
+altitude; Engagement financier au titre du F/A-18; F/A-18. Opérations compensatoires; Rapport sur la justice militaire; Situation au Proche-Orient et en Turquie; Munitions militaires déversées dans le lac de Thoune; Route militaire de contournement de Medeglia; Droit aux prestations complémentaires AVS. Légitimité établie au vu de la déclaration fiscale; Travail de nuit des femmes; EEE. Où en sommes-nous? La Suisse et l'Espace économique européen. Critiques de la Suède; GATT. Etat des négociations et offre de la Suisse; Essais de culture en plein champ de plantes transgéniques; Délégation suisse à la Conférence internationale sur la conservation des espèces; Lait en poudre contaminé par des antibiotiques; Aménagement de la gare d'Olten; CFF. "Fenêtre de Bedretto"; RAIL 2000. Tunnel de Brütten. Saut-de-mouton d'Hürlistein (Effretikon"); Accidents de la circulation. Répercussion des coûts; Navigation sur le lac Majeur. Modification de la concession; Aérodrome de Lugano-Agno. Concessions pour de nouvelles lignes? Permis d'exploitation de la centrale de Mühleberg; Appareil téléphonique "Telcastar" des PTT; Référendum sur la NLFA. Erreurs de dépouillement; Conflit du Haut-Karabakh. Bons offices de la Suisse; Visite au Tibet de la Délégation suisse des droits de l'homme; Aide aux pays d'Europe centrale et orientale et planification financière; Désengagement suisse au Sahara occidental; Exactions commises envers la minorité kurde en Turquie; Génocide à l'encontre de la population kurde</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <registrierdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>1992-03-16</datum>
+                    </von>
+                    <bis>
+                      <datum>1992-03-16</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <bemerkung>Dateien: E1301_04337_x_A1.mp3; E1301_04337_x_A2.mp3; E1301_04337_x_S1.wav; E1301_04337_x_S2.wav</bemerkung>
+                  <zusatzDaten>
+                    <merkmal name="Signatur">E1301#1992/301#8#1*</merkmal>
+                    <merkmal name="Stufe">Dokument</merkmal>
+                    <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10426*","Title":"Nationalrat (1848-)","DateRangeText":"1848-2007","ArchiveRecordId":"5798"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1301*","Title":"Nationalrat: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2011","ArchiveRecordId":"5802"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2011","ArchiveRecordId":"3965542"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4","Title":"Tonaufzeichnungen der Verhandlungen des Nationalrats","DateRangeText":"1982.03.01-2008.12.19","ArchiveRecordId":"3965546"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44","Title":"Legislaturperiode: Wintersession 1991 bis Herbstsession 1995","DateRangeText":"1991.11.25-1993.03.19","ArchiveRecordId":"4090586"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44-03","Title":"Frühjahrssession 1992","DateRangeText":"1992.03.02-1992.03.20","ArchiveRecordId":"4090589"},{"IconId":2,"Level":"Dossier","RefCode":"E1301#1992/301#8*","Title":"8. Verhandlungstag","DateRangeText":"1992.03.16","ArchiveRecordId":"3406247"},{"IconId":6,"Level":"Dokument","RefCode":"E1301#1992/301#8#1*","Title":"Fragestunde: Schwarzarbeit; Ratifizierung der Europäischen Ordnung der sozialen Sicherheit (revidiert); Aktion \"Kinder der Landstrasse\"; Bericht über Kindsmisshandllungen; WWF. Aufruf zu Gewalt und illegalen Aktionen; Aufforderung zu Straftaten durch den WWF; Umweltgipfel in Rio. Grünhelme; Rückstan","DateRangeText":"1992.03.16","ArchiveRecordId":"3525666"}]</merkmal>
+                    <merkmal name="Darin">Sprecher/Sprecherinnen: Aguet, Pierre; Bäumlin, Ursula; Bezzola, Duri; Binder, Max; Brunner, Christiane; Bühlmann, Cécile; Cincera, Ernst; Cotti, Flavio; Delamuraz, Jean-Pascal; Dreher, Michael; Fankhauser, Angeline; Friderici, Charles; Gardiol, Irène; Gonseth, Ruth; Gross, Andreas; Hämmerle, Andrea; Hollenstein, Pia; Keller, Rudolf; Kern, Armin; Koller, Arnold; Loeb, François; Maeder, Herbert; Meier, Hans; Moser, René; Müller, Reinhard; Pini, Massimo; Rechsteiner, Paul; Ruf, Markus; Ruffy. Victor; Scheidegger, Urs; Scherrer, Jürg; Schmid, Peter; Spielmann, Jean; Stamm, Judith; Steffen, Hans; Stich, Otto; Tschopp, Peter; Villiger, Kaspar; Vollmer, Peter; Wanner, Christian; Wittenwiler, Mili; Ziegler, Jean; Zisyadis, Joseph; Zölch, Elisabeth, Reimann, Maximilian</merkmal>
+                    <merkmal name="Identifikation digitales Magazin">e7ed0779-389d-442a-ba82-e3e23bfe8d48@_vXriLDj3sYPqb3ibfcDACm@_KkWKsYI9E8bEOiUzOM4EPf</merkmal>
+                    <merkmal name="Entstehungszeitraum Anzeigetext">16.03.1992</merkmal>
+                    <merkmal name="ReihenfolgeAnalogesDossier">000002</merkmal>
+                  </zusatzDaten>
+                  <dateiRef>09610f35a7a2444ab23400cc63498d61</dateiRef>
+                </dokument>
+                <dokument id="_lajlmYjMj0igyHuMIgukUD">
+                  <titel>92.3062: Dringliche Interpellation der grünen Fraktion. Fehler bei der Auszählung des Neat-Referendums / Interpellation urgente du groupe écologiste. Référendum sur la NLFA. Erreurs de dépouillement</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <registrierdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>1992-03-16</datum>
+                    </von>
+                    <bis>
+                      <datum>1992-03-16</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <bemerkung>Dateien: E1301_04339_x_A1.mp3; E1301_04339_x_A2.mp3; E1301_04339_x_S1.wav; E1301_04339_x_S2.wav</bemerkung>
+                  <zusatzDaten>
+                    <merkmal name="Signatur">E1301#1992/301#8#3*</merkmal>
+                    <merkmal name="Stufe">Dokument</merkmal>
+                    <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10426*","Title":"Nationalrat (1848-)","DateRangeText":"1848-2007","ArchiveRecordId":"5798"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1301*","Title":"Nationalrat: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2011","ArchiveRecordId":"5802"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2011","ArchiveRecordId":"3965542"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4","Title":"Tonaufzeichnungen der Verhandlungen des Nationalrats","DateRangeText":"1982.03.01-2008.12.19","ArchiveRecordId":"3965546"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44","Title":"Legislaturperiode: Wintersession 1991 bis Herbstsession 1995","DateRangeText":"1991.11.25-1993.03.19","ArchiveRecordId":"4090586"},{"IconId":19,"Level":"Serie","RefCode":"E1301#1.4-44-03","Title":"Frühjahrssession 1992","DateRangeText":"1992.03.02-1992.03.20","ArchiveRecordId":"4090589"},{"IconId":2,"Level":"Dossier","RefCode":"E1301#1992/301#8*","Title":"8. Verhandlungstag","DateRangeText":"1992.03.16","ArchiveRecordId":"3406247"},{"IconId":6,"Level":"Dokument","RefCode":"E1301#1992/301#8#3*","Title":"92.3062: Dringliche Interpellation der grünen Fraktion. Fehler bei der Auszählung des Neat-Referendums / Interpellation urgente du groupe écologiste. Référendum sur la NLFA. Erreurs de dépouillement","DateRangeText":"1992.03.16","ArchiveRecordId":"3525668"}]</merkmal>
+                    <merkmal name="Darin">Sprecher/Sprecherinnen: Couchepin, Pascal; Dünki, Max; Gardiol, Irène; Gross, Andreas; Thür, Hanspeter</merkmal>
+                    <merkmal name="Identifikation digitales Magazin">e7ed0779-389d-442a-ba82-e3e23bfe8d48@_vXriLDj3sYPqb3ibfcDACm@_lajlmYjMj0igyHuMIgukUD</merkmal>
+                    <merkmal name="Entstehungszeitraum Anzeigetext">16.03.1992</merkmal>
+                    <merkmal name="ReihenfolgeAnalogesDossier">000004</merkmal>
+                  </zusatzDaten>
+                  <dateiRef>59d4e49fb4944b339c0e72b99367cd3e</dateiRef>
+                </dokument>
+                <dokument id="_RJMRnCpDRBm1AJ3Vqu6rF8">
+                  <titel>U_m_s_c_h_l_a_g_0000001</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <registrierdatum />
+                  <entstehungszeitraum>
+                    <von />
+                    <bis />
+                  </entstehungszeitraum>
+                  <zusatzDaten>
+                    <merkmal name="ReihenfolgeAnalogesDossier">000001</merkmal>
+                  </zusatzDaten>
+                  <dateiRef>652e835d56114e7f9d348da1d0471668</dateiRef>
+                </dokument>
+                <dateiRef>_84BSW3nxJGRXkrOd93xYRo</dateiRef>
+              </dossier>
+            </ordnungssystemposition>
+          </ordnungssystemposition>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

@@ -1,0 +1,8 @@
+﻿{
+  "test": {
+    "_internal": {
+      "secret": "dasIstGeheim"
+    },
+    "stayHere": true 
+  }
+}

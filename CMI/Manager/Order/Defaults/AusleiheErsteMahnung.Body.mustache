@@ -1,0 +1,165 @@
+﻿<html>
+<head>
+
+    <style TYPE="text/css">
+        html,
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    {{#Sprachen}}
+    {{#IstDeutsch}}
+    <div id="deutsch">
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Als Verwaltungsstelle können Sie Unterlagen aus dem Bundesarchiv maximal 3 Monate ausleihen.
+        </p>
+        <p>
+            Bei folgenden Unterlagen ist diese Frist abgelaufen:
+        </p>
+        <div id="Auftraege">
+            <p>
+                <table>
+                    <tr>
+                        <th><strong>Ausleihdatum</strong></th>
+                        <th><strong>Signatur</strong></th>
+                        <th><strong>Aktenzeichen</strong></th>
+                        <th><strong>Dossiertitel</strong></th>
+                        <th><strong>Zeitraum</strong></th>
+                    </tr>
+                    {{#Aufträge}}
+                    <tr>
+                        <td>{{Ausgabedatum}}</td>
+                        <td>{{BestellteVe.Signatur}}</td>
+                        <td>{{BestellteVe.Aktenzeichen}}</td>
+                        <td>{{BestellteVe.Titel}}</td>
+                        <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                    </tr>
+                    {{/Aufträge}}
+                </table>
+            </p>
+        </div>
+        <p>
+            Bitte senden Sie uns die oben genannten Unterlagen <strong>bis spätestens am {{RückgabeTermin}}</strong> zurück. Beachten Sie dabei die Anweisungen im Merkblatt
+            <a href="https://www.bar.admin.ch/dam/bar/de/dokumente/kundeninformation/merkblatt_verwaltungsausleihe.pdf" target="_blank">Ausleihe von Dossiers durch die abliefernden Stellen</a> zur Rücksendung der Archivalien an das Schweizerische Bundesarchiv.
+        </p>
+        <p>
+            Selbstverständlich stehen wir Ihnen für allfällige Fragen zur Verfügung. Sollte sich dieses Schreiben mit Ihrer Rücksendung gekreuzt haben, können Sie es als gegenstandslos betrachten.
+        </p>
+        <p>
+            Freundliche Grüsse<br />
+            <br />
+            <strong>{{User.Vorname}} {{User.Name}}</strong><br />
+            <br />
+            Eidgenössisches Departement des Innern EDI <br />
+            Schweizerisches Bundesarchiv BAR <br />
+            Archivstrasse 24, CH-3003 Bern <br />
+            <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br>
+            Folgen Sie dem Bundesarchiv:
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstDeutsch}}
+    {{#IstFranzösisch}}
+    <div id="franzoesisch">
+        <p>
+            Bonjour,
+        </p>
+        <p>
+            La durée du prêt des Archives fédérales aux services de l’administration est de trois mois au maximum.
+            Or, ce délai est échu pour les documents suivants :
+        </p>
+        <div id="Auftraege">
+            <p>
+                <table>
+                    <tr>
+                        <th><strong>Date du prêt</strong></th>
+                        <th><strong>Cote</strong></th>
+                        <th><strong>Référence</strong></th>
+                        <th><strong>Titre du dossier</strong></th>
+                        <th><strong>Période</strong></th>
+                    </tr>
+                    {{#Aufträge}}
+                    <tr>
+                        <td>{{Ausgabedatum}}</td>
+                        <td>{{BestellteVe.Signatur}}</td>
+                        <td>{{BestellteVe.Aktenzeichen}}</td>
+                        <td>{{BestellteVe.Titel}}</td>
+                        <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                    </tr>
+                    {{/Aufträge}}
+                </table>
+            </p>
+        </div>
+        <p>
+            Veuillez nous retourner les documents précités d’ici au <strong>{{RückgabeTermin}} au plus tard,</strong> en veillant à observer les instructions relatives au renvoi
+            des archives de l’aide-mémoire <a href="https://www.bar.admin.ch/dam/bar/fr/dokumente/kundeninformation/merkblatt_verwaltungsausleihe.pdf" target="_blank">Prêts de dossiers aux services versants</a>.
+        </p>
+        <p>
+            Si votre retour a croisé le présent courriel, veuillez ne pas tenir compte de celui-ci. Nous restons naturellement à votre disposition pour tout complément d’information.
+        </p>
+        <p>
+            Meilleures salutations,<br />
+            <br />
+            <strong>{{User.Vorname}} {{User.Name}}</strong><br />
+            <br />
+            Département fédéral de l’intérieur DFI<br />
+            Archives fédérales suisses AFS<br />
+            Archivstrasse 24, CH-3003 Berne<br />
+            <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br>
+            Suivez les Archives fédérales:
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstFranzösisch}}
+    {{/Sprachen}}
+</body>
+</html>

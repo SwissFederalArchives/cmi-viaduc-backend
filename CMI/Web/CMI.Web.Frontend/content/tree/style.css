@@ -1,0 +1,158 @@
+
+/* @import '../styleguide/css/admin.css'; */ ist nicht mehr aktuell fuer OLZ. Wie ersetzen?
+
+@import '//www.recherche.bar.admin.ch/recherche/assets/css/admin.css';
+
+/*@import '//www.recherche.bar.admin.ch/recherche/assets/css/font.css';*/
+
+
+
+
+*, :after, :before { -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+/* values
+// Fonts
+$mainFont:         'Frutiger Neue Regular', Arial, sans-serif !default;
+$boldFont:         'Frutiger Neue Bold', sans-serif;
+$italicFont:       'Frutiger Neue Italic', sans-serif;
+$lightFont:        'Frutiger Neue Light', sans-serif;
+$font-family-serif:       		serif !default;
+$font-size-base:          			14px !default;
+$font-family-base:        	$mainFont !default;
+// Base colors
+$color-grey:	#454545;
+$color-red: #dc0018; // red
+$color-B: #3a3d3f;  // gray anthracite
+*/
+
+a:active, a:focus { outline: none; }
+:focus { -moz-outline-style: none; }
+
+/* Base styles
+-------------------------------------------------- */
+
+html, body{
+	background: white none;}
+
+body{
+	font-family: 'Frutiger Neue Regular', Arial, sans-serif;
+	font-size: 1em;
+	line-height: 1.6;
+	color:#454545;
+}
+
+/*h1,h1>*{ font-family: 'Frutiger Neue Light', sans-serif; margin: 0px 0px 12px; font-size:1em;}
+h2{ margin: 0px;font-size:1em;}*/
+
+
+/* TABLES
+-------------------------------------------------- */
+
+ul{ list-style-type: none;}
+
+ul#tree { margin: 0;padding: 0 0 0 5px;}
+
+ul#tree>li{margin-left:0;}
+
+#tree ul{
+/*border-left: 1px rgb(125, 125, 125) dashed;*/
+margin-left: 0/*.3em*/; padding: 0;
+display: block;
+/*box-shadow: inset 8px 4px 26px -11px rgba(0, 0, 0, 0.65);background: transparent none;*/
+/*box-shadow:5px 4px 8px -6px rgba(0, 0, 0, 0.1) inset;-webkit-box-shadow: 5px 4px 8px -6px rgba(0, 0, 0, 0.1) inset;-moz-box-shadow:5px 4px 8px -6px rgba(0, 0, 0, 0.1) inset;
+background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.01);*/
+}
+#tree ul li {
+font-size: /*1.15em*/ 1em;
+line-height: 2em;
+margin-left:/*1.8em*/16px; padding:0;
+border-bottom: 1px #f5f5f5 solid;}
+#tree ul li:last-child {
+border: 0;}
+
+#tree a{ display:inline-block; padding:0.8em 0 0.4em;}
+#tree a:active,#tree a:hover { text-decoration: underline; color: #454545;}
+#tree li>a:before {
+	font-family: 'Admin Icons';
+/*content: '+';*/
+content: /*"\003A" */ "\25BA"; 
+margin-right: 0.33em;
+color: #454545;
+vertical-align: bottom;
+font-size: 1em;
+}
+#tree li>a.treesel:before {
+/*content: '-';*/
+content: /*"\002C" */ "\25BC"; 
+color:#454545;
+}
+#tree li>a:active:before,#tree li>a:hover:before,
+#tree button:active:after,#tree button:hover:after {  color: #454545;}
+
+/*#tree button {text-indent: -9000px;display: inline-block;position: relative;width: 0;margin: 0;padding: 0;}*/
+/*#tree button:after { font-family: 'Admin Icons';content: "\006C";position: absolute;left: .5em;bottom: 0;width: 1em;height: 20px;text-indent: initial;text-align: right;top: 0;padding: 0.1em 0 0 0;color: rgb(168, 168, 168);}*/
+
+#tree a.treelink {
+display: block;
+padding: 6px 0;
+text-decoration: none!important;
+}
+
+/*#tree a.treelink:before {font-family: 'Admin Icons';content: "\0024";margin-right: 0.33em;vertical-align: bottom;}*/
+#tree a.treelink:active, #tree a.treelink:hover {
+/*background-color: rgba(229, 240, 246, 1); 
+color: #454545!important;*/
+text-decoration: underline!important;
+}
+
+table.tablesorter {
+font-size: 12px;
+width: 96%;
+text-align: left;
+margin: 0;
+margin-left: /*1.8em*/16px;
+padding: 0;
+border: 0;
+background: transparent none;
+border-collapse: collapse;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+background-color: white;
+border: 1px solid #FFF;
+font-size: 12px;
+padding: 0.6em;
+border-bottom: 1px #f5f5f5 solid;
+box-shadow: none;
+font-weight: normal;
+}
+table.tablesorter thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+	padding-right: 21px!important; /* NSDRCO space for img sorter */
+	border-bottom: 1px #f5f5f5 solid;
+}
+table.tablesorter tbody td {
+	color: #454545;
+	padding:0 4px;
+	background-color: #FFF /*#F9F9F9*/;
+	vertical-align: top;
+	line-height:1.5em;
+}
+table.tablesorter tbody tr > td:first-child, table.tablesorter tbody tr > td:last-child {
+	padding-top: 6px;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #f5f5f5;
+font-weight: bold;
+}

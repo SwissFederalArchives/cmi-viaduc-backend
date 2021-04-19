@@ -1,0 +1,225 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html,
+        body {
+            font-family: Frutiger, Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+	a {
+		color: #005580;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	h1 {
+		font-size: 35px;
+	}
+	h2 {
+		font-size: 23.8px;
+	}
+	h3 {
+		font-size: 16.8px;
+	}
+	h4 {
+		font-size: 14.73px;
+	}
+    </style>
+</head>
+<body>
+{{#User.IstDeutsch}}
+<p>
+Guten Tag
+</p>
+<p>Sie haben folgende Unterlagen heruntergeladen:</p>
+{{/User.IstDeutsch}}
+{{#User.IstFranzösisch}}
+<p>
+Bonjour,
+</p>
+<p>Vous avez téléchargés les documents suivants :</p>
+{{/User.IstFranzösisch}}
+{{#User.IstItalienisch}}
+<p>
+Buongiorno,
+</p>
+<p>ha scaricato i seguenti documenti:</p>
+{{/User.IstItalienisch}}
+{{#User.IstEnglisch}}
+<p>
+Hello
+</p>
+<p>You have downloaded the following documents:</p>
+{{/User.IstEnglisch}}		
+	
+	
+	<ul>
+        <li>
+            <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+        </li>
+    </ul>
+	
+
+<p>
+
+    {{#User.IstDeutsch}}
+    Da diese Daten noch einer Schutzfrist gemäss Bundesgesetz über die Archivierung (BGA, SR 152.1) unterliegen, sind sie verschlüsselt und passwortgeschützt. Ihr Passwort für den Download lautet:
+    {{/User.IstDeutsch}}
+    {{#User.IstFranzösisch}}
+    Ces documents étant encore soumis à un délai de protection en vertu de la loi fédérale sur l’archivage (LAr, RS 152.1), ils sont chiffrés et protégés par un mot de passe. Votre mot de passe pour le téléchargement est:
+    {{/User.IstFranzösisch}}
+    {{#User.IstItalienisch}}
+    Tuttavia, dato che sono ancora soggetti a un termine di protezione secondo la legge federale sull’archiviazione (LAr; RS 152.1), sono crittografati e protetti da password. La password per il download è la seguente:
+    {{/User.IstItalienisch}}
+    {{#User.IstEnglisch}}
+    As these documents are still within a closure period under the Federal Act on Archiving (ArchA, SR 152.1), they are encrypted and password-protected. Your password for the download is:
+    {{/User.IstEnglisch}}
+    </p>
+	
+	
+	
+	<p>{{PasswortZipDatei}}</p>
+	
+	
+	
+    {{#User.IstDeutsch}}    
+    Aufgrund der Verschlüsselung entpacken Sie die ZIP-Datei bitte mit einem geeigneten Programm wie <a href="http://www.7-zip.de/">7-zip</a> oder <a href="http://www.winzip.com/">WinZip</a>. Extrahieren Sie die ZIP-Datei und speichern Sie die Digitalisate ab. Um sich einen Überblick über die digitalisierten Unterlagen zu verschaffen, öffnen Sie die Datei index.html in Ihrem Browser.<br />
+    <br />
+    Geschützte Unterlagen dürfen nicht unverschlüsselt gespeichert bzw. ungesichert aufbewahrt werden. Sie sind nach dem Download für die sichere Aufbewahrung der Daten verantwortlich. Die Unterlagen dürfen ohne entsprechende Bewilligung nicht anderen Personen weitergegeben oder gezeigt werden. <br />
+    <br />
+    {{/User.IstDeutsch}}
+    {{#User.IstFranzösisch}}
+	En raison du chiffrage, il faut décompresser le dossier .zip avec un programme ad hoc, par exemple <a href="http://www.spiroo.be/7zip/">7-zip</a> ou <a href="http://www.winzip.com/win/fr/">WinZip</a>. Procédez à l’extraction du dossier compressé (.zip) et enregistrez les reproductions numériques. Vous pouvez obtenir un aperçu de l’ensemble des documents en ouvrant le fichier index.html dans votre navigateur. <br/>
+    <br />
+    Il n’est pas permis d’enregistrer des documents protégés non chiffrés ou de les conserver sans respecter les impératifs de sécurité. Après le téléchargement, il est de votre responsabilité de sauvegarder les données en lieu sûr. Par ailleurs, sans autorisation correspondante, vous ne pouvez pas transmettre ou montrer les documents à des tiers. <br />
+    <br />
+    {{/User.IstFranzösisch}}
+    {{#User.IstItalienisch}}
+    Dato che i documenti sono crittografati, per aprire il file ZIP è necessario un apposito programma (p. es. <a href="http://www.7-zip.org/">7-zip</a> o <a href="http://www.winzip.com/">WinZip</a>). Estragga i documenti dal file ZIP e li salvi. Per avere una panoramica dei documenti digitalizzati apra il file «index.html» nel Suo browser.<br />
+    <br />
+    I documenti soggetti a un termine di protezione devono imperativamente essere salvati in forma crittografata e conservati in modo sicuro. L’utente è responsabile della loro conservazione sicura dopo il download. I documenti non possono essere trasmessi o mostrati a terzi senza una corrispondente autorizzazione. <br />
+    <br />
+    {{/User.IstItalienisch}}
+    {{#User.IstEnglisch}}	
+    Owing to the encryption, please extract the data using a suitable program such as <a href="http://www.7-zip.org/">7-zip</a> or <a href="http://www.winzip.com/">WinZip</a>. Extract the ZIP file and save the digitised materials. For an overview of the digitised documents, open the index.html file in your browser.<br />
+    <br />
+    Documents that are within a closure period may not be stored without encryption or kept unsecured. You are responsible for storing them securely after downloading them. The documents may not be shared with or shown to others without the necessary authorisation. <br />
+    <br />
+    {{/User.IstEnglisch}}
+	    {{#User.IstDeutsch}}
+    Bei Fragen zur Bestellung wenden Sie sich bitte an die <a href="https://{{Global.PublicClientUrl}}">Beratung</a> oder per E-Mail an <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Mit freundlichen Grüssen<br>
+    <br>
+    Eidgenössisches Departement des Innern EDI<br>
+    Schweizerisches Bundesarchiv BAR<br>
+    Archivstrasse 24, CH-3003 Bern<br>
+    <br>
+    <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Folgen Sie dem Bundesarchiv: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+	{{/User.IstDeutsch}}
+
+    {{#User.IstFranzösisch}}
+    Pour tout renseignement sur la commande, veuillez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">conseil</a> ou par e-mail à <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Meilleures salutations,<br>
+    <br>
+    Département fédéral de l’intérieur DFI <br />
+    Archives fédérales suisses AFS <br />
+    Archivstrasse 24, CH-3003 Berne <br />
+	<br>
+    <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Suivez les Archives fédérales: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstFranzösisch}}
+
+    {{#User.IstItalienisch}}
+    Per qualsiasi ulteriore informazione può rivolgersi al servizio di <a href="https://{{Global.PublicClientUrl}}">consulenza on-line</a> oppure inviare una mail all’Archivio federale all’indirizzo <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Distinti saluti<br>
+    <br>
+    Dipartimento federale dell’interno DFI <br />
+    Archivio federale svizzero AFS <br />
+    Archivstrasse 24, CH-3003 Berna <br />
+	<br>
+    <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Seguite l’Archivio federale: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstItalienisch}}
+
+    {{#User.IstEnglisch}}
+    If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">online advice service</a> or send an e-mail to <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Yours sincerely<br>
+    <br>
+    Federal Department of Home Affairs FDHA<br>
+    Swiss Federal Archives SFA<br>
+    Archivstrasse 24, CH-3003 Bern<br>
+	    <br>
+    <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+	Follow the Federal Archives: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstEnglisch}}
+
+</body>
+</html>

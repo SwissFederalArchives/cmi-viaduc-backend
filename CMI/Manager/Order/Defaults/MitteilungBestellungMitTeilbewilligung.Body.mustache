@@ -1,0 +1,74 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auftrag abgebrochen: Teilbewilligung</h1>
+    Name: {{Besteller.Name}}
+    <br />
+    Vorname: {{Besteller.Vorname}}
+    <br />
+    Organisation: {{Besteller.Organisation}}
+    <br />
+    Ort: {{Besteller.Ländercode}} {{Besteller.Plz}} {{Besteller.Ort}}
+    <br />
+    E-Mail: {{Besteller.EmailAddress}}
+
+    <h2>Dossiers</h2>
+    {{#ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
+    <table>
+        <tr>
+            <td>Signatur</td>
+            <td>Aktenzeichen</td>
+            <td>Titel</td>
+            <td>Zeitraum</td>
+            <td>Schutzfristkategorie</td>
+            <td>Schutzfristdauer</td>
+            <td>Schutzfristende</td>
+            <td>DIR</td>
+            <td>Zuständige Stelle</td>
+            <td>Interne Bemerkung</td>
+            <td>Id Auftrag</td>
+        </tr>
+        {{#ZurueckgewiesenTeilbewilligungVorhanden}}
+        <tr>
+            <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+            <td>{{BestellteVe.Aktenzeichen}}</td>
+            <td>{{BestellteVe.Titel}}</td>
+            <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            <td>{{BestellteVe.Schutzfristkategorie}}</td>
+            <td>{{BestellteVe.Schutzfristdauer}}</td>
+            <td>{{BestellteVe.Schutzfristende}}</td>
+            <td>{{#BestellteVe.IdDir}}Ja{{/BestellteVe.IdDir}}{{^BestellteVe.IdDir}}Nein{{/BestellteVe.IdDir}}</td>
+            <td>{{BestellteVe.ZustaendigeStelle}}</td>
+            <td>{{InterneBemerkung}}</td>
+            <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+        </tr>
+        {{/ZurueckgewiesenTeilbewilligungVorhanden}}
+    </table>
+    {{/ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
+</body>
+</html>

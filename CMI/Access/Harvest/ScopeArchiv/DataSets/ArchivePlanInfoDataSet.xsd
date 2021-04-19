@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="ArchivePlanInfoDataSet" targetNamespace="http://tempuri.org/ArchivePlanInfo.xsd"
+           xmlns:mstns="http://tempuri.org/ArchivePlanInfo.xsd" xmlns="http://tempuri.org/ArchivePlanInfo.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+           xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified"
+           elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter"
+                  Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema"
+                  xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ArchivePlanInfoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true"
+              msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ArchivePlanInfoDataSet"
+              msprop:Generator_UserDSName="ArchivePlanInfoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ArchivePlanItem" msprop:Generator_TableClassName="ArchivePlanItemDataTable"
+                    msprop:Generator_TableVarName="tableArchivePlanItem"
+                    msprop:Generator_TablePropName="ArchivePlanItem"
+                    msprop:Generator_RowDeletingName="ArchivePlanItemRowDeleting"
+                    msprop:Generator_RowChangingName="ArchivePlanItemRowChanging"
+                    msprop:Generator_RowEvHandlerName="ArchivePlanItemRowChangeEventHandler"
+                    msprop:Generator_RowDeletedName="ArchivePlanItemRowDeleted"
+                    msprop:Generator_UserTableName="ArchivePlanItem"
+                    msprop:Generator_RowChangedName="ArchivePlanItemRowChanged"
+                    msprop:Generator_RowEvArgName="ArchivePlanItemRowChangeEvent"
+                    msprop:Generator_RowClassName="ArchivePlanItemRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SGNTR_CD" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="SGNTR_CD"
+                          msprop:Generator_ColumnVarNameInTable="columnSGNTR_CD"
+                          msprop:Generator_ColumnPropNameInTable="SGNTR_CDColumn"
+                          msprop:Generator_UserColumnName="SGNTR_CD" type="xs:string" minOccurs="0" />
+              <xs:element name="VRZNG_ENHT_TITEL" msprop:nullValue="_null"
+                          msprop:Generator_ColumnPropNameInRow="VRZNG_ENHT_TITEL"
+                          msprop:Generator_ColumnVarNameInTable="columnVRZNG_ENHT_TITEL"
+                          msprop:Generator_ColumnPropNameInTable="VRZNG_ENHT_TITELColumn"
+                          msprop:Generator_UserColumnName="VRZNG_ENHT_TITEL" type="xs:string" minOccurs="0" />
+              <xs:element name="ZT_RAUM_TXT" msprop:nullValue="_null"
+                          msprop:Generator_ColumnPropNameInRow="ZT_RAUM_TXT"
+                          msprop:Generator_ColumnVarNameInTable="columnZT_RAUM_TXT"
+                          msprop:Generator_ColumnPropNameInTable="ZT_RAUM_TXTColumn"
+                          msprop:Generator_UserColumnName="ZT_RAUM_TXT" type="xs:string" minOccurs="0" />
+              <xs:element name="ICON_ID" msprop:Generator_ColumnVarNameInTable="columnICON_ID"
+                          msprop:Generator_ColumnPropNameInRow="ICON_ID"
+                          msprop:Generator_ColumnPropNameInTable="ICON_IDColumn"
+                          msprop:Generator_UserColumnName="ICON_ID" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ENTRG_TYP_NM" msprop:nullValue="_null"
+                          msprop:Generator_ColumnPropNameInRow="ENTRG_TYP_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnENTRG_TYP_NM"
+                          msprop:Generator_ColumnPropNameInTable="ENTRG_TYP_NMColumn"
+                          msprop:Generator_UserColumnName="ENTRG_TYP_NM" type="xs:string" minOccurs="0" />
+              <xs:element name="VRZNG_ENHT_ID" msprop:Generator_ColumnVarNameInTable="columnVRZNG_ENHT_ID"
+                          msprop:Generator_ColumnPropNameInRow="VRZNG_ENHT_ID"
+                          msprop:Generator_ColumnPropNameInTable="VRZNG_ENHT_IDColumn"
+                          msprop:Generator_UserColumnName="VRZNG_ENHT_ID" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

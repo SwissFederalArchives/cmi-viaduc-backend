@@ -1,0 +1,271 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+    </style>
+</head>
+<body>
+    {{#Besteller.IstDeutsch}}
+    <div id="deutsch">
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Vielen Dank für Ihre Bestellung vom {{Bestellung.Erfassungsdatum}}:
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Signatur</th>
+                    <th>Aktenzeichen</th>
+                    <th>Dossiertitel</th>
+                    <th>Zeitraum</th>
+                </tr>
+                {{#Aufträge}}
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+                {{/Aufträge}}
+            </table>
+        </p>
+        <p>
+            Die Digitalisierung dieser Unterlagen wird durch einen externen Dienstleister durchgeführt.
+            Leider kann sich dadurch die Lieferfrist auf rund vier bis sechs Wochen verlängern. Für die Umstände entschuldigen wir uns.
+        </p>
+        <p>
+            Bei Fragen zur Bestellung wenden Sie sich bitte an die
+            <a href="https://{{Global.PublicClientUrl}}">Beratung</a>
+            oder antworten Sie auf diese E-Mail.
+        </p>
+        <p>
+            Mit freundlichen Grüssen
+        </p>
+        <p>
+            Eidgenössisches Departement des Innern EDI<br />
+            Schweizerisches Bundesarchiv BAR<br />
+            Archivstrasse 24, CH-3003 Bern<br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br />
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+		
+		    <p>
+        Folgen Sie dem Bundesarchiv:
+		<br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </p>
+    </div>
+    {{/Besteller.IstDeutsch}}
+    {{#Besteller.IstFranzösisch}}
+    <div id="franzoesisch">
+       <p>
+            Bonjour
+        </p>
+        <p>
+            Votre commande du {{Bestellung.Erfassungsdatum}} nous est bien parvenue et nous vous en remercions.
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Cote</th>
+                    <th>Référence</th>
+                    <th>Titre du dossier</th>
+                    <th>Période</th>
+                </tr>
+                {{#Aufträge}}
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+                {{/Aufträge}}
+            </table>
+        </p>
+        <p>
+            Nous avons confié la numérisation de ces documents à un prestataire externe. Dès lors, le délai de livraison peut s’en
+			trouver prolongé de quatre à six semaines. Nous vous prions de nous excuser de ce contretemps.
+        </p>
+        <p>
+            Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre
+            <a href="https://{{Global.PublicClientUrl}}">service de conseil en ligne</a>
+            ou répondre à cet e-mail. 
+        </p>
+        <p>
+            Meilleures salutations,
+        </p>
+        <p>
+			Département fédéral de l’intérieur DFI <br />
+			Archives fédérales suisses AFS <br />
+			Archivstrasse 24, CH-3003 Berne <br />
+			
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br />
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+		
+		    <p>
+        Suivez les Archives fédérales:
+		<br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </p>
+    </div>
+    {{/Besteller.IstFranzösisch}}
+    {{#Besteller.IstItalienisch}}
+    <div id="italienisch">
+        <p>
+            Buongiorno,
+        </p>
+        <p>
+            abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}.
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Segmatura</th>
+                    <th>Riferimento</th>
+                    <th>Titolo del dossier</th>
+                    <th>Periodo</th>
+                </tr>
+                {{#Aufträge}}
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/it/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+                {{/Aufträge}}
+            </table>
+        </p>
+        <p>
+            Dato che la digitalizzazione dei documenti è effettuata da un servizio esterno, il termine di consegna può 
+			richiedere da quattro a sei settimane. Ci scusiamo per l’inconveniente.
+        </p>
+        <p>
+            Per qualsiasi informazione ulteriore può rivolgersi al servizio di 
+            <a href="https://{{Global.PublicClientUrl}}">consulenza on-line</a>
+            oppure rispondere alla presente mail. 
+        </p>
+        <p>
+            Distinti saluti
+        </p>
+        <p>
+            Dipartimento federale dell’interno DFI <br />
+			Archivio federale svizzero AFS <br />
+			Archivstrasse 24, CH-3003 Berna <br />
+			
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br />
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+		
+		    <p>
+		Seguite l’Archivio federale:
+		<br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </p>
+    </div>
+    {{/Besteller.IstItalienisch}}
+    {{#Besteller.IstEnglisch}}
+    <div id="englisch">
+        <p>
+            Hello,
+        </p>
+        <p>
+			Thank you for your order of {{Bestellung.Erfassungsdatum}}.
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Reference code</th>
+                    <th>File reference</th>
+                    <th>Dossier title</th>
+                    <th>Time period</th>
+                </tr>
+                {{#Aufträge}}
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+                {{/Aufträge}}
+            </table>
+        </p>
+        <p>
+           These documents will be digitised by an external provider. Unfortunately this means delivery may take four to six weeks. 
+			We apologize for any inconveniences caused.
+        </p>
+        <p>
+            If you have any questions about your order please contact our 
+            <a href="https://{{Global.PublicClientUrl}}">online advice service</a>
+            or reply to this e-mail. 
+        </p>
+        <p>
+            Yours sincerely <br />
+        </p>
+        <p>
+           Federal Department of Home Affairs FDHA <br />
+			Swiss Federal Archives SFA <br />
+			Archivstrasse 24, CH-3003 Bern <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br />
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+		
+		    <p>
+        Follow the Federal Archives:
+		<br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </p>
+    </div>
+    {{/Besteller.IstEnglisch}}
+    <p>
+        Folgen Sie dem Bundesarchiv / Suivez les Archives fédérales / 
+		Seguite l’Archivio federale / Follow the Federal Archives:
+		<br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </p>
+</body>
+</html>

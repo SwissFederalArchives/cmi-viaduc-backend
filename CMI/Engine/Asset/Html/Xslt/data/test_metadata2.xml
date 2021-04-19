@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+    <generierungsdatum>2018-12-07T00:00:00+01:00</generierungsdatum>
+    <inhaltsverzeichnis>
+        <ordner id="contentRoot636797841790262870">
+            <name>content</name>
+            <originalName>content</originalName>
+            <datei id="p00000002">
+                <name>2.mp4</name>
+                <originalName>2.mp4</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>edf643feb2a18d453b5cb5250f9fb894</pruefsumme>
+            </datei>
+        </ordner>
+    </inhaltsverzeichnis>
+    <ablieferung>
+        <ablieferungstyp>FILES</ablieferungstyp>
+        <ablieferndeStelle>Parlamentsdienste: Amtliches Bulletin (Bern)</ablieferndeStelle>
+        <entstehungszeitraum>
+            <von>
+                <datum>2009-03-18</datum>
+            </von>
+            <bis>
+                <datum>2009-03-18</datum>
+            </bis>
+        </entstehungszeitraum>
+        <ablieferungsnummer>2010/203</ablieferungsnummer>
+        <provenienz>
+            <aktenbildnerName>Vereinigte Bundesversammlung (1848-)</aktenbildnerName>
+            <registratur>Amtliches Bulletin</registratur>
+        </provenienz>
+        <ordnungssystem>
+            <name>Vereinigte Bundesversammlung: Verhandlungsprotokolle (1848-)</name>
+            <ordnungssystemposition id="OSP-0">
+                <nummer>1.5-48-01</nummer>
+                <titel>Frühjahrsession 2009</titel>
+                <dossier id="d00000001_2009-03-18">
+                    <titel>1. Verhandlungstag</titel>
+                    <erscheinungsform>keine Angabe</erscheinungsform>
+                    <eroeffnungsdatum />
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                        <von>
+                            <datum>2009-03-18</datum>
+                        </von>
+                        <bis>
+                            <datum>2009-03-18</datum>
+                        </bis>
+                    </entstehungszeitraum>
+                    <dokument id="x00000002">
+                        <titel>2008.0214: Bundesstrafgericht / Tribunal pénal fédéral</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum />
+                        <entstehungszeitraum>
+                            <von>
+                                <datum>2009-03-18</datum>
+                            </von>
+                            <bis>
+                                <datum>2009-03-18</datum>
+                            </bis>
+                        </entstehungszeitraum>
+                        <bemerkung>Dauer: 00:01:05; Bulletin: 119 2009 / 0; Seiten: 607 - 608
+                            Wahlresultat zum Geschäft 2008.0214 befindet sich in der Ablieferung 2010/227 (siehe Geschäft 09.9006, zweiter Beitrag von Simoneschi-Cortesi, Chiara)</bemerkung>
+                        <zusatzDaten>
+                            <merkmal name="Signatur">E1201#2010/203#1#2*</merkmal>
+                            <merkmal name="Stufe">Dokument</merkmal>
+                            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10858*","Title":"Vereinigte Bundesversammlung (1848-)","DateRangeText":"1848-1995","ArchiveRecordId":"6957"},{"IconId":12,"Level":"Teilbestand","RefCode":"E1201*","Title":"Vereinigte Bundesversammlung: Verhandlungsprotokolle (1848-)","DateRangeText":"1848-2009","ArchiveRecordId":"6958"},{"IconId":19,"Level":"Serie","RefCode":"E1201#1","Title":"Verhandlungsprotokolle","DateRangeText":"1848-2006.06.21","ArchiveRecordId":"3725171"},{"IconId":19,"Level":"Serie","RefCode":"E1201#1.5","Title":"Videoaufzeichnungen der Verhandlungen der Vereinigten Bundesversammlung","DateRangeText":"2009-","ArchiveRecordId":"6728794"},{"IconId":19,"Level":"Serie","RefCode":"E1201#1.5-48","Title":"Legislaturperiode: Frühjahrsession 2009 bis Herbstsession 2011","DateRangeText":null,"ArchiveRecordId":"6728807"},{"IconId":19,"Level":"Serie","RefCode":"E1201#1.5-48-01","Title":"Frühjahrsession 2009","DateRangeText":"2009.03.18","ArchiveRecordId":"6865819"},{"IconId":2,"Level":"Dossier","RefCode":"E1201#2010/203#1*","Title":"1. Verhandlungstag","DateRangeText":"2009","ArchiveRecordId":"6865820"},{"IconId":6,"Level":"Dokument","RefCode":"E1201#2010/203#1#2*","Title":"2008.0214: Bundesstrafgericht / Tribunal pénal fédéral","DateRangeText":"2009.03.18","ArchiveRecordId":"6865822"}]</merkmal>
+                            <merkmal name="Form">Digital</merkmal>
+                            <merkmal name="Darin">Autor: Sprecher/Sprecherinnen: Simoneschi-Cortesi, Chiara;</merkmal>
+                            <merkmal name="Identifikation digitales Magazin">82edee8b-39c4-4d96-870f-330f6303fdd1@d00000001_2009-03-18@x00000002</merkmal>
+                            <merkmal name="Entstehungszeitraum Anzeigetext">18.03.2009</merkmal>
+                        </zusatzDaten>
+                        <dateiRef>p00000002</dateiRef>
+                    </dokument>
+                    <dateiRef>p00000003</dateiRef>
+                    <dateiRef>p00000004</dateiRef>
+                </dossier>
+            </ordnungssystemposition>
+        </ordnungssystem>
+    </ablieferung>
+</paket>

@@ -1,0 +1,119 @@
+{
+	"Version" :
+	{
+		"date" : "20170615"
+	},
+	"Enums" :
+	{
+		"Benutzbarkeit" :
+		{
+			"1" :
+			{
+				"Name" : "FreiEinsehbar"
+			},
+			"2" :
+			{
+				"Name" : "TeilweiseGesuchspflichtig"
+			},
+			"3" :
+			{
+				"Name" : "Gesuchspflichtig"
+			}
+		}
+	},
+	"Types" :
+	{
+		"Base" :
+		{
+			"Meta" :
+			{
+				"Identifikation" :
+				{
+					"Fields" : [
+						"ReferenceCode",
+						"Level",
+						{
+							"key" : "CreationPeriod",
+							"type" : "Date.Range"
+						}
+					]
+				},
+				"Kontext" :
+				{
+					"Fields" : [
+						"WithinInfo"
+					]
+				},
+				"Zugang" :
+				{
+					"Fields" : [
+						{
+							"key" : "ProtectionEndDate",
+							"type" : "Date.Year"
+						},
+						"ProtectionCategory",
+						{
+							"key" : "AccessTokens",
+							"type" : "Array.String"
+						},
+						"AccessionDate"
+					]
+				}
+			}
+		},
+
+		"Archiv" :
+		{
+			"Super" : "Base"
+		},
+
+		"Hauptabteilung" :
+		{
+			"Super" : "Base"
+		},
+		
+		"Abteilung" :
+		{
+			"Super" : "Base"
+		},
+		
+		"Serie" :
+		{
+			"Super" : "Base"
+		},
+		
+		"Bestand" :
+		{
+			"Super" : "Base"
+		},
+		
+		"Dossier" :
+		{
+			"Super" : "Base"
+		},
+		
+		"Dokument" :
+		{
+			"Super" : "Base"
+		},
+
+		"File" :
+		{
+			"Super" : "Base",
+			"Meta" :
+			{
+				"Identifikation" :
+				{
+					"Fields" : [
+						"Bemerkungen",
+						{
+							"key" : "Art",
+							"type" : "Stammdaten.ArtDatei"
+						}
+					]
+				}
+			}
+		}
+
+	}
+}

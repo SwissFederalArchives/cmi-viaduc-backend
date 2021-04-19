@@ -1,0 +1,6 @@
+﻿
+-- DB-Doku
+
+EXEC sys.sp_addextendedproperty @level1name=N'ApplicationUser', @level2name=N'IdentifierDocument', @value=N'Beim erfolgreichem Onboarding mit Swisscom wird in dieses Feld automatisch ein von der Swisscom generiertes PDF abgelegt. Zudem kann in dieses Feld auch über den Management Client eine Datei hochgeladen werden.', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level2type=N'COLUMN', @name=N'MS_Description'
+EXEC sys.sp_addextendedproperty @level1name=N'ApplicationUser', @level2name=N'ReasonForRejection', @value=N'In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level2type=N'COLUMN', @name=N'MS_Description'
+EXEC sys.sp_addextendedproperty @level1name=N'ApplicationUser', @level2name=N'ReasonForRejectionDate', @value=N'Datum an dem das Feld ReasonForRejection gesetzt wurde', @level0type=N'SCHEMA', @level0name=N'dbo', @level1type=N'TABLE', @level2type=N'COLUMN', @name=N'MS_Description'

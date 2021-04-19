@@ -1,0 +1,19 @@
+﻿.inlined body {
+    background: none;
+}
+
+.inlined body .container-main  {
+    margin-bottom: 0;
+    width: inherit;
+    box-shadow: none;
+}
+
+.edit-mode body header {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 15px;
+}
+
+.edit-mode body header .nav-services,
+.edit-mode body header .nav-lang {
+    margin-bottom: 0;
+}

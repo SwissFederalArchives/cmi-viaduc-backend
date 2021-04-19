@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C031477-0680-4A2B-A7CE-8A6434DF00BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMI.Contract.DocumentConverter</RootNamespace>
+    <AssemblyName>CMI.Contract.DocumentConverter</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Common, Version=2.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Common.2.5.6690\lib\net40\Rebex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.FileServer, Version=1.0.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.FileServer.1.0.6690\lib\net40\Rebex.FileServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Networking, Version=3.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Networking.3.5.6690\lib\net40\Rebex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ExtractionStartRequest.cs" />
+    <Compile Include="ExtractionStartResult.cs" />
+    <Compile Include="IErrorResult.cs" />
+    <Compile Include="JobInfoDetails.cs" />
+    <Compile Include="JobInitRequest.cs" />
+    <Compile Include="SupportedFileTypesRequest.cs" />
+    <Compile Include="IFileProcessorFactory.cs" />
+    <Compile Include="IDoc.cs" />
+    <Compile Include="JobInitResult.cs" />
+    <Compile Include="ConversionStartRequest.cs" />
+    <Compile Include="ConversionStartResult.cs" />
+    <Compile Include="ProcessType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupportedFileTypesResponse.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

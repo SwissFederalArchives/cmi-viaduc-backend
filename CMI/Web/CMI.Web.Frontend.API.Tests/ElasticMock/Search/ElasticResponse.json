@@ -1,0 +1,1823 @@
+﻿{
+  "took": 68,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 279029,
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "4397586",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Studienkommission für strategische Fragen",
+          "referenceCode": "E4390C#2005/25#462*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1990 - 1990",
+            "startDate": "1990-01-01T00:00:00",
+            "endDate": "1991-01-01T00:00:00",
+            "searchStartDate": "1989-07-05T00:00:00",
+            "searchEndDate": "1990-12-31T00:00:00",
+            "years": [ 1990 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467700038948160003894989000389500400043975850004397586",
+          "treeSequence": 512,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 2005,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)" },
+            { "title": "Verwaltung" },
+            { "title": "Beziehungen" },
+            { "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)" },
+            { "title": "Studienkommission für strategische Fragen" },
+            { "title": "Studienkommission für strategische Fragen" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390C*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)",
+              "dateRangeText": "1928-1999",
+              "archiveRecordId": "4677"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#0",
+              "title": "Verwaltung",
+              "dateRangeText": "1936-1991",
+              "archiveRecordId": "3894816"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#07",
+              "title": "Beziehungen",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3894989"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074",
+              "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3895004"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074.26",
+              "title": "Studienkommission für strategische Fragen",
+              "archiveRecordId": "4397585"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390C#2005/25#462*",
+              "title": "Studienkommission für strategische Fragen",
+              "dateRangeText": "1990-1990",
+              "archiveRecordId": "4397586"
+            }
+          ],
+          "previousArchiveRecordId": "0",
+          "nextArchiveRecordId": "5130687",
+          "parentArchiveRecordId": "4397585",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "2020-12-31T00:00:00",
+            "year": 2020
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "4.4.008.10.04",
+              "containerType": "Schachtel",
+              "idName": "2068351 2005/25_00123"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "2005/00025 Bundesamt für Bevölkerungsschutz (keine Angabe)",
+                "entityRecordId": "1311302",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "074.26" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "In Schutzfrist",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "4397586"
+        },
+        "highlight": {
+          "title": [ "Studienkommission für strategische <h1l1ght>Fragen</h1l1ght>" ],
+          "_all": [ "Studienkommission für strategische <h1l1ght>Fragen</h1l1ght>" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "4397589",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Kommission für Fragen des Frauenhilfsdienstes",
+          "referenceCode": "E4390C#074.28",
+          "level": "Serie",
+          "creationPeriod": {
+            "startDate": "0001-01-01T00:00:00",
+            "endDate": "0001-01-01T00:00:00",
+            "searchStartDate": "0001-01-01T00:00:00",
+            "searchEndDate": "0001-01-01T00:00:00"
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": false,
+          "treePath": "00000000010000000028000000467200000046770003894816000389498900038950040004397589",
+          "treeSequence": 274944,
+          "treeLevel": 8,
+          "isLeaf": false,
+          "isRoot": false,
+          "accessionDate": 0,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)" },
+            { "title": "Verwaltung" },
+            { "title": "Beziehungen" },
+            { "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)" },
+            { "title": "Kommission für Fragen des Frauenhilfsdienstes" }
+          ],
+          "externalDisplayTemplateName": "10070: BAR Serie",
+          "internalDisplayTemplateName": "10070: BAR Serie",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390C*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)",
+              "dateRangeText": "1928-1999",
+              "archiveRecordId": "4677"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#0",
+              "title": "Verwaltung",
+              "dateRangeText": "1936-1991",
+              "archiveRecordId": "3894816"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#07",
+              "title": "Beziehungen",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3894989"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074",
+              "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3895004"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074.28",
+              "title": "Kommission für Fragen des Frauenhilfsdienstes",
+              "archiveRecordId": "4397589"
+            }
+          ],
+          "previousArchiveRecordId": "3895127",
+          "nextArchiveRecordId": "3895128",
+          "parentArchiveRecordId": "3895004",
+          "firstChildArchiveRecordId": "5130689",
+          "childCount": 2,
+          "thumbnail": {},
+          "protectionCategory": "Unbekannt",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 0,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "4397589"
+        },
+        "highlight": {
+          "title": [ "Kommission für <h1l1ght>Fragen</h1l1ght> des <h1l1ght>Frauenhilfsdienstes</h1l1ght>" ],
+          "_all": [ "Kommission für <h1l1ght>Fragen</h1l1ght> des <h1l1ght>Frauenhilfsdienstes</h1l1ght>" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3895227",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "ZS- Vereinigung der franz-sprachigen Kantone",
+          "referenceCode": "E4390C#075.23",
+          "level": "Serie",
+          "creationPeriod": {
+            "startDate": "0001-01-01T00:00:00",
+            "endDate": "0001-01-01T00:00:00",
+            "searchStartDate": "0001-01-01T00:00:00",
+            "searchEndDate": "0001-01-01T00:00:00"
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": false,
+          "treePath": "00000000010000000028000000467200000046770003894816000389498900038952000003895227",
+          "treeSequence": 240128,
+          "treeLevel": 8,
+          "isLeaf": false,
+          "isRoot": false,
+          "accessionDate": 0,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)" },
+            { "title": "Verwaltung" },
+            { "title": "Beziehungen" },
+            { "title": "Institutionen und Interessengemeinschaften" },
+            { "title": "ZS- Vereinigung der franz-sprachigen Kantone" }
+          ],
+          "externalDisplayTemplateName": "10070: BAR Serie",
+          "internalDisplayTemplateName": "10070: BAR Serie",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390C*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)",
+              "dateRangeText": "1928-1999",
+              "archiveRecordId": "4677"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#0",
+              "title": "Verwaltung",
+              "dateRangeText": "1936-1991",
+              "archiveRecordId": "3894816"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#07",
+              "title": "Beziehungen",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3894989"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#075",
+              "title": "Institutionen und Interessengemeinschaften",
+              "dateRangeText": "1969-1986",
+              "archiveRecordId": "3895200"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#075.23",
+              "title": "ZS- Vereinigung der franz-sprachigen Kantone",
+              "archiveRecordId": "3895227"
+            }
+          ],
+          "previousArchiveRecordId": "3895226",
+          "nextArchiveRecordId": "3895228",
+          "parentArchiveRecordId": "3895200",
+          "firstChildArchiveRecordId": "3230320",
+          "childCount": 1,
+          "thumbnail": {},
+          "protectionCategory": "Unbekannt",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 0,
+          "permission": "Keine",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3895227"
+        },
+        "highlight": {
+          "title": [ "ZS- Vereinigung der <h1l1ght>franz</h1l1ght>-sprachigen Kantone" ],
+          "_all": [ "ZS- Vereinigung der <h1l1ght>franz</h1l1ght>-sprachigen Kantone" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227376",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Dänemark",
+          "referenceCode": "E4390A#1000/862#289*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1949",
+            "startDate": "1949-01-01T00:00:00",
+            "endDate": "1950-01-01T00:00:00",
+            "searchStartDate": "1948-07-05T00:00:00",
+            "searchEndDate": "1950-06-29T00:00:00",
+            "years": [ 1949 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227376",
+          "treeSequence": 220672,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Dänemark" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#289*",
+              "title": "Dänemark",
+              "dateRangeText": "1949",
+              "archiveRecordId": "3227376"
+            }
+          ],
+          "previousArchiveRecordId": "3227375",
+          "nextArchiveRecordId": "3227377",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1979-12-31T00:00:00",
+            "year": 1979
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227376"
+        },
+        "highlight": {
+          "title": [ "Dänemark" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227381",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Norwegen",
+          "referenceCode": "E4390A#1000/862#294*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1949",
+            "startDate": "1949-01-01T00:00:00",
+            "endDate": "1950-01-01T00:00:00",
+            "searchStartDate": "1948-07-05T00:00:00",
+            "searchEndDate": "1950-06-29T00:00:00",
+            "years": [ 1949 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227381",
+          "treeSequence": 223232,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Norwegen" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#294*",
+              "title": "Norwegen",
+              "dateRangeText": "1949",
+              "archiveRecordId": "3227381"
+            }
+          ],
+          "previousArchiveRecordId": "3227380",
+          "nextArchiveRecordId": "3227382",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1979-12-31T00:00:00",
+            "year": 1979
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227381"
+        },
+        "highlight": {
+          "title": [ "Norwegen" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227384",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Belgien",
+          "referenceCode": "E4390A#1000/862#297*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1950",
+            "startDate": "1950-01-01T00:00:00",
+            "endDate": "1951-01-01T00:00:00",
+            "searchStartDate": "1949-07-05T00:00:00",
+            "searchEndDate": "1951-06-29T00:00:00",
+            "years": [ 1950 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227384",
+          "treeSequence": 224768,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Belgien" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#297*",
+              "title": "Belgien",
+              "dateRangeText": "1950",
+              "archiveRecordId": "3227384"
+            }
+          ],
+          "previousArchiveRecordId": "3227383",
+          "nextArchiveRecordId": "3227385",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1980-12-31T00:00:00",
+            "year": 1980
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227384"
+        },
+        "highlight": {
+          "title": [ "Belgien" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227380",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Finnland",
+          "referenceCode": "E4390A#1000/862#293*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1949",
+            "startDate": "1949-01-01T00:00:00",
+            "endDate": "1950-01-01T00:00:00",
+            "searchStartDate": "1948-07-05T00:00:00",
+            "searchEndDate": "1950-06-29T00:00:00",
+            "years": [ 1949 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227380",
+          "treeSequence": 222720,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Finnland" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#293*",
+              "title": "Finnland",
+              "dateRangeText": "1949",
+              "archiveRecordId": "3227380"
+            }
+          ],
+          "previousArchiveRecordId": "3227379",
+          "nextArchiveRecordId": "3227381",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1979-12-31T00:00:00",
+            "year": 1979
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227380"
+        },
+        "highlight": {
+          "title": [ "Finnland" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227383",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "USA",
+          "referenceCode": "E4390A#1000/862#296*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1949",
+            "startDate": "1949-01-01T00:00:00",
+            "endDate": "1950-01-01T00:00:00",
+            "searchStartDate": "1948-07-05T00:00:00",
+            "searchEndDate": "1950-06-29T00:00:00",
+            "years": [ 1949 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227383",
+          "treeSequence": 224256,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "USA" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#296*",
+              "title": "USA",
+              "dateRangeText": "1949",
+              "archiveRecordId": "3227383"
+            }
+          ],
+          "previousArchiveRecordId": "3227382",
+          "nextArchiveRecordId": "3227384",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1979-12-31T00:00:00",
+            "year": 1979
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227383"
+        },
+        "highlight": {
+          "title": [ "USA" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227387",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Dänemark",
+          "referenceCode": "E4390A#1000/862#300*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1950",
+            "startDate": "1950-01-01T00:00:00",
+            "endDate": "1951-01-01T00:00:00",
+            "searchStartDate": "1949-07-05T00:00:00",
+            "searchEndDate": "1951-06-29T00:00:00",
+            "years": [ 1950 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227387",
+          "treeSequence": 226304,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Dänemark" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#300*",
+              "title": "Dänemark",
+              "dateRangeText": "1950",
+              "archiveRecordId": "3227387"
+            }
+          ],
+          "previousArchiveRecordId": "3227386",
+          "nextArchiveRecordId": "3227388",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1980-12-31T00:00:00",
+            "year": 1980
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227387"
+        },
+        "highlight": {
+          "title": [ "Dänemark" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      },
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "3227388",
+        "_score": 1.0,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Deutschland",
+          "referenceCode": "E4390A#1000/862#301*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1950",
+            "startDate": "1950-01-01T00:00:00",
+            "endDate": "1951-01-01T00:00:00",
+            "searchStartDate": "1949-07-05T00:00:00",
+            "searchEndDate": "1951-06-29T00:00:00",
+            "years": [ 1950 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467500039803430003980349000398036200039803630003227388",
+          "treeSequence": 226816,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 1000,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)" },
+            { "title": "Allgemeine Fragen und Korrespondenzen" },
+            { "title": "Eidg. Behörden" },
+            { "title": "Politisches Departement" },
+            { "title": "Allgemeines - Genfer Abkommen / Lieux de Genève" },
+            { "title": "Deutschland" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390A*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1963-1970)",
+              "dateRangeText": "1933-1969",
+              "archiveRecordId": "4675"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2",
+              "title": "Allgemeine Fragen und Korrespondenzen",
+              "dateRangeText": "1934-1962",
+              "archiveRecordId": "3980343"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#21",
+              "title": "Eidg. Behörden",
+              "dateRangeText": "1945-1962",
+              "archiveRecordId": "3980349"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#212",
+              "title": "Politisches Departement",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980362"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390A#2120",
+              "title": "Allgemeines - Genfer Abkommen / Lieux de Genève",
+              "dateRangeText": "1947-1961",
+              "archiveRecordId": "3980363"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390A#1000/862#301*",
+              "title": "Deutschland",
+              "dateRangeText": "1950",
+              "archiveRecordId": "3227388"
+            }
+          ],
+          "previousArchiveRecordId": "3227387",
+          "nextArchiveRecordId": "3227389",
+          "parentArchiveRecordId": "3980363",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "1980-12-31T00:00:00",
+            "year": 1980
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "1.2.408.05.05",
+              "containerType": "Schachtel",
+              "idName": "1067522 1000/862_11"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "1000/00862 Bundesverwaltung (Bern) (1936-1959)",
+                "entityRecordId": "13304",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "2120" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "Frei zugänglich",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "3227388"
+        },
+        "highlight": {
+          "title": [ "Deutschland" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        }
+      }
+    ]
+  },
+  "aggregations": {
+    "bestellbare_einheiten": {
+      "doc_count": 265048,
+      "nach_level": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "Dossier",
+            "doc_count": 228343
+          },
+          {
+            "key": "Dokument",
+            "doc_count": 36557
+          },
+          {
+            "key": "Subdossier",
+            "doc_count": 141
+          },
+          {
+            "key": "Serie",
+            "doc_count": 7
+          }
+        ]
+      }
+    }
+  }
+}

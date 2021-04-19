@@ -1,0 +1,7 @@
+﻿ALTER TABLE ApplicationUser ADD ReasonForRejectionDate DATETIME NOT NULL CONSTRAINT DF_ApplicationUser_ReasonForRejectionDate DEFAULT(SYSDATETIME()) 
+ALTER TABLE ApplicationUser ADD IdentifierDocument BINARY(4000) NULL 
+ALTER TABLE ApplicationUser DROP CONSTRAINT CHK_ROLEPUBLICCLIENT_VS_ISINTERNALUSER
+GO
+
+ALTER TABLE ApplicationUser ADD CONSTRAINT CHK_ROLEPUBLICCLIENT_VS_ISINTERNALUSER CHECK ((IsInternalUser = 1 AND RolePublicClient IN ('BAR', 'AS', 'BVW')) OR (IsInternalUser = 0 AND RolePublicClient IN ('Ö2', 'Ö3')))
+GO

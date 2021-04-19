@@ -1,0 +1,720 @@
+﻿Fingerabdruckverfahren|Daktyloskopie|fingerprinting|dactyloscopy|dactyloscopie|dattiloscopia|dactiloscopia
+daktyloskopische Abklärung|Fingerabdruckvergleich|Vergleich der Fingerabdrücke|fingerprint comparison|examen dactyloscopique|analyse dactyloscopique|esame dattiloscopico|accertamento dattiloscopico|examinaziun dactiloscopica
+Familiennachzug|Familienvereinigung|Familienzusammenführung|family reunification|family reunion|regroupement familial|réunification familiale|ricongiungimento familiare|arriv successiv da la famiglia|reuniun da la famiglia|arrivada posteriura da la famiglia
+die Familie nachziehen|reunite the family|faire venir sa famille|farsi raggiungere dalla famiglia
+nachträglicher Familiennachzug|subsequent family reunification|regroupement familial différé|ricongiungimento familiare differito|arriv successiv posteriur da la famiglia
+Nachzug eines Kindes|Kindernachzug|regroupement familial d'un enfant|ricongiungimento di un figlio|arriv successiv d'in uffant
+ein Kind nachziehen|---|faire venir un enfant|ricongiungere un figlio
+Anspruch auf Familiennachzug|right to family reunification|droit au regroupement familial|diritto al ricongiungimento familiare|dretg da l'arriv successiv da la famiglia
+Frist für den Familiennachzug|time limit for family reunification|délai pour le regroupement familial|termine per il ricongiungimento familiare|termin per l'arriv successiv da la famiglia
+Ausländerrecht|law on foreign nationals|aliens law|droit des étrangers|droit en matière d'étrangers|droit sur les étrangers|diritto degli stranieri|diritto in materia di stranieri|diritto sugli stranieri|dretg da persunas estras|dretg d'esters
+ausländerrechtliche Bestimmung|provision of the law on foreign nationals|disposition du droit des étrangers|disposition du droit sur les étrangers|disposition en matière de droit sur les étrangers|disposition relevant de la législation sur les étrangers|disposizione del diritto in materia di stranieri|disposizione in materia di diritto sugli stranieri|disposizione della legislazione sugli stranieri|prescrizione del diritto in materia di stranieri|disposiziun dal dretg d'esters
+Ausländerbereich|in relation to foreign nationals|immigration sector|domaine des étrangers|settore degli stranieri|sectur d'esters
+Migrationsbereich|migration sector|sphere of migration|field of migration|domaine des migrations|domaine migratoire|settore della migrazione|settore delle migrazioni|ambito migratorio|sectur da la migraziun
+Ausländerpolitik|policy on foreign nationals|politique des étrangers|politique en matière d'étrangers|politique à l'égard des étrangers|politica degli stranieri|politica in materia di stranieri|politica dals esters|politica d'immigraziun
+Migrationspolitik|migration policy|immigration policy|politique migratoire|politique de migration|politique des migrations|politique en matière de migrations|politique en matière de migration|politica migratoria|politica di migrazione|politica in materia di migrazione|politica sulla migrazione|politica da migraziun
+Integrationspolitik|integration policy|politique d'intégration|politique en matière d'intégration|politica d'integrazione|politica integrativa|politica d'integraziun
+Migration|Wanderung|Migrationsbewegung|Wanderungsbewegung|Bevölkerungswanderung|Migrationsstrom|Migrationsfluss|migration|migratory movement|migratory flow|mouvement migratoire|flux migratoire|mouvement de migration|migrazione|movimento migratorio|flusso migratorio|movimento di migrazione|migraziun|moviment migratoric
+Primärmigration|primäre Migration|unabhängige Migration|primary migration|migration primaire|migrazione primaria|immigraziun primara
+Sekundärmigration|sekundäre Migration|secondary migration|migration secondaire|migrazione secondaria|immigraziun secundara
+grenzüberschreitende Migration|internationale Migration|internationale Wanderung|grenzüberschreitende Migrationsbewegung|international migration|migration internationale|migration transfrontalière|mouvement migratoire transfrontalier|mouvement de migration transfrontalière|mouvement migratoire par delà les frontières|flux migratoire transfrontalier|migrazione transfrontaliera|migrazione internazionale|movimento di migrazione transfrontaliero|flusso migratorio transfrontaliero|flusso migratorio internazionale|flusso migratorio attraverso le frontiere|migraziun transcunfinala|migraziun sur ils cunfins|migraziun internaziunala
+Binnenmigration|Binnenwanderung|interne Migrationsbewegung|Binnenmigrationsbewegung|internal migration|migration interne|migration intérieure|mouvement migratoire intérieur|flux migratoire interne|migrazione interna|flusso migratorio interno|migraziun interna
+illegale Migration|irreguläre Migration|illegal migration|irregular migration|migration illégale|migration irrégulière|migration clandestine|migrazione illegale|migrazione irregolare|migrazione clandestina|migraziun illegala
+PiM|Prävention irregulärer Migration|Prävention von irregulärer Migration|prevention of irregular migration|prévention de la migration irrégulière|prevenzione della migrazione irregolare|prevenziun da la migraziun irregulara
+Person aus dem Ausländerbereich|Person des Ausländerbereichs|Person im Ausländerbereich|person subject to the law on foreign nationals|foreign national|personne relevant du domaine des étrangers|persona del settore degli stranieri|persona nel settore degli stranieri|persona rientrante nel settore degli stranieri|persuna dal sectur d'esters|persuna che deriva dal sectur d'esters
+Ausländer|Ausländerin|ausländische Person|ausländischer Staatsangehöriger|ausländische Staatsangehörige|Fremder|Fremde|foreign national|foreigner|alien|étranger|étrangère|personne étrangère|ressortissant étranger|ressortissante étrangère|personne d'origine étrangère|straniero|straniera|persona straniera|cittadino straniero|cittadina straniera|ester|estra|persuna estra
+Schweizerbürger|Schweizerbürgerin|Schweizer Bürger|Schweizer Bürgerin|Schweizer Staatsbürger|Schweizer Staatsbürgerin|schweizerischer Staatsangehöriger|schweizerische Staatsangehörige|Schweizer|Schweizerin|Swiss citizen|citizen of Switzerland|Swiss national|Swiss person|Swiss man|Swiss woman|citoyen suisse|citoyenne suisse|ressortissant suisse|ressortissante suisse|Suisse|Suissesse|cittadino svizzero|cittadina svizzera|Svizzero|Svizzera|persona di cittadinanza svizzera|burgais svizzer|burgaisa svizra|Svizzer|Svizra
+Drittstaatsangehöriger|Drittstaatsangehörige|Angehöriger eines Drittstaates|Angehörige eines Drittstaates|third-country national|third-state national|citizen of a third country|ressortissant d'un État tiers|cittadino di uno Stato terzo|burgais d'in terz stadi|burgaisa d'in terz stadi
+Staatsangehöriger eines Mitgliedstaats der Europäischen Union|Staatsangehörige eines Mitgliedstaats der Europäischen Union|Staatsangehöriger eines Mitgliedstaats der EU|Staatsangehörige eines Mitgliedstaats der EU|Staatsangehöriger eines EU-Mitgliedstaats|Staatsangehörige eines EU-Mitgliedstaats|Angehöriger eines Mitgliedstaats der Europäischen Union|Angehörige eines Mitgliedstaats der Europäischen Union|Angehöriger eines Mitgliedstaats der EU|Angehörige eines Mitgliedstaats der EU|Angehöriger eines EU-Mitgliedstaats|Angehörige eines EU-Mitgliedstaats|EU-Angehöriger|EU-Angehörige|EU-Bürger|EU-Bürgerin|Unionsbürger|Unionsbürgerin|citizen of a member state of the European Union|citizen of an EU member state|EU citizen|European national|EU national|citizen of the Union|ressortissant d'un État membre de l'Union européenne|ressortissante d'un État membre de l'Union européenne|ressortissant d'un État membre de l'UE|ressortissante d'un État membre de l'UE|ressortissant de l'UE|ressortissante de l'UE|citoyen de l'UE|citoyenne de l'UE|citoyen de l'Union|citoyenne de l'Union|cittadino di uno Stato membro dell'Unione europea|cittadino di uno Stato membro dell'UE|cittadino dell'UE|cittadino dell'Unione|burgais d'in stadi commember da l'Uniun europeica|burgaisa d'in stadi commember da l'Uniun europeica|burgais d'in stadi commember da l'UE|burgaisa d'in stadi commember da l'UE|burgais da l'UE|burgaisa da l'UE
+Staatsangehöriger eines Mitgliedstaats der Europäischen Gemeinschaft|Staatsangehörige eines Mitgliedstaats der Europäischen Gemeinschaft|Staatsangehöriger eines Mitgliedstaats der EG|Staatsangehörige eines Mitgliedstaats der EG|citizen of a member state of the European Community|citizen of an EC member state|citizen of an EU state|EC citizen|ressortissant d'un État membre de la Communauté européenne|ressortissante d'un État membre de la Communauté européenne|ressortissant d'un État membre de la CE|ressortissante d'un État membre de la CE|cittadino di uno Stato membro della Comunità europea|cittadino di uno Stato membro della CE|burgais d'in stadi commember da la Communitad europeica|burgaisa d'in stadi commember da la Communitad europeica|burgais d'in stadi commember da la CE|burgaisa d'in stadi commember da la CE
+Staatsangehöriger eines Mitgliedstaats der Europäischen Freihandelsassoziation|Staatsangehörige eines Mitgliedstaats der Europäischen Freihandelsassoziation|Staatsangehöriger eines Mitgliedstaats der EFTA|Staatsangehörige eines Mitgliedstaats der EFTA|Staatsangehöriger eines EFTA-Mitgliedstaats|Staatsangehörige eines EFTA-Mitgliedstaats|Angehöriger eines Mitgliedstaats der Europäischen Freihandelsassoziation|Angehörige eines Mitgliedstaats der Europäischen Freihandelsassoziation|Angehöriger eines Mitgliedstaats der EFTA|Angehörige eines Mitgliedstaats der EFTA|Angehöriger eines EFTA-Mitgliedstaats|Angehörige eines EFTA-Mitgliedstaats|EFTA-Angehöriger|EFTA-Angehörige|citizen of a member state of the European Free Trade Association|citizen of an EFTA member state|Citizen of an EFTA state|EFTA citizen|ressortissant d'un État membre de l'Association européenne de libre-échange|ressortissante d'un État membre de l'Association européenne de libre-échange|ressortissant d'un État membre de l'AELE|ressortissante d'un État membre de l'AELE|ressortissant de l'AELE|ressortissante de l'AELE|cittadino di uno Stato membro dell'Associazione europea di libero scambio|cittadino di uno Stato membro dell'AELS|cittadino dell'AELS|burgais d'in stadi commember da l'Associaziun europeica da commerzi liber|burgaisa d'in stadi commember da l'Associaziun europeica da commerzi liber|burgais d'in stadi commember da l'AECL|burgaisa d'in stadi commember da l'AECL|burgais da l'AECL|burgaisa da l'AECL
+ansässiger Ausländer|ansässige Ausländerin|resident foreign national|résident étranger|résidente étrangère|residente straniero|residente straniera|ester resident|estra residenta
+ausländischer Arbeitnehmer|ausländische Arbeitnehmerin|foreign employee|foreign worker|travailleur étranger|travailleuse étrangère|lavoratore straniero|lavoratrice straniera|lavurant ester|lavuranta estra
+inländischer Arbeitnehmer|inländische Arbeitnehmerin|domestic employee|travailleur en Suisse|travailleuse en Suisse|travailleur indigène|travailleuse indigène|lavoratore indigeno|lavoratrice indigena|lavurant indigen|lavuranta indigena
+nicht erwerbstätiger Ausländer|nicht erwerbstätige Ausländerin|foreign nationals without gainful employment|non-employed foreign nationals|étranger n'exerçant pas d'activité lucrative|étrangère n'exerçant pas d'activité lucrative|straniero che non esercita un'attività lucrativa|straniera che non esercita un'attività lucrativa|ester senza activitad da gudogn|estra senza activitad da gudogn
+ausländischer Ehegatte|ausländische Ehegattin|foreign spouse|conjoint étranger|conjointe étrangère|coniuge straniero|coniuge straniera|conjugal ester|conjugala estra
+VA|vorläufig aufgenommener Ausländer|vorläufig aufgenommene Ausländerin|vorläufig aufgenommene ausländische Person|vorläufig Aufgenommener|vorläufig Aufgenommene|vorläufig aufgenommene Person|temporarily admitted foreign national|temporarily admitted alien|temporarily admitted person|AP|étranger admis provisoirement|étrangère admise provisoirement|étranger admis à titre provisoire|étrangère admise à titre provisoire|personne admise provisoirement|personne admise à titre provisoire|admis provisoire|straniero ammesso provvisoriamente|straniera ammessa provvisoriamente|straniero ammesso a titolo provvisorio|straniera ammessa a titolo provvisorio|straniero temporaneamente ammesso|persona ammessa provvisoriamente|persuna admessa provisoricamain|persuna estra admessa provisoricamain
+Staatenloser|Staatenlose|staatenlose Person|stateless person|apatride|apolide|persuna senza naziunalitad
+Person mit unbefugtem Aufenthalt|Person mit rechtswidrigem Aufenthalt|person residing without authorisation|person with unauthorised stay|illegally resident person|personne en situation irrégulière|personne en séjour irrégulier|personne en situation de séjour illégal|persona senza dimora autorizzata|persona in situazione irregolare|persona in soggiorno irregolare|persona in posizione irregolare|straniero senza statuto di soggiorno regolare
+schriftenlose ausländische Person|schriftenloser Ausländer|schriftenlose Ausländerin|Papierloser|Papierlose|Sans-Papiers|undocumented foreigner|undocumented immigrant|foreign national without identification documents|sans-papiers|étranger dépourvu de documents de voyage|étranger sans pièces de légitimation|étranger sans papiers|straniero sprovvisto di documenti di viaggio|persona sprovvista di documenti di viaggio|straniero sprovvisto di documenti|straniero privo di documenti|persona priva di documenti|persuna estra senza documents da viadi|persuna estra senza documents da legitimaziun
+Person mit einer Aufenthaltsbewilligung|Aufenthalter|Aufenthalterin|person with a residence permit|titulaire d'une autorisation de séjour|titulaire d'un permis de séjour|étranger titulaire d'un permis de séjour|étrangère titulaire d'un permis de séjour|titolare di un permesso di dimora|straniero dimorante|straniera dimorante|dimorante|persuna cun ina permissiun da dimora|dimorant|dimoranta
+Person mit einer Kurzaufenthaltsbewilligung|Kurzaufenthalter|Kurzaufenthalterin|person with a short stay permit|titulaire d'une autorisation de courte durée|bénéficiaire d'une autorisation de courte durée|titolare di un permesso di soggiorno di breve durata|dimorante temporaneo|dimorante temporanea|persuna cun ina permissiun da dimora curta|dimorant a curt termin|dimoranta a curt termin|dimorant temporar|dimoranta temporara
+Person mit einer Niederlassungsbewilligung|niedergelassener Ausländer|niedergelassene Ausländerin|Niedergelassener|Niedergelassene|person with a permanent residence permit|titulaire d'une autorisation d'établissement|bénéficiaire d'une autorisation d'établissement|titulaire d'un permis d'établissement|étranger titulaire d'un permis d'établissement|étrangère titulaire d'un permis d'établissement|établis|titolare di un permesso di domicilio|straniero domiciliato|straniera domiciliata|domiciliato|domiciliata|persuna cun ina permissiun da domicil|persuna domiciliada|domicilià|domiciliada
+Grenzgänger|Grenzgängerin|Person mit einer Grenzgängerbewilligung|cross-border commuter|frontier worker|frontier commuter|person with a cross-border commuter permit|frontalier|frontalière|travailleur frontalier|travailleuse frontalière|titulaire d'une autorisation frontalière|frontaliero|frontaliera|lavoratore frontaliero|lavoratrice frontaliera|lavoratore confinante|lavoratrice confinante|titolare di un permesso per frontalieri|cunfinari|cunfinaria|persuna cun ina permissiun da cunfinarias e da cunfinaris
+Jahresaufenthalter|Jahresaufenthalterin|holder of an annual residence permit|annual resident|résident à l'année|résidente à l'année|titulaire d'une autorisation à l'année|bénéficiaire d'une autorisation à l'année|titulaire d'un permis à l'année|étranger titulaire d'une autorisation à l'année|étrangère titulaire d'une autorisation à l'année|annuel|dimorante annuale|dimorant per in onn|dimoranta per in onn|persuna cun dimora annuala|persuna estra cun dimora annuala
+Saisonnier|Saisonnière|Saisonarbeiter|Saisonarbeiterin|Saisonarbeitnehmer|Saisonarbeitnehmerin|seasonal worker|saisonnier|saisonnière|ouvrier saisonnier|ouvrière saisonnière|stagionale|lavorante di stagione|stagiunari|stagiunaria
+Saisonangestellter|Saisonangestellte|saisonal Beschäftigter|saisonal Beschäftigte|seasonal employee|employé saisonnier|employée saisonnière|impiegato di stagione|impiegata di stagione|emploià da stagiun|emploiada da stagiun
+Stagiaire|stagiaire|intern|work experience trainee|tirocinante|praticante|praticant|praticanta
+Inhaber eines Ausländerausweises|Inhaberin eines Ausländerausweises|Inhaber eines Ausweises|Inhaberin eines Ausweises|Ausweisinhaber|Ausweisinhaberin|holder of a foreign national identity card|identity card holder|titulaire d'un titre de séjour|détenteur d'un titre de séjour|détentrice d'un titre de séjour|titolare di una carta di soggiorno|possessur d'in document da legitimaziun da persunas estras|possessura d'in document da legitimaziun da persunas estras|possessur d'in document da legitimaziun|possessura d'in document da legitimaziun
+Gruppe von Gesuchstellern|applicant group|groupe de requérants|gruppo di richiedenti|gruppa da requirents
+unerwünschter Ausländer|unerwünschte Ausländerin|undesirable alien|étranger indésirable|straniero indesiderabile|ester nungiavischà|estra nungiavischada
+ausgewiesene Person|ausgewiesener Ausländer|ausgewiesene Ausländerin|Ausgewiesener|Ausgewiesene|expelled person|personne expulsée|étranger expulsé|étrangère expulsée|expulsé|expulsée|persona espulsa|straniero espulso|straniera espulsa|espulso|persuna expulsada|persuna estra expulsada
+weggewiesene Person|weggewiesener Ausländer|weggewiesene Ausländerin|removed person|person subject to a removal order|personne renvoyée|étranger renvoyé|étrangère renvoyée|persona allontanata|straniero allontanato|straniera allontanata|persuna spedida|persuna estra spedida
+ausreisepflichtige Person|person required to leave|personne contrainte au départ|personne tenue de partir|persona obbligata a partire|persuna obligada da partir
+in die Schweiz entsandter Arbeitnehmer|in die Schweiz entsandte Arbeitnehmerin|entsandter Arbeitnehmer|entsandte Arbeitnehmerin|employee posted to Switzerland|posted employee|posted worker|travailleur détaché en Suisse|travailleur détaché|travaileuse détachée en Suisse|travailleuse détachée|lavoratore distaccato in Svizzera|lavoratore distaccato|lavurant tramess en Svizra|lavuranta tramessa en Svizra|lavurant transmess en Svizra|lavuranta transmessa en Svizra|lavurant tramess|lavuranta tramessa
+Begleitperson|accompanying person|accompagnant|accompagnatore|persuna accumpagnanta
+Dokumentenberater|Dokumentenberaterin|document adviser|conseiller en matière de documents|conseillère en matière de documents|consulente in materia di documenti|cussegliader da documents|cussegliadra da documents
+Schleppernetz|Schlepperorganisation|human trafficking network|filière d'immigration clandestine|réseau de passeurs|filière de passeurs|rete di passatori|organisaziun da cuntrabanda da persunas
+Migrationsbehörde|migration authority|autorité de migration|autorité compétente en matière de migration|autorité chargée des questions migratoires|autorità competente nel settore della migrazione|autorità di migrazione|autorità competente in materia di migrazione|autoritad da migraziun
+kantonale Migrationsbehörde|cantonal migration authority|autorité cantonale de migration|autorità cantonale competente nel settore della migrazione|autorità cantonale di migrazione|autoritad chantunala da migraziun
+kommunale Migrationsbehörde|communal migration authority|autorité communale de migration|autorità comunale competente nel settore della migrazione|autorità comunale di migrazione|autoritad communala da migraziun
+Frepo|Fremdenpolizeibehörde|Fremdenpolizei|aliens police|aliens registration office|police des étrangers|polizia degli stranieri|polizia d'esters|polizia da persunas estras
+kantonale Fremdenpolizeibehörde|cantonal migration authority|autorité cantonale de police des étrangers|autorità cantonale di polizia degli stranieri|autoritad chantunala da polizia d'esters
+Behörde des Arbeitsnachweises|Arbeitsnachweis|office de placement|ufficio di collocamento|uffizi da mussament da lavur
+Polizeibehörde|police authority|autorité de police|autorité policière|autorità di polizia|autoritad da polizia
+kantonale Polizeibehörde|Polizeibehörde eines Kantons|cantonal police authority|cantonal police|autorité cantonale de police|autorità cantonale di polizia|autorità di polizia di un Cantone|autoritad chantunala da polizia
+kommunale Polizeibehörde|Polizeibehörde einer Gemeinde|communal police authority|communal police|autorité communale de police|autorità comunale di polizia|autoritad communala da polizia
+Integrationsfachstelle|Ausländerdienst|foreign national service|bureau de l'intégration|service d'aide aux étrangers|service des étrangers|servizio addetto all'integrazione|servizio per gli stranieri|servizio degli stranieri|servizio d'aiuto agli stranieri|servetsch da persunas estras
+Ausländerorganisation|Ausländerverein|Ausländervereinigung|Migrantenorganisation|expatriate organisation|migrant organisation|migrant association|MRCO|migrant and refugee community organisation|organisation d'étrangers|association d'étrangers|organisation de migrants|association de migrants|organizzazione di stranieri|associazione di stranieri|organizzazione di immigranti|associazione di immigranti|organisaziun da persunas estras
+Stelle für die Ausfertigung der biometrischen Ausweise|Stelle zur Ausfertigung des biometrischen Ausländerausweises|mit der Ausfertigung der biometrischen Ausweise betraute Stelle|mit der Ausfertigung des biometrische Ausländerausweises betraute Stelle|Ausfertigungsstelle|office issuing biometric identity cards|office entrusted with issuing biometric identity cards|issuing office|centre chargé de produire les titres de séjour biométrique|centre chargé de produire le titre de séjour biométrique|centre chargé de produire les titres de séjour|servizio incaricato dell'allestimento delle carte di soggiorno biometriche|centro incaricato di confezionare la carta di soggiorno biometrica|post per la producziun dals documents da legitimaziun biometrics|post da producziun
+Grenzkontrollbehörde|für die Grenzkontrolle zuständige Behörde|Grenzkontrollorgan|border control authority|authority responsible for border controls|authority responsible for the border check|autorité chargée du contrôle à la frontière|autorité responsable du contrôle à la frontière|autorité compétente en matière de contrôle à la frontière|organe de contrôle à la frontière|autorità di controllo alla frontiera|autorità competente per il controllo al confine|organo di controllo alla frontiera|autoritad ch'è incumbensada cun la controlla da cunfin|autoritad ch'è cumpetenta per la controlla da cunfin
+schweizerische Vertretung im Ausland|Schweizer Vertretung im Ausland|schweizerische Auslandvertretung|Schweizer Auslandvertretung|Vertretung der Schweiz im Ausland|Auslandvertretung der Schweiz|Swiss representation abroad|représentation suisse à l'étranger|représentation de la Suisse à l'étranger|rappresentanza svizzera all'estero|represchentanza svizra a l'exteriur
+diplomatische Vertretung|diplomatic representation|représentation diplomatique|rappresentanza diplomatica|represchentanza diplomatica
+konsularische Vertretung|consular representation|représentation consulaire|rappresentanza consolare|represchentanza consulara
+konsularischer Posten|Konsularbehörde|consular post|consular authority|poste consulaire|autorité consulaire|sede consolare|autorità consolare|post consular|autoritad consulara
+Heimatstaat|Heimatland|native country|home country|state of origin|country of origin|État d'origine|pays d'origine|Stato d'origine|Paese d'origine|stadi d'origin|pajais d'origin
+Herkunftsstaat|Herkunftsland|country of origin|state of origin|country of provenance|state of provenance|État de provenance|pays de provenance|État d'origine|pays d'origine|Stato di provenienza|Paese di provenienza|Stato d'origine|Paese d'origine|stadi da derivanza|pajais da derivanza|pajais da provegnientscha|pajais d'origin
+Drittstaat|Drittland|third country|third state|État tiers|pays tiers|Stato terzo|Paese terzo|stadi terz|ulteriur stadi|terz stadi
+Transitstaat|Transitland|Durchbeförderungsstaat|Durchbeförderungsland|Durchgangsstaat|transit state|transit country|state of transit|country of transit|État de transit|pays de transit|Stato di transito|Paese di transito|stadi da transit|pajais da transit
+Zielstaat|Zielland|Bestimmungsland|destination country|country of destination|État de destination|pays de destination|Stato di destinazione|Paese di destinazione|stadi da destinaziun|pajais da destinaziun
+Nachbarstaat|Nachbarland|benachbarter Staat|benachbartes Land|neighbouring state|adjacent state|État limitrophe|pays limitrophe|État voisin|pays voisin|Stato confinante|Paese confinante|Stato limitrofo|Paese limitrofo|Stato vicino|Paese vicino|stadi vischin|pajais vischin|pajais cunfinant|pajais limitrof
+Gaststaat|Gastland|host state|host country|État hôte|pays hôte|Stato ospite|Paese ospite|stadi ospitant|pajais ospitant
+Aufnahmestaat|Aufnahmeland|host state|host country|État d'accueil|pays d'accueil|Stato d'accoglienza|Paese d'accoglienza|Paese d'ammissione|stadi d'accoglientscha|pajais d'accoglientscha|pajais d'admissiun
+Wohnsitzstaat|Wohnsitzland|Wohnstaat|Wohnland|country of residence|État de domicile|pays de domicile|État de résidence|pays de résidence|Stato di domicilio|Paese di domicilio|Stato di residenza|Paese di residenza|stadi da domicil|pajais da domicil
+Aufenthaltsstaat|Aufenthaltsland|host country|État de séjour|pays de séjour|État de résidence|pays de résidence|Stato di soggiorno|Paese di soggiorno|Stato di residenza|Paese di residenza|stadi da dimora
+Aufenthaltsort|place of stay|place of residence|lieu de séjour|lieu de résidence|luogo di soggiorno|luogo di dimora|luogo di residenza|lieu da dimora
+Transitzone eines Flughafens|Transitzone|Transitraum eines Flughafens|Transitraum|Transitbereich eines Flughafens|airport transit zone|transit zone of an airport|transit zone|zone de transit d'un aéroport|zone de transit|zona di transito di un aeroporto|zona di transito|zona da transit d'ina plazza aviatica|zona da transit
+ausstellender Staat|Ausstellerstaat|country of issue|État émetteur|Stato di rilascio|stadi emittent
+Mitgliedstaat der Europäischen Union|Mitgliedstaat der EU|EU-Mitgliedstaat|EU-Staat|member state of the European Union|EU member state|member state of the EU|EU state|État membre de l'Union européenne|État membre de l'UE|État de l'UE|Stato membro dell'Unione europea|Stato membro dell'UE|Stato dell'UE|stadi commember da l'Uniun europeica|stadi commember da l'UE|stadi da l'UE
+Mitgliedstaat der Europäischen Gemeinschaft|Mitgliedstaat der EG|EG-Mitgliedstaat|member state of the European Community|EC member state|État membre de la Communauté européenne|État membre de la CE|Stato membro della Comunità europea|Stato membro della CE|stadi commember da la Communitad europeica|stadi commember da la CE
+Mitgliedstaat der Europäischen Freihandelsassoziation|Mitgliedstaat der EFTA|EFTA-Mitgliedstaat|EFTA-Staat|member state of the European Free Trade Association|EFTA member state|EFTA state|État membre de l'Association européenne de libre-échange|État membre de l'AELE|État de l'AELE|Stato membro dell'Associazione europea di libero scambio|Stato membro dell'AELS|Stato dell'AELS|stadi commember da l'Associaziun europeica da commerzi liber|stadi commember da l'AECL|stadi da l'AECL
+Schengen-Raum|Schengenraum|Schengen area|espace Schengen|spazio Schengen|spazi Schengen|territori da Schengen
+Abflugsort|Abflugort|place of departure|lieu d'embarquement|luogo del decollo|luogo d'imbarco|lieu da partenza
+Zielort des Flugs|Bestimmungsort|flight destination|lieu de destination du vol|destination|luogo di destinazione del volo|luogo di destinazione|destinaziun dal sgol
+Abgangsflughafen|airport of departure|aéroport de départ|aeroporto di partenza|plazza aviatica da partenza
+Zielflughafen|airport of destination|aéroport de destination|aeroporto di destinazione|plazza aviatica da destinaziun|eroport da destinaziun
+Schengen-Aussengrenze|Schengener Aussengrenze|Schengen external border|frontière extérieure Schengen|frontiera esterna Schengen|cunfin exteriur dal spazi Schengen
+Grenzraum|border zone|espace frontalier|zone frontalière|area di confine|territori da cunfin
+Grenzzone|border zone|zone frontalière|zona di frontiera|zona frontaliera|zona da cunfin
+Grenzübergangsstelle|Grenzübergang|Übergangsstelle|border crossing point|poste frontière|point de passage frontalier|point de passage de frontière|point frontière|posto di confine|valico di confine|valico di frontiera|post da cunfin|post da passagi da cunfin
+Einreise|entry|entrée|entrata|entrada
+einreisen|enter|entrer|entrare|entrar|vegnir
+direkte Einreise|direct entry|entrée directe|entrata diretta|entrada directa
+Einreise in die Schweiz|entry into Switzerland|entrée en Suisse|entrata in Svizzera|entrada en Svizra
+in die Schweiz einreisen|enter Switzerland|entrer en Suisse|entrare in Svizzera|venire in Svizzera|entrar en Svizra
+zur Übersiedlung einreisen|entrer dans l'intention de prendre domicile|venire con l'intenzione di stabilirsi|entrar cun l'intenziun da sa domiciliar
+ein Gebiet betreten|enter an area|pénétrer dans une région|accedere a un territorio|entrar en in territori
+Grenzübertritt|Grenzübergang|crossing the border|border crossing|frontier crossing|passage de la frontière|franchissement de la frontière|passaggio del confine|passaggio della frontiera|passagi dal cunfin
+rechtswidriger Grenzübertritt|illegaler Grenzübertritt|crossing the border unlawfully|crossing the border illegally|unlawful border crossing|illegal border crossing|passage illégal de la frontière|franchissement illégal de la frontière|passaggio illegale del confine|passaggio illegale della frontiera|passagi illegal dal cunfin
+rechtswidrige Einreise|illegale Einreise|unlawful entry|illegal entry|entrée illégale|entrée irrégulière|entrata illegale|entrada illegala
+rechtswidrig einreisen|illegal einreisen|enter unlawfully|enter illegally|entrer illégalement|entrare illegalmente|entrar illegalmain
+Wiedereinreise|re-entry|return|retour|ritorno|rientro
+Weiterreise|onward journey|poursuite du voyage|suite du voyage|proseguimento del viaggio|prosecuzione del viaggio|continuazione del viaggio|cuntinuaziun dal viadi
+weiterreisen|continue travelling|continue the journey|poursuivre le voyage|proseguire il viaggio|cuntinuar il viadi
+Durchreise|transit|transito
+durchreisen|travel through|transit|transiter|transitare|passar tras
+rechtswidrige Durchreise|illegale Durchreise|unlawful transit|transit illégal|transito illegale|transit illegal
+Anwesenheitsrecht|Recht auf Anwesenheit|right of stay|right to stay|right of residence|droit de résidence|droit de résider|droit de présence|diritto di residenza|diritto di risiedere|diritto di presenza|dretg da dimora
+gefestigtes Anwesenheitsrecht|gesichertes Anwesenheitsrecht|gefestigtes Aufenthaltsrecht|guaranteed right to stay|droit de présence assuré|droit de présence reconnu|droit de présence stable|droit de résidence durable|droit de séjour stable|diritto di residenza certo|diritto di residenza assicurato|diritto di soggiorno certo|diritto di permanenza certo|dretg da dimora garantì
+Aufenthaltsrecht|Aufenthaltsberechtigung|right of residence|right of stay|droit de séjour|diritto di soggiorno|dretg da dimora
+dauerhaftes Aufenthaltsrecht|permanent right of residence|droit de séjour durable|diritto di soggiorno duraturo|dretg da dimora durabel
+Anwesenheitsverhältnis|conditions of stay|conditions de séjour|conditions de résidence|condizioni di soggiorno|condizioni di residenza|cundiziuns da dimora
+Aufenthaltsstatus|aufenthaltsrechtlicher Status|residence status|statut de séjour|statuto di soggiorno|statuto di dimora|status da dimora
+Anwesenheit eines Ausländers|Anwesenheit einer Ausländerin|stay of a foreign national|foreign national's stay|présence d'un étranger|présence d'une étrangère|presenza di uno straniero|presenza di una straniera|preschientscha d'in ester|preschientscha d'in'estra
+Aufenthalt|residence|stay|séjour|soggiorno|dimora
+dauerhafter Aufenthalt|long period of stay|séjour durable|soggiorno duraturo|dimora durabla
+vorübergehender Aufenthalt|temporary period of stay|séjour temporaire|soggiorno temporaneo|dimora temporara
+ununterbrochener Aufenthalt|uninterrupted period of stay|séjour ininterrompu|soggiorno ininterrotto|dimora nuninterrutta
+rechtmässiger Aufenthalt|ordnungsgemässer Aufenthalt|law-abiding period of stay|regular period of stay|séjour légal|séjour régulier|soggiorno legale|soggiorno regolare|dimora legala|dimora ordinaria
+rechtswidriger Aufenthalt|unrechtmässiger Aufenthalt|illegaler Aufenthalt|unbefugter Aufenthalt|rechtswidriges Verweilen|unlawful period of stay|illegal stay|irregular stay|unauthorised stay|séjour illégal|séjour irrégulier|soggiorno illegale|soggiorno irregolare|dimora irregolare|dimora illegala
+Auslandaufenthalt|Auslandsaufenthalt|Aufenthalt im Ausland|stay abroad|period of stay abroad|séjour à l'étranger|soggiorno all'estero|dimora a l'exteriur|segiurn a l'ester
+Aufenthalt ohne Erwerbstätigkeit|period of stay without gainful employment|séjour sans activité lucrative|soggiorno senza attività lucrativa|dimora senza activitad da gudogn
+Aufenthalt mit Erwerbstätigkeit|period of stay with gainful employment|séjour avec activité lucrative|soggiorno con attività lucrativa|dimora cun activitad da gudogn
+den Aufenthalt aufgeben|terminer le séjour|---
+Aufenthaltsdauer|Anwesenheitsdauer|Dauer des Aufenthalts|Dauer der Anwesenheit|period of stay|length of stay|duration of residence|durée de séjour|durata del soggiorno|durata della dimora|durata della presenza|durada da la dimora|dimora
+Beendigung des Aufenthalts|Beendigung der Anwesenheit|end of the period of stay|fin du séjour|fine del soggiorno|fin da la dimora
+Stellenantritt|Antritt einer Stelle|beginning of employment|prise d'emploi|assunzione d'impiego|entrada en plazza
+eine Stelle antreten|begin employment|prendre un emploi|assumere un impiego|entrar en plazza
+Aufnahme einer Erwerbstätigkeit|beginning of employment|début de l'activité lucrative|inizio dell'attività lucrativa|cumenzament d'ina activitad da gudogn
+betriebliche Saisondauer|durée effective de la saison dans l'entreprise|durata stagionale effettiva dell'azienda|durada effectiva da la stagiun dal manaschi
+ohne Entgelt beherbergen|accommodate free of charge|loger gratuitement|dare alloggio gratuitamente|alloggiare gratuitamente|alloschar gratuitamain
+fremdenpolizeiliche Bestimmung|fremdenpolizeiliche Vorschrift|immigration provision|disposition de la police des étrangers|prescription sur la police des étrangers|disposizione di polizia degli stranieri|prescrizione di polizia degli stranieri|prescrizione sulla polizia degli stranieri|disposiziun da la polizia d'esters
+Integration|integration|intégration|integrazione|integraziun
+soziale Integration|social integration|intégration sociale|integrazione sociale|integraziun sociala
+nachhaltige Integration|lasting integration|intégration durable|integrazione duratura|integraziun persistenta
+Wiedereingliederung im Herkunftsland|Wiedereingliederung im Herkunftsstaat|reintegration in the country of origin|réintégration dans le pays de provenance|réintégration dans l'État de provenance|reintegrazione nel Paese d'origine|reinserimento nel Paese d'origine|reintegraziun en il stadi da derivanza
+Integrationsgrad|Grad der Integration|degree of integration|degré d'intégration|grado d'integrazione|grad da l'integraziun
+gewerbsmässige Beherbergung|commercial accommodation|hébergement contre rémunération|hébergement à titre onéreux|alloggio a pagamento|alloschi professiunal
+gewerbsmässig beherbergen|gegen Entgelt beherbergen|accommodate for commercial gain|loger contre rémunération|loger à titre lucratif|héberger contre rémunération|dare alloggio a pagamento|alloggiare a pagamento|alloggiare dietro compenso|dar alloschi professiunal
+Ausreise|departure|exit|sortie|départ|partenza|sortida
+ausreisen|leave|quitter|partire|lasciare|partir|bandunar
+Ausreise aus der Schweiz|departure from Switzerland|leaving Switzerland|sortie de Suisse|départ de Suisse|partenza dalla Svizzera|partenza da la Svizra
+aus der Schweiz ausreisen|leave Switzerland|quitter la Suisse|quitter le territoire suisse|lasciare la Svizzera|partir da la Svizra|bandunar la Svizra
+Ausreise aus einem Kanton|departure from a canton|départ d'un canton|partenza da un Cantone|partenz d'in chantun
+aus einem Kanton ausreisen|leave a canton|leave the territory of a canton|quitter un canton|quitter le territoire d'un canton|lasciare un Cantone|bandunar in chantun
+ein Gebiet verlassen|leave an area|quitter un territoire|abbandonare un territorio|bandunar in territori
+kontrollierte Ausreise|supervised departure|controlled departure|départ contrôlé|départ effectué sous contrôle|partenza controllata|partenza controllada
+unkontrollierte Abreise|unkontrollierte Ausreise|unsupervised departure|départ non contrôlé|départ non officiel|partenza non controllata|partenza non notificata|partenza betg controllada
+selbständige Ausreise|freiwillige Ausreise|voluntary departure|independent exit|départ autonome|départ volontaire|libre départ|partenza autonoma|partenza volontaria|partenza independenta|partenza voluntara
+fristgerechte Ausreise|fristgemässe Ausreise|departure within the deadline|scheduled departure|départ dans les délais|départ dans les délais prescrits|partenza entro i termini stabiliti|partenza tenor il termin
+Ausreisefrist|departure deadline|délai de départ|termine di partenza|termin da partenza
+eine Ausreisefrist ansetzen|eine Frist zur Ausreise setzen|set a departure deadline|impartir un délai de départ|impartir un délai pour le départ|impartire un termine di partenza|assegnare un termine di partenza|fissare un termine di partenza|fixar in termin da partenza
+rechtswidrige Ausreise|illegale Ausreise|unlawful exit|sortie illégale|partenza illegale|partenza illegala
+rechtswidrig ausreisen|illegal ausreisen|leave unlawfully|sortir illégalement|uscire illegalmente|partir illegalmain
+definitive Ausreise|definitive departure|départ définitif|partenza definitiva
+Rückreise|return journey|voyage de retour|retour|viaggio di ritorno|return
+Ausreisepflicht|obligation to leave|obligation de quitter un pays|injonction de quitter un pays|obbligo di lasciare un Paese|obligaziun da partir
+Anmeldung|registration|déclaration d'arrivée|annonce d'arrivée|notificazione dell'arrivo|notificazione|notifica di arrivo|annunzia
+sich anmelden|register|déclarer son arrivée|notificare l'arrivo|notificarsi|s'annunziar
+Anmeldepflicht|registration requirement|obligation de déclarer son arrivée|obligation de déclaration d'arrivée|obbligo di notificare l'arrivo|obbligo di notificazione dell'arrivo|obligaziun d'annunzia|obligaziun d’annunziar l’arrivada
+Anmeldefrist|Frist zur Anmeldung|time limit for registration|délai de déclaration d'arrivée|termine di notificazione|termin d'annunzia
+einen Ausländer melden|eine Ausländerin melden|provide the particulars of a foreign national|déclarer un étranger|annoncer un étranger|notificare uno straniero|annunziar ina persuna estra
+Abmeldung|notice of departure|déclaration de départ|annonce de départ|notificazione della partenza|notifica di partenza|annunzia da la partenza
+sich abmelden|give notice of departure|déclarer son départ|annoncer son départ|notificare la partenza|annunziar la partenza|avisar la partenza
+Abmeldepflicht|requirement to give notice of departure|obligation de déclarer son départ|obbligo di notificare la partenza|obligaziun d'annunziar la partenza
+Einreisevoraussetzungen|Voraussetzungen für die Einreise|Einreisebedingungen|entry requirements|conditions d'entrée|condizioni d'entrata|condizioni di ingresso|premissas per entrar
+Einreisebewilligung|Einreiseerlaubnis|entry permit|permission to enter|autorisation d'entrée|autorisation d'entrer|permis d'entrée|autorizzazione d'entrata|permesso d'entrata|permissiun d'entrada|permissiun d'entrar
+Einreiseverweigerung|Verweigerung der Einreise|refusal of entry|refus d'entrée|rifiuto d'entrata|refusa d'entrar
+die Einreise verweigern|refuse entry|refuser l'entrée|rifiutare l'entrata|refusar l'entrada
+vorläufige Verweigerung der Einreise|vorläufige Einreiseverweigerung|provisional refusal of entry|temporary refusal of entry|temporary rejection of entry|temporary refusal to grant entry|refus provisoire de l'entrée|rifiuto provvisorio dell'entrata|refusa provisorica d'entrar
+die Einreise vorläufig verweigern|provisionally refuse entry|temporarily refuse entry|temporarily reject entry|refuser provisoirement l'entrée|rifiutare provvisoriamente l'entrata|refusar l'entrada per entant
+Einreiseverbot|Einreisesperre|ban on entry|entry ban|interdiction d'entrée|divieto d'entrare|divieto d'entrata|scumond d'entrar
+befristetes Einreiseverbot|limited ban on entry|interdiction d'entrée d'une durée limitée|divieto d'entrare di durata determinata|scumond d'entrar d'ina durada limitada
+unbefristetes Einreiseverbot|unlimited ban on entry|interdiction d'entrée d'une durée illimitée|divieto d'entrare di durata indeterminata|scumond d'entrar d'ina durada illimitada
+ein Einreiseverbot verfügen|die Einreisesperre verhängen|order a ban on entry|interdire l'entrée|vietare l'entrata|disponer in scumond d'entrar
+Einreisebeschränkung|restriction on entry|restriction d'entrée|restrizione d'entrata|restricziun d'entrada
+eine Einreisebeschränkung auferlegen|impose a restriction on entry|frapper d'une restriction d'entrée|emanare una restrizione d'entrata|imponer ina restricziun d'entrada
+ein Einreiseverbot aufheben|revoke a ban on entry|suspendre une interdiction d'entrée|sospendere il divieto d'entrare|abolir in scumond d'entrar
+Aufenthaltsregelung|Regelung des Aufenthalts|Anwesenheitsregelung|Regelung der Anwesenheit|Regelung des Anwesenheitsverhältnisses|regulation of stay|regulation of the period of stay|residence regulation|regulation of residence|regulation of the conditions of stay|réglementation du séjour|règlement des conditions de séjour|réglementation des conditions de résidence|règlement des conditions de résidence|regolamentazione del soggiorno|regolamento del soggiorno|regolamento delle condizioni di soggiorno|disciplina del soggiorno|disciplinamento delle condizioni di residenza|regolamento delle condizioni di residenza|regulaziun da la dimora|reglamentaziun da dimora
+den Aufenthalt regeln|die Anwesenheit regeln|das Anwesenheitsverhältnis regeln|regulate the conditions of stay|régler le séjour|régulariser le séjour|réglementer les conditions de résidence|régler les conditions de résidence|regolare il soggiorno|disciplinare la residenza|disciplinare le condizioni di residenza|disciplinare le condizioni di soggiorno|regular la dimora
+Anwesenheitsbewilligung|ausländerrechtliche Bewilligung|Bewilligung|permission to stay|permit|autorisation de résidence|autorisation relevant du droit des étrangers|autorisation|permesso di residenza|autorizzazione di residenza|permesso del diritto in materia di stranieri|permesso di diritto degli stranieri|autorizzazione prevista dal diritto degli stranieri|permesso di presenza|permesso|permissiun da star en il pajais|permissiun da preschientscha|permissiun
+ausländerrechtliche Aufenthaltsbewilligung|residence permit under the law on foreign nationals|autorisation de séjour relevant du droit des étrangers|autorisation de séjour délivrée en vertu du droit des étrangers|permesso di dimora secondo la legislazione sugli stranieri|permesso di dimora rilasciato in virtù del diritto in materia di stranieri|permissiun da dimora tenor il dretg d'esters
+Aufenthaltsbewilligung|Aufenthaltsgenehmigung|residence permit|autorisation de séjour|permis de séjour|permesso di dimora|permesso di soggiorno|permissiun da dimora
+Aufenthaltsbewilligung|B-Bewilligung|Bewilligung B|residence permit|B permit|autorisation de séjour|permis B|permesso di dimora|permesso B|permissiun da dimora|permissiun B
+erstmalige Aufenthaltsbewilligung|first-time residence permit|autorisation de séjour initiale|autorisation initiale de séjour|permesso iniziale di dimora|primo permesso di dimora|emprima permissiun da dimora
+Jahresbewilligung|Jahresaufenthaltsbewilligung|Aufenthaltsbewilligung für Jahresaufenthalterinnen und -aufenthalter|annual permit|one-year permit|annual residence permit|autorisation à l'année|autorisation de séjour à l'année|autorisation de séjour pour les résidents à l'année|permis de séjour à l'année|permis de séjour annuel|permis à l'année|permesso annuale|permesso di dimora annuale|permesso di dimora per dimoranti annuali|permissiun per in onn|permissiun da dimora per in onn
+Kurzaufenthaltsbewilligung|Bewilligung für Kurzaufenthalter|Kurzaufenthalterbewilligung|L-Bewilligung|Bewilligung L|short stay permit|short-term residence permit|L permit|autorisation de courte durée|autorisation de séjour de courte durée|autorisation pour séjour de courte durée|permis de séjour de courte durée|permis L|permesso di soggiorno di breve durata|permesso di breve durata|permesso per dimoranti temporanei|permesso L|permissiun da dimora curta|permissiun da dimora temporara
+erstmalige Kurzaufenthaltsbewilligung|first-time short stay permit|autorisation initiale de séjour de courte durée|autorisation de séjour de courte durée initiale|permesso iniziale di soggiorno di breve durata|primo permesso di soggiorno di breve durata|emprima permissiun da dimora curta
+Niederlassungsbewilligung|C-Bewilligung|Bewilligung C|permanent residence permit|C permit|autorisation d'établissement|permis d'établissement|permis C|permesso di domicilio|permesso C|permissiun da domicil
+Grenzgängerbewilligung|G-Bewilligung|Bewilligung G|cross-border commuter permit|G permit|autorisation frontalière|autorisation pour frontaliers|permis de frontalier|permis G|permesso per frontalieri|permesso G|permissiun da cunfinarias e da cunfinaris|permissiun da cunfinari
+Stagiairesbewilligung|Stagiaires-Bewilligung|Stagiairebewilligung|Stagiaire-Bewilligung|stagiaire permit|autorisation de stagiaire|autorisation de stagiaires|autorisation pour stagiaires|permesso per tirocinanti|permesso di praticanti|permesso per praticanti|permissiun da praticant
+Saisonbewilligung|Saisonarbeiterbewilligung|seasonal worker permit|autorisation saisonnière|autorisation de séjour pour saisonnier|autorité de séjour saisonnier|permis saisonnier|permis de saisonnier|permesso stagionale|permissiun da stagiun
+Toleranzbewilligung|autorisation de tolérance|permesso di tolleranza|permissiun da toleranza
+Bewilligung zur Erwerbstätigkeit|Arbeitsbewilligung|Arbeitserlaubnis|work permit|authorisation to engage in gainful employment|autorisation d'exercer une activité lucrative|autorisation de travailler|permis de travail|autorisation de travail|autorizzazione di esercitare un'attività lucrativa|autorizzazione a esercitare un'attività lucrativa|autorizzazione a svolgere un'attività lucrativa|permesso di esercitare un'attività lucrativa|permesso di lavoro|autorizzazione di lavoro|permissiun da lavur|permissiun per in'activitad da gudogn
+Grenzkarte|border card|carte frontalière|tessera di confine|carta di frontiera|carta da cunfin
+eine Bewilligung besitzen|im Besitz einer Bewilligung sein|hold a permit|être titulaire d'une autorisation|être au bénéfice d'une autorisation|essere titolare di un permesso|essere al beneficio di un permesso|essere in possesso di un permesso|avair ina permissiun
+eine Aufenthaltsbewilligung besitzen|im Besitz einer Aufenthaltsbewilligung sein|hold a residence permit|être titulaire d'une autorisation de séjour|être au bénéfice d'une autorisation de séjour|essere titolare di un permesso di dimora|essere al beneficio di un permesso di dimora|avair ina permissiun da dimora
+eine Niederlassungsbewilligung besitzen|im Besitz einer Niederlassungsbewilligung sein|eine Niederlassungsbewilligung haben|hold a permanent residence permit|être titulaire d'une autorisation d'établissement|être au bénéfice d'une autorisation d'établissement|essere titolare di un permesso di domicilio|essere al beneficio di un permesso di domicilio|avair ina permissiun da domicil
+eine Bewilligung erschleichen|die Erteilung einer Bewilligung erschleichen|fraudulently secure the grant of a permit|obtenir frauduleusement une autorisation|obtenir une autorisation de séjour par surprise|ottenere il rilascio di un permesso fornendo dati falsi|ottenere un permesso di dimora dando indicazioni false|obtegnair cun fraud ina permissiun da domicil
+ausländerrechtliches Verfahren|proceedings under the law on foreign nationals|procedure for foreign nationals|procédure relevant du droit des étrangers|procedura di diritto in materia di stranieri|procedura in materia di diritto degli stranieri|procedura prevista dalla legislazione sugli stranieri|procedura tenor il dretg da persunas estras
+Bewilligungsgesuch|application for a permit|permit application|demande d'autorisation|domanda di permesso|dumonda da permissiun
+Bewilligungsentscheid|permit decision|décision sur une demande d'autorisation|decisione relativa al permesso|decisione circa un permesso|decisiun da permissiun
+Erteilung einer Bewilligung|Bewilligungserteilung|grant of a permit|granting a permit|octroi d'une autorisation|rilascio di un permesso|concessiun d'ina permissiun
+eine Bewilligung erteilen|grant a permit|octroyer une autorisation|accorder une autorisation|rilasciare un permesso|conceder ina permissiun
+Erteilung einer Kurzaufenthaltsbewilligung|grant of a short stay permit|octroi d'une autorisation de courte durée|rilascio di un permesso di soggiorno di breve durata|concessiun d'ina permissiun da dimora curta
+eine Kurzaufenthaltsbewilligung erteilen|grant a short stay permit|octroyer une autorisation de courte durée|rilasciare un permesso di soggiorno di breve durata|conceder ina permissiun da dimora curta
+Erteilung einer Aufenthaltsbewilligung|grant of a residence permit|octroi d'une autorisation de séjour|rilascio di un permesso di dimora|concessiun d'ina permissiun da dimora
+eine Aufenthaltsbewilligung erteilen|grant a residence permit|octroyer une autorisation de séjour|rilasciare un permesso di dimora|conceder ina permissiun da dimora
+eine provisorische Aufenthaltsbewilligung erteilen|provisionally grant a residence permit|octroyer provisoirement une autorisation de séjour|accordare in via provvisoria un permesso di dimora|conceder providoricamain ina permissiun da dimora
+Erteilung einer Niederlassungsbewilligung|grant of a permanent residence permit|octroi d'une autorisation d'établissement|rilascio di un permesso di domicilio|concessiun d'ina permissiun da domicil
+eine Niederlassungsbewilligung erteilen|die Niederlassung bewilligen|grant a permanent residence permit|octroyer une autorisation d'établissement|accorder une autorisation d'établissement|accorder l'établissement|rilasciare un permesso di domicilio|accordare il domicilio|conceder ina permissiun da domicil
+eine Aufenthaltsbewilligung ausstellen|délivrer une autorisation de séjour|rilasciare un permesso di dimora|dar ina permissiun da dimora
+eine Niederlassungsbewilligung ausstellen|délivrer une autorisation d'établissement|rilasciare un permesso di domicilio|dar ina pemissiun da domicil
+Verlängerung einer Aufenthaltsbewilligung|extension of a residence permit|renewal of a residence permit|prolongation d'une autorisation de séjour|proroga di un permesso di dimora|prolungaziun d'ina permissiun da dimora
+eine Aufenthaltsbewilligung verlängern|extend a residence permit|prolonger une autorisation de séjour|prorogare un permesso di dimora|prolungar ina permissiun da dimora
+Verlängerung einer Kurzaufenthaltsbewilligung|extension of a short stay permit|renewal of a short stay permit|prolongation d'une autorisation de séjour de courte durée|prolongation d'une autorisation de courte durée|proroga di un permesso di soggiorno di breve durata|prolungaziun d'ina permissiun da dimora curta
+eine Kurzaufenthaltsbewilligung verlängern|extend a short stay permit|prolonger une autorisation de séjour de courte durée|prorogare un permesso di soggiorno di breve durata|prolungar ina permissiun da dimora curta
+Nichtverlängerung einer Bewilligung|non-renewal of a permit|non-prolongation d'une autorisation|mancata proroga di un permesso|betg prolungar ina permissiun
+eine Bewilligung verweigern|refuse a permit|refuser une autorisation|negare un permesso|rifiutare un permesso|rifiutare la concessione di un permesso|refusar ina permissiun
+Widerruf einer Bewilligung|revocation of a permit|révocation d'une autorisation|revoca di un permesso|revocaziun d'ina permissiun
+eine Bewilligung widerrufen|revoke a permit|révoquer une autorisation|revocare un permesso|revocar ina permissiun
+eine Aufenthaltsbewilligung widerrufen|revoke a residence permit|révoquer une autorisation de séjour|revocare una permesso di dimora|revocar ina permessiun da dimora
+Entzug einer Bewilligung|withdrawal of a permit|retrait d'une autorisation|ritiro di un permesso|retratga d'ina permissiun
+eine Bewilligung entziehen|withdraw a permit|retirer une autorisation|ritirare un permesso|retrair ina permissiun
+Entzug der Aufenthaltsbewilligung|withdrawal of a residence permit|retrait de l'autorisation de séjour|ritiro del permesso di dimora|retratga da la permissiun da dimora
+die Aufenthaltsbewilligung entziehen|withdraw a residence permit|retirer l'autorisation de séjour|ritirare il permesso di dimora|retrair la permissiun da dimora
+Zulassung eines Ausländers|Zulassung einer Ausländerin|Zulassung|admission of a foreign national|admission|admission d'un étranger|admission d'une étrangère|ammissione di uno straniero|ammissione|admissiun d'ina persuna estra|admissiun
+Wiederherstellung einer Bewilligung|rétablissement d'une autorisation|ristabilimento di un permesso|restabiliment d'ina permissiun
+einen Ausländer zulassen|eine Ausländerin zulassen|admit a foreign national|admettre un étranger|admettre une étrangère|ammettere uno straniero|admetter ina persuna estra
+eine Bewilligung wiederherstellen|rétablir une autorisation|ristabilire un permesso|restabilir ina permissiun
+Wiederzulassung eines Ausländers|Wiederzulassung einer Ausländerin|re-admission of a foreign national|réadmission d'un étranger|réadmission d'une étrangère|riammissione di uno straniero|readmissiun d'ina persuna estra
+Zulassungsvoraussetzungen|admission requirements|conditions d'admission|condizioni d'ammissione|premissas d'admissiun
+AVOR|arbeitsmarktlicher Vorentscheid|preliminary decision based on the employment market|décision préalable de l'autorité du marché du travail|décision préalable en matière de marché du travail|décision préalable relative au marché du travail|décision préalable concernant le marché du travail|décision préalable en fonction du marché du travail|decisione preliminare dell'autorità preposta al mercato del lavoro|decisione di massima relativa al mercato del lavoro|decisiun preliminara areguard il martgà da lavur
+Inländervorrang|Vorrang der inländischen Arbeitskräfte|Vorrang der inländischen Arbeitnehmer|precedence given to the domestic workforce|principle of national priority|priority given to domestic employees|priorité des travailleurs en Suisse|préférence nationale|préférence indigène|priorité des travailleurs indigènes|priorité des travailleurs résidents|priorité des nationaux|priorità dei lavoratori indigeni|preferenza ai lavoratori indigeni|priorità dei lavoratori residenti|precedenza ai lavoratori residenti|precedenza ai residenti|preferenza nazionale|precedenza da persunas indigenas
+Kontrolle der Lohn- und Arbeitsbedingungen|Kontrolle der Entlohnungs- und Arbeitsbedingungen|control of wage and working conditions|control of salary and employment conditions|contrôle des conditions de salaire et de travail|contrôle des conditions de rémunération et de travail|controllo delle condizioni salariali e lavorative|controllo delle condizioni di retribuzione e di lavoro|controlla da las cundiziuns da salari e da lavur
+Kadertransfer|betrieblicher Kadertransfer|ICT|intra-corporate transfer|executive transfer|transfert de cadres|échange de cadres|trasferimento di quadri|trasferimento di dirigenti|transfer dal cader
+notwendige finanzielle Mittel|required financial means|moyens financiers nécessaires|mezzi finanziari necessari|meds finanzials necessaris
+Begrenzungsmassnahme|limitation measure|mesure de limitation|misura limitativa|mesira da limitaziun
+Höchstzahl|Kontingent|Bewilligungskontingent|quota|nombre maximum|contingent|contingent d'autorisations|contingente massimo|contingente|contingente di permessi|dumber maximal
+Höchstzahl des Bundes|Höchstzahl für den Bund|federal quota|nombre maximum pour la Confédération|contingent de la Confédération|nombre maximum dont dispose la Confédération|contingente federale|contingente della Confederazione|dumber maximal da la Confederaziun
+kantonale Höchstzahl|Höchstzahl für einen Kanton|cantonal quota|nombre maximum pour un canton|contingent d'un canton|contingent cantonal|contingente cantonale|dumber maximal chantunal
+VA|vorläufige Aufnahme|temporary admission|AP|admission provisoire|ammissione provvisoria|admissiun provisorica
+vorläufig aufnehmen|vorläufige Aufnahme gewähren|admit temporarily|grant temporary admission|admettre provisoirement|ammettere provvisoriamente|concedere l'ammissione provvisoria|admetter provisoricamain
+Anordnung der vorläufigen Aufnahme|order for temporary admission|décision d'admission provisoire|prononcé de l'admission provisoire|decisione d'ammissione provvisoria|ordinaziun da l'admissiun provisorica
+die vorläufige Aufnahme verfügen|die vorläufige Aufnahme anordnen|order temporary admission|ordonner l'admission provisoire|décider d'admettre provisoirement|disporre l'ammissione provvisoria|ordinare l'ammissione provvisoria|disponer l'admissiun provisorica
+Aufhebung der vorläufigen Aufnahme|revocation of temporary admission|withdrawal of temporary admission|levée de l'admission provisoire|revoca dell'ammissione provvisoria|aboliziun da l'admissiun provisorica
+die vorläufige Aufnahme aufheben|revoke temporary admission|withdraw temporary admission|lever l'admission provisoire|revocare l'ammissione provvisoria|abolir l'admissiun provisorica
+Visumverfahren|visa procedure|procédure d'octroi du visa|procédure d'octroi des visas|procédure de visa|procédure de visas|procedura di rilascio del visto|procedura del visto|procedura da visum
+Begrenzung der Zahl der Ausländer|limitation of the number of foreign nationals|restriction of the number of foreign nationals|limitation du nombre des étrangers|limitazione dell'effettivo degli stranieri|limitaziun dal dumber dals esters
+Zustimmungsverfahren|approval procedure|procédure d'approbation|procedura d'approvazione|procedura d'approvaziun
+Integrationsförderung|Förderung der Integration|encouraging integration|encouragement de l'intégration|promotion de l'intégration|promozione dell'integrazione|promoziun da l'integraziun
+Integrationsvereinbarung|integration agreement|convention d'intégration|accordo d'integrazione|cunvegna d'integraziun
+Integrationskurs|integration course|cours d'intégration|corso d'integrazione|curs d'integraziun
+Entfernungsmassnahme|procedure to remove people|mesure d'éloignement|misura di allontanamento|mesira d'allontanament
+Fernhaltemassnahme|procedure to keep people away|mesure d'éloignement|misura di respingimento|mesira d'allontanament
+Wegweisung|Wegweisungsentscheid|removal|removal order|removal decision|renvoi|décision de renvoi|allontanamento|decisione d'allontanamento|rinvio|decisione di rinvio|spedida|decisiun da spedida
+wegweisen|remove|renvoyer|allontanare|spedir
+ordentliche Wegweisungsverfügung|ordinary removal order|décision de renvoi ordinaire|decisione di allontanamento ordinaria|disposiziun da spedida ordinaria
+rechtskräftige Wegweisung|rechtskräftiger Wegweisungsentscheid|vollziehbarer Wegweisungsentscheid|legally binding removal order|décision de renvoi exécutoire|décision exécutoire de renvoi|décision de renvoi entrée en force|decisione di allontanamento passata in giudicato|decisione esecutiva d'allontanamento|decisiun da spedida cun vigur legala
+formlose Wegweisung|removal without formal procedure|renvoi sans décision formelle|allontanamento senza formalità|spedida senza formalitads
+formlos wegweisen|remove without formal procedure|renvoyer sans décision formelle|allontanare senza formalità|spedir senza formalitads
+Wegweisung am Flughafen|Rückweisung am Flughafen|removal at the airport|renvoi à l'aéroport|allontanamento all'aeroporto|respingimento all'aeroporto|spedida a la plazza aviatica
+vorsorgliche Wegweisung|removal as a precautionary measure|renvoi préventif|allontanamento preventivo|allontanamento a titolo preventivo|spedida preventiva
+Ausweisung|Ausweisungsentscheid|expulsion|expulsion order|administrative expulsion|décision d'expulsion|expulsion administrative|espulsione|decisione d'espulsione|espulsione amministrativa|expulsiun|decisiun d'expulsiun|expulsiun administrativa
+ausweisen|expel|expulser|espellere|expulsar
+rechtskräftige Ausweisung|rechtskräftiger Ausweisungsentscheid|legally binding expulsion order|décision d'expulsion exécutoire|décision exécutoire d'expulsion|décision d'expulsion entrée en force|decisione di espulsione passata in giudicato|decisiun d'expulsiun cun vigur legala
+befristete Ausweisung|temporary expulsion|expulsion déterminée|espulsione determinata|expulsiun temporara
+unbefristete Ausweisung|permanent expulsion|expulsion indéterminée|espulsione indeterminata|expulsiun indeterminada
+vollziehbare Wegweisung|enforceable removal order|renvoi exécutoire|allontanamento esecutivo|spedida executabla
+vollziehbare Ausweisung|enforceable expulsion order|expulsion exécutoire|espulsione esecutiva|expulsiun executabla
+Ausdehnungsverfügung|extension order|décision d'extension|decisione di estensione|disposiziun d'extensiun
+Auslieferungsverfügung|extradition order|décision d'extradition|decisione di estradizione|disposiziun d'extradiziun
+Ausweisungsgrund|reason for expulsion|ground for expulsion|motif d'expulsion|motivo d'espulsione|motiv d'expulsiun
+Verhalten eines Ausländers|Verhalten einer Ausländerin|conduct of a foreign national|behaviour of a foreign national|conduite d'un étranger|conduite d'une étrangère|condotta di uno straniero|condotta di una straniera|cumportament d'in ester
+sich in die im Gaststaat geltende Ordnung einfügen|s'adapter à l'ordre établi dans le pays qui offre l'hospitalité|adattarsi all'ordinamento vigente nel paese ospitante|s'adattar a l'urden dal stadi ospitant
+Wegweisungsverfahren|Rückweisungsverfahren|removal proceedings|procédure de renvoi|procedura di allontanamento|procedura di respingimento|procedura da spedida
+Ausweisungsverfahren|expulsion proceedings|procédure d'expulsion|procedura di espulsione|procedura d'expulsiun
+Androhung der Wegweisung|threat of removal|menace de renvoi|minaccia di rinvio|smanatscha d'expulsiun
+Aufhebung einer Ausweisung|levée d'une expulsion|revoca di un'espulsione|revocaziun d'ina expulsiun
+Einstellung einer Ausweisung|suspension d'une expulsion|sospensione di un'espulsione|suspensiun d'ina expulsiun
+Standardformular|standard form|formulaire type|modulo standard|formular da standard
+Vollzug der Wegweisung|Wegweisungsvollzug|Vollzug einer Wegweisungsverfügung|enforcement of removal|enforcement of a removal order|execution of removal|exécution du renvoi|exécution d'une décision de renvoi|esecuzione dell'allontanamento|esecuzione di una decisione d'allontanamento|esecuzione del rinvio|execuziun da la spedida
+Vollzug der Ausweisung|Ausweisungsvollzug|enforcement of expulsion|enforcement of an expulsion order|execution of an expulsion order|exécution de l'expulsion|esecuzione dell'espulsione|execuziun da l'expulsiun
+zwangsweiser Vollzug der Wegweisung|forced removal|exécution forcée d'une décision de renvoi|exécution du renvoi sous contrainte|esecuzione forzata dell'allontanamento|esecuzione coercitiva dell'allontanamento|execuziun sfurzada da la spedida
+zwangsweiser Vollzug der Ausweisung|forced expulsion|exécution forcée d'une décision d'expulsion|exécution de l'expulsion sous contrainte|esecuzione forzata dell'espulsione|esecuzione coercitiva dell'espulsione|execuziun sfurzada da l'expulsiun
+sofortiger Vollzug der Wegweisung|immediate enforcement of removal|immediate execution of removal|exécution immédiate du renvoi|esecuzione immediata dell'allontanamento|execuziun immediata da la spedida
+sofortiger Vollzug der Ausweisung|immediate enforcement of expulsion|immediate execution of expulsion|exécution immédiate de l'expulsion|esecuzione immediata dell'espulsione|execuziun immediata da l'expulsiun
+Ausschaffung|Rückführung|Rückschaffung|Heimschaffung|zwangsweise Rückführung|deportation|repatriation|rapatriement|refoulement|rapatriement sous contrainte|rinvio coatto|rinvio forzato|rimpatrio|rientro|sfratto|expulsiun|repatriament
+ausschaffen|deport|refouler|rinviare|sfrattare|expulsar
+Aufschub der Ausschaffung|postponement of deportation|report du renvoi ou de l'expulsion|differimento del rinvio coatto|suspensiun da l'expulsiun
+die Ausschaffung aufschieben|postpone deportation|reporter l'exécution du renvoi ou de l'expulsion|differire il rinvio coatto|suspender l'expulsiun
+sich der Ausschaffung entziehen|se soustraire au refoulement|sottrarsi allo sfratto|sa sustrair da repatriament
+Wegweisungsvollzugshindernis|obstacle to the enforcement of a removal order|empêchement à l'exécution du renvoi|impedimento all'esecuzione dell'allontanamento|impediment da l'execuziun da l'allontanament
+Unmöglichkeit des Vollzugs der Wegweisung|Unmöglichkeit des Wegweisungsvollzugs|Unmöglichkeit des Vollzugs|Unmöglichkeit der Wegweisung|impossibility of the enforcement of removal|impossibility of removal|impossibilité de l'exécution du renvoi|impossibilité d'exécuter le renvoi|impossibilité du renvoi|impossibilità dell'esecuzione dell'allontanamento|impossibilità dell'allontanamento| impussibilitad da l'execuziun da la spedida|execuziun da la spedida
+Unzulässigkeit des Vollzugs der Wegweisung|Unzulässigkeit des Wegweisungsvollzugs|Unzulässigkeit der Wegweisung|inadmissibility of the enforcement of removal|illicéité de l'exécution du renvoi|caractère illicite du renvoi|illiceità dell'esecuzione dell'allontanamento|inadmissibladad da l'execuziun da la spedida
+Unzumutbarkeit des Vollzugs der Wegweisung|Unzumutbarkeit des Wegweisungsvollzugs|Unzumutbarkeit des Vollzug|Unzumutbarkeit der Wegweisung|unreasonableness of the enforcement of removal|unreasonableness of enforcement|inexigibilité de l'exécution du renvoi|inexigibilité du renvoi|inesigibilità dell'esecuzione dell'allontanamento|nunraschunaivladad da l'execuziun da la spedida
+die Internierung verfügen|prononcer l'internement|decidere l'internamento|decretar l'internament
+Rückübernahme|readmission|réadmission|riammissione|riaccettazione|readmissiun
+Aufnahme in einem Drittstaat|admission to a third country|admission dans un Etat tiers|ammissione in un Paese terzo|admissiun en in terz stadi
+Aufnahme|taking charge|acceptance|prise en charge|presa in carico|admissiun
+Wiederaufnahme|taking back|reacceptance|reprise en charge|ripresa in carico|readmissiun
+Durchbeförderung|Transit|transit|admission en transit|transito|accordo di transito, trasporto in transito
+interkantonaler Transport|intercantonal transport|transport intercantonal|trasporto intercantonale|transport interchantunal
+polizeiliche Begleitung|police escort|escorte policière|scorta di polizia|escorta poliziala
+soziale Begleitung|social escort|accompagnement social|accompagnement|accompagnamento sociale|accumpagnament social
+medizinische Begleitung|medical escort|accompagnement médical|scorta medica|accumpagnament medical
+Zwangsmassnahme|Zwangsmittel|ausländerrechtliche Zwangsmassnahme|Zwangsmassnahme im Ausländerrecht|coercive measure|coercive measure under the law on foreign nationals|mesure de contrainte|moyen de contrainte|mesure de contrainte en matière de droit des étrangers|mesure de contrainte relevant du droit des étrangers|mesure de contrainte en droit des étrangers|misura coercitiva|mezzo coercitivo|misura coercitiva in materia di diritto degli stranieri|misura coercitiva del diritto degli stranieri|misura coercitiva nel diritto degli stranieri|misura coercitiva nel diritto in materia di stranieri|mesira repressiva|med repressiv|med da sforz
+kurzfristige Festhaltung|kurzfristiges Festhalten|Festhaltung|temporary detention|rétention|rétention de courte durée|fermo|fermo di breve durata|fermanza curta|fermanza da curta durada
+kurzfristig festhalten|festhalten|detain temporarily|detain|retenir|retenir pour une courte durée|fermare|fermare per un breve periodo|retegnair per in curt mument
+Anhaltung im grenznahen Raum|detention in the vicinity of the border|interception près de la frontière|intercettazione nei pressi della frontiera|fermanza en il territori damanaivel dal cunfin
+Eingrenzung|restriction order|control order|allocation to a place of residence|assignation d'un lieu de résidence|injonction de ne pas quitter un territoire assigné|assegnazione di un luogo di soggiorno|assegnaziun d'in lieu da dimora
+Ausgrenzung|Verbot, ein bestimmtes Gebiet zu betreten|exclusion order|order prohibiting entry to a specific area|interdiction de pénétrer dans une région déterminée|divieto di accedere a un dato territorio|scumond d'entrar en in tschert territori
+Administrativhaft|ausländerrechtliche Administrativhaft|ausländerrechtliche Haft|administrative detention|détention administrative|rétention administrative|carcerazione amministrativa|detenzione amministrativa|detenziun administrativa|arrest administrativ
+Vorbereitungshaft|detention in preparation for departure|preparatory detention|détention en phase préparatoire|détention de phase préparatoire|détention préparatoire|carcerazione preliminare|detenzione preparatoria|arrest preparatoric|arrest preventiv
+Ausschaffungshaft|detention pending deportation|pre-deportation detention|détention en vue du renvoi ou de l'expulsion|détention en vue du renvoi|détention en vue d'expulsion|détention en vue de l'exécution du renvoi|détention aux fins d'expulsion|détention en vue du refoulement|carcerazione in vista di rinvio coatto|carcerazione in vista del rinvio forzato|carcerazione in vista di sfratto|carcerazione in vista d'espulsione|arrest d'expulsiun|arrest da repatriament
+Durchsetzungshaft|Beugehaft|Zwangshaft|Ordnungshaft|coercive detention|imprisonment for contempt of court|détention pour insoumission|carcerazione cautelativa|arrest pervia d'insubordinaziun
+Sicherstellung eines Dokuments|seizure of a document|saisie d'un document|messa al sicuro di un documento|metter en segirezza documents
+ein Dokument sicherstellen|seize a document|saisir un document|mettere al sicuro un documento|metter en segirezza in document
+Einziehung eines Dokuments|confiscation of a document|forfeiture of a document|confiscation d'un document|confisca di un documento|confiscaziun d'in document
+ein Dokument einziehen|confiscate a document|forfeit a document|confisquer un document|confiscare un documento|confiscar in document
+Identitätsausweis|Identitätspapier|Identitätsdokument|Ausweis|identity document|identity paper|pièce d'identité|papier d'identité|document d'identité|documento d'identità|documento di legittimazione|certificato d'identità|document d'identitad
+Identität|identity|identité|identità|identitad
+Ausweispapier|Ausweis|identity document|pièce de légitimation|papier de légitimation|pièce d'identité|pièce|documento di legittimazione|document da legitimaziun
+ausländisches Ausweispapier|foreign identity document|pièce de légitimation étrangère|pièce d’identité étrangère|documento di legittimazione estero|document da legitimaziun ester
+heimatliches Ausweispapier|national identity document|pièce de légitimation nationale|documento di legittimazione nazionale|document da legitimaziun naziunal
+gültiges Ausweispapier|valid identity document|pièce de légitimation valable|documento di legittimazione valido|documento di legittimazione valevole|document da legitimaziun valaivel
+anerkanntes Ausweispapier|recognised identity document|pièce de légitimation reconnue|documento di legittimazione riconosciuto|document da legitimaziun renconuschì
+ordentlicher Pass|Schweizerpass|passeport ordinaire|passeport suisse|passaporto ordinario|passaporto svizzero|passaport ordinari|passaport svizzer
+Kollektivpass|passeport collectif|passaporto collettivo|pass collectiv
+Reisedokument|Reisepapier|travel document|document de voyage|documento di viaggio|document da viadi
+Reiseersatzdokument|Ersatzreisedokument|substitute travel document|document de voyage supplétif|document de voyage de remplacement|documento di viaggio sostitutivo|document da viadi substitutiv
+Passierschein|Laissez-passer|laissez-passer|lasciapassare|permiss da passar
+Wohnsitzbescheinigung|certificate of residence|attestation de domicile|certificat de domicile|certificat de résidence|certificato di domicilio|certificato di residenza|attest da domicil
+Ausländerausweis|Ausweis|foreign national identity card|identity card|permit|titre de séjour|permis de séjour|permis pour étrangers|permis|livret pour étrangers|livret d'étranger|livret|carta di soggiorno|carta di soggiorno per stranieri|permesso|libretto per stranieri|document da legitimaziun da persunas estras|document da legitimaziun|legitimaziun da persunas estras|legitimaziun d'esters
+fremdenpolizeiliches Ausweisbuch|livret de légitimation pour les étrangers|libretto d'identità per gli stranieri
+Ausweis B|B permit|permit B|permis B|livret B|permesso B|libretto B|permissiun  B
+Ausweis L|L permit|permit L|permis L|livret L|permesso L|libretto L|permissiun L
+Ausweis Ci|Ci permit|permit Ci|permis Ci|livret Ci|permesso Ci|libretto Ci|permissiun Ci
+Ausweis C|C permit|permit C|permis C|livret C|permesso C|libretto C|permissiun C
+Ausweis G|G permit|permit G|permis G|livret G|permesso G|libretto G|permissiun G
+Ausweis F|Ausweis für vorläufig aufgenommene Ausländer|Ausweis für vorläufig aufgenommene Ausländerinnen und Ausländer|F permit|permit F|permit for provisionally admitted foreign nationals|permit for temporarily admitted aliens|permis F|livret F|livret pour étrangers admis provisoirement|permesso F|permesso per stranieri ammessi provvisoriamente|libretto F|permissiun F|permissiun per esters admess provisoricamain
+Ausweis N|Ausweis für Asylsuchende|Bescheinigung Asylgesuch|N permit|permit N|permit for asylum seekers|permis N|livret N|livret pour requérants d'asile|attestation de demande d'asile|attestation de dépôt d'une demande d'asile|permesso N|permesso per richiedenti l'asilo|libretto N|attestato sulla domanda d'asilo|permissiun N|permissiun per requirents d'asil
+Ausweis S|Ausweis für Schutzbedürftige|S permit|permit S|permit for persons in need of protection|permis S|livret S|livret pour personnes à protéger|permesso S|permesso per persone bisognose di protezione|libretto S|permissiun S|permissiun per persunas che basegnan protecziun
+Schengen-Visum|einheitliches Visum|Schengen visa|uniform visa|visa Schengen|visa uniforme|visto Schengen|visto uniforme|visum da Schengen|visum unifurm
+Rückreisevisum|Bewilligung zur Wiedereinreise|return visa|re-entry visa|visa de retour|autorisation de retour|visto di ritorno|visto di rientro|autorizzazione al ritorno|autorizzazione a un nuovo ingresso|visum da return
+Durchreisevisum|Transitvisum|transit visa|visa de transit|visto di transito|visum da transit
+gefälschtes Dokument|forged document|faux document|document faux|document contrefait|documento falso|documento contraffatto|document falsifitgà
+verfälschtes Dokument|falsified document|document falsifié|documento falsificato|documento alterato|document sfalsifitgà
+echtes Dokument|genuine document|document authentique|documento autentico|document autentic
+Beschaffung von Reisepapieren|Reisepapierbeschaffung|Papierbeschaffung|obtaining travel documents|obtaining documents|acquisition of travel documents|obtention de documents de voyage|obtention de documents|ottenimento di documenti di viaggio|ottenimento di documenti|procuraziun da documents da viadi
+ein Reisepapier beschaffen|obtain a travel document|acquire a travel document|obtenir un document de voyage|se procurer un document de voyage|ottenere un documento di viaggio|procurarsi un documento di viaggio|procurare un documento di viaggio|procurar in document da viadi
+ein Ausweispapier anerkennen|recognise an identity document|reconnaître un papier de légitimation|riconoscere un documento di legittimazione|renconuscher in document da legitimaziun
+ein Ausweispapier vorlegen|produce an identity document|produire une pièce de légitimation|presentare un documento di legittimazione|preschentar in document da legitimaziun
+Aliasname|Alias|Deckname|alias name|alias|a.k.a.|nom d'emprunt|pseudonimo|pseudonim
+Abklärung der Identität|Identitätsabklärung|Feststellung der Identität|Identitätsfeststellung|establishing the identity|determining the identity|verifying the identity|établissement de l'identité|vérification de l'identité|accertamento dell'identità|verifica dell'identità|constataziun da l'identitad
+die Identität feststellen|die Identität abklären|die Identität überprüfen|establish the identity|determine the identity|verify the identity|établir l'identité|vérifier l'identité|accertare l'identità|verificare l'identità|constatar l'identitad
+die Identität offenlegen|die Identität offen legen|reveal one's identity|décliner son identité|dichiarare le generalità|svelare la propria identità|inditgar l'identitad
+erkennungsdienstliche Behandlung|identification procedure|procedure to establish identity|traitement signalétique|formalités d'identification|identification|trattamento dei dati segnaletici|procedura d'identificazione|identificazione|examinaziun dal servetsch d'identificaziun
+Abnahme der Fingerabdrücke|Fingerabdruckabnahme|Fingerabdrucknahme|Erfassung der Fingerabdrücke|Erstellung eines Fingerabdruckbogens|taking fingerprints|relevé des empreintes digitales|rilevamento delle impronte digitali|rilievo delle impronte digitali|prender improntas dals dets
+Fingerabdruckbogen|Fingerabdruckblatt|fingerprint sheet|formulaire dactyloscopique|relevé d'empreintes digitales|fiche dactyloscopique|scheda dattiloscopica|scheda decadattilare|artga cun las improntas dals dets
+Fingerabdruck-Datenbank|Fingerabdruckdatenbank|Fingerabdrucksammlung|fingerprint database|banque de données sur les empreintes digitales|banque de données des empreintes digitales|banca dati sulle impronte digitali|banca dati delle impronte digitali|banca da datas cun las improntas dals dets
+ZEMIS|Zentrales Migrationsinformationssystem|Central Migration Information System|SYMIC|Système d'information central sur la migration|SIMIC|Sistema d'informazione centrale sulla migrazione|Sistem d'infurmaziun central davart la migraziun
+ZAR|Zentrales Ausländerregister|Central Aliens Register|RCE|Registre central des étrangers|RCS|Registro centrale degli stranieri|Register central dals esters
+AUPER|automatisiertes Personenregistratursystem|computerised registration system|système d'enregistrement automatisé des personnes|sistema automatizzato di registrazione delle persone|sistem automatisà da registraziun da persunas
+VIS|Visa-Informationssystem|Visa Information System|système d'information sur les visas|sistema d'informazione visti|sistema di informazione sui visti|sistem d'infurmaziun davart ils visums
+C-VIS; CS-VIS|zentrales Visa-Informationssystem|zentrales VIS|Central Visa Information System|central VIS|système central d'information sur les visas|VIS central principal|sistema centrale d'informazione visti|sistema centrale di informazione sui visti|VIS centrale|C-VIS|sistem d'infurmaziun central per ils visums
+nationales Visumsystem|ORBIS|nationales Visa-Informationssystem|National Visa Information System|système national d'information sur les visas|sistema nazionale d'informazione visti|sistema nazionale visti|sistem naziunal da visums
+EVA|System für die automatisierte Ausstellung und Kontrolle der Visa|System EVA|Elektronische Visumausstellung|electronic visa issuing system|système d'élaboration et de contrôle automatisé des visas|système EVA|établissement électronique de visas|établissement de visas automatisé|sistema automatizzato di rilascio e controllo dei visti|sistema di trattamento e controllo elettronico dei visti|sistema EVA|rilascio elettronico dei visti|sistem automatisà da dar e da controllar visums
+Rückübernahmeabkommen|Rückübernahmevereinbarung|readmission agreement|accord de réadmission|accord sur la réadmission|accordo di riammissione|accordo di riaccettazione|accordo sulla riammissione|cunvegna da readmissiun|cunvegna da reacceptaziun
+Transitabkommen|Durchbeförderungsabkommen|Transitvereinbarung|transit agreement|accord de transit|accord sur le transit|accordo di transito|accordo di trasporto in transito|cunvegna da transit
+Stagiaires-Abkommen|agreement on stagiaires|accord concernant les stagiaires|accordo sui tirocinanti|accordo sui praticanti|cunvegna davart ils praticants
+eine Sicherheit verlangen|require a guarantee|request security|exiger une garantie|exiger une sûreté|exiger le dépôt d'une garantie|chiedere una garanzia|richiedere una garanzia|esigere una garanzia|dumandar ina segirezza|pretender ina garanzia
+Staatsangehöriger|Staatsangehörige|Staatsbürger|Staatsbürgerin|Bürger|Bürgerin|citizen|national|ressortissant|ressortissante|citoyen|citoyenne|cittadino|cittadina|burgais|burgaisa
+Berufswechsel|change of occupation|changement de profession|cambiamento di professione|midada da professiun
+Schengen-Assoziierungsabkommen|Schengen Association Agreements|accords d'association à Schengen|accordi di associazione alla normativa di Schengen|accordi di associazione a Schengen|cunvegnas d'associaziun a la reglamentaziun da Schengen
+Dublin-Assoziierungsabkommen|Dublin Association Agreements|accords d'association à Dublin|accordi di associazione alla normativa di Dublino|accordi di associazione a Dublino|cunvegnas d'associaziun a la reglamentaziun da Dublin
+Verordnung (EG) Nr. 562/2006 des Europäischen Parlaments und des Rates vom 15. März 2006 über einen Gemeinschaftskodex für das Überschreiten der Grenzen durch Personen (Schengener Grenzkodex)|Gemeinschaftskodex für das Überschreiten der Grenzen durch Personen|Schengener Grenzkodex|Regulation (EC) No 562/2006 of the European Parliament and of the Council of 15 March 2006 establishing a Community Code on the rules governing the movement of persons across borders (Schengen Borders Code)|Community Code on the rules governing the movement of persons across borders|Schengen Borders Code|Règlement (CE) no 562/2006 du Parlement européen et du Conseil du 15 mars 2006 établissant un code communautaire relatif au régime de franchissement des frontières par les personnes (code frontières Schengen)|Code communautaire relatif au régime de franchissement des frontières par les personnes|Code frontières Schengen|Regolamento (CE) n. 562/2006 del Parlamento europeo e del Consiglio, del 15 marzo 2006, che istituisce un codice comunitario relativo al regime di attraversamento delle frontiere da parte delle persone (codice frontiere Schengen)|Codice comunitario relativo al regime di attraversamento delle frontiere da parte delle persone|Codice frontiere Schengen|Codex da cunfin tenor Schengen
+Widerruf eines Visums|revocation of a visa|révocation d'un visa|revoca di un visto|revocaziun d'in visum
+Bewilligungsverfahren|permit procedure|procédure d'autorisation|procedura di permesso|procedura da permissiun
+Änderung eines Visums|Abänderung eines Visums|modification of a visa|modification d'un visa|modifica di un visto|modificazione di un visto|modificaziun d'in visum
+API|Advance Passenger Information|Advanced Passenger Information|RPCV|renseignements préalables concernant les voyageurs
+anerkannter Pass|recognised passport|passeport reconnu|passaporto riconosciuto|passaport renconuschì
+API-Verfahren|procédure API|procédure RPCV|procedura API
+Arbeitsmigration|Wirtschaftsmigration|Arbeitskräftemigration|labour migration|economic migration|migration de travail|migration du travail|migration liée au travail|migration économique|migration de main d’oeuvre|migrazione economica|migrazione della manodopera|migraziun da lavur|migraziun economica
+Aufenthaltskategorie|Kategorie der Aufenthaltsbewilligung|Bewilligungskategorie|residence category|catégorie de séjour|catégorie d’autorisation de séjour|catégorie d'autorisation|categoria di soggiorno|categoria di permesso di soggiorno|categoria di permesso di dimora|categoria di permesso|categoria da dimora|categoria da permissiun
+Aufenthaltszweck|Zweck des Aufenthalts|purpose of stay|but de séjour|scopo di soggiorno|intent da dimora
+ansteigende Höchstzahlen|ansteigende Kontingente|aufsteigende Kontingente|contingents progressifs|contingenti progressivi|dumber maximal creschent|contingents creschents
+Au-Pair-Angestellter|Au-Pair-Angestellte|Au-Pair-Beschäftigter|Au-Pair-Beschäftigte|au-pair worker|au-pair|personne au pair|employé au pair|employée au pair|impiegato alla pari|giovane alla pari|emploià au pair|emploiada au pair
+Ausländer in der Gemeinde|Les étrangers dans la commune|Gli stranieri nel comune
+Ausländerbeirat|conseil des étrangers|consiglio degli stranieri|cussegl da persunas estras
+Ausländerkategorie|category of foreign national|catégorie d'étrangers|categoria di stranieri|categoria da persunas estras|categoria d'esters
+Ausreisekarte|exit card|carte de sortie|carte de départ|carta di partenza|carta d'uscita|cartolina d'uscita|carta da partenza
+Ausreisemeldekarte|carte d'annonce de départ|carta della notifica di partenza|carta d'annunzia da la partenza
+Ausübung einer Erwerbstätigkeit|exercice d'une activité lucrative|esercizio di un'attività lucrativa|pratitgar in'activitad da gudogn
+Ausweisungsverfügung|expulsion order|expulsion ruling|décision d'expulsion|decisione d'espulsione|disposiziun d'expulsiun
+bedarfsgerechte Wohnung|angemessene Wohnung|suitable accommodation|logement approprié|logement convenable|habitation convenable|abitazione conforme ai bisogni|abitazione adeguata|alloggio conveniente|abitaziun che correspunda als basegns|alloschi che correspunda als basegns
+Befreiung von der Visumpflicht|Visumbefreiung|exemption from the visa requirement|exemption from visa requirements|visa exemption|exemption de l'obligation de visa|libération de l'obligation de visa|exemption de visa|esenzione dall'obbligo di visto|dispensaziun da l'obligaziun da visum
+heimatlicher Pass|heimatlicher Reisepass|nationaler Pass|nationaler Reisepass|national passport|passeport national|passaporto nazionale|passaport naziunal
+Bemerkungscode|code d'observation|codice d'osservazione|code d'observaziun
+Integrationsbereitschaft|Bereitschaft zur Integration|willingness to integrate|volonté de s'intégrer|volontà di integrarsi|disponibilità a integrarsi|prontadad da s'integrar
+Besuchervisum|visitor visa|visit visa|visa de visite|visa pour visite|visto di visita|visto per visita|visum da visitas
+Betreuungspflicht|obligation to provide assistance|devoir de prise en charge|obbligo di assistenza|obligaziun d'assistenza
+bewilligungspflichtiger Aufenthalt|stay requiring a permit|séjour soumis à autorisation|soggiorno sottostante a permesso|soggiorno sottoposto a permesso|dimora che basegna ina permissiun
+bewilligungsfreier Aufenthalt|stay not requiring a permit|séjour non soumis à autorisation|soggiorno non sottostante a permesso|soggiorno non sottoposto a permesso|soggiorno esente da permesso|dimora che na basegna betg ina permissiun
+Bewilligungskanton|permit-granting canton|chantun ch'ha dà ina permissiun
+nationales Visum für den längerfristigen Aufenthalt|Visum für den längerfristigen Aufenthalt|Langzeitvisum|national long-stay visa|long-stay visa|visa national de long séjour|visa de long séjour|visto nazionale per soggiorno di lunga durata|visto nazionale per soggiorni di lunga durata|visto per soggiorno di lunga durata|visto per soggiorni di lunga durata|visum naziunal da lunga durada
+digitaler Fingerabdruck|digital fingerprint|empreinte digitale numérisée|empreinte digitale numérique|impronta digitale numerica|impronta dal det digitala
+Dossierstandort|emplacement d'un dossier|ubicazione di un fascicolo|plazzament d'ina documentaziun
+duales Zulassungssystem|duales Rekrutierungssystem|dual system for the admission of foreign workers|dual system of recruiting foreign labour|système binaire d'admission|système d’admission dual|système de recrutement dual|sistema di ammissione binario|sistema binario di ammissione|sistema binario di reclutamento|sistem dual d'admissiun|sistem dual da recrutaziun
+echtes Reisedokument|genuine travel document|document de voyage authentique|documento di viaggio autentico|document da viadi autentic
+Einreisebestimmungen|Einreisevorschriften|entry provisions|entry regulation|dispositions sur l'entrée|dispositions régissant l'entrée|dispositions en matière d'entrée|prescriptions d'entrée|disposizioni in materia d'entrata|disposizioni concernente l'entrata|disposizioni sull'entrata|prescrizioni in materia d'entrata|disposiziuns d'entrada|prescripziuns d'entrada
+Einreisedatum|date of entry|date d'entrée|data d'entrata|data d'entrada en il pajais
+Einreiseentscheid|decision on entry|décision d'entrée|decisione d'entrata|decisiun d'entrar
+Einreiseverfahren|entry procedure|procédure d'entrée|procedura d'entrata|procedura d'entrada en il pajais
+Einstellungserklärung|contractual statement|déclaration d'engagement|dichiarazione di assunzione|conferma d'assunzione|conferma da l'engaschament
+Einwanderungsland|Einwanderungsstaat|country of immigration|pays d'immigration|Paese d'immigrazione|Stato d'immigrazione|Paese di immigrati|pajais d'immigraziun
+Erlöschen einer Bewilligung|expiry of a permit|extinction d'une autorisation|decadenza di un permesso|estinzione di un permesso|scadenza d'ina permissiun
+Ersatzpass|Passersatz|Passersatzdokument|substitute passport|replacement passport|passeport de remplacement|passaporto sostitutivo|documento sostitutivo del passaporto|passaport substitutiv
+Erstasylland|Erstasylstaat|first asylum country|country of first asylum|pays de premier asile|État de premier asile|Paese di primo asilo|Stato di primo asilo|pajais da l'emprim asil
+Europäische Staatsangehörigkeitskonvention|European Convention on Nationality|Convention européenne sur la nationalité|Convenzione del Consiglio d'Europa sulla cittadinanza|Convenziun europeica davart la naziunalitad
+RFSR|Raum der Freiheit, der Sicherheit und des Rechts|AFSJ|area of freedom, security and justice|ELSJ|espace de liberté, de sécurité et de justice|SLSG|spazio di libertà, sicurezza e giustizia|spazi da libertad, segirezza e giustia
+Familienpass|family passport|passeport de famille|passeport familial|passaporto di famiglia|passaport da famiglia
+formlose Rückübernahme|informal readmission|réadmission sans formalités|réadmission sans formalité|riammissione senza formalità|riammissione informale|reacceptaziun senza formalitads
+fremdenpolizeiliche Massnahme|mesure de police des étrangers|misura di polizia degli stranieri|mesira da la polizia d'esters
+gebührenfreies Visum|visa gratuit|visto esente da emolumento|visto esente da tassa|visto gratuito|visum gratuit|visum liber da taxas
+Geschäftsvisum|geschäftliches Visum|business visa|visa d'affaires|visto per affari|visto d'affari|visto business|visum commerzial|visum d'affars
+gesicherte Wiederausreise aus der Schweiz|gesicherte Wiederausreise|guaranteed return|sortie assurée de Suisse|départ garanti de Suisse|partenza assicurata dalla Svizzera|partenza garantita dalla Svizzera|partenza garantida da la Svizra
+Grenzgängerstatut|cross-border commuter status|statut de frontalier|statuto di frontaliero|statut dals cunfinaris
+GSM|grenzsanitarische Massnahme|MSF|mesure sanitaire de frontière|mesure sanitaire à la frontière|misura sanitaria di confine|mesira sanitara da cunfin
+GSU|grenzsanitarische Untersuchung|ESF|examen sanitaire de frontière|visita sanitaria di confine|visita sanitara da cunfin
+Grenzübertrittskontrolle|Grenzkontrolle|border check|vérification aux frontières|verifica di frontiera|controlla al cunfin
+Haftverlängerung|Verlängerung der Haft|Fortsetzung der Haft|extension of detention|continuation of detention|prolongation de la détention|maintien de la détention|proroga della carcerazione|mantenimento della carcerazione|prosecuzione della carcerazione|prolungaziun da l'arrest|cuntinuaziun da l'arrest
+Härtefallkommission|commission d'examen des cas de rigueur|commissione per casi di rigore|cumissiun per cas da direzza
+Täuschung der Behörden|fraudulent conduct towards the authorities|comportement frauduleux à l'égard des autorités|inganno nei confronti delle autorità|engion da las autoritads
+Arbeitnehmer|Arbeitnehmerin|Arbeitnehmende|unselbstständig Erwerbstätiger|unselbstständig Erwerbstätige|unselbstständig erwerbstätige Person|Unselbstständigerwerbender|Unselbstständigerwerbende|unselbstständig erwerbende Person|employee|travailleur salarié|travailleuse salariée|salarié|salariée|travailleur|travailleuse|lavoratore dipendente|lavoratore salariato|lavoratore|lavurant|lavuranta|persuna cun activitad da gudogn dependenta|emploià|emploiada
+Verbleiberecht|Bleiberecht|right to stay|droit de demeurer|diritto di rimanere|dretg da restar
+Verfallsanzeige|notice of expiry|avis de fin de validité|avviso di scadenza|notifica di scadenza|avis da scadenza|decleranza da scadenza
+Verlängerung eines Visums|Visumverlängerung|extension of a visa|prolongation d'un visa|proroga di un visto|prolungaziun d'in visum
+Studentenvisum|Visum zu Studienzwecken|student visa|visa d'études|visa pour études|visto di studio|visto per studio|visto per studi|visum da studi
+Visumgebühr|visa fee|émolument de visa|droit de visa|emolumento di visto|emolumento per un visto|emolumento per il rilascio del visto|diritto per un visto|taxa dal visum
+Visumpraxis|visa practice|pratique en matière de visas|prassi in materia di visti|pratica da visum
+Visumstatistik|visa statistics|statistique en matière de visas|statistica in materia di visti|statistica relativa ai visti|statistica dals visums
+Visumunterlagen|visa documentation|dossier de visa|pièces de visa|incarto relativo al visto|documentazione relativa al visto|documentaziun tar il visum
+Arbeitsmigrant|Arbeitsmigrantin|Wanderarbeiter|Wanderarbeiterin|Wanderarbeitnehmer|Wanderarbeitnehmerin|migrant worker|labour migrant|travailleur migrant|travailleuse migrante|lavoratore migrante|lavurer migrant|lavurera migranta
+Wanderungssaldo|Migrationsbilanz|Wanderungsbilanz|Nettomigration|Nettozuwanderung|net migration|solde migratoire|bilan migratoire|balance migratoire|migration nette|immigration nette|saldo migratorio|bilancio migratorio|migrazione netta|immigrazione netta|saldo da migraziun
+Zugewanderter|Zugewanderte|Eingewanderter|Eingewanderte|Einwanderer|Einwanderin|Zuwanderer|Zuwanderin|Immigrant|Immigrantin|immigrant|immigré|immigrée|immigrante|immigrato|immigrata|immigranta
+Zusicherung einer Bewilligung|guarantee of a permit|assurance d'autorisation|assicurazione di un permesso|assicurazione del rilascio di un permesso|garanzia d'ina permissiun
+Weisung über die Bestimmung und Schreibweise der Namen von ausländischen Staatsangehörigen|Directives sur la détermination et l'orthographe des noms de ressortissants étrangers|Istruzione sulla determinazione e l'ortografia dei nomi di cittadini stranieri|Directivas davart la determinaziun e l'ortografia dals nums da burgais esters
+Einreisegesuch|Einreiseantrag|request for entry|application for entry|demande d'entrée|domanda d'entrata|dumonda d'entrada
+Rückreisegarantie|garantie de retour|garanzia di ritorno|garanzia da return
+befristete Aufenthaltsbewilligung|limited residence permit|autorisation de séjour de durée limitée|autorisation de séjour limitée dans le temps|autorisation de séjour limitée|autorisation de séjour de durée déterminée|permesso di dimora di durata limitata|permesso di dimora di durata determinata|permissiun da dimora limitada
+Daueraufenthalter|Daueraufenthalterin|permanent resident|long-term resident|titulaire d'une autorisation de séjour de longue durée|résident permanent|résidente permanente|résident de longue durée|residente permanente|dimorant permanent|dimoranta permanenta
+Höflichkeitsvisum|courtesy visa|visa de courtoisie|visto di cortesia|visum da curtaschia
+Grundsatz der Inländergleichbehandlung|Prinzip der Inländergleichbehandlung|Gebot der Inländergleichbehandlung|national treatment principle|national treatment obligation|principe du traitement national|principio del trattamento nazionale|obbligo del trattamento nazionale|principio della parità di trattamento|princip da tractament naziunal|obligaziun da tractament naziunal
+Inlandgesuch|application filed in Switzerland|demande déposée en Suisse|domanda presentata in Svizzera|domanda depositata in Svizzera|domanda presentata all'interno del Paese|domanda depositata all'interno del Paese|dumonda inoltrada en Svizra
+Integrationsförderungsprogramm|Programm zur Integrationsförderung|integration programme|programme de promotion de l'intégration|programma di promozione dell'integrazione|program da promoziun da l'integraziun
+Integrationspauschale|flat-rate payment for integration|indemnité forfaitaire d'intégration|somma forfettaria per l'integrazione|somma forfettaria a favore dell'integrazione|pauschala d'integraziun
+interkulturelles Übersetzen|interkulturelles Dolmetschen|community interpreting|intercultural translation|interprétariat communautaire|interpretariato interculturale|translaziun a bucca interculturala
+kantonale Ausländerbehörde|Ausländerbehörde eines Kantons|cantonal authority responsible for foreign nationals|cantonal immigration authority|autorité cantonale compétente en matière d'étrangers|autorità cantonale competente in materia di stranieri|autorità cantonale degli stranieri|autoritad chantunala cumpetenta per las persunas estras|autoritad chantunala da persunas estras
+kantonale Ausländerkommission|cantonal commission for foreigners|commission cantonale des étrangers|commissione cantonale degli stranieri|cumissiun chantunala da persunas estras
+kantonale Integrationskommission|cantonal integration commission|commission cantonale de l'intégration|commissione cantonale dell'integrazione|cumissiun chantunala d'integraziun
+Kinderreiseausweis|Kinderausweis|child's passport|child's travel certificate|document de voyage pour enfants|certificat de voyage pour enfant|certificat de voyage pour enfants|documento di viaggio per fanciulli|certificato di viaggio per bambini|document da viadi per uffants
+Kontingentseinheit|quota unit|unité de contingent|unità di contingente|unitad da contingent
+Entlassung aus der eidgenössischen Kontrolle|eidgenössische Kontrollentlassung|Kontrollentlassung|libération du contrôle fédéral|libération du contrôle|liberazione dal controllo federale|rilascio dal controllo|liberaziun da la controlla federala|relaschada da la controlla
+kurzfristige Erwerbstätigkeit|short-term work|activité lucrative à court terme|activité lucrative de courte durée|attività lucrativa di breve durata|attività lucrativa a breve termine|activitad da gudogn a curt termin
+Migrationspartnerschaft|migration partnership|partenariat migratoire|partenariat dans le domaine des migrations|partenariato migratorio|partenariato in materia di migrazione|partenadi da migraziun
+Bevölkerung mit Migrationshintergrund|population with an immigration background|population issue de la migration|popolazione con un passato migratorio|populaziun cun ina biografia da migraziun|populaziun cun experientschas da migraziun|persuna immigrada
+Mutationskarte für Grenzgänger|carte de mutation du frontalier|modulo "Annuncio di modifica per frontalieri"|carta da mutaziun per cunfinaris
+Pauschalzustimmung|approbation de principe|approvazione generale|consentiment general
+pflichtgemässe Ausreise|proper exit|départ dans les délais prescrits|partenza regolare|partenza obbligatoria|partenza confurma a l'obligaziun
+provisorische Aufenthaltsbewilligung|autorisation de séjour provisoire|permesso di dimora accordato in via provvisoria|permesso di dimora provvisorio|permissiun provisorica da dimora
+Pull-Effekt|Sogwirkung|pull effect|effet d'attraction|effetto di attrazione|effetto di richiamo|effect d'attracziun|effect da fascinaziun
+Push-Effekt|push effect|effet de répulsion|effetto di spinta|effetto di repulsione|effect da repulsiun
+Integrationshindernis|Integrationshemmnis|obstacle to integration|integration obstacle|obstacle à l'intégration|entrave à l'intégration|ostacolo all'integrazione|impediment per l'integraziun
+Reiseausweis für Flüchtlinge|Reisedokument für Flüchtlinge|Konventionsreiseausweis|travel document for refugees|refugees travel document|CTD|convention travel document|titre de voyage pour réfugiés|titolo di viaggio per rifugiati|document da viadi per fugitivs
+Rückkehrrecht|right to return|droit au retour|diritto al ritorno|dretg da return
+Schengen-Regelung|Schengen rules|réglementation Schengen|normativa Schengen|disciplina Schengen|reglamentaziun da Schengen
+schwerwiegender persönlicher Härtefall|schwerer persönlicher Härtefall|schwerwiegender Härtefall|serious case of personal hardship|case of serious personal hardship|cas individuel d'extrême gravité|cas personnel d'extrême gravité|cas de rigueur d'extrême gravité|situation personnelle grave|caso personale particolarmente grave|grave caso di rigore personale|caso di rigore personale grave|caso personale di particolare rigore|caso personale particolarmente rigoroso|cas da direzza persunal gravant|grev cas da direzza persunal
+Zusicherung einer Aufenthaltsbewilligung|Aufenthaltszusicherung|assurance of a residence permit|gurarantee of a residence permit|assurance d'autorisation de séjour|assicurazione di un permesso di dimora|assicurazione del rilascio di un permesso di dimora|garanzia d'ina permissiun da dimora
+Daueraufenthaltsbewilligung|dauerhafte Aufenthaltsbewilligung|permanent residence permit|long-term residence permit|autorisation de séjour de longue durée|autorisation de séjour durable|permesso di dimora di lunga durata|permesso di dimora durevole|permesso di dimora duraturo|permesso di soggiorno di lunga durata|permissiun da dimora permanenta
+Einsatz|work|mission|impiego|engaschament
+Einsatzort|place of activity|lieu de mission|lieu d'activité|luogo d'impiego|lieu d'engaschament
+Entsendestaat|posting state|État de détachement|Stato di distacco|stadi da transmissiun
+Garantiesumme|guaranteed amount|montant de la garantie|importo della garanzia|summa da garanzia
+Grenzposten|border post|poste frontière|poste-frontière|posto di confine|post da cunfin
+Ausländerbehörde|immigration authority|autorité compétente en matière d'étrangers|autorità competente in materia di stranieri|autoritad cumpetenta per las persunas estras|autoritad da persunas estras
+Mutationsprotokoll|journal des mutations|protocollo delle mutazioni|protocol da las mutaziuns
+RV|Rechtsvertreter|Rechtsvertreterin|legal representative|RL|représentant légal|mandataire|rappresentante legale|represchentant legal|represchentanta legala
+Schwerpunktprogramm|programme des points forts|programma prioritario|program prioritar
+Umwandlungsgesuch|application for conversion|demande de transformation|domanda di trasformazione|dumonda da transfurmaziun
+expiry|échéance
+Visumpflicht|Visumzwang|Sichtvermerkzwang|visa obligation|obligation de visa|obligation du visa|obbligo del visto|obligaziun da visum
+ausstellende Behörde|issuing authority|autorité d'établissement|autorité de délivrance|autorité émettrice|autorità di rilascio|autorità rilasciante|autorità emittente|autoritad d'emissiun
+mündliche Verhandlung|oral hearing|hearing|procédure orale|audience|udienza|procedura orale|udienza in procedura orale|tractativa a bucca
+Überfremdung|foreign infiltration|foreign control|surpopulation étrangère|emprise étrangère|pléthore d'étrangers|inforestierimento|eccessivo dominio straniero|eccesso della popolazione straniera|surpopulaziun estra
+Integrationsdelegierter|Integrationsdelegierte|integration delegate|délégué à l'intégration|déléguée à l'intégration|delegato all'integrazione|delegata all'integrazione|incumbensà d'integraziun|incumbensada d'integraziun|delegà per fatgs d'integraziun
+Ventilklausel|Schutzklausel|safeguard clause|clause de sauvegarde|clause de ventilation|clausola di salvaguardia|clausola valvola|clausula da protecziun|clausula da regulaziun|clausula da ventil
+Arbeitsbescheinigung|confirmation of engagement|certificate of employment|attestation de travail|attestato di lavoro|certificato di lavoro|attest da lavur
+Kontrollfrist|review deadline|deadline for review|délai de contrôle|termine di controllo|termin da controlla
+Grenzkontrollrapport|border control report|rapport de contrôle à la frontière|rapporto di controllo alla frontiera|rapport da controlla da cunfin
+grenzüberschreitende Nacheile|Nacheile|cross-border hot pursuit|hot pursuit|poursuite transfrontalière|poursuite|inseguimento transfrontaliero|inseguimento|persecuziun transcunfinala
+Zulassungspolitik|admission policy|politique d'admission|politica d'ammissione|politica d'admissiun
+Kontrollvermerk|attestation de contrôle|attestazione di controllo|attestaziun da controlla
+geschlossene Gruppe|groupe de composition homogène|gruppo compatto|comitiva|gruppa cumpacta
+Kollektivvisum|collective visa|visa collectif|visto collettivo|visum collectiv
+Beherberger|Beherbergerin|landlord|landlady|logeur|logeuse|alloggiatore|alloschader|alloschadra
+Meldeschein|registration form|bulletin d'arrivée|modulo di notificazione|cedola di notificazione|formular d'annunzia
+Ausnahmevisum|exceptional visa|visa exceptionnel|visto eccezionale|visum excepziunal
+Ersatzgesuch|demande de remplacement|domanda di sostituzione|dumonda da substituziun
+Familienbewilligung|autorisation familiale|permesso di famiglia|permissiun da famiglia
+Saisonbetrieb|entreprise saisonnière|azienda stagionale|manaschi da stagiun
+Kontingentsperiode|quota period|période de contingentement|periodo di contingentamento|periodo di contingente|perioda da contingentaziun|perioda da contingent
+Kontingentsjahr|quota year|année de contingentement|anno di contingente|onn da contingentaziun
+Einladungsschreiben|letter of invitation|lettre d'invitation|lettera d'invito|brev d'invit
+Scheinehe|Ausländerrechtsehe|Gefälligkeitsehe|sham marriage|fake marriage|marriage of convenience|mariage de complaisance|mariage fictif|mariage blanc|matrimonio di compiacenza|matrimonio fittizio|matrimonio di convenienza|matrimoni fictiv|matrimoni simulà|pseudomaridaglia
+Einrichtungszeit|période de mise en place|periodo d'installazione|periodo di preparazione|perioda d'installaziun|temp d'installaziun
+Bewilligungsbehörde|permit-granting authority|autorité compétente en matière d'autorisation|autorità competente per il rilascio dei permessi|autorità competente in materia di permessi|autoritad da permissiun
+Bewilligung zur Wiedereinreise|Wiedereinreisebewilligung|return visa|re-entry permit|autorisation de retour|autorizzazione al ritorno|permesso di ritorno|autorizzazione a un nuovo ingresso|permissiun da return
+Entsendebestätigung|confirmation of posting|attestation de détachement|conferma del distaccamento|conferma da transmissiun
+Grenzüberwachung|border surveillance|surveillance des frontières|sorveglianza di frontiera|surveglianza dal cunfin
+Rücküberweisung|Remittance|Rimesse|Geldtransfer|Geldüberweisung|remittance|transfert de fonds|transfert de fonds des migrants|envoi de fonds|rimessa|trasferimento di fondi|invio di denaro|trasferimento di denaro|reassegnaziun|assegnaziun da daners
+grenzüberschreitende Dienstleistung|cross-border service|prestation de service transfrontière|prestazione di servizi transfrontaliera|servetsch transcunfinal
+Handflächenabdruck|Handballenabdruck|palm print|empreinte palmaire|empreinte de la paume|impronta palmare
+Sonderflug|special flight|vol spécial|volo speciale|sgol spezial
+Ausstellungsdatum|Ausstelldatum|Datum der Ausstellung|date of issue|date d'établissement|date de délivrance|data di rilascio|data d'emissiun
+Anmeldeverfahren|registration procedure|procédure de déclaration d'arrivée|procedura di notificazione|procedura d'annunzia
+Staatsangehörigkeit|Staatsbürgerschaft|Nationalität|citizenship|nationality|nationalité|cittadinanza|nazionalità|naziunalitad
+Doppelbürgerschaft|dual nationality|dual citizenship|double nationalité|doppia cittadinanza|doppia nazionalità|dretg da burgais dubel
+Personalien|biographic data|identité|identité civile|generalità|dati personali|persunalias
+Überwachung der Ausschaffung|supervision of a deportation procedure|contrôle du renvoi ou de l'expulsion|monitoraggio del rinvio coatto|surveglianza da l'expulsiun
+Haftdauer|term of detention|durée de la détention|durata della carcerazione|durada da l'arrest
+maximale Haftdauer|maximum term of detention|durée maximale de la détention|durata massima della carcerazione|durada maximala da l'arrest
+Anordnung der Haft|Haftanordnung|detention order|ordre de détention|décision de détention|ordine di carcerazione|ordinaziun da l'arrest
+die Haft anordnen|die Inhaftierung anordnen|order detention|ordonner la détention|ordinare la carcerazione|ordinare l'incarcerazione|ordinar l'arrest|ordinar l'arrestaziun
+in Haft nehmen|inhaftieren|detain|mettre en détention|incarcérer|incarcerare|arrestar
+in Haft belassen|leave in detention|maintenir en détention|mantenere in carcere|laschar en arrest
+die Haft beenden|revoke the detention order|lever la détention|---|terminar l'arrest
+Haftbedingungen|conditions of detention|conditions de détention|condizioni di carcerazione|cundiziuns d'arrest
+Haftvollzug|Vollzug der Haft|enforcement of detention|exécution de la détention|esecuzione della carcerazione|execuziun da l'arrest
+Kontrolle der Identität|Identitätskontrolle|Überprüfung der Identität|verifying the identity|contrôle de l'identité|controllo dell'identità|controlla da l'identitad
+die Identität kontrollieren|die Identität überprüfen|die Identität prüfen|verify the identity|vérifier l'identité|verificare l'identità|controllar l'identitad
+Ordensname|religious name|nom en religion|nom religieux|nom reçu dans un ordre religieux|nome religioso|num da l'urden
+Künstlername|stage name|pseudonym|nom d'artiste|nome d'arte|num d'artist
+biometrische Daten|biometric data|données biométriques|dati biometrici|datas biometricas
+Gesichtsbild|facial image|portrait photograph|image du visage|image faciale|photographie faciale|photographie|immagine del viso|immagine del volto|immagine facciale|maletg da la fatscha|purtret da la fatscha
+Gesichtserkennungssystem|facial recognition system|système de reconnaissance des visages|système de reconnaissance faciale|sistema di riconoscimento facciale|sistema di riconoscimento dei tratti del viso|sistem per identifitgar la fatscha
+Grenzkontrolle|border control|contrôle à la frontière|controllo al confine|controllo alla frontiera|controllo di frontiera|controlla da cunfin
+automatisierte Grenzkontrolle|automated border control|contrôle automatisé à la frontière|controllo di confine automatizzato|controllo di frontiera automatizzato|controlla da cunfin automatisada
+Personenkontrolle|check on persons|contrôle des personnes|controllo delle persone|controlla da persunas
+Dokumentenkontrolle|checking documents|document check|contrôle des documents|controllo dei documenti|controlla da documents
+Bekämpfung der illegalen Migration|combating illegal migration|fighting illegal migration|fight against illegal migration|lutte contre la migration illégale|lutte contre les migrations irrégulières|lotta alla migrazione illegale|lotta contro la migrazione illegale|lotta alla migrazione clandestina|cumbat cunter la migraziun illegala
+die illegale Migration bekämpfen|combat illegal migration|fight illegal migration|lutter contre la migration illégale|lottare contro la migrazione illegale|cumbattar la migraziun illegala
+biometrischer Ausländerausweis|biometrischer Ausweis|Ausweis mit Datenchip|biometric identity card|identity card with a data chip|titre de séjour biométrique|carte de séjour biométrique|titre de séjour à puce|carta di soggiorno biometrica|carta di soggiorno provvista di microchip|document da legitimaziun biometric|document da legitimaziun munì cun in chip
+Aufenthaltstitel|residence permit|residence document|titre de séjour|titolo di soggiorno|titel da dimora
+biometrischer Pass|E-Pass|elektronischer Pass|biometric passport|e-passport|passeport biométrique|passeport électronique|passaporto biometrico|passaporto elettronico|passaport biometric|passaport electronic
+Teilnehmerkarte|participation card|carte de participant|carta per partecipanti|charta da participaziun
+Datenchip|Chip|data chip|chip|puce électronique|puce|microchip|chip da datas
+maschinenlesbarer Bereich|maschinenlesbare Zone|maschinenlesbare Zeilen|machine-readable zone|MRZ|zone lisible par machine|zone lisible par la machine|zone lisible à la machine|zona a lettura ottica|lingias legiblas d'ina maschina
+Erneuerung eines Ausländerausweises|Erneuerung eines Ausweises|renewal of a foreign national identity card|renewal of an identity card|renouvellement d'un titre de séjour|rinnovo di una carta di soggiorno|renovaziun d'in document da legitimaziun da persunas estras|renovaziun d'in document da legitimaziun
+einen Ausländerausweis erneuern|einen Ausweis erneuern|renew a foreign national identity card|renew an identity card|renouveler un titre de séjour|rinnovare una carta di soggiorno|renovar in document da legitimaziun da persunas estras|renovar in document da legitimaziun
+Visumgesuch|Visumsgesuch|Visumantrag|Visumsantrag|visa application|demande de visa|domanda di visto|richiesta del visto|dumonda da visum
+Visumantragsformular|Visumgesuchsformular|visa application form|formulaire de demande de visa|modulo di domanda di visto|modulo di domanda del visto|formular per dumandar in visum
+Visumerteilung|Erteilung eines Visums|granting a visa|octroi d'un visa|rilascio di un visto|concessione di un visto|concessiun d'in visum
+Ausstellung eines Visums|Visumausstellung|issue of a visa|issuing a visa|établissement d'un visa|délivrance d'un visa|rilascio di un visto|emissiun d'in visum
+ein Visum ausstellen|issue a visa|établir un visa|délivrer un visa|rilasciare un visto|emetter in visum|dar in visum
+ISR|Informationssystem zur Ausstellung von schweizerischen Reisedokumenten und Bewilligungen zur Wiedereinreise an Ausländerinnen und Ausländer|information system for the issue of Swiss travel documents and return visas to foreign nationals|système d'information en vue de l'établissement des documents de voyage suisses et des autorisations de retour pour étrangers|sistema d'informazione per il rilascio a stranieri di documenti di viaggio svizzeri e permessi di ritorno|sistem d'infurmaziun per emetter documents da viadi svizzers e permissiuns da return per persunas estras
+automatisiertes Personendossier- und Dokumentationssystem|eDossier|elektronisches Dossier|automated personal file and documentation system|système de gestion électronique de dossiers personnels et de la documentation|système automatisé de gestion des dossiers personnels et de la documentation|dossier électronique|sistema automatizzato degli incarti personali e della documentazione|sistema di gestione automatizzata dei fascicoli personali e della documentazione|sistem da dossiers persunals e da documentaziun automatisà
+Eurodac-Treffer|Eurodac hit|Eurodac match|résultat positif dans Eurodac|risposta pertinente Eurodac|endataziun en Eurodac|endataziun en la banca da datas Eurodac
+Aufenthaltskosten|residence costs|frais de séjour|spese di soggiorno|custs da dimora
+Rückreisekosten|return costs|frais de retour|custs da return
+Ausschaffungskosten|Rückführungskosten|deportation costs|frais de renvoi ou d'expulsion|frais de rapatriement|costi del rinvio coatto|costi del rimpatrio|custs d'expulsiun
+Begleitkosten|Begleitungskosten|Kosten für die Begleitung|attendance costs|frais d'escorte|frais d'accompagnement|costi dell'accompagnamento|costi di scorta|spese di scorta|custs per l'accumpagnament
+Aufrechterhaltung der Niederlassungsbewilligung|Beibehaltung der Niederlassungsbewilligung|maintien de l'autorisation d'établissement|mantenimento del permesso di domicilio|mantegniment da la permissiun da domicil
+die Niederlassungsbewilligung aufrechterhalten|remain valid|maintenir l'autorisation d'établissement|mantenere il permesso di domicilio|mantegnair la permissiun da domicil
+ein Visum erteilen|grant a visa|octroyer un visa|déliver un visa|rilasciare un visto|conceder in visum
+Pass|Reisepass|passport|passeport|passaporto|passaport
+unbegleiteter minderjähriger Ausländer|unbegleitete minderjährige Ausländerin|unbegleiteter Minderjähriger|unbegleitete Minderjährige|unaccompanied minor foreign national|unaccompanied minor|étranger mineur non accompagné|mineur non accompagné|straniero minorenne non accompagnato|minore non accompagnato|persuna estra minorenna betg accumpagnada|persuna estra minorenna senza accumpagnament|persuna minorenna betg accumpagnada
+Fingerabdruck|Daktylogramm|fingerprint|empreinte digitale|impronta digitale|impronta dal det
+Gültigkeitsdauer|term of validity|durée de validité|durata di validità|periodo di validità|valaivladad|durada da valaivladad
+Informationsblatt|information sheet|feuille d'information|foglio informativo|fegl d'infurmaziun
+Haftüberprüfungsverfahren|Verfahren der Haftüberprüfung|detention review procedure|procédure d'examen de la détention|procédure d'examen|procedura di esame della carcerazione|procedura di esame|procedura per controllar l'arrest|procedura d'examinaziun d'arrest
+Visuminhaber|Visuminhaberin|visa holder|titulaire de visa|titolare di visto|possessur d'in visum|possessura d'in visum
+Visumgesuchsteller|Visumgesuchstellerin|visa applicant|demandeur de visa|demandeuse de visa|richiedente il visto|persuna che dumonda in visum
+Wochenaufenthalter|Wochenaufenthalterin|weekly resident|résident à la semaine|personne qui séjourne à la semaine|résidente à la semaine|soggiornante settimanale|dimorante settimanale|ferialista|dimorant durant l'emna|dimoranta durant l'emna
+Wochenaufenthalt|auswärtiger Wochenaufenthalt|weekly residence|séjour hors du domicile|séjour hors du lieu de domicile|séjour hebdomadaire hors du domicile|séjour hebdomadaire|séjour à la semaine|soggiorno settimanale|soggiorno fuori domicilio|dimora durant l'emna
+Cabaret-Tänzerin|Cabaret-Tänzer|cabaret dancer|artiste de cabaret|danseuse de cabaret|danseur de cabaret|artista di cabaret|artista di locali notturni|ballerina di cabaret|ballerino di cabaret|sautunza da cabaret|sautunza da striptease|striptiseusa
+Cabaret-Tänzerinnen-Statut|cabaret dancer status|statut d'artiste de cabaret|statut des artistes de cabaret|statut de danseuses de cabaret|statuto di artista di cabaret|statuto di ballerina di cabaret|statut da las sautunzas da cabaret
+Variétéartist|Variétéartistin|artiste de théâtre de variétés|artiste de variétés|artista di teatro di varietà|artista di varietà|artist da variété|artista da variété
+Unterricht in heimatlicher Sprache und Kultur|HSK-Unterricht|instruction in native language and culture|enseignement de la langue et de la culture d’origine|enseignement LCO|insegnamento della lingua e della cultura d'origine|insegnamento LCO|instrucziun en la lingua e la cultura da la patria|instrucziun LCP
+Kurs in heimatlicher Sprache und Kultur|HSK-Kurs|course in native language and culture|cours de langue et de culture d'origine|cours LCO|corso di lingua e cultura del Paese d'origine|corso di lingua e cultura d'origine|corso LCO|curs da lingua e cultura da la patria
+Lehrkraft für heimatliche Sprache und Kultur|Lehrer für heimatliche Sprache und Kultur|Lehrerin für heimatliche Sprache und Kultur|HSK-Lehrkraft|HSK-Lehrperson|HSK-Lehrer|HSK-Lehrerin|teacher of native language and culture|enseignant de langue et culture d'origine|enseignante de langue et culture d'origine|enseignant LCO|enseignante LCO|insegnante di lingua e cultura del Paese d'origine|insegnante LCO|magister da lingua e cultura da la patria|magistra da lingua e cultura da la patria
+religiöse Betreuungsperson|personne assurant un encadrement religieux|personne exerçant une activité d’encadrement religieux|personne chargée de l'encadrement religieux|consulente religioso|persuna d'assistenza religiusa|consulent religius
+Visumbehörde|visa authority|autorité compétente en matière de visas|autorité chargée des visas|autorità competente per i visti|autoritad che emetta visums
+Entsendebetrieb|entsendendes Unternehmen|entsendender Arbeitgeber|posting company|posting employer|entreprise détachant des travailleurs|azienda distaccante|interpresa da transmissiun
+Beschäftigungsstaat|Beschäftigungsland|Arbeitsstaat|Arbeitsland|country of work|État d'emploi|pays d'emploi|État de travail|pays de travail|État du lieu de travail|Stato d'impiego|Paese d'impiego|Paese di lavoro|Stato del luogo di lavoro|Stadi dal patrun da lavur|pajais da lavur
+Beschäftigungskanton|Arbeitskanton|canton of work|canton de travail|canton du lieu de travail|cantone di lavoro|chantun da lavur
+Schengen-Staat|Schengen state|État Schengen|Stato Schengen|stadi da Schengen
+Dublin-Staat|Dublin state|État Dublin|Stato Dublino|stadi da Dublin
+Flughafentransit|airport transit|transit aéroportuaire|transito aeroportuale|transit d'eroport
+rechtmässige Einreise|legale Einreise|legal entry|entrée légale|entrata legale|entrada legala
+rechtmässig einreisen|enter lawfully|enter legally|entrer légalement|entrare legalmente|entrar legalmain
+Gastgewerbe|Hotel- und Gastgewerbe|Hotellerie und Gastgewerbe|hotel and catering industry|hôtellerie et restauration|hôtellerie-restauration|settore alberghiero e della ristorazione|settore alberghiero e ristorazione|industria alberghiera e ristorazione|hotellaria e restauraziun
+Reinigungsgewerbe|cleaning services|nettoyage|lavori di pulizia|servizi di pulizia|lavurs da nettegiar
+industrielle Reinigung|industrial cleaning services|industrial cleaning|nettoyage industriel|pulizia industriale|nettegiament industrial
+Überwachungs- und Sicherheitsdienst|Bewachungs- und Sicherheitsdienst|Sicherheitsgewerbe|surveillance and security services|surveillance et sécurité|secteur de la surveillance et de la sécurité|servizi di sorveglianza e di sicurezza|servizio di sorveglianza e di sicurezza|servizi di vigilanza|servetsch da surveglianza e da segirezza
+Reisendengewerbe|Gewerbe der Reisenden|itinerant trade|commerce itinérant|commercio ambulante|commerzi ambulant
+Reisender|Reisende|Handelsreisender|Handelsreisende|itinerant trader|commercial traveller|travelling salesman|commerçant itinérant|commerçante itinérante|commerciante ambulante|viagiatur da fatschenta|viagiatura da fatschenta
+Erotikgewerbe|Sexgewerbe|sex industry|industrie du sexe|settore a luci rosse|industria del sesso|sectur erotic|industria da sex
+Gartenbau|Gartenbaugewerbe|horticultural service activities|landscaping|horticulture|services annexes à la culture et aménagement des paysages|orticultura|servizi connessi all'orticultura|servetsch d'orticultura
+Gesuch um Familiennachzug|Familiennachzugsgesuch|Nachzugsgesuch|Gesuch um Nachzug|application for family reunification|request for reunification|demande de regroupement familial|domanda di ricongiungimento familiare|domanda per il ricongiungimento familiare|dumonda per l'arriv successiv da la famiglia|dumonda per ina reuniun da la famiglia
+Visumbestimmungen|Visumvorschriften|visa requirements|dispositions en matière de visas|prescriptions en matière de visas|prescriptions en matière de visa|disposizioni in materia di visti|prescrizioni in materia di visti|disposizioni sul visto|disposiziuns dal visum
+Aufenthaltsgesuch|demande de séjour|demande d'autorisation de séjour|domanda di dimora|domanda di permesso di dimora|dumonda da dimora
+Aufhebung eines Einreiseverbots|revocation of a ban on entry|levée d'une interdiction d'entrée|revoca di un divieto d'entrata|sospensione di un divieto d'entrata|abrogaziun d'in scumond d'entrar en Svizra
+Aufenthaltsvoraussetzungen|Voraussetzungen für den Aufenthalt|Aufenthaltsbedingungen|conditions of stay|conditions de séjour|condizioni di soggiorno|condizioni di dimora|premissas da dimora
+Aufenthaltsbewilligung EU/EFTA|EU/EFTA residence permit|autorisation de séjour UE/AELE|permesso di dimora UE/AELS|permissiun da dimora UE/AECL
+Kurzaufenthaltsbewilligung EU/EFTA|EU/EFTA short stay permit|EU/EFTA short-term residence permit|autorisation de séjour de courte durée UE/AELE|permesso di soggiorno di breve durata UE/AELS|permissiun da dimora curta UE/AECL
+Grenzgängerbewilligung EU/EFTA|EU/EFTA cross-border commuter permit|autorisation frontalière UE/AELE|permesso per frontalieri UE/AELS|permissiun da cunfinarias e da cunfinaris UE/AECL
+Niederlassungsbewilligung EU/EFTA|EU/EFTA permanent residence permit|autorisation d'établissement UE/AELE|permesso di domicilio UE/AELS|permissiun da domicil UE/AECL
+Zusicherung einer Kurzaufenthaltsbewilligung|guarantee of a short-stay permit|assurance d'autorisation de courte durée|assicurazione di un permesso di soggiorno di breve durata|assicurazione del rilascio di un permesso di soggiorno di breve durata|garanzia d'ina permissiun da dimora curta
+Ermächtigung zur Visumerteilung|authorisation to grant a visa|autorisation habilitant à délivrer un visa|autorizzazione per il rilascio del visto|autorizzazione relativa al rilascio del visto|autorisaziun per conceder in visum
+eine Kurzaufenthaltsbewilligung erneuern|renew a short stay permit|renouveler une autorisation de séjour de courte durée|rinnovare un permesso di soggiorno di breve durata|renovar ina permissiun da dimora curta
+Erneuerung einer Kurzaufenthaltsbewilligung|renewal of a short stay permit|renouvellement d'une autorisation de séjour de courte durée|rinnovo di un permesso di soggiorno di breve durata|renovaziun d'ina permissiun da dimora curta
+Erneuerung einer Aufenthaltsbewilligung|renewal of a residence permit|renouvellement d'une autorisation de séjour|rinnovo di un permesso di dimora|renovaziun d'ina permissiun da dimora
+Zulassungsbestimmungen|Zulassungsvorschriften|admission provisions|dispositions d'admission|dispositions sur l'admission|prescriptions d'admission|disposizioni d'ammissione|prescrizioni d'ammissione|disposiziuns d'admissiun|prescripziuns d'admissiun
+arbeitsmarktliche Voraussetzungen|labour market requirements|conditions relatives au marché du travail|presupposti relativi al mercato del lavoro|cundiziuns areguard il martgà da lavur
+arbeitsmarktliche Beschränkungen|labour market restrictions|restrictions on labour market access|restrictions d'accès au marché du travail|limitazioni d'accesso al mercato del lavoro|limitaziuns d'access al martgà da lavur
+Verpflichtungserklärung|Garantieerklärung|sponsorship declaration|declaration of sponsorship|déclaration de prise en charge|déclaration de garantie|dichiarazione di garanzia|decleranza d'obligaziun
+kollektive vorläufige Aufnahme|gruppenweise vorläufige Aufnahme|collective temporary admission|admission provisoire collective|admission collective provisoire|ammissione provvisoria collettiva|ammissione provvisoria per gruppi|admissiun provisorica collectiva
+Erlöschen der vorläufigen Aufnahme|expiry of temporary admission|extinction de l'admission provisoire|fin de l'admission provisoire|estinzione dell'ammissione provvisoria|scadenza da l'admissiun provisorica
+Beendigung der vorläufigen Aufnahme|termination of temporary admission|revocation of temporary admission|fin de l'admission provisoire|fine dell'ammissione provvisoria|finiziun da l'admissiun provisorica
+Integrationsziel|Ziel der Integration|integration goal|but de l'intégration|obiettivo dell'integrazione|finamira da l'integraziun
+Integrationsmassnahme|integration measure|mesure d'intégration|misura d'integrazione|mesira d'integraziun
+Vollzugsunterstützung|aide à l'exécution des renvois|aiuto all'esecuzione|sustegn per la spedida
+Vollzugsdokumentation|documentation sur l'exécution des renvois|documentazione d'esecuzione|documentaziun da l'execuziun
+Erstbild|photographie initiale|immagine primaria|emprim purtret
+Einzelbildaufnahme des Gesichts|photographie faciale|immagine statica del viso|fotografia da la fatscha
+Abklärung der Staatsangehörigkeit|Staatsangehörigkeitsabklärung|Feststellung der Staatsangehörigkeit|établissement de la nationalité|accertamento della cittadinanza|examinaziun da la naziunalitad
+biometrisches Merkmal|biometric feature|caractéristique biométrique|caratteristica biometrica|caracteristica biometrica
+Duplikatausweis|Duplikat|duplicate permit|duplicata de titre de séjour|duplicato|duplicat d'ina legitimaziun da persunas estras
+Diplomatenpass|diplomatic passport|passeport diplomatique|passaporto diplomatico|passaport diplomatic
+Dienstpass|service passport|passeport de service|passaporto di servizio|passaport da servetsch
+Sonderpass|Spezialpass|special passport|passeport spécial|passaporto speciale|passaport spezial
+Visum|Sichtvermerk|visa|visto|visum
+Einreisevisum|entry visa|visa d'entrée|visto d'entrata|visto d'ingresso|visum d'entrada
+Flughafentransitvisum|Visum für den Flughafentransit|airport transit visa|visa de transit aéroportuaire|visto di transito aeroportuale|visum da transit d'eroport
+räumlich beschränktes Visum|Visum mit räumlich beschränkter Gültigkeit|VrG|visa with limited territorial validity|visa à validité territoriale limitée|VTL|visto di validità territoriale limitata|visto con validità territoriale limitata|visum cun legitimaziun territoriala limitada
+nationales Visum|national visa|visa national|visto nazionale|visum naziunal
+Personenfreizügigkeit|Freizügigkeit|freier Personenverkehr|Freizügigkeit der Personen|free movement of persons|libre circulation des personnes|libera circolazione delle persone|libra circulaziun da persunas
+Ausreisevisum|exit visa|visa de sortie|visto di uscita|visum da sortida
+Visumkategorie|visa type|catégorie de visa|type de visa|tipo di visto|categoria da visum
+Legitimationskarte des EDA|EDA-Ausweis|FDFA legitimation card|carte de légitimation du DFAE|pièce de légitimation du DFAE|carta di legittimazione del DFAE|carta da legitimaziun dal DFAE
+Meldebestätigung|confirmation of notification|notification confirmation|confirmation d'annonce|attestation d'annonce|conferma della notifica|conferma di notifica|conferma dell'avvenuta notifica|attestato di notifica|conferma d'annunzia
+Meldeverfahren|registration procedure|procédure d'annonce|procedura di notifica|procedura d'annunzia
+heimatliches Reisepapier|heimatliches Reisedokument|national travel document|document de voyage national|document de voyage du pays d'origine|documento di viaggio nazionale|documento di viaggio del Paese di origine|document da viadi naziunal
+N-VIS; NI-VIS|nationale Schnittstelle|National Interface|interface nationale|interfaccia nazionale|N-VIS|interfatscha naziunala
+Visadaten|Visumdaten|visa data|données relatives aux visas|données sur les visas|dati sui visti|dati relativi al visto|datas davart ils visums
+Visumvignette|Visummarke|Visumkleber|Sicherheitsvignette|visa sticker|vignette visa|vignette-visa|vignette de visa|vignette de sécurité|vignetta di visto|vignetta visto|visto adesivo|contrassegno di sicurezza|vignetta da visum
+Nummer der Visumvignette|Nummer der Visummarke|number of the visa sticker|numéro de la vignette visa|numero della vignetta di visto|numero della vignetta visto|numer da la vignetta da visum
+Ausfertigung eines Ausländerausweises|Ausfertigung eines Ausweises|Herstellung eines Ausländerausweises|Ausweisfertigung|Ausweisproduktion|issuing an identity card|production of an identity card|production d'un titre de séjour|allestimento di una carta di soggiorno|produzione di una carta di soggiorno|producziun d'in document da legitimaziun
+Ablauf des Visums|expiry of the visa|expiration du visa|scadenza del visto|scadenza dal visum
+Prüfung eines Visumgesuchs|assessing a visa application|examen d'une demande de visa|esame di una domanda di visto|examinaziun d'ina dumonda da visum
+Visumentscheid|Entscheidung über das Visum|visa decision|decision concerning the visa|décision relative au visa|decisione relativa al visto|decisione concernente il visto|decisiun davart in visum
+Visumverweigerung|Verweigerung eines Visums|Ablehnung eines Visums|refusal of a visa|refus d'un visa|refus de visa|rifiuto di un visto|refusa d'in visum
+Aufhebung eines Visums|revocation of a visa|abrogation d'un visa|révocation d'un visa|revoca di un visto|revocaziun d'in visum
+Annullierung eines Visums|annulment of a visa|annulation d'un visa|annullamento di un visto|annullaziun d'in visum
+Visumpolitik|Visapolitik|visa policy|politique en matière de visas|politique des visas|politica in materia di visti|politica dei visti|politica da visums
+Verordnung (EG) Nr. 810/2009 des Europäischen Parlaments und des Rates vom 13.7.2009 über einen Visakodex der Gemeinschaft (Visakodex)|Visakodex der Gemeinschaft|Visakodex|EG-Visakodex|EU-Visakodex|Regulation (EC) No 810/2009 of the European Parliament and of the Council of 13 July 2009 establishing a Community Code on Visas (Visa Code)|Community Code on Visas|Visa Code|Règlement (CE) no  810/2009 du Parlement européen et du Conseil du 13 juillet 2009 établissant un code communautaire des visas (code des visas)|Code communautaire des visas|Code des visas|Code des visas CE|Code des visas UE|Regolamento (CE) n. 810/2009 del Parlamento europeo e del Consiglio del 13 luglio 2009 che istituisce un codice comunitario dei visti (codice dei visti)|Codice comunitario dei visti|Codice dei visti|Codice CE dei visti|Codice dei visti UE|Reglament (CE) n. 810/2009 dal Parlament europeic e dal Cussegl, dals 13 da fanadur 2009 davart in codex da visums communitar (codex da visums)|codex communitar da visums|codex da visums
+Verordnung (EG) Nr. 767/2008 des Europäischen Parlaments und des Rates vom 9. Juli 2008 über das Visa-Informationssystem (VIS) und den Datenaustausch zwischen den Mitgliedstaaten über Visa für einen kurzfristigen Aufenthalt|VIS-Verordnung|EU-VIS-Verordnung|Regulation (EC) No 767/2008 of the European Parliament and of the Council of 9 July 2008 concerning the Visa Information System (VIS) and the exchange of data between Member States on short-stay visas|VIS Regulation|Règlement (CE) no  767/2008 du Parlement européen et du Conseil du 9 juillet 2008 concernant le système d'information sur les visas (VIS) et l'échange de données entre les États membres sur les visas de court séjour|Règlement VIS|Règlement VIS UE|Regolamento (CE) n. 767/2008 del Parlamento europeo e del Consiglio, del 9 luglio 2008 , concernente il sistema di informazione visti (VIS) e lo scambio di dati tra Stati membri sui visti per soggiorni di breve durata|Regolamento VIS|Regolamento VIS UE|Ordinaziun (CE) nr. 767/2008 dal Parlament europeic e dal Cussegl dals 9 da fanadur 2008 davart il sistem d'infurmaziun per ils visums (VIS) ed il barat da datas tranter ils stadis commembers davart ils visums per ina dimora da curta durada|Ordinaziun VIS
+Papierdossier|paper file|dossier papier|fascicolo cartaceo|cartella cartacea|dossier da palpiri
+Niederlassungsvereinbarung|agreement on permanent residence|accord d'établissement|convention d'établissement|accordo di domicilio|cunvegna da domicil
+Niederlassungsvertrag|Niederlassungsabkommen|treaty on permanent residence|traité d'établissement|convention d'établissement|trattato di domicilio|convenzione di domicilio|contract da domicil
+polizeilicher Nachrichtenaustausch|exchange of police information|exchange of information between police forces|échanges d'informations de police|échange d’informations policières|échange de renseignements de police|scambio di informazioni di polizia|barat d'infurmaziuns da la polizia
+Qualifikationsvoraussetzungen|Qualifikationserfordernisse|qualification requirements|exigences en matière de qualifications professionnelles|exigences en matière de qualifications|exigences en matière de qualification|exigence d'une bonne qualification professionnelle|conditions de bonne qualification professionnelle|esigenze in materia di qualifiche professionali|esigenze in materia di qualifica professionale|esigenze in materia di qualifiche|condizioni in materia di qualifiche|condizioni di qualifica professionale|premissas da qualificaziun
+Begleitbeamter|Begleitbeamtin|Polizeibegleiter|Polizeibegleiterin|Begleitperson|accompanying officer|police escort|agent d'escorte|agente di scorta
+Touristenvisum|tourist visa|visa de tourisme|visa touristique|visa de touriste|visto turistico|visum da turissem|visum turistic
+Dauervisum|Langzeitvisum|long-term visa|visa de longue durée|visa durable|visa permanent|visto di lunga durata|visto permanente|visum da lunga durada
+Visum für den kurzfristigen Aufenthalt|Kurzzeitvisum|Reisevisum|short-stay visa|travel visa|visa de court séjour|visa de voyage|visto per soggiorno di breve durata|visto di viaggio|visum da curta durada
+Arbeitsvisum|work visa|visa de travail|visto di lavoro|visto per lavoro|visum da lavur
+Diplomatenvisum|Protokollausweis|diplomatisches Visum|diplomatic visa|visa diplomatique|visto diplomatico|visum diplomatic
+Dienstvisum|service visa|visa de service|visa officiel|visto di servizio|visum da servetsch
+Passagier-Informationssystem|API-System|APIS|Advance Passenger Information System|Advanced Passenger Information System|API system|système d'information sur les passagers|système API|système des renseignements préalables concernant les voyageurs|système RPCV|sistema d'informazione sui passeggeri|sistema API|sistem d'infurmaziun davart ils passagiers
+Zulassungspraxis|admission practice|pratique en matière d'admission|pratique d'admission|prassi in materia di ammissioni|prassi d'ammissione|pratica d'admissiun
+Wegweisungsverfügung|removal order|removal ruling|décision de renvoi|decisione d'allontanamento|disposiziun da spedida
+Drei-Kreise-Modell|Modell der drei Kreise|three circles model|modèle des trois cercles|modello delle tre cerchie|modello dei tre cerchi|modello a tre cerchie|model en trais circuls
+Auswanderungsland|country of emigration|pays d'émigration|Paese di emigrazione|Paese di emigranti|pajais d'emigraziun
+Saisonnierstatut|seasonal worker status|statut de saisonnier|statuto di stagionale|statut dals stagiunaris
+Auswanderer|Auswanderin|Emigrant|Emigrantin|emigrant|émigrant|émigrante|émigré|émigrée|emigrante|emigrato|emigrata|emigranta
+Einwanderung|Immigration|Zuwanderung|immigration|immigrazione|immigraziun
+Auswanderung|Emigration|emigration|émigration|emigrazione|emigraziun
+Migrant|Migrantin|migrant|migrante|migranta
+Auslandgesuch|application filed abroad|demande déposée à l'étranger|domanda presentata all'estero|domanda depositata all'estero|dumonda inoltrada a l'exteriur
+Person mit Migrationshintergrund|person with an immigration background|personne issue de la migration|persona con un passato migratorio|persuna cun ina biografia da migraziun
+Pull-Faktor|pull factor|pull migration factor|facteur d'attraction|fattore di attrazione|fattore di richiamo|fattore pull|factur d'attracziun
+Push-Faktor|push factor|push migration factor|facteur de répulsion|fattore di spinta|fattore push|factur da repulsiun
+Meldepflicht|notification requirement|obligation d'annoncer l'arrivée|obligation de déclarer l'étranger|obbligo di notificare l'arrivo|obbligo di notificazione|obligaziun d'annunzia
+Selbstständigerwerbender|Selbstständigerwerbende|selbstständig Erwerbstätiger|selbstständig Erwerbstätige|selbstständig erwerbstätige Person|Selbstständiger|Selbstständige|self-employed person|travailleur indépendant|travailleuse indépendante|indépendant|indépendante|lavoratore indipendente|indipendente|lavoratore autonomo|autonomo|persuna cun activitad da gudogn independenta|lavurant independent|lavurant autonom
+Trialog|trialogue|trialogo|trialog
+Entsendung von Arbeitnehmerinnen und Arbeitnehmern|Entsendung von Arbeitnehmenden|Entsendung|posting of employees|posting of workers|posting|détachement de travailleurs|détachement|distacco di lavoratori|distacco|transmissiun da lavurantas e lavurants|transmissiun
+Administrativhaftanstalt|Ausschaffungsgefängnis|institution for administrative detention|administrative detention centre|holding centre|établissement de détention administrative|centre de détention administrative|stabilimento di carcerazione amministrativa|stabilimento di detenzione amministrativa|carcere per il rinvio forzato|stabiliment d'arrest administrativ
+Administrativhaftplatz|place of administrative detention|place de détention administrative|posto di carcerazione amministrativa|posto di detenzione amministrativa|plazza d'arrestaziun administrativa
+Ehegattennachzug|Nachzug des Ehegatten|Nachzug der Ehegattin|reunification of spouses|regroupement familial avec le conjoint|regroupement avec le conjoint|ricongiungimento familiare con il coniuge|ricongiungimento con il coniuge|arriv successiv da la conjugala|arriv successiv dal conjugal
+kantonales Integrationsprogramm|KIP|cantonal integration programme|programme cantonal d'intégration|PIC|programma cantonale d'integrazione|program chantunal d'integraziun
+Integrationsprojekt|integration project|projet d'intégration|progetto d'integrazione|project d'integraziun
+Flughafenbetreiber|airport operator|gestionnaire d'aéroport|gestore di aeroporto|gestiunari d'ina plazza aviatica|gestiunaria d'ina plazza aviatica
+Reiseausweis für Staatenlose|travel document for stateless persons|titre de voyage pour apatrides|documento di viaggio per apolidi|document da viadi per persunas senza naziunalitad
+Reisekrankenversicherung|travel medical insurance|assurance médicale de voyage|assicurazione sanitaria di viaggio|assicuranza da malsauns per viadis
+Haftkosten|detention costs|frais de détention|spese di carcerazione|custs d'arrest
+Handkantenabdruck|side-of-the-hand print|empreinte de la tranche de la main|impronta del profilo della mano|impronta del profilo palmare
+Härtefallklausel|hardship clause|clause de rigueur|clausola di rigore|clausula da direzza
+Arbeitslosenvorrang|priority given to the resident unemployed|priorité aux chômeurs résidents
+Integrationsvorlehre|préapprentissage d’intégration|pretirocinio d’integrazione|emprendissadi preliminar d'integraziun

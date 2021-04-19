@@ -1,0 +1,321 @@
+﻿{
+  "Name": "e1:metadata",
+  "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+  "Value": null,
+  "Attributes": {
+    "xmlns:e1": "http://www.tessella.com/sdb/cmis/metadata"
+  },
+  "Children": [
+    {
+      "Name": "e1:title",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": "1. Verhandlungstag",
+      "Attributes": null,
+      "Children": []
+    },
+    {
+      "Name": "e1:description",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": "d00000001_2009-03-18",
+      "Attributes": null,
+      "Children": []
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Accession Ref",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "550a3209-4eb0-45bb-aa4d-2dcecb46eb4d",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Digital Surrogate",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "false",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Catalogue Reference",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": " 1. Verhandlungstag",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Coverage From",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "2009-03-18",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Coverage To",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "2009-03-18",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "AIP-ID_Dossier-ID",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "550a3209-4eb0-45bb-aa4d-2dcecb46eb4d@d00000001_2009-03-18",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": null,
+          "Attributes": null,
+          "Children": null
+        },
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Zusatzmerkmal",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Bemerkung",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": null,
+          "Attributes": null,
+          "Children": null
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "Type",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "dossier",
+          "Attributes": null,
+          "Children": []
+        }
+      ]
+    },
+    {
+      "Name": "e1:item",
+      "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+      "Value": null,
+      "Attributes": null,
+      "Children": [
+        {
+          "Name": "e1:name",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": "ARELDA:dossier",
+          "Attributes": null,
+          "Children": []
+        },
+        {
+          "Name": "e1:value",
+          "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+          "Value": null,
+          "Attributes": null,
+          "Children": [
+            {
+              "Name": "dossier",
+              "Namespace": "",
+              "Value": null,
+              "Attributes": {
+                "id": "d00000001_2009-03-18"
+              },
+              "Children": [
+                {
+                  "Name": "titel",
+                  "Namespace": "",
+                  "Value": "1. Verhandlungstag",
+                  "Attributes": null,
+                  "Children": []
+                },
+                {
+                  "Name": "entstehungszeitraum",
+                  "Namespace": "",
+                  "Value": null,
+                  "Attributes": null,
+                  "Children": [
+                    {
+                      "Name": "von",
+                      "Namespace": "",
+                      "Value": null,
+                      "Attributes": null,
+                      "Children": [
+                        {
+                          "Name": "datum",
+                          "Namespace": "",
+                          "Value": "2009-03-18",
+                          "Attributes": null,
+                          "Children": []
+                        }
+                      ]
+                    },
+                    {
+                      "Name": "bis",
+                      "Namespace": "",
+                      "Value": null,
+                      "Attributes": null,
+                      "Children": [
+                        {
+                          "Name": "datum",
+                          "Namespace": "",
+                          "Value": "2009-03-18",
+                          "Attributes": null,
+                          "Children": []
+                        },
+                        {
+                          "Name": "ca",
+                          "Namespace": "",
+                          "Value": "true",
+                          "Attributes": null,
+                          "Children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Name": "dateiRef",
+                  "Namespace": "",
+                  "Value": "p00000003",
+                  "Attributes": null,
+                  "Children": []
+                },
+                {
+                  "Name": "dateiRef",
+                  "Namespace": "",
+                  "Value": "p00000004",
+                  "Attributes": null,
+                  "Children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+﻿CREATE TABLE [dbo].[Version](
+	[DbVersion] [int] NOT NULL
+) ON [PRIMARY]
+
+
+
+INSERT INTO Version VALUES (1)
+
+
+
+CREATE TABLE [dbo].[FavoriteList](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NOT NULL,
+	[UserId] [nvarchar](200) NOT NULL,
+ CONSTRAINT [PK_FavoriteList] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+CREATE TABLE [dbo].[Favorite](
+	[List] [int] NOT NULL,
+	[Ve] [int] NOT NULL,
+ CONSTRAINT [PK_Favorite] PRIMARY KEY CLUSTERED 
+(
+	[List] ASC,
+	[Ve] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+ALTER TABLE [dbo].[Favorite]  WITH CHECK ADD  CONSTRAINT [FK_Favorite_FavoriteList] FOREIGN KEY([List])
+REFERENCES [dbo].[FavoriteList] ([ID])
+
+
+ALTER TABLE [dbo].[Favorite] CHECK CONSTRAINT [FK_Favorite_FavoriteList]
+
+
+
+

@@ -1,0 +1,145 @@
+﻿<html>
+
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+        table.noLine td {
+            border-bottom: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <p style="color:red">
+        <u>Az.</u>
+    </p>
+    <p style="color:red">
+        Sehr geehrter Herr / Sehr geehrte Frau
+    </p>
+    <p>
+        Mit Schreiben vom {{Erfassungsdatum}} hat uns <span style="color:red">Herr/Frau</span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+            ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        ein Gesuch um Einsichtnahme in folgende Unterlagen übermittelt:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Signatur</th>
+                <th>Aktenzeichen</th>
+                <th>Band</th>
+                <th>Dossiertitel</th>
+                <th>Zeitraum</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        <span style="color:red">Art. 9 BGA</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von 30 Jahren gemäss Art. 9 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1).
+    </p>
+    <p>
+        <span style="color:red">Art. 11 BGA, 0 – 30 Jahre</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von 50 Jahren gemäss Art. 11 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1). Sie sind nach Personennamen erschlossen und enthalten besonders schützenswerte Personendaten oder Persönlichkeitsprofile gemäss Art. 3 Bst. c des Datenschutzgesetzes (<a href="http://www.admin.ch/ch/d/sr/c235_1.html">DSG</a>, SR 235.1).
+    </p>
+    <p>
+        <span style="color:red">Art. 11 BGA, 30 – 50 Jahre</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von 50 Jahren gemäss Art. 11 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1). Sie sind nach Personennamen erschlossen und enthalten besonders schützenswerte Personendaten oder Persönlichkeitsprofile gemäss Art. 3 Bst. c des Datenschutzgesetzes (<a href="http://www.admin.ch/ch/d/sr/c235_1.html">DSG</a>, SR 235.1). Das Einsichtsgesuch bezieht sich auf Dossiers, die im Bereich der von 30 auf 50 Jahre verlängerten Schutzfrist liegen.
+    </p>
+    <p>
+        <span style="color:red">Art. 12.1 BGA</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von <span style="color:red">X</span> Jahren gemäss Art. 12 Abs. 1 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) und Anhang 3 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11).
+    </p>
+    <p>
+        <span style="color:red">Art. 12.1 BGA (EJPD-SOBE)</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von 50 Jahren gemäss Art. 12 Abs. 1 und Art. 26 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) und Anhang 3 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11). Unsere Prüfung hat ergeben, dass es sich um Unterlagen handelt, die dem Bundesarchiv seinerzeit vom Sonderbeauftragten für Staatsschutzakten abgeliefert worden sind. Die Behandlung des Einsichtsgesuchs fällt deshalb in die Zuständigkeit des GS EJPD.
+    </p>
+    <p>
+        <span style="color:red">Art. 12.1 BGA (VBS-NDB)</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von <span style="color:red">X</span> Jahren gemäss Art. 12 Abs. 1 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) und Anhang 3 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11). Unsere Prüfung hat ergeben, dass es sich um Unterlagen handelt, die dem Bundesarchiv seinerzeit vom Polizeidienst der Bundesanwaltschaft respektive dem Fedpol/DAP abgeliefert worden sind. Die Behandlung des Einsichtsgesuchs fällt somit in die Zuständigkeit des NDB als Nachfolgebehörde des DAP.
+    </p>
+    <p>
+        <span style="color:red">Art. 12.2 BGA</span><br />
+        Diese Unterlagen unterstehen einer Schutzfrist von <span style="color:red">X</span> Jahren gemäss Art. 12 Abs. 2 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1). Die Verlängerung der Schutzfrist ist von Ihnen am <span style="color:red">Datum</span> mit der Begründung verfügt worden, <span style="color:red">Angabe der Begründung</span>.
+    </p>
+    <p>
+        <span style="color:red">Mehrere Ämter betreffend</span><br />
+        Wir machen Sie darauf aufmerksam, dass das Einsichtsgesuch von {{Besteller.Vorname}} {{Besteller.Name}} auch Unterlagen von <span style="color:red">einem/verschiedenen weiteren Aktenbildner/n</span> umfasst. Die entsprechenden Teile des Gesuchs haben wir an die jeweils zuständigen Stellen weitergeleitet.
+    </p>
+    <p>
+        <span style="color:red">Herr/Frau</span> {{Besteller.Name}} beschreibt die Art der Arbeit und den Zweck der Einsichtnahme folgendermassen:
+    </p>
+    <p>       
+        <table class="noLine">            
+            <tr>
+                <td>Art der Arbeit:<br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Deutsch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Zweck der Einsichtnahme:</td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>        
+    </p>
+    <p>
+        <span style="color:red">entweder [wenn <u>nur</u> Unterlagen mit Entstehungszeitraum <u>vor 01.07.2006</u> ersucht werden]:</span><br />
+        Soweit es aufgrund der uns vorliegenden Informationen möglich ist, haben wir das Gesuch einer formellen Vorprüfung unterzogen. <span style="color:red">Dabei haben wir festgestellt, dass die Unterlagen unter vergleichbaren Bedingungen bereits andern GesuchstellerInnen vorgelegt wurden [Angabe der früheren Bewilligung(en)].</span> Wir bitten Sie, das Einsichtsgesuch materiell zu prüfen. Die massgebenden Kriterien für die Prüfung sind in Art. 18 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) gegebenenfalls in Verbindung mit Art. 19 VBGA festgehalten. <span style="color:red">Da Herr/Frau {{Besteller.Name}} eine journalistisch-publizistische Recherche beabsichtigt, bitten wir Sie, zu einer möglichen Publikation der Unterlagen durch den Gesuchsteller / die Gesuchstellerin ebenfalls Stellung zu nehmen.</span>
+    </p>
+    <p>
+        Bitte teilen Sie uns Ihren Entscheid gemäss BGA bis zum <span style="color:red">Datum [1 Monat nach Datum des Schreibens / PD: 2 Monate nach Datum dieses Schreibens]</span> mit. Sollten Sie eine längere Bearbeitungszeit wünschen, teilen Sie uns dies bitte raschmöglichst schriftlich mit, damit wir <span style="color:red">die Gesuchstellerin / den Gesuchsteller</span> informieren können.
+    </p>
+    <p>
+        <span style="color:red">oder [wenn Unterlagen mit Entstehungszeitraum <u>vor und nach 01.07.2006</u> ersucht werden]:</span><br />
+        Soweit es aufgrund der uns vorliegenden Informationen möglich ist, haben wir das Gesuch einer formellen Vorprüfung unterzogen. <span style="color:red">Dabei haben wir festgestellt, dass die Unterlagen unter vergleichbaren Bedingungen bereits andern GesuchstellerInnen vorgelegt wurden [Angabe der früheren Bewilligung(en)].</span>
+        Wir bitten Sie, das Einsichtsgesuch materiell zu prüfen. Die massgebenden Kriterien für die Prüfung der Unterlagen, welche vor dem 01.07.2006 erstellt wurden, sind in Art. 18 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) gegebenenfalls in Verbindung mit Art. 19 VBGA festgehalten. Für Unterlagen, die nach dem 01.07.2006 entstanden sind, ist entweder Art. 18 VBGA gegebenenfalls in Verbindung mit Art. 19 VBGA oder Art. 6 des Bundesgesetzes über das Öffentlichkeitsprinzip der Verwaltung (<a href="http://www.admin.ch/ch/d/sr/c152_3.html">BGÖ</a>, SR 152.3) massgebend. Das Gesuch ist nach der für <span style="color:red">den Gesuchsteller / die Gesuchstellerin</span> vorteilhafteren Variante zu beurteilen.
+    </p>
+    <p>
+        Bitte teilen Sie uns Ihren Entscheid gemäss BGA bis zum <span style="color:red">Datum [1 Monat nach Datum des Schreibens / PD: 2 Monate nach Datum dieses Schreibens]</span> mit. Sollten Sie eine längere Bearbeitungszeit wünschen, teilen Sie uns dies bitte raschmöglichst schriftlich mit, damit wir <span style="color:red">die Gesuchstellerin / den Gesuchsteller</span> informieren können. <span style="color:red">Da Herr/Frau {{Besteller.Name}} eine journalistisch-publizistische Recherche beabsichtigt, bitten wir Sie, zu einer möglichen Publikation der Unterlagen ebenfalls Stellung zu nehmen.</span>
+    </p>
+	
+	<p>
+	
+	<span style="color:red">Wenn Digitalisierung ausgelöst oder digital vorhanden</span><br>
+	Die ersuchten Unterlagen werden derzeit digitalisiert. Personen mit der Rolle &laquo;Ablieferende Stelle&raquo; können die Digitalisate innerhalb der nächsten Tage herunterladen.
+	</p>
+    <p>
+        Weitere allgemeine Hinweise zum Thema Einsichts-, Auskunfts- und Zugangsgesuche finden Sie im <a href="http://www.bar.admin.ch/content/dam/bar/de/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">Merkblatt Einsichtsgesuche</a>
+    </p>
+    <p>
+        Vielen Dank für Ihre Bemühungen.
+    </p>
+
+    <p>
+        Mit freundlichen Grüssen
+    </p>
+</body>
+</html>

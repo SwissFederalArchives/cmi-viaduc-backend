@@ -1,0 +1,397 @@
+﻿@using CMI.Utilities.Common.Helpers
+@using CMI.Web.Common.Helpers
+@{
+    var staticRoot = Url.Content(StringHelper.AddToString("~", "/", WebHelper.StaticDefaultPath));
+}
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="de" class="no-js ie6 oldie"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="de" class="no-js ie7 oldie"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="de" class="no-js ie8 oldie"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="de" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9 ]><!-->
+<html lang="de" class="no-js no-ie">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>@CMI.Web.Frontend.local.Resource.Bundesarchiv_BAR</title>
+
+    <!-- Source CSS -->
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/vendors.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/admin.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/print.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/viaduc.css">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="@Html.Raw(staticRoot)img/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-76x76.png">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-96x96.png")" sizes="96x96">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-16x16.png")" sizes="16x16">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-32x32.png")" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="@Html.Raw(staticRoot)img/ico/mstile-144x144.png">
+    <meta name="msapplication-config" content="@Html.Raw(staticRoot)img/ico/browserconfig.xml">
+</head>
+<body>
+
+<ul class="access-keys">
+    <li>
+        <a href="index.html" accesskey="0">Startseite</a>
+    </li>
+    <li>
+        <a href="#main-navigation" accesskey="1">Hauptnavigation</a>
+    </li>
+    <li>
+        <a href="#content" accesskey="2">Inhalt</a>
+    </li>
+</ul>
+
+<div class="container container-main">
+<header>
+    <div class="clearfix">
+        <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachwahl</h2>
+            <nav class="nav-lang">
+                <ul>
+                    <li>
+                        <a href="~/de/suche/einfach" lang="de" title="Deutsch Ausgewählt" aria-label="Deutsch Ausgewählt" class="active">DE</a>
+                    </li>
+                    <li>
+                        <a href="~/fr/suche/einfach" lang="fr" title="Français" aria-label="Français " class="">FR</a>
+                    </li>
+                    <li>
+                        <a href="~/it/suche/einfach" lang="it" title="Italiano" aria-label="Italiano" class="">IT</a>
+                    </li>
+                    <li>
+                        <a href="~/en/suche/einfach" lang="en" title="English" aria-label="English " class="">EN</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="nav-service">
+                <ul class="download-link">
+                    <li>
+                        <a href="~/de/bestellkorb" class="icon icon--before icon--cart">Bestellkorb (0)&nbsp;&nbsp;</a>
+                        <a href="~/de/konto/anmelden">Anmelden&nbsp;&nbsp;</a>
+                        <a href="~/de/informationen/hilfe">Hilfe</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </div>
+
+    <div class="clearfix">
+        <a href="../de/" class="brand hidden-xs">
+            <img src="@Html.Raw(staticRoot)img/logo-CH.svg")" onerror="this.onerror = null;this.src = '~/img/logo-CH.png'" alt="Logo der Schweizerischen Eidgenossenschaft – zur Startseite"/>
+            <h1>
+                @CMI.Web.Frontend.local.Resource.Bundesarchiv_BAR
+                <br/>
+                Online-Zugang zu den Archivbeständen des Bundes
+            </h1>
+        </a>
+    </div>
+
+</header>
+<nav class="nav-main yamm navbar" id="main-navigation">
+<h2 class="sr-only">Navigation</h2>
+<!-- The mobile navigation -->
+<section class="nav-mobile">
+    <div class="table-row">
+        <div class="nav-mobile-header">
+            <div class="table-row">
+                <span class="nav-mobile-logo">
+                    <!--Html.ActionLink("Contact", "Contact", "Home")-->
+                    <img src="@Html.Raw(staticRoot)img/swiss.svg")" onerror="this.onerror = null;this.src = '@Html.Raw(staticRoot)img/swiss.png'" alt="Logo der Schweizerischen Eidgenossenschaft – zur Startseite"/>
+                </span>
+                <h1>
+                    <a href="../home/">Schweizerisches Bundesarchiv BAR</a>
+                </h1>
+            </div>
+        </div>
+        <div class="table-cell dropdown">
+            <a href="#" class="nav-mobile-menu dropdown-toggle" data-toggle="dropdown">
+                <span class="icon icon--menu"></span>
+            </a>
+            <div class="drilldown dropdown-menu" role="menu">
+                <div class="drilldown-container">
+                    <nav class="nav-page-list">
+                        <ul>
+                            <li class="list-sub">
+                                <a href="#">Suche</a>
+                                <nav class="drilldown-sub">
+                                    <a href="#" class="icon icon--before icon--less drilldown-back">Zurück</a>
+                                    <ul role="menu">
+                                        <li role="presentation">
+                                            <a href="~/de/suche/einfach" role="menuitem" tabindex="-1">Standard Suche</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/suche/erweitert" role="menuitem" tabindex="-1">Erweiterte Suche</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </li>
+                            <li class="list-sub">
+                                <a href="#">Bestände</a>
+                                <nav class="drilldown-sub">
+                                    <a href="#" class="icon icon--before icon--less drilldown-back">Zurück</a>
+                                    <ul role="menu">
+                                        <li role="presentation">
+                                            <a href="~/de/bestaende/uebersicht" role="menuitem" tabindex="-1">Beständeübersicht</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </li>
+
+                            <li class="list-sub">
+                                <a href="#">Dienstleistungen</a>
+                                <nav class="drilldown-sub">
+                                    <a href="#" class="icon icon--before icon--less drilldown-back">Zurück</a>
+                                    <ul role="menu">
+                                        <li role="presentation">
+                                            <a href="~/de/dienstleistungen/angebot" role="menuitem" tabindex="-1">Dienstleistungsangebot</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/dienstleistungen/rechercheauftrag" role="menuitem" tabindex="-1">Rechercheauftrag erteilen</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/dienstleistungen/einsichtsgesuch" role="menuitem" tabindex="-1">Einsichtsgesuch stellen</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </li>
+
+                            <li class="list-sub">
+                                <a href="#">Informationen</a>
+                                <nav class="drilldown-sub">
+                                    <a href="#" class="icon icon--before icon--less drilldown-back">Zurück</a>
+                                    <ul role="menu">
+                                        <li role="presentation">
+                                            <a href="~/de/informationen/kontakt" role="menuitem" tabindex="-1">Kontakt</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/informationen/hilfe" role="menuitem" tabindex="-1">Online-Hilfe</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/informationen/forum" role="menuitem" tabindex="-1">Diskussionsforum</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="~/de/informationen/glossar" role="menuitem" tabindex="-1">Glossar</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </li>
+                        </ul>
+                        <a href="#" class="yamm-close-bottom">
+                            <span class="icon icon--top" aria-hidden="true"></span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The tab navigation -->
+<ul class="nav navbar-nav">
+    <li class="dropdown yamm-fw">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Suche</a>
+        <ul class="dropdown-menu" role="menu">
+            <div class="yamm-content container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="#" class="yamm-close icon icon--after icon--close pull-right" role="menuitem" tabindex="-1">Schliessen</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/suche/einfach">Standard Suche</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/suche/erweitert">Erweiterte Suche</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                </div>
+                <a href="#" class="yamm-close-bottom" role="menuitem" tabindex="-1">
+                    <span class="icon icon--top"></span>
+                </a>
+            </div>
+        </ul>
+    </li>
+
+    <li class="dropdown yamm-fw">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bestände</a>
+        <ul class="dropdown-menu" role="menu">
+            <div class="yamm-content container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="#" class="yamm-close icon icon--after icon--close pull-right" role="menuitem" tabindex="-1">Schliessen</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/bestaende/uebersicht">Beständeübersicht</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                </div>
+                <a href="#" class="yamm-close-bottom" role="menuitem" tabindex="-1">
+                    <span class="icon icon--top"></span>
+                </a>
+            </div>
+        </ul>
+    </li>
+
+    <li class="dropdown yamm-fw">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dienstleistungen</a>
+        <ul class="dropdown-menu" role="menu">
+            <div class="yamm-content container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="#" class="yamm-close icon icon--after icon--close pull-right" role="menuitem" tabindex="-1">Schliessen</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/dienstleistungen/angebot">Dienstleistungsangebot</a>
+                            </h4>
+                            <ul role="menu">
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/dienstleistungen/rechercheauftrag">Rechercheauftrag erteilen</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/dienstleistungen/einsichtsgesuch">Einsichtsgesuch stellen</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                </div>
+                <a href="#" class="yamm-close-bottom" role="menuitem" tabindex="-1">
+                    <span class="icon icon--top"></span>
+                </a>
+            </div>
+        </ul>
+    </li>
+
+    <li class="dropdown yamm-fw">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Informationen</a>
+        <ul class="dropdown-menu" role="menu">
+            <div class="yamm-content container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <a href="#" class="yamm-close icon icon--after icon--close pull-right" role="menuitem" tabindex="-1">Schliessen</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/informationen/kontakt">Kontakt</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/informationen/hilfe">Online-Hilfe</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/informationen/forum">Diskussionsforum</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                    <li class="col-sm-3">
+                        <div class="yamm-content container-fluid">
+                            <h4>
+                                <a href="~/de/informationen/glossar">Glossar</a>
+                            </h4>
+                            <ul role="menu"></ul>
+                        </div>
+                    </li>
+                </div>
+                <a href="#" class="yamm-close-bottom" role="menuitem" tabindex="-1">
+                    <span class="icon icon--top"></span>
+                </a>
+            </div>
+        </ul>
+    </li>
+</ul>
+</nav>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="content" class="container-fluid">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container-fluid">
+        <hr class="footer-line visible-xs">
+        <img class="visible-xs" src="@Html.Raw(staticRoot)img/logo-CH.svg")" onerror="this.onerror = null;this.src = '@Html.Raw(staticRoot)img/logo-CH.png'" alt="back to home">
+    </div>
+
+    <address>
+        <span class="hidden-xs">Schweizerisches Bundesarchiv BAR</span>
+        <nav class="pull-right">
+            <ul>
+                <li>
+                    <a href="http://www.disclaimer.admin.ch/terms_and_conditions.html">Rechtliches</a>
+                </li>
+                <li>
+                    <a href="https://www.admin.ch/gov/de/start/dokumentation/impressum.html">Impressum</a>
+                </li>
+            </ul>
+        </nav>
+    </address>
+</footer>
+</div>
+
+@RenderSection("scripts", false)
+
+<!-- Source Scripts -->
+<script src="@Html.Raw(staticRoot)js/vendors.min.js"></script>
+<script src="@Html.Raw(staticRoot)js/main.min.js"></script>
+
+</body>
+</html>

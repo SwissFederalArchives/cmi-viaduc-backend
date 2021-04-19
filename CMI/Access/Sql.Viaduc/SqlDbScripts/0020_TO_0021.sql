@@ -1,0 +1,2 @@
+﻿ALTER TABLE OrderItem
+ADD ArchivNummer NVARCHAR(MAX)

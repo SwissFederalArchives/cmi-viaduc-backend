@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="DescriptorDataSet" targetNamespace="http://tempuri.org/DescriptorDataSet.xsd"
+           xmlns:mstns="http://tempuri.org/DescriptorDataSet.xsd" xmlns="http://tempuri.org/DescriptorDataSet.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+           xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified"
+           elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter"
+                  Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema"
+                  xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DescriptorDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true"
+              msprop:Generator_DataSetName="DescriptorDataSet" msprop:Generator_UserDSName="DescriptorDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Descriptor" msprop:Generator_UserTableName="Descriptor"
+                    msprop:Generator_RowEvArgName="DescriptorRowChangeEvent"
+                    msprop:Generator_TableVarName="tableDescriptor" msprop:Generator_TablePropName="Descriptor"
+                    msprop:Generator_RowDeletingName="DescriptorRowDeleting"
+                    msprop:Generator_RowChangingName="DescriptorRowChanging"
+                    msprop:Generator_RowDeletedName="DescriptorRowDeleted"
+                    msprop:Generator_RowEvHandlerName="DescriptorRowChangeEventHandler"
+                    msprop:Generator_TableClassName="DescriptorDataTable"
+                    msprop:Generator_RowChangedName="DescriptorRowChanged"
+                    msprop:Generator_RowClassName="DescriptorRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DSKRP_ID" msprop:Generator_ColumnVarNameInTable="columnDSKRP_ID"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_ID"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_IDColumn"
+                          msprop:Generator_UserColumnName="DSKRP_ID" type="xs:decimal" />
+              <xs:element name="GSFT_OBJ_KURZ_NM" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="GSFT_OBJ_KURZ_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnGSFT_OBJ_KURZ_NM"
+                          msprop:Generator_ColumnPropNameInTable="GSFT_OBJ_KURZ_NMColumn"
+                          msprop:Generator_UserColumnName="GSFT_OBJ_KURZ_NM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_SIEHE_UNTER_LISTE" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_SIEHE_UNTER_LISTE"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_SIEHE_UNTER_LISTE"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_SIEHE_UNTER_LISTEColumn"
+                          msprop:Generator_UserColumnName="DSKRP_SIEHE_UNTER_LISTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_BENUTZT_FUER_LISTE" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_BENUTZT_FUER_LISTE"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_BENUTZT_FUER_LISTE"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_BENUTZT_FUER_LISTEColumn"
+                          msprop:Generator_UserColumnName="DSKRP_BENUTZT_FUER_LISTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_SIEHE_AUCH_LISTE" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_SIEHE_AUCH_LISTE"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_SIEHE_AUCH_LISTE"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_SIEHE_AUCH_LISTEColumn"
+                          msprop:Generator_UserColumnName="DSKRP_SIEHE_AUCH_LISTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_NM" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="DSKRP_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_NM"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_NMColumn"
+                          msprop:Generator_UserColumnName="DSKRP_NM">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_BSR" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="DSKRP_BSR"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_BSR"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_BSRColumn"
+                          msprop:Generator_UserColumnName="DSKRP_BSR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_FREMD_SPR_NM" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_FREMD_SPR_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_FREMD_SPR_NM"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_FREMD_SPR_NMColumn"
+                          msprop:Generator_UserColumnName="DSKRP_FREMD_SPR_NM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSKRP_QLL_TXT" msprop:nullValue="_empty"
+                          msprop:Generator_ColumnPropNameInRow="DSKRP_QLL_TXT"
+                          msprop:Generator_ColumnVarNameInTable="columnDSKRP_QLL_TXT"
+                          msprop:Generator_ColumnPropNameInTable="DSKRP_QLL_TXTColumn"
+                          msprop:Generator_UserColumnName="DSKRP_QLL_TXT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="THSRS_NM" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="THSRS_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnTHSRS_NM"
+                          msprop:Generator_ColumnPropNameInTable="THSRS_NMColumn"
+                          msprop:Generator_UserColumnName="THSRS_NM">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GSFT_OBJ_BZHNG_ROLLE_NM" msprop:nullValue="_null"
+                          msprop:Generator_ColumnPropNameInRow="GSFT_OBJ_BZHNG_ROLLE_NM"
+                          msprop:Generator_ColumnVarNameInTable="columnGSFT_OBJ_BZHNG_ROLLE_NM"
+                          msprop:Generator_ColumnPropNameInTable="GSFT_OBJ_BZHNG_ROLLE_NMColumn"
+                          msprop:Generator_UserColumnName="GSFT_OBJ_BZHNG_ROLLE_NM" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

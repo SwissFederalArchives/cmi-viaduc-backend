@@ -1,0 +1,525 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C45C6CC0-D67C-448B-9322-7AE04AFE9CA3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMI.Engine.Asset</RootNamespace>
+    <AssemblyName>CMI.Engine.Asset</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GreenPipes, Version=2.1.4.118, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GreenPipes.2.1.4\lib\net452\GreenPipes.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.5.5.6\lib\net452\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="NewId, Version=3.0.2.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NewId.3.0.2\lib\net452\NewId.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Common, Version=2.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Common.2.5.6690\lib\net40\Rebex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Networking, Version=3.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Networking.3.5.6690\lib\net40\Rebex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Sftp, Version=3.0.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Sftp.3.0.6690\lib\net40\Rebex.Sftp.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="saxon9he-api, Version=9.9.1.7, Culture=neutral, PublicKeyToken=e1fdd002d5083fe6, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Saxon-HE.9.9.1.7\lib\net40\saxon9he-api.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DownloadAndStoreFileResult.cs" />
+    <Compile Include="IPreparationTimeCalculator.cs" />
+    <Compile Include="PackagePriorizationEngine.cs" />
+    <Compile Include="PreparationTimeCalculator.cs" />
+    <Compile Include="IRenderEngine.cs" />
+    <Compile Include="ITextEngine.cs" />
+    <Compile Include="ITransformEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderEngine.cs" />
+    <Compile Include="StreamUtility.cs" />
+    <Compile Include="TextEngine.cs" />
+    <Compile Include="TransformEngine.cs" />
+    <Compile Include="Xsl2Processor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\ablieferung.xsd">
+      <Link>Html\Xslt\data\ablieferung.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\archivischerVorgang.xsd">
+      <Link>Html\Xslt\data\archivischerVorgang.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\base.xsd">
+      <Link>Html\Xslt\data\base.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\datei.xsd">
+      <Link>Html\Xslt\data\datei.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\dokument.xsd">
+      <Link>Html\Xslt\data\dokument.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\dossier.xsd">
+      <Link>Html\Xslt\data\dossier.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\gebrauchskopie.xsd">
+      <Link>Html\Xslt\data\gebrauchskopie.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\ordner.xsd">
+      <Link>Html\Xslt\data\ordner.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\ordnungssystem.xsd">
+      <Link>Html\Xslt\data\ordnungssystem.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\ordnungssystemposition.xsd">
+      <Link>Html\Xslt\data\ordnungssystemposition.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\paket.xsd">
+      <Link>Html\Xslt\data\paket.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\provenienz.xsd">
+      <Link>Html\Xslt\data\provenienz.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\Contract\Common\Gebrauchskopie\zusatzDaten.xsd">
+      <Link>Html\Xslt\data\zusatzDaten.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Html\design\css\images\ssp_sprite.psd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\AdminCH_Symbols.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\AdminCH_Symbols.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\AdminCH_Symbols.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\AdminCH_Symbols.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Bd.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Bd.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Bd.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Bd.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-It.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-It.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-It.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-It.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Light.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Light.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Light.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Regular.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\FrutigerNeueW02-Regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Html\design\fonts\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="Html\design\js\i18n\de.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\i18n\en.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\i18n\fr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\i18n\it.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Html\Xslt\Viaduc Gebrauchskopie.xpr" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Access\Sql.Viaduc\CMI.Access.Sql.Viaduc.csproj">
+      <Project>{713F2501-9065-454B-9E14-2599A1F3D4E8}</Project>
+      <Name>CMI.Access.Sql.Viaduc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Asset\CMI.Contract.Asset.csproj">
+      <Project>{DAC68CC6-85EC-4B43-9CBB-A8C02BBFAB80}</Project>
+      <Name>CMI.Contract.Asset</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Common\CMI.Contract.Common.csproj">
+      <Project>{045835A1-50C3-4D61-947A-7398A9D70706}</Project>
+      <Name>CMI.Contract.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\DocumentConverter\CMI.Contract.DocumentConverter.csproj">
+      <Project>{8C031477-0680-4A2B-A7CE-8A6434DF00BC}</Project>
+      <Name>CMI.Contract.DocumentConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Messaging\CMI.Contract.Messaging.csproj">
+      <Project>{27A7EBB7-2C64-4EE0-A040-E00B99BB9372}</Project>
+      <Name>CMI.Contract.Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Html\design\css\admin.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\cmi.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\images\2-klick-logo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\images\dummy_facebook.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\images\dummy_gplus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\images\dummy_twitter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\images\ssp_sprite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\print.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\twitter-inject.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\css\vendors.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\AdminCH_Symbols.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\FrutigerNeueW02-Bd.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\FrutigerNeueW02-It.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\FrutigerNeueW02-Light.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\FrutigerNeueW02-Regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\bg-striped.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\chosen-sprite%402x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\chosen-sprite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\error.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\error.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\FB-f-Logo__blue_29.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\form-icons.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\form-icons.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-114x114.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-120x120.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-144-precomposed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-144x144.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-57x57.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-60x60.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-72x72.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-76x76.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon-precomposed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\apple-touch-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\browserconfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\favicon-16x16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\favicon-196x196.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\favicon-32x32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\favicon-96x96.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\favicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\mstile-144x144.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\mstile-150x150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\mstile-310x150.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\mstile-310x310.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\ico\mstile-70x70.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\loading.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\logo-CH.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\logo-CH.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\overlay.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\play-pause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\play-pause.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\social-sharing-facebook.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\social-sharing-google.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\social-sharing-linkedin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\social-sharing-twitter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\social-sharing-xing.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\swiss.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\swiss.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\Twitter_logo_blue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\twitter_sprite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\video-play.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\img\video-play.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\jsTreeTheme\32px.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\jsTreeTheme\40px.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\jsTreeTheme\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\jsTreeTheme\style.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\jsTreeTheme\throbber.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\CLDRPluralRuleParser.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.emitter.bidi.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.emitter.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.fallbacks.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.language.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.messagestore.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jquery.i18n.parser.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jstree.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\jstree.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\main.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\vendors.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\design\js\vendors.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\Xslt\areldaConvert.xsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\Xslt\data\test_metadata.xml" />
+    <Content Include="Html\Xslt\data\test_metadata2.xml" />
+    <Content Include="Html\Xslt\data\test_metadata3.xml" />
+    <Content Include="Html\Xslt\data\test_metadata4.xml" />
+    <Content Include="Html\Xslt\data\test_metadata5.xml" />
+    <Content Include="Html\Xslt\gebrauchskopie.xsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,405 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    {{! *** Dieser Abschnitt wird eingefügt, damit der Freigabemanager Informationen zum Endanwender im Mail erhält. }}
+    <div id="weiterleitung">
+        <span class="editthis">✎</span>
+        <br />
+        Name: {{Besteller.Name}}
+        <br />
+        Vorname: {{Besteller.Vorname}}
+        <br />
+        EMail: {{Besteller.EmailAddress}}
+        <br />
+        Sprache: {{Besteller.Sprache}}
+        <br />
+        Auftrag: <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+    </div>
+
+    {{#Sprachen}}
+    {{#IstDeutsch}}
+    <div id="deutsch">
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Vielen Dank für Ihren Digitalisierungsauftrag vom {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+            Leider können wir folgende Unterlagen nicht digitalisieren:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Signatur</th>
+                    <th>Aktenzeichen</th>
+                    <th>Dossiertitel</th>
+                    <th>Zeitraum</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        
+        <p>
+            <span style="color:red">Erklärung, Digitalisierung abgebrochen, bitte wählen:</span><br />
+        </p>
+		
+		<p>
+		<span style="color:red">01_Auftragseinheit fehlt in Behältnis:</span><br>
+		Diese Unterlagen sind derzeit ausgeliehen und werden in ca. <span style="color:red">X</span> Tagen wieder für die Digitalisierung verfügbar sein. Bitte wiederholen Sie die Bestellung zu diesem Zeitpunkt.
+		</p>
+		
+		<p>
+		<span style="color:red">02_Auftragseinheit nicht identifizierbar</span><br>
+		Die Unterlagen befinden sich derzeit nicht an ihrem Standort. Wir klären die Verfügbarkeit für die Digitalisierung ab und werden Sie darüber informieren. 
+		</p>
+
+		<p>
+		<span style="color:red">03_Aufnahmetauglichkeit negativ</span><br>
+		Die Verzeichnungseinheit kann aufgrund seiner Beschaffenheit nicht digitalisiert werden <span style="color:red">(Präzisierung, z. B. es handelt sich um ein Objekt)</span>. Bitte bestellen Sie sie zur Konsultation in den Lesesaal.
+		</p>
+
+		<p>
+		<span style="color:red">05_Ingest DIR fehlgeschlagen (ID bereits vorhanden)</span><br> 
+		<span style="color:red">In diesem seltenen Fall: Nur Anpassen der zweiten Zeile in</span> Die digitalisierten Unterlagen stehen für Sie online zur Verfügung: <span style="color:red">und am Ende der Nachricht «Für die Umstände entschuldigen wir uns» löschen.</span></p>
+
+        <p>
+            Für die Umstände entschuldigen wir uns. Bei Fragen zur Bestellung wenden Sie sich bitte an die
+            <a href="https://{{Global.PublicClientUrl}}">Beratung</a>
+            oder antworten Sie auf diese E-Mail.
+        </p>
+        <p>
+            Mit freundlichen Grüssen
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Eidgenössisches Departement des Innern EDI<br />
+            Schweizerisches Bundesarchiv BAR<br />
+            Archivstrasse 24, CH-3003 Bern<br />
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Folgen Sie dem Bundesarchiv: <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstDeutsch}}
+
+    {{#IstFranzösisch}}
+    <div id="franzoesisch">
+        <p>
+           Bonjour, 
+        </p>
+        <p>
+            Votre commande de reproduction numérique du {{Bestellung.Erfassungsdatum}} nous est bien parvenue et nous vous en remercions. 
+        </p>
+
+        <p>
+            Nous ne sommes malheureusement pas en mesure de numériser les documents suivants :
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Cote</th>
+                    <th>Référence</th>
+                    <th>Titre du dossier</th>
+                    <th>Période</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        
+        <p>
+            <span style="color:red">Erklärung, Digitalisierung abgebrochen, bitte wählen:</span><br />
+        </p>
+		
+		<p>
+		<span style="color:red">01_Auftragseinheit fehlt in Behältnis:</span><br>
+		Ces documents font actuellement l’objet d’un prêt et seront à nouveau disponibles pour la numérisation dans <span style="color:red">X</span> jours environ. Veuillez renouveler votre commande après ce délai.
+		</p>
+		
+		<p>
+		<span style="color:red">02_Auftragseinheit nicht identifizierbar</span><br>
+		Les documents commandés ne se trouvent pas à leur emplacement. Nous vérifions actuellement leur disponibilité pour la numérisation et vous informerons dès que possible. 
+		</p>
+
+		<p>
+		<span style="color:red">03_Aufnahmetauglichkeit negativ</span><br>
+		La numérisation est impossible de par la nature de l’unité archivistique <span style="color:red">(Präzisierung, z. B. es handelt sich um ein Objekt)</span>. Veuillez effectuer une commande en vue de la consultation en salle de lecture.
+		</p>
+
+		<p>
+		<span style="color:red">05_Ingest DIR fehlgeschlagen (ID bereits vorhanden)</span><br> 
+		<span style="color:red">In diesem seltenen Fall: Nur Anpassen der zweiten Zeile in</span> Les documents numérisés sont à votre disposition en ligne: <span style="color:red">und am Ende der Nachricht «Nous nous excusons pour les désagréments occasionnés.» löschen.</span></p>
+		
+        <p>
+            Nous nous excusons pour les désagréments occasionnés. Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre 
+            <a href="https://{{Global.PublicClientUrl}}">service de conseil</a>
+            ou répondre à cet e-mail. 
+        </p>
+        <p>
+            Meilleures salutations,
+        </p>
+        
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+       
+        <p>
+            Département fédéral de l’intérieur DFI <br />
+            Archives fédérales suisses AFS <br />
+            Archivstrasse 24, CH-3003 Berne <br />
+
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+           
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Suivez les Archives fédérales:
+             <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstFranzösisch}}
+
+    {{#IstItalienisch}}
+    <div id="italienisch">
+        <p>
+            Buongiorno,
+        </p>
+        <p>
+            abbiamo ricevuto la Sua richiesta di digitalizzazione del  {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+           Purtroppo i seguenti documenti non possono essere digitalizzati:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Segnatura</th>
+                    <th>Riferimento</th>
+                    <th>Titolo del dossier</th>
+                    <th>Periodo</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        
+        <p>
+            <span style="color:red">Erklärung, Digitalisierung abgebrochen, bitte wählen:</span><br />
+        </p>
+		
+		<p>
+		<span style="color:red">01_Auftragseinheit fehlt in Behältnis:</span><br>
+		I documenti sono attualmente ceduti in prestito e saranno nuovamente disponibili per la digitalizzazione tra <span style="color:red">X</span> giorni. La preghiamo di procedere a una nuova ordinazione dopo questo termine.
+		</p>
+		
+		<p>
+		<span style="color:red">02_Auftragseinheit nicht identifizierbar</span><br>
+		I documenti non si trovano attualmente al loro posto. Sono in corso accertamenti sulla loro disponibilità. La informeremo non appena potremo procedere alla loro digitalizzazione.
+		</p>
+
+		<p>
+		<span style="color:red">03_Aufnahmetauglichkeit negativ</span><br>
+		Data la sua natura, l’unità di descrizione non può essere digitalizzata <span style="color:red">(Präzisierung, z. B. es handelt sich um ein Objekt)</span>. La preghiamo di ordinarla per consultazione nelle nostre sale di lettura.
+		</p>
+
+		<p>
+		<span style="color:red">05_Ingest DIR fehlgeschlagen (ID bereits vorhanden)</span><br> 
+		<span style="color:red">In diesem seltenen Fall: Nur Anpassen der zweiten Zeile in</span> I documenti digitalizzati sono a Sua disposizione on-line: <span style="color:red">und am Ende der Nachricht «Ci scusiamo per l’inconveniente.» löschen.</span></p>
+        <p>
+            Ci scusiamo per l’inconveniente. Per qualsiasi ulteriore informazione può rivolgersi al servizio di 
+            <a href="https://{{Global.PublicClientUrl}}">consulenza</a>
+            oppure rispondere alla presente mail. 
+        </p>
+        <p>
+            Distinti saluti
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Dipartimento federale dell’interno DFI <br />
+            Archivio federale svizzero AFS <br />
+            Archivstrasse 24, CH-3003 Berna <br />
+            
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Seguite l’Archivio federale:
+             <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstItalienisch}}
+
+    {{#IstEnglisch}}
+    <div id="englisch">
+        <p>
+            Hello 
+        </p>
+        <p>
+            Thank you for your digitisation order of {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+            Unfortunately we are unable to digitise the following documents:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Reference code</th>
+                    <th>File reference</th>
+                    <th>Dossier title</th>
+                    <th>Time period</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <span style="color:red">Erklärung, Digitalisierung abgebrochen, bitte wählen:</span><br />
+        </p>
+		
+		<p>
+		<span style="color:red">01_Auftragseinheit fehlt in Behältnis:</span><br>
+		These documents are currently out on loan and will be available for digitisation again in approximately <span style="color:red">X</span> days. Please repeat your order then.
+		</p>
+		
+		<p>
+		<span style="color:red">02_Auftragseinheit nicht identifizierbar</span><br>
+		These documents are not currently at their location. We will clarify their availability for digitisation and notify you accordingly. 
+		</p>
+
+		<p>
+		<span style="color:red">03_Aufnahmetauglichkeit negativ</span><br>
+		Owing to its nature, the unit of description cannot be digitised <span style="color:red">(Präzisierung, z. B. es handelt sich um ein Objekt)</span>. Please order it for consultation in the reading room.
+		</p>
+
+		<p>
+		<span style="color:red">05_Ingest DIR fehlgeschlagen (ID bereits vorhanden)</span><br> 
+		<span style="color:red">In diesem seltenen Fall: Nur Anpassen der zweiten Zeile in</span> The digitised documents are available for you online: <span style="color:red">und am Ende der Nachricht «We apologise for any inconvenience caused.» löschen.</span></p>
+        <p>
+            We apologise for any inconvenience caused. If you have any questions about your order please contact our 
+            <a href="https://{{Global.PublicClientUrl}}">advice service</a>
+            or reply to this e-mail.
+        </p>
+        <p>
+            Yours sincerely
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Federal Department of Home Affairs FDHA <br />
+            Swiss Federal Archives SFA <br />
+            Archivstrasse 24, CH-3003 Bern <br />
+            
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Follow the Federal Archives: <br />
+            <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+
+    </div>
+    {{/IstEnglisch}}
+    {{/Sprachen}}
+</body>
+</html>

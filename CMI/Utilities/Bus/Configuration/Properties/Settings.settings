@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Utilities.Bus.Configuration.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RabbitMqUri" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rabbitmq://localhost/viaduc/</Value>
+    </Setting>
+    <Setting Name="RabbitMqUriResponseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RabbitMqUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Bus.Configuration.Properties.Settings.RabbitMqUserName@@</Value>
+    </Setting>
+    <Setting Name="RabbitMqPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Bus.Configuration.Properties.Settings.RabbitMqPassword@@</Value>
+    </Setting>
+    <Setting Name="PrefetchCountSettings" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{"m.repository.manager.downloadPackage": 8, "m.repository.manager.archiveRecordAppendPackage": 4}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

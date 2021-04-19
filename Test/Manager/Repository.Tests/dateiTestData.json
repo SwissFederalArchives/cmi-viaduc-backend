@@ -1,0 +1,250 @@
+﻿{
+    "Name": "e1:metadata",
+    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+    "Value": null,
+    "Attributes": {"xmlns:e1": "http://www.tessella.com/sdb/cmis/metadata"},
+    "Children": [
+        {
+            "Name": "e1:title",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": null
+        },
+        {
+            "Name": "e1:description",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": null
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Extant",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "true",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Directory",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "false",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Type",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "datei",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "ARELDA:datei",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": null,
+                    "Attributes": null,
+                    "Children": [
+                        {
+                            "Name": "datei",
+                            "Namespace": "",
+                            "Value": null,
+                            "Attributes": {"id": "_9ddrsOngEeW0aqy2QDXP4A"},
+                            "Children": [
+                                {
+                                    "Name": "name",
+                                    "Namespace": "",
+                                    "Value": "README.txt",
+                                    "Attributes": null,
+                                    "Children": []
+                                },
+                                {
+                                    "Name": "originalName",
+                                    "Namespace": "",
+                                    "Value": "README.txt",
+                                    "Attributes": null,
+                                    "Children": []
+                                },
+                                {
+                                    "Name": "pruefalgorithmus",
+                                    "Namespace": "",
+                                    "Value": "MD5",
+                                    "Attributes": null,
+                                    "Children": []
+                                },
+                                {
+                                    "Name": "pruefsumme",
+                                    "Namespace": "",
+                                    "Value": "83ede739c7a1560b56b18d21db72b2fa",
+                                    "Attributes": null,
+                                    "Children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "FileSize",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "27",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Last Modified Date",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "2016-03-14",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Fixity Algorithm Ref",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "1",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:item",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:name",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Fixity Value",
+                    "Attributes": null,
+                    "Children": []
+                },
+                {
+                    "Name": "e1:value",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "83ede739c7a1560b56b18d21db72b2fa",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        },
+        {
+            "Name": "e1:group",
+            "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+            "Value": null,
+            "Attributes": null,
+            "Children": [
+                {
+                    "Name": "e1:title",
+                    "Namespace": "http://www.tessella.com/sdb/cmis/metadata",
+                    "Value": "Properties",
+                    "Attributes": null,
+                    "Children": []
+                }
+            ]
+        }
+    ]
+}

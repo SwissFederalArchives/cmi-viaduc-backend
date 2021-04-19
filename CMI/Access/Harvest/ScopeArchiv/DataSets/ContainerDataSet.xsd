@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ContainerDataSet" targetNamespace="http://tempuri.org/ContainerDataSet.xsd" xmlns:mstns="http://tempuri.org/ContainerDataSet.xsd" xmlns="http://tempuri.org/ContainerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ContainerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ContainerDataSet" msprop:Generator_UserDSName="ContainerDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="StorageContainer" msprop:Generator_TableClassName="StorageContainerDataTable" msprop:Generator_TableVarName="tableStorageContainer" msprop:Generator_RowChangedName="StorageContainerRowChanged" msprop:Generator_TablePropName="StorageContainer" msprop:Generator_RowDeletingName="StorageContainerRowDeleting" msprop:Generator_RowChangingName="StorageContainerRowChanging" msprop:Generator_RowEvHandlerName="StorageContainerRowChangeEventHandler" msprop:Generator_RowDeletedName="StorageContainerRowDeleted" msprop:Generator_RowClassName="StorageContainerRow" msprop:Generator_UserTableName="StorageContainer" msprop:Generator_RowEvArgName="StorageContainerRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BHLTN_DEF_STAND_ORT_CD" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BHLTN_DEF_STAND_ORT_CD" msprop:Generator_ColumnVarNameInTable="columnBHLTN_DEF_STAND_ORT_CD" msprop:Generator_ColumnPropNameInTable="BHLTN_DEF_STAND_ORT_CDColumn" msprop:Generator_UserColumnName="BHLTN_DEF_STAND_ORT_CD" type="xs:string" minOccurs="0" />
+              <xs:element name="GSFT_OBJ_KURZ_NM" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="GSFT_OBJ_KURZ_NM" msprop:Generator_ColumnVarNameInTable="columnGSFT_OBJ_KURZ_NM" msprop:Generator_ColumnPropNameInTable="GSFT_OBJ_KURZ_NMColumn" msprop:Generator_UserColumnName="GSFT_OBJ_KURZ_NM" type="xs:string" minOccurs="0" />
+              <xs:element name="BHLTN_TYP_NM" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BHLTN_TYP_NM" msprop:Generator_ColumnVarNameInTable="columnBHLTN_TYP_NM" msprop:Generator_ColumnPropNameInTable="BHLTN_TYP_NMColumn" msprop:Generator_UserColumnName="BHLTN_TYP_NM" type="xs:string" minOccurs="0" />
+              <xs:element name="BHLTN_CD" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BHLTN_CD" msprop:Generator_ColumnVarNameInTable="columnBHLTN_CD" msprop:Generator_ColumnPropNameInTable="BHLTN_CDColumn" msprop:Generator_UserColumnName="BHLTN_CD" type="xs:string" minOccurs="0" />
+              <xs:element name="BHLTN_INFO_TRGR_NM" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="BHLTN_INFO_TRGR_NM" msprop:Generator_ColumnVarNameInTable="columnBHLTN_INFO_TRGR_NM" msprop:Generator_ColumnPropNameInTable="BHLTN_INFO_TRGR_NMColumn" msprop:Generator_UserColumnName="BHLTN_INFO_TRGR_NM" type="xs:string" minOccurs="0" />
+              <xs:element name="BHLTN_ID" msprop:Generator_ColumnVarNameInTable="columnBHLTN_ID" msprop:Generator_ColumnPropNameInRow="BHLTN_ID" msprop:Generator_ColumnPropNameInTable="BHLTN_IDColumn" msprop:Generator_UserColumnName="BHLTN_ID" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

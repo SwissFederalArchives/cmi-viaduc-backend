@@ -1,0 +1,116 @@
+﻿@using CMI.Utilities.Common.Helpers
+@using CMI.Web.Common.Helpers
+@{
+    Layout = null;
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.StaticContent))
+{
+    @Html.Raw(ViewBag.StaticContent)
+}
+else
+{
+    var clientRoot = Url.Content(StringHelper.AddToString("~", "/", DirectoryHelper.Instance.ClientDefaultPath));
+    clientRoot = clientRoot + (!clientRoot.EndsWith("/") ? "/" : string.Empty);
+    <text>
+        <!DOCTYPE html>
+        <html lang="@ViewBag.Language" class="cmi-boot">
+        @Html.Raw(StaticContentHelper.ProcessedMarker)
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <title>@ViewBag.PageTitle</title>
+
+            <link rel="stylesheet" type="text/css" href="@Html.Raw(clientRoot)assets/css/fonts.css">
+
+            <!-- Favicons -->
+            <link rel="shortcut icon" href="@Html.Raw(clientRoot)assets/img/ico/favicon.ico">
+            <link rel="apple-touch-icon" sizes="57x57" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-57x57.png">
+            <link rel="apple-touch-icon" sizes="114x114" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-114x114.png">
+            <link rel="apple-touch-icon" sizes="72x72" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-72x72.png">
+            <link rel="apple-touch-icon" sizes="144x144" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-144x144.png">
+            <link rel="apple-touch-icon" sizes="60x60" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-60x60.png">
+            <link rel="apple-touch-icon" sizes="120x120" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-120x120.png">
+            <link rel="apple-touch-icon" sizes="76x76" href="@Html.Raw(clientRoot)assets/img/ico/apple-touch-icon-76x76.png">
+            <link rel="icon" type="image/png" href="@Html.Raw(clientRoot)assets/img/ico/favicon-96x96.png" sizes="96x96">
+            <link rel="icon" type="image/png" href="@Html.Raw(clientRoot)assets/img/ico/favicon-16x16.png" sizes="16x16">
+            <link rel="icon" type="image/png" href="@Html.Raw(clientRoot)assets/img/ico/favicon-32x32.png" sizes="32x32">
+
+            <meta name="msapplication-TileColor" content="#ffffff">
+            <meta name="msapplication-TileImage" content="@Html.Raw(clientRoot)assets/img/ico/mstile-144x144.png">
+            <meta name="msapplication-config" content="@Html.Raw(clientRoot)assets/img/ico/browserconfig.xml">
+
+
+            <script type='text/javascript'>
+                window.viaducclient = { runModes: "web development debug" };
+            </script>
+
+        </head>
+
+        <body class="">
+        <ul class="access-keys">
+            <li>
+                <a href="#" accesskey="0">Startseite</a>
+            </li>
+            <li>
+                <a href="#" accesskey="1">Hauptnavigation</a>
+            </li>
+            <li>
+                <a href="#" accesskey="2">Inhalt</a>
+            </li>
+        </ul>
+
+        <cmi-viaduc-root>
+            <div class="cmi-loader cmi-visible">
+                <h3>
+                    <span>Online-Zugang zum Bundesarchiv</span>
+                    <br/>
+                    <span>Catalogue en ligne des Archives fédérales</span>
+                    <br/>
+                    <span>Catalogo on-line dell’Archivio federale</span><br/>
+                    <span>Federal Archives’ online catalogue</span>
+                    <br/>
+                </h3>
+                <div class="cmi-three-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <div>
+                    <img src="@Html.Raw(clientRoot)assets/img/logo-CH.svg">
+                </div>
+            </div>
+        </cmi-viaduc-root>
+
+        <!-- inject:js --><!-- endinject -->
+        <script type="text/javascript" src="@Html.Raw(clientRoot)inline.bundle.js"></script>
+        <script type="text/javascript" src="@Html.Raw(clientRoot)polyfills.bundle.js"></script>
+        <script type="text/javascript" src="@Html.Raw(clientRoot)styles.bundle.js"></script>
+        <script type="text/javascript" src="@Html.Raw(clientRoot)scripts.bundle.js"></script>
+        <script type="text/javascript" src="@Html.Raw(clientRoot)vendor.bundle.js"></script>
+        <script type="text/javascript" src="@Html.Raw(clientRoot)main.bundle.js"></script>
+
+
+        @if (!string.IsNullOrEmpty(ViewBag.Translations))
+        {
+            <script type="application/json" id="viaduc-translations-@Html.Raw(ViewBag.Language)">
+                    @Html.Raw(ViewBag.Translations)
+                </script>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.Settings))
+        {
+            <script type="application/json" id="viaduc-settings">
+                    @Html.Raw(ViewBag.Settings)
+                </script>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.ModelData))
+        {
+            <script type="application/json" id="viaduc-model">
+                    @Html.Raw(ViewBag.ModelData)
+                </script>
+        }
+
+        </body>
+        </html>
+    </text>
+}

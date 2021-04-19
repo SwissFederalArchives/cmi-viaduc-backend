@@ -1,0 +1,74 @@
+{
+  "_from": "dictionary-de-ch",
+  "_id": "dictionary-de-ch@2.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-xSOgI96/If9OLfHmK6Z7Bxjs9+mxJy9PAwVFRPDACRHBUbDRks0T4X9bdtFjcDAjxlCzYtFHaiEin7B9A4DR+w==",
+  "_location": "/dictionary-de-ch",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "dictionary-de-ch",
+    "name": "dictionary-de-ch",
+    "escapedName": "dictionary-de-ch",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/dictionary-de-ch/-/dictionary-de-ch-2.0.4.tgz",
+  "_shasum": "4a3774994811c85f2da0733274a957524925c175",
+  "_spec": "dictionary-de-ch",
+  "_where": "C:\\Dev\\CMInformatik\\Viaduc\\Dictionaries\\de",
+  "author": {
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com",
+    "url": "https://wooorm.com"
+  },
+  "bugs": {
+    "url": "https://github.com/wooorm/dictionaries/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Titus Wormer",
+      "email": "tituswormer@gmail.com",
+      "url": "https://wooorm.com"
+    },
+    {
+      "name": "Thomas Beverley",
+      "email": "tom.beverley101@gmail.com"
+    }
+  ],
+  "deprecated": false,
+  "description": "German (Switzerland) spelling dictionary in UTF-8",
+  "files": [
+    "index.js",
+    "index.aff",
+    "index.dic"
+  ],
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/wooorm"
+  },
+  "keywords": [
+    "spelling",
+    "myspell",
+    "hunspell",
+    "dictionary",
+    "de",
+    "ch",
+    "german",
+    "switzerland"
+  ],
+  "license": "(GPL-2.0 OR GPL-3.0)",
+  "name": "dictionary-de-ch",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/de-CH"
+  },
+  "version": "2.0.4"
+}

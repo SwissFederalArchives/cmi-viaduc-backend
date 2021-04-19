@@ -1,0 +1,147 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        body { font-family: Sans-Serif; }
+    </style>
+</head>
+<body>
+    <p>
+        {{#User.IstDeutsch}}
+        Guten Tag<br>
+        <br>
+        Vielen Dank für Ihre Bestellung:
+        <ul>
+            <li>
+                <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+            </li>
+        </ul>
+        Leider ist die Aufbereitung fehlgeschlagen. Wir prüfen die Fehlerursache und stellen Ihnen das gewünschte Digitalisat so rasch wie möglich zur Verfügung. <br />
+        <br />
+        Bei Fragen zur Bestellung wenden Sie sich bitte an die
+        <a href="https://{{Global.PublicClientUrl}}">Beratung</a>
+        oder per E-Mail an
+        <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+        <br />
+        <br />
+        Mit freundlichen Grüssen<br />
+        <br />
+        Eidgenössisches Departement des Innern EDI <br />
+        Schweizerisches Bundesarchiv BAR <br />
+        Archivstrasse 24, CH-3003 Bern <br />
+        <br />
+        Folgen Sie dem Bundesarchiv:
+        <br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        {{/User.IstDeutsch}}
+
+
+        {{#User.IstEnglisch}}
+        Hello <br>
+        <br>
+        Thank you for your order: <br />
+        <ul>
+            <li>
+                <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+            </li>
+        </ul>
+        Unfortunately, the preparation process has failed. We are examining the cause of the problem and will provide you with the digitised material you have requested as soon as possible. <br />
+        <br />
+        If you have any questions about your order please contact our
+        <a href="https://{{Global.PublicClientUrl}}">online advice service </a>
+        or send an e-mail to
+        <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+        <br />
+        <br />
+        Yours sincerely
+        <br />
+        Federal Department of Home Affairs FDHA <br />
+        Swiss Federal Archives SFA <br />
+        Archivstrasse 24, CH-3003 Bern <br />
+        <br />
+        Follow the Federal Archives:
+        <br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        {{/User.IstEnglisch}}
+
+
+        {{#User.IstFranzösisch}}
+        Bonjour,<br>
+        <br>
+        Votre commande: <br />
+        <ul>
+            <li>
+                <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+            </li>
+        </ul>
+        Cependant, la préparation des documents a malheureusement échoué. Nous en examinons actuellement la raison et vous fournirons les reproductions dès que possible.<br />
+        <br />
+        Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre
+        <a href="https://{{Global.PublicClientUrl}}">service de conseil</a>
+        ou par e-mail à
+        <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+        <br />
+        <br />
+        Meilleures salutations,
+        <br />
+        Département fédéral de l’intérieur DFI <br />
+        Archives fédérales suisses AFS <br />
+        Archivstrasse 24, CH-3003 Berne <br />
+        <br />
+        Suivez les Archives fédérales:
+        <br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        {{/User.IstFranzösisch}}
+
+
+        {{#User.IstItalienisch}}
+        Buongiorno,<br>
+        <br>
+        abbiamo ricevuto la Sua ordinazione:
+        <ul>
+            <li>
+                <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+            </li>
+        </ul>
+        Purtroppo la preparazione non è riuscita. Le metteremo a disposizione il materiale digitalizzato richiesto non appena avremo risolto il problema.<br />
+        <br />
+        Per qualsiasi ulteriore informazione può rivolgersi al servizio di
+        <a href="https://{{Global.PublicClientUrl}}">consulenza on-line</a>
+        oppure inviare una mail all’Archivio federale all’indirizzo
+        <a href="mailto:bundesarchiv@bar.admin.ch">bundesarchiv@bar.admin.ch</a>.
+        <br />
+        <br />
+        Distinti saluti <br />
+        <br />
+        Dipartimento federale dell’interno DFI <br />
+        Archivio federale svizzero AFS<br />
+        Archivstrasse 24, CH-3003 Berna <br />
+
+        <br />
+        <br />
+        <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch </a> <br />
+        <a href="mailto:http://www.archivio-federale.ch/">www.archivio-federale.ch</a><br>
+        <br />
+        Seguite l‘Archivio federale:
+        <br />
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        {{/User.IstItalienisch}}
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2019-03-20T00:00:00+01:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot636886699269386980">
+      <name>content</name>
+      <originalName>content</originalName>
+      <datei id="_QMTkIEbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-01.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-01.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>9fccb7bffbc838b6c4ef2a698bb3259b</pruefsumme>
+      </datei>
+      <datei id="_QOZ14EbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-02.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-02.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>4f44be9d30d3580689b6cf456e4c9809</pruefsumme>
+      </datei>
+      <datei id="_QPdl0EbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-03.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-03.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>bd4ff038af22c47efd0ae3be081a6f22</pruefsumme>
+      </datei>
+      <datei id="_QQeScEbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-04.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-04.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>df670cd37382366b2a00fc799c59b0a5</pruefsumme>
+      </datei>
+      <datei id="_QTLoMEbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-06.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-06.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>70ea5f1c6d2a6ef2385f46a7c4317127</pruefsumme>
+      </datei>
+      <datei id="_QXs70EbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-08.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-08.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>c2764fe421e1b741a001f8bcd1e68d9f</pruefsumme>
+      </datei>
+      <datei id="_QYMrEEbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-A-09.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-A-09.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>f057d014c2f7c542fd9bf5757b5aab35</pruefsumme>
+      </datei>
+      <datei id="_Q_O14EbPEeiqjKHXAxsI6w">
+        <name>JPG2000-viaduc-testdaten-Serie-D-01.jp2</name>
+        <originalName>JPG2000-viaduc-testdaten-Serie-D-01.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>28fac56e607817be21202afdb8add0ad</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesarchiv</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von />
+      <bis />
+    </entstehungszeitraum>
+    <ablieferungsnummer>2018/2v2</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Bundesarchiv </aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Schweizerisches Bundesarchiv: Viaduc Testdaten</name>
+      <ordnungssystemposition id="_ubpbIEbQEeiqjKHXAxsI6w">
+        <nummer>1</nummer>
+        <titel>Testdaten</titel>
+        <dossier id="_ubtskEbQEeiqjKHXAxsI6w">
+          <titel>JPG2000 Testdaten</titel>
+          <erscheinungsform>keine Angabe</erscheinungsform>
+          <eroeffnungsdatum />
+          <abschlussdatum />
+          <entstehungszeitraum>
+            <von>
+              <datum>1900-01-01</datum>
+            </von>
+            <bis>
+              <datum>1900-12-31</datum>
+            </bis>
+          </entstehungszeitraum>
+          <zusatzDaten>
+            <merkmal name="Signatur">E3120-05#2018/2#3*</merkmal>
+            <merkmal name="Stufe">Dossier</merkmal>
+            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10796*","Title":"Schweizerisches Bundesarchiv (1979-)","DateRangeText":"1976-2004","ArchiveRecordId":"6764"},{"IconId":12,"Level":"Teilbestand","RefCode":"E3120-05*","Title":"Schweizerisches Bundesarchiv: Viaduc Testdaten","DateRangeText":"1978-1992","ArchiveRecordId":"31442817"},{"IconId":19,"Level":"Serie","RefCode":"E3120-05#1","Title":"Testdaten","DateRangeText":null,"ArchiveRecordId":"31442818"},{"IconId":2,"Level":"Dossier","RefCode":"E3120-05#2018/2#3*","Title":"JPG2000 Testdaten","DateRangeText":"1900","ArchiveRecordId":"31442821"}]</merkmal>
+            <merkmal name="Identifikation digitales Magazin">f7db5abf-b476-4a05-9dc5-3d1fa26fedcc@_ubtskEbQEeiqjKHXAxsI6w</merkmal>
+            <merkmal name="Entstehungszeitraum Anzeigetext">1900</merkmal>
+          </zusatzDaten>
+          <dateiRef>_QMTkIEbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QOZ14EbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QPdl0EbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QQeScEbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QTLoMEbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QXs70EbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_QYMrEEbPEeiqjKHXAxsI6w</dateiRef>
+          <dateiRef>_Q_O14EbPEeiqjKHXAxsI6w</dateiRef>
+        </dossier>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

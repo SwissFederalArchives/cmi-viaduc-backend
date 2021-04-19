@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Parameter.Properties" GeneratedClassName="WaitTimeSetting">
+  <Profiles />
+  <Settings>
+    <Setting Name="MillisekundenInitial" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="MillisekundenFirstAPICall" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">6000</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

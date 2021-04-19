@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Order.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="VecteurSftpRoot" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Vecteur</Value>
+    </Setting>
+    <Setting Name="AssetManagerPickupPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Final</Value>
+    </Setting>
+    <Setting Name="SftpLicenseKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Order.Properties.Settings.SftpLicenseKey@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

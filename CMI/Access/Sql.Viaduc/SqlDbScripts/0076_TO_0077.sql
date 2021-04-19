@@ -1,0 +1,1 @@
+﻿UPDATE [dbo].[ArtDerArbeit] SET [Name_fr] = 'Doctorat' WHERE ID = 6

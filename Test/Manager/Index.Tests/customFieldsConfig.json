@@ -1,0 +1,402 @@
+﻿[
+  {
+    "ElementId": 1,
+    "ElementName": "TITEL",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Titel",
+    "TargetField": "Title",
+    "IsDefaultField": 1,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 2,
+    "ElementName": "SIGNATUR",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Signatur",
+    "TargetField": "ReferenceCode",
+    "IsDefaultField": 1,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 3,
+    "ElementName": "SIGNATUR_ARCHIVPLAN",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Signatur Archivplan",
+    "TargetField": "SignaturArchivplan",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 6,
+    "ElementName": "STUFE",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Stufe",
+    "TargetField": "Level",
+    "IsDefaultField": 1,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 7,
+    "ElementName": "ENTSTEHUNGSZEITRAUM",
+    "SourceType": "Datumsbereich (von/bis)",
+    "Label": "Entstehungszeitraum",
+    "TargetField": "CreationPeriod",
+    "IsDefaultField": 1,
+    "Type": "ElasticTimePeriod",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 8,
+    "ElementName": "DARIN",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Darin",
+    "TargetField": "WithinInfo",
+    "IsDefaultField": 1,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 9,
+    "ElementName": "BILD_VORSCHAU",
+    "SourceType": "Bild",
+    "Label": "Vorschaubild",
+    "TargetField": "BildVorschau",
+    "IsDefaultField": 0,
+    "Type": "ElasticBase64",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 9,
+    "ElementName": "BILD_VORSCHAU",
+    "SourceType": "Bild",
+    "Label": "Vorschaubild",
+    "TargetField": "Thumbnail",
+    "IsDefaultField": 1,
+    "Type": "ElasticBase64",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10,
+    "ElementName": "BILD_ANSICHT",
+    "SourceType": "Bild",
+    "Label": "Ansichtsbild",
+    "TargetField": "BildAnsicht",
+    "IsDefaultField": 0,
+    "Type": "ElasticBase64",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 18,
+    "ElementName": "SIGNATURHISTORY",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Frühere Signaturen",
+    "TargetField": "FormerReferenceCode",
+    "IsDefaultField": 1,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 505,
+    "ElementName": "VE_ABLIEFERUNG_LINK",
+    "SourceType": "Verknüpfung",
+    "Label": "Ablieferung (Link)",
+    "TargetField": "VeAblieferungLink",
+    "IsDefaultField": 0,
+    "Type": "ElasticEntityLink",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 510,
+    "ElementName": "VE_ORDNUNGSKOMPONENTE_LINK",
+    "SourceType": "Verknüpfung",
+    "Label": "Ordnungskomponente (Link)",
+    "TargetField": "VeOrdnungskomponenteLink",
+    "IsDefaultField": 0,
+    "Type": "ElasticEntityLink",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10026,
+    "ElementName": "VERWANDTE_VE",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Verwandte VE",
+    "TargetField": "VerwandteVe",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10109,
+    "ElementName": "BEMERKUNG_ZUR_VE",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Zusätzliche Informationen",
+    "TargetField": "BemerkungZurVe",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10151,
+    "ElementName": "FORM",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Form",
+    "TargetField": "Form",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10153,
+    "ElementName": "ENTSTEHUNGSZEITRAUM__ANM.",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Entstehungszeitraum Anm.",
+    "TargetField": "EntstehungszeitraumAnmerkung",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10155,
+    "ElementName": "GESCHICHTE_DER_VE",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Geschichte der Unterlagen",
+    "TargetField": "GeschichteDerUnterlagen",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },  
+  {
+    "ElementId": 10174,
+    "ElementName": "LAND",
+    "SourceType": "Auswahlliste",
+    "Label": "Land",
+    "TargetField": "Land",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10234,
+    "ElementName": "ZUSATZKOMPONENTE_ZAC1",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Zusatzkomponente",
+    "TargetField": "ZusatzkomponenteZac1",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10239,
+    "ElementName": "AKTENZEICHEN",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Aktenzeichen",
+    "TargetField": "Aktenzeichen",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10240,
+    "ElementName": "FRÜHERES_AKTENZEICHEN",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Früheres Aktenzeichen",
+    "TargetField": "FrüheresAktenzeichen",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10363,
+    "ElementName": "VORGÄNGERBEHÖRDEN",
+    "SourceType": "Verknüpfung",
+    "Label": "Vorgängerbehörde(n)",
+    "TargetField": "Vorgängerbehörden",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10364,
+    "ElementName": "NACHFOLGERBEHÖRDEN",
+    "SourceType": "Verknüpfung",
+    "Label": "Nachfolgerbehörde(n)",
+    "TargetField": "Nachfolgerbehörden",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10367,
+    "ElementName": "AIP_ID",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Identifikation digitales Magazin",
+    "TargetField": "AipId",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10373,
+    "ElementName": "NICHT_ONLINE_RECHERCHIERBARE_DOSSIERS",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Nicht online recherchierbare Dossiers",
+    "TargetField": "NichtOnlineRecherchierbareDossiers",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10376,
+    "ElementName": "URHEBER",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Urheber",
+    "TargetField": "Urheber",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10377,
+    "ElementName": "BETEILIGTE_PERSONEN_KÖRPERSCHAFTEN",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Beteiligte Personen /  Körperschaften",
+    "TargetField": "BeteiligtePersonenKörperschaften",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10378,
+    "ElementName": "VERLEGER",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Verleger",
+    "TargetField": "Verleger",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10379,
+    "ElementName": "ABDECKUNG",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Abdeckung",
+    "TargetField": "Abdeckung",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10380,
+    "ElementName": "THEMA",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Thema",
+    "TargetField": "Thema",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10384,
+    "ElementName": "FORMAT",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Format",
+    "TargetField": "Format",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10385,
+    "ElementName": "KATEGORIE_DIA",
+    "SourceType": "Ganze Zahl",
+    "Label": "Kat. Automatisierung",
+    "TargetField": "KategorieDia",
+    "IsDefaultField": 0,
+    "Type": "int?",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10386,
+    "ElementName": "ANHANG_3",
+    "SourceType": "Ja/Nein-Feld",
+    "Label": "Anhang 3 VBGA",
+    "TargetField": "Anhang3",
+    "IsDefaultField": 0,
+    "Type": "bool?",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10416,
+    "ElementName": "DIGITALES_FINDMITTEL_(BESCHREIBUNG)",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Digitales Findmittel (Beschreibung)",
+    "TargetField": "DigitalesFindmittelBeschreibung",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10417,
+    "ElementName": "DIGITALES_FINDMITTEL_(LINK)",
+    "SourceType": "Web-Hyperlink",
+    "Label": "Digitales Findmittel (Link)",
+    "TargetField": "DigitalesFindmittelLink",
+    "IsDefaultField": 0,
+    "Type": "ElasticHyperlink",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10418,
+    "ElementName": "DIGITALE_VERSION",
+    "SourceType": "Web-Hyperlink",
+    "Label": "Digitale Version",
+    "TargetField": "DigitaleVersion",
+    "IsDefaultField": 0,
+    "Type": "ElasticHyperlink",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10425,
+    "ElementName": "ZUGÄNGLICHKEIT_GEMÄSS_BGA",
+    "SourceType": "Auswahlliste",
+    "Label": "Zugänglichkeit gemäss BGA",
+    "TargetField": "ZugänglichkeitGemässBga",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10426,
+    "ElementName": "ZUSTÄNDIGE_STELLE_(LINK)",
+    "SourceType": "Auswahlliste",
+    "Label": "Zuständige Stelle (Link)",
+    "TargetField": "ZuständigeStelle",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
+    "ElementId": 10438,
+    "ElementName": "PUBLIKATIONSRECHTE",
+    "SourceType": "Auswahlliste",
+    "Label": "Publikationsrechte",
+    "TargetField": "Publikationsrechte",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": -1,
+    "ElementName": "Dummy",
+    "SourceType": "Einzeldatum",
+    "Label": "dummy",
+    "TargetField": "DummyElasticdatewithyear",
+    "IsDefaultField": 0,
+    "Type": "ElasticDateWithYear",
+    "IsRepeatable": 0
+  }
+]

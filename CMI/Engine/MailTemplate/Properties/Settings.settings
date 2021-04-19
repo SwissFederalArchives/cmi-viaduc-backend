@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Engine.MailTemplate.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PublicClientUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">viaducdev.cmiag.ch/clientdev</Value>
+    </Setting>
+    <Setting Name="ManagementClientUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">viaducdev.cmiag.ch/management</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

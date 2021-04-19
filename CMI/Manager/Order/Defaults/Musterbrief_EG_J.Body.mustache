@@ -1,0 +1,311 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+        table.noLine td {
+            border-bottom: none;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    {{#Sprachen}}
+    {{#IstDeutsch}}  
+    <p style="color:red">
+        <u>Az.</u>
+    </p>
+    <p>
+        <span style="color:red">Sehr geehrter Herr / Sehr geehrte Frau</span>
+    </p>
+    <p>
+        Im Schweizerischen Bundesarchiv wird in der Hauptabteilung
+        {{#BeginntEineSignaturMitJ1}}J1 (Deposita von natürlichen Personen){{/BeginntEineSignaturMitJ1}}
+        {{#BeginntEineSignaturMitJ2}}J2 (Deposita von juristischen Personen){{/BeginntEineSignaturMitJ2}}
+        der Bestand {{SignaturUndTitelBestand}} aufbewahrt. Gemäss Vereinbarung vom <span style="color:red">Datum der Vereinbarung</span> erfolgt der Zugang zu diesem Bestand <span style="color:red">für Unterlagen in Schutzfrist / nur</span> mit der Einwilligung <span style="color:red">von Bewilligungsinstanz/des Deponenten bzw. seines Rechtsnachfolgers.</span>
+    </p>
+    <p>
+        Mit Schreiben vom {{Erfassungsdatum}} hat uns <span style="color:red">Herr/Frau</span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+        ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        ein Gesuch um Einsichtnahme in folgende Unterlagen übermittelt:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Signatur</th>
+                <th>Aktenzeichen</th>
+                <th>Band</th>
+                <th>Dossiertitel</th>
+                <th>Zeitraum</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        <span style="color:red">Herr/Frau</span> {{Besteller.Name}} beschreibt die Art der Arbeit und den Zweck der Einsichtnahme folgendermassen:
+    </p>
+    <p>
+        <table class="noLine">
+            <tr>
+                <td>Art der Arbeit:<br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Deutsch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Zweck der Einsichtnahme:</td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        Wir bitten Sie, das vorliegende Gesuch zu prüfen und uns Ihren Entscheid bis zum {{HeutigesDatumPlus30Tage}} mitzuteilen. Bei Rückfragen stehen wir Ihnen gerne zur Verfügung.
+    </p>
+    <p>
+        Vielen Dank für Ihre Bemühungen.
+    </p>
+    <p>
+        Mit freundlichen Grüssen
+    </p>
+    {{/IstDeutsch}}
+
+
+    {{#IstFranzösisch}}
+    <p style="color:red">
+        <u>Référence</u>
+    </p>
+    <p style="color:red">
+        Madame, / Monsieur, 
+    </p>
+    <p>
+        Le fonds {{SignaturUndTitelBestand}} des Archives fédérales est conservé dans la division
+        {{#BeginntEineSignaturMitJ1}}J1 (dépôt d'une personne physique){{/BeginntEineSignaturMitJ1}}
+        {{#BeginntEineSignaturMitJ2}}J2 (dépôt d'une personne morale){{/BeginntEineSignaturMitJ2}}
+        En vertu du contrat du 
+        <span style="color:red">date du contrat</span>
+        l’accès à ce fonds nécessite 
+        <span style="color:red">obligatoirement /, pour les documents soumis à un délai de protection</span> 
+        une autorisation 
+        <span style="color:red">l’instance compétente / du déposant ou, le cas échéant, de son ayant droit.</span>
+    </p>
+    <p>
+        En date du {{Erfassungsdatum}} <span style="color:red">Madame / Monsieur</span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+        ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        nous a adressé une demande de consultation des documents suivants :
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Cote</th>
+                <th>Référence</th>
+                <th>Volume</th>
+                <th>Titre du dossier</th>
+                <th>Période</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        La demande de consultation de <span style="color:red">Madame / Monsieur </span> {{Besteller.Name}} s’inscrit dans le cadre suivant : 
+    </p>
+    <p>
+        <table class="noLine">
+            <tr>
+                <td>Nature du travail: <br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Französisch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>But de la consultation: </td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        Nous vous prions de bien vouloir examiner cette demande et de nous communiquer votre décision d’ici au {{HeutigesDatumPlus30Tage}}. Nous restons à votre disposition pour tout renseignement complémentaire.
+    </p>
+    <p>
+        Vous remerciant par avance de votre collaboration, nous vous adressons
+        <span style="color:red">Madame / Monsieur</span>, nos meilleures salutations.
+    </p>
+    {{/IstFranzösisch}}
+
+
+    {{#IstItalienisch}}
+    <p style="color:red">
+        <u>Az.</u>
+    </p>
+    <p>
+       <span style="color:red">Gentile signora / Egregio signor </span>
+    </p>
+    <p>
+        nella sezione principale 
+        {{#BeginntEineSignaturMitJ1}}J1 (dipositi di persone fisiche){{/BeginntEineSignaturMitJ1}}
+        {{#BeginntEineSignaturMitJ2}}J2 (dipositi di persone giuridiche){{/BeginntEineSignaturMitJ2}}
+        dell’Archivio federale è conservato il fondo {{SignaturUndTitelBestand}}.
+        Conformemente all’accordo del <span style="color:red">data</span>, l’accesso ai 
+        <span style="color:red">documenti</span>
+        di questo fondo 
+        <span style="color:red">soggetti a un termine di protezione </span>
+        è possibile 
+        <span style="color:red">soltanto </span>
+        previo consenso 
+        <span style="color:red">dell’autorità competente / del depositario o del suo successore legale.</span>
+    </p>
+    <p>
+        Con la lettera del {{Erfassungsdatum}}, <span style="color:red"> il signor / la signora </span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+        ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        ha presentato una domanda di consultazione per i documenti seguenti:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Segnatura</th>
+                <th>Riferimento</th>
+                <th>Volume</th>
+                <th>Titolo del dossier</th>
+                <th>Periodo</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        <span style="color:red">Il signor / La signora</span> {{Besteller.Name}} descrive il tipo di attività e lo scopo della consultazione come segue:
+    </p>
+    <p>
+        <table class="noLine">
+            <tr>
+                <td>Tipo di attività: <br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Italienisch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Scopo della consultazione:</td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        La invitiamo a esaminare la domanda e a comunicarci la Sua decisione entro il  {{HeutigesDatumPlus30Tage}}. Restiamo a disposizione per qualsiasi ulteriore chiarimento.
+    </p>
+    <p>
+       Distinti saluti
+    </p>
+    {{/IstItalienisch}}
+	
+	   
+	{{#IstEnglisch}}  
+    <p style="color:red">
+        <u>Az.</u>
+    </p>
+    <p>
+        <span style="color:red">Dear Mr / Dear Ms</span>
+    </p>
+    <p>
+        The fonds {{SignaturUndTitelBestand}} is kept in Main Department
+        {{#BeginntEineSignaturMitJ1}}J1 (deposit of a natural person){{/BeginntEineSignaturMitJ1}}
+        {{#BeginntEineSignaturMitJ2}}J2 (deposit of a legal person){{/BeginntEineSignaturMitJ2}}
+		of the Federal Archives. Under an agreement dated <span style="color:red">Datum der Vereinbarung</span>, access to this fonds <span style="color:red">for documents within a closure period is permitted [only]</span> with the consent of <span style="color:red">the authorising body / the depositor or their legal successor.</span>
+    </p>
+    <p>
+        In a communication dated {{Erfassungsdatum}} <span style="color:red">Mr/Ms </span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+        ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        submitted a request to consult the following documents:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Reference code</th>
+                <th>File reference</th>
+                <th>Volume</th>
+                <th>Dossier title</th>
+                <th>Time period</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        <span style="color:red">Mr/Ms</span> {{Besteller.Name}} describes the nature of <span style="color:red">his/her</span> work and the purpose of the consultation as follows: 
+    </p>
+    <p>
+        <table class="noLine">
+            <tr>
+                <td>Nature of work:<br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Deutsch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Purpose of consultation:</td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        Kindly review this request and notify us of your decision by {{HeutigesDatumPlus30Tage}}. We will be happy to answer any questions you may have.
+    </p>
+    <p>
+        Thank you for your cooperation. 
+    </p>
+    <p>
+        Yours sincerely
+    </p>
+    {{/IstEnglisch}}
+
+
+    {{/Sprachen}}
+</body>
+</html>

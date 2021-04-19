@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{615168EE-A61C-408B-A54D-E80D0D12BC0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CMI.Manager.DocumentConverter</RootNamespace>
+    <AssemblyName>CMI.Manager.DocumentConverter</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=17.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Aspose.Cells.17.5\lib\net40\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Email, Version=17.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Aspose.Email.17.5.0\lib\net40\Aspose.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Pdf, Version=17.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Aspose.Pdf.17.5\lib\net40-client\Aspose.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Slides, Version=17.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Aspose.Slides.NET.17.4\lib\net4.0-client\Aspose.Slides.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Words, Version=17.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Aspose.Words.17.5\lib\net40\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GreenPipes, Version=2.1.4.118, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GreenPipes.2.1.4\lib\net452\GreenPipes.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.FREngine">
+      <HintPath>..\..\..\ThirdParty\Abbyy\Interop.FREngine.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MassTransit, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.5.5.6\lib\net452\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.5.5.6\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.SerilogIntegration, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.SerilogIntegration.5.5.6\lib\net452\MassTransit.SerilogIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="NewId, Version=3.0.2.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NewId.3.0.2\lib\net452\NewId.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.5.1.2\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Common, Version=2.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Common.2.5.6690\lib\net40\Rebex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.FileServer, Version=1.0.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.FileServer.1.0.6690\lib\net40\Rebex.FileServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.FileSystem, Version=1.0.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.FileSystem.1.0.6690\lib\net40\Rebex.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Rebex.Networking, Version=3.5.6690.0, Culture=neutral, PublicKeyToken=1c4638788972655d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Rebex.Networking.3.5.6690\lib\net40\Rebex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abbyy\AbbyyLicense.cs" />
+    <Compile Include="Consumers\ConversionStartConsumer.cs" />
+    <Compile Include="Consumers\DocumentConverterInfoConsumer.cs" />
+    <Compile Include="Consumers\JobInitConsumer.cs" />
+    <Compile Include="Consumers\ExtractionStartConsumer.cs" />
+    <Compile Include="Consumers\SupportedFileTypesConsumer.cs" />
+    <Compile Include="ConverterInstallationInfo.cs" />
+    <Compile Include="DocumentService.cs" />
+    <Compile Include="Doc.cs" />
+    <Compile Include="DocumentManager.cs" />
+    <Compile Include="Extraction\AbbyyTextExtractor.cs" />
+    <Compile Include="Abbyy\AbbyyWorker.cs" />
+    <Compile Include="Abbyy\EnginesPool.cs" />
+    <Compile Include="Extraction\AllowedExtensionFilter.cs" />
+    <Compile Include="Extraction\AsposePdfTextExtractor.cs" />
+    <Compile Include="Extraction\DefaultTextExtractorSettings.cs" />
+    <Compile Include="Extraction\DefaultValueAttribute.cs" />
+    <Compile Include="Extraction\ExtractionResult.cs" />
+    <Compile Include="Extraction\Extractor.cs" />
+    <Compile Include="Extraction\Interfaces\INeedsAbbyyInstallation.cs" />
+    <Compile Include="Extraction\Interfaces\ITextExtractor.cs" />
+    <Compile Include="Extraction\Interfaces\ITextExtractorSettings.cs" />
+    <Compile Include="Extraction\PdfHelper.cs" />
+    <Compile Include="Extraction\TextExtractorBase.cs" />
+    <Compile Include="Infrastructure\ContainerConfigurator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Infrastructure\SerilogWriter.cs" />
+    <Compile Include="Properties\Documentation.cs" />
+    <Compile Include="Properties\DocumentConverterSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>DocumentConverterSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Render\AbbyyProcessor.cs" />
+    <Compile Include="Render\AudioProcessor.cs" />
+    <Compile Include="Render\IRenderer.cs" />
+    <Compile Include="Render\Renderer.cs" />
+    <Compile Include="Render\RendererCommand.cs" />
+    <Compile Include="Render\RenderProcessorBase.cs" />
+    <Compile Include="Render\TransformResult.cs" />
+    <Compile Include="Render\VideoProcessor.cs" />
+    <Compile Include="ServerKey.cs" />
+    <Compile Include="SftpServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EmbeddedResource Include="Extraction\Aspose.Total.lic" />
+    <None Include="packages.config" />
+    <None Include="Properties\DocumentConverterSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>DocumentConverterSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contract\DocumentConverter\CMI.Contract.DocumentConverter.csproj">
+      <Project>{8C031477-0680-4A2B-A7CE-8A6434DF00BC}</Project>
+      <Name>CMI.Contract.DocumentConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Messaging\CMI.Contract.Messaging.csproj">
+      <Project>{27A7EBB7-2C64-4EE0-A040-E00B99BB9372}</Project>
+      <Name>CMI.Contract.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Monitoring\CMI.Contract.Monitoring.csproj">
+      <Project>{92421CE8-8713-454F-BEA1-7037EAF1E43A}</Project>
+      <Name>CMI.Contract.Monitoring</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Parameter\CMI.Contract.Parameter.csproj">
+      <Project>{f5ca4600-3bb0-452c-9fe8-d70e9ffa3681}</Project>
+      <Name>CMI.Contract.Parameter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Bus\Configuration\CMI.Utilities.Bus.Configuration.csproj">
+      <Project>{72606585-274A-444F-AA34-C7F228F94460}</Project>
+      <Name>CMI.Utilities.Bus.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Common\CMI.Utilities.Common.csproj">
+      <Project>{1dcf43e7-a0ff-4506-9472-4dfd2b504a97}</Project>
+      <Name>CMI.Utilities.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Logging\Configurator\CMI.Utilities.Logging.Configurator.csproj">
+      <Project>{39326685-B5AB-40DC-8FA3-09A9502E7BE0}</Project>
+      <Name>CMI.Utilities.Logging.Configurator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ProcessorExeFiles\ffmpeg.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProcessorExeFiles\lame.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProcessorExeFiles\lame_enc.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

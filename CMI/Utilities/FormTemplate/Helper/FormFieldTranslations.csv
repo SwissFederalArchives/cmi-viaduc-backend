@@ -1,0 +1,38 @@
+﻿Key;German;French;Italian;English
+IDENTIFIKATION;Identifikation;Identification;Identificazione;Identification
+SIGNATUR;Signatur;Cote;Segnatura;Reference code
+TITEL;Titel;Titre;Titolo;Title
+ENTSTEHUNGSZEITRAUM;Entstehungszeitraum;Date de création;Periodo di costituzione;Creation period
+ANMERKUNGEN;Anmerkungen;Remarques;Osservazioni;Notes
+BEMERKUNG_ZUR_VE;Zusätzliche Informationen;Informations complémentaires;Informazioni supplementari;Additional information
+ENTSTEHUNGSZEITRAUM__ANM.;Entstehungszeitraum Anm.;Rem. date de création;Nota sul periodo di costituzione;Creation period note
+KONTEXT;Kontext;Structure;Contesto;Context
+VORGÄNGERBEHÖRDE(N);Vorgängerbehörde(n);Autorité compétente précédente;Autorità precedente(i);Predecessor authority/authorities
+NACHFOLGERBEHÖRDE(N);Nachfolgerbehörde(n);Autorité compétente ultérieure;Autorità successiva(e);Successor authority/authorities
+INHALT_UND_INNERE_ORDNUNG;Inhalt und innere Ordnung;Contenu et classement interne;Contenuto e ordinamento interno;Content and internal classification
+DARIN;Darin;Contenu;Contiene;In which
+VE_ABLIEFERUNG_LINK;Ablieferung;Versement;Versamento;Delivery
+DIGITALES_FINDMITTEL_(BESCHREIBUNG);Digitales Findmittel (Beschreibung);Instrument de recherche numérique (description);Strumento di ricerca digitale (descrizione);Digital finding aid (description)
+DIGITALES_FINDMITTEL_(LINK);Digitales Findmittel (Link);Instrument de recherche numérique (lien);Strumento di ricerca digitale (link);Digital finding aid (link)
+SACHVERWANDTE_UNTERLAGEN;Sachverwandte Unterlagen;Sources complémentaires;Documenti affini;Related documents
+VERWANDTE_VE;Verwandte VE;UD associée;UD affini;Related UD(s)
+SIGNATURHISTORY;Frühere Signaturen;Anciennes cotes;Vecchie segnature;Previous reference codes
+VE_ORDNUNGSKOMPONENTE_LINK;Ordnungskomponente;Composants du classement;Componente dell'ordinamento;Categorisation component
+FORM;Form;Forme;Forma;Form
+ZUGÄNGLICHKEIT_GEMÄSS_BGA;Zugänglichkeit gemäss BGA;Accessibilité selon la LAr;Accessibilità secondo la LAr;Accessibility under ArchA
+AKTENZEICHEN;Aktenzeichen;Référence;Riferimento;File reference
+ZUSATZKOMPONENTE_ZAC1;Zusatzkomponente;Composants complémentaires;Componente aggiuntiva;Additional component
+FRÜHERES_AKTENZEICHEN;Früheres Aktenzeichen;Ancienne référence;Vecchio riferimento;Previous file reference
+BILD_VORSCHAU;Vorschaubild;Miniature;Anteprima dell'immagine;Preview image
+BILD_ANSICHT;Ansichtsbild;Image;Riproduzione digitale;Display image
+FORMAT;Format;Format;Formato;Format
+URHEBER;Urheber;Agent de l'action;Autore;Originator
+BETEILIGTE_PERSONEN_KÖRPERSCHAFTEN;Beteiligte Personen /  Körperschaften;Personnes/collectivités intéressées;Persone / corporazioni coinvolte;Individuals / corporations involved
+VERLEGER;Verleger;Éditeur;Editore;Publisher
+ABDECKUNG;Abdeckung;Couverture;Copertina;Coverage
+DIGITALE_VERSION;Digitale Version;Version numérique;Versione digitale;Digital version
+THEMA;Thema;Thème;Tema;Subject
+LAND;Land;Pays;Paese;Country
+NICHT_ONLINE_RECHERCHIERBARE_DOSSIERS;Nicht online recherchierbare Dossiers;Dossiers ne pouvant faire l'objet d'une recherche en ligne;Dossier non reperibili on-line;Dossiers not searchable online
+STUFE;Stufe;Niveau;Livello;Level
+DETAILS;Details;Détails;Dettagli;Details

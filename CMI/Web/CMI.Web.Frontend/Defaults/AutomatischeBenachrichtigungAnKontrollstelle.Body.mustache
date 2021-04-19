@@ -1,0 +1,82 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Guten Tag,
+    </p>
+    <p>
+        {{User.Vorname}} {{User.Name}} hat am {{Global.HeutigesDatum}} folgende Verzeichnungseinheit{{#HatMehrereVe}}en{{/HatMehrereVe}}
+        Ihrer Verwaltungseinheit innerhalb der Schutzfrist zur Konsultation bestellt:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Signatur</th>
+                <th>Titel</th>
+                <th>Entstehungszeitraum</th>
+                <th>Personendaten</th>
+                <th>Begründung</th>
+            </tr>
+            {{#VeList}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Id}}">{{Signatur}}</a></td>
+                <td>{{Titel}}</td>
+                <td>{{Entstehungszeitraum}}</td>
+                <td>{{#HatPersonendaten}}ja{{/HatPersonendaten}}{{^HatPersonendaten}}nein{{/HatPersonendaten}}</td>
+                <td>{{Begründung.Deutsch}}</td>
+            </tr>
+            {{/VeList}}
+        </table>
+    </p>
+    <p>
+        Sie erhalten diese automatische Benachrichtigung, weil Sie die/der «Verantwortliche Amtsausleihe» Ihrer Verwaltungseinheit sind. Falls diese Konsultation aus Ihrer Sicht nicht rechtmässig ist oder Sie nicht mehr zuständig für die Kontrolle sind, wenden Sie sich bitte an <a href="mailto:benutzer-admin@bar.admin.ch">benutzer-admin@bar.admin.ch</a>.
+    </p>
+    <p>
+        Mit freundlichen Grüssen
+    </p>
+    <p>
+        Eidgenössisches Departement des Innern EDI<br />
+        Schweizerisches Bundesarchiv BAR<br />
+        Archivstrasse 24, CH-3003 Bern<br />
+        <br />
+        <a href="mailto:benutzer-admin@bar.admin.ch">benutzer-admin@bar.admin.ch</a><br />
+        <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+    </p>
+    <p>
+        Folgen Sie dem Bundesarchiv / Suivez les Archives fédérales / 
+        Seguite l’Archivio federale / Follow the Federal Archives:<br />
+        <br />
+        <b><a href="https://twitter.com/ch_bundesarchiv">Twitter</a></b>
+        –
+        <b><a href="https://www.facebook.com/Bundesarchiv.Schweiz">Facebook</a></b>
+        –
+        <b><a href="https://www.youtube.com/user/Bundesarchiv">Youtube</a></b>
+    </p>
+</body>
+</html>

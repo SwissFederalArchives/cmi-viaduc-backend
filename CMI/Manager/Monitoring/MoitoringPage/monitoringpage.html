@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+    <script src="./jquery-3.3.1.min.js"></script>
+    <meta name="language" content="de">
+    <script>
+        console.log('If you\'re looking for an error:');
+        console.log('It is likely that jquery-3.3.1.min.js is not available in the same directory.');
+        $(document).ready(function () {
+            var managementclient = 'http://localhost:51287';
+            
+            console.log('If other errors occure check the url\'s availability:', managementclient);
+            $.ajax({
+                type: 'GET',
+                url: managementclient + '/api/Monitoring/GetServicesStatusHtml',
+                dataType: 'json',
+                success: function(data, status){
+                    if(status == 'success') {
+                        document.getElementById("servicesStatus").innerHTML = data;
+                    } else {
+                        document.getElementById("servicesStatus").innerHTML = 'Error!';
+                    }
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: managementclient + '/api/Monitoring/GetTestStatusHtml',
+                dataType: 'json',
+                success: function(data, status){
+                    if(status == 'success') {
+                        document.getElementById("testStatus").innerHTML = data;
+                    } else {
+                        document.getElementById("testStatus").innerHTML = 'Error!';
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Service Status:</h2>
+    <div id="servicesStatus">
+
+    </div>
+    <h2>Test Status:</h2>
+    <div id="testStatus">
+        
+    </div>
+</body>
+</html>

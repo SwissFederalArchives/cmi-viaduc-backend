@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Utilities.Logging.Configurator.Properties" GeneratedClassName="LogSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LogLevel" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Information</Value>
+    </Setting>
+    <Setting Name="SendMailOnError" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OutputFolder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Logs\{exeName}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

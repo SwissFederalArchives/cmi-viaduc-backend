@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Notification.Properties" GeneratedClassName="NotificationSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Port" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="Host" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.sparkpostmail.com</Value>
+    </Setting>
+    <Setting Name="DefaultFromAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">do-not-reply@viaduc.evelix.ch</Value>
+    </Setting>
+    <Setting Name="StartupTestTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="StartupTestBody" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Test Body</Value>
+    </Setting>
+    <Setting Name="StartupTestSubject" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Test subject</Value>
+    </Setting>
+    <Setting Name="UserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Notification.Properties.NotificationSettings.UserName@@</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Notification.Properties.NotificationSettings.Password@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,76 @@
+﻿ABSH|Amtsbericht des Obergerichts an den Grossen Rat des Kantons Schaffhausen|Amtsbericht des Obergerichtes an den Grossen Rat des Kantons Schaffhausen
+AGVE|Aargauische Gerichts- und Verwaltungsentscheide
+AJP|Aktuelle Juristische Praxis|PJA|Pratique juridique actuelle
+ARGVP|Ausserrhodische Gerichts- und Verwaltungspraxis
+ASA|Archiv für Schweizerisches Abgaberecht|Archives de droit fiscal suisse
+Asyl|Schweizerische Zeitschrift für Asylrecht und -praxis|Revue suisse pour la pratique et le droit d'asile
+BGE|Amtliche Sammlung der Entscheidungen des Schweizerischen Bundesgerichts|Entscheidungen des Schweizerischen Bundesgerichts|Decisions of the Swiss Federal Supreme Court|ATF|Recueil officiel des arrêts du Tribunal fédéral suisse|Arrêts du Tribunal fédéral suisse|DTF|Raccolta ufficiale delle decisioni del Tribunale federale|Decisioni del Tribunale federale svizzero|Decisiuns dal Tribunal federal svizzer
+BJM|Basler Juristische Mitteilungen
+BlSchK|Blätter für Schuldbetreibung und Konkurs|Bulletin des poursuites et faillites|Rivista di esecuzione e fallimento
+ZR|Blätter für Zürcherische Rechtsprechung|BlZR|Blätter für Zürcher Rechtsprechung
+BLVGE|Basellandschaftliche Verwaltungsgerichtsentscheide|VGE-BL
+BR|Baurecht|DC|Droit de la construction|Diritto della costruzione
+BSR|Bibliographie des schweizerischen Rechts|Bibliographie du droit suisse|Bibliografia del diritto svizzero
+BVR|Bernische Verwaltungsrechtsprechung|JAB|Jurisprudence administrative bernoise
+CdB|Cahiers du bail
+CR|Computer und Recht
+DR|Décisions et rapports de la Commission européenne des droits de l'Homme
+EGV-SZ|Entscheide der Gerichts- und Verwaltungsbehörden des Kantons Schwyz
+EVGE|Entscheidungen des eidgenössischen Versicherungsgerichts|Amtliche Sammlung der Entscheidungen des eidgenössischen Versicherungsgerichts|Decisions of the Federal Insurance Court|ATFA|Arrêts du Tribunal fédéral des assurances|Recueil officiel des arrêts du Tribunal fédéral des assurances|DTFA|Decisioni del Tribunale federale delle assicurazioni|Raccolta ufficiale delle decisioni del Tribunale federale delle assicurazioni|Decisiuns dal Tribunal federal d'assicuranzas
+EuGRZ|Europäische Grundrechte-Zeitschrift
+FZR|Freiburger Zeitschrift für Rechtsprechung|RFJ|Revue fribourgeoise de jurisprudence
+IPRax|Praxis des internationalen Privat- und Verfahrensrechts
+JAR|Jahrbuch des Schweizerischen Arbeitsrechts
+JdT|Journal des Tribunaux
+JKR|Jahrbuch des Schweizerischen Konsumentenrechts|ADC|Annuaire de droit suisse de la consommation
+LGVE|Luzerner Gerichts- und Verwaltungsentscheide
+MedR|Medizinrecht
+mp|Mietrechtspraxis: Zeitschrift für schweizerisches Mietrecht
+NStP|Die neue Steuerpraxis
+OWVVGE|Verwaltungs- und Verwaltungsgerichtsentscheide des Kantons Obwalden
+PKG|Praxis des Kantonsgerichts von Graubünden|Prassi del Tribunale cantonale dei Grigioni|PDC|Pratica da la Dretgira chantunala dal Grischun
+PMMBl|Schweizerisches Patent-, Muster- und Markenblatt|FBDM|Feuille suisse des brevets, dessins et marques|Foglio svizzero dei brevetti, disegni e marchi
+Pra|Die Praxis: wichtige Entscheidungen des Schweizerischen Bundesgerichts, Sozialversicherungsentscheide, Entscheidungen des Europäischen Gerichtshofes in Strassburg|Die Praxis des Bundesgerichts|Die Praxis
+PVG|Praxis des Verwaltungsgerichtes des Kantons Graubünden|PTA|Prassi del Tribunale amministrativo dei Grigioni
+RBOG|Rechenschaftsbericht des Obergerichts des Kantons Thurgau an den Grossen Rat
+RBUR|Rechenschaftsbericht über die Rechtspflege des Kantons Uri
+RDAF|Revue de droit administratif et de droit fiscal
+RDAT|Rivista di diritto amministrativo e tributario ticinese
+Rep|Repertorio di giurisprudenza patria
+RJJ|Revue jurassienne de jurisprudence
+RJN|Recueil de jurisprudence neuchâteloise
+RKUV|Kranken- und Unfallversicherung: Rechtsprechung und Verwaltungspraxis|RAMA|Assurance-maladie et accidents: jurisprudence et pratique administrative|RAMI|Assicurazione malattia e infortuni: giurisprudenza e prassi amministrativa
+RStrS|Rechtsprechung in Strafsachen|BJP|Bulletin de jurisprudence pénale
+RUDH|Revue Universelle des Droits de l'Homme
+SAE|Sammlung arbeitsrechtlicher Entscheide|JU-TRAV|Recueil de jugements du droit du travail
+SGGVP|St. Gallische Gerichts- und Verwaltungspraxis
+sic!|Zeitschrift für Immaterialgüter-, Informations- und Wettbewerbsrecht|Revue du droit de la propriété intellectuelle, de l'information et de la concurrence
+SJ|La Semaine judiciaire
+SJIR|Schweizerisches Jahrbuch für internationales Recht|ASDI|Annuaire suisse de droit international
+SJZ|Schweizerische Juristen-Zeitung|RSJ|Revue Suisse de Jurisprudence|RSG|Revista svizra da giurisprudenza
+SMI|Schweizerische Mitteilungen über Immaterialgüterrecht|RSPI|Revue suisse de la propriété intellectuelle
+SOG|Solothurnische Gerichtspraxis
+StE|Der Steuerentscheid
+StR|Steuer Revue|RF|Revue fiscale
+SVZ|Schweizerische Versicherungszeitschrift|RSA|Revue suisse d'assurances
+SZIER|Schweizerische Zeitschrift für internationales und europäisches Recht|SRIEL|Swiss Review of International and European Law|RSDIE|Revue suisse de droit international et de droit européen|Rivista svizzera di diritto internazionale e di diritto europeo
+SZS|Schweizerische Zeitschrift für Sozialversicherung und berufliche Vorsorge|RSAS|Revue suisse des assurances sociales et de la prévoyance professionnelle|Rivista svizzera delle assicurazioni sociali e della previdenza professionale
+SZW|Schweizerische Zeitschrift für Wirtschaftsrecht|Swiss Review of Business Law|RSDA|Revue suisse de droit des affaires
+URP|Umweltrecht in der Praxis|DEP|Le Droit de l'environnement dans la pratique
+VKKP|Veröffentlichungen der Schweizerischen Kartellkommission und des Preisüberwachers|Publ. CCSPr|Publications de la Commission suisse des cartels et du préposé à la surveillance des
+ZAK|Zeitschrift für die Ausgleichskassen|RCC|Revue à l'intention des caisses de compensation|Rivista per le casse di compensazione
+ZBGR|Schweizerische Zeitschrift für Beurkundungs- und Grundbuchrecht|RNRF|Revue Suisse du notariat et du registre foncier
+ZBJV|Zeitschrift des Bernischen Juristenvereins|RJB|Revue de la société des juristes bernois|RSJB
+ZBl|Schweizerisches Zentralblatt für Staats- und Verwaltungsrecht
+ZGGVP|Gerichts- und Verwaltungspraxis des Kantons Zug
+ZGRG|Zeitschrift für Gesetzgebung und Rechtsprechung in Graubünden|Rivista grigionese di legislazione e giurisprudenza|Revista grischuna per legislaziun e giurisdicziun
+ZöF|Zeitschrift für öffentliche Fürsorge
+ZSR|Zeitschrift für schweizerisches Recht|RDS|Revue de droit suisse|Rivista di diritto svizzero|Revista da dretg svizzer
+ZStP|Zürcher Steuerpraxis
+ZStrR|Schweizerische Zeitschrift für Strafrecht|RPS|Revue Pénale Suisse|Rivista Penale Svizzera|Revista penala svizra
+ZVW|Zeitschrift für Vormundschaftswesen|RDT|Revue du droit de tutelle|Rivista di diritto tutelare
+ZWR|Zeitschrift für Walliser Rechtsprechung|RVJ|Revue valaisanne de jurisprudence
+ZZW|Zeitschrift für Zivilstandswesen|REC|Revue de l'état civil|RSC|Rivista dello stato civile
+VAS|Verkehrsaktensammlung|RT|Recueil des Transports|Raccolta dei trasporti
+VPB|Verwaltungspraxis der Bundesbehörden|ACLFA|Administrative Case Law of the Federal Authorities|JAAC|Jurisprudence des autorités administratives de la Confédération|GAAC|Giurisprudenza delle autorità amministrative della Confederazione|PAAF|Pratica administrativa da las autoritads federalas
+aBV|alte Bundesverfassung|fCst|Former Federal Constitution|aCst.|ancienne Constitution fédérale|vCost.|vecchia Costituzione federale

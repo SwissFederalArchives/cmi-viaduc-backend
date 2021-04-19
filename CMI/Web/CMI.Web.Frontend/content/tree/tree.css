@@ -1,0 +1,43 @@
+#bodytree {
+/*	font-family:arial,helvetica,verdana,sans-serif;
+	font-size:0.75em;*/
+}
+#tree ul {
+	padding-bottom: 5px;
+	padding-top: 5px;	
+}
+#tree ul li {
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+#tree a {
+	text-decoration: none;
+	color: #454545;
+}
+.treesel {
+	/*font-weight: bold;*/
+}
+
+.treelink {
+	text-decoration: underline!important;
+	color: #006699!important;
+}
+
+button {
+        /*Reset's every elements apperance*/
+        background: none repeat scroll 0 0 transparent;
+        border: medium none;
+        border-spacing: 0;
+        color: #454545;
+/*		font-family:arial,helvetica,verdana,sans-serif;
+		font-size:0.75em;*/
+		cursor: pointer;
+        font-weight: normal;
+        line-height: 1.42rem;
+        list-style: none outside none;
+        margin: 0;
+        padding: 0px 2px;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+}

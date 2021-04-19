@@ -1,0 +1,78 @@
+﻿<html>
+
+<head>
+    <style TYPE="text/css">
+        body {
+            font-family: Sans-Serif;
+	 
+        }
+
+        .col {
+            width: 200px;
+        }
+	ul.first {
+		list-style-type: none;
+	}
+        
+    </style>
+</head>
+
+<body>
+    <b>Neues Einsichtsgesuch: {{User.Vorname}} {{User.Name}}, {{User.Organisation}}, {{User.Ort}} / {{Bestellung.OrderId}}</b>
+    <hr>
+    <table> 
+        <tr>
+            <td class="col">Name:</td>
+            <td>{{User.Name}}</td>
+        </tr>
+        <tr>
+            <td class="col">Vorname:</td>
+            <td>{{User.Vorname}}</td>
+        </tr>
+        <tr>
+            <td class="col">Organisation:</td>
+            <td>{{User.Organisation}}</td>
+        </tr>
+        <tr>
+            <td class="col">Ort:</td>
+            <td>{{User.Ort}}</td>
+        </tr>
+        <tr>
+            <td class="col">E-Mail:</td>
+            <td>{{User.EmailAddress}}</td>
+        </tr>
+    </table>
+    <hr>
+    <table> 
+        <tr>
+            <td class="col">Zweck:</td>
+            <td>{{Bestellung.BegründungEinsichtsgesuch}}</td>
+        </tr>
+    </table> 
+    <hr>
+    <table> 
+        <tr>
+            <td class="col">Dossiers:</td>
+            <td>
+                {{#VeList}}
+                    <a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Id}}">{{Signatur}}</a>,
+                        {{Aktenzeichen}}, {{Titel}}, {{Entstehungszeitraum}}<br> {{Schutzfristkategorie}}, {{Schutzfristdauer}} Jahre;
+                        Schutzfristende: {{Schutzfristende}};
+			in DIR vorhanden: {{#IdDir}}Ja{{/IdDir}}{{^IdDir}}Nein{{/IdDir}};
+			zuständige Stelle: {{ZustaendigeStelle}}; personenbezogene Unterlagen: {{#Bestellung.IstPersonenbezogeneNachforschung}}Ja{{/Bestellung.IstPersonenbezogeneNachforschung}}{{^Bestellung.IstPersonenbezogeneNachforschung }}Nein{{/Bestellung.IstPersonenbezogeneNachforschung}}; eigene Unterlagen: {{#Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Ja{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}{{^Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Nein{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}<br>{{/VeList}}
+			
+
+                
+            </td>
+        </tr>
+    </table> 
+    <hr>
+    <table> 
+        <tr>
+            <td class="col">Bestellung:</td>
+            <td>{{Bestellung.OrderId}}</td>
+        </tr>
+    </table>
+</body>
+
+</html>

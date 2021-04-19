@@ -1,0 +1,141 @@
+﻿Pa. Iv.|parlamentarische Initiative|parliamentary initiative|Iv. pa.|initiative parlementaire|Iv. Pa.|iniziativa parlamentare|iniziativa parlamentara
+Kt. Iv.|Standesinitiative|cantonal initiative|Iv. ct.|initiative d'un canton|initiative déposée par un canton|initiative émanant d'un canton|initiative cantonale|Iv. Ct.|iniziativa cantonale|iniziativa dal chantun|iniziativa dals chantuns
+Eintretensdebatte|introductory debate|débat d'entrée en matière|dibattito di entrata in materia|debatta d'entrar en materia|debatta d'entrada en materia|debatta d'entrada
+Eintretensbeschluss|decision on introduction|décision d'entrer en matière|décision d'entrée en matière|decisione di entrata in materia|decisiun d'entrar en materia
+Eintretensreferat|introductory speech|introductory report|introductory presentation|exposé d'entrée en matière|relazione di entrata in materia|referat d'entrada en materia
+Nichteintreten|non-approval of introduction|non-entrée en matière|non entrata in materia|non entrata nel merito|betg entrar en materia
+Rückweisung|referral|referral for review|renvoi|rinvio|refusaziun
+Rückweisungsbeschluss|referral decision|decision on referral|decision to refer|décision de renvoi|decisione di rinvio|conclus da refusaziun
+Abschreibung|abandonment|abandoning|classement|stralcio dal ruolo|stralcio|stritgada
+abschreiben|abandon|classer|stritgar
+verwerfen|ablehnen|reject|rejeter|respingere|rifiutare|refusar
+Petitionsrecht|Petitionsfreiheit|right of petition|droit de pétition|liberté de pétition|diritto di petizione|libertà di petizione|dretg da petiziun
+Petition|Bittschrift|petition|pétition|petizione|petiziun
+Fraktion|parliamentary group|group|faction|groupe parlementaire|groupe|gruppo parlamentare|gruppo|fracziun|fracziun parlamentara
+Zweikammersystem|bicameral system|two-chamber system|bicamérisme|bicaméralisme|système bicaméral|système des deux chambres|bicameralismo|sistema bicamerale|sistem da duas chombras
+ausserordentliche Session|ausserordentliche Sitzung|extraordinary session|session extraordinaire|sessione straordinaria|sessiun extraordinaria
+Sondersession|special session|session spéciale|sessione speciale|sessiun speziala|sessiun extraordinaria
+referendumspflichtiger Bundesbeschluss|federal decree subject to a referendum|arrêté fédéral soumis au référendum|decreto federale sottostante a referendum|decreto federale sottoposto a referendum|decreto federale soggetto a referendum
+allgemeinverbindlicher Bundesbeschluss|general federal decree|general decree|arrêté fédéral de portée générale|decreto federale di obbligatorietà generale|decreto federale di carattere obbligatorio generale|conclus federal generalmain liant
+dringlicher Bundesbeschluss|emergency federal decree|arrêté fédéral urgent|decreto federale urgente|conclus federal urgent
+Abgeordneter|Abgeordnete|Parlamentarier|Parlamentarierin|Ratsmitglied|representative|parliamentarian|member of Parliament|assembly member|député|parlementaire|membre d'un conseil|deputato|parlamentare|deputà|deputada|parlamentari|parlamentaria
+parlamentarische Gruppe|Gruppe|cross-party group|intergroupe parlementaire|intergroupe|groupement parlementaire|groupement|intergruppo parlamentare|intergruppo|gruppa parlamentara
+Büro der Vereinigten Bundesversammlung|Büro der Bundesversammlung|Office of the United Federal Assembly|Office of the Federal Assembly|Bureau de l'Assemblée fédérale (Chambres réunies)|Ufficio dell'Assemblea federale plenaria|Biro da l'Assamblea federala plenara
+Fraktionspräsidentenkonferenz|Konferenz der Fraktionspräsidenten|Conference of Parliamentary Group Presidents|Conference of Parliamentary Party Chairmen|conférence des présidents de groupe|conferenza dei presidenti di gruppo|conferenza dals presidents da fracziun
+gemeinsame Kommission|joint committee|commission commune|commissione congiunta|cumissiun cuminaivla
+Delegation|delegation|délégation|delegazione|delegaziun
+Subkommission|sub-committee|sous-commission|sottocommissione|sutcumissiun
+provisorisches Büro des Nationalrates|provisorisches Büro|provisional office of the National Council|provisional office|bureau provisoire du Conseil national|bureau provisoire|Ufficio provvisorio del Consiglio nazionale|Ufficio provvisorio|biro provisoric dal Cussegl naziunal
+Alterspräsident|Alterspräsident des Nationalrates|Alterspräsidentin|Alterspräseidentin des Nationalrates|oldest member|doyen de fonction|doyen de fonction du Conseil national|presidente decano|presidente decano del Consiglio nazionale|president senior|presidenta seniora
+Eid|oath|serment|giuramento|sarament
+Gelübde|solemn promise|promesse solennelle|promessa solenne|empermischun
+Vereidigung|swearing-in|assermentation|giuramento|saramentaziun
+Konstituierung|constitution|costituzione|constituziun
+ordentliche Session|ordentliche Sitzung|ordinary session|session ordinaire|sessione ordinaria|sessiun ordinaria
+Nachmittagssitzung des Nationalrats|Nachmittagssitzung|additional sitting of the National Council|additional sitting|afternoon sitting|séance de relevée du Conseil national|séance supplémentaire|seduta pomeridiana del Cosniglio nazionale|seduta pomeridiana|seduta dal suentermezdi dal Cussegl naziunal
+geheime Beratung|sitting in camera|délibérations à huis clos|deliberazione segreta|tractativa secreta
+Fragestunde|question time|question hour|heure des questions|ora delle domande|ura da dumondas
+absolute Immunität|absolute immunity|immunité absolue|immunità assoluta|immunitad absoluta
+unbedingte Immunität|absolute immunity|irresponsabilité absolue|irresponsabilità assoluta|irresponsabladad absoluta
+relative Immunität|relative immunity|immunité relative|immunità relativa|immunitad relativa
+bedingte Immunität|relative immunity|irresponsabilité relative|irresponsabilità relativa|irresponsabladad relativa
+Sessionsteilnahmegarantie|Verfolgungsprivileg|session attendance guarantee|inviolability|garantie de participation aux sessions|inviolabilité|garanzia di partecipazione alle sessioni|inviolabilità|garanzia da pudair sa participar a las sessiuns|inviolabilitad
+Unvereinbarkeit|incompatibility|incompatibilité|incompatibilità|incumpatibilitad
+parlamentarischer Vorstoss|Vorstoss|persönlicher Vorstoss|parliamentary procedural request|procedural request|intervention parlementaire|intervention|intervention personnelle|intervento parlamentare|intervento|intervenziun parlamentara|intervenziun
+Motion|Mo.|motion|mozione|moziun
+Postulat|Po.|postulate|postulat|postulato
+Interpellation|Ip.|interpellation|interpellanza|interpellaziun
+dringliche Interpellation|dringlich erklärte Interpellation|urgent interpellation|emergency interpellation|interpellation urgente|interpellation déclarée urgente|interpellanza urgente|interpellanza dichiarata urgente|interpellaziun urgenta
+Anfrage|A|einfache Anfrage|EA|question|ordinary question|Q|question ordinaire|QO|interrogazione|I|interrogazione ordinaria|IO|dumonda|dumonda ordinaria
+dringliche Anfrage|dringliche einfache Anfrage|urgent question|urgent ordinary question|emergency ordinary question|question urgente|question ordinaire urgente|interrogazione urgente|interrogazione ordinaria urgente|dumonda urgenta
+Empfehlung|recommendation|recommandation|raccomandazione|recumandaziun
+Begründung|statement of reasons|développement|motivazione|motivaziun
+Motionär|Motionärin|Verfasser einer Motion|Verfasserin einer Motion|Urheber einer Motion|Urheberin einer Motion|author of a motion|auteur d'une motion|motionnaire|autore di una mozione|moziunari|moziunaria
+Interpellant|Interpellantin|Verfasser einer Interpellation|Verfasserin einer Interpellation|Urheber einer Interpellation|Urheberin einer Interpellation|author of an interpellation|interpellant|auteur d'une interpellation|interpellateur|autore di un'interpellanza|interpellante|interpellanta
+Auftrag|mandate|mandat|mandato|incumbensa
+Ordnungsantrag|point of order|motion d'ordre|mozione d'ordine|proposta davart l'urden
+Kommissionssprecher|Kommissionssprecherin|Berichterstatter|Berichterstatterin|committee rapporteur|rapporteur|rapporteur de commission|relatore della commissione|relatore|pledader da la cumissiun|pledadra da la cumissiun
+Sprecher der Kommissionsminderheit|Sprecherin der Kommissionsminderheit|Sprecher der Minderheit|Sprecherin der Minderheit|Berichterstatter der Minderheit|Berichterstatterin der Minderheit|rapporteur for a committee minority|minority rapporteur|porte-parole de la minorité d'une commission|rapporteur de minorité|porte-parole de minorité|relatore della minoranza di una commissione|relatore di minoranza|pledader da la minoritad d'ina cumissiun|pledader da minoritad
+Fraktionssprecher|Fraktionssprecherin|group spokesperson|porte-parole de groupe|portavoce di gruppo|pledader da la fracziun|pledadra da la fracziun
+Nichteintretensantrag|Antrag auf Nichteintreten|motion for non-approval of introduction|proposition de non-entrée en matière|proposta di non entrata in materia|proposta da betg entrar en materia
+Eintreten|approval of introduction|introduction of a bill|introduction|entrée en matière|entrata in materia|entrada en materia
+Rückweisungsantrag|Antrag auf Rückweisung|proposal for referral|proposition de renvoi|proposta di rinvio|proposta da refusaziun
+persönliche Erklärung|personal statement|déclaration personnelle|dichiarazione personale|decleraziun persunala
+Antragsteller|Antragstellerin|Antragssteller|Antragsstellerin|Antragsstellender|Antragsstellende|person submitting a proposal|auteur d'une proposition|proponente|proponent|proponenta
+Hauptantrag|main proposal|proposition principale|proposta principale|proposta principala
+Ergänzungsantrag|proposed supplement|proposition demandant des compléments|proposta di complemento|proposta da cumplement
+Streichungsantrag|proposed deletion|proposition demandant des suppressions|proposta di stralcio|proposta da stritgar
+Unterabänderungsantrag|proposed sub-amendment|sub-amendment proposal|proposition de sous-amendement|proposta di modificazione di emendamento|proposta di sottoemendamento|proposta da submidada
+Rückkommensantrag|proposal for reconsideration|proposition de réexamen|proposition de nouvel examen|proposta di nuova deliberazione|proposta di nuovo esame|proposta di rivenire su una deliberazione|proposta da revegnir
+Rückkommen|reconsideration|réexamen|nouvel examen|nuova deliberazione|nuovo esame|reponderaziun
+Dringlichkeitsklausel|urgency clause|clause d'urgence|clausola d'urgenza|clausola di urgenza|clausula d'urgenza
+Referendumsklausel|referendum clause|clause référendaire|clause de référendum|clausola di referendum|clausola referendaria|clausula da referendum
+Unterabänderung|sub-amendment|sous-amendement|sottoemendamento|submidada
+Gesamtabstimmung|vote on the entire bill|vote on the bill in its entirety|vote on the entire text|vote on the enactment in its entirety|vote sur l'ensemble|vote d'ensemble|votazione sul complesso|votaziun generala
+Schlussabstimmung|final vote|vote final|votazione finale|votaziun finala
+getrennte Abstimmung|separate vote|vote séparé|votazione separata|votaziun separada
+Stimmabgabe durch Aufstehen|voting by standing up|vote par assis et levé|votazione per alzata e seduta|votaziun cun star si da la sutga
+Abstimmung unter Namensaufruf|Stimmabgabe unter Namensaufruf|roll call voting|vote by roll call|vote par appel nominal|vote à l'appel nominal|votazione per appello nominale|votaziun sut appel nominal
+Stimmabgabe durch Handerheben|voting by a show of hands|vote à main levée|votazione per alzata di mano|votaziun cun tegnair si il maun
+Stichentscheid|casting vote|voix prépondérante|voix décisive|voto decisivo|voto preponderante|decisiun da tagl
+Einzelwahl|individual election|élection individuelle|elezione individuale|elecziun individuala
+Gesamtwahl|collective election|élection collective|elezione collettiva|elecziun collectiva
+Fahne|flag|synoptic chart|dépliant|tableau synoptique|paragramma|tabella sinottica|bandiera|tabella sinoptica
+Amtl. Bull.|Amtliches Bulletin der Bundesversammlung|AB|Amtliches Bulletin|Official Bulletin of the Federal Assembly|Official Bulletin|BO|Bulletin officiel de l'Assemblée fédérale|Bulletin officiel|Boll. Uff.|Bollettino ufficiale dell'Assemblea federale|Bollettino Ufficiale|BU|Bulletin uffizial da l'Assamblea federala|Bulletin uffizial
+Übersicht über die Verhandlungen|Übersicht über die Ratsverhandlungen|summary of debates|résumé des délibérations|riassunto delle deliberazioni|resumaziun da las tractativas
+Bericht über die Richtlinien der Regierungspolitik|outline report on government policy|rapport sur les grandes lignes de la politique gouvernementale|rapporto sulle linee direttive della politica di governo|rapport davart las directivas da la politica da regenza
+Beschlussentwurf|Entwurf eines Bundesbeschlusses|Beschlussesentwurf|draft decree|projet d'arrêté|disegno di decreto|sboz d'in conclus|sboz per in conclus
+Zustandekommen einer Volksinitiative|Zustandekommen einer Initiative|success of a popular initiative|success of an initiative|aboutissement d'une initiative populaire|aboutissement d'une initiative|riuscita di un'iniziativa popolare|riuscita di un'iniziativa|reussida d'ina iniziativa dal pievel|reussida d'ina iniziativa
+Vollzug eines Erlasses|implementation of a legislative enactment|exécution d'un acte législatif|exécution d'un acte normatif|esecuzione di un atto normativo|esecuzione di un atto legislativo|execuziun d'in decret
+Bekanntmachung eines Erlasses|publication of a legislative enactment|publication d'un acte législatif|pubblicazione di un atto legislativo|publicaziun d'in decret
+förmliche Zeugeneinvernahme|förmliche Einvernahme eines Zeugen|Zeugeneinvernahme|formal interviewing of a witness|interviewing of a witness|formal evidentiary hearing|audition formelle d'un témoin|audition d'un témoin|esame formale di un testimone|esame di un testimone|audizione formale di un testimone|audizione di un testimone|interrogaziun formala d'in perditga|interrogaziun d'in perditga
+Urheber einer parlamentarischen Initiative|Urheberin einer parlamentarischen Initiative|Urheber einer Initiative|Urheberin einer Initiative|Initiant|Initiantin|author of a parliamentary initiative|author of an initiative|auteur d'une initiative parlementaire|auteur d'une initiative|autore di un'iniziativa parlamentare|autore di un'iniziativa|promotore di un'iniziativa parlamentare|promotore di un'iniziativa|autur d'ina iniziativa parlamentara|autura d'ina iniziativa parlamentara|autur d'ina iniziativa|autura d'ina iniziativa
+Empfehlung auf Ablehnung|Ablehnungsempfehlung|Antrag auf Verwerfung|Verwerfungsantrag|recommendation of rejection|proposal for the rejection|rejection proposal|recommandation de rejet|raccomandazione di respingere|recumandaziun da refusar
+Empfehlung auf Annahme|Annahmeempfehlung|recommendation of acceptance|acceptance recommendation|recommandation d'acceptation|raccomandazione di accettare|recumandaziun d'acceptar
+schriftliches Gutachten|written expert opinion|written opinion|expertise écrite|rapport d'expertise écrit|avis écrit|perizia scritta|parere scritto|expertisa en scrit
+unbedingtes Recht|absolute right|unconditional right|droit absolu|diritto assoluto|dretg absolut
+Expertenbericht|expert report|expert opinion|rapport d'expertise|rapporto peritale|rapport d'experts|rapport d'expertas e d'experts
+Dringlicherklärung|Dringlichkeitserklärung|declaration of urgency|déclaration d'urgence|dichiarazione d'urgenza|decleraziun d'urgenza|decleranza d'urgenza
+Amtsverschwiegenheit|official secrecy|secret de fonction|secret professionnel|segreto d'ufficio|secret d'uffizi
+gemeinsame Verhandlung|joint proceedings|délibération commune|deliberazione in comune|deliberaziun communabla
+Stimmengleichheit|tie|tie in votes|égalité des voix|parité des voix|parità di voti|paritad da las vuschs
+Aktenherausgabe|Herausgabe von Akten|Herausgabe von Unterlagen|production of documents|handover of documents|production de documents|production de pièces|produzione di documenti|producziun da documents|restituziun da documents
+Volksinitiative in der Form des ausgearbeiteten Entwurfs|Volksinitiative in Form eines ausgearbeiteten Entwurfs|Initiative in der Form des ausgearbeiteten Entwurfs|popular initiative in the form of a draft proposal|popular initiative in the form of a specific draft|initiative in the form of a specific draft|initiative populaire revêtant la forme d'un projet rédigé|initiative populaire présentée sous la forme d’un projet rédigé|initiative populaire présentée sous forme de projet rédigé de toutes pièces|initiative revêtant la forme d'un projet rédigé|iniziativa popolare in forma di progetto elaborato|iniziativa popolare presentata in forma di progetto elaborato|iniziativa popolare presentata sotto forma di progetto elaborato|iniziativa popolare elaborata|iniziativa presentata in forma di progetto elaborato|iniziativa dal pievel en furma d'in sboz elavurà|iniziativa en furma d'in sboz elavurà
+Eröffnungstag einer Session|opening day of a session|jour d'ouverture d'une session|giorno d'apertura d'una sessione|di d'avertura d'ina sessiun
+Teilrevision der Bundesverfassung|Partialrevision der Bundesverfassung|partial revision of the Federal Constitution|révision partielle de la Constitution|révision partielle de la Constitution fédérale|revisione parziale della Costituzione federale|revisione parziale della Costituzione|revisiun parziala da la Constituziun federala
+Wintersession|winter session|session d'hiver|sessione invernale|sessiun d'enviern
+Sommersession|summer session|session d'été|sessione estiva|sessiun da stad
+ordentliche Gesamterneuerung des Nationalrats|Gesamterneuerung des Nationalrats|Gesamterneuerung|ordinary general election to the National Council|ordinary general election|general election to the National Council|general election|renouvellement intégral ordinaire du Conseil national|renouvellement ordinaire du Conseil national|renouvellement intégral du Conseil national|rinnovo ordinario del Consiglio nazionale|rinnovazione ordinaria del Consiglio nazionale|rinnovo integrale del Consiglio nazionale|rinnovo integrale|renovaziun totala ordinaria dal Cussegl naziunal|renovaziun totala dal Cussegl naziunal|renovaziun totala
+ausserordentliche Gesamterneuerung des Nationalrats|ausserordentliche Gesamterneuerung|extraordinary general election to the National Council|extraordinary general election|renouvellement intégral extraordinaire du Conseil national|renouvellement intégral extraordinaire|rinnovo straordinario del Consiglio nazionale|rinnovazione straordinaria del Consiglio nazionale|rinnovazione straordinaria|renovaziun totala extraordinaria dal Cussegl naziunal|renovaziun totala extraordinaria
+Rückzugsklausel|withdrawal clause|clause de retrait|clausola di ritiro|clausula da retratga
+Einheit der Materie|cohesion of subject matter|unité de la matière|unità materiale|unità della materia|unitad da la materia
+Einheit der Form|consistency of form|unité de la forme|unità formale|unità della forma|unitad da la furma
+Volksinitiative in der Form der allgemeinen Anregung|Volksinitiative in Form der allgemeinen Anregung|Initiative in der Form der allgemeinen Anregung|Initiative in Form der allgemeinen Anregung|popular initiative in the form of a general proposal|initiative in the form of a general proposal|initiative populaire conçue en termes généraux|initiative populaire revêtant la forme d'une proposition conçue en termes généraux|initiative conçue en termes généraux|initiative revêtant la forme d'une proposition conçue en termes généraux|iniziativa popolare presentata in forma di proposta generica|iniziativa popolare generica|iniziativa presentata in forma di proposta generica|iniziativa popolare presentata in forma di proposta generale|iniziativa presentata in forma generica|iniziativa dal pievel en furma d'ina proposta generala|iniziativa en furma d'ina proposta generala
+Redezeit|speaking time|time allowed for speeches|temps de parole|tempo di parola|durada dal pled|temp da discurrer
+Begründung eines Antrags|Antragsbegründung|statement of reasons for a proposal|développement d'une proposition|motivazione di una proposta|motivaziun d'ina proposta
+elektronisches Abstimmungssystem|electronic voting system|système de vote électronique|sistema di voto elettronico|sistem da votaziun electronic|sistem per la votaziun electronica
+Anzeigetafel|scoreboard|panneau électronique|tabellone elettronico|tavla d'avis
+Abteilung der Bundesversammlung|section de l'Assemblée fédérale|sezione dell'Assemblea federale|secziun da l'Assamblea federala
+Offenlegungspflicht|Pflicht zur Offenlegung der Interessenbindungen|duty of disclosure|obligation de signaler les intérêts|obligation de déclarer les intérêts|obbligo d'indicare le relazioni d'interesse|obbligo d'indicazione delle relazioni d'interesse|obbligo di dichiarare le relazioni d'interesse|obbligo di rendere pubbliche le relazioni d'interesse|obligaziun da transparenza
+parlamentarisches Geschäft|Parlamentsgeschäft|Ratsgeschäft|Geschäft|item of parlamentary business|item of business|business|objet parlementaire|objet|oggetto parlamentare|oggetto sottoposto alle Camere|oggetto|fatschenta parlamentara|fatschenta da las chombras|fatschenta
+Eingabe|submission|requête|domanda|domanda presentata da cittadini|domanda concernente la gestione|instanza
+Verständigungslösung|compromise solution|solution de compromis|intesa|cumpromiss
+erstberatende Kommission|Kommission des Erstrates|committee of the first chamber|commission du conseil prioritaire|commissione della prima Camera|commissione della Camera prioritaria|cumissiun da la chombra prioritara
+Disziplinaruntersuchung|disciplinary investigation|enquête disciplinaire|inchiesta disciplinare|examinaziun disciplinara
+Geschäftsliste|Liste der Parlamentsgeschäfte|liste des objets à traiter|liste des objets parlementaires à traiter|liste des objets parlementaires|elenco degli oggetti in deliberazione|elenco degli affari parlamentari|glista da las fatschentas|glista da las fatschentas parlamentaras
+Bundesrichterwahl|election of judges of the Federal Supreme Court|appointment of judges to the Federal Supreme Court|élection des juges du Tribunal fédéral|elezione dei giudici del Tribunale federale|elecziun dals derschaders dal Tribunal federal
+Ergänzungswahl|élection complémentaire|elezione complementare|elecziun cumplementara
+Wiederwahl|re-election|réélection|rielezione|reelecziun
+Sachbereichskommission|Legislativkommission|specialist committee|specialised committee|legislative committee|commission thématique|commission législative|commissione tematica|commissione legislativa|cumissiun specifica|cumissiun legislativa
+Lobbyist|Lobbyistin|lobbyist|lobbyiste|lobbista|lobist|lobista
+Milizparlament|Halbberufsparlament|part-time parliament|militia parliament|semi-professional parliament|parlement de milice|parlamento di milizia|parlament da milissa
+Mitunterzeichner|Mitunterzeichnerin|co-signatory|cosignataire|cofirmatario|consutsegnader|consutsegnadra
+Zwischenfrage|incidental question|question à l'orateur|domanda intelocutoria|dumonda intermediara
+Eventualabstimmung|elimination vote|vote préliminaire|votazione eventuale|votaziun eventuala
+hängig|pending|pendant|pendente|pendent
+Urheber eines parlamentarischen Vorstosses|Urheberin eines parlamentarischen Vorstosses|Urheber eines Vorstosses|Urheberin eines Vorstosses|author of a parliamentary procedural request|author of a procedural request|auteur d'une intervention parlementaire|auteur d'une intervention|autore di un intervento parlamentare|iniziatore di un intervento parlamentare|autore di un intervento|autur d'ina intervenziun parlamentara|autura d'ina intervenziun parlamentara|autur d'ina intervenziun|autura d'ina intervenziun
+elektronische Abstimmung|elektronische Stimmabgabe|electronic voting|vote électronique|voto elettronico|votaziun electronica
+Herbstsession|autumn session|session d’automne|sessione autunnale|sessiun d'atun
+Frühjahrssession|spring session|session printemps|sessione primaverile|sessiun da primavaira
+Ordnungsruf|call to order|rappel à l'ordre|richiamo all'ordine|clom a l'urden
+Geschäftsnummer|file number|numéro d'objet|numero dell'oggetto|numer da la fatschenta

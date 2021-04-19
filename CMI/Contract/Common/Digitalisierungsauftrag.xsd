@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="DigitalisierungsAuftrag">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Ablieferung" type="AblieferungType"/>
+                <xs:element name="OrdnungsSystem" type="OrdnungsSystemType"/>
+                <xs:element name="Dossier" type="VerzEinheitType" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation/>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="Auftragsdaten" type="AuftragsdatenType" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="AblieferungType">
+        <xs:sequence>
+            <xs:element name="Ablieferungsnummer" type="xs:string"/>
+            <xs:element name="AblieferndeStelle" type="xs:string"/>
+            <xs:element name="AktenbildnerName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OrdnungsSystemType">
+        <xs:sequence>
+            <xs:element name="Signatur" type="xs:string"/>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element minOccurs="0" name="Stufe" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Nicht notwendig für Ingest, macht Struktur jedoch klarer.
+Auf oberster Ebene = Bestand oder Teilbestand.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="UntergeordnetesOrdnungsSystem" type="OrdnungsSystemType">
+                <xs:annotation>
+                    <xs:documentation>Allfällig vorhandene Serie unterhalb Bestand/Teilbestand/Serie.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BehaeltnisType">
+        <xs:sequence>
+            <xs:element name="BehaeltnisCode" type="xs:string"/>
+            <xs:element name="BehaeltnisTyp" type="xs:string"/>
+            <xs:element name="InformationsTraeger" type="xs:string" minOccurs="0"/>
+            <xs:element name="Standort" type="xs:string" minOccurs="0"/>
+            <xs:element name="EnthalteneVerzEinheiten" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Enthaltene Verz-Einheiten sind nur für für die Stufe Dossier zwingend</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="VerzEinheit" type="VerzEinheitKurzType"> </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="VerzEinheitType">
+        <xs:sequence>
+            <xs:element name="Signatur" type="xs:string" nillable="true"/>
+            <xs:element name="Titel" type="xs:string"/>
+            <xs:element name="Entstehungszeitraum" type="xs:string"/>
+            <xs:element name="Stufe" type="xs:string"/>
+            <xs:element name="FrueheresAktenzeichen" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="Aktenzeichen" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="Zusatzkomponente" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="Darin" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="Form" type="xs:string" minOccurs="0"/>
+            <xs:element minOccurs="0" name="Archivnummer" type="xs:string"/>
+            <xs:element name="VerzEinheitId" type="xs:long"/>
+            <xs:element name="UntergeordneteVerzEinheiten" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="VerzEinheit" type="VerzEinheitType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Behaeltnisse" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation/>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="Behaeltnis" type="BehaeltnisType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="InSchutzfrist" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="VerzEinheitKurzType">
+        <xs:sequence>
+            <xs:element name="Signatur" type="xs:string"/>
+            <xs:element name="Titel" type="xs:string"/>
+            <xs:element name="Entstehungszeitraum" type="xs:string" minOccurs="0"/>
+            <xs:element name="Aktenzeichen" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AuftragsdatenType">
+        <xs:sequence>
+            <xs:element name="BemerkungenKunde" type="xs:string"/>
+            <xs:element name="BemerkungenBar" type="xs:string"/>
+            <xs:element name="AuftragsId" type="xs:string"/>
+            <xs:element name="Bestelldatum" type="xs:dateTime"/>
+            <xs:element name="BestelleinheitId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Id der VE die die Bestellung ausgelöst hat. Oder &lt; 0 wenn keine verzeichnete VE hinter der Bestellung steht.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Benutzungskopie" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

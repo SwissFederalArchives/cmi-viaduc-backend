@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2019-04-17T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot636910866329937072">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_bxRGKgql7O6qYdX7MKtJ56_D">
+        <name>D_o_k_u_m_e_n_t_0000002</name>
+        <originalName>D_o_k_u_m_e_n_t_0000002</originalName>
+        <datei id="_Gkg3ZzYiEr4U733pDA9HVw">
+          <name>00000007.jp2</name>
+          <originalName>00000007.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e27292e29a2fb003c465901c5e8cebe8</pruefsumme>
+        </datei>
+        <datei id="_eUXhnbZckzKXZgrrel9SUA">
+          <name>00000007_PREMIS.xml</name>
+          <originalName>00000007_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>334870bf0b69e92e3725cb54d3783eff</pruefsumme>
+        </datei>
+        <datei id="_K1RfZFsm6MPocBjQluAiDQ">
+          <name>00000008.jp2</name>
+          <originalName>00000008.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b4541d9fe24f9b0117a25f9446b9cd02</pruefsumme>
+        </datei>
+        <datei id="_fOAVK0irZHqufSJ5qVH4iN">
+          <name>00000008_PREMIS.xml</name>
+          <originalName>00000008_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2ea061986f7eef1129cd5a6cdc892f40</pruefsumme>
+        </datei>
+        <datei id="_bJYn2150eCM8o39T72ARmD">
+          <name>00000009.jp2</name>
+          <originalName>00000009.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0c85aac66a097a9dbded911ff7619e0f</pruefsumme>
+        </datei>
+        <datei id="_0d0NNXBYIeuFBUhS2tDOu4">
+          <name>00000009_PREMIS.xml</name>
+          <originalName>00000009_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a28f012dab6c2792ea7706b107b9af1f</pruefsumme>
+        </datei>
+        <datei id="_TbMr8rYfSTO2IkgSwcIIxC">
+          <name>00000010.jp2</name>
+          <originalName>00000010.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5a113f19d613499ed760295e83a48aa4</pruefsumme>
+        </datei>
+        <datei id="_tM33gZBNkFvuhlGjjZc1Cp">
+          <name>00000010_PREMIS.xml</name>
+          <originalName>00000010_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5fd525b7b294178ba5efd7ad0a13ae7b</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_rfYKWUAHr9ZGphEtV71CaM_D">
+        <name>D_o_k_u_m_e_n_t_0000001</name>
+        <originalName>D_o_k_u_m_e_n_t_0000001</originalName>
+        <datei id="_ZN78fvX87PggttZjBr6vJd">
+          <name>00000003.jp2</name>
+          <originalName>00000003.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>75ce130391d1e80f065829d0e31c787c</pruefsumme>
+        </datei>
+        <datei id="_ro7B3OcpjYSExWyRWcZ2Pi">
+          <name>00000003_PREMIS.xml</name>
+          <originalName>00000003_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>208078d072052c701e739bb8f2d32fa4</pruefsumme>
+        </datei>
+        <datei id="_H3lP0XcCjyrXZMrUq8G3r3">
+          <name>00000004.jp2</name>
+          <originalName>00000004.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6d4efc4c70329806789e6bed2a9a245d</pruefsumme>
+        </datei>
+        <datei id="_X2EYf7XS983dhmPDlyQnkJ">
+          <name>00000004_PREMIS.xml</name>
+          <originalName>00000004_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0e09643d5832904633da2a1df9a4222d</pruefsumme>
+        </datei>
+        <datei id="_qvwfgKqJpT1s6Ia3cQo9kF">
+          <name>00000005.jp2</name>
+          <originalName>00000005.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>428dbda0c236bba0dfcb41abddc25ac5</pruefsumme>
+        </datei>
+        <datei id="_ULaPLdbHzZKitHmMeAckXl">
+          <name>00000005_PREMIS.xml</name>
+          <originalName>00000005_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b28343a74cdceec0fd254efe860ac63d</pruefsumme>
+        </datei>
+        <datei id="_mjbfVl8MT32AfYlMW9PQgG">
+          <name>00000006.jp2</name>
+          <originalName>00000006.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>77d6abd02ddb6dc679c9c487845e0fb2</pruefsumme>
+        </datei>
+        <datei id="_NucP8hY33WXonZzJMfVcO7">
+          <name>00000006_PREMIS.xml</name>
+          <originalName>00000006_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7de65baf414acbb33d50e937d0cac679</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_vndYhE4gosSNJ9ORM5sgmM_D">
+        <name>U_m_s_c_h_l_a_g_0000001</name>
+        <originalName>U_m_s_c_h_l_a_g_0000001</originalName>
+        <datei id="_ASZpvfnSuZgvwLaRhHVU81">
+          <name>00000001.jp2</name>
+          <originalName>00000001.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a126a3262e20eb7066bb714cbd2900e3</pruefsumme>
+        </datei>
+        <datei id="_w8SL24x0Eybr8UUUTjWsF3">
+          <name>00000001_PREMIS.xml</name>
+          <originalName>00000001_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>666e7aa7d47b02af098f36c5a173f814</pruefsumme>
+        </datei>
+        <datei id="_Kt7U0x88X9VK5WY7gXQyrW">
+          <name>00000002.jp2</name>
+          <originalName>00000002.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>573f37f98c8a187d25025a4007a3079d</pruefsumme>
+        </datei>
+        <datei id="_HJpiD8hzgLbvmq3OYdz9k3">
+          <name>00000002_PREMIS.xml</name>
+          <originalName>00000002_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4b6f40c23f7e73f7149da6c2bad492ce</pruefsumme>
+        </datei>
+      </ordner>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesverwaltung (Bern)</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von />
+      <bis />
+    </entstehungszeitraum>
+    <ablieferungsnummer>1000/1941_2755139</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Abteilung für Landwirtschaft (k. A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Abteilung für Landwirtschaft: Zentrale Ablage (1883-1979)</name>
+      <ordnungssystemposition id="_Ag9Z50nlpLajuWwzhGm3t5">
+        <nummer>5</nummer>
+        <titel>Tierzucht</titel>
+        <ordnungssystemposition id="_1YofjGXIXkeea927J1V0wB">
+          <nummer>56</nummer>
+          <titel>Viehexport, Kompensationen (Gross- und Kleinvieh, Geflügel)</titel>
+          <ordnungssystemposition id="_Xm0gNe0rjgYp4pSaW6EyDQ">
+            <nummer>560</nummer>
+            <titel>Viehexport, Kompensationen</titel>
+            <dossier id="_6fTunOekPrIHQ0Qh0Kgm1D">
+              <aktenzeichen>560</aktenzeichen>
+              <titel>Allgemeines (Gross- und Kleinvieh, Geflügel) (I 1)</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <eroeffnungsdatum />
+              <abschlussdatum />
+              <entstehungszeitraum>
+                <von>
+                  <datum>1933-01-01</datum>
+                </von>
+                <bis>
+                  <datum>1935-12-31</datum>
+                </bis>
+              </entstehungszeitraum>
+              <zusatzDaten>
+                <merkmal name="Signatur">E7220A#1000/1941#275*</merkmal>
+                <merkmal name="Stufe">Dossier</merkmal>
+                <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10015*","Title":"Abteilung für Landwirtschaft (1881-1979)","DateRangeText":"1855-1979","ArchiveRecordId":"4355"},{"IconId":12,"Level":"Teilbestand","RefCode":"E7220A*","Title":"Abteilung für Landwirtschaft: Zentrale Ablage (1883-1979)","DateRangeText":"1864-1984","ArchiveRecordId":"4356"},{"IconId":19,"Level":"Serie","RefCode":"E7220A#5","Title":"Tierzucht","DateRangeText":null,"ArchiveRecordId":"3790013"},{"IconId":19,"Level":"Serie","RefCode":"E7220A#56","Title":"Viehexport, Kompensationen (Gross- und Kleinvieh, Geflügel)","DateRangeText":null,"ArchiveRecordId":"3790127"},{"IconId":19,"Level":"Serie","RefCode":"E7220A#560","Title":"Viehexport, Kompensationen","DateRangeText":null,"ArchiveRecordId":"3790128"},{"IconId":2,"Level":"Dossier","RefCode":"E7220A#1000/1941#275*","Title":"Allgemeines (Gross- und Kleinvieh, Geflügel) (I 1)","DateRangeText":"1933-1935","ArchiveRecordId":"2755139"}]</merkmal>
+                <merkmal name="Identifikation digitales Magazin">a0afd572-062a-4d7f-8fd8-c50a00f382bf@_6fTunOekPrIHQ0Qh0Kgm1D</merkmal>
+                <merkmal name="Entstehungszeitraum Anzeigetext">1933 - 1935</merkmal>
+              </zusatzDaten>
+              <dokument id="_bxRGKgql7O6qYdX7MKtJ56">
+                <titel>D_o_k_u_m_e_n_t_0000002</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_Gkg3ZzYiEr4U733pDA9HVw</dateiRef>
+                <dateiRef>_eUXhnbZckzKXZgrrel9SUA</dateiRef>
+                <dateiRef>_K1RfZFsm6MPocBjQluAiDQ</dateiRef>
+                <dateiRef>_fOAVK0irZHqufSJ5qVH4iN</dateiRef>
+                <dateiRef>_bJYn2150eCM8o39T72ARmD</dateiRef>
+                <dateiRef>_0d0NNXBYIeuFBUhS2tDOu4</dateiRef>
+                <dateiRef>_TbMr8rYfSTO2IkgSwcIIxC</dateiRef>
+                <dateiRef>_tM33gZBNkFvuhlGjjZc1Cp</dateiRef>
+              </dokument>
+              <dokument id="_rfYKWUAHr9ZGphEtV71CaM">
+                <titel>D_o_k_u_m_e_n_t_0000001</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_ZN78fvX87PggttZjBr6vJd</dateiRef>
+                <dateiRef>_ro7B3OcpjYSExWyRWcZ2Pi</dateiRef>
+                <dateiRef>_H3lP0XcCjyrXZMrUq8G3r3</dateiRef>
+                <dateiRef>_X2EYf7XS983dhmPDlyQnkJ</dateiRef>
+                <dateiRef>_qvwfgKqJpT1s6Ia3cQo9kF</dateiRef>
+                <dateiRef>_ULaPLdbHzZKitHmMeAckXl</dateiRef>
+                <dateiRef>_mjbfVl8MT32AfYlMW9PQgG</dateiRef>
+                <dateiRef>_NucP8hY33WXonZzJMfVcO7</dateiRef>
+              </dokument>
+              <dokument id="_vndYhE4gosSNJ9ORM5sgmM">
+                <titel>U_m_s_c_h_l_a_g_0000001</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_ASZpvfnSuZgvwLaRhHVU81</dateiRef>
+                <dateiRef>_w8SL24x0Eybr8UUUTjWsF3</dateiRef>
+                <dateiRef>_Kt7U0x88X9VK5WY7gXQyrW</dateiRef>
+                <dateiRef>_HJpiD8hzgLbvmq3OYdz9k3</dateiRef>
+              </dokument>
+            </dossier>
+          </ordnungssystemposition>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

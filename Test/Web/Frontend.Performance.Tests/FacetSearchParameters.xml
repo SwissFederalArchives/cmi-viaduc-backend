@@ -1,0 +1,66 @@
+<searches>
+  <search>
+    <value>Léon Huber Tagesschau</value>
+    <creationPeriod>null</creationPeriod>
+    <take>10</take>
+    <filterValue>creationPeriod.years:[1975 TO 1979]</filterValue>
+    <facet>creationPeriod.years</facet>
+  </search>
+  <search>
+    <value>Architektur Wettbewerb</value>
+    <creationPeriod>null</creationPeriod>
+    <take>20</take>
+    <filterValue>creationPeriod.years:[1975 TO 1979]</filterValue>
+    <facet>creationPeriod.years</facet>
+  </search>
+  <search>
+    <value>Fotos Militärdienst</value>
+    <!-- Important to use the quotes-->
+    <creationPeriod>"1920-1950"</creationPeriod>
+    <take>50</take>
+    <filterValue>creationPeriod.years:[1975 TO 1979]</filterValue>
+    <facet>creationPeriod.years</facet>
+  </search>
+  <search>
+    <value>Streik</value>
+    <creationPeriod>null</creationPeriod>
+    <take>10</take>
+    <filterValue>creationPeriod.years:[1918 TO 1918]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Zentralregierung</value>
+    <creationPeriod>null</creationPeriod>
+    <take>20</take>
+    <filterValue>creationPeriod.years:[1800 TO 1900]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Helvetische Republik</value>
+    <creationPeriod>null</creationPeriod>
+    <take>50</take>
+    <filterValue>creationPeriod.years:[1848 TO 1870]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Atomkraftwerk Gösgen</value>
+    <creationPeriod>null</creationPeriod>
+    <take>10</take>
+    <filterValue>creationPeriod.years:[1960 TO 1980]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Rotes Kreuz</value>
+    <creationPeriod>null</creationPeriod>
+    <take>20</take>
+    <filterValue>creationPeriod.years:[1900 TO 1935]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Charlie Chaplin</value>
+    <creationPeriod>null</creationPeriod>
+    <take>25</take>
+    <filterValue>creationPeriod.years:[1966 TO 1979]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+  <search>
+    <value>Beziehungen USA</value>
+    <creationPeriod>"2000-2020"</creationPeriod>
+    <take>10</take>
+    <filterValue>creationPeriod.years:[2000 TO 2020]</filterValue>
+    <facet>creationPeriod.years</facet>  </search>
+</searches>

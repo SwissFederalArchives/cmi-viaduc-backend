@@ -1,0 +1,51 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        body { font-family: Sans-Serif; }
+    </style>
+</head>
+<body>
+    <h1>
+        Aufbereitung Gebrauchskopie fehlgeschlagen
+    </h1>
+    <p>
+        Beim Aufbereiten des untenstehenden Digitalisierungsauftrags ist ein Fehler aufgetreten. Es konnte keine Gebrauchskopie aus dem Benutzungskopie-SIP erstellt werden, weshalb die möglicherweise fehlerhafte Benutzungskopie in den Cache geladen wurde. Bitte informiere den AppO Webportal über den Aufbereitungsfehler und den Benutzer über das weitere Vorgehen.
+    </p>
+    <p>
+        {{#Aufträge}}
+        <table>
+            <tr>
+                <td>Auftrags-ID:</td>
+                <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+            </tr>
+            <tr>
+                <td>Signatur:</td>
+                <td>{{BestellteVe.Signatur}}</td>
+            </tr>
+            <tr>
+                <td>Titel:</td>
+                <td>{{BestellteVe.Titel}}</td>
+            </tr>
+            <tr>
+                <td>Benutzer:</td>
+                <td>{{Bestellung.Besteller.Vorname}} {{Bestellung.Besteller.Name}}{{#Bestellung.Besteller.Organisation}}, {{Bestellung.Besteller.Organisation}} {{/Bestellung.Besteller.Organisation}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Fehlermeldung:</td>
+                <td>{{Fehlermeldung}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Passwort:</td>
+                <td>{{PasswortZipDatei}}</td>
+            </tr>
+        </table>
+        {{/Aufträge}}
+    </p>
+</body>
+</html>

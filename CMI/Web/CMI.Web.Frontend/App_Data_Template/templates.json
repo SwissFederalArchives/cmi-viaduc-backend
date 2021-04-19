@@ -1,0 +1,2400 @@
+{
+  "FormTemplates": [
+    {
+      "FormId": "1",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "Level",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Stufe",
+                "en": "Level",
+                "fr": "Niveau",
+                "it": "Livello"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10019",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelBeschreibung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "Digital finding aid (description)",
+                "fr": "Instrument de recherche numérique (description)",
+                "it": "Strumento di ricerca digitale (descrizione)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelLink",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "Digital finding aid (link)",
+                "fr": "Instrument de recherche numérique (lien)",
+                "it": "Strumento di ricerca digitale (link)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeOrdnungskomponenteLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Ordnungskomponente",
+                "en": "Categorisation component",
+                "fr": "Composants du classement",
+                "it": "Componente dell'ordinamento"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10020",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10032",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Land",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Land",
+                "en": "Country",
+                "fr": "Pays",
+                "it": "Paese"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitaleVersion",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitale Version",
+                "en": "Digital version",
+                "fr": "Version numérique",
+                "it": "Versione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10040",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10046",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Land",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Land",
+                "en": "Country",
+                "fr": "Pays",
+                "it": "Paese"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitaleVersion",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitale Version",
+                "en": "Digital version",
+                "fr": "Version numérique",
+                "it": "Versione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10050",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Vorgängerbehörden",
+              "DbType": "Verknüpfung",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Vorgängerbehörde(n)",
+                "en": "Predecessor authority/authorities",
+                "fr": "Autorité compétente précédente",
+                "it": "Autorità precedente(i)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Nachfolgerbehörden",
+              "DbType": "Verknüpfung",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Nachfolgerbehörde(n)",
+                "en": "Successor authority/authorities",
+                "fr": "Autorité compétente ultérieure",
+                "it": "Autorità successiva(e)"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelBeschreibung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "Digital finding aid (description)",
+                "fr": "Instrument de recherche numérique (description)",
+                "it": "Strumento di ricerca digitale (descrizione)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelLink",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "Digital finding aid (link)",
+                "fr": "Instrument de recherche numérique (lien)",
+                "it": "Strumento di ricerca digitale (link)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeOrdnungskomponenteLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Ordnungskomponente",
+                "en": "Categorisation component",
+                "fr": "Composants du classement",
+                "it": "Componente dell'ordinamento"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10058",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildVorschau",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Vorschaubild",
+                "en": "Preview image",
+                "fr": "Miniature",
+                "it": "Anteprima dell'immagine"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildAnsicht",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ansichtsbild",
+                "en": "Display image",
+                "fr": "Image",
+                "it": "Riproduzione digitale"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10070",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.NichtOnlineRecherchierbareDossiers",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Nicht online recherchierbare Dossiers",
+                "en": "Dossiers not searchable online",
+                "fr": "Dossiers ne pouvant faire l'objet d'une recherche en ligne",
+                "it": "Dossier non reperibili on-line"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelBeschreibung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "Digital finding aid (description)",
+                "fr": "Instrument de recherche numérique (description)",
+                "it": "Strumento di ricerca digitale (descrizione)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelLink",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "Digital finding aid (link)",
+                "fr": "Instrument de recherche numérique (lien)",
+                "it": "Strumento di ricerca digitale (link)"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10075",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Vorgängerbehörden",
+              "DbType": "Verknüpfung",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Vorgängerbehörde(n)",
+                "en": "Predecessor authority/authorities",
+                "fr": "Autorité compétente précédente",
+                "it": "Autorità precedente(i)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Nachfolgerbehörden",
+              "DbType": "Verknüpfung",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Nachfolgerbehörde(n)",
+                "en": "Successor authority/authorities",
+                "fr": "Autorité compétente ultérieure",
+                "it": "Autorità successiva(e)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelBeschreibung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "Digital finding aid (description)",
+                "fr": "Instrument de recherche numérique (description)",
+                "it": "Strumento di ricerca digitale (descrizione)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitalesFindmittelLink",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "Digital finding aid (link)",
+                "fr": "Instrument de recherche numérique (lien)",
+                "it": "Strumento di ricerca digitale (link)"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeOrdnungskomponenteLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Ordnungskomponente",
+                "en": "Categorisation component",
+                "fr": "Composants du classement",
+                "it": "Componente dell'ordinamento"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10076",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeOrdnungskomponenteLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Ordnungskomponente",
+                "en": "Categorisation component",
+                "fr": "Composants du classement",
+                "it": "Componente dell'ordinamento"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10077",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Format",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Format",
+                "en": "Format",
+                "fr": "Format",
+                "it": "Formato"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Urheber",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Urheber",
+                "en": "Originator",
+                "fr": "Agent de l'action",
+                "it": "Autore"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BeteiligtePersonenKörperschaften",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Beteiligte Personen /  Körperschaften",
+                "en": "Individuals / corporations involved",
+                "fr": "Personnes/collectivités intéressées",
+                "it": "Persone / corporazioni coinvolte"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Verleger",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Verleger",
+                "en": "Publisher",
+                "fr": "Éditeur",
+                "it": "Editore"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Abdeckung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Abdeckung",
+                "en": "Coverage",
+                "fr": "Couverture",
+                "it": "Copertina"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildVorschau",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Vorschaubild",
+                "en": "Preview image",
+                "fr": "Miniature",
+                "it": "Anteprima dell'immagine"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildAnsicht",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ansichtsbild",
+                "en": "Display image",
+                "fr": "Image",
+                "it": "Riproduzione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitaleVersion",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitale Version",
+                "en": "Digital version",
+                "fr": "Version numérique",
+                "it": "Versione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Thema",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Thema",
+                "en": "Subject",
+                "fr": "Thème",
+                "it": "Tema"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10078",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Format",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Format",
+                "en": "Format",
+                "fr": "Format",
+                "it": "Formato"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Urheber",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Urheber",
+                "en": "Originator",
+                "fr": "Agent de l'action",
+                "it": "Autore"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BeteiligtePersonenKörperschaften",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Beteiligte Personen /  Körperschaften",
+                "en": "Individuals / corporations involved",
+                "fr": "Personnes/collectivités intéressées",
+                "it": "Persone / corporazioni coinvolte"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Verleger",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Verleger",
+                "en": "Publisher",
+                "fr": "Éditeur",
+                "it": "Editore"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Abdeckung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Abdeckung",
+                "en": "Coverage",
+                "fr": "Couverture",
+                "it": "Copertina"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildVorschau",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Vorschaubild",
+                "en": "Preview image",
+                "fr": "Miniature",
+                "it": "Anteprima dell'immagine"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BildAnsicht",
+              "DbType": "Bild",
+              "ElasticType": "ElasticBase64",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ansichtsbild",
+                "en": "Display image",
+                "fr": "Image",
+                "it": "Riproduzione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Thema",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Thema",
+                "en": "Subject",
+                "fr": "Thème",
+                "it": "Tema"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitaleVersion",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitale Version",
+                "en": "Digital version",
+                "fr": "Version numérique",
+                "it": "Versione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    },
+    {
+      "FormId": "10084",
+      "Sections": [
+        {
+          "SectionLabels": {
+            "de": "Details",
+            "en": "Details",
+            "fr": "Détails",
+            "it": "Dettagli"
+          },
+          "Fields": [
+            {
+              "DbFieldName": "ReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Signatur",
+                "en": "Reference code",
+                "fr": "Cote",
+                "it": "Segnatura"
+              }
+            },
+            {
+              "DbFieldName": "Title",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Titel",
+                "en": "Title",
+                "fr": "Titre",
+                "it": "Titolo"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Form",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Form",
+                "en": "Form",
+                "fr": "Forme",
+                "it": "Forma"
+              }
+            },
+            {
+              "DbFieldName": "CreationPeriod",
+              "DbType": "Datumsbereich",
+              "ElasticType": "ElasticTimePeriod",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum",
+                "en": "Creation period",
+                "fr": "Date de création",
+                "it": "Periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.EntstehungszeitraumAnmerkung",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Entstehungszeitraum Anm.",
+                "en": "Creation period note",
+                "fr": "Rem. date de création",
+                "it": "Nota sul periodo di costituzione"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZugänglichkeitGemässBga",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zugänglichkeit <a href='#/de/informationen/schutzfristen-und-einsichtsgesuche' target='_blank'>gemäss BGA</a>",
+                "en": "Accessibility <a href='#/en/information/closure-periods-and-requests-to-consult-records' target='_blank'>under ArchA</a>",
+                "fr": "Accessibilité <a href='#/fr/informations/delais-de-protection-et-demandes-de-consultation' target='_blank'>selon la LAr</a>",
+                "it": "Accessibilità <a href='#/it/informazioni/termini-di-protezione-e-domande-di-consultazione' target='_blank'>secondo la LAr</a>"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Aktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Aktenzeichen",
+                "en": "File reference",
+                "fr": "Référence",
+                "it": "Riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.ZusatzkomponenteZac1",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Zusatzkomponente",
+                "en": "Additional component",
+                "fr": "Composants complémentaires",
+                "it": "Componente aggiuntiva"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.FrüheresAktenzeichen",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "Previous file reference",
+                "fr": "Ancienne référence",
+                "it": "Vecchio riferimento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.Land",
+              "DbType": "Auswahlliste",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Land",
+                "en": "Country",
+                "fr": "Pays",
+                "it": "Paese"
+              }
+            },
+            {
+              "DbFieldName": "WithinInfo",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Darin",
+                "en": "In which",
+                "fr": "Contenu",
+                "it": "Contiene"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.DigitaleVersion",
+              "DbType": "WebHyperlink",
+              "ElasticType": "ElasticHyperlink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Digitale Version",
+                "en": "Digital version",
+                "fr": "Version numérique",
+                "it": "Versione digitale"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VeAblieferungLink",
+              "DbType": "Verknüpfung",
+              "ElasticType": "ElasticEntityLink",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Ablieferung",
+                "en": "Delivery",
+                "fr": "Versement",
+                "it": "Versamento"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.VerwandteVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Verwandte VE",
+                "en": "Related UD(s)",
+                "fr": "UD associée",
+                "it": "UD affini"
+              }
+            },
+            {
+              "DbFieldName": "FormerReferenceCode",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 0,
+              "FieldLabels": {
+                "de": "Frühere Signaturen",
+                "en": "Previous reference codes",
+                "fr": "Anciennes cotes",
+                "it": "Vecchie segnature"
+              }
+            },
+            {
+              "DbFieldName": "CustomFields.BemerkungZurVe",
+              "DbType": "Text",
+              "ElasticType": "string",
+              "Visibility": 1,
+              "FieldLabels": {
+                "de": "Zusätzliche Informationen",
+                "en": "Additional information",
+                "fr": "Informations complémentaires",
+                "it": "Informazioni supplementari"
+              }
+            }
+          ],
+          "SubSections": []
+        }
+      ]
+    }
+  ]
+}

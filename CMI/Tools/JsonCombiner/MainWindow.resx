@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TxtPathMaster.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="TxtPathMaster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 36</value>
+  </data>
+  <data name="TxtPathMaster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1080, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TxtPathMaster.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TxtPathMaster.Name" xml:space="preserve">
+    <value>TxtPathMaster</value>
+  </data>
+  <data name="&gt;&gt;TxtPathMaster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TxtPathMaster.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TxtPathMaster.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="TxtPathSource.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="TxtPathSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 77</value>
+  </data>
+  <data name="TxtPathSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1080, 20</value>
+  </data>
+  <data name="TxtPathSource.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;TxtPathSource.Name" xml:space="preserve">
+    <value>TxtPathSource</value>
+  </data>
+  <data name="&gt;&gt;TxtPathSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TxtPathSource.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TxtPathSource.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="LableTitleMaster.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableTitleMaster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 17</value>
+  </data>
+  <data name="LableTitleMaster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="LableTitleMaster.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="LableTitleMaster.Text" xml:space="preserve">
+    <value>Master File Path:</value>
+  </data>
+  <data name="&gt;&gt;LableTitleMaster.Name" xml:space="preserve">
+    <value>LableTitleMaster</value>
+  </data>
+  <data name="&gt;&gt;LableTitleMaster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableTitleMaster.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableTitleMaster.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="LableSourceFileTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableSourceFileTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 61</value>
+  </data>
+  <data name="LableSourceFileTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="LableSourceFileTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="LableSourceFileTitle.Text" xml:space="preserve">
+    <value>Source File Path:</value>
+  </data>
+  <data name="&gt;&gt;LableSourceFileTitle.Name" xml:space="preserve">
+    <value>LableSourceFileTitle</value>
+  </data>
+  <data name="&gt;&gt;LableSourceFileTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableSourceFileTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableSourceFileTitle.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="DropBoxLanguageSource.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="DropBoxLanguageSource.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="DropBoxLanguageSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 132</value>
+  </data>
+  <data name="DropBoxLanguageSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>928, 21</value>
+  </data>
+  <data name="DropBoxLanguageSource.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;DropBoxLanguageSource.Name" xml:space="preserve">
+    <value>DropBoxLanguageSource</value>
+  </data>
+  <data name="&gt;&gt;DropBoxLanguageSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DropBoxLanguageSource.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;DropBoxLanguageSource.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="LableDropBoxMenueTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableDropBoxMenueTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 116</value>
+  </data>
+  <data name="LableDropBoxMenueTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="LableDropBoxMenueTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="LableDropBoxMenueTitle.Text" xml:space="preserve">
+    <value>Sprache Source:</value>
+  </data>
+  <data name="&gt;&gt;LableDropBoxMenueTitle.Name" xml:space="preserve">
+    <value>LableDropBoxMenueTitle</value>
+  </data>
+  <data name="&gt;&gt;LableDropBoxMenueTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableDropBoxMenueTitle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableDropBoxMenueTitle.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="OpenFileSystemMaster.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="OpenFileSystemMaster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1099, 36</value>
+  </data>
+  <data name="OpenFileSystemMaster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 19</value>
+  </data>
+  <data name="OpenFileSystemMaster.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemMaster.Name" xml:space="preserve">
+    <value>OpenFileSystemMaster</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemMaster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemMaster.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemMaster.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="OpenFileSystemSoruce.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="OpenFileSystemSoruce.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1098, 77</value>
+  </data>
+  <data name="OpenFileSystemSoruce.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="OpenFileSystemSoruce.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemSoruce.Name" xml:space="preserve">
+    <value>OpenFileSystemSoruce</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemSoruce.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemSoruce.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;OpenFileSystemSoruce.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="LableOutput.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="LableOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 163</value>
+  </data>
+  <data name="LableOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="LableOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="LableOutput.Text" xml:space="preserve">
+    <value>output</value>
+  </data>
+  <data name="LableOutput.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;LableOutput.Name" xml:space="preserve">
+    <value>LableOutput</value>
+  </data>
+  <data name="&gt;&gt;LableOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LableOutput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LableOutput.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="FileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>960, 121</value>
+  </data>
+  <data name="btnStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 40</value>
+  </data>
+  <data name="btnStart.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnStart.Text" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
+    <value>btnStart</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnStart.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="outputBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="outputBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 182</value>
+  </data>
+  <data name="outputBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1140, 472</value>
+  </data>
+  <data name="outputBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="outputBox.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;outputBox.Name" xml:space="preserve">
+    <value>outputBox</value>
+  </data>
+  <data name="&gt;&gt;outputBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;outputBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;outputBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="outputLink.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="outputLink.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="outputLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 671</value>
+  </data>
+  <data name="outputLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="outputLink.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="outputLink.Text" xml:space="preserve">
+    <value>link output</value>
+  </data>
+  <data name="outputLink.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;outputLink.Name" xml:space="preserve">
+    <value>outputLink</value>
+  </data>
+  <data name="&gt;&gt;outputLink.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;outputLink.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;outputLink.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="fileSystemWatcher1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>109</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1164, 700</value>
+  </data>
+  <data name="BtnCopyAndSelect.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="BtnCopyAndSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>873, 665</value>
+  </data>
+  <data name="BtnCopyAndSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 27</value>
+  </data>
+  <data name="BtnCopyAndSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="BtnCopyAndSelect.Text" xml:space="preserve">
+    <value>Select and Copy</value>
+  </data>
+  <data name="&gt;&gt;BtnCopyAndSelect.Name" xml:space="preserve">
+    <value>BtnCopyAndSelect</value>
+  </data>
+  <data name="&gt;&gt;BtnCopyAndSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnCopyAndSelect.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnCopyAndSelect.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BtnSaveAsFile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="BtnSaveAsFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>973, 665</value>
+  </data>
+  <data name="BtnSaveAsFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 27</value>
+  </data>
+  <data name="BtnSaveAsFile.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="BtnSaveAsFile.Text" xml:space="preserve">
+    <value>Save as File</value>
+  </data>
+  <data name="&gt;&gt;BtnSaveAsFile.Name" xml:space="preserve">
+    <value>BtnSaveAsFile</value>
+  </data>
+  <data name="&gt;&gt;BtnSaveAsFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BtnSaveAsFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BtnSaveAsFile.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>JSON Combiner</value>
+  </data>
+  <data name="&gt;&gt;FileDialog.Name" xml:space="preserve">
+    <value>FileDialog</value>
+  </data>
+  <data name="&gt;&gt;FileDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fileSystemWatcher1.Name" xml:space="preserve">
+    <value>fileSystemWatcher1</value>
+  </data>
+  <data name="&gt;&gt;fileSystemWatcher1.Type" xml:space="preserve">
+    <value>System.IO.FileSystemWatcher, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog.Name" xml:space="preserve">
+    <value>saveFileDialog</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainWindow</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>281, 17</value>
+  </metadata>
+</root>

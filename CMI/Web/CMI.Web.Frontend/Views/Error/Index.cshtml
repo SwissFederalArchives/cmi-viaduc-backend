@@ -1,0 +1,100 @@
+﻿@using CMI.Utilities.Common.Helpers
+@using CMI.Web.Common.Helpers
+@model CMI.Web.Frontend.Models.ErrorModel
+@{
+    Layout = null;
+    var staticRoot = Url.Content(StringHelper.AddToString("~", "/", DirectoryHelper.Instance.StaticDefaultPath));
+    staticRoot = staticRoot + (!staticRoot.EndsWith("/") ? "/" : string.Empty);
+}
+
+<!DOCTYPE HTML>
+<html lang="@ViewBag.Language" class="no-js no-ie @ViewBag.HtmlClasses">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Source CSS -->
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/vendors.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/admin.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/print.css">
+    <link rel="stylesheet" href="@Html.Raw(staticRoot)css/viaduc.css">
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="@Html.Raw(staticRoot)img/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="@Html.Raw(staticRoot)img/ico/apple-touch-icon-76x76.png">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="@Html.Raw(staticRoot)img/ico/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="@Html.Raw(staticRoot)img/ico/mstile-144x144.png">
+    <meta name="msapplication-config" content="@Html.Raw(staticRoot)img/ico/browserconfig.xml">
+
+    <title>@ViewBag.Title</title>
+
+    <meta name="language" content="@ViewBag.Language">
+</head>
+<body>
+
+<div class="container container-main">
+
+    <header>
+        <div class="clearfix">
+            <section class="clearfix">
+                <h2 class="sr-only">Sprachwahl</h2>
+                <nav class="nav-lang">
+                    <ul>
+                        @foreach (var entry in Model.LanguageLinks)
+                        {
+                            <li>
+                                <a href="@entry.Value" lang="@entry.Key" class="@(ViewBag.Language == entry.Key ? "active" : "")">@entry.Key.ToUpper()</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </section>
+        </div>
+
+        <div class="clearfix">
+            <a href="../de/" class="brand hidden-xs">
+                <img src="@Html.Raw(staticRoot)img/logo-CH.svg")" onerror="this.onerror = null;this.src = '~/img/logo-CH.png'" alt="Logo der Schweizerischen Eidgenossenschaft – zur Startseite"/>
+                <h1>
+                    <br/>
+                    @ViewBag.Title
+                </h1>
+            </a>
+        </div>
+    </header>
+
+
+    <!--content-begin-->
+    @Html.Raw(ViewBag.Html)
+    <div style="margin-left: 15px; margin-top: -60px; margin-bottom: 30px">
+        <h2>EXCEPTION-INFO</h2>
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorId))
+        {
+            <p>
+                <b>ID:</b> @Model.ErrorId
+            </p>
+        }
+        <p>
+            <b>TIMESTAMP:</b> @Model.TimeStamp
+        </p>
+        <p>
+            <b>URL:</b> @Model.Url
+        </p>
+    </div>
+    <!--content-end-->
+
+</div>
+
+<script src="@Html.Raw(staticRoot)js/vendors.min.js"></script>
+<script src="@Html.Raw(staticRoot)js/main.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,2418 @@
+﻿{
+  "dumped": "2017-11-14 15:34:32",
+  "model": {
+    "version": "0.9.0",
+    "types": {
+      "base": {},
+      "templateBase": {
+        "super": "base"
+      }
+    },
+    "accessRoles": {
+      "roleOe1": "Ö1",
+      "roleOe2": "Ö2",
+      "roleOe3": "Ö3",
+      "roleBVW": "BVW",
+      "roleAS": "AS",
+      "roleBAR": "BAR"
+    },
+    "fieldTypes": {
+      "typeInt": "int",
+      "typeBool": "bool",
+      "typeFloat": "float",
+      "typeString": "string",
+      "typeTimePeriod": "ElasticTimePeriod",
+      "typeDateWithYear": "ElasticDateWithYear",
+      "typeBase64": "ElasticBase64",
+      "typeHyperlink": "ElasticHyperlink",
+      "typeEntityLink": "ElasticEntityLink"
+    }
+  },
+  "types": {
+    "base": {
+      "name": "base"
+    },
+    "templateBase": {
+      "name": "templateBase",
+      "superName": "base"
+    },
+    "template_10020": {
+      "name": "template_10020",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10050": {
+      "name": "template_10050",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "extent",
+              "name": "extent",
+              "type": "string",
+              "label": "Laufmeter",
+              "labels": {
+                "de": "Laufmeter",
+                "en": "en:Laufmeter",
+                "fr": "fr:Laufmeter",
+                "it": "it:Laufmeter"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.vorgängerbehörden",
+              "name": "customFields.vorgaengerbehoerden",
+              "type": "string",
+              "label": "Vorgängerbehörde(n)",
+              "labels": {
+                "de": "Vorgängerbehörde(n)",
+                "en": "en:Vorgängerbehörde(n)",
+                "fr": "fr:Vorgängerbehörde(n)",
+                "it": "it:Vorgängerbehörde(n)"
+              }
+            },
+            {
+              "key": "customFields.nachfolgerbehörden",
+              "name": "customFields.nachfolgerbehoerden",
+              "type": "string",
+              "label": "Nachfolgerbehörde(n)",
+              "labels": {
+                "de": "Nachfolgerbehörde(n)",
+                "en": "en:Nachfolgerbehörde(n)",
+                "fr": "fr:Nachfolgerbehörde(n)",
+                "it": "it:Nachfolgerbehörde(n)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelBeschreibung",
+              "name": "customFields.digitalesFindmittelBeschreibung",
+              "type": "string",
+              "label": "Digitales Findmittel (Beschreibung)",
+              "labels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "en:Digitales Findmittel (Beschreibung)",
+                "fr": "fr:Digitales Findmittel (Beschreibung)",
+                "it": "it:Digitales Findmittel (Beschreibung)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelLink",
+              "name": "customFields.digitalesFindmittelLink",
+              "type": "ElasticHyperlink",
+              "label": "Digitales Findmittel (Link)",
+              "labels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "en:Digitales Findmittel (Link)",
+                "fr": "fr:Digitales Findmittel (Link)",
+                "it": "it:Digitales Findmittel (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            },
+            {
+              "key": "customFields.veOrdnungskomponenteLink",
+              "name": "customFields.veOrdnungskomponenteLink",
+              "type": "ElasticEntityLink",
+              "label": "Ordnungskomponente (Link)",
+              "labels": {
+                "de": "Ordnungskomponente (Link)",
+                "en": "en:Ordnungskomponente (Link)",
+                "fr": "fr:Ordnungskomponente (Link)",
+                "it": "it:Ordnungskomponente (Link)"
+              }
+            },
+            {
+              "key": "customFields.kategorieDia",
+              "name": "customFields.kategorieDia",
+              "type": "int?",
+              "label": "Kat. Automatisierung",
+              "labels": {
+                "de": "Kat. Automatisierung",
+                "en": "en:Kat. Automatisierung",
+                "fr": "fr:Kat. Automatisierung",
+                "it": "it:Kat. Automatisierung"
+              }
+            },
+            {
+              "key": "customFields.anhang3",
+              "name": "customFields.anhang3",
+              "type": "bool?",
+              "label": "Anhang 3 VBGA",
+              "labels": {
+                "de": "Anhang 3 VBGA",
+                "en": "en:Anhang 3 VBGA",
+                "fr": "fr:Anhang 3 VBGA",
+                "it": "it:Anhang 3 VBGA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10075": {
+      "name": "template_10075",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "extent",
+              "name": "extent",
+              "type": "string",
+              "label": "Laufmeter",
+              "labels": {
+                "de": "Laufmeter",
+                "en": "en:Laufmeter",
+                "fr": "fr:Laufmeter",
+                "it": "it:Laufmeter"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.vorgängerbehörden",
+              "name": "customFields.vorgaengerbehoerden",
+              "type": "string",
+              "label": "Vorgängerbehörde(n)",
+              "labels": {
+                "de": "Vorgängerbehörde(n)",
+                "en": "en:Vorgängerbehörde(n)",
+                "fr": "fr:Vorgängerbehörde(n)",
+                "it": "it:Vorgängerbehörde(n)"
+              }
+            },
+            {
+              "key": "customFields.nachfolgerbehörden",
+              "name": "customFields.nachfolgerbehoerden",
+              "type": "string",
+              "label": "Nachfolgerbehörde(n)",
+              "labels": {
+                "de": "Nachfolgerbehörde(n)",
+                "en": "en:Nachfolgerbehörde(n)",
+                "fr": "fr:Nachfolgerbehörde(n)",
+                "it": "it:Nachfolgerbehörde(n)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelBeschreibung",
+              "name": "customFields.digitalesFindmittelBeschreibung",
+              "type": "string",
+              "label": "Digitales Findmittel (Beschreibung)",
+              "labels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "en:Digitales Findmittel (Beschreibung)",
+                "fr": "fr:Digitales Findmittel (Beschreibung)",
+                "it": "it:Digitales Findmittel (Beschreibung)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelLink",
+              "name": "customFields.digitalesFindmittelLink",
+              "type": "ElasticHyperlink",
+              "label": "Digitales Findmittel (Link)",
+              "labels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "en:Digitales Findmittel (Link)",
+                "fr": "fr:Digitales Findmittel (Link)",
+                "it": "it:Digitales Findmittel (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            },
+            {
+              "key": "customFields.veOrdnungskomponenteLink",
+              "name": "customFields.veOrdnungskomponenteLink",
+              "type": "ElasticEntityLink",
+              "label": "Ordnungskomponente (Link)",
+              "labels": {
+                "de": "Ordnungskomponente (Link)",
+                "en": "en:Ordnungskomponente (Link)",
+                "fr": "fr:Ordnungskomponente (Link)",
+                "it": "it:Ordnungskomponente (Link)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10058": {
+      "name": "template_10058",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "customFields.aipId",
+              "name": "customFields.aipId",
+              "type": "string",
+              "label": "Identifikation digitales Magazin",
+              "labels": {
+                "de": "Identifikation digitales Magazin",
+                "en": "en:Identifikation digitales Magazin",
+                "fr": "fr:Identifikation digitales Magazin",
+                "it": "it:Identifikation digitales Magazin"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.aktenzeichen",
+              "name": "customFields.aktenzeichen",
+              "type": "string",
+              "label": "Aktenzeichen",
+              "labels": {
+                "de": "Aktenzeichen",
+                "en": "en:Aktenzeichen",
+                "fr": "fr:Aktenzeichen",
+                "it": "it:Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.zusatzkomponenteZac1",
+              "name": "customFields.zusatzkomponenteZac1",
+              "type": "string",
+              "label": "Zusatzkomponente",
+              "labels": {
+                "de": "Zusatzkomponente",
+                "en": "en:Zusatzkomponente",
+                "fr": "fr:Zusatzkomponente",
+                "it": "it:Zusatzkomponente"
+              }
+            },
+            {
+              "key": "customFields.früheresAktenzeichen",
+              "name": "customFields.frueheresAktenzeichen",
+              "type": "string",
+              "label": "Früheres Aktenzeichen",
+              "labels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "en:Früheres Aktenzeichen",
+                "fr": "fr:Früheres Aktenzeichen",
+                "it": "it:Früheres Aktenzeichen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.bildVorschau",
+              "name": "customFields.bildVorschau",
+              "type": "ElasticBase64",
+              "label": "Vorschaubild",
+              "labels": {
+                "de": "Vorschaubild",
+                "en": "en:Vorschaubild",
+                "fr": "fr:Vorschaubild",
+                "it": "it:Vorschaubild"
+              }
+            },
+            {
+              "key": "customFields.bildAnsicht",
+              "name": "customFields.bildAnsicht",
+              "type": "ElasticBase64",
+              "label": "Ansichtsbild",
+              "labels": {
+                "de": "Ansichtsbild",
+                "en": "en:Ansichtsbild",
+                "fr": "fr:Ansichtsbild",
+                "it": "it:Ansichtsbild"
+              }
+            },
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10077": {
+      "name": "template_10077",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            },
+            {
+              "key": "customFields.format",
+              "name": "customFields.format",
+              "type": "string",
+              "label": "Format",
+              "labels": {
+                "de": "Format",
+                "en": "en:Format",
+                "fr": "fr:Format",
+                "it": "it:Format"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.aktenzeichen",
+              "name": "customFields.aktenzeichen",
+              "type": "string",
+              "label": "Aktenzeichen",
+              "labels": {
+                "de": "Aktenzeichen",
+                "en": "en:Aktenzeichen",
+                "fr": "fr:Aktenzeichen",
+                "it": "it:Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.urheber",
+              "name": "customFields.urheber",
+              "type": "string",
+              "label": "Urheber",
+              "labels": {
+                "de": "Urheber",
+                "en": "en:Urheber",
+                "fr": "fr:Urheber",
+                "it": "it:Urheber"
+              }
+            },
+            {
+              "key": "customFields.beteiligtePersonenKörperschaften",
+              "name": "customFields.beteiligtePersonenKoerperschaften",
+              "type": "string",
+              "label": "Beteiligte Personen /  Körperschaften",
+              "labels": {
+                "de": "Beteiligte Personen /  Körperschaften",
+                "en": "en:Beteiligte Personen /  Körperschaften",
+                "fr": "fr:Beteiligte Personen /  Körperschaften",
+                "it": "it:Beteiligte Personen /  Körperschaften"
+              }
+            },
+            {
+              "key": "customFields.verleger",
+              "name": "customFields.verleger",
+              "type": "string",
+              "label": "Verleger",
+              "labels": {
+                "de": "Verleger",
+                "en": "en:Verleger",
+                "fr": "fr:Verleger",
+                "it": "it:Verleger"
+              }
+            },
+            {
+              "key": "customFields.abdeckung",
+              "name": "customFields.abdeckung",
+              "type": "string",
+              "label": "Abdeckung",
+              "labels": {
+                "de": "Abdeckung",
+                "en": "en:Abdeckung",
+                "fr": "fr:Abdeckung",
+                "it": "it:Abdeckung"
+              }
+            },
+            {
+              "key": "customFields.zusatzkomponenteZac1",
+              "name": "customFields.zusatzkomponenteZac1",
+              "type": "string",
+              "label": "Zusatzkomponente",
+              "labels": {
+                "de": "Zusatzkomponente",
+                "en": "en:Zusatzkomponente",
+                "fr": "fr:Zusatzkomponente",
+                "it": "it:Zusatzkomponente"
+              }
+            },
+            {
+              "key": "customFields.früheresAktenzeichen",
+              "name": "customFields.frueheresAktenzeichen",
+              "type": "string",
+              "label": "Früheres Aktenzeichen",
+              "labels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "en:Früheres Aktenzeichen",
+                "fr": "fr:Früheres Aktenzeichen",
+                "it": "it:Früheres Aktenzeichen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.bildVorschau",
+              "name": "customFields.bildVorschau",
+              "type": "ElasticBase64",
+              "label": "Vorschaubild",
+              "labels": {
+                "de": "Vorschaubild",
+                "en": "en:Vorschaubild",
+                "fr": "fr:Vorschaubild",
+                "it": "it:Vorschaubild"
+              }
+            },
+            {
+              "key": "customFields.bildAnsicht",
+              "name": "customFields.bildAnsicht",
+              "type": "ElasticBase64",
+              "label": "Ansichtsbild",
+              "labels": {
+                "de": "Ansichtsbild",
+                "en": "en:Ansichtsbild",
+                "fr": "fr:Ansichtsbild",
+                "it": "it:Ansichtsbild"
+              }
+            },
+            {
+              "key": "customFields.digitaleVersion",
+              "name": "customFields.digitaleVersion",
+              "type": "ElasticHyperlink",
+              "label": "Digitale Version",
+              "labels": {
+                "de": "Digitale Version",
+                "en": "en:Digitale Version",
+                "fr": "fr:Digitale Version",
+                "it": "it:Digitale Version"
+              }
+            },
+            {
+              "key": "customFields.thema",
+              "name": "customFields.thema",
+              "type": "string",
+              "label": "Thema",
+              "labels": {
+                "de": "Thema",
+                "en": "en:Thema",
+                "fr": "fr:Thema",
+                "it": "it:Thema"
+              }
+            },
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10032": {
+      "name": "template_10032",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "archiveType",
+              "name": "archiveType",
+              "type": "string",
+              "label": "Archivalienart",
+              "labels": {
+                "de": "Archivalienart",
+                "en": "en:Archivalienart",
+                "fr": "fr:Archivalienart",
+                "it": "it:Archivalienart"
+              }
+            },
+            {
+              "key": "customFields.aipId",
+              "name": "customFields.aipId",
+              "type": "string",
+              "label": "Identifikation digitales Magazin",
+              "labels": {
+                "de": "Identifikation digitales Magazin",
+                "en": "en:Identifikation digitales Magazin",
+                "fr": "fr:Identifikation digitales Magazin",
+                "it": "it:Identifikation digitales Magazin"
+              }
+            },
+            {
+              "key": "customFields.zugänglichkeitGemässBga",
+              "name": "customFields.zugaenglichkeitGemaessBga",
+              "type": "string",
+              "label": "Zugänglichkeit gemäss BGA",
+              "labels": {
+                "de": "Zugänglichkeit gemäss BGA",
+                "en": "en:Zugänglichkeit gemäss BGA",
+                "fr": "fr:Zugänglichkeit gemäss BGA",
+                "it": "it:Zugänglichkeit gemäss BGA"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.aktenzeichen",
+              "name": "customFields.aktenzeichen",
+              "type": "string",
+              "label": "Aktenzeichen",
+              "labels": {
+                "de": "Aktenzeichen",
+                "en": "en:Aktenzeichen",
+                "fr": "fr:Aktenzeichen",
+                "it": "it:Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.zusatzkomponenteZac1",
+              "name": "customFields.zusatzkomponenteZac1",
+              "type": "string",
+              "label": "Zusatzkomponente",
+              "labels": {
+                "de": "Zusatzkomponente",
+                "en": "en:Zusatzkomponente",
+                "fr": "fr:Zusatzkomponente",
+                "it": "it:Zusatzkomponente"
+              }
+            },
+            {
+              "key": "customFields.früheresAktenzeichen",
+              "name": "customFields.frueheresAktenzeichen",
+              "type": "string",
+              "label": "Früheres Aktenzeichen",
+              "labels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "en:Früheres Aktenzeichen",
+                "fr": "fr:Früheres Aktenzeichen",
+                "it": "it:Früheres Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.land",
+              "name": "customFields.land",
+              "type": "string",
+              "label": "Land",
+              "labels": {
+                "de": "Land",
+                "en": "en:Land",
+                "fr": "fr:Land",
+                "it": "it:Land"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.digitaleVersion",
+              "name": "customFields.digitaleVersion",
+              "type": "ElasticHyperlink",
+              "label": "Digitale Version",
+              "labels": {
+                "de": "Digitale Version",
+                "en": "en:Digitale Version",
+                "fr": "fr:Digitale Version",
+                "it": "it:Digitale Version"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10078": {
+      "name": "template_10078",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            },
+            {
+              "key": "customFields.format",
+              "name": "customFields.format",
+              "type": "string",
+              "label": "Format",
+              "labels": {
+                "de": "Format",
+                "en": "en:Format",
+                "fr": "fr:Format",
+                "it": "it:Format"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "customFields.zugänglichkeitGemässBga",
+              "name": "customFields.zugaenglichkeitGemaessBga",
+              "type": "string",
+              "label": "Zugänglichkeit gemäss BGA",
+              "labels": {
+                "de": "Zugänglichkeit gemäss BGA",
+                "en": "en:Zugänglichkeit gemäss BGA",
+                "fr": "fr:Zugänglichkeit gemäss BGA",
+                "it": "it:Zugänglichkeit gemäss BGA"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.aktenzeichen",
+              "name": "customFields.aktenzeichen",
+              "type": "string",
+              "label": "Aktenzeichen",
+              "labels": {
+                "de": "Aktenzeichen",
+                "en": "en:Aktenzeichen",
+                "fr": "fr:Aktenzeichen",
+                "it": "it:Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.urheber",
+              "name": "customFields.urheber",
+              "type": "string",
+              "label": "Urheber",
+              "labels": {
+                "de": "Urheber",
+                "en": "en:Urheber",
+                "fr": "fr:Urheber",
+                "it": "it:Urheber"
+              }
+            },
+            {
+              "key": "customFields.beteiligtePersonenKörperschaften",
+              "name": "customFields.beteiligtePersonenKoerperschaften",
+              "type": "string",
+              "label": "Beteiligte Personen /  Körperschaften",
+              "labels": {
+                "de": "Beteiligte Personen /  Körperschaften",
+                "en": "en:Beteiligte Personen /  Körperschaften",
+                "fr": "fr:Beteiligte Personen /  Körperschaften",
+                "it": "it:Beteiligte Personen /  Körperschaften"
+              }
+            },
+            {
+              "key": "customFields.verleger",
+              "name": "customFields.verleger",
+              "type": "string",
+              "label": "Verleger",
+              "labels": {
+                "de": "Verleger",
+                "en": "en:Verleger",
+                "fr": "fr:Verleger",
+                "it": "it:Verleger"
+              }
+            },
+            {
+              "key": "customFields.abdeckung",
+              "name": "customFields.abdeckung",
+              "type": "string",
+              "label": "Abdeckung",
+              "labels": {
+                "de": "Abdeckung",
+                "en": "en:Abdeckung",
+                "fr": "fr:Abdeckung",
+                "it": "it:Abdeckung"
+              }
+            },
+            {
+              "key": "customFields.zusatzkomponenteZac1",
+              "name": "customFields.zusatzkomponenteZac1",
+              "type": "string",
+              "label": "Zusatzkomponente",
+              "labels": {
+                "de": "Zusatzkomponente",
+                "en": "en:Zusatzkomponente",
+                "fr": "fr:Zusatzkomponente",
+                "it": "it:Zusatzkomponente"
+              }
+            },
+            {
+              "key": "customFields.früheresAktenzeichen",
+              "name": "customFields.frueheresAktenzeichen",
+              "type": "string",
+              "label": "Früheres Aktenzeichen",
+              "labels": {
+                "de": "Früheres Aktenzeichen",
+                "en": "en:Früheres Aktenzeichen",
+                "fr": "fr:Früheres Aktenzeichen",
+                "it": "it:Früheres Aktenzeichen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.bildVorschau",
+              "name": "customFields.bildVorschau",
+              "type": "ElasticBase64",
+              "label": "Vorschaubild",
+              "labels": {
+                "de": "Vorschaubild",
+                "en": "en:Vorschaubild",
+                "fr": "fr:Vorschaubild",
+                "it": "it:Vorschaubild"
+              }
+            },
+            {
+              "key": "customFields.bildAnsicht",
+              "name": "customFields.bildAnsicht",
+              "type": "ElasticBase64",
+              "label": "Ansichtsbild",
+              "labels": {
+                "de": "Ansichtsbild",
+                "en": "en:Ansichtsbild",
+                "fr": "fr:Ansichtsbild",
+                "it": "it:Ansichtsbild"
+              }
+            },
+            {
+              "key": "customFields.thema",
+              "name": "customFields.thema",
+              "type": "string",
+              "label": "Thema",
+              "labels": {
+                "de": "Thema",
+                "en": "en:Thema",
+                "fr": "fr:Thema",
+                "it": "it:Thema"
+              }
+            },
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.digitaleVersion",
+              "name": "customFields.digitaleVersion",
+              "type": "ElasticHyperlink",
+              "label": "Digitale Version",
+              "labels": {
+                "de": "Digitale Version",
+                "en": "en:Digitale Version",
+                "fr": "fr:Digitale Version",
+                "it": "it:Digitale Version"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10040": {
+      "name": "template_10040",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            },
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10070": {
+      "name": "template_10070",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          },
+          "fields": [
+            {
+              "key": "customFields.aktenzeichen",
+              "name": "customFields.aktenzeichen",
+              "type": "string",
+              "label": "Aktenzeichen",
+              "labels": {
+                "de": "Aktenzeichen",
+                "en": "en:Aktenzeichen",
+                "fr": "fr:Aktenzeichen",
+                "it": "it:Aktenzeichen"
+              }
+            },
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.nichtOnlineRecherchierbareDossiers",
+              "name": "customFields.nichtOnlineRecherchierbareDossiers",
+              "type": "string",
+              "label": "Nicht online recherchierbare Dossiers",
+              "labels": {
+                "de": "Nicht online recherchierbare Dossiers",
+                "en": "en:Nicht online recherchierbare Dossiers",
+                "fr": "fr:Nicht online recherchierbare Dossiers",
+                "it": "it:Nicht online recherchierbare Dossiers"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelBeschreibung",
+              "name": "customFields.digitalesFindmittelBeschreibung",
+              "type": "string",
+              "label": "Digitales Findmittel (Beschreibung)",
+              "labels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "en:Digitales Findmittel (Beschreibung)",
+                "fr": "fr:Digitales Findmittel (Beschreibung)",
+                "it": "it:Digitales Findmittel (Beschreibung)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelLink",
+              "name": "customFields.digitalesFindmittelLink",
+              "type": "ElasticHyperlink",
+              "label": "Digitales Findmittel (Link)",
+              "labels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "en:Digitales Findmittel (Link)",
+                "fr": "fr:Digitales Findmittel (Link)",
+                "it": "it:Digitales Findmittel (Link)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10019": {
+      "name": "template_10019",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "extent",
+              "name": "extent",
+              "type": "string",
+              "label": "Laufmeter",
+              "labels": {
+                "de": "Laufmeter",
+                "en": "en:Laufmeter",
+                "fr": "fr:Laufmeter",
+                "it": "it:Laufmeter"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          }
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "withinInfo",
+              "name": "withinInfo",
+              "type": "string",
+              "label": "Darin",
+              "labels": {
+                "de": "Darin",
+                "en": "en:Darin",
+                "fr": "fr:Darin",
+                "it": "it:Darin"
+              }
+            },
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelBeschreibung",
+              "name": "customFields.digitalesFindmittelBeschreibung",
+              "type": "string",
+              "label": "Digitales Findmittel (Beschreibung)",
+              "labels": {
+                "de": "Digitales Findmittel (Beschreibung)",
+                "en": "en:Digitales Findmittel (Beschreibung)",
+                "fr": "fr:Digitales Findmittel (Beschreibung)",
+                "it": "it:Digitales Findmittel (Beschreibung)"
+              }
+            },
+            {
+              "key": "customFields.digitalesFindmittelLink",
+              "name": "customFields.digitalesFindmittelLink",
+              "type": "ElasticHyperlink",
+              "label": "Digitales Findmittel (Link)",
+              "labels": {
+                "de": "Digitales Findmittel (Link)",
+                "en": "en:Digitales Findmittel (Link)",
+                "fr": "fr:Digitales Findmittel (Link)",
+                "it": "it:Digitales Findmittel (Link)"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            },
+            {
+              "key": "customFields.veOrdnungskomponenteLink",
+              "name": "customFields.veOrdnungskomponenteLink",
+              "type": "ElasticEntityLink",
+              "label": "Ordnungskomponente (Link)",
+              "labels": {
+                "de": "Ordnungskomponente (Link)",
+                "en": "en:Ordnungskomponente (Link)",
+                "fr": "fr:Ordnungskomponente (Link)",
+                "it": "it:Ordnungskomponente (Link)"
+              }
+            },
+            {
+              "key": "customFields.kategorieDia",
+              "name": "customFields.kategorieDia",
+              "type": "int?",
+              "label": "Kat. Automatisierung",
+              "labels": {
+                "de": "Kat. Automatisierung",
+                "en": "en:Kat. Automatisierung",
+                "fr": "fr:Kat. Automatisierung",
+                "it": "it:Kat. Automatisierung"
+              }
+            },
+            {
+              "key": "customFields.anhang3",
+              "name": "customFields.anhang3",
+              "type": "bool?",
+              "label": "Anhang 3 VBGA",
+              "labels": {
+                "de": "Anhang 3 VBGA",
+                "en": "en:Anhang 3 VBGA",
+                "fr": "fr:Anhang 3 VBGA",
+                "it": "it:Anhang 3 VBGA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "template_10076": {
+      "name": "template_10076",
+      "superName": "templateBase",
+      "metaCategories": [
+        {
+          "identifier": "identifikation",
+          "label": "Identifikation",
+          "labels": {
+            "de": "Identifikation",
+            "en": "en:Identifikation",
+            "fr": "fr:Identifikation",
+            "it": "it:Identifikation"
+          },
+          "fields": [
+            {
+              "key": "referenceCode",
+              "name": "referenceCode",
+              "type": "string",
+              "label": "Signatur",
+              "labels": {
+                "de": "Signatur",
+                "en": "en:Signatur",
+                "fr": "fr:Signatur",
+                "it": "it:Signatur"
+              }
+            },
+            {
+              "key": "title",
+              "name": "title",
+              "type": "string",
+              "label": "Titel",
+              "labels": {
+                "de": "Titel",
+                "en": "en:Titel",
+                "fr": "fr:Titel",
+                "it": "it:Titel"
+              }
+            },
+            {
+              "key": "creationPeriod",
+              "name": "creationPeriod",
+              "type": "ElasticTimePeriod",
+              "label": "Entstehungszeitraum",
+              "labels": {
+                "de": "Entstehungszeitraum",
+                "en": "en:Entstehungszeitraum",
+                "fr": "fr:Entstehungszeitraum",
+                "it": "it:Entstehungszeitraum"
+              }
+            },
+            {
+              "key": "extent",
+              "name": "extent",
+              "type": "string",
+              "label": "Laufmeter",
+              "labels": {
+                "de": "Laufmeter",
+                "en": "en:Laufmeter",
+                "fr": "fr:Laufmeter",
+                "it": "it:Laufmeter"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "kontext",
+          "label": "Kontext",
+          "labels": {
+            "de": "Kontext",
+            "en": "en:Kontext",
+            "fr": "fr:Kontext",
+            "it": "it:Kontext"
+          }
+        },
+        {
+          "identifier": "inhaltUndInnereOrdnung",
+          "label": "Inhalt und innere Ordnung",
+          "labels": {
+            "de": "Inhalt und innere Ordnung",
+            "en": "en:Inhalt und innere Ordnung",
+            "fr": "fr:Inhalt und innere Ordnung",
+            "it": "it:Inhalt und innere Ordnung"
+          },
+          "fields": [
+            {
+              "key": "customFields.veAblieferungLink",
+              "name": "customFields.veAblieferungLink",
+              "type": "ElasticEntityLink",
+              "label": "Ablieferung (Link)",
+              "labels": {
+                "de": "Ablieferung (Link)",
+                "en": "en:Ablieferung (Link)",
+                "fr": "fr:Ablieferung (Link)",
+                "it": "it:Ablieferung (Link)"
+              }
+            },
+            {
+              "key": "customFields.form",
+              "name": "customFields.form",
+              "type": "string",
+              "label": "Form",
+              "labels": {
+                "de": "Form",
+                "en": "en:Form",
+                "fr": "fr:Form",
+                "it": "it:Form"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "sachverwandteUnterlagen",
+          "label": "Sachverwandte Unterlagen",
+          "labels": {
+            "de": "Sachverwandte Unterlagen",
+            "en": "en:Sachverwandte Unterlagen",
+            "fr": "fr:Sachverwandte Unterlagen",
+            "it": "it:Sachverwandte Unterlagen"
+          },
+          "fields": [
+            {
+              "key": "customFields.verwandteVe",
+              "name": "customFields.verwandteVe",
+              "type": "string",
+              "label": "Verwandte VE",
+              "labels": {
+                "de": "Verwandte VE",
+                "en": "en:Verwandte VE",
+                "fr": "fr:Verwandte VE",
+                "it": "it:Verwandte VE"
+              }
+            },
+            {
+              "key": "formerReferenceCode",
+              "name": "formerReferenceCode",
+              "type": "string",
+              "label": "Frühere Signaturen",
+              "labels": {
+                "de": "Frühere Signaturen",
+                "en": "en:Frühere Signaturen",
+                "fr": "fr:Frühere Signaturen",
+                "it": "it:Frühere Signaturen"
+              }
+            }
+          ]
+        },
+        {
+          "identifier": "anmerkungen",
+          "label": "Anmerkungen",
+          "labels": {
+            "de": "Anmerkungen",
+            "en": "en:Anmerkungen",
+            "fr": "fr:Anmerkungen",
+            "it": "it:Anmerkungen"
+          },
+          "fields": [
+            {
+              "key": "customFields.bemerkungZurVe",
+              "name": "customFields.bemerkungZurVe",
+              "type": "string",
+              "label": "Zusätzliche Informationen",
+              "labels": {
+                "de": "Zusätzliche Informationen",
+                "en": "en:Zusätzliche Informationen",
+                "fr": "fr:Zusätzliche Informationen",
+                "it": "it:Zusätzliche Informationen"
+              }
+            },
+            {
+              "key": "customFields.veOrdnungskomponenteLink",
+              "name": "customFields.veOrdnungskomponenteLink",
+              "type": "ElasticEntityLink",
+              "label": "Ordnungskomponente (Link)",
+              "labels": {
+                "de": "Ordnungskomponente (Link)",
+                "en": "en:Ordnungskomponente (Link)",
+                "fr": "fr:Ordnungskomponente (Link)",
+                "it": "it:Ordnungskomponente (Link)"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

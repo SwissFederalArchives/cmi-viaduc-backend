@@ -1,0 +1,114 @@
+﻿<html>
+
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        table.noLine td {
+            border-bottom: none;
+            border-top: none;
+        }
+    </style>
+</head>
+
+<body>
+    <p style="color:red">
+        Az.
+    </p>
+    <p style="color:red">
+        Sehr geehrter Herr / Sehr geehrte Frau
+    </p>
+    <p>
+        Mit Schreiben vom {{Erfassungsdatum}} hat uns <span style="color:red">Herr/Frau</span> {{Besteller.Vorname}} {{Besteller.Name}}
+        {{#Besteller.Organisation}}
+            ({{Besteller.Organisation}})
+        {{/Besteller.Organisation}}
+        ein Auskunftsgesuch in folgende Unterlagen übermittelt:
+    </p>
+    <p>
+        <table>
+            <tr>
+                <th>Signatur</th>
+                <th>Aktenzeichen</th>
+                <th>Band</th>
+                <th>Dossiertitel</th>
+                <th>Zeitraum</th>
+            </tr>
+            {{#Aufträge}}
+            <tr>
+                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Band}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+            {{/Aufträge}}
+        </table>
+    </p>
+    <p>
+        Diese Unterlagen unterliegen gemäss Art. <span style="color:red">9/11/12</span> des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) noch einer Schutzfrist.
+    </p>
+    <p>
+        Gemäss Art. 15 BGA und Art. 20 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) kann jede Person über sie betreffende Daten, die beim Bundesarchiv oder bei den selbständig archivieren Stellen archiviert sind, Auskunft verlangen.
+    </p>
+    <p>
+        <span style="color:red">Herr/Frau</span> {{Besteller.Name}} beschreibt die Art der Arbeit und den Zweck der Einsichtnahme folgendermassen:
+    </p>
+    <p>
+        <table class="noLine">
+            <tr>
+                <td>Art der Arbeit:<br />&nbsp;</td>
+                <td>{{ArtDerArbeit.Deutsch}}<br />&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Zweck der Einsichtnahme:</td>
+                <td>«{{BegründungEinsichtsgesuch}}»</td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        Wir bitten Sie, das Auskunftsgesuch von <span style="color:red">Herrn / Frau</span> {{Besteller.Name}} materiell zu prüfen. Die massgebenden Kriterien für die Prüfung der Unterlagen sind in Art. 15 BGA, Art. 20 VBGA und in den Bestimmungen des DSG festgehalten. Die Identität von {{Besteller.Vorname}} {{Besteller.Name}} (geboren am {{Besteller.Geburtsdatum}}) wurde im Rahmen des Identifizierungsprozesses des Bundesarchivs geprüft und bestätigt.
+    </p>
+    <p>
+        Bitte teilen Sie uns Ihren Entscheid bis zum {{FrühestesErfassungsdatumPlus30Tage}} mit (Art. 1 <a href="http://www.admin.ch/ch/d/sr/c235.11.html">VDSG</a>). Andernfalls erwarten wir gerne Ihre schriftliche Mitteilung, damit wir <span style="color:red">die Gesuchstellerin / den Gesuchsteller</span> informieren können.
+    </p>
+	<p>
+	
+	<span style="color:red">Wenn Digitalisierung ausgelöst oder digital vorhanden</span><br>
+	Die ersuchten Unterlagen werden derzeit digitalisiert. Personen mit der Rolle &laquo;Ablieferende Stelle&raquo; können die Digitalisate innerhalb der nächsten Tage herunterladen.
+	</p>
+    <p>
+        Weitere allgemeine Hinweise zum Thema Einsichts-, Auskunfts- und Zugangsgesuche finden Sie im <a href="http://www.bar.admin.ch/content/dam/bar/de/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">Merkblatt Einsichtsgesuche</a>.
+    </p>
+    <p>
+        Vielen Dank für Ihre Bemühungen.
+    </p>
+
+    <p>
+        Mit freundlichen Grüssen
+    </p>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="formTemplateContainer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="formTemplates" type="formTemplate">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="section">
+        <xs:sequence>
+            <xs:element name="sectionLabels" type="label" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" name="fields" type="fieldType"> </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="subSections" type="section"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="label">
+        <xs:sequence>
+            <xs:element name="lang" type="xs:language"/>
+            <xs:element name="value" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="formTemplate">
+        <xs:sequence>
+            <xs:element name="formId" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="sections" type="section"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="fieldType">
+        <xs:sequence>
+            <xs:element name="dbFieldName" type="xs:string"/>
+            <xs:element name="dbType" type="xs:string"/>
+            <xs:element name="elasticType" type="xs:string"/>
+            <xs:element name="visibility">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="public"/>
+                        <xs:enumeration value="internal"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="fieldLabels" type="label" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

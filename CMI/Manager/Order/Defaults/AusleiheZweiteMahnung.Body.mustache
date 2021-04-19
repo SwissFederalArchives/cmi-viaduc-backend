@@ -1,0 +1,103 @@
+﻿<html>
+<head>
+
+    <style TYPE="text/css">
+        html,
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    {{#Sprachen}}
+    {{#IstDeutsch}}
+    <div id="deutsch">
+        <p><strong>Zweite Mahnung Verwaltungsausleihe</strong></p>
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Wir beziehen uns auf die beiliegende erste Mahnung, die wir <span style="color:red">Name Benutzer</span> am <span style="color:red">Datum</span> gesendet haben.
+            Leider haben wir weder die gemahnten Unterlagen noch eine Rückmeldung innerhalb der angegebenen Frist erhalten. Wir bitten Sie, uns die gemahnten Unterlagen <span style="text-decoration: underline">unverzüglich</span> zurückzusenden.
+            Falls dies aus einem bestimmten Grund nicht möglich ist, bitten wir Sie um eine rasche Kontaktaufnahme.
+        </p>
+        <p>
+            Wenn wir <strong>bis am <span style="color:red">Frist von 10 Tagen</span></strong> keine Rückmeldung erhalten, werden die Unterlagen in unseren Verzeichnissen als «vermisst im ausleihenden Amt» geführt und die Direktion Ihres Amtes wird von uns entsprechend informiert.
+        </p>
+        <p>
+            Selbstverständlich stehen wir Ihnen für allfällige Fragen zur Verfügung. Sollte sich dieses Schreiben mit Ihrer Rücksendung gekreuzt haben, können Sie es als gegenstandslos betrachten.
+        </p>
+        <p>
+            Freundliche Grüsse
+            <br />
+            <br />
+            <br />
+            <strong>Ralph Bassfeld</strong><br />
+            Dienstchef
+            <br />
+            <br />
+            Beilage: Erste Mahnung vom <span style="color:red">Datum</span>
+        </p>
+    </div>
+    {{/IstDeutsch}}
+    {{#IstFranzösisch}}
+    <div id="franzoesisch">
+        <p><strong>Prêt à l’administration : deuxième rappel</strong></p>
+        <p>
+            Bonjour,
+        </p>
+        <p>
+            Nous nous référons au premier rappel envoyé à <span style="color:red">Name Benutzer</span> le <span style="color:red">Datum</span>.
+            À ce jour, nous sommes toujours sans nouvelles et constatons que les documents empruntés ne nous ont pas été retournés dans le délai supplémentaire imparti. Nous vous prions donc de nous les faire parvenir <span style="text-decoration: underline">immédiatement</span>.
+            Si cela ne devait pas être possible, veuillez nous contacter rapidement.
+        </p>
+        <p>
+            En l’absence de nouvelles de votre part <strong>dans les <span style="color:red">dix jours</span></strong>, nous indiquerons dans nos répertoires que les documents en question ont été perdus lors du prêt à un office et informerons la direction de votre office en conséquence.
+        </p>
+        <p>
+            Si votre retour a croisé le présent courrier, veuillez ne pas tenir compte de celui-ci. Nous restons naturellement à votre disposition pour tout complément d’information.
+        </p>
+        <p>
+            Meilleures salutations,
+            <br />
+            <br />
+            <br />
+            <strong>Ralph Bassfeld</strong><br />
+            Responsable de service
+            <br />
+            <br />
+            Pièce jointe : premier rappel du <span style="color:red">Datum</span>
+        </p>
+    </div>
+    {{/IstFranzösisch}}
+    {{/Sprachen}}
+</body>
+</html>

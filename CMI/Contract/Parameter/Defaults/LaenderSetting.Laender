@@ -1,0 +1,2026 @@
+﻿{
+   "AC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ascension",
+      "fr":"Île de l’Ascension",
+      "it":"Isola di Ascensione",
+      "en":"Ascension Island"
+   },
+   "AD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Andorra",
+      "fr":"Andorre",
+      "it":"Andorra",
+      "en":"Andorra"
+   },
+   "AE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Vereinigte Arabische Emirate",
+      "fr":"Émirats arabes unis",
+      "it":"Emirati Arabi Uniti",
+      "en":"United Arab Emirates"
+   },
+   "AF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Afghanistan",
+      "fr":"Afghanistan",
+      "it":"Afghanistan",
+      "en":"Afghanistan"
+   },
+   "AG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Antigua und Barbuda",
+      "fr":"Antigua-et-Barbuda",
+      "it":"Antigua e Barbuda",
+      "en":"Antigua & Barbuda"
+   },
+   "AI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Anguilla",
+      "fr":"Anguilla",
+      "it":"Anguilla",
+      "en":"Anguilla"
+   },
+   "AL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Albanien",
+      "fr":"Albanie",
+      "it":"Albania",
+      "en":"Albania"
+   },
+   "AM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Armenien",
+      "fr":"Arménie",
+      "it":"Armenia",
+      "en":"Armenia"
+   },
+   "AO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Angola",
+      "fr":"Angola",
+      "it":"Angola",
+      "en":"Angola"
+   },
+   "AQ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Antarktis",
+      "fr":"Antarctique",
+      "it":"Antartide",
+      "en":"Antarctica"
+   },
+   "AR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Argentinien",
+      "fr":"Argentine",
+      "it":"Argentina",
+      "en":"Argentina"
+   },
+   "AS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Amerikanisch-Samoa",
+      "fr":"Samoa américaines",
+      "it":"Samoa Americane",
+      "en":"American Samoa"
+   },
+   "AT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Österreich",
+      "fr":"Autriche",
+      "it":"Austria",
+      "en":"Austria"
+   },
+   "AU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Australien",
+      "fr":"Australie",
+      "it":"Australia",
+      "en":"Australia"
+   },
+   "AW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Aruba",
+      "fr":"Aruba",
+      "it":"Aruba",
+      "en":"Aruba"
+   },
+   "AX":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Åland-Inseln",
+      "fr":"Îles Åland",
+      "it":"Isole Aland",
+      "en":"Åland Islands"
+   },
+   "AZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Aserbaidschan",
+      "fr":"Azerbaïdjan",
+      "it":"Azerbaigian",
+      "en":"Azerbaijan"
+   },
+   "BA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bosnien und Herzegowina",
+      "fr":"Bosnie-Herzégovine",
+      "it":"Bosnia-Erzegovina",
+      "en":"Bosnia & Herzegovina"
+   },
+   "BB":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Barbados",
+      "fr":"Barbade",
+      "it":"Barbados",
+      "en":"Barbados"
+   },
+   "BD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bangladesh",
+      "fr":"Bangladesh",
+      "it":"Bangladesh",
+      "en":"Bangladesh"
+   },
+   "BE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Belgien",
+      "fr":"Belgique",
+      "it":"Belgio",
+      "en":"Belgium"
+   },
+   "BF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Burkina Faso",
+      "fr":"Burkina Faso",
+      "it":"Burkina Faso",
+      "en":"Burkina Faso"
+   },
+   "BG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bulgarien",
+      "fr":"Bulgarie",
+      "it":"Bulgaria",
+      "en":"Bulgaria"
+   },
+   "BH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bahrain",
+      "fr":"Bahreïn",
+      "it":"Bahrein",
+      "en":"Bahrain"
+   },
+   "BI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Burundi",
+      "fr":"Burundi",
+      "it":"Burundi",
+      "en":"Burundi"
+   },
+   "BJ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Benin",
+      "fr":"Bénin",
+      "it":"Benin",
+      "en":"Benin"
+   },
+   "BL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Barthélemy",
+      "fr":"Saint-Barthélemy",
+      "it":"Saint-Barthélemy",
+      "en":"St. Barthélemy"
+   },
+   "BM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bermuda",
+      "fr":"Bermudes",
+      "it":"Bermuda",
+      "en":"Bermuda"
+   },
+   "BN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Brunei",
+      "fr":"Brunéi Darussalam",
+      "it":"Brunei",
+      "en":"Brunei"
+   },
+   "BO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bolivien",
+      "fr":"Bolivie",
+      "it":"Bolivia",
+      "en":"Bolivia"
+   },
+   "BQ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Karibische Niederlande",
+      "fr":"Pays-Bas caribéens",
+      "it":"Caraibi Olandesi",
+      "en":"Caribbean Netherlands"
+   },
+   "BR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Brasilien",
+      "fr":"Brésil",
+      "it":"Brasile",
+      "en":"Brazil"
+   },
+   "BS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bahamas",
+      "fr":"Bahamas",
+      "it":"Bahamas",
+      "en":"Bahamas"
+   },
+   "BT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Bhutan",
+      "fr":"Bhoutan",
+      "it":"Bhutan",
+      "en":"Bhutan"
+   },
+   "BW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Botswana",
+      "fr":"Botswana",
+      "it":"Botswana",
+      "en":"Botswana"
+   },
+   "BY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Weissrussland",
+      "fr":"Biélorussie",
+      "it":"Bielorussia",
+      "en":"Belarus"
+   },
+   "BZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Belize",
+      "fr":"Belize",
+      "it":"Belize",
+      "en":"Belize"
+   },
+   "CA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kanada",
+      "fr":"Canada",
+      "it":"Canada",
+      "en":"Canada"
+   },
+   "CC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kokosinseln",
+      "fr":"Îles Cocos",
+      "it":"Isole Cocos",
+      "en":"Cocos (Keeling) Islands"
+   },
+   "CD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kongo-Kinshasa",
+      "fr":"Congo-Kinshasa",
+      "it":"Congo - Kinshasa",
+      "en":"Congo - Kinshasa"
+   },
+   "CF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Zentralafrikanische Republik",
+      "fr":"République centrafricaine",
+      "it":"Repubblica Centrafricana",
+      "en":"Central African Republic"
+   },
+   "CG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kongo-Brazzaville",
+      "fr":"Congo-Brazzaville",
+      "it":"Congo-Brazzaville",
+      "en":"Congo - Brazzaville"
+   },
+   "CH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Schweiz",
+      "fr":"Suisse",
+      "it":"Svizzera",
+      "en":"Switzerland"
+   },
+   "CI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Côte d’Ivoire",
+      "fr":"Côte d’Ivoire",
+      "it":"Costa d’Avorio",
+      "en":"Côte d’Ivoire"
+   },
+   "CK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Cookinseln",
+      "fr":"Îles Cook",
+      "it":"Isole Cook",
+      "en":"Cook Islands"
+   },
+   "CL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Chile",
+      "fr":"Chili",
+      "it":"Cile",
+      "en":"Chile"
+   },
+   "CM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kamerun",
+      "fr":"Cameroun",
+      "it":"Camerun",
+      "en":"Cameroon"
+   },
+   "CN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"China",
+      "fr":"Chine",
+      "it":"Cina",
+      "en":"China"
+   },
+   "CO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kolumbien",
+      "fr":"Colombie",
+      "it":"Colombia",
+      "en":"Colombia"
+   },
+   "CR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Costa Rica",
+      "fr":"Costa Rica",
+      "it":"Costa Rica",
+      "en":"Costa Rica"
+   },
+   "CU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kuba",
+      "fr":"Cuba",
+      "it":"Cuba",
+      "en":"Cuba"
+   },
+   "CV":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kapverden",
+      "fr":"Cap-Vert",
+      "it":"Capo Verde",
+      "en":"Cape Verde"
+   },
+   "CW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Curaçao",
+      "fr":"Curaçao",
+      "it":"Curaçao",
+      "en":"Curaçao"
+   },
+   "CX":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Weihnachtsinsel",
+      "fr":"Île Christmas",
+      "it":"Isola di Christmas",
+      "en":"Christmas Island"
+   },
+   "CY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Zypern",
+      "fr":"Chypre",
+      "it":"Cipro",
+      "en":"Cyprus"
+   },
+   "CZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tschechische Republik",
+      "fr":"République tchèque",
+      "it":"Repubblica Ceca",
+      "en":"Czech Republic"
+   },
+   "DE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Deutschland",
+      "fr":"Allemagne",
+      "it":"Germania",
+      "en":"Germany"
+   },
+   "DG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Diego Garcia",
+      "fr":"Diego Garcia",
+      "it":"Diego Garcia",
+      "en":"Diego Garcia"
+   },
+   "DJ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Djibouti",
+      "fr":"Djibouti",
+      "it":"Gibuti",
+      "en":"Djibouti"
+   },
+   "DK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Dänemark",
+      "fr":"Danemark",
+      "it":"Danimarca",
+      "en":"Denmark"
+   },
+   "DM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Dominica",
+      "fr":"Dominique",
+      "it":"Dominica",
+      "en":"Dominica"
+   },
+   "DO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Dominikanische Republik",
+      "fr":"République dominicaine",
+      "it":"Repubblica Dominicana",
+      "en":"Dominican Republic"
+   },
+   "DZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Algerien",
+      "fr":"Algérie",
+      "it":"Algeria",
+      "en":"Algeria"
+   },
+   "EA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ceuta und Melilla",
+      "fr":"Ceuta et Melilla",
+      "it":"Ceuta e Melilla",
+      "en":"Ceuta & Melilla"
+   },
+   "EC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ecuador",
+      "fr":"Équateur",
+      "it":"Ecuador",
+      "en":"Ecuador"
+   },
+   "EE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Estland",
+      "fr":"Estonie",
+      "it":"Estonia",
+      "en":"Estonia"
+   },
+   "EG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ägypten",
+      "fr":"Égypte",
+      "it":"Egitto",
+      "en":"Egypt"
+   },
+   "EH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Westsahara",
+      "fr":"Sahara occidental",
+      "it":"Sahara Occidentale",
+      "en":"Western Sahara"
+   },
+   "ER":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Eritrea",
+      "fr":"Érythrée",
+      "it":"Eritrea",
+      "en":"Eritrea"
+   },
+   "ES":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Spanien",
+      "fr":"Espagne",
+      "it":"Spagna",
+      "en":"Spain"
+   },
+   "ET":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Äthiopien",
+      "fr":"Éthiopie",
+      "it":"Etiopia",
+      "en":"Ethiopia"
+   },
+   "FI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Finnland",
+      "fr":"Finlande",
+      "it":"Finlandia",
+      "en":"Finland"
+   },
+   "FJ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Fidschi",
+      "fr":"Fidji",
+      "it":"Figi",
+      "en":"Fiji"
+   },
+   "FK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Falklandinseln",
+      "fr":"Îles Malouines",
+      "it":"Isole Falkland",
+      "en":"Falkland Islands"
+   },
+   "FM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mikronesien",
+      "fr":"États fédérés de Micronésie",
+      "it":"Micronesia",
+      "en":"Micronesia"
+   },
+   "FO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Färöer",
+      "fr":"Îles Féroé",
+      "it":"Isole Faroe",
+      "en":"Faroe Islands"
+   },
+   "FR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Frankreich",
+      "fr":"France",
+      "it":"Francia",
+      "en":"France"
+   },
+   "GA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Gabun",
+      "fr":"Gabon",
+      "it":"Gabon",
+      "en":"Gabon"
+   },
+   "GB":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Grossbritannien",
+      "fr":"Royaume-Uni",
+      "it":"Regno Unito",
+      "en":"United Kingdom"
+   },
+   "GD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Grenada",
+      "fr":"Grenade",
+      "it":"Grenada",
+      "en":"Grenada"
+   },
+   "GE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Georgien",
+      "fr":"Géorgie",
+      "it":"Georgia",
+      "en":"Georgia"
+   },
+   "GF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Französisch-Guayana",
+      "fr":"Guyane française",
+      "it":"Guiana Francese",
+      "en":"French Guiana"
+   },
+   "GG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guernsey",
+      "fr":"Guernesey",
+      "it":"Guernsey",
+      "en":"Guernsey"
+   },
+   "GH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ghana",
+      "fr":"Ghana",
+      "it":"Ghana",
+      "en":"Ghana"
+   },
+   "GI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Gibraltar",
+      "fr":"Gibraltar",
+      "it":"Gibilterra",
+      "en":"Gibraltar"
+   },
+   "GL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Grönland",
+      "fr":"Groenland",
+      "it":"Groenlandia",
+      "en":"Greenland"
+   },
+   "GM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Gambia",
+      "fr":"Gambie",
+      "it":"Gambia",
+      "en":"Gambia"
+   },
+   "GN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guinea",
+      "fr":"Guinée",
+      "it":"Guinea",
+      "en":"Guinea"
+   },
+   "GP":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guadeloupe",
+      "fr":"Guadeloupe",
+      "it":"Guadalupa",
+      "en":"Guadeloupe"
+   },
+   "GQ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Äquatorialguinea",
+      "fr":"Guinée équatoriale",
+      "it":"Guinea Equatoriale",
+      "en":"Equatorial Guinea"
+   },
+   "GR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Griechenland",
+      "fr":"Grèce",
+      "it":"Grecia",
+      "en":"Greece"
+   },
+   "GS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Südgeorgien und die Südlichen Sandwichinseln",
+      "fr":"Îles Géorgie du Sud et Sandwich du Sud",
+      "it":"Georgia del Sud e isole Sandwich meridionali",
+      "en":"South Georgia & South Sandwich Islands"
+   },
+   "GT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guatemala",
+      "fr":"Guatemala",
+      "it":"Guatemala",
+      "en":"Guatemala"
+   },
+   "GU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guam",
+      "fr":"Guam",
+      "it":"Guam",
+      "en":"Guam"
+   },
+   "GW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guinea-Bissau",
+      "fr":"Guinée-Bissau",
+      "it":"Guinea-Bissau",
+      "en":"Guinea-Bissau"
+   },
+   "GY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Guyana",
+      "fr":"Guyana",
+      "it":"Guyana",
+      "en":"Guyana"
+   },
+   "HK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sonderverwaltungszone Hongkong",
+      "fr":"R.A.S. chinoise de Hong Kong",
+      "it":"RAS di Hong Kong",
+      "en":"Hong Kong SAR China"
+   },
+   "HN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Honduras",
+      "fr":"Honduras",
+      "it":"Honduras",
+      "en":"Honduras"
+   },
+   "HR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kroatien",
+      "fr":"Croatie",
+      "it":"Croazia",
+      "en":"Croatia"
+   },
+   "HT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Haiti",
+      "fr":"Haïti",
+      "it":"Haiti",
+      "en":"Haiti"
+   },
+   "HU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ungarn",
+      "fr":"Hongrie",
+      "it":"Ungheria",
+      "en":"Hungary"
+   },
+   "IC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kanarische Inseln",
+      "fr":"Îles Canaries",
+      "it":"Isole Canarie",
+      "en":"Canary Islands"
+   },
+   "ID":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Indonesien",
+      "fr":"Indonésie",
+      "it":"Indonesia",
+      "en":"Indonesia"
+   },
+   "IE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Irland",
+      "fr":"Irlande",
+      "it":"Irlanda",
+      "en":"Ireland"
+   },
+   "IL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Israel",
+      "fr":"Israël",
+      "it":"Israele",
+      "en":"Israel"
+   },
+   "IM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Isle of Man",
+      "fr":"Île de Man",
+      "it":"Isola di Man",
+      "en":"Isle of Man"
+   },
+   "IN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Indien",
+      "fr":"Inde",
+      "it":"India",
+      "en":"India"
+   },
+   "IO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Britisches Territorium im Indischen Ozean",
+      "fr":"Territoire britannique de l’océan Indien",
+      "it":"Territorio Britannico dell’Oceano Indiano",
+      "en":"British Indian Ocean Territory"
+   },
+   "IQ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Irak",
+      "fr":"Irak",
+      "it":"Iraq",
+      "en":"Iraq"
+   },
+   "IR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Iran",
+      "fr":"Iran",
+      "it":"Iran",
+      "en":"Iran"
+   },
+   "IS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Island",
+      "fr":"Islande",
+      "it":"Islanda",
+      "en":"Iceland"
+   },
+   "IT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Italien",
+      "fr":"Italie",
+      "it":"Italia",
+      "en":"Italy"
+   },
+   "JE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Jersey",
+      "fr":"Jersey",
+      "it":"Jersey",
+      "en":"Jersey"
+   },
+   "JM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Jamaika",
+      "fr":"Jamaïque",
+      "it":"Giamaica",
+      "en":"Jamaica"
+   },
+   "JO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Jordanien",
+      "fr":"Jordanie",
+      "it":"Giordania",
+      "en":"Jordan"
+   },
+   "JP":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Japan",
+      "fr":"Japon",
+      "it":"Giappone",
+      "en":"Japan"
+   },
+   "KE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kenia",
+      "fr":"Kenya",
+      "it":"Kenya",
+      "en":"Kenya"
+   },
+   "KG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kirgisistan",
+      "fr":"Kirghizistan",
+      "it":"Kirghizistan",
+      "en":"Kyrgyzstan"
+   },
+   "KH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kambodscha",
+      "fr":"Cambodge",
+      "it":"Cambogia",
+      "en":"Cambodia"
+   },
+   "KI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kiribati",
+      "fr":"Kiribati",
+      "it":"Kiribati",
+      "en":"Kiribati"
+   },
+   "KM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Komoren",
+      "fr":"Comores",
+      "it":"Comore",
+      "en":"Comoros"
+   },
+   "KN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Kitts und Nevis",
+      "fr":"Saint-Christophe-et-Niévès",
+      "it":"Saint Kitts e Nevis",
+      "en":"St. Kitts & Nevis"
+   },
+   "KP":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Demokratische Volksrepublik Korea",
+      "fr":"Corée du Nord",
+      "it":"Corea del Nord",
+      "en":"North Korea"
+   },
+   "KR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Republik Korea",
+      "fr":"Corée du Sud",
+      "it":"Corea del Sud",
+      "en":"South Korea"
+   },
+   "KW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kuwait",
+      "fr":"Koweït",
+      "it":"Kuwait",
+      "en":"Kuwait"
+   },
+   "KY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kaimaninseln",
+      "fr":"Îles Caïmans",
+      "it":"Isole Cayman",
+      "en":"Cayman Islands"
+   },
+   "KZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kasachstan",
+      "fr":"Kazakhstan",
+      "it":"Kazakistan",
+      "en":"Kazakhstan"
+   },
+   "LA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Laos",
+      "fr":"Laos",
+      "it":"Laos",
+      "en":"Laos"
+   },
+   "LB":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Libanon",
+      "fr":"Liban",
+      "it":"Libano",
+      "en":"Lebanon"
+   },
+   "LC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Lucia",
+      "fr":"Sainte-Lucie",
+      "it":"Saint Lucia",
+      "en":"St. Lucia"
+   },
+   "LI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Liechtenstein",
+      "fr":"Liechtenstein",
+      "it":"Liechtenstein",
+      "en":"Liechtenstein"
+   },
+   "LK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sri Lanka",
+      "fr":"Sri Lanka",
+      "it":"Sri Lanka",
+      "en":"Sri Lanka"
+   },
+   "LR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Liberia",
+      "fr":"Libéria",
+      "it":"Liberia",
+      "en":"Liberia"
+   },
+   "LS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Lesotho",
+      "fr":"Lesotho",
+      "it":"Lesotho",
+      "en":"Lesotho"
+   },
+   "LT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Litauen",
+      "fr":"Lituanie",
+      "it":"Lituania",
+      "en":"Lithuania"
+   },
+   "LU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Luxemburg",
+      "fr":"Luxembourg",
+      "it":"Lussemburgo",
+      "en":"Luxembourg"
+   },
+   "LV":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Lettland",
+      "fr":"Lettonie",
+      "it":"Lettonia",
+      "en":"Latvia"
+   },
+   "LY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Libyen",
+      "fr":"Libye",
+      "it":"Libia",
+      "en":"Libya"
+   },
+   "MA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Marokko",
+      "fr":"Maroc",
+      "it":"Marocco",
+      "en":"Morocco"
+   },
+   "MC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Monaco",
+      "fr":"Monaco",
+      "it":"Monaco",
+      "en":"Monaco"
+   },
+   "MD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Republik Moldau",
+      "fr":"Moldavie",
+      "it":"Moldavia",
+      "en":"Moldova"
+   },
+   "ME":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Montenegro",
+      "fr":"Monténégro",
+      "it":"Montenegro",
+      "en":"Montenegro"
+   },
+   "MF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Martin",
+      "fr":"Saint-Martin (partie française)",
+      "it":"Saint Martin",
+      "en":"St. Martin"
+   },
+   "MG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Madagaskar",
+      "fr":"Madagascar",
+      "it":"Madagascar",
+      "en":"Madagascar"
+   },
+   "MH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Marshall-Inseln",
+      "fr":"Îles Marshall",
+      "it":"Isole Marshall",
+      "en":"Marshall Islands"
+   },
+   "MK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mazedonien",
+      "fr":"Macédoine",
+      "it":"Repubblica di Macedonia",
+      "en":"Macedonia"
+   },
+   "ML":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mali",
+      "fr":"Mali",
+      "it":"Mali",
+      "en":"Mali"
+   },
+   "MM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Myanmar",
+      "fr":"Myanmar",
+      "it":"Myanmar (Birmania)",
+      "en":"Myanmar (Burma)"
+   },
+   "MN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mongolei",
+      "fr":"Mongolie",
+      "it":"Mongolia",
+      "en":"Mongolia"
+   },
+   "MO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sonderverwaltungsregion Macau",
+      "fr":"R.A.S. chinoise de Macao",
+      "it":"RAS di Macao",
+      "en":"Macau SAR China"
+   },
+   "MP":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Nördliche Marianen",
+      "fr":"Îles Mariannes du Nord",
+      "it":"Isole Marianne Settentrionali",
+      "en":"Northern Mariana Islands"
+   },
+   "MQ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Martinique",
+      "fr":"Martinique",
+      "it":"Martinica",
+      "en":"Martinique"
+   },
+   "MR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mauretanien",
+      "fr":"Mauritanie",
+      "it":"Mauritania",
+      "en":"Mauritania"
+   },
+   "MS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Montserrat",
+      "fr":"Montserrat",
+      "it":"Montserrat",
+      "en":"Montserrat"
+   },
+   "MT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Malta",
+      "fr":"Malte",
+      "it":"Malta",
+      "en":"Malta"
+   },
+   "MU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mauritius",
+      "fr":"Maurice",
+      "it":"Mauritius",
+      "en":"Mauritius"
+   },
+   "MV":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Malediven",
+      "fr":"Maldives",
+      "it":"Maldive",
+      "en":"Maldives"
+   },
+   "MW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Malawi",
+      "fr":"Malawi",
+      "it":"Malawi",
+      "en":"Malawi"
+   },
+   "MX":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mexiko",
+      "fr":"Mexique",
+      "it":"Messico",
+      "en":"Mexico"
+   },
+   "MY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Malaysia",
+      "fr":"Malaisie",
+      "it":"Malesia",
+      "en":"Malaysia"
+   },
+   "MZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mosambik",
+      "fr":"Mozambique",
+      "it":"Mozambico",
+      "en":"Mozambique"
+   },
+   "NA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Namibia",
+      "fr":"Namibie",
+      "it":"Namibia",
+      "en":"Namibia"
+   },
+   "NC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Neukaledonien",
+      "fr":"Nouvelle-Calédonie",
+      "it":"Nuova Caledonia",
+      "en":"New Caledonia"
+   },
+   "NE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Niger",
+      "fr":"Niger",
+      "it":"Niger",
+      "en":"Niger"
+   },
+   "NF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Norfolkinsel",
+      "fr":"Île Norfolk",
+      "it":"Isola Norfolk",
+      "en":"Norfolk Island"
+   },
+   "NG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Nigeria",
+      "fr":"Nigéria",
+      "it":"Nigeria",
+      "en":"Nigeria"
+   },
+   "NI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Nicaragua",
+      "fr":"Nicaragua",
+      "it":"Nicaragua",
+      "en":"Nicaragua"
+   },
+   "NL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Niederlande",
+      "fr":"Pays-Bas",
+      "it":"Paesi Bassi",
+      "en":"Netherlands"
+   },
+   "NO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Norwegen",
+      "fr":"Norvège",
+      "it":"Norvegia",
+      "en":"Norway"
+   },
+   "NP":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Nepal",
+      "fr":"Népal",
+      "it":"Nepal",
+      "en":"Nepal"
+   },
+   "NR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Nauru",
+      "fr":"Nauru",
+      "it":"Nauru",
+      "en":"Nauru"
+   },
+   "NU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Niue",
+      "fr":"Niue",
+      "it":"Niue",
+      "en":"Niue"
+   },
+   "NZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Neuseeland",
+      "fr":"Nouvelle-Zélande",
+      "it":"Nuova Zelanda",
+      "en":"New Zealand"
+   },
+   "OM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Oman",
+      "fr":"Oman",
+      "it":"Oman",
+      "en":"Oman"
+   },
+   "PA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Panama",
+      "fr":"Panama",
+      "it":"Panamá",
+      "en":"Panama"
+   },
+   "PE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Peru",
+      "fr":"Pérou",
+      "it":"Perù",
+      "en":"Peru"
+   },
+   "PF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Französisch-Polynesien",
+      "fr":"Polynésie française",
+      "it":"Polinesia Francese",
+      "en":"French Polynesia"
+   },
+   "PG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Papua-Neuguinea",
+      "fr":"Papouasie-Nouvelle-Guinée",
+      "it":"Papua Nuova Guinea",
+      "en":"Papua New Guinea"
+   },
+   "PH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Philippinen",
+      "fr":"Philippines",
+      "it":"Filippine",
+      "en":"Philippines"
+   },
+   "PK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Pakistan",
+      "fr":"Pakistan",
+      "it":"Pakistan",
+      "en":"Pakistan"
+   },
+   "PL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Polen",
+      "fr":"Pologne",
+      "it":"Polonia",
+      "en":"Poland"
+   },
+   "PM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Pierre und Miquelon",
+      "fr":"Saint-Pierre-et-Miquelon",
+      "it":"Saint Pierre e Miquelon",
+      "en":"St. Pierre & Miquelon"
+   },
+   "PN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Pitcairninseln",
+      "fr":"Pitcairn",
+      "it":"Isole Pitcairn",
+      "en":"Pitcairn Islands"
+   },
+   "PR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Puerto Rico",
+      "fr":"Porto Rico",
+      "it":"Portorico",
+      "en":"Puerto Rico"
+   },
+   "PS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Palästinensische Autonomiegebiete",
+      "fr":"Territoires palestiniens",
+      "it":"Territori palestinesi",
+      "en":"Palestinian Territories"
+   },
+   "PT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Portugal",
+      "fr":"Portugal",
+      "it":"Portogallo",
+      "en":"Portugal"
+   },
+   "PW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Palau",
+      "fr":"Palaos",
+      "it":"Palau",
+      "en":"Palau"
+   },
+   "PY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Paraguay",
+      "fr":"Paraguay",
+      "it":"Paraguay",
+      "en":"Paraguay"
+   },
+   "QA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Katar",
+      "fr":"Qatar",
+      "it":"Qatar",
+      "en":"Qatar"
+   },
+   "RE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Réunion",
+      "fr":"La Réunion",
+      "it":"Réunion",
+      "en":"Réunion"
+   },
+   "RO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Rumänien",
+      "fr":"Roumanie",
+      "it":"Romania",
+      "en":"Romania"
+   },
+   "RS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Serbien",
+      "fr":"Serbie",
+      "it":"Serbia",
+      "en":"Serbia"
+   },
+   "RU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Russische Föderation",
+      "fr":"Russie",
+      "it":"Federazione Russa",
+      "en":"Russia"
+   },
+   "RW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Rwanda",
+      "fr":"Rwanda",
+      "it":"Ruanda",
+      "en":"Rwanda"
+   },
+   "SA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Saudi-Arabien",
+      "fr":"Arabie saoudite",
+      "it":"Arabia Saudita",
+      "en":"Saudi Arabia"
+   },
+   "SB":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Salomon-Inseln",
+      "fr":"Îles Salomon",
+      "it":"Isole Solomon",
+      "en":"Solomon Islands"
+   },
+   "SC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Seychellen",
+      "fr":"Seychelles",
+      "it":"Seychelles",
+      "en":"Seychelles"
+   },
+   "SD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sudan",
+      "fr":"Soudan",
+      "it":"Sudan",
+      "en":"Sudan"
+   },
+   "SE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Schweden",
+      "fr":"Suède",
+      "it":"Svezia",
+      "en":"Sweden"
+   },
+   "SG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Singapur",
+      "fr":"Singapour",
+      "it":"Singapore",
+      "en":"Singapore"
+   },
+   "SH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Helena",
+      "fr":"Sainte-Hélène",
+      "it":"Sant’Elena",
+      "en":"St. Helena"
+   },
+   "SI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Slowenien",
+      "fr":"Slovénie",
+      "it":"Slovenia",
+      "en":"Slovenia"
+   },
+   "SJ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Svalbard und Jan Mayen",
+      "fr":"Svalbard et Jan Mayen",
+      "it":"Svalbard e Jan Mayen",
+      "en":"Svalbard & Jan Mayen"
+   },
+   "SK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Slowakei",
+      "fr":"Slovaquie",
+      "it":"Slovacchia",
+      "en":"Slovakia"
+   },
+   "SL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sierra Leone",
+      "fr":"Sierra Leone",
+      "it":"Sierra Leone",
+      "en":"Sierra Leone"
+   },
+   "SM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"San Marino",
+      "fr":"Saint-Marin",
+      "it":"San Marino",
+      "en":"San Marino"
+   },
+   "SN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Senegal",
+      "fr":"Sénégal",
+      "it":"Senegal",
+      "en":"Senegal"
+   },
+   "SO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Somalia",
+      "fr":"Somalie",
+      "it":"Somalia",
+      "en":"Somalia"
+   },
+   "SR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Suriname",
+      "fr":"Suriname",
+      "it":"Suriname",
+      "en":"Suriname"
+   },
+   "SS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Südsudan",
+      "fr":"Soudan du Sud",
+      "it":"Sudan del Sud",
+      "en":"South Sudan"
+   },
+  "ST": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "de": "Sao Tomé und Principe",
+    "fr": "Sao Tomé-et-Principe",
+    "it": "São Tomé e Príncipe",
+    "en": "São Tomé & Príncipe"
+  },
+   "SV":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"El Salvador",
+      "fr":"El Salvador",
+      "it":"El Salvador",
+      "en":"El Salvador"
+   },
+   "SX":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sint Maarten",
+      "fr":"Saint-Martin (partie néerlandaise)",
+      "it":"Sint Maarten",
+      "en":"Sint Maarten"
+   },
+   "SY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Syrien",
+      "fr":"Syrie",
+      "it":"Siria",
+      "en":"Syria"
+   },
+   "SZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Swasiland",
+      "fr":"Swaziland",
+      "it":"Swaziland",
+      "en":"Swaziland"
+   },
+   "TA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tristan da Cunha",
+      "fr":"Tristan da Cunha",
+      "it":"Tristan da Cunha",
+      "en":"Tristan da Cunha"
+   },
+   "TC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Turks- und Caicosinseln",
+      "fr":"Îles Turques-et-Caïques",
+      "it":"Isole Turks e Caicos",
+      "en":"Turks & Caicos Islands"
+   },
+   "TD":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tschad",
+      "fr":"Tchad",
+      "it":"Ciad",
+      "en":"Chad"
+   },
+   "TF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Französische Süd- und Antarktisgebiete",
+      "fr":"Terres australes françaises",
+      "it":"Territori australi francesi",
+      "en":"French Southern Territories"
+   },
+   "TG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Togo",
+      "fr":"Togo",
+      "it":"Togo",
+      "en":"Togo"
+   },
+   "TH":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Thailand",
+      "fr":"Thaïlande",
+      "it":"Tailandia",
+      "en":"Thailand"
+   },
+   "TJ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tadschikistan",
+      "fr":"Tadjikistan",
+      "it":"Tagikistan",
+      "en":"Tajikistan"
+   },
+   "TK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tokelau",
+      "fr":"Tokelau",
+      "it":"Tokelau",
+      "en":"Tokelau"
+   },
+   "TL":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Timor-Leste",
+      "fr":"Timor oriental",
+      "it":"Timor Est",
+      "en":"Timor-Leste"
+   },
+   "TM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Turkmenistan",
+      "fr":"Turkménistan",
+      "it":"Turkmenistan",
+      "en":"Turkmenistan"
+   },
+   "TN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tunesien",
+      "fr":"Tunisie",
+      "it":"Tunisia",
+      "en":"Tunisia"
+   },
+   "TO":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tonga",
+      "fr":"Tonga",
+      "it":"Tonga",
+      "en":"Tonga"
+   },
+   "TR":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Türkei",
+      "fr":"Turquie",
+      "it":"Turchia",
+      "en":"Turkey"
+   },
+   "TT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Trinidad und Tobago",
+      "fr":"Trinité-et-Tobago",
+      "it":"Trinidad e Tobago",
+      "en":"Trinidad & Tobago"
+   },
+   "TV":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tuvalu",
+      "fr":"Tuvalu",
+      "it":"Tuvalu",
+      "en":"Tuvalu"
+   },
+   "TW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Taiwan",
+      "fr":"Taïwan",
+      "it":"Taiwan",
+      "en":"Taiwan"
+   },
+   "TZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Tansania",
+      "fr":"Tanzanie",
+      "it":"Tanzania",
+      "en":"Tanzania"
+   },
+   "UA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Ukraine",
+      "fr":"Ukraine",
+      "it":"Ucraina",
+      "en":"Ukraine"
+   },
+   "UG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Uganda",
+      "fr":"Ouganda",
+      "it":"Uganda",
+      "en":"Uganda"
+   },
+   "UM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Amerikanisch-Ozeanien",
+      "fr":"Îles mineures éloignées des États-Unis",
+      "it":"Isole minori lontane dagli USA",
+      "en":"U.S. Outlying Islands"
+   },
+   "US":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Vereinigte Staaten",
+      "fr":"États-Unis",
+      "it":"Stati Uniti",
+      "en":"United States"
+   },
+   "UY":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Uruguay",
+      "fr":"Uruguay",
+      "it":"Uruguay",
+      "en":"Uruguay"
+   },
+   "UZ":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Usbekistan",
+      "fr":"Ouzbékistan",
+      "it":"Uzbekistan",
+      "en":"Uzbekistan"
+   },
+   "VA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Vatikanstadt",
+      "fr":"État de la Cité du Vatican",
+      "it":"Città del Vaticano",
+      "en":"Vatican City"
+   },
+   "VC":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"St. Vincent und die Grenadinen",
+      "fr":"Saint-Vincent-et-les-Grenadines",
+      "it":"Saint Vincent e Grenadines",
+      "en":"St. Vincent & Grenadines"
+   },
+   "VE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Venezuela",
+      "fr":"Venezuela",
+      "it":"Venezuela",
+      "en":"Venezuela"
+   },
+   "VG":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Britische Jungferninseln",
+      "fr":"Îles Vierges britanniques",
+      "it":"Isole Vergini Britanniche",
+      "en":"British Virgin Islands"
+   },
+   "VI":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Amerikanische Jungferninseln",
+      "fr":"Îles Vierges des États-Unis",
+      "it":"Isole Vergini Americane",
+      "en":"U.S. Virgin Islands"
+   },
+   "VN":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Vietnam",
+      "fr":"Vietnam",
+      "it":"Vietnam",
+      "en":"Vietnam"
+   },
+   "VU":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Vanuatu",
+      "fr":"Vanuatu",
+      "it":"Vanuatu",
+      "en":"Vanuatu"
+   },
+   "WF":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Wallis und Futuna",
+      "fr":"Wallis-et-Futuna",
+      "it":"Wallis e Futuna",
+      "en":"Wallis & Futuna"
+   },
+   "WS":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Samoa",
+      "fr":"Samoa",
+      "it":"Samoa",
+      "en":"Samoa"
+   },
+   "XK":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Kosovo",
+      "fr":"Kosovo",
+      "it":"Kosovo",
+      "en":"Kosovo"
+   },
+   "YE":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Jemen",
+      "fr":"Yémen",
+      "it":"Yemen",
+      "en":"Yemen"
+   },
+   "YT":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Mayotte",
+      "fr":"Mayotte",
+      "it":"Mayotte",
+      "en":"Mayotte"
+   },
+   "ZA":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Südafrika",
+      "fr":"Afrique du Sud",
+      "it":"Sudafrica",
+      "en":"South Africa"
+   },
+   "ZM":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Sambia",
+      "fr":"Zambie",
+      "it":"Zambia",
+      "en":"Zambia"
+   },
+   "ZW":{
+      "canOnboardWithPassport":true,
+      "canOnboardWithIdentityCard":true,
+      "de":"Zimbabwe",
+      "fr":"Zimbabwe",
+      "it":"Zimbabwe",
+      "en":"Zimbabwe"
+   }
+}

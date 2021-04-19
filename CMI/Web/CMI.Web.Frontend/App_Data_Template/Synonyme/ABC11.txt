@@ -1,0 +1,69 @@
+﻿ABC Beob Po|ABC Beobachtungsposten|NBC OP|NBC observation post|po mes/obs NBC|poste d'observation NBC|po oss NBC|posto d'osservazione NBC
+ABC Lab|ABC-Laboratorium|NBC lab|NBC laboratory|lab NBC|laboratoire NBC|laboratorio NBC
+Stab LVb G, Rttg|Stab des Lehrverbandes Genie, Rettung|staff of arty, eng, resc unit|staff of artillery, engineer, rescue, unit|EM FOAP G, sauv|Etat-major de formation d'application du génie, des troupes de sauvetage|SM FOA G, salv|Stato maggiore della formazione d'addestramento del genio, del salvataggio
+ABC Abw Kp|ABC Abwehrkompanie|NBC def coy|NBC defence company|cp déf NBC|compagnie de défense NBC|cp dif NBC|compagnia di difesa NBC
+ABC Abw Lab|ABC Abwehr Labor|armdF NBC lab|armed forces NBC laboratory|lab déf NBC|laboratoire de défense NBC|lab dif NBC|laboratorio difesa NBC
+Parkdienst an der ABC-Schutzmaske 90|maintenance service for the NBC 90 protective mask|service de parc du masque de protection NBC 90|servizio di parco alla maschera di protezione NBC 90
+ABC Aufklärung|NBC reconnaissance|exploration NBC|esplorazione NBC
+ABCCC|Airborne Battlefield Command and Control Center
+ABC-Schutzmassnahme|NBC protection measures|mesures de protection NBC|misure di protezione NBC
+ABC Schutzfilter 90|filtre de protection NBC 90|filtro di protezione NBC 90
+ABC Abw Bat|ABC Abwehrbataillon|NBC def bat|NBC defence battalion|Bat déf NBC|Bataillon de défense NBC|Bat dif NBC|Battaglione per la difesa NBC
+ABC|atomar, biologisch, chemisch|NBC|nuclear, biological, chemical|WMD|weapons of mass destruction|nucléaire, biologique, chimique|nucleare, biologico, chimico
+Verschwellkerze|bougie lacrymogène
+nicht funkenerzeugendes Material|matière non susceptible de produire des étincelles|matériau ne produisant pas d'étincelles|materiale antiscintilla
+ABC-Schutzmaterial|NBC-protection material|NBC protective gear|matériel de protection NBC|materiale di protezione NBC
+ABC-Absauggebläse|soufflerie d'aspiration NBC
+ABC-Anlage|installation NBC
+ABC-Hauptgebläse|soufflerie principale d'aspiration NBC
+Belüftungs- und ABC-Anlage|Lüftungs- und ABC-Anlage|installation NBC et d'aération|installation de ventilation et NBC
+ABC Schutzhandschuhe|gants de protection NBC|guanti di protezione NBC
+Stiefel 90, CSA 90|ABC Überstiefel 90 zu CSA 90|St CSA 90|surbottes 90, CSA 90|surbottes NBC 90 pour CSA 90|bot CSA 90|stivali NBC 90
+Tasche für ABC-Schutzmaske 90|Tasche SM 90|Tasche für ABC-SM 90|sacoche pour le masque de protection NBC 90|sacoche MP 90|sacoche pour MP NBC 90|tasca per maschera di protezione NBC 90|tasca MP 90|tasca per MP NBC 90
+Gesichtsstück|couvre-face|facciale
+ABC Bereitschaftsgrad|ABC Schutzbereitschaft|degré de préparation NBC|grado di preparazione NBC
+ABC Spürer|NBC detection soldier|détecteur NBC|rivelatore NBC
+ABC Schutzhandschuh|NBC protective glove|gant de protection NBC|guanto di protezione NBC
+ABC Abwehr|défense NBC|difesa NBC
+SM|ABC Schutzmaske|NBC protective mask|NBC respirator|MP|masque de protection NBC|maschera di protezione NBC
+ABC Schutzbekleidung|NBC protective clothing|NBC protective garment|NBC protective suit
+ABC-Schutzfilter|filtre de protection NBC
+Ausblaskanal|canal de ventilation
+ABC-Schutzbereitschaft|état de préparation NBC
+Luftansaugkasten|filtre à poussières grossières
+ABC-Abwehrtruppen|truppe di difesa NBC
+ABC-Dekontaminationssystem|sistema di decontaminazione NBC
+ABC Schutzhandschuhe 90 zu CSA 90|gants de protection NBC pour CSA 90
+Trinkwasserreserve|réserve d'eau potable
+potentielles Sicherheitsproblem|potential security issue|risque potentiel pour la sécurité
+internationale Nichtverbreitungsnormen|international non-proliferation norms|normes internationales pour la non-prolifération
+ABC-Proliferationsverfahren|NBC proliferation risk|risques de prolifération des armes NBC
+Aufklärungsplattformen und -sensoren|reconnaissance platforms and sensors|détecteurs et plates-formes de reconnaissance
+Verbindungsleitung|tee duct|conduite de raccordement|conduite de liaison
+ABC-Messventil|afterburner control metering valve|NBC metering valve|soupape de dosage NBC|soupape de dosage du régulateur à carburant PC
+ABC|AB-TreibstoffRer|Nachbrenner-TreibstoffRer|NBC|afterburner fuel control|AB fuel control|régulateur à carburant PC
+UNSCOM|Sonderkommission der Vereinten Nationen für Irak|UNO-Sonderkommission für die Vernichtung der Massenvernichtungswaffenim Irak|UN Special Commission on Iraq|Commission spéciale de l'ONU sur l'Irak|Commission spéciale des Nations Unies chargée du désarmement de l'Irak|Commissione speciale dell'ONU per l'eliminazione delle armi di distruzione di massa in Iraq
+ABC-Filter|filtre de protection NBC|filtro di protezione NBC
+ABC-Schutzfilter 74|filtre prot NBC 74|filtre de protection NBC 74|filtro prot NBC 74|filtro di protezione NBC 74
+Fkw SE-412/ABC sch gl|Funkwagen SE-412/ABC, sch gl 4x4, MOWAG|vhc radio SE-412/NBC|véhicule radio SE-412/NBC, ld tt 4x4, MOWAG|veic radio SE-412/NBC|veicolo radio SE-412/NBC, pes fstr 4x4, MOWAG
+Abt Fltw 71|Abteilungsfeuerleitwagen mit SE-412/ABC STEYR|Abt Fltw|vhc dir feux gr 71|véhicule de direction des feux de groupe avec SE-412/NBC STEYR|veic dir fuoco gr 71|veicolo di direzione del fuoco di gruppo con SE-412/NBC STEYR
+Fk Ueww SE-412/ABC|Funküberwachungswagen SE-412/ABC VW|vhc surv SE-412/NBC|véhicule de surveillance radio SE-412/NBC VW|veic sorv SE-412/NBC|veicolo di sorveglianza radio SE-412/NBC VW
+Fkw SE-412/ABC L gl|Funkwagen SE-412/ABC, L gl 4x4, PINZGAUER 710|vhc radio SE-412/NBC|véhicule radio SE-412/NBC, L tt 4x4, PINZGAUER 710|veic radio SE412/NBC|veicolo radio SE-412/NBC, L fstr 4x4, PINZGAUER 710
+Funkanl SE-412/ABC|Funkanlage SE-412/ABC|SE-412/ABC|inst radio SE-412NBC|installation radio SE-412/NBC|SE-412/NBC|installazione radio SE-412/NBC
+ABC-Schutzfilter 300|ABC-Schutzfilter 300m3/h|filtre prot NBC 300|filtre de protection NBC 300m3/h|filtro prot NBC 300|filtro di protezione NBC 300m3/h
+ABC-Schutzfilter 1200|ABC-Schutzfilter 1200m3/h|filtre prot NBC 1200|filtre de protection NBC 1200m3/h|filtro prot NBC 1200|filtro di protezione NBC 1200m3/h
+ABC-Schutzmaske Pz|ABC-Schutzmaske 81 für Panzerbesatzung|ABC-SM Pz|MP NBC char|masque de protection NBC 81 pour l'équipage des chars|MP NBC c arm|maschera di protezione ABC 81 per l'equipaggio dei carri armati|MP NBC car
+CO-Filter zu SM 74|CO-Filter zu ABC-Schutzmaske 74|filtre CO MP 74|filtre CO pour masque de protection NBC 74|filtro CO MP 74|filtro CO per maschera di protezione NBC 74
+CO Manip Filter SM 74|CO-Manipulierfilter zu ABC-Schutzmaske 7|filtre CO manip MP 74|filtre CO de manipulation pour masque de protection NBC 74|filtro CO manip MP 74|filtro CO di manipolazione per maschera di protezione NBC 74
+Fkw SE-412/ABC VW L|Funkwagen SE-412/ABC, L 4x2, VW 1600-23|Fkw SE-412|vhc radio SE-412/NBC|véhicule radio SE-412/NBC, L 4x2, VW 1600-23|veic rad SE-412/NBC|veicolo radio SE-412/NBC, L 4x2, VW 1600-23
+Prüfsort SM ABC|Prüfsortiment für ABC-Schutzmasken|assort contr MP NBC|assortiment de contrôle pour masques de protection NBC|assort prova MP NBC|assortimento di prova per maschere di protezione NBC
+Ex-ABC Material|persönliches Exerzier-ABC Schutzmaterial|mat pers prot NBC ex|matériel personnel de protection NBC d'exercice|mat pers prot NBC eser|materiale personale di protezione NBC d'esercizio
+PD Sort SM 90|Parkdienstsortiment zu ABC-SM 90|assort S pc MP 90|assortiment de service de parc pour MP NBC 90|assortimento per il servizio di parco per MP NBC 90
+ABC-SM 90|ABC-Schutzmaske 90|SM 90|MP NBC 90|masque de protection NBC 90|MP 90|maschera di protezione NBC 90
+ABC-Schuha 90, CSA|ABC-Schutzhandschuhe 90 zu CSA 90|Hd CSA 90|gants prot NBC 90, CSA|gants de protection NBC 90 pour CSA 90|gants CSA 90|guanti prot NBC 90, CSA|guanti di protezione NBC 90 per CSA 90|guanti CSA 90
+Stiefel 90, CSA 90|ABC-Ueberstiefel 90 zu CSA 90|St CSA 90|surbottes 90, CSA 90|surbottes NBC 90 pour CSA 90|bot CSA 90|stivali 90, CSA 90|sovrastivali NBC 90 per CSA 90|stiv CSA 90
+ABC Schutzanzug|NBC protective clothing
+ABC Schutzausrüstung|NBC protective gear|NBC equipment|NBC protection gear
+ABC Überstiefel|NBC protective overboots|surbottes de protection ABC|surbottes NBC 90|stivali NBC
+persönliches ABC Schutzmaterial|matériel personnel de protection NBC
+ABC-Waffen|NBC weapons|armes NBC|armi NBC

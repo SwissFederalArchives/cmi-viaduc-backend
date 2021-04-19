@@ -1,0 +1,42 @@
+<EntityDescriptor xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" cacheDuration="PT15M" validUntil="2019-02-22T15:57:56.9158548Z" entityID="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/Metadata" ID="_bdeae985b92d4daf8d7493e0d1aa5df9">
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <Reference URI="#_bdeae985b92d4daf8d7493e0d1aa5df9">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+          <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <DigestValue>@@CMI.Web.Frontend.AppData_Template.IdpMetadata.DigestValue@@</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>
+		@@CMI.Web.Frontend.AppData_Template.IdpMetadata.SignatureValue@@
+	</SignatureValue>
+    <KeyInfo>
+      <X509Data>
+        <X509Certificate>
+			@@CMI.Web.Frontend.AppData_Template.IdpMetadata.X509Certificate@@
+		</X509Certificate>
+      </X509Data>
+    </KeyInfo>
+  </Signature>
+  <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor>
+      <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <X509Data>
+          <X509Certificate>
+			  @@CMI.Web.Frontend.AppData_Template.IdpMetadata.X509Certificate@@
+		  </X509Certificate>
+        </X509Data>
+      </KeyInfo>
+    </KeyDescriptor>
+    <ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/ArtifactResolve" isDefault="true" index="0"/>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/Logout"/>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/Logout"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="@@CMI.Web.Frontend.AppData_Template.IdpMetadata.Url@@/"/>
+  </IDPSSODescriptor>
+</EntityDescriptor>

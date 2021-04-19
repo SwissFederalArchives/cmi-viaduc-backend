@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{713F2501-9065-454B-9E14-2599A1F3D4E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMI.Access.Sql.Viaduc</RootNamespace>
+    <AssemblyName>CMI.Access.Sql.Viaduc</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AblieferndeStellen\ApplicationUserAblieferndeStelleAmtExtensions.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AblieferndeStelleDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AblieferndeStelleTokenDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\ApplicationUserAblieferndeStelleAmtDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\ApplicationUserAblieferndeStelleUserDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AsTokenMappingAmtDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AsTokenMappingTokenDto.cs" />
+    <Compile Include="AblieferndeStellen\AblieferndeStelleDataAccess.cs" />
+    <Compile Include="AblieferndeStellen\AblieferndeStelleTokenExtensions.cs" />
+    <Compile Include="AblieferndeStellen\AblieferndeStelleExtensions.cs" />
+    <Compile Include="AblieferndeStellen\AblieferndeStelleTokenDataAccess.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AblieferndeStelleDetailDto.cs" />
+    <Compile Include="AblieferndeStellen\Dto\AmtTokenDto.cs" />
+    <Compile Include="AblieferndeStellen\IAblieferndeStelleDataAccess.cs" />
+    <Compile Include="AblieferndeStellen\IAblieferndeStelleTokenDataAccess.cs" />
+    <Compile Include="ApplicationAccess.cs" />
+    <Compile Include="DataAccessExtensions.cs" />
+    <Compile Include="DigitalisierungsTermin.cs" />
+    <Compile Include="File\DownloadLogDataAccess.cs" />
+    <Compile Include="File\DownloadTokenType.cs" />
+    <Compile Include="File\IDownloadLogDataAccess.cs" />
+    <Compile Include="IUserDataAccess.cs" />
+    <Compile Include="PendingMigrationCheckResult.cs" />
+    <Compile Include="FavoriteKind.cs" />
+    <Compile Include="File\DownloadTokenDataAccess.cs" />
+    <Compile Include="File\IDownloadTokenDataAccess.cs" />
+    <Compile Include="IFavorite.cs" />
+    <Compile Include="IOrderDataAccess.cs" />
+    <Compile Include="OrderingFlatItem.cs" />
+    <Compile Include="PrimaerdatenAuftragAccess.cs" />
+    <Compile Include="SearchFavorite.cs" />
+    <Compile Include="UpdateOrderingParams.cs" />
+    <Compile Include="UserInfo.cs" />
+    <Compile Include="UserAccess.cs" />
+    <Compile Include="UserOverview.cs" />
+    <Compile Include="VeFavorite.cs" />
+    <Compile Include="DbUpgrader.cs" />
+    <Compile Include="DataAccess.cs" />
+    <Compile Include="ApplicationRoleUserDataAccess.cs" />
+    <Compile Include="ApplicationRoleDataAccess.cs" />
+    <Compile Include="ApplicationRoleUser.cs" />
+    <Compile Include="ApplicationRole.cs" />
+    <Compile Include="NewsDataAccess.cs" />
+    <Compile Include="StammdatenDataAccess.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserUsageStatisticAccess.cs" />
+    <Compile Include="UserDataAccess.cs" />
+    <Compile Include="FavoriteList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FavoriteDataAccess.cs" />
+    <Compile Include="OrderDataAccess.cs" />
+    <Compile Include="ViaducContext.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0000_TO_0001.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0001_TO_0002.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0002_TO_0003.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0003_TO_0004.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0004_TO_0005.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0005_TO_0006.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0006_TO_0007.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0007_TO_0008.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0008_TO_0009.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contract\Common\CMI.Contract.Common.csproj">
+      <Project>{045835a1-50c3-4d61-947a-7398a9d70706}</Project>
+      <Name>CMI.Contract.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Management\CMI.Contract.Management.csproj">
+      <Project>{D690DB56-489B-4ABD-8E9C-19287E7F2306}</Project>
+      <Name>CMI.Contract.Management</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Messaging\CMI.Contract.Messaging.csproj">
+      <Project>{27A7EBB7-2C64-4EE0-A040-E00B99BB9372}</Project>
+      <Name>CMI.Contract.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\Order\CMI.Contract.Order.csproj">
+      <Project>{3FA6554C-7659-4BC8-9DB4-AD9FBA6F6948}</Project>
+      <Name>CMI.Contract.Order</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\Logging\Configurator\CMI.Utilities.Logging.Configurator.csproj">
+      <Project>{39326685-B5AB-40DC-8FA3-09A9502E7BE0}</Project>
+      <Name>CMI.Utilities.Logging.Configurator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0011_TO_0012.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0009_TO_0010.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0010_TO_0011.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0012_TO_0013.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0013_TO_0014.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0014_TO_0015.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0015_TO_0016.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0016_TO_0017.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0017_TO_0018.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0018_TO_0019.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0019_TO_0020.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0020_TO_0021.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0021_TO_0022.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0022_TO_0023.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0023_TO_0024.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0024_TO_0025.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0025_TO_0026.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0026_TO_0027.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0027_TO_0028.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0028_TO_0029.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0029_TO_0030.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0030_TO_0031.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0031_TO_0032.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0032_TO_0033.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0033_TO_0034.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0034_TO_0035.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0036_TO_0037.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0035_TO_0036.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0037_TO_0038.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0038_TO_0039.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0039_TO_0040.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0040_TO_0041.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0041_TO_0042.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0042_TO_0043.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0043_TO_0044.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0044_TO_0045.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0045_TO_0046.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0046_TO_0047.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0047_TO_0048.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0048_TO_0049.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0049_TO_0050.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0050_TO_0051.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0051_TO_0052.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0052_TO_0053.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0053_TO_0054.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0054_TO_0055.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0055_TO_0056.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0056_TO_0057.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0057_TO_0058.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0058_TO_0059.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0059_TO_0060.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0060_TO_0061.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0061_TO_0062.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0062_TO_0063.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0063_TO_0064.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0064_TO_0065.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0065_TO_0066.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0066_TO_0067.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0067_TO_0068.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0068_TO_0069.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0069_TO_0070.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0070_TO_0071.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0071_TO_0072.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0072_TO_0073.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0073_TO_0074.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0074_TO_0075.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0075_TO_0076.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0076_TO_0077.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0077_TO_0078.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

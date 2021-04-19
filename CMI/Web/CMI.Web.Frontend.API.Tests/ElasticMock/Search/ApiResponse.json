@@ -1,0 +1,724 @@
+﻿{
+  "entities": {
+    "items": [
+      {
+        "Id": "4397586",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Studienkommission für strategische Fragen",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#2005/25#462*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1990 - 1990",
+              "StartDate": "1990-01-01T00:00:00",
+              "EndDate": "1991-01-01T00:00:00",
+              "SearchStartDate": "1989-07-05T00:00:00",
+              "SearchEndDate": "1990-12-31T00:00:00",
+              "Years": [ 1990 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "2020-12-31T00:00:00",
+              "Year": 2020,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 2005
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 512,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "0",
+        "NextArchiveRecordId": "5130687",
+        "ParentArchiveRecordId": "4397585",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "4.4.008.10.04",
+            "ContainerType": "Schachtel",
+            "IdName": "2068351 2005/25_00123"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Studienkommission für strategische <h1l1ght>Fragen</h1l1ght>" ],
+          "_all": [ "Studienkommission für strategische <h1l1ght>Fragen</h1l1ght>" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "4397589",
+        "Type": "Serie",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Kommission für Fragen des Frauenhilfsdienstes",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#074.28",
+            "Level": "Serie",
+            "CreationPeriod": {
+              "StartDate": "0001-01-01T00:00:00",
+              "EndDate": "0001-01-01T00:00:00",
+              "SearchStartDate": "0001-01-01T00:00:00",
+              "SearchEndDate": "0001-01-01T00:00:00",
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "0001-01-01T00:00:00",
+              "Year": 0,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Unbekannt",
+            "AccessionDate": 0
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": false,
+        "TreeSequence": 274944,
+        "TreeLevel": 8,
+        "IsLeaf": false,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10070: BAR Serie",
+        "InternalDisplayTemplateName": "10070: BAR Serie",
+        "PreviousArchiveRecordId": "3895127",
+        "NextArchiveRecordId": "3895128",
+        "ParentArchiveRecordId": "3895004",
+        "FirstChildArchiveRecordId": "5130689",
+        "ChildCount": 2,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 0,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Kommission für <h1l1ght>Fragen</h1l1ght> des <h1l1ght>Frauenhilfsdienstes</h1l1ght>" ],
+          "_all": [ "Kommission für <h1l1ght>Fragen</h1l1ght> des <h1l1ght>Frauenhilfsdienstes</h1l1ght>" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3895227",
+        "Type": "Serie",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "ZS- Vereinigung der franz-sprachigen Kantone",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390C#075.23",
+            "Level": "Serie",
+            "CreationPeriod": {
+              "StartDate": "0001-01-01T00:00:00",
+              "EndDate": "0001-01-01T00:00:00",
+              "SearchStartDate": "0001-01-01T00:00:00",
+              "SearchEndDate": "0001-01-01T00:00:00",
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "0001-01-01T00:00:00",
+              "Year": 0,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Unbekannt",
+            "AccessionDate": 0
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": false,
+        "TreeSequence": 240128,
+        "TreeLevel": 8,
+        "IsLeaf": false,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10070: BAR Serie",
+        "InternalDisplayTemplateName": "10070: BAR Serie",
+        "PreviousArchiveRecordId": "3895226",
+        "NextArchiveRecordId": "3895228",
+        "ParentArchiveRecordId": "3895200",
+        "FirstChildArchiveRecordId": "3230320",
+        "ChildCount": 1,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 0,
+        "Permission": "Keine",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "ZS- Vereinigung der <h1l1ght>franz</h1l1ght>-sprachigen Kantone" ],
+          "_all": [ "ZS- Vereinigung der <h1l1ght>franz</h1l1ght>-sprachigen Kantone" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227376",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Dänemark",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#289*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1949",
+              "StartDate": "1949-01-01T00:00:00",
+              "EndDate": "1950-01-01T00:00:00",
+              "SearchStartDate": "1948-07-05T00:00:00",
+              "SearchEndDate": "1950-06-29T00:00:00",
+              "Years": [ 1949 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1979-12-31T00:00:00",
+              "Year": 1979,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 220672,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227375",
+        "NextArchiveRecordId": "3227377",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Dänemark" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227381",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Norwegen",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#294*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1949",
+              "StartDate": "1949-01-01T00:00:00",
+              "EndDate": "1950-01-01T00:00:00",
+              "SearchStartDate": "1948-07-05T00:00:00",
+              "SearchEndDate": "1950-06-29T00:00:00",
+              "Years": [ 1949 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1979-12-31T00:00:00",
+              "Year": 1979,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 223232,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227380",
+        "NextArchiveRecordId": "3227382",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Norwegen" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227384",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Belgien",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#297*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1950",
+              "StartDate": "1950-01-01T00:00:00",
+              "EndDate": "1951-01-01T00:00:00",
+              "SearchStartDate": "1949-07-05T00:00:00",
+              "SearchEndDate": "1951-06-29T00:00:00",
+              "Years": [ 1950 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1980-12-31T00:00:00",
+              "Year": 1980,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 224768,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227383",
+        "NextArchiveRecordId": "3227385",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Belgien" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227380",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Finnland",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#293*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1949",
+              "StartDate": "1949-01-01T00:00:00",
+              "EndDate": "1950-01-01T00:00:00",
+              "SearchStartDate": "1948-07-05T00:00:00",
+              "SearchEndDate": "1950-06-29T00:00:00",
+              "Years": [ 1949 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1979-12-31T00:00:00",
+              "Year": 1979,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 222720,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227379",
+        "NextArchiveRecordId": "3227381",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Finnland" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227383",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "USA",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#296*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1949",
+              "StartDate": "1949-01-01T00:00:00",
+              "EndDate": "1950-01-01T00:00:00",
+              "SearchStartDate": "1948-07-05T00:00:00",
+              "SearchEndDate": "1950-06-29T00:00:00",
+              "Years": [ 1949 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1979-12-31T00:00:00",
+              "Year": 1979,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 224256,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227382",
+        "NextArchiveRecordId": "3227384",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "USA" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227387",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Dänemark",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#300*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1950",
+              "StartDate": "1950-01-01T00:00:00",
+              "EndDate": "1951-01-01T00:00:00",
+              "SearchStartDate": "1949-07-05T00:00:00",
+              "SearchEndDate": "1951-06-29T00:00:00",
+              "Years": [ 1950 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1980-12-31T00:00:00",
+              "Year": 1980,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 226304,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227386",
+        "NextArchiveRecordId": "3227388",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Dänemark" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      },
+      {
+        "Id": "3227388",
+        "Type": "Dossier",
+        "MetadataAccessTokens": [ "Public" ],
+        "Title": "Deutschland",
+        "_metadata": {
+          "Identifikation": {
+            "ReferenceCode": "E4390A#1000/862#301*",
+            "Level": "Dossier",
+            "CreationPeriod": {
+              "Text": "1950",
+              "StartDate": "1950-01-01T00:00:00",
+              "EndDate": "1951-01-01T00:00:00",
+              "SearchStartDate": "1949-07-05T00:00:00",
+              "SearchEndDate": "1951-06-29T00:00:00",
+              "Years": [ 1950 ],
+              "type": "Date.Range"
+            }
+          },
+          "Zugang": {
+            "ProtectionEndDate": {
+              "Date": "1980-12-31T00:00:00",
+              "Year": 1980,
+              "type": "Date.Year"
+            },
+            "ProtectionCategory": "Art. 9.1 BGA",
+            "AccessionDate": 1000
+          }
+        },
+        "HasImage": false,
+        "HasAudioVideo": false,
+        "PlayingLengthInS": 0,
+        "CanBeOrdered": true,
+        "TreeSequence": 226816,
+        "TreeLevel": 9,
+        "IsLeaf": true,
+        "IsRoot": false,
+        "Places": [],
+        "ExternalDisplayTemplateName": "10032: BAR Dossier",
+        "InternalDisplayTemplateName": "10032: BAR Dossier",
+        "PreviousArchiveRecordId": "3227387",
+        "NextArchiveRecordId": "3227389",
+        "ParentArchiveRecordId": "3980363",
+        "FirstChildArchiveRecordId": "-1",
+        "ChildCount": 0,
+        "Thumbnail": {},
+        "ContainsPersonRelatedInformation": false,
+        "IsPhysicalyUsable": true,
+        "ProtectionDuration": 30,
+        "Permission": "nicht erhoben",
+        "PhysicalUsability": "Uneingeschränkt",
+        "Accessibility": "Öffentlich",
+        "Descriptors": [],
+        "Containers": [
+          {
+            "ContainerLocation": "1.2.408.05.05",
+            "ContainerType": "Schachtel",
+            "IdName": "1067522 1000/862_11"
+          }
+        ],
+        "References": [],
+        "PrimaryData": [],
+        "highlight": {
+          "title": [ "Deutschland" ],
+          "_all": [ "Allgemeine <h1l1ght>Fragen</h1l1ght> und Korrespondenzen" ]
+        },
+        "Depth": 0
+      }
+    ],
+    "paging": {
+      "fileFulltext": null,
+      "orderBy": null,
+      "sortOrder": null,
+      "skip": 0,
+      "take": 10,
+      "NumberToSkip": 0,
+      "NumberToTake": 10,
+      "total": 279029
+    }
+  },
+  "facets": {
+    "bestellbare_einheiten": {
+      "docCount": 265048,
+      "meta": null,
+      "aggregations": {
+        "nach_level": {
+          "items": [
+            {
+              "key": "Dossier",
+              "keyAsString": null,
+              "docCount": 228343,
+              "docCountErrorUpperBound": null,
+              "aggregations": null
+            },
+            {
+              "key": "Dokument",
+              "keyAsString": null,
+              "docCount": 36557,
+              "docCountErrorUpperBound": null,
+              "aggregations": null
+            },
+            {
+              "key": "Subdossier",
+              "keyAsString": null,
+              "docCount": 141,
+              "docCountErrorUpperBound": null,
+              "aggregations": null
+            },
+            {
+              "key": "Serie",
+              "keyAsString": null,
+              "docCount": 7,
+              "docCountErrorUpperBound": null,
+              "aggregations": null
+            }
+          ],
+          "docCountErrorUpperBound": 0,
+          "sumOtherDocCount": 0,
+          "meta": null,
+          "docCount": 0
+        }
+      }
+    }
+  }
+}

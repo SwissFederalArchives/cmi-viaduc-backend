@@ -1,0 +1,132 @@
+﻿.editor-container {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+    .editor-container.editing {
+        display: block;
+    }
+
+.editor-editable-controls-container {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    overflow: visible;
+}
+
+.editing-controls {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+}
+
+    .editing-controls .control {
+        background: #333;
+        color: white;
+        cursor: pointer;
+        display: none;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        border-radius: 20px;
+        font-size: 20px;
+        margin-bottom: 6px;
+        text-align: center;
+        font-style: normal;
+        font-variant: normal;
+        speak: none;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.175);
+        -moz-box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.175);
+    }
+
+    .editing-controls .edit {
+        display: inline-block;
+    }
+
+    .editing-controls.enabled .edit {
+        display: none;
+    }
+
+    .editing-controls.enabled .save,
+    .editing-controls.enabled .cancel {
+        display: block;
+    }
+
+.editing [data-editable] {
+    outline: dashed;
+    outline-color: #e8e8e8;
+}
+
+    .editing [data-editable].editing {
+        outline: dashed;
+        outline-color: #c8c8c8;
+    }
+
+.editable-controls {
+    position: absolute;
+    z-index: 1;
+}
+
+    .editable-controls.editing .controls-container {
+        position: absolute;
+        right: 4px;
+        top: 0;
+    }
+
+    .editable-controls .control {
+        background: #333;
+        color: white;
+        cursor: pointer;
+        display: none;
+        border-radius: 12px;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        margin-bottom: 4px;
+        text-align: center;
+        font-style: normal;
+        font-variant: normal;
+        speak: none;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.175);
+        -moz-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.175);
+    }
+
+    .editable-controls .edit {
+        display: inline-block;
+    }
+
+    .editable-controls.editing .edit {
+        display: none;
+    }
+
+    .editable-controls.editing .save,
+    .editable-controls.editing .cancel {
+        display: inline-block;
+    }
+
+.control.edit {
+    background-color: #337ab7;
+}
+
+.control.save {
+    background-color: #5cb85c;
+}
+
+.control.cancel {
+    background-color: #d9534f;
+}

@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A schema definition for transferring all data for an unit of description (UoD) from an AIS to a virtual reading room.
+     Author:            Joerg Lang, Evelix GmbH
+     Creation Date:     January 2017
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="archiveRecord">
+        <xs:annotation>
+            <xs:documentation>A archveRecord is a container for all the different data that one Unit of Description holds</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="security">
+                    <xs:complexType>
+                        <xs:sequence maxOccurs="1">
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="metadataAccessToken" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>accessToken contains a string, identifiying who has access to the UoD.
+Examples for the token can be:
+- BAR
+- Ö3
+- Ö2
+</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="primaryDataFulltextAccessToken" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>accessToken contains a string, identifiying who has access to the fulltext of the primary data files.
+Examples for the token can be:
+- BAR
+- AS_YYYY
+- FG_XXXX
+- EB_XXXX
+
+</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="primaryDataDownloadAccessToken" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>accessToken contains a string, identifiying who has access to the download of the primary data files.
+Examples for the token can be:
+- BAR
+- AS_YYYY
+- FG_XXXX
+- EB_XXXXX
+</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="display">
+                    <xs:annotation>
+                        <xs:documentation>Data that is used for controlling the UI. Most of the data could be calculated from other data withing the records, but we store it here for fast access.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="externalDisplayTemplateName" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>The name or identification of the display template to use for public view.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="internalDisplayTemplateName" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>The name or identification of the display template to use for internal view.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="containsImages" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>A flag indicating if the archive items contains any images.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="containsMedia" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>A flag indicating if the archive items contains any videos or audio files.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="canBeOrdered" type="xs:boolean"/>
+                            <xs:element name="archiveplanContext">
+                                <xs:annotation>
+                                    <xs:documentation>A list that contains all the information to quickly build an archive plan for display. </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence maxOccurs="1">
+                                        <xs:element ref="archiveplanContextItem" maxOccurs="unbounded"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="previousArchiveRecordId" type="xs:string" nillable="true">
+                                <xs:annotation>
+                                    <xs:documentation/>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="nextArchiveRecordId" type="xs:string" nillable="true"/>
+                            <xs:element name="parentArchiveRecordId" type="xs:string" nillable="true"/>
+                            <xs:element name="firstChildArchiveRecordId" type="xs:string" nillable="true"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="metadata">
+                    <xs:annotation>
+                        <xs:documentation>A wealth of information about the archive record.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="detailData"/>
+                            <xs:element name="usage">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="alwaysVisibleOnline" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Internal flag indicating that the unit should be visible online. Can be used to override a protection end date. Attribute is used in the calculation of the end visibility of meta- and primarydata.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="isPhysicalyUsable" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Indicates if the material can be used in the reading room.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="containsPersonRelatedData" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Flag indicating that the material contains person related information.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="protectionCategory" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>The protection category (Schutzfristkategorie)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+
+                                        <xs:element name="protectionBaseDate" type="xs:string" nillable="true">
+                                            <xs:annotation>
+                                                <xs:documentation>The type of base date used to calculate the protection end date.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="protectionDuration" type="xs:int" nillable="true">
+                                            <xs:annotation>
+                                                <xs:documentation>The protection duration in years according to the protection category.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="protectionEndDate" nillable="true" type="xs:date">
+                                            <xs:annotation>
+                                                <xs:documentation>The protection end date. (Schutzfrist Enddatum)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="cannotFallBelow" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Indicates if the protection end date cannot be underrun. (Nicht unterschreitbar).</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="adjustedManually" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>A flag indicating if the protection duration was manually adjusted and is not the default according to the protection category anymore.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="protectionNote" type="xs:string" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>An optional note about the protection situation.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="permission" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>Indicates the type of permission needed. (Bewilligung)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="physicalUsability" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>Indicates the physical usability of the archive item. (Physische Benutzerbarkeit)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="accessibility" type="xs:string">
+                                            <xs:annotation>
+                                                <xs:documentation>Indication about the accessibility of the item. (Zugänglichkeit)</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="usageNotes">
+                                            <xs:annotation>
+                                                <xs:documentation>Optionl notes about the usage.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
+                                        <xs:element minOccurs="0" name="license">
+                                            <xs:annotation>
+                                                <xs:documentation>Optional indication of the creative commons license for the item.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                    <xs:enumeration value="CC0"/>
+                                                    <xs:enumeration value="CC BY"/>
+                                                    <xs:enumeration value="CC BY-SA"/>
+                                                    <xs:enumeration value="CC BY-ND"/>
+                                                    <xs:enumeration value="CC BY-NC"/>
+                                                    <xs:enumeration value="CC BY-NC-SA"/>
+                                                    <xs:enumeration value="CC BY-NC-ND"/>
+                                                    <xs:enumeration value="Undefined"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element ref="nodeInfo"/>
+                            <xs:element minOccurs="0" name="descriptors">
+                                <xs:annotation>
+                                    <xs:documentation>A list of descriptors (keywords) that help categorize the current UoD.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" ref="descriptor"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="containers">
+                                <xs:annotation>
+                                    <xs:documentation>A list with containers where the archival records are physically stored.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="container">
+                                            <xs:annotation>
+                                                <xs:documentation>This element contains the data describing a container.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="containerLocation" type="xs:string"/>
+                                                    <xs:element name="containerType" type="xs:string"/>
+                                                    <xs:element name="idName" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="containerCode" type="xs:string"/>
+                                                    <xs:element minOccurs="0" name="containerCarrierMaterial" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="numberOfContainers" type="xs:int" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="references">
+                                <xs:annotation>
+                                    <xs:documentation>ArchiveRecords may be linked to other archiveRecords.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" name="reference">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="referenceName" type="xs:string">
+                                                        <xs:annotation>
+                                                            <xs:documentation>A human readable name for the linked entity.</xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                    <xs:element minOccurs="0" name="role" type="xs:string">
+                                                        <xs:annotation>
+                                                            <xs:documentation>The role the linked entity has. Roles may be "see also", "related content found in", "successor", </xs:documentation>
+                                                        </xs:annotation>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="archiveRecordId" type="xs:string"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="accessionDate" type="xs:int">
+                                <xs:annotation>
+                                    <xs:documentation>The year in which this record was added to the archive collection.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="primaryDataLink" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>A link or other identifier to the primary data for the unit.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                            <xs:element name="aggregationFields">
+                                <xs:annotation>
+                                    <xs:documentation>A collection of special values that allows filtering in the search client.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="aggregationField" type="aggregationField"> </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="1" minOccurs="0" name="primaryData">
+                    <xs:annotation>
+                        <xs:documentation>The actual "pyhisical" records. In our case these are either digital born data, or scanned files.
+</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="repositoryPackage" type="repositoryPackage">
+                                <xs:annotation>
+                                    <xs:documentation>A package is a collection of files either with or without directories.
+It is possible, that an archive record has a package coming from the file system, or from a digital repository.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="archiveRecordId" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>The internal id of the record from the source system.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="archiveplanContextItem">
+        <xs:annotation>
+            <xs:documentation>An archive context item contains all necessary information to show/display an archive record within the archive plan.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence maxOccurs="1">
+                <xs:element name="iconId" type="xs:int">
+                    <xs:annotation>
+                        <xs:documentation>A simple id identifying an icon</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="level" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The level of the current item, e.g. series, document, fonds</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="refCode" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The reference code of the item</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="title" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The title of the item.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="dateRangeText" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The date range of the item expressed as a string.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="archiveRecordId" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="detailData">
+        <xs:annotation>
+            <xs:documentation>This element is used to list all individual datafields the item can have.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence maxOccurs="1" minOccurs="1">
+                <xs:element ref="dataElement" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="dataElement">
+        <xs:annotation>
+            <xs:documentation>A data element is a container for an individual field. It can consists of one ore more values.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence maxOccurs="1">
+                <xs:element name="elementValue" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="textValues">
+                                <xs:annotation>
+                                    <xs:documentation>A data element can have several text representations in different languages. Mostly, only default language representation will be available, but for date ranges (ca. 1950 / approx. 1950) or boolans (Ja / Yes) different languages will be available.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="1" name="textValue" maxOccurs="unbounded">
+                                            <xs:annotation>
+                                                <xs:documentation>Each element must have a text representation. For textual values this is the text itself. For a duration it could be "1 hour 12min" or for a date range it could be "ca. 1960 - ca. 1970"</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute name="lang" type="xs:language"/>
+                                                        <xs:attribute name="isDefaultLang" type="xs:boolean"/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" ref="dateRange"/>
+                            <xs:element minOccurs="0" name="durationInSeconds" type="xs:int"/>
+                            <xs:element minOccurs="0" name="floatValue">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:float">
+                                            <xs:attribute name="decimalPositions" type="xs:int" use="required"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="intValue" type="xs:int"/>
+                            <xs:element minOccurs="0" name="booleanValue" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="timeValue" type="xs:time"/>
+                            <xs:element minOccurs="0" name="dateValue" type="xs:date"/>
+                            <xs:element minOccurs="0" name="blobValueBase64">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="mimeType"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="link">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="href" use="required"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" name="entityLink">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="entityRecordId" use="required" type="xs:string"/>
+                                            <xs:attribute name="entityType" use="required" type="xs:string"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="sequence" type="xs:int" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="elementId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Optionally the internal id of the element if any.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="elementName" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>A unique name for an element. </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="eadCode" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Optionally the EAD code for that element.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="elementType" use="required">
+                <xs:annotation>
+                    <xs:documentation>The specific type of that data element.</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="text"/>
+                        <xs:enumeration value="memo"/>
+                        <xs:enumeration value="selection"/>
+                        <xs:enumeration value="date"/>
+                        <xs:enumeration value="datePrecise"/>
+                        <xs:enumeration value="dateRange"/>
+                        <xs:enumeration value="integer"/>
+                        <xs:enumeration value="float"/>
+                        <xs:enumeration value="boolean"/>
+                        <xs:enumeration value="time"/>
+                        <xs:enumeration value="timespan"/>
+                        <xs:enumeration value="hyperlink"/>
+                        <xs:enumeration value="header"/>
+                        <xs:enumeration value="entityLink"/>
+                        <xs:enumeration value="accrual"/>
+                        <xs:enumeration value="fileLink"/>
+                        <xs:enumeration value="mailLink"/>
+                        <xs:enumeration value="image"/>
+                        <xs:enumeration value="media"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="includeInFullTextIndex" type="xs:boolean" use="required">
+                <xs:annotation>
+                    <xs:documentation>Indicates if the value of this element should be added to the full text index.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="visibility" use="required">
+                <xs:annotation>
+                    <xs:documentation>Indicates the visibility of this element. Can either be public or internal</xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="public"/>
+                        <xs:enumeration value="internal"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="dateRange">
+        <xs:annotation>
+            <xs:documentation>This element is used to describe a date range.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Date is entered as a string in the form +YYYYMMDD. Depending on how many digits are entered the "exactness" of the date is evaluated.
+First digit plus or minus
+3 digits = Century
+5 digits = Year
+7 digits = Year and Month
+9 digits = Year, month, day
+</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="fromDate" type="xs:date">
+                    <xs:annotation>
+                        <xs:documentation>The FromDate is calculated using the text representation from the field From. Depending on the exactness the actual start date the value is set.
+For example
+15 --> 01.01.1401
+1912 --> 01.01.1912
+191205 --> 01.05.1912
+19991224 --> 24.12.1999
+
+If the date operator is "before", "to", "s.d." or "N/A" the FromDate equals DateTime.Min</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="searchFromDate" type="xs:date">
+                    <xs:annotation>
+                        <xs:documentation>The SearchFromDate is usually identical to the FromDate. But if the FromApproxIndicator is true we move the from date to an earlier date. How much depends on the whole date range and the precision of the from date.
+This is required for the best possible search experience using date ranges.
+
+</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="fromApproxIndicator" type="xs:boolean"/>
+                <xs:element name="to" type="xs:string"/>
+                <xs:element name="toDate" type="xs:date"/>
+                <xs:element name="searchToDate" type="xs:date"/>
+                <xs:element name="toApproxIndicator" type="xs:boolean"/>
+            </xs:sequence>
+            <xs:attribute name="dateOperator" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="between"/>
+                        <xs:enumeration value="fromTo"/>
+                        <xs:enumeration value="after"/>
+                        <xs:enumeration value="startingWith"/>
+                        <xs:enumeration value="before"/>
+                        <xs:enumeration value="to"/>
+                        <xs:enumeration value="s.d."/>
+                        <xs:enumeration value="exact"/>
+                        <xs:enumeration value="n/a"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="descriptor">
+        <xs:annotation>
+            <xs:documentation>This element is a container for describing a descriptor.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element minOccurs="0" name="description" type="xs:string"/>
+                <xs:element minOccurs="0" name="otherLanguageNames" type="xs:string"/>
+                <xs:element minOccurs="0" name="idName" type="xs:string"/>
+                <xs:sequence maxOccurs="1">
+                    <xs:element name="seeAlso" type="xs:string" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="function" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Optional a function describing in what kind of relationship this descriptor represents.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="thesaurus" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>Indicates the thesaurus from which this descriptor is coming from.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="source" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Defines the origin of the descriptor. Can be used to differentiate between manual given keywords or keywords that were auto extracted from the text using some kind of speech services.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="nodeInfo">
+        <xs:annotation>
+            <xs:documentation>The node information defines the position of this archive record in regard to the other records. Archive records are arranged in a hierarchy (tree graph).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="parentArchiveRecordId" nillable="true" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The id of the parent node. Each archive record has exactly one parent, except for the root node.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="path" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The path is the concatenated string containing the archive record ids from the root down to the current level. </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="sequence" type="xs:int">
+                    <xs:annotation>
+                        <xs:documentation>The sequence defines the order in which the current item is positioned within all the childs of the parent receord.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="isLeaf" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:documentation>A leaf is a node without a child</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="isRoot" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:documentation>Indicates a root node.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="level" type="xs:int">
+                    <xs:annotation>
+                        <xs:documentation>The level of a node is defined by 1 + (the number of connections between the node and the root).</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="childCount" type="xs:long">
+                    <xs:annotation>
+                        <xs:documentation>The number of children of this node.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="repositoryFolder">
+        <xs:sequence>
+            <xs:element name="logicalName" type="xs:string"/>
+            <xs:element name="physicalName" type="xs:string"/>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="sipId" type="xs:string"/>
+            <xs:element name="sipType">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="dossier"/>
+                        <xs:enumeration value="dokument"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="folders" type="repositoryFolder"/>
+            <xs:element name="files" maxOccurs="unbounded" minOccurs="0" type="repositoryFile"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="repositoryFile">
+        <xs:sequence>
+            <xs:element name="logicalName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Contains the file name including the extension, but without the path information.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="physicalName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Contains the file name as written to disk. In case the logical name has reserved characters or is to long.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="sipOriginalName" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The original name as definied in the SIP</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mimeType" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Indicates the mime type.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="hash" type="xs:string"/>
+            <xs:element name="hashAlgorithm" type="xs:string"/>
+            <xs:element name="exported" type="xs:boolean"/>
+            <xs:element name="id" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The id to locate the item in the repository</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sipId" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>The file id as definied in the SIP.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="extendedProperties" type="extendedProperty"/>
+            <xs:element name="contentText" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>The whole content of the document as text only. Can be used for full text indexing.
+(Optional, as text extracting is probably done later in the process.)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="sizeInBytes" type="xs:long"/>
+    </xs:complexType>
+    <xs:complexType name="repositoryPackage">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="folders" type="repositoryFolder"/>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="files" type="repositoryFile">
+                <xs:annotation>
+                    <xs:documentation>A collection of files</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="sizeInBytes" type="xs:long">
+            <xs:annotation>
+                <xs:documentation>The total size of all files in the package in bytes.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fileCount" type="xs:int">
+            <xs:annotation>
+                <xs:documentation>The total number of all files in the package.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="packageId" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>A string containing an identifier to find the root of the package in the digital repository.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="packageFileName" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>The name of the zip file. The name must be without path information.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="repositoryExtractionDuration" type="xs:long">
+            <xs:annotation>
+                <xs:documentation>Returns the duration in ticks for extracting all data from the repository.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fulltextExtractionDuration" type="xs:long">
+            <xs:annotation>
+                <xs:documentation>Returns the duration in ticks for extracting the full text of all files in the package (if any).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="archiveRecordId" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>In case the package is used as a standalone type, the archive record id identifies to which record this package belongs.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="aggregationField">
+        <xs:sequence>
+            <xs:element name="values" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="aggregationName" type="xs:string"/>
+    </xs:complexType>
+    <xs:complexType name="extendedProperty">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

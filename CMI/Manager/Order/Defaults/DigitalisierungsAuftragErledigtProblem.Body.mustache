@@ -1,0 +1,72 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="deutsch">
+        <h2>
+            Erstellung Gebrauchskopie nach Abschluss Digitalisierung nicht möglich ({{Ve.Signatur}})
+        </h2>
+        <p>
+            Nachfolgender Auftrag konnte nicht abgeschlossen werden. Die Digitalisierung wurde zwar erfolgreich abgeschlossen, jedoch wurde die digitalisierte Verzeichnungseinheit in AIS bis jetzt nicht mit einer «Identifikation Digitales Magazin» aktualisiert.
+        </p>
+        <p>
+            Bitte prüfen Sie, warum AIS nicht aktualisiert wurde und informieren Sie den Nutzer, wenn das Problem behoben ist.
+        </p>
+        <p>
+            {{#Aufträge}}
+            <table>
+                <tr>
+                    <td>VE</td>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                </tr>
+                <tr>
+                    <td>Name, Vorname</td>
+                    <td>{{Besteller.Name}},  {{Besteller.Vorname}}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{Besteller.EmailAddress}}</td>
+                </tr>
+                <tr>
+                    <td>Benutzer-ID</td>
+                    <td>{{Besteller.Id}}</td>
+                </tr>
+                <tr>
+                    <td>Auftrags-ID</td>
+                    <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+                </tr>
+            </table>
+            {{/Aufträge}}
+        </p>
+       
+    </div>
+</body>
+</html>

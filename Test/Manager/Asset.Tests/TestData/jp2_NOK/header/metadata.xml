@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2019-04-17T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot636910863925240776">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_DjHCf3LzNhSbQWzK07htD1_D">
+        <name>D_o_k_u_m_e_n_t_0000001</name>
+        <originalName>D_o_k_u_m_e_n_t_0000001</originalName>
+        <datei id="_NFK3cwoDRKD6AQuAQNTjMs">
+          <name>00000003.jp2</name>
+          <originalName>00000003.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>75ce130391d1e80f065829d0e31c787c</pruefsumme>
+        </datei>
+        <datei id="_WjBOFC2qX6lpfpE4EgHNJT">
+          <name>00000003_PREMIS.xml</name>
+          <originalName>00000003_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1978653315a093f6aa91aa833edcbe56</pruefsumme>
+        </datei>
+        <datei id="_6KjGlpNJ53JICWKFGTs68O">
+          <name>00000004.jp2</name>
+          <originalName>00000004.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6d4efc4c70329806789e6bed2a9a245d</pruefsumme>
+        </datei>
+        <datei id="_Vk8KNqmeQLdTmX37InqqU2">
+          <name>00000004_PREMIS.xml</name>
+          <originalName>00000004_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>15018ae15fed7a499f4ae8e8d6bb42b7</pruefsumme>
+        </datei>
+        <datei id="_5QKGjp8TiDvPdj5XLGdxBu">
+          <name>00000005.jp2</name>
+          <originalName>00000005.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>428dbda0c236bba0dfcb41abddc25ac5</pruefsumme>
+        </datei>
+        <datei id="_90MniCx3Eymcl4KnOkuqPz">
+          <name>00000005_PREMIS.xml</name>
+          <originalName>00000005_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4e5483e094b1e001cf78f0f927952f44</pruefsumme>
+        </datei>
+        <datei id="_ltMnCDcZaV5dF7ZnIv7yZX">
+          <name>00000006_PREMIS.xml</name>
+          <originalName>00000006_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>97832d35414a10a6c785b9cd8ba238eb</pruefsumme>
+        </datei>
+        <datei id="_RGi7gLLvKoTjbfB8TdlNBB">
+          <name>00000010.jp2</name>
+          <originalName>00000010.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>77d6abd02ddb6dc679c9c487845e0fb2</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_DZA0ROofmUMI7n4SkMeUzN_D">
+        <name>U_m_s_c_h_l_a_g_0000001</name>
+        <originalName>U_m_s_c_h_l_a_g_0000001</originalName>
+        <datei id="_gCw0AnoKi8MPw3cCylgEEo">
+          <name>00000001.jp2</name>
+          <originalName>00000001.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a126a3262e20eb7066bb714cbd2900e3</pruefsumme>
+        </datei>
+        <datei id="_7ZPIQdLoBwqFrne6CkYlYx">
+          <name>00000001_PREMIS.xml</name>
+          <originalName>00000001_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>18e981b94a6c10fd6a24b44ef97b1f8c</pruefsumme>
+        </datei>
+        <datei id="_iQVXSoZM1UqiYEozWPN3Xn">
+          <name>00000002.jp2</name>
+          <originalName>00000002.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>573f37f98c8a187d25025a4007a3079d</pruefsumme>
+        </datei>
+        <datei id="_yXJPZNsqfBQEJuwzaMvrd9">
+          <name>00000002_PREMIS.xml</name>
+          <originalName>00000002_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5908c66fee60f08dfb0512607925bc35</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_PzwMrhkjWgHNRVBDD08LPb_D">
+        <name>D_o_k_u_m_e_n_t_0000002</name>
+        <originalName>D_o_k_u_m_e_n_t_0000002</originalName>
+        <datei id="_EplwbC4tWIF5KqQp5ihab6">
+          <name>00000006.jp2</name>
+          <originalName>00000006.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b4541d9fe24f9b0117a25f9446b9cd02</pruefsumme>
+        </datei>
+        <datei id="_K6xiZbB3asWUnsdomrZaNu">
+          <name>00000007.jp2</name>
+          <originalName>00000007.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0c85aac66a097a9dbded911ff7619e0f</pruefsumme>
+        </datei>
+        <datei id="_8Qk3nRgUBQr1Xg4g9sAkqW">
+          <name>00000007_PREMIS.xml</name>
+          <originalName>00000007_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0d20ecfa9be3aef5e444ad099637ac50</pruefsumme>
+        </datei>
+        <datei id="_hqhyx920nWUuzr6bKn5VI0">
+          <name>00000008.jp2</name>
+          <originalName>00000008.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5a113f19d613499ed760295e83a48aa4</pruefsumme>
+        </datei>
+        <datei id="_6Wkc0YCh46nHOkE4VtzDzE">
+          <name>00000008_PREMIS.xml</name>
+          <originalName>00000008_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>adb5623eb8a14101d57f155a6cf02ece</pruefsumme>
+        </datei>
+        <datei id="_7igrCLW0mrug2QhndGX0ex">
+          <name>00000010_PREMIS.xml</name>
+          <originalName>00000010_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ea172e8c67ba9218560278b449fa27a4</pruefsumme>
+        </datei>
+        <datei id="_mSvrDul59Mmaf0EFxa3RJh">
+          <name>00000013.jp2</name>
+          <originalName>00000013.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e27292e29a2fb003c465901c5e8cebe8</pruefsumme>
+        </datei>
+        <datei id="_boCDhbuYTvwRT04G9aVAqa">
+          <name>00000013_PREMIS.xml</name>
+          <originalName>00000013_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>aac8cb3b5d2fb70f1d4ef2f9dc87dc23</pruefsumme>
+        </datei>
+      </ordner>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesverwaltung (Bern)</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von />
+      <bis />
+    </entstehungszeitraum>
+    <ablieferungsnummer>1000/1044_2934940</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Oberzolldirektion (k. A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Oberzolldirektion: Zentrale Ablage (1930-1959)</name>
+      <ordnungssystemposition id="_PK1QrxDLBMRwKsSlTZ4rZ1">
+        <nummer>1</nummer>
+        <titel>Gesetzliche Grundlagen, Gesetze und Reglemente</titel>
+        <ordnungssystemposition id="_fgStapap71tyQ8U3eiJCOz">
+          <nummer>1.04</nummer>
+          <titel>Zollfreier Warenverkehr mit endgültiger Abfertigung</titel>
+          <ordnungssystemposition id="_mB07aWeMTOu9nxqF4W05Wr">
+            <nummer>1.04-041</nummer>
+            <titel>Warensendungen an internationale Organisationen</titel>
+            <dossier id="_N19wOxbZd5u2jS9bpr3UZd">
+              <aktenzeichen>041-2.10</aktenzeichen>
+              <titel>Gips-Union SA, Genève; Gips für das Völkerbundsgebäude</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <eroeffnungsdatum />
+              <abschlussdatum />
+              <entstehungszeitraum>
+                <von>
+                  <datum>1932-01-01</datum>
+                </von>
+                <bis>
+                  <datum>1938-12-31</datum>
+                </bis>
+              </entstehungszeitraum>
+              <zusatzDaten>
+                <merkmal name="Signatur">E6351F#1000/1044#852*</merkmal>
+                <merkmal name="Stufe">Dossier</merkmal>
+                <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1"},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28"},{"IconId":5,"Level":"Bestand","RefCode":"E10432*","Title":"Oberzolldirektion (1850-)","DateRangeText":"1848-2009","ArchiveRecordId":"5832"},{"IconId":12,"Level":"Teilbestand","RefCode":"E6351F*","Title":"Oberzolldirektion: Zentrale Ablage (1930-1959)","DateRangeText":"1850-1982","ArchiveRecordId":"5834"},{"IconId":19,"Level":"Serie","RefCode":"E6351F#1","Title":"Gesetzliche Grundlagen, Gesetze und Reglemente","DateRangeText":"1921-2000","ArchiveRecordId":"3937588"},{"IconId":19,"Level":"Serie","RefCode":"E6351F#1.04","Title":"Zollfreier Warenverkehr mit endgültiger Abfertigung","DateRangeText":"1921-1973","ArchiveRecordId":"3937622"},{"IconId":19,"Level":"Serie","RefCode":"E6351F#1.04-041","Title":"Warensendungen an internationale Organisationen","DateRangeText":"1930-1973","ArchiveRecordId":"3937624"},{"IconId":2,"Level":"Dossier","RefCode":"E6351F#1000/1044#852*","Title":"Gips-Union SA, Genève; Gips für das Völkerbundsgebäude","DateRangeText":"1932-1938","ArchiveRecordId":"2934940"}]</merkmal>
+                <merkmal name="Identifikation digitales Magazin">27dd0ecb-f5c2-479f-bb27-34c20cf51ea9@_N19wOxbZd5u2jS9bpr3UZd</merkmal>
+                <merkmal name="Entstehungszeitraum Anzeigetext">1932 - 1938</merkmal>
+              </zusatzDaten>
+              <dokument id="_DjHCf3LzNhSbQWzK07htD1">
+                <titel>D_o_k_u_m_e_n_t_0000001</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_NFK3cwoDRKD6AQuAQNTjMs</dateiRef>
+                <dateiRef>_WjBOFC2qX6lpfpE4EgHNJT</dateiRef>
+                <dateiRef>_6KjGlpNJ53JICWKFGTs68O</dateiRef>
+                <dateiRef>_Vk8KNqmeQLdTmX37InqqU2</dateiRef>
+                <dateiRef>_5QKGjp8TiDvPdj5XLGdxBu</dateiRef>
+                <dateiRef>_90MniCx3Eymcl4KnOkuqPz</dateiRef>
+                <dateiRef>_RGi7gLLvKoTjbfB8TdlNBB</dateiRef>
+                <dateiRef>_ltMnCDcZaV5dF7ZnIv7yZX</dateiRef>
+              </dokument>
+              <dokument id="_DZA0ROofmUMI7n4SkMeUzN">
+                <titel>U_m_s_c_h_l_a_g_0000001</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_gCw0AnoKi8MPw3cCylgEEo</dateiRef>
+                <dateiRef>_7ZPIQdLoBwqFrne6CkYlYx</dateiRef>
+                <dateiRef>_iQVXSoZM1UqiYEozWPN3Xn</dateiRef>
+                <dateiRef>_yXJPZNsqfBQEJuwzaMvrd9</dateiRef>
+              </dokument>
+              <dokument id="_PzwMrhkjWgHNRVBDD08LPb">
+                <titel>D_o_k_u_m_e_n_t_0000002</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <registrierdatum />
+                <entstehungszeitraum>
+                  <von />
+                  <bis />
+                </entstehungszeitraum>
+                <dateiRef>_mSvrDul59Mmaf0EFxa3RJh</dateiRef>
+                <dateiRef>_8Qk3nRgUBQr1Xg4g9sAkqW</dateiRef>
+                <dateiRef>_EplwbC4tWIF5KqQp5ihab6</dateiRef>
+                <dateiRef>_6Wkc0YCh46nHOkE4VtzDzE</dateiRef>
+                <dateiRef>_K6xiZbB3asWUnsdomrZaNu</dateiRef>
+                <dateiRef>_7igrCLW0mrug2QhndGX0ex</dateiRef>
+                <dateiRef>_hqhyx920nWUuzr6bKn5VI0</dateiRef>
+                <dateiRef>_boCDhbuYTvwRT04G9aVAqa</dateiRef>
+              </dokument>
+            </dossier>
+          </ordnungssystemposition>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

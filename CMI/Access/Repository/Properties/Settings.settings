@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Access.Repository.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RepositoryServiceUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/alfresco/api/-default-/public/cmis/versions/1.0/atom</Value>
+    </Setting>
+    <Setting Name="ConnectionMode" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">atom</Value>
+    </Setting>
+    <Setting Name="FixityAlgorithmRefElementName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Fixity Algorithm Ref</Value>
+    </Setting>
+    <Setting Name="FixityValueElementName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Fixity Value</Value>
+    </Setting>
+    <Setting Name="RepositoryUser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Access.Repository.Properties.Settings.RepositoryUser@@</Value>
+    </Setting>
+    <Setting Name="RepositoryPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Access.Repository.Properties.Settings.RepositoryPassword@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

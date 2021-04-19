@@ -1,0 +1,531 @@
+﻿<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta name="language" content="en">
+
+</head>
+<body>
+    <div class="container container-main">
+    <!--content-begins-->
+    <!--
+    Formate bei Code samples muss beibehalten werden. (pre Tags)
+    dafür in Visual Studio die Option "Tools/Options/Text Editor/HTML/Advanded/Format on Paste = false"
+    -->
+        <div id="content-wrapper">
+            <div class="container-fluid hidden-xs">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="mod mod-breadcrumb">
+                            <h2 id="br1" class="hidden">Breadcrumb</h2>
+                            <ol class="breadcrumb" aria-labelledby="br1">
+                                <li><a href="/en/" title="Schweizerisches Bundesarchiv"><i class="glyphicon glyphicon-home"></i></a><span class="icon icon--greater"></span></li>
+                                <li class="active" aria-selected="true" aria-label="current page">API</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 main-column" id="content" role="main">
+                        <div class="row">
+                            <div class="col-md-8 main-content">
+                                <h1>SFA Data Search API</h1>
+
+                                <p>
+                                    <b>
+                                        The Swiss Federal Archives provide an Application Programming Interface (API) to the metadata on recherche.bar.admin.ch.
+                                        With this API, developers can create their own applications on top of the SFA's search engine.
+                                    </b>
+                                </p>
+
+                                <p>
+                                    All metadata which is publically accessible in the Swiss Federal Archive’s online search is available via the API.
+                                    Direct access to primary data is not possible, because only allowed for logged users.
+
+                                    No login or API key is needed. The API is designed for single searches. It is not designed for bulk downloads.
+                                    All publically available metadata from the SFA can be conveniently
+                                    <a href="https://opendata.swiss/en/dataset/swiss-archives-archive-database-of-the-swiss-federal-archives">
+                                        downloaded from the OpenData.swiss platform in one single zipped file
+                                    </a>
+                                    (504.0MB).
+                                </p>
+
+                                <h2>Technical specification</h2>
+
+                            <p>
+                                Host: https://www.recherche.bar.admin.ch/recherche/api/v1/ <br />
+                                API type: RESTful. <br />
+                                Exchange format: JSON <br />
+                                Character encoding: UTF-8. <br />
+                                <br />
+                                Detailed API documentation in Swagger framework is available here:
+                                <a href="https://www.recherche.bar.admin.ch/recherche/swagger/index.html?url=/clientdev/swagger/v1/swagger.json">
+                                    https://www.recherche.bar.admin.ch/recherche/swagger/index.html?url=/clientdev/swagger/v1/swagger.json
+                                </a>
+
+                                <ul>
+                                    <li>Fetch one record using its id: GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities/{id} </li>
+                                    <li>Fetch multiple records: GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities?ids=1,412,42 </li>
+                                    <li>
+                                        Search a record: POST request with header: {‘content-type’ : ‘application/json; charset=utf-8'} to
+                                        https://www.recherche.bar.admin.ch/recherche/api/v1/entities/Search
+                                    </li>
+                                </ul>
+                            </p>
+                            <p>
+                                <br/>
+                                The API and its documentation are versioned. If you have built your application
+                                around version v1, updating your code might be necessary to have it run in version vX.
+                            </p>
+
+
+                            <div id="ExampleOfSearchCode">
+                                    <h2>Example of search code (Python 3)</h2>
+                                    <p>
+                                        The following Python 3 code retrieves information on all documents having the word “Feurwehr” or “feurwehr”
+                                        in any metadata field and prints it to the Python output. Search terms are case-insensitive.
+                                    </p>
+
+                                    <pre class="  language-python">
+<code class=" language-python"><span class="token keyword">import</span> json
+<span class="token keyword">import</span> urllib<span class="token punctuation">.</span>request
+HostURL <span class="token operator">=</span> <span class="token string">'https://www.recherche.bar.admin.ch/recherche/api/v1/entities/Search'</span>
+JSON <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"query"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token string">"searchGroups"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"searchFields"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"feuerwehr"</span><span class="token punctuation">,</span> <span class="token string">"key"</span><span class="token punctuation">:</span> <span class="token string">"allData"</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"fieldOperator"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"groupOperator"</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">}</span>
+params <span class="token operator">=</span> json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>JSON<span class="token punctuation">)</span><span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span>
+req <span class="token operator">=</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span>Request<span class="token punctuation">(</span>HostURL<span class="token punctuation">,</span> data<span class="token operator">=</span>params<span class="token punctuation">,</span>headers<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'content-type'</span><span class="token punctuation">:</span> <span class="token string">'application/json'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>req<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+
+                                </div>
+
+                                <h2>Examples of JSON search requests (POST)</h2>
+
+                                <div id="SearchingForSpecificPhase">
+                                    <h3>Searching for a specific phrase “ab cd”</h3>
+                                    <p>
+                                        A specific phrase can be searched for with quotes or escaped quotes in the search field value. E.g.
+                                        "value": '"Leon Schlumpf"', or "value": "\"Leon Schlumpf\"".
+                                        <br />
+                                        <br />
+                                        N.B.: only search in the title (Titel) and metadata (Metadaten) allow for retrieval of a single term or phrase in the middle of a
+                                        text, e.g. “Kultur” in “Wissenschaft, Kultur und Lebensbedingungen”. See below (“Searching for a specific reference code”).
+                                    </p>
+                                    <pre class="  language-json">
+<code class=" language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"\"Leon Schlumpf\""</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span> 
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code>
+</pre>
+                                </div>
+
+                                <div id="Paging">
+                                    <h3>Paging</h3>
+                                    <p>
+                                        By default, the query returns only the first 10 results. To get the next results,
+                                        send the paging parameter to <b>skip</b> the n first results and <b>take</b> m results from that point.
+                                    </p>
+                                    
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"\"Leon Schlumpf\""</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"paging"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"skip"</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+        <span class="token property">"take"</span><span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+        <span class="token property">"orderBy"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+        <span class="token property">"sortOrder"</span><span class="token operator">:</span> <span class="token string">""</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+                                </div>
+
+                                <div id="RestrictingSearchToASpecificArchivalLevel">
+
+                                    <h3>Restricting search to a specific archival level</h3>
+                                    <p>
+                                        Restricting search to a specific archival level is achieved by facet filtering. German archival terminology is used:
+                                    </p>
+                                    <ul>
+                                        <li>Dokument (document)</li>
+                                        <li>Dossier (dossier)</li>
+                                        <li>Serie (series)</li>
+                                        <li>Teilbestand (sub-fonds)</li>
+                                        <li>Bestand (fonds)</li>
+                                    </ul>
+                                    <p>
+                                        Here we search the term “feuerwehr” at the document and file levels:
+                                    </p>
+
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"feuerwehr"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"facetsFilters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"filters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"level:\"Dossier\""</span><span class="token punctuation">,</span>
+                <span class="token string">"level:\"Dokument\""</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"facet"</span><span class="token operator">:</span> <span class="token string">"level"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+
+                                <div id="RestrictingTheSearchToASpecificSpanOfYears">
+                                    <h3>Restricting the search to a specific span of years</h3>
+
+                                    <p>
+                                        In the expression <code>creationPeriod.years:[x TO y]</code>, x and y can be any years with x&lt;y
+                                        Here we search the term “feuerwehr” for the creation period from 1950 to 1999:
+                                    </p>
+                                    
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"feuerwehr"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"facetsFilters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"filters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"creationPeriod.years:[1950 TO 1999]"</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"facet"</span><span class="token operator">:</span> <span class="token string">"creationPeriod.years"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+                                    
+                                </div>
+
+                                <div id="SearchingFilesFromASpecificFond">
+                                    <h3>Searching files from a specific fond</h3>
+                                    <p>
+                                        Here we search the term <i>“feuerwehr”</i> in all metadata from the fonds "<i>Institut für Politikwissenschaft der Universität Bern (1965-)</i>" :
+                                    </p>
+                                    
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"feuerwehr"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"facetsFilters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">"filters"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">"aggregationFields.bestand:\"Institut für Politikwissenschaft der Universität Bern (1965-)\""</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"facet"</span><span class="token operator">:</span> <span class="token string">"aggregationFields.bestand"</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+
+                                <div id="SearchingWithBooleanOperators">
+                                    <h3>Searching with Boolean operators</h3>
+
+                                    <div id="Variant1SimpleSearchInTheSameField">
+                                        <br />
+                                        <h4>Variant 1: simple search in the same field</h4>
+                                        <p>
+                                            Search for all documents containing „loi“ AND “culture” in any field. Variant equivalent to a simple search.
+                                        </p>
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"loi AND culture"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                    </div>
+
+                                    <div id="Variant2BooleanCombinationOfTwoFields">
+                                        <h4>Variant 2: Boolean combination of two fields</h4>
+                                        <p>
+                                            In a complex search, Boolean conditions are expressed by the <i>fieldOperator</i>.<br />
+                                            <i>
+                                                "fieldOperator": 1 stands for (a AND b) <br />
+                                                “fieldOperator”: 2 stands for (a OR b) <br />
+                                                “fieldOperator”: 0 stands for NOT(a OR b) <br />
+                                            </i>
+                                            <br />
+                                            Example: search for all documents containing „loi“ in the titel AND “culture” in any field.
+                                            <img src="/img/ExampleSearchForLoiAndCulture.png" 
+                                                 alt="Screenshot Example search for all documents containing „loi“ in the titel AND “culture” in any field." />
+
+                                        </p>
+<pre class="  language-json"><code class=" language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"loi"</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"title"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"culture"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                                    </div>
+
+                                    <div id="ComplexBoolean">
+                                        <h4>Complex Boolean</h4>
+
+                                        <p>
+                                            The following corresponds to a search for all elements whose title metadata contains “Bundesrat”
+                                            and “Couchepin”, but whose metadata excludes “Kultur” in all fields. In short, we search: <br />
+                                            <i>ALL (title: Bundesrat, title: Couchepin) AND NONE (_all: Kultur)</i>, <br />
+                                            in other terms: <br />
+                                            <i>(title = Bundesrat AND title = Couchepin) AND (NOT anyfield = Kultur)</i>
+
+                                            <img src="/img/ComplexBooleanSearch.png" alt="Picture Showing Complex Boolean Search Example" />
+                                        </p>
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"title"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"Bundesrat"</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"title"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"Couchepin"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"Kultur"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">3</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                    </div>
+
+                                    <div id="SearchingWithWildcards">
+                                        <h4>Searching with wildcards * and ?</h4>
+
+                                        <p>
+                                            Use * or ? as wildcards. <br />
+                                            Here we search for all terms beginning with “lo” or with “cult”. <br />
+                                            N.B: This does not work in enclosing quotes. Example "lo? OR cult*" works, but "\"lo? OR cult*\"" does not. <br />
+                                        </p>
+
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"lo? OR cult*"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                                    </div>
+                                </div>
+
+                                <div id="SearchingForASpecificPartialReferenceCode">
+                                    <h3>Searching for a specific partial reference code (Signatur)</h3>
+
+                                    <p>
+                                        Only fields like title (Titel) and metadata (Metadaten) allow for retrieval of a single term or phrase in the middle of a text,
+                                        e.g. “Kultur” in “Wissenschaft, Kultur und Lebensbedingungen”. This is not the case for alphanumeric identifier fields, notably referenceCode,
+                                        FormerReferenceCode and Aktenzeichen. For the purpose of indexing optimization, these fields are not tokenized in the search index.
+                                        This means that if the key is set to referenceCode (signature), a search term such as J2 will not yield any result, as only the exact
+                                        reference code “J2” would be found. A wildcard, as in “J2*” or “J2?” is necessary to fetch J2.1#1000/1211#1*, J2.1#1000/1211#10*,
+                                        J2.1#1000/1211#11* etc.
+                                    </p>
+
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"referenceCode"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"J2*"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+
+                                <div id="SearchingWithFuzzyOperator">
+                                    <h3>Searching with fuzzy operator ~</h3>
+                                    <p>
+                                        The fuzzy operator "bundesr~" also finds Bundesräte, Bundesamt, Bunesrat (wrong spelling) etc.
+                                    </p>
+
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"title"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"bundesr~"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token property">"fieldOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"groupOperator"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+
+                                <div id="ProximitySearchesWithTheProximityOperator">
+                                    <h3>Proximity searches with the proximity operator ~ n</h3>
+                                    <p>
+                                        The proximity operator for n permutations of the word order (displacement, insertion of other words) in the search phrase.
+                                        With <i>"\"Professor Einstein\" ~2"</i>, we fetch <i>“Professor Einstein”</i> but also <i>“Einstein, Professor”</i>.
+                                        2 changes have been allowed: 1: swapping the order of both words, 2: inserting a comma.
+                                    </p>
+
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"\"Professor Einstein\" ~2"</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+
+                                <div id="WeightingSearchTerms">
+                                    <h3>Weighting search terms ^n</h3>
+                                    <p>
+                                        The weighting operator n ∈ [1: 100] gives more weight to a specific search term. This influences the order in which the results are displayed.
+                                    </p>
+<pre class="  language-json"><code class="  language-json"><span class="token punctuation">{</span>
+    <span class="token property">"query"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"searchGroups"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">"searchFields"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token property">"definition"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                            <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"title"</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token property">"key"</span><span class="token operator">:</span> <span class="token string">"allData"</span><span class="token punctuation">,</span>
+                        <span class="token property">"value"</span><span class="token operator">:</span> <span class="token string">"Bundesrat Couchepin^4"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--content-end-->
+    </div>
+</body>
+</html>

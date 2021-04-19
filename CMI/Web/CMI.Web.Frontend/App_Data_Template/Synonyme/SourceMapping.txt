@@ -1,0 +1,360 @@
+﻿ABC11	ABC-Terminologie des VBS	Terminologie NBC du DDPS	Terminologia NBC del DDPS	ABC Military Terminology DDPS
+ABK06	Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+ABR17	Abkürzungen der Titel der Bundeserlasse	Abréviations des titres des actes législatifs fédéraux	Abbreviazioni dei titoli degli atti legislativi federali	EN: Abkürzungen der Titel der Bundeserlasse
+ABR89	Abkürzungen der Dienststellen der schweizerischen Bundesverwaltung und weitere schweizerische Abkürzungen	Abréviations des services de l'Administration fédérale suisse et autres abréviations suisses	Abbreviazioni dei servizi dell'Amministrazione federale svizzera e altre abbreviazioni svizzere	Abbreviations of services in the Swiss Federal Administration and other Swiss abbreviations
+ABR96	Abkürzungen des Bundesgerichts für Bundeserlasse [BK]	Abréviations du Tribunal fédéral pour les actes législatifs fédéraux [ChF]	Abbreviazioni del Tribunale federale relative ad atti legislativi federali [CaF].	EN: Abkürzungen des Bundesgerichts für Bundeserlasse [BK]
+ABR99	Abkürzungen der Dienststellen der schweizerischen Bundesverwaltung und weitere schweizerische Abkürzungen	Abréviations des services de l'Administration fédérale suisse et autres abréviations suisses	Abbreviazioni dei servizi dell'Amministrazione federale svizzera e altre abbreviazioni svizzere.	EN: Abkürzungen der Dienststellen der schweizerischen Bundesverwaltung und weitere schweizerische Abkürzungen
+ADF03	Bezeichnungen der Organisationseinheiten der Bundesverwaltung	Dénominations des unités organisationnelles de l'administration fédérale	Denominazioni delle unità organizzative dell'Amministrazione federale	Names of organisational units of the Federal Administration
+ADF15	Bezeichnungen der Organisationseinheiten der Bundesverwaltung	Dénominations des unités organisationnelles de l'administration fédérale	Denominazioni delle unità organizzative dell'Amministrazione federale	Names of organisational units of the Federal Administration
+ADF89v	Frühere Bezeichnungen der Organisationseinheiten der Bundesverwaltung	Anciennes dénominations des unités organisationnelles de l'administration fédérale	Denominazioni precedenti delle unità organizzative dell'Amministrazione federale	Former names of organisational units of the Federal Administration
+ADS95	Drohnen-Terminologie	Terminologie des drones	Terminologia dei ricognitori telecomandati	EN: Drohnen-Terminologie
+AHV17	Terminologie der AHV	Terminologie de l'AVS	Terminologia dell'AVS	Terminology of the OASI
+AIR01	Terminologie der Luftreinhaltung (BAFU)	Terminologie de la protection de l'air (OFEV)	Terminologia dell'inquinamento atmosferico (UFAM)	Air pollution control terminology (FOEN)
+ALBI15	Punktuelle Einträge (A. Bieler, BAFU)	Fiches ponctuelles (A. Bieler, OFEV)	Schede puntuali (A. Bieler, UFAM)	Ad-hoc entries (A. Bieler, FOEN)
+ALL09	Terminologie der Allianz Suisse	Terminologie d'Allianz Suisse	Terminologia dell'Allianz Suisse	EN: Terminologie der Allianz Suisse
+ALLG14	Punktuelle Einträge	Fiches ponctuelles	Schede puntuali	Ad-hoc entries
+ALP94	Terminologie des Güterverkehrs EU-CH	Terminologie du transport de marchandises UE-CH	Terminologia del trasporto di merci UE-CH	Terminologie des Güterverkehrs EU-CH
+ALX91	Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+ANG00	Anglizismen	Anglicismes	Anglicismi	Anglicisms
+ANG17	Anglizismen	Anglicismes	Anglicismi	Anglicisms
+ANM06	Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+API95	Terminologie der Bienenzucht	Terminologie de l'apiculture	Terminologia dell'apicoltura	Beekeeping terminology
+ARB10	Terminologie des schweizerischen Arbeitsrechts	Terminologie du droit du travail	Terminologia del diritto di lavoro	Employment Law Terminology
+ARB17	Terminologie des schweizerischen Arbeitsrechts	Terminologie du droit du travail	Terminologia del diritto del lavoro	Employment Law Terminology
+ARC06	Terminologie der Archivierung	Terminologie de l'archivage	Terminologia dell'archiviazione	Archiving Terminology
+ARG06	Einträge in Bearbeitung (M. Argast, VBS)	Fiches en cours d'élaboration (M. Argast, DDPS)	Schede in corso di elaborazione  (M. Argast, VBS)	EN: Einträge in Bearbeitung (M. Argast, VBS)
+ARM21	Terminologie der Armee XXI	Terminologie de l'Armée XXI	Terminologia dell'Esercito XXI	EN: Terminologie der Armee XXI
+ARM95	Terminologie der Armee 95	Terminologie de l'Armée 95	Terminologia dell'Esercito 95	EN: Terminologie der Armee 95
+ASM07	Terminologie der Krankenversicherung	Terminologie de l'assurance-maladie	Terminologia dell'assicurazione malattia	Health Insurance Terminology
+ASM09	Gesundheitsgesetzgebung der Staatskanzlei des Kantons Freiburg (Schweiz)	Terminologie de la législation sur la santé de la Chancellerie d'Etat du Canton de Fribourg (Suisse)	IT: Gesundheitsgesetzgebung der Staatskanzlei des Kantons Freiburg (Schweiz)	EN: Gesundheitsgesetzgebung der Staatskanzlei des Kantons Freiburg (Schweiz)
+ASY07	Übersetzungsdatei der schweizerischen Bundesverwaltung, Asylwesen (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse, asyle (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale, asilo (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+ASY14	Terminologie des schweizerischen Asylrechts	Terminologie du droit d'asile suisse	Terminologia del diritto d'asilo svizzero	Terminology of Swiss asylum law
+ATM99	Terminologie der nuklearen Entsorgung	Terminologie de la gestion des déchets nucléaires	Terminologia della gestione delle scorie nucleari	EN: Terminologie der nuklearen Entsorgung
+AUS14	Terminologie des schweizerischen Ausländerrechts	Terminologie du droit des étrangers suisse	Terminologia del diritto degli stranieri svizzero	Terminology of Swiss law on foreign nationals
+AUT13	Bezeichnungen der schweizerischen Kantonsbehörden	Dénominations des autorités cantonales suisses 	Denominazioni delle autorità cantonale svizzere	Names of Swiss cantonal authorities
+AUT14	Bezeichnungen der schweizerischen Bundesbehörden	Dénominations des autorités fédérales suisses	Denominazioni delle autorità federali svizzere	Names of Swiss federal authorities
+AUT15	Bezeichnungen der schweizerischen Bundesbehörden	Dénominations des autorités fédérales suisses	Denominazioni delle autorità federali svizzere	Names of Swiss federal authorities
+AUT89v	Frühere Bezeichnungen der Schweizer Behörden	Anciennes dénominations des autorités suisses	Denominazioni precedenti delle autorità svizzere	Former names of Swiss authorities
+AUT98	Bezeichnungen der kantonalen Rechtspflegeorgane	Dénominations des autorités judiciaires cantonales	Denominazioni delle autorità giudiziarie cantonali	Names of cantonal judicial authorities
+AWG99	Terminologie des Anwaltsgesetzes	Terminologie de la loi sur les avocats	Terminologia della legge sugli avvocati	EN: Terminologie des Anwaltsgesetzes
+BABS16	Terminologie des Bevölkerungsschutzes	Terminologie de la protection de la population	Terminologia della protezione della popolazione	Terminologie des Bevölkerungsschutzes
+BAG12	Terminologie des BAG 2012	Terminologie de l'OFSP 2012	Terminologie dell'UFSP 2012	Terminologie des BAG 2012
+BAU09	Terminologie der Interkantonalen Vereinbarung über die Harmonisierung der Baubegriffe	Terminologie de l'accord intercantonal harmonisant la terminologie dans le domaine des constructions	Terminologia dell'accordo intercantonale sull'armonizzazione dei termini del dominio delle 	Terminology of the Intercantonal Agreement on the harmonisation of construction terms
+BAU17	Terminologie des Bauwesens	Terminologie de la construction	Terminologia della costruzione	Terminology of construction
+BBE14	Titel der Bundesbeschlüsse des schweizerischen Bundesrechts	Titres des arrêtés fédérals du droit fédéral suisse 	Titoli dei decreti federali del diritto federale svizzero	Titles of federal decrees (Swiss legislation)
+BBL07	Terminologie des Immobilienmanagements (SAP RE)	Terminologie de la gestion immobilière (SAP RE)	Terminologia della gestione degli immobili (SAP RE)	Terminology of real estate management (SAP RE)
+BBL08	Terminologie des Immobilienmanagements	Terminologie de la gestion immobilière	Terminologia della gestione degli immobili	Terminology of real estate management
+BBLCH11	Titel der Erlasse des schweizerischen Bundesrechts (Bundesblatt)	Titres des actes législatifs du droit fédéral suisse (Feuille fédérale)	Titoli degli atti legislativi del diritto federale svizzero (Foglio federale)	Titles of Swiss federal legislation (Federal Gazette) 
+BBLFF17	Terminologie des Bundesblattes	Terminologie des Bundesblattes	Terminologie des Bundesblattes	Terminologie des Bundesblattes
+BBT02	Berufsbildungsterminologie	Terminologie de la formation professionnelle	Terminologia della formazione professionale	Vocational Education and Training
+BDS05	Terminologie der Dämmstoffe	Terminologie des matériaux isolants	Terminologia dei materiali isolanti	Terminology of Insulating Materials
+BELA16	Terminologie Behelf Sachbereich Lage	Terminologie Manuel du suivi de la situation	Terminologia Promemoria Analisi della situazione	Terminologie Behelf Sachbereich Lage
+BES95	Artenliste Schweizer Säuger und Vögel	Liste des mammifères et des oiseaux en Suisse	Elenco dei mammiferi e degli uccelli in Svizzera	EN: Artenliste Schweizer Säuger und Vögel
+BFS13	Terminologie des BFS	Terminologie OFS	Terminologia UFS	Terminology Federal Statistical Office
+BLW06	Übersetzungsdatei der schweizerischen Bundesverwaltung, Landwirtschaft (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse, agriculture (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale, agricoltura (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+BMD06	Terminologie der Biomedizin	Terminologie de la biomédecine	Terminologia della biomedicina	EN: Terminologie der Biomedizin
+BPG17	Terminologie des Bundespersonalrechts	Terminologie de la législation sur le personnel fédéral	Terminologia della legislazione sul personale federale	Terminology of federal personnel law
+BRG97	Terminologie der Richtlinien für die Vorbereitung und Erledigung der Bundesratsgeschäfte	Terminologie des directives sur la préparation et l'exécution des affaires du Conseil fédéral	Terminologia delle direttive per la preparazione e il disbrigo degli affari del Consiglio federale	EN: Terminologie der Richtlinien für die Vorbereitung und Erledigung der Bundesratsgeschäfte
+BRT02	Terminologie des Lärmschutzes (BAFU)	Terminologie de la protection contre le bruit (OFEV)	Terminologia dell'inquinamento fonico (UFAM)	Noise abatement terminology (FOEN)
+BRT91	Terminologie des schweizerischen Baurechts	Terminologie du droit suisse de la construction	Terminologia del diritto svizzero della costruzione	EN: Terminologie des schweizerischen Baurechts
+BSA98	Abrüstungsterminologie (Bundessprachenamt Deutschland)	Terminologie du désarmement (Bundessprachenamt Allemagne)	 Terminologia del disarmo (Bundessprachenamt Germania)	Disarmament Terminology (Bundessprachenamt Germany)
+BST91	Börsenterminologie	Terminologie boursière	Terminologia della borsa	EN: Börsenterminologie
+BUD09	Terminologie der eidgenössischen Staatsrechnung und des Budgets	Terminologie du compte d'Etat de la Confédération et du budget	Terminologia del consuntivo della Confederazione e del preventivo	EN: Terminologie der eidgenössischen Staatsrechnung und des Budgets
+BUD11	Terminologie der eidgenössischen Staatsrechnung und des Budgets	Terminologie du compte d'Etat de la Confédération et du budget	Terminologia del consuntivo della Confederazione e del preventivo	EN: Terminologie der eidgenössischen Staatsrechnung und des Budgets
+BVE04	Terminologie der verdeckten Ermittlung 	Terminologie de l'investigation secrète	Terminologia dell'indagine sotto copertura	EN: Terminologie der verdeckten Ermittlung 
+BVG17	Terminologie der Gesetzgebung der beruflichen Vorsorge	Terminologie de la législation sur la prévoyance professionnelle	Terminologia della legislazione sulla previdenza professionale	Terminology of the Legislation on Occupational Pension Funds
+BZN06	Terminologie des Amts für Sprachangelegenheiten Bozen	Terminologie du Service des affaires linguistiques de Bolzano	Terminologia dell'Ufficio questioni linguistiche Bolzano	Terminology of the Office for Linguistic Affairs Bozen
+BZS21	Terminologie des Bevölkerungsschutzes	Terminologie de la protection de la population	Terminologia della protezione della populazione	Terminologie des Bevölkerungsschutzes
+CAB17	Terminologie der Seilbahnen	Terminologie des installations à câbles	Terminologia degli impianti a fune	Terminology of the cableways
+CAN08	Terminologie der Eidgenössischen Sportschule Magglingen (Kanusport)	Terminologie de l'Ecole fédérale de sport de Macolin (canoë-kayak)	Terminologie der Eidgenössischen Sportschule Magglingen (canoismo)	Terminologie der Eidgenössischen Sportschule Magglingen (Kanusport)
+CCT01	Gesamtarbeitsvertrag SRG	Convention collective de travail SSR	Contratto collettivo di lavoro SSR	SBC Collective Employment Contract
+CER98	Terminologie des internationalen Getreidehandel-Übereinkommens 1995	Terminologie de l'Accord international sur les céréales de 1995	Terminologia dell'Accordo internazionale sui cereali del 1995	Terminology of the International Grains Agreement 1995
+CHA03	Herausforderungen 2003-2007	Challenges 2003-2007	Défis 2003-2007	Sfide 2003-2007
+CHI15	Terminologie der Chemikalien	Terminologie des produits chimiques	Terminologia dei prodotti chimici	Terminology of chemicals
+CONS13	Terminologie der Vernehmlassungen	Terminologie des procédures de consultation	Terminologia delle procedure di consultazione	Terminology of the consultation procedures
+COURS18	Einträge von Kursteilnehmenden	COURS17	COURS17	COURS17
+CPC12	Terminologie der neuen schweizerischen Zivilprozessordnung	Terminologie de la nouvelle procédure civile suisse	Terminologia della nuova procedura civile svizzera	Terminology of new Swiss civil procedure
+CPP08	Terminologie der schweizerischen Strafprozessordnung	Terminologie de la procédure pénale suisse	Terminologia della procedura penale svizzera	Terminology of Swiss criminal procedure
+CRA05	Terminologie der Schweizerischen Asylrekurskommission	Terminologie de la Commission de recours en matière d'asile	Terminologia della Commissione svizzera di ricorso in materia d'asilo	EN: Terminologie der Schweizerischen Asylrekurskommission
+CRT06	Terminologie des commissions de terminologie et de néologie, France	Terminology of the French Terminology Commissions (FR, EN)	IT: Terminologie des commissions de terminologie et de néologie, France	EN: Terminologie des commissions de terminologie et de néologie, France
+CRT10	Terminologie des commissions de terminologie et de néologie, France (FranceTerme)	Terminology of the French Terminology Commissions (FR, EN)	IT: Terminologie des commissions de terminologie et de néologie, France (FranceTerme)	EN: Terminologie des commissions de terminologie et de néologie, France (FranceTerme)
+CST04	Terminologie der Grundrechte	Terminologie des droits fondamentaux	Terminologia dei diritti fondamentali	Terminology of fundamental rights
+DDU05	Terminologie der Nachhaltigen Entwicklung, verwandte Gebiete	Terminologie du développement durable, domaines connexes	Terminologia dello sviluppo sostenibile, dominii correlati	 Sustainable Development Terminology, related domains
+DDU08	Terminologie der Nachhaltigen Entwicklung	Terminologie du développement durable	Terminologia dello sviluppo sostenibile	 Sustainable Development Terminology
+DEC05	Terminologie der Abfallentsorgung (BAFU)	Terminologie de l'élimination des déchets  (OFEV)	Terminologia dello smaltimento dei rifiuti (UFAM)	EN: Terminologie der Abfallentsorgung (BAFU)
+DEC08	Terminologie der medizinischen Abfälle	Terminologie des déchets médicaux	Terminologia dei rifiuti sanitari	Terminology of Healthcare Waste
+DENDRO18	Dendrochronologie-Glossar	Glossaire de la dendrochronologie	Glossario della dendrocronologia	Glossary of Dendrochronology
+DFGP15	Terminologie des Eidgenössisches Justiz- und Polizeidepartements	Terminologie du du Département fédéral de justice et police	Terminologia del Dipartimento federale di giustizia e polizia	Terminology of the Federal Department of Justice and Police
+DIP10	Terminologie des internationalen Privatrechts	Terminologie du droit international privé	Terminologia del diritto internazionale privato	Terminology of international private law
+DIP17	Terminologie des internationalen Privatrechts	Terminologie du droit international privé	Terminologia del diritto internazionale privato	Terminology of international private law
+DIP91	Terminologie des internationalen Privatrechts	Terminologie du droit international privé	Terminologia del diritto internazionale privato	Terminology of international private law
+DRU02	Terminologie der Schweizer Drogenpolitik [BAG]	Terminologie de la politique suisse en matière de drogue [OFSP]	Terminologia della politica svizzera in materia di droga [UFSP]	Terminology of Swiss Drugs Policy [FOPH]
+DSG96	Terminologie der Gesetzgebung über den Datenschutz	Terminologie de la législation sur la protection des données	Terminologia legislativa della protezione dei dati	Terminology of data protection legislation
+EDU00	Terminologie des Bildungswesens, Bund und Kantone	Terminologie de l'éducation, niveau fédéral et cantonal	Terminologia del sistema educativo	Education terminology, federal and cantonal level
+EDU07	Terminologie des Bildungswesens, Kanton Tessin	Terminologie de l'éducation, Canton de Tessin	Terminologia del sistema educativo, Cantone Ticino	EN: Terminologie des Bildungswesens, Kanton Tessin
+EGA93	Terminologie der Gleichstellung von Frau und Mann	Terminologie de l'égalité entre femmes et hommes	Terminologia sulla parità dei sessi	Gender equality terminology
+EGOV16	E-Government-Terminologie	Terminologie de la cyberadministration	Terminologia del governo elettronico	E-Government-Terminology
+EGR92	Titel der EU-Richtlinien bis 1992	Titres des directives UE jusqu'en 1992	Titoli delle direttive UE fino al 1992	Titles of EU directives up to 1992
+EGV04	E-Government-Terminologie	Terminologie de la cyberadministration	Terminologia del governo elettronico	E-Government-Terminology
+EHE91	Terminologie des schweizerischen Ehegüterrechts, Stand 1991	Terminologie du régime matrimonial suisse, état 1991	Terminologia del regime matrimoniale svizzero, stato 2016	Swiss marital property terminology, status 1991
+ENL13	Terminologie Recht und Umwelt	ENL13	Terminologia diritto e ambiente	Environmental law terminology
+ENR11	Energieglossar	Glossaire de l'énergie 	Glossario sull'energia 	Energy glossary
+ENR99	Terminologie der erneuerbaren Energien	Terminologie des énergies renouvelables	Terminologia delle energie rinnovabili	EN: Terminologie der erneuerbaren Energien
+ENV98	BAFU, Altlasten-Glossar, 1995	OFEV, Glossaire des sites contaminés, 1995	UFAM, Glossario dei siti contaminati, 1995	FOEN, Glossary of contaminated sites, 1995
+ERB12	Terminologie des Erbrechts	Terminologie du droit des successions	Terminologia del diritto successorio	Succession law terminology
+ERS06	Einträge in Bearbeitung (Stefanie Eichenberger - GS VBS)	Fiches en cours d'élaboration (S. Eichenberger - SG-DDPS)	Schede in corso di elaborazione (S. Eichenberger - SG-DDPS)	Working entries (S. Eichenberger - GS-DDPS)
+EVG97	Terminologie des Eidgenössischen Versicherungsgerichts	Terminologie du Tribunal fédéral des assurances	Terminologia del Tribunale federale delle assicurazioni	Terminology of the Federal Insurance Court
+EWB17	Eidgenössisches Wörterbüchlein 	Petit dictionnaire fédéral	Dizionarietto federale 	Federal Dictionary 
+FAD90	Funktionen in der schweizerischen Bundesverwaltung	Fonctions dans l'Administration fédérale suisse	Funzioni nell'Amministrazione federale svizzera	Jobs in the Swiss Federal Administration
+FAM95	Terminologie der Milchwirtschaft	Terminologie d'économie laitière	Terminologia dell'economia lattiera	EN: Terminologie der Milchwirtschaft
+FAMI14	Terminologie des Schweizerischen Zivilgesetzbuches (Familienrecht)	Terminologie du Code civil suisse (droit de la famille)	Terminologia del Codice civile svizzero (diritto di famiglia)	Swiss Civil Code terminology (Family Law)
+FAU02	Terminologie der Fauna (BAFU)	Terminologie de la faune (OFEV)	Terminologia della fauna (UFAM)	Fauna terminology (FOEN)
+FAZ10	Terminologie der Familienzulagen	Terminologie des allocations familiales	Terminologia degli assegni familiari	EN: Terminologie der Familienzulagen
+FBM92	Terminologie der Berufsmatura	Terminologie de la maturité professionnelle	Terminologia della maturità professionale	Vocational Baccalaureate Terminology
+FDU92	Übersetzungsdatei	Fichier de traduction	Schedario personale di traduzione	Translation file
+FFO05	Einträge in Bearbeitung (F. Fomasi, Bundeskanzlei)	Fiches en cours d'élaboration (F. Fomasi, Chancellerie fédérale)	Schede in corso di elaborazione (F. Fomasi, Cancelleria federale)	Working entries (F. Fomasi, Federal Chancellery)
+FIF13	Terminologie der Forschungs- und Innovationsförderung 	Terminologie en relation avec la promotion de la recherche et de l’innovation	Terminologia relativa alla promozione della ricerca e dell’innovazione	Terminology of research and innovation promotion
+FMA16	Terminologie der Finanzmarktaufsicht	Terminologie de la surveillance des marchés financiers	Terminologia della vigilanza sui mercati finanziari	Terminology of the Financial Market Supervision
+FMAUF17	Terminologie der Fernmeldegesetzgebung (aufgehobene Erlasse)	Terminologie de la législation sur les télécommunications (actes législatifs abrogés)	Terminologia della legislazione sulle telecomunicazioni (atti normativi abrogati)	Terminology of telecommunications legislation (repealed enactments)
+FMG17	Terminologie der Fernmeldegesetzgebung	Terminologie de la législation sur les télécommunications	Terminologia della legislazione sulle telecomunicazioni	Terminology of telecommunications legislation
+FNS06	Terminologie des Schweizerischen Nationalfonds	Terminologie du Fonds national suisse	Terminologia del Fondo nazionale svizzero	Terminology of the Swiss National Science Foundation 
+FOND15	Grundbegriffe des Rechts	Notions fondamentales du droit	Concetti fondamentali del diritto	Grundbegriffe des Rechts
+FOR18	Forstterminologie	Terminologie forestière	Terminologia forestale	Forestry terminology
+FOR99	Forstterminologie	Terminologie forestière	Terminologia forestale	Forestry terminology
+FRAPA17	Paul Frank's working entries	Paul Frank's working entries	Paul Frank's working entries	Paul Frank's working entries
+GDS06	Terminologie der Geodäsie	Terminologie de la géodésie	Terminologia della geodesia	Geodesy terminology
+GEA05	Punktuelle Einträge (Sektion Terminologie der Bundeskanzlei)	Fiches ponctuelles (Section de terminologie de la Chancellerie fédérale)	Schede puntuali (Sezione di terminologia della Cancelleria federale)	Ad-hoc entries (Sektion Terminologie der Bundeskanzlei)
+GEN03	Terminologie der Gesetzgebung über die medizinisch unterstützte Fortpflanzung	Terminologie de la législation sur la procréation médicalement assistée 	Terminologia della legislazione concernente la procreazione con assistenza medica	EN: Terminologie der Gesetzgebung über die medizinisch unterstützte Fortpflanzung
+GEN09	Terminologie der genetisch veränderten Lebensmittel	Terminologie des denrées alimentaires génétiquement modifiés	Genetically modified food terminology (DE, FR, EN)	EN: Terminologie der genetisch veränderten Lebensmittel
+GEN96	Terminologie der Gesetzgebung über die medizinisch unterstützte Fortpflanzung	Terminologie de la législation sur la procréation médicalement assistée	Terminologia della legislazione concernente la procreazione con assistenza medica	EN: Terminologie der Gesetzgebung über die medizinisch unterstützte Fortpflanzung
+GEO07	Terminologie der Geologie	Terminologie de la géologie	Terminologia della geologia	Geology terminology
+GEO08	Terminologie der Geologie	Terminologie de la géologie	Terminologia della geologia	Geology terminology
+GEO09	Terminologie der Geologie	Terminologie de la géologie	Terminologia della geologia	Geology terminology
+GEV09	GEVER Terminologie	Terminologie GEVER	Terminologia GEVER	GEVER Terminology
+GEV12	GEVER System	Système GEVER	Sistema GEVER	GEVER System
+GEW10	Terminologie des Gewässerschutzes (Kanton Freiburg)	Terminologie de la protection des eaux (Canton de Fribourg)	Terminologia della protezione delle acque (Cantone di Friburgo)	EN: Terminologie des Gewässerschutzes (Kanton Freiburg)
+GRF16	Grundbuch-Terminologie	Terminologie du registre foncier	Terminologia del registro fondiario	Land register terminology
+GRG05	Einträge in Bearbeitung (S. Gregorio, Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (S. Gregorio, Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (S. Gregorio, Sezione di terminologia della Cancelleria federale)	EN: Einträge in Bearbeitung (S. Gregorio, Sektion Terminologie der Bundeskanzlei)
+GRG10	Terminologie des Grossratsgesetzes des Kantons Freiburg 	FR: GRG10	Terminologia della Legge sul Gran Consiglio del Cantone Friburgo	EN: GRG10
+GRI10	Terminologie der übertragbaren Krankheiten 	Terminologie des maladies transmissibles	Terminologia delle malattie trasmissibili	Terminologie der übertragbaren Krankheiten 
+GRM06	Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+GSVBS17	Terminologie des GS-VBS	Terminologie du SG-DDPS	Terminologia del SG-DDPS	GS-DDPS Terminology
+GTG10	Terminologie der Gentechnik im ausserhumanen Bereich	Terminologie du génie génétique dans le domaine non humain	Terminologia dell'ingegneria genetica nel settore non umano	Terminology of non-human gene technology
+GVK05	Terminologie des Gesamtverkehrs	Terminologie des transports	Terminologia dei trasporti	Terminology of the Transports
+GWG15	Terminologie der Geldwäscherei (inkl. FATF-Empfehlungen)	Terminologie du blanchiment d'argent (Recommandations du GAFI incluses)	Terminologia del riciclaggio di denaro (incl. Raccomandazioni GAFI)	Money Laundering Terminology (including FATF Recommendations)
+GWS01	Gewässerschutz	Protection des eaux	Protezione delle acque	Water Protection
+HER14	HERMES 5 Terminologie	Terminologie HERMES 5	Terminologia HERMES 5	HERMES 5 Terminology
+HES04	Terminologie der Fachhochschulen	Terminologie des hautes écoles spécialisées	Terminologia delle scuole universitarie professionali	EN: Terminologie der Fachhochschulen
+HES94	Terminologie der Fachhochschulen	Terminologie des hautes écoles spécialisées	Terminologia delle scuole universitarie professionali	EN: Terminologie der Fachhochschulen
+HLZ11	Forstwirtschaft und Umwelt	Sylviculture et environnement	Selvicoltura e ambiente	EN: Forstwirtschaft und Umwelt
+HOCHB16	Terminologie der Bauwerksdokumentation im Hochbau	Terminologie der Bauwerksdokumentation im Hochbau	Terminologie der Bauwerksdokumentation im Hochbau	Terminologie der Bauwerksdokumentation im Hochbau
+IFD96	Terminologie der direkten Bundessteuer	Terminologie de l'impôt fédéral direct	Terminologia dell'imposta federale diretta	Terminology of direct federal taxation
+IFS15	Glossar Inventar der Fundmünzen der Schweiz (IFS)	Glossaire Inventaire des trouvailles monétaires suisses (ITMS)	Glossario Inventario dei ritrovamenti monetali svizzeri (IRMS)	Glossary Swiss Inventory of Coin Finds (SICF)
+INI19	Titel der eidgenössischen Volksinitiativen	Titres des initiatives populaires fédérales	Titoli delle iniziative popolari federali	Titles of popular initiatives
+IRS17	Terminologie der internationalen Rechtshilfe in Strafsachen	Terminologie de l'entraide judiciaire internationale en matière pénale	Terminologia dell'assistenza giudiziaria internazionale in materia penale	Terminology of International Mutual Assistance in Criminal Matters
+ISB02	Informatik-Terminologie der Bundesverwaltung	Terminologie informatique de l'Administration fédérale	Terminologia informatica dell'Amministrazione federale	Federal Administration IT terminology
+ISB04	Informatik-Terminologie der Bundesverwaltung	Terminologie informatique de l'Administration fédérale	Terminologia informatica dell'Amministrazione federale	Federal Administration IT terminology
+ITA08	Dreisprachige Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif trilingue des traducteurs de l'administration fédérale suisse, droit (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+JUR06	Übersetzungsdatei der schweizerischen Bundesverwaltung, Recht (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse, droit (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale, diritto (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+KAR07	Terminologie der Kartografie	Terminologie de la cartographie	Terminologia della cartografia	Cartography terminology
+KAR98	Terminologie des Kartellrechts	Terminologie de la législation sur les cartels	Terminologia della legislazione sui cartelli	EN: Terminologie des Kartellrechts
+KAUF16	Terminologie des Kaufvertrags	Terminologie des Kaufvertrags	Terminologie des Kaufvertrags	Terminologie des Kaufvertrags
+KAV12	Terminologie der Projekte Modernisierung KAV-Systeme	Terminologie des projets Modernisation du Centre des publications officielles	Terminologia dei Progetti di modernizzazione del Centro delle pubblicazioni ufficiali 	Terminology on Projects for the Modernisation of the Official Publications Centre
+KDK10	Konferenz der Kantonsregierungen	FR: KDK10	Conferenza dei governi cantonali	EN: KDK10
+KGS06	Terminologie der Koordinationsstelle für Geoinformationen und geografische Informationssysteme	Terminologie de la Coordination de l'information géographique et des systèmes d'information géographiques	Terminologia della Coordinazione dell'informazione geografica e dei sistemi informativi territoriali	Terminology of the Federal Coordination Centre for Geographical Information
+KHD01	Terminologie der Gesetzgebung über die gefährlichen Hunde	Terminologie législative sur les chiens dangereux	Terminologia legislativa sui cani pericolosi	Terminology of the legislation on dangerous dogs
+KLI08	Terminologie des Klimawandels	Terminologie du changement climatique	Terminologia del cambiamento climatico	Climate Change Terminology
+KMG05	Terminologie des Kriegsmaterialgesetzes	Terminologie du matériel de guerre	Terminologia sul materiale bellico 	War material terminology
+KOM15	Bezeichnungen der parlamentarischen und ausserparlamentarischen Kommissionen	Dénominations des commissions parlementaires et extraparlementaires	Denominazioni delle commissioni parlamentari e extraparlamentari	Names of parliamentary committees and extra-parliamentary commissions
+KOM99v	Frühere Bezeichnungen der parlamentarischen und ausserparlamentarischen Kommissionen	Anciennes dénominations des commissions parlementaires et extraparlementaires	Denominazioni precedenti delle commissioni parlamentari e extraparlamentari	Former names of parliamentary committees and extra-parliamentary commissions
+KULT15	Terminologie der Kulturbotschaft	Terminologie du Message culture	Terminologie der Kulturbotschaft	Terminologie der Kulturbotschaft
+LAU06	Einträge in Bearbeitung (Caroline Laurent - BJ)	Fiches en cours d'élaboration (Caroline Laurent - OFJ)	Schede in corso di elaborazione  (Caroline Laurent - UFG)	Working entries (Caroline Laurent - FOJ)
+LCH13v	Titel der Erlasse des schweizerischen Bundesrechts (aufgehoben) 	Titres des actes législatifs du droit fédéral suisse (abrogé)	Titoli degli atti legislativi del diritto federale svizzero (abrogato) 	Titles of Swiss federal legislation (repealed)
+LCH18v	Titel der Erlasse des schweiz. Bundesrecht (aufgehoben)	Titres des actes législatifs du droit fédéral suisse (abrogé)	Titoli degli atti legislativi del diritto federale svizzero (abrogato) 	Titles of Swiss federal legislation (repealed)
+LCH91	Titel der Erlasse des schweizerischen Bundesrechts (1832 ff.)	Titres des actes législatifs du droit fédéral suisse (1832 ss.)	Titoli degli atti legislativi del diritto federale svizzero (1832 ss.)	Titles of Swiss federal legislation (1832 ff.)
+LDA17	Urheberrecht	Droit d'auteur	Diritto d'autore	Copyright
+LEG03	Terminologie verschiedener Erlasse	Terminologie de divers actes législatifs	Terminologia di vari atti legislativi	Terminology from miscellaneous laws
+LEG05	Terminologie verschiedener Erlasse	Terminologie de divers actes législatifs	Terminologia di vari atti legislativi	Terminology from miscellaneous laws
+LEITB16	Terminologie des Leitbilds Bevölkerungsschutz	Terminologie du plan directeur de la protection de la population	Terminologia del concetto direttivo della protezione della popolazione	Terminologie des Leitbilds Bevölkerungsschutz
+LESE18	LESE18	LESE18	LESE18	LESE18
+LFR12	Abkürzungen der Erlasstitel des Kantons Freiburg	Abréviations des titres des actes législatifs fribourgeois  	Abkürzungen der Erlasstitel des Kantons Freiburg	Abbreviations of titles of legislation from the Canton of Fribourg
+LFT95	Terminologie der Gesetzgebung über die Zivilluftfahrt	Terminologie de la législation relative à l'aviation civile	Terminologia legislativa dell'aviazione civile	Terminology of the legislation on civil aviation
+LMG04	Terminologie der Gesetzgebung über Lebensmittel und Gebrauchsgegenstände	Terminologie de la législation relative aux denrées alimentaires et aux objets usuels	Terminologia legislativa sulle derrate alimentari e gli oggetti d'uso	Terminology of foodstuffs and utility articles
+LMJ01	Spielbankenterminologie	Terminologie des maisons de jeux	Terminologia delle case da gioco	EN: Spielbankenterminologie
+LOICH17	Titel der Erlasse des schweizerischen Bundesrechts	Titres des actes législatifs du droit fédéral suisse	Titoli degli atti legislativi del diritto federale svizzero	Titles of Swiss federal legislation
+LPA02	 Terminologie des Verwaltungsverfahrens	Terminologie de la procédure administrative	Terminologia della procedura amministrativa	Administrative procedure terminology
+LPF15	Rechtswörterbuch Piccard/Thilo/Steiner, Schuldbetreibungs- und Konkursrecht	Dictionnaire juridique Piccard-Thilo-Steiner, poursuite pour dettes et faillite	Dizionario giuridico Piccard-Thilo-Steiner, esecuzione e fallimento	Legal dictionary Piccard/Thilo/Steiner, Debt Enforcement and Bankruptcy
+LWB93	Terminologie der schweizerischen Landwirtschaftsgesetzgebung	Terminologie de la législation agricole suisse	Terminologia della legislazione agraria svizzera	Terminology of Swiss agricultural legislation
+LWG11	Terminologie des Landwirtschaftsgesetzes des Kantons Freiburg 	FR: LWG11	Terminologia della Legge sull'agricolutra del Cantone Friburgo	EN: LWG11
+MAK12	Einträge in Bearbeitung (K. MacKenzie, Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (K. MacKenzie, Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (K. MacKenzie, Sezione di terminologia della Cancelleria federale)	Working entries (K. MacKenzie, Terminology Section of the Federal Chancellery)
+MAR05	Einträge in Bearbeitung (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)
+MAR06	Einträge in Bearbeitung (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)
+MAR12	Einträge in Bearbeitung (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)	Fiches en cours d'élaboration (Christine Martin, BASPO)
+MDS00	Sammlung der TERMDAT-BenutzerInnen der Bundesverwaltung (ohne VBS)	Collection des utilisateurs TERMDAT de l'Administration fédérale (sauf DDPS)	Collezione degli utenti TERMDAT dell'Amministrazione federale (senza DDPS)	Collection of TERMDAT users in the Federal Administration (excl. DDPS)
+MDS06	Sammlung der TERMDAT-BenutzerInnen der Bundesverwaltung	Collection des utilisateurs TERMDAT de l'Administration fédérale	Collezione degli utenti TERMDAT dell'Amministrazione federale	Collection of TERMDAT users in the Federal Administration
+MDS09	Sammlung der TERMDAT-BenutzerInnen der Bundesverwaltung	Collection des utilisateurs TERMDAT de l'Administration fédérale	Collezione degli utenti TERMDAT dell'Amministrazione federale	Collection of TERMDAT users in the Federal Administration
+MEC13	Einträge in Bearbeitung (C. Messina, Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (C. Messina, Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (C. Messina, Sezione di terminologia della Cancelleria federale)	Working entries (C. Messina, Terminology Section of the Federal Chancellery)
+MEI05	Einträge in Bearbeitung (E. Meier, Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (E. Meier, Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (E. Meier, Sezione di terminologia della Cancelleria federale)	Working entries (E. Meier, Terminology Section of the Federal Chancellery)
+MES08	Einträge in Bearbeitung (Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (Sezione di terminologia della Cancelleria federale)	Working entries (Terminology Section of the Federal Chancellery)
+MET16	Terminologie der Metrologie	Terminologie de la métrologie	Terminologia della metrologia	Terminology of Metrology
+METE14	Terminologie der Meteorologie	Terminologie de la météorologie	Terminologia della meteorologia	Terminology of Meteorology
+MIET17	Terminologie des Mietrechts	Terminologie du contrat de bail	Terminologia del contratto di locazione	Terminology of tenancy law
+MIG10	Terminologie des Bundesamtes für Migration	Terminologie de l'Office fédéral des migrations	Terminologia dell'Ufficio federale della migrazione	Terminology of the Federal Office for Migration
+MIS07	Miszellen: Einträge unterschiedlicher Thematik aus der Amtlichen Sammlung	Terminologie ponctuelle extraite du Recueil officiel des lois fédérales	Miscellanea: termini vari provenienti dalla Raccolta ufficiale delle leggi federali	Miscellaneous entries on various topics from the Official Compilation
+MIS08	Miszellen: Einträge unterschiedlicher Thematik aus Pressemitteilungen	Terminologie ponctuelle extraite des communiqués de presse	Miscellanea: termini vari provenienti da comunicati stampa	Miscellaneous entries on various topics from press releases
+MIS13	Miszellen: Terminologie-Monitoring	Terminologie ponctuelle: Veille terminologique	Miscellanea: Osservatorio terminologico	Terminology monitoring
+MIS90	Miszellen: Einträge unterschiedlicher Thematik	Terminologie ponctuelle	Miscellanea: schede concernenti argomenti vari	Miscellaneous eintries on various themes
+MOF06	Terminologie der schweizerischen amtlichen Vermessung	Terminologie de la mensuration officielle suisse	Terminologia della misurazione ufficiale svizzera	Terminology of the Swiss official cadastral surveying
+MOF98	Terminologie der schweizerischen amtlichen Vermessung	Terminologie de la mensuration officielle suisse	Terminologia della misurazione ufficiale svizzera	Terminology of the Swiss official cadastral surveying
+MWS04	Terminologie der Mehrwertsteuer	Terminologie de la taxe sur la valeur ajoutée	Terminologia dell'imposta sul valore aggiunto	EN: Terminologie der Mehrwertsteuer
+MWS95	Terminologie der Mehrwertsteuer	Terminologie de la taxe sur la valeur ajoutée	Terminologia dell'imposta sul valore aggiunto	EN: Terminologie der Mehrwertsteuer
+NAS06	Nachhaltigkeit und Erfolgskontrolle im Schutzwald (BAFU)	Terminologie de la gestion durable des forêts de protection (OFEV)	Continuità nel bosco di protezione e controllo dell'efficacia (UFAM)	Sustainable Development and Performance Review in Protection Forests (FOEN)
+NAS08	Nachhaltigkeit und Erfolgskontrolle im Schutzwald (BAFU)	Terminologie de la gestion durable des forêts de protection (OFEV)	Continuità nel bosco di protezione e controllo dell'efficacia (UFAM)	Sustainable Development and Performance Review in Protection Forests (FOEN)
+NAT02	Terminologie der natürlichen Umwelt (BUWAL)	Terminologie des milieux naturels (OFEFP)	Terminologia dell'ambiente naturale (UFAFP)	Natural environment terminology (SAEFL)
+NAV01	Terminologie der schweizerischen Gesetzgebung über die Binnenschifffahrt	Terminologie législative de la navigation intérieure	Terminologia legislativa della navigazione interna	Terminologie der schweizerischen Gesetzgebung über die Binnenschifffahrt
+NBB07	Terminologie des &quot;Normenbeirat BAU&quot;	Terminologie du &quot;Normenbeirat BAU&quot;	Terminologia del &quot;Normenbeirat BAU&quot;	Terminology of the &quot;Normenbeirat BAU&quot;
+NET05	Glossar TermNet	Glossaire TermNet	Glossario TermNet	TermNet Glossary
+NFB14	Terminologie des Neuen Führungsmodells für die Bundesverwaltung	Terminologie du nouveau modèle de gestion de l’administration fédérale	Terminologia del Nuovo Modello di Gestione dell'Amministrazione federale	Terminologie des Neuen Führungsmodells für die Bundesverwaltung
+NRM02	Terminologie des Neuen Rechnungsmodells	Terminologie du Nouveau modèle comptable	Terminologia del Nuovo modello contabile	EN: Terminologie des Neuen Rechnungsmodells
+NUC11	Terminologie Kernanlagen 	FR: NUC11	Terminologia degli impianti nucleari	EN: NUC11
+OAI13	Terminologie OAIS - Referenzmodell für ein Offenes-Archiv-Informationssystem	Terminologie OAIS - Modèle de référence pour un Système ouvert d’archivage d’information	Terminologia OAIS - Modello di riferimento per un sistema informativo aperto per l'archiviazione	OAIS Terminology - Reference Model for an Open Archival Information System
+OEREB16	Terminologie des ÖREB-Katasters	Terminologie du cadastre RDPPF	Terminologia del catasto RDPP 	Terminology of the PLR-cadastre
+OFR11	Sammlung des Bundesamts für Strassen	Collection de l'Office fédéral des routes	Terminologia dell'Ufficio federale delle strade	Terminology of the Federal Roads Authority 
+OHG06	Terminologie der Opferhilfe	Terminologie de l'aide aux victimes d'infractions	Terminologia dell'aiuto alle vittime di reati 	EN: Terminologie der Opferhilfe
+OMC97	WTO-Terminologie	Terminologie de l'OMC	Terminologia dell'OMC	WTO terminology
+ONU10	Bezeichnung der UNO-Organe 	FR: ONU10	Denominazioni degli organi ONU	EN: ONU10
+ORG05	Bezeichnungen schweizerischer und internationaler Organisationen und Institutionen	Noms des organisations et institutions suisses et internationales	Denominazioni delle organizzazioni e istituzioni svizzere e internazionali	Names of Swiss and international organisations 
+ORG16	Bezeichnungen schweizerischer und internationaler Organisationen und Institutionen	Noms des organisations et institutions suisses et internationales	Denominazioni delle organizzazioni e istituzioni svizzere e internazionali	Names of Swiss and international organisations
+ORG96	Bezeichnungen schweizerischer und internationaler Organisationen und Institutionen	Noms des organisations et institutions suisses et internationales	Denominazioni delle organizzazioni e istituzioni svizzere e internazionali	Names of Swiss and international organisations
+ORV03	Terminologie des Obligationenrechts	Terminologie du droit des obligations	Terminologia del diritto delle obbligazioni	Terminology of the Code of Obligations
+ORV07	Terminologie des Obligationenrechts	Terminologie du droit des obligations	Terminologia del diritto delle obbligazioni	Terminology of the Code of Obligations
+ORV15	Terminologie des Obligationenrechts (aktualisiert)	Terminologie du droit des obligations	Terminologia del diritto delle obbligazioni	Terminology of the Code of Obligations
+ORV92	Terminologie des Obligationenrechts	Terminologie du droit des obligations	Terminologia del diritto delle obbligazioni	Terminology of the Code of Obligations
+ORVER17	Terminologie des Obligationenrechts (Verträge)	Terminologie du droit des obligations (contrats)	Terminologia del diritto delle obbligazioni (contratti)	Terminology of the Code of Obligations (contracts)
+PAI05	Eiskunstlaufglossar des Einzellaufs (Sprünge und Pirouetten)	Glossaire sur le patinage artistique individuel (Sauts et pirouettes)	Glossario sul pattinaggio artistico individuale (Salti e piroette)	Single Figure Skating Glossary (Jumps and Spins)
+PAP03	Übersetzungsdatei Nutztiere	Fichier de traduction de production animale	File traduzione animali da reddito	EN: Fichier de traduction de production animale
+PARL12	Titel der parlamentarischen Initiativen	Titres des initiatives parlementaires	Titoli delle iniziative parlamentari	Titles of parliamentary initiatives
+PARTI17	Politische Parteien der Schweiz	Partis politiques suisses	Partiti politici svizzeri	Swiss political parties
+PCI99	Terminologie des Zivilschutzes	Terminologie de la protection civile	Terminologia della protezione civile 	Civil defence terminology
+PDA12	Terminologie des Erwachsenenschutzrechts	Terminologie du droit de la protection de l'adulte	Terminologia del diritto di protezione degli adulti	Terminology of the protection of adults
+PEN15	Terminologie des schweizerischen Strafrechts	Terminologie du droit pénal suisse	Terminologia del diritto penale svizzero	Terminology of Swiss criminal law
+PERS14	Terminologie des Zivilgesetzbuches (Personenrecht) 	Terminologie du Code civil suisse (droit des personnes)	Terminologia del Codice civile svizzero (diritto delle persone)	Swiss Civil Code terminology (Law of Persons)
+PFS17	Schweizerische parlamentarische Terminologie	Terminologie parlementaire suisse	Terminologia parlamentare svizzera	Swiss parliamentary terminology
+PGG14	Terminologie der Postgesetzgebung 	Terminologie de la législation postale	Terminologia della legislazione postale	Terminology of Postal Services Legislation 
+PHB13	Einträge in Bearbeitung (P. Hurni-Bainbridge, Sektion Terminologie der Bundeskanzlei)	Fiches en cours d'élaboration (P. Hurni-Bainbridge, Section de terminologie de la Chancellerie fédérale)	Schede in corso di elaborazione (P. Hurni-Bainbridge, Sezione di terminologia 	 entries in process (P. Hurni-Bainbridge, Terminology Section)
+PMA17	Terminologie der Fortpflanzungsmedizin	Terminologie de la procréation médicalement assistée	Terminologia della medicina della procreazione	EN: Terminologie der Fortpflanzungsmedizin
+POG14	Geo-politische Benennungen (Staaten)	Dénominations géopolitiques (Etats)	Denominazioni geopolitiche (Stati)	Geo-political denominations (states)
+POGCH17	Geo-politische Benennungen (Kantone, Gemeinden)	Dénominations géopolitiques (cantons, communes)	Denominazioni geopolitiche (cantoni, comuni)	Geo-politiscal terms (cantons, communes)
+POR01	Terminologie der politischen Rechte	Terminologie des droits politiques	Terminologia dei diritti politici	Terminology of political rights
+POR16	Terminologie der politischen Rechte	Terminologie des droits politiques	Terminologia dei diritti politici	Terminology of political rights
+PPM12	Terminologie des Militärstrafprozesses	Terminologie  de la procédure pénale militaire	Terminologia  della prodecura penale militare 	Terminology of military criminal procedure
+PRO04	Berufsbezeichnungen der amtlichen Statistik 1997	Dénominations des professions de la statistique officielle 1997	Designazioni delle professioni della statistica ufficiale 1997	Names of occupations in the 1997 official statistics
+PRO13	Offizielle Berufsbezeichnungen	FR: PRO13	Denominazioni ufficiali delle professioni	EN: PRO13
+PRO92	Berufsbezeichnungen	Appellations des professions	Designazioni delle professioni	Names of occupations
+PRO98	Berufsbezeichnungen der amtlichen Statistik	Appellations des professions de la statistique officielle	Designazioni delle professioni della statistica ufficiale	Names of occupations in the official statistics
+PRP13	Terminologie der öffentlichen Leistungen	Terminologie des services publics	Terminologia dei servizi pubblici	Terminologie der öffentlichen Leistungen
+PUBLICA14	PUBLICA-Terminologie 	Terminologie de PUBLICA	Terminologia di PUBLICA	Terminology of PUBLICA
+PUG96	Terminologie der Preisüberwachung	Terminologie de la surveillance des prix	Terminologia della sorveglianza dei prezzi	Price supervision terminology
+RACHU17	RACHU17	RACHU17	RACHU17	RACHU17
+RAU02	Terminologie der Raumplanung (ARE)	Terminologie de l'aménagement du territoire (ARE)	Terminologia della pianificazione del territorio (ARE)	EN: Terminologie der Raumplanung (ARE)
+RAUM18	Terminologie der Raumplanung (ETHZ)	Terminologie de l'aménagement du territoire (EPFZ)	Terminologia della pianificazione del territorio (PFZ)	Spatial Planning Terminology (ETHZ)
+RCIV15	Terminologie des Haftpflichtrechts	Terminologie de la responsabilité civile	Terminologia della responsabilità civile 	Terminologie des Haftpflichtrechts
+REF11	Finanzberichterstattung des Bundes - Bezeichnungen der Rechnungsposten	Rapports sur l'état des finances de la Confédération - Titres des postes budgétaires	Rendiconto finanziario della Confederazione	Financial reporting of the Confederation
+RMA11	Einträge in Bearbeitung (R. Maag, Italienische Abteilung der Bundeskanzlei)	Fiches en cours d'élaboration (R. Maag, Division italienne de la Chancellerie fédérale )	Schede in corso di elaborazione (R. Maag, Divisione italiana della Cancelleria federale)	EN: Einträge in Bearbeitung (R. Maag, Italienische Abteilung der Bundeskanzlei)
+RMAB15	Ressourcenmanagement Bund	Gestion fédérale des ressources 	Gestion fédérale des ressources 	Gestion fédérale des ressources 
+RTV07	Terminologie der Gesetzgebung über Radio und Fernsehen	Terminologie de la législation sur la radio et la télévision	Terminologia della legislazione sulla radiotelevisione	Terminology of the radio and television terminology
+RTV92	Terminologie der Gesetzgebung über Radio und Fernsehen	Terminologie de la législation sur la radio et la télévision	Terminologia della legislazione sulla radiotelevisione	Terminology of the radio and television terminology
+RTV97	Terminologie der Gesetzgebung über Radio und Fernsehen	Terminologie de la législation sur la radio et la télévision	Terminologia della legislazione sulla radiotelevisione	Terminology of the radio and television terminology
+SACH15	Terminologie des Sachenrechts	Terminologie des droits réels	Terminologia dei diritti reali	Terminology of property law
+SAP95	Terminologie der Gesetzgebung über die Versicherungsaufsicht und den Versicherungsvertrag	Terminologie législative de la surveillance des assurances et du contrat d'assurance	Terminologia della sorveglianza degli assicuratori e del contratto d'assicurazione	Terminology of the legislation on insurance oversight and insurance contracts
+SBB10	Terminologie der SBB	Terminologie des CFF	Terminologia delle FFS	EN: Terminologie der SBB
+SCH07	Terminologie der Schengen/Dublin-Abkommen	Terminologie des accords de Schengen et de Dublin	Terminologia degli accordi di Schengen e Dublino; Terminology of the Schengen/Dublin Agreements (DE, FR, IT, IS, NL)	EN: Terminologie der Schengen/Dublin-Abkommen
+SCHKG16	Terminologie des Schuldbetreibungs- und Konkursrechts	Terminologie de la poursuite pour dettes et faillite	Terminologia dell'esecuzione e del fallimento	Terminology of Debt Collection and Bankruptcy
+SCO06	Übersetzungsdatei Claudio Schott (VBS) IT-DE 	Fiches de Claudio Schott (VBS) IT-DE	Schedario di Claudio Schott (DDPS) IT-DE	Claudio Schott's translation file (DDPS) IT-DE
+SEK16	Terminologie des Schweizerischen Evangelischen Kirchenbundes (SEK)	Terminologie de la Fédération des Églises protestantes de Suisse (FEPS)	Terminologie de la Fédération des Églises protestantes de Suisse (FEPS)	Terminologie des Schweizerischen Evangelischen Kirchenbundes (SEK)
+SEM15	Terminologie des Projekts &quot;Interprète SEM&quot;	Terminologie du projet &quot;Interprète SEM&quot;	Terminologia del progetto &quot;Interprète SEM&quot;	Terminologie des Projekts &quot;Interprète SEM&quot;
+SFA00	Terminologie der Strategischen Führungsausbildung [BK]	Terminologie de la Formation à la conduite stratégique [ChF]	Terminologia della Formazione alla condotta strategica [CaF]	Strategic leadership training terminology [FCh]
+SLA06	 Einträge in Bearbeitung  (Steve Lata - Bundeskanzlei)	Fiches en cours d'élaboration (Steve Lata - Chancellerie fédérale)	Schede in corso di elaborazione (Steve Lata - Cancelleria federale)	Working entries (Steve Lata - Federal Chancellery)
+SLI03	Terminologie der Italienischen Abteilung (BK)	Terminologie de la Division italienne (ChF)	Terminologia della Divisione italiana (CaF)	Italian Division terminology (FCh)
+SMO09	Terminologie des Elektrosmog	Terminologie de l'électrosmog	Terminologia dell'elettrosmog	Electrosmog Terminology
+SNU92	Terminologie der Sicherheit von Kernanlagen	Terminologie de la sécurité des installations nucléaires	Terminologia della sicurezza degli impianti nucleari	Nuclear Safety Terminology
+SOC16	Terminologie des Gesellschaftsrecht	Terminologie des Gesellschaftsrecht	Terminologie des Gesellschaftsrecht	Terminologie des Gesellschaftsrecht
+SOL08	Terminologie des Bodenschutzes (BAFU)	Terminologie de la protection du sol (OFEV)	Terminologia dell'inquinamento del suolo (UFAM)	EN: Terminologie des Bodenschutzes (BAFU)
+SPO05	Sportterminologie	Terminologie du sport	Terminologia dello sport	Sport terminology
+SPR97	Terminologie des Sprachenrechts	Terminologie du droit des langues	Terminologia del diritto delle lingue	Terminology of the law on languages
+SPS17	Einträge in Bearbeitung (S. Spahni, Bundesamt für Verkehr)	Fiches en cours d'élaboration (S. Spahni, Office fédéral des transports)	Schede in corso di elaborazione (S. Spahni, Ufficio federale dei trasporti)	Working entries (S. Spahni, Federal Office of Transport)
+SSM01	Terminologie der Eidgenössischen Sportschule Magglingen	Terminologie de l'Ecole fédérale de sport de Macolin	Terminologia della Scuola federale dello sport di Macolin	EN: Terminologie der Eidgenössischen Sportschule Magglingen
+SSM07	Terminologie der Eidgenössischen Sportschule Magglingen	Terminologia della Scuola federale dello sport di Macolin	Terminologia della Scuola federale dello sport di Macolin	Terminologie der Eidgenössischen Sportschule Magglingen
+SSM08	Terminologie der Eidgenössischen Sportschule Magglingen	Terminologie de l'Ecole fédérale de sport de Macolin	Terminologia della Scuola federale dello sport di Macolin	EN: Terminologie der Eidgenössischen Sportschule Magglingen
+SSM14	Terminologie des BASPO	Terminologie de l'OFSPO	Terminologia dell'UFSPO	FOFSPO Terminology
+SSM95	Terminologie der Eidgenössischen Sportschule Magglingen	Terminologie de l'Ecole fédérale de sport de Macolin	Terminologia della Scuola federale dello sport di Macolin	EN: Terminologie der Eidgenössischen Sportschule Magglingen
+STA03	Terminologie der (Kriminal-)Statistik	Terminologie de la statistique (de la criminalité)	Terminologia della statistica (della criminalità)	Terminology of (Crime) Statistics
+STA04	Terminologie der statistischen Erhebungen des Bundes	Terminologie des relevés statistiques fédéraux	Terminologia delle rilevazioni statistiche federali	Terminology of federal statistical surveys
+STE07	Terminologie des Schweizerischen Steuersystems	Terminologie du système fiscal suisse	Terminologia del sistema fiscale svizzero	Terminology of the Swiss Tax System
+STF99	Terminologie der Störfälle	Terminologie des accidents majeurs	Terminologia degli incidenti rilevanti	Major accidents terminology
+STSCH17	Strahlenschutz	Radioprotection	Radioprotezione	Radiation Protection
+SUV07	BBT/SUVA-Glossar Softwarelokalisierung	Glossaire de la localisation de logiciels (BBT/SUVA)	Glossario della localizzazione software (BBT/SUVA)	Glossary of software localisation (BBT/SUVA)
+SVG98	Terminologie des Strassenverkehrsrechts	Terminologie du droit de la circulation routière	Terminologia del diritto della circolazione stradale	EN: Terminologie des Strassenverkehrsrechts
+SVU93	Terminologie des Übereinkommens über den Strassenverkehr	Terminologie de la Convention sur la circulation routière	Terminologia della Convenzione sulla circolazione stradale	Terminology of the Convention on Road Traffic
+TAR04	Terminologie der Verfassung des Kantons Appenzell Ausserrhoden 1995	Terminologie de la Constitution du canton d'Appenzell Rhodes-Extérieures 1995	Terminologia della Costituzione del Cantone di Appenzello Esterno 1995	Terminology of the Constitution of the Canton of Appenzell Ausserrhoden 1995
+TBE00	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE01	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE02	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE03	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE04	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE05	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE06	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE07	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE08	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE09	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE10	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE11	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE12	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE89	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE90	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE91	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE92	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE93	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE94	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE95	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE96	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE97	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE98	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBE99	Rechts- und Verwaltungsterminologie des Kantons Bern	Terminologie juridique et administrative du Canton de Berne	Terminologia giuridica e amministrativa del Cantone di Berna	Legal and Administrative Terminology of the Canton of Bern
+TBT13	Interoperabilität im Schienenverkehr	Interopérabilité ferrroviaire	Interoperabilità ferroviaria	Railway interoperability
+TER03	Terminologie der Finanzierung des Terrorismus	Terminologie du financement du terrorisme	Terminologia del finanziamento del terrorismo	Terminology of the Financing of Terrorism
+TFR07	Terminologie der Staatskanzlei des Kantons Freiburg	Terminologie de la Chancellerie d'Etat du canton de Fribourg	Terminologia della Cancelleria dello Stato del Cantone di Friburgo	Terminology of the Cantonal Chancellery of the Canton of Fribourg
+TGR14	Terminologie der Standeskanzlei Graubünden (Parli) 	Terminologie de la Chancellerie d'Etat du Canton des Grisons (Parli)	Terminologia della Cancelleria dello Stato dei Grigioni (Parli)	Terminology of the Cantonal Chancellery of Graubünden (Parli)
+TGR16	Terminologie der Standeskanzlei Graubünden	Terminologie de la Chancellerie d'Etat du Canton des Grisons	Terminologia della Cancelleria dello Stato dei Grigioni	Terminology of the Cantonal Chancellery of Graubünden
+THI96	Rechtswörterbuch Piccard/Thilo/Steiner, 1950	Dictionnaire juridique Piccard-Thilo-Steiner, 1950	Dizionario giuridico Piccard-Thilo-Steiner, 1950	Legal dictionary Piccard/Thilo/Steiner, 1950
+TIT15	Schweizerische Bundesbehörden: Titel der Amtsträger	Autorités fédérales suisses: titres des personnages officiels	Autorità federali svizzere: titoli dei mandatari	Swiss federal authorities: titles of public officials
+TIT89v	Schweizerische Bundes-, Kantons- und Gemeindebehörden: frühere Titel der Amtsträger	Autorités fédérales, cantonales et communales suisses: anciens titres des personnages officiels	Autorità federali, cantonali e comunali svizzere: titoli precedenti dei mandatari	Swiss federal, cantonal and communal authorities: former titles of public officials
+TIT98	Schweizerische Bundes-, Kantons- und Gemeindebehörden: Titel der Amtsträger	Autorités fédérales, cantonales et communales suisses: titres des personnages officiels	Autorità federali, cantonali e comunali svizzere: titoli dei mandatari	Swiss federal, cantonal and communal authorities: titles of public officials
+TOP06	Terminologie der Topografie	Terminologie de la topographie	Terminologia della topografia	Terminology of Topography
+TRN05	Terminologie der Gesetzgebung über die Zuteilung von Organen zur Transplantation	Terminologie de la législation sur l'attribution d'organes	Terminologia della legislazione sull'attribuzione di organi per il trapianto	EN: Terminologie der Gesetzgebung über die Zuteilung von Organen zur Transplantation
+TRS17	Rechtsetzungsterminologie	Terminologie législative et réglementaire	Terminologia legislativa	Terminology of the legislative process 
+TSA87	Terminologie der Aktiengesellschaft	Terminologie de la société anonyme	Terminologia della società anonima	Terminology of the company limited by shares
+TSS16	Terminologie des Gesundheitssystems	Terminologie du système de santé	Terminologia del sistema sanitario	Health System Terminology
+TVA07	Übersetzungsdatei der schweizerischen Bundesverwaltung (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+TVS12	Terminologie der Staatskanzlei des Kantons Wallis	Terminologie de la Chancellerie d'Etat du Canton du Valais	Terminologia  della Cancelleria dello Stato del Cantone del Vallese	Terminology of the Cantonal Chancellery of Valais
+UEB08	Übersetzungsdatei	fichier de traduction	file di traduzione	Translation file
+UFAG13	Terminologie der Landwirtschaft 	Terminologie de l'agriculture	Terminologia dell'agricoltura	Terminology of agriculture
+UNI04	Terminologie der Universität Freiburg	Terminologie de l'Université Fribourg	Terminologia dell'Università di Friburgo	EN: Terminologie der Universität Freiburg
+UNI93	Bezeichnungen der Hochschulorgane	Appellations de l'administration des hautes écoles	Denominazioni degli organi delle scuole universitarie	EN: Bezeichnungen der Hochschulorgane
+UNO04	Terminologie des Hochkommissariats der Vereinten Nationen für Flüchtlinge	Terminologie du Haut Commissariat des Nations Unies pour les réfugiés	Terminologia dell'Alto Commissariato delle Nazioni Unite per i Rifugiati	Terminoloy of the United Nations High Commissioner for Refugee
+VAL16	Terminologie Wertpapiere	Terminologie Wertpapiere	Terminologie Wertpapiere	Terminologie Wertpapiere
+VBS07	Militärische Terminologie des VBS	Terminologie militaire du DDPS	Terminologia militare del DDPS	DDPS Military Terminology
+VBS11	Militärische Terminologie des GS-VBS	Terminologie militaire du SG-DDPS	Terminologia militare del SG-DDPS	GS-DDPS Military Terminology
+VBS97	Militärische Terminologie des VBS	Terminologie militaire du DDPS	Terminologia militare del DDPS	DDPS Military Terminology
+VBS98	Militärische Terminologie des VBS: Materialbewirtschaftung	Terminologie militaire du DDPS: système de gestion du matériel	Terminologia militare del DDPS: sistema di gestione del materiale	GS-DDPS Military Terminology: materials management
+VPG07	Übersetzungsdatei der schweizerischen Bundesverwaltung, Verwaltungspraxis der Bundesbehörden (1991-2004, frühere Datenbank ALEXIS)	Fichier collectif des traducteurs de l'administration fédérale suisse (1991 - 2004, ALEXIS)	File di traduzione dell'Amministrazione federale (1991-2004, vecchia banca dati ALEXIS)	Translators of the Federal Administration (File ALEXIS, 1991-2004)
+VWK91	Terminologie der Verwaltungskontrolle	Terminologie du contrôle administratif	Terminologia del controllo amministrativo	Administrative control terminology
+WAF96	Terminologie des Waffengesetzes	Terminologie de la loi sur les armes	Terminologia della legge sulle armi	Weapons Act terminology
+WAFFE18	Terminologie des Waffengesetzes	Terminologie de la loi sur les armes	Terminologia della legge sulle armi	Weapons Act Terminology
+WWI17	Terminologie des Hochwasserschutzes (BAFU)	Terminologie de la protection contre les crues (OFEV)	Terminologia della protezione contro le piene (UFAM)	Terminology of flood protection (FOEN)
+WYL15	Wyler/Wyler, Lex Friedrich, 1987	Wyler/Wyler, Lex Friedrich, 1987	Wyler/Wyler, Lex Friedrich, 1987	Wyler/Wyler, Lex Friedrich, 1987
+ZGB15	Terminologie des schweizerischen Zivilgesetzbuchs (punktuelle Einträge)	Terminologie du Code civil suisse (fiches ponctuelles)	Terminologia del Codice civile svizzero (schede puntuali)	Swiss Civil Code terminology (ad-hoc entries)
+ZGB93	Terminologie des Schweizerischen Zivilgesetzbuchs	Terminologie du Code civil suisse	Terminologia del Codice civile svizzero	Swiss Civil Code terminology
+ZIV15	Terminologie der Vollzugsstelle für den Zivildienst	Terminologie de l'Organe d'exécution du service civil	Terminologia dell'Organo d'esecuzione del servizio civile	Terminology of the Central Office for Civilian Service
+ZSPCI18	Terminologie des Projekts Zivilschutz 2015+ (ZS 2015+)	Terminologie du projet Protection civile 2015+ (PCi 2015+)	Terminologia del progetto Protezione civile 2015+ (PCi 2015+)	Terminologie des Projekts Zivilschutz 2015+ (ZS 2015+)
+ZSW11	Terminologie des Schweizerischen Zivilstandswesens	Terminologie de l'état civil suisse 	Terminologia dello stato civile svizzero	EN: Terminologie des Schweizerischen Zivilstandswesens

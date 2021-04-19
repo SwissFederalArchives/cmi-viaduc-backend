@@ -1,0 +1,209 @@
+﻿{
+  "took": 3,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "failed": 0
+  },
+  "hits": {
+    "total": 1,
+    "max_score": 13.597743,
+    "hits": [
+      {
+        "_index": "archive-de_v20170630",
+        "_type": "elasticarchiverecord",
+        "_id": "4397586",
+        "_score": 13.597743,
+        "_source": {
+          "metadataAccessTokens": [ "Public" ],
+          "title": "Studienkommission für strategische Fragen",
+          "referenceCode": "E4390C#2005/25#462*",
+          "level": "Dossier",
+          "creationPeriod": {
+            "text": "1990 - 1990",
+            "startDate": "1990-01-01T00:00:00",
+            "endDate": "1991-01-01T00:00:00",
+            "searchStartDate": "1989-07-05T00:00:00",
+            "searchEndDate": "1990-12-31T00:00:00",
+            "years": [ 1990 ]
+          },
+          "hasImage": false,
+          "hasAudioVideo": false,
+          "playingLengthInS": 0,
+          "canBeOrdered": true,
+          "treePath": "000000000100000000280000004672000000467700038948160003894989000389500400043975850004397586",
+          "treeSequence": 512,
+          "treeLevel": 9,
+          "isLeaf": true,
+          "isRoot": false,
+          "accessionDate": 2005,
+          "parentContentInfos": [
+            { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
+            { "title": "Archiv des Schweizerischen Bundesstaates ab 1848" },
+            { "title": "Bundesamt für Zivilschutz (1963-2002)" },
+            { "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)" },
+            { "title": "Verwaltung" },
+            { "title": "Beziehungen" },
+            { "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)" },
+            { "title": "Studienkommission für strategische Fragen" },
+            { "title": "Studienkommission für strategische Fragen" }
+          ],
+          "externalDisplayTemplateName": "10032: BAR Dossier",
+          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "archiveplanContext": [
+            {
+              "iconId": 4,
+              "level": "Archiv",
+              "refCode": "CH-BAR#Unterlagen*",
+              "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)",
+              "dateRangeText": "1424-2007",
+              "archiveRecordId": "1"
+            },
+            {
+              "iconId": 10,
+              "level": "Hauptabteilung",
+              "refCode": "E*",
+              "title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+              "dateRangeText": "1848-2009",
+              "archiveRecordId": "28"
+            },
+            {
+              "iconId": 5,
+              "level": "Bestand",
+              "refCode": "E10104*",
+              "title": "Bundesamt für Zivilschutz (1963-2002)",
+              "dateRangeText": "1928-1996",
+              "archiveRecordId": "4672"
+            },
+            {
+              "iconId": 12,
+              "level": "Teilbestand",
+              "refCode": "E4390C*",
+              "title": "Bundesamt für Zivilschutz: Zentrale Ablage (1976-1997)",
+              "dateRangeText": "1928-1999",
+              "archiveRecordId": "4677"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#0",
+              "title": "Verwaltung",
+              "dateRangeText": "1936-1991",
+              "archiveRecordId": "3894816"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#07",
+              "title": "Beziehungen",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3894989"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074",
+              "title": "Kommissionen, Arbeitsgruppen und Ausschüsse der öffentlichen Verwaltung (Konstitution, Einladungen, Protokolle, Berichte)",
+              "dateRangeText": "1964-1986",
+              "archiveRecordId": "3895004"
+            },
+            {
+              "iconId": 19,
+              "level": "Serie",
+              "refCode": "E4390C#074.26",
+              "title": "Studienkommission für strategische Fragen",
+              "archiveRecordId": "4397585"
+            },
+            {
+              "iconId": 2,
+              "level": "Dossier",
+              "refCode": "E4390C#2005/25#462*",
+              "title": "Studienkommission für strategische Fragen",
+              "dateRangeText": "1990-1990",
+              "archiveRecordId": "4397586"
+            }
+          ],
+          "previousArchiveRecordId": "0",
+          "nextArchiveRecordId": "5130687",
+          "parentArchiveRecordId": "4397585",
+          "firstChildArchiveRecordId": "-1",
+          "childCount": 0,
+          "thumbnail": {},
+          "protectionEndDate": {
+            "date": "2020-12-31T00:00:00",
+            "year": 2020
+          },
+          "protectionCategory": "Art. 9.1 BGA",
+          "containsPersonRelatedInformation": false,
+          "isPhysicalyUsable": true,
+          "protectionDuration": 30,
+          "permission": "nicht erhoben",
+          "physicalUsability": "Uneingeschränkt",
+          "accessibility": "Öffentlich",
+          "descriptors": [],
+          "containers": [
+            {
+              "containerLocation": "4.4.008.10.04",
+              "containerType": "Schachtel",
+              "idName": "2068351 2005/25_00123"
+            }
+          ],
+          "references": [],
+          "primaryData": [],
+          "customFields": {
+            "bildVorschau": {},
+            "bildAnsicht": {},
+            "veAblieferungLink": [
+              {
+                "value": "2005/00025 Bundesamt für Bevölkerungsschutz (keine Angabe)",
+                "entityRecordId": "1311302",
+                "entityType": "Ablieferungen"
+              }
+            ],
+            "veOrdnungskomponenteLink": [],
+            "verwandteVe": [],
+            "bemerkungZurVe": [],
+            "land": [],
+            "zusatzkomponenteZac1": [],
+            "aktenzeichen": [ "074.26" ],
+            "früheresAktenzeichen": [],
+            "vorgängerbehörden": [],
+            "nachfolgerbehörden": [],
+            "aipId": [],
+            "urheber": [],
+            "beteiligtePersonenKörperschaften": [],
+            "verleger": [],
+            "abdeckung": [],
+            "thema": [],
+            "format": [],
+            "digitalesFindmittelBeschreibung": [],
+            "digitalesFindmittelLink": [],
+            "digitaleVersion": [],
+            "zugänglichkeitGemässBga": "In Schutzfrist",
+            "dummyElasticdatewithyear": {
+              "date": "0001-01-01T00:00:00",
+              "year": 0
+            }
+          },
+          "archiveRecordId": "4397586"
+        }
+      }
+    ]
+  },
+  "aggregations": {
+    "bestellbare_einheiten": {
+      "doc_count": 1,
+      "nach_level": {
+        "doc_count_error_upper_bound": 0,
+        "sum_other_doc_count": 0,
+        "buckets": [
+          {
+            "key": "Dossier",
+            "doc_count": 1
+          }
+        ]
+      }
+    }
+  }
+}

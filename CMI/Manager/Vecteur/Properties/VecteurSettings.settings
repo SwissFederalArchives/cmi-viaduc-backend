@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Vecteur.Properties" GeneratedClassName="VecteurSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BaseDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\vecteur</Value>
+    </Setting>
+    <Setting Name="Address" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.Address@@</Value>
+    </Setting>
+    <Setting Name="SftpPort" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">11127</Value>
+    </Setting>
+    <Setting Name="ApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.ApiKey@@</Value>
+    </Setting>
+    <Setting Name="RequestTimeoutInMinute" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="SftpPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.SftpPassword@@</Value>
+    </Setting>
+    <Setting Name="SftpLicenseKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.SftpLicenseKey@@</Value>
+    </Setting>
+    <Setting Name="SftpPrivateCertKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.SftpPrivateCertKey@@</Value>
+    </Setting>
+    <Setting Name="SftpPrivateCertPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Vecteur.Properties.VecteurSettings.SftpPrivateCertPassword@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,20 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">body {font-family: Sans-Serif; }</style>
+</head>
+<body>
+
+Guten Tag<br>
+<br>
+Es besteht ein Problem mit Ihrer Bestellung: 
+
+<ul>
+    <li>
+        <a href ="https://viaduc.cmiag.ch/clientdev/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}} {{Ve.Titel}}</a>
+    </li>
+</ul>
+
+Wir möchten uns für die Unannehmlichkeit entschuldigen.
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.DocumentConverter.Properties" GeneratedClassName="DocumentConverterSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BaseDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\ConverterBaseFolder</Value>
+    </Setting>
+    <Setting Name="Port" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8032</Value>
+    </Setting>
+    <Setting Name="BaseAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{MachineName}</Value>
+    </Setting>
+    <Setting Name="PathToAbbyyFrEngineDll" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MissingAbbyyPathInstallationMessage" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ABBYY IS NOT INSTALLED</Value>
+    </Setting>
+    <Setting Name="SftpLicenseKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpLicenseKey@@</Value>
+    </Setting>
+    <Setting Name="OCRTextExtractionProfile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TextExtraction_Accuracy</Value>
+    </Setting>
+    <Setting Name="PDFTextLayerExtractionProfile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TextExtraction_Speed</Value>
+    </Setting>
+    <Setting Name="SftpPrivateCertKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpPrivateCertKey@@</Value>
+    </Setting>
+    <Setting Name="SftpPrivateCertPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpPrivateCertPassword@@</Value>
+    </Setting>
+    <Setting Name="AbbyyEnginePoolSize" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="AbbyySerialNumber" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.AbbyySerialNumber@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

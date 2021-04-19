@@ -1,0 +1,247 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html,
+        body {
+            font-family: Frutiger, Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+	a {
+		color: #005580;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	h1 {
+		font-size: 35px;
+	}
+	h2 {
+		font-size: 23.8px;
+	}
+	h3 {
+		font-size: 16.8px;
+	}
+	h4 {
+		font-size: 14.73px;
+	}
+    </style>
+</head>
+<body>
+
+    {{#User.IstDeutsch}}
+    Guten Tag <br>
+    <br>
+    
+    Vielen Dank für Ihre Bestellung.
+    {{#IstGebrauchskopieÖffentlich}}
+    Die digitalisierten Unterlagen stehen für Sie online zur Verfügung:
+    {{/IstGebrauchskopieÖffentlich}}
+    {{#IstGebrauchskopieEb}}
+    Die digitalisierten Unterlagen stehen für Sie in den nächsten fünf Tagen online zur Verfügung:
+    {{/IstGebrauchskopieEb}}
+    {{#IstGebrauchskopieAb}}
+    Die digitalisierten Unterlagen stehen für Sie in den nächsten zwölf Stunden online zur Verfügung:
+    {{/IstGebrauchskopieAb}}
+    {{#IstGebrauchskopieBarOderAs}}
+    Die digitalisierten Unterlagen stehen für Sie in den nächsten zwölf Stunden online zur Verfügung:
+    {{/IstGebrauchskopieBarOderAs}}
+
+    {{/User.IstDeutsch}}
+
+    {{#User.IstFranzösisch}}
+    Bonjour<br>
+    <br>
+    
+    Votre commande nous est bien parvenue et nous vous en remercions.
+    {{#IstGebrauchskopieÖffentlich}}
+    Votre commande nous est bien parvenue et nous vous en remercions. Les documents numérisés sont à votre disposition en ligne : 
+    {{/IstGebrauchskopieÖffentlich}}
+    {{#IstGebrauchskopieEb}}
+    Les documents numérisés sont à votre disposition en ligne pendant les cinq prochains jours : 
+    {{/IstGebrauchskopieEb}}
+    {{#IstGebrauchskopieAb}}
+    Les documents numérisés sont à votre disposition en ligne pendant les douze prochaines heures : 
+    {{/IstGebrauchskopieAb}}
+    {{#IstGebrauchskopieBarOderAs}}
+    Les documents numérisés sont à votre disposition en ligne pendant les douze prochaines heures : 
+    {{/IstGebrauchskopieBarOderAs}}	
+    {{/User.IstFranzösisch}}
+
+    {{#User.IstItalienisch}}
+    Buongiorno, <br>
+    <br>
+    
+    
+    {{#IstGebrauchskopieÖffentlich}}
+    i documenti ordinati sono stati digitalizzati e sono ora a Sua disposizione on-line:
+    {{/IstGebrauchskopieÖffentlich}}
+    {{#IstGebrauchskopieEb}}
+    i documenti ordinati sono stati digitalizzati e sono ora a Sua disposizione on-line durante i prossimi cinque giorni: 
+    {{/IstGebrauchskopieEb}}
+    {{#IstGebrauchskopieAb}}
+    i documenti ordinati sono stati digitalizzati e sono ora a Sua disposizione on-line durante le prossime dodici ore: 
+    {{/IstGebrauchskopieAb}}
+    {{#IstGebrauchskopieBarOderAs}}
+    i documenti ordinati sono stati digitalizzati e sono ora a Sua disposizione on-line durante le prossime dodici ore: 
+    {{/IstGebrauchskopieBarOderAs}}
+	{{/User.IstItalienisch}}
+    {{#User.IstEnglisch}}
+
+    Hello <br>
+    <br>
+    
+    Thank you for your order.
+    {{#IstGebrauchskopieÖffentlich}}
+    Your digitised documents are now available online:
+    {{/IstGebrauchskopieÖffentlich}}
+    {{#IstGebrauchskopieEb}}
+    Your digitised documents will be available online in the next five days:
+	
+    {{/IstGebrauchskopieEb}}
+    {{#IstGebrauchskopieAb}}
+    Your digitised documents will be available online in the next twelve hours:
+    {{/IstGebrauchskopieAb}}
+    {{#IstGebrauchskopieBarOderAs}}
+    Your digitised documents will be available online in the next twelve hours:
+    {{/IstGebrauchskopieBarOderAs}}
+    {{/User.IstEnglisch}}
+
+    <ul>
+        <li>
+            <a href="https://{{Global.PublicClientUrl}}/#/{{User.Sprache}}/archiv/einheit/{{Ve.Id}}">{{Ve.Signatur}}</a>{{#Ve.Aktenzeichen}}, {{Ve.Aktenzeichen}}{{/Ve.Aktenzeichen}}, {{Ve.Titel}}{{#Ve.Entstehungszeitraum}}, {{Ve.Entstehungszeitraum}}{{/Ve.Entstehungszeitraum}}
+        </li>
+    </ul>
+
+    {{#User.IstDeutsch}}
+    Klicken Sie auf den Link und wählen Sie auf der Seite die Funktion «Download». {{#IstGebrauchskopieÖffentlich}}Extrahieren Sie die ZIP-Datei und speichern Sie die Digitalisate ab. Um sich einen Überblick über die digitalisierten Unterlagen zu verschaffen, öffnen Sie die Datei index.html in Ihrem Browser.{{/IstGebrauchskopieÖffentlich}}{{^IstGebrauchskopieÖffentlich}}Danach erhalten Sie per E-Mail ein Passwort und Informationen zum weiteren Vorgehen.{{/IstGebrauchskopieÖffentlich}}
+    {{/User.IstDeutsch}}
+
+    {{#User.IstFranzösisch}}
+    Veuillez cliquer sur le lien puis sélectionner la fonction « Télécharger ». {{#IstGebrauchskopieÖffentlich}}Procédez à l’extraction du dossier compressé (.zip) et enregistrez les reproductions numériques. Vous pouvez obtenir un aperçu de l’ensemble des documents en ouvrant le fichier index.html dans votre navigateur.{{/IstGebrauchskopieÖffentlich}}{{^IstGebrauchskopieÖffentlich}}Vous recevrez ensuite par e-mail un mot de passe ainsi que les informations nécessaires sur la suite de la procédure.{{/IstGebrauchskopieÖffentlich}}
+    {{/User.IstFranzösisch}}
+
+    {{#User.IstItalienisch}}
+    Dopo aver cliccato sul link deve selezionare la funzione «Download» nella pagina visualizzata. {{#IstGebrauchskopieÖffentlich}}Estragga i documenti dal file ZIP e li salvi. Per avere una panoramica dei documenti digitalizzati, apra il file «index.htlm» nel Suo browser.{{/IstGebrauchskopieÖffentlich}}{{^IstGebrauchskopieÖffentlich}}In seguito riceverà una mail con la password e le istruzioni su come procedere.{{/IstGebrauchskopieÖffentlich}}
+    {{/User.IstItalienisch}}
+
+    {{#User.IstEnglisch}}
+    Click on the link and select “Download” on the page. {{#IstGebrauchskopieÖffentlich}}Extract the ZIP file and save the digitised materials. For an overview of the digitised documents, open the index.html file in your browser.{{/IstGebrauchskopieÖffentlich}}{{^IstGebrauchskopieÖffentlich}} You will then receive a password and information on what to do next via e-mail.{{/IstGebrauchskopieÖffentlich}}
+    {{/User.IstEnglisch}}
+    <br><br>
+    {{#User.IstDeutsch}}
+    Bei Fragen zur Bestellung wenden Sie sich bitte an die <a href="https://{{Global.PublicClientUrl}}">Beratung</a> oder per E-Mail an <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Mit freundlichen Grüssen<br>
+    <br>
+    Eidgenössisches Departement des Innern EDI<br>
+    Schweizerisches Bundesarchiv BAR<br>
+    Archivstrasse 24, CH-3003 Bern<br>
+    <br>
+    <a href="mailto:bundesarchiv@bar.admin.ch">bundesarchiv@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Folgen Sie dem Bundesarchiv: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+	{{/User.IstDeutsch}}
+
+    {{#User.IstFranzösisch}}
+    Pour tout renseignement sur la commande, veuillez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">conseil</a> ou par e-mail à <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Meilleures salutations,<br>
+    <br>
+    Département fédéral de l’intérieur DFI <br />
+    Archives fédérales suisses AFS <br />
+    Archivstrasse 24, CH-3003 Berne <br />
+	<br>
+    <a href="mailto:bundesarchiv@bar.admin.ch">bundesarchiv@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Suivez les Archives fédérales: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstFranzösisch}}
+
+    {{#User.IstItalienisch}}
+    Per qualsiasi ulteriore informazione può rivolgersi al servizio di  <a href="https://{{Global.PublicClientUrl}}">consulenza</a> oppure inviare una mail all’Archivio federale all’indirizzo <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Distinti saluti<br>
+    <br>
+    Dipartimento federale dell’interno DFI <br />
+    Archivio federale svizzero AFS <br />
+    Archivstrasse 24, CH-3003 Berna <br />
+	<br>
+    <a href="mailto:bundesarchiv@bar.admin.ch">bundesarchiv@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+    Seguite l’Archivio federale: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstItalienisch}}
+
+    {{#User.IstEnglisch}}
+    If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">advice service</a> or send an e-mail to <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.<br />
+    <br>
+    Yours sincerely<br>
+    <br>
+    Federal Department of Home Affairs FDHA<br>
+    Swiss Federal Archives SFA<br>
+    Archivstrasse 24, CH-3003 Bern<br>
+	    <br>
+    <a href="mailto:bundesarchiv@bar.admin.ch">bundesarchiv@bar.admin.ch</a><br>
+    <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+    <br>
+	Follow the Federal Archives: <br />
+    <br>
+    <b>
+        <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+        –
+        <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+        –
+        <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+    </b>
+    {{/User.IstEnglisch}}
+
+</body>
+</html>

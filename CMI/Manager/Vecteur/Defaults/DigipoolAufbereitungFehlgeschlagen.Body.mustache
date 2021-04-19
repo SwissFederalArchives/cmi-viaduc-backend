@@ -1,0 +1,78 @@
+﻿<html>
+<head>
+    <style>
+        html, body {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 800px;
+        font-size: 10pt;
+        line-height: 13px;
+        }
+
+        table {
+        border-collapse: collapse;
+        }
+
+        th, td {
+        padding-top: 2px;
+        padding-left: 0px;
+        padding-bottom: 2px;
+        padding-right: 20px;
+        text-align: left;
+        vertical-align: top;
+        font-weight: normal;
+        line-height: 12px;
+        }
+
+        p {
+            margin-bottom: 12px;
+        }
+
+        .editthis {
+        font-size: 18pt;
+        color: red;
+        background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+
+    <p>Beim Aufbereiten des folgenden Digitalisierungsauftrags ist ein Fehler aufgetreten:</p>
+
+    {{#Aufträge}}
+    <table>
+        <tr>
+            <td>Auftrags-ID:</td>
+            <td>{{Id}}</td>
+        </tr>
+        <tr>
+            <td>Signatur:</td>
+            <td>{{BestellteVe.Signatur}}</td>
+        </tr>
+        <tr>
+            <td>Titel:</td>
+            <td>{{BestellteVe.Titel}}</td>
+        </tr>
+        <tr>
+            <td>Benutzer:</td>
+            <td>{{Bestellung.Besteller.Vorname}} {{Bestellung.Besteller.Name}}, {{Bestellung.Besteller.Organisation}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Fehlermeldung:</td>
+            <td>{{exceptionMessage}}</td>
+        </tr>
+    </table>
+    {{/Aufträge}}
+
+    <p>Im Digi-Pool wurde daher das Feld «Aufbereitungsfehler» mit dem Wert «Ja» befüllt und der Auftrag der Priorität 9 zugewiesen. <span style="text-decoration:underline">Dieser Auftrag ist somit blockiert.</span></p>
+    <p>Hilft die oben aufgeführte Fehlermeldung nicht weiter, prüfen Sie die Logs.</p>
+    <p>Nach Behebung des Fehlers müssen Sie im Digi-Pool mit dem Button «Aufbereitungsfehler zurücksetzen» den Auftrag wieder aktivieren.</p>
+    <p>Weitere Informationen finden Sie im Anwendungshandbuch (Kapitel 4.7).</p>
+
+
+</body>
+</html>

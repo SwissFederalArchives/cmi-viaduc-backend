@@ -1,0 +1,5 @@
+﻿{
+    "vc": { "url": "http://localhost/viaduc/proxy/vcpub/api/Public/GetSettings" },
+    "vcpri": { "url": "http://localhost/viaduc" },
+    "vcpub": { "url": "http://localhost/viaduc" }
+}

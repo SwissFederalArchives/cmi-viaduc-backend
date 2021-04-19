@@ -1,0 +1,9 @@
+{
+  "elastic": {
+    "_internal": true,
+    "baseUrl": "@@CMI.Web.Frontend.AppData_Template.ConfigJson.ElasticUrl@@",
+    "debug": {
+      "fetchRequestJson": true
+    }
+  }
+}

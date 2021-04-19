@@ -1,0 +1,267 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            font-weight: normal;
+            line-height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Gebrauchskopie zum Download bereit im Cache
+    </h1>
+    <p>
+        Es wurde erfolgreich eine Gebrauchskopie aus einer Benutzungskopie erstellt. Bitte lade die Gebrauchskopie herunter und stelle sie dem Kunden zu.
+    </p>
+    {{#Aufträge}}
+    <p>
+        <table>
+            <tr>
+                <td>
+                    Nutzer:<br />
+                    Organisation:<br />
+                    E-Mail:<br />
+                    Sprache:
+                </td>
+                <td>
+                    {{Bestellung.Besteller.Vorname}} {{Bestellung.Besteller.Name}}<br />
+                    {{Bestellung.Besteller.Organisation}}<br />
+                    {{Bestellung.Besteller.EmailAddress}}<br />
+                    {{Bestellung.Besteller.Sprache}}
+                </td>
+            </tr>
+            <tr>
+                <td>Auftrag:</td>
+                <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+            </tr>
+        </table>
+    </p>
+    <p>
+        <span style="color:red">Sehr geehrter Herr / Sehr geehrte Frau</span> {{Bestellung.Besteller.Name}}
+    </p>
+    <p>
+        Vielen Dank für Ihre Bestellung vom {{Bestellung.Erfassungsdatum}}. Die folgenden Unterlagen liegen digital bereit:
+    </p>
+	
+	{{#Aufträge}}
+    <p>
+        <table>
+            <tr>
+                <th>(Teil-)Bestand,<br>Ablieferung / Signatur</th>
+                <th>Behältnis /<br>Archivnr.</th>
+                <th>Az.</th>
+                <th>Dossiertitel</th>
+                <th>Zeitraum</th>
+            </tr>
+            <tr>
+                <td>{{BestellteVe.TeilBestand}},<br>{{BestellteVe.Ablieferung}} / {{BestellteVe.Signatur}}</td>
+                <td>{{BestellteVe.BehältnisCodesText}} /<br>{{BestellteVe.Archivnummer}}</td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+        </table>
+    </p>
+    {{/Aufträge}}
+    <p>
+        Klicken Sie auf den folgenden Link, um die Daten herunterzuladen: <span style="color:red">FTP-Link</span>.
+    </p>
+    <p>
+        Die Daten sind verschlüsselt und passwortgeschützt. Aufgrund der Verschlüsselung entpacken Sie die ZIP-Datei bitte mit einem geeigneten Programm wie <a href="http://www.7-zip.de/">7-zip</a> oder <a href="http://www.winzip.de/">WinZip</a>. Ihr Passwort lautet:
+    </p>
+    <p>
+        {{PasswortZipDatei}}
+    </p>
+    <p>
+        Extrahieren Sie die ZIP-Datei und speichern Sie die Digitalisate ab. Um sich einen Überblick über die digitalisierten Unterlagen zu verschaffen, öffnen Sie die Datei index.html in Ihrem Browser.
+    </p>
+    <p>
+        <span style="color:red">Nur wenn in Schutzfrist:</span> Geschützte Unterlagen dürfen nicht unverschlüsselt gespeichert bzw. ungesichert aufbewahrt werden. Sie sind nach dem Download für die sichere Aufbewahrung der Daten verantwortlich. Sie dürfen die Unterlagen ohne entsprechende Bewilligung nicht anderen Personen weitergegeben oder sie ihnen zeigen.
+    </p>
+    <p>
+        Bei Fragen zur Bestellung wenden Sie sich bitte an die <a href="https://{{Global.PublicClientUrl}}">Beratung</a> oder per E-Mail an <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+    </p>
+    <p>
+        Mit freundlichen Grüssen
+    </p>
+    <p>
+        <span style="color:red">[E-Mail-Signatur zuständige/r Sachbearbeiter/in]</span>
+    </p>
+    <p>
+        <span style="color:red">Monsieur / Madame</span> {{Bestellung.Besteller.Name}}
+    </p>
+    <p>
+        Votre commande du {{Bestellung.Erfassungsdatum}} nous est bien parvenue et nous vous en remercions. Les documents suivants sont prêts au format numérique :
+    </p>
+	
+	{{#Aufträge}}
+    <p>
+        <table>
+            <tr>
+                <th>Fonds (partiel), versement/cote</th>
+                <th>Numéro de volume ou de dossier</th>
+                <th>Réf.</th>
+                <th>Titre du dossier</th>
+                <th>Période</th>
+            </tr>
+            <tr>
+                <td>{{BestellteVe.TeilBestand}},<br>{{BestellteVe.Ablieferung}} / {{BestellteVe.Signatur}}</td>
+                <td>{{BestellteVe.BehältnisCodesText}} /<br>{{BestellteVe.Archivnummer}}</td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+        </table>
+    </p>
+    {{/Aufträge}}
+    <p>
+        Veuillez cliquer sur le lien suivant pour télécharger les documents : <span style="color:red">FTP-Link</span>.
+    </p>
+    <p>
+        Les documents sont chiffrés et protégés par un mot de passe. En raison du chiffrage, il faut décompresser le dossier .zip avec un programme ad hoc, par exemple <a href="http://www.spiroo.be/7zip/">7-zip</a> ou <a href="http://www.winzip.com/">WinZip</a>. <br />
+		
+    <br /> Votre mot de passe est :
+    </p>
+    <p>
+        {{PasswortZipDatei}}
+    </p>
+    <p>
+        Procédez à l’extraction du dossier compressé (.zip) et enregistrez les reproductions numériques. Vous pouvez obtenir un aperçu de l’ensemble des documents en ouvrant le fichier index.html dans votre navigateur.
+    </p>
+    <p>
+        <span style="color:red">Nur wenn in Schutzfrist:</span> Il n’est pas permis d’enregistrer des documents protégés non chiffrés ou de les conserver sans res-pecter les impératifs de sécurité. Après le téléchargement, il est de votre responsabilité de sauve-garder les données en lieu sûr. Par ailleurs, sans autorisation correspondante, vous ne pouvez pas transmettre ou montrer les documents à des tiers.
+    </p>
+    <p>
+        Pour tout renseignement sur la commande, veuillez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">conseil</a> ou par e-mail à <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+    </p>
+    <p>
+        Meilleures salutations,
+    </p>
+    <p>
+        <span style="color:red">[E-Mail-Signatur zuständige/r Sachbearbeiter/in]</span>
+    </p>
+	
+    <p>
+        <span style="color:red">Egregio signor / Gentila signora</span> {{Bestellung.Besteller.Name}}
+    </p>
+    <p>
+        abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}. I seguenti documenti sono disponibili in forma digitale:
+    </p>
+	
+	{{#Aufträge}}
+    <p>
+        <table>
+            <tr>
+                <th>(Sub-)fondo, versamento/segnatura</th>
+                <th>Contenitore /<br>n. d’archivio</th>
+                <th>Pos.</th>
+                <th>Titolo del dossier</th>
+                <th>Periodo</th>
+            </tr>
+            <tr>
+                <td>{{BestellteVe.TeilBestand}},<br>{{BestellteVe.Ablieferung}} / {{BestellteVe.Signatur}}</td>
+                <td>{{BestellteVe.BehältnisCodesText}} /<br>{{BestellteVe.Archivnummer}}</td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+        </table>
+    </p>
+    {{/Aufträge}}
+    <p>
+        Per scaricare i documenti, cliccare sul link seguente: <span style="color:red">FTP-Link</span>.
+    </p>
+    <p>
+        I documenti sono crittografati e protetti da password. Dato che i documenti sono crittografati, per aprire il file ZIP occorre utilizzare un apposito programma (p. es. <a href="http://www.7-zip.org/">7-zip</a> o <a href="http://www.winzip.com/">WinZip</a>). La password per il download è la seguente:
+    </p>
+    <p>
+        {{PasswortZipDatei}}
+    </p>
+    <p>
+        Estragga i documenti dal file ZIP e li salvi. Per avere una panoramica dei documenti digitalizzati apra il file «index.htlm» nel Suo browser.
+    </p>
+    <p>
+        <span style="color:red">Nur wenn in Schutzfrist:</span> I documenti soggetti a un termine di protezione devono imperativamente essere salvati in forma crittografata e conservati in modo sicuro. L’utente è responsabile della loro conservazione sicura dopo il download. I documenti non possono essere trasmessi o mostrati a terzi senza una corrispondente autorizzazione.
+    </p>
+    <p>
+        Per qualsiasi informazione ulteriore può rivolgersi al servizio di  <a href="https://{{Global.PublicClientUrl}}">consulenza</a> oppure contattare per mail l’Archivio federale all’indirizzo <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+    </p>
+    <p>
+        Distinti saluti
+    </p>
+    <p>
+        <span style="color:red">[E-Mail-Signatur zuständige/r Sachbearbeiter/in]</span>
+    </p>
+	
+
+    <p>
+        <span style="color:red">Dear Mr / Dear Ms</span> {{Bestellung.Besteller.Name}}
+    </p>
+    <p>
+        Thank you for your order of {{Bestellung.Erfassungsdatum}}. The following documents are ready in digital form:
+    </p>
+	
+	{{#Aufträge}}
+    <p>
+        <table>
+            <tr>
+                <th>(Sub-)fonds, Delivery / Reference code</th>
+                <th>Behältnis /<br>Archivnr.</th>
+                <th>File ref.</th>
+                <th>Dossier title</th>
+                <th>Time period</th>
+            </tr>
+            <tr>
+                <td>{{BestellteVe.TeilBestand}},<br>{{BestellteVe.Ablieferung}} / {{BestellteVe.Signatur}}</td>
+                <td>{{BestellteVe.BehältnisCodesText}} /<br>{{BestellteVe.Archivnummer}}</td>
+                <td>{{BestellteVe.Aktenzeichen}}</td>
+                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.Entstehungszeitraum}}</td>
+            </tr>
+        </table>
+    </p>
+    {{/Aufträge}}
+    <p>
+        Click on the following link to download the data: <span style="color:red">FTP-Link</span>.
+    </p>
+    <p>
+        The data are encrypted and password-protected. Owing to the encryption, please extract the data using a suitable program such as <a href="http://www.7-zip.org/">7-zip</a> or <a href="http://www.winzip.com/">WinZip</a>. Your password is:
+		
+    </p>
+    <p>
+        {{PasswortZipDatei}}
+    </p>
+    <p>
+        Extract the ZIP file and save the digitised material. For an overview of the digitised documents, open the index.html file in your browser.
+    </p>
+    <p>
+        <span style="color:red">Nur wenn in Schutzfrist:</span> Documents that are within a closure period may not be stored without encryption or kept unsecured. You are responsible for storing them securely after downloading them. You may not share the docu-ments with or show them to other people without authorisation.
+    </p>
+    <p>
+        If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">advice service</a> or send an e-mail to <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a>.
+    </p>
+    <p>
+        Yours sincerely
+    </p>
+    <p>
+        <span style="color:red">[E-Mail-Signatur zuständige/r Sachbearbeiter/in]</span>
+    </p>
+</body>
+</html>

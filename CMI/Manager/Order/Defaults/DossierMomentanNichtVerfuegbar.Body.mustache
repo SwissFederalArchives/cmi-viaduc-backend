@@ -1,0 +1,330 @@
+﻿<html>
+<head>
+    <style TYPE="text/css">
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        .editthis {
+            font-size:18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    {{! *** Dieser Abschnitt wird eingefügt, damit der Freigabemanager Informationen zum Endanwender im Mail erhält. }}
+    <div id="weiterleitung">
+        <span class="editthis">✎</span>
+        <br />
+        Name: {{Besteller.Name}}
+        <br />
+        Vorname: {{Besteller.Vorname}}
+        <br />
+        EMail: {{Besteller.EmailAddress}}
+        <br />
+        Sprache: {{Besteller.Sprache}}
+        <br />
+        Auftrag: <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+    </div>
+
+    {{#Sprachen}}
+    {{#IstDeutsch}}
+    <div id="deutsch">
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Vielen Dank für Ihre Bestellung vom {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+            Die folgenden Unterlagen sind derzeit leider nicht verfügbar:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Signatur</th>
+                    <th>Aktenzeichen</th>
+                    <th>Dossiertitel</th>
+                    <th>Zeitraum</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+
+                </tr>
+            </table>
+        </p>
+        <p>
+            <span style="color:red">Erklärung [Wird vom Bestell-Manager individuell erfasst: Muss Nutzer erneut bestellen? Wann? etc.]</span><br />
+        </p>
+        <p>
+            Für die Umstände entschuldigen wir uns. Bei Fragen zur Bestellung wenden Sie sich bitte an die
+            <a href="https://{{Global.PublicClientUrl}}">Beratung</a>
+            oder antworten Sie auf diese E-Mail.
+        </p>
+        <p>
+            Mit freundlichen Grüssen
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Eidgenössisches Departement des Innern EDI<br />
+            Schweizerisches Bundesarchiv BAR<br />
+            Archivstrasse 24, CH-3003 Bern<br />
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Folgen Sie dem Bundesarchiv: <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+
+    </div>
+    {{/IstDeutsch}}
+
+    {{#IstFranzösisch}}
+    <div id="franzoesisch">
+        <p>
+            Bonjour,
+        </p>
+        <p>
+            Votre commande du  {{Bestellung.Erfassungsdatum}} nous est bien parvenue et nous vous en remercions.
+        </p>
+
+        <p>
+            Les documents suivants ne sont malheureusement pas disponibles pour l’instant :
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Cote</th>
+                    <th>Référence</th>
+                    <th>Titre du dossier</th>
+                    <th>Période</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <span style="color:red">Erklärung [Wird vom Bestell-Manager individuell erfasst: Muss Nutzer erneut bestellen? Wann? etc.]</span><br />
+        </p>
+        <p>
+            Nous vous prions de nous excuser de ce contretemps. Si vous avez des questions concernant votre commande,
+            vous pouvez vous adresser à notre service de
+            <a href="https://{{Global.PublicClientUrl}}">conseil</a>
+            ou répondre à cet e-mail.
+        </p>
+        <p>
+            Meilleures salutations,
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Département fédéral de l’intérieur DFI <br />
+            Archives fédérales suisses AFS <br />
+            Archivstrasse 24, CH-3003 Berne <br />
+
+
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Suivez les Archives fédérales:
+            <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstFranzösisch}}
+
+    {{#IstItalienisch}}
+    <div id="italienisch">
+        <p>
+            Buongiorno,
+        </p>
+        <p>
+            abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+            Al momento i seguenti documenti non sono purtroppo disponibili:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Segnatura</th>
+                    <th>Riferimento</th>
+                    <th>Titolo del dossier</th>
+                    <th>Periodo</th>
+                </tr>
+
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+
+            </table>
+        </p>
+        <p>
+            <span style="color:red">Erklärung [Wird vom Bestell-Manager individuell erfasst: Muss Nutzer erneut bestellen? Wann? etc.]</span><br />
+        </p>
+        <p>
+            Ci scusiamo per l’inconveniente. Per qualsiasi informazione ulteriore può rivolgersi al servizio di
+            <a href="https://{{Global.PublicClientUrl}}">consulenza</a>
+            oppure rispondere alla presente mail.
+        </p>
+        <p>
+            Distinti saluti
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Dipartimento federale dell’interno DFI <br />
+            Archivio federale svizzero AFS <br />
+            Archivstrasse 24, CH-3003 Berna <br />
+
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Seguite l’Archivio federale:
+            <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstItalienisch}}
+
+    {{#IstEnglisch}}
+    <div id="englisch">
+        <p>
+            Hello,
+        </p>
+        <p>
+            Thank you for your order of {{Bestellung.Erfassungsdatum}}.
+        </p>
+
+        <p>
+            Unfortunately the following documents are currently unavailable:
+        </p>
+
+        <p>
+            <table>
+                <tr>
+                    <th>Reference code</th>
+                    <th>File reference</th>
+                    <th>Dossier title</th>
+                    <th>Time period</th>
+                </tr>
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
+                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
+                    <td>{{Auftrag.BestellteVe.Titel}}</td>
+                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            <span style="color:red">Erklärung [Wird vom Bestell-Manager individuell erfasst: Muss Nutzer erneut bestellen? Wann? etc.]</span><br />
+        </p>
+        <p>
+            We apologize for any inconveniences caused. If you have any questions about your order please contact our
+            <a href="https://{{Global.PublicClientUrl}}">advice service</a>
+            or reply to this e-mail.
+        </p>
+        <p>
+            Yours sincerely
+        </p>
+
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+
+        <p>
+            Federal Department of Home Affairs FDHA <br />
+            Swiss Federal Archives SFA <br />
+            Archivstrasse 24, CH-3003 Bern <br />
+
+
+            <a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />
+
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+
+        <p>
+            Follow the Federal Archives:
+            <br />
+
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstEnglisch}}
+    {{/Sprachen}}
+</body>
+</html>

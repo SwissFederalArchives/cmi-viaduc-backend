@@ -1,0 +1,3 @@
+﻿update ApplicationRoleFeature
+	set FeatureId = 'AuftragsuebersichtEinsichtsgesucheDigitalisierungAusloesenAusfuehren'
+	where FeatureId = 'AuftragsuebersichtEinsichtsgesucheDigitalisierungsauftragAusfuehren';
