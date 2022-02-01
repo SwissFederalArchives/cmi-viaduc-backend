@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CMI.Contract.Common;
 
 namespace CMI.Contract.Order
 {
@@ -28,6 +29,7 @@ namespace CMI.Contract.Order
 
         Task<DigipoolEntry[]> GetDigipool(int numberOfEntries);
         Task UpdateDigipool(List<int> orderItemIds, int? digitalisierungsKategorie, DateTime? terminDigitalisierung);
+        Task <List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenReportRecords(LogDataFilter filter);
         Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId);
         Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId);
 
@@ -49,5 +51,6 @@ namespace CMI.Contract.Order
         Task MarkOrderAsFaulted(int orderItemId);
         Task ResetAufbereitungsfehler(List<int> orderItemIds);
         Task<MahnungVersendenResponse> MahnungVersenden(List<int> orderItemIds, string language, int gewaehlteMahnungAnzahl, string userId);
+        Task<ErinnerungVersendenResponse> ErinnerungVersenden(List<int> orderItemIds, string mcUserId);
     }
 }

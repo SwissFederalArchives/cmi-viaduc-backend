@@ -1,4 +1,34 @@
 ﻿<!DOCTYPE HTML>
+<style>
+    .cmi-three-dots {
+        padding: 10px 20px;
+        background-color: #fff;
+        display: flex;
+        width: 100px;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cmi-three-dots span {
+        width: 10px;
+        height: 10px;
+        background: #DC0018;
+        opacity: 0.2;
+    }
+
+    .cmi-three-dots span:nth-child(1) {
+        animation: lightUp 1.5s linear infinite;
+    }
+
+    .cmi-three-dots span:nth-child(2) {
+        animation: lightUp 1.5s linear infinite 0.5s;
+    }
+
+    .cmi-three-dots span:nth-child(3) {
+        animation: lightUp 1.5s linear infinite 1s;
+    }
+</style>
 <html lang="fr">
 <head>
     <meta name="language" content="fr">
@@ -13,10 +43,10 @@
             <div class="container-fluid hidden-xs">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="mod mod-breadcrumb">
+                        <div >
                             <h2 id="br1" class="hidden">Breadcrumb</h2>
                             <ol class="breadcrumb" aria-labelledby="br1">
-                                <li><a href="/fr/" title="Archives fédérales suisses"><i class="glyphicon glyphicon-home"></i></a><span class="icon icon--greater"></span></li>
+                                <li><a href="../" title="Archives fédérales suisses"><i class="glyphicon glyphicon-home"></i></a><span class="icon icon--greater"></span></li>
                                 <li class="active" aria-selected="true" aria-label="current page">Aperçu par thème</li>
                             </ol>
                         </div>
@@ -25,11 +55,18 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12 col-md-12 main-column" id="content" role="main">
-                        <div class="row">
-                            <div class="col-md-12 main-content emb">
+                    <div class="col-sm-12 col-md-12" id="content" role="main">
+                        <div class="row" style="display: none" id="overview">
+                            <div class="col-md-12">
                                 <h1 class="text-inline">Aperçu par thème</h1>
-                                <iframe src="/api/Static/GetFile?url=/tree/tree-FR.html" scrolling="no" style="border: 0; width: 100%; height: 110000px"></iframe>
+                                <!-- ReSharper disable once Html.PathError -->
+                                <iframe onload="document.getElementById('loading').style.display = 'none';document.getElementById('overview').style.display = '';"
+                                        src="/api/Static/GetFile?url=/tree/tree-FR.html" scrolling="no" style="border: 0; width: 100%; height: 110000px"></iframe>
+                            </div>
+                        </div>
+                        <div class="row" id="loading">
+                            <div class="cmi-three-dots">
+                                <span></span><span></span><span></span>
                             </div>
                         </div>
                     </div>

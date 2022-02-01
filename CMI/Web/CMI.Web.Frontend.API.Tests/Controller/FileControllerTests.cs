@@ -329,13 +329,15 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 });
 
             var cacheHelperMock = Mock.Of<ICacheHelper>();
-            var statusClientMock = new Mock<IRequestClient<GetAssetStatusRequest, GetAssetStatusResult>>();
-            statusClientMock.Setup(m => m.Request(It.IsAny<GetAssetStatusRequest>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(() =>
-                    new GetAssetStatusResult
-                    {
-                        Status = AssetDownloadStatus.RequiresPreparation
-                    });
+            var statusClientMock = new Mock<IRequestClient<GetAssetStatusRequest>>();
+            var response = new Mock<Response<GetAssetStatusResult>>();
+            response.Setup(r => r.Message).Returns(new GetAssetStatusResult
+            {
+                Status = AssetDownloadStatus.RequiresPreparation
+            });
+
+            statusClientMock.Setup(m => m.GetResponse<GetAssetStatusResult>(It.IsAny<GetAssetStatusRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .ReturnsAsync(response.Object);
 
             var sut = new FileController(null, statusClientMock.Object, null, null, null, elasticServiceMock, null, null, null, cacheHelperMock, null,
                 null, null, null);
@@ -383,8 +385,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 });
 
             var cacheHelperMock = Mock.Of<ICacheHelper>();
-            var statusClientMock = new Mock<IRequestClient<GetAssetStatusRequest, GetAssetStatusResult>>();
-            statusClientMock.Setup(m => m.Request(It.IsAny<GetAssetStatusRequest>(), It.IsAny<CancellationToken>()))
+
+            var statusClientMock = new Mock<IRequestClient<GetAssetStatusRequest>>();
+            statusClientMock.Setup(m => m.GetResponse<GetAssetStatusResult>(It.IsAny<GetAssetStatusRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
                 .Throws(new Exception("Error in StatusClient"));
 
             var sut = new FileController(null, statusClientMock.Object, null, null, null, elasticServiceMock, null, null, null, cacheHelperMock, null,
@@ -531,14 +534,16 @@ namespace CMI.Web.Frontend.API.Tests.Controller
 
 
             var cacheHelperMock = Mock.Of<ICacheHelper>();
-            var prepareClientMock = new Mock<IRequestClient<PrepareAssetRequest, PrepareAssetResult>>();
-            prepareClientMock.Setup(m => m.Request(It.IsAny<PrepareAssetRequest>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(() =>
-                    new PrepareAssetResult
-                    {
-                        Status = AssetDownloadStatus.InPreparationQueue,
-                        InQueueSince = DateTime.Now
-                    });
+            var prepareClientMock = new Mock<IRequestClient<PrepareAssetRequest>>();
+            var response = new Mock<Response<PrepareAssetResult>>();
+            response.Setup(r => r.Message).Returns(new PrepareAssetResult
+            {
+                Status = AssetDownloadStatus.InPreparationQueue,
+                InQueueSince = DateTime.Now
+            });
+
+            prepareClientMock.Setup(m => m.GetResponse<PrepareAssetResult>(It.IsAny<PrepareAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .ReturnsAsync(response.Object);
 
             var sut = new FileController(null, null, prepareClientMock.Object, null, null, elasticServiceMock, null, null, null, cacheHelperMock,
                 null, null, null, null);
@@ -586,8 +591,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 });
 
             var cacheHelperMock = Mock.Of<ICacheHelper>();
-            var prepareClientMock = new Mock<IRequestClient<PrepareAssetRequest, PrepareAssetResult>>();
-            prepareClientMock.Setup(m => m.Request(It.IsAny<PrepareAssetRequest>(), It.IsAny<CancellationToken>()))
+            var prepareClientMock = new Mock<IRequestClient<PrepareAssetRequest>>();
+            prepareClientMock.Setup(m => m.GetResponse<PrepareAssetResult>(It.IsAny<PrepareAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
                 .Throws(new Exception("Error in PrepareClient"));
 
             var sut = new FileController(null, null, prepareClientMock.Object, null, null, elasticServiceMock, null, null, null, cacheHelperMock,
@@ -854,8 +859,12 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 });
 
             var userDataAccessMock = new Mock<IUserDataAccess>();
-            var downloadClientMock = Mock.Of<IRequestClient<DownloadAssetRequest, DownloadAssetResult>>(setup =>
-                setup.Request(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>()) == Task.FromResult(new DownloadAssetResult()));
+            var response = new Mock<Response<DownloadAssetResult>>();
+            response.Setup(r => r.Message).Returns(new DownloadAssetResult());
+
+
+            var downloadClientMock = Mock.Of<IRequestClient<DownloadAssetRequest>>(setup =>
+                setup.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(response.Object));
             var cacheHelperMock = Mock.Of<ICacheHelper>(setup => setup.GetStreamFromCache(It.IsAny<string>()) == Stream.Null);
             var kontrollstellenInformer = new Mock<IKontrollstellenInformer>();
 
@@ -925,8 +934,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var kontrollstellenInformerMock = new Mock<IKontrollstellenInformer>();
 
             var userDataAccessMock = new Mock<IUserDataAccess>();
-            var downloadClientMock = new Mock<IRequestClient<DownloadAssetRequest, DownloadAssetResult>>();
-            downloadClientMock.Setup(m => m.Request(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>()))
+            var downloadClientMock = new Mock<IRequestClient<DownloadAssetRequest>>();
+            downloadClientMock.Setup(m => m.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
                 .Throws(new Exception("Error in downloadClient"));
 
             var cacheHelperMock = Mock.Of<ICacheHelper>(setup => setup.GetStreamFromCache(It.IsAny<string>()) == Stream.Null);

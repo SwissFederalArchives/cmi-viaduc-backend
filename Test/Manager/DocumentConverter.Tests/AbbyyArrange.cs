@@ -18,12 +18,16 @@ namespace CMI.Manager.DocumentConverter.Tests
             var document = new Mock<FRDocument>();
             document.Setup(s => s.Process(It.IsAny<DocumentProcessingParams>()));
             document.SetupGet(s => s.Pages.Count).Returns(documentPageCount);
-            document.Setup(s => s.Pages[0].IsEmpty(null, null, false)).Returns(pageIsEmpty);
+            document.Setup(s => s.Pages[0].IsEmpty(null, null, null)).Returns(pageIsEmpty);
             document.Setup(s => s.Export(It.IsAny<string>(), FileExportFormatEnum.FEF_TextUnicodeDefaults, null));
             document.Setup(s => s.Close());
+            document.Object.OnPageProcessed += (sender, index, stage) => { };
+            document.Object.OnProgress += (FRDocument sender, int percentage, ref bool cancel) => { };
+            document.Object.OnWarning += (FRDocument sender, int index, string warning, ref bool cancel) => { };
             var engine = new Mock<IEngine>();
             engine.SetupGet(s => s.CurrentLicense).Returns(license);
             engine.Setup(s => s.LoadPredefinedProfile(It.IsAny<string>()));
+            engine.Setup(s => s.LoadProfile(It.IsAny<string>()));
             engine.Setup(s => s.CreateFRDocumentFromImage(It.IsAny<string>(), null)).Returns(document.Object);
             var p = new Mock<DocumentProcessingParams>();
             p.Setup(s => s.PageProcessingParams.RecognizerParams.SetPredefinedTextLanguage(It.IsAny<string>()));

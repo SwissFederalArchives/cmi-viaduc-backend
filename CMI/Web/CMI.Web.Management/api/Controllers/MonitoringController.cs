@@ -79,8 +79,7 @@ namespace CMI.Web.Management.api.Controllers
                 // Send heartbeat request async to every service
                 foreach (var serviceName in Enum.GetNames(typeof(MonitoredServices)).Where(n => n != MonitoredServices.NotMonitored.ToString()))
                 {
-                    var requiresDifferentResponseAddress = IsOtherZoneService(serviceName);
-                    var t = GetHeartbeatFromService(bus, serviceName, requiresDifferentResponseAddress);
+                    var t = GetHeartbeatFromService(bus, serviceName);
                     tasks.Add(t);
                 }
 
@@ -100,26 +99,18 @@ namespace CMI.Web.Management.api.Controllers
         /// <param name="monitoringBus">The message bus.</param>
         /// <param name="serviceName">Name of the service.</param>
         /// <returns>HeartbeatResponse.</returns>
-        private async Task<MonitoringResult> GetHeartbeatFromService(IBus monitoringBus, string serviceName, bool requiresDifferentResponseAddress)
+        private async Task<MonitoringResult> GetHeartbeatFromService(IBus monitoringBus, string serviceName)
         {
             var stopwatch = new Stopwatch();
             var requestTimeout = TimeSpan.FromSeconds(ServiceHeartbeatRequestTimeout);
-            var timeToLive = TimeSpan.FromSeconds(ServiceRequestTimeToLive);
 
-            // If we need a different respone address, get one, if not, just return an empty method.
-            var callback = requiresDifferentResponseAddress
-                ? BusConfigurator.ChangeResponseAddress
-                : new Action<SendContext<HeartbeatRequest>>(context => { });
-
-            var client = monitoringBus.CreateRequestClient<HeartbeatRequest, HeartbeatResponse>(
+            var client = monitoringBus.CreateRequestClient<HeartbeatRequest>(
                 new Uri(monitoringBus.Address, string.Format(BusConstants.MonitoringServiceHeartbeatRequestQueue, serviceName)),
-                requestTimeout,
-                timeToLive,
-                callback);
+                requestTimeout);
             try
             {
                 stopwatch.Restart();
-                var r = await client.Request(new HeartbeatRequest());
+                var r = (await client.GetResponse<HeartbeatResponse>(new HeartbeatRequest())).Message;
                 stopwatch.Stop();
                 r.HartbeatResponseTime = stopwatch.ElapsedMilliseconds;
                 return new MonitoringResult
@@ -141,31 +132,7 @@ namespace CMI.Web.Management.api.Controllers
                 };
             }
         }
-
-        /// <summary>
-        ///     Determines whether a service belongs to a different network zone than the current service/program
-        /// </summary>
-        /// <param name="serviceName">Name of the service.</param>
-        private bool IsOtherZoneService(string serviceName)
-        {
-            if (Enum.TryParse(serviceName, true, out MonitoredServices result))
-            {
-                switch (result)
-                {
-                    case MonitoredServices.DataFeedService:
-                    case MonitoredServices.ExternalContentService:
-                    case MonitoredServices.RepositoryService:
-                    case MonitoredServices.HarvestService:
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-            return false;
-        }
-
-
+        
         private string CreateHtmlFromMonitoringResult(MonitoringResult[] monitoringResults)
         {
             var html = new StringBuilder();
@@ -204,19 +171,18 @@ namespace CMI.Web.Management.api.Controllers
         private async Task<MonitoringResult[]> RunTasks(IBus monitoringBus)
         {
             var timeout = TimeSpan.FromSeconds(ServiceTestRequestTimeout);
-            var timeToLive = TimeSpan.FromSeconds(ServiceRequestTimeToLive);
             var address = monitoringBus.Address;
 
-            var elasticSearch = monitoringBus.CreateRequestClient<TestElasticsearchRequest, TestElasticsearchResponse>(
-                new Uri(address, BusConstants.MonitoringElasticSearchTestQueue), timeout, timeToLive);
-            var dirTest = monitoringBus.CreateRequestClient<DirCheckRequest, DirCheckResponse>(
-                new Uri(address, BusConstants.MonitoringDirCheckQueue), timeout, timeToLive, BusConfigurator.ChangeResponseAddress);
-            var aisDbTest = monitoringBus.CreateRequestClient<AisDbCheckRequest, AisDbCheckResponse>(
-                new Uri(address, BusConstants.MonitoringAisDbCheckQueue), timeout, timeToLive, BusConfigurator.ChangeResponseAddress);
-            var documentConverterInfo = monitoringBus.CreateRequestClient<DocumentConverterInfoRequest, DocumentConverterInfoResponse>(
-                new Uri(address, BusConstants.MonitoringDocumentConverterInfoQueue), timeout, timeToLive);
-            var abbyyOcrTest = monitoringBus.CreateRequestClient<AbbyyOcrTestRequest, AbbyyOcrTestResponse>(
-                new Uri(address, BusConstants.MonitoringAbbyyOcrTestQueue), timeout, timeToLive);
+            var elasticSearch = monitoringBus.CreateRequestClient<TestElasticsearchRequest>(
+                new Uri(address, BusConstants.MonitoringElasticSearchTestQueue), timeout);
+            var dirTest = monitoringBus.CreateRequestClient<DirCheckRequest>(
+                new Uri(address, BusConstants.MonitoringDirCheckQueue), timeout);
+            var aisDbTest = monitoringBus.CreateRequestClient<AisDbCheckRequest>(
+                new Uri(address, BusConstants.MonitoringAisDbCheckQueue), timeout);
+            var documentConverterInfo = monitoringBus.CreateRequestClient<DocumentConverterInfoRequest>(
+                new Uri(address, BusConstants.MonitoringDocumentConverterInfoQueue), timeout);
+            var abbyyOcrTest = monitoringBus.CreateRequestClient<AbbyyOcrTestRequest>(
+                new Uri(address, BusConstants.MonitoringAbbyyOcrTestQueue), timeout);
 
             var t1 = Task.Run(() => TestDb());
             var t2 = TestRabbitMq();
@@ -231,14 +197,14 @@ namespace CMI.Web.Management.api.Controllers
         }
 
 
-        private async Task<MonitoringResult> TestAisDb(IRequestClient<AisDbCheckRequest, AisDbCheckResponse> requestClient)
+        private async Task<MonitoringResult> TestAisDb(IRequestClient<AisDbCheckRequest> requestClient)
         {
             var watch = new Stopwatch();
             MonitoringResult result;
             try
             {
                 watch.Start();
-                var response = await requestClient.Request(new AisDbCheckRequest());
+                var response = (await requestClient.GetResponse<AisDbCheckResponse>(new AisDbCheckRequest())).Message;
                 watch.Stop();
 
                 result = new MonitoringResult
@@ -308,13 +274,13 @@ namespace CMI.Web.Management.api.Controllers
             return result;
         }
 
-        private async Task<MonitoringResult> TestElasticsearch(IRequestClient<TestElasticsearchRequest, TestElasticsearchResponse> requestClient)
+        private async Task<MonitoringResult> TestElasticsearch(IRequestClient<TestElasticsearchRequest> requestClient)
         {
             MonitoringResult result;
             try
             {
-                var response = await requestClient.Request(new TestElasticsearchRequest());
-                result = response.MonitoringResult;
+                var response = await requestClient.GetResponse<TestElasticsearchResponse>(new TestElasticsearchRequest());
+                result = response.Message.MonitoringResult;
             }
             catch (Exception ex)
             {
@@ -371,7 +337,7 @@ namespace CMI.Web.Management.api.Controllers
             return result;
         }
 
-        private async Task<MonitoringResult> TestDir(IRequestClient<DirCheckRequest, DirCheckResponse> requestClient)
+        private async Task<MonitoringResult> TestDir(IRequestClient<DirCheckRequest> requestClient)
         {
             var result = new MonitoringResult {MonitoredServices = "DIR"};
             var watch = new Stopwatch();
@@ -379,7 +345,7 @@ namespace CMI.Web.Management.api.Controllers
             try
             {
                 watch.Start();
-                var response = await requestClient.Request(new DirCheckRequest());
+                var response = (await requestClient.GetResponse<DirCheckResponse>(new DirCheckRequest())).Message;
                 watch.Stop();
 
                 if (response.Ok)
@@ -406,7 +372,7 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         private async Task<MonitoringResult> TestAbbyyLicence(
-            IRequestClient<DocumentConverterInfoRequest, DocumentConverterInfoResponse> requestClient)
+            IRequestClient<DocumentConverterInfoRequest> requestClient)
         {
             var watch = new Stopwatch();
             MonitoringResult result;
@@ -414,7 +380,7 @@ namespace CMI.Web.Management.api.Controllers
             try
             {
                 watch.Start();
-                var infoResponse = await requestClient.Request(new DocumentConverterInfoRequest());
+                var infoResponse = (await requestClient.GetResponse<DocumentConverterInfoResponse>(new DocumentConverterInfoRequest())).Message;
                 watch.Stop();
 
                 result = new MonitoringResult
@@ -448,14 +414,14 @@ namespace CMI.Web.Management.api.Controllers
             return result;
         }
 
-        private async Task<MonitoringResult> TestAbbyyExecute(IRequestClient<AbbyyOcrTestRequest, AbbyyOcrTestResponse> requestClient)
+        private async Task<MonitoringResult> TestAbbyyExecute(IRequestClient<AbbyyOcrTestRequest> requestClient)
         {
             var watch = new Stopwatch();
             MonitoringResult result;
             try
             {
                 watch.Start();
-                var testResponse = await requestClient.Request(new AbbyyOcrTestRequest());
+                var testResponse = (await requestClient.GetResponse<AbbyyOcrTestResponse>(new AbbyyOcrTestRequest())).Message;
                 watch.Stop();
 
                 result = new MonitoringResult

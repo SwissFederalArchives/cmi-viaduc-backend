@@ -47,21 +47,18 @@ namespace CMI.Manager.Repository.Consumer
                 if (result.Success && result.Valid)
                 {
                     // Forward the downloaded package to the asset manager for transformation
-                    var endpoint = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerTransformAssetMessageQueue));
+                    var endpoint = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerPrepareForTransformation));
 
-                    await endpoint.Send<ITransformAsset>(new TransformAsset
+                    await endpoint.Send(new PrepareForTransformationMessage
                     {
                         AssetType = AssetType.Gebrauchskopie,
-                        ArchiveRecordId = result.PackageDetails.ArchiveRecordId,
-                        FileName = result.PackageDetails.PackageFileName,
                         CallerId = context.Message.CallerId,
                         RetentionCategory = context.Message.RetentionCategory,
                         Recipient = context.Message.Recipient,
-                        DeepLinkToVe = context.Message.DeepLinkToVe,
                         Language = context.Message.Language,
                         ProtectWithPassword = context.Message.RetentionCategory != CacheRetentionCategory.UsageCopyPublic,
-                        PackageId = context.Message.PackageId,
-                        PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId
+                        PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId,
+                        RepositoryPackage = result.PackageDetails
                     });
 
                     // also publish the event, that the package is downloaded

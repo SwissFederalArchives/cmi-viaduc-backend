@@ -37,7 +37,7 @@ namespace CMI.Access.Common
         {
             get
             {
-                Client.Refresh(new RefreshRequest());
+                Client.Indices.Refresh(new RefreshRequest());
                 return Client.Count<ElasticArchiveRecord>().Count;
             }
         }
@@ -64,14 +64,14 @@ namespace CMI.Access.Common
 
         public bool IndexExists(string indexName)
         {
-            var indexes = Client.CatIndices();
-            var aliases = Client.CatAliases();
+            var indexes = Client.Cat.Indices();
+            var aliases = Client.Cat.Aliases();
             return indexes.Records.Any(r => r.Index == indexName) || aliases.Records.Any(r => r.Alias == indexName);
         }
 
         public void DeleteIndex(string indexName)
         {
-            var response = Client.DeleteIndex(indexName);
+            var response = Client.Indices.Delete(indexName);
 
             if (!response.Acknowledged)
             {
@@ -198,7 +198,7 @@ namespace CMI.Access.Common
         public async Task<ElasticTestResponse> GetIndexHealth()
         {
             var isIndexReadOnly = await GetIndexIsReadonly();
-            var catIndexResponse = await Client.CatIndicesAsync(s => s.Index(index));
+            var catIndexResponse = await Client.Cat.IndicesAsync(s => s.Index(index));
 
             var firstPage = catIndexResponse?.Records?.FirstOrDefault();
             return new ElasticTestResponse
@@ -212,13 +212,14 @@ namespace CMI.Access.Common
 
         private async Task<bool> GetIndexIsReadonly()
         {
-            var indexSettingsResponse = await Client.GetIndexSettingsAsync(r => r.Index(index));
+            var indexSettingsResponse = await Client.Indices.GetSettingsAsync(index);
+
             var indexResponse =
                 indexSettingsResponse.Indices?.FirstOrDefault(i => i.Key.Name.StartsWith(index, StringComparison.InvariantCultureIgnoreCase));
-
-            if (indexResponse != null && indexResponse.Value.Value.Settings.ContainsKey("index.blocks.read_only_allow_delete"))
+            
+            if (indexResponse != null && indexResponse.Value.Value.Settings.ContainsKey(UpdatableIndexSettings.BlocksReadOnlyAllowDelete))
             {
-                return bool.Parse(indexResponse.Value.Value.Settings["index.blocks.read_only_allow_delete"].ToString());
+                return bool.Parse(indexResponse.Value.Value.Settings[UpdatableIndexSettings.BlocksReadOnlyAllowDelete].ToString());
             }
 
             return false;

@@ -1,10 +1,9 @@
-﻿using CMI.Access.Harvest;
+﻿using System.Reflection;
+using Autofac;
+using CMI.Access.Harvest;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Harvest;
 using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
-
 namespace CMI.Manager.ExternalContent.Infrastructure
 {
     /// <summary>
@@ -12,27 +11,27 @@ namespace CMI.Manager.ExternalContent.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             // register the different consumers and classes
-            kernel.Bind<IExternalContentManager>().To(typeof(ExternalContentManager));
-            kernel.Bind<IDbDigitizationOrderAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IAISDataProvider>().To(typeof(AISDataProvider));
+            builder.RegisterType<ExternalContentManager>().As<IExternalContentManager>().As<IReportExternalContentManager>();
+            builder.RegisterType<LanguageSettings>().AsSelf();
+            builder.RegisterType<ApplicationSettings>().AsSelf();
+            builder.RegisterType<CachedLookupData>().AsSelf();
+            builder.RegisterType<SipDateBuilder>().AsSelf();
+            builder.RegisterType<DigitizationOrderBuilder>().AsSelf();
+            builder.RegisterType<ArchiveRecordBuilder>().AsSelf();
+            builder.RegisterType<AISDataAccess>().As<IDbExternalContentAccess>();
+            builder.RegisterType<AISDataProvider>().As<IAISDataProvider>();
 
+            // register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
-
-
-            return kernel;
+            return builder;
         }
     }
 }

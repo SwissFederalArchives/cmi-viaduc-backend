@@ -13,7 +13,6 @@ using CMI.Web.Common;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management;
-using CMI.Web.Management.App_Start;
 using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -39,7 +38,6 @@ namespace CMI.Web.Management
             UpgradeDb();
             CleanUpDb();
 
-            BusConfig.Configure(NinjectWebCommon.Kernel);
             AreaRegistration.RegisterAllAreas();
 
             GlobalConfiguration.Configure(cfg =>

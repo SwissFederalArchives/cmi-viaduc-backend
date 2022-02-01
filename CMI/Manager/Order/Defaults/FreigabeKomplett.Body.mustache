@@ -1,6 +1,5 @@
 ﻿<html>
 <head>
-		
     <style TYPE="text/css">
         html,
         body {
@@ -9,7 +8,6 @@
             font-size: 10pt;
             line-height: 13px;
         }
-
         table {
             border-collapse: collapse;
         }
@@ -26,7 +24,6 @@
             font-weight: normal;
             line-height: 12px;
         }
-
         .editthis {
             font-size: 18pt;
             color: red;
@@ -34,9 +31,8 @@
         }
     </style>
 </head>
-
 <body>
-    {{! *** Dieser Abschnitt wird eingefügt, damit der Freigabemanager Informationen zum Endanwender im Mail erhält. }} 
+    {{! *** Dieser Abschnitt wird eingefügt, damit der Freigabemanager Informationen zum Endanwender im Mail erhält. }}
     {{#Weiterleitung}}
     <div id="weiterleitung">
         <span class="editthis">✎</span>
@@ -46,7 +42,7 @@
         <br /> Sprache: {{Besteller.Sprache}}
     </div>
     {{/Weiterleitung}}
-    {{#Sprachen}} 
+    {{#Sprachen}}
     {{#IstDeutsch}}
     <div id="deutsch">
         <p>
@@ -59,9 +55,7 @@
         {{#ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         <div id="ZurueckgewiesenEinsichtsbewilligungNoetig">
             <p>
-                Wir haben festgestellt, dass die folgenden bestellten Unterlagen noch innerhalb einer Schutzfrist gemäss Bundesgesetz über die Archivierung (<a href="https://www.admin.ch/ch/d/sr/c152_1.html">
-                    BGA, SR 152.1
-                </a>) liegen:
+                Wir haben festgestellt, dass die folgenden bestellten Unterlagen noch innerhalb einer Schutzfrist gemäss Bundesgesetz über die Archivierung (<a href="https://www.admin.ch/ch/d/sr/c152_1.html">BGA, SR 152.1</a>) liegen:
             </p>
             <p>
                 <table>
@@ -87,21 +81,15 @@
                 </table>
             </p>
             <p>
-                Für die Einsicht in Unterlagen, die noch einer Schutzfrist unterliegen, benötigen Sie eine Bewilligung. Dazu müssen Sie beim
-                Bundesarchiv ein <a href="https://{{Global.PublicClientUrl}}/#/de/informationen/schutzfristen-und-einsichtsgesuche">Einsichtsgesuch</a>
-                stellen. Nutzen Sie bitte die Funktion
-                <a href="https://{{Global.PublicClientUrl}}/#/de/konto/bestellkorb">«Dossiers manuell zum Bestellkorb hinzufügen» > «Mit Signatur»</a>
-                und füllen Sie anschliessend das Einsichtsgesuch aus.
+                Für die Einsicht in Unterlagen, die noch einer Schutzfrist unterliegen, benötigen Sie eine Bewilligung. Dazu müssen Sie beim Bundesarchiv ein <a href="https://{{Global.PublicClientUrl}}/#/de/informationen/schutzfristen-und-einsichtsgesuche">Einsichtsgesuch</a> stellen. Nutzen Sie bitte die Funktion <a href="https://{{Global.PublicClientUrl}}/#/de/konto/bestellkorb">«Dossiers manuell zum Bestellkorb hinzufügen» > «Mit Signatur»</a> und füllen Sie anschliessend das Einsichtsgesuch aus.
             </p>
             <p>
-                Wir werden das Gesuch dann an die zuständige Stelle weiterleiten. Mit einem Entscheid können Sie in der Regel innerhalb von
-                vier bis sechs Wochen rechnen.
+                Wir werden das Gesuch dann an die zuständige Stelle weiterleiten. Mit einem Entscheid können Sie in der Regel innerhalb von vier bis sechs Wochen rechnen.
             </p>
         </div>
         {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         <div id="ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist">
-												   
             <p>
                 Wir haben festgestellt, dass die folgenden bestellten Unterlagen noch innerhalb einer Schutzfrist gemäss Bundesgesetz über die Archivierung (<a href="https://www.admin.ch/ch/d/sr/c152_1.html">BGA, SR 152.1</a>) liegen:
             </p>
@@ -132,7 +120,7 @@
                 Für die Einsicht in diese Unterlagen benötigen Sie eine Bewilligung. Dazu müssen Sie beim Bundesarchiv ein <a href="https://{{Global.PublicClientUrl}}/#/de/informationen/schutzfristen-und-einsichtsgesuche">Einsichtsgesuch stellen</a>. Legen Sie bitte die gewünschten Dossiers in den <a href="https://{{Global.PublicClientUrl}}/#/de/konto/bestellkorb">Bestellkorb</a> und füllen Sie anschliessend das Einsichtsgesuch aus.
             </p>
             <p>
-                Wir werden das Gesuch dann an die zuständige Stelle zum Entscheid weiterleiten.
+                Wir werden das Gesuch dann an die zuständige Stelle zum Entscheid weiterleiten. Mit einem Entscheid können Sie in der Regel innerhalb von vier bis sechs Wochen rechnen.
             </p>
         </div>
         {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
@@ -163,8 +151,7 @@
                 </table>
             </p>
             <p>
-                Wir können nur jenen Verwaltungsstellen Unterlagen zuschicken, die uns diese abgeliefert haben. Das trifft auf Ihre Bestellung
-                nicht zu.
+                Wir können nur jenen Verwaltungsstellen Unterlagen zuschicken, die uns diese abgeliefert haben. Das trifft auf Ihre Bestellung nicht zu.
             </p>
             <p>
                 Gerne weisen wir Sie auf die Möglichkeit hin, diese Dossiers als Digitalisate oder zur Konsultation in unsere Lesesäle zu <a href="https://{{Global.PublicClientUrl}}">bestellen</a>. Bitte beachten Sie vor einem
@@ -258,10 +245,7 @@
             </p>
             <p>
                 Aufgrund der Auflagen der Einsichtsbewilligung können wir Ihnen das Dossier nicht vollständig zur Verfügung stellen. Wir werden die Unterlagen für Sie vorbereiten und Sie in den nächsten Tagen kontaktieren.
-												
-													
             </p>
-
         </div>
         {{/ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
         {{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
@@ -284,7 +268,7 @@
             </table>
         </p>
         <p>
-            Bitte klicken Sie auf den Link in der Spalte «Signatur», um die Unterlagen herunterzuladen.
+            Bitte klicken Sie auf den Link in der Spalte «Signatur» und wählen Sie auf der Seite die Funktion «Download». Extrahieren Sie die ZIP-Datei und speichern Sie die Digitalisate ab. Um sich einen Überblick über die digitalisierten Unterlagen zu verschaffen, öffnen Sie die Datei index.html in Ihrem Browser.
         </p>
         {{/FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         {{#FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
@@ -314,20 +298,29 @@
             Bei Fragen zur Bestellung wenden Sie sich bitte an die <a href="https://{{Global.PublicClientUrl}}">Beratung</a>
             oder antworten Sie auf diese E-Mail.
         </p>
-        <p> Mit freundlichen Grüssen </p> {{#Weiterleitung}}
-        <p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
+        <p> Mit freundlichen Grüssen </p>
+        {{#Weiterleitung}}<p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
         <p>
             Eidgenössisches Departement des Innern EDI<br /> Schweizerisches Bundesarchiv BAR<br /> Archivstrasse 24, CH-3003
             Bern
-            <br /> {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
-            {{^Weiterleitung}}
-            <a href="mailto:{{From}}">{{From}}</a><br />{{/Weiterleitung}} <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
         </p>
         <p>
-            Folgen Sie dem Bundesarchiv <br /> <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a> – <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
-            – <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+            {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br>{{/Weiterleitung}}
+            {{^Weiterleitung}}<a href="mailto:{{From}}">{{From}}</a><br>{{/Weiterleitung}}
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a>
         </p>
-    </div> 
+        <p>
+            Folgen Sie dem Bundesarchiv
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
     {{/IstDeutsch}}
     {{#IstFranzösisch}}
     <div id="franzoesisch">
@@ -373,18 +366,12 @@
                 </a> et remplir la demande de consultation.
             </p>
             <p>
-                Nous transmettrons ensuite votre demande au service compétent. La décision vous parviendra normalement dans un délai de
-                quatre à six semaines.
+                Nous transmettrons ensuite votre demande au service compétent. La décision vous parviendra normalement dans un délai de quatre à six semaines.
             </p>
-            <p>
-                Si vous avez des questions concernant la demande de consultation, vous pouvez vous adresser à notre
-                <a href="https://{{Global.PublicClientUrl}}">service de conseil en ligne</a> ou répondre à cet e-mail.
-            </p>
-        </div> 
+        </div>
         {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         <div id="ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist">
-						   
             <p>
                 Nous avons constaté que les documents suivants sont encore soumis à un délai de protection en vertu de la loi fédérale sur l’archivage (<a href="https://www.admin.ch/ch/f/sr/c152_1.html">LAr, RS 152.1</a>):
             </p>
@@ -415,10 +402,9 @@
                 Pour consulter ces documents, vous avez besoin d’une autorisation. Vous devez donc <a href="https://{{Global.PublicClientUrl}}/#/fr/informations/commande-et-consultation">soumettre une demande de consultation</a> aux Archives fédérales. Pour ce faire, veuillez déposer les dossiers désirés dans le <a href="https://{{Global.PublicClientUrl}}/#/fr/compte/ordini">panier</a> et remplir la demande de consultation.
             </p>
             <p>
-                Nous transmettrons ensuite votre demande au service compétent afin qu’il prenne la décision requise. 
+                Nous transmettrons ensuite votre demande au service compétent afin qu’il prenne la décision requise. La décision vous parviendra normalement dans un délai de quatre à six semaines.
             </p>
-
-        </div> 
+        </div>
         {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
         <div id="ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligung">
@@ -450,13 +436,13 @@
                 Or, nous ne pouvons transmettre un document au titre de prêt à l’administration qu’au service qui nous l’a versé, ce qui n’est pas le cas en l’occurrence.
             </p>
             <p>
-                Nous vous informons qu’il est possible de <a href="https://{{Global.PublicClientUrl}}/">commander</a> une reproduction numérique de ces dossiers ou d’effectuer une commande en vue de la consultation en salle de lecture. Avant de venir aux Archives fédérales, veuillez consulter nos <a href="https://{{Global.PublicClientUrl}}/#/fr/contact">heures d’ouverture</a> et les <a href="https://{{Global.PublicClientUrl}}/fr/informations/commande-et-consultation">informations générales</a>.
+                Nous vous informons qu’il est cependant possible de <a href="https://{{Global.PublicClientUrl}}/">commander</a> une reproduction numérique de ces dossiers ou d’effectuer une commande en vue de la consultation en salle de lecture. Avant de venir aux Archives fédérales, veuillez consulter nos <a href="https://{{Global.PublicClientUrl}}/#/fr/contact">heures d’ouverture</a> et les <a href="https://{{Global.PublicClientUrl}}/fr/informations/commande-et-consultation">informations générales</a>.
             </p>
             <p>
                 Nous espérons que ces informations vous seront utiles et nous tenons à votre disposition pour tout renseignement complémentaire.
             </p>
-        </div> 
-        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}} 
+        </div>
+        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
         {{#ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         <div id="ZurueckgewiesenFormularbestellungNichtErlaubt">
             <p> Vous avez saisi les données suivantes: </p>
@@ -486,14 +472,7 @@
                 </a>):
             </p>
             <p> <span class="editthis">✎</span> Angabe der Signaturen gemäss AIS </p>
-            <p>
-                Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">
-                    conseil
-                    en ligne
-                </a> ou répondre à cet e-mail.
-            </p>
-
-        </div> 
+        </div>
         {{/ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         {{#ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
         <div id="ZurueckgewiesenDossierangabenUnzureichend">
@@ -519,18 +498,12 @@
                 </table>
             </p>
             <p><span class="editthis">✎</span><span style="color:red"> Erklärung/Präzisierung, wird vom Freigabe-Manager individuell erfasst</span><p>
-            <p>
-                Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">
-                    conseil
-                    en ligne
-                </a> ou répondre à cet e-mail.
-            </p>
-        </div> 
-        {{/ZurueckgewiesenDossierangabenUnzureichendVorhanden}} 
+        </div>
+        {{/ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
         {{#ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
         <div id="ZurueckgewiesenTeilbewilligungVorhanden">
             <p>
-                Vous avez commandé les documents suivants, pour lesquels vous avez obtenu une autorisation de consultation partielle le Datum:
+                Vous avez commandé les documents suivants:
             </p>
             <p>
                 <table>
@@ -554,17 +527,15 @@
                         <td>{{BestellteVe.Entstehungszeitraum}}</td>
                         <td>{{Bewilligungsdatum}}</td>
                     </tr> {{/ZurueckgewiesenTeilbewilligungVorhanden}}
-					
                 </table>
             </p>
             <p>
                 Sur la base des conditions liées à cette autorisation, nous ne pouvons pas mettre l’intégralité du dossier à votre disposition.
                 Nous allons préparer les documents et vous contacterons ces prochains jours.
             </p>
-
-        </div> 
+        </div>
         {{/ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
-{{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
+        {{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         <p>
             <table>
                 <tr>
@@ -584,13 +555,12 @@
             </table>
         </p>
         <p>
-            Veuillez cliquer sur le lien dans la colonne « Cote » pour télécharger les documents.
+            Veuillez cliquer sur le lien dans la colonne « Cote » puis sélectionner la fonction « Télécharger ». Procédez à l’extraction du dossier compressé (.zip) et enregistrez les reproductions numériques. Vous pouvez obtenir un aperçu de l’ensemble des documents en ouvrant le fichier index.html dans votre navigateur.
         </p>
         {{/FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         {{#FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
         <p>
-	
-			Les documents suivants sont encore soumis à un délai de protection en vertu de la loi fédérale sur l’archivage (<a href="https://www.admin.ch/ch/f/sr/c152_1.html">LAr, RS 152.1</a>). Pour pouvoir télécharger les reproductions numériques, vous devez d’abord vous identifier, une procédure que vous pouvez effectuer à partir de votre <a href="https://{{Global.PublicClientUrl}}/#/fr/compte">compte d’utilisateur</a>.
+            Les documents suivants sont encore soumis à un délai de protection en vertu de la loi fédérale sur l’archivage (<a href="https://www.admin.ch/ch/f/sr/c152_1.html">LAr, RS 152.1</a>). Pour pouvoir télécharger les reproductions numériques, vous devez d’abord vous identifier, une procédure que vous pouvez effectuer à partir de votre <a href="https://{{Global.PublicClientUrl}}/#/fr/compte">compte d’utilisateur</a>.
         </p>
         <p>
             <table>
@@ -610,36 +580,44 @@
                 {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2}}
             </table>
         </p>
-        {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}		
+        {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
         <p>
-                Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}">conseil en ligne</a> ou répondre à cet e-mail.
+            Si vous avez des questions concernant votre commande, vous pouvez vous adresser à notre service de <a href="https://{{Global.PublicClientUrl}}/">conseil en ligne</a> ou répondre à cet e-mail.
         </p>
-		
-        <p> Meilleures salutations, </p> {{#Weiterleitung}}
-        <p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
+        <p> Meilleures salutations, </p>
+        {{#Weiterleitung}}<p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
         <p>
-            Département fédéral de l’intérieur DFI<br /> Archives fédérales suisses AFS<br /> Archivstrasse 24, CH-3003 Berne<br /> {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
+            Département fédéral de l’intérieur DFI<br /> Archives fédérales suisses AFS<br /> Archivstrasse 24, CH-3003 Berne
+        </p>
+        <p>
+            {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
             {{^Weiterleitung}}
             <a href="mailto:{{From}}">{{From}}</a><br />{{/Weiterleitung}} <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
         </p>
         <p>
-            Suivez les Archives fédérales <br /> <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a> – <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
-            – <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+            Suivez les Archives fédérales
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
         </p>
-    </div> 
+    </div>
     {{/IstFranzösisch}}
     {{#IstItalienisch}}
     <div id="italienisch">
         <p>
-            {{#Weiterleitung}} Gentile signora {{Besteller.Name}} <span class="editthis">✎</span> Egregio Signor {{Besteller.Name}}
+            {{#Weiterleitung}} Gentile Signora {{Besteller.Name}} <span class="editthis">✎</span> Egregio Signor {{Besteller.Name}}
             {{/Weiterleitung}} {{^Weiterleitung}} Buongiorno, {{/Weiterleitung}}
         </p>
-        <p> abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}. </p> 
+        <p> abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}. </p>
         {{#ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         <div id="ZurueckgewiesenEinsichtsbewilligungNoetig">
             <p>
-                A quanto abbiamo potuto constatare, i seguenti documenti sono ancora soggetti a un termine di protezione secondo la legge
-                federale sull’archiviazione (<a href="https://www.admin.ch/ch/i/sr/c152_1.html">LAr; RS 152.1</a>):
+                A quanto abbiamo potuto constatare, i seguenti documenti sono ancora soggetti a un termine di protezione secondo la legge federale sull’archiviazione (<a href="https://www.admin.ch/ch/i/sr/c152_1.html">LAr; RS 152.1</a>):
             </p>
             <p>
                 <table>
@@ -658,7 +636,6 @@
                             <a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a>
                             {{/BestellteVe.IstFormularbestellung}}
                         </td>
-
                         <td>{{BestellteVe.Aktenzeichen}}</td>
                         <td>{{BestellteVe.Titel}}</td>
                         <td>{{BestellteVe.Entstehungszeitraum}}</td>
@@ -673,14 +650,8 @@
             <p>
                 La domanda sarà trasmessa al servizio competente, che la esaminerà. Di norma la procedura richiede da quattro a sei settimane.
             </p>
-            <p>
-                Per qualsiasi ulteriore informazione può rivolgersi al servizio di consulenza on-line <a href="https://{{Global.PublicClientUrl}}">
-                    consulenza
-                    on-line
-                </a> oppure rispondere alla presente mail.
-            </p>
         </div>
-        {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}} 
+        {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         <div id="ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist">
             <p>
@@ -710,9 +681,8 @@
                 </table>
             </p>
             <p>
-                Per consultarli Le serve un’autorizzazione che può ottenere presentando una <a href="https://{{Global.PublicClientUrl}}/#/it/informazioni/termini-di-protezione-e-domande-di-consultazione">domanda di consultazione</a> all’Archivio federale. Aggiunga i dossier desiderati al <a href="https://{{Global.PublicClientUrl}}/#/it/conto/carrello">carrello</a> e compili in seguito la domanda di consultazione, che provvederemo a inoltrare al servizio competente per decisione.
+                Per consultarli Le serve un’autorizzazione che può ottenere presentando una <a href="https://{{Global.PublicClientUrl}}/#/it/informazioni/termini-di-protezione-e-domande-di-consultazione">domanda di consultazione</a> all’Archivio federale. Aggiunga i dossier desiderati al <a href="https://{{Global.PublicClientUrl}}/#/it/conto/carrello">carrello</a> e compili in seguito la domanda di consultazione, che provvederemo a inoltrare al servizio competente per la decisione. Di norma la procedura richiede da quattro a sei settimane.
             </p>
- 
         </div>
         {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
@@ -748,13 +718,13 @@
             </p>
             <p>
                 Desideriamo tuttavia segnalarle che ha la possibilità di <a href="https://{{Global.PublicClientUrl}}">ordinarli</a> per scaricarli on-line in forma digitalizzata oppure per consultarli nelle nostre sale di lettura. Prima della visita, La
-                invitiamo a informarsi sui i nostri <a href="https://{{Global.PublicClientUrl}}/#/it/contatto">orari d’apertura</a>e a leggere le <a href="https://{{Global.PublicClientUrl}}/#/it/informazioni/ordinazione-e-consultazione">informazioni generali</a>.
+                invitiamo a informarsi sui i nostri <a href="https://{{Global.PublicClientUrl}}/#/it/contatto">orari d’apertura</a> e a leggere le <a href="https://{{Global.PublicClientUrl}}/#/it/informazioni/ordinazione-e-consultazione">informazioni generali</a>.
             </p>
             <p>
                 Nella speranza che queste informazioni Le siano utili, restiamo a disposizione per qualsiasi ulteriore ragguaglio.
             </p>
-        </div> 
-        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}} 
+        </div>
+        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
         {{#ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         <div id="ZurueckgewiesenFormularbestellungNichtErlaubt">
             <p> L’ordinazione contiene le seguenti indicazioni: </p>
@@ -781,12 +751,8 @@
                 La invitiamo quindi a effettuare una nuova ordinazione (utilizzando la funzione <a href="https://{{Global.PublicClientUrl}}/#/it/conto/carrello">«Inserisci manualmente i dossier nel carrello» > «Con segnatura»</a>):
             </p>
             <p> <span class="editthis">✎</span> Angabe der Signaturen gemäss AIS </p>
-            <p>
-                Per qualsiasi ulteriore informazione può rivolgersi al servizio di <a href="https://{{Global.PublicClientUrl}}">
-                    consulenza on-line</a> oppure rispondere alla presente mail.
-            </p>
         </div>
-        {{/ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}} 
+        {{/ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         {{#ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
         <div id="ZurueckgewiesenDossierangabenUnzureichend">
             <p>
@@ -811,15 +777,10 @@
                 </table>
             </p>
             <p><span class="editthis">✎</span><span style="color:red"> Erklärung/Präzisierung, wird vom Freigabe-Manager individuell erfasst</span><p>
-            <p>
-                Per qualsiasi ulteriore informazione può rivolgersi al servizio di <a href="https://{{Global.PublicClientUrl}}">
-                    consulenza on-line</a> oppure rispondere alla presente mail.
-            </p>
-        </div> 
+        </div>
         {{/ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
         {{#ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
         <div id="ZurueckgewiesenTeilbewilligungVorhanden">
-            <p> Il data Le è stata accordata l’autorizzazione a consultare i seguenti documenti: </p>
             <p>
                 <table>
                     <tr>
@@ -846,10 +807,9 @@
             <p>
                 A causa degli oneri cui l’autorizzazione è subordinata non possiamo metterle a disposizione l’intero dossier. Provvederemo a preparare i documenti consultabili e La contatteremo nei prossimi giorni.
             </p>
-
-        </div> 
+        </div>
         {{/ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
-{{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
+        {{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         <p>
             <table>
                 <tr>
@@ -869,7 +829,7 @@
             </table>
         </p>
         <p>
-            Per scaricare i documenti, cliccare sul link nella colonna «Segnatura».
+            Per scaricare i documenti, clicchi sul link nella colonna «Segnatura». Deve selezionare la funzione «Download» nella pagina visualizzata. Estragga i documenti dal file ZIP e li salvi. Per avere una panoramica dei documenti digitalizzati, apra il file «index.htlm» nel Suo browser.
         </p>
         {{/FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         {{#FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
@@ -895,23 +855,31 @@
             </table>
         </p>
         {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
-
         <p>
-                Per qualsiasi ulteriore informazione può rivolgersi al servizio di <a href="https://{{Global.PublicClientUrl}}">
-                    consulenza on-line</a> oppure rispondere alla presente mail.
+            Per qualsiasi ulteriore informazione può rivolgersi al servizio di <a href="https://{{Global.PublicClientUrl}}">
+                consulenza on-line
+            </a> oppure rispondere alla presente mail.
         </p>
-		
-        <p> Distinti saluti </p> {{#Weiterleitung}}
-        <p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
+        <p> Distinti saluti </p>
+        {{#Weiterleitung}}<p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
         <p>
-            Dipartimento federale dell’interno DFI<br /> Archivio federale svizzero AFS<br /> Archivstrasse 24, CH-3003 Berna<br /> {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
-            {{^Weiterleitung}}
-            <a href="mailto:{{From}}">{{From}}</a><br />{{/Weiterleitung}} <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+            Dipartimento federale dell’interno DFI<br /> Archivio federale svizzero AFS<br /> Archivstrasse 24, CH-3003 Berna
+        </p>
+        <p>
+            {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
+            {{^Weiterleitung}}<a href="mailto:{{From}}">{{From}}</a><br />{{/Weiterleitung}}
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
         </p>
         <p>
             Seguite l’Archivio federale:
-            <br /> <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a> – <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
-            – <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
         </p>
     </div>
     {{/IstItalienisch}}
@@ -921,7 +889,7 @@
             {{#Weiterleitung}} Dear Ms {{Besteller.Name}} <span class="editthis">✎</span> / Dear Mr {{Besteller.Name}} {{/Weiterleitung}}
             {{^Weiterleitung}} Hello {{/Weiterleitung}}
         </p>
-        <p> Thank you for your order of {{Bestellung.Erfassungsdatum}}. </p> 
+        <p> Thank you for your order of {{Bestellung.Erfassungsdatum}}. </p>
         {{#ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         <p>
             We have established that the following documents from your order are still within a closure period under the Federal Act on Archiving (<a href="https://www.admin.ch/ch/e/rs/c152_1.html">ArchA, SR 152.1</a>):
@@ -953,18 +921,13 @@
             To consult records that are still subject to a closure period you require authorisation, which you must apply for by submitting
             a <a href="https://{{Global.PublicClientUrl}}/#/en/information/closure-periods-and-requests-to-consult-records">
                 consultation request
-            </a>. Please use the function <a href="https://{{Global.PublicClientUrl}}/#/en/account/cart">“Add dossiers to the shopping cart manually” > “With reference code”</a> and then complete the request to consult
-            records.
+            </a>. Please use the function <a href="https://{{Global.PublicClientUrl}}/#/en/account/cart">“Add dossiers to the shopping cart manually” > “With reference code”</a> and then complete the request to consult records.
         </p>
         <p>
             We will forward your request to the administrative office responsible. You will normally receive a decision within four
             to six weeks.
         </p>
-        <p>
-            If you have any questions about your request please contact our <a href="https://{{Global.PublicClientUrl}}">
-                online advice service</a> or reply to this e-mail.
-        </p> 
-        {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}} 
+        {{/ZurueckgewiesenEinsichtsbewilligungNoetigVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         <p> We have established that the following documents from your order are still within a closure period under the Federal Act on Archiving (<a href="https://www.admin.ch/ch/e/rs/c152_1.html">ArchA, SR 152.1</a>): </p>
         <p>
@@ -991,12 +954,12 @@
             </table>
         </p>
         <p>
-            To consult these documents you require authorisation, which you must apply for by <a href="https://{{Global.PublicClientUrl}}/#/en/information/closure-periods-and-requests-to-consult-records">submitting a consultation request</a> to the Federal Archives. Add the desired dossiers to your <a href="https://{{Global.PublicClientUrl}}/#/en/account/cart">shopping cart</a> and then complete the consultation request. 
+            To consult these documents you require authorisation, which you must apply for by <a href="https://{{Global.PublicClientUrl}}/#/en/information/closure-periods-and-requests-to-consult-records">submitting a consultation request</a> to the Federal Archives. Add the desired dossiers to your <a href="https://{{Global.PublicClientUrl}}/#/en/account/cart">shopping cart</a> and then complete the consultation request.
         </p>
         <p>
-            We will forward your request to the office responsible for a decision.
+            We will forward your request to the office responsible for a decision. You will normally receive a decision within four
+            to six weeks.
         </p>
-
         {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfristVorhanden}}
         {{#ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
         <p> We have established that you have ordered documents which are not assigned to your administrative office: </p>
@@ -1030,7 +993,7 @@
             You have the option to <a href="https://{{Global.PublicClientUrl}}">order</a> these dossiers as digitised versions or for consultation in our reading rooms. Before visiting the Federal Archives, please note our <a href="https://{{Global.PublicClientUrl}}/#/en/contact">opening hours </a> and the <a href="https://{{Global.PublicClientUrl}}/en/information/ordering-and-consulting">general information</a>.
         </p>
         <p>We hope this information is of assistance to you, and will be pleased to answer any questions you may have. </p>
-        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}} 
+        {{/ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligungVorhanden}}
         {{#ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         <p>In your order you listed the following data: </p>
         <p>
@@ -1056,12 +1019,7 @@
             and would ask you to order the dossiers again (select the function <a href="https://{{Global.PublicClientUrl}}/#/en/account/cart">“Add dossiers to the shopping cart manually” > “With reference code”</a>):
         </p>
         <p> <span class="editthis">✎</span> Angabe der Signaturen gemäss AIS </p>
-        <p>
-            If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">
-                online advice service
-            </a> or reply to this e-mail.
-        </p> 
-        {{/ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}} 
+        {{/ZurueckgewiesenFormularbestellungNichtErlaubtVorhanden}}
         {{#ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
         <p> Unfortunately we cannot supply the following documents because the information is incorrect or incomplete: </p>
         <p>
@@ -1083,11 +1041,8 @@
             </table>
         </p>
         <p><span class="editthis">✎</span><span style="color:red"> Erklärung/Präzisierung, wird vom Freigabe-Manager individuell erfasst</span><p>
-        <p>
-            If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">online advice service</a> or reply to this e-mail.
-        </p> 
-        {{/ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
-        {{#ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
+            {{/ZurueckgewiesenDossierangabenUnzureichendVorhanden}}
+            {{#ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
         <p> You have ordered the following documents: </p>
         <p>
             <table>
@@ -1116,9 +1071,8 @@
             Owing to the conditions applying to the authorisation we cannot make the dossier available to you in full. We will prepare
             the documents for you and contact you in the next few days.
         </p>
-
         {{/ZurueckgewiesenTeilbewilligungVorhandenVorhanden}}
-{{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
+        {{#FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         <p>
             <table>
                 <tr>
@@ -1138,9 +1092,59 @@
             </table>
         </p>
         <p>
-            Please click on the link in the “Reference code” column to download the documents.
+            Please click on the link in the “Reference code” column and select “Download” on the page. Extract the ZIP file and save the digitised materials. For an overview of the digitised documents, open the index.html file in your browser.
         </p>
         {{/FreigegebenDigitaleVe_FreigegebenAusserhalbSchutzfristOderNichtÖ2Vorhanden}}
         {{#FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
         <p>
-            The following documents are still within a closure period under the Federal Act on Archiving (<a href="https://www.a
+            The following documents are still within a closure period under the Federal Act on Archiving (<a href="https://www.admin.ch/ch/e/rs/c152_1.html">LAr, RS 152.1</a>). In order to download them you must first identify yourself. You can request identification in your <a href="https://{{Global.PublicClientUrl}}/#/en/account">user account</a>.
+        </p>
+        <p>
+            <table>
+                <tr>
+                    <th>Reference code</th>
+                    <th>File reference</th>
+                    <th>Dossier title</th>
+                    <th>Time period</th>
+                </tr>
+                {{#FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2}}
+                <tr>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
+                </tr>
+                {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2}}
+            </table>
+        </p>
+        {{/FreigegebenDigitaleVe_FreigegebenInSchutzfristUndÖ2Vorhanden}}
+        <p>
+            If you have any questions about your order please contact our <a href="https://{{Global.PublicClientUrl}}">online advice service</a> or reply to this e-mail.
+        </p>
+        <p> Yours sincerely </p>
+        {{#Weiterleitung}}<p> <b>{{User.Vorname}} {{User.Name}}</b> </p> {{/Weiterleitung}}
+        <p>
+            Federal Department of Home Affairs FDHA<br /> Swiss Federal Archives SFA<br /> Archivstrasse 24, CH-3003
+            Bern
+        </p>
+        <p>
+            {{#Weiterleitung}}<a href="mailto:{{User.EmailAddress}}">{{User.EmailAddress}}</a><br />{{/Weiterleitung}}
+            {{^Weiterleitung}}<a href="mailto:{{From}}">{{From}}</a><br />{{/Weiterleitung}}
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br />
+        </p>
+        <p>
+            Follow the Federal Archives:
+            <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstEnglisch}}
+    {{/Sprachen}}
+</body>
+</html>

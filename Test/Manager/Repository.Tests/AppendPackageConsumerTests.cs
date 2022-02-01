@@ -1,146 +1,171 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Repository.Consumer;
 using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Repository.Tests
 {
-    public class AppendPackageConsumerTests : InMemoryTestFixture
+    public class AppendPackageConsumerTests
     {
         private readonly Mock<IConsumer<IArchiveRecordAppendPackage>> archiveRecordAppendPackageConsumer =
             new Mock<IConsumer<IArchiveRecordAppendPackage>>();
 
         private readonly Mock<IRepositoryManager> repositoryManager = new Mock<IRepositoryManager>();
-        private Task<ConsumeContext<IArchiveRecordAppendPackage>> appendPackageTask;
-        private Task<ConsumeContext<IArchiveRecordUpdated>> archiveRecordUpdatedTask;
-        private Task<ConsumeContext<IArchiveRecordExtractFulltextFromPackage>> extractFulltextTask;
 
-        public AppendPackageConsumerTests() : base(true)
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
+        private InMemoryTestHarness harness;
 
         [SetUp]
         public void Setup()
         {
+            harness = new InMemoryTestHarness();
             repositoryManager.Reset();
             archiveRecordAppendPackageConsumer.Reset();
         }
-
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            appendPackageTask = Handler<IArchiveRecordAppendPackage>(configurator,
-                context => new AppendPackageConsumer(repositoryManager.Object).Consume(context));
-        }
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
-            configurator.ReceiveEndpoint(BusConstants.AssetManagerExtractFulltextMessageQueue, ec =>
-            {
-                ec.Consumer(() => archiveRecordAppendPackageConsumer.Object);
-                extractFulltextTask = Handled<IArchiveRecordExtractFulltextFromPackage>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.HarvestManagerArchiveRecordUpdatedEventQueue, ec =>
-            {
-                ec.Consumer(() => archiveRecordAppendPackageConsumer.Object);
-                archiveRecordUpdatedTask = Handled<IArchiveRecordUpdated>(ec);
-            });
-        }
-
         [Test]
         public async Task If_AppendPackage_failed_Sync_process_is_set_to_failed()
         {
             // Arrange
-            var ar = new ArchiveRecord {ArchiveRecordId = "345"};
-            var mutationId = 666;
-            var errMsg = "Some error message";
-            var appendResult = new RepositoryPackageResult {Valid = false, Success = false, ErrorMessage = errMsg};
-            repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
-                .ReturnsAsync(appendResult);
-
-            // Act
-            await InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+            try
             {
-                ArchiveRecord = ar,
-                MutationId = mutationId
-            });
+                
+                var ar = new ArchiveRecord { ArchiveRecordId = "345" };
+                var mutationId = 666;
+                var errMsg = "Some error message";
+                var appendResult = new RepositoryPackageResult { Valid = false, Success = false, ErrorMessage = errMsg };
+                repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
+                    .ReturnsAsync(appendResult);
 
-            // Wait for the results
-            await appendPackageTask;
-            var context = await archiveRecordUpdatedTask;
+                var appendPackageConsumer = harness.Consumer(() => new AppendPackageConsumer(repositoryManager.Object));
+                harness.Consumer(() => archiveRecordAppendPackageConsumer.Object);
 
-            // Assert
-            context.Message.ActionSuccessful.Should().Be(false);
-            context.Message.MutationId.Should().Be(mutationId);
-            context.Message.ErrorMessage.Should().Be(errMsg);
+                await harness.Start();
+
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+                {
+                    ArchiveRecord = ar,
+                    MutationId = mutationId
+                });
+
+                // Wait for the results
+
+                Assert.That(await harness.Consumed.Any<IArchiveRecordAppendPackage>());
+                Assert.That(await appendPackageConsumer.Consumed.Any<IArchiveRecordAppendPackage>());
+
+                Assert.That(await harness.Published.Any<IArchiveRecordUpdated>());
+                var context = harness.Published.Select<IArchiveRecordUpdated>().First().Context;
+
+                // Assert
+                context.Message.ActionSuccessful.Should().Be(false);
+                context.Message.MutationId.Should().Be(mutationId);
+                context.Message.ErrorMessage.Should().Be(errMsg);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
+
+
         }
 
         [Test]
         public async Task If_Package_not_valid_Sync_process_is_set_to_failed()
         {
             // Arrange
-            var ar = new ArchiveRecord {ArchiveRecordId = "344"};
-            var mutationId = 999;
-            var errMsg = "Some other error message";
-            var appendResult = new RepositoryPackageResult {Valid = false, Success = true, ErrorMessage = errMsg};
-            repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
-                .ReturnsAsync(appendResult);
-
-            // Act
-            await InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+            try
             {
-                ArchiveRecord = ar,
-                MutationId = mutationId
-            });
+                var ar = new ArchiveRecord { ArchiveRecordId = "344" };
+                var mutationId = 999;
+                var errMsg = "Some other error message";
+                var appendResult = new RepositoryPackageResult { Valid = false, Success = true, ErrorMessage = errMsg };
+                repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
+                    .ReturnsAsync(appendResult);
 
-            // Wait for the results
-            await appendPackageTask;
-            var context = await archiveRecordUpdatedTask;
+                var appendPackageConsumer = harness.Consumer(() => new AppendPackageConsumer(repositoryManager.Object));
+                harness.Consumer(() => archiveRecordAppendPackageConsumer.Object);
 
-            // Assert
-            context.Message.ActionSuccessful.Should().Be(false);
-            context.Message.MutationId.Should().Be(mutationId);
-            context.Message.ErrorMessage.Should().Be(errMsg);
+                await harness.Start();
+
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+                {
+                    ArchiveRecord = ar,
+                    MutationId = mutationId
+                });
+
+                // Wait for the results
+                Assert.That(await harness.Consumed.Any<IArchiveRecordAppendPackage>());
+                Assert.That(await appendPackageConsumer.Consumed.Any<IArchiveRecordAppendPackage>());
+                
+                Assert.That(await harness.Published.Any<IArchiveRecordUpdated>());
+                var context = harness.Published.Select<IArchiveRecordUpdated>().First().Context;
+
+                // Assert
+                context.Message.ActionSuccessful.Should().Be(false);
+                context.Message.MutationId.Should().Be(mutationId);
+                context.Message.ErrorMessage.Should().Be(errMsg);
+
+            }
+            finally
+            {
+                await harness.Stop();
+            }
+
         }
 
         [Test]
-        public async Task If_Package_is_valid_extract_fulltext_is_initiated()
+        public async Task If_Package_is_valid_preprocessing_of_asset_is_initiated()
         {
-            // Arrange
-            var ar = new ArchiveRecord {ArchiveRecordId = "478"};
-            var mutationId = 777;
-            var errMsg = string.Empty;
-            var appendResult = new RepositoryPackageResult
+            try
             {
-                Valid = true, Success = true, ErrorMessage = errMsg, PackageDetails = new RepositoryPackage
+                // Arrange
+                var ar = new ArchiveRecord { ArchiveRecordId = "478" };
+                var mutationId = 777;
+                var errMsg = string.Empty;
+                var appendResult = new RepositoryPackageResult
                 {
-                    PackageFileName = "need a file name.whatever"
-                }
-            };
-            repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
-                .ReturnsAsync(appendResult);
+                    Valid = true, Success = true, ErrorMessage = errMsg, PackageDetails = new RepositoryPackage
+                    {
+                        PackageFileName = "need a file name.whatever"
+                    }
+                };
+                repositoryManager.Setup(e => e.AppendPackageToArchiveRecord(It.IsAny<ArchiveRecord>(), It.IsAny<long>(), It.IsAny<int>()))
+                    .ReturnsAsync(appendResult);
 
-            // Act
-            await InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+                var appendPackageConsumer = harness.Consumer(() => new AppendPackageConsumer(repositoryManager.Object));
+                harness.Consumer(() => archiveRecordAppendPackageConsumer.Object);
+
+                await harness.Start();
+
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IArchiveRecordAppendPackage>(new
+                {
+                    ArchiveRecord = ar,
+                    MutationId = mutationId
+                });
+
+                // Wait for the results
+                Assert.That(await harness.Consumed.Any<IArchiveRecordAppendPackage>());
+                Assert.That(await appendPackageConsumer.Consumed.Any<IArchiveRecordAppendPackage>());
+
+                Assert.That(await harness.Sent.Any<PrepareForRecognitionMessage>());
+                var context = harness.Sent.Select<PrepareForRecognitionMessage>().First().Context;
+
+                // Assert
+                context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(ar.ArchiveRecordId);
+                context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
             {
-                ArchiveRecord = ar,
-                MutationId = mutationId
-            });
+                await harness.Stop();
+            }
 
-            // Wait for the results
-            await appendPackageTask;
-            var context = await extractFulltextTask;
-
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(ar.ArchiveRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
         }
     }
 }

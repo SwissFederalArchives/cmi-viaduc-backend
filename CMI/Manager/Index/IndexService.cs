@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Threading;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
@@ -10,7 +11,6 @@ using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using GreenPipes;
 using MassTransit;
-using Ninject;
 using Serilog;
 
 namespace CMI.Manager.Index
@@ -20,7 +20,7 @@ namespace CMI.Manager.Index
     /// </summary>
     public class IndexService
     {
-        private readonly StandardKernel kernel;
+        private readonly ContainerBuilder containerBuilder;
         private IBusControl bus;
 
         // ReSharper disable once NotAccessedField.Local 
@@ -30,7 +30,7 @@ namespace CMI.Manager.Index
         public IndexService()
         {
             // Configure IoC Container
-            kernel = ContainerConfigurator.Configure();
+            containerBuilder = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
         }
 
@@ -44,51 +44,43 @@ namespace CMI.Manager.Index
 
             // Configure Bus
             var helper = new ParameterBusHelper();
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.IndexService, (cfg, host) =>
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.IndexService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerUpdateArchiveRecordMessageQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<UpdateArchiveRecordConsumer>());
+                    ec.Consumer(ctx.Resolve<UpdateArchiveRecordConsumer>);
                     ec.UseRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerRemoveArchiveRecordMessageQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<RemoveArchiveRecordConsumer>());
+                    ec.Consumer(ctx.Resolve<RemoveArchiveRecordConsumer>);
                     ec.UseRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerFindArchiveRecordMessageQueue,
-                    ec => { ec.Consumer(() => kernel.Get<FindArchiveRecordConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<FindArchiveRecordConsumer>); });
                 cfg.ReceiveEndpoint(string.Format(BusConstants.IndexManagagerRequestBase, nameof(GetArchiveRecordsForPackageRequest)),
                     ec =>
                     {
-                        ec.Consumer(() =>
-                            kernel.Get<SimpleConsumer<GetArchiveRecordsForPackageRequest, GetArchiveRecordsForPackageResponse, IIndexManager>>());
+                        ec.Consumer(ctx.Resolve<IConsumer<GetArchiveRecordsForPackageRequest>>);
                     });
 
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerUpdateIndivTokensMessageQueue,
-                    ec => { ec.Consumer(() => kernel.Get<UpdateIndivTokensConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<UpdateIndivTokensConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringElasticSearchTestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<TestElasticSearchRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<TestElasticSearchRequestConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerGetElasticLogRecordsRequestQueue,
-                    ec =>
-                    {
-                        ec.Consumer(() =>
-                            kernel.Get<SimpleConsumer<GetElasticLogRecordsRequest, GetElasticLogRecordsResponse, IElasticLogManager>>());
-                    });
+                    ec => {  ec.Consumer(ctx.Resolve<IConsumer<GetElasticLogRecordsRequest>>); });
 
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host);
-                cfg.UseSerilog();
+                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 
-            // Add the bus instance to the IoC container
-            kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IParameterHelper>().To<ParameterHelper>();
+            var container = containerBuilder.Build();
+            bus = container.Resolve<IBusControl>();
             bus.Start();
-
-            var elasticLogManager = kernel.Get<IElasticLogManager>();
+            
+            var elasticLogManager = container.Resolve<IElasticLogManager>();
             deleteOldLogIndexesTimer = new Timer(t => elasticLogManager.DeleteOldLogIndexes(), null, TimeSpan.Zero, TimeSpan.FromDays(1));
 
             Log.Information("Index service started");

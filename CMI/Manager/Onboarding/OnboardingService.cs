@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Reflection;
 using System.Threading;
+using Autofac;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
@@ -10,7 +11,6 @@ using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
 using Microsoft.Owin.Hosting;
-using Ninject;
 using Serilog;
 
 namespace CMI.Manager.Onboarding
@@ -27,9 +27,6 @@ namespace CMI.Manager.Onboarding
 
         public OnboardingService()
         {
-            Startup.Kernel = new StandardKernel();
-            Startup.Kernel.Load(Assembly.GetExecutingAssembly());
-
             LogConfigurator.ConfigureForService();
 
             dataAccess = new UserDataAccess(DbConnectionSetting.Default.ConnectionString);
@@ -39,10 +36,9 @@ namespace CMI.Manager.Onboarding
         {
             Log.Information("Onboarding service is starting");
 
-            InitBus();
-
-
             webApp = WebApp.Start<Startup>(OnboardingPostbackSetting.Default.PostbackBaseUrl);
+            bus = Startup.Container.Resolve<IBusControl>();
+            bus.Start();
 
             processSftp = new ProcessSftp(bus);
             timerProcessFiles = new Timer(ProcessFiles, null, 0, Timeout.Infinite);
@@ -93,20 +89,6 @@ namespace CMI.Manager.Onboarding
             }
         }
 
-        private void InitBus()
-        {
-            var helper = new ParameterBusHelper();
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.OnboardingService, (cfg, host) =>
-            {
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host);
 
-                cfg.UseSerilog();
-            });
-
-            bus.Start();
-
-            // Add the bus instance to the IoC container            
-            Startup.Kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-        }
     }
 }

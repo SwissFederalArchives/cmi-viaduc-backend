@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
@@ -9,32 +11,19 @@ using CMI.Manager.Harvest.Consumers;
 using CMI.Manager.Harvest.Infrastructure;
 using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Harvest.Tests
 {
-    public class SyncArchiveRecordConsumerTests : InMemoryTestFixture
+    public class SyncArchiveRecordConsumerTests
     {
         private readonly Mock<ICachedHarvesterSetting> cachedHarvesterSetting = new Mock<ICachedHarvesterSetting>();
-
-        private readonly Mock<IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>> findArchiveRecordClient =
-            new Mock<IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>>();
-
+        private readonly Mock<IRequestClient<FindArchiveRecordRequest>> findArchiveRecordClient =
+            new Mock<IRequestClient<FindArchiveRecordRequest>>();
         private readonly Mock<IHarvestManager> harvestManager = new Mock<IHarvestManager>();
         private readonly Mock<IConsumer<ISyncArchiveRecord>> syncArchiveRecordConsumer = new Mock<IConsumer<ISyncArchiveRecord>>();
-        private Task<ConsumeContext<IArchiveRecordAppendPackageMetadata>> appendPackageMetadataTask;
-        private Task<ConsumeContext<IArchiveRecordAppendPackage>> appendPackageTask;
-        private Task<ConsumeContext<IRemoveArchiveRecord>> removeArchiveRemoveTask;
-        private Task<ConsumeContext<IDeleteFileFromCache>> removeFileFromCacheTask;
-        private Task<ConsumeContext<ISyncArchiveRecord>> syncArchiveRecordTask;
-        private Task<ConsumeContext<IUpdateArchiveRecord>> updateArchiveRecordTask;
-
-        public SyncArchiveRecordConsumerTests() : base(true)
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
 
         [SetUp]
         public void Setup()
@@ -44,73 +33,53 @@ namespace CMI.Manager.Harvest.Tests
             cachedHarvesterSetting.Reset();
         }
 
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            cachedHarvesterSetting.Setup(s => s.EnableFullResync()).Returns(false);
-            syncArchiveRecordTask = Handler<ISyncArchiveRecord>(configurator,
-                context =>
-                    new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object)
-                        .Consume(context));
-        }
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
-            configurator.ReceiveEndpoint(BusConstants.IndexManagerUpdateArchiveRecordMessageQueue, ec =>
-            {
-                ec.Consumer(() => syncArchiveRecordConsumer.Object);
-                updateArchiveRecordTask = Handled<IUpdateArchiveRecord>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.IndexManagerRemoveArchiveRecordMessageQueue, ec =>
-            {
-                ec.Consumer(() => syncArchiveRecordConsumer.Object);
-                removeArchiveRemoveTask = Handled<IRemoveArchiveRecord>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.RepositoryManagerArchiveRecordAppendPackageMessageQueue, ec =>
-            {
-                ec.Consumer(() => syncArchiveRecordConsumer.Object);
-                appendPackageTask = Handled<IArchiveRecordAppendPackage>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.RepositoryManagerReadPackageMetadataMessageQueue, ec =>
-            {
-                ec.Consumer(() => syncArchiveRecordConsumer.Object);
-                appendPackageMetadataTask = Handled<IArchiveRecordAppendPackageMetadata>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.CacheDeleteFile, ec =>
-            {
-                ec.Consumer(() => syncArchiveRecordConsumer.Object);
-                removeFileFromCacheTask = Handled<IDeleteFileFromCache>(ec);
-            });
-        }
-
         [Test]
         public async Task If_delete_is_requested_record_is_removed_from_index()
         {
             // Arrange
             var archvieRecordId = "34599";
             var mutationId = 6616;
-            var ar = new ArchiveRecord {ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = null}};
+            var ar = new ArchiveRecord { ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = null } };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
 
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "delete"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "delete"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await removeArchiveRemoveTask;
 
-            // Assert
-            context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
+
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+                var message = harness.Consumed.Select<ISyncArchiveRecord>().FirstOrDefault();
+
+                // was the delete message sent
+                Assert.That(await harness.Sent.Any<IRemoveArchiveRecord>());
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -121,33 +90,55 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 666;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = null},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = null },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             var findResult = new FindArchiveRecordResponse
             {
                 ArchiveRecordId = archvieRecordId,
-                ElasticArchiveRecord = new ElasticArchiveRecord {ArchiveRecordId = archvieRecordId, PrimaryDataLink = null}
+                ElasticArchiveRecord = new ElasticArchiveRecord { ArchiveRecordId = archvieRecordId, PrimaryDataLink = null }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
+
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await updateArchiveRecordTask;
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
+
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+                var message = harness.Consumed.Select<ISyncArchiveRecord>().FirstOrDefault();
+
+                // was the update message sent
+                Assert.That(await harness.Sent.Any<IUpdateArchiveRecord>());
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -158,33 +149,54 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = "Aip@DossierId"},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = "Aip@DossierId" },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             var findResult = new FindArchiveRecordResponse
             {
                 ArchiveRecordId = archvieRecordId,
-                ElasticArchiveRecord = new ElasticArchiveRecord {ArchiveRecordId = archvieRecordId, PrimaryDataLink = null}
+                ElasticArchiveRecord = new ElasticArchiveRecord { ArchiveRecordId = archvieRecordId, PrimaryDataLink = null }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
+
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await appendPackageMetadataTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+                var message = harness.Consumed.Select<ISyncArchiveRecord>().FirstOrDefault();
+
+                // was the append metadata message sent
+                Assert.That(await harness.Sent.Any<IArchiveRecordAppendPackageMetadata>());
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -195,33 +207,54 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = "Aip@DossierId"},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = "Aip@DossierId" },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             var findResult = new FindArchiveRecordResponse
             {
                 ArchiveRecordId = archvieRecordId,
-                ElasticArchiveRecord = new ElasticArchiveRecord {ArchiveRecordId = archvieRecordId, PrimaryDataLink = "DifferentAip@DossierId"}
+                ElasticArchiveRecord = new ElasticArchiveRecord { ArchiveRecordId = archvieRecordId, PrimaryDataLink = "DifferentAip@DossierId" }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
+
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await appendPackageMetadataTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+                var message = harness.Consumed.Select<ISyncArchiveRecord>().FirstOrDefault();
+
+                // was the append metadata message sent
+                Assert.That(await harness.Sent.Any<IArchiveRecordAppendPackageMetadata>());
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -233,8 +266,8 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = "Aip@DossierId"},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = "Aip@DossierId" },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             var findResult = new FindArchiveRecordResponse
@@ -242,31 +275,53 @@ namespace CMI.Manager.Harvest.Tests
                 ArchiveRecordId = archvieRecordId, ElasticArchiveRecord = new ElasticArchiveRecord
                 {
                     ArchiveRecordId = archvieRecordId, PrimaryDataLink = "Aip@DossierId", PrimaryData = new List<ElasticArchiveRecordPackage>
-                    {
-                        new ElasticArchiveRecordPackage {FileCount = 5, PackageId = "controlPackageId"}
-                    }
+                            {
+                                new ElasticArchiveRecordPackage {FileCount = 5, PackageId = "controlPackageId"}
+                            }
                 }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
+
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await updateArchiveRecordTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.ArchiveRecord.ElasticPrimaryData[0].FileCount.Should().Be(5);
-            context.Message.ArchiveRecord.ElasticPrimaryData[0].PackageId.Should().Be("controlPackageId");
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Sent.Any<IUpdateArchiveRecord>());
+                var message = harness.Sent.Select<IUpdateArchiveRecord>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].FileCount.Should().Be(5);
+                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].PackageId.Should().Be("controlPackageId");
+                message.Context.Message.MutationId.Should().Be(mutationId);
+
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -278,8 +333,8 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = "Aip@DossierId"},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = "Aip@DossierId" },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             cachedHarvesterSetting.Setup(s => s.EnableFullResync()).Returns(true);
@@ -288,29 +343,49 @@ namespace CMI.Manager.Harvest.Tests
                 ArchiveRecordId = archvieRecordId, ElasticArchiveRecord = new ElasticArchiveRecord
                 {
                     ArchiveRecordId = archvieRecordId, PrimaryDataLink = "Aip@DossierId", PrimaryData = new List<ElasticArchiveRecordPackage>
-                    {
-                        new ElasticArchiveRecordPackage {FileCount = 5, PackageId = "controlPackageId"}
-                    }
+                            {
+                                new ElasticArchiveRecordPackage {FileCount = 5, PackageId = "controlPackageId"}
+                            }
                 }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await appendPackageMetadataTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Sent.Any<IArchiveRecordAppendPackageMetadata>());
+                var message = harness.Sent.Select<IArchiveRecordAppendPackageMetadata>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -321,24 +396,39 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = "Aip@DossierId"},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string>()}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = "Aip@DossierId" },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string>() }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            harvestManager.Verify(e => e.UpdateMutationStatus(It.IsAny<MutationStatusInfo>()), Times.Once);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // Assert
+                harvestManager.Verify(e => e.UpdateMutationStatus(It.IsAny<MutationStatusInfo>()), Times.Once);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
+
         }
 
         [Test]
@@ -349,37 +439,61 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 6626;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = null},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = null },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             var findResult = new FindArchiveRecordResponse
             {
                 ArchiveRecordId = archvieRecordId,
-                ElasticArchiveRecord = new ElasticArchiveRecord {ArchiveRecordId = archvieRecordId, PrimaryDataLink = "AIP@DossierId"}
+                ElasticArchiveRecord = new ElasticArchiveRecord { ArchiveRecordId = archvieRecordId, PrimaryDataLink = "AIP@DossierId" }
             };
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
+            findArchiveRecordClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
 
             // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await updateArchiveRecordTask;
-            var context2 = await removeFileFromCacheTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
 
-            // Verify the delete cache method was called
-            context2.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Sent.Any<IUpdateArchiveRecord>());
+                var message = harness.Sent.Select<IUpdateArchiveRecord>().FirstOrDefault();
+
+                // was the remove from cache message sent
+                Assert.That(await harness.Sent.Any<IDeleteFileFromCache>());
+                var message2 = harness.Sent.Select<IDeleteFileFromCache>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+
+                // Verify the delete cache method was called
+                Assert.That(message2 != null);
+                message2.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -390,30 +504,54 @@ namespace CMI.Manager.Harvest.Tests
             var mutationId = 66267;
             var ar = new ArchiveRecord
             {
-                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata {PrimaryDataLink = null},
-                Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string> {"Ö1"}}
+                ArchiveRecordId = archvieRecordId, Metadata = new ArchiveRecordMetadata { PrimaryDataLink = null },
+                Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string> { "Ö1" } }
             };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
-            var findResult = new FindArchiveRecordResponse {ArchiveRecordId = archvieRecordId, ElasticArchiveRecord = null};
-            findArchiveRecordClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None))
-                .Returns(Task.FromResult(findResult));
+            var findResult = new FindArchiveRecordResponse { ArchiveRecordId = archvieRecordId, ElasticArchiveRecord = null };
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(findResult);
+            findArchiveRecordClient.Setup(e =>
+                    e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(),
+                        It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(response.Object));
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() =>
+                new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
-            var context = await updateArchiveRecordTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-            context.Message.MutationId.Should().Be(mutationId);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Sent.Any<IUpdateArchiveRecord>());
+                var message = harness.Sent.Select<IUpdateArchiveRecord>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
+
 
         [Test]
         public async Task If_update_is_requested_for_inexisting_record_the_sync_is_aborted()
@@ -424,22 +562,37 @@ namespace CMI.Manager.Harvest.Tests
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(() => null);
             harvestManager.Setup(e => e.UpdateMutationStatus(It.IsAny<MutationStatusInfo>())).Verifiable();
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() =>
+                new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            harvestManager.Verify(
-                v => v.UpdateMutationStatus(It.Is<MutationStatusInfo>(m =>
-                    m.ChangeFromStatus == ActionStatus.SyncInProgress && m.NewStatus == ActionStatus.SyncAborted && m.MutationId == mutationId)),
-                Times.Once);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // Assert
+                harvestManager.Verify(
+                    v => v.UpdateMutationStatus(It.Is<MutationStatusInfo>(m =>
+                        m.ChangeFromStatus == ActionStatus.SyncInProgress && m.NewStatus == ActionStatus.SyncAborted && m.MutationId == mutationId)),
+                    Times.Once);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -449,26 +602,41 @@ namespace CMI.Manager.Harvest.Tests
             var archvieRecordId = "34527";
             var mutationId = 66267;
             var ar = new ArchiveRecord
-                {ArchiveRecordId = archvieRecordId, Security = new ArchiveRecordSecurity {MetadataAccessToken = new List<string>()}};
+            { ArchiveRecordId = archvieRecordId, Security = new ArchiveRecordSecurity { MetadataAccessToken = new List<string>() } };
             harvestManager.Setup(e => e.BuildArchiveRecord(archvieRecordId)).Returns(ar);
             harvestManager.Setup(e => e.UpdateMutationStatus(It.IsAny<MutationStatusInfo>())).Verifiable();
 
-            // Act
-            await InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() =>
+                new SyncArchiveRecordConsumer(harvestManager.Object, findArchiveRecordClient.Object, cachedHarvesterSetting.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecordId = archvieRecordId,
-                MutationId = mutationId,
-                Action = "UpDaTe"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<ISyncArchiveRecord>(new
+                {
+                    ArchiveRecordId = archvieRecordId,
+                    MutationId = mutationId,
+                    Action = "UpDaTe"
+                });
 
-            // Wait for the results
-            await syncArchiveRecordTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<ISyncArchiveRecord>());
 
-            // Assert
-            harvestManager.Verify(
-                v => v.UpdateMutationStatus(It.Is<MutationStatusInfo>(m =>
-                    m.ChangeFromStatus == ActionStatus.SyncInProgress && m.NewStatus == ActionStatus.SyncAborted && m.MutationId == mutationId)),
-                Times.Once);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<ISyncArchiveRecord>());
+
+                // Assert
+                harvestManager.Verify(
+                    v => v.UpdateMutationStatus(It.Is<MutationStatusInfo>(m =>
+                        m.ChangeFromStatus == ActionStatus.SyncInProgress && m.NewStatus == ActionStatus.SyncAborted && m.MutationId == mutationId)),
+                    Times.Once);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
     }
 }

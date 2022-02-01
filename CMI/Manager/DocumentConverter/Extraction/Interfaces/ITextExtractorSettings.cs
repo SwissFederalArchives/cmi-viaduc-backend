@@ -1,4 +1,6 @@
-﻿namespace CMI.Manager.DocumentConverter.Extraction.Interfaces
+﻿using CMI.Contract.DocumentConverter;
+
+namespace CMI.Manager.DocumentConverter.Extraction.Interfaces
 {
     public interface ITextExtractorSettings
     {
@@ -19,5 +21,7 @@
         /// </summary>
         /// <value>The text extraction profile.</value>
         string TextExtractionProfile { get; set; }
+
+        JobContext Context { get; set; }
     }
 }

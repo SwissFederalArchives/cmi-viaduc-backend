@@ -37,9 +37,7 @@ namespace CMI.Web.Management.api.Controllers
                                          && i.OrderingType != (int) OrderType.Verwaltungsausleihe);
             }
 
-            return items.Any()
-                ? Ok(items)
-                : (IHttpActionResult) StatusCode(HttpStatusCode.NoContent);
+            return Ok(items);
         }
     }
 }

@@ -21,13 +21,11 @@ namespace CMI.Manager.Order
         private readonly PostCommitActionsRegistry postCommitActions = new PostCommitActionsRegistry();
         private readonly ISearchIndexDataAccess searchIndexDataAccess;
         private readonly IUserDataAccess userDataAccess;
-        private Dictionary<int, OrderItem> allOrderItems = new Dictionary<int, OrderItem>();
         private bool hasExecuted;
         private OrderItem[] orderItems;
         private DateTime transactionDateTime;
 
-        public StatusWechsler(IOrderDataAccess orderDataAccess, IUserDataAccess userDataAccess, ISearchIndexDataAccess searchIndexDataAccess,
-            IBus bus, PostCommitActionsRegistry postCommitActions)
+        public StatusWechsler(IOrderDataAccess orderDataAccess, IUserDataAccess userDataAccess, ISearchIndexDataAccess searchIndexDataAccess, IBus bus)
         {
             this.orderDataAccess = orderDataAccess;
             this.userDataAccess = userDataAccess;

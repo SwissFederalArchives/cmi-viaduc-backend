@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Autofac;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
@@ -11,25 +12,21 @@ using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using GreenPipes;
 using MassTransit;
-using Ninject;
-using Ninject.Activation;
 using Serilog;
 
 namespace CMI.Manager.Order
 {
     public class OrderService
     {
-        private readonly StandardKernel kernel;
-        private readonly RecalcTermineListener recalcTermineListener;
+        private readonly ContainerBuilder containerBuilder;
+        private RecalcTermineListener recalcTermineListener;
         private IBusControl bus;
 
         public OrderService()
         {
             // Configure IoC Container
-            kernel = ContainerConfigurator.Configure();
+            containerBuilder = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
-
-            recalcTermineListener = new RecalcTermineListener(kernel.Get<IOrderDataAccess>());
         }
 
         /// <summary>
@@ -42,123 +39,125 @@ namespace CMI.Manager.Order
 
             // Configure Bus
             var helper = new ParameterBusHelper();
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.OrderService, (cfg, host) =>
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.OrderService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(AddToBasketRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<AddToBasketRequest, AddToBasketResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<AddToBasketRequest>>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerFindOrderItemsRequestQueue,
-                    ec => { ec.Consumer(() => new FindOrderItemsRequestConsumer(kernel.Get<IPublicOrder>())); });
+                    ec => { ec.Consumer(ctx.Resolve<FindOrderItemsRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerGetStatusHistoryForOrderItemRequestQueue,
-                    ec => { ec.Consumer(() => new GetStatusHistoryForOrderItemConsumer(kernel.Get<IPublicOrder>())); });
+                    ec => { ec.Consumer(ctx.Resolve<GetStatusHistoryForOrderItemConsumer>); });
+
+                cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetPrimaerdatenReportRecordsRequest)),
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<GetPrimaerdatenReportRecordsRequest>>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerFindOrderingHistoryForVeRequestQueue,
-                    ec => { ec.Consumer(() => new FindOrderHistoryForVeConsumer(kernel.Get<IPublicOrder>())); });
+                    ec => { ec.Consumer(ctx.Resolve<FindOrderHistoryForVeConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerGetOrderingRequestQueue,
-                    ec => { ec.Consumer(() => new GetOrderingRequestConsumer(kernel.Get<IPublicOrder>())); });
+                    ec => { ec.Consumer(ctx.Resolve<GetOrderingRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerUpdateOrderDetailRequestQueue,
-                    ec => { ec.Consumer(() => new UpdateOrderDetailRequestConsumer(kernel.Get<IPublicOrder>())); });
+                    ec => { ec.Consumer(ctx.Resolve<UpdateOrderDetailRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(AddToBasketCustomRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<AddToBasketCustomRequest, AddToBasketCustomResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<AddToBasketCustomRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(RemoveFromBasketRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<RemoveFromBasketRequest, RemoveFromBasketResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<RemoveFromBasketRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateCommentRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<UpdateCommentRequest, UpdateCommentResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<UpdateCommentRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateBenutzungskopieRequest)),
                     ec =>
                     {
-                        ec.Consumer(() => kernel.Get<SimpleConsumer<UpdateBenutzungskopieRequest, UpdateBenutzungskopieResponse, IPublicOrder>>());
+                        ec.Consumer(ctx.Resolve<IConsumer<UpdateBenutzungskopieRequest>>);
                     });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateBewilligungsDatumRequest)),
                     ec =>
                     {
-                        ec.Consumer(() =>
-                            kernel.Get<SimpleConsumer<UpdateBewilligungsDatumRequest, UpdateBewilligungsDatumResponse, IPublicOrder>>());
+                        ec.Consumer(ctx.Resolve<IConsumer<UpdateBewilligungsDatumRequest>>);
                     });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateReasonRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<UpdateReasonRequest, UpdateReasonResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<UpdateReasonRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(OrderCreationRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<CreateOrderFromBasketRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<CreateOrderFromBasketRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetBasketRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<GetBasketRequest, GetBasketResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<GetBasketRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetOrderingsRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<GetOrderingsRequest, GetOrderingsResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<GetOrderingsRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(IsUniqueVeInBasketRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<IsUniqueVeInBasketRequest, IsUniqueVeInBasketResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<IsUniqueVeInBasketRequest>>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetDigipoolRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<GetDigipoolRequest, GetDigipoolResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<GetDigipoolRequest>>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerSetStatusAushebungBereitRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SetStatusAushebungBereitConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<SetStatusAushebungBereitConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerSetStatusDigitalisierungExternRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SetStatusDigitalisierungExternConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<SetStatusDigitalisierungExternConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerSetStatusDigitalisierungAbgebrochenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SetStatusDigitalisierungAbgebrochenConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<SetStatusDigitalisierungAbgebrochenConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerSetStatusZumReponierenBereitRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SetStatusZumReponierenBereitConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<SetStatusZumReponierenBereitConsumer>); });
 
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateDigipoolRequest)),
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<UpdateDigipoolRequest, UpdateDigipoolResponse, IPublicOrder>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<UpdateDigipoolRequest>>); });
 
                 cfg.ReceiveEndpoint(BusConstants.EntscheidFreigabeHinterlegenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<EntscheidFreigabeHinterlegenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<EntscheidFreigabeHinterlegenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.EntscheidGesuchHinterlegenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<EntscheidGesuchHinterlegenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<EntscheidGesuchHinterlegenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.InVorlageExportierenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<InVorlageExportierenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<InVorlageExportierenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.ReponierenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SetStatusZumReponierenBereitConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<SetStatusZumReponierenBereitConsumer>); });
 
-                cfg.ReceiveEndpoint(BusConstants.AbschliessenRequestQueue, ec => { ec.Consumer(() => kernel.Get<AbschliessenRequestConsumer>()); });
+                cfg.ReceiveEndpoint(BusConstants.AbschliessenRequestQueue, ec => { ec.Consumer(ctx.Resolve<AbschliessenRequestConsumer>); });
 
-                cfg.ReceiveEndpoint(BusConstants.AbbrechenRequestQueue, ec => { ec.Consumer(() => kernel.Get<AbbrechenRequestConsumer>()); });
+                cfg.ReceiveEndpoint(BusConstants.AbbrechenRequestQueue, ec => { ec.Consumer(ctx.Resolve<AbbrechenRequestConsumer>); });
 
-                cfg.ReceiveEndpoint(BusConstants.ZuruecksetzenRequestQueue, ec => { ec.Consumer(() => kernel.Get<ZuruecksetzenRequestConsumer>()); });
+                cfg.ReceiveEndpoint(BusConstants.ZuruecksetzenRequestQueue, ec => { ec.Consumer(ctx.Resolve<ZuruecksetzenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.AuftraegeAusleihenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<AuftraegeAusleihenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<AuftraegeAusleihenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.AushebungsauftraegeDruckenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<AushebungsauftraegeDruckenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<AushebungsauftraegeDruckenRequestConsumer>); });
 
-                cfg.ReceiveEndpoint(BusConstants.RecalcIndivTokens, ec => { ec.Consumer(() => kernel.Get<RecalcIndivTokensConsumer>()); });
+                cfg.ReceiveEndpoint(BusConstants.RecalcIndivTokens, ec => { ec.Consumer(ctx.Resolve<RecalcIndivTokensConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungAusloesenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<DigitalisierungAusloesenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<DigitalisierungAusloesenRequestConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEvent, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<DigitalisierungsAuftragErledigtConsumer>());
+                    ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtConsumer>);
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerArchiveRecordUpdatedEventQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<ArchiveRecordUpdatedConsumer>());
+                    ec.Consumer(ctx.Resolve<ArchiveRecordUpdatedConsumer>);
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEventError,
-                    ec => { ec.Consumer(() => kernel.Get<DigitalisierungsAuftragErledigtErrorConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtErrorConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.BenutzungskopieAuftragErledigtEvent, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<BenutzungskopieAuftragErledigtConsumer>());
+                    ec.Consumer(ctx.Resolve<BenutzungskopieAuftragErledigtConsumer>);
                     // Wenn Vecteur meldet, dass Auftrag erledigt ist, kann es sein, dass die Daten eventuell noch nicht in den SFTP hochgeladen wurden.
                     // Der Consumer löst in diesem Fall eine Exception aus. Durch den Retry versuchen wir es noch ein paar mal
 #if DEBUG
@@ -168,31 +167,33 @@ namespace CMI.Manager.Order
 #endif
                 });
                 cfg.ReceiveEndpoint(BusConstants.BenutzungskopieAuftragErledigtEventError,
-                    ec => { ec.Consumer(() => kernel.Get<BenutzungskopieAuftragErledigtErrorConsumer>()); });
-                cfg.ReceiveEndpoint(BusConstants.OrderManagerAssetReadyEventQueue, ec => { ec.Consumer(() => kernel.Get<AssetReadyConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<BenutzungskopieAuftragErledigtErrorConsumer>); });
+                cfg.ReceiveEndpoint(BusConstants.OrderManagerAssetReadyEventQueue, ec => { ec.Consumer(ctx.Resolve<AssetReadyConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerMarkOrderAsFaultedQueue,
-                    ec => { ec.Consumer(() => kernel.Get<SimpleConsumer<MarkOrderAsFaultedRequest, MarkOrderAsFaultedResponse, OrderManager>>()); });
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<MarkOrderAsFaultedRequest>>); });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerResetFaultedOrdersQueue,
                     ec =>
                     {
-                        ec.Consumer(() =>
-                            kernel.Get<SimpleConsumer<ResetAufbereitungsfehlerRequest, ResetAufbereitungsfehlerResponse, OrderManager>>());
+                        ec.Consumer(ctx.Resolve<IConsumer<ResetAufbereitungsfehlerRequest>>);
                     });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerMahnungVersendenRequestQueue,
-                    ec => { ec.Consumer(() => kernel.Get<MahnungVersendenRequestConsumer>()); });
+                    ec => { ec.Consumer(ctx.Resolve<MahnungVersendenRequestConsumer>); });
 
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host);
-                cfg.UseSerilog();
+                cfg.ReceiveEndpoint(BusConstants.OrderManagerErinnerungVersendenRequestQueue,
+                    ec => { ec.Consumer(ctx.Resolve<ErinnerungVersendenRequestConsumer>); });
+
+                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 
-            // Add the bus instance to the IoC container
-            kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>>()
-                .ToMethod(CreateFindArchiveRecordRequestClient);
+            containerBuilder.Register(CreateFindArchiveRecordRequestClient);
+            containerBuilder.Register(CreateRegisterPrepareAssetClient);
 
+            var container = containerBuilder.Build();
 
+            bus = container.Resolve<IBusControl>();
             bus.Start();
+            
+            recalcTermineListener = new RecalcTermineListener(container.Resolve<IOrderDataAccess>());
             recalcTermineListener.Start();
 
             Log.Information("Order service started");
@@ -212,25 +213,18 @@ namespace CMI.Manager.Order
             Log.CloseAndFlush();
         }
 
-        private IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> CreateFindArchiveRecordRequestClient(IContext context)
+        private IRequestClient<FindArchiveRecordRequest> CreateFindArchiveRecordRequestClient(IComponentContext context)
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
-
-            var client =
-                new MessageRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>(bus,
-                    new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue), requestTimeout, null,
-                    ChangeResponseAddress);
-
-            return client;
+            var uri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue);
+            return bus.CreateRequestClient<FindArchiveRecordRequest>(uri, requestTimeout);
         }
 
-        private void ChangeResponseAddress(SendContext<FindArchiveRecordRequest> context)
+        private IRequestClient<PrepareAssetRequest> CreateRegisterPrepareAssetClient(IComponentContext context)
         {
-            if (!string.IsNullOrEmpty(BusConfigurator.ResponseUri) && BusConfigurator.ResponseUri != BusConfigurator.Uri)
-            {
-                context.ResponseAddress = new Uri(context.ResponseAddress.OriginalString.ToLower()
-                    .Replace(BusConfigurator.Uri.ToLower(), BusConfigurator.ResponseUri.ToLower()));
-            }
+            var requestTimeout = TimeSpan.FromMinutes(1);
+            var uri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.WebApiPrepareAssetRequestQueue);
+            return bus.CreateRequestClient<PrepareAssetRequest>(uri, requestTimeout);
         }
     }
 }

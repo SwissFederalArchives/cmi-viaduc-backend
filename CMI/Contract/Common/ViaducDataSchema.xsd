@@ -13,7 +13,8 @@
                 <xs:element name="security">
                     <xs:complexType>
                         <xs:sequence maxOccurs="1">
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="metadataAccessToken" type="xs:string">
+                            <xs:element maxOccurs="unbounded" minOccurs="0"
+                                name="metadataAccessToken" type="xs:string">
                                 <xs:annotation>
                                     <xs:documentation>accessToken contains a string, identifiying who has access to the UoD.
 Examples for the token can be:
@@ -23,7 +24,8 @@ Examples for the token can be:
 </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="primaryDataFulltextAccessToken" type="xs:string">
+                            <xs:element maxOccurs="unbounded" minOccurs="0"
+                                name="primaryDataFulltextAccessToken" type="xs:string">
                                 <xs:annotation>
                                     <xs:documentation>accessToken contains a string, identifiying who has access to the fulltext of the primary data files.
 Examples for the token can be:
@@ -35,7 +37,8 @@ Examples for the token can be:
 </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="primaryDataDownloadAccessToken" type="xs:string">
+                            <xs:element maxOccurs="unbounded" minOccurs="0"
+                                name="primaryDataDownloadAccessToken" type="xs:string">
                                 <xs:annotation>
                                     <xs:documentation>accessToken contains a string, identifiying who has access to the download of the primary data files.
 Examples for the token can be:
@@ -82,18 +85,22 @@ Examples for the token can be:
                                 </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence maxOccurs="1">
-                                        <xs:element ref="archiveplanContextItem" maxOccurs="unbounded"/>
+                                        <xs:element ref="archiveplanContextItem"
+                                            maxOccurs="unbounded"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="previousArchiveRecordId" type="xs:string" nillable="true">
+                            <xs:element name="previousArchiveRecordId" type="xs:string"
+                                nillable="true">
                                 <xs:annotation>
                                     <xs:documentation/>
                                 </xs:annotation>
                             </xs:element>
                             <xs:element name="nextArchiveRecordId" type="xs:string" nillable="true"/>
-                            <xs:element name="parentArchiveRecordId" type="xs:string" nillable="true"/>
-                            <xs:element name="firstChildArchiveRecordId" type="xs:string" nillable="true"/>
+                            <xs:element name="parentArchiveRecordId" type="xs:string"
+                                nillable="true"/>
+                            <xs:element name="firstChildArchiveRecordId" type="xs:string"
+                                nillable="true"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -117,7 +124,8 @@ Examples for the token can be:
                                                 <xs:documentation>Indicates if the material can be used in the reading room.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
-                                        <xs:element name="containsPersonRelatedData" type="xs:boolean">
+                                        <xs:element name="containsPersonRelatedData"
+                                            type="xs:boolean">
                                             <xs:annotation>
                                                 <xs:documentation>Flag indicating that the material contains person related information.</xs:documentation>
                                             </xs:annotation>
@@ -128,17 +136,20 @@ Examples for the token can be:
                                             </xs:annotation>
                                         </xs:element>
 
-                                        <xs:element name="protectionBaseDate" type="xs:string" nillable="true">
+                                        <xs:element name="protectionBaseDate" type="xs:string"
+                                            nillable="true">
                                             <xs:annotation>
                                                 <xs:documentation>The type of base date used to calculate the protection end date.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
-                                        <xs:element name="protectionDuration" type="xs:int" nillable="true">
+                                        <xs:element name="protectionDuration" type="xs:int"
+                                            nillable="true">
                                             <xs:annotation>
                                                 <xs:documentation>The protection duration in years according to the protection category.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
-                                        <xs:element name="protectionEndDate" nillable="true" type="xs:date">
+                                        <xs:element name="protectionEndDate" nillable="true"
+                                            type="xs:date">
                                             <xs:annotation>
                                                 <xs:documentation>The protection end date. (Schutzfrist Enddatum)</xs:documentation>
                                             </xs:annotation>
@@ -153,7 +164,8 @@ Examples for the token can be:
                                                 <xs:documentation>A flag indicating if the protection duration was manually adjusted and is not the default according to the protection category anymore.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
-                                        <xs:element name="protectionNote" type="xs:string" minOccurs="0">
+                                        <xs:element name="protectionNote" type="xs:string"
+                                            minOccurs="0">
                                             <xs:annotation>
                                                 <xs:documentation>An optional note about the protection situation.</xs:documentation>
                                             </xs:annotation>
@@ -184,14 +196,14 @@ Examples for the token can be:
                                             </xs:annotation>
                                             <xs:simpleType>
                                                 <xs:restriction base="xs:string">
-                                                    <xs:enumeration value="CC0"/>
-                                                    <xs:enumeration value="CC BY"/>
-                                                    <xs:enumeration value="CC BY-SA"/>
-                                                    <xs:enumeration value="CC BY-ND"/>
-                                                    <xs:enumeration value="CC BY-NC"/>
-                                                    <xs:enumeration value="CC BY-NC-SA"/>
-                                                    <xs:enumeration value="CC BY-NC-ND"/>
-                                                    <xs:enumeration value="Undefined"/>
+                                                  <xs:enumeration value="CC0"/>
+                                                  <xs:enumeration value="CC BY"/>
+                                                  <xs:enumeration value="CC BY-SA"/>
+                                                  <xs:enumeration value="CC BY-ND"/>
+                                                  <xs:enumeration value="CC BY-NC"/>
+                                                  <xs:enumeration value="CC BY-NC-SA"/>
+                                                  <xs:enumeration value="CC BY-NC-ND"/>
+                                                  <xs:enumeration value="Undefined"/>
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
@@ -215,22 +227,27 @@ Examples for the token can be:
                                 </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="container">
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="container">
                                             <xs:annotation>
                                                 <xs:documentation>This element contains the data describing a container.</xs:documentation>
                                             </xs:annotation>
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="containerLocation" type="xs:string"/>
-                                                    <xs:element name="containerType" type="xs:string"/>
-                                                    <xs:element name="idName" type="xs:string"/>
-                                                    <xs:element minOccurs="0" name="containerCode" type="xs:string"/>
-                                                    <xs:element minOccurs="0" name="containerCarrierMaterial" type="xs:string"/>
+                                                  <xs:element name="containerLocation"
+                                                  type="xs:string"/>
+                                                  <xs:element name="containerType" type="xs:string"/>
+                                                  <xs:element name="idName" type="xs:string"/>
+                                                  <xs:element minOccurs="0" name="containerCode"
+                                                  type="xs:string"/>
+                                                  <xs:element minOccurs="0"
+                                                  name="containerCarrierMaterial" type="xs:string"/>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
-                                    <xs:attribute name="numberOfContainers" type="xs:int" use="required"/>
+                                    <xs:attribute name="numberOfContainers" type="xs:int"
+                                        use="required"/>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element minOccurs="0" name="references">
@@ -242,18 +259,20 @@ Examples for the token can be:
                                         <xs:element maxOccurs="unbounded" name="reference">
                                             <xs:complexType>
                                                 <xs:sequence>
-                                                    <xs:element name="referenceName" type="xs:string">
-                                                        <xs:annotation>
-                                                            <xs:documentation>A human readable name for the linked entity.</xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
-                                                    <xs:element minOccurs="0" name="role" type="xs:string">
-                                                        <xs:annotation>
-                                                            <xs:documentation>The role the linked entity has. Roles may be "see also", "related content found in", "successor", </xs:documentation>
-                                                        </xs:annotation>
-                                                    </xs:element>
+                                                  <xs:element name="referenceName" type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>A human readable name for the linked entity.</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="role"
+                                                  type="xs:string">
+                                                  <xs:annotation>
+                                                  <xs:documentation>The role the linked entity has. Roles may be "see also", "related content found in", "successor", </xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
                                                 </xs:sequence>
-                                                <xs:attribute name="archiveRecordId" type="xs:string"/>
+                                                <xs:attribute name="archiveRecordId"
+                                                  type="xs:string"/>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
@@ -275,7 +294,9 @@ Examples for the token can be:
                                 </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="aggregationField" type="aggregationField"> </xs:element>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="aggregationField" type="aggregationField">
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -289,7 +310,8 @@ Examples for the token can be:
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="repositoryPackage" type="repositoryPackage">
+                            <xs:element maxOccurs="unbounded" name="repositoryPackage"
+                                type="repositoryPackage">
                                 <xs:annotation>
                                     <xs:documentation>A package is a collection of files either with or without directories.
 It is possible, that an archive record has a package coming from the file system, or from a digital repository.</xs:documentation>
@@ -366,16 +388,18 @@ It is possible, that an archive record has a package coming from the file system
                                 </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element minOccurs="1" name="textValue" maxOccurs="unbounded">
+                                        <xs:element minOccurs="1" name="textValue"
+                                            maxOccurs="unbounded">
                                             <xs:annotation>
                                                 <xs:documentation>Each element must have a text representation. For textual values this is the text itself. For a duration it could be "1 hour 12min" or for a date range it could be "ca. 1960 - ca. 1970"</xs:documentation>
                                             </xs:annotation>
                                             <xs:complexType>
                                                 <xs:simpleContent>
-                                                    <xs:extension base="xs:string">
-                                                        <xs:attribute name="lang" type="xs:language"/>
-                                                        <xs:attribute name="isDefaultLang" type="xs:boolean"/>
-                                                    </xs:extension>
+                                                  <xs:extension base="xs:string">
+                                                  <xs:attribute name="lang" type="xs:language"/>
+                                                  <xs:attribute name="isDefaultLang"
+                                                  type="xs:boolean"/>
+                                                  </xs:extension>
                                                 </xs:simpleContent>
                                             </xs:complexType>
                                         </xs:element>
@@ -388,7 +412,8 @@ It is possible, that an archive record has a package coming from the file system
                                 <xs:complexType>
                                     <xs:simpleContent>
                                         <xs:extension base="xs:float">
-                                            <xs:attribute name="decimalPositions" type="xs:int" use="required"/>
+                                            <xs:attribute name="decimalPositions" type="xs:int"
+                                                use="required"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -419,8 +444,10 @@ It is possible, that an archive record has a package coming from the file system
                                 <xs:complexType>
                                     <xs:simpleContent>
                                         <xs:extension base="xs:string">
-                                            <xs:attribute name="entityRecordId" use="required" type="xs:string"/>
-                                            <xs:attribute name="entityType" use="required" type="xs:string"/>
+                                            <xs:attribute name="entityRecordId" use="required"
+                                                type="xs:string"/>
+                                            <xs:attribute name="entityType" use="required"
+                                                type="xs:string"/>
                                         </xs:extension>
                                     </xs:simpleContent>
                                 </xs:complexType>
@@ -641,7 +668,8 @@ This is required for the best possible search experience using date ranges.
                 </xs:simpleType>
             </xs:element>
             <xs:element maxOccurs="unbounded" minOccurs="0" name="folders" type="repositoryFolder"/>
-            <xs:element name="files" maxOccurs="unbounded" minOccurs="0" type="repositoryFile"> </xs:element>
+            <xs:element name="files" maxOccurs="unbounded" minOccurs="0" type="repositoryFile">
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="repositoryFile">
@@ -669,6 +697,7 @@ This is required for the best possible search experience using date ranges.
             <xs:element name="hash" type="xs:string"/>
             <xs:element name="hashAlgorithm" type="xs:string"/>
             <xs:element name="exported" type="xs:boolean"/>
+            <xs:element name="skipOCR" type="xs:boolean"/>
             <xs:element name="id" type="xs:string">
                 <xs:annotation>
                     <xs:documentation>The id to locate the item in the repository</xs:documentation>
@@ -679,7 +708,8 @@ This is required for the best possible search experience using date ranges.
                     <xs:documentation>The file id as definied in the SIP.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="extendedProperties" type="extendedProperty"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="extendedProperties"
+                type="extendedProperty"/>
             <xs:element name="contentText" type="xs:string" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>The whole content of the document as text only. Can be used for full text indexing.

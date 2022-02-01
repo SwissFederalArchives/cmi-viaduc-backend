@@ -23,6 +23,17 @@ namespace CMI.Manager.Order.Status
 
         public override OrderStatesInternal OrderStateInternal => OrderStatesInternal.FreigabePruefen;
 
+        public override void Abbrechen(Abbruchgrund abbruchgrund, string bemerkungZumDossier, string interneBemerkung)
+        {
+            Context.ThrowIfAuftragstypIsNot(new[]
+            {
+                OrderType.Verwaltungsausleihe,
+                OrderType.Lesesaalausleihen,
+                OrderType.Digitalisierungsauftrag
+            });
+            this.AbbrechenInternal(abbruchgrund, bemerkungZumDossier, interneBemerkung);
+        }
+
         public override void Zuruecksetzen()
         {
             this.ZuruecksetzenInternal();

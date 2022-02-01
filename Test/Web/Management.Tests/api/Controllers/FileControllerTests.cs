@@ -28,33 +28,45 @@ namespace CMI.Web.Management.Tests.api.Controllers
             orderManagerClient = Mock.Of<IPublicOrder>();
             downloadTokenDataAccess = Mock.Of<IDownloadTokenDataAccess>();
             downloadHelper = Mock.Of<IFileDownloadHelper>(c => c.GetClientIp(It.IsAny<HttpRequestMessage>()) == "0.0.0.0:127");
-            downloadClient = Mock.Of<IRequestClient<DownloadAssetRequest, DownloadAssetResult>>(
-                c => c.Request(It.IsAny<DownloadAssetRequest>(), CancellationToken.None) == Task.FromResult(new DownloadAssetResult
-                {
-                    AssetDownloadLink = "mydownloadLink"
-                }));
-            downloadClientNoLink = Mock.Of<IRequestClient<DownloadAssetRequest, DownloadAssetResult>>(
-                c => c.Request(It.IsAny<DownloadAssetRequest>(), CancellationToken.None) == Task.FromResult(new DownloadAssetResult
-                {
-                    AssetDownloadLink = ""
-                }));
+            var downloadAssetResponse = new Mock<Response<DownloadAssetResult>>();
+            downloadAssetResponse.Setup(r => r.Message).Returns(new DownloadAssetResult
+            {
+                AssetDownloadLink = "mydownloadLink"
+            });
+
+            downloadClient = Mock.Of<IRequestClient<DownloadAssetRequest>>(
+                c => c.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(downloadAssetResponse.Object));
+
+            var downloadAssetNoLinkResponse = new Mock<Response<DownloadAssetResult>>();
+            downloadAssetNoLinkResponse.Setup(r => r.Message).Returns(new DownloadAssetResult
+            {
+                AssetDownloadLink = ""
+            });
+
+            downloadClientNoLink = Mock.Of<IRequestClient<DownloadAssetRequest>>(
+                c => c.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(downloadAssetNoLinkResponse.Object));
+
             cacheHelper = Mock.Of<ICacheHelper>(c =>
                 c.GetStreamFromCache(It.IsAny<string>()) == (Stream) new MemoryStream(Encoding.UTF8.GetBytes(" a test")));
-            doesExistInCacheClient = Mock.Of<IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse>>(c =>
-                c.Request(It.IsAny<DoesExistInCacheRequest>(), CancellationToken.None) == Task.FromResult(new DoesExistInCacheResponse
-                {
-                    Exists = true,
-                    FileSizeInBytes = 100
-                }));
+
+            var doesExistInCacheResponse = new Mock<Response<DoesExistInCacheResponse>>();
+            doesExistInCacheResponse.Setup(r => r.Message).Returns(new DoesExistInCacheResponse
+            {
+                Exists = true,
+                FileSizeInBytes = 100
+            });
+
+            doesExistInCacheClient = Mock.Of<IRequestClient<DoesExistInCacheRequest>>(c =>
+                c.GetResponse<DoesExistInCacheResponse>(It.IsAny<DoesExistInCacheRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(doesExistInCacheResponse.Object));
         }
 
         private IPublicOrder orderManagerClient;
         private IDownloadTokenDataAccess downloadTokenDataAccess;
         private IFileDownloadHelper downloadHelper;
-        private IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClient;
+        private IRequestClient<DownloadAssetRequest> downloadClient;
         private ICacheHelper cacheHelper;
-        private IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClientNoLink;
-        private IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistInCacheClient;
+        private IRequestClient<DownloadAssetRequest> downloadClientNoLink;
+        private IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient;
 
         [Test]
         public void Invalid_token_returns_Forbidden()

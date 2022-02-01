@@ -17,7 +17,7 @@ namespace CMI.Web.Frontend.api
             this.setting = setting;
         }
 
-        public KontingentResult BestimmeKontingent(IEnumerable<Ordering> userOrderings, AccessRolesEnum userAccessRole, User user)
+        public KontingentResult BestimmeKontingent(IEnumerable<Ordering> userOrderings, User user)
         {
             if (user.DigitalisierungsbeschraenkungAufgehobenBis.HasValue &&
                 user.DigitalisierungsbeschraenkungAufgehobenBis.Value >= DateTime.Now)
@@ -31,7 +31,7 @@ namespace CMI.Web.Frontend.api
 
             var digitalisierungsbeschraenkung = 0;
 
-            switch (userAccessRole)
+            switch (user.Access.RolePublicClient.GetRolePublicClientEnum())
             {
                 case AccessRolesEnum.Ö2:
                     digitalisierungsbeschraenkung = setting.DigitalisierungsbeschraenkungOe2;
@@ -49,8 +49,8 @@ namespace CMI.Web.Frontend.api
                     digitalisierungsbeschraenkung = setting.DigitalisierungsbeschraenkungBar;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(userAccessRole),
-                        $"Die Rolle: {userAccessRole} ist nicht vorgesehen für die Kontingentberechnung");
+                    throw new ArgumentOutOfRangeException(nameof(user),
+                        $"Die Rolle: {user.Access.RolePublicClient} ist nicht vorgesehen für die Kontingentberechnung");
             }
 
             var aktiveDigitalisierungsAuftraege = userOrderings

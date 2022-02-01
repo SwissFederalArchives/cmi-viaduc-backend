@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
+using CMI.Contract.Common.Extensions;
 using CMI.Contract.Order;
 using CMI.Engine.MailTemplate;
 using CMI.Manager.Order.Consumers;
@@ -25,18 +28,42 @@ namespace CMI.Manager.Order.Status
             auftragStatus.Context.OrderItem.DatumDesEntscheids = null;
             auftragStatus.Context.SetNewStatus(AuftragStatusRepo.Abgebrochen);
 
-            var expando = CreateEmailData(auftragStatus);
+            dynamic expando = CreateEmailData(auftragStatus);
+            dynamic emailData = null;
 
             switch (abbruchgrund)
             {
                 case Abbruchgrund.DigitalisierungNichtMoeglich:
-                    auftragStatus.Context.MailPortfolio.AddFinishedMail<DigitalisierungNichtMoeglich>(expando);
+                    emailData = auftragStatus.Context.MailPortfolio.GetUnfinishedMailData<DigitalisierungNichtMoeglich>(auftragStatus.Context.Besteller.Id);
+                    if (emailData == null)
+                    {
+                        auftragStatus.Context.MailPortfolio.BeginUnfinishedMail<DigitalisierungNichtMoeglich>(auftragStatus.Context.Besteller.Id, expando);
+                    }
                     break;
 
                 case Abbruchgrund.DossierMomentanNichtVerfuegbar:
-                    auftragStatus.Context.MailPortfolio.AddFinishedMail<DossierMomentanNichtVerfuegbar>(expando);
+                    emailData = auftragStatus.Context.MailPortfolio.GetUnfinishedMailData<DossierMomentanNichtVerfuegbar>(auftragStatus.Context.Besteller.Id);
+                    if (emailData == null)
+                    {
+                        auftragStatus.Context.MailPortfolio.BeginUnfinishedMail<DossierMomentanNichtVerfuegbar>(auftragStatus.Context.Besteller.Id, expando);
+                    }
                     break;
             }
+
+            if (emailData != null)
+            {
+                var builder = new DataBuilder(auftragStatus.Context.Bus, emailData);
+                builder.AddAuftraege(new List<int> { auftragStatus.Context.OrderItem.Id });
+
+                // After a new Auftrag has been set, we get the collection of the orderings and
+                // get their dates. Finally we set a property that is called Auftragsdaten.
+                List<Auftrag> aufträge = emailData.Aufträge;
+                var bestellungen = aufträge.Select(a => a.Bestellung);
+                var daten = bestellungen.Select(o => o.Erfassungsdatum).Distinct();
+                
+                builder.AddValue("Auftragsdaten", string.Join(" / ", daten));
+            }
+
 
             UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);
         }
@@ -46,9 +73,8 @@ namespace CMI.Manager.Order.Status
             var builder = new DataBuilder(auftragStatus.Context.Bus)
                 .AddUser(auftragStatus.Context.CurrentUser.Id)
                 .AddBesteller(auftragStatus.Context.Ordering.UserId)
-                .AddBestellung(auftragStatus.Context.Ordering)
-                .AddAuftrag(auftragStatus.Context.Ordering, auftragStatus.Context.OrderItem)
-                .AddValue("Id", auftragStatus.Context.OrderItem.Id);
+                .AddAuftraege(new List<int>{ auftragStatus.Context.OrderItem.Id })
+                .AddValue("Auftragsdaten", auftragStatus.Context.Ordering.OrderDate?.ToString("dd.MM.yyyy") ?? "");
 
             var expando = builder.Create();
 

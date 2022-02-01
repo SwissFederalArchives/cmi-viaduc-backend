@@ -22,7 +22,15 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var action = new Action(() => { sut.BestimmeKontingent(orderings, AccessRolesEnum.Ö1, new User()); });
+            var action = new Action(() =>
+            {
+                sut.BestimmeKontingent(orderings,
+                    new User
+                    {
+                        RolePublicClient = AccessRoles.RoleOe1,
+                        Access = new UserAccess("1", AccessRoles.RoleOe1, "oe1", null, false)
+                    });
+            });
 
             // assert
             action.Should().Throw<ArgumentOutOfRangeException>();
@@ -38,11 +46,13 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.Ö2, new User());
+            var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
             result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
         }
+
+
 
         [Test]
         public void BestimmeKontingent_AktiveAuftraege_Should_BeCalculatedFromOrderings_When_Ordering_Is_Digitalisierung()
@@ -89,7 +99,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.Ö2, new User());
+            var result = sut.BestimmeKontingent(orderings,CreateOe2User());
 
             // assert
             result.AktiveDigitalisierungsauftraege.Should().Be(2);
@@ -128,7 +138,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.Ö2, new User());
+            var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
             result.AktiveDigitalisierungsauftraege.Should().Be(0);
@@ -139,7 +149,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         public void BestimmeKontingent_Bestellkontingent_Should_Be_Correct_When_Less_Orderings_Than_Threshold()
         {
             // arrange
-            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungBar = 4};
+            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungOe2 = 4, DigitalisierungsbeschraenkungBar = 500};
 
             var itemsFromOrdering = new List<OrderItem>
             {
@@ -185,19 +195,19 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BAR, new User());
+            var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
             result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungBar);
-            result.Bestellkontingent.Should().Be(setting.DigitalisierungsbeschraenkungBar - result.AktiveDigitalisierungsauftraege);
+            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
+            result.Bestellkontingent.Should().Be(setting.DigitalisierungsbeschraenkungOe2 - result.AktiveDigitalisierungsauftraege);
         }
 
         [Test]
         public void BestimmeKontingent_Bestellkontingent_Should_Be_Zero_When_More_Orderings_Than_Threshold()
         {
             // arrange
-            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungBar = 1};
+            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungOe2 = 1};
 
             var itemsFromOrdering = new List<OrderItem>
             {
@@ -243,11 +253,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BAR, new User());
+            var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
             result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungBar);
+            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
             result.Bestellkontingent.Should().Be(0);
         }
 
@@ -255,7 +265,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         public void BestimmeKontingent_Bestellkontingent_Should_Be_Zero_When_Orderings_Equals_Threshold()
         {
             // arrange
-            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungBvw = 2};
+            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungOe2 = 2};
 
             var itemsFromOrdering = new List<OrderItem>
             {
@@ -301,11 +311,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BVW, new User());
+            var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
             result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungBvw);
+            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
             result.Bestellkontingent.Should().Be(0);
         }
 
@@ -343,7 +353,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BAR, user);
+            var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
             result.Bestellkontingent.Should().Be(int.MaxValue);
@@ -384,7 +394,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BAR, user);
+            var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
             result.Bestellkontingent.Should().Be(int.MaxValue);
@@ -394,7 +404,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         public void BestimmeKontingent_Bestellkontingent_Should_Be_Zero_When_User_DisablesThreshold_Ends_Yesterday()
         {
             // arrange
-            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungBar = 1};
+            var setting = new DigitalisierungsbeschraenkungSettings {DigitalisierungsbeschraenkungOe2 = 1};
 
             var itemsFromOrdering = new List<OrderItem>
             {
@@ -416,18 +426,25 @@ namespace CMI.Web.Frontend.API.Tests.api
                 }
             };
 
-            var user = new User
-            {
-                DigitalisierungsbeschraenkungAufgehobenBis = DateTime.Now.AddDays(-1)
-            };
-
+            var user = CreateOe2User();
+            user.DigitalisierungsbeschraenkungAufgehobenBis = DateTime.Now.AddDays(-1);
             var sut = new KontingentBestimmer(setting);
 
             // act
-            var result = sut.BestimmeKontingent(orderings, AccessRolesEnum.BAR, user);
+            var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
             result.Bestellkontingent.Should().Be(0);
+        }
+
+        private static User CreateOe2User()
+        {
+            return new User
+            {
+                RolePublicClient = AccessRoles.RoleOe2,
+                Access = new UserAccess("2", AccessRoles.RoleOe2, "oe2", null, false)
+            };
+
         }
     }
 }

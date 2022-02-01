@@ -6,22 +6,20 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Contract.Common.Extensions;
 using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Contract.Parameter;
 using CMI.Engine.MailTemplate;
 using CMI.Utilities.Common.Helpers;
 using CMI.Utilities.Logging.Configurator;
-using CMI.Utilities.ProxyClients.Order;
 using CMI.Utilities.Template;
 using CMI.Web.Common.api.Attributes;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management.api.Data;
-using CMI.Web.Management.App_Start;
 using CMI.Web.Management.Auth;
 using CMI.Web.Management.ParameterSettings;
 using MassTransit;
-using Ninject;
 using Serilog;
 
 namespace CMI.Web.Management.api.Controllers
@@ -30,27 +28,29 @@ namespace CMI.Web.Management.api.Controllers
     [NoCache]
     public class OrderController : ApiManagementControllerBase
     {
-        private readonly IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> findArchiveRecordClient;
+        private readonly IRequestClient<FindArchiveRecordRequest> findArchiveRecordClient;
         private readonly IMailHelper mailHelper;
-        private readonly OrderManagerClient orderManagerClient;
+        private readonly IBus bus;
+        private readonly IPublicOrder orderManagerClient;
         private readonly IParameterHelper parameterHelper;
 
 
-        public OrderController(OrderManagerClient client,
-            IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> findArchiveRecordClient,
-            IParameterHelper parameterHelper, IMailHelper mailHelper)
+        public OrderController(IPublicOrder client,
+            IRequestClient<FindArchiveRecordRequest> findArchiveRecordClient,
+            IParameterHelper parameterHelper, IMailHelper mailHelper, IBus bus)
         {
             orderManagerClient = client;
             this.findArchiveRecordClient = findArchiveRecordClient;
             this.parameterHelper = parameterHelper;
             this.mailHelper = mailHelper;
+            this.bus = bus;
         }
 
 
         [HttpGet]
         public async Task<IHttpActionResult> GetAushebungsauftraegeHtml([FromUri] int[] orderItemIds)
         {
-            var builder = new DataBuilder(NinjectWebCommon.Kernel.Get<IBus>());
+            var builder = new DataBuilder(bus);
             var access = ManagementControllerHelper.GetUserAccess();
 
             access.AssertFeatureOrThrow(ApplicationFeature.AuftragsuebersichtAuftraegeKannAushebungsauftraegeDrucken);
@@ -73,7 +73,7 @@ namespace CMI.Web.Management.api.Controllers
         {
             try
             {
-                var builder = new DataBuilder(NinjectWebCommon.Kernel.Get<IBus>());
+                var builder = new DataBuilder(bus);
                 var access = ManagementControllerHelper.GetUserAccess();
                 access.AssertFeatureOrThrow(ApplicationFeature.AuftragsuebersichtAuftraegeVersandkontrolleAusfuehren);
                 var expando = builder
@@ -303,8 +303,8 @@ namespace CMI.Web.Management.api.Controllers
 
         private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId)
         {
-            var result = await findArchiveRecordClient.Request(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
-            return result.ElasticArchiveRecord;
+            var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
+            return result.Message.ElasticArchiveRecord;
         }
 
         [HttpGet]
@@ -549,6 +549,36 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         [HttpPost]
+        public async Task<IHttpActionResult> ErinnerungVersenden([FromBody] ErinnerungVersendenPostData erinnerungVersendenPost)
+        {
+            var access = this.GetManagementAccess();
+            access.AssertFeatureOrThrow(ApplicationFeature.AuftragsuebersichtAuftraegeErinnerungVersenden);
+            if (erinnerungVersendenPost == null)
+            {
+                return BadRequest("Keine Werte angegeben");
+            }
+
+            if (erinnerungVersendenPost.OrderItemIds?.Count == 0)
+            {
+                return BadRequest("Keine OrderItemIds angegeben");
+            }
+
+            if (!CheckNurErinnerbareAuftraegeEnthalten(erinnerungVersendenPost.OrderItemIds))
+            {
+                return BadRequest(
+                    "Es dürfen nur «Lesesaalausleihen» mit dem internen Status «Ausgeliehen» übergeben werden.");
+            }
+            var result = await orderManagerClient.ErinnerungVersenden(erinnerungVersendenPost.OrderItemIds, access.UserId);
+
+            if (result.Success)
+            {
+                return Ok("success");
+            }
+
+            return BadRequest("");
+        }
+
+        [HttpPost]
         public async Task<IHttpActionResult> MahnungVersenden([FromBody] MahnungVersendenPostData mahnungVersendenPost)
         {
             var access = this.GetManagementAccess();
@@ -587,6 +617,15 @@ namespace CMI.Web.Management.api.Controllers
                                                         (i.Status != (int) OrderStatesInternal.Ausgeliehen ||
                                                          !(i.OrderingType == (int) OrderType.Lesesaalausleihen ||
                                                            i.OrderingType == (int) OrderType.Verwaltungsausleihe))).ToList();
+            return !items.Any();
+        }
+
+        private bool CheckNurErinnerbareAuftraegeEnthalten(List<int> orderItemIds)
+        {
+            var ctx = new ViaducContext(WebHelper.Settings["sqlConnectionString"]);
+            var items = ctx.OrderingFlatItem.Where(i => orderItemIds.Contains(i.ItemId) &&
+                                                        (i.Status != (int)OrderStatesInternal.Ausgeliehen ||
+                                                         i.OrderingType != (int)OrderType.Lesesaalausleihen)).ToList();
             return !items.Any();
         }
 
@@ -637,6 +676,15 @@ namespace CMI.Web.Management.api.Controllers
                     default:
                         throw new ArgumentOutOfRangeException(nameof(originAttribute.Table), $"Unknown table: {originAttribute.Table}");
                 }
+            }
+
+            if (flatItem.Status == (int)OrderStatesInternal.Ausgeliehen && !existingItem.Ausleihdauer.Equals(flatItem.Ausleihdauer))
+            {
+                var user = ControllerHelper.UserDataAccess.GetUser(ControllerHelper.GetCurrentUserId());
+                updateOrderItemData.InternalComment = updateOrderItemData.InternalComment.Prepend(
+                    $"Erwartetes Rückgabedatum von {existingItem.Ausgabedatum.Value.AddDays(existingItem.Ausleihdauer):dd.MM.yyyy} " +
+                    $"auf {flatItem.Ausgabedatum.Value.AddDays(flatItem.Ausleihdauer):dd.MM.yyyy} angepasst," +
+                    $" {DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")}, {user.FirstName} {user.FamilyName}");
             }
 
             var data = new UpdateOrderDetailData

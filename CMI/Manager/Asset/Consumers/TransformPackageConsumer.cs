@@ -49,10 +49,10 @@ namespace CMI.Manager.Asset.Consumers
         private async Task<AssetReady> Convert(ITransformAsset message)
         {
             var currentStatus = AufbereitungsStatusEnum.PaketTransferiert;
-            var id = message.AssetType == AssetType.Gebrauchskopie ? message.ArchiveRecordId : message.OrderItemId.ToString();
+            var id = message.AssetType == AssetType.Gebrauchskopie ? message.RepositoryPackage.ArchiveRecordId : message.OrderItemId.ToString();
             var assetReady = new AssetReady
             {
-                ArchiveRecordId = message.ArchiveRecordId,
+                ArchiveRecordId = message.RepositoryPackage.ArchiveRecordId,
                 OrderItemId = message.OrderItemId,
                 CallerId = message.CallerId,
                 AssetType = message.AssetType,
@@ -64,11 +64,16 @@ namespace CMI.Manager.Asset.Consumers
             try
             {
                 // Let's convert the package
-                var result = await assetManager.ConvertPackage(id, message.AssetType,
-                    message.ProtectWithPassword, message.FileName, message.PackageId);
+                var result = await assetManager.ConvertPackage(id, message.AssetType, message.ProtectWithPassword, message.RepositoryPackage);
 
                 currentStatus = AufbereitungsStatusEnum.AssetUmwandlungAbgeschlossen;
-                await UpdatePrimaerdatenAuftragStatus(message, AufbereitungsServices.AssetService, currentStatus, result.ErrorMessage);
+                await assetManager.UpdatePrimaerdatenAuftragStatus(new UpdatePrimaerdatenAuftragStatus
+                {
+                    PrimaerdatenAuftragId = message.PrimaerdatenAuftragId,
+                    Service = AufbereitungsServices.AssetService,
+                    Status = currentStatus,
+                    ErrorText = result.ErrorMessage
+                });
 
                 if (!result.Valid)
                 {
@@ -83,7 +88,13 @@ namespace CMI.Manager.Asset.Consumers
 
                 var errorMessage = uploadSuccess ? null : $"Unable to upload file {result.FileName} to cache";
                 currentStatus = AufbereitungsStatusEnum.ImCacheAbgelegt;
-                await UpdatePrimaerdatenAuftragStatus(message, AufbereitungsServices.CacheService, currentStatus, errorMessage);
+                await assetManager.UpdatePrimaerdatenAuftragStatus(new UpdatePrimaerdatenAuftragStatus
+                {
+                    PrimaerdatenAuftragId = message.PrimaerdatenAuftragId,
+                    Service = AufbereitungsServices.CacheService,
+                    Status = currentStatus,
+                    ErrorText = errorMessage
+                });
 
                 File.Delete(result.FileName);
 
@@ -101,64 +112,54 @@ namespace CMI.Manager.Asset.Consumers
                 Log.Error(ex, "Unexpected error in the conversion of the package for ID {id} and AssetType {AssetType}.", id, message.AssetType);
                 assetReady.Valid = false;
                 assetReady.ErrorMessage = $"Unexpected exception occured.\nException:\n{ex}";
-                await UpdatePrimaerdatenAuftragStatus(message, AufbereitungsServices.CacheService, currentStatus, ex.Message);
+                await assetManager.UpdatePrimaerdatenAuftragStatus(new UpdatePrimaerdatenAuftragStatus
+                {
+                    PrimaerdatenAuftragId = message.PrimaerdatenAuftragId,
+                    Service = AufbereitungsServices.AssetService,
+                    Status = currentStatus,
+                    ErrorText = ex.Message
+                });
             }
 
             return assetReady;
         }
 
-        private async Task UpdatePrimaerdatenAuftragStatus(ITransformAsset message, AufbereitungsServices service, AufbereitungsStatusEnum newStatus,
-            string errorText = null)
-        {
-            if (message.PrimaerdatenAuftragId > 0)
-            {
-                Log.Information("Auftrag mit Id {PrimaerdatenAuftragId} wurde im {service}-Service auf Status {Status} gesetzt.",
-                    message.PrimaerdatenAuftragId, service.ToString(), newStatus.ToString());
-
-                var ep = await bus.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue));
-                await ep.Send<IUpdatePrimaerdatenAuftragStatus>(new UpdatePrimaerdatenAuftragStatus
-                {
-                    PrimaerdatenAuftragId = message.PrimaerdatenAuftragId,
-                    Service = service,
-                    Status = newStatus,
-                    ErrorText = errorText
-                });
-            }
-        }
-
         private async Task UploadReZippedOriginalFile(ITransformAsset message)
         {
-            // Upload original package encrypted
+            var packageFileName = message.RepositoryPackage.PackageFileName;
+
             try
             {
-                var createdFileName =
-                    assetManager.CreateZipFileWithPasswordFromFile(message.FileName, message.OrderItemId.ToString(), message.AssetType);
+                // Upload original package encrypted
+                var createdFileName = assetManager.CreateZipFileWithPasswordFromFile(packageFileName, message.OrderItemId.ToString(), message.AssetType);
 
                 var uploadSuccess = await cacheHelper.SaveToCache(bus, message.RetentionCategory, createdFileName);
                 if (!uploadSuccess)
                 {
-                    Log.Error("Unable to upload original package file {fileName} to cache", message.FileName);
+                    Log.Error("Unable to upload original package file {fileName} to cache", packageFileName);
                 }
 
                 File.Delete(createdFileName);
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Exception on upload original package file {fileName} to cache", message.FileName);
+                Log.Error(ex, "Exception on upload original package file {fileName} to cache", packageFileName);
             }
         }
 
         private static void DeleteOriginalZipFile(ITransformAsset message)
         {
+            var packageFileName = message.RepositoryPackage.PackageFileName;
+
             // Delete the original file
             try
             {
-                var originalFile = Path.Combine(Settings.Default.PickupPath, message.FileName);
+                var originalFile = Path.Combine(Settings.Default.PickupPath, packageFileName);
                 File.Delete(originalFile);
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Exception on delete original package file {fileName}", message.FileName);
+                Log.Error(ex, "Exception on delete original package file {fileName}", packageFileName);
             }
         }
     }

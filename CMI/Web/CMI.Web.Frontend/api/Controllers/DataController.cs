@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Web.Http.Results;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.Logging.Configurator;
@@ -26,15 +27,17 @@ namespace CMI.Web.Frontend.api.Controllers
     {
         private static readonly UsageAnalyzer usageAnalyzer;
         private readonly IEntityProvider entityProvider;
+        private readonly VeExportRecordHelper veExportRecordHelper;
 
         static DataController()
         {
             usageAnalyzer = new UsageAnalyzer(GetUsageSettings(), UsageType.Display);
         }
 
-        public DataController(IEntityProvider entityProvider)
+        public DataController(IEntityProvider entityProvider, VeExportRecordHelper veExportRecordHelper)
         {
             this.entityProvider = entityProvider;
+            this.veExportRecordHelper = veExportRecordHelper;
         }
 
         [HttpGet]
@@ -111,6 +114,47 @@ namespace CMI.Web.Frontend.api.Controllers
             return entityProvider.GetEntities<TreeRecord>(idList, access, paging);
         }
 
+
+        [HttpGet]
+        public IHttpActionResult ExportSearchResultToExcel(string searchText)
+        {
+            ISearchResult searchResult;
+            var search = JsonConvert.DeserializeObject<SearchParameters>(searchText);
+
+            try
+            {
+                string language = WebHelper.GetClientLanguage(Request);
+                var error = entityProvider.CheckSearchParameters(search, language);
+                
+                if (!string.IsNullOrEmpty(error))
+                {
+                    return new BadRequestErrorMessageResult(error, this);
+                }
+                var access = GetUserAccess(language);
+
+                search.Paging.Skip = 0;
+                search.Paging.Take = 10000;
+                searchResult = entityProvider.Search<SearchRecord>(search, access);
+
+                if (searchResult is SearchResult<SearchRecord> searchRecords)
+                {
+                    return ResponseMessage(veExportRecordHelper.CreateExcelFile(
+                        ConvertExportData(searchRecords.Entities.Items.Select(i => i.Data).ToList()), language,
+                        FrontendSettingsViaduc.Instance.GetTranslation(language, "veExportRecord.fileName") +
+                        $"-{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx",
+                        FrontendSettingsViaduc.Instance.GetTranslation("en", "veExportRecord.fileName") +
+                        $"-{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Search for {searchQuery} failed", JsonConvert.SerializeObject(search, Formatting.Indented));
+                return InternalServerError(ex);
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         [HttpPost]
         public ISearchResult Search([FromBody] SearchParameters search, string language = null)
         {
@@ -157,7 +201,6 @@ namespace CMI.Web.Frontend.api.Controllers
                 if (result is SearchResult<SearchRecord> searchResult)
                 {
                     usageAnalyzer.UpdateUsageStatistic(userId, Request, searchResult.Entities.Items.Count);
-
                     if (usageAnalyzer.GetExceededThreshold(userId, Request) != null)
                     {
                         return GetCaptchaMissing(language);
@@ -308,6 +351,20 @@ namespace CMI.Web.Frontend.api.Controllers
                     Details = settings.GetTranslation(language, "search.captchaInvalidDetails", "Bitte versuchen Sie es erneut.")
                 }
             };
+        }
+
+        private List<VeExportRecord> ConvertExportData(List<SearchRecord> searchResults)
+        {
+            return searchResults.Select(item => new VeExportRecord
+            {
+                ReferenceCode = item.ReferenceCode,
+                FileReference = VeExportRecordHelper.GetCustomField(item.CustomFields, "aktenzeichen"),
+                Title = item.Title,
+                CreationPeriod = item.CreationPeriod?.Text,
+                WithinInfo = item.WithinInfo,
+                Level = item.Level,
+                Accessibility = VeExportRecordHelper.GetCustomField(item.CustomFields, "zugänglichkeitGemässBga")
+            }).ToList();
         }
     }
 }

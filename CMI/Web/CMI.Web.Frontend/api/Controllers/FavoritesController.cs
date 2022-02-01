@@ -8,8 +8,10 @@ using CMI.Contract.Common;
 using CMI.Web.Common.api;
 using CMI.Web.Common.api.Attributes;
 using CMI.Web.Common.Helpers;
+using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Interfaces;
+using CMI.Web.Frontend.Helpers;
 using Newtonsoft.Json.Linq;
 using WebGrease.Css.Extensions;
 
@@ -21,10 +23,12 @@ namespace CMI.Web.Frontend.api.Controllers
     {
         private readonly IElasticService elasticService;
         private readonly FavoriteDataAccess sqlDataAccess = new FavoriteDataAccess(WebHelper.Settings["sqlConnectionString"]);
+        private readonly VeExportRecordHelper veExportRecordHelper;
 
-        public FavoritesController(IElasticService elasticService)
+        public FavoritesController(IElasticService elasticService, VeExportRecordHelper veExportRecordHelper)
         {
             this.elasticService = elasticService;
+            this.veExportRecordHelper  = veExportRecordHelper;
         }
 
         [HttpGet]
@@ -115,6 +119,17 @@ namespace CMI.Web.Frontend.api.Controllers
             sqlDataAccess.RenameList(ControllerHelper.GetCurrentUserId(), listId, newName);
         }
 
+        [HttpGet]
+        public IHttpActionResult ExportList(int listId)
+        {
+            var list = sqlDataAccess.GetList(ControllerHelper.GetCurrentUserId(), listId);
+            list.Items = GetFavoritesContainedOnList(listId);
+            var language = GetUserAccess(WebHelper.GetClientLanguage(Request)).Language;
+            return ResponseMessage(veExportRecordHelper.CreateExcelFile(ConvertExportData(list.Items.Where(i => i is VeFavorite).ToList()), language,
+                    FrontendSettingsViaduc.Instance.GetTranslation(language, "accountFavoritesDetailPageComponent.fileName") + $"{list.Name}.xlsx",
+                FrontendSettingsViaduc.Instance.GetTranslation("en", "accountFavoritesDetailPageComponent.fileName") + $"{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx"));
+        }
+
         [HttpPost]
         public IHttpActionResult AddSearchFavorite([FromUri] int listId, [FromBody] SearchFavorite favorite)
         {
@@ -155,6 +170,7 @@ namespace CMI.Web.Frontend.api.Controllers
         public IEnumerable<IFavorite> GetFavoritesContainedOnList(int listId)
         {
             var uid = ControllerHelper.GetCurrentUserId();
+            
             var favorites = sqlDataAccess.GetFavoritesContainedOnList(uid, listId).ToList();
 
             var veIds = favorites.OfType<VeFavorite>().Select(f => f.VeId).ToList();
@@ -173,6 +189,8 @@ namespace CMI.Web.Frontend.api.Controllers
                         continue;
                     }
 
+                    veFavorite.CustomFields = elasticHit.Data?.CustomFields; 
+                    veFavorite.WithinInfo = elasticHit.Data?.WithinInfo;
                     veFavorite.Title = elasticHit.Data?.Title;
                     veFavorite.Level = elasticHit.Data?.Level;
                     veFavorite.CreationPeriod = elasticHit.Data?.CreationPeriod?.Text;
@@ -219,5 +237,22 @@ namespace CMI.Web.Frontend.api.Controllers
                 throw new InvalidOperationException("Unexpected error during migration. See server logs for details.");
             }
         }
+
+        private List<VeExportRecord> ConvertExportData(List<IFavorite> searchResults)
+        {
+            return searchResults.Select(item => new VeExportRecord
+            {
+                // ReSharper disable PossibleNullReferenceException
+                ReferenceCode = (item as VeFavorite).ReferenceCode,
+                FileReference = VeExportRecordHelper.GetCustomField((item as VeFavorite).CustomFields, "aktenzeichen"),
+                Title = item.Title,
+                CreationPeriod = (item as VeFavorite).CreationPeriod,
+                WithinInfo = (item as VeFavorite).WithinInfo,
+                Level = (item as VeFavorite).Level,
+                Accessibility = VeExportRecordHelper.GetCustomField((item as VeFavorite).CustomFields, "zugänglichkeitGemässBga")
+                // ReSharper enable PossibleNullReferenceException
+            }).ToList();
+        }
+
     }
 }

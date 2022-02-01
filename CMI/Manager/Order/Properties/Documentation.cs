@@ -11,6 +11,7 @@ namespace CMI.Manager.Order.Properties
             AddDescription<Settings>(x => x.AssetManagerPickupPath,
                 "Angabe des Pfades wo der Asset-Manager die ZIP Dateien für die Aufbereitung erwartet.");
             AddDescription<Settings>(x => x.VecteurSftpRoot, "Angabe des Root-Pfades wo Vecteur die Benutzungskopien ablegt.");
+            AddDescription<Settings>(x => x.SftpLicenseKey, "Lizenzschlüssel für SFTP Komponente.");
         }
     }
 }

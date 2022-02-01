@@ -49,20 +49,26 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.6.1.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.Mvc5.6.0.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.WebApi2.6.0.1\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Automatonymous, Version=5.1.1.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Automatonymous.5.1.1\lib\netstandard2.0\Automatonymous.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Elasticsearch.Net, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Elasticsearch.Net.6.4.2\lib\net461\Elasticsearch.Net.dll</HintPath>
+    <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Elasticsearch.Net.7.12.1\lib\net461\Elasticsearch.Net.dll</HintPath>
     </Reference>
-    <Reference Include="GreenPipes, Version=2.1.4.118, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\GreenPipes.2.1.4\lib\net452\GreenPipes.dll</HintPath>
+    <Reference Include="GreenPipes, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GreenPipes.4.0.0\lib\netstandard2.0\GreenPipes.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.6.5.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\HtmlAgilityPack.1.6.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -73,14 +79,14 @@
     <Reference Include="Kentor.AuthServices.Owin, Version=0.21.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Kentor.AuthServices.Owin.0.21.2\lib\net45\Kentor.AuthServices.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.5.5.6\lib\net452\MassTransit.dll</HintPath>
+    <Reference Include="MassTransit, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.7.1.8\lib\netstandard2.0\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.RabbitMqTransport, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.5.5.6\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
+    <Reference Include="MassTransit.AutofacIntegration, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.Autofac.7.1.8\lib\netstandard2.0\MassTransit.AutofacIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.SerilogIntegration, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.SerilogIntegration.5.5.6\lib\net452\MassTransit.SerilogIntegration.dll</HintPath>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.7.1.8\lib\netstandard2.0\MassTransit.RabbitMqTransport.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -92,7 +98,7 @@
       <HintPath>..\..\..\packages\Microsoft.AspNet.OData.7.3.0\lib\net45\Microsoft.AspNet.OData.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -106,6 +112,9 @@
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.2\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.OData.Core, Version=7.6.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.OData.Core.7.6.3\lib\portable-net45+win8+wpa81\Microsoft.OData.Core.dll</HintPath>
@@ -136,11 +145,11 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Nest, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NEST.6.4.2\lib\net461\Nest.dll</HintPath>
+    <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NEST.7.12.1\lib\net461\Nest.dll</HintPath>
     </Reference>
-    <Reference Include="NewId, Version=3.0.2.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NewId.3.0.2\lib\net452\NewId.dll</HintPath>
+    <Reference Include="NewId, Version=3.0.3.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NewId.3.0.3\lib\net452\NewId.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -148,57 +157,26 @@
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.ContextPreservation, Version=3.3.1.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.ContextPreservation.3.3.1\lib\net45\Ninject.Extensions.ContextPreservation.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.NamedScope, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.NamedScope.3.3.0\lib\net45\Ninject.Extensions.NamedScope.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.Common, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Web.Common.3.3.2\lib\net45\Ninject.Web.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.Common.OwinHost, Version=3.3.1.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Web.Common.OwinHost.3.3.1\lib\net45\Ninject.Web.Common.OwinHost.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Web.Common.WebHost.3.3.2\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.WebApi, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Web.WebApi.3.3.0\lib\net45\Ninject.Web.WebApi.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Web.WebApi.OwinHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Web.WebApi.OwinHost.3.3.0\lib\net45\Ninject.Web.WebApi.OwinHost.dll</HintPath>
-    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\RabbitMQ.Client.5.1.2\lib\net451\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.6.2.1\lib\net461\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\..\..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
     </Reference>
-    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>..\..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel.Services" />
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -208,7 +186,7 @@
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>..\..\..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
@@ -228,8 +206,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
@@ -237,6 +215,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
     </Reference>
@@ -251,11 +230,18 @@
     <Reference Include="System.Spatial, Version=5.8.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Spatial.5.8.4\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Channels, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Channels.4.7.1\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Threading.ThreadPool, Version=4.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.ThreadPool.4.3.0\lib\net46\System.Threading.ThreadPool.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -311,6 +297,11 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -368,9 +359,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="api\Controllers\ApiManagementControllerBase.cs" />
+    <Compile Include="api\Controllers\ConverterProgressController.cs" />
     <Compile Include="api\Controllers\FileController.cs" />
     <Compile Include="api\Controllers\LogController.cs" />
     <Compile Include="api\Controllers\MonitoringController.cs" />
+    <Compile Include="api\Controllers\ReportController.cs" />
+    <Compile Include="api\Data\AbbyyProgressInfo.cs" />
     <Compile Include="api\Data\AbschliessenParams.cs" />
     <Compile Include="api\Data\AushebungsauftraegeDruckenParams.cs" />
     <Compile Include="api\Data\EntscheidFreigabeHinterlegenParams.cs" />
@@ -393,32 +387,36 @@
     <Compile Include="api\Controllers\SystemController.cs" />
     <Compile Include="api\Data\DigipoolPostData.cs" />
     <Compile Include="api\Data\EntscheidGesuchHinterlegenParams.cs" />
+    <Compile Include="api\Data\ErinnerungVersendenPostData.cs" />
     <Compile Include="api\Data\InVorlageExportierenParams.cs" />
     <Compile Include="api\Data\MahnungVersendenPostData.cs" />
+    <Compile Include="api\Data\ProgressDetail.cs" />
     <Compile Include="api\Data\TokenPostData.cs" />
     <Compile Include="api\Data\AblieferndeStellePostData.cs" />
     <Compile Include="api\Data\UserPostData.cs" />
     <Compile Include="api\Data\ZuruecksetzenParams.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BusConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\ODataConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WebConfig.cs" />
     <Compile Include="Auth\ManagementAuthExtensions.cs" />
     <Compile Include="Auth\ManagementUserAccess.cs" />
+    <Compile Include="Consumers\AbbyyProgressEventConsumer.cs" />
+    <Compile Include="Consumers\DocumentConverterServiceStartedEventConsumer.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DependencyInjection\ManagementModules.cs" />
+    <Compile Include="DependencyInjection\ManagementInjectables.cs" />
     <Compile Include="DependencyInjection\Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IReportExternalContentHelper.cs" />
     <Compile Include="Helpers\ManagementTranslationHelper.cs" />
-    <Compile Include="Helpers\ParameterBusHelper.cs" />
+    <Compile Include="Helpers\ReportExternalContentHelper.cs" />
     <Compile Include="ParameterSettings\AushebungsauftraegeTemplate.cs" />
     <Compile Include="ParameterSettings\LaenderSetting.cs" />
     <Compile Include="ParameterSettings\StatusUebergangSettings.cs" />
@@ -461,6 +459,10 @@
     <ProjectReference Include="..\..\Contract\Common\CMI.Contract.Common.csproj">
       <Project>{045835a1-50c3-4d61-947a-7398a9d70706}</Project>
       <Name>CMI.Contract.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Contract\DocumentConverter\CMI.Contract.DocumentConverter.csproj">
+      <Project>{8C031477-0680-4A2B-A7CE-8A6434DF00BC}</Project>
+      <Name>CMI.Contract.DocumentConverter</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Contract\Management\CMI.Contract.Management.csproj">
       <Project>{D690DB56-489B-4ABD-8E9C-19287E7F2306}</Project>
@@ -544,6 +546,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\packages\Microsoft.Net.Compilers.3.3.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Net.Compilers.3.3.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>IF NOT '%25ON_BUILDSERVER%25'=='True' (
@@ -552,6 +555,7 @@ XCOPY "$(ProjectDir)App_Data_Template" "$(ProjectDir)App_Data" /E/I/Q
 "$(SolutionDir)CMI\Tools\UrbanCode\bin\$(ConfigurationName)\CMI.Tools.UrbanCode.exe" e "$(ProjectDir)App_Data" "$(SolutionDir)..\Credentials for develop.json"
 )</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

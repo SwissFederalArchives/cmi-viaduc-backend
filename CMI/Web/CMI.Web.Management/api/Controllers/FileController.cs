@@ -22,8 +22,8 @@ namespace CMI.Web.Management.api.Controllers
     public class FileController : ApiManagementControllerBase
     {
         private readonly ICacheHelper cacheHelper;
-        private readonly IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistInCacheClient;
-        private readonly IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClient;
+        private readonly IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient;
+        private readonly IRequestClient<DownloadAssetRequest> downloadClient;
         private readonly IFileDownloadHelper downloadHelper;
         private readonly IDownloadTokenDataAccess downloadTokenDataAccess;
         private readonly IPublicOrder orderManagerClient;
@@ -31,8 +31,8 @@ namespace CMI.Web.Management.api.Controllers
         public FileController(IPublicOrder orderManagerClient,
             IDownloadTokenDataAccess downloadTokenDataAccess,
             IFileDownloadHelper downloadHelper,
-            IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClient,
-            IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistInCacheClient,
+            IRequestClient<DownloadAssetRequest> downloadClient,
+            IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient,
             ICacheHelper cacheHelper)
         {
             this.orderManagerClient = orderManagerClient;
@@ -78,7 +78,7 @@ namespace CMI.Web.Management.api.Controllers
 
             downloadTokenDataAccess.CleanUpOldToken(token, orderItemId, DownloadTokenType.OrderItem);
 
-            var downloadAssetResult = await downloadClient.Request(new DownloadAssetRequest
+            var downloadAssetResult = (await downloadClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
             {
                 ArchiveRecordId = orderItem.VeId.ToString(),
                 OrderItemId = orderItemId,
@@ -86,7 +86,7 @@ namespace CMI.Web.Management.api.Controllers
                 Recipient = userId,
                 RetentionCategory = CacheRetentionCategory.UsageCopyBenutzungskopie,
                 ForceSendPasswordMail = true
-            });
+            })).Message;
 
             // If item is not in cache, indicate that it is gone
             if (string.IsNullOrEmpty(downloadAssetResult.AssetDownloadLink))
@@ -127,11 +127,11 @@ namespace CMI.Web.Management.api.Controllers
                 return BadRequest("OrderItem does not exist in DB");
             }
 
-            var doesExistInCacheResponse = await doesExistInCacheClient.Request(new DoesExistInCacheRequest
+            var doesExistInCacheResponse = (await doesExistInCacheClient.GetResponse<DoesExistInCacheResponse>(new DoesExistInCacheRequest
             {
                 Id = orderItemId.ToString(),
                 RetentionCategory = CacheRetentionCategory.UsageCopyBenutzungskopie
-            });
+            })).Message;
 
             if (!doesExistInCacheResponse.Exists)
             {

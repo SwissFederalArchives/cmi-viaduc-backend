@@ -10,7 +10,9 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Moq;
 using Nest;
+using Nest.JsonNetSerializer;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -51,7 +53,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 },
                 hits = new
                 {
-                    total = 1,
+                    total = new { value = 1 },
                     max_score = 1.0,
                     hits = new[]
                     {
@@ -114,8 +116,9 @@ namespace CMI.Web.Frontend.API.Tests.api
                 },
                 hits = new
                 {
-                    total = 1,
+                    total = new { value = 1 },
                     max_score = 1.0,
+
                     hits = new[]
                     {
                         new
@@ -173,7 +176,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 },
                 hits = new
                 {
-                    total = 1,
+                    total = new { value = 1 },
                     max_score = 1.0,
                     hits = new[]
                     {
@@ -235,7 +238,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 },
                 hits = new
                 {
-                    total = 1,
+                    total = new { value = 1 },
                     max_score = 1.0,
                     hits = new[]
                     {
@@ -290,7 +293,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 },
                 hits = new
                 {
-                    total = 1,
+                    total = new { value = 1 },
                     max_score = 1.0,
                     hits = new[]
                     {
@@ -340,7 +343,11 @@ namespace CMI.Web.Frontend.API.Tests.api
                     var response = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(responseMock));
                     var connection = new InMemoryConnection(response);
                     var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
-                    var settings = new ConnectionSettings(connectionPool, connection);
+                    var settings = new ConnectionSettings(connectionPool, connection,
+                        (serializer, values) => new JsonNetSerializer(
+                            serializer, values, null, null,
+                            new[] { new ExpandoObjectConverter() }));
+
                     return new ElasticClient(settings);
                 });
 

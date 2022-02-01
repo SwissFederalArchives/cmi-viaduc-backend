@@ -10,7 +10,7 @@ namespace CMI.Manager.DocumentConverter.Consumers
     ///     Consumes requests for supported file types.
     /// </summary>
     /// <seealso cref="SupportedFileTypesRequest" />
-    internal class SupportedFileTypesConsumer : IConsumer<SupportedFileTypesRequest>
+    public class SupportedFileTypesConsumer : IConsumer<SupportedFileTypesRequest>
     {
         private readonly IDocumentManager manager;
 

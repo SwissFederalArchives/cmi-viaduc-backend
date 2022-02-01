@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using Autofac;
 using CMI.Manager.DocumentConverter.Abbyy;
 using CMI.Manager.DocumentConverter.Properties;
 using CMI.Manager.DocumentConverter.Extraction;
 using CMI.Manager.DocumentConverter.Render;
 using MassTransit;
-using Ninject;
-using Ninject.Activation;
-using Ninject.Extensions.Conventions;
 using Serilog;
 
 namespace CMI.Manager.DocumentConverter.Infrastructure
@@ -18,49 +17,39 @@ namespace CMI.Manager.DocumentConverter.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             // register the different consumers and classes
             var enginePool = CreateEnginesPool();
-            kernel.Bind<IEnginesPool>().ToConstant(enginePool).InSingletonScope();
+            builder.RegisterInstance(enginePool).SingleInstance().ExternallyOwned();
 
             // register all extractors
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<TextExtractorBase>()
-                    .BindBase();
-            });
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<TextExtractorBase>()
+                .As<TextExtractorBase>();
 
             // register all renderers
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<RenderProcessorBase>()
-                    .BindBase();
-            });
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<RenderProcessorBase>()
+                .As<RenderProcessorBase>();
 
-            kernel.Bind<IAbbyyWorker>().To<AbbyyWorker>();
-            kernel.Bind<Extractor>().ToSelf();
-            kernel.Bind<Renderer>().ToSelf();
-            kernel.Bind<ConverterInstallationInfo>().ToSelf().InSingletonScope();
-            kernel.Bind<IDocumentManager>().To<DocumentManager>();
-            kernel.Bind<SftpServer>().ToSelf().InSingletonScope();
+            builder.RegisterType<AbbyyWorker>().As<IAbbyyWorker>();
+            builder.RegisterType<Extractor>().AsSelf();
+            builder.RegisterType<Renderer>().AsSelf();
+            builder.RegisterType<ConverterInstallationInfo>().AsSelf().SingleInstance();
+            builder.Register(c => new AbbyyLicense(c.Resolve<IEnginesPool>())).SingleInstance();
+            
+            builder.RegisterType<DocumentManager>().As<IDocumentManager>();
+            builder.RegisterType<SftpServer>().AsSelf().SingleInstance();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
+            // register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-            return kernel;
+            return builder;
         }
 
         private static IEnginesPool CreateEnginesPool()

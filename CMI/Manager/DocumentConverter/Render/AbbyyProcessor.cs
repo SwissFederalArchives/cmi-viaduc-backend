@@ -43,7 +43,7 @@ namespace CMI.Manager.DocumentConverter.Render
                 serializer.Serialize(streamWriter, cmd);
             }
 
-            return abbyyWorker.TransformDocument(cmd.PdfTextLayerExtractionProfile, cmd.SourceFile, cmd.TargetFile);
+            return abbyyWorker.TransformDocument(cmd.PdfTextLayerExtractionProfile, cmd.SourceFile, cmd.TargetFile, cmd.Context);
         }
 
         protected override FileInfo GetResult()

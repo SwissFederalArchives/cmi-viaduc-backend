@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Autofac;
 using CMI.Contract.DocumentConverter;
 using CMI.Contract.Messaging;
 using CMI.Tools.DocumentConverter.Properties;
@@ -18,11 +19,14 @@ namespace CMI.Tools.DocumentConverter
 
         public DocumentConverterTester()
         {
-            bus = BusConfigurator.ConfigureBus();
-            ;
+            var containerBuilder = new ContainerBuilder();
+            BusConfigurator.ConfigureBus(containerBuilder);
+            var container = containerBuilder.Build();
+
+            bus = container.Resolve<IBusControl>();
             bus.Start();
         }
-
+        
         public void Dispose()
         {
             bus.Stop();
@@ -71,9 +75,10 @@ namespace CMI.Tools.DocumentConverter
 
                 // Print out supported file types
                 var conversionSupportedFileTypes = supportedFileTypesClient
-                    .Request(new SupportedFileTypesRequest {ProcessType = ProcessType.Rendering}).GetAwaiter().GetResult();
+                    .GetResponse<SupportedFileTypesResponse>(new SupportedFileTypesRequest {ProcessType = ProcessType.Rendering}).GetAwaiter().GetResult().Message;
                 var extractionSupportedFileTypes = supportedFileTypesClient
-                    .Request(new SupportedFileTypesRequest {ProcessType = ProcessType.TextExtraction}).GetAwaiter().GetResult();
+                    .GetResponse<SupportedFileTypesResponse>(new SupportedFileTypesRequest {ProcessType = ProcessType.TextExtraction}).GetAwaiter().GetResult().Message;
+
                 Console.WriteLine($"Supported types for conversion: {string.Join(", ", conversionSupportedFileTypes.SupportedFileTypes)}");
                 Console.WriteLine($"Supported types for text extraction: {string.Join(", ", extractionSupportedFileTypes.SupportedFileTypes)}");
                 Console.WriteLine("");
@@ -81,7 +86,7 @@ namespace CMI.Tools.DocumentConverter
                 foreach (var job in jobs)
                 {
                     // Init Job
-                    var jobInitResult = initClient.Request(job).GetAwaiter().GetResult();
+                    var jobInitResult = initClient.GetResponse<JobInitResult>(job).GetAwaiter().GetResult().Message;
 
                     if (!jobInitResult.IsInvalid)
                     {
@@ -92,18 +97,19 @@ namespace CMI.Tools.DocumentConverter
                         switch (job.RequestedProcessType)
                         {
                             case ProcessType.TextExtraction:
-                                var extractedText = extractionClient.Request(new ExtractionStartRequest {JobGuid = jobInitResult.JobGuid})
-                                    .GetAwaiter().GetResult();
+                                var extractedText = extractionClient.GetResponse<ExtractionStartResult>(new ExtractionStartRequest {JobGuid = jobInitResult.JobGuid})
+                                    .GetAwaiter().GetResult().Message;
                                 SaveTextExtractionResult(new FileInfo(job.FileNameWithExtension), extractedText.Text, targetFolder);
                                 break;
                             case ProcessType.Rendering:
-                                var conversionResult = conversionClient.Request(new ConversionStartRequest
+                                var conversionResult = conversionClient.GetResponse<ConversionStartResult>(new ConversionStartRequest
                                     {
                                         JobGuid = jobInitResult.JobGuid,
                                         DestinationExtension = GetDestinationBasedOnInput(new FileInfo(job.FileNameWithExtension).Extension)
                                     })
                                     .GetAwaiter()
-                                    .GetResult();
+                                    .GetResult()
+                                    .Message;
                                 if (!conversionResult.IsInvalid)
                                 {
                                     DownloadAndStoreFile(conversionResult, targetFolder);
@@ -207,44 +213,44 @@ namespace CMI.Tools.DocumentConverter
         }
 
 
-        private IRequestClient<JobInitRequest, JobInitResult> CreateJobInitRequestClient()
+        private IRequestClient<JobInitRequest> CreateJobInitRequestClient()
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
 
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterJobInitRequestQueue);
-            var client = new MessageRequestClient<JobInitRequest, JobInitResult>(bus, busUri, requestTimeout);
+            var client = bus.CreateRequestClient<JobInitRequest>(busUri, requestTimeout);
 
             return client;
         }
 
-        private IRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse> CreateSupportedFileTypesRequestClient()
+        private IRequestClient<SupportedFileTypesRequest> CreateSupportedFileTypesRequestClient()
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
 
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterSupportedFileTypesRequestQueue);
-            var client = new MessageRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse>(bus, busUri, requestTimeout);
+            var client = bus.CreateRequestClient<SupportedFileTypesRequest>(busUri, requestTimeout);
 
             return client;
         }
 
-        private IRequestClient<ConversionStartRequest, ConversionStartResult> CreateDocumentConversionRequestClient()
+        private IRequestClient<ConversionStartRequest> CreateDocumentConversionRequestClient()
         {
             // Very large files could take a very long time to convert
             var requestTimeout = TimeSpan.FromHours(12);
 
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterConversionStartRequestQueue);
-            var client = new MessageRequestClient<ConversionStartRequest, ConversionStartResult>(bus, busUri, requestTimeout);
+            var client = bus.CreateRequestClient<ConversionStartRequest>(busUri, requestTimeout);
 
             return client;
         }
 
-        private IRequestClient<ExtractionStartRequest, ExtractionStartResult> CreateDocumentExtractionRequestClient()
+        private IRequestClient<ExtractionStartRequest> CreateDocumentExtractionRequestClient()
         {
             // Ocr of a large pdf can take some time
             var requestTimeout = TimeSpan.FromHours(12);
 
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterExtractionStartRequestQueue);
-            var client = new MessageRequestClient<ExtractionStartRequest, ExtractionStartResult>(bus, busUri, requestTimeout);
+            var client = bus.CreateRequestClient<ExtractionStartRequest>(busUri, requestTimeout);
 
             return client;
         }

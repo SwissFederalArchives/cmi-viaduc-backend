@@ -54,6 +54,35 @@ namespace CMI.Engine.Asset
             return retVal;
         }
 
+        public bool ConvertAreldaMetadataXml(string tempFolder)
+        {
+            Log.Information("Converting arelda metadata.xml file...");
+
+            try
+            {
+                var metadataFile = Path.Combine(tempFolder, "header", "metadata.xml");
+                var transformationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Html", "Xslt", "areldaConvert.xsl");
+
+                // IF one of the files does not exist, log warning and create an "error" index.html file.
+                if (!File.Exists(transformationFile) || !File.Exists(metadataFile))
+                {
+                    throw new Exception(
+                        $"Could not find the transformation file or the source file to transform. Make sure the both file exists.\nTransformation file: {transformationFile}\nSource file: {metadataFile}");
+                }
+
+                var result = TransformXml(metadataFile, transformationFile, null);
+                File.WriteAllText(metadataFile, result);
+                Log.Information("Converted.");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unable to convert arelda metadata xml in folder {tempFolder}", tempFolder);
+                throw;
+            }
+
+            return true;
+        }
+
         private XmlDocument ToXmlDocument(XDocument xDocument)
         {
             var xmlDocument = new XmlDocument();

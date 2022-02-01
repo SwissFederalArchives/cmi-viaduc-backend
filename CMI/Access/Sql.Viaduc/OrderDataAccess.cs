@@ -452,6 +452,46 @@ namespace CMI.Access.Sql.Viaduc
                 return orderings;
             }
         }
+        
+        public async Task<List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenaufbereitungItemsByDate(DateTime startTime, DateTime endTime)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                var primaerdatenaufbereitungItems = new List<PrimaerdatenAufbereitungItem>();
+
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * " +
+                                      "FROM " +
+                                      "v_PrimaerdatenAufbereitung " +
+                                      "WHERE AuftragErledigt between @startTime AND @endTime";
+
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "startTime",
+                        Value = startTime,
+                        SqlDbType = SqlDbType.DateTime
+                    });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "endTime",
+                        Value = endTime,
+                        SqlDbType = SqlDbType.DateTime
+                    });
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            primaerdatenaufbereitungItems.Add(PrimaerdatenAufbereitungItemFromReader(reader));
+                        }
+                    }
+                }
+                
+                return primaerdatenaufbereitungItems;
+            }
+        }
 
         public async Task<Ordering> GetOrdering(int orderingId, bool includeOrderItems = true)
         {
@@ -1778,6 +1818,40 @@ namespace CMI.Access.Sql.Viaduc
             };
         }
 
+        private PrimaerdatenAufbereitungItem PrimaerdatenAufbereitungItemFromReader(SqlDataReader reader)
+        {
+            var primaerdatenAufbereitungItem = new PrimaerdatenAufbereitungItem();
+
+            primaerdatenAufbereitungItem.OrderingDate = reader["OrderingDate"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.OrderingType = reader["OrderingType"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.OrderItemId = reader["OrderItemId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.Dossiertitel = reader["Dossiertitel"].ToString();
+            primaerdatenAufbereitungItem.VeId = reader["VeId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.MutationsId = reader["MutationsId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.NeuEingegangen = reader["NeuEingegangen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.FreigabePruefen = reader["FreigabePruefen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.FuerDigitalisierungBereit = reader["FuerDigitalisierungBereit"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.FuerAushebungBereit = reader["FuerAushebungBereit"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.Ausgeliegen = reader["Ausgeliegen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.ZumReponierenBereit = reader["ZumReponierenBereit"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.Abgeschlossen = reader["Abgeschlossen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.Abgebrochen = reader["Abgebrochen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.PrimaerdatenAuftragId = reader["PrimaerdatenAuftragId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.AufbereitungsArt = reader["AufbereitungsArt"].ToString();
+            primaerdatenAufbereitungItem.GroesseInBytes = reader["GroesseInBytes"].GetValueOrNull<long>();
+            primaerdatenAufbereitungItem.Quelle = reader["Quelle"].ToString();
+            primaerdatenAufbereitungItem.GeschaetzteAufbereitungszeit = reader["GeschaetzteAufbereitungszeit"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.Registriert = reader["Registriert"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.LetzterAufbereitungsversuch = reader["LetzterAufbereitungsversuch"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.ErsterAufbereitungsversuch = reader["ErsterAufbereitungsversuch"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.AuftragErledigt = reader["AuftragErledigt"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.ImCacheAbgelegt = reader["ImCacheAbgelegt"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.AnzahlVersucheDownload = reader["AnzahlVersucheDownload"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.AnzahlVersucheSync = reader["AnzahlVersucheSync"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.PackageMetadata = reader["PackageMetadata"].ToString();
+
+            return primaerdatenAufbereitungItem;
+        }
 
         private OrderItem OrderItemFromReader(SqlDataReader reader)
         {

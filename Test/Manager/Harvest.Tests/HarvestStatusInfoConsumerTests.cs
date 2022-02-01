@@ -14,9 +14,9 @@ namespace CMI.Manager.Harvest.Tests
     public class HarvestStatusInfoConsumerTests : InMemoryTestFixture
     {
         private readonly Mock<IHarvestManager> harvestManager = new Mock<IHarvestManager>();
-        private IRequestClient<GetHarvestStatusInfo, GetHarvestStatusInfoResult> client;
+        private IRequestClient<GetHarvestStatusInfo> client;
 
-        public HarvestStatusInfoConsumerTests() : base(true)
+        public HarvestStatusInfoConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -25,7 +25,7 @@ namespace CMI.Manager.Harvest.Tests
         public void Setup()
         {
             harvestManager.Reset();
-            client = CreateRequestClient<GetHarvestStatusInfo, GetHarvestStatusInfoResult>();
+            client = CreateRequestClient<GetHarvestStatusInfo>();
         }
 
         protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
@@ -51,7 +51,7 @@ namespace CMI.Manager.Harvest.Tests
             });
 
             // Act
-            var response = await client.Request(new GetHarvestStatusInfo {DateRange = QueryDateRangeEnum.LastHour});
+            var response = (await client.GetResponse<GetHarvestStatusInfoResult>(new GetHarvestStatusInfo {DateRange = QueryDateRangeEnum.LastHour})).Message;
 
             // Assert
             response.Result.NumberOfRecordsCurrentlySyncing.Should().Be(1);

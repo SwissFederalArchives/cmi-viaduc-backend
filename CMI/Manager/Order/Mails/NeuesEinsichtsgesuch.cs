@@ -15,7 +15,9 @@ namespace CMI.Manager.Order.Mails
 
         [DefaultValue("")] public override string Bcc { get; set; }
 
-        [DefaultValue("Neues Einsichtsgesuch: {{User.Vorname}} {{User.Name}}, {{User.Organisation}}, {{User.Ort}} / {{Bestellung.OrderId}}")]
+        [DefaultValue("Neues Einsichtsgesuch: {{User.Vorname}} {{User.Name}}," +
+                " {{#HasOrganization}}{{User.Organisation}}, {{/HasOrganization}}{{User.Ort}} / {{Bestellung.ErfassungsdatumMitUhrzeit}} / {{Bestellung.OrderId}}")]
+
         public override string Subject { get; set; }
 
         [ReadDefaultFromResource] public override string Body { get; set; }

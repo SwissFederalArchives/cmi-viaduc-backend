@@ -80,7 +80,7 @@ namespace CMI.Manager.Order
             {
                 return; // keine Änderung, es braucht nichts historisiert zu werden
             }
-
+            
             OrderItem.Status = newState.OrderStateInternal;
 
             pendingStatusWechselHistoryRows.Add(new StatusHistory

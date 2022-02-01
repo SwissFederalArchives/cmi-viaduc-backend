@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using CMI.Contract.Common.Gebrauchskopie;
+using CMI.Engine.Asset;
+using CMI.Engine.Asset.PreProcess;
 using FluentAssertions;
 using NUnit.Framework;
 

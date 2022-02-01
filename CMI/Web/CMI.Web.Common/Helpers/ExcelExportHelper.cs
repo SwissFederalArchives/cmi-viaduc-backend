@@ -76,7 +76,7 @@ namespace CMI.Web.Common.Helpers
         {
             if (!string.IsNullOrEmpty(columnInfo.FormatSpecification))
             {
-                var cell = col.Range.GetCellOrNull(1, 0);
+                var cell = GetCell(col, 1);
                 if (cell != null)
                 {
                     var style = cell.GetStyle();
@@ -95,10 +95,31 @@ namespace CMI.Web.Common.Helpers
                 worksheet.AutoFitColumn(col.Range.FirstColumn);
             }
 
+            if (!string.IsNullOrEmpty(columnInfo.ColumnHeader))
+            {
+                col.Name = columnInfo.ColumnHeader;
+            }
+
             if (columnInfo.Hidden)
             {
                 col.Range.ColumnWidth = 0;
             }
+        }
+
+        /// <summary>
+        /// The Cell is only supplied if the cell has a value also
+        /// </summary>
+        /// <param name="col"></param>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
+        private static Cell GetCell(ListColumn col, int rowIndex)
+        {
+            var cell = col.Range.GetCellOrNull(rowIndex, 0);
+            if (cell == null && col.Range.RowCount > rowIndex + 1)
+            {
+                cell = GetCell(col, ++rowIndex);
+            }
+            return cell;
         }
 
         // As Excel allows only 32K in a cell, we need to make sure, no text property is longer than 32K
@@ -131,6 +152,7 @@ namespace CMI.Web.Common.Helpers
     public class ExcelColumnInfo
     {
         public string ColumnName { get; set; }
+        public string ColumnHeader { get; set; }
         public string FormatSpecification { get; set; }
         public int Width { get; set; }
         public bool MakeAutoWidth { get; set; }

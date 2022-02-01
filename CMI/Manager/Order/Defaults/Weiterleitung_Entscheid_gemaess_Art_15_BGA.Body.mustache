@@ -1,16 +1,14 @@
 ﻿<html>
-
-<head>    
-<style TYPE="text/css">
+<head>
+    <style TYPE="text/css">
         html, body {
             font-family: Arial, Helvetica, sans-serif;
             width: 800px;
             font-size: 10pt;
             line-height: 13px;
         }
-
-        table {           
-			border-collapse: collapse;
+        table {
+            border-collapse: collapse;
         }
         th, td {
             padding-top: 2px;
@@ -26,7 +24,6 @@
         }
     </style>
 </head>
-
 <body>
     <p style="color:red">
         Name: {{Besteller.Name}} <br />
@@ -50,8 +47,8 @@
         <span style="color:red">Sehr geehrte Frau / Sehr geehrter Herr</span> {{Besteller.Name}}
     </p>
     <p>
-        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen <span style="color:red">des/der</span> {{TitelUndSignaturTeilBestand}}. 
-        Gerne teilen wir Ihnen mit, dass Ihnen die zuständige Verwaltungsstelle mit Schreiben vom <span style="color:red">Datum</span> 
+        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen von {{TitelUndSignaturTeilBestand}}.
+        Gerne teilen wir Ihnen mit, dass Ihnen die zuständige Verwaltungsstelle mit Schreiben vom <span style="color:red">Datum</span>
         gestützt auf die Bestimmungen von Art. 15 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) Einsicht in folgende Unterlagen gewährt:
     </p>
     <p>
@@ -92,7 +89,7 @@
         <span style="color:red">Sehr geehrte Frau / Sehr geehrter Herr</span> {{Besteller.Name}}
     </p>
     <p>
-        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen <span style="color:red">des/der</span> {{TitelUndSignaturTeilBestand}}. Gerne teilen wir Ihnen mit, dass Ihnen die zuständige Verwaltungsstelle mit Schreiben vom <span style="color:red">Datum</span> gestützt auf die Bestimmungen von Art. 15 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) eine eingeschränkte Einsicht in folgende Unterlagen gewährt:
+        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen von {{TitelUndSignaturTeilBestand}}. Gerne teilen wir Ihnen mit, dass Ihnen die zuständige Verwaltungsstelle mit Schreiben vom <span style="color:red">Datum</span> gestützt auf die Bestimmungen von Art. 15 des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) eine eingeschränkte Einsicht in folgende Unterlagen gewährt:
     </p>
     <p>
         <table>
@@ -144,7 +141,7 @@
         <span style="color:red">Sehr geehrte Frau / Sehr geehrter Herr</span> {{Besteller.Name}}
     </p>
     <p>
-        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen <span style="color:red">des/der</span> {{TitelUndSignaturTeilBestand}}. Wir müssen Ihnen mitteilen, dass die zuständige Verwaltungsstelle Ihrem Gesuch in folgende Unterlagen mit Schreiben vom <span style="color:red">Datum</span> nicht entsprochen hat:
+        Wir beziehen uns auf Ihr Gesuch vom {{Erfassungsdatum}} betreffend Unterlagen von {{TitelUndSignaturTeilBestand}}. Wir müssen Ihnen mitteilen, dass die zuständige Verwaltungsstelle Ihrem Gesuch in folgende Unterlagen mit Schreiben vom <span style="color:red">Datum</span> nicht entsprochen hat:
     </p>
     <p>
         <table>
@@ -172,13 +169,11 @@
     </p>
     <p>
         Sie haben gemäss Art. 22 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) die Möglichkeit, einen Entscheid in Form einer beschwerdefähigen Verfügung zu verlangen. Eine Frist oder Formvorschrift besteht hierfür nicht. Wir bitten Sie lediglich um eine kurze E-Mail, die wir an die zuständige Stelle weiterleiten. Bitte beachten Sie, dass die zuständige Stelle Gebühren für das Erstellen einer beschwerdefähigen Verfügung verlangen kann.
-        </p>
+    </p>
     <p>
         Mit freundlichen Grüssen
     </p>
     {{/IstDeutsch}}
-
-
     {{#IstFranzösisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
@@ -215,14 +210,12 @@
     </p>
     <p>
         Vous pouvez <a href="https://{{Global.PublicClientUrl}}/#/fr/informations/commande-et-consultation
-">commander</a> 
-        ces documents pour les consulter en salle de lecture ou en commander une reproduction numérique. 
+">commander</a>
+        ces documents pour les consulter en salle de lecture ou en commander une reproduction numérique.
     </p>
     <p>
         Meilleures salutations,
     </p>
-
-
     <hr>
     <p style="color:red">
         <b>Eingeschränkte Auskunftsbewilligung</b>
@@ -258,7 +251,7 @@
         </table>
     </p>
     <p>
-        La restriction se fonde sur l’art. 9 de la loi fédérale sur la protection des données (<a href="http://www.admin.ch/ch/f/sr/c235_1.html">LPD</a>, RS 235.1) et a été motivée comme suit par le service compétent : 
+        La restriction se fonde sur l’art. 9 de la loi fédérale sur la protection des données (<a href="http://www.admin.ch/ch/f/sr/c235_1.html">LPD</a>, RS 235.1) et a été motivée comme suit par le service compétent :
     </p>
     <p style="color:red">
         [En règle générale, on citera mot pour mot les motifs cités par le service compétent dans son courrier d’autorisation.]
@@ -272,8 +265,6 @@
     <p>
         Meilleures salutations,
     </p>
-
-
     <hr>
     <p style="color:red">
         <b>Einsichtsverweigerung (Auskunftsgesuch)</b>
@@ -309,21 +300,18 @@
         </table>
     </p>
     <p>
-        Le refus se fonde sur l’art. 9 de la loi fédérale sur la protection des données (<a href="http://www.admin.ch/ch/f/sr/c235_1.html">LPD</a>, RS 235.1) et a été motivé comme suit par le service compétent : 
+        Le refus se fonde sur l’art. 9 de la loi fédérale sur la protection des données (<a href="http://www.admin.ch/ch/f/sr/c235_1.html">LPD</a>, RS 235.1) et a été motivé comme suit par le service compétent :
     </p>
     <p style="color:red">
         [En règle générale, on citera mot pour mot les motifs cités par le service compétent dans son courrier de refus.]
     </p>
     <p>
         Conformément à l’art. 22 de l’ordonnance sur l’archivage (<a href="http://www.admin.ch/ch/f/sr/c152_11.html">OLAr</a>, RS 152.11) vous avez la possibilité de demander que la décision d’autorisation sous restriction vous soit notifiée sous forme de décision susceptible de recours.  Cette démarche n’est soumise à aucun délai ni prescription formelle – il suffit de nous adresser une brève demande par écrit, que nous transmettrons au service compétent. Veuillez noter que la rédaction d’une décision susceptible de recours peut être soumise à émolument.
-        </p>
+    </p>
     <p>
         Meilleures salutations,
     </p>
     {{/IstFranzösisch}}
-
-
-
     {{#IstItalienisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
@@ -338,7 +326,7 @@
         <span style="color:red">Gentile signora / Egregio signor </span> {{Besteller.Name}}
     </p>
     <p>
-        in riferimento alla Sua richiesta del {{Erfassungsdatum}} concernente documenti <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}, La informiamo che il  <span style="color:red">data</span> il servizio competente Le ha accordato, in virtù dell’articolo 15 della legge federale sull’archiviazione (<a href="http://www.admin.ch/ch/i/sr/c152_1.html">LAr</a>; RS 152.1), l’autorizzazione a consultare i seguenti documenti:
+        in riferimento alla Sua richiesta del {{Erfassungsdatum}} concernente documenti <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}, La informiamo che il giorno <span style="color:red">data</span> il servizio competente Le ha accordato, in virtù dell’articolo 15 della legge federale sull’archiviazione (<a href="http://www.admin.ch/ch/i/sr/c152_1.html">LAr</a>; RS 152.1), l’autorizzazione a consultare i seguenti documenti:
     </p>
     <p>
         <table>
@@ -364,8 +352,6 @@
     <p>
         Distinti saluti
     </p>
-
-
     <hr>
     <p style="color:red">
         <b>Eingeschränkte Auskunftsbewilligung</b>
@@ -380,7 +366,7 @@
         <span style="color:red">Gentile signora / Egregio signor </span> {{Besteller.Name}},
     </p>
     <p>
-        in riferimento alla Sua richiesta del {{Erfassungsdatum}} concernente documenti <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}. La informiamo che il <span style="color:red">data</span> il servizio competente Le ha accordato, in virtù dell’articolo 15 della legge federale sull’archiviazione (<a href="http://www.admin.ch/ch/i/sr/c152_1.html">LAr</a>; RS 152.1), l’autorizzazione a consultare con restrizioni i seguenti documenti:
+        in riferimento alla Sua richiesta del {{Erfassungsdatum}} concernente documenti <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}. La informiamo che il giorno <span style="color:red">data</span> il servizio competente Le ha accordato, in virtù dell’articolo 15 della legge federale sull’archiviazione (<a href="http://www.admin.ch/ch/i/sr/c152_1.html">LAr</a>; RS 152.1), l’autorizzazione a consultare con restrizioni i seguenti documenti:
     </p>
     <p>
         <table>
@@ -401,7 +387,7 @@
         </table>
     </p>
     <p>
-       Le restrizioni si fondano sull’articolo 9 della legge federale sulla protezione dei dati (<a href="http://www.admin.ch/ch/i/sr/c235_1.html">LPD</a>; RS 235.1) e sono state motivate come segue dal servizio competente: 
+        Le restrizioni si fondano sull’articolo 9 della legge federale sulla protezione dei dati (<a href="http://www.admin.ch/ch/i/sr/c235_1.html">LPD</a>; RS 235.1) e sono state motivate come segue dal servizio competente:
     </p>
     <p style="color:red">
         [Begründung ist in der Regel wörtlich aus dem Bewilligungsschreiben des Amtes zu zitieren]
@@ -415,9 +401,6 @@
     <p>
         Distinti saluti
     </p>
-
-
-
     <hr>
     <p style="color:red">
         <b>Einsichtsverweigerung (Auskunftsgesuch)</b>
@@ -432,7 +415,7 @@
         <span style="color:red">Gentile signora / Egregio signor </span> {{Besteller.Name}}
     </p>
     <p>
-        in riferimento alla richiesta del {{Erfassungsdatum}} concernente documenti  <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}, La informiamo che il <span style="color:red">data</span> il servizio competente non Le ha accordato l’autorizzazione a consultare i seguenti documenti:
+        in riferimento alla richiesta del {{Erfassungsdatum}} concernente documenti  <span style="color:red">del sub-fondo / dei sub-fondi </span> {{TitelUndSignaturTeilBestand}}, La informiamo che il giorno <span style="color:red">data</span> il servizio competente non Le ha accordato l’autorizzazione a consultare i seguenti documenti:
     </p>
     <p>
         <table>
@@ -453,24 +436,19 @@
         </table>
     </p>
     <p>
-        Il rigetto si fonda sull’articolo 9 della legge federale sulla protezione dei dati (<a href="http://www.admin.ch/ch/i/sr/c235_1.html">LPD</a>; RS 235.1) ed è stato motivato come segue dal servizio competente: 
+        Il rigetto si fonda sull’articolo 9 della legge federale sulla protezione dei dati (<a href="http://www.admin.ch/ch/i/sr/c235_1.html">LPD</a>; RS 235.1) ed è stato motivato come segue dal servizio competente:
     </p>
     <p style="color:red">
         [Begründung ist in der Regel wörtlich aus dem Schreiben des Amtes zu zitieren]
     </p>
     <p>
         Secondo l’articolo 22 dell’ordinanza sull’archiviazione (<a href="http://www.admin.ch/ch/i/sr/c152_11.html">OLAr</a>; RS 152.11), ha la possibilità di chiedere una decisione impugnabile con ricorso. La richiesta non sottostà a termini o requisiti formali particolari. La preghiamo unicamente di inviarci una breve e-mail che provvederemo a inoltrare al servizio competente. Le segnaliamo tuttavia che per l’emanazione di una decisione impugnabile può essere riscosso un emolumento.
-        </p>
+    </p>
     <p>
         Distinti saluti
     </p>
-
     {{/IstItalienisch}}
-
-
-
-    {{#IstEnglisch}}   
-
+    {{#IstEnglisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
     </p>
@@ -510,10 +488,7 @@
     <p>
         Yours sincerely
     </p>
-
-
-
-   <hr>
+    <hr>
     <p style="color:red">
         <b>Eingeschränkte Auskunftsbewilligung</b>
     </p>
@@ -528,7 +503,7 @@
     </p>
     <p>
         We refer to your request dated {{Erfassungsdatum}} relating to documents from {{TitelUndSignaturTeilBestand}}.
-        We are pleased to inform you that, based on the provisions of Art. 15 of the Federal Act on Archiving 
+        We are pleased to inform you that, based on the provisions of Art. 15 of the Federal Act on Archiving
         (<a href="https://www.admin.ch/ch/e/rs/c152_1.html">BGA</a>, SR 152.1), the administrative office responsible has, in its communication dated <span style="color:red">date</span>, authorised you to consult the following documents subject to restrictions:
     </p>
     <p>
@@ -551,7 +526,7 @@
     </p>
     <p>
         The restriction has been imposed under the terms of Art. 9 of the Federal Act on Data Protection
-        (<a href="http://www.admin.ch/ch/e/rs/c235_1.html">FADP</a>, SR 235.1) and has been justified by the office responsible on the following grounds: 
+        (<a href="http://www.admin.ch/ch/e/rs/c235_1.html">FADP</a>, SR 235.1) and has been justified by the office responsible on the following grounds:
     </p>
     <p style="color:red">
         [Begründung ist in der Regel wörtlich aus dem Bewilligungsschreiben des Amtes zu zitieren]
@@ -566,7 +541,6 @@
     <p>
         Yours sincerely
     </p>
-
     <hr>
     <p style="color:red">
         <b>Einsichtsverweigerung (Auskunftsgesuch)</b>
@@ -602,7 +576,19 @@
         </table>
     </p>
     <p>
-        Authorisation has been refused under the terms of Art. 9 of the Federal Act on Data Protection (<a href="http://www.admin.ch/ch/e/rs/c235_1.html">FADP</a>, SR 235.1) and has been justified by the office responsible on the following grounds: 
+        Authorisation has been refused under the terms of Art. 9 of the Federal Act on Data Protection (<a href="http://www.admin.ch/ch/e/rs/c235_1.html">FADP</a>, SR 235.1) and has been justified by the office responsible on the following grounds:
     </p>
     <p style="color:red">
-        [Begründung ist in der Regel wörtlich aus dem Schreiben des
+        [Begründung ist in der Regel wörtlich aus dem Schreiben des Amtes zu zitieren]
+    </p>
+    <p>
+        Under Art. 22 of the Archiving Ordinance (<a href="http://www.admin.ch/ch/e/rs/c152_11.html">ArchO</a>, SR 152.11)
+        you have the option to request a decision in the form of an appealable ruling. There is no deadline for doing so and no formal requirements apply. We would simply ask you to send us a short e-mail which we will forward to the office responsible. Please note that the office responsible may charge a fee for issuing an appealable ruling
+    </p>
+    <p>
+        Yours sincerely
+    </p>
+    {{/IstEnglisch}}
+    {{/Sprachen}}
+</body>
+</html>

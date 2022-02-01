@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Reflection;
-using CMI.Contract.Monitoring;
-using CMI.Contract.Parameter;
+using Autofac;
 using CMI.Manager.Vecteur.Properties;
-using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
 using Microsoft.Owin.Hosting;
@@ -38,15 +35,11 @@ namespace CMI.Manager.Vecteur
             Log.Information("Vecteur service started");
 
 
-            Startup.Kernel.Bind<IBus>().ToMethod(context => Bus).InSingletonScope();
-            Startup.Kernel.Bind<IBusControl>().ToMethod(context => Bus).InSingletonScope();
         }
 
         private void StartBus()
         {
-            var helper = new ParameterBusHelper();
-            Bus = BusConfigurator.ConfigureBus(MonitoredServices.VecteurService,
-                (cfg, host) => { helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host); });
+            Bus = Startup.Container.Resolve<IBusControl>();
             Bus.Start();
         }
 

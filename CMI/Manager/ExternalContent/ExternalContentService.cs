@@ -1,11 +1,11 @@
-﻿using CMI.Contract.Messaging;
+﻿using Autofac;
+using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Manager.ExternalContent.Consumers;
 using CMI.Manager.ExternalContent.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
-using Ninject;
 using Serilog;
 
 namespace CMI.Manager.ExternalContent
@@ -15,13 +15,13 @@ namespace CMI.Manager.ExternalContent
     /// </summary>
     public class ExternalContentService
     {
-        private readonly StandardKernel kernel;
+        private ContainerBuilder containerBuilder;
         private IBusControl bus;
 
         public ExternalContentService()
         {
             // Configure IoC Container
-            kernel = ContainerConfigurator.Configure();
+            containerBuilder = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
         }
 
@@ -34,17 +34,17 @@ namespace CMI.Manager.ExternalContent
             Log.Information("ExternalContent service is starting");
 
             // Configure Bus
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.ExternalContentService, (cfg, host) =>
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.ExternalContentService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.ManagementApiGetDigitizationOrderData,
-                    ec => { ec.Consumer(() => kernel.Get<DigitizationOrderConsumer>()); });
-
-                cfg.UseSerilog();
+                    ec => { ec.Consumer(ctx.Resolve<DigitizationOrderConsumer>); });
+                cfg.ReceiveEndpoint(BusConstants.ManagementApiGetReportExternalContent,
+                    ec => { ec.Consumer(ctx.Resolve<ReportExternalConsumer>); });
             });
 
             // Add the bus instance to the IoC container
-            kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
+            var container = containerBuilder.Build();
+            bus = container.Resolve<IBusControl>();
             bus.Start();
 
             Log.Information("ExternalContent service started");

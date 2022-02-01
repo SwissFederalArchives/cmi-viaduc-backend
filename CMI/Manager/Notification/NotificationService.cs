@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Manager.Notification.Consumers;
@@ -8,19 +9,18 @@ using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using GreenPipes;
 using MassTransit;
-using Ninject;
 using Serilog;
 
 namespace CMI.Manager.Notification
 {
     public class NotificationService
     {
-        private readonly StandardKernel kernel;
+        private readonly ContainerBuilder containerBuilder;
         private IBusControl bus;
 
         public NotificationService()
         {
-            kernel = ContainerConfigurator.Configure();
+            containerBuilder = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
         }
 
@@ -28,21 +28,18 @@ namespace CMI.Manager.Notification
         {
             LogInformation("Notification service is starting");
             // Configure Bus
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.NotificationService, (cfg, host) =>
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.NotificationService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.NotificationManagerMessageQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<EmailMessageConsumer>());
+                    ec.Consumer(ctx.Resolve<EmailMessageConsumer>);
                     ec.UseRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
-
-                cfg.UseSerilog();
             });
 
-            // Add the bus instance to the IoC container
-            kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
+            var container = containerBuilder.Build();
+            bus = container.Resolve<IBusControl>();
             bus.Start();
 
             PublishStartupTestMailIfNeccessary();

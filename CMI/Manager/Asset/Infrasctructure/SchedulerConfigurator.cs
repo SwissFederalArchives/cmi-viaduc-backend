@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Core;
 using CMI.Manager.Asset.Jobs;
 using CMI.Manager.Asset.ParameterSettings;
-using Ninject;
 using Quartz;
 using Quartz.Impl;
 using Serilog;
@@ -11,11 +12,11 @@ namespace CMI.Manager.Asset.Infrasctructure
 {
     internal static class SchedulerConfigurator
     {
-        public static async Task<IScheduler> Configure(IKernel kernel)
+        public static async Task<IScheduler> Configure(IContainer container)
         {
             var scheduler = await StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.JobFactory = new JobFactory(kernel);
-            var settings = kernel.Get<AssetPriorisierungSettings>();
+            scheduler.JobFactory = new JobFactory(container);
+            var settings = container.Resolve<AssetPriorisierungSettings>();
 
             // Define the standard job to get the pending SYNC records
             // -------------------------------------------------------

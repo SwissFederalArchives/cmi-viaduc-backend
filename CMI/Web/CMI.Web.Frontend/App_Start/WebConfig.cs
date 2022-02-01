@@ -1,7 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.Reflection;
+using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
+using CMI.Web.Frontend.DependencyInjection;
 
 namespace CMI.Web.Frontend
 {
@@ -19,7 +23,17 @@ namespace CMI.Web.Frontend
         {
             var builder = new ContainerBuilder();
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(builder.Build()));
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterWebApiModelBinderProvider();
+            
+            builder.RegisterBus();
+            builder.RegisterFrontendInjectables();
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+            BusConfig.StartBus(container);
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

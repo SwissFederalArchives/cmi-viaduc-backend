@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Dynamic;
+using CMI.Contract.Common.Extensions;
 using CMI.Contract.Order;
 using CMI.Engine.MailTemplate;
 using CMI.Manager.Order.Mails;

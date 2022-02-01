@@ -15,7 +15,7 @@ namespace CMI.Manager.Index
 {
     public class IndexManager : IIndexManager
     {
-        private const string DossierLevelIdentifier = "Dossier";
+        private const string dossierLevelIdentifier = "Dossier";
         private readonly ISearchIndexDataAccess dbAccess;
         private readonly CustomFieldsConfiguration fieldsConfiguration;
 
@@ -69,7 +69,7 @@ namespace CMI.Manager.Index
 
                 // Is the package we fetched already on dossier level?
                 // If not, traverse up the hierarchie until we find the dossier level
-                while (entryItem != null && entryItem.Level.Equals(DossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase) == false)
+                while (entryItem != null && entryItem.Level.Equals(dossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase) == false)
                 {
                     Log.Verbose("Ordered item is not dossier level. So we traverse up.");
                     if (!string.IsNullOrEmpty(entryItem.ParentArchiveRecordId))
@@ -158,7 +158,7 @@ namespace CMI.Manager.Index
                 Bestand = archiveRecord.Display.ArchiveplanContext
                     .LastOrDefault(a => a.Level.Equals(levelIdentifier, StringComparison.InvariantCultureIgnoreCase))?.Title,
                 Ordnungskomponenten = archiveRecord.Metadata.AggregationFields.FirstOrDefault(a => a.AggregationName == "FondsOverview")?.Values,
-                HasPrimaryData = !string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink)
+                HasPrimaryData = !string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink) || ContainsCustomFieldDigitaleVersion(elasticArchiveRecord.CustomFields)
             };
             elasticArchiveRecord.References = archiveRecord.Metadata.References.Select(s => new ElasticReference
                 {
@@ -200,6 +200,17 @@ namespace CMI.Manager.Index
             // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
             // According to elastic documentation histograms are calculated with this formula
             // bucket_key = Math.floor((value - offset) / interval) * interval + offset
+            CalculateCreationPeriodBuckets(elasticArchiveRecord);
+
+            return elasticArchiveRecord;
+        }
+        
+        /// <summary>
+        /// Calculate the Period how create the Record
+        /// </summary>
+        /// <param name="elasticArchiveRecord"></param>
+        public static void CalculateCreationPeriodBuckets(ElasticArchiveRecord elasticArchiveRecord)
+        {
             if (elasticArchiveRecord.CreationPeriod != null && elasticArchiveRecord.CreationPeriod.Years.Any())
             {
                 elasticArchiveRecord.AggregationFields.CreationPeriodYears001 =
@@ -207,17 +218,12 @@ namespace CMI.Manager.Index
                 elasticArchiveRecord.AggregationFields.CreationPeriodYears005 =
                     elasticArchiveRecord.CreationPeriod.Years.Select(year => (int) Math.Floor(year / 5m) * 5).Distinct().ToList();
                 elasticArchiveRecord.AggregationFields.CreationPeriodYears010 =
-                    elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Select(year => (int) Math.Floor(year / 10m) * 10).Distinct()
-                        .ToList();
+                    elasticArchiveRecord.CreationPeriod.Years.Select(year => (int) Math.Floor(year / 10m) * 10).Distinct().ToList();
                 elasticArchiveRecord.AggregationFields.CreationPeriodYears025 =
-                    elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Select(year => (int) Math.Floor(year / 25m) * 25).Distinct()
-                        .ToList();
+                    elasticArchiveRecord.CreationPeriod.Years.Select(year => (int) Math.Floor(year / 25m) * 25).Distinct().ToList();
                 elasticArchiveRecord.AggregationFields.CreationPeriodYears100 =
-                    elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Select(year => (int) Math.Floor(year / 100m) * 100).Distinct()
-                        .ToList();
+                    elasticArchiveRecord.CreationPeriod.Years.Select(year => (int) Math.Floor(year / 100m) * 100).Distinct().ToList();
             }
-
-            return elasticArchiveRecord;
         }
 
         public void TransferDataFromPropertyBag(ElasticArchiveRecord elasticArchiveRecord, List<DataElement> detailData)
@@ -344,6 +350,22 @@ namespace CMI.Manager.Index
             }
 
             return retVal;
+        }
+
+        private static bool ContainsCustomFieldDigitaleVersion(dynamic customFields)
+        {
+            if (customFields is Dictionary<string, object> && ((IDictionary<string, object>)customFields).ContainsKey("digitaleVersion"))
+            {
+                var field =
+                    ((IDictionary<string, object>)customFields).FirstOrDefault(k =>
+                        k.Key.Equals("digitaleVersion", StringComparison.InvariantCultureIgnoreCase));
+                if (field.Value != null && !string.IsNullOrWhiteSpace(field.Value.ToString()))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

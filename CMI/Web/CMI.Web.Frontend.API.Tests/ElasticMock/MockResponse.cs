@@ -46,5 +46,18 @@ namespace CMI.Web.Frontend.API.Tests.ElasticMock
         public IReadOnlyCollection<TreeRecord> Documents { get; }
         public IReadOnlyCollection<IHit<TreeRecord>> Hits { get; }
         public IReadOnlyCollection<FieldValues> Fields { get; }
+
+        #region Nach Update 7.12.1
+
+        ClusterStatistics ISearchResponse<TreeRecord>.Clusters => throw new NotImplementedException();
+
+        IHitsMetadata<TreeRecord> ISearchResponse<TreeRecord>.HitsMetadata => throw new NotImplementedException();
+
+        ISuggestDictionary<TreeRecord> ISearchResponse<TreeRecord>.Suggest => throw new NotImplementedException();
+
+        string ISearchResponse<TreeRecord>.PointInTimeId => throw new NotImplementedException();
+
+
+        #endregion
     }
 }

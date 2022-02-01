@@ -26,6 +26,8 @@ namespace CMI.Access.Sql.Viaduc
 
         Task<IEnumerable<Ordering>> GetOrderings(string userId);
 
+        Task<List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenaufbereitungItemsByDate(DateTime startTime, DateTime endTime);
+
         Task<Ordering> GetOrdering(int orderingId, bool includeOrderItems = true);
 
         Task<OrderItem> GetOrderItem(int orderItemId);

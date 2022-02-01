@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset;
+using CMI.Engine.Asset.ParameterSettings;
+using CMI.Engine.Asset.PreProcess;
 using CMI.Manager.Asset.ParameterSettings;
 using Serilog;
 
@@ -44,12 +46,10 @@ namespace CMI.Manager.Asset.TransformJp2ToPdfTester
 
                 var metadataFile = Path.Combine(sourceFolder, "header", "metadata.xml");
                 var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
-
+                var settings = new ScansZusammenfassenSettings { DefaultAufloesungInDpi = 300, GroesseInProzent = sizeInPercent, JpegQualitaetInProzent = jpegQuality };
+                var scanProcessor = new ScanProcessor(new FileResolution(settings), settings);
                 // Create pdf documents from scanned jpeg 2000 scans.
-                var scanProcessor = new ScanProcessor();
-                scanProcessor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, sourceFolder,
-                    new ScansZusammenfassenSettings
-                        {DefaultAufloesungInDpi = 300, GroesseInProzent = sizeInPercent, JpegQualitaetInProzent = jpegQuality});
+                scanProcessor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, sourceFolder);
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace CMI.Manager.Asset.TransformJp2ToPdfTester
         {
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.LiterateConsole()
+                .WriteTo.Console()
                 .ReadFrom.AppSettings().CreateLogger();
         }
 

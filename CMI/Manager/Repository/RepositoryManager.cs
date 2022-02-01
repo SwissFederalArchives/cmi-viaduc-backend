@@ -230,7 +230,7 @@ namespace CMI.Manager.Repository
                         // Create the metadata.xml
                         if (createMetadataXml)
                         {
-                            handler.CreateMetadataXml(Path.Combine(tempRootFolder, headerFolderName), retVal.PackageDetails, allIgnoredFiles);
+                            await handler.CreateMetadataXml(Path.Combine(tempRootFolder, headerFolderName), retVal.PackageDetails, allIgnoredFiles);
                         }
 
                         // Get some information about the package

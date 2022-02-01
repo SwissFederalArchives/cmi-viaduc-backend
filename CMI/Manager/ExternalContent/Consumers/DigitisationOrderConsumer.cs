@@ -8,9 +8,9 @@ namespace CMI.Manager.ExternalContent.Consumers
 {
     public class DigitizationOrderConsumer : IConsumer<GetDigitizationOrderData>
     {
-        private readonly ExternalContentManager externalContentManager;
+        private readonly IExternalContentManager externalContentManager;
 
-        public DigitizationOrderConsumer(ExternalContentManager externalContentManager)
+        public DigitizationOrderConsumer(IExternalContentManager externalContentManager)
         {
             this.externalContentManager = externalContentManager;
         }

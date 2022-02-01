@@ -1,0 +1,217 @@
+﻿<html>
+<head>
+
+    <style TYPE="text/css">
+        html,
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            width: 800px;
+            font-size: 10pt;
+            line-height: 13px;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            text-align: left;
+            vertical-align: top;
+            font-weight: normal;
+            line-height: 12px;
+        }
+
+        .editthis {
+            font-size: 18pt;
+            color: red;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    {{#Sprachen}}
+    {{#IstDeutsch}}
+    <div id="deutsch">
+        <p>
+            Guten Tag
+        </p>
+        <p>
+            Wir danken Ihnen für Ihr Interesse an den Unterlagen im Bundesarchiv.
+        </p>
+        <p>
+            Wie Sie der Bestellübersicht in Ihrem <a href="https://www.recherche.bar.admin.ch/recherche/#/de/konto/bestellungen">Benutzerkonto</a> entnehmen können, haben wir für Sie am {{Lesesaaltermin}} Unterlagen im Lesesaal bereitgestellt.
+        </p>
+        <p>
+            Wenn Sie die Unterlagen innerhalb der nächsten fünf Arbeitstage konsultieren möchten, teilen Sie uns bitte den Zeitpunkt mit. Ohne entsprechenden Bericht werden wir die Unterlagen nach Ablauf einer Frist von 48 Stunden wieder einlagern, ebenso wenn die Konsultation erst nach mehr als fünf Tagen erfolgen kann.
+        </p>
+        <p>
+            Wir danken für Ihr Verständnis und stehen bei Fragen gerne zur Verfügung.
+        </p>
+        <p>
+            Freundliche Grüsse
+            <br />
+            <br />
+            <strong>{{User.Vorname}} {{User.Name}} </strong><br />
+            <br />
+            Eidgenössisches Departement des Innern EDI <br />
+            Schweizerisches Bundesarchiv BAR <br />
+            Archivstrasse 24<br />
+            CH-3003 Bern <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br />
+        </p>
+        <p>
+            Folgen Sie dem Bundesarchiv:<br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstDeutsch}}
+    {{#IstFranzösisch}}
+    <div id="franzoesisch">
+        <p>
+            Bonjour,
+        </p>
+        <p>
+            Nous vous remercions de votre intérêt pour les fonds d’archives des AFS.
+        </p>
+        <p>
+            Comme vous pouvez le constater dans l’aperçu de votre  <a href="https://www.recherche.bar.admin.ch/recherche/#/fr/compte/ordres"> compte d’utilisateur</a>, nous avons mis de côté en salle de lecture les documents que vous avez réservés pour le {{Lesesaaltermin}}.
+        </p>
+        <p>
+            Si vous souhaitez consulter lesdits documents dans les cinq jours ouvrables, veuillez nous communiquer le moment de votre visite. En l’absence de nouvelles de votre part, ou si vous ne pouvez venir dans les cinq jours ouvrables, nous redescendrons les documents en magasin dans les 48 h.
+        </p>
+        <p>
+            Nous vous remercions de votre compréhension et nous tenons à votre disposition pour tout renseignement complémentaire.
+        </p>
+        <p>
+            Meilleures salutations, <br />
+            <br />
+            <strong>{{User.Vorname}} {{User.Name}} </strong><br />
+            <br />
+            Département fédéral de l’intérieur DFI <br />
+            Archives fédérales suisses AFS <br />
+            Archivstrasse 24<br />
+            CH-3003 Berne <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br />
+        </p>
+        <p>
+            Suivez les Archives fédérales: <br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstFranzösisch}}
+    {{#IstItalienisch}}
+    <div id="italienisch">
+        <p>
+            Buongiorno,
+        </p>
+        <p>
+            La ringraziamo dell’interesse mostrato per i documenti conservati nell’Archivio federale.
+        </p>
+        <p>
+            Come risulta dal riepilogo delle ordinazioni nel Suo <a href="https://www.recherche.bar.admin.ch/recherche/#/it/conto/ordini">conto utente</a>, abbiamo preparato per il {{Lesesaaltermin}} i documenti da Lei ordinati per consultazione nelle sale di lettura.
+        </p>
+        <p>
+            Se intende consultare i documenti nei prossimi cinque giorni lavorativi, La invitiamo a indicarci una data precisa. Senza un riscontro da parte Sua, oppure se la consultazione è prevista soltanto più tardi, riporteremo i documenti ordinati in magazzino dopo 48 ore dalla presente comunicazione.
+        </p>
+        <p>
+            La ringraziamo e restiamo a Sua disposizione per ulteriori informazioni.
+        </p>
+        <p>
+            Cordiali saluti<br />
+            <br />
+            <strong>{{User.Vorname}} {{User.Name}} </strong><br />
+            <br />
+            Dipartimento federale dell’interno DFI<br />
+            Archivio federale svizzero AFS<br />
+            Archivstrasse 24<br />
+            CH-3003 Berne <br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="http://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br />
+        </p>
+        <p>
+            Seguite l‘Archivio federale:<br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstItalienisch}}
+    {{#IstEnglisch}}
+    <div id="englisch">
+        <p>
+            Hello
+        </p>
+        <p>
+            Thank you for your interest in documents from the Federal Archives.
+        </p>
+
+        <p>
+            As you can see from the order overview in your <a href="https://www.recherche.bar.admin.ch/recherche/#/en/account/orders">user account</a>, we prepared some documents for you to consult in the reading room on {{Lesesaaltermin}}.
+        </p>
+        <p>
+            If you wish to consult the documents within the next five working days, please let us know when you would like to do so. Unless we hear from you within 48 hours, or if you are unable to consult the documents within the next five days, we will put them back into storage.
+        </p>
+
+        <p>
+            Thank you for your understanding. Please feel free to contact us if you have any questions.
+        </p>
+
+        <p>
+            Yours sincerely
+        </p>
+        <p>
+            <b>{{User.Vorname}} {{User.Name}}</b>
+        </p>
+        <p>
+            Federal Department of Home Affairs FDHA<br />
+            Swiss Federal Archives SFA<br />
+            Archivstrasse 24<br />
+            CH-3003 Bern<br />
+            <a href="mailto:bestellung@bar.admin.ch">bestellung@bar.admin.ch</a><br>
+            <a href="https://www.bar.admin.ch">www.bar.admin.ch</a><br>
+            <br />
+        </p>
+        <p>
+            Follow the Federal Archives:<br />
+            <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
+            –
+            <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
+            –
+            <a href='https://www.youtube.com/user/Bundesarchiv'>Youtube</a>
+        </p>
+    </div>
+    {{/IstEnglisch}}
+    {{/Sprachen}}
+</body>
+</html>

@@ -58,19 +58,25 @@ namespace CMI.Manager.Order.Consumers
             var sendEndpointProvider = auftragStatus.Context.Bus;
 
             var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId.ToString(), false);
-            var recalcTokens = new RecalcIndivTokens
+            
+            // It is possible, that a VE record was delete while the order item is still in progress
+            // So if the archiveRecord does not exist anymore, no need to update the Indiv Tokens
+            if (archiveRecord != null)
             {
-                ArchiveRecordId = archiveRecordId,
-                ExistingMetadataAccessTokens = archiveRecord.MetadataAccessTokens.ToArray(),
-                ExistingPrimaryDataDownloadAccessTokens = archiveRecord.PrimaryDataDownloadAccessTokens.ToArray(),
-                ExistingPrimaryDataFulltextAccessTokens = archiveRecord.PrimaryDataFulltextAccessTokens.ToArray()
-            };
+                var recalcTokens = new RecalcIndivTokens
+                {
+                    ArchiveRecordId = archiveRecordId,
+                    ExistingMetadataAccessTokens = archiveRecord.MetadataAccessTokens.ToArray(),
+                    ExistingPrimaryDataDownloadAccessTokens = archiveRecord.PrimaryDataDownloadAccessTokens.ToArray(),
+                    ExistingPrimaryDataFulltextAccessTokens = archiveRecord.PrimaryDataFulltextAccessTokens.ToArray()
+                };
 
 
-            auftragStatus.Context.PostCommitActionsRegistry.RegisterPostCommitAction(async () =>
-            {
-                await SendToIndexManager(recalcTokens, contextOrderDataAccess, sendEndpointProvider, busAddress);
-            });
+                auftragStatus.Context.PostCommitActionsRegistry.RegisterPostCommitAction(async () =>
+                {
+                    await SendToIndexManager(recalcTokens, contextOrderDataAccess, sendEndpointProvider, busAddress);
+                });
+            }
         }
 
         private static bool IsNotIndivToken(string t)

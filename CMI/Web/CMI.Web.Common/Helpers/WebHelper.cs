@@ -50,6 +50,8 @@ namespace CMI.Web.Common.Helpers
         public static string SupportedLanguagesForChatBot => GetStringSetting("supportedLanguagesForChatBot", "de");
         public static string UrlForChatBot => GetStringSetting("urlForChatBot", "https://chatbot.bar.smartive.cloud/");
 
+        public static string PublicClientUrl => GetStringSetting("publicClientUrl", "https://www.recherche.bar.admin.ch/recherche");
+
         public static string SwaggerBaseUrl => GetStringSetting("swaggerBaseUrl", "https://www.recherche.bar.admin.ch/recherche");
 
         public static string MatomoUrl => GetStringSetting("matomo-url", "");

@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,11 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.Imaging, Version=17.4.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Aspose.Imaging.17.4.0\lib\net40\Aspose.Imaging.dll</HintPath>
+    <Reference Include="Autofac, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Autofac.6.1.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Pdf, Version=17.5.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Aspose.Pdf.17.5\lib\net40-client\Aspose.Pdf.dll</HintPath>
+    <Reference Include="AsyncEnumerable, Version=4.0.2.0, Culture=neutral, PublicKeyToken=0426b068161bd1d1, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AsyncEnumerator.4.0.2\lib\net461\AsyncEnumerable.dll</HintPath>
+    </Reference>
+    <Reference Include="Automatonymous, Version=5.1.1.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Automatonymous.5.1.1\lib\netstandard2.0\Automatonymous.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
@@ -47,29 +52,32 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CSJ2K, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0ca7be2ec378a773, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\CSJ2K.3.0.0\lib\net40-client\CSJ2K.dll</HintPath>
-    </Reference>
-    <Reference Include="GreenPipes, Version=2.1.4.118, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\GreenPipes.2.1.4\lib\net452\GreenPipes.dll</HintPath>
+    <Reference Include="GreenPipes, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GreenPipes.4.0.0\lib\netstandard2.0\GreenPipes.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.5.5.6\lib\net452\MassTransit.dll</HintPath>
+    <Reference Include="MassTransit, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.7.1.8\lib\netstandard2.0\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.RabbitMqTransport, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.5.5.6\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
+    <Reference Include="MassTransit.AutofacIntegration, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.Autofac.7.1.8\lib\netstandard2.0\MassTransit.AutofacIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.SerilogIntegration, Version=5.5.6.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.SerilogIntegration.5.5.6\lib\net452\MassTransit.SerilogIntegration.dll</HintPath>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=7.1.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.7.1.8\lib\netstandard2.0\MassTransit.RabbitMqTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
     </Reference>
-    <Reference Include="NewId, Version=3.0.2.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NewId.3.0.2\lib\net452\NewId.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="NewId, Version=3.0.3.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NewId.3.0.3\lib\net452\NewId.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -77,34 +85,49 @@
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.NamedScope, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Ninject.Extensions.NamedScope.3.3.0\lib\net45\Ninject.Extensions.NamedScope.dll</HintPath>
-    </Reference>
     <Reference Include="Quartz, Version=3.0.7.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Quartz.3.0.7\lib\net452\Quartz.dll</HintPath>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\RabbitMQ.Client.5.1.2\lib\net451\RabbitMQ.Client.dll</HintPath>
+    <Reference Include="RabbitMQ.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RabbitMQ.Client.6.2.1\lib\net461\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\..\..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Threading.Channels, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Channels.4.7.1\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.ThreadPool, Version=4.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Threading.ThreadPool.4.3.0\lib\net46\System.Threading.ThreadPool.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
@@ -115,29 +138,32 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetManager.cs" />
     <Compile Include="AssetService.cs" />
-    <Compile Include="Consumers\AbbyyOcrTestConsumer.cs" />
     <Compile Include="Consumers\AssetReadyConsumer.cs" />
     <Compile Include="Consumers\PrepareAssetConsumer.cs" />
     <Compile Include="Consumers\GetAssetStatusConsumer.cs" />
     <Compile Include="Consumers\DownloadAssetConsumer.cs" />
     <Compile Include="Consumers\ExtractFulltextPackageConsumer.cs" />
+    <Compile Include="Consumers\PrepareForRecognitionConsumer.cs" />
+    <Compile Include="Consumers\PrepareForTransformationConsumer.cs" />
     <Compile Include="Consumers\ScheduleForPackageSyncConsumer.cs" />
-    <Compile Include="Consumers\TestConversionResult.cs" />
     <Compile Include="Consumers\TransformPackageConsumer.cs" />
     <Compile Include="Consumers\UpdatePrimaerdatenAuftragStatusConsumer.cs" />
     <Compile Include="Infrasctructure\SchedulerConfigurator.cs" />
-    <Compile Include="IScanProcessor.cs" />
     <Compile Include="Jobs\CheckPendingDownloadRecordsJob.cs" />
     <Compile Include="Jobs\DeleteOldRecordsJob.cs" />
     <Compile Include="Jobs\CheckPendingSyncRecordsJob.cs" />
     <Compile Include="Infrasctructure\JobFactory.cs" />
     <Compile Include="Mails\AufbereitetenBenutzungskopieProblem.cs" />
     <Compile Include="Mails\AufbereiteteBenutzungskopieZumDownloadBereit.cs" />
-    <Compile Include="MetadataXmlUpdater.cs" />
     <Compile Include="Mails\GebrauchskopiePasswort.cs" />
     <Compile Include="Mails\GebrauchskopieErstellenProblem.cs" />
     <Compile Include="ParameterSettings\AssetPriorisierungSettings.cs" />
@@ -151,30 +177,18 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ScanProcessor.cs" />
     <Compile Include="Infrasctructure\ContainerConfigurator.cs" />
-    <Compile Include="IOcrTester.cs" />
     <Compile Include="PackageConversionResult.cs" />
     <Compile Include="ProcessType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Documentation.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ParameterSettings\ScansZusammenfassenSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
@@ -182,7 +196,6 @@
     <EmbeddedResource Include="Defaults\GebrauchskopieErstellenProblem.Body.mustache" />
     <EmbeddedResource Include="Defaults\GebrauchskopieSettings.ReadmeDateiinhalt" />
     <EmbeddedResource Include="Defaults\GebrauchskopiePasswort.Body.mustache" />
-    <EmbeddedResource Include="Aspose.Total.lic" />
     <EmbeddedResource Include="Defaults\AufbereitetenBenutzungskopieProblem.Body.mustache" />
     <EmbeddedResource Include="Defaults\AufbereiteteBenutzungskopieZumDownloadBereit.Body.mustache" />
     <None Include="packages.config" />
@@ -257,8 +270,12 @@
       <Name>CMI.Utilities.Template</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\AbbyyTiffTest.tif" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets'))" />
+  </Target>
 </Project>

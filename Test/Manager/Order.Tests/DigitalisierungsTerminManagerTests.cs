@@ -9,6 +9,7 @@ using NUnit.Framework;
 
 namespace CMI.Manager.Order.Tests
 {
+    [Culture("de-CH")]
     [TestFixture]
     public class DigitalisierungsTerminManagerTests
     {

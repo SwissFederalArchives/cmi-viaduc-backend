@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Autofac;
 using CMI.Manager.DataFeed.Properties;
-using Ninject;
 using Quartz;
 using Quartz.Impl;
 using Serilog;
@@ -10,10 +10,10 @@ namespace CMI.Manager.DataFeed.Infrastructure
 {
     internal static class SchedulerConfigurator
     {
-        public static async Task<IScheduler> Configure(IKernel kernel)
+        public static async Task<IScheduler> Configure(IContainer container)
         {
             var scheduler = await StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.JobFactory = new JobFactory(kernel);
+            scheduler.JobFactory = new JobFactory(container);
 
             // Define the standard job to get the pending records
             // --------------------------------------------------

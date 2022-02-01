@@ -1,34 +1,36 @@
-﻿using CMI.Access.Harvest;
+﻿using System.Reflection;
+using Autofac;
+using CMI.Access.Harvest;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Harvest;
 using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
 
 namespace CMI.Manager.DataFeed.Infrastructure
 {
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             // register the different consumers and classes
-            kernel.Bind<IDbMutationQueueAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<CheckMutationQueueJob>().ToSelf();
-            kernel.Bind<IAISDataProvider>().To(typeof(AISDataProvider));
-            kernel.Bind<ICancelToken>().ToMethod(context => new JobCancelToken()).InSingletonScope();
+            builder.RegisterType<LanguageSettings>().AsSelf();
+            builder.RegisterType<ApplicationSettings>().AsSelf();
+            builder.RegisterType<CachedLookupData>().AsSelf();
+            builder.RegisterType<SipDateBuilder>().AsSelf();
+            builder.RegisterType<DigitizationOrderBuilder>().AsSelf();
+            builder.RegisterType<ArchiveRecordBuilder>().AsSelf();
+            builder.RegisterType<AISDataAccess>().As<IDbMutationQueueAccess>();
+            builder.RegisterType<CheckMutationQueueJob>().AsSelf();
+            builder.RegisterType<RequeueMutationJob>().AsSelf();
+            builder.RegisterType<AISDataProvider>().As<IAISDataProvider>();
+            builder.RegisterType<JobCancelToken>().As<ICancelToken>().SingleInstance().ExternallyOwned();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-            return kernel;
+            return builder;
         }
     }
 }

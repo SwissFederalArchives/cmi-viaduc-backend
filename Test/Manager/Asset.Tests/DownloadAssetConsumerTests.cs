@@ -24,15 +24,15 @@ namespace CMI.Manager.Asset.Tests
         [SetUp]
         public void Setup()
         {
-            requestClient = CreateRequestClient<DownloadAssetRequest, DownloadAssetResult>();
-            doesExistsClient = CreateRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse>();
+            requestClient = CreateRequestClient<DownloadAssetRequest>();
+            doesExistsClient = CreateRequestClient<DoesExistInCacheRequest>();
             assetManager.Reset();
             cacheHelper.Reset();
             downloadPackageConsumer.Reset();
             notificationManagerConsumer.Reset();
         }
 
-        public DownloadAssetConsumerTests() : base(true)
+        public DownloadAssetConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -47,9 +47,9 @@ namespace CMI.Manager.Asset.Tests
         private readonly Mock<IDataBuilder> dataBuilder = new Mock<IDataBuilder>();
 
         private Task<ConsumeContext<DownloadAssetRequest>> downloadAssetTask;
-        private IRequestClient<DownloadAssetRequest, DownloadAssetResult> requestClient;
-        private IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistsClient;
-        private Task<DownloadAssetResult> response;
+        private IRequestClient<DownloadAssetRequest> requestClient;
+        private IRequestClient<DoesExistInCacheRequest> doesExistsClient;
+        private Task<Response<DownloadAssetResult>> response;
         private Task<ConsumeContext<IEmailMessage>> notificationHandled;
 
 
@@ -88,14 +88,14 @@ namespace CMI.Manager.Asset.Tests
             doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(false, 0);
 
             // Act
-            response = requestClient.Request(new DownloadAssetRequest
+            response = requestClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await downloadAssetTask;
 
             // Assert
@@ -111,7 +111,7 @@ namespace CMI.Manager.Asset.Tests
             cacheHelper.Setup(e => e.GetFtpUrl(Bus, CacheRetentionCategory.UsageCopyPublic, "1111")).Returns(Task.FromResult("sft://mockup"));
 
             // Act
-            response = requestClient.Request(new DownloadAssetRequest
+            response = requestClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
             {
                 ArchiveRecordId = "1111",
                 AssetType = AssetType.Gebrauchskopie,
@@ -119,7 +119,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await downloadAssetTask;
 
             // Assert

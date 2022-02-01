@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
 using CMI.Contract.Harvest;
+using CMI.Manager.DataFeed.Properties;
 using Quartz;
 using Serilog;
 
 namespace CMI.Manager.DataFeed
 {
     /// <summary>
-    ///     Re-queues failed or lost sync operations. That is
-    ///     it will try to re-sync records that have a status of 3 (failed sync) or that
-    ///     have a status of 1 (sync in progress) for a long time.
+    ///     Re-queues failed sync operations. That is
+    ///     it will try to re-sync records that have a status of 3 (failed sync) and
+    ///     that were not failed more than x times
     /// </summary>
     /// <seealso cref="Quartz.IJob" />
     [DisallowConcurrentExecution]
@@ -29,7 +30,8 @@ namespace CMI.Manager.DataFeed
         {
             Log.Information("Starting to check if re-queuing records can be found.");
 
-            var recordsAffected = dbMutationQueueAccess.ResetFailedOrLostSyncOperations();
+            var maxRetries = Settings.Default.MaxNumberOfRetries;
+            var recordsAffected = dbMutationQueueAccess.ResetFailedSyncOperations(maxRetries);
 
             Log.Information("Reset {recordsAffected} records to initial status.", recordsAffected);
             return Task.CompletedTask;

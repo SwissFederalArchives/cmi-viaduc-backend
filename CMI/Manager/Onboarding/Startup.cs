@@ -1,7 +1,8 @@
-﻿using System.Web.Http;
-using Ninject;
-using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
+﻿using System.Reflection;
+using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
+using CMI.Manager.Onboarding.Infrastructure;
 using Owin;
 using Swashbuckle.Application;
 
@@ -9,10 +10,12 @@ namespace CMI.Manager.Onboarding
 {
     public class Startup
     {
-        public static StandardKernel Kernel { get; set; }
+        private static IContainer container;
+        public static IContainer Container => container;
 
         public void Configuration(IAppBuilder app)
         {
+            var builder = ContainerConfigurator.Configure();
             var config = new HttpConfiguration();
 
             config
@@ -21,11 +24,14 @@ namespace CMI.Manager.Onboarding
 
             config.MapHttpAttributeRoutes();
 
-            app.UseWebApi(config);
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            
+            container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-            app
-                .UseNinjectMiddleware(() => Kernel)
-                .UseNinjectWebApi(config);
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacWebApi(config);
+            app.UseWebApi(config);
         }
     }
 }

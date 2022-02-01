@@ -26,12 +26,15 @@ namespace CMI.Manager.DocumentConverter
         /// <param name="sourceFile">The file to convert.</param>
         /// <param name="destinationExtension">The destination file type based on the extension.</param>
         /// <param name="videoQuality">The video quality if required</param>
+        /// <param name="context">The context of the conversion</param>
         /// <returns>The converted file, or the same file if conversion is not supported or Abby is not installed.</returns>
-        FileInfo Convert(string jobGuid, FileInfo sourceFile, string destinationExtension, string videoQuality);
+        FileInfo Convert(string jobGuid, FileInfo sourceFile, string destinationExtension, string videoQuality, JobContext context);
 
-        ExtractionResult ExtractText(string jobGuid, FileInfo sourceFile);
+        ExtractionResult ExtractText(string jobGuid, FileInfo sourceFile, JobContext context);
 
         int? GetPagesRemaining();
+
+        bool TryOcrTextExtraction(out string text);
     }
 
     public class DocumentManager : IDocumentManager
@@ -62,7 +65,7 @@ namespace CMI.Manager.DocumentConverter
             }
         }
 
-        public FileInfo Convert(string jobGuid, FileInfo sourceFile, string destinationExtension, string videoQuality)
+        public FileInfo Convert(string jobGuid, FileInfo sourceFile, string destinationExtension, string videoQuality, JobContext context)
         {
             if (!renderer.IsValidExtension(sourceFile.Extension))
             {
@@ -111,14 +114,15 @@ namespace CMI.Manager.DocumentConverter
                 SourceFile = sourceFile,
                 Identifier = jobGuid,
                 VideoQuality = string.IsNullOrEmpty(videoQuality) ? VideoQuality.Default.ToString() : videoQuality,
-                PdfTextLayerExtractionProfile = DocumentConverterSettings.Default.PDFTextLayerExtractionProfile
+                PdfTextLayerExtractionProfile = DocumentConverterSettings.Default.PDFTextLayerExtractionProfile,
+                Context = context
             };
 
             Log.Information($"Start to render document {sourceFile} with job id {jobGuid} and extraction profile {cmd.PdfTextLayerExtractionProfile} and video quality {cmd.VideoQuality}");
             return rendererForDestinationExtension.Render(cmd);
         }
 
-        public ExtractionResult ExtractText(string jobGuid, FileInfo sourceFile)
+        public ExtractionResult ExtractText(string jobGuid, FileInfo sourceFile, JobContext context)
         {
             extractor.SetAbbyyInfosIfNeccessary(DocumentConverterSettings.Default.PathToAbbyyFrEngineDll, DocumentConverterSettings.Default.MissingAbbyyPathInstallationMessage);
             var extractorForExtension = extractor.GetExtractorForExtension(sourceFile.Extension);
@@ -142,7 +146,7 @@ namespace CMI.Manager.DocumentConverter
             {
                 var profile = DocumentConverterSettings.Default.OCRTextExtractionProfile;
                 Log.Information($"Start to extract text from document {sourceFile} with job id {jobGuid} and extraction profile {profile}.");
-                var result = extractorForExtension.ExtractText(doc, new DefaultTextExtractorSettings(profile));
+                var result = extractorForExtension.ExtractText(doc, new DefaultTextExtractorSettings(profile) {Context = context});
                 return result;
             }
         }
@@ -158,6 +162,40 @@ namespace CMI.Manager.DocumentConverter
                 Log.Warning(ex, "Exception on get remaining pages");
             }
             return null;
+        }
+
+        public bool TryOcrTextExtraction(out string text)
+        {
+            const string fileName = "AbbyyTiffTest.tif";
+
+            var assemblyLocation = AppDomain.CurrentDomain.BaseDirectory;
+            var img = Resources.AbbyyTiffTest;
+            var path = Path.Combine(assemblyLocation, fileName);
+            var file = new FileInfo(path);
+
+            if (!file.Exists)
+            {
+                img.Save(path);
+                file.Refresh();
+                if (!file.Exists)
+                {
+                    text = $"Unable to find file {file.FullName}";
+                    return false;
+                }
+            }
+
+            extractor.SetAbbyyInfosIfNeccessary(DocumentConverterSettings.Default.PathToAbbyyFrEngineDll, DocumentConverterSettings.Default.MissingAbbyyPathInstallationMessage);
+            var abbyyExtractor = extractor.GetAbbyyExtractor();
+            var result = abbyyExtractor.ExtractText(new Doc(file, Guid.NewGuid().ToString()), new DefaultTextExtractorSettings("TextExtraction_Speed"));
+
+            if (result.HasError)
+            {
+                text = $"Could not extract text from sample file. ({result.ErrorMessage})";
+                return false;
+            }
+
+            text = result.ToString();
+            return true;
         }
 
 

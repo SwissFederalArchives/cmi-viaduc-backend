@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Windows.Forms;
+using Autofac;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
@@ -13,7 +14,7 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
     public partial class MainForm : Form
     {
         private static IBusControl bus;
-        private readonly IRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse> orderClient;
+        private readonly IRequestClient<GetDigitizationOrderData> orderClient;
 
         public MainForm()
         {
@@ -23,28 +24,25 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
         }
 
 
-        public static IRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse> GetOrderClient()
+        public static IRequestClient<GetDigitizationOrderData> GetOrderClient()
         {
             // ReSharper disable once RedundantAssignment
             var requestTimeout = TimeSpan.FromMinutes(1);
-            // ReSharper disable once RedundantAssignment
-            var timeToLive = TimeSpan.FromMinutes(5);
-#if DEBUG
-            requestTimeout = TimeSpan.FromMinutes(10);
-            timeToLive = TimeSpan.FromMinutes(11);
-#endif
+            #if DEBUG
+                requestTimeout = TimeSpan.FromMinutes(10);
+            #endif
 
-            IRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse> client =
-                new MessageRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse>(bus,
-                    new Uri(new Uri(BusConfigurator.Uri), BusConstants.ManagementApiGetDigitizationOrderData), requestTimeout, timeToLive);
-
-            return client;
+            return bus.CreateRequestClient<GetDigitizationOrderData>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.ManagementApiGetDigitizationOrderData), requestTimeout);
         }
 
         private static void LoadBus()
         {
             // Configure Bus
-            bus = BusConfigurator.ConfigureBus();
+            var containerBuilder = new ContainerBuilder();
+            BusConfigurator.ConfigureBus(containerBuilder);
+            var container = containerBuilder.Build();
+
+            bus = container.Resolve<IBusControl>();
             bus.Start();
         }
 
@@ -55,7 +53,7 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
                 Cursor = Cursors.WaitCursor;
                 var text = txtArchiveRecordId.Text;
                 var archiveRecordId = Convert.ToInt32(text.Contains("(") ? text.Substring(0, text.IndexOf("(", StringComparison.Ordinal)) : text);
-                var result = await orderClient.Request(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId.ToString()});
+                var result = (await orderClient.GetResponse<GetDigitizationOrderDataResponse>(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId.ToString()})).Message;
                 if (result.Result.Success)
                 {
                     txtResult.Text = JsonConvert.SerializeObject(result.Result.DigitizationOrder, Formatting.Indented);

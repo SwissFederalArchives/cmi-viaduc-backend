@@ -19,31 +19,31 @@ namespace CMI.Utilities.ProxyClients.Order
 
         public async Task SetStatusAushebungBereit(int auftragsId)
         {
-            var client = GetRequestClient<SetStatusAushebungBereitRequest, SetStatusAushebungBereitResponse>(BusConstants
+            var client = GetRequestClient<SetStatusAushebungBereitRequest>(BusConstants
                 .OrderManagerSetStatusAushebungBereitRequestQueue);
             var request = new SetStatusAushebungBereitRequest
             {
                 OrderItemId = auftragsId
             };
 
-            await client.Request(request);
+            await client.GetResponse<SetStatusAushebungBereitResponse>(request);
         }
 
         public async Task SetStatusDigitalisierungExtern(int auftragsId)
         {
-            var client = GetRequestClient<SetStatusDigitalisierungExternRequest, SetStatusDigitalisierungExternResponse>(BusConstants
+            var client = GetRequestClient<SetStatusDigitalisierungExternRequest>(BusConstants
                 .OrderManagerSetStatusDigitalisierungExternRequestQueue);
             var request = new SetStatusDigitalisierungExternRequest
             {
                 OrderItemId = auftragsId
             };
 
-            await client.Request(request);
+            await client.GetResponse<SetStatusDigitalisierungExternResponse>(request);
         }
 
         public async Task SetStatusDigitalisierungAbgebrochen(int auftragsId, string grund)
         {
-            var client = GetRequestClient<SetStatusDigitalisierungAbgebrochenRequest, SetStatusDigitalisierungAbgebrochenResponse>(BusConstants
+            var client = GetRequestClient<SetStatusDigitalisierungAbgebrochenRequest>(BusConstants
                 .OrderManagerSetStatusDigitalisierungAbgebrochenRequestQueue);
             var request = new SetStatusDigitalisierungAbgebrochenRequest
             {
@@ -51,12 +51,12 @@ namespace CMI.Utilities.ProxyClients.Order
                 Grund = grund
             };
 
-            await client.Request(request);
+            await client.GetResponse<SetStatusDigitalisierungAbgebrochenResponse>(request);
         }
 
         public async Task SetStatusZumReponierenBereit(int auftragId)
         {
-            var client = GetRequestClient<SetStatusZumReponierenBereitRequest, SetStatusZumReponierenBereitResponse>(BusConstants
+            var client = GetRequestClient<SetStatusZumReponierenBereitRequest>(BusConstants
                 .OrderManagerSetStatusZumReponierenBereitRequestQueue);
             var request = new SetStatusZumReponierenBereitRequest
             {
@@ -64,15 +64,13 @@ namespace CMI.Utilities.ProxyClients.Order
                 UserId = Users.Vecteur.Id
             };
 
-            await client.Request(request);
+            await client.GetResponse<SetStatusZumReponierenBereitResponse>(request);
         }
 
-        private IRequestClient<T1, T2> GetRequestClient<T1, T2>(string serviceUrl) where T1 : class where T2 : class
+        private IRequestClient<T1> GetRequestClient<T1>(string serviceUrl) where T1 : class
         {
             var requestTimeout = TimeSpan.FromSeconds(30);
-
-
-            return new MessageRequestClient<T1, T2>(bus, new Uri(bus.Address, serviceUrl), requestTimeout);
+            return bus.CreateRequestClient<T1>(new Uri(bus.Address, serviceUrl), requestTimeout);
         }
     }
 }

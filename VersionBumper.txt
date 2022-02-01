@@ -1,0 +1,7 @@
+The purpose of this textfile is to create simple commits to GitHub in order to force a new version number.
+This is required if we have changes only in the Frontend or the Management client.
+Simply make a change to this file, and the deployment to Azure will work again.
+
+
+For
+	2021-11-26

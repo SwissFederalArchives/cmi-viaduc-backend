@@ -18,7 +18,7 @@ namespace CMI.Manager.Harvest.Consumers
     public class SyncArchiveRecordConsumer : IConsumer<ISyncArchiveRecord>
     {
         private readonly ICachedHarvesterSetting cachedSettings;
-        private readonly IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> findArchiveRecordClient;
+        private readonly IRequestClient<FindArchiveRecordRequest> findArchiveRecordClient;
         private readonly IHarvestManager harvestManager;
 
 
@@ -27,7 +27,7 @@ namespace CMI.Manager.Harvest.Consumers
         /// </summary>
         /// <param name="harvestManager">The harvest manager responsible for sync management.</param>
         public SyncArchiveRecordConsumer(IHarvestManager harvestManager,
-            IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> findArchiveRecordClient, ICachedHarvesterSetting cachedSettings)
+            IRequestClient<FindArchiveRecordRequest> findArchiveRecordClient, ICachedHarvesterSetting cachedSettings)
         {
             this.harvestManager = harvestManager;
             this.findArchiveRecordClient = findArchiveRecordClient;
@@ -165,9 +165,9 @@ namespace CMI.Manager.Harvest.Consumers
         {
             try
             {
-                var result = await findArchiveRecordClient.Request(new FindArchiveRecordRequest
+                var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
                     {ArchiveRecordId = archiveRecordId, IncludeFulltextContent = true});
-                return result.ElasticArchiveRecord;
+                return result.Message.ElasticArchiveRecord;
             }
             catch (Exception e)
             {

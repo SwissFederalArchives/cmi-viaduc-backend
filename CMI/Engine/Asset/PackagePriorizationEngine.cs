@@ -48,7 +48,7 @@ namespace CMI.Engine.Asset
                 {4, SplitKategorienInRanges(channelAssignmentDefinition.GetPrioritiesForChannel(4))}
             };
 
-            Log.Information(
+            Log.Debug(
                 "Initialized Package Priorization Engine with the following settings: Max job count for sync: {MaxJobCountPerChannelForSync}. " +
                 "Max job count for download: {MaxJobCountPerChannelForDownload}", MaxJobCountPerChannelForSync, MaxJobCountPerChannelForDownload);
         }
@@ -59,13 +59,13 @@ namespace CMI.Engine.Asset
 
         public async Task<Dictionary<int, int[]>> GetNextJobsForExecution(AufbereitungsArtEnum aufbereitungsArt)
         {
-            Log.Information("Fetching next jobs for execution from priorization engine.");
+            Log.Debug("Fetching next jobs for execution from priorization engine.");
             var newJobsPerChannel = new Dictionary<int, int>();
 
             // Hole die aktuelle Auslastung von der Datenbank
             // die im Repository Service in der Arbeit sind
             var workload = await primaerdatenDb.GetCurrentWorkload(aufbereitungsArt);
-            Log.Information("The current workload is: {workload}", JsonConvert.SerializeObject(workload));
+            Log.Debug("The current workload is: {workload}", JsonConvert.SerializeObject(workload));
 
             // Schaue ob alle channels gefüllt sind
             foreach (var channelWorkload in workload)
@@ -82,9 +82,9 @@ namespace CMI.Engine.Asset
             }
 
             // Hole die nächsten Jobs anhand der möglichen neuen Jobs
-            Log.Information("We are able to fetch pending jobs as follows: {newJobsPerChannel}", JsonConvert.SerializeObject(newJobsPerChannel));
+            Log.Debug("We are able to fetch pending jobs as follows: {newJobsPerChannel}", JsonConvert.SerializeObject(newJobsPerChannel));
             var retVal = await FetchPendingJobsFromDatabase(aufbereitungsArt, newJobsPerChannel);
-            Log.Information("The following jobs can be started: {retVal}", JsonConvert.SerializeObject(retVal));
+            Log.Debug("The following jobs can be started: {retVal}", JsonConvert.SerializeObject(retVal));
 
             return retVal;
         }
@@ -96,7 +96,7 @@ namespace CMI.Engine.Asset
             foreach (var channel in newJobsPerChannel)
             {
                 var jobIds = await FetchNextJobForChannel(aufbereitungsArt, channel.Key, channel.Value, retVal.SelectMany(r => r.Value).ToArray());
-                Log.Information("Found the following jobs for channel {Key}: {jobIds}", channel.Key, string.Join(", ", jobIds));
+                Log.Debug("Found the following jobs for channel {Key}: {jobIds}", channel.Key, string.Join(", ", jobIds));
                 if (jobIds.Count > 0)
                 {
                     retVal.Add(channel.Key, jobIds.ToArray());

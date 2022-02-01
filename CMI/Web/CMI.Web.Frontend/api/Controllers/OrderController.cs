@@ -17,29 +17,31 @@ using CMI.Web.Frontend.api.Dto;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
-using CMI.Web.Frontend.App_Start;
 using CMI.Web.Frontend.Helpers;
 using CMI.Web.Frontend.ParameterSettings;
-using Ninject;
 
 namespace CMI.Web.Frontend.api.Controllers
 {
     [Authorize]
     public class OrderController : OrderControllerBase
     {
-        private readonly OrderManagerClient client;
+        private readonly IPublicOrder client;
         private readonly DigitalisierungsbeschraenkungSettings digitalisierungsbeschraenkungSettings;
         private readonly IElasticService elasticService;
         private readonly IEntityProvider entityProvider;
         private readonly IKontrollstellenInformer kontrollstellenInformer;
         private readonly IUserDataAccess userDataAccess;
+        private readonly VerwaltungsausleiheSettings verwaltungsausleiheSettings;
+        private readonly ManagementClientSettings managementClientSettings;
 
-        public OrderController(OrderManagerClient client,
+        public OrderController(IPublicOrder client,
             IEntityProvider entityProvider,
             IKontrollstellenInformer kontrollstellenInformer,
             IElasticService elasticService,
             DigitalisierungsbeschraenkungSettings digitalisierungsbeschraenkungSettings,
-            IUserDataAccess userDataAccess)
+            IUserDataAccess userDataAccess,
+            VerwaltungsausleiheSettings verwaltungsausleiheSettings,
+            ManagementClientSettings managementClientSettings)
         {
             this.client = client;
             this.entityProvider = entityProvider;
@@ -47,6 +49,8 @@ namespace CMI.Web.Frontend.api.Controllers
             this.elasticService = elasticService;
             this.digitalisierungsbeschraenkungSettings = digitalisierungsbeschraenkungSettings;
             this.userDataAccess = userDataAccess;
+            this.verwaltungsausleiheSettings = verwaltungsausleiheSettings;
+            this.managementClientSettings = managementClientSettings;
         }
 
         [HttpPost]
@@ -182,7 +186,9 @@ namespace CMI.Web.Frontend.api.Controllers
 
             var bestimmer = new KontingentBestimmer(digitalisierungsbeschraenkungSettings);
             var userOrderings = await client.GetOrderings(user.Id);
-            var result = bestimmer.BestimmeKontingent(userOrderings, role, user);
+
+
+            var result = bestimmer.BestimmeKontingent(userOrderings, user);
 
             return Ok(result);
         }
@@ -277,8 +283,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
             if (userAccess.RolePublicClient == AccessRoles.RoleAS)
             {
-                var settings = NinjectWebCommon.Kernel.Get<VerwaltungsausleiheSettings>();
-                orderParams.ArtDerArbeit = (int) settings.ArtDerArbeitFuerAmtsBestellung;
+                orderParams.ArtDerArbeit = (int) verwaltungsausleiheSettings.ArtDerArbeitFuerAmtsBestellung;
             }
 
             var creationRequest = new OrderCreationRequest
@@ -310,11 +315,10 @@ namespace CMI.Web.Frontend.api.Controllers
             }
         }
 
-        private static void ValidateLesesaalBestellung(DateTime? leseSaalDateAsDateTime)
+        private void ValidateLesesaalBestellung(DateTime? leseSaalDateAsDateTime)
         {
-            var settings = NinjectWebCommon.Kernel.Get<ManagementClientSettings>();
             var valid = leseSaalDateAsDateTime.HasValue &&
-                        (settings.OpeningDaysLesesaal?.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries)
+                        (managementClientSettings.OpeningDaysLesesaal?.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries)
                             .Contains(leseSaalDateAsDateTime.Value.ToString("dd.MM.yyyy")) ?? false);
 
             if (!valid)
@@ -330,13 +334,9 @@ namespace CMI.Web.Frontend.api.Controllers
         {
             var kontingentBestimmer = new KontingentBestimmer(digitalisierungsbeschraenkungSettings);
             var orderings = await client.GetOrderings(bestellerId);
-            var role = bestellungIstFuerAndererBenutzer
-                ? AccessRolesEnum.BAR
-                : userAccess.RolePublicClient.GetRolePublicClientEnum();
-
-            var user = userDataAccess.GetUser(bestellerId);
-
-            var result = kontingentBestimmer.BestimmeKontingent(orderings, role, user);
+        
+            User user = userDataAccess.GetUser(bestellungIstFuerAndererBenutzer ? bestellerId : ControllerHelper.GetCurrentUserId());
+            var result = kontingentBestimmer.BestimmeKontingent(orderings, user);
 
             // User should usually not see these validation-messages, as it is already checked on client (so no translation here)
             if (result.Bestellkontingent <= 0)
@@ -388,8 +388,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var userAccess = GetUserAccess();
             if (userAccess.RolePublicClient == AccessRoles.RoleAS)
             {
-                var settings = NinjectWebCommon.Kernel.Get<VerwaltungsausleiheSettings>();
-                orderEinsichtsgesuchParams.ArtDerArbeit = (int) settings.ArtDerArbeitFuerAmtsBestellung;
+                orderEinsichtsgesuchParams.ArtDerArbeit = (int)verwaltungsausleiheSettings.ArtDerArbeitFuerAmtsBestellung;
             }
 
             var creationRequest = new OrderCreationRequest

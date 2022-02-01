@@ -17,9 +17,9 @@ namespace CMI.Manager.Order.Mails
         public override string Bcc { get; set; }
 
         [DefaultValue("{{#Sprachen}}" +
-                      "{{^IstFranzösisch}}" +
+                      "{{#IstDeutsch}}" +
                       "Erste Mahnung Verwaltungsausleihe" +
-                      "{{/IstFranzösisch}}" +
+                      "{{/IstDeutsch}}" +
                       "{{#IstFranzösisch}}" +
                       "Prêt à l’administration : premier rappel" +
                       "{{/IstFranzösisch}}" +

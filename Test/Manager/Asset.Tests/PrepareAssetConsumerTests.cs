@@ -21,13 +21,13 @@ namespace CMI.Manager.Asset.Tests
         [SetUp]
         public void Setup()
         {
-            requestClient = CreateRequestClient<PrepareAssetRequest, PrepareAssetResult>();
-            indexClient = CreateRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>();
+            requestClient = CreateRequestClient<PrepareAssetRequest>();
+            indexClient = CreateRequestClient<FindArchiveRecordRequest>();
             assetManager.Reset();
             indexManagerConsumer.Reset();
         }
 
-        public PrepareAssetConsumerTests() : base(true)
+        public PrepareAssetConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -37,9 +37,9 @@ namespace CMI.Manager.Asset.Tests
         private readonly Mock<IConsumer<IIndexManager>> indexManagerConsumer = new Mock<IConsumer<IIndexManager>>();
         private Task<ConsumeContext<PrepareAssetRequest>> prepareAssetTask;
         private Task<ConsumeContext<FindArchiveRecordRequest>> findArchiveRecordTask;
-        private IRequestClient<PrepareAssetRequest, PrepareAssetResult> requestClient;
-        private IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> indexClient;
-        private Task<PrepareAssetResult> response;
+        private IRequestClient<PrepareAssetRequest> requestClient;
+        private IRequestClient<FindArchiveRecordRequest> indexClient;
+        private Task<Response<PrepareAssetResult>> response;
 
         protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
         {
@@ -61,7 +61,7 @@ namespace CMI.Manager.Asset.Tests
                 .Returns(Task.FromResult(new PreparationStatus {PackageIsInPreparationQueue = true}));
 
             // Act
-            response = requestClient.Request(new PrepareAssetRequest
+            response = requestClient.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
@@ -69,7 +69,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await prepareAssetTask;
 
             // Assert
@@ -88,7 +88,7 @@ namespace CMI.Manager.Asset.Tests
             indexManager.Setup(i => i.FindArchiveRecord("999", false)).Returns(() => new ElasticArchiveRecord());
 
             // Act
-            response = requestClient.Request(new PrepareAssetRequest
+            response = requestClient.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
@@ -97,7 +97,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await findArchiveRecordTask;
             await prepareAssetTask;
 

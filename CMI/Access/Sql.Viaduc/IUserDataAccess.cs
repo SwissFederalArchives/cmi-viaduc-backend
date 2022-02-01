@@ -8,6 +8,8 @@ namespace CMI.Access.Sql.Viaduc
     {
         User GetUser(string userId);
 
+        List<User> GetUsers(string[] userIds);
+
         User GetUserWitExtId(string userExtId);
 
         IEnumerable<User> GetAllUsers();

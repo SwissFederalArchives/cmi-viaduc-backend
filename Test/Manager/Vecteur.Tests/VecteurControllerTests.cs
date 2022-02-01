@@ -329,7 +329,7 @@ namespace CMI.Manager.Vecteur.Tests
                 {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
             // Setup specific exception that signals that database is down
             var fe = new FaultEvent<OrderDatabaseNotFoundOrNotRunningException>(new OrderDatabaseNotFoundOrNotRunningException(), new Guid(), null,
-                new OrderDatabaseNotFoundOrNotRunningException());
+                new OrderDatabaseNotFoundOrNotRunningException(), null);
             var ex = new RequestFaultException("", fe);
 
             var controller = ArrangeControllerForGetNextDigitalisierungsauftragWithDigipoolException(ex, archiveRecord);

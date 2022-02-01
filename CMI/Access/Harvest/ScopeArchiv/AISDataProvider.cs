@@ -72,6 +72,22 @@ namespace CMI.Access.Harvest.ScopeArchiv
             return list;
         }
 
+        public List<SyncInfoForReport> GetSyncInfoForReport(List<int> mutationsIds)
+        {
+            var list = new List<SyncInfoForReport>();
+            // The Oracle DB can only read 1000 records at a time,
+            // so the DB is queried in chunks of thousands.
+            // If there are less than 1000, the DB is called after the while loop.
+            while (mutationsIds.Count > 1000)
+            {
+                list.AddRange(SyncInfoForReports(mutationsIds.GetRange(0, 1000).ToArray()));
+                mutationsIds.RemoveRange(0, 1000);
+            }
+
+            list.AddRange(SyncInfoForReports(mutationsIds.ToArray()));
+            return list;
+        }
+
         /// <summary>
         ///     Updates the mutation status of a mutation record in the AIS.
         /// </summary>
@@ -211,15 +227,15 @@ namespace CMI.Access.Harvest.ScopeArchiv
         }
 
         /// <summary>
-        ///     Resets the failed or lost synchronize operations to the initial status.
+        ///     Resets the failed sync operations to the initial status.
         /// </summary>
+        /// <param name="maxRetries">Maximum number of times a failed operation is reset.</param>
         /// <returns>Number of affected records</returns>
-        public int ResetFailedOrLostSyncOperations()
+        public int ResetFailedSyncOperations(int maxRetries)
         {
-            return ExecuteSql(SqlStatements.ResetFailedOrLostOperations, new[]
+            return ExecuteSql(SqlStatements.ResetFailedOperations, new[]
             {
-                new OracleParameter {ParameterName = "syncStatus", Value = ActionStatus.SyncInProgress.ToString()},
-                new OracleParameter {ParameterName = "maxNumberOfRetries", Value = 5}
+                new OracleParameter {ParameterName = "maxNumberOfRetries", Value = maxRetries}
             });
         }
 
@@ -633,18 +649,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
 
                 retVal.TotalResultSetSize = (int) (decimal) ds.Tables["ResultCount"].Rows[0][0];
                 retVal.ResultSet = (from r in ds.Tables["LogInfo"].AsEnumerable()
-                        select new HarvestLogInfo
-                        {
-                            MutationId = (int) r.Field<double>("mttn_id"),
-                            ArchiveRecordId = r.Field<double>("gsft_obj_id").ToString("F0"),
-                            ArchiveRecordIdName = r.Field<string>("gsft_obj_kurz_nm"),
-                            ActionName = r.Field<string>("aktn"),
-                            CurrentStatus = (ActionStatus) r.Field<int>("aktn_stts"),
-                            CreationDate = r.Field<DateTime>("erfsg_dt"),
-                            LastChangeDate = r.Field<DateTime>("mttn_dt"),
-                            NumberOfSyncRetries = r.Field<int>("sync_anz_vrsch"),
-                            Details = GetLogDetails(dsDetail, (int) r.Field<double>("mttn_id"))
-                        }
+                        select HarvestLogInfo(r, dsDetail)
                     ).ToList();
             }
 
@@ -775,27 +780,6 @@ namespace CMI.Access.Harvest.ScopeArchiv
             return myRegex.Replace(text, "$2");
         }
 
-        private List<HarvestLogInfoDetail> GetLogDetails(DataSet dsDetail, int parentRecord)
-        {
-            // If there is no data, then return.
-            if (dsDetail.Tables.Count == 0)
-            {
-                return new List<HarvestLogInfoDetail>();
-            }
-
-            var result = from d in dsDetail.Tables[0].AsEnumerable()
-                where (int) d.Field<double>("mttn_id") == parentRecord
-                select new HarvestLogInfoDetail
-                {
-                    MutationActionDetailId = (int) d.Field<double>("mttn_aktn_id"),
-                    MutationId = parentRecord,
-                    ActionStatus = (ActionStatus) Enum.Parse(typeof(ActionStatus), d.Field<string>("AKTN_STTS_HIST")),
-                    ActionDate = d.Field<DateTime>("AKTN_STTS_DT"),
-                    ErrorReason = d.Field<string>("ERROR_GRND")
-                };
-            return result.ToList();
-        }
-
         #endregion
 
         #region Related objects to Unit of Description
@@ -835,6 +819,68 @@ namespace CMI.Access.Harvest.ScopeArchiv
             {
                 new OracleParameter {ParameterName = "gsft_obj_id", Value = recordId}
             });
+        }
+
+        #endregion
+
+        #region private Methods
+
+        private List<SyncInfoForReport> SyncInfoForReports(int[] mutationsIds)
+        {
+            var sqlString = string.Format(SqlStatements.SqlSyncInfoForReport, string.Join(",", mutationsIds));
+            var ds = GetDataSetFromSql<DataSet>(sqlString);
+            var list = (from r in ds.Tables[0].AsEnumerable()
+                select SyncInfoForReport(r)).ToList();
+            return list;
+        }
+
+        private SyncInfoForReport SyncInfoForReport(DataRow r)
+        {
+            return new SyncInfoForReport
+            {
+                MutationId = (int)r.Field<double>("mttn_id"),
+                ErstellungsdatumPrimaerdatenVerbindung = r.Field<DateTime>("ident_dt"),
+                StartErsterSynchronisierungsversuch = r.Field<DateTime>("ertr_sync_vrsch"),
+                StartLetzterSynchronisierungsversuch = r.Field<DateTime>("ltzr_sync_vrsch"),
+                AbschlussSynchronisierung = r.Field<DateTime>("absls_dt"),
+                AnzahlNotwendigerSynchronisierungsversuche = r.Field<int>("sync_anz_vrsch")
+            };
+        }
+
+        private HarvestLogInfo HarvestLogInfo(DataRow r, DataSet dsDetail)
+        {
+            return new HarvestLogInfo
+            {
+                MutationId = (int)r.Field<double>("mttn_id"),
+                ArchiveRecordId = r.Field<double>("gsft_obj_id").ToString("F0"),
+                ArchiveRecordIdName = r.Field<string>("gsft_obj_kurz_nm"),
+                ActionName = r.Field<string>("aktn"),
+                CurrentStatus = (ActionStatus)r.Field<int>("aktn_stts"),
+                CreationDate = r.Field<DateTime>("erfsg_dt"),
+                LastChangeDate = r.Field<DateTime>("mttn_dt"),
+                NumberOfSyncRetries = r.Field<int>("sync_anz_vrsch"),
+                Details = GetLogDetails(dsDetail, (int)r.Field<double>("mttn_id"))
+            };
+        }
+        private List<HarvestLogInfoDetail> GetLogDetails(DataSet dsDetail, int parentRecord)
+        {
+            // If there is no data, then return.
+            if (dsDetail.Tables.Count == 0)
+            {
+                return new List<HarvestLogInfoDetail>();
+            }
+
+            var result = from d in dsDetail.Tables[0].AsEnumerable()
+                where (int)d.Field<double>("mttn_id") == parentRecord
+                select new HarvestLogInfoDetail
+                {
+                    MutationActionDetailId = (int)d.Field<double>("mttn_aktn_id"),
+                    MutationId = parentRecord,
+                    ActionStatus = (ActionStatus)Enum.Parse(typeof(ActionStatus), d.Field<string>("AKTN_STTS_HIST")),
+                    ActionDate = d.Field<DateTime>("AKTN_STTS_DT"),
+                    ErrorReason = d.Field<string>("ERROR_GRND")
+                };
+            return result.ToList();
         }
 
         #endregion

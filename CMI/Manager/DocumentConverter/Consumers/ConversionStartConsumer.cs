@@ -50,11 +50,13 @@ namespace CMI.Manager.DocumentConverter.Consumers
                         throw new FileNotFoundException(sourceFile.FullName);
                     }
 
-                    Log.Information("Starting conversion for file {FullName} with job id {jobGuid}", sourceFile.FullName, jobGuid);
+                    Log.Information("Starting conversion for file {FullName} with job id {jobGuid} for archive record id {archiveRecordId}", 
+                        sourceFile.FullName, jobGuid, jobInfo.Request.Context.ArchiveRecordId);
 
-                    var result = manager.Convert(jobGuid, sourceFile, context.Message.DestinationExtension, context.Message.VideoQuality);
+                    var result = manager.Convert(jobGuid, sourceFile, context.Message.DestinationExtension, context.Message.VideoQuality, jobInfo.Request.Context);
 
-                    Log.Information("Finished conversion for file {FullName} with job id {jobGuid}", sourceFile.FullName, jobGuid);
+                    Log.Information("Finished conversion for file {FullName} with job id {jobGuid} for archive record id {archiveRecordId}",
+                        sourceFile.FullName, jobGuid, jobInfo.Request.Context.ArchiveRecordId);
 
                     await context.RespondAsync(new ConversionStartResult
                     {

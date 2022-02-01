@@ -1,10 +1,10 @@
-﻿using CMI.Access.Harvest;
+﻿using System.Reflection;
+using Autofac;
+using CMI.Access.Harvest;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Harvest;
 using CMI.Contract.Parameter;
 using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
 
 namespace CMI.Manager.Harvest.Infrastructure
 {
@@ -13,33 +13,29 @@ namespace CMI.Manager.Harvest.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             // register the different consumers and classes
-            kernel.Bind<IHarvestManager>().To(typeof(HarvestManager));
-            kernel.Bind<IDbMetadataAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IDbMutationQueueAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IDbResyncAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IDbStatusAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IDbTestAccess>().To(typeof(AISDataAccess));
-            kernel.Bind<IAISDataProvider>().To(typeof(AISDataProvider));
-            kernel.Bind<CachedLookupData>().ToSelf().InSingletonScope();
-            kernel.Bind<IParameterHelper>().To<ParameterHelper>();
-            kernel.Bind<ICachedHarvesterSetting>().To<CachedHarvesterSetting>().InSingletonScope();
+            builder.RegisterType<LanguageSettings>().AsSelf();
+            builder.RegisterType<ApplicationSettings>().AsSelf();
+            builder.RegisterType<CachedLookupData>().AsSelf();
+            builder.RegisterType<SipDateBuilder>().AsSelf();
+            builder.RegisterType<DigitizationOrderBuilder>().AsSelf();
+            builder.RegisterType<ArchiveRecordBuilder>().AsSelf();
+            builder.RegisterType<HarvestManager>().As<IHarvestManager>();
+            builder.RegisterType<AISDataAccess>().AsImplementedInterfaces();
+            builder.RegisterType<AISDataProvider>().As<IAISDataProvider>();
+            builder.RegisterType<ParameterHelper>().As<IParameterHelper>();
+            builder.RegisterType<CachedHarvesterSetting>().As<ICachedHarvesterSetting>().SingleInstance();
+            
+            // register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
-
-
-            return kernel;
+            return builder;
         }
     }
 }

@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Index.Consumer;
 using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Index.Tests
 {
-    public class UpdateArchiveRecordConsumerTests : InMemoryTestFixture
+    public class UpdateArchiveRecordConsumerTests
     {
         private readonly Mock<IIndexManager> indexManager = new Mock<IIndexManager>();
         private readonly Mock<IConsumer<IUpdateArchiveRecord>> updateArchiveRecordConsumer = new Mock<IConsumer<IUpdateArchiveRecord>>();
-        private Task<ConsumeContext<IArchiveRecordUpdated>> archiveRecordUpdatedTask;
-        private Task<ConsumeContext<IUpdateArchiveRecord>> updateArchiveReocrdTask;
-
-        public UpdateArchiveRecordConsumerTests() : base(true)
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
 
         [SetUp]
         public void Setup()
@@ -31,20 +25,7 @@ namespace CMI.Manager.Index.Tests
             updateArchiveRecordConsumer.Reset();
         }
 
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            updateArchiveReocrdTask = Handler<IUpdateArchiveRecord>(configurator,
-                context => new UpdateArchiveRecordConsumer(indexManager.Object).Consume(context));
-        }
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
-            configurator.ReceiveEndpoint(BusConstants.HarvestManagerArchiveRecordUpdatedEventQueue, ec =>
-            {
-                ec.Consumer(() => updateArchiveRecordConsumer.Object);
-                archiveRecordUpdatedTask = Handled<IArchiveRecordUpdated>(ec);
-            });
-        }
+ 
 
         [Test]
         public async Task If_Update_throws_error_Sync_process_is_set_to_failed()
@@ -55,21 +36,39 @@ namespace CMI.Manager.Index.Tests
             var errMsg = "Hi I'm an error";
             indexManager.Setup(e => e.UpdateArchiveRecord(It.IsAny<ConsumeContext<IUpdateArchiveRecord>>())).Throws(new Exception(errMsg));
 
-            // Act
-            await InputQueueSendEndpoint.Send<IUpdateArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new UpdateArchiveRecordConsumer(indexManager.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecord = ar,
-                MutationId = mutationId
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IUpdateArchiveRecord>(new
+                {
+                    ArchiveRecord = ar,
+                    MutationId = mutationId
+                });
 
-            // Wait for the results
-            await updateArchiveReocrdTask;
-            var context = await archiveRecordUpdatedTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<IUpdateArchiveRecord>());
 
-            // Assert
-            context.Message.ActionSuccessful.Should().Be(false);
-            context.Message.MutationId.Should().Be(mutationId);
-            context.Message.ErrorMessage.Should().Be(errMsg);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<IUpdateArchiveRecord>());
+
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Published.Any<IArchiveRecordUpdated>());
+                var message = harness.Published.Select<IArchiveRecordUpdated>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ActionSuccessful.Should().Be(false);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ErrorMessage.Should().Be(errMsg);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -88,21 +87,39 @@ namespace CMI.Manager.Index.Tests
             var mutationId = 124;
             indexManager.Setup(e => e.UpdateArchiveRecord(It.IsAny<ConsumeContext<IUpdateArchiveRecord>>()));
 
-            // Act
-            await InputQueueSendEndpoint.Send<IUpdateArchiveRecord>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new UpdateArchiveRecordConsumer(indexManager.Object));
+
+            await harness.Start();
+            try
             {
-                ArchiveRecord = ar,
-                MutationId = mutationId
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IUpdateArchiveRecord>(new
+                {
+                    ArchiveRecord = ar,
+                    MutationId = mutationId
+                });
 
-            // Wait for the results
-            await updateArchiveReocrdTask;
-            var context = await archiveRecordUpdatedTask;
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<IUpdateArchiveRecord>());
 
-            // Assert
-            context.Message.ActionSuccessful.Should().Be(true);
-            context.Message.MutationId.Should().Be(mutationId);
-            context.Message.ErrorMessage.Should().Be(null);
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<IUpdateArchiveRecord>());
+
+                // was the update ArchiveRecord message sent
+                Assert.That(await harness.Published.Any<IArchiveRecordUpdated>());
+                var message = harness.Published.Select<IArchiveRecordUpdated>().FirstOrDefault();
+
+                // Assert
+                Assert.That(message != null);
+                message.Context.Message.ActionSuccessful.Should().Be(true);
+                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ErrorMessage.Should().Be(null);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
     }
 }

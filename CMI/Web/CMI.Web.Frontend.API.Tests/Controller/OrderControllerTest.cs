@@ -16,7 +16,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
     [TestFixture]
     public class OrderControllerTest : InMemoryTestFixture
     {
-        public OrderControllerTest() : base(true)
+        public OrderControllerTest()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -33,7 +33,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // Arrange
             var orderManager = new OrderManagerClient(Bus);
-            var controller = new OrderController(orderManager, null, null, null, null, null);
+            var controller = new OrderController(orderManager, null, null, null, null, null, null, null);
 
             // Act
             var result = await controller.AddToBasket(new FormularBestellungParams
@@ -54,7 +54,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // Arrange
             var orderManager = new OrderManagerClient(Bus);
-            var controller = new OrderController(orderManager, null, null, null, null, null);
+            var controller = new OrderController(orderManager, null, null, null, null, null, null, null);
 
             // Act
             var result = await controller.AddToBasket(new FormularBestellungParams
@@ -75,7 +75,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // Arrange
             var orderManager = new OrderManagerClient(Bus);
-            var controller = new OrderController(orderManager, null, null, null, null, null);
+            var controller = new OrderController(orderManager, null, null, null, null, null, null, null);
 
             // Act
             var result = await controller.AddToBasket(new FormularBestellungParams
@@ -96,7 +96,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // Arrange
             var orderManager = new OrderManagerClient(Bus);
-            var controller = new OrderController(orderManager, null, null, null, null, null);
+            var controller = new OrderController(orderManager, null, null, null, null, null, null, null);
 
             // Act
             var result = await controller.AddToBasket(new FormularBestellungParams

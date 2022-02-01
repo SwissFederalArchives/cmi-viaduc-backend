@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Autofac;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
@@ -20,13 +21,7 @@ namespace CMI.Manager.Repository.ConsoleTestTool
         private static void Main(string[] args)
         {
             // Configure Bus
-            var bus = BusConfigurator.ConfigureBus(MonitoredServices.NotMonitored, (cfg, host) =>
-            {
-                cfg.ReceiveEndpoint(BusConstants.RepositoryTestPackageDownloadedEventQueue, ec => { ec.Consumer(() => new MyConsumer()); });
-
-                cfg.ReceiveEndpoint(BusConstants.AssetManagerAssetReadyEventQueue, ec => { ec.Consumer(() => new MyConsumer()); });
-            });
-            bus.Start();
+            var bus = LoadBus();
 
             var packageId = string.Empty;
             while (packageId?.ToLowerInvariant() != "quit")
@@ -48,6 +43,24 @@ namespace CMI.Manager.Repository.ConsoleTestTool
                     AppendPackage(bus, packageId);
                 }
             }
+        }
+
+        private static IBusControl LoadBus()
+        {
+            // Configure Bus
+            var containerBuilder = new ContainerBuilder(); 
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.NotMonitored, (cfg, ctx) =>
+            {
+                cfg.ReceiveEndpoint(BusConstants.RepositoryTestPackageDownloadedEventQueue, ec => { ec.Consumer(() => new MyConsumer()); });
+
+                cfg.ReceiveEndpoint(BusConstants.AssetManagerAssetReadyEventQueue, ec => { ec.Consumer(() => new MyConsumer()); });
+            });
+
+            var container = containerBuilder.Build();
+            var bus = container.Resolve<IBusControl>();
+            bus.Start();
+
+            return bus;
         }
 
         private static void AppendPackage(IBusControl bus, string packageId)

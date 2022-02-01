@@ -1,4 +1,5 @@
 ﻿using System;
+using CMI.Contract.Common.Extensions;
 using CMI.Contract.Order;
 using CMI.Manager.Order.Consumers;
 

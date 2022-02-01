@@ -140,10 +140,10 @@ namespace CMI.Engine.MailTemplate
         public List<Auftrag> GetAuftraege(IEnumerable<int> orderItemIds)
         {
             var requestClient =
-                CreateRequestClient<FindOrderItemsRequest, FindOrderItemsResponse>(bus, BusConstants.OrderManagerFindOrderItemsRequestQueue);
-            var task = requestClient.Request(new FindOrderItemsRequest {OrderItemIds = orderItemIds.ToArray()});
+                CreateRequestClient<FindOrderItemsRequest>(bus, BusConstants.OrderManagerFindOrderItemsRequestQueue);
+            var task = requestClient.GetResponse<FindOrderItemsResponse>(new FindOrderItemsRequest {OrderItemIds = orderItemIds.ToArray()});
             task.Wait();
-            var response = task.Result;
+            var response = task.Result.Message;
             var auftraege = new List<Auftrag>();
 
             foreach (var orderItem in response.OrderItems)
@@ -171,10 +171,10 @@ namespace CMI.Engine.MailTemplate
         private Person GetPerson(string userId)
         {
             var requestClient =
-                CreateRequestClient<ReadUserInformationRequest, ReadUserInformationResponse>(bus, BusConstants.ReadUserInformationQueue);
-            var task = requestClient.Request(new ReadUserInformationRequest {UserId = userId});
+                CreateRequestClient<ReadUserInformationRequest>(bus, BusConstants.ReadUserInformationQueue);
+            var task = requestClient.GetResponse<ReadUserInformationResponse>(new ReadUserInformationRequest {UserId = userId});
             task.Wait();
-            var response = task.Result;
+            var response = task.Result.Message;
             return Person.FromUser(response?.User);
         }
 
@@ -186,11 +186,16 @@ namespace CMI.Engine.MailTemplate
 
         private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId)
         {
-            var requestClient =
-                CreateRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
-            var task = requestClient.Request(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
+            var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
+            var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
             task.Wait();
-            return task.Result.ElasticArchiveRecord;
+            return task.Result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
+            {
+                ArchiveRecordId = archiveRecordId,
+                Title = "Record not found in Elastic",
+                CreationPeriod = new ElasticTimePeriod(),
+                CustomFields = new { aktenzeichen = "" }
+            };
         }
 
         private Auftrag GetAuftrag(Ordering ordering, OrderItem orderItem)
@@ -240,18 +245,16 @@ namespace CMI.Engine.MailTemplate
         }
 
 
-        public static IRequestClient<T1, T2> CreateRequestClient<T1, T2>(IBus busControl, string relativeUri) where T1 : class where T2 : class
+        public static IRequestClient<T1> CreateRequestClient<T1>(IBus busControl, string relativeUri) where T1 : class
         {
-            var client =
-                busControl.CreateRequestClient<T1, T2>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
-
+            var client = busControl.CreateRequestClient<T1>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
             return client;
         }
 
         private Ordering GetOrdering(int orderingId)
         {
-            var client = CreateRequestClient<GetOrderingRequest, GetOrderingResponse>(bus, BusConstants.OrderManagerGetOrderingRequestQueue);
-            var result = client.Request(new GetOrderingRequest {OrderingId = orderingId}).GetAwaiter().GetResult();
+            var client = CreateRequestClient<GetOrderingRequest>(bus, BusConstants.OrderManagerGetOrderingRequestQueue);
+            var result = client.GetResponse<GetOrderingResponse>(new GetOrderingRequest {OrderingId = orderingId}).GetAwaiter().GetResult().Message;
             return result.Ordering;
         }
     }

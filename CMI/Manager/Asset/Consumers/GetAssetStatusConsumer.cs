@@ -10,9 +10,9 @@ namespace CMI.Manager.Asset.Consumers
     public class GetAssetStatusConsumer : IConsumer<GetAssetStatusRequest>
     {
         private readonly IAssetManager assetManager;
-        private readonly IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> requestClient;
+        private readonly IRequestClient<DoesExistInCacheRequest> requestClient;
 
-        public GetAssetStatusConsumer(IAssetManager assetManager, IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> requestClient)
+        public GetAssetStatusConsumer(IAssetManager assetManager, IRequestClient<DoesExistInCacheRequest> requestClient)
         {
             this.assetManager = assetManager;
             this.requestClient = requestClient;
@@ -22,21 +22,21 @@ namespace CMI.Manager.Asset.Consumers
         {
             using (LogContext.PushProperty(nameof(context.ConversationId), context.ConversationId))
             {
-                Log.Information("Received {CommandName} command with conversationId {ConversationId} from the bus",
+                Log.Verbose("Received {CommandName} command with conversationId {ConversationId} from the bus",
                     nameof(GetAssetStatusRequest), context.ConversationId);
                 var message = context.Message;
 
 
                 // Prüfen, ob die Datei schon im Cache vorhanden ist. Wenn ja, ist alles gut.
-                var response = await requestClient.Request(new DoesExistInCacheRequest
+                var response = (await requestClient.GetResponse<DoesExistInCacheResponse>(new DoesExistInCacheRequest
                 {
                     Id = context.Message.ArchiveRecordId,
                     RetentionCategory = context.Message.RetentionCategory
-                });
+                })).Message;
 
                 if (response.Exists)
                 {
-                    Log.Information("Found the asset for id {ArchiveRecordId} with type {AssetType} and Size {FileSize} bytes in the cache.",
+                    Log.Verbose("Found the asset for id {ArchiveRecordId} with type {AssetType} and Size {FileSize} bytes in the cache.",
                         message.ArchiveRecordId, message.AssetType, response.FileSizeInBytes);
 
                     var assetStatusResult = new GetAssetStatusResult
@@ -48,7 +48,7 @@ namespace CMI.Manager.Asset.Consumers
                         FileSizeInBytes = response.FileSizeInBytes
                     };
 
-                    Log.Information("Constructed getAssetStatusResult");
+                    Log.Verbose("Constructed getAssetStatusResult");
                     await context.RespondAsync(assetStatusResult);
                     return;
                 }
@@ -58,7 +58,7 @@ namespace CMI.Manager.Asset.Consumers
                 var status = await assetManager.CheckPreparationStatus(message.ArchiveRecordId);
                 if (status.PackageIsInPreparationQueue)
                 {
-                    Log.Information("Found the asset for id {ArchiveRecordId} with type {AssetType} in the preparation queue.",
+                    Log.Verbose("Found the asset for id {ArchiveRecordId} with type {AssetType} in the preparation queue.",
                         message.ArchiveRecordId, message.AssetType);
                     var assetStatusResult = new GetAssetStatusResult
                     {

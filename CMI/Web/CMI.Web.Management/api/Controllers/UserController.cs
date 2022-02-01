@@ -42,6 +42,15 @@ namespace CMI.Web.Management.api.Controllers
             return userDataAccess.GetUser(ControllerHelper.GetCurrentUserId());
         }
 
+        /// <summary>
+        ///     Gibt Informationen zum aktuell eingeloggten Benutzer
+        /// </summary>
+        [HttpGet]
+        public User[] GetUsers([FromUri] string[] userIds)
+        {
+            return userDataAccess.GetUsers(userIds).ToArray();
+        }
+
         [HttpPost]
         public HttpResponseMessage UpdateUser([FromBody] UserPostData postData)
         {

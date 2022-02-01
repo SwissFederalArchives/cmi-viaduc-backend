@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
@@ -11,16 +12,15 @@ namespace CMI.Manager.Asset
         ///     Extracts the fulltext and adds the resulting text to the ArchiveRecord.
         /// </summary>
         /// <returns><c>true</c> if successfull, <c>false</c> otherwise.</returns>
-        Task<bool> ExtractFulltext(long mutationId, ArchiveRecord archiveRecord, int primaerdatenAuftragStatusId);
+        Task<bool> ExtractFulltext(long mutationId, ArchiveRecord archiveRecord, int primaerdatenAuftragId);
 
         /// <summary>
         ///     Converts a package to a usage copy.
         /// </summary>
         /// <param name="id">Bei AssetType Gebrauchskopie ArchiveRecordId, sonst OrderItemId</param>
         /// <param name="assetType">The asset type.</param>
-        /// <param name="fileName">Name of the package file to convert.</param>
-        /// <param name="packageId">The id of the ordered package</param>
-        Task<PackageConversionResult> ConvertPackage(string id, AssetType assetType, bool protectWithPassword, string fileName, string packageId);
+        /// <param name="package">The details of the package to convert</param>
+        Task<PackageConversionResult> ConvertPackage(string id, AssetType assetType, bool protectWithPassword, RepositoryPackage package);
 
         /// <summary>
         ///     Checks the status of the package
@@ -60,5 +60,7 @@ namespace CMI.Manager.Asset
         Task<int> UpdatePrimaerdatenAuftragStatus(IUpdatePrimaerdatenAuftragStatus newStatus);
 
         Task DeleteOldDownloadAndSyncRecords(int olderThanXDays);
+
+        Task<bool> ExtractZipFile(ExtractZipArgument extractZipArgument);
     }
 }

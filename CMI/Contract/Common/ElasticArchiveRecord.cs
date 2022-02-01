@@ -35,6 +35,7 @@ namespace CMI.Contract.Common
     {
         public string PrimaryDataLink { get; set; }
         public bool CanBeOrdered { get; set; }
+        public string WithinInfo { get; set; }
 
         [JsonConverter(typeof(ExpandoObjectConverter))]
         public dynamic CustomFields { get; set; }
@@ -47,7 +48,6 @@ namespace CMI.Contract.Common
     {
         public string FormerReferenceCode { get; set; }
         public string Extent { get; set; }
-        public string WithinInfo { get; set; }
         public bool HasImage { get; set; }
         public int AccessionDate { get; set; }
         public List<ElasticParentContentInfo> ParentContentInfos { get; set; }
@@ -101,9 +101,9 @@ namespace CMI.Contract.Common
 
     public class PermissionInfo
     {
-        public string[] MetadataAccessToken;
-        public string[] PrimaryDataDownloadAccessTokens;
-        public string[] PrimaryDataFulltextAccessTokens;
+        public string[] MetadataAccessToken { get; set; }
+        public string[] PrimaryDataDownloadAccessTokens { get; set; }
+        public string[] PrimaryDataFulltextAccessTokens { get; set; }
     }
 
     public class ElasticAggregationFields
@@ -166,7 +166,7 @@ namespace CMI.Contract.Common
 
             if (parts.Length < 2 || string.IsNullOrEmpty(parts[parts.Length - 1]))
             {
-                return container.ContainerCode; // Fallback falls das Band nicht ermittelt werden konnte (Gemäss Marlies Hertig)
+                return container.ContainerCode; // Fallback falls das Band nicht ermittelt werden konnte (GemÃ¤ss Marlies Hertig)
             }
 
             return parts[parts.Length - 1];
@@ -227,6 +227,7 @@ namespace CMI.Contract.Common
             Items = new List<ElasticRepositoryObject>();
         }
 
+        public string FileFormatsInpackage { get; set; }
         public long SizeInBytes { get; set; }
         public int FileCount { get; set; }
         public string PackageId { get; set; }

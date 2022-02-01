@@ -114,7 +114,22 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                     if (!engineHolders[i].IsEngineLocked())
                     {
                         Log.Information("Getting Abbyy engine with id {i}", i);
-                        return engineHolders[i].GetLockedEngine();
+                        var engine = engineHolders[i].GetLockedEngine();
+                        try
+                        {
+                            // If abbyy process was killed outside in task manager, it could be null
+                            // and this line would raise an error.
+                            var dummy = engine.ApplicationTitle;
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Warning(ex, "The Abbyy engine with id {i} was invalid and will be recreated.");
+                            // Recreate the engine
+                            ReleaseEngine(i, true);
+                            engine = engineHolders[i].GetLockedEngine();
+                        }
+
+                        return engine;
                     }
                 }
             }
@@ -188,10 +203,26 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                 engineHolders[engineIndex].UnlockEngine();
                 if (isRecycleRequired || isAutoRecycleRequired)
                 {
-                    Log.Information("Recycling Abbyy engine with id {engineIndex}", engineIndex);
-                    engineHolders[engineIndex].Dispose();
-                    engineHolders[engineIndex] = new EngineHolder(projectId);
+                    RecycleEngine(engineIndex);
                 }
+            }
+        }
+
+        private void RecycleEngine(int engineIndex)
+        {
+            Log.Information("Recycling Abbyy engine with id {engineIndex}", engineIndex);
+
+            try
+            {
+                engineHolders[engineIndex].Dispose();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "While recycling Abbyy engine, received an error while disposing of engine.");
+            }
+            finally
+            {
+                engineHolders[engineIndex] = new EngineHolder(projectId);
             }
         }
 
@@ -219,7 +250,7 @@ namespace CMI.Manager.DocumentConverter.Abbyy
 
                     process = Process.GetProcessById(processControl.ProcessId);
 
-                    engine = engineLoader.GetEngineObject(projectId);
+                    engine = engineLoader.InitializeEngine(projectId, null, null, "", "", false);
                 }
                 catch (COMException exception)
                 {

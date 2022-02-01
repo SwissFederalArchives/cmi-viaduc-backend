@@ -18,12 +18,12 @@ namespace CMI.Manager.Asset.Tests
         [SetUp]
         public void Setup()
         {
-            requestClient = CreateRequestClient<GetAssetStatusRequest, GetAssetStatusResult>();
-            doesExistsClient = CreateRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse>();
+            requestClient = CreateRequestClient<GetAssetStatusRequest>();
+            doesExistsClient = CreateRequestClient<DoesExistInCacheRequest>();
             assetManager.Reset();
         }
 
-        public GetAssetStatusConsumerTests() : base(true)
+        public GetAssetStatusConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -31,9 +31,9 @@ namespace CMI.Manager.Asset.Tests
         private readonly Mock<IAssetManager> assetManager = new Mock<IAssetManager>();
         private readonly DoesExistInCacheRequestConsumer doesExistInCacheConsumer = new DoesExistInCacheRequestConsumer();
         private Task<ConsumeContext<GetAssetStatusRequest>> getAssetStatusTask;
-        private IRequestClient<GetAssetStatusRequest, GetAssetStatusResult> requestClient;
-        private IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistsClient;
-        private Task<GetAssetStatusResult> response;
+        private IRequestClient<GetAssetStatusRequest> requestClient;
+        private IRequestClient<DoesExistInCacheRequest> doesExistsClient;
+        private Task<Response<GetAssetStatusResult>> response;
 
 
         protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
@@ -59,7 +59,7 @@ namespace CMI.Manager.Asset.Tests
             doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(true, 99999);
 
             // Act
-            response = requestClient.Request(new GetAssetStatusRequest
+            response = requestClient.GetResponse<GetAssetStatusResult>(new GetAssetStatusRequest
             {
                 ArchiveRecordId = "1111",
                 AssetType = AssetType.Gebrauchskopie,
@@ -67,7 +67,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await getAssetStatusTask;
 
             // Assert
@@ -86,7 +86,7 @@ namespace CMI.Manager.Asset.Tests
             doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(false, 0);
 
             // Act
-            response = requestClient.Request(new GetAssetStatusRequest
+            response = requestClient.GetResponse<GetAssetStatusResult>(new GetAssetStatusRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
@@ -94,7 +94,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await getAssetStatusTask;
 
             // Assert
@@ -109,7 +109,7 @@ namespace CMI.Manager.Asset.Tests
             doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(false, 0);
 
             // Act
-            response = requestClient.Request(new GetAssetStatusRequest
+            response = requestClient.GetResponse<GetAssetStatusResult>(new GetAssetStatusRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
@@ -117,7 +117,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Wait for the results
-            var message = await response;
+            var message = (await response).Message;
             await getAssetStatusTask;
 
             // Assert

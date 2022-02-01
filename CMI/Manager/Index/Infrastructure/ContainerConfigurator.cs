@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
+using Autofac;
 using CMI.Access.Common;
+using CMI.Contract.Messaging;
+using CMI.Contract.Parameter;
 using CMI.Manager.Index.Config;
+using CMI.Utilities.Bus.Configuration;
 using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
 
 namespace CMI.Manager.Index.Infrastructure
 {
@@ -13,29 +16,31 @@ namespace CMI.Manager.Index.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customFieldsConfig.json");
 
             // register the different consumers and classes
-            kernel.Bind<IIndexManager>().To(typeof(IndexManager));
-            kernel.Bind<ISearchIndexDataAccess>().To(typeof(SearchIndexDataAccess));
-            kernel.Bind<ITestSearchIndexDataAccess>().To(typeof(SearchIndexDataAccess));
-            kernel.Bind<IElasticLogManager>().To(typeof(ElasticLogManager));
-            kernel.Bind<CustomFieldsConfiguration>().To<CustomFieldsConfiguration>().InSingletonScope().WithConstructorArgument(configFile);
+            builder.RegisterType<IndexManager>().As<IIndexManager>();
+            builder.RegisterType<SearchIndexDataAccess>().AsImplementedInterfaces();
+            builder.RegisterType<LogDataAccess>().As<ILogDataAccess>();
+            builder.RegisterType<ParameterHelper>().As<IParameterHelper>();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
+            builder.RegisterType<ElasticLogManager>().As<IElasticLogManager>();
+            builder.RegisterType<CustomFieldsConfiguration>().AsSelf().SingleInstance().WithParameter("configurationFile", configFile);
 
-            return kernel;
+            // SimpleConsumers
+            builder.RegisterType(typeof(SimpleConsumer<GetArchiveRecordsForPackageRequest, GetArchiveRecordsForPackageResponse, IIndexManager>)).As(typeof(IConsumer<GetArchiveRecordsForPackageRequest>));
+            builder.RegisterType(typeof(SimpleConsumer<GetElasticLogRecordsRequest, GetElasticLogRecordsResponse, IElasticLogManager>)).As(typeof(IConsumer<GetElasticLogRecordsRequest>));
+
+            // just register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
+
+            return builder;
         }
     }
 }

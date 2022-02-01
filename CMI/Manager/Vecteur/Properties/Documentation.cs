@@ -1,4 +1,5 @@
 ﻿using CMI.Utilities.Common;
+using GreenPipes.Caching;
 
 namespace CMI.Manager.Vecteur.Properties
 {
@@ -12,6 +13,9 @@ namespace CMI.Manager.Vecteur.Properties
             AddDescription<VecteurSettings>(x => x.SftpPassword, "Passwort des SFTP des API für Digitalisierungsaufträge");
             AddDescription<VecteurSettings>(x => x.SftpPort, "Port des SFTP des API für Digitalisierungsaufträge");
             AddDescription<VecteurSettings>(x => x.RequestTimeoutInMinute, "Request Timeout für Digitalisierungsaufträge");
+            AddDescription<VecteurSettings>(x => x.SftpLicenseKey, "Lizenzschlüssel für den SFTP");
+            AddDescription<VecteurSettings>(x => x.SftpPrivateCertKey, "Inhalt für das SFTP Private-Zertifikat (BASE64-Encoded)");
+            AddDescription<VecteurSettings>(x => x.SftpPrivateCertPassword, "Passwort für das SFTP Private-Zertifikat");
         }
     }
 }

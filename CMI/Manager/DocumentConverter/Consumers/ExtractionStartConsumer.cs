@@ -47,11 +47,13 @@ namespace CMI.Manager.DocumentConverter.Consumers
                         throw new FileNotFoundException(sourceFile.FullName);
                     }
 
-                    Log.Information("Starting text extraction for file {FullName} with job id {jobGuid}", sourceFile.FullName, jobGuid);
+                    Log.Information("Starting text extraction for file {FullName} with job id {jobGuid} for archive record id {archiveRecordId}", 
+                        sourceFile.FullName, jobGuid, jobInfo.Request.Context.ArchiveRecordId);
 
-                    var extractionResult = manager.ExtractText(jobGuid, sourceFile);
+                    var extractionResult = manager.ExtractText(jobGuid, sourceFile, jobInfo.Request.Context);
 
-                    Log.Information("Finished text extraction for file {FullName} with job id {jobGuid}", sourceFile.FullName, jobGuid);
+                    Log.Information("Finished text extraction for file {FullName} with job id {jobGuid} for archive record id {archiveRecordId}",
+                        sourceFile.FullName, jobGuid, jobInfo.Request.Context.ArchiveRecordId);
 
                     // Depending on the OCR extraction result, we prepare the result
                     var result = new ExtractionStartResult();

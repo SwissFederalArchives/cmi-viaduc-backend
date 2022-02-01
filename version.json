@@ -1,0 +1,21 @@
+{
+	"$schema": "https://raw.githubusercontent.com/AArnott/Nerdbank.GitVersioning/master/src/NerdBank.GitVersioning/version.schema.json",
+	"version": "1.5.0",
+	"buildNumberOffset": 1000,
+	"nugetPackageVersion": {
+	  "semVer": 2
+	},
+	"publicReleaseRefSpec": [
+	  "^refs/heads/master$",
+	  "^refs/heads/develop$",
+	  "^refs/tags/v.\\d+\\.\\d+"
+	],
+  "assemblyVersion": {
+    "precision": "revision"
+  },
+  "cloudBuild": {
+    "buildNumber": {
+      "enabled": true
+    }
+  }
+}

@@ -19,9 +19,9 @@ namespace CMI.Manager.Repository.Tests
         private readonly Mock<IRepositoryManager> repositoryManager = new Mock<IRepositoryManager>();
         private Task<ConsumeContext<IAssetReady>> assetReadyUpdatedTask;
         private Task<ConsumeContext<IDownloadPackage>> downloadPackageTask;
-        private Task<ConsumeContext<ITransformAsset>> transformAssetTask;
+        private Task<ConsumeContext<PrepareForTransformationMessage>> prepareForTransformationAssetTask;
 
-        public DownlaodPackageConsumerTests() : base(true)
+        public DownlaodPackageConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -41,10 +41,10 @@ namespace CMI.Manager.Repository.Tests
 
         protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
         {
-            configurator.ReceiveEndpoint(BusConstants.AssetManagerTransformAssetMessageQueue, ec =>
+            configurator.ReceiveEndpoint(BusConstants.AssetManagerPrepareForTransformation, ec =>
             {
                 ec.Consumer(() => downloadPackageConsumer.Object);
-                transformAssetTask = Handled<ITransformAsset>(ec);
+                prepareForTransformationAssetTask = Handled<PrepareForTransformationMessage>(ec);
             });
 
             configurator.ReceiveEndpoint(BusConstants.AssetManagerAssetReadyEventQueue, ec =>
@@ -55,7 +55,7 @@ namespace CMI.Manager.Repository.Tests
         }
 
         [Test]
-        public async Task If_GetPackage_from_repository_is_successfull_transformation_of_asset_is_started()
+        public async Task If_GetPackage_from_repository_is_successfull_preprocessing_of_asset_is_started()
         {
             // Arrange
             var archiveRecordId = "654";
@@ -80,13 +80,13 @@ namespace CMI.Manager.Repository.Tests
 
             // Wait for the results
             await downloadPackageTask;
-            var context = await transformAssetTask;
+            var context = await prepareForTransformationAssetTask;
 
             // Assert
-            context.Message.ArchiveRecordId.Should().Be(archiveRecordId);
+            context.Message.RepositoryPackage.ArchiveRecordId.Should().Be(archiveRecordId);
             context.Message.CallerId = "someCaller";
             context.Message.AssetType = AssetType.Gebrauchskopie; // Download from DIR is always UsageCopy
-            context.Message.FileName.Should().Be("someZipFile.zip");
+            context.Message.RepositoryPackage.PackageFileName.Should().Be("someZipFile.zip");
             context.Message.RetentionCategory.Should().Be(CacheRetentionCategory.UsageCopyPublic);
         }
 

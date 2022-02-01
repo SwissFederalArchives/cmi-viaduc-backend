@@ -169,7 +169,7 @@ namespace CMI.Access.Sql.Viaduc
 
         [Column(CanBeNull = true)] public bool? Benutzungskopie { get; set; }
 
-        [Column(CanBeNull = false)] public DateTime ErwartetesRueckgabeDatum { get; set; }
+        [Column(CanBeNull = true)] public DateTime? ErwartetesRueckgabeDatum { get; set; }
 
         [Column(CanBeNull = false)]
         [Origin(Table = nameof(Ordering), Column = nameof(Ordering.RolePublicClient))]

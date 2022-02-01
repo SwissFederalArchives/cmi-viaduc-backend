@@ -130,6 +130,36 @@ FROM ApplicationUser ";
             return user;
         }
 
+        public List<User> GetUsers(string[] userIds)
+        {
+            var list = new List<User>();
+            if (userIds.Length == 0)
+            {
+                throw new ArgumentException(nameof(userIds));
+            }
+
+            using (var cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+
+                using (var cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText =
+                        $"{Sql} WHERE ID in ({string.Join(",", userIds.Select(id => $"'{id}'"))} )";
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            list.Add(reader.ToUser<User>());
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
         public User GetUserWitExtId(string userExtId)
         {
             User user = null;
@@ -152,7 +182,7 @@ FROM ApplicationUser ";
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if(reader.Read())
                         {
                             user = reader.ToUser<User>();
                         }

@@ -21,7 +21,7 @@ namespace CMI.Manager.Harvest.Tests
         private Task<ConsumeContext<IResyncArchiveDatabaseStarted>> resyncArchiveDatabaseStartedTask;
         private Task<ConsumeContext<IResyncArchiveDatabase>> resyncArchiveDatabaseTask;
 
-        public ArchiveDatabaseResyncConsumerTests() : base(true)
+        public ArchiveDatabaseResyncConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Utilities.Bus.Configuration;
@@ -32,7 +33,12 @@ namespace CMI.Utilities.Logging.Configurator
             try
             {
                 messageTemplateTextFormatter = new MessageTemplateTextFormatter(outputTemplate, formatProvider);
-                bus = BusConfigurator.ConfigureBus(MonitoredServices.NotMonitored, (cfg, host) => { });
+                var containerBuilder = new ContainerBuilder();
+                
+                BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.NotMonitored, (cfg, ctx) => { });
+                var container = containerBuilder.Build();
+                bus = container.Resolve<IBusControl>();
+
                 bus.Start();
                 ReadConfig();
 

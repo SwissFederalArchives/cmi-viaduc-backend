@@ -13,15 +13,15 @@ namespace CMI.Engine.Asset
 {
     public class RenderEngine : IRenderEngine
     {
-        private readonly IRequestClient<ConversionStartRequest, ConversionStartResult> conversionRequestClient;
-        private readonly IRequestClient<JobInitRequest, JobInitResult> jobInitRequestClient;
-        private readonly IRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse> supportedFileTypesRequestClient;
+        private readonly IRequestClient<ConversionStartRequest> conversionRequestClient;
+        private readonly IRequestClient<JobInitRequest> jobInitRequestClient;
+        private readonly IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient;
         private readonly string sftpLicenseKey;
         private string[] supportedFileTypes;
 
-        public RenderEngine(IRequestClient<JobInitRequest, JobInitResult> jobInitRequestClient,
-            IRequestClient<ConversionStartRequest, ConversionStartResult> conversionRequestClient,
-            IRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse> supportedFileTypesRequestClient,
+        public RenderEngine(IRequestClient<JobInitRequest> jobInitRequestClient,
+            IRequestClient<ConversionStartRequest> conversionRequestClient,
+            IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient,
             string sftpLicenseKey)
         {
             this.jobInitRequestClient = jobInitRequestClient;
@@ -42,12 +42,12 @@ namespace CMI.Engine.Asset
                 ProcessType = ProcessType.Rendering
             };
 
-            var response = await supportedFileTypesRequestClient.Request(request);
-            supportedFileTypes = response.SupportedFileTypes;
+            var response = await supportedFileTypesRequestClient.GetResponse<SupportedFileTypesResponse>(request);
+            supportedFileTypes = response.Message?.SupportedFileTypes;
             return supportedFileTypes;
         }
 
-        public async Task<string> ConvertFile(string file, string destinationExtension)
+        public async Task<string> ConvertFile(string file, string destinationExtension, JobContext context)
         {
             var fi = new FileInfo(file);
 
@@ -61,10 +61,11 @@ namespace CMI.Engine.Asset
                 var conversionSettings = new JobInitRequest
                 {
                     FileNameWithExtension = fi.Name,
-                    RequestedProcessType = ProcessType.Rendering
+                    RequestedProcessType = ProcessType.Rendering,
+                    Context = context
                 };
 
-                var registrationResponse = await jobInitRequestClient.Request(conversionSettings);
+                var registrationResponse = (await jobInitRequestClient.GetResponse<JobInitResult>(conversionSettings)).Message;
                 if (registrationResponse.IsInvalid)
                 {
                     throw new Exception($"JobInit request was not valid. Error message: {registrationResponse.ErrorMessage}");
@@ -83,7 +84,7 @@ namespace CMI.Engine.Asset
                 };
 
                 Log.Information("Sent actual conversion request for job id {jobGuid}", registrationResponse.JobGuid);
-                var convertionResponse = await conversionRequestClient.Request(requestSettings);
+                var convertionResponse = (await conversionRequestClient.GetResponse<ConversionStartResult>(requestSettings)).Message;
                 if (convertionResponse.IsInvalid)
                 {
                     throw new Exception(convertionResponse.ErrorMessage);

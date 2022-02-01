@@ -8,19 +8,47 @@
         }
 
         .col {
-            width: 200px;
+            width: 345px;
         }
 	ul.first {
 		list-style-type: none;
 	}
+        table {
+            border-collapse: collapse;
+        }
+
+        th {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+            text-align: left;
+            font-weight: normal;
+            line-height: 15px;
+        }
+
+        .veList {
+            padding-top: 2px;
+            padding-left: 0px;
+            padding-bottom: 2px;
+            padding-right: 20px;
+            border-bottom: 1px solid black;
+            text-align: left;
+            font-weight: normal;
+            line-height: 15px;
+        }
         
     </style>
 </head>
 
 <body>
-    <b>Neues Einsichtsgesuch: {{User.Vorname}} {{User.Name}}, {{User.Organisation}}, {{User.Ort}} / {{Bestellung.OrderId}}</b>
-    <hr>
-    <table> 
+    <b>
+        Neues Einsichtsgesuch: {{User.Vorname}} {{User.Name}}, {{#HasOrganization}}{{User.Organisation}}, {{/HasOrganization}}{{User.Ort}} / {{Bestellung.ErfassungsdatumMitUhrzeit}} / {{Bestellung.OrderId}}
+    </b>
+    <hr style="width: 2300px; text-align:left;" />
+    <table>
         <tr>
             <td class="col">Name:</td>
             <td>{{User.Name}}</td>
@@ -41,38 +69,102 @@
             <td class="col">E-Mail:</td>
             <td>{{User.EmailAddress}}</td>
         </tr>
+    </table >
+    <hr style="width: 2300px; text-align: left;" />
+    <table>
+        <tr>
+            <td class="col">Bestell-ID:</td>
+            <td>{{Bestellung.OrderId}}</td>
+        </tr>
+        <tr>
+            <td class="col">Art der Arbeit:</td>
+            <td>{{ArtDerArbeit.Deutsch}}</td>
+        </tr>
+        <tr>
+            <td class="col">Personenbezogene Nachforschung:</td>
+            <td>{{#Bestellung.IstPersonenbezogeneNachforschung}}Ja{{/Bestellung.IstPersonenbezogeneNachforschung}}{{^Bestellung.IstPersonenbezogeneNachforschung}}Nein{{/Bestellung.IstPersonenbezogeneNachforschung}}</td>
+        </tr>
+        <tr>
+            <td class="col">Unterlagen, die Gesuchsteller/in selber betreffen:</td>
+            <td>{{#Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Ja{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}{{^Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Nein{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}</td>
+        </tr>
     </table>
-    <hr>
-    <table> 
+    <hr style="width: 2300px; text-align: left;" />
+    <table>
         <tr>
             <td class="col">Zweck:</td>
             <td>{{Bestellung.BegründungEinsichtsgesuch}}</td>
         </tr>
-    </table> 
-    <hr>
-    <table> 
+    </table>
+    <hr style="width: 2300px; text-align: left;" />
+    <table style="margin-bottom: 30px;">
         <tr>
-            <td class="col">Dossiers:</td>
-            <td>
-                {{#VeList}}
-                    <a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Id}}">{{Signatur}}</a>,
-                        {{Aktenzeichen}}, {{Titel}}, {{Entstehungszeitraum}}<br> {{Schutzfristkategorie}}, {{Schutzfristdauer}} Jahre;
-                        Schutzfristende: {{Schutzfristende}};
-			in DIR vorhanden: {{#IdDir}}Ja{{/IdDir}}{{^IdDir}}Nein{{/IdDir}};
-			zuständige Stelle: {{ZustaendigeStelle}}; personenbezogene Unterlagen: {{#Bestellung.IstPersonenbezogeneNachforschung}}Ja{{/Bestellung.IstPersonenbezogeneNachforschung}}{{^Bestellung.IstPersonenbezogeneNachforschung }}Nein{{/Bestellung.IstPersonenbezogeneNachforschung}}; eigene Unterlagen: {{#Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Ja{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}{{^Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}Nein{{/Bestellung.HatUnterlagenDieNutzerSelberBetreffen}}<br>{{/VeList}}
-			
-
-                
-            </td>
-        </tr>
-    </table> 
-    <hr>
-    <table> 
-        <tr>
-            <td class="col">Bestellung:</td>
-            <td>{{Bestellung.OrderId}}</td>
+            <td class="col">Anzahl Verzeichnungseinheiten:</td>
+            <td>{{Anzahl}}</td>
         </tr>
     </table>
-</body>
+    <table style="width: 2300px; text-align: left;">
+        <tr>
+            <th>
+                Signatur
+            </th>
+            <th>
+                Aktenzeichen
+            </th>
+            <th>
+                Titel
+            </th>
+            <th>
+                Zeitraum
+            </th>
+            <th>
+                Schutzfristkategorie
+            </th>
+            <th>
+                Schutzfristdauer
+            </th>
+            <th>
+                Schutzfristende
+            </th>
+            <th>
+                DIR
+            </th>
+            <th>
+                Zuständige Stelle
+            </th>
+        </tr>
 
+        {{#VeList}}
+        <tr>
+            <td class="veList">
+                <a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Id}}">{{Signatur}}</a>
+            </td>
+            <td class="veList">
+                {{Aktenzeichen}}
+            </td>
+            <td class="veList">
+                {{Titel}}
+            </td>
+            <td class="veList">
+                {{Entstehungszeitraum}}
+            </td>
+            <td class="veList">
+                {{Schutzfristkategorie}}
+            </td>
+            <td class="veList">
+                {{Schutzfristdauer}} Jahre
+            </td>
+            <td class="veList">
+                {{Schutzfristende}}
+            </td>
+            <td class="veList">
+                {{#IdDir}}Ja{{/IdDir}}{{^IdDir}}Nein{{/IdDir}}
+            </td>
+            <td class="veList">
+                {{ZustaendigeStelle}}
+            </td>
+        </tr>
+        {{/VeList}}
+    </table>
+</body>
 </html>

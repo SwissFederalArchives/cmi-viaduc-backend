@@ -70,8 +70,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Harvest.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Common.Tests", "Test\Access\Common.Tests\CMI.Access.Common.Tests.csproj", "{1EA9D7A9-274C-42B8-BC61-E0F8378A8AC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Contract.Common.Tests", "Test\Contract\Common.Tests\CMI.Contract.Common.Tests.csproj", "{6AEB2A29-395E-4515-AA44-1DA7183EE03A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.Index.Tests", "Test\Manager\Index.Tests\CMI.Manager.Index.Tests.csproj", "{8DD5BC42-2B35-41B6-8B69-9570442E4E74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D235CC5B-8528-4867-9105-E568054F9E92}"
@@ -181,6 +179,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Local.testsettings = Local.testsettings
+		VersionBumper.txt = VersionBumper.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Host.DocumentConverter", "CMI\Host\DocumentConverter\CMI.Host.DocumentConverter.csproj", "{357666A1-07B3-4EA2-8E0C-DF2FB3D71BCB}"
@@ -290,7 +289,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.JsonCombiner", "C
 		{95103430-9D5B-4D04-8F56-7FE82E91A44F} = {95103430-9D5B-4D04-8F56-7FE82E91A44F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.JsonCombiner.Tests", "Test\Tools\CMI.Tools.JsonCombiner.Tests.csproj", "{3AC7D024-FBEF-4949-9635-AF8C6763398B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.JsonCombiner.Tests", "Test\Tools\JsonCombiner.Tests\CMI.Tools.JsonCombiner.Tests.csproj", "{3AC7D024-FBEF-4949-9635-AF8C6763398B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.Cache.Tests", "Test\Manager\Cache.Tests\CMI.Manager.Cache.Tests\CMI.Manager.Cache.Tests.csproj", "{DDF1F97F-152F-4CE7-991B-0F91A1E8F868}"
 EndProject
@@ -305,6 +304,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.Order.ConsoleTestTool", "Test\Manager\Order.ConsoleTestTool\CMI.Manager.Order.ConsoleTestTool.csproj", "{6FF2CE9A-8593-4F45-A626-0C6A528FEA7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.DocumentConverter.Tests", "Test\Manager\DocumentConverter.Tests\CMI.Manager.DocumentConverter.Tests.csproj", "{AD4574FA-67C6-40EF-ABDF-11822694B419}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.Asset.PdfManipulatorTester", "Test\Manager\Asset.PdfManipulatorTester\CMI.Manager.Asset.PdfManipulatorTester.csproj", "{00328A79-F697-4131-9628-1CC6637243D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.CacheFilesAnalysis", "CMI.Tools.CacheFilesAnalysis\CMI.Tools.CacheFilesAnalysis.csproj", "{DA8884E6-DC8C-401E-8845-F54300EDF03D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PainlessScripts", "PainlessScripts", "{AD20D956-1A5B-47DA-B16C-C4006242D407}"
+	ProjectSection(SolutionItems) = preProject
+		CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt = CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt
+		CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt = CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Assert.SQL.DataAccessExtentionsTests", "Test\Access\DataAccessExtentionsTests\CMI.Assert.SQL.DataAccessExtentionsTests.csproj", "{E8DBDFFA-04B3-4669-913C-24E5FF3D3160}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -392,10 +403,6 @@ Global
 		{1EA9D7A9-274C-42B8-BC61-E0F8378A8AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EA9D7A9-274C-42B8-BC61-E0F8378A8AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EA9D7A9-274C-42B8-BC61-E0F8378A8AC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AEB2A29-395E-4515-AA44-1DA7183EE03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AEB2A29-395E-4515-AA44-1DA7183EE03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AEB2A29-395E-4515-AA44-1DA7183EE03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AEB2A29-395E-4515-AA44-1DA7183EE03A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8DD5BC42-2B35-41B6-8B69-9570442E4E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8DD5BC42-2B35-41B6-8B69-9570442E4E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DD5BC42-2B35-41B6-8B69-9570442E4E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -672,6 +679,18 @@ Global
 		{AD4574FA-67C6-40EF-ABDF-11822694B419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD4574FA-67C6-40EF-ABDF-11822694B419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD4574FA-67C6-40EF-ABDF-11822694B419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00328A79-F697-4131-9628-1CC6637243D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00328A79-F697-4131-9628-1CC6637243D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00328A79-F697-4131-9628-1CC6637243D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00328A79-F697-4131-9628-1CC6637243D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8884E6-DC8C-401E-8845-F54300EDF03D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8884E6-DC8C-401E-8845-F54300EDF03D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8884E6-DC8C-401E-8845-F54300EDF03D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8884E6-DC8C-401E-8845-F54300EDF03D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8DBDFFA-04B3-4669-913C-24E5FF3D3160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8DBDFFA-04B3-4669-913C-24E5FF3D3160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8DBDFFA-04B3-4669-913C-24E5FF3D3160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8DBDFFA-04B3-4669-913C-24E5FF3D3160}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -699,7 +718,6 @@ Global
 		{39326685-B5AB-40DC-8FA3-09A9502E7BE0} = {73EDAA41-3BEA-4016-A49C-428254BDEFC5}
 		{8EDF4429-251A-416D-BB68-93F227191BCF} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{1EA9D7A9-274C-42B8-BC61-E0F8378A8AC6} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
-		{6AEB2A29-395E-4515-AA44-1DA7183EE03A} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{8DD5BC42-2B35-41B6-8B69-9570442E4E74} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{23986B9A-C131-40DB-89C0-2E3AC55CA393} = {D235CC5B-8528-4867-9105-E568054F9E92}
 		{CE8B1C6A-FBFD-4CC7-B061-F4AB739A4C83} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
@@ -776,6 +794,10 @@ Global
 		{C6B8CAC2-DD7C-4359-8E79-1427A7E02028} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{6FF2CE9A-8593-4F45-A626-0C6A528FEA7E} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{AD4574FA-67C6-40EF-ABDF-11822694B419} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
+		{00328A79-F697-4131-9628-1CC6637243D2} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
+		{DA8884E6-DC8C-401E-8845-F54300EDF03D} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
+		{AD20D956-1A5B-47DA-B16C-C4006242D407} = {0DD43E44-BBB9-479C-A9FF-574984FE8EA8}
+		{E8DBDFFA-04B3-4669-913C-24E5FF3D3160} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94FF0BA7-507D-45AD-A448-D34E2C5341FE}

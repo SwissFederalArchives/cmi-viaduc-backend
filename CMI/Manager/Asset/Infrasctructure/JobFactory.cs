@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using Autofac;
+using Autofac.Core;
 using Quartz;
 using Quartz.Spi;
 
@@ -9,21 +10,21 @@ namespace CMI.Manager.Asset.Infrasctructure
     /// </summary>
     internal class JobFactory : IJobFactory
     {
-        private readonly IKernel kernel;
+        private readonly IContainer container;
 
-        public JobFactory(IKernel kernel)
+        public JobFactory(IContainer container)
         {
-            this.kernel = kernel;
+            this.container = container;
         }
 
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
-            return (IJob) kernel.Get(bundle.JobDetail.JobType);
+            return (IJob)container.Resolve(bundle.JobDetail.JobType);
         }
 
         public void ReturnJob(IJob job)
         {
-            kernel.Get(job.GetType());
+            container.Resolve(job.GetType());
         }
     }
 }

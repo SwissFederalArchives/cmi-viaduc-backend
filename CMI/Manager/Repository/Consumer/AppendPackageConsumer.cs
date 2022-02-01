@@ -47,9 +47,9 @@ namespace CMI.Manager.Repository.Consumer
                     Log.Information("Package creation was successful for packageId {packageId}", result.PackageDetails.PackageId);
                     Debug.Assert(result.PackageDetails.PackageFileName != null);
                     var endpoint = await context.GetSendEndpoint(new Uri(context.SourceAddress,
-                        BusConstants.AssetManagerExtractFulltextMessageQueue));
+                        BusConstants.AssetManagerPrepareForRecognition));
 
-                    await endpoint.Send<IArchiveRecordExtractFulltextFromPackage>(new
+                    await endpoint.Send<PrepareForRecognitionMessage>(new
                     {
                         context.Message.MutationId,
                         context.Message.ArchiveRecord,

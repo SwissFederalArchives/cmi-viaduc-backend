@@ -21,7 +21,7 @@ namespace CMI.Manager.Asset.Tests
         private Task<ConsumeContext<IArchiveRecordExtractFulltextFromPackage>> extractFulltextTask;
         private Task<ConsumeContext<IUpdateArchiveRecord>> updateArchiveRecordHandled;
 
-        public ExtractFulltextPackageConsumerTests() : base(true)
+        public ExtractFulltextPackageConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }

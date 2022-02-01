@@ -10,7 +10,6 @@ using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend;
 using CMI.Web.Frontend.api.Controllers;
-using CMI.Web.Frontend.App_Start;
 using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -60,7 +59,7 @@ namespace CMI.Web.Frontend
             }, new SwaggerJsonSchemaGenerator(new JsonSchemaGeneratorSettings()));
 
 
-            BusConfig.Configure(NinjectWebCommon.Kernel);
+            WebConfig.Configure();
             AreaRegistration.RegisterAllAreas();
 
             GlobalConfiguration.Configure(cfg =>
@@ -70,7 +69,6 @@ namespace CMI.Web.Frontend
                 WebApiConfig.Register(cfg);
             });
 
-            WebConfig.Configure();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings

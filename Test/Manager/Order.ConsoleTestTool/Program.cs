@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Order;
@@ -13,8 +14,7 @@ namespace CMI.Manager.Order.ConsoleTestTool
         private static void Main(string[] args)
         {
             // Configure Bus
-            var bus = BusConfigurator.ConfigureBus(MonitoredServices.NotMonitored, (cfg, host) => { });
-            bus.Start();
+            var bus = LoadBus();
 
             var archiveRecordId = 30409399;
 
@@ -40,6 +40,19 @@ namespace CMI.Manager.Order.ConsoleTestTool
                 ArchiveRecordId = archiveRecordId,
                 Action = "Update"
             }).Wait();
+        }
+
+        private static IBusControl LoadBus()
+        {
+            // Configure Bus
+            var containerBuilder = new ContainerBuilder();
+            BusConfigurator.ConfigureBus(containerBuilder);
+            var container = containerBuilder.Build();
+
+            var bus = container.Resolve<IBusControl>();
+            bus.Start();
+
+            return bus;
         }
     }
 }

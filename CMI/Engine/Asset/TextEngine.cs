@@ -12,15 +12,15 @@ namespace CMI.Engine.Asset
 {
     public class TextEngine : ITextEngine
     {
-        private readonly IRequestClient<ExtractionStartRequest, ExtractionStartResult> extractionRequestClient;
-        private readonly IRequestClient<JobInitRequest, JobInitResult> jobRequestClient;
-        private readonly IRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse> supportedFileTypesRequestClient;
+        private readonly IRequestClient<ExtractionStartRequest> extractionRequestClient;
+        private readonly IRequestClient<JobInitRequest> jobRequestClient;
+        private readonly IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient;
         private readonly string sftpLicenseKey;
         private string[] supportedFileTypes;
 
-        public TextEngine(IRequestClient<JobInitRequest, JobInitResult> jobRequestClient,
-            IRequestClient<ExtractionStartRequest, ExtractionStartResult> extractionRequestClient,
-            IRequestClient<SupportedFileTypesRequest, SupportedFileTypesResponse> supportedFileTypesRequestClient,
+        public TextEngine(IRequestClient<JobInitRequest> jobRequestClient,
+            IRequestClient<ExtractionStartRequest> extractionRequestClient,
+            IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient,
             string sftpLicenseKey)
         {
             this.jobRequestClient = jobRequestClient;
@@ -29,7 +29,7 @@ namespace CMI.Engine.Asset
             this.sftpLicenseKey = sftpLicenseKey;
         }
 
-        public async Task<string> ExtractText(string file)
+        public async Task<string> ExtractText(string file, JobContext context)
         {
             var fi = new FileInfo(file);
 
@@ -41,10 +41,11 @@ namespace CMI.Engine.Asset
                 var conversionSettings = new JobInitRequest
                 {
                     FileNameWithExtension = fi.Name,
-                    RequestedProcessType = ProcessType.TextExtraction
+                    RequestedProcessType = ProcessType.TextExtraction,
+                    Context = context
                 };
 
-                var registrationResponse = await jobRequestClient.Request(conversionSettings);
+                var registrationResponse = (await jobRequestClient.GetResponse<JobInitResult>(conversionSettings)).Message;
                 Log.Information("Successfully registered job for text extraction of file {Name}. Got job id {JobId}", fi.Name,
                     registrationResponse.JobGuid);
 
@@ -56,9 +57,8 @@ namespace CMI.Engine.Asset
                     JobGuid = registrationResponse.JobGuid
                 };
                 Log.Information("Sent actual text extraction request for job id {jobGuid}", registrationResponse.JobGuid);
-
-                var extractionResult = await extractionRequestClient.Request(requestSettings);
-
+                
+                var extractionResult = (await extractionRequestClient.GetResponse<ExtractionStartResult>(requestSettings)).Message;
                 if (extractionResult.IsInvalid)
                 {
                     throw new Exception(extractionResult.ErrorMessage);
@@ -103,7 +103,7 @@ namespace CMI.Engine.Asset
                 ProcessType = ProcessType.TextExtraction
             };
 
-            var response = await supportedFileTypesRequestClient.Request(request);
+            var response = (await supportedFileTypesRequestClient.GetResponse<SupportedFileTypesResponse>(request)).Message;
             supportedFileTypes = response.SupportedFileTypes;
             return supportedFileTypes;
         }

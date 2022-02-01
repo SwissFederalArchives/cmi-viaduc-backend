@@ -2,6 +2,7 @@
 using System.IO.Abstractions;
 using System.Net.Mail;
 using System.Reflection;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
@@ -76,7 +77,9 @@ Vom AppO ist folgende Massnahme zu ergreifen:<br>
         private void StartBus()
         {
             var helper = new ParameterBusHelper();
-            Bus = BusConfigurator.ConfigureBus(MonitoredServices.CacheService, (cfg, host) =>
+            var containerBuilder = new ContainerBuilder();
+
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.CacheService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.CacheDoesExistRequestQueue,
                     ec => { ec.Consumer(() => new DoesExistInCacheRequestConsumer()); });
@@ -90,10 +93,11 @@ Vom AppO ist folgende Massnahme zu ergreifen:<br>
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
-
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host);
+                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 
+            var container = containerBuilder.Build();
+            Bus = container.Resolve<IBusControl>();
             Bus.Start();
         }
 

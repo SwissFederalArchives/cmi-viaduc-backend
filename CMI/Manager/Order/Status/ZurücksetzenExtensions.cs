@@ -14,6 +14,7 @@ namespace CMI.Manager.Order.Status
             auftragStatus.Context.OrderItem.EntscheidGesuch = EntscheidGesuch.NichtGeprueft;
             auftragStatus.Context.OrderItem.DatumDesEntscheids = null;
             auftragStatus.Context.OrderItem.HasAufbereitungsfehler = false;
+            auftragStatus.Context.OrderItem.Ausleihdauer = 90;
             /* Einige Parameter werden im NeuEingegangenStatus gesetzt und hier nicht geleert, weil sie sonst wieder überschrieben werden */
 
             UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);

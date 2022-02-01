@@ -20,14 +20,14 @@ namespace CMI.Manager.Asset.Consumers
         private readonly IBus bus;
         private readonly ICacheHelper cacheHelper;
         private readonly IDataBuilder dataBuilder;
-        private readonly IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistInCacheClient;
+        private readonly IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient;
         private readonly IMailHelper mailHelper;
         private readonly IParameterHelper parameterHelper;
         private readonly PasswordHelper passwordHelper;
 
         public DownloadAssetConsumer(ICacheHelper cacheHelper,
             IBus bus,
-            IRequestClient<DoesExistInCacheRequest, DoesExistInCacheResponse> doesExistInCacheClient,
+            IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient,
             IParameterHelper parameterHelper,
             IMailHelper mailHelper,
             IDataBuilder dataBuilder,
@@ -52,11 +52,11 @@ namespace CMI.Manager.Asset.Consumers
 
                 // Prüfen, ob die Datei im Cache vorhanden ist
                 var id = message.AssetType == AssetType.Benutzungskopie ? message.OrderItemId.ToString() : message.ArchiveRecordId;
-                var response = await doesExistInCacheClient.Request(new DoesExistInCacheRequest
+                var response = (await doesExistInCacheClient.GetResponse<DoesExistInCacheResponse>(new DoesExistInCacheRequest
                 {
                     Id = id,
                     RetentionCategory = message.RetentionCategory
-                });
+                })).Message;
 
                 if (response.Exists)
                 {

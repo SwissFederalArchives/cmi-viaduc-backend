@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using CMI.Access.Repository;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
@@ -20,14 +21,14 @@ namespace CMI.Engine.PackageMetadata
     public class PackageHandler : IPackageHandler
     {
         private const string subFondsLevelIdentifier = "Teilbestand";
-        private readonly IRequestClient<GetArchiveRecordsForPackageRequest, GetArchiveRecordsForPackageResponse> indexClient;
+        private readonly IRequestClient<GetArchiveRecordsForPackageRequest> indexClient;
         private readonly IMetadataDataAccess metadataAccess;
         private readonly IRepositoryDataAccess repositoryAccess;
         private IFolder entryFolder; // This is the folder the user requested. Metadatea can be above and below this folder
 
 
         public PackageHandler(IRepositoryDataAccess repositoryAccess, IMetadataDataAccess metadataAccess,
-            IRequestClient<GetArchiveRecordsForPackageRequest, GetArchiveRecordsForPackageResponse> indexClient)
+            IRequestClient<GetArchiveRecordsForPackageRequest> indexClient)
         {
             this.repositoryAccess = repositoryAccess;
             this.metadataAccess = metadataAccess;
@@ -44,7 +45,7 @@ namespace CMI.Engine.PackageMetadata
         public FolderInfoList FoldersTreeList { get; }
 
 
-        public void CreateMetadataXml(string folderName, RepositoryPackage package, List<RepositoryFile> filesToIgnore)
+        public async Task CreateMetadataXml(string folderName, RepositoryPackage package, List<RepositoryFile> filesToIgnore)
         {
             // Make sure folder name exists
             if (!Directory.Exists(folderName))
@@ -55,9 +56,12 @@ namespace CMI.Engine.PackageMetadata
             CopyXsdFiles(folderName);
 
             // Lesen der Bestellposition und aller Kinder aus dem Elastic Index. 
-            var getArchiveRecordsForPackageRequest = new GetArchiveRecordsForPackageRequest {PackageId = package.PackageId};
-            var indexRecords = indexClient.Request(getArchiveRecordsForPackageRequest).GetAwaiter().GetResult().Result;
-            Log.Debug($"Found the following archive records for packageId {package.PackageId}: {JsonConvert.SerializeObject(indexRecords)}");
+            var getArchiveRecordsForPackageRequest = new GetArchiveRecordsForPackageRequest { PackageId = package.PackageId };
+            var response = await indexClient.GetResponse<GetArchiveRecordsForPackageResponse>(getArchiveRecordsForPackageRequest);
+            
+            var indexRecords = response.Message?.Result;
+            Log.Debug($"Found the following archive records for pack" +
+                      $"ageId {package.PackageId}: {JsonConvert.SerializeObject(indexRecords)}");
 
             // If using the Alfresco Repository, then we simply return a "hard coded" file
             if (repositoryAccess.GetRepositoryName().StartsWith("Alfresco", StringComparison.InvariantCultureIgnoreCase))

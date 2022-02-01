@@ -14,6 +14,7 @@
         ZipDateiErzeugt,
         PaketTransferiert,
         ZipEntpackt,
+        PreprocessingAbgeschlossen,
         OCRAbgeschlossen,
         AssetUmwandlungAbgeschlossen,
         IndizierungAbgeschlossen,

@@ -111,7 +111,7 @@ namespace CMI.Access.Sql.Viaduc
                     }
 
                     auftrag.ModifiedOn = DateTime.Now;
-                    await UpdateAuftrag(auftrag, connection);
+                    await UpdateAuftrag(auftrag, connection, true);
 
                     // Update log status
                     var logId = await InsertAuftragLog(statusLog, connection);
@@ -405,18 +405,28 @@ namespace CMI.Access.Sql.Viaduc
             }
         }
 
-        private async Task<int> UpdateAuftrag(PrimaerdatenAuftrag auftrag, SqlConnection connection)
+        private async Task<int> UpdateAuftrag(PrimaerdatenAuftrag auftrag, SqlConnection connection, bool skipMaxVarcharFields = false)
         {
             using (var cmd = connection.CreateCommand())
             {
                 cmd.CommandText = @"
-	UPDATE PrimaerdatenAuftrag
-	SET    AufbereitungsArt = @AufbereitungsArt, GroesseInBytes = @GroesseInBytes, Verarbeitungskanal = @Verarbeitungskanal, PriorisierungsKategorie = @PriorisierungsKategorie, Status = @Status, Service = @Service, PackageId = @PackageId, PackageMetadata = @PackageMetadata, VeId = @VeId, Abgeschlossen = @Abgeschlossen, AbgeschlossenAm = @AbgeschlossenAm, GeschaetzteAufbereitungszeit = @GeschaetzteAufbereitungszeit, ErrorText = @ErrorText, Workload = @Workload, ModifiedOn = @ModifiedOn
+	UPDATE PrimaerdatenAuftrag 
+	SET    AufbereitungsArt = @AufbereitungsArt, GroesseInBytes = @GroesseInBytes, Verarbeitungskanal = @Verarbeitungskanal, 
+           PriorisierungsKategorie = @PriorisierungsKategorie, Status = @Status, Service = @Service, PackageId = @PackageId, 
+           {0}
+           VeId = @VeId, Abgeschlossen = @Abgeschlossen, AbgeschlossenAm = @AbgeschlossenAm, 
+           GeschaetzteAufbereitungszeit = @GeschaetzteAufbereitungszeit, ErrorText = @ErrorText, 
+           ModifiedOn = @ModifiedOn
 	WHERE  PrimaerdatenAuftragId = @PrimaerdatenAuftragId                ";
+
+                // We have noticed that the fields PackageMetadata and Workload can contain large amounts of data (70 MB and more)
+                // in those cases updating those fields have led to timeout problems.
+                // Not really sure if those fields are the cause, but in any case, we don't need to update those fields in any case
+                cmd.CommandText = string.Format(cmd.CommandText, skipMaxVarcharFields ? "" : "PackageMetadata = @PackageMetadata, Workload = @Workload, ");
 
                 #region parameters
 
-                AppendParametersForAuftrag(auftrag, cmd);
+                AppendParametersForAuftrag(auftrag, cmd, skipMaxVarcharFields);
 
                 cmd.Parameters.Add(new SqlParameter
                 {
@@ -552,7 +562,7 @@ namespace CMI.Access.Sql.Viaduc
             };
         }
 
-        private static void AppendParametersForAuftrag(PrimaerdatenAuftrag auftrag, SqlCommand cmd)
+        private static void AppendParametersForAuftrag(PrimaerdatenAuftrag auftrag, SqlCommand cmd, bool skipMaxVarcharFields = false)
         {
             cmd.Parameters.Add(new SqlParameter
             {
@@ -598,12 +608,6 @@ namespace CMI.Access.Sql.Viaduc
             });
             cmd.Parameters.Add(new SqlParameter
             {
-                ParameterName = "PackageMetadata",
-                Value = auftrag.PackageMetadata.ToDbParameterValue(),
-                SqlDbType = SqlDbType.NVarChar
-            });
-            cmd.Parameters.Add(new SqlParameter
-            {
                 ParameterName = "VeId",
                 Value = auftrag.VeId.ToDbParameterValue(),
                 SqlDbType = SqlDbType.Int
@@ -632,12 +636,22 @@ namespace CMI.Access.Sql.Viaduc
                 Value = auftrag.ErrorText.ToDbParameterValue(),
                 SqlDbType = SqlDbType.NVarChar
             });
-            cmd.Parameters.Add(new SqlParameter
+            if (!skipMaxVarcharFields)
             {
-                ParameterName = "Workload",
-                Value = auftrag.Workload.ToDbParameterValue(),
-                SqlDbType = SqlDbType.NVarChar
-            });
+                cmd.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "Workload",
+                    Value = auftrag.Workload.ToDbParameterValue(),
+                    SqlDbType = SqlDbType.NVarChar
+                });
+                cmd.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "PackageMetadata",
+                    Value = auftrag.PackageMetadata.ToDbParameterValue(),
+                    SqlDbType = SqlDbType.NVarChar
+                });
+            }
+
         }
     }
 }

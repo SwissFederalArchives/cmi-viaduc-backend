@@ -66,10 +66,11 @@ namespace CMI.Access.Harvest
         }
 
         /// <summary>Reset failed or lost synchronize operations in the mutation table to the initial status.</summary>
+        /// <param name="maxRetries">Maximum number of times a failed operation is reset.</param>
         /// <returns>Number of records that were reset.</returns>
-        public int ResetFailedOrLostSyncOperations()
+        public int ResetFailedSyncOperations(int maxRetries)
         {
-            return dataProvider.ResetFailedOrLostSyncOperations();
+            return dataProvider.ResetFailedSyncOperations(maxRetries);
         }
     }
 }

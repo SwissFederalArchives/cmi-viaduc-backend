@@ -13,10 +13,10 @@ namespace CMI.Manager.Asset.Consumers
     {
         private readonly IAssetManager assetManager;
         private readonly IBus bus;
-        private readonly IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> indexClient;
+        private readonly IRequestClient<FindArchiveRecordRequest> indexClient;
 
         public PrepareAssetConsumer(IAssetManager assetManager, IBus bus,
-            IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse> indexClient)
+            IRequestClient<FindArchiveRecordRequest> indexClient)
         {
             this.assetManager = assetManager;
             this.bus = bus;
@@ -57,7 +57,7 @@ namespace CMI.Manager.Asset.Consumers
                         Log.Information("Start fetching usage copy for id {ArchiveRecordId} with type {AssetType}.", message.ArchiveRecordId,
                             message.AssetType);
 
-                        var archiveRecord = await indexClient.Request(new FindArchiveRecordRequest {ArchiveRecordId = message.ArchiveRecordId});
+                        var archiveRecord = (await indexClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = message.ArchiveRecordId})).Message;
                         // Register the job in the queue
                         var auftragId = await assetManager.RegisterJobInPreparationQueue(message.ArchiveRecordId, message.AssetId,
                             AufbereitungsArtEnum.Download, AufbereitungsServices.AssetService, archiveRecord.ElasticArchiveRecord.PrimaryData,

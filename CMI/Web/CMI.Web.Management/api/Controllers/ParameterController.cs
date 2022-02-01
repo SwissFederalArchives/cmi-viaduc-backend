@@ -11,7 +11,6 @@ using CMI.Contract.Parameter.SaveParameter;
 using CMI.Web.Common.api.Attributes;
 using CMI.Web.Management.Auth;
 using MassTransit;
-using ParameterBusHelper = CMI.Web.Management.Helpers.ParameterBusHelper;
 
 namespace CMI.Web.Management.api.Controllers
 {
@@ -19,19 +18,24 @@ namespace CMI.Web.Management.api.Controllers
     [NoCache]
     public class ParameterController : ApiManagementControllerBase
     {
+        private readonly IBus bus;
+
+        public ParameterController(IBus bus)
+        {
+            this.bus = bus;
+        }
         [HttpGet]
         public async Task<IHttpActionResult> GetAllParameters()
         {
             var access = this.GetManagementAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AdministrationEinstellungenEinsehen);
 
-            var a = ParameterBusHelper.ParameterBus.Address;
+            var a = bus.Address;
             var uri = new Uri(a, "GetParameterQueue");
-            var requestClient =
-                ParameterBusHelper.ParameterBus.CreateRequestClient<GetParameterRequest, GetParameterResponse>(uri, TimeSpan.FromSeconds(35));
-            var result = await requestClient.Request(new GetParameterRequest());
+            var requestClient = bus.CreateRequestClient<GetParameterRequest>(uri, TimeSpan.FromSeconds(35));
+            var result = await requestClient.GetResponse<GetParameterResponse>(new GetParameterRequest());
 
-            return Ok(result.Parameters);
+            return Ok(result.Message.Parameters);
         }
 
         [HttpPost]
@@ -40,10 +44,9 @@ namespace CMI.Web.Management.api.Controllers
             var access = this.GetManagementAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AdministrationEinstellungenBearbeiten);
 
-            var uri = new Uri(ParameterBusHelper.ParameterBus.Address, "SaveParameterQueue");
-            var requestClient =
-                ParameterBusHelper.ParameterBus.CreateRequestClient<SaveParameterRequest, SaveParameterResponse>(uri, TimeSpan.FromSeconds(20));
-            var result = await requestClient.Request(new SaveParameterRequest(parameter));
+            var uri = new Uri(bus.Address, "SaveParameterQueue");
+            var requestClient = bus.CreateRequestClient<SaveParameterRequest>(uri, TimeSpan.FromSeconds(20));
+            var result = (await requestClient.GetResponse<SaveParameterResponse>(new SaveParameterRequest(parameter))).Message;
 
             if (result?.ErrorMessages == null || result.ErrorMessages.Length == 0)
             {

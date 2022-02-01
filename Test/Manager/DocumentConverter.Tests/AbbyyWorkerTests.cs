@@ -1,7 +1,9 @@
-﻿using CMI.Manager.DocumentConverter.Abbyy;
+﻿using CMI.Contract.DocumentConverter;
+using CMI.Manager.DocumentConverter.Abbyy;
 using CMI.Manager.DocumentConverter.Extraction;
 using FluentAssertions;
 using FREngine;
+using MassTransit;
 using Moq;
 using NUnit.Framework;
 
@@ -15,7 +17,8 @@ namespace CMI.Manager.DocumentConverter.Tests
         {
             // Arrange
             var enginePool = AbbyyArrange.ArrangeEnginePool(99);
-            var sut = new AbbyyWorker(enginePool.Object);
+            var bus = Mock.Of<IBus>();
+            var sut = new AbbyyWorker(enginePool.Object, bus);
 
             // Act
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed-Unknown"));
@@ -33,7 +36,8 @@ namespace CMI.Manager.DocumentConverter.Tests
         {
             // Arrange
             var enginePool = AbbyyArrange.ArrangeEnginePool(0);
-            var sut = new AbbyyWorker(enginePool.Object);
+            var bus = Mock.Of<IBus>();
+            var sut = new AbbyyWorker(enginePool.Object, bus);
 
             // Act
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed"));
@@ -51,7 +55,8 @@ namespace CMI.Manager.DocumentConverter.Tests
         {
             // Arrange
             var enginePool = AbbyyArrange.ArrangeEnginePool(99, 1, true);
-            var sut = new AbbyyWorker(enginePool.Object);
+            var bus = Mock.Of<IBus>();
+            var sut = new AbbyyWorker(enginePool.Object, bus);
 
             // Act
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed"));

@@ -1,5 +1,7 @@
-﻿using CMI.Contract.Messaging;
+﻿using Autofac;
+using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
+using CMI.Manager.Viaduc.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
@@ -17,16 +19,20 @@ namespace CMI.Manager.Viaduc
 
             Log.Information("Viaduc service is starting");
 
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.ViaducService, (cfg, host) =>
+            var containerBuilder = ContainerConfigurator.Configure();
+
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.ViaducService, (cfg, ctx) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.ReadUserInformationQueue,
-                    ec => { ec.Consumer(() => new ReadUserInformationConsumer()); }
+                    ec => { ec.Consumer(ctx.Resolve<ReadUserInformationConsumer>); }
                 );
                 cfg.ReceiveEndpoint(BusConstants.ReadStammdatenQueue,
-                    ec => { ec.Consumer(() => new ReadStammdatenConsumer()); }
+                    ec => { ec.Consumer(ctx.Resolve<ReadStammdatenConsumer>); }
                 );
             });
 
+            var container = containerBuilder.Build();
+            bus = container.Resolve<IBusControl>();
             bus.Start();
 
             Log.Information("Viaduc service started");

@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace CMI.Access.Common.Tests
 {
-    [NUnit.Framework.Ignore("Diese Tests müssen bewusst bzw. Bedarf ausgeführt werden")]
+    [NUnit.Framework.Ignore("Diese Tests mÃ¼ssen bewusst bzw. Bedarf ausgefÃ¼hrt werden")]
     [TestFixture]
     public class ElasticIndexAllFieldTests
     {
@@ -39,7 +39,7 @@ namespace CMI.Access.Common.Tests
             ear.WithinInfo = "WithinInfo";
             ear.CustomFields = new
             {
-                zugänglichkeitGemässBga = "In Schutzfrist",
+                zugÃ¤nglichkeitGemÃ¤ssBga = "In Schutzfrist",
                 publikationsrechte = "ABC"
             };
 

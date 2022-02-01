@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
@@ -33,17 +34,52 @@ namespace CMI.Manager.Order.Consumers
 
                 var fileName = MoveFileFromVecteurSftpToAssetManager(message.OrderItemId);
 
-                var ep = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerTransformAssetMessageQueue));
-                await ep.Send<ITransformAsset>(new TransformAsset
+                var ep = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerPrepareForTransformation));
+                await ep.Send(new PrepareForTransformationMessage
                 {
                     AssetType = AssetType.Benutzungskopie,
                     OrderItemId = message.OrderItemId,
-                    ArchiveRecordId = message.ArchiveRecordId,
-                    FileName = new FileInfo(fileName).Name, // Only pass the name, as the AssetManager expects the files in a specific location
+                    RepositoryPackage = CreateRepositoryPackage(fileName, message.ArchiveRecordId),
                     ProtectWithPassword = true,
                     RetentionCategory = CacheRetentionCategory.UsageCopyBenutzungskopie
                 });
             }
+        }
+
+        /// <summary>
+        /// Creates a repository package with file entries within the content folder.
+        /// We are taking a shortcut here, because we are not building the full folder
+        /// structure but use relative filenames.
+        /// But in the end, this should work the same.
+        /// </summary>
+        /// <param name="fileName">The full file name of the zip file.</param>
+        /// <param name="archiveRecordId">The archive record id</param>
+        /// <returns></returns>
+        private RepositoryPackage CreateRepositoryPackage(string fileName, string archiveRecordId)
+        {
+            const string contentFolderName = "content/";
+            var package = new RepositoryPackage() {ArchiveRecordId = archiveRecordId, PackageFileName = (new FileInfo(fileName)).Name};
+            using (var zipArchive = ZipFile.OpenRead(fileName))
+            {
+
+                // Sort the entries using their depth in the zip archive, so we can add
+                foreach (var zipArchiveEntry in zipArchive.Entries.Where(f => f.FullName.StartsWith(contentFolderName) && f.Length > 0)
+                    .OrderBy(e => e.FullName.Split('\\').Length).ThenBy(e => e.FullName))
+                {
+                    var relativeFileName = zipArchiveEntry.FullName.Substring(contentFolderName.Length);
+                    package.Files.Add(new RepositoryFile
+                    {
+                        PhysicalName = relativeFileName,
+                        SizeInBytes = zipArchiveEntry.Length,
+                        Exported = true
+                    });
+                }
+            }
+
+            package.FileCount = package.Files.Count;
+            package.SizeInBytes = package.Files.Sum(f => f.SizeInBytes);
+
+            return package;
         }
 
         private static string MoveFileFromVecteurSftpToAssetManager(int orderItemId)

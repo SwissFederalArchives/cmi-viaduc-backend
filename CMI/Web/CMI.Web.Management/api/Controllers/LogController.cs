@@ -20,9 +20,9 @@ namespace CMI.Web.Management.api.Controllers
     public class LogController : ApiManagementControllerBase
     {
         private readonly ExcelExportHelper exportHelper;
-        private readonly IRequestClient<GetElasticLogRecordsRequest, GetElasticLogRecordsResponse> getLogClient;
+        private readonly IRequestClient<GetElasticLogRecordsRequest> getLogClient;
 
-        public LogController(IRequestClient<GetElasticLogRecordsRequest, GetElasticLogRecordsResponse> getLogClient,
+        public LogController(IRequestClient<GetElasticLogRecordsRequest> getLogClient,
             ExcelExportHelper exportHelper)
         {
             this.getLogClient = getLogClient;
@@ -37,10 +37,10 @@ namespace CMI.Web.Management.api.Controllers
 
             try
             {
-                var response = await getLogClient.Request(new GetElasticLogRecordsRequest
+                var response = (await getLogClient.GetResponse<GetElasticLogRecordsResponse>(new GetElasticLogRecordsRequest
                 {
                     DataFilter = new LogDataFilter {StartDate = startDate, EndDate = endDate}
-                });
+                })).Message;
 
                 // Excel has a limit of 1'048'576 rows. We throw an error when more than 1 Mio is returned
                 if (response.Result.TotalCount > 1000000)

@@ -9,6 +9,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
     {
         ArchiveRecordDataSet.ArchiveRecordRow GetArchiveRecordRow(long recordId);
         List<MutationRecord> GetPendingMutations();
+        List<SyncInfoForReport> GetSyncInfoForReport(List<int> mutationsIds);
         ArchivePlanInfoDataSet LoadArchivePlanInfo(long[] recordIdList);
         ContainerDataSet LoadContainers(long recordId);
         DescriptorDataSet LoadDescriptors(long recordId);
@@ -18,7 +19,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
         ReferencesDataSet LoadReferences(long recordId);
         int UpdateMutationStatus(MutationStatusInfo info);
         int BulkUpdateMutationStatus(List<MutationStatusInfo> infos);
-        int ResetFailedOrLostSyncOperations();
+        int ResetFailedSyncOperations(int maxRetries);
         List<string> LoadMetadataSecurityTokens(long recordId);
         PrimaryDataSecurityTokenResult LoadPrimaryDataSecurityTokens(long recordId);
         int InitiateFullResync();

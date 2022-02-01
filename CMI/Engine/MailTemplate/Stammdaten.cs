@@ -32,9 +32,9 @@ namespace CMI.Engine.MailTemplate
 
         private string GetText(string language)
         {
-            var client = DataBuilder.CreateRequestClient<GetStammdatenRequest, GetStammdatenResponse>(Bus, BusConstants.ReadStammdatenQueue);
-            var result = client.Request(new GetStammdatenRequest {BezeichnungDerStammdaten = bezeichnungDerStammdaten, Language = language})
-                .GetAwaiter().GetResult();
+            var client = DataBuilder.CreateRequestClient<GetStammdatenRequest>(Bus, BusConstants.ReadStammdatenQueue);
+            var result = client.GetResponse<GetStammdatenResponse>(new GetStammdatenRequest {BezeichnungDerStammdaten = bezeichnungDerStammdaten, Language = language})
+                .GetAwaiter().GetResult().Message;
 
             var names = result.NamesAndIds.Where(e => idList.Contains(e.Id)).Select(e => e.Name);
 

@@ -45,7 +45,7 @@
         <br />
         Sprache: {{Besteller.Sprache}}
         <br />
-        Auftrag: <td><a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a></td>
+        Aufträge: {{#Aufträge}}<a href="https://{{Global.ManagementClientUrl}}/#/de/auftragsuebersicht/auftraege/{{Id}}">{{Id}}</a> {{/Aufträge}}
     </div>
 
     {{#Sprachen}}
@@ -55,7 +55,7 @@
             Guten Tag
         </p>
         <p>
-            Vielen Dank für Ihre Bestellung vom {{Bestellung.Erfassungsdatum}}.
+            Vielen Dank für Ihre Bestellung vom {{Auftragsdaten}}.
         </p>
 
         <p>
@@ -70,13 +70,14 @@
                     <th>Dossiertitel</th>
                     <th>Zeitraum</th>
                 </tr>
+                {{#Aufträge}}
                 <tr>
-                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
-                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
-                    <td>{{Auftrag.BestellteVe.Titel}}</td>
-                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
-
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
                 </tr>
+                {{/Aufträge}}
             </table>
         </p>
         <p>
@@ -105,9 +106,10 @@
         </p>
 
         <p>
-            Folgen Sie dem Bundesarchiv: <br />
-
+            Folgen Sie dem Bundesarchiv:<br />
             <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
             –
             <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
             –
@@ -123,7 +125,7 @@
             Bonjour,
         </p>
         <p>
-            Votre commande du  {{Bestellung.Erfassungsdatum}} nous est bien parvenue et nous vous en remercions.
+            Votre commande du {{Auftragsdaten}} nous est bien parvenue et nous vous en remercions.
         </p>
 
         <p>
@@ -138,12 +140,14 @@
                     <th>Titre du dossier</th>
                     <th>Période</th>
                 </tr>
+                {{#Aufträge}}
                 <tr>
-                    <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
-                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
-                    <td>{{Auftrag.BestellteVe.Titel}}</td>
-                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
                 </tr>
+                {{/Aufträge}}
             </table>
         </p>
         <p>
@@ -175,10 +179,10 @@
         </p>
 
         <p>
-            Suivez les Archives fédérales:
-            <br />
-
+            Suivez les Archives fédérales:<br />
             <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
             –
             <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
             –
@@ -193,7 +197,7 @@
             Buongiorno,
         </p>
         <p>
-            abbiamo ricevuto la Sua ordinazione del {{Bestellung.Erfassungsdatum}}.
+            abbiamo ricevuto la Sua ordinazione del {{Auftragsdaten}}.
         </p>
 
         <p>
@@ -209,12 +213,14 @@
                     <th>Periodo</th>
                 </tr>
 
+                {{#Aufträge}}
                 <tr>
-                    <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
-                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
-                    <td>{{Auftrag.BestellteVe.Titel}}</td>
-                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
                 </tr>
+                {{/Aufträge}}
 
             </table>
         </p>
@@ -245,10 +251,10 @@
         </p>
 
         <p>
-            Seguite l’Archivio federale:
-            <br />
-
+            Seguite l‘Archivio federale:<br />
             <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
             –
             <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
             –
@@ -263,7 +269,7 @@
             Hello,
         </p>
         <p>
-            Thank you for your order of {{Bestellung.Erfassungsdatum}}.
+            Thank you for your order of {{Auftragsdaten}}.
         </p>
 
         <p>
@@ -278,12 +284,14 @@
                     <th>Dossier title</th>
                     <th>Time period</th>
                 </tr>
+                {{#Aufträge}}
                 <tr>
-                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{Auftrag.BestellteVe.Id}}">{{Auftrag.BestellteVe.Signatur}}</a></td>
-                    <td>{{Auftrag.BestellteVe.Aktenzeichen}}</td>
-                    <td>{{Auftrag.BestellteVe.Titel}}</td>
-                    <td>{{Auftrag.BestellteVe.Entstehungszeitraum}}</td>
+                    <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                    <td>{{BestellteVe.Aktenzeichen}}</td>
+                    <td>{{BestellteVe.Titel}}</td>
+                    <td>{{BestellteVe.Entstehungszeitraum}}</td>
                 </tr>
+                {{/Aufträge}}
             </table>
         </p>
         <p>
@@ -314,10 +322,10 @@
         </p>
 
         <p>
-            Follow the Federal Archives:
-            <br />
-
+            Follow the Federal Archives:<br />
             <a href='https://twitter.com/ch_bundesarchiv'>Twitter</a>
+            –
+            <a href='https://www.instagram.com/ch_bundesarchiv/'>Instagram</a>
             –
             <a href='https://www.facebook.com/Bundesarchiv.Schweiz'>Facebook</a>
             –

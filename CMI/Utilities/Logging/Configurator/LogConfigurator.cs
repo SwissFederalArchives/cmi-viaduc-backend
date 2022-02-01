@@ -60,12 +60,12 @@ namespace CMI.Utilities.Logging.Configurator
             var exeName = Path.GetFileNameWithoutExtension(Process.GetCurrentProcess().MainModule.FileName);
             var pathFormat = Path.Combine(
                 LogSettings.Default.OutputFolder.Replace("{exeName}", exeName),
-                "log-{Date}.log");
+                "log-.log");
 
             Log.Logger = config
                 .Enrich.WithProperty("MainAssembly", exeName)
-                .WriteTo.RollingFile(pathFormat,
-                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}{Properties:j}{NewLine}")
+                .WriteTo.File(pathFormat,
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}{Properties:j}{NewLine}", rollingInterval: RollingInterval.Day)
                 .WriteTo.RabbitMQ(RabbitMqClientConfiguration(), RabbitMQSinkConfiguration(), new JsonFormatter())
                 .WriteTo.MailError()
                 .CreateLogger();
@@ -79,7 +79,7 @@ namespace CMI.Utilities.Logging.Configurator
                 .Enrich.WithProcessId()
                 .Enrich.WithThreadId()
                 .Enrich.WithMachineName()
-                .WriteTo.LiterateConsole()
+                .WriteTo.Console()
                 .ReadFrom.AppSettings();
         }
 

@@ -38,6 +38,11 @@
         public const string ManagementApiGetHarvestStatusInfoRequestQueue = "r.management.api.getHarvestStatusInfo";
         public const string ManagementApiGetHarvestLogInfoRequestQueue = "r.management.api.getHarvestLogInfo";
         public const string ManagementApiGetDigitizationOrderData = "r.management.api.getDigitizationOrderData";
+        public const string ManagementApiGetReportExternalContent = "r.management.api.getReportExternalContent";
+
+        // Events the Management Client subscribes to
+        public const string ManagementApiAbbyyProgressEventQueue = "e.managementClient.manager.abbyyProgressEvent";
+        public const string ManagementApiDocumentConverterServiceStartedQueue = "e.managementClient.manager.documentConverterServiceStartedEvent";
 
         // Messages the Index Manager subscribes to
         public const string IndexManagerUpdateArchiveRecordMessageQueue = "m.index.manager.updateArchiveRecord";
@@ -56,6 +61,8 @@
         public const string AssetManagerExtractFulltextMessageQueue = "m.asset.manager.archiveRecordExtractFulltextFromPackage";
         public const string AssetManagerTransformAssetMessageQueue = "m.asset.manager.transformAsset";
         public const string AssetManagerSchdeduleForPackageSyncMessageQueue = "m.asset.manager.scheduleForPackageSync";
+        public const string AssetManagerPrepareForRecognition = "m.asset.manager.prepareForRecognition";
+        public const string AssetManagerPrepareForTransformation = "m.asset.manager.prepareForTransformation";
 
         public const string AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue = "m.asset.manager.updatePrimaerdatenAuftragStatus";
 
@@ -92,7 +99,7 @@
 
         // Request/Response base URL for OrderManager
         public const string OrderManagagerRequestBase = "r.order.manager.{0}";
-
+        
         public const string OrderManagerGetStatusHistoryForOrderItemRequestQueue = "r.order.manager.getstatushistoryfororderitemrequest";
 
         public const string OrderManagerFindOrderingHistoryForVeRequestQueue = "r.order.manager.findorderhistoryforverequest";
@@ -112,6 +119,7 @@
         public const string OrderManagerMarkOrderAsFaultedQueue = "r.order.manager.markOrderAsFaulted";
         public const string OrderManagerResetFaultedOrdersQueue = "r.order.manager.resetFaultedOrders";
         public const string OrderManagerMahnungVersendenRequestQueue = "r.order.manager.mahnungVersenden";
+        public const string OrderManagerErinnerungVersendenRequestQueue = "r.order.manager.erinnerungVersenden";
         public const string EntscheidFreigabeHinterlegenRequestQueue = "r.order.manager.entscheidfreigabehinterlegen";
         public const string RecalcIndivTokens = "r.order.manager.RecalcIndivTokens";
         public const string DigitalisierungAusloesenRequestQueue = "r.order.manager.digitalisierungAusloesen";

@@ -1,31 +1,27 @@
-﻿using CMI.Contract.Messaging;
+﻿using System.Reflection;
+using Autofac;
+using CMI.Contract.Messaging;
 using CMI.Contract.Parameter;
 using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
 
 namespace CMI.Manager.Notification.Infrastructure
 {
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
             // register the different consumers and classes
-            kernel.Bind<IEmailMessage>().To(typeof(EmailMessage));
-            kernel.Bind<IParameterHelper>().To(typeof(ParameterHelper));
+            builder.RegisterType<EmailMessage>().As<IEmailMessage>();
+            builder.RegisterType<ParameterHelper>().As<IParameterHelper>();
 
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
+            // just register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-            return kernel;
+            return builder;
         }
     }
 }

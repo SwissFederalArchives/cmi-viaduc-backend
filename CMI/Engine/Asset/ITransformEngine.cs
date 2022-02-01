@@ -12,5 +12,12 @@ namespace CMI.Engine.Asset
         /// <param name="paramCollection">Parameters to pass to the transformation</param>
         /// <returns>System.String.</returns>
         string TransformXml(string sourceFile, string transformationFile, Dictionary<string, string> paramCollection);
+
+        /// <summary>
+        /// Converts the metadata xml found in a Benutzungskopie to a valid Arelda metadata.xml
+        /// </summary>
+        /// <param name="tempFolder">The temporary folder where the metadata.xml can be found</param>
+        /// <returns></returns>
+        bool ConvertAreldaMetadataXml(string tempFolder);
     }
 }

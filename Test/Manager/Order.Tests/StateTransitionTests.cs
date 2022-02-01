@@ -45,8 +45,7 @@ namespace CMI.Manager.Order.Tests
             var idxSearchMock = new Mock<ISearchIndexDataAccess>();
             idxSearchMock.Setup(foo => foo.FindDocument(item.VeId.ToString(), false)).Returns(elasticArchiveRecord);
 
-            var statusWechsler = new StatusWechsler(orderDataAccessMock.Object, userDataAccessMock.Object, idxSearchMock.Object, bus,
-                new PostCommitActionsRegistry());
+            var statusWechsler = new StatusWechsler(orderDataAccessMock.Object, userDataAccessMock.Object, idxSearchMock.Object, bus);
             await statusWechsler.Execute(aktion, new[] {item}, currentUser, new DateTime(2019, 1, 12));
         }
 

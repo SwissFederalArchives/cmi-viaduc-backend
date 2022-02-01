@@ -28,11 +28,8 @@ namespace CMI.Utilities.Cache.Access
             }
 
             var cacheConnectionInfoRequest = new CacheConnectionInfoRequest();
-            var requestClient =
-                CreateRequestClient<CacheConnectionInfoRequest, CacheConnectionInfoResponse>(bus, BusConstants.CacheConnectionInfoRequestQueue);
-
-            var response = await requestClient.Request(cacheConnectionInfoRequest);
-
+            var requestClient = CreateRequestClient<CacheConnectionInfoRequest>(bus, BusConstants.CacheConnectionInfoRequestQueue);
+            var response = (await requestClient.GetResponse<CacheConnectionInfoResponse>(cacheConnectionInfoRequest)).Message;
 
             try
             {
@@ -60,10 +57,9 @@ namespace CMI.Utilities.Cache.Access
         {
             Log.Information("GetDownloadLink started");
             var cacheConnectionInfoRequest = new CacheConnectionInfoRequest();
-            var requestClient =
-                CreateRequestClient<CacheConnectionInfoRequest, CacheConnectionInfoResponse>(bus, BusConstants.CacheConnectionInfoRequestQueue);
+            var requestClient = CreateRequestClient<CacheConnectionInfoRequest>(bus, BusConstants.CacheConnectionInfoRequestQueue);
 
-            var response = await requestClient.Request(cacheConnectionInfoRequest);
+            var response = (await requestClient.GetResponse<CacheConnectionInfoResponse>(cacheConnectionInfoRequest)).Message;
             Log.Information("GetDownloadLink finished");
             return $"sftp://{retentionCategory}:{response.Password}@{response.Machine}:{response.Port}/{id}";
         }
@@ -73,7 +69,7 @@ namespace CMI.Utilities.Cache.Access
             Log.Information("Preparing for Downloading from sftpUrl {sftpUrl}", sftpUrl);
 
             var regexObj =
-                new Regex(@"sftp://(?<username>\w+):(?<password>\w*)@(?<host>\w+):(?<port>\d+)/(?<record>\w+)",
+                new Regex(@"sftp://(?<username>\w+):(?<password>\w*)@(?<host>\S+):(?<port>\d+)/(?<record>\w+)",
                     RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace);
 
             var match = regexObj.Match(sftpUrl);
@@ -151,11 +147,9 @@ namespace CMI.Utilities.Cache.Access
         }
 
 
-        private static IRequestClient<T1, T2> CreateRequestClient<T1, T2>(IBus busControl, string relativeUri) where T1 : class where T2 : class
+        private static IRequestClient<T1> CreateRequestClient<T1>(IBus busControl, string relativeUri) where T1 : class
         {
-            var client =
-                busControl.CreateRequestClient<T1, T2>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
-
+            var client = busControl.CreateRequestClient<T1>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
             return client;
         }
     }

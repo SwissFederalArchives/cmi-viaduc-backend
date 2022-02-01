@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CMI.Contract.DocumentConverter;
 
 namespace CMI.Manager.DocumentConverter.Render
 {
@@ -27,6 +28,7 @@ namespace CMI.Manager.DocumentConverter.Render
         public FileInfo TargetFile { get; set; }
 
         public string VideoQuality { get; set; }
+        public JobContext Context { get; set; }
 
         /// <summary>
         /// The Abbyy ocr profile to use to generate the text layer

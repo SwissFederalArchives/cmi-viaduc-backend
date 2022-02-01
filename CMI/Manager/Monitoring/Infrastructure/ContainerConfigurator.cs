@@ -1,6 +1,6 @@
-﻿using MassTransit;
-using Ninject;
-using Ninject.Extensions.Conventions;
+﻿using System.Reflection;
+using Autofac;
+using MassTransit;
 
 namespace CMI.Manager.Monitoring.Infrastructure
 {
@@ -9,24 +9,16 @@ namespace CMI.Manager.Monitoring.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static StandardKernel Configure()
+        public static ContainerBuilder Configure()
         {
-            var kernel = new StandardKernel();
+            var builder = new ContainerBuilder();
 
-            // register the different consumers and classes
+            // register all the consumers
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                .AssignableTo<IConsumer>()
+                .AsSelf();
 
-
-            // just register all the consumers using Ninject.Extensions.Conventions
-            kernel.Bind(x =>
-            {
-                x.FromThisAssembly()
-                    .SelectAllClasses()
-                    .InheritedFrom<IConsumer>()
-                    .BindToSelf();
-            });
-
-
-            return kernel;
+            return builder;
         }
     }
 }

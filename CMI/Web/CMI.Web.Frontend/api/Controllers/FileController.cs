@@ -25,22 +25,22 @@ namespace CMI.Web.Frontend.api.Controllers
     public class FileController : ApiControllerBase
     {
         private readonly ICacheHelper cacheHelper;
-        private readonly IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClient;
+        private readonly IRequestClient<DownloadAssetRequest> downloadClient;
         private readonly IFileDownloadHelper downloadHelper;
         private readonly IDownloadLogDataAccess downloadLogDataAccess;
         private readonly IDownloadTokenDataAccess downloadTokenDataAccess;
         private readonly IElasticService elasticService;
         private readonly IKontrollstellenInformer kontrollstellenInformer;
         private readonly IOrderDataAccess orderDataAccess;
-        private readonly IRequestClient<PrepareAssetRequest, PrepareAssetResult> prepareClient;
-        private readonly IRequestClient<GetAssetStatusRequest, GetAssetStatusResult> statusClient;
+        private readonly IRequestClient<PrepareAssetRequest> prepareClient;
+        private readonly IRequestClient<GetAssetStatusRequest> statusClient;
         private readonly ITranslator translator;
         private readonly IUsageAnalyzer usageAnalyzer;
         private readonly IUserDataAccess userDataAccess;
 
-        public FileController(IRequestClient<DownloadAssetRequest, DownloadAssetResult> downloadClient,
-            IRequestClient<GetAssetStatusRequest, GetAssetStatusResult> statusClient,
-            IRequestClient<PrepareAssetRequest, PrepareAssetResult> prepareClient,
+        public FileController(IRequestClient<DownloadAssetRequest> downloadClient,
+            IRequestClient<GetAssetStatusRequest> statusClient,
+            IRequestClient<PrepareAssetRequest> prepareClient,
             IDownloadTokenDataAccess downloadTokenDataAccess,
             IDownloadLogDataAccess downloadLogDataAccess,
             IElasticService elasticService,
@@ -128,7 +128,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     DeepLinkToVe = link,
                     Language = lang ?? access.Language
                 };
-                var result = await prepareClient.Request(prepareAssetRequest);
+                var result = (await prepareClient.GetResponse<PrepareAssetResult>(prepareAssetRequest)).Message;
                 return Ok(result);
             }
             catch (Exception e)
@@ -166,9 +166,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     AssetId = packageId,
                     RetentionCategory = await cacheHelper.GetRetentionCategory(record, access.RolePublicClient, orderDataAccess)
                 };
-
-                var assetStatus = await statusClient.Request(assetStatusRequest);
-
+                var assetStatus = (await statusClient.GetResponse<GetAssetStatusResult>(assetStatusRequest)).Message;
                 return Ok(assetStatus);
             }
             catch (Exception e)
@@ -231,14 +229,14 @@ namespace CMI.Web.Frontend.api.Controllers
                     userDataAccess.StoreDownloadReasonInHistory(record, user, access, reason);
                 }
 
-                var downloadAssetResult = await downloadClient.Request(new DownloadAssetRequest
+                var downloadAssetResult = (await downloadClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
                 {
                     ArchiveRecordId = archiveRecordId.ToString(),
                     AssetType = AssetType.Gebrauchskopie,
                     Recipient = userId,
                     AssetId = record.PrimaryData.FirstOrDefault()?.PackageId,
                     RetentionCategory = await cacheHelper.GetRetentionCategory(record, access.RolePublicClient, orderDataAccess)
-                });
+                })).Message;
 
                 var stream = cacheHelper.GetStreamFromCache(downloadAssetResult.AssetDownloadLink);
                 var result = new HttpResponseMessage(HttpStatusCode.OK)

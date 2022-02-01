@@ -1,39 +1,25 @@
-using System;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 using CMI.Contract.Messaging;
 using CMI.Manager.Harvest.Consumers;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Harvest.Tests
 {
-    public class ArchiveRecordRemovedConsumerTests : InMemoryTestFixture
+    public class ArchiveRecordRemovedConsumerTests
     {
         private readonly Mock<IConsumer<IArchiveRecordRemoved>> archiveRecordRemovedConsumer = new Mock<IConsumer<IArchiveRecordRemoved>>();
-
         private readonly Mock<IHarvestManager> harvestManager = new Mock<IHarvestManager>();
-        private Task<ConsumeContext<IArchiveRecordRemoved>> archiveRecordRemovedTask;
-
-        public ArchiveRecordRemovedConsumerTests() : base(true)
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
 
         [SetUp]
         public void Setup()
         {
             harvestManager.Reset();
             archiveRecordRemovedConsumer.Reset();
-        }
-
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            archiveRecordRemovedTask = Handler<IArchiveRecordRemoved>(configurator,
-                context => new ArchiveRecordRemovedConsumer(harvestManager.Object).Consume(context));
         }
 
         [Test]
@@ -48,21 +34,36 @@ namespace CMI.Manager.Harvest.Tests
             };
             harvestManager.Setup(e => e.UpdateMutationStatus(status));
 
-            // Act
-            await InputQueueSendEndpoint.Send<IArchiveRecordRemoved>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new ArchiveRecordRemovedConsumer(harvestManager.Object));
+
+            await harness.Start();
+            try
             {
-                MutationId = mutationId,
-                ActionSuccessful = true
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IArchiveRecordRemoved>(new
+                {
+                    MutationId = mutationId,
+                    ActionSuccessful = true
+                });
 
-            // Wait for the results
-            await archiveRecordRemovedTask;
 
-            // Assert
-            harvestManager.Verify(e => e.UpdateMutationStatus(It.Is<MutationStatusInfo>(f =>
-                f.MutationId == mutationId &&
-                f.NewStatus == ActionStatus.SyncCompleted
-            )), Times.Once);
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<IArchiveRecordRemoved>());
+
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<IArchiveRecordRemoved>());
+
+                // Assert
+                harvestManager.Verify(e => e.UpdateMutationStatus(It.Is<MutationStatusInfo>(f =>
+                    f.MutationId == mutationId &&
+                    f.NewStatus == ActionStatus.SyncCompleted
+                )), Times.Once);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
 
         [Test]
@@ -77,23 +78,39 @@ namespace CMI.Manager.Harvest.Tests
             };
             harvestManager.Setup(e => e.UpdateMutationStatus(status));
 
-            // Act
-            await InputQueueSendEndpoint.Send<IArchiveRecordRemoved>(new
+            var harness = new InMemoryTestHarness();
+            var consumer = harness.Consumer(() => new ArchiveRecordRemovedConsumer(harvestManager.Object));
+
+            await harness.Start();
+            try
             {
-                MutationId = mutationId,
-                ActionSuccessful = false,
-                ErrorMessage = "My little error"
-            });
+                // Act
+                await harness.InputQueueSendEndpoint.Send<IArchiveRecordRemoved>(new
+                {
+                    MutationId = mutationId,
+                    ActionSuccessful = false,
+                    ErrorMessage = "My little error"
+                });
 
-            // Wait for the results
-            await archiveRecordRemovedTask;
 
-            // Assert
-            harvestManager.Verify(e => e.UpdateMutationStatus(It.Is<MutationStatusInfo>(f =>
-                f.MutationId == mutationId &&
-                f.NewStatus == ActionStatus.SyncFailed &&
-                f.ErrorMessage == "My little error"
-            )), Times.Once);
+
+                // did the endpoint consume the message
+                Assert.That(await harness.Consumed.Any<IArchiveRecordRemoved>());
+
+                // did the actual consumer consume the message
+                Assert.That(await consumer.Consumed.Any<IArchiveRecordRemoved>());
+
+                // Assert
+                harvestManager.Verify(e => e.UpdateMutationStatus(It.Is<MutationStatusInfo>(f =>
+                    f.MutationId == mutationId &&
+                    f.NewStatus == ActionStatus.SyncFailed &&
+                    f.ErrorMessage == "My little error"
+                )), Times.Once);
+            }
+            finally
+            {
+                await harness.Stop();
+            }
         }
     }
 }

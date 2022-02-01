@@ -137,6 +137,8 @@ namespace CMI.Web.Frontend.api.Entities
 
         public EntityResult<T> GetChildren(T entity, int setDepth, UserAccess access, Paging paging)
         {
+            paging ??= new Paging {OrderBy = "treeSequence", SortOrder = "Ascending"};
+            
             var result = new EntityResult<T>
             {
                 Items = new List<Entity<T>>(),
@@ -181,10 +183,6 @@ namespace CMI.Web.Frontend.api.Entities
                 {
                     SetDepth = setDepth
                 });
-                if (result.Paging == null)
-                {
-                    result.Paging = new Paging();
-                }
 
                 result.Paging.Total = queryResult.TotalNumberOfHits;
             }

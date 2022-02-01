@@ -10,6 +10,7 @@ using Nest.JsonNetSerializer;
 using Newtonsoft.Json.Converters;
 using Serilog;
 
+
 namespace CMI.Access.Common
 {
     public class LogDataAccess : ILogDataAccess
@@ -44,7 +45,6 @@ namespace CMI.Access.Common
 
             var query = BuildQuery(filter);
             var initialResponse = client.Search<ElasticRawLogRecord>(s => s
-                .AllTypes()
                 .Query(q => query)
                 .Sort(sort => sort.Ascending($"@{nameof(ElasticRawLogRecord.Timestamp).ToLowerCamelCase()}"))
                 .From(0)
@@ -80,7 +80,7 @@ namespace CMI.Access.Common
         {
             Log.Information("Task 'delete old log indexes' started for index name {IndexName}...", indexName);
 
-            var response = client.GetIndex(indexName, o => o.IncludeDefaults(false));
+            var response = client.Indices.Get(indexName, o => o.IncludeDefaults(false));
             var staticPart = indexName.Replace("*", string.Empty);
             var deleted = 0;
 
@@ -104,7 +104,7 @@ namespace CMI.Access.Common
 
                 if (date.Date < olderThanDate.Date)
                 {
-                    client.DeleteIndex(concreteIndexName);
+                    client.Indices.Delete(concreteIndexName);
                     deleted++;
                 }
             }
@@ -122,7 +122,7 @@ namespace CMI.Access.Common
             {
                 timestampQuery = new DateRangeQuery
                 {
-                    Field = $"@{nameof(ElasticRawLogRecord.Timestamp).ToLowerCamelCase()}",
+                    Field = $"{nameof(ElasticRawLogRecord.Timestamp)}",
                     GreaterThanOrEqualTo = new DateMathExpression(filter.StartDate.Value),
                     LessThanOrEqualTo = new DateMathExpression(filter.EndDate.Value)
                 };

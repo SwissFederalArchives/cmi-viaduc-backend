@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.IO;
 using CMI.Contract.DocumentConverter;
 using CMI.Manager.DocumentConverter.Properties;
@@ -19,6 +20,8 @@ namespace CMI.Manager.DocumentConverter
         private string baseAddress;
 
         private FileServer fileServer;
+        private readonly object fileServerLock = new object();
+        private readonly object directoryInformationLock = new object();
         public int port;
 
         public SftpServer()
@@ -32,12 +35,15 @@ namespace CMI.Manager.DocumentConverter
         ~SftpServer()
         {
             Log.Information("Disposing of sftp server instance in DocumentConverter");
-            if (fileServer.IsRunning)
+            lock (fileServerLock)
             {
-                fileServer?.Stop();
-            }
+                if (fileServer.IsRunning)
+                {
+                    fileServer?.Stop();
+                }
 
-            fileServer?.Dispose();
+                fileServer?.Dispose();
+            }
         }
 
         private void ConfigureAndStartFileServer()
@@ -54,20 +60,24 @@ namespace CMI.Manager.DocumentConverter
                     port, baseAddress,
                     DocumentConverterSettings.Default.BaseDirectory);
 
-                fileServer = new FileServer
+                lock (fileServerLock)
                 {
-                    LogWriter = new SerilogWriter(),
-                    Keys = {ServerKey.GetServerPrivateKey()}
-                };
-                fileServer.Settings.SshParameters.EncryptionModes &= ~SshEncryptionMode.CBC; // Disable CBC algorithm (security vulnerability)
-                fileServer.FileUploaded += (sender, e) =>
-                {
-                    Log.Information("File successfully uploaded: user={User}, full path={FullPath}, file name={Path}", e.User, e.FullPath,
-                        e.Path);
-                };
-                fileServer.FileDownloaded += FileServerOnFileDownloaded;
-                fileServer.Bind(port, FileServerProtocol.Sftp);
-                fileServer.Start();
+                    fileServer = new FileServer
+                    {
+                        LogWriter = new SerilogWriter(),
+                        Keys = { ServerKey.GetServerPrivateKey() }
+                    };
+
+                    fileServer.Settings.SshParameters.EncryptionModes &= ~SshEncryptionMode.CBC; // Disable CBC algorithm (security vulnerability)
+                    fileServer.FileUploaded += (sender, e) =>
+                    {
+                        Log.Information("File successfully uploaded: user={User}, full path={FullPath}, file name={Path}", e.User, e.FullPath,
+                            e.Path);
+                    };
+                    fileServer.FileDownloaded += FileServerOnFileDownloaded;
+                    fileServer.Bind(port, FileServerProtocol.Sftp);
+                    fileServer.Start();
+                }
                 Log.Information($"Sftp server is listening on port '{port}'");
             }
             catch (Exception e)
@@ -90,13 +100,17 @@ namespace CMI.Manager.DocumentConverter
                 // Create a new unique user and a unique directory for that user 
                 var newJobGuid = Guid.NewGuid().ToString("N");
                 var user = new FileServerUser(newJobGuid, password);
+                Debug.Assert(user != null);
                 var di = GetJobDirectory(newJobGuid);
                 di.Create();
 
                 // Create a sftp file system object and assign it to the user.
                 var localFileSystem = CreateFileSystem(di.FullName);
                 user.SetFileSystem(localFileSystem);
-                fileServer.Users.Add(user);
+                lock (fileServerLock)
+                {
+                    fileServer.Users.Add(user);
+                }
 
                 var jobInitResult = new JobInitResult
                 {
@@ -108,7 +122,7 @@ namespace CMI.Manager.DocumentConverter
                 };
 
                 // Add the information about the job to our local in memory storage
-                var jobInfoDetails = new JobInfoDetails {Request = jobInitRequest, Result = jobInitResult};
+                var jobInfoDetails = new JobInfoDetails { Request = jobInitRequest, Result = jobInitResult };
                 jobStorage.AddOrUpdate(newJobGuid, jobInfoDetails, (k, v) => v);
 
                 return jobInitResult;
@@ -141,8 +155,11 @@ namespace CMI.Manager.DocumentConverter
         public void RemoveJob(string jobGuid)
         {
             // JobGuid is same as username
-            var user = fileServer.Users[jobGuid];
-            RemoveJobInternal(user);
+            lock (fileServerLock)
+            {
+                var user = fileServer.Users[jobGuid];
+                RemoveJobInternal(user);
+            }
         }
 
         private LocalFileSystemProvider CreateFileSystem(string rootDir)
@@ -159,19 +176,22 @@ namespace CMI.Manager.DocumentConverter
             }
             try
             {
-                Log.Information("Cleaning up after download...");
-                var di = GetJobDirectory(user.Name);
-
-                if (di.Exists)
+                lock (directoryInformationLock)
                 {
-                    try
+                    Log.Information("Cleaning up after download...");
+                    var di = GetJobDirectory(user.Name);
+
+                    if (di.Exists)
                     {
-                        di.Delete(true);
-                        Log.Information("Folder '{FullName}' and contents removed", di.FullName);
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Warning(e, "Unable to delete folder '{FullName}'", di.FullName);
+                        try
+                        {
+                            di.Delete(true);
+                            Log.Information("Folder '{FullName}' and contents removed", di.FullName);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Warning(e, "Unable to delete folder '{FullName}'", di.FullName);
+                        }
                     }
                 }
 
@@ -203,7 +223,11 @@ namespace CMI.Manager.DocumentConverter
             }
             finally
             {
-                fileServer.Users.Remove(user);
+                lock (fileServerLock)
+                {
+                    fileServer.Users.Remove(user);
+                }
+
                 Log.Information("User '{Name}' removed from sftp server", user.Name);
             }
         }

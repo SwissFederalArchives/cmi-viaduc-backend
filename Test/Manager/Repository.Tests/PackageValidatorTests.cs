@@ -12,9 +12,9 @@ namespace CMI.Manager.Repository.Tests
     [TestFixture]
     public class PackageValidatorTests
     {
-        private const int MaxLevel = 5;
-        private const int NumberOfFoldersPerLevel = 2;
-        private const int NumberOfFilesPerLevel = 2;
+        private const int maxLevel = 5;
+        private const int numberOfFoldersPerLevel = 2;
+        private const int numberOfFilesPerLevel = 2;
         private string[] fileTestData;
         private string[] folderTestData;
         private int folderIndexCounter;
@@ -37,12 +37,12 @@ namespace CMI.Manager.Repository.Tests
 
         private void CreateTestFolders(List<RepositoryFolder> folderList, int level)
         {
-            if (level > MaxLevel)
+            if (level > maxLevel)
             {
                 return;
             }
 
-            for (var i = 0; i < NumberOfFoldersPerLevel; i++)
+            for (var i = 0; i < numberOfFoldersPerLevel; i++)
             {
                 var folderParts = folderTestData[folderIndexCounter].Split(';');
                 var newFolder = new RepositoryFolder
@@ -65,7 +65,7 @@ namespace CMI.Manager.Repository.Tests
 
         private void CreateTestFiles(List<RepositoryFile> files)
         {
-            for (var i = 0; i < NumberOfFilesPerLevel; i++)
+            for (var i = 0; i < numberOfFilesPerLevel; i++)
             {
                 var fileParts = fileTestData[fileIndexCounter].Split(';');
                 var newFile = new RepositoryFile
@@ -158,7 +158,7 @@ namespace CMI.Manager.Repository.Tests
             list.Count.Should().Be(numFolders + numFiles);
             list.Count(f => f.Type == TempValidationObjectType.File).Should().Be(numFiles);
             list.Count(f => f.Type == TempValidationObjectType.Folder).Should().Be(numFolders);
-            list.Max(l => l.HierachyLevel).Should().Be(MaxLevel + 1); // 5 Folder levels + 1 File Level
+            list.Max(l => l.HierachyLevel).Should().Be(maxLevel + 1); // 5 Folder levels + 1 File Level
         }
 
         [Test]

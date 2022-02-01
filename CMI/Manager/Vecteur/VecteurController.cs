@@ -79,7 +79,7 @@ namespace CMI.Manager.Vecteur
 
             try
             {
-                Log.Verbose("Getting next order from digipool");
+                Log.Information("Getting next order from digipool");
                 DigitalisierungsAuftrag auftrag;
                 var digipoolEntryArray = await orderManagerClient.GetDigipool(1);
 
@@ -166,6 +166,7 @@ namespace CMI.Manager.Vecteur
                                                            $"{string.Join(Environment.NewLine, errorList)}");
                 }
 
+                Log.Information("Sucessfully fetched next order with id {AuftragsId} from digipool.", auftrag.Auftragsdaten.AuftragsId);
                 return Ok(auftrag);
             }
             // Request timeout --> Manager, Index or External Content Service is not running
@@ -221,6 +222,7 @@ namespace CMI.Manager.Vecteur
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception), Description = "Wenn ein interner Fehler auftritt.")]
         public async Task<IHttpActionResult> GetStatus(int auftragsid)
         {
+            Log.Information("Received GetStatus call for order with id {auftragsid}.", auftragsid);
             if (!ApiKeyChecker.IsCorrect(Request))
             {
                 return Unauthorized();
@@ -235,10 +237,12 @@ namespace CMI.Manager.Vecteur
                     return StatusCode(HttpStatusCode.NotFound);
                 }
 
+                Log.Information("Returned status for order with id {auftragsid}.", auftragsid);
                 return Ok(orderItems[0].Status.ToString());
             }
             catch (Exception e)
             {
+                Log.Error(e, "Unexpected error while getting status for order with id {auftragsid}", auftragsid);
                 return InternalServerError(e);
             }
         }
@@ -251,6 +255,7 @@ namespace CMI.Manager.Vecteur
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception), Description = "Wenn ein interner Fehler auftritt.")]
         public async Task<IHttpActionResult> SetStatusAushebungBereit(int auftragsid)
         {
+            Log.Information("Received SetStatusAushebungBereit call for order with id {auftragsid}.", auftragsid);
             if (!ApiKeyChecker.IsCorrect(Request))
             {
                 return Unauthorized();
@@ -258,6 +263,7 @@ namespace CMI.Manager.Vecteur
 
             await vecteurActionsClient.SetStatusAushebungBereit(auftragsid);
 
+            Log.Information("Successfully updated status to FuerAushebungBereit for order with id {auftragsid}.", auftragsid);
             return Ok("OK");
         }
 
@@ -269,6 +275,7 @@ namespace CMI.Manager.Vecteur
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception), Description = "Wenn ein interner Fehler auftritt.")]
         public async Task<IHttpActionResult> SetStatusDigitalisierungAbgebrochen(int auftragsid, string grund)
         {
+            Log.Information("Received SetStatusDigitalisierungAbgebrochen call for order with id {auftragsid}.", auftragsid);
             if (!ApiKeyChecker.IsCorrect(Request))
             {
                 return Unauthorized();
@@ -276,6 +283,7 @@ namespace CMI.Manager.Vecteur
 
             await vecteurActionsClient.SetStatusDigitalisierungAbgebrochen(auftragsid, grund);
 
+            Log.Information("Successfully updated status to Abgebrochen for order with id {auftragsid}.", auftragsid);
             return Ok("OK");
         }
 
@@ -287,6 +295,7 @@ namespace CMI.Manager.Vecteur
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception), Description = "Wenn ein interner Fehler auftritt.")]
         public async Task<IHttpActionResult> SetStatusZumReponierenBereit(int auftragsid)
         {
+            Log.Information("Received SetStatusZumReponierenBereit call for order with id {auftragsid}.", auftragsid);
             if (!ApiKeyChecker.IsCorrect(Request))
             {
                 return Unauthorized();
@@ -294,6 +303,7 @@ namespace CMI.Manager.Vecteur
 
             await vecteurActionsClient.SetStatusZumReponierenBereit(auftragsid);
 
+            Log.Information("Successfully updated status to ZumReponierenBereit for order with id {auftragsid}.", auftragsid);
             return Ok("OK");
         }
 
@@ -305,6 +315,7 @@ namespace CMI.Manager.Vecteur
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception), Description = "Wenn ein interner Fehler auftritt.")]
         public async Task<IHttpActionResult> SetStatusDigitalisierungExtern(int auftragsid)
         {
+            Log.Information("Received SetStatusDigitalisierungExtern call for order with id {auftragsid}.", auftragsid);
             if (!ApiKeyChecker.IsCorrect(Request))
             {
                 return Unauthorized();
@@ -312,6 +323,7 @@ namespace CMI.Manager.Vecteur
 
             await vecteurActionsClient.SetStatusDigitalisierungExtern(auftragsid);
 
+            Log.Information("Successfully updated status to StatusDigitalisierungExtern for order with id {auftragsid}.", auftragsid);
             return Ok("OK");
         }
 

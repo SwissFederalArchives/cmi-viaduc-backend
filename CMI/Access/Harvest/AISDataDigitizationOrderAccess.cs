@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
@@ -8,7 +9,7 @@ using Serilog;
 
 namespace CMI.Access.Harvest
 {
-    public partial class AISDataAccess : IDbDigitizationOrderAccess
+    public partial class AISDataAccess : IDbExternalContentAccess
     {
         private readonly DigitizationOrderBuilder digitizationOrderBuilder;
 
@@ -56,6 +57,11 @@ namespace CMI.Access.Harvest
             Log.Information("Took {Time}ms to build DigitizationOrderDataResult for id {Id}", sw.ElapsedMilliseconds, archiveRecordId);
 
             return retVal;
+        }
+
+        public SyncInfoForReportResult GetReportExternalContent(int[] mutationsIds)
+        {
+            return new SyncInfoForReportResult { Records = dataProvider.GetSyncInfoForReport(mutationsIds.ToList()) };
         }
     }
 }

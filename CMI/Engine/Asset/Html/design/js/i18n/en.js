@@ -34,7 +34,7 @@ var localeEn = {
   "viaduc-label-sonstige_bestimmungen": "Other provisions",
   "viaduc-title-inhalt_und_innere_ordnung": "Content and internal classification",
   "viaduc-label-form": "Form",
-  "viaduc-label-darin": "In which",
+  "viaduc-label-darin": "Contains",
   "viaduc-label-umfang": "Scope",
   "viaduc-title-sachverwandte_unterlagen": "Related documents",
   "viaduc-label-frühere_signaturen": "Previous reference codes",

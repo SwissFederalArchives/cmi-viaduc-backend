@@ -1,4 +1,6 @@
 ﻿using System;
+using Autofac;
+using CMI.Contract.DocumentConverter;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Manager.DocumentConverter.Abbyy;
@@ -8,7 +10,6 @@ using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using GreenPipes;
 using MassTransit;
-using Ninject;
 using Serilog;
 
 namespace CMI.Manager.DocumentConverter
@@ -17,57 +18,74 @@ namespace CMI.Manager.DocumentConverter
     {
         private const string serviceName = "DocumentConverter service";
 
-        private readonly StandardKernel kernel;
+        private ContainerBuilder containerBuilder;
+        private IContainer container;
 
         private IBusControl bus;
 
         public DocumentService()
         {
-            kernel = ContainerConfigurator.Configure();
+            containerBuilder = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
         }
 
         public void Start()
         {
             Log.Information($"{serviceName} is starting");
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.DocumentConverterService, (cfg, host) =>
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.DocumentConverterService, (cfg, ctx) =>
             {
-                kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-                kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
-
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterJobInitRequestQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<JobInitConsumer>());
+                    ec.Consumer(ctx.Resolve<JobInitConsumer>);
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterConversionStartRequestQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<ConversionStartConsumer>());
+                    ec.Consumer(ctx.Resolve<ConversionStartConsumer>);
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterExtractionStartRequestQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<ExtractionStartConsumer>());
+                    ec.Consumer(ctx.Resolve<ExtractionStartConsumer>);
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterSupportedFileTypesRequestQueue, ec =>
                 {
-                    ec.Consumer(() => kernel.Get<SupportedFileTypesConsumer>());
+                    ec.Consumer(ctx.Resolve<SupportedFileTypesConsumer>);
                     ec.UseRetry(retry => retry.Incremental(3, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0)));
                 });
 
-                cfg.ReceiveEndpoint(BusConstants.MonitoringDocumentConverterInfoQueue,
-                    ec => { ec.Consumer(() => kernel.Get<DocumentConverterInfoConsumer>()); });
+                cfg.ReceiveEndpoint(BusConstants.MonitoringDocumentConverterInfoQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<DocumentConverterInfoConsumer>);
+                    ec.PrefetchCount = 4;
+                });
 
-                cfg.UseSerilog();
+                cfg.ReceiveEndpoint(BusConstants.MonitoringAbbyyOcrTestQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<AbbyyOcrTestConsumer>);
+                    // Do not allow more than 4 concurrent Abbyy calls
+                    ec.PrefetchCount = 4;
+                });
+
             });
 
+            container = containerBuilder.Build();
+            bus = container.Resolve<IBusControl>();
             bus.Start();
+
+            // Send event that document converter service is started
+            // Push an error message to indicate that the item has failed
+            bus.Publish<DocumentConverterServiceStartedEvent>(new
+            {
+                __TimeToLive = TimeSpan.FromSeconds(30),
+                StartTime = DateTime.Now
+            });
 
             Log.Information($"{serviceName} started");
         }
@@ -76,8 +94,9 @@ namespace CMI.Manager.DocumentConverter
         {
             Log.Information($"{serviceName} is stopping");
             bus.Stop();
-            var pool = kernel.TryGet<EnginesPool>();
-            pool?.Dispose();
+            if (container.TryResolve<EnginesPool>(out var pool))
+                pool.Dispose();
+
             Log.Information($"{serviceName} stopped");
             Log.CloseAndFlush();
         }

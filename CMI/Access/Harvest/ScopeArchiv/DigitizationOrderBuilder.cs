@@ -13,10 +13,10 @@ namespace CMI.Access.Harvest.ScopeArchiv
     public class DigitizationOrderBuilder
     {
         public const string NoDataAvailable = "keine Angabe";
-        private const string DossierLevelIdentifier = "Dossier";
-        private const string SubFondsLevelIdentifier = "Teilbestand";
-        private const string FondsLevelIdentifier = "Bestand";
-        private const string SerieLevelIdentifier = "Serie";
+        private const string dossierLevelIdentifier = "Dossier";
+        private const string subFondsLevelIdentifier = "Teilbestand";
+        private const string fondsLevelIdentifier = "Bestand";
+        private const string serieLevelIdentifier = "Serie";
         private readonly ConcurrentDictionary<long, List<VerzEinheitKurzType>> containerContentCache;
         private readonly IAISDataProvider dataProvider;
         private readonly ArchiveRecordBuilder recordBuilder;
@@ -96,7 +96,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
             // No matter which level the ordered item was, we always need to deliver the whole dossier
             var dossierLevelIndex =
                 archiveRecord.Display.ArchiveplanContext.FindIndex(i =>
-                    i.Level.Equals(DossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
+                    i.Level.Equals(dossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (dossierLevelIndex < 0)
             {
                 throw new InvalidOperationException(
@@ -164,7 +164,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
                         InformationsTraeger = container.BHLTN_INFO_TRGR_NM,
                         Standort = container.BHLTN_DEF_STAND_ORT_CD,
                         EnthalteneVerzEinheiten =
-                            verzEinheit.Level == DossierLevelIdentifier ? GetArchiveRecordsToContainer(container.BHLTN_ID) : null
+                            verzEinheit.Level == dossierLevelIdentifier ? GetArchiveRecordsToContainer(container.BHLTN_ID) : null
                     });
                 }
             }
@@ -294,12 +294,12 @@ namespace CMI.Access.Harvest.ScopeArchiv
         {
             // Do we find a subfonds?
             var startIndex = archiveRecord.Display.ArchiveplanContext.FindLastIndex(i =>
-                i.Level.Equals(SubFondsLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
+                i.Level.Equals(subFondsLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (startIndex < 0)
                 // Do we find a fonds then?
             {
                 startIndex = archiveRecord.Display.ArchiveplanContext.FindLastIndex(i =>
-                    i.Level.Equals(FondsLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
+                    i.Level.Equals(fondsLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
             }
 
             if (startIndex < 0)
@@ -310,7 +310,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
 
             // Now lets find the the first dossier which marks the end
             var endIndex = archiveRecord.Display.ArchiveplanContext.FindIndex(i =>
-                i.Level.Equals(DossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
+                i.Level.Equals(dossierLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
             if (endIndex < 0)
             {
                 throw new InvalidOperationException(
@@ -343,7 +343,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
                     : NoDataAvailable;
 
                 // Auf Stufe Serie muss die Serie-Nummer geliefert werden. Dies ist die Nummer nach dem letzten #
-                if (current.Stufe == SerieLevelIdentifier)
+                if (current.Stufe == serieLevelIdentifier)
                 {
                     var pattern = @"^.*#(?<number>[^#]+)$";
                     var r = Regex.Match(current.Signatur, pattern);

@@ -25,7 +25,7 @@ namespace CMI.Manager.Repository
         ///     Reads the package metadata from the repository
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
-        /// <param name="archiveRecord"></param>
+        /// <param name="archiveRecordId">The id of the archive record</param>
         /// <returns></returns>
         RepositoryPackageInfoResult ReadPackageMetadata(string packageId, string archiveRecordId);
     }

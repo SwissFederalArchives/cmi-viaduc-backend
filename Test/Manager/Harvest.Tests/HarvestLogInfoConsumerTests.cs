@@ -15,9 +15,9 @@ namespace CMI.Manager.Harvest.Tests
     public class HarvestLogInfoConsumerTests : InMemoryTestFixture
     {
         private readonly Mock<IHarvestManager> harvestManager = new Mock<IHarvestManager>();
-        private IRequestClient<GetHarvestLogInfo, GetHarvestLogInfoResult> client;
+        private IRequestClient<GetHarvestLogInfo> client;
 
-        public HarvestLogInfoConsumerTests() : base(true)
+        public HarvestLogInfoConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }
@@ -26,7 +26,7 @@ namespace CMI.Manager.Harvest.Tests
         public void Setup()
         {
             harvestManager.Reset();
-            client = CreateRequestClient<GetHarvestLogInfo, GetHarvestLogInfoResult>();
+            client = CreateRequestClient<GetHarvestLogInfo>();
         }
 
         protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
@@ -43,7 +43,7 @@ namespace CMI.Manager.Harvest.Tests
                 {ResultSet = new List<HarvestLogInfo>(), TotalResultSetSize = 1000});
 
             // Act
-            var response = await client.Request(new GetHarvestLogInfo {Request = new HarvestLogInfoRequest {ArchiveRecordIdFilter = "123"}});
+            var response = (await client.GetResponse<GetHarvestLogInfoResult>(new GetHarvestLogInfo {Request = new HarvestLogInfoRequest {ArchiveRecordIdFilter = "123"}})).Message;
 
             // Assert
             response.Result.TotalResultSetSize.Should().Be(1000);

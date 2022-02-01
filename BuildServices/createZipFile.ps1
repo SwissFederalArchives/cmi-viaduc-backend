@@ -19,7 +19,7 @@ Function Write-BuildLog {
 	param (
 		[string]$Message
 	)
-	write-host $( '##teamcity[message text=''{0}'']' -f $Message ) 
+	write-host $( '{0}' -f $Message ) 
 }
 
 #Main-program
@@ -83,20 +83,8 @@ if (![System.IO.Directory]::Exists($completePath ))
      New-Item -ItemType Directory -Force -Path $completePath
 }
 
-$zipPath = [io.path]::combine($completePath, "viaduc-complete-$BuildNumber.zip")
+$zipPath = [io.path]::combine($completePath, "viaduc.complete.$BuildNumber.zip")
 [io.compression.zipfile]::CreateFromDirectory($tempDir, $zipPath)
-
-# octopus-package erstellen
-$artefaktDir = [io.path]::Combine($SolutionDir, "octopusartefacts")
-
-# verzeichnis anlegen, wenn es noch nicht existiert
-if (![System.IO.Directory]::Exists($artefaktDir))
-{
-     New-Item -ItemType Directory -Force -Path $artefaktDir
-}
-$artefaktDir = [io.path]::Combine($artefaktDir, "viaduc.complete.$BuildNumber.zip")
-
-[io.compression.zipfile]::CreateFromDirectory($tempDir, $artefaktDir)
 
 # das Temp-Vereichnis löschen
 Remove-Item $tempDir -Recurse

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CMI.Contract.Common;
 using CMI.Contract.Order;
 
 namespace CMI.Contract.Messaging
@@ -146,6 +147,16 @@ namespace CMI.Contract.Messaging
 
     public class UpdateDigipoolResponse
     {
+    }
+    
+    public class GetPrimaerdatenReportRecordsRequest
+    {
+        public LogDataFilter Filter { get; set; }
+    }
+
+    public class GetPrimaerdatenReportRecordsResponse
+    {
+        public List<PrimaerdatenAufbereitungItem> Items { get; set; }
     }
 
     public class GetStatusHistoryForOrderItemRequest

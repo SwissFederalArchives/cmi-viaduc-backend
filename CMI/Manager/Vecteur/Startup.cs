@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Http;
-using CMI.Contract.Parameter;
-using CMI.Engine.MailTemplate;
-using CMI.Utilities.Template;
-using Ninject;
-using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
+using System.Web.Http.ExceptionHandling;
+using Autofac;
+using Autofac.Integration.WebApi;
+using CMI.Manager.Vecteur.Infrastructure;
 using NSwag;
 using NSwag.AspNet.Owin;
 using NSwag.SwaggerGeneration.Processors.Security;
@@ -17,11 +15,13 @@ namespace CMI.Manager.Vecteur
 {
     public class Startup
     {
-        public static IKernel Kernel { get; set; }
+        private static IContainer container;
+
+        public static IContainer Container => container;
 
         public void Configuration(IAppBuilder app)
         {
-            // siehe https://github.com/ninject/Ninject.Web.Common/wiki/Setting-up-a-OWIN-WebApi-application
+            var builder = ContainerConfigurator.Configure();
 
             var config = new HttpConfiguration();
             config.Formatters.Insert(0, new DigitalisierungsAuftragFormatter());
@@ -30,6 +30,11 @@ namespace CMI.Manager.Vecteur
                 .EnableSwaggerUi(c => { c.EnableApiKeySupport("X-ApiKey", "header"); });
 
             config.MapHttpAttributeRoutes();
+            config.Services.Add(typeof(IExceptionLogger), new VecteurExceptionLogger());
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            
+            container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             app
                 .UseSwagger(typeof(Startup).Assembly, c =>
@@ -62,19 +67,10 @@ namespace CMI.Manager.Vecteur
                         }));
                     c.GeneratorSettings.OperationProcessors.Add(new OperationSecurityScopeProcessor("ApiKey"));
                 })
-                .UseNinjectMiddleware(CreateKernel)
-                .UseNinjectWebApi(config);
+                .UseAutofacMiddleware(container)
+                .UseAutofacWebApi(config)
+                .UseWebApi(config);
         }
 
-        private static StandardKernel CreateKernel()
-        {
-            var kernel = new StandardKernel();
-            kernel.Load(Assembly.GetExecutingAssembly());
-            kernel.Bind<IMailHelper>().To<MailHelper>();
-            kernel.Bind<IParameterHelper>().To<ParameterHelper>();
-            kernel.Bind<IDataBuilder>().To<DataBuilder>();
-            Kernel = kernel;
-            return kernel;
-        }
     }
 }

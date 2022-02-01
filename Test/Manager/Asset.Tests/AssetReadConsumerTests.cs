@@ -19,7 +19,7 @@ namespace CMI.Manager.Asset.Tests
     [TestFixture]
     public class AssetReadyConsumerTests : InMemoryTestFixture
     {
-        public AssetReadyConsumerTests() : base(true)
+        public AssetReadyConsumerTests()
         {
             InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
         }

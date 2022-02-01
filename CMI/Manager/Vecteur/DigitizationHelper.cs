@@ -17,9 +17,9 @@ namespace CMI.Manager.Vecteur
     {
         private const string noDataAvailable = "keine Angabe";
         private readonly IBus bus;
-        private readonly OrderManagerClient orderManagerClient;
+        private readonly IPublicOrder orderManagerClient;
 
-        public DigitizationHelper(IBus bus, OrderManagerClient orderManagerClient)
+        public DigitizationHelper(IBus bus, IPublicOrder orderManagerClient)
         {
             this.bus = bus;
             this.orderManagerClient = orderManagerClient;
@@ -30,7 +30,7 @@ namespace CMI.Manager.Vecteur
             try
             {
                 var externalContentClient = GetExternalContentClient();
-                var response = await externalContentClient.Request(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId});
+                var response = (await externalContentClient.GetResponse<GetDigitizationOrderDataResponse>(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId})).Message;
 
                 if (response.Result.Success)
                 {
@@ -86,18 +86,12 @@ namespace CMI.Manager.Vecteur
             return auftrag;
         }
 
-        private IRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse> GetExternalContentClient()
+        private IRequestClient<GetDigitizationOrderData> GetExternalContentClient()
         {
             var requestTimeout = TimeSpan.FromMinutes(VecteurSettings.Default.RequestTimeoutInMinute);
-            var timeToLive =
-                TimeSpan.FromMinutes(VecteurSettings.Default.RequestTimeoutInMinute +
-                                     1); // Messages sitzen höchstens während RequestTimeoutInMinute + 1 Minuten in der Queue und werden dann gelöscht, wenn sie nicht verarbeitet wurden.
 
             Log.Information("Getting RequestClient for {CommandName}", nameof(GetDigitizationOrderData));
-            IRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse> client =
-                new MessageRequestClient<GetDigitizationOrderData, GetDigitizationOrderDataResponse>(bus,
-                    new Uri(new Uri(BusConfigurator.Uri), BusConstants.ManagementApiGetDigitizationOrderData), requestTimeout, timeToLive,
-                    BusConfigurator.ChangeResponseAddress);
+            var client = bus.CreateRequestClient<GetDigitizationOrderData>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.ManagementApiGetDigitizationOrderData), requestTimeout);
 
             return client;
         }

@@ -12,11 +12,11 @@ namespace CMI.Manager.Index
 {
     public class ElasticLogManager : IElasticLogManager
     {
-        private readonly LogDataAccess logDataAccess;
+        private readonly ILogDataAccess logDataAccess;
         private readonly IParameterHelper parameterHelper;
 
 
-        public ElasticLogManager(LogDataAccess logDataAccess, IParameterHelper parameterHelper)
+        public ElasticLogManager(ILogDataAccess logDataAccess, IParameterHelper parameterHelper)
         {
             this.logDataAccess = logDataAccess;
             this.parameterHelper = parameterHelper;

@@ -2,7 +2,7 @@
 
 namespace CMI.Manager.ExternalContent
 {
-    internal interface IExternalContentManager
+    public interface IExternalContentManager
     {
         /// <summary>
         ///     Gets the digitization order data for a specific archive record.

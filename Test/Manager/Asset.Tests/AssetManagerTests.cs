@@ -29,7 +29,7 @@ namespace CMI.Manager.Asset.Tests
             // Act
             // Assert
             Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await assetManager.ConvertPackage("123", AssetType.Gebrauchskopie, false, "test.zip", null));
+                await assetManager.ConvertPackage("123", AssetType.Gebrauchskopie, false, new RepositoryPackage {PackageFileName =  "test.zip"}));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace CMI.Manager.Asset.Tests
 
             // Assert
             Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await assetManager.ConvertPackage("123", AssetType.Gebrauchskopie, false, "test.zip", null));
+                await assetManager.ConvertPackage("123", AssetType.Gebrauchskopie, false, new RepositoryPackage { PackageFileName = "test.zip" }));
         }
 
         private static AssetManager CreateAssetManager()
@@ -74,7 +74,7 @@ namespace CMI.Manager.Asset.Tests
 	                        ""ExtraLargeSizeInMB"": 2147483647
                         }"
             });
-            var scanProcessorMock = new Mock<IScanProcessor>();
+            var pdfManipulatorMock = new Mock<IPdfManipulator>();
             var preparationTimeCalculator = new Mock<IPreparationTimeCalculator>();
             var auftragAccess = new Mock<IPrimaerdatenAuftragAccess>();
             auftragAccess.Setup(e => e.CreateOrUpdateAuftrag(It.IsAny<PrimaerdatenAuftrag>())).Returns(Task.FromResult(1));
@@ -84,15 +84,18 @@ namespace CMI.Manager.Asset.Tests
             auftragAccess.Setup(e => e.GetLaufendenAuftrag(2, AufbereitungsArtEnum.Download))
                 .Returns(Task.FromResult<PrimaerdatenAuftragStatusInfo>(null));
             auftragAccess.Setup(e => e.UpdateStatus(It.IsAny<PrimaerdatenAuftragLog>(), 0)).Returns(Task.FromResult(1));
-            var indexClient = new Mock<IRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>>();
-            indexClient.Setup(e => e.Request(It.IsAny<FindArchiveRecordRequest>(), CancellationToken.None)).Returns(
-                Task.FromResult(new FindArchiveRecordResponse {ArchiveRecordId = "1", ElasticArchiveRecord = new ElasticArchiveRecord()}));
+            var indexClient = new Mock<IRequestClient<FindArchiveRecordRequest>>();
+            var response = new Mock<Response<FindArchiveRecordResponse>>();
+            response.Setup(r => r.Message).Returns(new FindArchiveRecordResponse
+                {ArchiveRecordId = "1", ElasticArchiveRecord = new ElasticArchiveRecord()});
+            indexClient.Setup(e => e.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>())).Returns(
+                Task.FromResult(response.Object));
 
             preparationTimeCalculator
                 .Setup(s => s.EstimatePreparationDuration(It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(TimeSpan.FromMinutes(1));
             var assetManager = new AssetManager(textEngineMock.Object, renderEngineMock.Object, transformEngineMock.Object, passwordHelper,
-                paramHelperMock.Object, scanProcessorMock.Object, preparationTimeCalculator.Object, auftragAccess.Object, indexClient.Object,
+                paramHelperMock.Object, pdfManipulatorMock.Object, preparationTimeCalculator.Object, auftragAccess.Object, indexClient.Object,
                 null, null);
             return assetManager;
         }

@@ -6,11 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using CMI.Access.Sql.Viaduc;
+using CMI.Contract.Common;
+using CMI.Contract.Common.Extensions;
 using CMI.Contract.Order;
 using CMI.Contract.Parameter;
 using CMI.Engine.MailTemplate;
 using CMI.Manager.Order.Mails;
-using CMI.Manager.Order.Status;
 using CMI.Utilities.Template;
 using Serilog;
 using IBus = MassTransit.IBus;
@@ -173,6 +174,12 @@ namespace CMI.Manager.Order
         public Task UpdateDigipool(List<int> orderItemIds, int? digitalisierungsKategorie, DateTime? terminDigitalisierung)
         {
             return sqlDataAccess.UpdateDigipool(orderItemIds, digitalisierungsKategorie, terminDigitalisierung);
+        }
+
+        public Task <List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenReportRecords(LogDataFilter filter)
+        {
+            var dataItems = sqlDataAccess.GetPrimaerdatenaufbereitungItemsByDate(filter.StartDate.GetValueOrDefault(new DateTime(2018, 1, 1)), filter.EndDate.GetValueOrDefault(DateTime.Now));
+            return dataItems;
         }
 
         public async Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId)
@@ -343,6 +350,47 @@ namespace CMI.Manager.Order
             }
         }
 
+
+        public async Task<ErinnerungVersendenResponse> ErinnerungVersenden(List<int> orderItemIds, string mcUserId)
+        {
+            try
+            {
+                var orderItemsByUser = await sqlDataAccess.GetOrderItemsByUser(orderItemIds.ToArray());
+                foreach (var itemByUser in orderItemsByUser)
+                {
+                    var user = userAccess.GetUser(itemByUser.UserId);
+                    dataBuilder.Reset();
+                    var dataContext = dataBuilder
+                        .AddAuftraege(itemByUser.OrderItemIds)
+                        .AddBesteller(itemByUser.UserId)
+                        // For Signature
+                        .AddUser(mcUserId)
+                        // Adding custom value to expando. Will be set to final value later. 
+                        // Changing values later is allowed. Adding values is only allowed with the DataBuilder class
+                        .AddValue("Lesesaaltermin", "")
+                        .AddSprache(user.Language)
+                        .Create();
+
+                    var lesesaaltermine = ((List<Auftrag>) dataContext.Aufträge).Select(a => a.Bestellung.LesesaalDatum).Distinct();
+                    dataContext.Lesesaaltermin =  string.Join(" / ", lesesaaltermine);
+
+                    // Sende Mail Vorlage 
+                    var template = parameterHelper.GetSetting<ErinnerungTerminLesesaal>();
+                    template.To = user.EmailAddress;
+                    await mailHelper.SendEmail(bus, template, dataContext);
+                }
+
+                await UpdateErinnerungInfoForOrderItems(orderItemIds,  mcUserId);
+
+                return new ErinnerungVersendenResponse { Success = true };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexptected error while sending Erinnerung");
+                return new ErinnerungVersendenResponse { Success = false, Error = ex.Message };
+            }
+        }
+
         public User GetUser(string orderUserId)
         {
             return userAccess.GetUser(orderUserId);
@@ -423,6 +471,22 @@ namespace CMI.Manager.Order
                     orderItem.InternalComment.Prepend(
                         $"{anzahlText} Mahnung versandt {DateTime.Now:dd.MM.yyyy HH:mm:ss}, {user.FirstName} {user.FamilyName}");
                 orderItem.MahndatumInfo = orderItem.MahndatumInfo.Prepend($"{anzahlText} Mahnung {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
+
+                await sqlDataAccess.UpdateOrderItem(orderItem);
+            }
+        }
+
+        private async Task UpdateErinnerungInfoForOrderItems(List<int> orderItemIds, string userId)
+        {
+            var user = userAccess.GetUser(userId);
+
+            foreach (var orderItemId in orderItemIds)
+            {
+                var orderItem = await sqlDataAccess.GetOrderItem(orderItemId);
+
+                orderItem.InternalComment =
+                    orderItem.InternalComment.Prepend(
+                        $"Erinnerung versandt {DateTime.Now:dd.MM.yyyy HH:mm:ss}, {user.FirstName} {user.FamilyName}");
 
                 await sqlDataAccess.UpdateOrderItem(orderItem);
             }

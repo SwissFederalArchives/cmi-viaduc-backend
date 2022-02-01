@@ -23,13 +23,13 @@ namespace CMI.Access.Common.Tests
             record.CreationPeriod = GetTimePeriod(id);
             record.WithinInfo =
                 PickFromArray(
-                    new[] {"Diverse", "Gut erhaltene", "Teilweise historisch interessante", "Von Säure zerfressene"}, id) +
+                    new[] {"Diverse", "Gut erhaltene", "Teilweise historisch interessante", "Von SÃ¤ure zerfressene"}, id) +
                 " " +
                 PickFromArray(
                     new[]
                     {
                         "Fotos", "Briefe", "Siegel", "Urkunden aus Pergament", "diplomatische Depeschen",
-                        "verschlüsselte Nachrichten"
+                        "verschlÃ¼sselte Nachrichten"
                     }, id);
 
             record.HasImage = false;
@@ -101,8 +101,8 @@ namespace CMI.Access.Common.Tests
             string[] b =
             {
                 "Arthur", "Beat", "Charlotte", "Dominique", "Emiliane", "Freddy", "Georg", "Hans", "Ida", "Jakobus",
-                "Klaus-Maria", "Ludwig", "Martha", "Norbert", "Otto", "Pauline", "Quéry", "Rudolf", "Sophia", "Theodore",
-                "Udo", "Veronique", "Xaver", "Yvonne", "Zoé"
+                "Klaus-Maria", "Ludwig", "Martha", "Norbert", "Otto", "Pauline", "QuÃ©ry", "Rudolf", "Sophia", "Theodore",
+                "Udo", "Veronique", "Xaver", "Yvonne", "ZoÃ©"
             };
 
             string[] c =
@@ -113,7 +113,7 @@ namespace CMI.Access.Common.Tests
 
             string[] d =
             {
-                "Musterwil", "Thalwil", "Bern", "Zürich", "Adlikon", "London", "Berlin", "Gümligen", "Solothurn",
+                "Musterwil", "Thalwil", "Bern", "ZÃ¼rich", "Adlikon", "London", "Berlin", "GÃ¼mligen", "Solothurn",
                 "Bellinzona"
             };
 

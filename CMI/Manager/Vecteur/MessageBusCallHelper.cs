@@ -24,23 +24,21 @@ namespace CMI.Manager.Vecteur
 
         public async Task<OrderItem[]> FindOrderItems(int[] orderItemIds)
         {
-            var requestClient =
-                CreateRequestClient<FindOrderItemsRequest, FindOrderItemsResponse>(bus, BusConstants.OrderManagerFindOrderItemsRequestQueue);
-            var result = await requestClient.Request(new FindOrderItemsRequest {OrderItemIds = orderItemIds});
-            return result.OrderItems;
+            var requestClient = CreateRequestClient<FindOrderItemsRequest>(bus, BusConstants.OrderManagerFindOrderItemsRequestQueue);
+            var result = await requestClient.GetResponse<FindOrderItemsResponse>(new FindOrderItemsRequest {OrderItemIds = orderItemIds});
+            return result.Message.OrderItems;
         }
 
         public async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId)
         {
-            var requestClient =
-                CreateRequestClient<FindArchiveRecordRequest, FindArchiveRecordResponse>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
-            var result = await requestClient.Request(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
-            return result.ElasticArchiveRecord;
+            var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
+            var result = await requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
+            return result.Message.ElasticArchiveRecord;
         }
 
-        private static IRequestClient<T1, T2> CreateRequestClient<T1, T2>(IBus busControl, string relativeUri) where T1 : class where T2 : class
+        private static IRequestClient<T1> CreateRequestClient<T1>(IBus busControl, string relativeUri) where T1 : class
         {
-            var client = busControl.CreateRequestClient<T1, T2>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
+            var client = busControl.CreateRequestClient<T1>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
             return client;
         }
     }

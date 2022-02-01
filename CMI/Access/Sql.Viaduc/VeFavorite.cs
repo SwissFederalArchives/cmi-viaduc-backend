@@ -14,5 +14,8 @@ namespace CMI.Access.Sql.Viaduc
         public string Title { get; set; }
         public DateTime CreatedAt { get; set; }
         public FavoriteKind Kind { get; set; }
+        public string Accessibility { get; set; }
+        public string WithinInfo { get; set; }
+        public dynamic CustomFields { get; set; }
     }
 }

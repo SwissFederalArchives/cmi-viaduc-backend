@@ -116,6 +116,51 @@ namespace CMI.Access.Sql.Viaduc
             MapXmlFields(obj, reader);
         }
 
+        public static T? GetValueOrNull<T>(this object value) where T : struct
+        {
+            string fullNameSoll = typeof(T).FullName;
+            string fullName = value != null ? value.GetType().FullName : string.Empty;
+
+            if (string.IsNullOrEmpty(fullNameSoll) || string.IsNullOrEmpty(fullName))
+            {
+                return null;
+            }
+
+            if (fullName.Equals(fullNameSoll))
+            {
+                return value is DBNull ? null : (T?)value;
+            }
+            if (fullNameSoll.Equals(typeof(int).FullName) )
+            {
+                if (int.TryParse(value?.ToString(), out var result))
+                {
+                    return result as T?;
+                }
+            }
+            if (fullNameSoll.Equals(typeof(short).FullName))
+            {
+                if (short.TryParse(value?.ToString(), out var result))
+                {
+                    return result as T?;
+                }
+            }
+            if (fullNameSoll.Equals(typeof(long).FullName))
+            {
+                if (long.TryParse(value?.ToString(), out var result))
+                {
+                    return result as T?;
+                }
+            }
+            if (fullNameSoll.Equals(typeof(double).FullName))
+            {
+                if (double.TryParse(value?.ToString(), out var result))
+                {
+                    return result as T?;
+                }
+            }
+
+            return null;
+        }
 
         private static void MapAllFields<TTargetType, TTargetFieldType>(TTargetType targetObj, Func<string, TTargetFieldType> convert,
             string[] dataReaderFieldNames)

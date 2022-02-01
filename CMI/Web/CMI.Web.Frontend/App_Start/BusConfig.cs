@@ -1,84 +1,75 @@
 ﻿using System;
 using System.Reflection;
+using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
 using CMI.Utilities.Bus.Configuration;
 using MassTransit;
-using Ninject;
-using Ninject.Activation;
 using Serilog;
 
 namespace CMI.Web.Frontend
 {
-    public class BusConfig
+    public static class BusConfig
     {
         private static IBusControl bus;
 
-        public static void Configure(IKernel kernel)
+        public static void RegisterBus(this ContainerBuilder builder)
         {
             // Configure Bus
             var helper = new ParameterBusHelper();
-            bus = BusConfigurator.ConfigureBus(MonitoredServices.NotMonitored, (cfg, host) =>
+            BusConfigurator.ConfigureBus(builder, MonitoredServices.NotMonitored, (cfg, ctx) =>
             {
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg, host);
-
-                cfg.UseSerilog();
+                helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
+        }
 
-            kernel.Bind<IBus>().ToMethod(context => bus).InSingletonScope();
-            kernel.Bind<IBusControl>().ToMethod(context => bus).InSingletonScope();
-
+        public static void StartBus(IContainer container)
+        {
+            bus = container.Resolve<IBusControl>();
             bus.Start();
-
             Log.Information("CMI.Web.Frontend bus service started");
         }
 
         /// <summary>
-        ///     Registers a request/response constructor callback for ninject.
+        ///     Registers a request/response constructor callback for a DI container.
         /// </summary>
         /// <typeparam name="T1">The type of the Request.</typeparam>
-        /// <typeparam name="T2">The type of the Response.</typeparam>
-        /// <param name="context">The context.</param>
         /// <param name="serviceUrl">The service URL.</param>
         /// <returns>IRequestClient&lt;T1, T2&gt;.</returns>
-        private static IRequestClient<T1, T2> GetRequestClient<T1, T2>(IContext context, string serviceUrl) where T1 : class where T2 : class
+        private static IRequestClient<T1> GetRequestClient<T1>(string serviceUrl) where T1 : class
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
 
-            var client = new MessageRequestClient<T1, T2>(bus, new Uri(new Uri(BusConfigurator.Uri), serviceUrl), requestTimeout);
-
+            var client = bus.CreateRequestClient<T1>(new Uri(new Uri(BusConfigurator.Uri), serviceUrl), requestTimeout);
             return client;
         }
 
         /// <summary>
-        ///     Registers the download asset request/response constructur callback for ninject.
+        ///     Registers the download asset request/response constructur callback for a DI containter.
         /// </summary>
-        /// <param name="context">The context.</param>
         /// <returns>IRequestClient&lt;DownloadAsset, DownloadAssetResult&gt;.</returns>
-        public static IRequestClient<DownloadAssetRequest, DownloadAssetResult> RegisterDownloadAssetCallback(IContext context)
+        public static IRequestClient<DownloadAssetRequest> RegisterDownloadAssetCallback()
         {
-            return GetRequestClient<DownloadAssetRequest, DownloadAssetResult>(context, BusConstants.WebApiDownloadAssetRequestQueue);
+            return GetRequestClient<DownloadAssetRequest>(BusConstants.WebApiDownloadAssetRequestQueue);
         }
 
         /// <summary>
         ///     Registers the get asset status callback.
         /// </summary>
-        /// <param name="context">The context.</param>
         /// <returns>IRequestClient&lt;GetAssetStatusRequest, GetAssetStatusResult&gt;.</returns>
-        public static IRequestClient<GetAssetStatusRequest, GetAssetStatusResult> RegisterGetAssetStatusCallback(IContext context)
+        public static IRequestClient<GetAssetStatusRequest> RegisterGetAssetStatusCallback()
         {
-            return GetRequestClient<GetAssetStatusRequest, GetAssetStatusResult>(context, BusConstants.WebApiGetAssetStatusRequestQueue);
+            return GetRequestClient<GetAssetStatusRequest>(BusConstants.WebApiGetAssetStatusRequestQueue);
         }
 
         /// <summary>
         ///     Registers the prepare asset callback.
         /// </summary>
-        /// <param name="context">The context.</param>
         /// <returns>IRequestClient&lt;PrepareAssetRequest, PrepareAssetResult&gt;.</returns>
-        public static IRequestClient<PrepareAssetRequest, PrepareAssetResult> RegisterPrepareAssetCallback(IContext context)
+        public static IRequestClient<PrepareAssetRequest> RegisterPrepareAssetCallback()
         {
-            return GetRequestClient<PrepareAssetRequest, PrepareAssetResult>(context, BusConstants.WebApiPrepareAssetRequestQueue);
+            return GetRequestClient<PrepareAssetRequest>(BusConstants.WebApiPrepareAssetRequestQueue);
         }
     }
 }

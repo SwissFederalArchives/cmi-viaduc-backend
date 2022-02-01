@@ -1,19 +1,20 @@
-﻿using CMI.Contract.Common;
+﻿using System;
+using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 
 namespace CMI.Manager.ExternalContent
 {
-    public class ExternalContentManager : IExternalContentManager
+    public class ExternalContentManager : IExternalContentManager, IReportExternalContentManager
     {
-        private readonly IDbDigitizationOrderAccess dbDigitizationOrderAccess;
+        private readonly IDbExternalContentAccess dbExternalContentAccess;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ExternalContentManager" /> class.
         /// </summary>
-        /// <param name="dbDigitizationOrderAccess">The database digitization order access.</param>
-        public ExternalContentManager(IDbDigitizationOrderAccess dbDigitizationOrderAccess)
+        /// <param name="dbExternalContentAccess">The database external Content.</param>
+        public ExternalContentManager(IDbExternalContentAccess dbExternalContentAccess)
         {
-            this.dbDigitizationOrderAccess = dbDigitizationOrderAccess;
+            this.dbExternalContentAccess = dbExternalContentAccess;
         }
 
         /// <summary>
@@ -23,7 +24,24 @@ namespace CMI.Manager.ExternalContent
         /// <returns>DigitizationOrderDataResult.</returns>
         public DigitizationOrderDataResult GetDigitizationOrderData(string archiveRecordId)
         {
-            return dbDigitizationOrderAccess.GetDigitizationOrderData(archiveRecordId);
+            return dbExternalContentAccess.GetDigitizationOrderData(archiveRecordId);
+        }
+
+        /// <summary>
+        ///  Gets the SyncInfoForReportResult from the AIS.
+        /// Need for create Report
+        /// </summary>
+        /// <returns>A Data type that have records with the mutationsIds.</returns>
+        public SyncInfoForReportResult GetReportExternalContent(int[] mutationsIds)
+        {
+            try
+            {
+                return dbExternalContentAccess.GetReportExternalContent(mutationsIds);
+            }
+            catch (Exception e)
+            {
+                return new SyncInfoForReportResult { ErrorMessage = e.Message };
+            }
         }
     }
 }

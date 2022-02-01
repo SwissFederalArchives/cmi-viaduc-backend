@@ -65,6 +65,13 @@ namespace CMI.Manager.DocumentConverter.Extraction
                       && ex.IsAvailable);
         }
 
+        public TextExtractorBase GetAbbyyExtractor()
+        {
+            return extractors.OrderBy(ex => ex.Rank).FirstOrDefault(
+                ex => ex.GetType() == typeof(AbbyyTextExtractor)
+                      && ex.IsAvailable);
+        }
+
         private void StoreAvailableExtensions()
         {
             var lst = new List<string>();

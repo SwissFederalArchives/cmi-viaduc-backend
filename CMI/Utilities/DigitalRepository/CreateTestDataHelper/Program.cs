@@ -14,7 +14,7 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.AppSettings()
                 .Enrich.FromLogContext()
-                .WriteTo.LiterateConsole()
+                .WriteTo.Console()
                 .CreateLogger();
 
             var repository = new CmisRepository();

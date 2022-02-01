@@ -99,6 +99,8 @@ namespace CMI.Web.Frontend.api.Search
         public string Facet { get; set; }
 
         public string[] Filters { get; set; }
+
+        public bool ShowAll { get; set; }
     }
 
     public class SearchOptions
