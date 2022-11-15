@@ -3,7 +3,7 @@ using CMI.Access.Repository;
 using CMI.Contract.Monitoring;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Repository.Consumer
 {

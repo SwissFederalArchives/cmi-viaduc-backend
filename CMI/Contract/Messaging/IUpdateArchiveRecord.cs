@@ -7,5 +7,6 @@ namespace CMI.Contract.Messaging
         long MutationId { get; set; }
         ArchiveRecord ArchiveRecord { get; set; }
         int PrimaerdatenAuftragId { get; set; }
+        ElasticArchiveDbRecord ElasticArchiveDbRecord { get; set; }
     }
 }

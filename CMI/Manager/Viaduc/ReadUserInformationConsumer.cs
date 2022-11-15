@@ -3,7 +3,7 @@ using CMI.Access.Sql.Viaduc;
 using CMI.Manager.Viaduc.Properties;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Viaduc
 {

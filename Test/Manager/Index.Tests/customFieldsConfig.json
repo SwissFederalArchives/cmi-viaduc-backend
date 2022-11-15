@@ -240,16 +240,6 @@
     "IsRepeatable": 1
   },
   {
-    "ElementId": 10373,
-    "ElementName": "NICHT_ONLINE_RECHERCHIERBARE_DOSSIERS",
-    "SourceType": "Text (max. 4000 Z.)",
-    "Label": "Nicht online recherchierbare Dossiers",
-    "TargetField": "NichtOnlineRecherchierbareDossiers",
-    "IsDefaultField": 0,
-    "Type": "string",
-    "IsRepeatable": 0
-  },
-  {
     "ElementId": 10376,
     "ElementName": "URHEBER",
     "SourceType": "Text (max. 4000 Z.)",

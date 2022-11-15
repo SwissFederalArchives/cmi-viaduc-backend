@@ -19,7 +19,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="allFiles" select="//datei"/>
+    <xsl:variable name="allFiles" select="//datei[not(. = preceding::datei/.)]"/>
     <xsl:variable name="dossierIcon">
         <xsl:value-of>{"icon":"glyphicon glyphicon-folder-open"}</xsl:value-of>
     </xsl:variable>
@@ -638,7 +638,7 @@
              (only those can be selected and show the metadata) -->
         <xsl:for-each select="//dokument[count(dateiRef) > 1]/dateiRef">
             <xsl:variable name="dateiId" select="string()"/>
-            <xsl:variable name="datei" select="//datei[@id = $dateiId]"/>
+            <xsl:variable name="datei" select="//datei[@id = $dateiId][not(. = preceding::datei/.)]"/>
             <div id="metadata_{.}" style="display:none;">
                 <xsl:call-template name="renderFileMetadata">
                     <xsl:with-param name="file" select="$datei"/>

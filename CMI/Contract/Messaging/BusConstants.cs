@@ -38,7 +38,6 @@
         public const string ManagementApiGetHarvestStatusInfoRequestQueue = "r.management.api.getHarvestStatusInfo";
         public const string ManagementApiGetHarvestLogInfoRequestQueue = "r.management.api.getHarvestLogInfo";
         public const string ManagementApiGetDigitizationOrderData = "r.management.api.getDigitizationOrderData";
-        public const string ManagementApiGetReportExternalContent = "r.management.api.getReportExternalContent";
 
         // Events the Management Client subscribes to
         public const string ManagementApiAbbyyProgressEventQueue = "e.managementClient.manager.abbyyProgressEvent";
@@ -46,6 +45,8 @@
 
         // Messages the Index Manager subscribes to
         public const string IndexManagerUpdateArchiveRecordMessageQueue = "m.index.manager.updateArchiveRecord";
+        public const string IndexManagerAnonymizeArchiveRecordMessageQueue = "m.index.manager.anonymizeArchiveRecord";
+        public const string IndexManagerAnonymizeTestMessageQueue = "m.index.manager.anonymizeTest";
         public const string IndexManagerRemoveArchiveRecordMessageQueue = "m.index.manager.removeArchiveRecord";
         public const string IndexManagerFindArchiveRecordMessageQueue = "m.index.manager.findArchiveRecord";
         public const string IndexManagagerRequestBase = "r.index.manager.{0}";
@@ -96,6 +97,8 @@
         // Events the Viaduc Service subscribes to
         public const string ReadUserInformationQueue = "r.viaduc.manager.readuserinformation";
         public const string ReadStammdatenQueue = "r.viaduc.manager.readstammdaten";
+        public const string ViaducManagerRequestBase = "r.viaduc.manager.{0}";
+
 
         // Request/Response base URL for OrderManager
         public const string OrderManagagerRequestBase = "r.order.manager.{0}";
@@ -146,5 +149,9 @@
 
         // Events the Order Manager subscribes to
         public const string OrderManagerArchiveRecordUpdatedEventQueue = "e.order.manager.archiveRecordUpdated";
+
+        // Messages the Onboarding Manager subscribes to
+        public const string OnboardingManagerStartProcessMessageQueue = "m.onboarding.manager.startProcess";
+        public const string OnboardingManagerHandleCallbackMessageQueue = "m.onboarding.manager.handleCallback";
     }
 }

@@ -89,7 +89,8 @@ ResearcherGroup,
 BarInternalConsultation, 
 (CASE WHEN IdentifierDocument IS NOT NULL THEN 1 ELSE 0 END) AS HasIdentifizierungsmittel,
 DownloadLimitDisabledUntil,
-DigitalisierungsbeschraenkungAufgehobenBis
+DigitalisierungsbeschraenkungAufgehobenBis,
+ActiveAspNetSessionId 
 FROM ApplicationUser ";
 
         public User GetUser(string userId)
@@ -281,17 +282,19 @@ FROM ApplicationUser ";
                     cmd.AddParameter("MobileNumber", SqlDbType.NVarChar, user.MobileNumber);
                     cmd.AddParameter("Language", SqlDbType.NVarChar, string.IsNullOrEmpty(user.Language) ? "de" : user.Language);
                     cmd.AddParameter("CreatedBy", SqlDbType.NVarChar, user.EmailAddress);
+                    cmd.AddParameter("ActiveAspNetSessionId", SqlDbType.NVarChar, user.ActiveAspNetSessionId);
 
                     cmd.CommandText = @"INSERT INTO ApplicationUser (
                         Id, FamilyName, FirstName, EmailAddress, UserExtId,
                         Birthday, Organization, Street, StreetAttachment, ZipCode,
                         Town, CountryCode, PhoneNumber, Claims, IsInternalUser, Language,
-                         RolePublicClient, EiamRoles, MobileNumber, CreatedBy
+                         RolePublicClient, EiamRoles, MobileNumber, CreatedBy, ActiveAspNetSessionId
                         ) VALUES (
                         @Id, @FamilyName, @FirstName, @EmailAddress, @UserExtId, 
                         @Birthday, @Organization, @Street, @StreetAttachment, @ZipCode, 
                         @Town, @CountryCode, @PhoneNumber, @Claims, @IsInternalUser, @Language,
-                        @RolePublicClient, @EiamRoles, @MobileNumber, @CreatedBy)";
+                        @RolePublicClient, @EiamRoles, @MobileNumber, @CreatedBy, @ActiveAspNetSessionId)";
+
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -574,6 +577,60 @@ FROM ApplicationUser ";
                         Value = user.DigitalisierungsbeschraenkungAufgehobenBis.ToDbParameterValue(),
                         ParameterName = "p22",
                         SqlDbType = SqlDbType.DateTime
+                    });
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateActiveSessionId(string userId, string sessionId)
+        {
+            if (userId == null) return;
+
+            using (var cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+                using (var cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE ApplicationUser " +
+                                      "SET ActiveAspNetSessionId = @p2 " +
+                                      "WHERE ID = @p1";
+
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        Value = userId,
+                        ParameterName = "p1",
+                        SqlDbType = SqlDbType.NVarChar
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        Value = sessionId.ToDbParameterValue(),
+                        ParameterName = "p2",
+                        SqlDbType = SqlDbType.NVarChar
+                    });
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void ClearActiveUserSessionIds()
+        {
+            using (var cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+                using (var cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE ApplicationUser " +
+                                      "SET ActiveAspNetSessionId = @p1";
+                    
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        Value = DBNull.Value,
+                        ParameterName = "p1",
+                        SqlDbType = SqlDbType.NVarChar
                     });
 
                     cmd.ExecuteNonQuery();

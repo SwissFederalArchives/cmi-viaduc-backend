@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Harvest.Consumers
 {
@@ -28,7 +28,7 @@ namespace CMI.Manager.Harvest.Consumers
 
                 var message = context.Message;
                 var result = harvestManager.GetLogInfo(message.Request);
-                await context.RespondAsync<GetHarvestLogInfoResult>(new
+                await context.RespondAsync<GetHarvestLogInfoResult>(new GetHarvestLogInfoResult
                 {
                     Result = result
                 });

@@ -10,9 +10,9 @@ using CMI.Manager.Order.Consumers;
 using CMI.Manager.Order.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
+using RetryConfigurationExtensions = MassTransit.RetryConfigurationExtensions;
 
 namespace CMI.Manager.Order
 {
@@ -143,15 +143,16 @@ namespace CMI.Manager.Order
                 cfg.ReceiveEndpoint(BusConstants.RecalcIndivTokens, ec => { ec.Consumer(ctx.Resolve<RecalcIndivTokensConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungAusloesenRequestQueue,
                     ec => { ec.Consumer(ctx.Resolve<DigitalisierungAusloesenRequestConsumer>); });
+
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEvent, ec =>
                 {
                     ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerArchiveRecordUpdatedEventQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ArchiveRecordUpdatedConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ((MassTransit.IPipeConfigurator<ConsumeContext>) ec).UseRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEventError,
                     ec => { ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtErrorConsumer>); });
@@ -182,6 +183,10 @@ namespace CMI.Manager.Order
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerErinnerungVersendenRequestQueue,
                     ec => { ec.Consumer(ctx.Resolve<ErinnerungVersendenRequestConsumer>); });
 
+                cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(UpdateOrderItemRequest)),
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<UpdateOrderItemRequest>>); });
+
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 

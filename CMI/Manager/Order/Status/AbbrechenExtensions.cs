@@ -53,6 +53,7 @@ namespace CMI.Manager.Order.Status
             if (emailData != null)
             {
                 var builder = new DataBuilder(auftragStatus.Context.Bus, emailData);
+                builder.SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized);
                 builder.AddAuftraege(new List<int> { auftragStatus.Context.OrderItem.Id });
 
                 // After a new Auftrag has been set, we get the collection of the orderings and
@@ -71,6 +72,7 @@ namespace CMI.Manager.Order.Status
         private static ExpandoObject CreateEmailData(AuftragStatus auftragStatus)
         {
             var builder = new DataBuilder(auftragStatus.Context.Bus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                 .AddUser(auftragStatus.Context.CurrentUser.Id)
                 .AddBesteller(auftragStatus.Context.Ordering.UserId)
                 .AddAuftraege(new List<int>{ auftragStatus.Context.OrderItem.Id })

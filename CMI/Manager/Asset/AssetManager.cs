@@ -10,7 +10,6 @@ using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
-using CMI.Contract.DocumentConverter;
 using CMI.Contract.Messaging;
 using CMI.Contract.Parameter;
 using CMI.Engine.Asset;
@@ -24,6 +23,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using MassTransit;
 using Newtonsoft.Json;
 using Serilog;
+using JobContext = CMI.Contract.DocumentConverter.JobContext;
 using ZipFile = System.IO.Compression.ZipFile;
 
 namespace CMI.Manager.Asset
@@ -658,7 +658,7 @@ namespace CMI.Manager.Asset
         private static string GetTargetExtension(FileInfo file)
         {
             string targetExtension;
-            switch (file.Extension)
+            switch (file.Extension.ToLowerInvariant())
             {
                 case ".pdf":
                     targetExtension = "pdf";
@@ -674,7 +674,7 @@ namespace CMI.Manager.Asset
                     targetExtension = "mp4";
                     break;
                 default:
-                    throw new ArgumentException("Unsupported file extension.");
+                    throw new ArgumentException($"Unsupported file extension {file.Extension}.");
             }
 
             return targetExtension;

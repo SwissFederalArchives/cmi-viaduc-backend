@@ -18,9 +18,18 @@ namespace CMI.Engine.Asset
         {
             this.analyzerDetectAndFlagLargeDimensions = analyzerDetectAndFlagLargeDimensions;
             this.analyzerOptimizePdf = analyzerOptimizePdf;
-            var licensePdf = new License();
-            licensePdf.SetLicense("Aspose.Total.lic");
-            
+
+            try
+            {
+                var licensePdf = new License();
+                licensePdf.SetLicense("Aspose.Total.NET.lic");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while setting Aspose license.");
+                throw;
+            }
+
         }
         public Task<PreprocessingResult> DetectAndFlagLargeDimensions(RepositoryPackage package, string tempFolder, int primaerdatenAuftragId)
         {

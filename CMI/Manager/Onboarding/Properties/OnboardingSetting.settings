@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Onboarding.Properties" GeneratedClassName="OnboardingSetting">
+  <Profiles />
+  <Settings>
+    <Setting Name="PostbackBaseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:12972</Value>
+    </Setting>
+    <Setting Name="ConnectorClientId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@ConnectorClientId@@</Value>
+    </Setting>
+    <Setting Name="ConnectorClientSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@ConnectorClientSecret@@</Value>
+    </Setting>
+    <Setting Name="ConnectorTokenExpiration" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="ConnectorBaseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@ConnectorBaseUrl@@</Value>
+    </Setting>
+    <Setting Name="TimerProcessDueTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1800000</Value>
+    </Setting>
+    <Setting Name="OnboardingCallbackSuccessUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@OnboardingCallbackSuccess@@</Value>
+    </Setting>
+    <Setting Name="OnboardingCallbackWarnUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@OnboardingCallbackWarn@@</Value>
+    </Setting>
+    <Setting Name="OnboardingCallbackErrorUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@OnboardingCallbackError@@</Value>
+    </Setting>
+    <Setting Name="OnboardingCallbackReviewUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@OnboardingCallbackReview@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

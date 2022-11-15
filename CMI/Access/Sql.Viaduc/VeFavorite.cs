@@ -8,6 +8,7 @@ namespace CMI.Access.Sql.Viaduc
         public string ReferenceCode { get; set; }
         public bool CanBeOrdered { get; set; }
         public bool CanBeDownloaded { get; set; }
+        public bool HasPrimaryLink { get; set; }
         public string CreationPeriod { get; set; }
         public string Level { get; set; }
         public int Id { get; set; }

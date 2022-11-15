@@ -27,6 +27,7 @@ namespace CMI.Manager.Parameter
                 cfg.ReceiveEndpoint(ec => { ec.Consumer(() => new GetParameterEventResponseConsumer()); });
                 cfg.ReceiveEndpoint("SaveParameterQueue", ec => { ec.Consumer(() => new SaveParameterRequestConsumer()); });
                 cfg.ReceiveEndpoint(ec => { ec.Consumer(() => new SaveParameterEventResponseConsumer()); });
+                cfg.UseNewtonsoftJsonSerializer();
             });
 
             var container = containerBuilder.Build();

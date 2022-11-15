@@ -1,11 +1,8 @@
-using System;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 using CMI.Contract.Messaging;
 using CMI.Manager.Harvest.Consumers;
-using MassTransit;
-using MassTransit.TestFramework;
 using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;

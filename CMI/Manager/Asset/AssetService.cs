@@ -11,7 +11,6 @@ using CMI.Manager.Asset.Infrasctructure;
 using CMI.Manager.Asset.Properties;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Quartz;
 using Serilog;
@@ -86,7 +85,7 @@ namespace CMI.Manager.Asset
 
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerSchdeduleForPackageSyncMessageQueue, ec => { ec.Consumer(ctx.Resolve<ScheduleForPackageSyncConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue, ec => { ec.Consumer(ctx.Resolve<UpdatePrimaerdatenAuftragStatusConsumer>); });
-
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetAssembly(typeof(Engine.Asset.AssetPreparationEngine)), cfg);
             });

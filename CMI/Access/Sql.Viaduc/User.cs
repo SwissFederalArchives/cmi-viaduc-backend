@@ -107,6 +107,7 @@ namespace CMI.Access.Sql.Viaduc
         [EditIgnore] [JsonIgnore] public JObject Setting { get; set; }
 
         [EditIgnore] [JsonIgnore] public JObject Claims { get; set; }
+        [EditIgnore] [JsonIgnore] public string ActiveAspNetSessionId { get; set; }
 
         [EditNotAllowed] public List<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
 

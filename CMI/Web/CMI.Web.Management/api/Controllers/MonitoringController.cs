@@ -104,9 +104,7 @@ namespace CMI.Web.Management.api.Controllers
             var stopwatch = new Stopwatch();
             var requestTimeout = TimeSpan.FromSeconds(ServiceHeartbeatRequestTimeout);
 
-            var client = monitoringBus.CreateRequestClient<HeartbeatRequest>(
-                new Uri(monitoringBus.Address, string.Format(BusConstants.MonitoringServiceHeartbeatRequestQueue, serviceName)),
-                requestTimeout);
+            var client = monitoringBus.CreateRequestClient<HeartbeatRequest>(new Uri(monitoringBus.Address, string.Format(BusConstants.MonitoringServiceHeartbeatRequestQueue, serviceName)), requestTimeout);
             try
             {
                 stopwatch.Restart();
@@ -173,16 +171,13 @@ namespace CMI.Web.Management.api.Controllers
             var timeout = TimeSpan.FromSeconds(ServiceTestRequestTimeout);
             var address = monitoringBus.Address;
 
-            var elasticSearch = monitoringBus.CreateRequestClient<TestElasticsearchRequest>(
-                new Uri(address, BusConstants.MonitoringElasticSearchTestQueue), timeout);
-            var dirTest = monitoringBus.CreateRequestClient<DirCheckRequest>(
-                new Uri(address, BusConstants.MonitoringDirCheckQueue), timeout);
-            var aisDbTest = monitoringBus.CreateRequestClient<AisDbCheckRequest>(
-                new Uri(address, BusConstants.MonitoringAisDbCheckQueue), timeout);
-            var documentConverterInfo = monitoringBus.CreateRequestClient<DocumentConverterInfoRequest>(
-                new Uri(address, BusConstants.MonitoringDocumentConverterInfoQueue), timeout);
-            var abbyyOcrTest = monitoringBus.CreateRequestClient<AbbyyOcrTestRequest>(
-                new Uri(address, BusConstants.MonitoringAbbyyOcrTestQueue), timeout);
+            var elasticSearch = monitoringBus.CreateRequestClient<TestElasticsearchRequest>(new Uri(address, BusConstants.MonitoringElasticSearchTestQueue), timeout);
+            var dirTest = monitoringBus.CreateRequestClient<DirCheckRequest>(new Uri(address, BusConstants.MonitoringDirCheckQueue), timeout);
+            var aisDbTest = monitoringBus.CreateRequestClient<AisDbCheckRequest>(new Uri(address, BusConstants.MonitoringAisDbCheckQueue), timeout);
+            var documentConverterInfo = monitoringBus.CreateRequestClient<DocumentConverterInfoRequest>(new Uri(address, BusConstants.MonitoringDocumentConverterInfoQueue), timeout);
+            var abbyyOcrTest = monitoringBus.CreateRequestClient<AbbyyOcrTestRequest>(new Uri(address, BusConstants.MonitoringAbbyyOcrTestQueue), timeout);
+
+            var anonymizedTest = monitoringBus.CreateRequestClient<AnonymizationTestRequest>(new Uri(address, BusConstants.IndexManagerAnonymizeTestMessageQueue), timeout);
 
             var t1 = Task.Run(() => TestDb());
             var t2 = TestRabbitMq();
@@ -191,11 +186,44 @@ namespace CMI.Web.Management.api.Controllers
             var t5 = TestAisDb(aisDbTest);
             var t6 = TestAbbyyLicence(documentConverterInfo);
             var t7 = TestAbbyyExecute(abbyyOcrTest);
+            var t8 = TestAnonymizedService(anonymizedTest);
 
-            var results = await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7);
+            var results = await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7, t8);
             return results;
         }
 
+        private async Task<MonitoringResult> TestAnonymizedService(IRequestClient<AnonymizationTestRequest> requestClient)
+        {
+            var watch = new Stopwatch();
+            MonitoringResult result;
+            watch.Start();
+
+            try
+            {
+                var response = await requestClient.GetResponse<AnonymizationTestResponse>(new AnonymizationTestRequest() { Value = "Test" });
+                var success = response.Message.IsSuccess;
+
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Anonymisierungsdienst",
+                    Status = success ? HeartbeatStatus.Ok.ToString() : HeartbeatStatus.Nok.ToString(),
+                    Message = success ? "Ok, checks done. " : $"Nok, Exception: {response.Message.Exception?.Message}",
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Anonymisierungsdienst",
+                    Status = HeartbeatStatus.Nok.ToString(),
+                    Message = $"Viaduc service call failed which execute the test. Exception: {ex.Message}",
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+
+            return result;
+        }
 
         private async Task<MonitoringResult> TestAisDb(IRequestClient<AisDbCheckRequest> requestClient)
         {

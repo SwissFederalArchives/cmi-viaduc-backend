@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text.RegularExpressions;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Contract.Common.Extensions;
 using CMI.Utilities.Common.Helpers;
-using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common.api;
-using CMI.Web.Common.Helpers;
-using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
+using CMI.Web.Frontend.api.Templates;
 using Elasticsearch.Net;
 using Microsoft.Ajax.Utilities;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NJsonSchema.Infrastructure;
 using Serilog;
 using SourceFilter = Nest.SourceFilter;
 
@@ -29,25 +28,22 @@ namespace CMI.Web.Frontend.api.Elastic
         // ReSharper disable once InconsistentNaming
         public const int ELASTIC_SEARCH_HIT_LIMIT = 10000;
 
-        private static readonly string[] allowedFacetFields =
-        {
-            "level", "customFields.zugänglichkeitGemässBga", "aggregationFields.ordnungskomponenten", "aggregationFields.bestand",
-            "aggregationFields.hasPrimaryData", "aggregationFields.creationPeriodYears001", "aggregationFields.creationPeriodYears005",
-            "aggregationFields.creationPeriodYears005", "aggregationFields.creationPeriodYears025", "aggregationFields.creationPeriodYears100"
-        };
-
         private readonly IElasticClientProvider clientProvider;
+        private readonly ISearchRequestBuilder searchRequestBuilder;
         private readonly IElasticSettings elasticSettings;
+        private readonly List<TemplateField> internalFields;
 
-        public ElasticService(IElasticClientProvider clientProvider, IElasticSettings elasticSettings)
+        public ElasticService(IElasticClientProvider clientProvider, ISearchRequestBuilder searchRequestBuilder, IElasticSettings elasticSettings, List<TemplateField> internalFields)
         {
             this.clientProvider = clientProvider;
+            this.searchRequestBuilder = searchRequestBuilder;
             this.elasticSettings = elasticSettings;
+            this.internalFields = internalFields;
         }
 
         protected string BaseUrl => elasticSettings.BaseUrl;
 
-        public ElasticQueryResult<T> QueryForId<T>(int id, UserAccess access) where T : TreeRecord
+        public ElasticQueryResult<T> QueryForId<T>(int id, UserAccess access, bool translated = true) where T : TreeRecord
         {
             var query = new ElasticQuery
             {
@@ -67,31 +63,71 @@ namespace CMI.Web.Frontend.api.Elastic
                 }
             };
 
-            return RunQuery<T>(query, access);
+            var result = RunQuery<T>(query, access, translated);
+            if (result.Response.Hits.Count == 1)
+            {
+                return result;
+            }
+
+            if (result.Response.Hits.Count > 1)
+            {
+                throw new ArgumentException("Query For Id must return exactly one record");
+            }
+
+            return null;
         }
 
+        /// <summary>
+        /// Die Methode liefert eine Liste mit allen Kindern der übergebenen Vater-Id unter Berücksichtigung der Benutzerberechtigung.
+        /// </summary>
+        /// <remarks>
+        /// Wegen PVW-1178 (Timeout beim Öffnen von grossen anonymisierten Serien in BAR-Rolle) wurde die Methode dahingehend optimiert,
+        /// dass die Query Resultate vom Typ <see cref="ElasticArchiveDbRecord"/> anfordert. Dabei werden aber über die SourceFilter
+        /// nur diejenigen Eingenschaften zurückgeliefert, die es für TreeRecords benötigt, plus die nicht anonymisierten Felder.
+        /// Dies damit es für das sichtbarmachen der Daten für BAR Benutzer nicht erneut zusätzliche Elastic Abfragen braucht.
+        /// </remarks>
+        /// <param name="id">Die ArchiveRecord ID der VE dessen Kinder geholt werden sollen.</param>
+        /// <param name="access">Die Zugriffsrechte des Benutzers</param>
+        /// <returns></returns>
         public List<TreeRecord> QueryForParentId(int id, UserAccess access)
         {
             var client = clientProvider.GetElasticClient<TreeRecord>(elasticSettings);
             var result = new List<TreeRecord>();
 
-            var resultPart = client.Search<TreeRecord>(x => x
+            // Den SourceFilter erstellen, der nur die Felder des TreeRecords enthält
+            // Danach noch um die unanonymisierten Felder erweitern.
+            var sourceFilter = GetSourceFilterForType<TreeRecord>();
+            sourceFilter.Includes.And(Infer.Field("UnanonymizedFields".ToLowerCamelCase()));
+
+            var search = new SearchDescriptor<ElasticArchiveDbRecord>()
                 .Index(elasticSettings.DefaultIndex)
                 .From(0)
                 .Sort(s => s.Ascending(nameof(TreeRecord.Title).ToLowerCamelCase()))
                 .Sort(s => s.Ascending(nameof(TreeRecord.TreeSequence).ToLowerCamelCase()))
-                .Query(q => GetQueryWithSecurity(new TermQuery
+                .Query(q => searchRequestBuilder.GetQueryWithSecurity(new TermQuery
                 {
                     Field = elasticSettings.ParentIdField,
                     Value = id.ToStringInvariant()
                 }, access))
                 .Size(10000)
-                .Scroll("15s"));
+                .Source(x => x.Includes(i => i.Fields(sourceFilter.Includes)))
+                .Scroll("15s");
+
+            // Suche ausführen
+            var resultPart = client.Search<ElasticArchiveDbRecord>(search);
 
             while (resultPart.IsValid && resultPart.Documents.Count > 0)
             {
-                result.AddRange(resultPart.Documents);
-                resultPart = client.Scroll<TreeRecord>("15s", resultPart.ScrollId);
+                // Die unanonymisierten Daten für die berechtigten Benutzer "aufdecken"
+                foreach (var treeRecord in resultPart.Documents.Where(d => d.IsAnonymized))
+                {
+                    if (access != null && access.HasAnyTokenFor(treeRecord.FieldAccessTokens))
+                    {
+                        treeRecord.SetUnanonymizedValuesForAuthorizedUser(treeRecord);
+                    }
+                }
+                result.AddRange(resultPart.Documents.Select(d => (TreeRecord) d));
+                resultPart = client.Scroll<ElasticArchiveDbRecord>("15s", resultPart.ScrollId);
             }
 
             return result;
@@ -109,7 +145,7 @@ namespace CMI.Web.Frontend.api.Elastic
             return RunQueryWithoutSecurityFilters<T>(query);
         }
 
-        public ElasticQueryResult<T> RunQuery<T>(ElasticQuery query, UserAccess access) where T : TreeRecord
+        public ElasticQueryResult<T> RunQuery<T>(ElasticQuery query, UserAccess access, bool translated = true) where T : TreeRecord
         {
             var stopwatch = new Stopwatch();
             var info = StringHelper.AddToString(BaseUrl, "/", elasticSettings.DefaultIndex);
@@ -131,7 +167,7 @@ namespace CMI.Web.Frontend.api.Elastic
             try
             {
                 stopwatch.Start();
-                var searchRequest = BuildSearchRequest(query, access);
+                var searchRequest = searchRequestBuilder.Build(query, access);
                 result.Response = client.Search<T>(searchRequest);
 
                 var json = client.RequestResponseSerializer.SerializeToString(searchRequest, SerializationFormatting.Indented);
@@ -142,7 +178,7 @@ namespace CMI.Web.Frontend.api.Elastic
                 Debug.WriteLine($"Fetched record from web in  {stopwatch.ElapsedMilliseconds}ms");
                 result.Status = (int) HttpStatusCode.OK;
 
-                ProcessQueryResult(result, query.SearchParameters?.FacetsFilters, access, client.SourceSerializer);
+                ProcessQueryResult(result, query.SearchParameters?.FacetsFilters, access, client.SourceSerializer, translated);
             }
             catch (Exception ex)
             {
@@ -222,15 +258,15 @@ namespace CMI.Web.Frontend.api.Elastic
                 var request = new SearchRequest<ElasticArchiveRecord> {Query = query.Query};
                 var p = query.SearchParameters;
 
-                AddPaging(p?.Paging, request);
-                AddSort(p?.Paging?.OrderBy, p?.Paging?.SortOrder, request);
-                ExcludeUnwantedFields(request);
+                searchRequestBuilder.AddPaging(p?.Paging, request);
+                searchRequestBuilder.AddSort(p?.Paging?.OrderBy, p?.Paging?.SortOrder, request);
+                searchRequestBuilder.ExcludeUnwantedFields(request);
 
                 result.Response = client.Search<T>(request);
                 result.TimeInMilliseconds = (int) Math.Round((DateTime.Now - started).TotalMilliseconds);
                 result.Status = (int) HttpStatusCode.OK;
-
-                ProcessQueryResult(result, null, null, client.SourceSerializer);
+                // Ohne Übersetzung, weil es nur Daten für BAR Benutzer speichert/anzeigt
+                ProcessQueryResult(result, null, null, client.SourceSerializer, false);
             }
             catch (Exception ex)
             {
@@ -258,45 +294,6 @@ namespace CMI.Web.Frontend.api.Elastic
             }
 
             return result;
-        }
-
-
-        private SearchRequest<ElasticArchiveRecord> BuildSearchRequest(ElasticQuery query, UserAccess access)
-        {
-            var request = new SearchRequest<ElasticArchiveRecord>(elasticSettings.DefaultIndex);
-
-            var queryWithSecurity = GetQueryWithSecurity(query.Query, access);
-
-            request.Query = queryWithSecurity;
-            request.PostFilter = CreateQuery(query.SearchParameters.FacetsFilters);
-
-            var parameters = query.SearchParameters;
-            var options = parameters?.Options;
-
-            AddPaging(parameters?.Paging, request);
-            AddSort(parameters?.Paging?.OrderBy, parameters?.Paging?.SortOrder, request);
-           
-            ExcludeUnwantedFields(request);
-
-
-            if (options?.EnableAggregations ?? false)
-            {
-                AddAggregations(request, parameters?.FacetsFilters);
-            }
-
-            if (options?.EnableHighlighting ?? false)
-            {
-                AddHighlighting(request);
-            }
-
-            if (options?.EnableExplanations ?? false)
-            {
-                request.Explain = true;
-            }
-
-            request.TrackTotalHits = true;
-
-            return request;
         }
 
         private ElasticQuery BuildQueryForIds(IList<int> ids, Paging p)
@@ -331,315 +328,42 @@ namespace CMI.Web.Frontend.api.Elastic
             return query;
         }
 
-
-        private static BoolQuery GetQueryWithSecurity(QueryContainer querycontainer, UserAccess access)
-        {
-            if (access == null)
-            {
-                throw new ArgumentNullException(nameof(access));
-            }
-
-            if (access.CombinedTokens?.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(access)} is not valid");
-            }
-
-            var queryWithSecurity = new BoolQuery
-            {
-                Must = new[] {querycontainer}
-            };
-
-            queryWithSecurity.Filter = new QueryContainer[]
-            {
-                new TermsQuery
-                {
-                    Field = "metadataAccessTokens",
-                    Terms = access.CombinedTokens
-                }
-            };
-
-            return queryWithSecurity;
-        }
-
-        private static void AddPaging(Paging paging, SearchRequest<ElasticArchiveRecord> searchRequest)
-        {
-            if (paging == null)
-            {
-                return;
-            }
-
-            if (paging.NumberToSkip > 0)
-            {
-                searchRequest.From = paging.NumberToSkip;
-            }
-
-            if (paging.NumberToTake > 0)
-            {
-                searchRequest.Size = paging.NumberToTake;
-            }
-        }
-
-        private static void AddSort(string orderBy, string order, SearchRequest<ElasticArchiveRecord> searchRequest)
-        {
-            searchRequest.Sort = new List<ISort>();
-
-            if (!string.IsNullOrEmpty(orderBy) && !string.IsNullOrEmpty(order))
-            {
-                SortOrder? sortOrder;
-                switch (order.ToLowerInvariant())
-                {
-                    case "ascending":
-                        sortOrder = SortOrder.Ascending;
-                        break;
-
-                    case "descending":
-                        sortOrder = SortOrder.Descending;
-                        break;
-
-                    default:
-                        throw new ArgumentException(
-                            "The parameter sortOrder contains an invalid value. Valid values: 'ascending', 'descending', empty");
-                }
-
-                searchRequest.Sort.Add(new FieldSort {Field = orderBy, Order = sortOrder});
-
-                // Falls teilweise nach mehreren Feldern sortiert werden soll, könnte eine Ergänzung wie folgt hinzugefügt werden:
-                // if (orderBy == "treePath")
-                // {
-                //    searchRequest.Sort.Add(new FieldSort { Field = "treeSequence", Order = sortOrder });
-                // }
-            }
-
-            searchRequest.Sort.Add(new FieldSort {Field = "_score", Order = SortOrder.Descending});
-
-            // Das folgende Sortierfeld ist ein "tie-breaker", damit die Reihenfolge immer klar definiert ist, auch wenn alle bisherigen Sort-Felder den gleichen Inhalt haben.
-            // Die Reihenfolge muss definiert sein, damit das Paging funktioniert, denn wenn sich die Reihenfolge ändert zwischen zwei Seitenaufrufen,
-            // wäre ein Paging sinnlos.
-            searchRequest.Sort.Add(new FieldSort(){ Field = "referenceCode", Order = SortOrder.Ascending });
-        }
-
-        private static void AddAggregations(SearchRequest<ElasticArchiveRecord> searchRequest, FacetFilters[] facetsFilters )
-        {
-            var aggregations = CreateFacet(new TermsAggregation("level") {Field = "level.keyword", Size = int.MaxValue}, facetsFilters);
-            aggregations &=
-                CreateFacet(new TermsAggregation("customFields.zugänglichkeitGemässBga") {Field = "customFields.zugänglichkeitGemässBga", Size = 25}, facetsFilters);
-
-            aggregations &= CreateFacet(
-                new TermsAggregation("aggregationFields.ordnungskomponenten") {Field = "aggregationFields.ordnungskomponenten", 
-                Size = facetsFilters != null && facetsFilters.Any(fac => fac.Facet.Equals("aggregationFields.ordnungskomponenten") && fac.ShowAll) ? int.MaxValue : 25 }, facetsFilters);
-            aggregations &= CreateFacet(new TermsAggregation("aggregationFields.bestand") {Field = "aggregationFields.bestand",
-                Size = facetsFilters != null && facetsFilters.Any(fac => fac.Facet.Equals("aggregationFields.bestand") && fac.ShowAll) ? int.MaxValue : 25 }, facetsFilters); // Performance: Limit to 25
-            aggregations &=
-                CreateFacet(new TermsAggregation("aggregationFields.hasPrimaryData") {Field = "aggregationFields.hasPrimaryData", Missing = "false"},
-                    facetsFilters);
-
-            // Zeitraum Filter
-            // Für die feinen Filter reicht, wenn wir maximal 10 Stück zurückliefern. Da wir am Ende nur die Facette zurückliefern, die  weniger als 10 Buckets haben
-            var order = new List<TermsOrder> {new TermsOrder {Key = "_term"}};
-            aggregations &=
-                CreateFacet(
-                    new TermsAggregation("aggregationFields.creationPeriodYears001")
-                        {Field = "aggregationFields.creationPeriodYears001", Size = 10, Missing = "0", Order = order}, facetsFilters);
-            aggregations &=
-                CreateFacet(
-                    new TermsAggregation("aggregationFields.creationPeriodYears005")
-                        {Field = "aggregationFields.creationPeriodYears005", Size = 10, Missing = "0", Order = order}, facetsFilters);
-            aggregations &=
-                CreateFacet(
-                    new TermsAggregation("aggregationFields.creationPeriodYears010")
-                        {Field = "aggregationFields.creationPeriodYears005", Size = 10, Missing = "0", Order = order}, facetsFilters);
-            aggregations &=
-                CreateFacet(
-                    new TermsAggregation("aggregationFields.creationPeriodYears025")
-                        {Field = "aggregationFields.creationPeriodYears025", Size = 10, Missing = "0", Order = order}, facetsFilters);
-            aggregations &=
-                CreateFacet(
-                    new TermsAggregation("aggregationFields.creationPeriodYears100")
-                        {Field = "aggregationFields.creationPeriodYears100", Size = int.MaxValue, Order = order, Missing = "0"}, facetsFilters);
-
-
-            aggregations &= new FilterAggregation("bestellbare_einheiten")
-            {
-                Filter = new TermQuery {Field = "canBeOrdered", Value = "true"},
-                Aggregations = new TermsAggregation("nach_level") {Field = "level.keyword"}
-            };
-
-            searchRequest.Aggregations = aggregations;
-        }
-
-        private static AggregationBase CreateFacet(AggregationBase primaryAggregation, FacetFilters[] facetsFilters)
-        {
-            var primaryAggregationName = ((IAggregation) primaryAggregation).Name;
-
-            return new FilterAggregation("facet_" + primaryAggregationName)
-            {
-                Filter = CreateQuery(facetsFilters, Regex.Replace(primaryAggregationName, @"\d\d\d", "")),
-                Aggregations = primaryAggregation
-            };
-        }
-
-        private static QueryContainer CreateQuery(FacetFilters[] facetsFilters, string facetToExclude = null)
-        {
-            if (facetsFilters == null)
-            {
-                return new MatchAllQuery();
-            }
-
-            var list = new List<string>();
-
-            foreach (var item in facetsFilters)
-            {
-                if (string.IsNullOrEmpty(item.Facet))
-                {
-                    throw new BadRequestException("Facet is not allowed to contain nothing.");
-                }
-
-                if (item.Facet != facetToExclude &&
-                    item.Filters != null &&
-                    item.Filters.Length != 0)
-                {
-                    var securedFilters = GetSecuredFacetFilters(item.Filters);
-
-                    var filterForOneFacet = '(' + string.Join(" OR ", securedFilters) + ')';
-
-                    list.Add(filterForOneFacet);
-                }
-            }
-
-            if (list.Count == 0)
-            {
-                return new MatchAllQuery();
-            }
-
-            return new QueryStringQuery {Query = string.Join(" AND ", list)};
-        }
-
-        /// <summary>
-        ///     Diese Methode hat die Aufgabe sicherzustellen, das kein Zugriff auf ein unerlaubtes Elastic Feld erfolgt.
-        /// </summary>
-        public static List<string> GetSecuredFacetFilters(string[] filterArray)
-        {
-            var secured = new List<string>();
-
-            foreach (var filter in filterArray)
-            {
-                if (string.IsNullOrEmpty(filter))
-                {
-                    throw new BadRequestException("Filters array entry is not allowed to contain nothing.");
-                }
-
-                var splited = filter.Split(new[] {':'}, 2);
-
-                if (splited.Length != 2)
-                {
-                    throw new BadRequestException("Every filters array entry must contain a colon.");
-                }
-
-                if (!IsFacetFilterLegal(splited))
-                {
-                    throw new BadRequestException("Filters contains an illegal field or syntax.");
-                }
-
-                secured.Add($"{splited[0]}:{splited[1].Escape()}");
-            }
-
-            return secured;
-        }
-
-        private static bool IsFacetFilterLegal(string[] splited)
-        {
-            if (allowedFacetFields.Contains(splited[0]))
-            {
-                return true;
-            }
-
-            if (splited[1].Length == 0)
-            {
-                return false;
-            }
-
-            var lastCharRemoved = splited[1].Remove(splited[1].Length - 1);
-
-            return (splited[0] == "(_exists_" || splited[0] == "(!_exists_") &&
-                   allowedFacetFields.Contains(lastCharRemoved) &&
-                   splited[1].EndsWith(")");
-        }
-
-        private static void AddHighlighting(SearchRequest<ElasticArchiveRecord> searchRequest)
-        {
-            searchRequest.Highlight = new Highlight
-            {
-                PreTags = new[] {"<h1l1ght>"},
-                PostTags = new[] {"</h1l1ght>"},
-                Order = HighlighterOrder.Score,
-
-                Fields = new Dictionary<Field, IHighlightField>
-                {
-                    {
-                        "title",
-                        new HighlightField
-                        {
-                            Field = "title",
-                            NumberOfFragments = 0,
-                            NoMatchSize = 0,
-                            RequireFieldMatch = false
-                        }
-                    },
-                    {
-                        "all_Metadata_Text",
-                        new HighlightField
-                        {
-                            Field = "all_Metadata_Text",
-                            NumberOfFragments =
-                                4, // Der Titel erscheint 3 mal falls er ein Treffer ist. 4 Einträge holen damit wir auch etwas anderes erhalten.
-                            FragmentSize = 512,
-                            RequireFieldMatch = true
-                        }
-                    },
-                    {
-                        "all_Primarydata",
-                        new HighlightField
-                        {
-                            Field = "all_Primarydata",
-                            NumberOfFragments = 1,
-                            FragmentSize = 512,
-                            RequireFieldMatch = true
-                        }
-                    }
-                }
-            };
-        }
-
-        private static void ExcludeUnwantedFields(SearchRequest<ElasticArchiveRecord> searchRequest)
-        {
-            // Exclude content from primarydata. 
-            searchRequest.Source = new SourceFilter {Excludes = Infer.Fields("all", "primaryData.items.content")};
-        }
-
         private void ProcessQueryResult<T>(ElasticQueryResult<T> result, FacetFilters[] facetsFilters, UserAccess access,
-            IElasticsearchSerializer serializer) where T : TreeRecord
+            IElasticsearchSerializer serializer, bool translated = true) where T : TreeRecord
         {
             var response = result.Response;
 
             var hits = response?.Hits ?? new List<IHit<T>>();
 
-            result.TotalNumberOfHits = response?.HitsMetadata != null ? (int)response.HitsMetadata.Total.Value : -1;
+            result.TotalNumberOfHits = response?.HitsMetadata != null ? (int) response.HitsMetadata.Total.Value : -1;
             var entries = new List<Entity<T>>();
             foreach (var hit in hits)
             {
                 var data = JsonConvert.DeserializeObject<T>(serializer.SerializeToString(hit.Source));
-               
+
+                ProcessAnonymizedRecords(data, access);
+
                 var entry = new Entity<T>
                 {
                     Data = data,
-                    Highlight = GetHighlightingObj(hit, access),
-                    Explanation = GetExplanationObj(hit, serializer)
+                    Highlight = hit.GetHighlightingObj(access, data.Title),
+                    Explanation = hit.GetExplanationObj(serializer)
                 };
 
                 if (access != null)
                 {
-                    data.Translate(access.Language);
-                    entry.IsDownloadAllowed = access.HasAnyTokenFor(data.PrimaryDataDownloadAccessTokens);
+                    if (translated)
+                    {
+                        data.Translate(access.Language);
+                    }
+                    entry.IsDownloadAllowed = access.HasAnyTokenFor(data?.PrimaryDataDownloadAccessTokens);
+                }
+
+                // Remove internal fields
+                // This is only for added security, as internal fields are actually excluded from the result set
+                if (access == null || !access.HasAnyTokenFor(new[] {AccessRolesEnum.BAR.ToString()}))
+                {
+                    RemoveInternalFields(data);
                 }
 
                 entries.Add(entry);
@@ -651,7 +375,7 @@ namespace CMI.Web.Frontend.api.Elastic
             {
                 var filteredAggregations = GetfilteredAggregations(response.Aggregations, facetsFilters, out var chosenCreationPeriodAggregation);
                 var facette = filteredAggregations.CreateSerializableAggregations();
-               
+
                 ComplementAggregations(facette, chosenCreationPeriodAggregation);
                 result.Facets = facette;
             }
@@ -659,104 +383,29 @@ namespace CMI.Web.Frontend.api.Elastic
             result.Data = entityResult;
         }
 
-        private static JObject GetExplanationObj<T>(IHit<T> hit, IElasticsearchSerializer serializer) where T : TreeRecord
+        private void ProcessAnonymizedRecords<T>(T data, UserAccess access) where T : TreeRecord
         {
-            if (hit?.Explanation?.Value == null)
+            if (data.IsAnonymized && access != null && access.HasAnyTokenFor(data.FieldAccessTokens) &&
+                !(data is ElasticArchiveDbRecord))
             {
-                return null;
+                var dbRecord = GetElasticDbRecordById(Convert.ToInt32(data.ArchiveRecordId), access);
+                if (dbRecord != null)
+                {
+                    data.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+                }
             }
-
-            var explanationsObj = new JObject
-            {
-                {"value", hit.Explanation.Value},
-                {"explanation", GetExplanationWithObscuredValues(serializer.SerializeToString(hit.Explanation))}
-            };
-
-            return explanationsObj;
         }
 
-        private static string GetExplanationWithObscuredValues(string serializedExplanation)
+        private ElasticArchiveDbRecord GetElasticDbRecordById(int archiveRecordId, UserAccess access)
         {
-            if (string.IsNullOrEmpty(serializedExplanation))
+            var dbRecord = QueryForId<ElasticArchiveDbRecord>(archiveRecordId, access);
+
+            if (dbRecord.Response.Hits.Count == 1)
             {
-                return serializedExplanation;
+                return dbRecord.Response.Hits.First().Source;
             }
 
-            // Das Pattern findet alle KeyValuePairs, welche
-            // 1. mit "metadataAccessTokens", "primaryDataDownloadAccessTokens" oder "primaryDataFulltextAccessTokens" beginnen
-            // 2. dann kommt eine beliebige Anzahl an Leerzeichen
-            // 3. dann kommt ein Doppelpunkt
-            // 4. dann kommt einen beliebige Anzahl beliebiger Zeichen, bis entweder ein ',' oder ein '"' kommt
-            // Achtung: der Regex ist Case-sensitive!
-            const string pattern = "(metadataAccessTokens|primaryDataDownloadAccessTokens|primaryDataFulltextAccessTokens)[\\s]{0,}:.*?(?=(,|\"))";
-
-            return new Regex(pattern).Replace(serializedExplanation, "***");
-        }
-
-        internal static JObject GetHighlightingObj<T>(IHit<T> hit, UserAccess access) where T : TreeRecord
-        {
-            if (hit.Highlight == null || !hit.Highlight.Any())
-            {
-                return null;
-            }
-
-            var titleHighlight = FindHighlights(hit, "title");
-            var metaDataHighlight = FindHighlights(hit, "all_Metadata_Text")?.ToList();
-
-            // Verhindern der Anzeige von geschützten Primärdaten im Snippet für unberechtigte User
-            var primaryDataHighlight = access.HasAnyTokenFor(hit.Source.PrimaryDataFulltextAccessTokens)
-                ? FindHighlights(hit, "all_Primarydata")
-                : null;
-
-            List<string> mostRelevantVektor;
-            metaDataHighlight = TakeFirstNonTitleHighlight<T>(titleHighlight, metaDataHighlight);
-
-            if (metaDataHighlight == null || !metaDataHighlight.Any())
-            {
-                mostRelevantVektor = primaryDataHighlight;
-            }
-            else
-            {
-                mostRelevantVektor = metaDataHighlight;
-            }
-
-            var highlightobj = new JObject
-            {
-                ["title"] = titleHighlight != null // titleHighlight kann null enthalten
-                    ? new JArray(titleHighlight)
-                    : new JArray(hit.Source.Title),
-                ["mostRelevantVektor"] = mostRelevantVektor != null
-                    ? new JArray(mostRelevantVektor)
-                    : null
-            };
-
-            return highlightobj;
-        }
-
-        private static List<string> TakeFirstNonTitleHighlight<T>(List<string> titleHighlight, List<string> metaDataHighlight)
-            where T : TreeRecord
-        {
-            if (metaDataHighlight == null || !metaDataHighlight.Any())
-            {
-                return new List<string>();
-            }
-
-            var enumerable = (IEnumerable<string>) metaDataHighlight;
-
-            if (titleHighlight != null)
-            {
-                enumerable = metaDataHighlight.Where(e => !titleHighlight.First().Contains(e));
-            }
-
-            enumerable = enumerable.Take(1);
-            return enumerable.ToList();
-        }
-
-        private static List<string> FindHighlights<T>(IHit<T> hit, string key) where T : TreeRecord
-        {
-            var foundHighlight = hit.Highlight.FirstOrDefault(kv => kv.Key == key);
-
-            return foundHighlight.Value?.ToList();
+            return null;
         }
 
         /// <summary>
@@ -981,6 +630,42 @@ namespace CMI.Web.Frontend.api.Elastic
             }
 
             return true;
+        }
+
+        private void RemoveInternalFields<T>(T data) where T : TreeRecord
+        {
+            if (data is SearchRecord searchRecord)
+            {
+                foreach (var internalField in internalFields)
+                {
+                    var isCustomField = internalField.DbFieldName.StartsWith("CustomFields");
+                    var fieldName = isCustomField ? internalField.DbFieldName.Split('.')[1].ToLowerCamelCase() : internalField.DbFieldName;
+                    if (isCustomField ? searchRecord.HasCustomProperty(fieldName) : searchRecord.HasProperty(fieldName))
+                    {
+                        if (!isCustomField)
+                        {
+                            var prop = searchRecord.GetType().GetProperty(fieldName);
+                            if (prop != null)
+                            {
+                                prop.SetValue(searchRecord, null);
+                            }
+                        }
+                        else
+                        {
+                            var keyValues = (IDictionary<string, object>) searchRecord.CustomFields;
+                            Debug.WriteLine($"Removed field {fieldName} from customfields");
+                            keyValues[fieldName] = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        private SourceFilter GetSourceFilterForType<T>() where T : class
+        {
+            var fields = typeof(T).GetProperties().Select(p => p.Name.ToLowerCamelCase()).ToArray();
+            var filter = new SourceFilter() { Includes = Infer.Fields(fields) };
+            return filter;
         }
     }
 }

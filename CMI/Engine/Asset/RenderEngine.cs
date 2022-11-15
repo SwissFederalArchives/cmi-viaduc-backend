@@ -8,6 +8,7 @@ using MassTransit;
 using Rebex;
 using Rebex.Net;
 using Serilog;
+using JobContext = CMI.Contract.DocumentConverter.JobContext;
 
 namespace CMI.Engine.Asset
 {

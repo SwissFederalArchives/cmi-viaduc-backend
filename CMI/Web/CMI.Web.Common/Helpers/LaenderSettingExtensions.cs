@@ -28,6 +28,7 @@ namespace CMI.Web.Common.Helpers
                 var translated = JsonHelper.FindTokenValue<string>(prop.Value, language);
                 var canOnboardWithPassport = JsonHelper.FindTokenValue<bool>(prop.Value, "canOnboardWithPassport");
                 var canOnboardWithIdentityCard = JsonHelper.FindTokenValue<bool>(prop.Value, "canOnboardWithIdentityCard");
+                var newLaenderCode = JsonHelper.FindTokenValue<string>(prop.Value, "Laendercode");
                 if (string.IsNullOrEmpty(translated))
                 {
                     translated = prop.Name;
@@ -38,7 +39,8 @@ namespace CMI.Web.Common.Helpers
                     {"code", prop.Name},
                     {"name", translated},
                     {"canOnboardWithPassport", canOnboardWithPassport},
-                    {"canOnboardWithIdentityCard", canOnboardWithIdentityCard}
+                    {"canOnboardWithIdentityCard", canOnboardWithIdentityCard},
+                    {"newLaenderCode", newLaenderCode}
                 });
             }
 

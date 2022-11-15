@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
-using CMI.Contract.Parameter;
 using CMI.Engine.Asset;
 using CMI.Manager.Asset.Consumers;
 using FluentAssertions;
+using MassTransit;
 using MassTransit.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 
@@ -17,22 +17,39 @@ namespace CMI.Manager.Asset.Tests
 {
     public class PrepareForTransformationConsumerTests
     {
-        private readonly Mock<IAssetManager> assetManager = new Mock<IAssetManager>();
-        private readonly Mock<IAssetPreparationEngine> preparationEngine = new Mock<IAssetPreparationEngine>();
-        private readonly Mock<IScanProcessor> scanProcessorMock = new Mock<IScanProcessor>();
-        private readonly Mock<ITransformEngine> transformEngineMock = new Mock<ITransformEngine>();
-        private InMemoryTestHarness harness;
+        private Mock<IAssetManager> assetManager;
+        private Mock<IAssetPreparationEngine> preparationEngine;
+        private Mock<IScanProcessor> scanProcessorMock;
+        private Mock<ITransformEngine> transformEngineMock;
         private RepositoryPackage repositoryPackage;
+        private ITestHarness harness;
+        private ServiceProvider provider;
 
         [SetUp]
         public void Setup()
         {
-            harness = new InMemoryTestHarness();
-            assetManager.Reset();
-            preparationEngine.Reset();
-            scanProcessorMock.Reset();
-            transformEngineMock.Reset();
+            assetManager = new Mock<IAssetManager>();
+            preparationEngine = new Mock<IAssetPreparationEngine>();
+            scanProcessorMock = new Mock<IScanProcessor>();
+            transformEngineMock = new Mock<ITransformEngine>();
             repositoryPackage = new RepositoryPackage { PackageFileName = "testfile.zip", ArchiveRecordId = "112" };
+
+            // Build the container
+            provider = new ServiceCollection().AddMassTransitTestHarness(cfg =>
+                {
+                    cfg.AddConsumer<PrepareForTransformationConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerPrepareForTransformation);
+                    cfg.AddConsumer<TransformPackageConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerTransformAssetMessageQueue);
+                    cfg.AddConsumer<PrepareForRecognitionConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerPrepareForRecognition);
+                    cfg.AddTransient(_ => assetManager.Object);
+                    cfg.AddTransient(_ => preparationEngine.Object);
+                    cfg.AddTransient(_ => scanProcessorMock.Object);
+                    cfg.AddTransient(_ => transformEngineMock.Object);
+                    cfg.AddTransient(_ => repositoryPackage); 
+
+                })
+                .BuildServiceProvider(true);
+
+            harness = provider.GetRequiredService<ITestHarness>();
         }
         [Test]
         public async Task If_PrepareForTransformation_failed_Sync_process_is_set_to_failed()
@@ -46,13 +63,9 @@ namespace CMI.Manager.Asset.Tests
                 };
                 var orderId = 777;
 
-
-                var consumer = harness.Consumer(() => new PrepareForTransformationConsumer(assetManager.Object, scanProcessorMock.Object, transformEngineMock.Object, 
-                    preparationEngine.Object));
                 await harness.Start();
-
                 // Act
-                await harness.InputQueueSendEndpoint.Send(new PrepareForTransformationMessage()
+                await harness.Bus.Publish(new PrepareForTransformationMessage
                 {
                     AssetType = AssetType.Gebrauchskopie,
                     RepositoryPackage = repositoryPackage,
@@ -63,11 +76,12 @@ namespace CMI.Manager.Asset.Tests
                     PrimaerdatenAuftragId = 458
                 });
 
-                // Wait for the results
-                Assert.That(await harness.Consumed.Any<PrepareForTransformationMessage>());
-                Assert.That(await consumer.Consumed.Any<PrepareForTransformationMessage>());
 
-                Assert.That(await harness.Published.Any<IAssetReady>());
+                // Assert
+                // Wait for the results
+                Assert.IsTrue(await harness.Published.Any<PrepareForTransformationMessage>());
+                var consumerHarness = harness.GetConsumerHarness<PrepareForTransformationConsumer>();
+                Assert.That(await consumerHarness.Consumed.Any<PrepareForTransformationMessage>());
                 var context = harness.Published.Select<IAssetReady>().First().Context;
 
                 // Assert
@@ -92,12 +106,10 @@ namespace CMI.Manager.Asset.Tests
 
                 assetManager.Setup(s => s.ExtractZipFile(It.IsAny<ExtractZipArgument>())).Returns(() => Task.FromResult(true));
 
-                var consumer = harness.Consumer(() => new PrepareForTransformationConsumer(assetManager.Object, scanProcessorMock.Object, transformEngineMock.Object,
-                    preparationEngine.Object));
                 await harness.Start();
 
                 // Act
-                await harness.InputQueueSendEndpoint.Send(new PrepareForTransformationMessage()
+                await harness.Bus.Publish(new PrepareForTransformationMessage
                 {
                     AssetType = AssetType.Gebrauchskopie,
                     RepositoryPackage = repositoryPackage,
@@ -109,11 +121,10 @@ namespace CMI.Manager.Asset.Tests
                 });
 
                 // Wait for the results
-                Assert.That(await harness.Consumed.Any<PrepareForTransformationMessage>());
+                Assert.IsTrue(await harness.Published.Any<PrepareForTransformationMessage>());
+                var consumer = harness.GetConsumerHarness<PrepareForTransformationConsumer>();
                 Assert.That(await consumer.Consumed.Any<PrepareForTransformationMessage>());
-
-                Assert.That(await harness.Sent.Any<ITransformAsset>());
-                var context = harness.Sent.Select<ITransformAsset>().First().Context;
+                var context = harness.Published.Select<ITransformAsset>().First().Context;
 
                 // Assert
                 context.Message.RepositoryPackage.ArchiveRecordId.Should().Be("112");

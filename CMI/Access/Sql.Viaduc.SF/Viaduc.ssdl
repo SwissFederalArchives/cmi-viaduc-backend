@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CMI.Access.Sql.Viaduc.EF.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ViaducEntitiesStoreContainer">
+    <EntitySet Name="Collections" EntityType="CMI.Access.Sql.Viaduc.EF.Store.Collection" store:Type="Tables" Schema="dbo" Table="Collection" />
+    <EntitySet Name="v_CollectionLists" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_CollectionList" store:Type="Views" Schema="dbo" Table="v_CollectionList" />
+    <EntitySet Name="ApplicationUsers" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ApplicationUser" store:Type="Tables" Schema="dbo" Table="ApplicationUser" />
+    <EntitySet Name="ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" store:Type="Tables" Schema="dbo" Table="ManuelleKorrektur" />
+    <EntitySet Name="ManuelleKorrekturFelder" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturFeld" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturFeld" />
+    <EntitySet Name="ManuelleKorrekturStatusHistories" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturStatusHistory" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturStatusHistory" />
+    <EntitySet Name="v_ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_ManuelleKorrektur" store:Type="Views" Schema="dbo" Table="v_ManuelleKorrektur" />
+    <AssociationSet Name="Collection_Collection" Association="CMI.Access.Sql.Viaduc.EF.Store.Collection_Collection">
+      <End Role="Collection" EntitySet="Collections" />
+      <End Role="Collection1" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManuelleKorrekturFelder_ManuelleKorrektur" Association="CMI.Access.Sql.Viaduc.EF.Store.FK_ManuelleKorrekturFelder_ManuelleKorrektur">
+      <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+      <End Role="ManuelleKorrekturFeld" EntitySet="ManuelleKorrekturFelder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" Association="CMI.Access.Sql.Viaduc.EF.Store.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
+      <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+      <End Role="ManuelleKorrekturStatusHistory" EntitySet="ManuelleKorrekturStatusHistories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Collection">
+    <Key>
+      <PropertyRef Name="CollectionId" />
+    </Key>
+    <Property Name="CollectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity">
+      <Documentation>
+        <Summary>Primarykey </Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ParentId" Type="int">
+      <Documentation>
+        <Summary>Points to the parent collection</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" devart:DefaultValue="'de'" DefaultValue="de">
+      <Documentation>
+        <Summary>The language as ISO code de, en, fr</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="255">
+      <Documentation>
+        <Summary>Title of the collection</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="DescriptionShort" Type="nvarchar" Nullable="false" MaxLength="512">
+      <Documentation>
+        <Summary>A short description of the collection</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false">
+      <Documentation>
+        <Summary>A full description of the collection in markup language</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ValidFrom" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()">
+      <Documentation>
+        <Summary>From which point in time the collection should be visible to the users</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ValidTo" Type="datetime2" Nullable="false">
+      <Documentation>
+        <Summary>Until which point in time the collection should be visible to the users</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CollectionTypeId" Type="int" Nullable="false">
+      <Documentation>
+        <Summary>Indicates the type of collections: Themenblöcke and Ausstellungen (Topics and Collections)</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Image" Type="varbinary(max)">
+      <Documentation>
+        <Summary>An image that gives a hint to the collection</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Thumbnail" Type="varbinary(max)">
+      <Documentation>
+        <Summary>The thumbnail to the image</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ImageAltText" Type="nvarchar" MaxLength="255">
+      <Documentation>
+        <Summary>The accessibility help information for the image</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ImageMimeType" Type="nvarchar" MaxLength="255">
+      <Documentation>
+        <Summary>The mime type of the image</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Link" Type="nvarchar" MaxLength="4000">
+      <Documentation>
+        <Summary>The URL that will lead the user to the collection details</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CollectionPath" Type="nvarchar" Nullable="false" MaxLength="400">
+      <Documentation>
+        <Summary>The path of the item consisting of a padded string of the ids from first parent to current item.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="SortOrder" Type="int" Nullable="false" DefaultValue="0">
+      <Documentation>
+        <Summary>Allows to order the collections in a specific way</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()">
+      <Documentation>
+        <Summary>Date when record was added</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="255">
+      <Documentation>
+        <Summary>User that added the record</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ModifiedOn" Type="datetime2">
+      <Documentation>
+        <Summary>Date when the record was modified</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255">
+      <Documentation>
+        <Summary>User that modified the record</Summary>
+      </Documentation>
+    </Property>
+  </EntityType>
+  <EntityType Name="v_CollectionList">
+    <Key>
+      <PropertyRef Name="CollectionId" />
+    </Key>
+    <Property Name="CollectionId" Type="int" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="DescriptionShort" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ValidFrom" Type="datetime2" Nullable="false" />
+    <Property Name="ValidTo" Type="datetime2" Nullable="false" />
+    <Property Name="CollectionTypeId" Type="int" Nullable="false" />
+    <Property Name="ImageAltText" Type="nvarchar" MaxLength="255" />
+    <Property Name="ImageMimeType" Type="nvarchar" MaxLength="255" />
+    <Property Name="Link" Type="nvarchar" MaxLength="4000" />
+    <Property Name="CollectionPath" Type="nvarchar" Nullable="false" MaxLength="400" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="ModifiedOn" Type="datetime2" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+    <Property Name="Parent" Type="nvarchar" MaxLength="255" />
+    <Property Name="ChildCollections" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ApplicationUser">
+    <Documentation>
+      <Summary>Enthält Benutzer, die sich an Viaduc angemeldet haben</Summary>
+    </Documentation>
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" Nullable="false" MaxLength="200">
+      <Documentation>
+        <Summary>Vom eIAM Token Claim /identity/claims/nameidentifier</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="FamilyName" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Vom eIAM Token Claim /identity/claims/surname</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="FirstName" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Vom eIAM Token Claim /identity/claims/givenname</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Organization" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Street" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="StreetAttachment" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ZipCode" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Town" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CountryCode" Type="nvarchar" MaxLength="10">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Vom eIAM Token Claim /identity/claims/emailaddress</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="SkypeName" Type="nvarchar" MaxLength="200">
+      <Documentation>
+        <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Setting" Type="nvarchar(max)" />
+    <Property Name="Claims" Type="nvarchar(max)">
+      <Documentation>
+        <Summary>Claims (json) von der letzten Anmeldung</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Created" Type="datetime" Nullable="false" devart:DefaultValue="getdate()">
+      <Documentation>
+        <Summary>Erstellungsdatum</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Updated" Type="datetime" Nullable="false" devart:DefaultValue="getdate()">
+      <Documentation>
+        <Summary>Änderungsdatum</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Fulltext" Type="nvarchar" Nullable="false" MaxLength="1808" StoreGeneratedPattern="Computed">
+      <Documentation>
+        <Summary>Volltext</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="UserExtId" Type="nvarchar" MaxLength="100">
+      <Documentation>
+        <Summary>Vom eIAM Benutzer externe ID</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" devart:DefaultValue="'de'" DefaultValue="de">
+      <Documentation>
+        <Summary>Sprache, in welcher der Benutzer EMails empfangen möchte.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="500" />
+    <Property Name="ModifiedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="500" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="FabasoftDossier" Type="varchar" MaxLength="1000" />
+    <Property Name="ReasonForRejection" Type="varchar" MaxLength="100">
+      <Documentation>
+        <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="IsInternalUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
+    <Property Name="RolePublicClient" Type="varchar" MaxLength="3" />
+    <Property Name="EiamRoles" Type="varchar" MaxLength="10" />
+    <Property Name="ResearcherGroup" Type="bit" Nullable="false" devart:DefaultValue="0" />
+    <Property Name="BarInternalConsultation" Type="bit" Nullable="false" devart:DefaultValue="0" />
+    <Property Name="IdentifierDocument" Type="varbinary(max)">
+      <Documentation>
+        <Summary>Beim erfolgreichem Onboarding mit Swisscom wird in dieses Feld automatisch ein von der Swisscom generiertes PDF abgelegt. Zudem kann in dieses Feld auch über den Management Client eine Datei hochgeladen werden.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="200" />
+    <Property Name="ReasonForRejectionDate" Type="datetime">
+      <Documentation>
+        <Summary>Datum an dem das Feld ReasonForRejection gesetzt wurde</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="DownloadLimitDisabledUntil" Type="datetime" />
+    <Property Name="DigitalisierungsbeschraenkungAufgehobenBis" Type="datetime">
+      <Documentation>
+        <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
+      </Documentation>
+    </Property>
+    <Property Name="ActiveAspNetSessionId" Type="nvarchar(max)" devart:DefaultValue="''" DefaultValue="">
+      <Documentation>
+        <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
+      </Documentation>
+    </Property>
+  </EntityType>
+  <EntityType Name="ManuelleKorrektur">
+    <Key>
+      <PropertyRef Name="ManuelleKorrekturId" />
+    </Key>
+    <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="VeId" Type="int" Nullable="false" />
+    <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
+    <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()" />
+    <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="GeändertAm" Type="datetime2" devart:DefaultValue="getdate()" />
+    <Property Name="GeändertVon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+    <Property Name="Kommentar" Type="nvarchar(max)" />
+    <Property Name="Hierachiestufe" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Aktenzeichen" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Entstehungszeitraum" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZugänglichkeitGemässBGA" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Schutzfristverzeichnung" Type="nvarchar" MaxLength="200" />
+    <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="100" />
+    <Property Name="Publikationsrechte" Type="nvarchar" MaxLength="200" />
+    <Property Name="AnonymisiertZumErfassungszeitpunk" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ManuelleKorrekturFeld">
+    <Key>
+      <PropertyRef Name="ManuelleKorrekturFelderId" />
+    </Key>
+    <Property Name="ManuelleKorrekturFelderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" />
+    <Property Name="Feldname" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Original" Type="nvarchar(max)" />
+    <Property Name="Automatisch" Type="nvarchar(max)" />
+    <Property Name="Manuell" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ManuelleKorrekturStatusHistory">
+    <Key>
+      <PropertyRef Name="ManuelleKorrekturStatusHistoryId" />
+    </Key>
+    <Property Name="ManuelleKorrekturStatusHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" />
+    <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+    <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" />
+    <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="v_ManuelleKorrektur">
+    <Key>
+      <PropertyRef Name="ManuelleKorrekturId" />
+      <PropertyRef Name="VeId" />
+      <PropertyRef Name="Signatur" />
+      <PropertyRef Name="Schutzfristende" />
+      <PropertyRef Name="Titel" />
+      <PropertyRef Name="ErzeugtAm" />
+      <PropertyRef Name="ErzeugtVon" />
+      <PropertyRef Name="Anonymisierungsstatus" />
+      <PropertyRef Name="Hierachiestufe" />
+      <PropertyRef Name="Aktenzeichen" />
+      <PropertyRef Name="ZugänglichkeitGemässBGA" />
+      <PropertyRef Name="AnonymisiertZumErfassungszeitpunk" />
+    </Key>
+    <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="VeId" Type="int" Nullable="false" />
+    <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
+    <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" />
+    <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="GeändertAm" Type="datetime2" />
+    <Property Name="GeändertVon" Type="nvarchar" MaxLength="200" />
+    <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+    <Property Name="Kommentar" Type="nvarchar(max)" />
+    <Property Name="Hierachiestufe" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Aktenzeichen" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Entstehungszeitraum" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZugänglichkeitGemässBGA" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Schutzfristverzeichnung" Type="nvarchar" MaxLength="200" />
+    <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="100" />
+    <Property Name="Publikationsrechte" Type="nvarchar" MaxLength="200" />
+    <Property Name="AnonymisiertZumErfassungszeitpunk" Type="bit" Nullable="false" />
+    <Property Name="TitelGemAIS" Type="nvarchar(max)" />
+    <Property Name="TitelAutomatischAnonymisiert" Type="nvarchar(max)" />
+    <Property Name="TitelManuellKorrigiert" Type="nvarchar(max)" />
+    <Property Name="DarinGemAIS" Type="nvarchar(max)" />
+    <Property Name="DarinAutomatischAnonymisiert" Type="nvarchar(max)" />
+    <Property Name="DarinManuellKorrigiert" Type="nvarchar(max)" />
+    <Property Name="ZusatzkomponenteGemAIS" Type="nvarchar(max)" />
+    <Property Name="ZusatzkomponenteAutomatischAnonymisiert" Type="nvarchar(max)" />
+    <Property Name="ZusatzkomponenteManuellKorrigiert" Type="nvarchar(max)" />
+    <Property Name="ZusaetzlicheInformationenGemAIS" Type="nvarchar(max)" />
+    <Property Name="ZusaetzlicheInformationenAutomatischAnonymisiert" Type="nvarchar(max)" />
+    <Property Name="ZusaetzlicheInformationenManuellKorrigiert" Type="nvarchar(max)" />
+    <Property Name="VerwandteVEGemAIS" Type="nvarchar(max)" />
+    <Property Name="VerwandteVEAutomatischAnonymisiert" Type="nvarchar(max)" />
+    <Property Name="VerwandteVEManuellKorrigiert" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="Collection_Collection">
+    <End Role="Collection" Type="CMI.Access.Sql.Viaduc.EF.Store.Collection" Multiplicity="0..1" />
+    <End Role="Collection1" Type="CMI.Access.Sql.Viaduc.EF.Store.Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="CollectionId" />
+      </Principal>
+      <Dependent Role="Collection1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManuelleKorrekturFelder_ManuelleKorrektur">
+    <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ManuelleKorrekturFeld" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturFeld" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManuelleKorrektur">
+        <PropertyRef Name="ManuelleKorrekturId" />
+      </Principal>
+      <Dependent Role="ManuelleKorrekturFeld">
+        <PropertyRef Name="ManuelleKorrekturId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
+    <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ManuelleKorrekturStatusHistory" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturStatusHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ManuelleKorrektur">
+        <PropertyRef Name="ManuelleKorrekturId" />
+      </Principal>
+      <Dependent Role="ManuelleKorrekturStatusHistory">
+        <PropertyRef Name="ManuelleKorrekturId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

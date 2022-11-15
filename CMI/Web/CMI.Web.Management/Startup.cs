@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
@@ -13,14 +14,19 @@ using CMI.Web.Common;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management;
+using CMI.Web.Management.api.Configuration;
 using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using NSwag.AspNet.Owin;
 using Owin;
 using Serilog;
+using SameSiteMode = Microsoft.Owin.SameSiteMode;
+using Swashbuckle.Application;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -34,7 +40,6 @@ namespace CMI.Web.Management
 
             Log.Information("Application_Start");
             ConfigureSecurity(app);
-
             UpgradeDb();
             CleanUpDb();
 
@@ -46,10 +51,10 @@ namespace CMI.Web.Management
                 cfg.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
                 ODataConfig.Register(cfg);
                 WebApiConfig.Register(cfg);
+                EnableSwagger(app, cfg);
             });
 
             WebConfig.Configure();
-
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
@@ -58,6 +63,21 @@ namespace CMI.Web.Management
             };
 
             RoutingHelper.Initialize();
+        }
+
+        private void EnableSwagger(IAppBuilder app, HttpConfiguration config)
+        {
+            config
+                .EnableSwagger(c => c.SingleApiVersion("v1", "Schnittstelle Manager Client Viaduc"))
+                .EnableSwaggerUi();
+            app.UseSwaggerUi3(typeof(Startup).Assembly, settings =>
+            {
+                settings.GeneratorSettings.DefaultUrlTemplate = "api/{controller}/{action}/{id}";
+                settings.GeneratorSettings.SerializerSettings = new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                };
+            });
         }
 
         private void CleanUpDb()
@@ -77,6 +97,30 @@ namespace CMI.Web.Management
         private void ConfigureSecurity(IAppBuilder app)
         {
             app.Use(async (context, next) => { await next.Invoke(); });
+            
+            app.UseKentorOwinCookieSaver();
+            
+            app.Use(async (context, next) => { await next.Invoke(); });            
+
+            var connectionString = ManagementSettingsViaduc.Instance.SqlConnectionString;
+            var userDataAccess = new UserDataAccess(connectionString);
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = WebHelper.CookieMcAppliationCookieKey,
+                AuthenticationMode = AuthenticationMode.Active,
+                CookieSameSite = SameSiteMode.Strict,
+                CookieSecure = CookieSecureOption.Always,
+                CookieHttpOnly = true,
+                ExpireTimeSpan = TimeSpan.FromMinutes(ManagementSettingsViaduc.Instance.CookieExpireTimeInMinutes),
+                SlidingExpiration = true,
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = context => ValidateSessionIdIsActive(context, userDataAccess)
+                }
+            });
+            
+            app.Use(async (context, next) => { await next.Invoke(); });
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -94,24 +138,7 @@ namespace CMI.Web.Management
 
             app.Use(async (context, next) => { await next.Invoke(); });
 
-            Log.Information("ConfigureSecurity: tokenExpiry={TokenExpiryInMinutes}", AuthenticationHelper.TokenExpiryInMinutes);
-
-            var oAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions
-            {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(AuthenticationHelper.TokenExpiryInMinutes),
-                Provider = new AuthorizationServerProvider()
-            };
-
-            app.UseOAuthAuthorizationServer(oAuthAuthorizationServerOptions);
-
-            app.Use(async (context, next) => { await next.Invoke(); });
-
-            var authNOptions = AuthenticationHelper.WebApiBearerAuthenticationOptions = new OAuthBearerAuthenticationOptions();
-            app.UseOAuthBearerAuthentication(authNOptions);
-
-            app.Use(async (context, next) => { await next.Invoke(); });
+            Log.Information("ConfigureSecurity: tokenExpiry={cookieExpireTimeInMinutes}", ManagementSettingsViaduc.Instance.CookieExpireTimeInMinutes);
         }
 
         private void UpgradeDb()
@@ -127,6 +154,23 @@ namespace CMI.Web.Management
                 Log.Error(ex, "Startup.UpgradeDb failed");
                 throw;
             }
+        }
+
+        private static Task ValidateSessionIdIsActive(CookieValidateIdentityContext context, UserDataAccess userDataAccess)
+        {
+            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+            var user = userDataAccess.GetUser(userId);
+
+            var activeAspNetSessionId = user?.ActiveAspNetSessionId;
+            var currentAspNetSessionId = context.Request.Cookies[WebHelper.CookieMcAspNetSessionIdKey];
+
+            if (currentAspNetSessionId != activeAspNetSessionId)
+            {
+                context.RejectIdentity();
+                context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

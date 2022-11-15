@@ -70,8 +70,7 @@ namespace CMI.Manager.DocumentConverter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpLicenseK" +
-            "ey@@")]
+        [global::System.Configuration.DefaultSettingValueAttribute("@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpLicenseKey@@")]
         public string SftpLicenseKey {
             get {
                 return ((string)(this["SftpLicenseKey"]));

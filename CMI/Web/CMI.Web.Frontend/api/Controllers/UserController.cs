@@ -107,23 +107,5 @@ namespace CMI.Web.Frontend.api.Controllers
         {
             return userDataAccess.GetAllUsers().Where(u => !Users.IsSystemUser(u.Id));
         }
-
-        [HttpGet]
-        public string GetOnboardingUri()
-        {
-            var userAccess = GetUserAccess();
-            if (userAccess.RolePublicClient != AccessRoles.RoleOe2)
-            {
-                return string.Empty;
-            }
-
-            var user = userDataAccess.GetUser(ControllerHelper.GetCurrentUserId());
-
-            return parameterHelper.GetSetting<OnboardingSetting>()
-                .UriTemplate
-                .ToLowerInvariant()
-                .Replace("{language}", userAccess.Language)
-                .Replace("{userextid}", user.UserExtId);
-        }
     }
 }

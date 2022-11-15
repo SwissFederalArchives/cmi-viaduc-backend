@@ -2,7 +2,7 @@
 using CMI.Contract.Parameter.SaveParameter;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Parameter
 {

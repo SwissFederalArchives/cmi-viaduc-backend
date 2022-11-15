@@ -127,7 +127,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var language = GetUserAccess(WebHelper.GetClientLanguage(Request)).Language;
             return ResponseMessage(veExportRecordHelper.CreateExcelFile(ConvertExportData(list.Items.Where(i => i is VeFavorite).ToList()), language,
                     FrontendSettingsViaduc.Instance.GetTranslation(language, "accountFavoritesDetailPageComponent.fileName") + $"{list.Name}.xlsx",
-                FrontendSettingsViaduc.Instance.GetTranslation("en", "accountFavoritesDetailPageComponent.fileName") + $"{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx"));
+                FrontendSettingsViaduc.Instance.GetTranslation("en", "accountFavoritesDetailPageComponent.fileName") + $"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}.xlsx"));
         }
 
         [HttpPost]
@@ -196,8 +196,9 @@ namespace CMI.Web.Frontend.api.Controllers
                     veFavorite.CreationPeriod = elasticHit.Data?.CreationPeriod?.Text;
                     veFavorite.ReferenceCode = elasticHit.Data?.ReferenceCode;
                     veFavorite.CanBeOrdered = elasticHit.Data?.CanBeOrdered ?? false;
-                    veFavorite.CanBeDownloaded = !string.IsNullOrWhiteSpace(elasticHit.Data?.PrimaryDataLink) &&
-                                                 access.HasAnyTokenFor(elasticHit.Data.PrimaryDataDownloadAccessTokens);
+                    veFavorite.HasPrimaryLink = !string.IsNullOrWhiteSpace(elasticHit.Data?.PrimaryDataLink);
+                    veFavorite.CanBeDownloaded = veFavorite.HasPrimaryLink &&
+                                                 access.HasAnyTokenFor(elasticHit.Data?.PrimaryDataDownloadAccessTokens);
                     yield return veFavorite;
                 }
                 else

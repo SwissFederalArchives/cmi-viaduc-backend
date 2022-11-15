@@ -58,13 +58,24 @@ namespace CMI.Web.Frontend.api.Entities
                         continue;
                     }
 
-                    var item = new Entity<T>
+                    Entity<T> item;
+                    var isAnonymized = false;
+                    // Aus Performance Gründen holen wir das Detailitem nur, wenn das Items grundsätzlich anonymisiert sein könnte
+                    if (contextItem.Protected)
+                    {
+                        var record = elasticService.QueryForId<TreeRecord>(Convert.ToInt32(id), access).Data.Items.FirstOrDefault()?.Data;
+                        contextItem.Title = record?.Title;
+                        isAnonymized = true;
+                    }
+
+                    item = new Entity<T>
                     {
                         Data = new T
                         {
                             ArchiveRecordId = id,
                             Title = contextItem.Title,
-                            ReferenceCode = contextItem.RefCode
+                            ReferenceCode = contextItem.RefCode,
+                            IsAnonymized = isAnonymized,
                         }
                     };
 

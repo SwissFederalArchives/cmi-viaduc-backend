@@ -324,9 +324,7 @@ namespace CMI.Access.Sql.Viaduc
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-
                 var orderingId = await GetBasketId(orderCreationRequest.CurrentUserId, connection);
-
                 var updateRequestParams = new UpdateOrderingParams
                 {
                     ArtDerArbeit = orderCreationRequest.ArtDerArbeit,
@@ -479,7 +477,6 @@ namespace CMI.Access.Sql.Viaduc
                         Value = endTime,
                         SqlDbType = SqlDbType.DateTime
                     });
-
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -1285,7 +1282,7 @@ namespace CMI.Access.Sql.Viaduc
         {
             var downloadTokens = new HashSet<string>();
             var fulltextTokens = new HashSet<string>();
-            var metadataTokens = new HashSet<string>();
+            var fieldAccessTokens = new HashSet<string>();
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -1345,7 +1342,7 @@ namespace CMI.Access.Sql.Viaduc
                                         case EntscheidGesuch.EinsichtsgesuchBewilligt:
                                             downloadTokens.Add(dds ? "DDS" : "EB_" + userId);
                                             fulltextTokens.Add(dds ? "DDS" : "EB_" + userId);
-                                            metadataTokens.Add(dds ? "DDS" : "EB_" + userId);
+                                            fieldAccessTokens.Add(dds ? "DDS" : "EB_" + userId);
                                             break;
                                     }
 
@@ -1362,7 +1359,7 @@ namespace CMI.Access.Sql.Viaduc
                                         case ApproveStatus.FreigegebenInSchutzfrist:
                                             downloadTokens.Add(dds ? "DDS" : "EB_" + userId);
                                             fulltextTokens.Add(dds ? "DDS" : "EB_" + userId);
-                                            metadataTokens.Add(dds ? "DDS" : "EB_" + userId);
+                                            fieldAccessTokens.Add(dds ? "DDS" : "EB_" + userId);
                                             break;
                                     }
 
@@ -1373,7 +1370,7 @@ namespace CMI.Access.Sql.Viaduc
                 }
             }
 
-            return new IndivTokens(fulltextTokens.ToArray(), downloadTokens.ToArray(), metadataTokens.ToArray());
+            return new IndivTokens(fulltextTokens.ToArray(), downloadTokens.ToArray(), fieldAccessTokens.ToArray());
         }
 
         public async Task<bool> IsUniqueVeInBasket(int veId, string userId)
@@ -1821,33 +1818,20 @@ namespace CMI.Access.Sql.Viaduc
         private PrimaerdatenAufbereitungItem PrimaerdatenAufbereitungItemFromReader(SqlDataReader reader)
         {
             var primaerdatenAufbereitungItem = new PrimaerdatenAufbereitungItem();
-
-            primaerdatenAufbereitungItem.OrderingDate = reader["OrderingDate"].GetValueOrNull<DateTime>();
             primaerdatenAufbereitungItem.OrderingType = reader["OrderingType"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.OrderItemId = reader["OrderItemId"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.Dossiertitel = reader["Dossiertitel"].ToString();
             primaerdatenAufbereitungItem.VeId = reader["VeId"].GetValueOrNull<int>();
-            primaerdatenAufbereitungItem.MutationsId = reader["MutationsId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.Signatur = reader["Signatur"].ToString();
             primaerdatenAufbereitungItem.NeuEingegangen = reader["NeuEingegangen"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.FreigabePruefen = reader["FreigabePruefen"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.FuerDigitalisierungBereit = reader["FuerDigitalisierungBereit"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.FuerAushebungBereit = reader["FuerAushebungBereit"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.Ausgeliegen = reader["Ausgeliegen"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.Ausgeliehen = reader["Ausgeliehen"].GetValueOrNull<DateTime>();
             primaerdatenAufbereitungItem.ZumReponierenBereit = reader["ZumReponierenBereit"].GetValueOrNull<DateTime>();
             primaerdatenAufbereitungItem.Abgeschlossen = reader["Abgeschlossen"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.Abgebrochen = reader["Abgebrochen"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.PrimaerdatenAuftragId = reader["PrimaerdatenAuftragId"].GetValueOrNull<int>();
-            primaerdatenAufbereitungItem.AufbereitungsArt = reader["AufbereitungsArt"].ToString();
-            primaerdatenAufbereitungItem.GroesseInBytes = reader["GroesseInBytes"].GetValueOrNull<long>();
-            primaerdatenAufbereitungItem.Quelle = reader["Quelle"].ToString();
-            primaerdatenAufbereitungItem.GeschaetzteAufbereitungszeit = reader["GeschaetzteAufbereitungszeit"].GetValueOrNull<int>();
-            primaerdatenAufbereitungItem.Registriert = reader["Registriert"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.LetzterAufbereitungsversuch = reader["LetzterAufbereitungsversuch"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.ErsterAufbereitungsversuch = reader["ErsterAufbereitungsversuch"].GetValueOrNull<DateTime>();
+            primaerdatenAufbereitungItem.AufbereitungsArt = reader["AufbereitungsArt"].ToString(); 
             primaerdatenAufbereitungItem.AuftragErledigt = reader["AuftragErledigt"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.ImCacheAbgelegt = reader["ImCacheAbgelegt"].GetValueOrNull<DateTime>();
-            primaerdatenAufbereitungItem.AnzahlVersucheDownload = reader["AnzahlVersucheDownload"].GetValueOrNull<int>();
-            primaerdatenAufbereitungItem.AnzahlVersucheSync = reader["AnzahlVersucheSync"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.DigitalisierungsKategorieId = reader["DigitalisierungsKategorieId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.PrimaerdatenAuftragId = reader["PrimaerdatenAuftragId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.GroesseInBytes = reader["GroesseInBytes"].GetValueOrNull<long>();
             primaerdatenAufbereitungItem.PackageMetadata = reader["PackageMetadata"].ToString();
 
             return primaerdatenAufbereitungItem;
@@ -2093,11 +2077,11 @@ namespace CMI.Access.Sql.Viaduc
 
     public class IndivTokens
     {
-        public IndivTokens(string[] primaryDataFulltextAccessTokens, string[] primaryDataDownloadAccessTokens, string[] metadataAccessTokens)
+        public IndivTokens(string[] primaryDataFulltextAccessTokens, string[] primaryDataDownloadAccessTokens, string[] fieldAccessTokens)
         {
             PrimaryDataFulltextAccessTokens = primaryDataFulltextAccessTokens;
             PrimaryDataDownloadAccessTokens = primaryDataDownloadAccessTokens;
-            MetadataAccessTokens = metadataAccessTokens;
+            FieldDataAccessTokens = fieldAccessTokens;
         }
 
         public string[] PrimaryDataFulltextAccessTokens { get; }
@@ -2105,5 +2089,7 @@ namespace CMI.Access.Sql.Viaduc
         public string[] PrimaryDataDownloadAccessTokens { get; }
 
         public string[] MetadataAccessTokens { get; }
+
+        public string[] FieldDataAccessTokens { get; }
     }
 }

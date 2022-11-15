@@ -14,7 +14,8 @@
   "AE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
-    "de": "Vereinigte Arabische Emirate",
+    "Laendercode": "ARE",
+    "de": "V. A. Emirate",
     "fr": "Émirats arabes unis",
     "it": "Emirati Arabi Uniti",
     "en": "United Arab Emirates"
@@ -38,6 +39,9 @@
     "en": "Anguilla"
   },
   "AL": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "ALB",
     "de": "Albanien",
     "fr": "Albanie",
     "it": "Albania",
@@ -62,6 +66,9 @@
     "en": "Antarctica"
   },
   "AR": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "ARG",
     "de": "Argentinien",
     "fr": "Argentine",
     "it": "Argentina",
@@ -76,6 +83,7 @@
   "AT": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "AUT",
     "de": "Österreich",
     "fr": "Autriche",
     "it": "Austria",
@@ -84,6 +92,7 @@
   "AU": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "AUS",
     "de": "Australien",
     "fr": "Australie",
     "it": "Australia",
@@ -110,6 +119,7 @@
   "BA": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "BIH",
     "de": "Bosnien und Herzegowina",
     "fr": "Bosnie-Herzégovine",
     "it": "Bosnia-Erzegovina",
@@ -122,6 +132,9 @@
     "en": "Barbados"
   },
   "BD": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "BGD",
     "de": "Bangladesh",
     "fr": "Bangladesh",
     "it": "Bangladesh",
@@ -130,6 +143,7 @@
   "BE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "BEL",
     "de": "Belgien",
     "fr": "Belgique",
     "it": "Belgio",
@@ -143,13 +157,17 @@
   },
   "BG": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "BGR",
     "de": "Bulgarien",
     "fr": "Bulgarie",
     "it": "Bulgaria",
     "en": "Bulgaria"
   },
   "BH": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "BHR",
     "de": "Bahrain",
     "fr": "Bahreïn",
     "it": "Bahrein",
@@ -198,6 +216,9 @@
     "en": "Caribbean Netherlands"
   },
   "BR": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "BRA",
     "de": "Brasilien",
     "fr": "Brésil",
     "it": "Brasile",
@@ -222,7 +243,10 @@
     "en": "Botswana"
   },
   "BY": {
-    "de": "Weissrussland",
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "BLR",
+    "de": "Belarus",
     "fr": "Biélorussie",
     "it": "Bielorussia",
     "en": "Belarus"
@@ -236,6 +260,7 @@
   "CA": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "CAN",
     "de": "Kanada",
     "fr": "Canada",
     "it": "Canada",
@@ -268,6 +293,7 @@
   "CH": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "CHE",
     "de": "Schweiz",
     "fr": "Suisse",
     "it": "Svizzera",
@@ -288,12 +314,16 @@
   "CL": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "CHL",
     "de": "Chile",
     "fr": "Chili",
     "it": "Cile",
     "en": "Chile"
   },
   "CM": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "cmr",
     "de": "Kamerun",
     "fr": "Cameroun",
     "it": "Camerun",
@@ -302,12 +332,16 @@
   "CN": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "CHN",
     "de": "China",
     "fr": "Chine",
     "it": "Cina",
     "en": "China"
   },
   "CO": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "COL",
     "de": "Kolumbien",
     "fr": "Colombie",
     "it": "Colombia",
@@ -320,13 +354,16 @@
     "en": "Costa Rica"
   },
   "CU": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "CUB",
     "de": "Kuba",
     "fr": "Cuba",
     "it": "Cuba",
     "en": "Cuba"
   },
   "CV": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Kapverden",
     "fr": "Cap-Vert",
@@ -348,6 +385,7 @@
   "CY": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "CYP",
     "de": "Zypern",
     "fr": "Chypre",
     "it": "Cipro",
@@ -356,6 +394,7 @@
   "CZ": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "CZE",
     "de": "Tschechische Republik",
     "fr": "République tchèque",
     "it": "Repubblica Ceca",
@@ -364,6 +403,7 @@
   "DE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "DEU",
     "de": "Deutschland",
     "fr": "Allemagne",
     "it": "Germania",
@@ -384,6 +424,7 @@
   "DK": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "DNK",
     "de": "Dänemark",
     "fr": "Danemark",
     "it": "Danimarca",
@@ -402,6 +443,9 @@
     "en": "Dominican Republic"
   },
   "DZ": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "DZA",
     "de": "Algerien",
     "fr": "Algérie",
     "it": "Algeria",
@@ -414,6 +458,9 @@
     "en": "Ceuta & Melilla"
   },
   "EC": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "ECU",
     "de": "Ecuador",
     "fr": "Équateur",
     "it": "Ecuador",
@@ -421,7 +468,8 @@
   },
   "EE": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "EST",
     "de": "Estland",
     "fr": "Estonie",
     "it": "Estonia",
@@ -430,6 +478,7 @@
   "EG": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "EGY",
     "de": "Ägypten",
     "fr": "Égypte",
     "it": "Egitto",
@@ -442,6 +491,9 @@
     "en": "Western Sahara"
   },
   "ER": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "ERI",
     "de": "Eritrea",
     "fr": "Érythrée",
     "it": "Eritrea",
@@ -450,12 +502,16 @@
   "ES": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "ESP",
     "de": "Spanien",
     "fr": "Espagne",
     "it": "Spagna",
     "en": "Spain"
   },
   "ET": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "ETH",
     "de": "Äthiopien",
     "fr": "Éthiopie",
     "it": "Etiopia",
@@ -464,6 +520,7 @@
   "FI": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "FIN",
     "de": "Finnland",
     "fr": "Finlande",
     "it": "Finlandia",
@@ -488,7 +545,7 @@
     "en": "Micronesia"
   },
   "FO": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Färöer",
     "fr": "Îles Féroé",
@@ -498,6 +555,7 @@
   "FR": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "FRA",
     "de": "Frankreich",
     "fr": "France",
     "it": "Francia",
@@ -512,6 +570,7 @@
   "GB": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "GBR",
     "de": "Grossbritannien",
     "fr": "Royaume-Uni",
     "it": "Regno Unito",
@@ -524,8 +583,8 @@
     "en": "Grenada"
   },
   "GE": {
-    "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": true,
+    "canOnboardWithPassport": false,
+    "canOnboardWithIdentityCard": false,
     "de": "Georgien",
     "fr": "Géorgie",
     "it": "Georgia",
@@ -544,7 +603,7 @@
     "en": "Guernsey"
   },
   "GH": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Ghana",
     "fr": "Ghana",
@@ -558,7 +617,7 @@
     "en": "Gibraltar"
   },
   "GL": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Grönland",
     "fr": "Groenland",
@@ -592,6 +651,7 @@
   "GR": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "GRC",
     "de": "Griechenland",
     "fr": "Grèce",
     "it": "Grecia",
@@ -640,8 +700,9 @@
     "en": "Honduras"
   },
   "HR": {
-    "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithPassport": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "HRV",
     "de": "Kroatien",
     "fr": "Croatie",
     "it": "Croazia",
@@ -656,6 +717,7 @@
   "HU": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "HUN",
     "de": "Ungarn",
     "fr": "Hongrie",
     "it": "Ungheria",
@@ -670,6 +732,7 @@
   "ID": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "IDN",
     "de": "Indonesien",
     "fr": "Indonésie",
     "it": "Indonesia",
@@ -678,6 +741,7 @@
   "IE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "IRL",
     "de": "Irland",
     "fr": "Irlande",
     "it": "Irlanda",
@@ -686,6 +750,7 @@
   "IL": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "ISR",
     "de": "Israel",
     "fr": "Israël",
     "it": "Israele",
@@ -700,6 +765,7 @@
   "IN": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "IND",
     "de": "Indien",
     "fr": "Inde",
     "it": "India",
@@ -718,7 +784,7 @@
     "en": "Iraq"
   },
   "IR": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Iran",
     "fr": "Iran",
@@ -728,6 +794,7 @@
   "IS": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "ISL",
     "de": "Island",
     "fr": "Islande",
     "it": "Islanda",
@@ -735,7 +802,8 @@
   },
   "IT": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "ITA",
     "de": "Italien",
     "fr": "Italie",
     "it": "Italia",
@@ -766,6 +834,9 @@
     "en": "Japan"
   },
   "KE": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "KEN",
     "de": "Kenia",
     "fr": "Kenya",
     "it": "Kenya",
@@ -808,13 +879,16 @@
     "en": "North Korea"
   },
   "KR": {
-    "de": "Republik Korea",
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "KOR",
+    "de": "Korea (Süd)",
     "fr": "Corée du Sud",
     "it": "Corea del Sud",
     "en": "South Korea"
   },
   "KW": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Kuwait",
     "fr": "Koweït",
@@ -828,6 +902,9 @@
     "en": "Cayman Islands"
   },
   "KZ": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "KAZ",
     "de": "Kasachstan",
     "fr": "Kazakhstan",
     "it": "Kazakistan",
@@ -842,6 +919,7 @@
   "LB": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "LBN",
     "de": "Libanon",
     "fr": "Liban",
     "it": "Libano",
@@ -856,6 +934,7 @@
   "LI": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "LIE",
     "de": "Liechtenstein",
     "fr": "Liechtenstein",
     "it": "Liechtenstein",
@@ -882,14 +961,16 @@
   "LT": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "LTU",
     "de": "Litauen",
     "fr": "Lituanie",
     "it": "Lituania",
     "en": "Lithuania"
   },
   "LU": {
-    "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithPassport": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "LUX",
     "de": "Luxemburg",
     "fr": "Luxembourg",
     "it": "Lussemburgo",
@@ -898,6 +979,7 @@
   "LV": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "LVA",
     "de": "Lettland",
     "fr": "Lettonie",
     "it": "Lettonia",
@@ -910,6 +992,9 @@
     "en": "Libya"
   },
   "MA": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "MAR",
     "de": "Marokko",
     "fr": "Maroc",
     "it": "Marocco",
@@ -930,6 +1015,10 @@
     "en": "Moldova"
   },
   "ME": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "MNE",
+    "de": "Republik Moldau",
     "de": "Montenegro",
     "fr": "Monténégro",
     "it": "Montenegro",
@@ -956,10 +1045,11 @@
   "MK": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
-    "de": "Mazedonien",
-    "fr": "Macédoine",
-    "it": "Repubblica di Macedonia",
-    "en": "Macedonia"
+    "Laendercode": "MKD",
+    "de": "Nordmazedonien",
+    "fr": "Macédoine du Nord",
+    "it": "Macedonia del Nord",
+    "en": "North Macedonia"
   },
   "ML": {
     "de": "Mali",
@@ -1012,6 +1102,7 @@
   "MT": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "MLT",
     "de": "Malta",
     "fr": "Malte",
     "it": "Malta",
@@ -1036,6 +1127,9 @@
     "en": "Malawi"
   },
   "MX": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "Mex",
     "de": "Mexiko",
     "fr": "Mexique",
     "it": "Messico",
@@ -1044,6 +1138,7 @@
   "MY": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "MYS",
     "de": "Malaysia",
     "fr": "Malaisie",
     "it": "Malesia",
@@ -1080,6 +1175,9 @@
     "en": "Norfolk Island"
   },
   "NG": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "NGA",
     "de": "Nigeria",
     "fr": "Nigéria",
     "it": "Nigeria",
@@ -1094,6 +1192,7 @@
   "NL": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "NLD",
     "de": "Niederlande",
     "fr": "Pays-Bas",
     "it": "Paesi Bassi",
@@ -1101,7 +1200,8 @@
   },
   "NO": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "NOR",
     "de": "Norwegen",
     "fr": "Norvège",
     "it": "Norvegia",
@@ -1126,6 +1226,9 @@
     "en": "Niue"
   },
   "NZ": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "NZL",
     "de": "Neuseeland",
     "fr": "Nouvelle-Zélande",
     "it": "Nuova Zelanda",
@@ -1144,6 +1247,9 @@
     "en": "Panama"
   },
   "PE": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "PER",
     "de": "Peru",
     "fr": "Pérou",
     "it": "Perù",
@@ -1162,6 +1268,9 @@
     "en": "Papua New Guinea"
   },
   "PH": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "PHL",
     "de": "Philippinen",
     "fr": "Philippines",
     "it": "Filippine",
@@ -1169,7 +1278,8 @@
   },
   "PK": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "PAK",
     "de": "Pakistan",
     "fr": "Pakistan",
     "it": "Pakistan",
@@ -1177,7 +1287,8 @@
   },
   "PL": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "POL",
     "de": "Polen",
     "fr": "Pologne",
     "it": "Polonia",
@@ -1210,6 +1321,7 @@
   "PT": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "PRT",
     "de": "Portugal",
     "fr": "Portugal",
     "it": "Portogallo",
@@ -1241,13 +1353,17 @@
   },
   "RO": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": false,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "ROU",
     "de": "Rumänien",
     "fr": "Roumanie",
     "it": "Romania",
     "en": "Romania"
   },
   "RS": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "SRB",
     "de": "Serbien",
     "fr": "Serbie",
     "it": "Serbia",
@@ -1256,9 +1372,10 @@
   "RU": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
-    "de": "Russische Föderation",
+    "Laendercode": "RUS",
+    "de": "Russland",
     "fr": "Russie",
-    "it": "Federazione Russa",
+    "it": "Russia",
     "en": "Russia"
   },
   "RW": {
@@ -1294,12 +1411,16 @@
   "SE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "SEW",
     "de": "Schweden",
     "fr": "Suède",
     "it": "Svezia",
     "en": "Sweden"
   },
   "SG": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "SGP",
     "de": "Singapur",
     "fr": "Singapour",
     "it": "Singapore",
@@ -1314,6 +1435,7 @@
   "SI": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
+    "Laendercode": "SVN",
     "de": "Slowenien",
     "fr": "Slovénie",
     "it": "Slovenia",
@@ -1327,7 +1449,8 @@
   },
   "SK": {
     "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "SVK",
     "de": "Slowakei",
     "fr": "Slovaquie",
     "it": "Slovacchia",
@@ -1346,6 +1469,9 @@
     "en": "San Marino"
   },
   "SN": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "SEN",
     "de": "Senegal",
     "fr": "Sénégal",
     "it": "Senegal",
@@ -1388,6 +1514,9 @@
     "en": "Sint Maarten"
   },
   "SY": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "SYR",
     "de": "Syrien",
     "fr": "Syrie",
     "it": "Siria",
@@ -1424,12 +1553,18 @@
     "en": "French Southern Territories"
   },
   "TG": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "TGO",
     "de": "Togo",
     "fr": "Togo",
     "it": "Togo",
     "en": "Togo"
   },
   "TH": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "THA",
     "de": "Thailand",
     "fr": "Thaïlande",
     "it": "Tailandia",
@@ -1460,6 +1595,9 @@
     "en": "Turkmenistan"
   },
   "TN": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "TUN",
     "de": "Tunesien",
     "fr": "Tunisie",
     "it": "Tunisia",
@@ -1474,6 +1612,7 @@
   "TR": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "TUR",
     "de": "Türkei",
     "fr": "Turquie",
     "it": "Turchia",
@@ -1492,6 +1631,9 @@
     "en": "Tuvalu"
   },
   "TW": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "TWN",
     "de": "Taiwan",
     "fr": "Taïwan",
     "it": "Taiwan",
@@ -1504,6 +1646,9 @@
     "en": "Tanzania"
   },
   "UA": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": true,
+    "Laendercode": "UKR",
     "de": "Ukraine",
     "fr": "Ukraine",
     "it": "Ucraina",
@@ -1524,13 +1669,14 @@
   "US": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "USA",
     "de": "Vereinigte Staaten",
     "fr": "États-Unis",
     "it": "Stati Uniti",
     "en": "United States"
   },
   "UY": {
-    "canOnboardWithPassport": true,
+    "canOnboardWithPassport": false,
     "canOnboardWithIdentityCard": false,
     "de": "Uruguay",
     "fr": "Uruguay",
@@ -1556,6 +1702,9 @@
     "en": "St. Vincent & Grenadines"
   },
   "VE": {
+    "canOnboardWithPassport": true,
+    "canOnboardWithIdentityCard": false,
+    "Laendercode": "VEN",
     "de": "Venezuela",
     "fr": "Venezuela",
     "it": "Venezuela",
@@ -1576,6 +1725,7 @@
   "VN": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "VNM",
     "de": "Vietnam",
     "fr": "Vietnam",
     "it": "Vietnam",
@@ -1602,6 +1752,7 @@
   "XK": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
+    "Laendercode": "RKS",
     "de": "Kosovo",
     "fr": "Kosovo",
     "it": "Kosovo",
@@ -1620,8 +1771,8 @@
     "en": "Mayotte"
   },
   "ZA": {
-    "canOnboardWithPassport": true,
-    "canOnboardWithIdentityCard": true,
+    "canOnboardWithPassport": false,
+    "canOnboardWithIdentityCard": false,
     "de": "Südafrika",
     "fr": "Afrique du Sud",
     "it": "Sudafrica",

@@ -42,6 +42,8 @@ namespace CMI.Engine.MailTemplate
 
         public override string Titel => elasticArchiveRecord.Title;
 
+        public override string Darin => elasticArchiveRecord.WithinInfo;
+
         public override string Id => elasticArchiveRecord.ArchiveRecordId;
 
         public override bool IstFreiZugänglich => elasticArchiveRecord.PrimaryDataDownloadAccessTokens.Contains(AccessRoles.RoleOe2);
@@ -76,6 +78,9 @@ namespace CMI.Engine.MailTemplate
         public override bool IdDir => !string.IsNullOrEmpty(elasticArchiveRecord?.PrimaryDataLink);
 
         public override string ZustaendigeStelle => elasticArchiveRecord.ZuständigeStelle() ?? "";
+
+        public override string ZusaetzlicheInformationen => elasticArchiveRecord.ZusätzlicheInformationen() ?? "";
+
 
         public override Behältnis[] Behältnisse
         {

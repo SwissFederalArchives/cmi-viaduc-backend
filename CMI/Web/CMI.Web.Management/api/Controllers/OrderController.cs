@@ -56,6 +56,7 @@ namespace CMI.Web.Management.api.Controllers
             access.AssertFeatureOrThrow(ApplicationFeature.AuftragsuebersichtAuftraegeKannAushebungsauftraegeDrucken);
 
             var expando = builder
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                 .AddUser(access.UserId)
                 .AddAuftraege(orderItemIds)
                 .Create();
@@ -77,6 +78,7 @@ namespace CMI.Web.Management.api.Controllers
                 var access = ManagementControllerHelper.GetUserAccess();
                 access.AssertFeatureOrThrow(ApplicationFeature.AuftragsuebersichtAuftraegeVersandkontrolleAusfuehren);
                 var expando = builder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddUser(access.UserId)
                     .AddBestellerMitAuftraegen(orderItemIds)
                     .Create();
@@ -161,7 +163,7 @@ namespace CMI.Web.Management.api.Controllers
                 return StatusCode(HttpStatusCode.Forbidden);
             }
 
-            var item = await GetOrderingDetailItemInternal(id);
+            var item = await GetOrderingDetailItemInternal(id, true);
 
             return Ok(item);
         }
@@ -205,10 +207,10 @@ namespace CMI.Web.Management.api.Controllers
 
             if (flatItem.VeId.HasValue)
             {
-                var elasticItem = await GetElasticArchiveRecord(flatItem.VeId.Value.ToString());
+                var elasticItem = await GetElasticArchiveRecord(flatItem.VeId.Value.ToString(), nichtSichtbarEinsehen);
                 if (elasticItem != null)
                 {
-                    var ancestors = GetAncestors(elasticItem);
+                    var ancestors = elasticItem.GetArchivePlanContext();
                     item.ArchivplanKontext = ancestors;
 
                     if (nichtSichtbarEinsehen)
@@ -250,7 +252,7 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         private void AssertUserHasFeatureForOrderingType(int[] orderItemIds,
-            ManagementUserAccess access,
+            IManagementUserAccess access,
             ApplicationFeature? featureWhenHasAuftraege,
             ApplicationFeature? featureWhenHasEinsichtsgesuche)
         {
@@ -276,34 +278,16 @@ namespace CMI.Web.Management.api.Controllers
             }
         }
 
-        public List<TreeRecord> GetAncestors(ElasticArchiveRecord record)
+     
+
+        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId, bool nichtSichtbarEinsehen = false)
         {
-            var ancestors = new List<TreeRecord>();
-            var items = record.ArchiveplanContext;
-
-            if (items == null)
-            {
-                return ancestors;
-            }
-
-            foreach (var contextItem in items)
-            {
-                var item = new TreeRecord
+            var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(
+                new FindArchiveRecordRequest
                 {
-                    ArchiveRecordId = contextItem.ArchiveRecordId,
-                    Title = contextItem.Title,
-                    ReferenceCode = contextItem.RefCode
-                };
-
-                ancestors.Add(item);
-            }
-
-            return ancestors;
-        }
-
-        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId)
-        {
-            var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
+                    ArchiveRecordId = archiveRecordId,
+                    UseUnanonymizedData = nichtSichtbarEinsehen
+                });
             return result.Message.ElasticArchiveRecord;
         }
 

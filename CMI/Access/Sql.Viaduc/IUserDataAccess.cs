@@ -30,6 +30,8 @@ namespace CMI.Access.Sql.Viaduc
 
         void UpdateUserSetting(JObject setting, string userId);
 
+        void UpdateRejectionReason(string rejectionReason, string userId);
+
         void DeleteAblieferdeStelleFromUser(string userId, int ablieferndeStelleId);
 
         void DeleteAllAblieferdeStelleFromUser(string userId);
@@ -40,7 +42,8 @@ namespace CMI.Access.Sql.Viaduc
         void SetIdentifierDocument(string userId, byte[] file, string rolePublicClient);
         string GetRoleForClient(string userId);
         string GetEiamRoles(string userId);
-
+        void UpdateActiveSessionId(string userId, string sessionId);
+        void ClearActiveUserSessionIds();
         void StoreDownloadReasonInHistory(ElasticArchiveRecord record, User user, UserAccess access, int reasonId);
     }
 }

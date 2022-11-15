@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using CMI.Contract.Asset;
+﻿using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Contract.Messaging;
@@ -12,8 +6,14 @@ using CMI.Engine.Asset;
 using CMI.Manager.Asset.Properties;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
 using Serilog.Core.Enrichers;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Asset.Consumers
 {

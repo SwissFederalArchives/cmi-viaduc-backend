@@ -176,7 +176,19 @@ namespace CMI.Contract.Common
         ReportingStatisticsReportsEinsehen = 10000096,
 
         [Description("Reporting-Abbyy Aktivitäten-Einsehen")]
-        ReportingStatisticsConverterProgressEinsehen = 10000097
+        ReportingStatisticsConverterProgressEinsehen = 10000097,
+
+        [Description("Administration-Sammlungen-Einsehen")]
+        AdministrationSammlungenEinsehen = 10000098,
+
+        [Description("Administration-Sammlungen-Bearbeiten")]
+        AdministrationSammlungenBearbeiten = 10000099,
+
+        [Description("Anonymisierung-ManuelleKorrektur-Einsehen")]
+        AnonymisierungManuelleKorrekturenEinsehen = 10000100,
+
+        [Description("Anonymisierung-ManuelleKorrektur-Bearbeiten")]
+        AnonymisierungManuelleKorrekturenBearbeiten = 10000101
     }
 
     public class ApplicationFeatureInfo

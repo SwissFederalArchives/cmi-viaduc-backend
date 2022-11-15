@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CMI.Access.Sql.Viaduc;
 using CMI.Access.Sql.Viaduc.AblieferndeStellen;
 using CMI.Contract.Common;
+using CMI.Contract.Common.Extensions;
 using CMI.Engine.MailTemplate;
 using CMI.Utilities.Template;
 using CMI.Web.Common.api;
@@ -44,8 +45,7 @@ namespace CMI.Web.Frontend.Helpers
             }
 
             var archiveRecordIdList = veInfoList.Select(ve => ve.VeId).ToList();
-            var entityResult = elasticService.QueryForIds<ElasticArchiveRecord>(archiveRecordIdList, userAccess,
-                new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0});
+            var entityResult = elasticService.QueryForIdsWithoutSecurityFilter<ElasticArchiveDbRecord>(archiveRecordIdList, new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0});
 
             if (entityResult.Status != (int) HttpStatusCode.OK)
             {
@@ -75,6 +75,10 @@ namespace CMI.Web.Frontend.Helpers
                 {
                     var kontrollstellen = string.Join(",", ablieferndeStelle.Kontrollstellen.OrderBy(e => e));
 
+                    if (archiveRecord.IsAnonymized)
+                    {
+                        archiveRecord.SetUnanonymizedValuesForAuthorizedUser(archiveRecord);
+                    }
                     if (archiveRecordListProKontrollstellen.TryGetValue(kontrollstellen, out var archiveRecordList))
                     {
                         archiveRecordList.Add(archiveRecord);
@@ -95,7 +99,8 @@ namespace CMI.Web.Frontend.Helpers
         private async Task Inform(string kontrollstellen, IEnumerable<ElasticArchiveRecord> relevanteArchiveRecords, IList<VeInfo> veInfoList,
             string userId)
         {
-            var dataBuilder = new DataBuilder(bus);
+            var dataBuilder = new DataBuilder(bus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized);
             var mailHelper = new MailHelper();
             var veList = new List<InElasticIndexierteVe>();
 

@@ -20,6 +20,7 @@ namespace CMI.Web.Frontend
             var helper = new ParameterBusHelper();
             BusConfigurator.ConfigureBus(builder, MonitoredServices.NotMonitored, (cfg, ctx) =>
             {
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
         }
@@ -70,6 +71,23 @@ namespace CMI.Web.Frontend
         public static IRequestClient<PrepareAssetRequest> RegisterPrepareAssetCallback()
         {
             return GetRequestClient<PrepareAssetRequest>(BusConstants.WebApiPrepareAssetRequestQueue);
+        }
+
+
+        /// <summary>
+        ///     Registers the start onboarding process callback
+        /// </summary>
+        public static IRequestClient<StartOnboardingProcessRequest> RegisterStartOnboardingProcessClient()
+        {
+            return GetRequestClient<StartOnboardingProcessRequest>(BusConstants.OnboardingManagerStartProcessMessageQueue);
+        }
+
+        /// <summary>
+        ///     Registers the start onboarding handle callback
+        /// </summary>
+        public static IRequestClient<HandleOnboardingCallbackRequest> RegisterHandleOnboardingCallbackClient()
+        {
+            return GetRequestClient<HandleOnboardingCallbackRequest>(BusConstants.OnboardingManagerHandleCallbackMessageQueue);
         }
     }
 }

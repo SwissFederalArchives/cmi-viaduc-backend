@@ -8,7 +8,6 @@ using CMI.Manager.Repository.Consumer;
 using CMI.Manager.Repository.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -58,7 +57,7 @@ namespace CMI.Manager.Repository
                     ec.UseRetry(retryPolicy => retryPolicy.Exponential(3, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringDirCheckQueue, ec => { ec.Consumer(ctx.Resolve<CheckDirConsumer>); });
-
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 

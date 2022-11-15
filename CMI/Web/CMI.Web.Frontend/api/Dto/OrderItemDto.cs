@@ -29,6 +29,7 @@ namespace CMI.Web.Frontend.api.Dto
 
         public int? VeId { get; set; }
         public int Id { get; set; }
+        public int OrderId { get; set; }
         public bool HasPersonendaten { get; set; }
         public string Standort { get; set; }
         public string Signatur { get; set; }

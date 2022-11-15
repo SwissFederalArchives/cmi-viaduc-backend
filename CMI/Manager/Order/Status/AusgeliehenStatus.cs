@@ -85,6 +85,7 @@ namespace CMI.Manager.Order.Status
         private ExpandoObject CreateEmailData()
         {
             var builder = new DataBuilder(Context.Bus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                 .AddBestellung(Context.Ordering)
                 .AddBesteller(Context.Besteller.Id)
                 .AddAuftraege(new[] {Context.OrderItem.Id});

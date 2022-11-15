@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Access.Harvest.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="OraclePort" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">"@@CMI.Utilities.DigitalRepository.CreateTestDataHelper.Properties.OraclePort@@</Value>
-    </Setting>
     <Setting Name="OracleSID" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
@@ -34,6 +31,12 @@
     </Setting>
     <Setting Name="OracleUser" Type="System.String" Scope="Application">
       <Value Profile="(Default)">@@CMI.Access.Harvest.Properties.Settings.OracleUser@@</Value>
+    </Setting>
+    <Setting Name="OraclePort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.DigitalRepository.CreateTestDataHelper.Properties.OraclePort@@</Value>
+    </Setting>
+    <Setting Name="ExcludedThesaurenIds" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">10001, 10003</Value>
     </Setting>
   </Settings>
 </SettingsFile>

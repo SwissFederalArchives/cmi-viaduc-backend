@@ -1,56 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CMI.Contract.Asset;
+﻿using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Index;
-using CMI.Manager.Index.Consumer;
 using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CMI.Manager.Asset.Tests
 {
     [TestFixture]
-    public class PrepareAssetConsumerTests : InMemoryTestFixture
+    public class PrepareAssetConsumerTests 
     {
+        private Mock<IAssetManager> assetManager;
+        private Mock<IIndexManager> indexManager;
+        private Mock<IRequestClient<FindArchiveRecordRequest>> indexClient;
+        private ITestHarness harness;
+        private ServiceProvider provider;
+
         [SetUp]
         public void Setup()
         {
-            requestClient = CreateRequestClient<PrepareAssetRequest>();
-            indexClient = CreateRequestClient<FindArchiveRecordRequest>();
-            assetManager.Reset();
-            indexManagerConsumer.Reset();
-        }
+            assetManager = new Mock<IAssetManager>();
+            indexManager = new Mock<IIndexManager>();
+            indexClient = new Mock<IRequestClient<FindArchiveRecordRequest>>();
+            provider = new ServiceCollection()
+                .AddMassTransitTestHarness(cfg =>
+                {
+                    cfg.AddConsumer<PrepareAssetConsumer>();
+                    cfg.AddTransient(_ => assetManager.Object);
+                    cfg.AddTransient(_ => indexManager.Object);
+                    cfg.AddTransient(_ => indexClient.Object);
+                })
+                .BuildServiceProvider(true);
 
-        public PrepareAssetConsumerTests()
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
-
-        private readonly Mock<IAssetManager> assetManager = new Mock<IAssetManager>();
-        private readonly Mock<IIndexManager> indexManager = new Mock<IIndexManager>();
-        private readonly Mock<IConsumer<IIndexManager>> indexManagerConsumer = new Mock<IConsumer<IIndexManager>>();
-        private Task<ConsumeContext<PrepareAssetRequest>> prepareAssetTask;
-        private Task<ConsumeContext<FindArchiveRecordRequest>> findArchiveRecordTask;
-        private IRequestClient<PrepareAssetRequest> requestClient;
-        private IRequestClient<FindArchiveRecordRequest> indexClient;
-        private Task<Response<PrepareAssetResult>> response;
-
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            prepareAssetTask = Handler<PrepareAssetRequest>(configurator,
-                context => new PrepareAssetConsumer(assetManager.Object, Bus, indexClient).Consume(context));
-            findArchiveRecordTask = Handler<FindArchiveRecordRequest>(configurator,
-                context => new FindArchiveRecordConsumer(indexManager.Object).Consume(context));
-        }
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
+            harness = provider.GetRequiredService<ITestHarness>();
         }
 
         [Test]
@@ -59,23 +49,21 @@ namespace CMI.Manager.Asset.Tests
             // Arrange
             assetManager.Setup(e => e.CheckPreparationStatus("999"))
                 .Returns(Task.FromResult(new PreparationStatus {PackageIsInPreparationQueue = true}));
+            await harness.Start();
+
+            var client = harness.GetRequestClient<PrepareAssetRequest>();
 
             // Act
-            response = requestClient.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
+            var result = await client.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
                 CallerId = "6"
             });
-
-            // Wait for the results
-            var message = (await response).Message;
-            await prepareAssetTask;
-
+          
             // Assert
-            message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
+            result.Message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
         }
-
         [Test]
         public async Task Register_in_job_database_called_when_not_in_preperation_queue()
         {
@@ -85,28 +73,37 @@ namespace CMI.Manager.Asset.Tests
             assetManager.Setup(e => e.RegisterJobInPreparationQueue("999", "usuallySomeGuid", AufbereitungsArtEnum.Download,
                 AufbereitungsServices.AssetService,
                 It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>())).Returns(() => Task.FromResult(1));
-            indexManager.Setup(i => i.FindArchiveRecord("999", false)).Returns(() => new ElasticArchiveRecord());
+            indexManager.Setup(i => i.FindArchiveRecord("999", false, false)).Returns(() => new ElasticArchiveRecord());
+
+            var findArchiveRecordResponseMock = new Mock<Response<FindArchiveRecordResponse>>();
+
+            findArchiveRecordResponseMock.SetupGet(x => x.Message).Returns(new FindArchiveRecordResponse
+            {
+                ArchiveRecordId = "999",
+                ElasticArchiveRecord = new ElasticArchiveRecord()
+            });
+            indexClient.Setup(r =>
+                r.GetResponse<FindArchiveRecordResponse>(It.IsAny<FindArchiveRecordRequest>(), new CancellationToken(), new RequestTimeout())).ReturnsAsync(findArchiveRecordResponseMock.Object);
+
+
+            await harness.Start();
+
+            var client = harness.GetRequestClient<PrepareAssetRequest>();
 
             // Act
-            response = requestClient.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
+            var result = await client.GetResponse<PrepareAssetResult>(new PrepareAssetRequest
             {
                 ArchiveRecordId = "999",
                 AssetType = AssetType.Gebrauchskopie,
                 CallerId = "5",
                 AssetId = "usuallySomeGuid"
             });
-
-            // Wait for the results
-            var message = (await response).Message;
-            await findArchiveRecordTask;
-            await prepareAssetTask;
-
-
+            
             // Assert
-            message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
+            result.Message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
             assetManager.Verify(a => a.RegisterJobInPreparationQueue("999", "usuallySomeGuid", AufbereitungsArtEnum.Download,
                 AufbereitungsServices.AssetService,
-                It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>()), () => Times.Once());
+                It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>()), Times.Once);
         }
     }
 }

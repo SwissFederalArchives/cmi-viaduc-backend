@@ -17,7 +17,8 @@ namespace CMI.Web.Frontend.api.Configuration
         }
 
         public static FrontendSettingsViaduc Instance { get; }
-
         public string SqlConnectionString { get; } = WebHelper.Settings["sqlConnectionString"];
+        public string SqlConnectionStringEF { get; } = WebHelper.Settings["sqlConnectionStringEF"];
+        public int CookieExpireTimeInMinutes { get; } = WebHelper.GetIntSetting("cookieExpireTimeInMinutes", 60);
     }
 }

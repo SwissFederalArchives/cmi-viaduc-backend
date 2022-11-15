@@ -35,8 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -74,8 +75,16 @@
     <Compile Include="EditRequiresFeatureAttribute.cs" />
     <Compile Include="ElasticLogRecord.cs" />
     <Compile Include="ElasticRawLogRecord.cs" />
+    <Compile Include="Entities\AnonymisierungsStatusEnum.cs" />
+    <Compile Include="Entities\CollectionItemResult.cs" />
+    <Compile Include="Entities\ImageInfo.cs" />
+    <Compile Include="Entities\ManuelleKorrekturDetailItem.cs" />
+    <Compile Include="Entities\ManuelleKorrekturFelder.cs" />
+    <Compile Include="Entities\Viaduc.DTOs.cs" />
+    <Compile Include="Extensions\SetUnanonymizedValuesService.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GetElasticLogRecordsResult.cs" />
+    <Compile Include="ICollectionManager.cs" />
     <Compile Include="IEditRequiresFeatureAttribute.cs" />
     <Compile Include="ElasticArchiveRecord.cs" />
     <Compile Include="ElasticArchiveRecordExtension.cs" />
@@ -86,11 +95,14 @@
     <Compile Include="HarvestLogInfoRequest.cs" />
     <Compile Include="HarvestLogInfoResult.cs" />
     <Compile Include="HarvestStatusInfo.cs" />
+    <Compile Include="IManuelleKorrekturManager.cs" />
     <Compile Include="IUpdatePrimaerdatenAuftragStatus.cs" />
     <Compile Include="LogDataFilter.cs" />
     <Compile Include="JsonConverters\LongToTimeSpanConverter.cs" />
     <Compile Include="ModulFunktionsblock.cs" />
     <Compile Include="MutationRecord.cs" />
+    <Compile Include="DropDownListItem.cs" />
+    <Compile Include="OnboardingModel.cs" />
     <Compile Include="PrimaerdatenAuftrag.cs" />
     <Compile Include="PrimaerdatenAuftragEnums.cs" />
     <Compile Include="PrimaerdatenAuftragLog.cs" />
@@ -172,11 +184,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" />
+  <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Nerdbank.GitVersioning.3.4.231\build\Nerdbank.GitVersioning.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets'))" />
   </Target>
 </Project>

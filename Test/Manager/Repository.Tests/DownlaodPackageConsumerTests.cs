@@ -1,57 +1,30 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
-using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Repository.Consumer;
-using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Repository.Tests
 {
-    public class DownlaodPackageConsumerTests : InMemoryTestFixture
+    public class DownlaodPackageConsumerTests
     {
         private readonly Mock<IConsumer<IDownloadPackage>> downloadPackageConsumer = new Mock<IConsumer<IDownloadPackage>>();
-
+        private InMemoryTestHarness harness;
         private readonly Mock<IRepositoryManager> repositoryManager = new Mock<IRepositoryManager>();
-        private Task<ConsumeContext<IAssetReady>> assetReadyUpdatedTask;
-        private Task<ConsumeContext<IDownloadPackage>> downloadPackageTask;
-        private Task<ConsumeContext<PrepareForTransformationMessage>> prepareForTransformationAssetTask;
-
-        public DownlaodPackageConsumerTests()
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
-
+        
         [SetUp]
         public void Setup()
         {
+            harness = new InMemoryTestHarness();
+            harness.TestTimeout = TimeSpan.FromMinutes(5);
+            harness.Start();
             repositoryManager.Reset();
             downloadPackageConsumer.Reset();
-        }
-
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            downloadPackageTask = Handler<IDownloadPackage>(configurator,
-                context => new DownloadPackageConsumer(repositoryManager.Object, Bus).Consume(context));
-        }
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
-            configurator.ReceiveEndpoint(BusConstants.AssetManagerPrepareForTransformation, ec =>
-            {
-                ec.Consumer(() => downloadPackageConsumer.Object);
-                prepareForTransformationAssetTask = Handled<PrepareForTransformationMessage>(ec);
-            });
-
-            configurator.ReceiveEndpoint(BusConstants.AssetManagerAssetReadyEventQueue, ec =>
-            {
-                ec.Consumer(() => downloadPackageConsumer.Object);
-                assetReadyUpdatedTask = Handled<IAssetReady>(ec);
-            });
         }
 
         [Test]
@@ -68,26 +41,27 @@ namespace CMI.Manager.Repository.Tests
                 }
             };
             repositoryManager.Setup(e => e.GetPackage(packageId, archiveRecordId, It.IsAny<int>())).ReturnsAsync(downloadResult);
-
-            // Act
-            await InputQueueSendEndpoint.Send<IDownloadPackage>(new
+            var consumer = new DownloadPackageConsumer(repositoryManager.Object, harness.Bus);
+            var context = new Mock<ConsumeContext<IDownloadPackage>>();
+            context.SetupGet(x => x.Message).Returns(new DownloadPackage
             {
                 PackageId = packageId,
                 ArchiveRecordId = archiveRecordId,
                 CallerId = "someCaller",
                 RetentionCategory = CacheRetentionCategory.UsageCopyPublic
             });
+            context.SetupGet(x => x.SourceAddress).Returns(harness.BaseAddress);
+            context.Setup(c => c.GetSendEndpoint(It.IsAny<Uri>())).Returns(GetEndpoint);
+           
 
-            // Wait for the results
-            await downloadPackageTask;
-            var context = await prepareForTransformationAssetTask;
+            // Act
+            await consumer.Consume(context.Object);
 
-            // Assert
-            context.Message.RepositoryPackage.ArchiveRecordId.Should().Be(archiveRecordId);
-            context.Message.CallerId = "someCaller";
-            context.Message.AssetType = AssetType.Gebrauchskopie; // Download from DIR is always UsageCopy
-            context.Message.RepositoryPackage.PackageFileName.Should().Be("someZipFile.zip");
-            context.Message.RetentionCategory.Should().Be(CacheRetentionCategory.UsageCopyPublic);
+            // Assert  
+            context.Verify(c => c.GetSendEndpoint(It.IsAny<Uri>()), Times.Once);
+            context.Verify(c => c.Publish<IPackageDownloaded>(It.IsAny<object>(), It.IsAny<CancellationToken>()), Times.Once);
+            context.Verify(c => c.Publish<IAssetReady>(It.IsAny<AssetReady>(), It.IsAny<CancellationToken>()), Times.Never);
+            await harness.Stop();
         }
 
         [Test]
@@ -109,23 +83,24 @@ namespace CMI.Manager.Repository.Tests
             repositoryManager.Setup(e => e.GetPackage(packageId, archiveRecordId, It.IsAny<int>())).ReturnsAsync(downloadResult);
 
             // Act
-            await InputQueueSendEndpoint.Send<IDownloadPackage>(new
+            var consumer = new DownloadPackageConsumer(repositoryManager.Object, harness.Bus);
+            var context = new Mock<ConsumeContext<IDownloadPackage>>();
+            context.SetupGet(x => x.Message).Returns(new DownloadPackage
             {
                 PackageId = packageId,
                 ArchiveRecordId = archiveRecordId,
                 CallerId = "someCaller",
                 RetentionCategory = CacheRetentionCategory.UsageCopyPublic
             });
+            context.Setup(c => c.GetSendEndpoint(It.IsAny<Uri>())).Returns(GetEndpoint);
 
-            // Wait for the results
-            await downloadPackageTask;
-            var context = await assetReadyUpdatedTask;
-
-            // Assert
-            context.Message.ArchiveRecordId.Should().Be(archiveRecordId);
-            context.Message.CallerId = "someCaller";
-            context.Message.AssetType = AssetType.Gebrauchskopie; // Download from DIR is always UsageCopy
-            context.Message.Valid.Should().Be(false);
+            // Act
+            await consumer.Consume(context.Object);
+            // Assert  
+            context.Verify(c => c.GetSendEndpoint(It.IsAny<Uri>()), Times.Never);
+            context.Verify(c => c.Publish<IPackageDownloaded>(It.IsAny<object>(), It.IsAny<CancellationToken>()), Times.Never);
+            context.Verify(c => c.Publish<IAssetReady>(It.IsAny<AssetReady>(), It.IsAny<CancellationToken>()), Times.Once);
+            await harness.Stop();
         }
 
         [Test]
@@ -145,25 +120,38 @@ namespace CMI.Manager.Repository.Tests
                 }
             };
             repositoryManager.Setup(e => e.GetPackage(packageId, archiveRecordId, It.IsAny<int>())).ReturnsAsync(downloadResult);
-
-            // Act
-            await InputQueueSendEndpoint.Send<IDownloadPackage>(new
+            var consumer = new DownloadPackageConsumer(repositoryManager.Object, harness.Bus);
+            var context = new Mock<ConsumeContext<IDownloadPackage>>();
+            context.SetupGet(x => x.Message).Returns(new DownloadPackage
             {
                 PackageId = packageId,
                 ArchiveRecordId = archiveRecordId,
                 CallerId = "someCaller",
                 RetentionCategory = CacheRetentionCategory.UsageCopyPublic
             });
+            context.Setup(c => c.GetSendEndpoint(It.IsAny<Uri>())).Returns(GetEndpoint);
 
-            // Wait for the results
-            await downloadPackageTask;
-            var context = await assetReadyUpdatedTask;
+            // Act
+            await consumer.Consume(context.Object); // Assert  
+            context.Verify(c => c.GetSendEndpoint(It.IsAny<Uri>()), Times.Never);
+            context.Verify(c => c.Publish<IPackageDownloaded>(It.IsAny<object>(), It.IsAny<CancellationToken>()), Times.Never);
+            context.Verify(c => c.Publish<IAssetReady>(It.IsAny<AssetReady>(), It.IsAny<CancellationToken>()), Times.Once);
+            await harness.Stop();
+        }
 
-            // Assert
-            context.Message.ArchiveRecordId.Should().Be(archiveRecordId);
-            context.Message.CallerId = "someCaller";
-            context.Message.AssetType = AssetType.Gebrauchskopie; // Download from DIR is always UsageCopy
-            context.Message.Valid.Should().Be(false);
+
+        private Task<ISendEndpoint> GetEndpoint()
+        {
+            var endpoint = new Mock<ISendEndpoint>();
+            endpoint.Setup(p =>
+                    p.Send(It.IsAny<PrepareForTransformationMessage>(), It.IsAny<CancellationToken>()))
+                .Returns(PrepareForTransformationConsumerMock);
+            return Task.FromResult(endpoint.Object);
+        }
+        
+        private Task PrepareForTransformationConsumerMock()
+        {
+            return Task.CompletedTask;
         }
     }
 }

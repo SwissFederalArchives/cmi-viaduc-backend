@@ -17,7 +17,7 @@ using MassTransit;
 using Newtonsoft.Json;
 using Renci.SshNet;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 using Serilog.Events;
 
 namespace CMI.Manager.Repository

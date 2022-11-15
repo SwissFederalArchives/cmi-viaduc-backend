@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using Aspose.Pdf;
+using Aspose.Pdf.Optimization;
 using CMI.Contract.Common;
 using CMI.Engine.Asset.ParameterSettings;
-using CSJ2K;
 using Serilog;
 using Image = System.Drawing.Image;
 
@@ -33,12 +32,18 @@ namespace CMI.Engine.Asset.PreProcess
                                 {
                                     Log.Information("File {FullName} will be optimized as there are too many big images (storage size).",
                                         sourceFile.FullName);
-                                    pdfDocument.OptimizeResources(new Document.OptimizationOptions
+                                    // Optimize
+                                    var optimizationOptions = new OptimizationOptions
                                     {
-                                        CompressImages = true,
-                                        ImageQuality = settings.OptimizedQualityInPercent,
-                                        ResizeImages = true
-                                    });
+                                        ImageCompressionOptions =
+                                        {
+                                            CompressImages = true,
+                                            ImageQuality = settings.OptimizedQualityInPercent,
+                                            ResizeImages = true
+                                        }
+                                    };
+
+                                    pdfDocument.OptimizeResources(optimizationOptions);
                                     pdfDocument.Save(sourceFile.FullName);
                                 }
                             }

@@ -8,6 +8,8 @@ using CMI.Web.Common.Helpers;
 using Kentor.AuthServices.Configuration;
 using Kentor.AuthServices.Saml2P;
 using Kentor.AuthServices.WebSso;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 
@@ -26,7 +28,7 @@ namespace CMI.Web.Common.Auth
 
         public void AcsCommandResultCreated(CommandResult result, Saml2Response response)
         {
-            spOptions.Logger.WriteInformation("SAML2 {Saml2Response}:" + JsonConvert.SerializeObject(response, Formatting.Indented));
+            spOptions.Logger.WriteVerbose("SAML2 {Saml2Response}:" + JsonConvert.SerializeObject(response, Formatting.Indented));
             // Bereits in Anwendung auf Mandant BAR vorhanden
             if (!HasValidMandant(result))
             {
@@ -103,8 +105,8 @@ namespace CMI.Web.Common.Auth
                     }
                 }
             }
-
-            spOptions.Logger.WriteInformation("(AuthServiceNotifications:AcsCommandResultCreated()): {READCLAIMS}" +
+            
+            spOptions.Logger.WriteVerbose("(AuthServiceNotifications:AcsCommandResultCreated()): {READCLAIMS}" +
                                               JsonConvert.SerializeObject(((ClaimsIdentity) result.Principal.Identity).Claims, Formatting.Indented,
                                                   new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore}));
         }

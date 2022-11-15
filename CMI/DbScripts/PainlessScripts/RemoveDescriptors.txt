@@ -1,0 +1,55 @@
+PUT /_ingest/pipeline/RemoveDescriptors
+{
+  "description": """"
+    PVW-1147 Einspielen Lösch-Script für bestehende Deskriptoren
+    all VEs with a thesaurus "Institutionen" or "Person" are searched and then these thesaurus are removed
+
+    
+    Procedure
+    Start/compile pipeline
+    Execute prepared search
+    Delete pipeline
+    
+    Hints:
+    the search is async and you get back a task with which the status can be checked e.g. GET /_tasks/lk3AiZV9R5Wc3wiPFmaD6w:14445773
+  """, 
+  "processors" : [{
+     "script" : {
+        "lang" : "painless",
+        "source" : """
+          def descriptors  = ctx.get('descriptors');
+          for (int i = descriptors.length-1; i>=0; i--) {
+            def descriptor = descriptors[i];
+            if (descriptor.thesaurus ==  "Person") {
+              descriptors.remove(i);
+            }
+            else if (descriptor.thesaurus ==  "Institutionen") {
+               descriptors.remove(i);
+            }
+          }
+          
+          """
+      }
+  }]
+}
+
+
+POST /archive/_update_by_query?pipeline=RemoveDescriptors&conflicts=proceed&wait_for_completion=false
+{
+  "query": {
+    "bool": {
+          "should": [
+            {
+              "match": {
+                "descriptors.thesaurus": "Institutionen"
+              }
+            },
+            {
+              "match": {
+                "descriptors.thesaurus": "Person"
+              }
+            }
+          ]
+        }
+  }
+}

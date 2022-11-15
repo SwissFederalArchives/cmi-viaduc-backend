@@ -29,5 +29,12 @@ namespace CMI.Engine.MailTemplate
         void Reset();
 
         dynamic Create();
+
+        /// <summary>
+        /// Sets if the data builder Add-methods should use the unanonymized data 
+        /// or use the anonymized default data, or if it is dependent on the approve status.
+        /// This method in general should be called before values are added.
+        /// </summary>
+        IDataBuilder SetDataProtectionLevel(DataBuilderProtectionStatus protectionStatus);
     }
 }

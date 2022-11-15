@@ -11,7 +11,7 @@ using CMI.Utilities.Cache.Access;
 using CMI.Utilities.Template;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Asset.Consumers
 {
@@ -97,6 +97,7 @@ namespace CMI.Manager.Asset.Consumers
                 var manager = parameterHelper.GetSetting<GebrauchskopiePasswort>();
                 var message = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddVe(message.ArchiveRecordId)
                     .AddUser(message.Recipient)
                     .AddValue("PasswortZipDatei", passwordHelper.GetHashPassword(message.ArchiveRecordId))
@@ -119,6 +120,7 @@ namespace CMI.Manager.Asset.Consumers
                 var template = parameterHelper.GetSetting<AufbereiteteBenutzungskopieZumDownloadBereit>();
                 var message = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddAuftraege(new[] {Convert.ToInt32(message.OrderItemId)})
                     .AddUser(message.Recipient)
                     .AddValue("Fehlermeldung", "")

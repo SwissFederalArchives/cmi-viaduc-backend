@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Index.Consumer
 {
@@ -32,6 +33,7 @@ namespace CMI.Manager.Index.Consumer
         /// <returns>Task.</returns>
         public async Task Consume(ConsumeContext<IUpdateArchiveRecord> context)
         {
+            Log.Information($"Updated archive record {context.Message.ArchiveRecord.ArchiveRecordId} in elastic index.");
             var currentStatus = AufbereitungsStatusEnum.OCRAbgeschlossen;
             using (LogContext.PushProperty(nameof(context.ConversationId), context.ConversationId))
             {
@@ -40,33 +42,74 @@ namespace CMI.Manager.Index.Consumer
 
                 try
                 {
-                    indexManager.UpdateArchiveRecord(context);
-                    Log.Information($"Updated archive record {context.Message.ArchiveRecord.ArchiveRecordId} in elastic index.");
+                    var archiveRecord = context.Message.ArchiveRecord;
+                    var elasticArchiveRecord = indexManager.ConvertArchiveRecord(archiveRecord);
 
-                    currentStatus = AufbereitungsStatusEnum.IndizierungAbgeschlossen;
-                    await UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus);
-
-                    // update the individual tokens for download and access 
-                    // these tokens need to be updated even if the record has no primary data.
-                    // Use case: Ö2 user asks for Einsichtsgesuch. It gets approved, but record may not (yet) have primary data.
-                    var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.RecalcIndivTokens));
-                    await ep.Send(new RecalcIndivTokens
+                    // Check if record must be anonymized
+                    // Is necessary if the method was not called by the anonymization consumer (ElasticArchiveDbRecord == null)
+                    // and the record has FieldAccess tokens
+                    if (context.Message.ElasticArchiveDbRecord == null && context.Message.ArchiveRecord.Security.FieldAccessToken.Any())
                     {
-                        ArchiveRecordId = Convert.ToInt32(context.Message.ArchiveRecord.ArchiveRecordId),
-                        ExistingMetadataAccessTokens = context.Message.ArchiveRecord.Security.MetadataAccessToken.ToArray(),
-                        ExistingPrimaryDataDownloadAccessTokens = context.Message.ArchiveRecord.Security.PrimaryDataDownloadAccessToken.ToArray(),
-                        ExistingPrimaryDataFulltextAccessTokens = context.Message.ArchiveRecord.Security.PrimaryDataFulltextAccessToken.ToArray()
-                    });
-                    Log.Information(
-                        $"Recalculated and updated individual tokens for archive record {context.Message.ArchiveRecord.ArchiveRecordId} in elastic index.");
-
-                    await context.Publish<IArchiveRecordUpdated>(new
+                        var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress,
+                            BusConstants.IndexManagerAnonymizeArchiveRecordMessageQueue));
+                        await ep.Send<IAnonymizationArchiveRecord>(new
+                        {
+                            MutationId = context.Message.MutationId,
+                            PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId,
+                            ArchiveRecord = context.Message.ArchiveRecord,
+                            ElasticArchiveDbRecord = elasticArchiveRecord
+                        });
+                    }
+                    // ----------------------------------------------------------------------
+                    // Der Datensatz muss nicht anonymisiert werden, oder wurde anonymisiert.
+                    // ----------------------------------------------------------------------
+                    else
                     {
-                        context.Message.MutationId,
-                        context.Message.ArchiveRecord.ArchiveRecordId,
-                        ActionSuccessful = true,
-                        context.Message.PrimaerdatenAuftragId
-                    });
+                        if (context.Message.ElasticArchiveDbRecord != null)
+                        {
+                            // Back from anonymize service: Update the record
+                            indexManager.UpdateArchiveRecord(context.Message.ElasticArchiveDbRecord);
+                        }
+                        else
+                        {
+                            // Update the record that was generated from the passed ArchiveRecord
+                            // This is the case when there are no FieldAccessTokens
+                            
+                            // Delete any existing manual corrections that may exist
+                            indexManager.DeletePossiblyExistingManuelleKorrektur(elasticArchiveRecord);
+                            indexManager.UpdateArchiveRecord(elasticArchiveRecord);
+                        }
+
+                        // In the archiveplan or the references we could have protected records that have changed
+                        // until the last sync of this record. We need to update those as well to be in sync
+                        UpdateAnyProtectedRelatedRecords(elasticArchiveRecord);
+
+                        currentStatus = AufbereitungsStatusEnum.IndizierungAbgeschlossen;
+                        await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus);
+
+                        // update the individual tokens for download and access 
+                        // these tokens need to be updated even if the record has no primary data.
+                        // Use case: Ö2 user asks for Einsichtsgesuch. It gets approved, but record may not (yet) have primary data.
+                        var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.RecalcIndivTokens));
+                        await ep.Send(new RecalcIndivTokens
+                        {
+                            ArchiveRecordId = Convert.ToInt32(context.Message.ArchiveRecord.ArchiveRecordId),
+                            ExistingMetadataAccessTokens = context.Message.ArchiveRecord.Security.MetadataAccessToken.ToArray(),
+                            ExistingPrimaryDataDownloadAccessTokens = context.Message.ArchiveRecord.Security.PrimaryDataDownloadAccessToken.ToArray(),
+                            ExistingPrimaryDataFulltextAccessTokens = context.Message.ArchiveRecord.Security.PrimaryDataFulltextAccessToken.ToArray(),
+                            ExistingFieldAccessTokens = context.Message.ArchiveRecord.Security?.FieldAccessToken.ToArray()
+                        });
+                        Log.Information(
+                            $"Recalculated and updated individual tokens for archive record {context.Message.ArchiveRecord.ArchiveRecordId} in elastic index.");
+
+                        await context.Publish<IArchiveRecordUpdated>(new
+                        {
+                            context.Message.MutationId,
+                            context.Message.ArchiveRecord.ArchiveRecordId,
+                            ActionSuccessful = true,
+                            context.Message.PrimaerdatenAuftragId
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -80,28 +123,38 @@ namespace CMI.Manager.Index.Consumer
                         ErrorMessage = ex.Message,
                         ex.StackTrace
                     });
-                    await UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus, ex.Message);
+                    await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus, ex.Message);
                 }
             }
         }
 
-        private async Task UpdatePrimaerdatenAuftragStatus(ConsumeContext<IUpdateArchiveRecord> context, AufbereitungsServices service,
-            AufbereitungsStatusEnum newStatus, string errorText = null)
+        private void UpdateAnyProtectedRelatedRecords(ElasticArchiveRecord elasticArchiveRecord)
         {
-            if (context.Message.PrimaerdatenAuftragId > 0)
+            // If a record has a parent that is anonymized
+            // (something that is rare, but can happen), then we need to fetch that parent
+            // and sync the related records of that parent. This updates the archiveplan and parentContentInfos
+            // of its children
+            var protectedParents = elasticArchiveRecord.ArchiveplanContext.Where(a => a.Protected);
+            foreach (var protectedParent in protectedParents)
             {
-                Log.Information("Auftrag mit Id {PrimaerdatenAuftragId} wurde im {service}-Service auf Status {Status} gesetzt.",
-                    context.Message.PrimaerdatenAuftragId, service.ToString(), newStatus.ToString());
+                indexManager.UpdateDependentRecords(protectedParent.ArchiveRecordId);
+            }
 
-                var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress,
-                    BusConstants.AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue));
-                await ep.Send<IUpdatePrimaerdatenAuftragStatus>(new UpdatePrimaerdatenAuftragStatus
+            // if a record has references to UoD that are anonymized, then
+            // we need to update those data as well, as those data could have been updated until the last sync
+            var protectedReferences = elasticArchiveRecord.References.Where(a => a.Protected).ToList();
+
+            // if a record has protected references, we need to make sure that the current record is updating its own references
+            // This step is required, because the UpdateDependentRecords won't update the references, if this
+            // record is synced for the first time and the referenced record is not yet up to date in Elastic
+            if (protectedReferences.Any())
+            {
+                indexManager.UpdateReferencesOfUnprotectedRecord(elasticArchiveRecord.ArchiveRecordId);
+                // Then sync the dependent records as well
+                foreach (var protectedReference in protectedReferences)
                 {
-                    PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId,
-                    Service = service,
-                    Status = newStatus,
-                    ErrorText = errorText
-                });
+                    indexManager.UpdateDependentRecords(protectedReference.ArchiveRecordId);
+                }
             }
         }
     }

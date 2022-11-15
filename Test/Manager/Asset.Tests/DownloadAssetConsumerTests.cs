@@ -12,118 +12,95 @@ using CMI.Utilities.Cache.Access;
 using CMI.Utilities.Template;
 using FluentAssertions;
 using MassTransit;
-using MassTransit.TestFramework;
+using MassTransit.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 
-namespace CMI.Manager.Asset.Tests
+namespace CMI.Manager.Asset.Tests;
+
+[TestFixture]
+public class DownloadAssetConsumerTests
 {
-    [TestFixture]
-    public class DownloadAssetConsumerTests : InMemoryTestFixture
+    private Mock<IAssetManager> assetManager;
+    private Mock<ICacheHelper> cacheHelper;
+    private Mock<IParameterHelper> parameterHelper;
+    private Mock<IMailHelper> mailHelper;
+    private Mock<IDataBuilder> dataBuilder;
+    private DoesExistInCacheRequestConsumer doesExistInCacheConsumer;
+    private ServiceProvider provider;
+
+    [SetUp]
+    public void Setup()
     {
-        [SetUp]
-        public void Setup()
-        {
-            requestClient = CreateRequestClient<DownloadAssetRequest>();
-            doesExistsClient = CreateRequestClient<DoesExistInCacheRequest>();
-            assetManager.Reset();
-            cacheHelper.Reset();
-            downloadPackageConsumer.Reset();
-            notificationManagerConsumer.Reset();
-        }
-
-        public DownloadAssetConsumerTests()
-        {
-            InMemoryTestHarness.TestTimeout = TimeSpan.FromMinutes(5);
-        }
-
-        private readonly Mock<IAssetManager> assetManager = new Mock<IAssetManager>();
-        private readonly Mock<ICacheHelper> cacheHelper = new Mock<ICacheHelper>();
-        private readonly Mock<IConsumer<IDownloadPackage>> downloadPackageConsumer = new Mock<IConsumer<IDownloadPackage>>();
-        private readonly DoesExistInCacheRequestConsumer doesExistInCacheConsumer = new DoesExistInCacheRequestConsumer();
-        private readonly Mock<IConsumer<IEmailMessage>> notificationManagerConsumer = new Mock<IConsumer<IEmailMessage>>();
-        private readonly Mock<IParameterHelper> parameterHelper = new Mock<IParameterHelper>();
-        private readonly Mock<IMailHelper> mailHelper = new Mock<IMailHelper>();
-        private readonly Mock<IDataBuilder> dataBuilder = new Mock<IDataBuilder>();
-
-        private Task<ConsumeContext<DownloadAssetRequest>> downloadAssetTask;
-        private IRequestClient<DownloadAssetRequest> requestClient;
-        private IRequestClient<DoesExistInCacheRequest> doesExistsClient;
-        private Task<Response<DownloadAssetResult>> response;
-        private Task<ConsumeContext<IEmailMessage>> notificationHandled;
-
-
-        protected override void ConfigureInMemoryReceiveEndpoint(IInMemoryReceiveEndpointConfigurator configurator)
-        {
-            downloadAssetTask = Handler<DownloadAssetRequest>(configurator,
-                context => new DownloadAssetConsumer(
-                    cacheHelper.Object,
-                    Bus,
-                    doesExistsClient,
-                    parameterHelper.Object,
-                    mailHelper.Object,
-                    dataBuilder.Object,
-                    new PasswordHelper("seed")
-                ).Consume(context));
-
-
-            Handler<DoesExistInCacheRequest>(configurator, context => doesExistInCacheConsumer.Consume(context));
-        }
-
-
-        protected override void ConfigureInMemoryBus(IInMemoryBusFactoryConfigurator configurator)
-        {
-            configurator.ReceiveEndpoint(BusConstants.NotificationManagerMessageQueue, ec =>
+        assetManager = new Mock<IAssetManager>();
+        cacheHelper = new Mock<ICacheHelper>();
+        parameterHelper = new Mock<IParameterHelper>();
+        mailHelper = new Mock<IMailHelper>();
+        dataBuilder = new Mock<IDataBuilder>();
+        doesExistInCacheConsumer = new DoesExistInCacheRequestConsumer();
+        provider = new ServiceCollection()
+            .AddMassTransitTestHarness(cfg =>
             {
-                ec.Consumer(() => notificationManagerConsumer.Object);
-                notificationHandled = Handled<IEmailMessage>(ec);
-            });
-        }
+                cfg.AddSingleton(doesExistInCacheConsumer);
+                cfg.AddConsumer<DownloadAssetConsumer>();
+                cfg.AddConsumer<DoesExistInCacheRequestConsumer>();
+                cfg.AddTransient(_ => doesExistInCacheConsumer);
+                cfg.AddTransient(_ => cacheHelper.Object);
+                cfg.AddTransient(_ => parameterHelper.Object);
+                cfg.AddTransient(_ => mailHelper.Object);
+                cfg.AddTransient(_ => dataBuilder.Object);
+                cfg.AddTransient(_ => assetManager.Object);
+                cfg.AddTransient(_ => new PasswordHelper("seed"));
+            })
+            .BuildServiceProvider(true);
+    }
 
+    [Test]
+    public async Task Requested_download_not_in_cache_returns_null_for_url()
+    {
+        // Arrange
+        doesExistInCacheConsumer.DoesExistFunc = _ => new Tuple<bool, long>(false, 0);
 
-        [Test]
-        public async Task Requested_download_not_in_cache_returns_null_for_url()
+        var harness = provider.GetRequiredService<ITestHarness>();
+        await harness.Start();
+        var client = harness.GetRequestClient<DownloadAssetRequest>();
+
+        // Act
+        var result = await client.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
         {
-            // Arrange
-            doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(false, 0);
+            ArchiveRecordId = "999",
+            AssetType = AssetType.Gebrauchskopie
+        });
 
-            // Act
-            response = requestClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
-            {
-                ArchiveRecordId = "999",
-                AssetType = AssetType.Gebrauchskopie
-            });
+        // Assert
+        result.Message.AssetDownloadLink.Should().BeNullOrEmpty();
+        await harness.Stop();
+    }
 
-            // Wait for the results
-            var message = (await response).Message;
-            await downloadAssetTask;
+    [Test]
+    public async Task Requested_download_returns_valid_url()
+    {
+        // Arrange
+        doesExistInCacheConsumer.DoesExistFunc = _ => new Tuple<bool, long>(true, 99999);
+        cacheHelper.Setup(c => c.GetFtpUrl(It.IsAny<IBus>(), It.IsAny<CacheRetentionCategory>(), "1111"))
+            .Returns(() => Task.FromResult("sft://mockup"));
 
-            // Assert
-            message.AssetDownloadLink.Should().BeNullOrEmpty();
-        }
+        var harness = provider.GetRequiredService<ITestHarness>();
+        await harness.Start();
+        var client = harness.GetRequestClient<DownloadAssetRequest>();
 
-        [Test]
-        public async Task Requested_download_returns_valid_url()
+        // Act
+        var result = await client.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
         {
-            // Arrange
-            doesExistInCacheConsumer.DoesExistFunc = context => new Tuple<bool, long>(true, 99999);
+            ArchiveRecordId = "1111",
+            AssetType = AssetType.Gebrauchskopie,
+            RetentionCategory = CacheRetentionCategory.UsageCopyPublic
+        });
 
-            cacheHelper.Setup(e => e.GetFtpUrl(Bus, CacheRetentionCategory.UsageCopyPublic, "1111")).Returns(Task.FromResult("sft://mockup"));
 
-            // Act
-            response = requestClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
-            {
-                ArchiveRecordId = "1111",
-                AssetType = AssetType.Gebrauchskopie,
-                RetentionCategory = CacheRetentionCategory.UsageCopyPublic
-            });
-
-            // Wait for the results
-            var message = (await response).Message;
-            await downloadAssetTask;
-
-            // Assert
-            message.AssetDownloadLink.Should().NotBeEmpty();
-        }
+        // Assert
+        result.Message.AssetDownloadLink.Should().Be("sft://mockup");
+        await harness.Stop();
     }
 }

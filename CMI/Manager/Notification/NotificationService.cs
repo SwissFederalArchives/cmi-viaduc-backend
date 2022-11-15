@@ -7,7 +7,6 @@ using CMI.Manager.Notification.Infrastructure;
 using CMI.Manager.Notification.Properties;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -36,8 +35,8 @@ namespace CMI.Manager.Notification
                     ec.UseRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
+                cfg.UseNewtonsoftJsonSerializer();
             });
-
             var container = containerBuilder.Build();
             bus = container.Resolve<IBusControl>();
             bus.Start();

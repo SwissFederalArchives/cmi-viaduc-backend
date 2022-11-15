@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ViaducEntitiesStoreContainer" CdmEntityContainer="ViaducDb">
+    <EntitySetMapping Name="Collections">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.Collection">
+        <MappingFragment StoreEntitySet="Collections">
+          <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DescriptionShort" ColumnName="DescriptionShort" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="CollectionTypeId" ColumnName="CollectionTypeId" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ImageAltText" ColumnName="ImageAltText" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="CollectionPath" ColumnName="CollectionPath" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CollectionList">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.CollectionListItem">
+        <MappingFragment StoreEntitySet="v_CollectionLists">
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="ChildCollections" ColumnName="ChildCollections" />
+          <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DescriptionShort" ColumnName="DescriptionShort" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+          <ScalarProperty Name="CollectionTypeId" ColumnName="CollectionTypeId" />
+          <ScalarProperty Name="ImageAltText" ColumnName="ImageAltText" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="CollectionPath" ColumnName="CollectionPath" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApplicationUsers">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ApplicationUser">
+        <MappingFragment StoreEntitySet="ApplicationUsers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="StreetAttachment" ColumnName="StreetAttachment" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SkypeName" ColumnName="SkypeName" />
+          <ScalarProperty Name="Setting" ColumnName="Setting" />
+          <ScalarProperty Name="Claims" ColumnName="Claims" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="Fulltext" ColumnName="Fulltext" />
+          <ScalarProperty Name="UserExtId" ColumnName="UserExtId" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="FabasoftDossier" ColumnName="FabasoftDossier" />
+          <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
+          <ScalarProperty Name="IsInternalUser" ColumnName="IsInternalUser" />
+          <ScalarProperty Name="RolePublicClient" ColumnName="RolePublicClient" />
+          <ScalarProperty Name="EiamRoles" ColumnName="EiamRoles" />
+          <ScalarProperty Name="ResearcherGroup" ColumnName="ResearcherGroup" />
+          <ScalarProperty Name="BarInternalConsultation" ColumnName="BarInternalConsultation" />
+          <ScalarProperty Name="IdentifierDocument" ColumnName="IdentifierDocument" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="ReasonForRejectionDate" ColumnName="ReasonForRejectionDate" />
+          <ScalarProperty Name="DownloadLimitDisabledUntil" ColumnName="DownloadLimitDisabledUntil" />
+          <ScalarProperty Name="DigitalisierungsbeschraenkungAufgehobenBis" ColumnName="DigitalisierungsbeschraenkungAufgehobenBis" />
+          <ScalarProperty Name="ActiveAspNetSessionId" ColumnName="ActiveAspNetSessionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManuelleKorrekturen">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrektur">
+        <MappingFragment StoreEntitySet="ManuelleKorrekturen">
+          <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+          <ScalarProperty Name="VeId" ColumnName="VeId" />
+          <ScalarProperty Name="Signatur" ColumnName="Signatur" />
+          <ScalarProperty Name="Schutzfristende" ColumnName="Schutzfristende" />
+          <ScalarProperty Name="Titel" ColumnName="Titel" />
+          <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+          <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+          <ScalarProperty Name="GeändertAm" ColumnName="GeändertAm" />
+          <ScalarProperty Name="GeändertVon" ColumnName="GeändertVon" />
+          <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+          <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+          <ScalarProperty Name="Hierachiestufe" ColumnName="Hierachiestufe" />
+          <ScalarProperty Name="Aktenzeichen" ColumnName="Aktenzeichen" />
+          <ScalarProperty Name="Entstehungszeitraum" ColumnName="Entstehungszeitraum" />
+          <ScalarProperty Name="ZugänglichkeitGemässBGA" ColumnName="ZugänglichkeitGemässBGA" />
+          <ScalarProperty Name="Schutzfristverzeichnung" ColumnName="Schutzfristverzeichnung" />
+          <ScalarProperty Name="ZuständigeStelle" ColumnName="ZuständigeStelle" />
+          <ScalarProperty Name="Publikationsrechte" ColumnName="Publikationsrechte" />
+          <ScalarProperty Name="AnonymisiertZumErfassungszeitpunk" ColumnName="AnonymisiertZumErfassungszeitpunk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManuelleKorrekturFelder">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturFeld">
+        <MappingFragment StoreEntitySet="ManuelleKorrekturFelder">
+          <ScalarProperty Name="ManuelleKorrekturFelderId" ColumnName="ManuelleKorrekturFelderId" />
+          <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+          <ScalarProperty Name="Feldname" ColumnName="Feldname" />
+          <ScalarProperty Name="Original" ColumnName="Original" />
+          <ScalarProperty Name="Automatisch" ColumnName="Automatisch" />
+          <ScalarProperty Name="Manuell" ColumnName="Manuell" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManuelleKorrekturStatusHistories">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturStatusHistory">
+        <MappingFragment StoreEntitySet="ManuelleKorrekturStatusHistories">
+          <ScalarProperty Name="ManuelleKorrekturStatusHistoryId" ColumnName="ManuelleKorrekturStatusHistoryId" />
+          <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+          <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+          <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+          <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VManuelleKorrekturen">
+      <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.VManuelleKorrektur">
+        <MappingFragment StoreEntitySet="v_ManuelleKorrekturen">
+          <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+          <ScalarProperty Name="VeId" ColumnName="VeId" />
+          <ScalarProperty Name="Signatur" ColumnName="Signatur" />
+          <ScalarProperty Name="Schutzfristende" ColumnName="Schutzfristende" />
+          <ScalarProperty Name="Titel" ColumnName="Titel" />
+          <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+          <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+          <ScalarProperty Name="GeändertAm" ColumnName="GeändertAm" />
+          <ScalarProperty Name="GeändertVon" ColumnName="GeändertVon" />
+          <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+          <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+          <ScalarProperty Name="Hierachiestufe" ColumnName="Hierachiestufe" />
+          <ScalarProperty Name="Aktenzeichen" ColumnName="Aktenzeichen" />
+          <ScalarProperty Name="Entstehungszeitraum" ColumnName="Entstehungszeitraum" />
+          <ScalarProperty Name="ZugänglichkeitGemässBGA" ColumnName="ZugänglichkeitGemässBGA" />
+          <ScalarProperty Name="Schutzfristverzeichnung" ColumnName="Schutzfristverzeichnung" />
+          <ScalarProperty Name="ZuständigeStelle" ColumnName="ZuständigeStelle" />
+          <ScalarProperty Name="Publikationsrechte" ColumnName="Publikationsrechte" />
+          <ScalarProperty Name="AnonymisiertZumErfassungszeitpunk" ColumnName="AnonymisiertZumErfassungszeitpunk" />
+          <ScalarProperty Name="TitelGemAIS" ColumnName="TitelGemAIS" />
+          <ScalarProperty Name="TitelAutomatischAnonymisiert" ColumnName="TitelAutomatischAnonymisiert" />
+          <ScalarProperty Name="TitelManuellKorrigiert" ColumnName="TitelManuellKorrigiert" />
+          <ScalarProperty Name="DarinGemAIS" ColumnName="DarinGemAIS" />
+          <ScalarProperty Name="DarinAutomatischAnonymisiert" ColumnName="DarinAutomatischAnonymisiert" />
+          <ScalarProperty Name="DarinManuellKorrigiert" ColumnName="DarinManuellKorrigiert" />
+          <ScalarProperty Name="ZusatzkomponenteGemAIS" ColumnName="ZusatzkomponenteGemAIS" />
+          <ScalarProperty Name="ZusatzkomponenteAutomatischAnonymisiert" ColumnName="ZusatzkomponenteAutomatischAnonymisiert" />
+          <ScalarProperty Name="ZusatzkomponenteManuellKorrigiert" ColumnName="ZusatzkomponenteManuellKorrigiert" />
+          <ScalarProperty Name="ZusaetzlicheInformationenGemAIS" ColumnName="ZusaetzlicheInformationenGemAIS" />
+          <ScalarProperty Name="ZusaetzlicheInformationenAutomatischAnonymisiert" ColumnName="ZusaetzlicheInformationenAutomatischAnonymisiert" />
+          <ScalarProperty Name="ZusaetzlicheInformationenManuellKorrigiert" ColumnName="ZusaetzlicheInformationenManuellKorrigiert" />
+          <ScalarProperty Name="VerwandteVEGemAIS" ColumnName="VerwandteVEGemAIS" />
+          <ScalarProperty Name="VerwandteVEManuellKorrigiert" ColumnName="VerwandteVEManuellKorrigiert" />
+          <ScalarProperty Name="VerwandteVEAutomatischAnonymisiert" ColumnName="VerwandteVEAutomatischAnonymisiert" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

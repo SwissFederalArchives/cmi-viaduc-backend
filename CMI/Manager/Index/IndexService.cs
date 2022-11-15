@@ -9,7 +9,6 @@ using CMI.Manager.Index.Consumer;
 using CMI.Manager.Index.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -52,6 +51,16 @@ namespace CMI.Manager.Index
                     ec.UseRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
+                cfg.ReceiveEndpoint(BusConstants.IndexManagerAnonymizeArchiveRecordMessageQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<AnonymizationArchiveRecordConsumer>);
+                    ec.UseRetry(retryPolicy =>
+                        retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                });
+                cfg.ReceiveEndpoint(BusConstants.IndexManagerAnonymizeTestMessageQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<AnonymizationTestConsumer>);
+                });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerRemoveArchiveRecordMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<RemoveArchiveRecordConsumer>);
@@ -60,6 +69,7 @@ namespace CMI.Manager.Index
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerFindArchiveRecordMessageQueue,
                     ec => { ec.Consumer(ctx.Resolve<FindArchiveRecordConsumer>); });
+                
                 cfg.ReceiveEndpoint(string.Format(BusConstants.IndexManagagerRequestBase, nameof(GetArchiveRecordsForPackageRequest)),
                     ec =>
                     {
@@ -73,6 +83,7 @@ namespace CMI.Manager.Index
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerGetElasticLogRecordsRequestQueue,
                     ec => {  ec.Consumer(ctx.Resolve<IConsumer<GetElasticLogRecordsRequest>>); });
 
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 

@@ -84,6 +84,13 @@ namespace CMI.Access.Harvest.ScopeArchiv
                     var securityTokens = dataProvider.LoadMetadataSecurityTokens(Convert.ToInt64(recordId));
                     security.MetadataAccessToken = securityTokens;
                 });
+
+                var tFieldSecurity = Task.Factory.StartNew(() =>
+                {
+                    var fieldTokens = dataProvider.LoadFieldSecurityTokens(Convert.ToInt64(recordId));
+                    security.FieldAccessToken = fieldTokens;
+                });
+
                 var tPrimaryDataSecurity = Task.Factory.StartNew(() =>
                 {
                     var securityTokens = dataProvider.LoadPrimaryDataSecurityTokens(Convert.ToInt64(recordId));
@@ -99,7 +106,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
                 });
 
 
-                Task.WaitAll(tMetadataSecurity, tPrimaryDataSecurity);
+                Task.WaitAll(tMetadataSecurity, tPrimaryDataSecurity, tFieldSecurity);
             }
             catch (Exception ex)
             {
@@ -141,7 +148,9 @@ namespace CMI.Access.Harvest.ScopeArchiv
                     display.ContainsMedia = metadata.DetailData.Any(d => d.ElementType == DataElementElementType.media);
                     // In scopeArchiv the Levels (Stufen) have an attribute called "Bestellbar". We now check this on the 
                     // Unit of Description (VRZNG_ENHT_BSTLG_IND) PLUS the additional rule, that there must be containers.
-                    display.CanBeOrdered = metadata.Containers.NumberOfContainers > 0 && recordRow.VRZNG_ENHT_BSTLG_IND != 0;
+                    // PVW-1071: Nicht bestellbar, wenn physische Bestellbarkeit nicht gegeben ist, d.h. Bestellbarkeit != "Uneingeschränkt"
+                    display.CanBeOrdered = metadata.Containers.NumberOfContainers > 0 && recordRow.VRZNG_ENHT_BSTLG_IND != 0 &&
+                                           recordRow.VRZNG_ENHT_BNTZB_ID == 1;
                 });
                 var tArchiveplanContext = Task.Factory.StartNew(() =>
                 {
@@ -244,7 +253,8 @@ namespace CMI.Access.Harvest.ScopeArchiv
                             DateRangeText = row.ZT_RAUM_TXT,
                             IconId = (int) row.ICON_ID,
                             RefCode = row.SGNTR_CD,
-                            Title = row.VRZNG_ENHT_TITEL
+                            Title = row.VRZNG_ENHT_TITEL,
+                            Protected = row.PRTCTD != 0
                         });
                     }
                     else
@@ -322,9 +332,10 @@ namespace CMI.Access.Harvest.ScopeArchiv
                 {
                     retVal.Add(new ArchiveRecordMetadataReference
                     {
-                        ArchiveRecordId = ((int) row.GSFT_OBJ_ID).ToString(),
+                        ArchiveRecordId = ((int)row.GSFT_OBJ_ID).ToString(),
                         ReferenceName = row.GSFT_OBJ_KURZ_NM,
-                        Role = row.GSFT_OBJ_BZHNG_ROLLE_NM
+                        Role = row.GSFT_OBJ_BZHNG_ROLLE_NM,
+                        Protected = row.PRTCTD != 0
                     });
                 }
             }
@@ -426,7 +437,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
                     retVal.ProtectionCategory = recordRow.VRZNG_ENHT_INHLT_NM;
                     retVal.ProtectionBaseDate = recordRow.VRZNG_ENHT_SCHTZ_FRIST_NM;
                     retVal.ProtectionDuration = (int) recordRow.SCHTZ_FRIST_DAUER;
-                    retVal.ProtectionEndDate = recordRow.IsSCHTZ_FRIST_BIS_DTNull() ? (DateTime?) null : recordRow.SCHTZ_FRIST_BIS_DT;
+                    retVal.ProtectionEndDate = recordRow.IsSCHTZ_FRIST_BIS_DTNull() ? null : recordRow.SCHTZ_FRIST_BIS_DT;
                     retVal.CannotFallBelow = recordRow.SCHTZ_FRIST_MIN_IND != 0;
                     retVal.AdjustedManually = recordRow.SCHTZ_FRIST_MTTN_IND != 0;
                     retVal.ProtectionNote = recordRow.SCHTZ_FRIST_NTZ;

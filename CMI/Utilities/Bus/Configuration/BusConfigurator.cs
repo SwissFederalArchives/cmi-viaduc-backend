@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Autofac;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Utilities.Bus.Configuration.Properties;
-using GreenPipes;
-using GreenPipes.Configurators;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
 using Serilog;
-using Serilog.Events;
 using Serilog.Extensions.Logging;
 
 namespace CMI.Utilities.Bus.Configuration
@@ -26,7 +21,7 @@ namespace CMI.Utilities.Bus.Configuration
             Log.Information("Configuring Bus uri={uri} user={user}", Settings.Default.RabbitMqUri, Settings.Default.RabbitMqUserName);
 
             // Configure Logging for Masstransit using Serilog 
-            MassTransit.Context.LogContext.ConfigureCurrentLogContext(new SerilogLoggerFactory(Log.Logger));
+            LogContext.ConfigureCurrentLogContext(new SerilogLoggerFactory(Log.Logger));
 
             builder.Register(ctx =>
                 {
@@ -87,5 +82,6 @@ namespace CMI.Utilities.Bus.Configuration
 
             return null;
         }
+        
     }
 }

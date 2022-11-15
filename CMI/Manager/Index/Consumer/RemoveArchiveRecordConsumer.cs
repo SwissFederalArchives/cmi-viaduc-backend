@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Index.Consumer
 {

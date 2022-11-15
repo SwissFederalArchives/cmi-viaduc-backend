@@ -82,7 +82,7 @@ namespace CMI.Web.Frontend.api.Controllers
         private ElasticArchiveRecord GetRecord(int archiveRecordId, UserAccess access)
         {
             var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
-            return entityResult.Response?.Hits?.FirstOrDefault()?.Source;
+            return entityResult.Entries.FirstOrDefault()?.Data;
         }
 
         [HttpPost]
@@ -204,7 +204,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var user = userDataAccess.GetUser(userId);
 
             var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
-            var record = entityResult.Response?.Hits?.FirstOrDefault()?.Source;
+            var record = entityResult.Entries.FirstOrDefault()?.Data;
 
             if (record == null)
             {

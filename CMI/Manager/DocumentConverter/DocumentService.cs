@@ -8,7 +8,6 @@ using CMI.Manager.DocumentConverter.Consumers;
 using CMI.Manager.DocumentConverter.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -71,8 +70,8 @@ namespace CMI.Manager.DocumentConverter
                     ec.Consumer(ctx.Resolve<AbbyyOcrTestConsumer>);
                     // Do not allow more than 4 concurrent Abbyy calls
                     ec.PrefetchCount = 4;
-                });
-
+                }); 
+                cfg.UseNewtonsoftJsonSerializer();
             });
 
             container = containerBuilder.Build();

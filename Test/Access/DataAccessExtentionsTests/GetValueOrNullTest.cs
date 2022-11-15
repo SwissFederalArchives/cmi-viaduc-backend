@@ -11,7 +11,7 @@ namespace DataAccessExtentionsTests
         {
             long longus = 25L;
             
-            var result = DataAccessExtensions.GetValueOrNull<int>(longus);
+            var result = longus.GetValueOrNull<int>();
             Assert.IsTrue(result == 25);
         }
 
@@ -20,7 +20,7 @@ namespace DataAccessExtentionsTests
         {
             long intus = 25;
 
-            var result = DataAccessExtensions.GetValueOrNull<int>(intus);
+            var result = intus.GetValueOrNull<int>();
             Assert.IsTrue(result == 25);
         }
 
@@ -29,7 +29,7 @@ namespace DataAccessExtentionsTests
         {
             short shortus = 25;
 
-            var result = DataAccessExtensions.GetValueOrNull<int>(shortus);
+            var result = shortus.GetValueOrNull<int>();
             Assert.IsTrue(result == 25);
         }
 
@@ -38,7 +38,7 @@ namespace DataAccessExtentionsTests
         {
             int intus = 25;
 
-            var result = DataAccessExtensions.GetValueOrNull<short>(intus);
+            var result = intus.GetValueOrNull<short>();
             Assert.IsTrue(result == 25);
         }
 
@@ -47,7 +47,7 @@ namespace DataAccessExtentionsTests
         {
             double intus = 25;
 
-            var result = DataAccessExtensions.GetValueOrNull<short>(intus);
+            var result = intus.GetValueOrNull<short>();
             Assert.IsTrue(result == 25);
         }
 
@@ -63,7 +63,7 @@ namespace DataAccessExtentionsTests
         {
             short shortus = 25;
 
-            var result = DataAccessExtensions.GetValueOrNull<short>(shortus);
+            var result = shortus.GetValueOrNull<short>();
             Assert.IsTrue(result == 25);
         }
     }

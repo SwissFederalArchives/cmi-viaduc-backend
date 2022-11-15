@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
+using CMI.Contract.Common.Entities;
 using CMI.Contract.Common.Properties;
 using Newtonsoft.Json;
 using Serilog;
@@ -53,9 +53,27 @@ namespace CMI.Contract.Common
 
         public static bool HasCustomProperty(this ElasticArchiveRecord entity, string key)
         {
+            var sr = entity as SearchRecord;
+            return sr.HasCustomProperty(key);
+        }
+
+        public static bool HasCustomProperty<T>(this T entity, string key) where T : SearchRecord
+        {
             // ignore case, because the customfields are lowercamelcase
             return entity?.CustomFields != null &&
                    ((IDictionary<string, object>) entity.CustomFields).Any(k => k.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public static void SetCustomProperty<T>(this T entity, string key, string value) where T : SearchRecord
+        {
+            if (entity.HasCustomProperty(key))
+            { 
+                ((IDictionary<string, object>) entity.CustomFields)[key] = value;
+            }
+            else
+            {
+                ((IDictionary<string, object>) entity.CustomFields).Add(key,value);
+            }
         }
 
         public static string Aktenzeichen(this ElasticArchiveRecord record)
@@ -78,6 +96,9 @@ namespace CMI.Contract.Common
             return null;
         }
 
+        /// <summary>
+        /// Feld verweist auf das CustomField "ZusatzkomponenteZac1"
+        /// </summary>
         public static string Zusatzmerkmal(this ElasticArchiveRecord record)
         {
             Log.Verbose("Getting property zusatzkomponenteZac1.");
@@ -97,6 +118,56 @@ namespace CMI.Contract.Common
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Feld verweist auf das CustomField "ZusatzkomponenteZac1"
+        /// </summary>
+        public static void SetAnonymizeZusatzmerkmal(this ElasticArchiveRecord record, string anonymizeText)
+        {
+            Log.Verbose("Setting property zusatzkomponenteZac1.");
+            if (record.HasCustomProperty("zusatzkomponenteZac1"))
+            {
+                record.CustomFields.zusatzkomponenteZac1 = anonymizeText;
+            }
+            else
+            {
+                throw new InvalidOperationException("CustomFields Property zusatzkomponenteZac1 is not present");
+            }
+        }
+
+        public static string VerwandteVe(this ElasticArchiveRecord record)
+        {
+            Log.Verbose("Getting property verwandteVe.");
+            if (record.HasCustomProperty("verwandteVe"))
+            {
+                Log.Verbose("Property verwandteVe: {verwandteVe}",
+                    JsonConvert.SerializeObject(record.CustomFields.verwandteVe));
+                if (record.CustomFields.verwandteVe is string)
+                {
+                    return record.CustomFields.verwandteVe;
+                }
+
+                if (record.CustomFields.verwandteVe is List<object>)
+                {
+                    return string.Join(", ", record.CustomFields.verwandteVe);
+                }
+            }
+
+            return null;
+        }
+
+        public static void SetAnonymizeVerwandteVe(this ElasticArchiveRecord record, string anonymizeText)
+        {
+            Log.Verbose("Setting property verwandteVe.");
+            if (record.HasCustomProperty("verwandteVe"))
+            {
+                record.CustomFields.verwandteVe = anonymizeText;
+            }
+            else
+            {
+                throw new InvalidOperationException("CustomFields Property verwandteVe is not present");
+            }
         }
 
         public static string Form(this ElasticArchiveRecord record)
@@ -180,6 +251,9 @@ namespace CMI.Contract.Common
             return null;
         }
 
+        /// <summary>
+        /// Feld verweist auf das interne CustomField BemerkungZurVe
+        /// </summary>
         public static string ZusätzlicheInformationen(this ElasticArchiveRecord record)
         {
             Log.Verbose("Getting property bemerkungZurVe.");
@@ -198,6 +272,22 @@ namespace CMI.Contract.Common
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Feld verweist auf das interne CustomField BemerkungZurVe
+        /// </summary>
+        public static void SetAnonymizeZusätzlicheInformationen(this ElasticArchiveRecord record, string anonymizeText)
+        {
+            Log.Verbose("Setting property bemerkungZurVe.");
+            if (record.HasCustomProperty("bemerkungZurVe"))
+            {
+                record.CustomFields.bemerkungZurVe = anonymizeText;
+            }
+            else
+            {
+                throw new InvalidOperationException("CustomFields Property bemerkungZurVe is not present");
+            }
         }
 
         public static string Land(this ElasticArchiveRecord record)
@@ -387,8 +477,8 @@ namespace CMI.Contract.Common
                 {
                     searchRecord.TranslateCustomFieldZugaenglichkeitGemässBga(cultureInfo);
                 }
-                
-                var level = ResourceManager.GetString(record.Level, cultureInfo) ;
+              
+                var level = ResourceManager.GetString(record.Level ?? "", cultureInfo) ;
                 if (!string.IsNullOrEmpty(level))
                 {
                     record.Level = level;
@@ -418,6 +508,97 @@ namespace CMI.Contract.Common
         private static bool HasProperty(dynamic expandoObject, string propertyName)
         {
             return ((IDictionary<string, object>) expandoObject).ContainsKey(propertyName);
+        }
+
+        public static List<ArchiveRecordContextItem> GetArchivePlanContext(this ElasticArchiveRecord record)
+        {
+            return record.ArchiveplanContext.Select(contextItem => new ArchiveRecordContextItem
+            {
+                ArchiveRecordId = contextItem.ArchiveRecordId,
+                Title = contextItem.Title,
+                ReferenceCode = contextItem.RefCode,
+                DateRangeText = contextItem.DateRangeText,
+                Level = contextItem.Level,
+                Protected = contextItem.Protected
+            }).ToList();
+        }
+
+        public static List<ArchiveRecordContextItem> GetArchivePlanContext(this ElasticArchiveDbRecord record)
+        {
+            if (record.IsAnonymized)
+            {
+                return record.UnanonymizedFields.ArchiveplanContext.Select(contextItem => new ArchiveRecordContextItem
+                {
+                    ArchiveRecordId = contextItem.ArchiveRecordId,
+                    Title = contextItem.Title,
+                    ReferenceCode = contextItem.RefCode,
+                    DateRangeText = contextItem.DateRangeText,
+                    Level = contextItem.Level,
+                    Protected = contextItem.Protected
+                }).ToList();
+            }
+
+            return record.ArchiveplanContext.Select(contextItem => new ArchiveRecordContextItem
+            {
+                ArchiveRecordId = contextItem.ArchiveRecordId,
+                Title = contextItem.Title,
+                ReferenceCode = contextItem.RefCode,
+                DateRangeText = contextItem.DateRangeText,
+                Level = contextItem.Level,
+                Protected = contextItem.Protected
+            }).ToList();
+        }
+
+
+        public static ArchiveRecordContextItem ToArchiveRecordContextItem(this ElasticArchiveRecord record)
+        {
+            return new ArchiveRecordContextItem
+            {
+                ArchiveRecordId = record.ArchiveRecordId,
+                Title = record.Title,
+                ReferenceCode = record.ReferenceCode,
+                DateRangeText = record.CreationPeriod.Text,
+                Level = record.Level,
+                Protected = !string.IsNullOrWhiteSpace(record.Permission)
+            };
+        }
+
+        public static ManuelleKorrekturDto ToManuelleKorrektur(this ElasticArchiveDbRecord record)
+        {
+            List<ManuelleKorrekturFeldDto> manuelleKorrekturFelder;
+            // Je nachdem ob der Record anonymisiert ist und die Felder UnanonymizedFields gefüllt sind, wird
+            // der Datensatz für die manuelle Korrektur anders erstellt. 
+            if (record.IsAnonymized)
+            {
+                manuelleKorrekturFelder = new List<ManuelleKorrekturFeldDto>
+                {
+                    new() {Feldname = ManuelleKorrekturFelder.Titel, Automatisch = record.Title, Original = record.UnanonymizedFields?.Title},
+                    new() {Feldname = ManuelleKorrekturFelder.VerwandteVe, Automatisch = record.VerwandteVe(), Original = record.UnanonymizedFields?.VerwandteVe},
+                    new() {Feldname = ManuelleKorrekturFelder.Darin, Automatisch = record.WithinInfo, Original = record.UnanonymizedFields?.WithinInfo},
+                    new() {Feldname = ManuelleKorrekturFelder.ZusatzkomponenteZac1, Automatisch = record.Zusatzmerkmal(), Original = record.UnanonymizedFields?.ZusatzkomponenteZac1},
+                    new() {Feldname = ManuelleKorrekturFelder.BemerkungZurVe, Automatisch = record.ZusätzlicheInformationen(),
+                        Original = record.UnanonymizedFields?.BemerkungZurVe}
+                };
+            }
+            else
+            {
+                manuelleKorrekturFelder = new List<ManuelleKorrekturFeldDto>
+                {
+                    new() {Feldname = ManuelleKorrekturFelder.Titel, Automatisch = record.Title, Original = record.Title},
+                    new() {Feldname = ManuelleKorrekturFelder.VerwandteVe, Automatisch = record.VerwandteVe(), Original = record.VerwandteVe()},
+                    new() {Feldname = ManuelleKorrekturFelder.Darin, Automatisch = record.WithinInfo, Original = record.WithinInfo},
+                    new() {Feldname = ManuelleKorrekturFelder.ZusatzkomponenteZac1, Automatisch = record.Zusatzmerkmal(), Original = record.Zusatzmerkmal()},
+                    new() {Feldname = ManuelleKorrekturFelder.BemerkungZurVe, Automatisch = record.ZusätzlicheInformationen(),
+                        Original = record.ZusätzlicheInformationen()}
+                };
+            }
+
+            return new ManuelleKorrekturDto(-1, Convert.ToInt32(record.ArchiveRecordId), record.ReferenceCode, record.ProtectionEndDate.Date,
+                record.IsAnonymized ? record.UnanonymizedFields?.Title : record.Title, DateTime.Now, null, null, null, 
+                0, string.Empty, record.Level, record.Aktenzeichen(), record.CreationPeriod.Text,
+                record.HasCustomProperty("zugänglichkeitGemässBga") ? record.CustomFields.zugänglichkeitGemässBga : "",
+                record.GetSchutzfristenVerzeichnung(), record.ZuständigeStelle(), record.Publikationsrechte(),
+                record.IsAnonymized, manuelleKorrekturFelder, null);
         }
     }
 }

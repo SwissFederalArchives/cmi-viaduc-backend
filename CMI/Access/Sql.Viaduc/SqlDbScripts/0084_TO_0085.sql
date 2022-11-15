@@ -1,0 +1,1 @@
+UPDATE [Ordering] SET LesesaalDate = NULL WHERE LesesaalDate = CAST('0001-01-01' AS Date)

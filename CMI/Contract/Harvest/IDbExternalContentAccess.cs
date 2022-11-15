@@ -13,12 +13,5 @@ namespace CMI.Contract.Harvest
         /// <param name="archiveRecordId">The archive record identifier.</param>
         /// <returns>DigitizationOrderDataResult.</returns>
         DigitizationOrderDataResult GetDigitizationOrderData(string archiveRecordId);
-
-        /// <summary>
-        ///  Gets the SyncInfoForReportResult from the AIS.
-        /// Need for create Report
-        /// </summary>
-        /// <returns>A Data type that have records with the mutationsIds.</returns>
-        SyncInfoForReportResult GetReportExternalContent(int[] mutationsIds);
     }
 }

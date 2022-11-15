@@ -62,7 +62,8 @@ namespace CMI.Web.Frontend.api.Controllers
             {
                 MetadataAccessToken = ear.Data.MetadataAccessTokens?.ToArray(),
                 PrimaryDataFulltextAccessTokens = ear.Data.PrimaryDataFulltextAccessTokens?.ToArray(),
-                PrimaryDataDownloadAccessTokens = ear.Data.PrimaryDataDownloadAccessTokens?.ToArray()
+                PrimaryDataDownloadAccessTokens = ear.Data.PrimaryDataDownloadAccessTokens?.ToArray(),
+                FieldAccessTokens = ear.Data.FieldAccessTokens?.ToArray()
             };
 
             return Ok(permissionInfo);
@@ -100,6 +101,43 @@ namespace CMI.Web.Frontend.api.Controllers
             }
 
             return entityProvider.GetEntity<DetailRecord>(id, access, p);
+        }
+
+
+        [HttpGet]
+        public IHttpActionResult GetAnonymized(int id)
+        {
+            if (AccessRoles.RoleBAR != GetUserPublicClientRole())
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+
+            // O3 Role necessary for correct access
+            var anonymAccess = GetAnonymizedAccess(AccessRoles.RoleOe3, WebHelper.GetClientLanguage(Request));
+            var entity = entityProvider.GetEntity<ElasticArchiveRecord>(id, anonymAccess);
+            if (entity == null)
+            {
+                // Handling for VEs with no access for OE3 User
+                Log.Warning($"call {nameof(GetAnonymized)} with entity null result , this should never happen");
+                return Json(new
+                {
+                    isAnonymized = false,
+                    title = string.Empty,
+                    withinInfo = string.Empty,
+                    verwandteVe = string.Empty,
+                    zusatzkomponenteZac1 = string.Empty,
+                    bemerkungZurVe = string.Empty
+                });
+            }
+
+            return Json(new { 
+                                isAnonymized = entity.Data.IsAnonymized,
+                                title = entity.Data.Title,
+                                withinInfo = entity.Data.WithinInfo,
+                                verwandteVe = entity.Data.VerwandteVe(),
+                                zusatzkomponenteZac1 = entity.Data.Zusatzmerkmal(),
+                                bemerkungZurVe = entity.Data.ZusätzlicheInformationen()
+            });
         }
 
         [HttpGet]
@@ -141,9 +179,9 @@ namespace CMI.Web.Frontend.api.Controllers
                     return ResponseMessage(veExportRecordHelper.CreateExcelFile(
                         ConvertExportData(searchRecords.Entities.Items.Select(i => i.Data).ToList()), language,
                         FrontendSettingsViaduc.Instance.GetTranslation(language, "veExportRecord.fileName") +
-                        $"-{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx",
+                        $"-{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}.xlsx",
                         FrontendSettingsViaduc.Instance.GetTranslation("en", "veExportRecord.fileName") +
-                        $"-{DateTime.Now.ToString("yyyy-MM-dd-hh_mm_ss")}.xlsx"));
+                        $"-{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}.xlsx"));
                 }
             }
             catch (Exception ex)

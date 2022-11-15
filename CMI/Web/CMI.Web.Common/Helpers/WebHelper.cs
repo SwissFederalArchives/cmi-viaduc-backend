@@ -20,10 +20,16 @@ namespace CMI.Web.Common.Helpers
         public const string ClientTypeFrontend = "frontend";
         public const string ClientTypeManagement = "management";
 
+        public const string CookiePcAspNetSessionIdKey = "V_PC_ASP_SessionId";
+        public const string CookieMcAspNetSessionIdKey = "V_MC_ASP_SessionId";
+        public const string CookiePcViaducUserIdKey = "V_PC_UserId";
+        public const string CookieMcViaducUserIdKey = "V_MC_UserId";
+        public const string CookiePcAppliationCookieKey = "V_PC_AppCookie";
+        public const string CookieMcAppliationCookieKey = "V_MC_AppCookie";
+
         public static readonly List<string> SupportedLanguages = new List<string> {"de", "fr", "it", "en"};
 
         private static readonly Regex LanguageInUrlMatcher = new Regex("^.*/(?<language>(de|fr|it|en))/");
-
 
         public static readonly char[] UrlSplitter = {'/'};
 
@@ -53,6 +59,14 @@ namespace CMI.Web.Common.Helpers
         public static string PublicClientUrl => GetStringSetting("publicClientUrl", "https://www.recherche.bar.admin.ch/recherche");
 
         public static string SwaggerBaseUrl => GetStringSetting("swaggerBaseUrl", "https://www.recherche.bar.admin.ch/recherche");
+
+        public static string ManagementAuthReturnUrl => GetStringSetting("managementAuthReturnUrl", "http://localhost/management/#/auth/success");
+
+        public static string ManagementLogoutReturnUrl => GetStringSetting("managementLogoutReturnUrl", "http://localhost/management");
+
+        public static string FrontendAuthReturnUrl => GetStringSetting("frontendAuthReturnUrl", "https://www.recherche.bar.admin.ch/recherche/#/auth/success");
+
+        public static string FrontendLogoutReturnUrl => GetStringSetting("frontendLogoutReturnUrl", "https://www.recherche.bar.admin.ch/recherche");
 
         public static string MatomoUrl => GetStringSetting("matomo-url", "");
         public static int MatomoSiteId => GetIntSetting("matomo-siteId");

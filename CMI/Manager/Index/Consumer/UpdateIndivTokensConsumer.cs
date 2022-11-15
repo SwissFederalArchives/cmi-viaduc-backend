@@ -22,7 +22,8 @@ namespace CMI.Manager.Index.Consumer
             indexManager.UpdateTokens(context.Message.ArchiveRecordId.ToString(),
                 context.Message.CombinedPrimaryDataDownloadAccessTokens,
                 context.Message.CombinedPrimaryDataFulltextAccessTokens,
-                context.Message.CombinedMetadataAccessTokens);
+                context.Message.CombinedMetadataAccessTokens,
+                context.Message.CombinedFieldAccessTokens);
             return Task.CompletedTask;
         }
     }

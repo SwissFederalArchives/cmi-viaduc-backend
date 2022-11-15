@@ -5,7 +5,7 @@ using CMI.Contract.DocumentConverter;
 using CMI.Manager.DocumentConverter.Properties;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.DocumentConverter.Consumers
 {

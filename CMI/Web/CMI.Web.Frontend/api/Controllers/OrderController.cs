@@ -9,7 +9,6 @@ using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Utilities.Common.Helpers;
 using CMI.Utilities.Logging.Configurator;
-using CMI.Utilities.ProxyClients.Order;
 using CMI.Web.Common.api;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Configuration;
@@ -19,6 +18,7 @@ using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.Helpers;
 using CMI.Web.Frontend.ParameterSettings;
+using Serilog;
 
 namespace CMI.Web.Frontend.api.Controllers
 {
@@ -69,7 +69,7 @@ namespace CMI.Web.Frontend.api.Controllers
             }
 
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
-            var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(veId, access);
+            var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(veId, access, false);
             var entity = entityResult.Response?.Hits?.FirstOrDefault()?.Source;
 
             if (entity == null)
@@ -77,8 +77,8 @@ namespace CMI.Web.Frontend.api.Controllers
                 return Content(HttpStatusCode.NotFound, $"No Ve found with id {veId}");
             }
 
-            if (!entity.CanBeOrdered ||
-                !(entity.Level == "Dossier" || entity.Level == "Subdossier" || entity.Level == "Dokument"))
+            if ((!entity.CanBeOrdered && string.IsNullOrEmpty(entity.PrimaryDataLink)) ||
+                 !(entity.Level == "Dossier" || entity.Level == "Subdossier" || entity.Level == "Dokument"))
             {
                 return Content(HttpStatusCode.Conflict, "Ve can not be ordered according to index");
             }
@@ -88,8 +88,8 @@ namespace CMI.Web.Frontend.api.Controllers
             {
                 return Content(HttpStatusCode.Conflict, "This Ve cannot be ordered as Ö2 user. Ö3 role is required.");
             }
-
-            var indexSnapShot = OrderHelper.GetOrderingIndexSnapshot(entity);
+            // For the order basket the non-anonymized data if necessary
+            var indexSnapShot = OrderHelper.GetOrderingIndexSnapshot(entityResult.Entries.FirstOrDefault()?.Data);
 
             var orderItemDb = await client.AddToBasket(indexSnapShot, userId);
             return Content(HttpStatusCode.Created, ConvertDbItemToDto(orderItemDb, OrderType.Bestellkorb, true));
@@ -229,79 +229,118 @@ namespace CMI.Web.Frontend.api.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Order([FromBody] OrderParams orderParams)
         {
-            // Diese Prüfung soll immer für den aktuellen Benutzer (also nicht für den Besteller) ablaufen gemäss Telefonat mit Marlies Hertig 
-            var basket = await GetBasket();
-            if (basket == null || basket.Count(i => !i.EinsichtsbewilligungNotwendig) == 0)
+            Log.Information("Recieved Order Request from User with id {UserId}", orderParams.UserId );
+            try
             {
-                throw new BadRequestException("Order not is allowed, because there are no items in basket");
-            }
-
-            var userAccess = GetUserAccess();
-
-            var bestellerId = !string.IsNullOrWhiteSpace(orderParams.UserId)
-                ? orderParams.UserId
-                : ControllerHelper.GetCurrentUserId();
-            var bestellungIstFuerAndererBenutzer = ControllerHelper.GetCurrentUserId() != bestellerId;
-            if (bestellungIstFuerAndererBenutzer)
-            {
-                if (GetCurrentUserAccess().RolePublicClient != AccessRoles.RoleBAR)
+                // Diese Prüfung soll immer für den aktuellen Benutzer (also nicht für den Besteller) ablaufen gemäss Telefonat mit Marlies Hertig 
+                var basket = await GetBasket();
+                if (basket == null || basket.Count(i => !i.EinsichtsbewilligungNotwendig) == 0)
                 {
-                    throw new BadRequestException(
-                        "Es wird versucht, für einen anderen Benutzer als den aktuellen Benutzer zu bestellen. Dazu fehlt aber die Berechtigung.");
+                    var ex = new BadRequestException("Order not is allowed, because there are no items in basket");
+                    Log.Error(ex,
+                        "OrderController_Order: Bestellkorb Einträge: " + basket?.Length + " EinsichtsbewilligungNotwendig: " +
+                        basket?.Count(i => !i.EinsichtsbewilligungNotwendig));
+                    throw ex;
                 }
 
-                orderParams.Comment = string.Join(" ", orderParams.Comment,
-                    FrontendSettingsViaduc.Instance.GetTranslation(WebHelper.GetClientLanguage(Request),
-                        "order.frombar", "(Diese Bestellung wurde durch das Bundesarchiv ausgelöst.)"));
+                Log.Debug("Bestellkorb Einträge: " + basket.Length + " EinsichtsbewilligungNotwendig: " +
+                          basket.Count(i => !i.EinsichtsbewilligungNotwendig));
+                var userAccess = GetUserAccess();
+                var bestellerId = !string.IsNullOrWhiteSpace(orderParams.UserId)
+                    ? orderParams.UserId
+                    : userAccess.UserId;
+                var bestellungIstFuerAndererBenutzer = userAccess.UserId != bestellerId;
+                if (bestellungIstFuerAndererBenutzer)
+                {
+                    if (userAccess.RolePublicClient != AccessRoles.RoleBAR)
+                    {
+                        var ex = new BadRequestException(
+                            "Es wird versucht, für einen anderen Benutzer als den aktuellen Benutzer zu bestellen. Dazu fehlt aber die Berechtigung.");
+                        Log.Error(ex, "OrderController_Order: " + ex.Message);
+                        throw ex;
+                    }
+
+                    orderParams.Comment = string.Join(" ", orderParams.Comment,
+                        FrontendSettingsViaduc.Instance.GetTranslation(WebHelper.GetClientLanguage(Request),
+                            "order.frombar", "(Diese Bestellung wurde durch das Bundesarchiv ausgelöst.)"));
+                    // check if the title of the CE has to be anonymized for the other user
+                    foreach (var orderItem in basket)
+                    {
+                        if (orderItem.VeId.HasValue)
+                        {
+                            var archiveDbRecord = elasticService.QueryForId<ElasticArchiveDbRecord>(orderItem.VeId.Value, userAccess, false).Entries.FirstOrDefault().Data;
+                            if (archiveDbRecord.IsAnonymized)
+                            {
+                                orderItem.Title = archiveDbRecord.Title;
+                                orderItem.Darin = archiveDbRecord.WithinInfo;
+                                await client.UpdateOrderItem(ConvertDtoItemToItem(orderItem));
+                            }
+                        }
+                    }
+                }
+
+                Log.Debug("Fetching orderItems to exclude for user with id {UserId}", orderParams.UserId);
+                var orderItemIdsToExclude = basket
+                    .Where(basketItem => basketItem.EinsichtsbewilligungNotwendig
+                                         || orderParams.Type == OrderType.Digitalisierungsauftrag &&
+                                         orderParams.OrderIdsToExclude != null && orderParams.OrderIdsToExclude.Contains(basketItem.Id))
+                    .Select(item => item.Id)
+                    .ToList();
+
+                Log.Debug("Validating order by type for user with id {UserId}", orderParams.UserId);
+                DateTime? leseSaalDateAsDateTime = null;
+                switch (orderParams.Type)
+                {
+                    case OrderType.Verwaltungsausleihe:
+                        ValidateVerwaltungsausleiheBestellung(userAccess);
+                        break;
+                    case OrderType.Digitalisierungsauftrag:
+                        await ValidateDigitalisierungsauftragBestellung(bestellerId, bestellungIstFuerAndererBenutzer,
+                            userAccess, basket, orderItemIdsToExclude);
+                        break;
+                    case OrderType.Lesesaalausleihen:
+                        leseSaalDateAsDateTime = orderParams.LesesaalDate.ParseDateTimeSwiss();
+                        ValidateLesesaalBestellung(leseSaalDateAsDateTime);
+                        break;
+                    default:
+                        var ex = new BadRequestException(
+                            $"Bestelltyp {orderParams.Type} ist hier nicht unterstützt.");
+                        Log.Error(ex, "OrderController_Order: " + ex.Message);
+                        throw ex;
+                }
+
+                if (userAccess.RolePublicClient == AccessRoles.RoleAS)
+                {
+                    orderParams.ArtDerArbeit = (int)verwaltungsausleiheSettings.ArtDerArbeitFuerAmtsBestellung;
+                }
+
+                var creationRequest = new OrderCreationRequest
+                {
+                    OrderItemIdsToExclude = orderItemIdsToExclude,
+                    Type = orderParams.Type,
+                    Comment = orderParams.Comment,
+                    ArtDerArbeit = orderParams.ArtDerArbeit,
+                    LesesaalDate = leseSaalDateAsDateTime,
+                    CurrentUserId = ControllerHelper.GetCurrentUserId(),
+                    BestellerId = bestellerId
+                };
+
+                var veInfoList = basket.Where(item => item.VeId.HasValue && !orderItemIdsToExclude.Contains(item.Id))
+                    .Select(item => new VeInfo((int)item.VeId, item.Reason)).ToList();
+
+                await kontrollstellenInformer.InformIfNecessary(userAccess, veInfoList);
+
+                Log.Information("Creating order for user with id {UserId}", orderParams.UserId);
+                await client.CreateOrderFromBasket(creationRequest);
             }
-
-            var orderItemIdsToExclude = basket
-                .Where(basketItem => basketItem.EinsichtsbewilligungNotwendig
-                                     || orderParams.Type == OrderType.Digitalisierungsauftrag &&
-                                     orderParams.OrderIdsToExclude != null && orderParams.OrderIdsToExclude.Contains(basketItem.Id))
-                .Select(item => item.Id)
-                .ToList();
-
-            DateTime? leseSaalDateAsDateTime = null;
-            switch (orderParams.Type)
+            catch (Exception exception)
             {
-                case OrderType.Verwaltungsausleihe:
-                    ValidateVerwaltungsausleiheBestellung(userAccess);
-                    break;
-                case OrderType.Digitalisierungsauftrag:
-                    await ValidateDigitalisierungsauftragBestellung(bestellerId, bestellungIstFuerAndererBenutzer,
-                        userAccess, basket, orderItemIdsToExclude);
-                    break;
-                case OrderType.Lesesaalausleihen:
-                    leseSaalDateAsDateTime = orderParams.LesesaalDate.ParseDateTimeSwiss();
-                    ValidateLesesaalBestellung(leseSaalDateAsDateTime);
-                    break;
-                default:
-                    throw new BadRequestException(
-                        $"Bestelltyp {orderParams.Type.ToString()} ist hier nicht unterstützt.");
+                if (exception is not BadRequestException)
+                {
+                    Log.Error(exception, exception.Message);
+                }
+                throw;
             }
-
-            if (userAccess.RolePublicClient == AccessRoles.RoleAS)
-            {
-                orderParams.ArtDerArbeit = (int) verwaltungsausleiheSettings.ArtDerArbeitFuerAmtsBestellung;
-            }
-
-            var creationRequest = new OrderCreationRequest
-            {
-                OrderItemIdsToExclude = orderItemIdsToExclude,
-                Type = orderParams.Type,
-                Comment = orderParams.Comment,
-                ArtDerArbeit = orderParams.ArtDerArbeit,
-                LesesaalDate = leseSaalDateAsDateTime,
-                CurrentUserId = ControllerHelper.GetCurrentUserId(),
-                BestellerId = bestellerId
-            };
-
-            var veInfoList = basket.Where(item => item.VeId.HasValue && !orderItemIdsToExclude.Contains(item.Id))
-                .Select(item => new VeInfo((int) item.VeId, item.Reason)).ToList();
-
-            await kontrollstellenInformer.InformIfNecessary(userAccess, veInfoList);
-            await client.CreateOrderFromBasket(creationRequest);
 
             return Content<object>(HttpStatusCode.NoContent, null);
         }
@@ -397,7 +436,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 Type = orderEinsichtsgesuchParams.Type,
                 Comment = orderEinsichtsgesuchParams.Comment,
                 ArtDerArbeit = orderEinsichtsgesuchParams.ArtDerArbeit,
-                LesesaalDate = DateTime.MinValue,
+                LesesaalDate = null,
                 BegruendungEinsichtsgesuch = orderEinsichtsgesuchParams.BegruendungEinsichtsgesuch,
                 CurrentUserId = ControllerHelper.GetCurrentUserId(),
                 BestellerId = ControllerHelper.GetCurrentUserId(),
@@ -478,6 +517,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     Period = itemDb.ZeitraumDossier,
                     VeId = itemDb.VeId,
                     Id = itemDb.Id,
+                    OrderId = itemDb.OrderId,
                     Comment = itemDb.Comment,
                     BewilligungsDatum = itemDb.BewilligungsDatum,
                     HasPersonendaten = itemDb.HasPersonendaten,
@@ -537,6 +577,41 @@ namespace CMI.Web.Frontend.api.Controllers
             }
 
             return orderItemsRet.ToArray();
+        }
+        
+        private OrderItem ConvertDtoItemToItem(OrderItemDto orderItemDto)
+        {
+            var orderItem = new OrderItem
+            {
+                Dossiertitel  = orderItemDto.Title,
+                ZeitraumDossier  = orderItemDto.Period,
+                VeId = orderItemDto.VeId,
+                Id = orderItemDto.Id,
+                OrderId = orderItemDto.OrderId,
+                Comment = orderItemDto.Comment,
+                BewilligungsDatum = orderItemDto.BewilligungsDatum,
+                HasPersonendaten = orderItemDto.HasPersonendaten,
+                Hierarchiestufe = orderItemDto.Hierarchiestufe,
+                ZusaetzlicheInformationen = orderItemDto.ZusaetzlicheInformationen,
+                Darin = orderItemDto.Darin,
+                Signatur = orderItemDto.Signatur,
+                ZustaendigeStelle = orderItemDto.ZustaendigeStelle,
+                Publikationsrechte = orderItemDto.Publikationsrechte,
+                Behaeltnistyp = orderItemDto.Behaeltnistyp,
+                IdentifikationDigitalesMagazin = orderItemDto.IdentifikationDigitalesMagazin,
+                ZugaenglichkeitGemaessBga = orderItemDto.ZugaenglichkeitGemaessBga,
+                Standort = orderItemDto.Standort,
+                Schutzfristverzeichnung = orderItemDto.Schutzfristverzeichnung,
+                Reason = orderItemDto.Reason,
+                Aktenzeichen = orderItemDto.Aktenzeichen,
+                DigitalisierungsKategorie = orderItemDto.DigitalisierungsKategorie,
+                TerminDigitalisierung = orderItemDto.TerminDigitalisierung,
+                EntscheidGesuch = orderItemDto.EntscheidGesuch,
+                DatumDesEntscheids = orderItemDto.DatumDesEntscheids,
+                Abbruchgrund = orderItemDto.Abbruchgrund
+            };
+
+            return orderItem;
         }
 
         private string Trim(string text)

@@ -43,7 +43,7 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
             var container = containerBuilder.Build();
 
             bus = container.Resolve<IBusControl>();
-            bus.Start();
+            bus.StartAsync();
         }
 
         private async void cmdGetDigitizationData_Click(object sender, EventArgs e)

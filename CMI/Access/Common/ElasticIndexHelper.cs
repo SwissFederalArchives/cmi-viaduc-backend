@@ -131,6 +131,51 @@ namespace CMI.Access.Common
             return r.Documents.FirstOrDefault();
         }
 
+        public ElasticArchiveDbRecord GetDbRecord(string archiveRecordIdOrSignature, bool includeFulltextContent)
+        {
+            if (IsNullOrEmpty(archiveRecordIdOrSignature))
+            {
+                return null;
+            }
+
+            if (int.TryParse(archiveRecordIdOrSignature, out int  veId))
+            {
+                var result = Client.Search<ElasticArchiveDbRecord>(s =>
+                    s.Source(sf =>
+                        {
+                            if (!includeFulltextContent)
+                            {
+                                return sf.Excludes(e => e
+                                    .Fields("primaryData.items.content")
+                                );
+                            }
+                            return sf;
+                        })
+                        .Query(q => q
+                            .Ids(sel => sel.Values(veId))
+                        ));
+
+                //  Id is or must be unique
+                return result.Documents.FirstOrDefault();
+            }
+            else
+            {
+               var searchRequest = new SearchRequest<ElasticArchiveDbRecord> { Query = CreateQueryForSignatur(archiveRecordIdOrSignature) };
+               var result = Client.Search<ElasticArchiveDbRecord>(searchRequest);
+               if (result.Documents.Count == 1)
+               {
+                   return result.Documents.FirstOrDefault();
+               }
+               
+               if (result.Documents.Count > 1)
+               {
+                   throw new ArgumentOutOfRangeException("archiveRecordIdOrSignature", "The search for reference code has found more than one hit.");
+               }
+            }
+       
+            return null;
+        }
+
         public void RemoveAll()
         {
             Client.DeleteByQuery<ElasticArchiveRecord>(q => q
@@ -140,7 +185,7 @@ namespace CMI.Access.Common
         }
 
         public void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
-            string[] metadataAccessTokens)
+            string[] metadataAccessTokens, string[] fieldAccessTokens)
         {
             var searchResponse = Client.Search<ElasticArchiveRecord>(s => s
                 .Source(false)
@@ -165,7 +210,8 @@ namespace CMI.Access.Common
             }
 
             // Für jede Token-Art muss mindestens ein Token (für BAR) geliefert werden.
-            // Ansonsten stimmt etwas nicht und wir brechen den Update ab.
+            // Ansonsten stimmt etwas nicht und wir brechen den Update ab. Ausser für FieldAccessTokens, dann werden keine
+            // individuellen FieldAccessToken hinterlegt. Nur die VE's gemäss Art. 12.3 anonymisiert werden bzw. geschützt sind, benötigen FieldAccessToken 
             if (primaryDataDownloadAccessTokens == null || primaryDataFulltextAccessTokens == null || metadataAccessTokens == null ||
                 primaryDataDownloadAccessTokens.Length == 0 || primaryDataFulltextAccessTokens.Length == 0 || metadataAccessTokens.Length == 0)
             {
@@ -177,7 +223,7 @@ namespace CMI.Access.Common
                     id, metadataAccessTokens, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens);
                 return;
             }
-
+            
             var updateResponse = Client.Update<ElasticArchiveRecord, object>
             (
                 id,
@@ -185,7 +231,8 @@ namespace CMI.Access.Common
                 {
                     PrimaryDataDownloadAccessTokens = primaryDataDownloadAccessTokens,
                     PrimaryDataFulltextAccessTokens = primaryDataFulltextAccessTokens,
-                    MetadataAccessTokens = metadataAccessTokens
+                    MetadataAccessTokens = metadataAccessTokens,
+                    FieldAccessTokens = fieldAccessTokens
                 })
             );
 
@@ -223,6 +270,28 @@ namespace CMI.Access.Common
             }
 
             return false;
+        }
+
+
+        /// <summary>
+        /// is copied from CMI.Web.Frontend.api.Search public static class ElasticQueryBuilder
+        /// </summary>
+        /// <param name="signatur"></param>
+        /// <returns></returns>
+        private static QueryContainer CreateQueryForSignatur(string signatur)
+        {
+            var boolQuery = new BoolQuery
+            {
+                Must = new QueryContainer[]
+                {
+                    new TermQuery
+                    {
+                        Field = "referenceCode",
+                        Value = signatur
+                    }
+                }
+            };
+            return boolQuery;
         }
     }
 }

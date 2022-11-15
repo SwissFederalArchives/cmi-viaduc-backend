@@ -7,6 +7,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Aspose.Pdf;
+using Aspose.Pdf.Operators;
+using Aspose.Pdf.Optimization;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.ParameterSettings;
 using CSJ2K;
@@ -28,12 +30,17 @@ namespace CMI.Engine.Asset.PreProcess
 
         public ScanProcessor(FileResolution fileResolution, ScansZusammenfassenSettings settings)
         {
-            // ReSharper disable once RedundantNameQualifier
-            var licensePdf = new License();
-            licensePdf.SetLicense("Aspose.Total.lic");
+            try
+            {
+                var licensePdf = new License();
+                licensePdf.SetLicense("Aspose.Total.NET.lic");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while setting Aspose license.");
+                throw;
+            }
 
-            var licenseImaging = new Aspose.Imaging.License();
-            licenseImaging.SetLicense("Aspose.Total.lic");
             this.fileResolution = fileResolution;
             this.settings = settings;
         }
@@ -58,7 +65,6 @@ namespace CMI.Engine.Asset.PreProcess
         /// </summary>
         /// <param name="paket">The package to be converted</param>
         /// <param name="folder">The root folder where the files can be found.</param>
-        /// <param name="settings">The conversion settings</param>
         public void ConvertSingleJpeg2000ScansToPdfDocuments(PaketDIP paket, string folder)
         {
             rootFolder = folder;
@@ -179,12 +185,17 @@ namespace CMI.Engine.Asset.PreProcess
             }
 
             // Optimize
-            pdfDocument.OptimizeResources(new Document.OptimizationOptions()
+            var optimizationOptions = new OptimizationOptions
             {
-                CompressImages = true,
-                ImageQuality = settings.JpegQualitaetInProzent,
-                ResizeImages = true
-            });
+                ImageCompressionOptions =
+                {
+                    CompressImages = true,
+                    ImageQuality = settings.JpegQualitaetInProzent,
+                    ResizeImages = true
+                }
+            };
+
+            pdfDocument.OptimizeResources(optimizationOptions);
             pdfDocument.Save(pdfFileName);
             MetadataXmlUpdater.AddFile(new FileInfo(pdfFileName), parents);
         }
@@ -200,19 +211,19 @@ namespace CMI.Engine.Asset.PreProcess
             // add image to Images collection of Page Resources
             page.Resources.Images.Add(imageInfo.Stream);
             // using GSave operator: this operator saves current graphics state
-            page.Contents.Add(new Operator.GSave());
+            page.Contents.Add(new GSave());
 
             // create Rectangle and Matrix objects
             var rectangle = new Rectangle(0, 0, imageInfo.PageSize.Width, imageInfo.PageSize.Height);
             var matrix = new Matrix(new[] {rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY});
 
             // using ConcatenateMatrix (concatenate matrix) operator: defines how image must be placed
-            page.Contents.Add(new Operator.ConcatenateMatrix(matrix));
+            page.Contents.Add(new ConcatenateMatrix(matrix));
             var ximage = page.Resources.Images[page.Resources.Images.Count];
             // using Do operator: this operator draws image
-            page.Contents.Add(new Operator.Do(ximage.Name));
+            page.Contents.Add(new Do(ximage.Name));
             // using GRestore operator: this operator restores graphics state
-            page.Contents.Add(new Operator.GRestore());
+            page.Contents.Add(new GRestore());
             page.FreeMemory();
             Log.Information("Added page for {filePath} to pdf document.", filePath);
         }

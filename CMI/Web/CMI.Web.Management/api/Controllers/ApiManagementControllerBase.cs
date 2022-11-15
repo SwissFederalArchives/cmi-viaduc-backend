@@ -9,6 +9,12 @@ namespace CMI.Web.Management.api.Controllers
     public abstract class ApiManagementControllerBase : ApiControllerBase
     {
         protected ManagementSettingsViaduc Settings => ManagementSettingsViaduc.Instance;
-        public ManagementControllerHelper ManagementControllerHelper => new ManagementControllerHelper(this, ControllerHelper);
+
+        public IManagementControllerHelper ManagementControllerHelper { get; set; }
+
+        protected ApiManagementControllerBase()
+        {
+            ManagementControllerHelper = new ManagementControllerHelper(this, ControllerHelper);
+        }
     }
 }

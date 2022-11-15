@@ -5,5 +5,8 @@
     <Setting Name="LevelAggregationIdentifier" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Bestand</Value>
     </Setting>
+    <Setting Name="ConnectionStringEF" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">metadata=res://*/CMI.Access.Sql.Viaduc.EF.Viaduc.csdl|res://*/CMI.Access.Sql.Viaduc.EF.Viaduc.ssdl|res://*/CMI.Access.Sql.Viaduc.EF.Viaduc.msl;provider=System.Data.SqlClient;provider connection string='Data Source=localhost;initial catalog=Viaduc;Trusted_Connection=True;MultipleActiveResultSets=True;App=EntityFramework'</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,0 +1,1075 @@
+﻿<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CMI.Access.Sql.Viaduc.EF.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ViaducEntitiesStoreContainer">
+          <EntitySet Name="Collections" EntityType="CMI.Access.Sql.Viaduc.EF.Store.Collection" store:Type="Tables" Schema="dbo" Table="Collection" />
+          <EntitySet Name="v_CollectionLists" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_CollectionList" store:Type="Views" Schema="dbo" Table="v_CollectionList" />
+          <EntitySet Name="ApplicationUsers" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ApplicationUser" store:Type="Tables" Schema="dbo" Table="ApplicationUser" />
+          <EntitySet Name="ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" store:Type="Tables" Schema="dbo" Table="ManuelleKorrektur" />
+          <EntitySet Name="ManuelleKorrekturFelder" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturFeld" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturFeld" />
+          <EntitySet Name="ManuelleKorrekturStatusHistories" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturStatusHistory" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturStatusHistory" />
+          <EntitySet Name="v_ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_ManuelleKorrektur" store:Type="Views" Schema="dbo" Table="v_ManuelleKorrektur" />
+          <AssociationSet Name="Collection_Collection" Association="CMI.Access.Sql.Viaduc.EF.Store.Collection_Collection">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="Collection1" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManuelleKorrekturFelder_ManuelleKorrektur" Association="CMI.Access.Sql.Viaduc.EF.Store.FK_ManuelleKorrekturFelder_ManuelleKorrektur">
+            <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+            <End Role="ManuelleKorrekturFeld" EntitySet="ManuelleKorrekturFelder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" Association="CMI.Access.Sql.Viaduc.EF.Store.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
+            <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+            <End Role="ManuelleKorrekturStatusHistory" EntitySet="ManuelleKorrekturStatusHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="CollectionId" />
+          </Key>
+          <Property Name="CollectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity">
+            <Documentation>
+              <Summary>Primarykey </Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ParentId" Type="int">
+            <Documentation>
+              <Summary>Points to the parent collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" devart:DefaultValue="'de'" DefaultValue="de">
+            <Documentation>
+              <Summary>The language as ISO code de, en, fr</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="255">
+            <Documentation>
+              <Summary>Title of the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DescriptionShort" Type="nvarchar" Nullable="false" MaxLength="512">
+            <Documentation>
+              <Summary>A short description of the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false">
+            <Documentation>
+              <Summary>A full description of the collection in markup language</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ValidFrom" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()">
+            <Documentation>
+              <Summary>From which point in time the collection should be visible to the users</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ValidTo" Type="datetime2" Nullable="false">
+            <Documentation>
+              <Summary>Until which point in time the collection should be visible to the users</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CollectionTypeId" Type="int" Nullable="false">
+            <Documentation>
+              <Summary>Indicates the type of collections: Themenblöcke and Ausstellungen (Topics and Collections)</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Image" Type="varbinary(max)">
+            <Documentation>
+              <Summary>An image that gives a hint to the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Thumbnail" Type="varbinary(max)">
+            <Documentation>
+              <Summary>The thumbnail to the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ImageAltText" Type="nvarchar" MaxLength="255">
+            <Documentation>
+              <Summary>The accessibility help information for the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ImageMimeType" Type="nvarchar" MaxLength="255">
+            <Documentation>
+              <Summary>The mime type of the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Link" Type="nvarchar" MaxLength="4000">
+            <Documentation>
+              <Summary>The URL that will lead the user to the collection details</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CollectionPath" Type="nvarchar" Nullable="false" MaxLength="400">
+            <Documentation>
+              <Summary>The path of the item consisting of a padded string of the ids from first parent to current item.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SortOrder" Type="int" Nullable="false" DefaultValue="0">
+            <Documentation>
+              <Summary>Allows to order the collections in a specific way</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedOn" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()">
+            <Documentation>
+              <Summary>Date when record was added</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="255">
+            <Documentation>
+              <Summary>User that added the record</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ModifiedOn" Type="datetime2">
+            <Documentation>
+              <Summary>Date when the record was modified</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255">
+            <Documentation>
+              <Summary>User that modified the record</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="v_CollectionList">
+          <Key>
+            <PropertyRef Name="CollectionId" />
+          </Key>
+          <Property Name="CollectionId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="DescriptionShort" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValidFrom" Type="datetime2" Nullable="false" />
+          <Property Name="ValidTo" Type="datetime2" Nullable="false" />
+          <Property Name="CollectionTypeId" Type="int" Nullable="false" />
+          <Property Name="ImageAltText" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImageMimeType" Type="nvarchar" MaxLength="255" />
+          <Property Name="Link" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CollectionPath" Type="nvarchar" Nullable="false" MaxLength="400" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="ModifiedOn" Type="datetime2" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Parent" Type="nvarchar" MaxLength="255" />
+          <Property Name="ChildCollections" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ApplicationUser">
+          <Documentation>
+            <Summary>Enthält Benutzer, die sich an Viaduc angemeldet haben</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" Nullable="false" MaxLength="200">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/nameidentifier</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FamilyName" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/surname</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/givenname</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Organization" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Street" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="StreetAttachment" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Town" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CountryCode" Type="nvarchar" MaxLength="10">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/emailaddress</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SkypeName" Type="nvarchar" MaxLength="200">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Setting" Type="nvarchar(max)" />
+          <Property Name="Claims" Type="nvarchar(max)">
+            <Documentation>
+              <Summary>Claims (json) von der letzten Anmeldung</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Created" Type="datetime" Nullable="false" devart:DefaultValue="getdate()">
+            <Documentation>
+              <Summary>Erstellungsdatum</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Updated" Type="datetime" Nullable="false" devart:DefaultValue="getdate()">
+            <Documentation>
+              <Summary>Änderungsdatum</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Fulltext" Type="nvarchar" Nullable="false" MaxLength="1808" StoreGeneratedPattern="Computed">
+            <Documentation>
+              <Summary>Volltext</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserExtId" Type="nvarchar" MaxLength="100">
+            <Documentation>
+              <Summary>Vom eIAM Benutzer externe ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="2" devart:DefaultValue="'de'" DefaultValue="de">
+            <Documentation>
+              <Summary>Sprache, in welcher der Benutzer EMails empfangen möchte.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="500" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="500" />
+          <Property Name="Birthday" Type="datetime" />
+          <Property Name="FabasoftDossier" Type="varchar" MaxLength="1000" />
+          <Property Name="ReasonForRejection" Type="varchar" MaxLength="100">
+            <Documentation>
+              <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsInternalUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
+          <Property Name="RolePublicClient" Type="varchar" MaxLength="3" />
+          <Property Name="EiamRoles" Type="varchar" MaxLength="10" />
+          <Property Name="ResearcherGroup" Type="bit" Nullable="false" devart:DefaultValue="0" />
+          <Property Name="BarInternalConsultation" Type="bit" Nullable="false" devart:DefaultValue="0" />
+          <Property Name="IdentifierDocument" Type="varbinary(max)">
+            <Documentation>
+              <Summary>Beim erfolgreichem Onboarding mit Swisscom wird in dieses Feld automatisch ein von der Swisscom generiertes PDF abgelegt. Zudem kann in dieses Feld auch über den Management Client eine Datei hochgeladen werden.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="ReasonForRejectionDate" Type="datetime">
+            <Documentation>
+              <Summary>Datum an dem das Feld ReasonForRejection gesetzt wurde</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DownloadLimitDisabledUntil" Type="datetime" />
+          <Property Name="DigitalisierungsbeschraenkungAufgehobenBis" Type="datetime">
+            <Documentation>
+              <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ActiveAspNetSessionId" Type="nvarchar(max)" devart:DefaultValue="''" DefaultValue="">
+            <Documentation>
+              <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="ManuelleKorrektur">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturId" />
+          </Key>
+          <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VeId" Type="int" Nullable="false" />
+          <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
+          <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" devart:DefaultValue="getdate()" />
+          <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="GeändertAm" Type="datetime2" devart:DefaultValue="getdate()" />
+          <Property Name="GeändertVon" Type="nvarchar" MaxLength="200" />
+          <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+          <Property Name="Kommentar" Type="nvarchar(max)" />
+          <Property Name="Hierachiestufe" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Aktenzeichen" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Entstehungszeitraum" Type="nvarchar" MaxLength="100" />
+          <Property Name="ZugänglichkeitGemässBGA" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Schutzfristverzeichnung" Type="nvarchar" MaxLength="200" />
+          <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Publikationsrechte" Type="nvarchar" MaxLength="200" />
+          <Property Name="AnonymisiertZumErfassungszeitpunk" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManuelleKorrekturFeld">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturFelderId" />
+          </Key>
+          <Property Name="ManuelleKorrekturFelderId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" />
+          <Property Name="Feldname" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Original" Type="nvarchar(max)" />
+          <Property Name="Automatisch" Type="nvarchar(max)" />
+          <Property Name="Manuell" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ManuelleKorrekturStatusHistory">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturStatusHistoryId" />
+          </Key>
+          <Property Name="ManuelleKorrekturStatusHistoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" />
+          <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+          <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" />
+          <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="v_ManuelleKorrektur">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturId" />
+            <PropertyRef Name="VeId" />
+            <PropertyRef Name="Signatur" />
+            <PropertyRef Name="Schutzfristende" />
+            <PropertyRef Name="Titel" />
+            <PropertyRef Name="ErzeugtAm" />
+            <PropertyRef Name="ErzeugtVon" />
+            <PropertyRef Name="Anonymisierungsstatus" />
+            <PropertyRef Name="Hierachiestufe" />
+            <PropertyRef Name="Aktenzeichen" />
+            <PropertyRef Name="ZugänglichkeitGemässBGA" />
+            <PropertyRef Name="AnonymisiertZumErfassungszeitpunk" />
+          </Key>
+          <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="VeId" Type="int" Nullable="false" />
+          <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
+          <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ErzeugtAm" Type="datetime2" Nullable="false" />
+          <Property Name="ErzeugtVon" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="GeändertAm" Type="datetime2" />
+          <Property Name="GeändertVon" Type="nvarchar" MaxLength="200" />
+          <Property Name="Anonymisierungsstatus" Type="int" Nullable="false" />
+          <Property Name="Kommentar" Type="nvarchar(max)" />
+          <Property Name="Hierachiestufe" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Aktenzeichen" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Entstehungszeitraum" Type="nvarchar" MaxLength="100" />
+          <Property Name="ZugänglichkeitGemässBGA" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Schutzfristverzeichnung" Type="nvarchar" MaxLength="200" />
+          <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Publikationsrechte" Type="nvarchar" MaxLength="200" />
+          <Property Name="AnonymisiertZumErfassungszeitpunk" Type="bit" Nullable="false" />
+          <Property Name="TitelGemAIS" Type="nvarchar(max)" />
+          <Property Name="TitelAutomatischAnonymisiert" Type="nvarchar(max)" />
+          <Property Name="TitelManuellKorrigiert" Type="nvarchar(max)" />
+          <Property Name="DarinGemAIS" Type="nvarchar(max)" />
+          <Property Name="DarinAutomatischAnonymisiert" Type="nvarchar(max)" />
+          <Property Name="DarinManuellKorrigiert" Type="nvarchar(max)" />
+          <Property Name="ZusatzkomponenteGemAIS" Type="nvarchar(max)" />
+          <Property Name="ZusatzkomponenteAutomatischAnonymisiert" Type="nvarchar(max)" />
+          <Property Name="ZusatzkomponenteManuellKorrigiert" Type="nvarchar(max)" />
+          <Property Name="ZusaetzlicheInformationenGemAIS" Type="nvarchar(max)" />
+          <Property Name="ZusaetzlicheInformationenAutomatischAnonymisiert" Type="nvarchar(max)" />
+          <Property Name="ZusaetzlicheInformationenManuellKorrigiert" Type="nvarchar(max)" />
+          <Property Name="VerwandteVEGemAIS" Type="nvarchar(max)" />
+          <Property Name="VerwandteVEAutomatischAnonymisiert" Type="nvarchar(max)" />
+          <Property Name="VerwandteVEManuellKorrigiert" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="Collection_Collection">
+          <End Role="Collection" Type="CMI.Access.Sql.Viaduc.EF.Store.Collection" Multiplicity="0..1" />
+          <End Role="Collection1" Type="CMI.Access.Sql.Viaduc.EF.Store.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="CollectionId" />
+            </Principal>
+            <Dependent Role="Collection1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManuelleKorrekturFelder_ManuelleKorrektur">
+          <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManuelleKorrekturFeld" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturFeld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManuelleKorrektur">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Principal>
+            <Dependent Role="ManuelleKorrekturFeld">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
+          <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrektur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManuelleKorrekturStatusHistory" Type="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManuelleKorrektur">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Principal>
+            <Dependent Role="ManuelleKorrekturStatusHistory">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CMI.Access.Sql.Viaduc.EF" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" annotation:UseStrongSpatialTypes="false" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ViaducDb" annotation:LazyLoadingEnabled="true" ed:Guid="f6072421-c423-460d-a299-71dd6cecf252">
+          <EntitySet Name="Collections" EntityType="CMI.Access.Sql.Viaduc.EF.Collection" />
+          <EntitySet Name="CollectionList" EntityType="CMI.Access.Sql.Viaduc.EF.CollectionListItem" />
+          <EntitySet Name="ApplicationUsers" EntityType="CMI.Access.Sql.Viaduc.EF.ApplicationUser" />
+          <EntitySet Name="ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.ManuelleKorrektur" />
+          <EntitySet Name="ManuelleKorrekturFelder" EntityType="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturFeld" />
+          <EntitySet Name="ManuelleKorrekturStatusHistories" EntityType="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturStatusHistory" />
+          <EntitySet Name="VManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.VManuelleKorrektur" />
+          <AssociationSet Name="Collection_CollectionSet" Association="CMI.Access.Sql.Viaduc.EF.Collection_Collection">
+            <End Role="Parent" EntitySet="Collections" />
+            <End Role="ChildCollections" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManuelleKorrekturFelder_ManuelleKorrekturSet" Association="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturFelder_ManuelleKorrektur">
+            <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+            <End Role="ManuelleKorrekturFelder" EntitySet="ManuelleKorrekturFelder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1Set" Association="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
+            <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
+            <End Role="ManuelleKorrekturStatusHistories" EntitySet="ManuelleKorrekturStatusHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Collection" ed:Guid="67cb0d2a-7dd5-4262-833a-2bcdfbb2403b">
+          <Key>
+            <PropertyRef Name="CollectionId" />
+          </Key>
+          <Property Name="CollectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="5447d4a8-304c-4bdf-8547-8efa8a60603d">
+            <Documentation>
+              <Summary>Primarykey </Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ParentId" Type="Int32" ed:ValidateRequired="false" ed:Guid="c8ed3dc3-121c-4d1b-aaef-f5b37f135bfe">
+            <Documentation>
+              <Summary>Points to the parent collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Language" Type="String" Nullable="false" DefaultValue="'de'" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="9b75272c-981c-43a4-b08a-18ef64538ede">
+            <Documentation>
+              <Summary>The language as ISO code de, en, fr</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="025419dc-47a1-4764-82b8-e4b6829f5e97">
+            <Documentation>
+              <Summary>Title of the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DescriptionShort" Type="String" Nullable="false" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="true" ed:Guid="042a49f2-48de-4021-9497-90f0d0b23497">
+            <Documentation>
+              <Summary>A short description of the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Description" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="0ecf3f1b-2101-4f14-8ffa-a09415029d20">
+            <Documentation>
+              <Summary>A full description of the collection in markup language</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ValidFrom" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="aa896cf9-9594-4a95-b68b-808b44269efc">
+            <Documentation>
+              <Summary>From which point in time the collection should be visible to the users</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ValidTo" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="84926561-19c6-47f2-bc31-0ccce400577c">
+            <Documentation>
+              <Summary>Until which point in time the collection should be visible to the users</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CollectionTypeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="121ea8a6-ef95-48df-b636-4bd4eb28ccc5">
+            <Documentation>
+              <Summary>Indicates the type of collections: Themenblöcke and Ausstellungen (Topics and Collections)</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Image" Type="Binary" ed:ValidateRequired="false" ed:Guid="5b4935f9-aead-40e5-850e-54e997c82d02">
+            <Documentation>
+              <Summary>An image that gives a hint to the collection</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Thumbnail" Type="Binary" ed:ValidateRequired="false" ed:Guid="1fe48b66-01e6-495b-9df4-40830f43359e">
+            <Documentation>
+              <Summary>The thumbnail to the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ImageAltText" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="eaa57b44-12b3-4d19-811d-1f8be85e6f5b">
+            <Documentation>
+              <Summary>The accessibility help information for the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ImageMimeType" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="1e3b7b52-965e-467e-802a-79ced788407e">
+            <Documentation>
+              <Summary>The mime type of the image</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Link" Type="String" MaxLength="4000" Unicode="true" ed:ValidateMaxLength="4000" ed:ValidateRequired="false" ed:Guid="637f19f8-58dc-4d87-9591-75a4a6dd9061">
+            <Documentation>
+              <Summary>The URL that will lead the user to the collection details</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CollectionPath" Type="String" Nullable="false" MaxLength="400" Unicode="true" ed:ValidateMaxLength="400" ed:ValidateRequired="true" ed:Guid="737ea8d8-39da-4016-948d-b22937e31271">
+            <Documentation>
+              <Summary>The path of the item consisting of a padded string of the ids from first parent to current item.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SortOrder" Type="Int32" Nullable="false" DefaultValue="0" ed:ValidateRequired="true" ed:Guid="e638fb12-066e-4fae-b976-691567778f69">
+            <Documentation>
+              <Summary>Allows to order the collections in a specific way</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="2c7e35ed-b939-4133-9293-059ff88d1e9e">
+            <Documentation>
+              <Summary>Date when record was added</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="3010db4e-2cbc-4da0-a1ca-042c4a9c6cd1">
+            <Documentation>
+              <Summary>User that added the record</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ModifiedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="120e7170-89fc-438d-9d35-7919bfbbb5d3">
+            <Documentation>
+              <Summary>Date when the record was modified</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="e8ab548a-35ce-4cd5-8958-8056b82e5dc7">
+            <Documentation>
+              <Summary>User that modified the record</Summary>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="ChildCollections" Relationship="CMI.Access.Sql.Viaduc.EF.Collection_Collection" FromRole="Parent" ToRole="ChildCollections" ed:Guid="e4f5bb98-a5f3-48d2-a7d9-039e748704e5" />
+          <NavigationProperty Name="Parent" Relationship="CMI.Access.Sql.Viaduc.EF.Collection_Collection" FromRole="ChildCollections" ToRole="Parent" ed:Guid="1ca9b2e0-1d45-4ffb-8b71-aebb8368668f" />
+        </EntityType>
+        <EntityType Name="CollectionListItem" ed:Guid="afca5f71-b259-4792-95d6-8c946be959dc">
+          <Key>
+            <PropertyRef Name="CollectionId" />
+          </Key>
+          <Property Name="CollectionId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="db6e7225-de75-4c4f-bd05-e34b37f04730" />
+          <Property Name="ParentId" Type="Int32" ed:ValidateRequired="false" ed:Guid="455d2e5e-61f7-4044-abfa-542cd0a1d107" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="08037c9e-8288-451c-957c-ba0655f69961" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="f2379e79-57fa-4d22-be69-f75485f68d95" />
+          <Property Name="DescriptionShort" Type="String" Nullable="false" MaxLength="512" Unicode="true" ed:ValidateMaxLength="512" ed:ValidateRequired="true" ed:Guid="f4fdd445-e84d-4615-98a1-dfa5e45e16c3" />
+          <Property Name="Description" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="f01f73fd-31f4-4c1f-a0b2-89c9bdb3d147" />
+          <Property Name="ValidFrom" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="605a9148-c5b0-44c8-ae8b-567f773b302a" />
+          <Property Name="ValidTo" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="3640f941-0989-40e6-95ba-95e8be3382e5" />
+          <Property Name="CollectionTypeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="e858fb2c-e376-4c7d-9e9c-2916a0f470f0" />
+          <Property Name="ImageAltText" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="6ac13a3e-470a-4c70-a397-bdb2c8be7b43" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="7dbea88a-b41d-4543-a928-da47a14ae312" />
+          <Property Name="Link" Type="String" MaxLength="4000" Unicode="true" ed:ValidateMaxLength="4000" ed:ValidateRequired="false" ed:Guid="43ffa588-db5f-4ffd-a2ec-2ea406d28a2c" />
+          <Property Name="CollectionPath" Type="String" Nullable="false" MaxLength="400" Unicode="true" ed:ValidateMaxLength="400" ed:ValidateRequired="true" ed:Guid="a714595d-133f-4d81-9ecb-1f3ddec3bf38" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="636baaeb-1504-4d63-8c26-2676a562fe68" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="58a74588-5335-4fd1-a277-c958e33696de" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="f1fe75d0-65bc-4aaa-89e5-e38d1b37857a" />
+          <Property Name="ModifiedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="5f0a663f-9b44-4057-a987-87a38df14cf4" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="13e28751-e44d-40c7-b9be-68aa1f32e15f" />
+          <Property Name="Parent" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="45e785bb-8cf4-4501-8e10-17c925f718ef" />
+          <Property Name="ChildCollections" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="f966bf95-8823-46df-82f1-4ea9fb824b6b" />
+        </EntityType>
+        <EntityType Name="ApplicationUser" ed:Guid="a07476e2-aa46-462c-ba6c-723a75221978">
+          <Documentation>
+            <Summary>Enthält Benutzer, die sich an Viaduc angemeldet haben</Summary>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="134029a2-5ead-423b-bae8-3262acd411df">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/nameidentifier</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FamilyName" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="118a15de-cd6a-4c9f-b681-57a15de62649">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/surname</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="FirstName" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="6c00baa2-0513-4686-a38c-579dd13460ee">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/givenname</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Organization" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="69275c27-7e10-4ffe-b9b9-adbb03528c33">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Street" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="dd3c8828-2f18-4411-9744-296f75ff999e">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="StreetAttachment" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="d816dd5f-a173-494f-bc9e-42d559524db3">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ZipCode" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="78ce72fb-ae67-49aa-b8b3-2ea73a253be2">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Town" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="b72a6750-b389-4f9b-9165-6bf3210d9102">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CountryCode" Type="String" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="383d5694-9687-4122-ae09-bdc8e4c0a2d8">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="EmailAddress" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="0d586372-1795-4d36-8a2c-0481c05c6bf2">
+            <Documentation>
+              <Summary>Vom eIAM Token Claim /identity/claims/emailaddress</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="PhoneNumber" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="7f8ef6ba-4385-4101-80e2-ab8de8a9171f">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="SkypeName" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="df459b03-2b41-4694-b3c7-fd1901354ec5">
+            <Documentation>
+              <Summary>Der Benutzer kann diese Information selber erfassen</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Setting" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="f9822dd7-508f-4b4a-856e-1ce77c5226ff" />
+          <Property Name="Claims" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="81f19de6-403a-4e37-9be7-bce42ffadcae">
+            <Documentation>
+              <Summary>Claims (json) von der letzten Anmeldung</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Created" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="352e44d0-2213-4e3c-a201-2cf143a52ecc">
+            <Documentation>
+              <Summary>Erstellungsdatum</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Updated" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="1a6e88a2-df44-44a4-831e-7be20a31ca66">
+            <Documentation>
+              <Summary>Änderungsdatum</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Fulltext" Type="String" Nullable="false" MaxLength="1808" Unicode="true" annotation:StoreGeneratedPattern="Computed" ed:ValidateMaxLength="1808" ed:ValidateRequired="true" ed:Guid="27f0043b-d89e-4be4-ba2b-2f7cbdd25837">
+            <Documentation>
+              <Summary>Volltext</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="UserExtId" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="6af3a1de-bdd7-4bfa-9713-9bb56c8bb4e7">
+            <Documentation>
+              <Summary>Vom eIAM Benutzer externe ID</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="Language" Type="String" Nullable="false" DefaultValue="'de'" MaxLength="2" Unicode="true" ed:ValidateMaxLength="2" ed:ValidateRequired="true" ed:Guid="ca689c2c-afe3-41c8-8175-1b2e17d57696">
+            <Documentation>
+              <Summary>Sprache, in welcher der Benutzer EMails empfangen möchte.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9321e4b6-aeda-40c9-96f6-b94204b06742" />
+          <Property Name="CreatedBy" Type="String" MaxLength="500" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="8138b8a5-85bb-4654-9fae-5421ff99b754" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="5a0f7ca3-8aa9-41c7-af4f-401c5cad254d" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="500" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="30db79eb-5ff5-4d3d-b5aa-424454d1cf7e" />
+          <Property Name="Birthday" Type="DateTime" ed:ValidateRequired="false" ed:Guid="9457b0df-4836-422c-abf6-43d70e932b11" />
+          <Property Name="FabasoftDossier" Type="String" MaxLength="1000" ed:ValidateMaxLength="1000" ed:ValidateRequired="false" ed:Guid="38f47ec3-5f52-4a9a-963d-cd6543443325" />
+          <Property Name="ReasonForRejection" Type="String" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="ad15043c-a007-4798-b510-8b03acb4cf6a">
+            <Documentation>
+              <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="IsInternalUser" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="57ca3788-ad53-46c1-85a1-89a2780f115e" />
+          <Property Name="RolePublicClient" Type="String" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="false" ed:Guid="250d30f3-6571-4234-8f18-7f1d12d6b6b6" />
+          <Property Name="EiamRoles" Type="String" MaxLength="10" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="33b33907-b23d-485b-9be2-70c72d034c9d" />
+          <Property Name="ResearcherGroup" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="987ac55c-5865-4b22-a23f-af8321c409b0" />
+          <Property Name="BarInternalConsultation" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0cf3445f-45c3-4a50-905d-424786ab451a" />
+          <Property Name="IdentifierDocument" Type="Binary" ed:ValidateRequired="false" ed:Guid="2ab9ec1f-ab4f-4e89-9b58-4c1f395ad5ff">
+            <Documentation>
+              <Summary>Beim erfolgreichem Onboarding mit Swisscom wird in dieses Feld automatisch ein von der Swisscom generiertes PDF abgelegt. Zudem kann in dieses Feld auch über den Management Client eine Datei hochgeladen werden.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="MobileNumber" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="24eec9b3-6050-4a7c-8090-83cbb30a11c9" />
+          <Property Name="ReasonForRejectionDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="1a1dbe9f-5f36-4175-a8a0-1e7315195674">
+            <Documentation>
+              <Summary>Datum an dem das Feld ReasonForRejection gesetzt wurde</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="DownloadLimitDisabledUntil" Type="DateTime" ed:ValidateRequired="false" ed:Guid="d2a25cdf-f0b6-4a3f-8827-73b65dd2bf72" />
+          <Property Name="DigitalisierungsbeschraenkungAufgehobenBis" Type="DateTime" ed:ValidateRequired="false" ed:Guid="54c85496-b0d8-4ae6-bfb0-c35e2c5c14d5">
+            <Documentation>
+              <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
+            </Documentation>
+          </Property>
+          <Property Name="ActiveAspNetSessionId" Type="String" DefaultValue="''" Unicode="true" ed:ValidateRequired="false" ed:Guid="2ca3ff55-9d61-49ad-90af-f188f5eb216a">
+            <Documentation>
+              <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EntityType Name="ManuelleKorrektur" ed:Guid="75cbb171-fa3c-4d1e-9df7-c393423b7364">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturId" />
+          </Key>
+          <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="5b57e645-9675-4285-98ca-212f6a3809d0" />
+          <Property Name="VeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="cb274ef3-f313-405c-a0f9-df0d150ed50e" />
+          <Property Name="Signatur" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="29bfcf06-abc2-4976-b875-06b6c8c10eda" />
+          <Property Name="Schutzfristende" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="d431ed63-ce36-4651-ba7d-adf667fd8ef9" />
+          <Property Name="Titel" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="3f6d943b-3271-450c-a2bd-c26edb176027" />
+          <Property Name="ErzeugtAm" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="6ffab350-0640-4af1-81cc-f1911a5638f4" />
+          <Property Name="ErzeugtVon" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="33524680-3186-41c2-bfa3-85a50e94370d" />
+          <Property Name="GeändertAm" Type="DateTime" ed:ValidateRequired="false" ed:Guid="651e874e-f28a-48fe-abf0-e805718ce8ba" />
+          <Property Name="GeändertVon" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="33226e09-31fb-4afd-a02d-3b559d759b6d" />
+          <Property Name="Anonymisierungsstatus" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="4a185308-f093-4cf7-9dbe-3eafa22a4090" />
+          <Property Name="Kommentar" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="70cceb4a-40db-4b9b-ae1f-ba772de2f426" />
+          <Property Name="Hierachiestufe" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="e413059d-bed3-4480-b2ea-18881d0eaa75" />
+          <Property Name="Aktenzeichen" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="6bb15058-2931-4bd3-9cf7-40cb1b5b6ab3" />
+          <Property Name="Entstehungszeitraum" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="e7ac9884-6ea6-468e-9734-dfc8be8e905d" />
+          <Property Name="ZugänglichkeitGemässBGA" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="7157be0c-e2ca-4916-ba69-64fdcd1cf2e8" />
+          <Property Name="Schutzfristverzeichnung" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="6e7442e5-e6d6-477a-94c1-4d8a641ad054" />
+          <Property Name="ZuständigeStelle" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="75f0be29-1db3-4c1a-8b5d-06081db84b94" />
+          <Property Name="Publikationsrechte" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="3c4870c2-231e-455e-b6b9-6987ad37f58f" />
+          <Property Name="AnonymisiertZumErfassungszeitpunk" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="fec5d041-aeb3-474e-bd7f-950ed860e94c" />
+          <NavigationProperty Name="ManuelleKorrekturFelder" Relationship="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturFelder_ManuelleKorrektur" FromRole="ManuelleKorrektur" ToRole="ManuelleKorrekturFelder" ed:Guid="aa9eb6e8-7880-4d8e-8c0e-6255357f50ec" />
+          <NavigationProperty Name="ManuelleKorrekturStatusHistories" Relationship="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" FromRole="ManuelleKorrektur" ToRole="ManuelleKorrekturStatusHistories" ed:Guid="fc170e10-6102-46da-897e-9fb17d1e2b27" />
+        </EntityType>
+        <EntityType Name="ManuelleKorrekturFeld" ed:Guid="d1474caa-d9fd-4814-9a99-ea0fc3aed30a">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturFelderId" />
+          </Key>
+          <Property Name="ManuelleKorrekturFelderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="68ad4f7e-76c1-4456-a116-3a9455305174" />
+          <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="0305d96e-7b68-49cb-b20a-f3ce5f29a67a" />
+          <Property Name="Feldname" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="776fe2aa-1b66-4f0d-96ef-e95c21d8a867" />
+          <Property Name="Original" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="527f13cc-9b5c-4843-addd-1c40df14dde8" />
+          <Property Name="Automatisch" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="6c64ba2b-3e6f-49b0-9d47-e110b1868930" />
+          <Property Name="Manuell" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="8c824102-6074-4de3-a080-09d3face4a83" />
+          <NavigationProperty Name="ManuelleKorrektur" Relationship="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturFelder_ManuelleKorrektur" FromRole="ManuelleKorrekturFelder" ToRole="ManuelleKorrektur" ed:Guid="a7297bb7-b83d-4cd0-8b97-49a33787c175" />
+        </EntityType>
+        <EntityType Name="ManuelleKorrekturStatusHistory" ed:Guid="4bb28461-4e61-44ea-8542-3dc7e2a4114b">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturStatusHistoryId" />
+          </Key>
+          <Property Name="ManuelleKorrekturStatusHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="fcfb6021-1b68-4836-8e61-e06b789a72a7" />
+          <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="538d24a1-9744-430c-8b6a-3dd8f65188a4" />
+          <Property Name="Anonymisierungsstatus" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="ced357d1-b2b1-42bb-b832-3d0ed78a94d7" />
+          <Property Name="ErzeugtAm" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="74cdd83b-948f-4fa5-928b-06b3d3f10d87" />
+          <Property Name="ErzeugtVon" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="b104d46b-2067-42b2-8e3c-1457e641b68c" />
+          <NavigationProperty Name="ManuelleKorrektur" Relationship="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" FromRole="ManuelleKorrekturStatusHistories" ToRole="ManuelleKorrektur" ed:Guid="68299969-7bc5-4901-9298-aa18bd02fa0f" />
+        </EntityType>
+        <EntityType Name="VManuelleKorrektur" ed:Guid="09d6b96b-5e69-40ce-b524-354a9dc86bf5">
+          <Key>
+            <PropertyRef Name="ManuelleKorrekturId" />
+            <PropertyRef Name="VeId" />
+            <PropertyRef Name="Signatur" />
+            <PropertyRef Name="Schutzfristende" />
+            <PropertyRef Name="Titel" />
+            <PropertyRef Name="ErzeugtAm" />
+            <PropertyRef Name="ErzeugtVon" />
+            <PropertyRef Name="Anonymisierungsstatus" />
+            <PropertyRef Name="Hierachiestufe" />
+            <PropertyRef Name="Aktenzeichen" />
+            <PropertyRef Name="ZugänglichkeitGemässBGA" />
+            <PropertyRef Name="AnonymisiertZumErfassungszeitpunk" />
+          </Key>
+          <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="fb6124e6-34f4-49a1-b35d-fba917dd05a6" />
+          <Property Name="VeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="04e367b9-bdb1-4ec5-bd09-d0ed6ab683b6" />
+          <Property Name="Signatur" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="da03391a-1923-4d6a-86d2-f62d9653623a" />
+          <Property Name="Schutzfristende" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="47f653bf-5350-4570-a0fb-067170a5ed44" />
+          <Property Name="Titel" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="ab334613-527e-4edf-b06f-5f784abd898d" />
+          <Property Name="ErzeugtAm" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="0eae4683-79e0-4a2e-9c67-54b67ab8406b" />
+          <Property Name="ErzeugtVon" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="3e39773f-99c0-44ec-a2d5-6c1275376b81" />
+          <Property Name="GeändertAm" Type="DateTime" ed:ValidateRequired="false" ed:Guid="f9498748-ea34-4e51-98f2-643a76e1a845" />
+          <Property Name="GeändertVon" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="6afebcdd-eecc-4772-ba79-e55a6d631bfc" />
+          <Property Name="Anonymisierungsstatus" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d7bf2761-9725-44c1-844d-87470b2f819a" />
+          <Property Name="Kommentar" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="8ebe771c-7928-49c1-8398-bfe05d39c21e" />
+          <Property Name="Hierachiestufe" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="f55604cd-6d9d-421f-945e-5b503ac246b6" />
+          <Property Name="Aktenzeichen" Type="String" Nullable="false" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="true" ed:Guid="47560802-f91f-4fb4-afd6-1bc18c3defe6" />
+          <Property Name="Entstehungszeitraum" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="e88cec90-39fb-4ffe-99e7-5d1aec9bc285" />
+          <Property Name="ZugänglichkeitGemässBGA" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="f4d08cf9-e92f-446a-9e92-1ab5c5a1e913" />
+          <Property Name="Schutzfristverzeichnung" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="97262718-ecd8-4519-b9ae-5d0f8f5a5cb2" />
+          <Property Name="ZuständigeStelle" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="b88800c2-066d-44c1-9342-138864064f29" />
+          <Property Name="Publikationsrechte" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="cbabb390-290f-4cef-a6e2-902164ab2550" />
+          <Property Name="AnonymisiertZumErfassungszeitpunk" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="b906a527-1264-4040-9c94-8ab32f75f353" />
+          <Property Name="TitelGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="c8cf334e-4c09-4bfc-a912-9e9dd97685be" />
+          <Property Name="TitelAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="a7d74edf-eeaf-4cca-a3ed-5c8743792785" />
+          <Property Name="TitelManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="316e08b7-26a0-4e06-b8c0-f1449c903477" />
+          <Property Name="DarinGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="0cbf2fb2-509f-4e72-badf-0cd5bfba6e0b" />
+          <Property Name="DarinAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="dd625811-9a8b-479e-8287-088c79a4cfca" />
+          <Property Name="DarinManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="521224c9-a560-4016-91d2-7eaada3fb14c" />
+          <Property Name="ZusatzkomponenteGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="cd4ce735-e4cd-4839-a917-17e72b669496" />
+          <Property Name="ZusatzkomponenteAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="32a55a5f-b045-44c3-8928-7384ab25af1b" />
+          <Property Name="ZusatzkomponenteManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="763f11c9-28e0-4c08-9842-63b80292bc57" />
+          <Property Name="ZusaetzlicheInformationenGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="587a0b44-e661-40e4-9d76-daaccc5922ab" />
+          <Property Name="ZusaetzlicheInformationenAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="5d697417-553f-4a48-9c02-6182d7fece9c" />
+          <Property Name="ZusaetzlicheInformationenManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="55758c7a-d218-4d5d-a520-44446eb0e24a" />
+          <Property Name="VerwandteVEGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="74c29b05-d03a-4582-90b6-e3c2a3042faa" />
+          <Property Name="VerwandteVEAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="b881490f-5eb0-4fe0-96aa-10db60017e24" />
+          <Property Name="VerwandteVEManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="613d384c-701b-44a1-94be-c0246b28a56a" />
+        </EntityType>
+        <Association Name="Collection_Collection" ed:Guid="fbe07d51-f04c-43f2-8c4e-e1f493f628db">
+          <End Role="Parent" Type="CMI.Access.Sql.Viaduc.EF.Collection" Multiplicity="0..1" />
+          <End Role="ChildCollections" Type="CMI.Access.Sql.Viaduc.EF.Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="CollectionId" />
+            </Principal>
+            <Dependent Role="ChildCollections">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManuelleKorrekturFelder_ManuelleKorrektur" ed:Guid="359c78ba-9d14-41bd-a922-027e1dd1d65c">
+          <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.ManuelleKorrektur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManuelleKorrekturFelder" Type="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturFeld" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManuelleKorrektur">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Principal>
+            <Dependent Role="ManuelleKorrekturFelder">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" ed:Guid="60056bb1-f2a9-4d96-b06a-756035385851">
+          <End Role="ManuelleKorrektur" Type="CMI.Access.Sql.Viaduc.EF.ManuelleKorrektur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ManuelleKorrekturStatusHistories" Type="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManuelleKorrektur">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Principal>
+            <Dependent Role="ManuelleKorrekturStatusHistories">
+              <PropertyRef Name="ManuelleKorrekturId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- MSL content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ViaducEntitiesStoreContainer" CdmEntityContainer="ViaducDb">
+          <EntitySetMapping Name="Collections">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.Collection">
+              <MappingFragment StoreEntitySet="Collections">
+                <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DescriptionShort" ColumnName="DescriptionShort" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="CollectionTypeId" ColumnName="CollectionTypeId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="ImageAltText" ColumnName="ImageAltText" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+                <ScalarProperty Name="CollectionPath" ColumnName="CollectionPath" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionList">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.CollectionListItem">
+              <MappingFragment StoreEntitySet="v_CollectionLists">
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="ChildCollections" ColumnName="ChildCollections" />
+                <ScalarProperty Name="CollectionId" ColumnName="CollectionId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="DescriptionShort" ColumnName="DescriptionShort" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+                <ScalarProperty Name="ValidTo" ColumnName="ValidTo" />
+                <ScalarProperty Name="CollectionTypeId" ColumnName="CollectionTypeId" />
+                <ScalarProperty Name="ImageAltText" ColumnName="ImageAltText" />
+                <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="CollectionPath" ColumnName="CollectionPath" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUsers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="StreetAttachment" ColumnName="StreetAttachment" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SkypeName" ColumnName="SkypeName" />
+                <ScalarProperty Name="Setting" ColumnName="Setting" />
+                <ScalarProperty Name="Claims" ColumnName="Claims" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Fulltext" ColumnName="Fulltext" />
+                <ScalarProperty Name="UserExtId" ColumnName="UserExtId" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="FabasoftDossier" ColumnName="FabasoftDossier" />
+                <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
+                <ScalarProperty Name="IsInternalUser" ColumnName="IsInternalUser" />
+                <ScalarProperty Name="RolePublicClient" ColumnName="RolePublicClient" />
+                <ScalarProperty Name="EiamRoles" ColumnName="EiamRoles" />
+                <ScalarProperty Name="ResearcherGroup" ColumnName="ResearcherGroup" />
+                <ScalarProperty Name="BarInternalConsultation" ColumnName="BarInternalConsultation" />
+                <ScalarProperty Name="IdentifierDocument" ColumnName="IdentifierDocument" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="ReasonForRejectionDate" ColumnName="ReasonForRejectionDate" />
+                <ScalarProperty Name="DownloadLimitDisabledUntil" ColumnName="DownloadLimitDisabledUntil" />
+                <ScalarProperty Name="DigitalisierungsbeschraenkungAufgehobenBis" ColumnName="DigitalisierungsbeschraenkungAufgehobenBis" />
+                <ScalarProperty Name="ActiveAspNetSessionId" ColumnName="ActiveAspNetSessionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManuelleKorrekturen">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrektur">
+              <MappingFragment StoreEntitySet="ManuelleKorrekturen">
+                <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+                <ScalarProperty Name="VeId" ColumnName="VeId" />
+                <ScalarProperty Name="Signatur" ColumnName="Signatur" />
+                <ScalarProperty Name="Schutzfristende" ColumnName="Schutzfristende" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+                <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+                <ScalarProperty Name="GeändertAm" ColumnName="GeändertAm" />
+                <ScalarProperty Name="GeändertVon" ColumnName="GeändertVon" />
+                <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+                <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+                <ScalarProperty Name="Hierachiestufe" ColumnName="Hierachiestufe" />
+                <ScalarProperty Name="Aktenzeichen" ColumnName="Aktenzeichen" />
+                <ScalarProperty Name="Entstehungszeitraum" ColumnName="Entstehungszeitraum" />
+                <ScalarProperty Name="ZugänglichkeitGemässBGA" ColumnName="ZugänglichkeitGemässBGA" />
+                <ScalarProperty Name="Schutzfristverzeichnung" ColumnName="Schutzfristverzeichnung" />
+                <ScalarProperty Name="ZuständigeStelle" ColumnName="ZuständigeStelle" />
+                <ScalarProperty Name="Publikationsrechte" ColumnName="Publikationsrechte" />
+                <ScalarProperty Name="AnonymisiertZumErfassungszeitpunk" ColumnName="AnonymisiertZumErfassungszeitpunk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManuelleKorrekturFelder">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturFeld">
+              <MappingFragment StoreEntitySet="ManuelleKorrekturFelder">
+                <ScalarProperty Name="ManuelleKorrekturFelderId" ColumnName="ManuelleKorrekturFelderId" />
+                <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+                <ScalarProperty Name="Feldname" ColumnName="Feldname" />
+                <ScalarProperty Name="Original" ColumnName="Original" />
+                <ScalarProperty Name="Automatisch" ColumnName="Automatisch" />
+                <ScalarProperty Name="Manuell" ColumnName="Manuell" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManuelleKorrekturStatusHistories">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturStatusHistory">
+              <MappingFragment StoreEntitySet="ManuelleKorrekturStatusHistories">
+                <ScalarProperty Name="ManuelleKorrekturStatusHistoryId" ColumnName="ManuelleKorrekturStatusHistoryId" />
+                <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+                <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+                <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+                <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VManuelleKorrekturen">
+            <EntityTypeMapping TypeName="CMI.Access.Sql.Viaduc.EF.VManuelleKorrektur">
+              <MappingFragment StoreEntitySet="v_ManuelleKorrekturen">
+                <ScalarProperty Name="ManuelleKorrekturId" ColumnName="ManuelleKorrekturId" />
+                <ScalarProperty Name="VeId" ColumnName="VeId" />
+                <ScalarProperty Name="Signatur" ColumnName="Signatur" />
+                <ScalarProperty Name="Schutzfristende" ColumnName="Schutzfristende" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="ErzeugtAm" ColumnName="ErzeugtAm" />
+                <ScalarProperty Name="ErzeugtVon" ColumnName="ErzeugtVon" />
+                <ScalarProperty Name="GeändertAm" ColumnName="GeändertAm" />
+                <ScalarProperty Name="GeändertVon" ColumnName="GeändertVon" />
+                <ScalarProperty Name="Anonymisierungsstatus" ColumnName="Anonymisierungsstatus" />
+                <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+                <ScalarProperty Name="Hierachiestufe" ColumnName="Hierachiestufe" />
+                <ScalarProperty Name="Aktenzeichen" ColumnName="Aktenzeichen" />
+                <ScalarProperty Name="Entstehungszeitraum" ColumnName="Entstehungszeitraum" />
+                <ScalarProperty Name="ZugänglichkeitGemässBGA" ColumnName="ZugänglichkeitGemässBGA" />
+                <ScalarProperty Name="Schutzfristverzeichnung" ColumnName="Schutzfristverzeichnung" />
+                <ScalarProperty Name="ZuständigeStelle" ColumnName="ZuständigeStelle" />
+                <ScalarProperty Name="Publikationsrechte" ColumnName="Publikationsrechte" />
+                <ScalarProperty Name="AnonymisiertZumErfassungszeitpunk" ColumnName="AnonymisiertZumErfassungszeitpunk" />
+                <ScalarProperty Name="TitelGemAIS" ColumnName="TitelGemAIS" />
+                <ScalarProperty Name="TitelAutomatischAnonymisiert" ColumnName="TitelAutomatischAnonymisiert" />
+                <ScalarProperty Name="TitelManuellKorrigiert" ColumnName="TitelManuellKorrigiert" />
+                <ScalarProperty Name="DarinGemAIS" ColumnName="DarinGemAIS" />
+                <ScalarProperty Name="DarinAutomatischAnonymisiert" ColumnName="DarinAutomatischAnonymisiert" />
+                <ScalarProperty Name="DarinManuellKorrigiert" ColumnName="DarinManuellKorrigiert" />
+                <ScalarProperty Name="ZusatzkomponenteGemAIS" ColumnName="ZusatzkomponenteGemAIS" />
+                <ScalarProperty Name="ZusatzkomponenteAutomatischAnonymisiert" ColumnName="ZusatzkomponenteAutomatischAnonymisiert" />
+                <ScalarProperty Name="ZusatzkomponenteManuellKorrigiert" ColumnName="ZusatzkomponenteManuellKorrigiert" />
+                <ScalarProperty Name="ZusaetzlicheInformationenGemAIS" ColumnName="ZusaetzlicheInformationenGemAIS" />
+                <ScalarProperty Name="ZusaetzlicheInformationenAutomatischAnonymisiert" ColumnName="ZusaetzlicheInformationenAutomatischAnonymisiert" />
+                <ScalarProperty Name="ZusaetzlicheInformationenManuellKorrigiert" ColumnName="ZusaetzlicheInformationenManuellKorrigiert" />
+                <ScalarProperty Name="VerwandteVEGemAIS" ColumnName="VerwandteVEGemAIS" />
+                <ScalarProperty Name="VerwandteVEManuellKorrigiert" ColumnName="VerwandteVEManuellKorrigiert" />
+                <ScalarProperty Name="VerwandteVEAutomatischAnonymisiert" ColumnName="VerwandteVEAutomatischAnonymisiert" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams>
+      <Diagram Name="Main" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

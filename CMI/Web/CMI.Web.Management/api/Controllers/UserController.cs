@@ -167,8 +167,7 @@ namespace CMI.Web.Management.api.Controllers
             };
             return response;
         }
-
-
+        
         [HttpGet]
         public JObject GetUserSettings()
         {

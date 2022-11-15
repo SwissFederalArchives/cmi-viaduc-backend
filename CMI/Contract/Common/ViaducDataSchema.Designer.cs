@@ -103,6 +103,11 @@ namespace CMI.Contract.Common
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("primaryDataDownloadAccessToken", ElementName = "primaryDataDownloadAccessToken")]
         public List<string> PrimaryDataDownloadAccessToken { get; set; }
+        /// <summary>
+        /// accessToken contains a string, identifying who has access to the fields that contain the unanonymized text for units of description.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("fieldAccessToken", ElementName = "fieldAccessToken")]
+        public List<string> FieldAccessToken { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
@@ -342,6 +347,11 @@ namespace CMI.Contract.Common
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("dateRangeText")]
         public string DateRangeText { get; set; }
+        /// <summary>
+        /// Indicates if this UoD has a special protection level. Is not required.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("protected")]
+        public bool Protected { get; set; }
         [System.Xml.Serialization.XmlAttributeAttribute(AttributeName = "archiveRecordId")]
         public string ArchiveRecordId { get; set; }
     }
@@ -1070,6 +1080,11 @@ namespace CMI.Contract.Common
         /// </summary>
         [System.Xml.Serialization.XmlElementAttribute("role")]
         public string Role { get; set; }
+        /// <summary>
+        /// Indicates if this UoD has a special protection level. Is not required.
+        /// </summary>
+        [System.Xml.Serialization.XmlElementAttribute("protected")]
+        public bool Protected { get; set; }
         [System.Xml.Serialization.XmlAttributeAttribute(AttributeName = "archiveRecordId")]
         public string ArchiveRecordId { get; set; }
     }

@@ -21,7 +21,10 @@ namespace CMI.Manager.Monitoring
 
         public void Start()
         {
-            BusConfigurator.ConfigureBus(builder, MonitoredServices.MonitoringService);
+            BusConfigurator.ConfigureBus(builder, MonitoredServices.MonitoringService, (cfg, ctx) =>
+            {
+                cfg.UseNewtonsoftJsonSerializer();
+            });
             var container = builder.Build();
             bus = container.Resolve<IBusControl>();
             bus.Start();

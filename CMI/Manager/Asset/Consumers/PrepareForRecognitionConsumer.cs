@@ -10,7 +10,7 @@ using CMI.Engine.Asset;
 using CMI.Manager.Asset.Properties;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 using Serilog.Core.Enrichers;
 
 namespace CMI.Manager.Asset.Consumers
@@ -79,7 +79,7 @@ namespace CMI.Manager.Asset.Consumers
                 // Forward the prepared data to the next processing point
                 var endpoint = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.AssetManagerExtractFulltextMessageQueue));
 
-                await endpoint.Send<IArchiveRecordExtractFulltextFromPackage>(new ArchiveRecordExtractFulltextFromPackage
+                await endpoint.Send<IArchiveRecordExtractFulltextFromPackage>(new 
                 {
                     MutationId = context.Message.MutationId,
                     ArchiveRecord = context.Message.ArchiveRecord,

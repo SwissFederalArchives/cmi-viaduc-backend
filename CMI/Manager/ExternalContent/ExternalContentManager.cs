@@ -1,10 +1,9 @@
-﻿using System;
-using CMI.Contract.Common;
+﻿using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 
 namespace CMI.Manager.ExternalContent
 {
-    public class ExternalContentManager : IExternalContentManager, IReportExternalContentManager
+    public class ExternalContentManager : IExternalContentManager
     {
         private readonly IDbExternalContentAccess dbExternalContentAccess;
 
@@ -25,23 +24,6 @@ namespace CMI.Manager.ExternalContent
         public DigitizationOrderDataResult GetDigitizationOrderData(string archiveRecordId)
         {
             return dbExternalContentAccess.GetDigitizationOrderData(archiveRecordId);
-        }
-
-        /// <summary>
-        ///  Gets the SyncInfoForReportResult from the AIS.
-        /// Need for create Report
-        /// </summary>
-        /// <returns>A Data type that have records with the mutationsIds.</returns>
-        public SyncInfoForReportResult GetReportExternalContent(int[] mutationsIds)
-        {
-            try
-            {
-                return dbExternalContentAccess.GetReportExternalContent(mutationsIds);
-            }
-            catch (Exception e)
-            {
-                return new SyncInfoForReportResult { ErrorMessage = e.Message };
-            }
         }
     }
 }

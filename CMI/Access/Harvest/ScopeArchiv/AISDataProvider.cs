@@ -71,22 +71,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
 
             return list;
         }
-
-        public List<SyncInfoForReport> GetSyncInfoForReport(List<int> mutationsIds)
-        {
-            var list = new List<SyncInfoForReport>();
-            // The Oracle DB can only read 1000 records at a time,
-            // so the DB is queried in chunks of thousands.
-            // If there are less than 1000, the DB is called after the while loop.
-            while (mutationsIds.Count > 1000)
-            {
-                list.AddRange(SyncInfoForReports(mutationsIds.GetRange(0, 1000).ToArray()));
-                mutationsIds.RemoveRange(0, 1000);
-            }
-
-            list.AddRange(SyncInfoForReports(mutationsIds.ToArray()));
-            return list;
-        }
+        
 
         /// <summary>
         ///     Updates the mutation status of a mutation record in the AIS.
@@ -466,6 +451,32 @@ namespace CMI.Access.Harvest.ScopeArchiv
             return retVal;
         }
 
+        public List<string> LoadFieldSecurityTokens(long recordId)
+        {
+            var retVal = new List<string>();
+
+            var securityInfo = GetDataSetFromSql<DataSet>(SqlStatements.GetArchiveRecordFieldSecurityInfo, new[]
+            {
+                new OracleParameter {ParameterName = "vrzng_enht_id", Value = recordId}
+            });
+
+            // We should have received exatly one record
+            Debug.Assert(securityInfo.Tables[0].Rows.Count == 1, "securityInfo.Tables[0].Rows.Count == 1");
+            var row = securityInfo.Tables[0].Rows[0];
+
+            var securityTokens = row["access_tokens"] == DBNull.Value ? null : (string)row["access_tokens"];
+            Log.Debug("Found the following security access tokens for archive record with id {recordId}: {securityTokens}", recordId, securityTokens);
+
+            // accessTokens is a comma seperated list with the access Tokens:
+            if (securityTokens != null)
+            {
+                var tokens = securityTokens.Split(',').Select(s => s.Trim().ToUpper());
+                retVal.AddRange(tokens);
+            }
+
+            return retVal;
+        }
+
         public PrimaryDataSecurityTokenResult LoadPrimaryDataSecurityTokens(long recordId)
         {
             var retVal = new PrimaryDataSecurityTokenResult();
@@ -802,10 +813,13 @@ namespace CMI.Access.Harvest.ScopeArchiv
         /// </summary>
         public DescriptorDataSet LoadDescriptors(long recordId)
         {
-            return GetDataSetFromSql<DescriptorDataSet>(SqlStatements.SqlArchiveRecordDescriptors, new[]
+            var exludedIds = applicationSettings.ExcludedThesaurenIds;
+            var sql = string.Format(SqlStatements.SqlArchiveRecordDescriptors, string.Join(",", exludedIds ?? new[] {-1}));
+            var descriptorDataSet =  GetDataSetFromSql<DescriptorDataSet>(sql, new[]
             {
                 new OracleParameter {ParameterName = "vrzng_enht_id", Value = recordId}
             });
+            return descriptorDataSet;
         }
 
         /// <summary>
@@ -824,28 +838,6 @@ namespace CMI.Access.Harvest.ScopeArchiv
         #endregion
 
         #region private Methods
-
-        private List<SyncInfoForReport> SyncInfoForReports(int[] mutationsIds)
-        {
-            var sqlString = string.Format(SqlStatements.SqlSyncInfoForReport, string.Join(",", mutationsIds));
-            var ds = GetDataSetFromSql<DataSet>(sqlString);
-            var list = (from r in ds.Tables[0].AsEnumerable()
-                select SyncInfoForReport(r)).ToList();
-            return list;
-        }
-
-        private SyncInfoForReport SyncInfoForReport(DataRow r)
-        {
-            return new SyncInfoForReport
-            {
-                MutationId = (int)r.Field<double>("mttn_id"),
-                ErstellungsdatumPrimaerdatenVerbindung = r.Field<DateTime>("ident_dt"),
-                StartErsterSynchronisierungsversuch = r.Field<DateTime>("ertr_sync_vrsch"),
-                StartLetzterSynchronisierungsversuch = r.Field<DateTime>("ltzr_sync_vrsch"),
-                AbschlussSynchronisierung = r.Field<DateTime>("absls_dt"),
-                AnzahlNotwendigerSynchronisierungsversuche = r.Field<int>("sync_anz_vrsch")
-            };
-        }
 
         private HarvestLogInfo HarvestLogInfo(DataRow r, DataSet dsDetail)
         {

@@ -6,6 +6,7 @@
         public abstract string TitelTeilBestand { get; }
         public abstract string Signatur { get; }
         public abstract string Titel { get; }
+        public abstract string Darin { get; }
         public abstract string Id { get; }
         public bool IstFormularbestellung => string.IsNullOrWhiteSpace(Id);
         public abstract bool IstFreiZugänglich { get; }
@@ -23,5 +24,6 @@
         public abstract string TitelBestand { get; }
         public abstract string Bestand { get; }
         public abstract string Ablieferung { get; }
+        public abstract string ZusaetzlicheInformationen { get; }
     }
 }

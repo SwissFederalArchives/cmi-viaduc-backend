@@ -7,7 +7,7 @@ using CMI.Manager.Order.Mails;
 using CMI.Utilities.Template;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Order.Consumers
 {
@@ -49,6 +49,7 @@ namespace CMI.Manager.Order.Consumers
                 var mailTemplate = parameterHelper.GetSetting<DigitalisierungsAuftragErledigtProblem>();
                 var messageContext = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddVe(messageContext.ArchiveRecordId)
                     .AddUser(messageContext.OrderUserId)
                     .AddBesteller(messageContext.OrderUserId)

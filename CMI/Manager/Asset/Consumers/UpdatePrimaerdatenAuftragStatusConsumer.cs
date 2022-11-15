@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CMI.Contract.Common;
 using MassTransit;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 using Serilog.Core.Enrichers;
 
 namespace CMI.Manager.Asset.Consumers

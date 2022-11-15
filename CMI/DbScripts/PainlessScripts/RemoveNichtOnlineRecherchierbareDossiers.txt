@@ -1,0 +1,31 @@
+PUT /_ingest/pipeline/RemoveNichtOnlineRecherchierbareDossiers
+{
+  "description": """"
+    PVW-1074 Anonymisierung: Meldung «Nicht online recherchierbare Dossiers» entfernen oder anpassen
+    Als AppO möchte ich, dass das bestehende Feld «Nicht online recherchierbare Dossiers» aus der Anzeige im Public-Client und dem Index entfernt wird, da die Information nicht mehr benötigt wird.
+    
+    Procedure
+    Start/compile pipeline
+    Execute search
+    Delete pipeline
+    
+    Hints:
+    the search is async and you get back a task with which the status can be checked e.g. GET /_tasks/lk3AiZV9R5Wc3wiPFmaD6w:14445773
+  """, 
+  "processors" : [{
+     "script" : {
+        "lang" : "painless",
+        "source" : """
+        ctx.remove('nichtOnlineRecherchierbareDossiers');
+        ctx.customFields.remove('nichtOnlineRecherchierbareDossiers');
+        """
+      }
+  }]
+}
+
+POST /archive/_update_by_query?pipeline=RemoveNichtOnlineRecherchierbareDossiers&conflicts=proceed&wait_for_completion=false
+{
+  "query": {
+    "match_all": {}
+  }
+}

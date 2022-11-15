@@ -38,6 +38,38 @@ namespace CMI.Access.Harvest.Tests
             result.Metadata.DetailData.Count.Should().Be(5);
         }
 
+        [Test]
+        public void ArchiveRecord_Must_Have_4_Field_Security_Values()
+        {
+            // Arrange
+            var mock = new DataProviderMock();
+            var provider = mock.GetMock();
+            var ab = new ArchiveRecordBuilder(provider, languageSettings, applicationSettings, new CachedLookupData(provider));
+
+            // Act
+            var result = ab.Build("1000");
+
+            // Assert
+            result.Security.FieldAccessToken.Count.Should().Be(1);
+            result.Security.MetadataAccessToken.Count.Should().Be(1);
+            result.Security.PrimaryDataDownloadAccessToken.Count.Should().Be(1);
+            result.Security.PrimaryDataFulltextAccessToken.Count.Should().Be(1);
+        }
+
+        [Test]
+        public void ArchiveRecord_SecurityField_FieldAccessToken_HasBAR_Value()
+        {
+            // Arrange
+            var mock = new DataProviderMock();
+            var provider = mock.GetMock();
+            var ab = new ArchiveRecordBuilder(provider, languageSettings, applicationSettings, new CachedLookupData(provider));
+
+            // Act
+            var result = ab.Build("1000");
+
+            // Assert
+            result.Security.FieldAccessToken[0].Should().Be("BAR");
+        }
 
         [Test]
         public void ArchiveRecord_Has_Single_Memo_Field()
@@ -84,6 +116,24 @@ namespace CMI.Access.Harvest.Tests
             result.Metadata.DetailData.FirstOrDefault(d => d.ElementType == DataElementElementType.memo).ElementValue.First().TextValues
                 .First(t => t.IsDefaultLang).Value.Should().Be("Some long text that continues on several lines to be stiched together ");
         }
+
+        [Test]
+        public void ArchiveRecord_Check_ArchiveplanContext_Field_Correct_set()
+        {
+            // Arrange
+            var mock = new DataProviderMock();
+            var provider = mock.GetMock();
+            var ab = new ArchiveRecordBuilder(provider, languageSettings, applicationSettings, new CachedLookupData(provider));
+
+            // Act
+            var result = ab.Build("1000");
+
+            // Assert
+            result.Display.ArchiveplanContext.Count.Should().Be(3);
+            result.Display.ArchiveplanContext[0].Protected.Should().BeTrue();
+            result.Display.ArchiveplanContext[1].Protected.Should().BeFalse();
+        }
+
 
         [Test]
         public void ArchiveRecord_Signatur_Field_Is_Repeated_Field()

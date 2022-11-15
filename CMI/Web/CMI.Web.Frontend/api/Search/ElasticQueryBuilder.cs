@@ -15,7 +15,7 @@ namespace CMI.Web.Frontend.api.Search
     public static class ElasticQueryBuilder
     {
         private static Dictionary<string, SearchFieldDefinition> searchFieldDefinitionsByKey;
-        private static Dictionary<string, IFieldTranslator> translatorsByKey;
+        internal static Dictionary<string, IFieldTranslator> translatorsByKey;
 
         public static ElasticQuery BuildElasticQuery(SearchParameters searchFor, UserAccess access)
         {

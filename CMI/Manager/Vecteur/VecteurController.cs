@@ -394,6 +394,7 @@ namespace CMI.Manager.Vecteur
             {
                 var template = parameterHelper.GetSetting<DigipoolAufbereitungFehlgeschlagen>();
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddAuftraege(new[] {orderItemId})
                     .AddValue("exceptionMessage", exceptionInfo)
                     .Create();

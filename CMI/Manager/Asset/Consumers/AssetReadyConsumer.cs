@@ -10,7 +10,7 @@ using CMI.Manager.Asset.Mails;
 using CMI.Utilities.Template;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 using Serilog.Core.Enrichers;
 
 namespace CMI.Manager.Asset.Consumers
@@ -92,6 +92,7 @@ namespace CMI.Manager.Asset.Consumers
                 var template = parameterHelper.GetSetting<GebrauchskopieZumDownloadBereit>();
                 var message = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddVe(message.ArchiveRecordId)
                     .AddUser(message.Recipient)
                     .AddValue("PasswortZipDatei", passwordHelper.GetHashPassword(message.ArchiveRecordId))
@@ -116,6 +117,7 @@ namespace CMI.Manager.Asset.Consumers
             {
                 var template = parameterHelper.GetSetting<GebrauchskopieErstellenProblem>();
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddVe(context.Message.ArchiveRecordId)
                     .AddUser(context.Message.Recipient)
                     .Create();
@@ -136,6 +138,7 @@ namespace CMI.Manager.Asset.Consumers
                 var template = parameterHelper.GetSetting<AufbereiteteBenutzungskopieZumDownloadBereit>();
                 var message = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddAuftraege(new[] {Convert.ToInt32(message.OrderItemId)})
                     .AddValue("Fehlermeldung", message.ErrorMessage)
                     .AddValue("PasswortZipDatei", passwordHelper.GetHashPassword(message.OrderItemId.ToString()))
@@ -157,6 +160,7 @@ namespace CMI.Manager.Asset.Consumers
                 var template = parameterHelper.GetSetting<AufbereitetenBenutzungskopieProblem>();
                 var message = context.Message;
                 var dataContext = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddAuftraege(new[] {Convert.ToInt32(message.OrderItemId)})
                     .AddValue("Fehlermeldung", message.ErrorMessage)
                     .AddValue("PasswortZipDatei", passwordHelper.GetHashPassword(message.OrderItemId.ToString()))

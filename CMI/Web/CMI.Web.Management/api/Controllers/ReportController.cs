@@ -14,7 +14,6 @@ using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management.Auth;
-using CMI.Web.Management.Helpers;
 using MassTransit;
 using Newtonsoft.Json;
 using Serilog;
@@ -25,14 +24,12 @@ namespace CMI.Web.Management.api.Controllers
     public class ReportController : ApiManagementControllerBase
     {
         private readonly ExcelExportHelper exportHelper;
-        private readonly IReportExternalContentHelper externalContentClient;
         private readonly IPublicOrder orderManagerClient;
 
-        public ReportController(IPublicOrder client, ExcelExportHelper exportHelper, IReportExternalContentHelper externalContentClient)
+        public ReportController(IPublicOrder client, ExcelExportHelper exportHelper)
         {
             this.orderManagerClient = client;
             this.exportHelper = exportHelper;
-            this.externalContentClient = externalContentClient;
         }
 
         [HttpGet]
@@ -45,21 +42,24 @@ namespace CMI.Web.Management.api.Controllers
             {
                 var rawResult =
                     await this.orderManagerClient.GetPrimaerdatenReportRecords(new LogDataFilter {StartDate = startDate, EndDate = endDate});
-                var mutationIds = rawResult.Where(r => r.MutationsId.HasValue)
-                    .Select(r => r.MutationsId.Value).ToArray();
-                List<SyncInfoForReport> externalContent = null;
-                if (mutationIds.Length > 0)
-                {
-                    Log.Information("Has mutationIds read by GetSyncInfoForReport");
-                    externalContent = await externalContentClient.GetSyncInfoForReport(mutationIds);
-                }
-                else if (rawResult.Count == 0)
+               
+                Log.Information("Has records count {Count} read", rawResult.Count);
+                List<PrimaerdatenAufbereitungItem> rawData = rawResult.GroupBy(
+                        i => i.OrderItemId)
+                    .Where(g => g.Count() == 1 && g.Key != null).SelectMany(element => element).ToList();
+
+                rawData.AddRange(rawResult
+                    .GroupBy(i => i.OrderItemId).Where(g =>
+                        g.Count() > 1 && g.Key != null).Select(entry => 
+                        entry.FirstOrDefault(e => e.AuftragErledigt.HasValue )));
+
+                if (rawData.Count == 0)
                 {
                     throw new Exception("Keine Daten gefunden, Zeitraum vergrössern ");
                 }
-                Log.Information("Has records count {Count} read", rawResult.Count);
 
-                var response = ConvertToPrimaerdatenRecord(rawResult, externalContent);
+                Log.Information("Has records count {Count} read", rawData.Count);
+                var response = ConvertToPrimaerdatenRecord(rawData);
 
                 var retVal = CreateExcelFile(response);
 
@@ -98,227 +98,37 @@ namespace CMI.Web.Management.api.Controllers
 
             using (var stream = exportHelper.ExportToExcel(response, new ExcelColumnInfos
             {
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.AufbereitungsArt), ColumnHeader = "Auftragstyp", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.OrderId), ColumnHeader = "Auftrags-ID", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.VeId), ColumnHeader = "VE-ID", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.MutationsId), ColumnHeader = "Mutations-ID", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.PrimaerdatenAuftragId), ColumnHeader = "Primärdaten Auftrag-ID", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.Size),ColumnHeader = "Grösse SIP in MB",  MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.FileCount), ColumnHeader = "Anzahl Files im SIP", MakeAutoWidth = true},
-                new ExcelColumnInfo {ColumnName = nameof(PrimaerdatenReportRecord.FileFormats), ColumnHeader = "Dateiformat im SIP", MakeAutoWidth = true},
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.Source), 
-                    ColumnHeader = "Quelle: digitale Ablieferung oder Digitalisierung durch Vecteur?", 
-                    MakeAutoWidth = true
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.OrderId), ColumnHeader = "Auftrags-ID", MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.VeId), ColumnHeader = "ID-VE", MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.Signatur), ColumnHeader = "Signatur", MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.Size),ColumnHeader = "Grösse SIP in MB",  MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.FileCount), ColumnHeader = "Anzahl Files im SIP", MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.DigitalisierungsKategorie), ColumnHeader = "Kategorie Digipool", MakeAutoWidth = true},
+               new() {
+                   ColumnName = nameof(PrimaerdatenReportRecord.NeuEingegangen),
+                   ColumnHeader = "Zeitstempel Status 'Neu eingegangen'",
+                   FormatSpecification = format.FormatString, MakeAutoWidth = true
+               },
+               new() {
+                   ColumnName = nameof(PrimaerdatenReportRecord.Ausgeliehen),
+                   ColumnHeader = "Zeitstempel Status 'Ausgeliehen'",
+                   FormatSpecification = format.FormatString, MakeAutoWidth = true},
+               new() {
+                   ColumnName = nameof(PrimaerdatenReportRecord.ZumReponierenBereit),
+                   ColumnHeader = "Zeitstempel Status 'Zum Reponieren bereit'",
+                   FormatSpecification = format.FormatString, MakeAutoWidth = true
+               },
+               new() {
+                   ColumnName = nameof(PrimaerdatenReportRecord.Mail),
+                   ColumnHeader = "Zeitstempel Versand Mail 'Für Download bereit' an User",
+                   FormatSpecification = format.FormatString,
+                   MakeAutoWidth = true
                 },
-                new ExcelColumnInfo {
-                    ColumnName = nameof(PrimaerdatenReportRecord.NeuEingegangen),
-                    ColumnHeader = "Zeitstempel Status 'Neu Eingegangen'",
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo {
-                    ColumnName = nameof(PrimaerdatenReportRecord.FreigabePrüfen),
-                    ColumnHeader = "Zeitstempel Status 'Freigabe prüfen'",
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true 
-                },
-                new ExcelColumnInfo {
-                    ColumnName = nameof(PrimaerdatenReportRecord.FürDigitalisierungBereit),
-                    ColumnHeader = "Zeitstempel Status 'Für Digitalisierung bereit'", 
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerManuelleFreigabe),
-                    ColumnHeader = "Dauer manuelle Freigabe durch BAR-MA  in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                    {ColumnName = nameof(PrimaerdatenReportRecord.FürAushebungBereit), ColumnHeader = "Zeitstempel Status 'Für Aushebung bereit'",
-                        FormatSpecification = format.FormatString, MakeAutoWidth = true},
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAuftragsabrufVecteur),
-                    ColumnHeader = "Dauer Auftragsabruf durch Vecteur  in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                    {ColumnName = nameof(PrimaerdatenReportRecord.Ausgeliehen), ColumnHeader = "Zeitstempel Status 'Ausgeliehen'",
-                        FormatSpecification = format.FormatString, MakeAutoWidth = true},
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAusleiheLogistik),
-                    ColumnHeader = "Dauer Ausleihe durch Logistik in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo {
-                        ColumnName = nameof(PrimaerdatenReportRecord.ZumReponierenBereit),
-                        ColumnHeader = "Zeitstempel Status 'Zum Reponieren bereit'",
-                        FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerDigitalisierungVecteur),
-                    ColumnHeader = "Dauer Digitalisierung durch Vecteur inkl. Ingest DIR in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.PrimaryDataLinkCreationDate),
-                    ColumnHeader = "Zeitstempel Status 'Identifikation digitales Magazin' in AIS",
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerUpdateAIPAdresseAIS),
-                    ColumnHeader = "Dauer Update AIP-Adresse in AIS in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.StartFirstSynchronizationAttempt),
-                    ColumnHeader = "Zeitstempel Start erster Synchronisierungsversuch (Status 1)",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerStartSynchronisierungWebOZ),
-                    ColumnHeader = "Dauer Start Synchronisierung durch WebOZ in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.StartLastSynchronizationAttempt),
-                    ColumnHeader = "Zeitstempel Start letzter Synchronisierungsversuch bevor Synchronisierung erfolgreich war (Status 2)",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.CompletionLastSynchronizationAttempt),
-                    ColumnHeader = "Zeitstempel Abschluss Synchronisierung (Status 2)",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.CountSynchronizationAttempts),
-                    ColumnHeader = "Anzahl notwendiger Synchronisierungsversuche bis Status 2",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerErfolgreicherSyncVersuch),
-                    ColumnHeader = "Dauer erfolgreicher Sync-Versuch in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAlleSyncVersuche),
-                    ColumnHeader = "Dauer alle Sync-Versuche  in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerZumReponierenBereitSyncCompleted),
-                    ColumnHeader = "Dauer von 'Zum Reponieren bereit' / 'Ingest completed DIR' bis Sync completed Viaduc  in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.ClickButtonPrepareDigitalCopy),
-                    ColumnHeader = "Zeitstempel Klick Button 'Digitalisat aufbereiten'",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.EstimatedPreparationTimeVeAccordingDetailPage),
-                    ColumnHeader = "Geschätzte Aufbereitungszeit der VE gem. Anzeige auf Detailseite in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.StartFirstPreparationAttempt),
-                    ColumnHeader = "Zeitstempel Start erster Aufbereitungsversuch Gebrauchskopie",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.StartLastPreparationAttempt),
-                    ColumnHeader = "Zeitstempel Start letzter Aufbereitungsversuch bevor Aufbereitung erfolgreich war",
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.CompletionLastPreparationAttempt),
-                    ColumnHeader = "Zeitstempel Abschluss Aufbereitung Gebrauchskopie",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.CountPreparationAttempts),
-                    ColumnHeader = "Aufbereitung erfolgreich",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerErfolgreicherAufbereitungsversuch),
-                    ColumnHeader = "Dauer erfolgreicher Aufbereitungsversuch in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAllAufbereitungsversuch),
-                    ColumnHeader = "Dauer alle Aufbereitungsversuche in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerSyncCompletedAufbereitungErfolgreich),
-                    ColumnHeader = "Dauer von 'Sync completed Viaduc' bis zu 'Aufbereitung erfolgreich' in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.StorageUseCopyCache),
-                    ColumnHeader = "Zeitstempel Speicherung Gebrauchskopie im Cache",
-                    FormatSpecification = format.FormatString, MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAufbereitungErfolgreichSpeicherungGebrauchskopieCache),
-                    ColumnHeader = "Dauer von 'Aufbereitung erfolgreich' bis Speicherung Gebrauchskopie im Cache in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.ShippingMailReadForDownload),
-                    ColumnHeader = "Zeitstempel Versand Mail 'Fur Download bereit' an User",
-                    FormatSpecification = format.FormatString,
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.DauerAufbereitungErfolgreichMailVersandt),
-                    ColumnHeader = "Dauer von 'Aufbereitung erfolgreich' bis Mail versandt in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.EingangBestellungVersandEMailZumDownloadBereit),
-                    ColumnHeader = "Eingang Bestellung bis Versand der E-Mail 'Zum Download bereit' in [h]:mm",
-                    MakeAutoWidth = true
-                },
-                new ExcelColumnInfo
-                {
-                    ColumnName = nameof(PrimaerdatenReportRecord.KlickButtonDigitalisatAufbereitenVersandEMailZumDownloadBereit),
-                    ColumnHeader = "Klick Button 'Digitalisat aufbereiten' bis Versand E-Mail 'Zum Download bereit'  in [h]:mm",
-                    MakeAutoWidth = true
-                }
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.WartezeitDigitalisierung),ColumnHeader = "Von 'Neu eingegangen' bis 'Ausgeliehen' in [h]:mm",  MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.DauerDigitalisierung),ColumnHeader = "Von 'Ausgeliehen' bis 'Zum Reponieren bereit' in [h]:mm",  MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.DigitalisierungTotal),ColumnHeader = "Von 'Neu Eingegangen' bis 'Zum Reponieren bereit' in [h]:mm",  MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.DauerAufbereitung),ColumnHeader = "Von 'Zum Reponieren bereit' bis Mailversand in [h]:mm",  MakeAutoWidth = true},
+               new() {ColumnName = nameof(PrimaerdatenReportRecord.TotalWartezeitNutzer),ColumnHeader = "Von 'Neu Eingegangen' bis Mailversand in [h]:mm",  MakeAutoWidth = true}
             }))
                 retVal.Content = new ByteArrayContent(stream.ToArray());
             retVal.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
@@ -331,65 +141,54 @@ namespace CMI.Web.Management.api.Controllers
 
         private static void SetMetaData(PrimaerdatenAufbereitungItem item, PrimaerdatenReportRecord record)
         {
-            var list = JsonConvert.DeserializeObject<List<ElasticArchiveRecordPackage>>(item.PackageMetadata);
-            var metaData = list.FirstOrDefault();
-
-            if (metaData != null)
+            try
             {
-                var items = metaData.Items.Where(i => i.Type.Equals(ElasticRepositoryObjectType.File)).ToList().Select(i => Path.GetExtension(i.Name)).Distinct().ToArray();
-                // ReSharper disable once PossibleLossOfFraction
-                record.Size = metaData.SizeInBytes / (1024 * 1024);
-                record.FileCount = metaData.FileCount;
-                record.FileFormats = string.Join(",", items);
-                var timeSpan = metaData.FulltextExtractionDuration + metaData.RepositoryExtractionDuration;
-                record.EstimatedPreparationTimeVeAccordingDetailPage = FormatTimeSpan(timeSpan);
+                var list = JsonConvert.DeserializeObject<List<ElasticArchiveRecordPackage>>(item.PackageMetadata);
+                if (list != null)
+                {
+                    var metaData = list.FirstOrDefault();
+
+                    if (metaData != null)
+                    {
+                        record.Size = metaData.SizeInBytes / (1024 * 1024);
+                        record.FileCount = metaData.FileCount;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("ReportController, VeId {VeId}, PrimaerdatenAuftragId {PrimaerdatenAuftragId}: an error occurred while deserializing meta data: {Message}", item.VeId, item.PrimaerdatenAuftragId, ex.Message);
             }
         }
 
         private static void SetPrimaerdaten(PrimaerdatenReportRecord record, PrimaerdatenAufbereitungItem item)
         {
             // Primaerdaten
-            record.AufbereitungsArt = item.AufbereitungsArt == "Sync" ? "Synchronisation" : "Aufbereitung";
             record.OrderId = item.OrderItemId;
             record.VeId = item.VeId;
-            record.MutationsId = item.MutationsId;
-            record.PrimaerdatenAuftragId = item.PrimaerdatenAuftragId;
-            record.Source = item.Quelle;
+            record.Signatur = item.Signatur;
             record.NeuEingegangen = item.NeuEingegangen;
-            record.FreigabePrüfen = item.FreigabePruefen;
-            record.FürDigitalisierungBereit = item.FuerDigitalisierungBereit;
-            record.FürAushebungBereit = item.FuerAushebungBereit;
-            record.Ausgeliehen = item.Ausgeliegen;
+            record.Ausgeliehen = item.Ausgeliehen;
             record.ZumReponierenBereit = item.ZumReponierenBereit;
-            record.ClickButtonPrepareDigitalCopy = item.Registriert;
-            record.StartFirstPreparationAttempt = item.ErsterAufbereitungsversuch;
-            record.StartLastPreparationAttempt = item.LetzterAufbereitungsversuch;
-            record.CompletionLastPreparationAttempt = item.AuftragErledigt;
-            record.ShippingMailReadForDownload = item.AuftragErledigt; 
-            record.CountPreparationAttempts = item.AnzahlVersucheDownload;
-            record.StorageUseCopyCache = item.ImCacheAbgelegt;
+            if (item.DigitalisierungsKategorieId.HasValue)
+            {
+                record.DigitalisierungsKategorie = DigitalisierungsKategorieId((DigitalisierungsKategorie)item.DigitalisierungsKategorieId.Value);
+            }
+            record.Mail = item.Abgeschlossen ; 
         }
 
-        private List<PrimaerdatenReportRecord> ConvertToPrimaerdatenRecord(List<PrimaerdatenAufbereitungItem> rawResult, List<SyncInfoForReport> syncInfoForReport)
+        private static string DigitalisierungsKategorieId(DigitalisierungsKategorie itemDigitalisierungsKategorieId)
+        {
+            return itemDigitalisierungsKategorieId.ToString();
+        }
+
+        private List<PrimaerdatenReportRecord> ConvertToPrimaerdatenRecord(List<PrimaerdatenAufbereitungItem> rawResult)
         {
             List<PrimaerdatenReportRecord> result = new List<PrimaerdatenReportRecord>();
             
             foreach (var item in rawResult)
             {
                 var record = new PrimaerdatenReportRecord();
-                if (syncInfoForReport != null && item.MutationsId.HasValue)
-                {
-                    var infoForReport = syncInfoForReport.FirstOrDefault(mut => mut.MutationId == item.MutationsId.Value);
-                   if (infoForReport != null)
-                   {
-                       record.PrimaryDataLinkCreationDate = infoForReport.ErstellungsdatumPrimaerdatenVerbindung;
-                       record.StartFirstSynchronizationAttempt = infoForReport.StartErsterSynchronisierungsversuch;
-                       record.CompletionLastSynchronizationAttempt = infoForReport.AbschlussSynchronisierung;
-                       record.StartLastSynchronizationAttempt = infoForReport.StartLetzterSynchronisierungsversuch;
-                       record.CountSynchronizationAttempts = infoForReport.AnzahlNotwendigerSynchronisierungsversuche;
-                   }
-                }
-
                 SetMetaData(item, record);
                 SetPrimaerdaten(record, item);
                 SetCalculatedValues(record, item);
@@ -401,86 +200,30 @@ namespace CMI.Web.Management.api.Controllers
 
         private void SetCalculatedValues(PrimaerdatenReportRecord @record, PrimaerdatenAufbereitungItem item)
         {
-            var timeSpan = item.FreigabePruefen.HasValue & item.FuerDigitalisierungBereit.HasValue
-                ? item.FuerDigitalisierungBereit.Value.Subtract(item.FreigabePruefen.Value)
+            var timeSpan = item.Ausgeliehen.HasValue & item.NeuEingegangen.HasValue
+                ? item.Ausgeliehen.Value.Subtract(item.NeuEingegangen.Value)
                 : (TimeSpan?)null;
-            record.DauerManuelleFreigabe = FormatTimeSpan(timeSpan);
+            record.WartezeitDigitalisierung = FormatTimeSpan(timeSpan);
 
-            timeSpan = item.FuerAushebungBereit.HasValue & item.FuerDigitalisierungBereit.HasValue ?
-                    item.FuerAushebungBereit.Value.Subtract(item.FuerDigitalisierungBereit.Value)
-                    : (TimeSpan?)null;
-            record.DauerAuftragsabrufVecteur = FormatTimeSpan(timeSpan);
-
-            timeSpan = item.FuerAushebungBereit.HasValue & item.Ausgeliegen.HasValue ?
-            item.Ausgeliegen.Value.Subtract(item.FuerAushebungBereit.Value)
-            : (TimeSpan?)null;
-            record.DauerAusleiheLogistik = FormatTimeSpan(timeSpan);
-
-            timeSpan = item.ZumReponierenBereit.HasValue & item.Ausgeliegen.HasValue ?
-                item.ZumReponierenBereit.Value.Subtract(item.Ausgeliegen.Value)
+            timeSpan = item.Ausgeliehen.HasValue & item.ZumReponierenBereit.HasValue
+                ? item.ZumReponierenBereit.Value.Subtract(item.Ausgeliehen.Value)
                 : (TimeSpan?)null;
-            record.DauerDigitalisierungVecteur = FormatTimeSpan(timeSpan);
+            record.DauerDigitalisierung = FormatTimeSpan(timeSpan);
 
-            timeSpan = item.ZumReponierenBereit.HasValue & record.PrimaryDataLinkCreationDate.HasValue ?
-                record.PrimaryDataLinkCreationDate.Value.Subtract(item.ZumReponierenBereit.Value)
+            timeSpan = item.NeuEingegangen.HasValue & item.ZumReponierenBereit.HasValue ?
+                item.ZumReponierenBereit.Value.Subtract(item.NeuEingegangen.Value)
                 : (TimeSpan?)null;
-            record.DauerUpdateAIPAdresseAIS = FormatTimeSpan(timeSpan);
+            record.DigitalisierungTotal = FormatTimeSpan(timeSpan);
 
-            timeSpan = record.StartFirstSynchronizationAttempt.HasValue & record.PrimaryDataLinkCreationDate.HasValue ?
-                record.StartFirstSynchronizationAttempt.Value.Subtract(record.PrimaryDataLinkCreationDate.Value)
+            timeSpan = item.ZumReponierenBereit.HasValue & item.Abgeschlossen.HasValue ?
+                item.Abgeschlossen.Value.Subtract(item.ZumReponierenBereit.Value)
                 : (TimeSpan?)null;
-            record.DauerStartSynchronisierungWebOZ = FormatTimeSpan(timeSpan);
+            record.DauerAufbereitung = FormatTimeSpan(timeSpan);
 
-            timeSpan = record.CompletionLastSynchronizationAttempt.HasValue & record.StartLastSynchronizationAttempt.HasValue ?
-                record.CompletionLastSynchronizationAttempt.Value.Subtract(record.StartLastSynchronizationAttempt.Value)
+            timeSpan = item.NeuEingegangen.HasValue & item.Abgeschlossen.HasValue ?
+                item.Abgeschlossen.Value.Subtract(item.NeuEingegangen.Value)
                 : (TimeSpan?)null;
-            record.DauerErfolgreicherSyncVersuch = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.CompletionLastSynchronizationAttempt.HasValue & record.StartFirstSynchronizationAttempt.HasValue ?
-                record.CompletionLastSynchronizationAttempt.Value.Subtract(record.StartFirstSynchronizationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerAlleSyncVersuche = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.CompletionLastSynchronizationAttempt.HasValue & item.ZumReponierenBereit.HasValue ?
-                record.CompletionLastSynchronizationAttempt.Value.Subtract(item.ZumReponierenBereit.Value)
-                : (TimeSpan?)null;
-            record.DauerZumReponierenBereitSyncCompleted = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.CompletionLastPreparationAttempt.HasValue & record.StartLastPreparationAttempt.HasValue ?
-                record.CompletionLastPreparationAttempt.Value.Subtract(record.StartLastPreparationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerErfolgreicherAufbereitungsversuch = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.CompletionLastPreparationAttempt.HasValue & record.StartFirstPreparationAttempt.HasValue ?
-                record.CompletionLastPreparationAttempt.Value.Subtract(record.StartFirstPreparationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerAllAufbereitungsversuch = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.CompletionLastPreparationAttempt.HasValue & record.CompletionLastSynchronizationAttempt.HasValue ?
-                record.CompletionLastPreparationAttempt.Value.Subtract(record.CompletionLastSynchronizationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerSyncCompletedAufbereitungErfolgreich = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.StorageUseCopyCache.HasValue && record.CompletionLastPreparationAttempt.HasValue ?
-                record.StorageUseCopyCache.Value.Subtract(record.CompletionLastPreparationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerAufbereitungErfolgreichSpeicherungGebrauchskopieCache = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.ShippingMailReadForDownload.HasValue && record.CompletionLastPreparationAttempt.HasValue
-                ? record.ShippingMailReadForDownload.Value.Subtract(record.CompletionLastPreparationAttempt.Value)
-                : (TimeSpan?)null;
-            record.DauerAufbereitungErfolgreichMailVersandt = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.ShippingMailReadForDownload.HasValue && item.NeuEingegangen.HasValue ?
-                record.ShippingMailReadForDownload.Value.Subtract(item.NeuEingegangen.Value)
-                : (TimeSpan?)null;
-            record.EingangBestellungVersandEMailZumDownloadBereit = FormatTimeSpan(timeSpan);
-
-            timeSpan = record.ShippingMailReadForDownload.HasValue && record.ClickButtonPrepareDigitalCopy.HasValue ?
-                record.ShippingMailReadForDownload.Value.Subtract(record.ClickButtonPrepareDigitalCopy.Value)
-                : (TimeSpan?)null;
-            record.KlickButtonDigitalisatAufbereitenVersandEMailZumDownloadBereit = FormatTimeSpan(timeSpan);
-
+            record.TotalWartezeitNutzer = FormatTimeSpan(timeSpan);
         }
 
         private static string FormatTimeSpan(TimeSpan? timeSpan)

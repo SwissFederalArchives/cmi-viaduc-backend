@@ -13,6 +13,7 @@ namespace CMI.Engine.MailTemplate
     public class DataBuilder : IDataBuilder
     {
         private readonly IBus bus;
+        private DataBuilderProtectionStatus useUnanonymizedData;
         private dynamic expando;
 
         // Required constructor for dependency injection
@@ -42,13 +43,15 @@ namespace CMI.Engine.MailTemplate
 
         public IDataBuilder AddBestellung(Ordering ordering)
         {
+            SetProtectionStatusOfOrderItems(ordering.Items);
             expando.Bestellung = new Bestellung(ordering);
             return this;
         }
 
         public IDataBuilder AddVe(string archiveRecordId)
         {
-            expando.Ve = GetVe(archiveRecordId);
+            var allowUnanonymized = TryGetProtectionStatus(archiveRecordId);
+            expando.Ve = GetVe(archiveRecordId, allowUnanonymized);
             return this;
         }
 
@@ -57,7 +60,8 @@ namespace CMI.Engine.MailTemplate
             var veList = new List<InElasticIndexierteVe>();
             foreach (var archiveRecordId in archiveRecordIdList)
             {
-                veList.Add(GetVe(archiveRecordId));
+                var allowUnanonymized = TryGetProtectionStatus(archiveRecordId);
+                veList.Add(GetVe(archiveRecordId, allowUnanonymized));
             }
 
             AddVeList(veList);
@@ -97,7 +101,9 @@ namespace CMI.Engine.MailTemplate
         public IDataBuilder AddAuftraege(Ordering ordering, IEnumerable<OrderItem> items, string propertyName)
         {
             var auftraege = new List<Auftrag>();
-            foreach (var orderItem in items)
+            var orderItems = items.ToList();
+            SetProtectionStatusOfOrderItems(orderItems);
+            foreach (var orderItem in orderItems)
             {
                 auftraege.Add(GetAuftrag(ordering, orderItem));
             }
@@ -108,6 +114,7 @@ namespace CMI.Engine.MailTemplate
 
         public IDataBuilder AddAuftrag(Ordering ordering, OrderItem item)
         {
+            SetProtectionStatusOfOrderItems(new []{item});
             AddValue("Auftrag", GetAuftrag(ordering, item));
             return this;
         }
@@ -146,6 +153,7 @@ namespace CMI.Engine.MailTemplate
             var response = task.Result.Message;
             var auftraege = new List<Auftrag>();
 
+            SetProtectionStatusOfOrderItems(response.OrderItems);
             foreach (var orderItem in response.OrderItems)
             {
                 var ordering = GetOrdering(orderItem.OrderId);
@@ -160,12 +168,19 @@ namespace CMI.Engine.MailTemplate
 
         public void Reset()
         {
+            useUnanonymizedData = DataBuilderProtectionStatus.AllAnonymized;
             expando = new ExpandoObject();
         }
 
         public dynamic Create()
         {
             return expando;
+        }
+
+        public IDataBuilder SetDataProtectionLevel(DataBuilderProtectionStatus protectionStatus)
+        {
+            useUnanonymizedData = protectionStatus;
+            return this;
         }
 
         private Person GetPerson(string userId)
@@ -179,15 +194,19 @@ namespace CMI.Engine.MailTemplate
         }
 
 
-        private InElasticIndexierteVe GetVe(string archiveRecordId)
+        private InElasticIndexierteVe GetVe(string archiveRecordId, bool getUnprotectedVersion)
         {
-            return InElasticIndexierteVe.FromElasticArchiveRecord(GetElasticArchiveRecord(archiveRecordId));
+            return InElasticIndexierteVe.FromElasticArchiveRecord(GetElasticArchiveRecord(archiveRecordId, getUnprotectedVersion));
         }
 
-        private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId)
+        private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId, bool getUnprotectedVersion)
         {
             var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
-            var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = archiveRecordId});
+            var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
+                {
+                    ArchiveRecordId = archiveRecordId, 
+                    UseUnanonymizedData = getUnprotectedVersion
+                });
             task.Wait();
             return task.Result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
             {
@@ -219,7 +238,9 @@ namespace CMI.Engine.MailTemplate
 
         private Auftrag GetAuftragForOrderItemWithVeId(Ordering ordering, OrderItem orderItem)
         {
-            var bestellterRecord = GetElasticArchiveRecord(orderItem.VeId.ToString());
+            var bestellterRecord = useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ? 
+                GetElasticArchiveRecord(orderItem.VeId.ToString(), true) : 
+                GetElasticArchiveRecord(orderItem.VeId.ToString(), AllowUnanonymized(orderItem.ApproveStatus));
             ElasticArchiveRecord auszuhebenderRecord = null;
             var besteller = GetPerson(ordering.UserId);
 
@@ -228,7 +249,7 @@ namespace CMI.Engine.MailTemplate
                 var dossierId = bestellterRecord.GetAuszuhebendeArchiveRecordId();
                 if (dossierId != null)
                 {
-                    auszuhebenderRecord = GetElasticArchiveRecord(dossierId);
+                    auszuhebenderRecord = GetElasticArchiveRecord(dossierId, true);
                 }
             }
             else
@@ -256,6 +277,82 @@ namespace CMI.Engine.MailTemplate
             var client = CreateRequestClient<GetOrderingRequest>(bus, BusConstants.OrderManagerGetOrderingRequestQueue);
             var result = client.GetResponse<GetOrderingResponse>(new GetOrderingRequest {OrderingId = orderingId}).GetAwaiter().GetResult().Message;
             return result.Ordering;
+        }
+
+        private void SetProtectionStatusOfOrderItems(IEnumerable<OrderItem> orderItems)
+        {
+            foreach (var orderItem in orderItems)
+            {
+                if (orderItem.VeId.HasValue)
+                {
+                    if (useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ||
+                        useUnanonymizedData == DataBuilderProtectionStatus.DependentOnApproveStatus && AllowUnanonymized(orderItem.ApproveStatus))
+                    {
+                        var ve = GetVe(orderItem.VeId.Value.ToString(), true);
+                        orderItem.Dossiertitel = ve.Titel;
+                        orderItem.Darin = ve.Darin;
+                        orderItem.ZusaetzlicheInformationen = ve.ZusaetzlicheInformationen;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Depending on the approve status the user is allowed to see unanonymized data
+        /// </summary>
+        private bool AllowUnanonymized(ApproveStatus approveStatus)
+        {
+            switch (approveStatus)
+            {
+                case ApproveStatus.NichtGeprueft:
+                case ApproveStatus.ZurueckgewiesenEinsichtsbewilligungNoetig:
+                case ApproveStatus.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist:
+                case ApproveStatus.ZurueckgewiesenTeilbewilligungVorhanden:
+                case ApproveStatus.ZurueckgewiesenFormularbestellungNichtErlaubt:
+                case ApproveStatus.ZurueckgewiesenDossierangabenUnzureichend:
+                    return false;
+
+                case ApproveStatus.FreigegebenDurchSystem:
+                case ApproveStatus.FreigegebenAusserhalbSchutzfrist:
+                case ApproveStatus.FreigegebenInSchutzfrist:
+                case ApproveStatus.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligung:
+                    return true;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(approveStatus), approveStatus, null);
+            }
+        }
+
+        private bool TryGetProtectionStatus(string archiveRecordId)
+        {
+            var allowUnanonymized = false;
+            switch (useUnanonymizedData)
+            {
+                case DataBuilderProtectionStatus.AllUnanonymized:
+                    allowUnanonymized = true;
+                    break;
+                case DataBuilderProtectionStatus.AllAnonymized:
+                    allowUnanonymized = false;
+                    break;
+                case DataBuilderProtectionStatus.DependentOnApproveStatus:
+                {
+                    // Try to find orderitem
+                    if (((IDictionary<String, object>) expando).ContainsKey("Bestellung"))
+                    {
+                        if (expando.Bestellung is Bestellung bestellung)
+                        {
+                            var orderItem = bestellung.Ordering.Items.FirstOrDefault(p => p.VeId == Convert.ToInt32(archiveRecordId));
+                            if (orderItem != null)
+                            {
+                                allowUnanonymized = AllowUnanonymized(orderItem.ApproveStatus);
+                            }
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            return allowUnanonymized;
         }
     }
 }

@@ -9,7 +9,6 @@ using CMI.Contract.Parameter;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Common;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -93,6 +92,7 @@ Vom AppO ist folgende Massnahme zu ergreifen:<br>
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
+                cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
             });
 

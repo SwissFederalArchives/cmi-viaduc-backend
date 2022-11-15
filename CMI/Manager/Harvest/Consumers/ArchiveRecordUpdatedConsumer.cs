@@ -5,7 +5,7 @@ using CMI.Contract.Harvest;
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Harvest.Consumers
 {

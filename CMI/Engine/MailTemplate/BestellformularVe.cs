@@ -32,9 +32,11 @@ namespace CMI.Engine.MailTemplate
         public override string TitelTeilBestand { get; }
 
         public override string Ablieferung { get; }
+        public override string ZusaetzlicheInformationen { get; }
 
         public override string Signatur { get; }
         public override string Titel { get; }
+        public override string Darin { get; }
         public override string Id { get; }
         public override bool IstFreiZugänglich { get; }
         public override string Level { get; }

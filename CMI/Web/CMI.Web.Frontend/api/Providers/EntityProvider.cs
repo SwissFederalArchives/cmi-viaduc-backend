@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
@@ -67,7 +68,7 @@ namespace CMI.Web.Frontend.api.Providers
 
             var found = elasticService.QueryForId<T>(id, access);
 
-            var result = found.Exception == null
+            var result = found != null && found.Exception == null
                 ? CreateEntityResult(access, found, metaOptions)
                 : null;
 
@@ -256,18 +257,10 @@ namespace CMI.Web.Frontend.api.Providers
         {
             // To reduce download size all unneeded whitespace is eliminated
             var s = new StringBuilder();
-            if (parent?.Data?.NichtOnlineRecherchierbareDossiers != null && parent.Data?.Level == "Serie" && role != AccessRoles.RoleBAR)
-            {
-                var text =
-                    $"{HttpUtility.HtmlEncode(parent.Data.NichtOnlineRecherchierbareDossiers.Split('(')[0].Trim())} {GetTranslationTreeNode(language, "onlyVisibleForIdentifiedUsers", "Dossiers sind aus rechtlichen Gründen nur identifizierten BenutzerInnen anzeigbar.")}";
-                s.Append(
-                    $@"<ul class=""row""><li class=""recordTitle""><ul><li></li><li class=""glyphicon glyphicon-info-sign""></li><li title=""{text}"">{text}</li><li></li></ul></li></ul>");
-            }
-
             foreach (var treeRecord in treeRecords)
             {
-                s.Append(
-                    $@"<ul class=""row""><li class=""recordTitle""><ul id=""Node{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" tabindex=""0""><li><a id=""{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" {GetClass(treeRecord)} aria-label=""{GetTranslationTreeNode(language, "expandLink", "Link aufklappen")} {HttpUtility.HtmlEncode(treeRecord.Title)}""></a></li><li><span aria-label=""{GetTranslationTreeNode(language, treeRecord.Level.ToLower(), "Typ " + treeRecord.Level)}""  class=""{GetIconName(treeRecord.Level)}""></span></li><li><a data-toggle=""tooltip"" title=""{HttpUtility.HtmlEncode(treeRecord.Title)}"" tabindex=""-1"" href=""{GetDetailUrl(treeRecord, language)}""><b>{HttpUtility.HtmlEncode(treeRecord.ReferenceCode)}</b>&nbsp;{HttpUtility.HtmlEncode(treeRecord.Title)}&nbsp;</a></li><li><span>{HttpUtility.HtmlEncode(GetCreationPeriod(treeRecord))}</span></li></ul></li><li id =""children{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" class=""tree-node-children""></li></ul>");
+                var row = $@"<ul class=""row""><li class=""recordTitle""><ul id=""Node{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" tabindex=""0""><li><a id=""{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" {GetClass(treeRecord)} aria-label=""{GetTranslationTreeNode(language, "expandLink", "Link aufklappen")} {HttpUtility.HtmlEncode(treeRecord.Title)}""></a></li><li><span aria-label=""{GetTranslationTreeNode(language, treeRecord.Level.ToLower(), "Typ " + treeRecord.Level)}""  class=""{GetIconName(treeRecord.Level)}""></span></li><li><a data-toggle=""tooltip"" title=""{HttpUtility.HtmlEncode(treeRecord.Title)}"" tabindex=""-1"" href=""{GetDetailUrl(treeRecord, language)}""><b>{HttpUtility.HtmlEncode(treeRecord.ReferenceCode)}</b>&nbsp;{AnonymizeText(treeRecord.Title,language)}&nbsp;</a></li><li><span>{HttpUtility.HtmlEncode(GetCreationPeriod(treeRecord))}{AddEyeOffIcon(treeRecord, language, role)}</span></li></ul></li><li id =""children{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" class=""tree-node-children""></li></ul>";
+                s.Append(row);
             }
 
             // Müssen einen leeren Dummy Eintrag einfügen, ansonsten der Baum in Edge einen "null" Eintrag anzeigt. 
@@ -278,6 +271,25 @@ namespace CMI.Web.Frontend.api.Providers
             }
 
             return s.ToString();
+        }
+
+        private string AddEyeOffIcon(TreeRecord treeRecord, string language, string role)
+        {
+            if (treeRecord.IsAnonymized && role.Equals(AccessRoles.RoleBAR, StringComparison.InvariantCultureIgnoreCase))
+            {
+                var tooltip = translator.GetTranslation(language, "simpleHit.anonymToolTip", "Für nicht berechtigte NutzerInnen anonymisiert.");
+                return $@"&nbsp;<span data-toggle=""tooltip"" title=""{tooltip}"" class=""glyphicon glyphicon-eye-close text-danger""></span>";
+            }
+
+            return string.Empty;
+        }
+
+        private string AnonymizeText(string value, string language, string pattern = "███")
+        {
+            var tooltip = translator.GetTranslation(language, "anonymized.Tooltip", "Aus Datenschutzgründen anonymisiert.");
+
+            var html = $"<span data-toggle=\"tooltip\" data-placement=\"bottom\" class=text-anonymized title=\"{tooltip}\">{pattern}</span>";
+            return Regex.Replace(HttpUtility.HtmlEncode(value), pattern, html);
         }
 
         private string GetTranslationTreeNode(string language, string element, string text)

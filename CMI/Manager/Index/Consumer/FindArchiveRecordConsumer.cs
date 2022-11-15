@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Index.Consumer
 {
@@ -28,7 +28,10 @@ namespace CMI.Manager.Index.Consumer
                     await context.RespondAsync(new FindArchiveRecordResponse
                     {
                         ArchiveRecordId = context.Message.ArchiveRecordId,
-                        ElasticArchiveRecord = indexManager.FindArchiveRecord(context.Message.ArchiveRecordId, context.Message.IncludeFulltextContent)
+                        ElasticArchiveRecord = indexManager.FindArchiveRecord(
+                            context.Message.ArchiveRecordId, 
+                            context.Message.IncludeFulltextContent, 
+                            context.Message.UseUnanonymizedData)
                     });
                 }
                 catch (Exception ex)

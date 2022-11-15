@@ -612,7 +612,8 @@ namespace CMI.Manager.Vecteur.Tests
             var bus = Mock.Of<IBus>();
             var parameterHelper = Mock.Of<IParameterHelper>();
             var user = new User();
-            var dataBuilder = Mock.Of<IDataBuilder>(x => x.AddAuftraege(It.IsAny<IEnumerable<int>>()) == x &&
+            var dataBuilder = Mock.Of<IDataBuilder>(x => x.SetDataProtectionLevel(It.IsAny<DataBuilderProtectionStatus>()) == x &&
+                                                         x.AddAuftraege(It.IsAny<IEnumerable<int>>()) == x &&
                                                          x.AddValue(It.IsAny<string>(), It.IsAny<object>()) == x &&
                                                          x.GetAuftraege(It.IsAny<IEnumerable<int>>()) == new List<Auftrag>
                                                          {

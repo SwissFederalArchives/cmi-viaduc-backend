@@ -13,8 +13,16 @@ namespace CMI.Web.Common.Helpers
     {
         static ExcelExportHelper()
         {
-            var licenseCells = new License();
-            licenseCells.SetLicense("Aspose.Total.lic");
+            try
+            {
+                var licensePdf = new License();
+                licensePdf.SetLicense("Aspose.Total.NET.lic");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while setting Aspose license.");
+                throw;
+            }
         }
 
         /// <summary>Exports any data list to a XLSX Excel stream.</summary>

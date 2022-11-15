@@ -212,6 +212,7 @@ namespace CMI.Contract.Messaging
         public string[] ExistingPrimaryDataDownloadAccessTokens { get; set; }
         public string[] ExistingPrimaryDataFulltextAccessTokens { get; set; }
         public string[] ExistingMetadataAccessTokens { get; set; }
+        public string[] ExistingFieldAccessTokens { get; set; }
     }
 
     public class UpdateIndivTokens
@@ -221,6 +222,7 @@ namespace CMI.Contract.Messaging
         public string[] CombinedPrimaryDataDownloadAccessTokens { get; set; }
         public string[] CombinedPrimaryDataFulltextAccessTokens { get; set; }
         public string[] CombinedMetadataAccessTokens { get; set; }
+        public string[] CombinedFieldAccessTokens { get; set; }
     }
 
     public class InVorlageExportierenRequest
@@ -307,4 +309,15 @@ namespace CMI.Contract.Messaging
     public class ResetAufbereitungsfehlerResponse
     {
     }
+
+    public class UpdateOrderItemRequest
+    {
+        public OrderItem OrderItem { get; set; }
+    }
+
+    public class UpdateOrderItemResponse
+    {
+        public int OrderItemId { get; set; }
+    }
+
 }

@@ -7,6 +7,7 @@ using CMI.Engine.MailTemplate;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.ProxyClients.Order;
 using CMI.Utilities.Template;
+using MassTransit;
 
 namespace CMI.Manager.Vecteur.Infrastructure
 {
@@ -35,7 +36,11 @@ namespace CMI.Manager.Vecteur.Infrastructure
         {
             var helper = new ParameterBusHelper();
             BusConfigurator.ConfigureBus(builder, MonitoredServices.VecteurService,
-                (cfg, ctx) => { helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg); });
+                (cfg, ctx) =>
+                {
+                    cfg.UseNewtonsoftJsonSerializer();
+                    helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
+                });
         }
     }
 }

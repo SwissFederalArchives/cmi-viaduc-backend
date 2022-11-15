@@ -72,6 +72,7 @@ namespace CMI.Manager.Order.Status
             {
                 // Das EMail mit seine Grunddaten erstellen:
                 emailExpando = new DataBuilder(Context.Bus)
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllAnonymized)
                     .AddUser(Context.Ordering.UserId)
                     .AddBestellung(Context.Ordering)
                     .AddVeList(new List<string>())
@@ -98,7 +99,7 @@ namespace CMI.Manager.Order.Status
             }
             else
             {
-                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId.Value.ToString(), false);
+                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId.Value.ToString(), false);
                 ((List<InElasticIndexierteVe>) emailExpando.VeList).Add(InElasticIndexierteVe.FromElasticArchiveRecord(veRecord));
             }
         }

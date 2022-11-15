@@ -7,7 +7,7 @@ namespace CMI.Web.Management.Auth
     {
         public static ManagementUserAccess GetManagementAccess(this ApiManagementControllerBase controller, string language = null)
         {
-            return controller.ManagementControllerHelper.GetUserAccess(language ?? WebHelper.GetClientLanguage(controller.Request));
+            return (ManagementUserAccess)controller.ManagementControllerHelper.GetUserAccess(language ?? WebHelper.GetClientLanguage(controller.Request));
         }
     }
 }

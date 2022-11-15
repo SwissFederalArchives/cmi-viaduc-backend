@@ -2,7 +2,7 @@
 using CMI.Contract.Messaging;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Harvest.Consumers
 {
@@ -28,7 +28,7 @@ namespace CMI.Manager.Harvest.Consumers
 
                 var message = context.Message;
                 var result = harvestManager.GetStatusInfo(message.DateRange);
-                await context.RespondAsync<GetHarvestStatusInfoResult>(new
+                await context.RespondAsync(new GetHarvestStatusInfoResult
                 {
                     Result = result
                 });

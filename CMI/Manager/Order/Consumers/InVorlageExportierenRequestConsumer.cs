@@ -6,7 +6,7 @@ using CMI.Contract.Order;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Order.Consumers
 {

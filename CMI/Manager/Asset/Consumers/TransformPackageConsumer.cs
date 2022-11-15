@@ -8,7 +8,7 @@ using CMI.Manager.Asset.Properties;
 using CMI.Utilities.Cache.Access;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Asset.Consumers
 {

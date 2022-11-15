@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
+using CMI.Access.Sql.Viaduc.EF;
 using CMI.Web.Management.api.Controllers;
 using Microsoft.AspNet.OData.Batch;
 using Microsoft.AspNet.OData.Builder;
@@ -18,9 +19,11 @@ namespace CMI.Web.Management
 
             var orderingName = nameof(OrderingFlatItemsController).Replace("Controller", "");
             var userOverviewName = nameof(UserOverviewController).Replace("Controller", "");
+            var manuelleKorrekturName = nameof(VManuelleKorrekturenController).Replace("Controller", "");
 
             modelBuilder.EntitySet<OrderingFlatItem>(orderingName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
             modelBuilder.EntitySet<UserOverview>(userOverviewName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
+            modelBuilder.EntitySet<VManuelleKorrektur>(manuelleKorrekturName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
 
             config.MapODataServiceRoute(
                 "ODataRoute",

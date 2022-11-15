@@ -196,7 +196,7 @@ namespace CMI.Access.Sql.Viaduc
         public IEnumerable<Bestellhistorie> OrderingHistory { get; set; }
         public bool HasMoreOrderingHistory { get; set; }
 
-        public IEnumerable<TreeRecord> ArchivplanKontext { get; set; }
+        public IEnumerable<ArchiveRecordContextItem> ArchivplanKontext { get; set; }
 
         [JsonIgnore] public OrderingFlatItem Item { get; private set; }
 

@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using CMI.Access.Sql.Viaduc;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend;
+using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Controllers;
 using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NJsonSchema.Generation;
@@ -22,6 +27,7 @@ using NSwag.AspNet.Owin;
 using NSwag.SwaggerGeneration;
 using Owin;
 using Serilog;
+using SameSiteMode = Microsoft.Owin.SameSiteMode;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -82,43 +88,62 @@ namespace CMI.Web.Frontend
         private void ConfigureSecurity(IAppBuilder app)
         {
             app.Use(async (context, next) => { await next.Invoke(); });
+            app.UseKentorOwinCookieSaver();
 
+            app.Use(async (context, next) => { await next.Invoke(); });
+            var connectionString = FrontendSettingsViaduc.Instance.SqlConnectionString;
+            var userDataAccess = new UserDataAccess(connectionString);
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = WebHelper.CookiePcAppliationCookieKey,
+                AuthenticationMode = AuthenticationMode.Active,
+                CookieSameSite = SameSiteMode.Strict,
+                CookieSecure = CookieSecureOption.Always,
+                CookieHttpOnly = true,
+                ExpireTimeSpan = TimeSpan.FromMinutes(FrontendSettingsViaduc.Instance.CookieExpireTimeInMinutes),
+                SlidingExpiration = true,
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = context => ValidateSessionIdIsActive(context, userDataAccess)
+                }
+            });
+
+            app.Use(async (context, next) => { await next.Invoke(); });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             app.Use(async (context, next) => { await next.Invoke(); });
 
             var authOptions = new KentorAuthServicesAuthenticationOptions(true)
             {
-                SPOptions = {Logger = new SeriLogAdapter(Log.Logger)}
+                SPOptions = { Logger = new SeriLogAdapter(Log.Logger) }
             };
 
             var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, true);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
-
             app.UseKentorAuthServicesAuthentication(authOptions);
-
+            
+            Log.Information("ConfigureSecurity: tokenExpiry={cookieExpireTimeInMinutes}",
+                FrontendSettingsViaduc.Instance.CookieExpireTimeInMinutes);
+            
             app.Use(async (context, next) => { await next.Invoke(); });
+        }
 
-            Log.Information("ConfigureSecurity: tokenExpiry={TokenExpiryInMinutes}",
-                AuthenticationHelper.TokenExpiryInMinutes);
+        private static Task ValidateSessionIdIsActive(CookieValidateIdentityContext context, UserDataAccess userDataAccess)
+        {
+            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+            var user = userDataAccess.GetUser(userId);
 
-            var oAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions
+            var activeAspNetSessionId = user?.ActiveAspNetSessionId;
+            var currentAspNetSessionId = context.Request.Cookies[WebHelper.CookiePcAspNetSessionIdKey];
+
+            if (currentAspNetSessionId != activeAspNetSessionId)
             {
-                AllowInsecureHttp = true,
-                TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(AuthenticationHelper.TokenExpiryInMinutes),
-                Provider = new AuthorizationServerProvider()
-            };
+                context.RejectIdentity();
+                context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
+            }
 
-            app.UseOAuthAuthorizationServer(oAuthAuthorizationServerOptions);
-
-            app.Use(async (context, next) => { await next.Invoke(); });
-
-            var authNOptions = AuthenticationHelper.WebApiBearerAuthenticationOptions =
-                new OAuthBearerAuthenticationOptions();
-            app.UseOAuthBearerAuthentication(authNOptions);
-
-            app.Use(async (context, next) => { await next.Invoke(); });
+            return Task.CompletedTask;
         }
     }
 }

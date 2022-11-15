@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Xml.Serialization;
 using CMI.Contract.Common.JsonConverters;
 using Newtonsoft.Json;
@@ -12,20 +13,22 @@ namespace CMI.Contract.Common
     /// </summary>
     public class TreeRecord
     {
+        public string ArchiveRecordId { get; set; }
         public string Title { get; set; }
         public string ReferenceCode { get; set; }
+        public bool IsAnonymized { get; set; }
         public bool IsLeaf { get; set; }
         public string ParentArchiveRecordId { get; set; }
         public string Level { get; set; }
         public long ChildCount { get; set; }
-        public string ArchiveRecordId { get; set; }
+     
         public int TreeSequence { get; set; }
         public List<ElasticArchiveplanContextItem> ArchiveplanContext { get; set; }
         public ElasticTimePeriod CreationPeriod { get; set; }
         public string ExternalDisplayTemplateName { get; set; }
-        public string NichtOnlineRecherchierbareDossiers { get; set; }
         public List<string> PrimaryDataDownloadAccessTokens { get; set; }
         public List<string> PrimaryDataFulltextAccessTokens { get; set; }
+        public List<string> FieldAccessTokens { get; set; }
     }
 
     /// <summary>
@@ -38,7 +41,7 @@ namespace CMI.Contract.Common
         public string WithinInfo { get; set; }
 
         [JsonConverter(typeof(ExpandoObjectConverter))]
-        public dynamic CustomFields { get; set; }
+        public dynamic CustomFields { get; set; } = new ExpandoObject();
     }
 
     /// <summary>
@@ -98,12 +101,20 @@ namespace CMI.Contract.Common
         public ElasticAggregationFields AggregationFields { get; set; }
     }
 
+    /// <summary>
+    /// Erweiterung weil eine Anonymisierung vorhanden ist
+    /// </summary>
+    public class ElasticArchiveDbRecord : ElasticArchiveRecord
+    {
+        public UnanonymizedFields UnanonymizedFields { get; set; } = new UnanonymizedFields();
+    }
 
     public class PermissionInfo
     {
         public string[] MetadataAccessToken { get; set; }
         public string[] PrimaryDataDownloadAccessTokens { get; set; }
         public string[] PrimaryDataFulltextAccessTokens { get; set; }
+        public string[] FieldAccessTokens { get; set; }
     }
 
     public class ElasticAggregationFields
@@ -116,6 +127,24 @@ namespace CMI.Contract.Common
         public List<int> CreationPeriodYears010 { get; set; }
         public List<int> CreationPeriodYears025 { get; set; }
         public List<int> CreationPeriodYears100 { get; set; }
+    }
+
+    public class UnanonymizedFields
+    {
+        public string Title { get; set; }
+        public string WithinInfo { get; set; }
+        /// <summary>
+        /// Feld heisst ZusätzlicheInformationen an anderer Stelle
+        /// </summary>
+        public string BemerkungZurVe { get; set; }
+        /// <summary>
+        /// Feld heisst Zusatzmerkmal an anderer Stelle
+        /// </summary>
+        public string ZusatzkomponenteZac1 { get; set; }
+        public string VerwandteVe { get; set; } 
+        public List<ElasticArchiveplanContextItem> ArchiveplanContext { get; set; } = new List<ElasticArchiveplanContextItem>();
+        public List<ElasticParentContentInfo> ParentContentInfos { get; set; } = new List<ElasticParentContentInfo>();
+        public List<ElasticReference> References { get; set; } = new List<ElasticReference>();
     }
 
     public class ElasticTimePeriod
@@ -142,6 +171,7 @@ namespace CMI.Contract.Common
         public string ReferenceName { get; set; }
         public string Role { get; set; }
         public string ArchiveRecordId { get; set; }
+        public bool Protected { get; set; }
     }
 
     public class ElasticContainer
@@ -205,6 +235,7 @@ namespace CMI.Contract.Common
         public string Title { get; set; }
         public string DateRangeText { get; set; }
         public string ArchiveRecordId { get; set; }
+        public bool Protected { get; set; }
     }
 
     public class ElasticParentContentInfo
@@ -280,5 +311,15 @@ namespace CMI.Contract.Common
         public string Value { get; set; }
         public string EntityRecordId { get; set; }
         public string EntityType { get; set; }
+    }
+
+    public class ArchiveRecordContextItem
+    {
+        public string Level { get; set; }
+        public string Title { get; set; }
+        public string DateRangeText { get; set; }
+        public string ArchiveRecordId { get; set; }
+        public bool Protected { get; set; }
+        public string ReferenceCode { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CMI.Access.Common.Properties;
 using CMI.Contract.Common;
+using CMI.Contract.Common.Extensions;
 using CMI.Utilities.Common.Helpers;
 using Elasticsearch.Net;
 using Nest;
@@ -14,6 +15,7 @@ namespace CMI.Access.Common
     public class SearchIndexDataAccess : ISearchIndexDataAccess, ITestSearchIndexDataAccess
     {
         private readonly ElasticIndexHelper helper;
+        public const int  ElasticSearchHitLimit = 10000;
 
         public SearchIndexDataAccess()
         {
@@ -42,6 +44,22 @@ namespace CMI.Access.Common
             return helper.GetRecord(archiveRecordId, includeFulltextContent);
         }
 
+        public ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, bool includeFulltextContent)
+        {
+            var record = FindDocument(archiveRecordId, includeFulltextContent);
+            var dbRecord = FindDbDocument(archiveRecordId, includeFulltextContent);
+
+            record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+
+            return record;
+
+        }
+
+        public ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, bool includeFulltextContent)
+        {
+            return helper.GetDbRecord(archiveRecordIdOrSignature, includeFulltextContent);
+        }
+
         public ElasticArchiveRecord FindDocumentByPackageId(string packageId)
         {
             var query = new TermQuery
@@ -65,15 +83,52 @@ namespace CMI.Access.Common
                 Log.Warning(
                     $"Did not find archive record when searching for packageId {packageId}. Query sent was {helper.Client.SourceSerializer.SerializeToString(searchRequest)}");
             }
-
-            return result.Documents.FirstOrDefault();
+            
+            var record = result.Documents.FirstOrDefault();
+            if (record != null && record.IsAnonymized)
+            {
+                var dbRecord = FindDbDocument(record.ArchiveRecordId, false);
+                record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+            }
+            return record;
         }
 
         public IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, bool allLevels)
         {
+            return GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, allLevels);
+        }
+
+        public IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, bool allLevels)
+        {
+            var children = GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, allLevels).ToList();
+            var childrenDbRecord = GetChildrenInternal<ElasticArchiveDbRecord>(archiveRecordId, allLevels).ToList();
+
+            // Now overwrite potentially anonymized fields with the clear values
+            foreach (var child in children)
+            {
+                child.SetUnanonymizedValuesForAuthorizedUser(childrenDbRecord.First(c => c.ArchiveRecordId == child.ArchiveRecordId));
+            }
+
+            return children;
+        }
+
+        public void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
+            string[] metadataAccessTokens, string[] fieldAccessTokens)
+        {
+            helper.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens, fieldAccessTokens);
+        }
+
+        public async Task<ElasticTestResponse> GetElasticIndexHealth()
+        {
+            return await helper.GetIndexHealth();
+        }
+
+
+        private IEnumerable<T> GetChildrenInternal<T>(string archiveRecordId, bool allLevels) where T : class
+        {
             // Required to use typed search request, or else the default index setting is ignored.
             // See https://github.com/elastic/elasticsearch-net/issues/1906
-            var searchRequest = new SearchRequest<ElasticArchiveRecord>();
+            var searchRequest = new SearchRequest<T>();
             QueryContainer query;
 
             if (!allLevels)
@@ -99,21 +154,18 @@ namespace CMI.Access.Common
                 };
             }
 
+            
             searchRequest.Query = query;
+            searchRequest.From = 0;
+            searchRequest.Size = ElasticSearchHitLimit;
+            var sourceFilter = new SourceFilter()
+            {
+                Excludes = Infer.Fields(new[] {"primaryData.items.content", "thumbnail", "customFields.bildVorschau", "customFields.bildAnsicht"})
+            };
+            searchRequest.Source = sourceFilter;
 
-            var result = helper.Client.Search<ElasticArchiveRecord>(searchRequest);
+            var result = helper.Client.Search<T>(searchRequest);
             return result.Documents;
-        }
-
-        public void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
-            string[] metadataAccessTokens)
-        {
-            helper.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens);
-        }
-
-        public async Task<ElasticTestResponse> GetElasticIndexHealth()
-        {
-            return await helper.GetIndexHealth();
         }
     }
 }

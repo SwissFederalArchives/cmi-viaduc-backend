@@ -49,6 +49,12 @@ Examples for the token can be:
 </xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="fieldAccessToken"
+                                type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>accessToken contains a string, identifying who has access to the fields that contain the unanonymized text for units of description.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -270,6 +276,12 @@ Examples for the token can be:
                                                   <xs:documentation>The role the linked entity has. Roles may be "see also", "related content found in", "successor", </xs:documentation>
                                                   </xs:annotation>
                                                   </xs:element>
+                                                  <xs:element minOccurs="0" name="protected"
+                                                  type="xs:boolean">
+                                                  <xs:annotation>
+                                                  <xs:documentation>Indicates if this UoD has a special protection level. Is not required.</xs:documentation>
+                                                  </xs:annotation>
+                                                  </xs:element>
                                                 </xs:sequence>
                                                 <xs:attribute name="archiveRecordId"
                                                   type="xs:string"/>
@@ -357,6 +369,11 @@ It is possible, that an archive record has a package coming from the file system
                 <xs:element name="dateRangeText" type="xs:string">
                     <xs:annotation>
                         <xs:documentation>The date range of the item expressed as a string.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="protected" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:documentation>Indicates if this UoD has a special protection level. Is not required.</xs:documentation>
                     </xs:annotation>
                 </xs:element>
             </xs:sequence>

@@ -360,6 +360,18 @@ namespace CMI.Utilities.ProxyClients.Order
             return (await client.GetResponse<ErinnerungVersendenResponse>(erinnerungRequest)).Message;
         }
 
+        public async Task<int> UpdateOrderItem(OrderItem item)
+        {
+            var client = GetRequestClient<UpdateOrderItemRequest>();
+
+            var request = new UpdateOrderItemRequest
+            {
+                OrderItem = item
+            };
+
+            return (await client.GetResponse<UpdateOrderItemResponse>(request)).Message.OrderItemId;
+        }
+
         private IRequestClient<T1> GetRequestClient<T1>(string queueEndpoint = "", int requestTimeOutInSeconds = 0) where T1 : class
         {
             var serviceUrl = string.IsNullOrEmpty(queueEndpoint)

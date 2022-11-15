@@ -38,8 +38,7 @@ namespace CMI.Manager.ExternalContent
             {
                 cfg.ReceiveEndpoint(BusConstants.ManagementApiGetDigitizationOrderData,
                     ec => { ec.Consumer(ctx.Resolve<DigitizationOrderConsumer>); });
-                cfg.ReceiveEndpoint(BusConstants.ManagementApiGetReportExternalContent,
-                    ec => { ec.Consumer(ctx.Resolve<ReportExternalConsumer>); });
+                cfg.UseNewtonsoftJsonSerializer();
             });
 
             // Add the bus instance to the IoC container

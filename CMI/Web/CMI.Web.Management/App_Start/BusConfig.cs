@@ -30,7 +30,7 @@ namespace CMI.Web.Management
                 {
                     ec.Consumer(ctx.Resolve<DocumentConverterServiceStartedEventConsumer>);
                 });
-
+                cfg.UseNewtonsoftJsonSerializer();
             });
             builder.Register(c => CreateFindArchiveRecordRequestClient()).As<IRequestClient<FindArchiveRecordRequest>>();
         }
@@ -50,8 +50,7 @@ namespace CMI.Web.Management
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
 
-            var client = bus.CreateRequestClient<DownloadAssetRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.WebApiDownloadAssetRequestQueue),
+            var client = bus.CreateRequestClient<DownloadAssetRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.WebApiDownloadAssetRequestQueue),
                 requestTimeout);
 
             return client;
@@ -61,8 +60,7 @@ namespace CMI.Web.Management
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
 
-            var client = bus.CreateRequestClient<FindArchiveRecordRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue),
+            var client = bus.CreateRequestClient<FindArchiveRecordRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue),
                 requestTimeout);
 
             return client;
@@ -72,29 +70,17 @@ namespace CMI.Web.Management
         {
             var requestTimeout = TimeSpan.FromMinutes(15);
 
-            var client = bus.CreateRequestClient<GetElasticLogRecordsRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerGetElasticLogRecordsRequestQueue),
+            var client = bus.CreateRequestClient<GetElasticLogRecordsRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerGetElasticLogRecordsRequestQueue),
                 requestTimeout);
 
             return client;
         }
         
-        public static IRequestClient<SyncInfoForReportRequest> GetExternalContentClient()
-        {
-            var requestTimeout = TimeSpan.FromMinutes(15);
-            var client = bus.CreateRequestClient<SyncInfoForReportRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.ManagementApiGetReportExternalContent), requestTimeout);
-
-            return client;
-        }
-
-
         public static IRequestClient<DoesExistInCacheRequest> CreateDoesExistInCacheClient()
         {
             var requestTimeout = TimeSpan.FromMinutes(5);
 
-            var client = bus.CreateRequestClient<DoesExistInCacheRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.CacheDoesExistRequestQueue),
+            var client = bus.CreateRequestClient<DoesExistInCacheRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.CacheDoesExistRequestQueue),
                 requestTimeout);
 
             return client;

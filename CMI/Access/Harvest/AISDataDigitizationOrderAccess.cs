@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Linq;
 using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
@@ -57,11 +56,6 @@ namespace CMI.Access.Harvest
             Log.Information("Took {Time}ms to build DigitizationOrderDataResult for id {Id}", sw.ElapsedMilliseconds, archiveRecordId);
 
             return retVal;
-        }
-
-        public SyncInfoForReportResult GetReportExternalContent(int[] mutationsIds)
-        {
-            return new SyncInfoForReportResult { Records = dataProvider.GetSyncInfoForReport(mutationsIds.ToList()) };
         }
     }
 }

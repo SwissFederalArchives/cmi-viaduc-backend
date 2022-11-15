@@ -8,7 +8,7 @@ using CMI.Utilities.Cache.Access;
 using MassTransit;
 using Newtonsoft.Json;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Order.Consumers
 {

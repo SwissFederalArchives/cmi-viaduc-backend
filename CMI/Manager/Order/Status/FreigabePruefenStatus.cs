@@ -128,6 +128,7 @@ namespace CMI.Manager.Order.Status
             }
 
             var builder = new DataBuilder(Context.Bus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllAnonymized)
                 .AddUser(Context.CurrentUser.Id)
                 .AddBesteller(Context.Ordering.UserId)
                 .AddBestellung(Context.Ordering);
@@ -158,6 +159,7 @@ namespace CMI.Manager.Order.Status
             }
 
             var builder = new DataBuilder(Context.Bus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.DependentOnApproveStatus)
                 .AddUser(Context.CurrentUser.Id)
                 .AddBesteller(Context.Ordering.UserId)
                 .AddBestellung(Context.Ordering);

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Aspose.Pdf;
+using Aspose.Pdf.Optimization;
 using Aspose.Pdf.Text;
 using CMI.Contract.Common;
 using Serilog;
@@ -86,8 +87,16 @@ namespace CMI.Engine.Asset
 
         public PdfManipulator()
         {
-            var licensePdf = new License();
-            licensePdf.SetLicense("Aspose.Total.lic");
+            try
+            {
+                var licensePdf = new License();
+                licensePdf.SetLicense("Aspose.Total.NET.lic");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while setting Aspose license.");
+                throw;
+            }
         }
 
         public List<AssetExtractionFile> ConvertToTextExtractionFiles(List<RepositoryFile> repositoryFiles, string path)
@@ -322,14 +331,14 @@ namespace CMI.Engine.Asset
                     File.Delete(originalFileName);
 
                     // Save the newly created pdf
-                   var optimizationOptions = new Document.OptimizationOptions
-                   {
-                       RemoveUnusedObjects = true,
-                       RemoveUnusedStreams = true,
-                       AllowReusePageContent = true,
-                       LinkDuplcateStreams = true,
-                       UnembedFonts = false
-                   };
+                    var optimizationOptions = new OptimizationOptions
+                    {
+                        RemoveUnusedObjects = true,
+                        RemoveUnusedStreams = true,
+                        AllowReusePageContent = true,
+                        LinkDuplcateStreams = true,
+                        UnembedFonts = false
+                    };
 
                     pdfDocument.OptimizeResources(optimizationOptions);
                     pdfDocument.Optimize();

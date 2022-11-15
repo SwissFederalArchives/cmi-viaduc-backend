@@ -1,16 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
-using CMI.Engine.Security;
 using CMI.Manager.Asset.Consumers;
 using CMI.Utilities.Cache.Access;
 using FluentAssertions;
 using MassTransit;
 using MassTransit.Testing;
-using MassTransit.Transports.InMemory.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using NUnit.Framework;
 
@@ -18,20 +16,31 @@ namespace CMI.Manager.Asset.Tests
 {
     public class TransformPackageConsumerTests
     {
-        private readonly Mock<IAssetManager> assetManager = new Mock<IAssetManager>();
-        private readonly Mock<IConsumer<IAssetReady>> assetReady = new Mock<IConsumer<IAssetReady>>();
-        private readonly Mock<ICacheHelper> cacheHelper = new Mock<ICacheHelper>();
-        private readonly Mock<PasswordHelper> passwordHelper = new Mock<PasswordHelper>("seed");
+        private Mock<IAssetManager> assetManager ;
+        private Mock<ICacheHelper> cacheHelper;
         private RepositoryPackage repositoryPackage;
+        private ITestHarness harness;
+        private ServiceProvider provider;
 
         [SetUp]
         public void Setup()
         {
-            assetManager.Reset();
-            cacheHelper.Reset();
-            assetReady.Reset();
-            passwordHelper.Reset();
+            assetManager = new Mock<IAssetManager>();
+            cacheHelper = new Mock<ICacheHelper>();
             repositoryPackage = new RepositoryPackage {PackageFileName = "testfile.zip", ArchiveRecordId = "112"};
+            // Build the container
+            provider = new ServiceCollection().AddMassTransitTestHarness(cfg =>
+                {
+                    cfg.AddConsumer<TransformPackageConsumer>();
+                    cfg.AddConsumer<PrepareForRecognitionConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerPrepareForRecognition);
+                    cfg.AddConsumer<AssetReadyConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerAssetReadyEventQueue);
+                    cfg.AddTransient(_ => assetManager.Object);
+                    cfg.AddTransient(_ => cacheHelper.Object);
+
+                })
+                .BuildServiceProvider(true);
+
+            harness = provider.GetRequiredService<ITestHarness>(); ;
         }
         
         [Test]
@@ -40,16 +49,12 @@ namespace CMI.Manager.Asset.Tests
             // Arrange
             assetManager.Setup(e => e.ConvertPackage("112", AssetType.Gebrauchskopie, false, It.IsAny<RepositoryPackage>()))
                 .ReturnsAsync(new PackageConversionResult { Valid = false, FileName = "112.zip" });
-
-            var harness = new InMemoryTestHarness();
-            var consumer = harness.Consumer(() => new TransformPackageConsumer(assetManager.Object, cacheHelper.Object, harness.Bus));
-            harness.Consumer(() => assetReady.Object);
-
+           
             await harness.Start();
             try
             {
                 // Act
-                await harness.InputQueueSendEndpoint.Send<ITransformAsset>(new TransformAsset
+                await harness.Bus.Publish<ITransformAsset>(new TransformAsset
                 {
                     AssetType = AssetType.Gebrauchskopie,
                     CallerId = "2222",
@@ -60,8 +65,10 @@ namespace CMI.Manager.Asset.Tests
 
 
                 // did the endpoint consume the message
+                Assert.IsTrue(await harness.Published.Any<ITransformAsset>());
                 Assert.That(await harness.Consumed.Any<ITransformAsset>());
 
+                var consumer = harness.GetConsumerHarness<TransformPackageConsumer>();
                 // did the actual consumer consume the message
                 Assert.That(await consumer.Consumed.Any<ITransformAsset>());
 
@@ -69,7 +76,7 @@ namespace CMI.Manager.Asset.Tests
                 Assert.That(await harness.Published.Any<IAssetReady>());
 
                 // ensure that no faults were published by the consumer
-                Assert.That(await harness.Published.Any<Fault<IAssetReady>>(), Is.False);
+                Assert.IsFalse(await consumer.Consumed.Any<Fault<IAssetReady>>());
 
                 // did the actual consumer consume the message
                 Assert.That(await harness.Consumed.Any<IAssetReady>());
@@ -99,16 +106,12 @@ namespace CMI.Manager.Asset.Tests
                 .ReturnsAsync("ftp://UsageCopyPublic:@someurl:9000/113");
             cacheHelper.Setup(e => e.SaveToCache(It.IsAny<IBus>(), It.IsAny<CacheRetentionCategory>(), It.IsAny<string>()))
                 .ReturnsAsync(true);
-
-            var harness = new InMemoryTestHarness();
-            var consumer = harness.Consumer(() => new TransformPackageConsumer(assetManager.Object, cacheHelper.Object, harness.Bus));
-            harness.Consumer(() => assetReady.Object);
-
+           
             await harness.Start();
             try
             {
                 // Act
-                await harness.InputQueueSendEndpoint.Send<ITransformAsset>(new TransformAsset
+                await harness.Bus.Publish<ITransformAsset>(new TransformAsset
                 {
                     AssetType = AssetType.Gebrauchskopie,
                     RepositoryPackage = repositoryPackage,
@@ -121,13 +124,15 @@ namespace CMI.Manager.Asset.Tests
                 Assert.That(await harness.Consumed.Any<ITransformAsset>());
 
                 // did the actual consumer consume the message
+
+                var consumer = harness.GetConsumerHarness<TransformPackageConsumer>();
                 Assert.That(await consumer.Consumed.Any<ITransformAsset>());
 
                 // the consumer publish the event
                 Assert.That(await harness.Published.Any<IAssetReady>());
 
                 // ensure that no faults were published by the consumer
-                Assert.That(await harness.Published.Any<Fault<IAssetReady>>(), Is.False);
+                Assert.IsFalse(await consumer.Consumed.Any<Fault<IAssetReady>>());
 
                 // did the actual consumer consume the message
                 Assert.That(await harness.Consumed.Any<IAssetReady>());
@@ -157,15 +162,11 @@ namespace CMI.Manager.Asset.Tests
             cacheHelper.Setup(e => e.SaveToCache(It.IsAny<IBus>(), It.IsAny<CacheRetentionCategory>(), It.IsAny<string>()))
                 .ReturnsAsync(false);
 
-            var harness = new InMemoryTestHarness();
-            var consumer = harness.Consumer(() => new TransformPackageConsumer(assetManager.Object, cacheHelper.Object, harness.Bus));
-            harness.Consumer(() => assetReady.Object);
-
             await harness.Start();
             try
             {
                 // Act
-                await harness.InputQueueSendEndpoint.Send<ITransformAsset>(new TransformAsset
+                await harness.Bus.Publish<ITransformAsset>(new TransformAsset
                 {
                     AssetType = AssetType.Gebrauchskopie,
                     RepositoryPackage = repositoryPackage,
@@ -178,13 +179,15 @@ namespace CMI.Manager.Asset.Tests
                 Assert.That(await harness.Consumed.Any<ITransformAsset>());
 
                 // did the actual consumer consume the message
+
+                var consumer = harness.GetConsumerHarness<TransformPackageConsumer>();
                 Assert.That(await consumer.Consumed.Any<ITransformAsset>());
 
                 // the consumer publish the event
                 Assert.That(await harness.Published.Any<IAssetReady>());
 
                 // ensure that no faults were published by the consumer
-                Assert.That(await harness.Published.Any<Fault<IAssetReady>>(), Is.False);
+                Assert.IsFalse(await consumer.Consumed.Any<Fault<IAssetReady>>());
 
                 // did the actual consumer consume the message
                 Assert.That(await harness.Consumed.Any<IAssetReady>());
@@ -213,16 +216,12 @@ namespace CMI.Manager.Asset.Tests
                 .Returns("myZippedFile");
             cacheHelper.Setup(e => e.SaveToCache(It.IsAny<IBus>(), CacheRetentionCategory.UsageCopyBenutzungskopie, "myZippedFile"))
                 .ReturnsAsync(true);
-
-            var harness = new InMemoryTestHarness();
-            var consumer = harness.Consumer(() => new TransformPackageConsumer(assetManager.Object, cacheHelper.Object, harness.Bus));
-            harness.Consumer(() => assetReady.Object);
-
+            
             await harness.Start();
             try
             {
                 // Act
-                await harness.InputQueueSendEndpoint.Send<ITransformAsset>(new TransformAsset
+                await harness.Bus.Publish<ITransformAsset>(new TransformAsset
                 {
                     OrderItemId = 115,
                     RepositoryPackage = repositoryPackage,
@@ -236,13 +235,14 @@ namespace CMI.Manager.Asset.Tests
                 Assert.That(await harness.Consumed.Any<ITransformAsset>());
 
                 // did the actual consumer consume the message
+                var consumer = harness.GetConsumerHarness<TransformPackageConsumer>();
                 Assert.That(await consumer.Consumed.Any<ITransformAsset>());
 
                 // the consumer publish the event
                 Assert.That(await harness.Published.Any<IAssetReady>());
 
-                // ensure that no faults were published by the consumer
-                Assert.That(await harness.Published.Any<Fault<IAssetReady>>(), Is.False);
+                // ensure that no faults were published by the consume
+                Assert.IsFalse(await consumer.Consumed.Any<Fault<IAssetReady>>());
 
                 // did the endpoint consume the message
                 Assert.That(await harness.Consumed.Any<IAssetReady>());

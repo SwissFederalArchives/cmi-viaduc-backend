@@ -36,5 +36,16 @@ namespace CMI.Web.Frontend.api.Controllers
 
             return userAccessProvider.GetUserAccess(language, userId);
         }
+
+        protected UserAccess GetAnonymizedAccess(string accessRole, string language = null)
+        {
+            userAccessProvider = userAccessProvider ?? new UserAccessProvider(ControllerHelper.UserDataAccess);
+            language = language ?? WebHelper.GetClientLanguage(Request);
+
+            var userAccess = userAccessProvider.GetUserAccess(language, null);
+            userAccess.RolePublicClient = accessRole;
+
+            return userAccess;
+        }
     }
 }

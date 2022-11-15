@@ -1,5 +1,4 @@
 ﻿using CMI.Utilities.Common;
-using GreenPipes.Caching;
 
 namespace CMI.Manager.Vecteur.Properties
 {

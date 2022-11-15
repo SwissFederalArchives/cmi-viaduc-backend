@@ -8,7 +8,6 @@ using CMI.Manager.Harvest.Consumers;
 using CMI.Manager.Harvest.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
-using GreenPipes;
 using MassTransit;
 using Serilog;
 
@@ -90,6 +89,7 @@ namespace CMI.Manager.Harvest
 
                 cfg.ReceiveEndpoint(BusConstants.MonitoringAisDbCheckQueue, ec => { ec.Consumer(ctx.Resolve<CheckAisDbConsumer>); });
 
+                cfg.UseNewtonsoftJsonSerializer();
                 // Wire up the parameter manager
                 var helper = new ParameterBusHelper();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
@@ -107,8 +107,7 @@ namespace CMI.Manager.Harvest
         private IRequestClient<FindArchiveRecordRequest> CreateFindArchiveRecordRequestClient(IComponentContext context)
         {
             var requestTimeout = TimeSpan.FromMinutes(1);
-            return bus.CreateRequestClient<FindArchiveRecordRequest>(
-                new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue), requestTimeout);
+            return bus.CreateRequestClient<FindArchiveRecordRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue), requestTimeout);
         }
 
         /// <summary>

@@ -19,6 +19,7 @@ namespace CMI.Access.Harvest.Properties
             AddDescription<Settings>(x => x.OracleUser, "Benutzer des Connection Strings zur Oracle DB des AIS");
             AddDescription<Settings>(x => x.OutputSQLExecutionTimes, "SQL Execution Time Einstellung des Connection Strings zur Oracle DB des AIS");
             AddDescription<Settings>(x => x.SupportedLanguages, "Unterstützte Sprachen des Connection Strings zur Oracle DB des AIS");
+            AddDescription<Settings>(x => x.ExcludedThesaurenIds, "Eine Liste mit Thesauren-Ids deren Deskriptoren von der Synchronisation ausgeschlossen werden sollen.");
         }
     }
 }

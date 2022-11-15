@@ -17,8 +17,6 @@ namespace CMI.Web.Common.Auth
 
     public class AuthenticationHelper : IAuthenticationHelper
     {
-        public static int TokenExpiryInMinutes => WebHelper.GetIntSetting("tokenExpiryInMinutes", 12 * 60);
-
         public static OAuthBearerAuthenticationOptions WebApiBearerAuthenticationOptions { get; set; }
 
         public IList<ClaimInfo> GetClaims(IIdentity identity)

@@ -50,6 +50,7 @@ namespace CMI.Access.Harvest.Tests
             referenceRow.GSFT_OBJ_ID = 9999;
             referenceRow.GSFT_OBJ_BZHNG_ROLLE_NM = "see also";
             referenceRow.GSFT_OBJ_KURZ_NM = "Archive Record Title";
+            referenceRow.PRTCTD = 0;
             referencesDataSet.References.AddReferencesRow(referenceRow);
 
             descriptorDataSet = new DescriptorDataSet();
@@ -109,9 +110,9 @@ namespace CMI.Access.Harvest.Tests
             archiveRecordDataSet.ArchiveRecord.AddArchiveRecordRow(ar);
 
             archivePlanInfoDataSet = new ArchivePlanInfoDataSet();
-            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 1", "Just a string", "1940 - 1950", 1, "Series", 1);
-            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 2", "Another string", "1945 - 1949", 1, "File", 800);
-            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 3", "Document Title", "1947", 1, "Document", 1000);
+            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 1", "Just a string", "1940 - 1950", 1, "Series", 1, 1);
+            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 2", "Another string", "1945 - 1949", 1, "File", 800, 0);
+            archivePlanInfoDataSet.ArchivePlanItem.AddArchivePlanItemRow("RefCode 3", "Document Title", "1947", 1, "Document", 1000, 0);
         }
 
         public void CreateNewTextRow(int gsftObjDtlId, ScopeArchivGeschaeftsObjektKlasse gsftObjKls, ScopeArchivDatenElementId elementId,
@@ -182,6 +183,7 @@ namespace CMI.Access.Harvest.Tests
                     DownloadAccessTokens = new List<string> {"Ö1"},
                     FulltextAccessTokens = new List<string> {"Ö1"}
                 });
+            moq.Setup(t => t.LoadFieldSecurityTokens(1000)).Returns(new List<string> { "BAR" });
 
             return moq.Object;
         }

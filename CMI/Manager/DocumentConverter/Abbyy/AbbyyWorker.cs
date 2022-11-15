@@ -9,6 +9,7 @@ using CMI.Manager.DocumentConverter.Render;
 using FREngine;
 using MassTransit;
 using Serilog;
+using JobContext = CMI.Contract.DocumentConverter.JobContext;
 
 namespace CMI.Manager.DocumentConverter.Abbyy
 {

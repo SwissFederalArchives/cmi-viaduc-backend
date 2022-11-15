@@ -5,7 +5,7 @@ using CMI.Web.Management.Auth;
 
 namespace CMI.Web.Management.api.Controllers
 {
-    public class ManagementControllerHelper
+    public class ManagementControllerHelper : IManagementControllerHelper
     {
         private readonly ApiController controller;
         private readonly ControllerHelper helper;
@@ -15,8 +15,9 @@ namespace CMI.Web.Management.api.Controllers
             this.controller = controller;
             this.helper = helper;
         }
+        
 
-        public ManagementUserAccess GetUserAccess(string language = null)
+        public IManagementUserAccess GetUserAccess(string language = null)
         {
             var userId = helper.GetCurrentUserId();
             return new ManagementUserAccess(
@@ -26,5 +27,10 @@ namespace CMI.Web.Management.api.Controllers
                 language ?? WebHelper.GetClientLanguage(controller.Request)
             );
         }
+    }
+
+    public interface IManagementControllerHelper
+    {
+        IManagementUserAccess GetUserAccess(string language = null);
     }
 }

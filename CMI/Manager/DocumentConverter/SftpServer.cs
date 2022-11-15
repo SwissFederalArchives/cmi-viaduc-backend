@@ -67,7 +67,6 @@ namespace CMI.Manager.DocumentConverter
                         LogWriter = new SerilogWriter(),
                         Keys = { ServerKey.GetServerPrivateKey() }
                     };
-
                     fileServer.Settings.SshParameters.EncryptionModes &= ~SshEncryptionMode.CBC; // Disable CBC algorithm (security vulnerability)
                     fileServer.FileUploaded += (sender, e) =>
                     {

@@ -16,7 +16,6 @@ namespace CMI.Web.Common.Helpers
 
         public static CmiSettings Settings => WebHelper.Settings != null ? WebHelper.Settings : new CmiSettings();
 
-
         #region Utilities
 
         public static int AdjustPagingSkip(int skip, int take, int total)

@@ -143,6 +143,7 @@ namespace CMI.Manager.Order.Status
             {
                 // Das EMail mit seine Grunddaten erstellen:
                 emailExpando = dataBuilder
+                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                     .AddSprache(sprache)
                     .AddUser(Context.CurrentUser.Id)
                     .AddBesteller(Context.Besteller.Id)
@@ -152,7 +153,7 @@ namespace CMI.Manager.Order.Status
                 Context.MailPortfolio.BeginUnfinishedMail<T>("InVorlageExportieren", emailExpando);
             }
 
-
+            dataBuilder.SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized);
             dataBuilder.AddAuftraege(new[] {Context.OrderItem.Id});
 
             var auftragsliste = (List<Auftrag>) emailExpando.Aufträge;

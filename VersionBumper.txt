@@ -4,4 +4,17 @@ Simply make a change to this file, and the deployment to Azure will work again.
 
 
 For
-	2021-11-26
+	2022-04-01: Feature/PVW 1080 gefundene fehler beim RC
+	2022-04-08: feature/pvw 1101 textkorrektur im public client registrieren
+	2022-04-21: feature/PVW-1107 [BUG] Diverse Fehler in der Benutzerverwaltung 
+	2022-05-16: Für Anpassungen Public Client zum Zweiten
+	2022-05-17: PVW-1119 Tooltip Archiveplan Anonymisierung 
+	2022-05-17: PVW-1119-Tooltip-Archiveplan-Anonymisierung-fix
+	2022-05-19: After Pre-Release Testing
+	2022-05-31: PVW-1132 Pre-Release Fehler-Meldungen
+	2022-06-03: PVW-1068 Anonymisierung: Detailansicht Manuelle Korrekturen Rückmeldugen
+	2022-06-21: PVW-1160 [BUG] Anonymisierung: Sortierung und Spaltendarstellung Manuelle Korrektur
+	2022-08-02: Release Stand 
+	2022-09-02: Anpassungen im Frontend
+	2022-09-28: Korrekturen Texte im Frontend
+	2022-10-06: PVW-1284 [BUG] Identifizierung: Kein Mail an benutzer-admin@bar.admin.ch bei Warnung

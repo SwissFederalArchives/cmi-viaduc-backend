@@ -52,5 +52,6 @@ namespace CMI.Contract.Order
         Task ResetAufbereitungsfehler(List<int> orderItemIds);
         Task<MahnungVersendenResponse> MahnungVersenden(List<int> orderItemIds, string language, int gewaehlteMahnungAnzahl, string userId);
         Task<ErinnerungVersendenResponse> ErinnerungVersenden(List<int> orderItemIds, string mcUserId);
+        Task<int> UpdateOrderItem(OrderItem item);
     }
 }

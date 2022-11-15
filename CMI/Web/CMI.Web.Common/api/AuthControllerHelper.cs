@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Web;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Manager.Order.Status;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
+using SameSiteMode = Microsoft.Owin.SameSiteMode;
 
 namespace CMI.Web.Common.api
 {
@@ -38,11 +44,84 @@ namespace CMI.Web.Common.api
             this.authenticationHelper = authenticationHelper;
         }
 
+        /// <summary>
+        /// Wird aufgerufen, wenn das EIAM / SAML2-Login durchgeführt wurde.
+        /// Erstellt die Session innerhalb der Viaduc Applikation
+        /// </summary>
+        /// <param name="owinContext"></param>
+        /// <returns></returns>
+        public async Task OnExternalSignIn(IOwinContext owinContext, bool isPublicClient)
+        {
+            var authManager = owinContext.Authentication;
+            var authResult = await authManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
+            if (authResult == null)
+            {
+                return;
+            }
+               
+            var identity = authResult.Identity;
+            Log.Information("Found identity for user {Name}", identity.Name);
+
+            authManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
+            Log.Information("Getting claims");
+            var claims = identity.Claims.ToList();
+            var appCookieKey = isPublicClient ? WebHelper.CookiePcAppliationCookieKey : WebHelper.CookieMcAppliationCookieKey;
+            var ci = new ClaimsIdentity(claims, appCookieKey);
+            authManager.SignIn(ci);
+
+            var aspSessionIdCookieyKey = isPublicClient ? WebHelper.CookiePcAspNetSessionIdKey : WebHelper.CookieMcAspNetSessionIdKey;
+            var sessionId = owinContext.Request.Cookies[aspSessionIdCookieyKey];
+            var userId = GetUserId(ci.Claims);
+            Log.Information("Got userId from claims: {userId}", userId);
+
+            // Die SessionId wird zusätzlich in einem eigenem Cookie gespeichert, damit diese nach dem Logout kurzzeitig verwendet werden kann.
+            var cookieUserIdKey = isPublicClient ? WebHelper.CookiePcViaducUserIdKey : WebHelper.CookieMcViaducUserIdKey;
+            AddViaducSessionCookie(owinContext, userId, cookieUserIdKey);
+
+            // Wir merken uns die aktive SessionId um sie bei einem Logout zurückzusetzen. 
+            // Dies wird beim Überprüfen der Identity genutzt um zu verhindern, dass vor einem Logout
+            // das Session-Cookie abgegriffen - und nach dem Logout weiter verwendet werden kann.
+            userDataAccess.UpdateActiveSessionId(userId, sessionId);
+        }
+
+        /// <summary>
+        /// Wird nach dem Abmelden vom EIAM / SAMl2 aufgerufen.
+        /// Die Methode entfernt die notwendigen Cookies und setzt die aktive SessionId des Benutzers auf der DB zurück.
+        /// </summary>
+        /// <param name="owinContext"></param>
+        public void OnExternalSignOut(IOwinContext owinContext, bool isPublicClient)
+        {
+            var cookieUserIdKey = isPublicClient ? WebHelper.CookiePcViaducUserIdKey : WebHelper.CookieMcViaducUserIdKey;
+            var appCookieKey = isPublicClient ? WebHelper.CookiePcAppliationCookieKey : WebHelper.CookieMcAppliationCookieKey;
+
+            var userId = owinContext.Request.Cookies[cookieUserIdKey];
+            userDataAccess.UpdateActiveSessionId(userId, null);
+
+            var authManager = owinContext.Authentication;
+            authManager.SignOut(appCookieKey);
+            owinContext.Response.Cookies.Delete(cookieUserIdKey, new CookieOptions
+            {
+                HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict
+            });
+        }
+
+        private static void AddViaducSessionCookie(IOwinContext owinContext, string userId, string cookieUserIdKey)
+        {
+            owinContext.Response.Cookies.Append(cookieUserIdKey, userId,
+                new CookieOptions { HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict });
+        }
+
+        private string GetUserId(IEnumerable<Claim> claims)
+        {
+            return claims?.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+        }
+
         public Identity GetIdentity(HttpRequestMessage request, IPrincipal user, bool isPublicClient)
         {
             var userId = controllerHelper.GetCurrentUserId();
             var claims = authenticationHelper.GetClaimsForRequest(user, request);
-
+            
             if (!HasValidMandant(claims))
             {
                 Log.Warning("User hat noch keinen Antrag gestellt");
@@ -83,7 +162,7 @@ namespace CMI.Web.Common.api
                 throw new AuthenticationException(
                     $"Es wurde für den Benutzer keine Rolle definiert in der Datenbank oder Authentifikation hat fehlgeschlagen UserId:={userId}, AuthStatus='{authStatus}'");
             }
-
+            
             var accessTokens = userDataAccess.GetTokensDesUser(userId);
 
             var identity = new Identity

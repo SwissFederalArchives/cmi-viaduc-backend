@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Data Source=localhost;Initial Catalog=Viaduc;@@CMI.Manager.Onboarding.Properties.DbConnectionSetting.ConnectionString_Credentials@@;Pooling=true</Value>
+      <Value Profile="(Default)">@@CMI.SqlServer.DbConnectionSetting.ConnectionString@@</Value>
     </Setting>
   </Settings>
 </SettingsFile>

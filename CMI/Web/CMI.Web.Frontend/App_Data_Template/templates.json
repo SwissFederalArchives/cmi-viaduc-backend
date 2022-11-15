@@ -1256,18 +1256,6 @@
               }
             },
             {
-              "DbFieldName": "CustomFields.NichtOnlineRecherchierbareDossiers",
-              "DbType": "Text",
-              "ElasticType": "string",
-              "Visibility": 0,
-              "FieldLabels": {
-                "de": "Nicht online recherchierbare Dossiers",
-                "en": "Dossiers not searchable online",
-                "fr": "Dossiers ne pouvant faire l'objet d'une recherche en ligne",
-                "it": "Dossier non reperibili on-line"
-              }
-            },
-            {
               "DbFieldName": "CustomFields.DigitalesFindmittelBeschreibung",
               "DbType": "Text",
               "ElasticType": "string",

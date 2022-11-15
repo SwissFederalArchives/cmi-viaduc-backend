@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Castle.Core.Internal;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Utilities.Bus.Configuration
 {

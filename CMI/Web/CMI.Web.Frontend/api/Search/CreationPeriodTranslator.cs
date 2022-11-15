@@ -21,7 +21,7 @@ namespace CMI.Web.Frontend.api.Search
 
             if (values.Length != 2)
             {
-                throw new InvalidOperationException("The creation period must contain zero or one – character");
+                throw new InvalidOperationException("The creation period must contain zero or one - character");
             }
 
             var searchFromString = values[0].Trim();

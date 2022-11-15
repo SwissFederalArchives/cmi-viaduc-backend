@@ -312,6 +312,7 @@ namespace CMI.Manager.Order
                 {
                     dataBuilder.Reset();
                     var dataContext = dataBuilder
+                        .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
                         .AddAuftraege(itemByUser.OrderItemIds)
                         .AddBesteller(itemByUser.UserId)
                         .AddUser(userId)
@@ -389,6 +390,11 @@ namespace CMI.Manager.Order
                 Log.Error(ex, "Unexptected error while sending Erinnerung");
                 return new ErinnerungVersendenResponse { Success = false, Error = ex.Message };
             }
+        }
+
+        public Task<int> UpdateOrderItem(OrderItem item)
+        {
+            return sqlDataAccess.UpdateOrderItem(item);
         }
 
         public User GetUser(string orderUserId)

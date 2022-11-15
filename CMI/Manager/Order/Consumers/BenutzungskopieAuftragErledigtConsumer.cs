@@ -10,7 +10,7 @@ using CMI.Contract.Order;
 using CMI.Manager.Order.Properties;
 using MassTransit;
 using Serilog;
-using Serilog.Context;
+using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Order.Consumers
 {
