@@ -364,7 +364,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         ParameterName = "p1",
                         Value = ToDb(newUserId),
-                        SqlDbType = SqlDbType.VarChar
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {

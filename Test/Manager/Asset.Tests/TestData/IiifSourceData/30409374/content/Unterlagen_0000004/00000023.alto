@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3565" WIDTH="2532">
+<BottomMargin HEIGHT="3565" WIDTH="2532" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="33" WIDTH="90" VPOS="135" HPOS="922" language="fr">
+<TextLine HEIGHT="21" WIDTH="14" VPOS="146" HPOS="922"><String WC="0.23000000417232513" CONTENT="F" HEIGHT="21" WIDTH="14" VPOS="146" HPOS="922"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="51" WIDTH="115" VPOS="136" HPOS="91" language="de">
+<TextLine HEIGHT="32" WIDTH="59" VPOS="150" HPOS="95"><String WC="0.5533333420753479" CONTENT="•V’" HEIGHT="32" WIDTH="59" VPOS="150" HPOS="95"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="32" WIDTH="40" VPOS="149" HPOS="2122" language="rm">
+<TextLine HEIGHT="30" WIDTH="29" VPOS="149" HPOS="2128"><String WC="0." CONTENT="V" HEIGHT="24" WIDTH="13" VPOS="155" HPOS="2128"/><SP WIDTH="8" VPOS="149" HPOS="2142"/><String WC="1." CONTENT="’" HEIGHT="16" WIDTH="6" VPOS="149" HPOS="2151"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block4" HEIGHT="36" WIDTH="113" VPOS="239" HPOS="839" language="rm">
+<TextLine HEIGHT="28" WIDTH="108" VPOS="244" HPOS="840"><String WC="0.37999999523162842" CONTENT="!•" HEIGHT="16" WIDTH="20" VPOS="256" HPOS="840"/><SP WIDTH="25" VPOS="244" HPOS="861"/><String WC="0.52666664123535156" CONTENT="w.." HEIGHT="26" WIDTH="61" VPOS="244" HPOS="887"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block5" HEIGHT="37" WIDTH="24" VPOS="279" HPOS="2138" language="rm">
+<TextLine HEIGHT="25" WIDTH="12" VPOS="285" HPOS="2144"><String WC="0.89999997615814209" CONTENT=";■" HEIGHT="25" WIDTH="12" VPOS="285" HPOS="2144"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block6" HEIGHT="35" WIDTH="62" VPOS="629" HPOS="1125" language="rm">
+<TextLine HEIGHT="25" WIDTH="60" VPOS="634" HPOS="1125"><String WC="0.50400000810623169" CONTENT="-:Sk&gt;" HEIGHT="25" WIDTH="60" VPOS="634" HPOS="1125"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block7" HEIGHT="39" WIDTH="2498" VPOS="3526" HPOS="0"/><GraphicalElement ID="Page1_Block8" HEIGHT="3492" WIDTH="40" VPOS="41" HPOS="0"/><GraphicalElement ID="Page1_Block9" HEIGHT="3526" WIDTH="38" VPOS="39" HPOS="2494"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Image: </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="ocr-system" content="ABBYY FineReader Engine 12"/>
+      <meta name="ocr-capabilities"
+            content="ocr_page ocr_header ocr_footer ocr_carea ocr_par ocr_line ocrx_word"/>
+   </head>
+   <body>
+      <div class="ocr_page"
+           id="Page1"
+           title="image ; bbox 0 0 1800 2535; ppageno 0">
+         <div class="ocr_footer" id="block_d177e14" title="bbox 0 0 1800 2535">
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block1"
+               title="bbox 777 603 861 636"
+               lang="en-US">
+               <span class="ocr_line" id="line_d177e16" title="bbox 781 606 857 632">
+                  <span class="ocrx_word"
+                        id="word_d177e17"
+                        title="bbox 781 606 841 632 ; x_wconf 46.00000083446503">-.-S’</span>
+                  <span class="ocrx_word"
+                        id="word_d177e19"
+                        title="bbox 854 612 857 615 ; x_wconf 61.000001430511475">■</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block2"
+               title="bbox 776 711 805 742"
+               lang="fr">
+               <span class="ocr_line" id="line_d177e21" title="bbox 779 713 802 739">
+                  <span class="ocrx_word"
+                        id="word_d177e22"
+                        title="bbox 779 713 802 739 ; x_wconf 83.99999737739563">B</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block3"
+               title="bbox 856 991 944 1033">
+               <span class="ocr_line" id="line_d177e24" title="bbox 856 996 944 1029">
+                  <span class="ocrx_word"
+                        id="word_d177e25"
+                        title="bbox 856 1003 865 1028 ; x_wconf 27.000001072883606">r</span>
+                  <span class="ocrx_word"
+                        id="word_d177e27"
+                        title="bbox 873 1011 914 1029 ; x_wconf 57.499998807907104">U«</span>
+                  <span class="ocrx_word"
+                        id="word_d177e29"
+                        title="bbox 930 996 944 1028 ; x_wconf 23.999999463558197">I</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block4"
+               title="bbox 102 943 235 994"
+               lang="de">
+               <span class="ocr_line" id="line_d177e31" title="bbox 103 965 225 994">
+                  <span class="ocrx_word"
+                        id="word_d177e32"
+                        title="bbox 103 965 225 994 ; x_wconf 42.399999499320984">IäÄSS</span>
+               </span>
+            </p>
+         </div>
+      </div>
+   </body>
+</html>

@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
+using CMI.Engine.Asset;
+using CMI.Engine.Asset.PostProcess;
 using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Index;
 using CMI.Manager.Index.Consumer;
@@ -18,6 +20,7 @@ namespace CMI.Manager.Asset.Tests
         private ITestHarness harness;
         private Mock<IAssetManager> assetManager;
         private Mock<IIndexManager> indexManager;
+        private Mock<IAssetPostProcessingEngine> assetPostProcessingEngine;
         private ServiceProvider provider;
 
         [SetUp]
@@ -25,13 +28,16 @@ namespace CMI.Manager.Asset.Tests
         {
             assetManager = new Mock<IAssetManager>();
             indexManager = new Mock<IIndexManager>();
+            assetPostProcessingEngine = new Mock<IAssetPostProcessingEngine>();
             provider = new ServiceCollection()
                 .AddMassTransitTestHarness(cfg =>
                 {
                     cfg.AddConsumer<ExtractFulltextPackageConsumer>();
                     cfg.AddConsumer<UpdateArchiveRecordConsumer>().Endpoint(e => e.Name = BusConstants.IndexManagerUpdateArchiveRecordMessageQueue);
+                    cfg.AddConsumer<RecognitionPostProcessingConsumer>().Endpoint(e => e.Name = BusConstants.AssetManagerRecognitionPostProcessing);
                     cfg.AddTransient(_ => assetManager.Object);
                     cfg.AddTransient(_ => indexManager.Object);
+                    cfg.AddTransient(_ => assetPostProcessingEngine.Object);
                 })
                 .BuildServiceProvider(true);
 
@@ -82,8 +88,8 @@ namespace CMI.Manager.Asset.Tests
             Assert.IsTrue(await harness.Consumed.Any<IArchiveRecordExtractFulltextFromPackage>());
             var consumerHarness = harness.GetConsumerHarness<ExtractFulltextPackageConsumer>();
             Assert.That(await consumerHarness.Consumed.Any<IArchiveRecordExtractFulltextFromPackage>());
-            var updateConsumer = harness.GetConsumerHarness<UpdateArchiveRecordConsumer>();
-            Assert.That(await updateConsumer.Consumed.Any<IUpdateArchiveRecord>());
+            var consumerRecognition = harness.GetConsumerHarness<RecognitionPostProcessingConsumer>();
+            Assert.That(await consumerRecognition.Consumed.Any<RecognitionPostProcessingMessage>());
             await harness.Stop();
         }
     }

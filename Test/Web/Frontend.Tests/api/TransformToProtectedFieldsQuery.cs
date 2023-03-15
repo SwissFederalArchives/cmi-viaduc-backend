@@ -118,7 +118,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         }
 
         [Test]
-        public void SearchRequest_for_multi_Fields_and_not_all_must_be_duplicated_for_unanonymized_fields()
+        public void SearchRequest_for_multi_Fields_and_not_all_must_be_duplicated_with_unanonymized_fields()
         {
             var transformQueryToProtectedFields = new QueryTransformationService(ReadSearchSettings());
             var boolQuery = new BoolQuery();
@@ -159,8 +159,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             resultQueryText.Should().Contain("\"query\":\"Ich bin der Test Text\"");
 
             resultQueryText.Should().NotContain("default_field\":\"unanonymizedFields.referenceCode\"");
-            resultQueryText.Should().NotContain("default_field\":\"referenceCode\"");
-            resultQueryText.Should().NotContain("\"query\":\"XY0815\"");
+            resultQueryText.Should().Contain("default_field\":\"referenceCode\"");
+            resultQueryText.Should().Contain("\"query\":\"XY0815\"");
         }
 
         [Test]

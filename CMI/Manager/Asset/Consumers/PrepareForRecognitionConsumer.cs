@@ -7,6 +7,7 @@ using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Engine.Asset;
+using CMI.Engine.Asset.PreProcess;
 using CMI.Manager.Asset.Properties;
 using MassTransit;
 using Serilog;
@@ -30,13 +31,13 @@ namespace CMI.Manager.Asset.Consumers
     {
         private readonly IAssetManager assetManager;
         private readonly IAssetPreparationEngine assetPreparationEngine;
-        private List<Func<PrepareForRecognitionMessage, Task<PreprocessingResult>>> preparationSteps;
+        private List<Func<PrepareForRecognitionMessage, Task<ProcessStepResult>>> preparationSteps;
 
         public PrepareForRecognitionConsumer(IAssetManager assetManager, IAssetPreparationEngine assetPreparationEngine)
         {
             this.assetManager = assetManager;
             this.assetPreparationEngine = assetPreparationEngine;
-            preparationSteps = new List<Func<PrepareForRecognitionMessage, Task<PreprocessingResult>>>();
+            preparationSteps = new List<Func<PrepareForRecognitionMessage, Task<ProcessStepResult>>>();
         }
 
         public async Task Consume(ConsumeContext<PrepareForRecognitionMessage> context)
@@ -52,11 +53,14 @@ namespace CMI.Manager.Asset.Consumers
 
                 // 1. Step: Extract Zip file(s)
                 preparationSteps.Add(ExtractRepositoryPackage);
+#if DEBUG
+#else
+
                 // 2. Step: Detect and mark files with large dimensions
                 preparationSteps.Add(DetectAndFlagLargeDimensions);
                 // 3. Step: Detect and optimize pdf files that need optimization
                 preparationSteps.Add(DetectAndOptimizePdf);
-
+#endif
                 foreach (var step in preparationSteps)
                 {
                     var result = await step(context.Message);
@@ -88,7 +92,7 @@ namespace CMI.Manager.Asset.Consumers
             }
         }
 
-        private async Task<PreprocessingResult> ExtractRepositoryPackage(PrepareForRecognitionMessage message)
+        private async Task<ProcessStepResult> ExtractRepositoryPackage(PrepareForRecognitionMessage message)
         {
             var packages = message.ArchiveRecord.PrimaryData;
             var primaerdatenAuftragId = message.PrimaerdatenAuftragId;
@@ -101,15 +105,15 @@ namespace CMI.Manager.Asset.Consumers
                     PackageFileName = repositoryPackage.PackageFileName, 
                     PrimaerdatenAuftragId = primaerdatenAuftragId
                 });
-                return result ? new PreprocessingResult{Success = true} : 
-                                new PreprocessingResult{Success = false, ErrorMessage = "Could not unzip package."};
+                return result ? new ProcessStepResult{Success = true} : 
+                                new ProcessStepResult{Success = false, ErrorMessage = "Could not unzip package."};
             }
 
             Log.Warning("No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected.", primaerdatenAuftragId);
-            return new PreprocessingResult{Success = false, ErrorMessage = $"No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected." };
+            return new ProcessStepResult{Success = false, ErrorMessage = $"No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected." };
         }
 
-        private Task<PreprocessingResult> DetectAndFlagLargeDimensions(PrepareForRecognitionMessage message)
+        private Task<ProcessStepResult> DetectAndFlagLargeDimensions(PrepareForRecognitionMessage message)
         {
             try
             {
@@ -121,17 +125,17 @@ namespace CMI.Manager.Asset.Consumers
                     assetPreparationEngine.DetectAndFlagLargeDimensions(package, tempFolder, message.PrimaerdatenAuftragId);
                 }
 
-                return Task.FromResult(new PreprocessingResult { Success = true });
+                return Task.FromResult(new ProcessStepResult { Success = true });
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while detecting large dimensions.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult { Success = false, ErrorMessage = msg });
+                return Task.FromResult(new ProcessStepResult { Success = false, ErrorMessage = msg });
             }
         }
 
-        private Task<PreprocessingResult> DetectAndOptimizePdf(PrepareForRecognitionMessage message)
+        private Task<ProcessStepResult> DetectAndOptimizePdf(PrepareForRecognitionMessage message)
         {
             try
             {
@@ -143,13 +147,13 @@ namespace CMI.Manager.Asset.Consumers
                     assetPreparationEngine.OptimizePdfIfRequired(package, tempFolder, message.PrimaerdatenAuftragId);
                 }
 
-                return Task.FromResult(new PreprocessingResult { Success = true });
+                return Task.FromResult(new ProcessStepResult { Success = true });
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while detecting and optimizing pdf.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult { Success = false, ErrorMessage = msg });
+                return Task.FromResult(new ProcessStepResult { Success = false, ErrorMessage = msg });
             }
         }
 

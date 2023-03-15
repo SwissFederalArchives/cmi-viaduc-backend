@@ -330,7 +330,6 @@ public class SearchRequestBuilderTests
         result.Aggregations.Should().NotBeNull();
     }
 
-
     [Test]
     public void Check_if_added_Field_title_to_Searchquery_and_queryBuilder_duplicated_field_in_Unnonymized_query()
     {
@@ -460,9 +459,9 @@ public class SearchRequestBuilderTests
         stringQuery.First().Query.Should().Be("Ball");
         stringQuery.First().DefaultField.Name.Should().Be("referenceCode");
     }
-    
+
     [Test]
-    public void Check_if_added_two_Fields_referenceCode_and_title_to_searchQuery_only_title_was_duplicated_in_Unnonymized_Fieldquery()
+    public void Check_if_added_two_Fields_referenceCode_and_title_to_searchQuery_only_title_was_duplicated_with_Unnonymized_Fieldquery()
     {
         // arrange
         var builder = CreatingSimpleSearchRequestBuilder();
@@ -508,10 +507,11 @@ public class SearchRequestBuilderTests
         stringQuery.Last().Query.Should().Be("Katze");
         stringQuery.Last().DefaultField.Name.Should().Be("title");
         stringQuery = GetStringQuery((result.Query as IQueryContainer).Bool.Should.Last());
-        stringQuery.First().Query.Should().Be("Katze");
-        stringQuery.First().DefaultField.Name.Should().Be("unanonymizedFields.title");
+        stringQuery.First().Query.Should().Be("Ball");
+        stringQuery.First().DefaultField.Name.Should().Be("referenceCode");
+        stringQuery.Last().Query.Should().Be("Katze");
+        stringQuery.Last().DefaultField.Name.Should().Be("unanonymizedFields.title");
     }
-
 
     [Test]
     public void Check_if_added_two_Fields_allMetaData_and_title_to_searchQuery_both_fields_duplicated_in_Unnonymized_Fieldquery()

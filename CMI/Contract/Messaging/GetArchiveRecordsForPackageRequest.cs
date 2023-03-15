@@ -2,6 +2,6 @@
 {
     public class GetArchiveRecordsForPackageRequest
     {
-        public string PackageId { get; set; }
+        public string ArchiveRecordId { get; set; }
     }
 }

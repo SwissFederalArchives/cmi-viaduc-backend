@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Image: </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="ocr-system" content="ABBYY FineReader Engine 12"/>
+      <meta name="ocr-capabilities"
+            content="ocr_page ocr_header ocr_footer ocr_carea ocr_par ocr_line ocrx_word"/>
+   </head>
+   <body>
+      <div class="ocr_page"
+           id="Page1"
+           title="image ; bbox 0 0 2540 3565; ppageno 0">
+         <div class="ocr_header" id="block_d93e14" title="bbox 0 0 2540 28"/>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block1"
+            title="bbox 1480 1494 1867 1547"
+            lang="en-US">
+            <span class="ocr_line" id="line_d93e20" title="bbox 1642 1502 1835 1540">
+               <span class="ocrx_word"
+                     id="word_d93e21"
+                     title="bbox 1642 1528 1645 1530 ; x_wconf 57.999998331069946">■</span>
+               <span class="ocrx_word"
+                     id="word_d93e23"
+                     title="bbox 1696 1537 1722 1540 ; x_wconf 77.49999761581421">..</span>
+               <span class="ocrx_word"
+                     id="word_d93e25"
+                     title="bbox 1783 1502 1788 1530 ; x_wconf 56.99999928474426">;</span>
+               <span class="ocrx_word"
+                     id="word_d93e27"
+                     title="bbox 1828 1528 1835 1530 ; x_wconf 99.00000095367432">-</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block2"
+            title="bbox 599 1756 837 1805"
+            lang="en-US">
+            <span class="ocr_line" id="line_d93e29" title="bbox 673 1764 814 1782">
+               <span class="ocrx_word"
+                     id="word_d93e30"
+                     title="bbox 673 1771 679 1774 ; x_wconf 67.00000166893005">•</span>
+               <span class="ocrx_word"
+                     id="word_d93e32"
+                     title="bbox 696 1771 727 1782 ; x_wconf 25.499999523162842">-M</span>
+               <span class="ocrx_word"
+                     id="word_d93e34"
+                     title="bbox 811 1764 814 1767 ; x_wconf 62.99999952316284">'</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block3"
+            title="bbox 1561 2340 2170 2384"
+            lang="en-US">
+            <span class="ocr_line" id="line_d93e36" title="bbox 1814 2358 2131 2377">
+               <span class="ocrx_word"
+                     id="word_d93e37"
+                     title="bbox 1814 2358 1819 2375 ; x_wconf 27.000001072883606">:</span>
+               <span class="ocrx_word"
+                     id="word_d93e39"
+                     title="bbox 2125 2371 2131 2377 ; x_wconf 73.00000190734863">.</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block4"
+            title="bbox 2030 263 2333 368"
+            lang="en-US">
+            <span class="ocr_line" id="line_d93e41" title="bbox 2154 286 2160 306">
+               <span class="ocrx_word"
+                     id="word_d93e42"
+                     title="bbox 2154 286 2160 306 ; x_wconf 28.00000011920929">:</span>
+            </span>
+         </p>
+         <div class="ocr_footer" id="block_d93e17" title="bbox 0 3538 2540 3565"/>
+      </div>
+   </body>
+</html>

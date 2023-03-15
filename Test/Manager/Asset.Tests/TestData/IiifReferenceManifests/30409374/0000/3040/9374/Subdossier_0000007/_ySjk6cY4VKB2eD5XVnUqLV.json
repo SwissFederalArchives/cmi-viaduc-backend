@@ -1,0 +1,146 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Subdossier_0000007/_ySjk6cY4VKB2eD5XVnUqLV.json",
+  "label": {
+    "none": [
+      "Subdossier_0000007"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Subdossier_0000007/Umschlag_0000008/_VENrLuWmEJAZkD6588jeQr.json",
+      "label": {
+        "none": [
+          "Umschlag_0000008"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FSubdossier_0000007%2FUmschlag_0000008%2F%2F%2F00000126.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Subdossier_0000007/Dokument_0000009/_9ilDwCcEZj3qHBijGbyKOW.json",
+      "label": {
+        "none": [
+          "Dokument_0000009"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FSubdossier_0000007%2FDokument_0000009%2F%2F%2F00000130.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Subdossier_0000007"
+        ],
+        "en": [
+          "Subdossier_0000007"
+        ],
+        "fr": [
+          "Subdossier_0000007"
+        ],
+        "it": [
+          "Subdossier_0000007"
+        ],
+        "none": [
+          "Subdossier_0000007"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "keine Angabe - keine Angabe"
+        ],
+        "en": [
+          "keine Angabe - keine Angabe"
+        ],
+        "fr": [
+          "keine Angabe - keine Angabe"
+        ],
+        "it": [
+          "keine Angabe - keine Angabe"
+        ],
+        "none": [
+          "keine Angabe - keine Angabe"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/30409374.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30409374",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "start": null
+}

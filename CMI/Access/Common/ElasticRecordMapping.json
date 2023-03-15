@@ -722,6 +722,9 @@
           }
         }
       },
+      "manifestLink": {
+        "type": "keyword"
+      },
       "protectionCategory": {
         "type": "keyword"
       },
@@ -848,7 +851,7 @@
               }
             }
           },
-		      "references": {
+          "references": {
             "properties": {
               "archiveRecordId": {
                 "type": "keyword"

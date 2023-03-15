@@ -7,6 +7,7 @@ using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using MassTransit;
+using Serilog;
 
 namespace CMI.Engine.MailTemplate
 {
@@ -201,20 +202,33 @@ namespace CMI.Engine.MailTemplate
 
         private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId, bool getUnprotectedVersion)
         {
-            var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
-            var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
+            try
+            {
+                var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
+                var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
                 {
-                    ArchiveRecordId = archiveRecordId, 
+                    ArchiveRecordId = archiveRecordId,
                     UseUnanonymizedData = getUnprotectedVersion
                 });
-            task.Wait();
-            return task.Result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
+                task.Wait();
+                return task.Result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
+                {
+                    ArchiveRecordId = archiveRecordId,
+                    Title = "Record not found in Elastic",
+                    CreationPeriod = new ElasticTimePeriod()
+                };
+            }
+            catch (Exception e)
             {
-                ArchiveRecordId = archiveRecordId,
-                Title = "Record not found in Elastic",
-                CreationPeriod = new ElasticTimePeriod(),
-                CustomFields = new { aktenzeichen = "" }
-            };
+                Log.Warning("Es gab ein Problem beim Zusammenbauen von einem Record mit der id {archiveRecordId},es wird ein default Record zurückgegeben. Fehler: {message}", archiveRecordId, e.Message);
+                return new ElasticArchiveRecord
+                {
+                    ArchiveRecordId = archiveRecordId,
+                    Title = "Record not found in Elastic",
+                    CreationPeriod = new ElasticTimePeriod()
+                };
+            }
+           
         }
 
         private Auftrag GetAuftrag(Ordering ordering, OrderItem orderItem)

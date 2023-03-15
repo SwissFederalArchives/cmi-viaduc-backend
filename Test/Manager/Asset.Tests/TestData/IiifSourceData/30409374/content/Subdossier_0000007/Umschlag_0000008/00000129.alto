@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3594" WIDTH="2530">
+<BottomMargin HEIGHT="3594" WIDTH="2530" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="162" WIDTH="596" VPOS="2110" HPOS="1108" language="de">
+<TextLine HEIGHT="37" WIDTH="548" VPOS="2235" HPOS="1144"><String WC="1." CONTENT="," HEIGHT="14" WIDTH="10" VPOS="2258" HPOS="1144"/><SP WIDTH="62" VPOS="2240" HPOS="1155"/><String WC="0.625" CONTENT="/&apos;" HEIGHT="28" WIDTH="23" VPOS="2240" HPOS="1218"/><SP WIDTH="31" VPOS="2250" HPOS="1242"/><String WC="0.28999999165534973" CONTENT="&gt;■" HEIGHT="13" WIDTH="24" VPOS="2250" HPOS="1274"/><SP WIDTH="341" VPOS="2235" HPOS="1299"/><String WC="1." CONTENT="&apos;" HEIGHT="6" WIDTH="9" VPOS="2235" HPOS="1641"/><SP WIDTH="38" VPOS="2235" HPOS="1651"/><String WC="0.56999999284744263" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="2251" HPOS="1690"/></TextLine>
+</TextBlock>
+<ComposedBlock ID="Page1_Block2" HEIGHT="3594" WIDTH="2530" VPOS="0" HPOS="0" TYPE="separatorsBox"><GraphicalElement ID="Page1_Block3" HEIGHT="38" WIDTH="2530" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block4" HEIGHT="60" WIDTH="2484" VPOS="3534" HPOS="0"/><GraphicalElement ID="Page1_Block5" HEIGHT="3594" WIDTH="38" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block6" HEIGHT="3512" WIDTH="42" VPOS="0" HPOS="2488"/></ComposedBlock><GraphicalElement ID="Page1_Block7" HEIGHT="12" WIDTH="332" VPOS="3078" HPOS="242"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3578" WIDTH="2539">
+<BottomMargin HEIGHT="3578" WIDTH="2539" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="51" WIDTH="178" VPOS="2827" HPOS="415" language="de">
+<TextLine HEIGHT="33" WIDTH="144" VPOS="2835" HPOS="425"><String WC="0.5899999737739563" CONTENT="&apos;" HEIGHT="6" WIDTH="10" VPOS="2835" HPOS="425"/><SP WIDTH="9" VPOS="2835" HPOS="436"/><String WC="0.23999999463558197" CONTENT="j" HEIGHT="33" WIDTH="10" VPOS="2835" HPOS="446"/><SP WIDTH="105" VPOS="2835" HPOS="457"/><String WC="0.7850000262260437" CONTENT="■." HEIGHT="8" WIDTH="6" VPOS="2857" HPOS="563"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="118" WIDTH="310" VPOS="1327" HPOS="1725" language="de">
+<TextLine HEIGHT="6" WIDTH="51" VPOS="1402" HPOS="1904"><String WC="0.57999998331069946" CONTENT="■" HEIGHT="4" WIDTH="3" VPOS="1402" HPOS="1904"/><SP WIDTH="44" VPOS="1402" HPOS="1908"/><String WC="0.56999999284744263" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="1406" HPOS="1953"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="305" WIDTH="241" VPOS="2135" HPOS="26" language="de">
+<TextLine HEIGHT="26" WIDTH="92" VPOS="2231" HPOS="27"><String WC="0.23999999463558197" CONTENT="!" HEIGHT="26" WIDTH="4" VPOS="2231" HPOS="27"/><SP WIDTH="82" VPOS="2231" HPOS="32"/><String WC="0.56999999284744263" CONTENT="■" HEIGHT="2" WIDTH="4" VPOS="2247" HPOS="115"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block4" HEIGHT="825" WIDTH="47" VPOS="167" HPOS="0"/><GraphicalElement ID="Page1_Block5" HEIGHT="3578" WIDTH="58" VPOS="0" HPOS="2481"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

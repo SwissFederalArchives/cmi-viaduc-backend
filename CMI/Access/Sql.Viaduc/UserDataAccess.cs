@@ -996,7 +996,7 @@ FROM ApplicationUser ";
                     {
                         Value = ToDb(rejectionReason),
                         ParameterName = "p2",
-                        SqlDbType = SqlDbType.VarChar
+                        SqlDbType = SqlDbType.NVarChar
                     });
 
                     object date;

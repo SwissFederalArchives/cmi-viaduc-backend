@@ -16,16 +16,19 @@ namespace CMI.Engine.Asset
     {
         private readonly IRequestClient<ConversionStartRequest> conversionRequestClient;
         private readonly IRequestClient<JobInitRequest> jobInitRequestClient;
+        private readonly IRequestClient<JobEndRequest> jobEndRequestClient;
         private readonly IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient;
         private readonly string sftpLicenseKey;
         private string[] supportedFileTypes;
 
         public RenderEngine(IRequestClient<JobInitRequest> jobInitRequestClient,
+            IRequestClient<JobEndRequest> jobEndRequestClient,
             IRequestClient<ConversionStartRequest> conversionRequestClient,
             IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient,
             string sftpLicenseKey)
         {
             this.jobInitRequestClient = jobInitRequestClient;
+            this.jobEndRequestClient = jobEndRequestClient;
             this.conversionRequestClient = conversionRequestClient;
             this.supportedFileTypesRequestClient = supportedFileTypesRequestClient;
             this.sftpLicenseKey = sftpLicenseKey;
@@ -94,6 +97,10 @@ namespace CMI.Engine.Asset
                 var result = await DownloadAndStoreFile(convertionResponse, fi.Directory);
                 Log.Information(
                     $"Retrieved conversion result for file {fi.FullName} in {stopWatch.ElapsedMilliseconds} ms. Length of content is {result.LengthOfContent} bytes.");
+
+                // Remove the job
+                await jobEndRequestClient.GetResponse<JobEndResult>(new JobEndRequest { JobGuid = convertionResponse.JobGuid });
+                Log.Information($"Removed the job with the id {convertionResponse.JobGuid}.");
 
                 return result.TargetPath;
             }

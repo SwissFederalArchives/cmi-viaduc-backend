@@ -36,7 +36,7 @@ namespace CMI.Manager.DocumentConverter.Render
 
         protected void CreateAndStoreTargetFilePath()
         {
-            cmd.TargetFile = new FileInfo(Path.Combine(cmd.WorkingDir, $"{title}.{OutputExtension}"));
+            cmd.TargetFile = new FileInfo(Path.ChangeExtension(cmd.SourceFile.FullName, OutputExtension));
         }
 
         protected abstract FileInfo GetResult();

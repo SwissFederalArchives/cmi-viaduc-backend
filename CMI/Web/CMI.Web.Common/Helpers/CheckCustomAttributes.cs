@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
@@ -53,7 +54,15 @@ namespace CMI.Web.Common.Helpers
                 var originalWert = propertyInfo.GetValue(originalUser);
                 var neuerWert = propertyInfo.GetValue(postData);
 
-                if (originalWert.IsEquivalent(neuerWert))
+
+                if (originalWert is DateTime originalWertDate && neuerWert is DateTime neuerWertDate)
+                {
+                    if (Equals(originalWertDate, neuerWertDate))
+                    {
+                        continue;
+                    }
+                }
+                else if (originalWert.IsEquivalent(neuerWert))
                 {
                     continue;
                 }

@@ -255,7 +255,7 @@ namespace CMI.Access.Repository
                             break;
                         default:
                             if (extensionElement.Name.Equals(propertyName, StringComparison.InvariantCultureIgnoreCase))
-                                // Wir haben ein normales Property gefunden. Wir können das Element der Collection hinzufügen.
+                            // Wir haben ein normales Property gefunden. Wir können das Element der Collection hinzufügen.
                             {
                                 retVal.Add(extensionElement);
                             }

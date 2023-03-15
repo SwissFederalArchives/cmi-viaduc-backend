@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Image: </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="ocr-system" content="ABBYY FineReader Engine 12"/>
+      <meta name="ocr-capabilities"
+            content="ocr_page ocr_header ocr_footer ocr_carea ocr_par ocr_line ocrx_word"/>
+   </head>
+   <body>
+      <div class="ocr_page"
+           id="Page1"
+           title="image ; bbox 0 0 2545 3562; ppageno 0">
+         <div class="ocr_header" id="block_d213e14" title="bbox 0 0 2545 3464">
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block1"
+               title="bbox 2016 492 2126 527"
+               lang="en-US">
+               <span class="ocr_line" id="line_d213e16" title="bbox 2022 497 2087 522">
+                  <span class="ocrx_word"
+                        id="word_d213e17"
+                        title="bbox 2022 497 2029 517 ; x_wconf 27.000001072883606">J</span>
+                  <span class="ocrx_word"
+                        id="word_d213e19"
+                        title="bbox 2049 499 2087 522 ; x_wconf 100">7,-</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block2"
+               title="bbox 0 837 148 1075"
+               lang="en-US">
+               <span class="ocr_line" id="line_d213e21" title="bbox 109 901 111 903">
+                  <span class="ocrx_word"
+                        id="word_d213e22"
+                        title="bbox 109 901 111 903 ; x_wconf 62.00000047683716">■</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block3"
+               title="bbox 0 27 415 679"
+               lang="en-US">
+               <span class="ocr_line" id="line_d213e26" title="bbox 0 88 30 122">
+                  <span class="ocrx_word"
+                        id="word_d213e27"
+                        title="bbox 0 88 30 122 ; x_wconf 11.999999731779099">□</span>
+               </span>
+            </p>
+         </div>
+      </div>
+   </body>
+</html>

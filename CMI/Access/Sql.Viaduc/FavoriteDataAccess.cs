@@ -244,13 +244,13 @@ namespace CMI.Access.Sql.Viaduc
                 {
                     Value = sFavorite.Url,
                     ParameterName = "p2",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
                     Value = sFavorite.Title,
                     ParameterName = "p3",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
@@ -323,7 +323,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         Value = url,
                         ParameterName = "p2",
-                        SqlDbType = SqlDbType.VarChar
+                        SqlDbType = SqlDbType.NVarChar
                     });
 
                     using (var reader = cmd.ExecuteReader())

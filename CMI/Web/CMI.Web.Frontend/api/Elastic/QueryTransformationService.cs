@@ -78,10 +78,6 @@ namespace CMI.Web.Frontend.api.Elastic
                                     newQuery = newQuery.Replace(searchText.Value, newQueryString);
                                     hasProtectedFields = true;
                                     break;
-                                // Only fields of which protected fields exist must be in the query
-                                default:
-                                    newQuery = newQuery.Contains(",{\"" + searchText.Value + "}") ? newQuery.Replace(",{\"" + searchText.Value + "}", "") : newQuery.Replace("{\"" + searchText.Value + "},", "");
-                                    break;
                             }
                         }
                         else

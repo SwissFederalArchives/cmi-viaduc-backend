@@ -70,6 +70,7 @@
     <Compile Include="GetHarvestLogInfo.cs" />
     <Compile Include="IAnonymizeArchiveRecord.cs" />
     <Compile Include="ManuelleKorrekturRequestAndResponse.cs" />
+    <Compile Include="RecognitionPostProcessingMessage.cs" />
     <Compile Include="OnboardingMessages.cs" />
     <Compile Include="PrepareForRecognitionMessage.cs" />
     <Compile Include="PrepareForTransformationMessage.cs" />

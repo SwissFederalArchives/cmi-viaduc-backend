@@ -30,12 +30,12 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             da.Fill(ds);
 
             var q = from r in ds.Tables[0].AsEnumerable()
-                select new AipData
-                {
-                    Id = r.Field<double>("vrzng_enht_id").ToString(CultureInfo.InvariantCulture),
-                    Title = r.Field<string>("vrzng_enht_titel"),
-                    AipAtDossierId = r.Field<string>("memo_txt")
-                };
+                    select new AipData
+                    {
+                        Id = r.Field<double>("vrzng_enht_id").ToString(CultureInfo.InvariantCulture),
+                        Title = r.Field<string>("vrzng_enht_titel"),
+                        AipAtDossierId = r.Field<string>("memo_txt")
+                    };
 
             retVal.AddRange(q);
             cn.Close();

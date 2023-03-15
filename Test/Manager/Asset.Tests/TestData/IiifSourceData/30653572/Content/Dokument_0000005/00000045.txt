@@ -1,0 +1,39 @@
+﻿- 5 -
+Bereitschaftsordonnanzen 1 und 2
+4.2.6.
+4.2.7.
+Zus tandsordonnanz
+Flugsicherungs-Of Flpl Abt
+4.2.8.
+- 1 Hausautomatanschluss
+- 1 Anschluss an die Truppenzentrale (in ZB-Schaltung)
+Gegensprechanlage
+4.3.
+4.3.1.
+4.3.2.
+4.3.3.
+Pilotengegensprechanlage
+Die Verbindungsaufnahme muss beidseitig erfolgen können.
+Mit der Piloten GS erfolgt die Vrb zwischen den Ei Ord und den Piloten auf
+den Alarmstandorten A-J aller Flpl und auf den Alarmstandorten A-4 der
+LUV-Flpl.
+Flugsicherungsgegensprechanlage
+Im Flpl Ei KP verfügt der Flsi Of über eine Gegensprechstelle. An dieser
+Anlage muss wegen der Neukonzipierung des Flpl Ei KP keine Aenderung vor-
+genommen werden.
+Für die Ber Ord sind Sprechgarnituren notwendig. Kabellänge dem Aktions-
+radius angepasst.
+- Anschluss an das Zustandsmeldesystem EA (zu Zustandsräumen und EA-
+Arbeitsgruppen der EZ I/II/a)
+Informationsgegensprechanlage
+Verbindungen gemäss beiliegender Zeichnung M-221O5-l,"Flpl Ei KP Informations-
+gegensprechanlage; Vrb-Matrix". Die Gesamtzahl der Teilnehmer pro Gegen-
+sprechanlage beträgt im Maximum 12.
+- Je 1 Verbindung für die Uem des Flz-Zustandes zwischen Bereitschafts-
+ordonnanz 1 (ZET) und Bereitschaftsordonnanz 2 bei den Flz Bereitstel-
+lungsorganisationen X und Y.
+Im Normalfall bearbeitet eine Ei Ord die Flugzeuge einer Staffel und über-
+wacht den gesamten Na Fluss auf der GS.
+Es muss möglich sein, dass die St Kdt mit ihren Piloten, und der Fl Ei Of
+mit den Piloten der Staffeln auf den Alarmstandorten A-3 und A-4 (nur
+LUV-Flpl) in Verbindung treten können.

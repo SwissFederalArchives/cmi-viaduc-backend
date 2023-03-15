@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CMI.Access.Onboarding.Response;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Serilog;
 
 namespace CMI.Access.Onboarding
 {
@@ -19,8 +20,8 @@ namespace CMI.Access.Onboarding
         
         public OnboardingConnector(IConnectorSettings connectorSettings)
         {
-            this.settings = connectorSettings;
-            this.cache = new MemoryCache("TokenCache");
+            settings = connectorSettings;
+            cache = new MemoryCache("TokenCache");
         }
 
         public async Task<string> GetAccessToken()
@@ -35,7 +36,7 @@ namespace CMI.Access.Onboarding
                 };
 
                 var json = JObject.FromObject(credentials).ToString();
-                var content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 var client = HttpClientFactory.Create();
                 HttpResponseMessage response = await client.PostAsync($"{settings.OnboardingBaseUrl}/api/v1/authentication", content);
@@ -53,12 +54,14 @@ namespace CMI.Access.Onboarding
         {
             var token = await GetAccessToken();
             var client = HttpClientFactory.Create();
-            
+
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.GetAsync($"{settings.OnboardingBaseUrl}/api/v1/fidentity/{id}");
             response.EnsureSuccessStatusCode();
-            
+
             var json = await response.Content.ReadAsStringAsync();
+            Log.Information("Receiving onboarding response from fidentiy for processId {id}: {json}", id, json);
+            
             return JsonConvert.DeserializeObject<Status>(json);
         }
 
@@ -78,7 +81,7 @@ namespace CMI.Access.Onboarding
         {
             var token = await GetAccessToken();
 
-            var content = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
             var client = HttpClientFactory.Create();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             HttpResponseMessage response = await client.PostAsync($"{settings.OnboardingBaseUrl}/api/v1/fidentity", content);

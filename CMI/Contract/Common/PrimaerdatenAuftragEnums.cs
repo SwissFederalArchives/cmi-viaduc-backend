@@ -16,6 +16,7 @@
         ZipEntpackt,
         PreprocessingAbgeschlossen,
         OCRAbgeschlossen,
+        PostprocessingAbgeschlossen,
         AssetUmwandlungAbgeschlossen,
         IndizierungAbgeschlossen,
         ImCacheAbgelegt,

@@ -132,7 +132,7 @@ namespace CMI.Access.Sql.Viaduc.AblieferndeStellen
                 {
                     Value = bezeichnung,
                     ParameterName = "p2",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 }
             };
 
@@ -212,7 +212,7 @@ namespace CMI.Access.Sql.Viaduc.AblieferndeStellen
                     {
                         Value = bezeichnung,
                         ParameterName = "p2",
-                        SqlDbType = SqlDbType.VarChar
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {

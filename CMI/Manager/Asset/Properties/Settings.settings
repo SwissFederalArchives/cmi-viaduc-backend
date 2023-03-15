@@ -17,5 +17,17 @@
     <Setting Name="DocumentTransformParallelism" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">2</Value>
     </Setting>
+    <Setting Name="SolrUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.Settings.SolrUrl@@</Value>
+    </Setting>
+    <Setting Name="hOcrCopyDestinationPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.Settings.hOcrCopyDestinationPath@@</Value>
+    </Setting>
+    <Setting Name="SolrCoreName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.Settings.SolrCoreName@@</Value>
+    </Setting>
+    <Setting Name="IgnoreAccessTokensForManifestCheck" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

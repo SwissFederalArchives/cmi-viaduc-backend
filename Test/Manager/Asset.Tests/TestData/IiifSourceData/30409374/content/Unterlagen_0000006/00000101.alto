@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="1817" WIDTH="2539">
+<BottomMargin HEIGHT="1817" WIDTH="2539" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="19" WIDTH="17" VPOS="909" HPOS="578" language="de">
+<TextLine HEIGHT="12" WIDTH="8" VPOS="912" HPOS="582"><String WC="0.57999998331069946" CONTENT="*" HEIGHT="12" WIDTH="8" VPOS="912" HPOS="582"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block2" HEIGHT="35" WIDTH="2478" VPOS="1782" HPOS="31"/><GraphicalElement ID="Page1_Block3" HEIGHT="1752" WIDTH="33" VPOS="31" HPOS="0"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

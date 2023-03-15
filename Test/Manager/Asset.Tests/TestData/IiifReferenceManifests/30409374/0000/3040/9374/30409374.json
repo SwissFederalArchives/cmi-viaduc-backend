@@ -1,0 +1,304 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/30409374.json",
+  "label": {
+    "none": [
+      "SCHLEI, EDITH, 01.06.1920"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Umschlag_0000001/_WyU7sI2WhiqqlIr8l0MQ8A.json",
+      "label": {
+        "none": [
+          "Umschlag_0000001"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FUmschlag_0000001%2F%2F%2F00000001.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Unterlagen_0000002/_01WUSkwwJ1Q6C2wjKCCwa1.json",
+      "label": {
+        "none": [
+          "Unterlagen_0000002"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FUnterlagen_0000002%2F%2F%2F00000007.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Dokument_0000003/_XuidsXmAAKtK6mf06VoyIS.json",
+      "label": {
+        "none": [
+          "Dokument_0000003"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FDokument_0000003%2F%2F%2F00000011.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Unterlagen_0000004/_CCxcUnV5UmaMvJr3H3tUnv.json",
+      "label": {
+        "none": [
+          "Unterlagen_0000004"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FUnterlagen_0000004%2F%2F%2F00000020.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Dokument_0000005/_63t5Bf9SE8nIRQrbBOq1fo.json",
+      "label": {
+        "none": [
+          "Dokument_0000005"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FDokument_0000005%2F%2F%2F00000030.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Unterlagen_0000006/_rUmwed1CigbsD7hUfKwRp2.json",
+      "label": {
+        "none": [
+          "Unterlagen_0000006"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9374%2FUnterlagen_0000006%2F%2F%2F00000035.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9374/Subdossier_0000007/_ySjk6cY4VKB2eD5XVnUqLV.json",
+      "label": {
+        "none": [
+          "Subdossier_0000007"
+        ]
+      },
+      "type": "Collection"
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "E4264#1985/196#21917*"
+        ],
+        "en": [
+          "E4264#1985/196#21917*"
+        ],
+        "fr": [
+          "E4264#1985/196#21917*"
+        ],
+        "it": [
+          "E4264#1985/196#21917*"
+        ],
+        "none": [
+          "E4264#1985/196#21917*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "SCHLEI, EDITH, 01.06.1920"
+        ],
+        "en": [
+          "SCHLEI, EDITH, 01.06.1920"
+        ],
+        "fr": [
+          "SCHLEI, EDITH, 01.06.1920"
+        ],
+        "it": [
+          "SCHLEI, EDITH, 01.06.1920"
+        ],
+        "none": [
+          "SCHLEI, EDITH, 01.06.1920"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "1943 - 1968"
+        ],
+        "en": [
+          "1943 - 1968"
+        ],
+        "fr": [
+          "1943 - 1968"
+        ],
+        "it": [
+          "1943 - 1968"
+        ],
+        "none": [
+          "1943 - 1968"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "N14468"
+        ],
+        "en": [
+          "N14468"
+        ],
+        "fr": [
+          "N14468"
+        ],
+        "it": [
+          "N14468"
+        ],
+        "none": [
+          "N14468"
+        ]
+      }
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30409374",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3040/9374/OCR-Text-komplett.zip",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Zip",
+      "format": "application/zip"
+    }
+  ],
+  "start": null
+}

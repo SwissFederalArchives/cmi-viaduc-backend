@@ -39,6 +39,12 @@ namespace CMI.Manager.DocumentConverter
                     ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
+                cfg.ReceiveEndpoint(BusConstants.DocumentConverterJobEndRequestQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<JobEndConsumer>);
+                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                });
+
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterConversionStartRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ConversionStartConsumer>);

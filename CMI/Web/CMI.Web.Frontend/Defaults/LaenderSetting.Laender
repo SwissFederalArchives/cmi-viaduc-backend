@@ -323,7 +323,7 @@
   "CM": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
-    "Laendercode": "cmr",
+    "Laendercode": "CMR",
     "de": "Kamerun",
     "fr": "Cameroun",
     "it": "Camerun",
@@ -1129,7 +1129,7 @@
   "MX": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": false,
-    "Laendercode": "Mex",
+    "Laendercode": "MEX",
     "de": "Mexiko",
     "fr": "Mexique",
     "it": "Messico",
@@ -1411,7 +1411,7 @@
   "SE": {
     "canOnboardWithPassport": true,
     "canOnboardWithIdentityCard": true,
-    "Laendercode": "SEW",
+    "Laendercode": "SWE",
     "de": "Schweden",
     "fr": "Suède",
     "it": "Svezia",

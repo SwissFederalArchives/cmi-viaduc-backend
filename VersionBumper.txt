@@ -18,3 +18,8 @@ For
 	2022-09-02: Anpassungen im Frontend
 	2022-09-28: Korrekturen Texte im Frontend
 	2022-10-06: PVW-1284 [BUG] Identifizierung: Kein Mail an benutzer-admin@bar.admin.ch bei Warnung
+	2022-11-24: feature/Registrieren Seite-Hallo-entfernt
+	2022-12-02: PVW-1333 [BUG] Viewer: Button "Anmelden" erscheint nach Rückkehr vom Viewer nicht, wenn ich im Online-Zugang bereits angemeldet war
+	2022-12-09: PVW-1343 [BUG] Fehler bei "Datum der Bewilligung", "Datum des Entscheids" und "Abschlussdatum"
+	2022-12-12: PVW-1343 [BUG] Fehler bei "Datum der Bewilligung", "Datum des Entscheids" und "Abschlussdatum"
+	2023-01-09: PVW-1370 BUG: Datepicker im Bestellwizard zeigt nicht korrektes Verhalten

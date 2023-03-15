@@ -117,6 +117,7 @@ namespace CMI.Web.Common.api
                 SettingsHelper.InjectInfo(settingsObj, "chatbot", "urlForChatBot", WebHelper.UrlForChatBot);
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "url", WebHelper.MatomoUrl);
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "siteId", WebHelper.MatomoSiteId);
+                SettingsHelper.InjectInfo(settingsObj, "viewer", "url", WebHelper.ViewerUrl);
             }
         }
 

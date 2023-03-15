@@ -1,0 +1,37 @@
+﻿- 6 -
+Fernschreiberverbindungen
+4.4.
+Fernschreiber sind in Schallschluckgehäuse einzubauen.
+Die
+4.5.
+4.6.
+Nahzone
+- Funkkanal:
+- Empfang mittels Lautsprecher, Lautstärke regulierbar
+- Besprechung mittels Handmikrophon.
+4.7.
+"Flpl Ei KP für 2 Fl St, Informationswand")
+- Ein Datenfernschreiber am Arbeitsplatz der Stg Ordonnanz im Zustandsraum
+für Ein- und Ausgabe von Informationen
+- Die dargestellten Informationen müssen von den Arbeitsplätzen im Flpl Ei KP
+gut leserlich sein
+Informationsdarstellungen
+(siehe Zeichnung M-221OJ-1 ,
+- Ein Einsatzfernschreiber am Arbeitsplatz der UTf Ordonnanz im KP Raum nur
+für den Empfang von Informationen.
+Uhrenanlage
+Es muss eine Zifferuhr montiert werden, welche von allen Arbeitsplätzen des
+Flpl Ei KP gut sichtbar ist.
+Diese Zifferuhr muss mit der FLORIDA-Zeit, welche über den Datenfernschreiber
+abgerufen werden kann, übereinstimmen. Die zulässige Abweichung beträgt
++ IO S.
+- Die verwendeten Schilder müssen derart normalisiert sein, dass sie für alle
+Informationsdarstellungen verwendbar sind
+Funkbesprechung
+An den Arbeitsplätzen der Einsatzordonnanzen sind Funkbesprechungsanlagen mit
+folgenden Anforderungen zu installieren:
+Gemäss Pkt 4.2.2. müssen die Piloten, zwecks Durchgabe von Startbefehlen
+im Falle "VOICE", auf die Ei Leitungen zum Starter EZ l/ll durchgeschaltet
+werden können.
+- Die Informationsdarstellungen sollen auf einfache Weise bedient werden
+können.

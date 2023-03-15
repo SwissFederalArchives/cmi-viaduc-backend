@@ -84,7 +84,7 @@ namespace CMI.Manager.Harvest.Consumers
                             return;
                         }
 
-                        // Fetch the (eventally) existing archive record
+                        // Fetch the (eventually) existing archive record
                         var elasticRecord = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId);
 
                         // Does the AIS data provide a primary data link?
@@ -102,7 +102,7 @@ namespace CMI.Manager.Harvest.Consumers
                                     nameof(IDeleteFileFromCache), context.Message.MutationId);
                             }
 
-                            await UpdateArchiveRecord(context, message, archiveRecord);
+                            await UpdateArchiveRecord(context, message, archiveRecord, false);
                         }
                         else
                         {
@@ -113,10 +113,17 @@ namespace CMI.Manager.Harvest.Consumers
                             {
                                 // Add the primary data from the existing record to the new ais data
                                 archiveRecord.ElasticPrimaryData = elasticRecord.PrimaryData;
-                                await UpdateArchiveRecord(context, message, archiveRecord);
+                                await UpdateArchiveRecord(context, message, archiveRecord, false);
                             }
                             else
                             {
+                                // So we have to do a sync with primary data
+                                // As the export of the DIR does rely on metadata that is fetched from elastic,
+                                // we are going to update/insert the archive record in Elastic (but without the extracted OCR first)
+                                // The update in the index should be done quickly, so when the data is needed from the DIR it will be available
+                                await UpdateArchiveRecord(context, message, archiveRecord, true);
+
+                                // Now start getting the metadata info of the DIR package
                                 var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress,
                                     BusConstants.RepositoryManagerReadPackageMetadataMessageQueue));
                                 await ep.Send<IArchiveRecordAppendPackageMetadata>(new
@@ -149,13 +156,14 @@ namespace CMI.Manager.Harvest.Consumers
         }
 
         private static async Task UpdateArchiveRecord(ConsumeContext<ISyncArchiveRecord> context, ISyncArchiveRecord message,
-            ArchiveRecord archiveRecord)
+            ArchiveRecord archiveRecord, bool doNotReportCompletion)
         {
             var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.IndexManagerUpdateArchiveRecordMessageQueue));
             await ep.Send<IUpdateArchiveRecord>(new
             {
                 message.MutationId,
-                ArchiveRecord = archiveRecord
+                ArchiveRecord = archiveRecord,
+                doNotReportCompletion
             });
             Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IUpdateArchiveRecord),
                 context.Message.MutationId);

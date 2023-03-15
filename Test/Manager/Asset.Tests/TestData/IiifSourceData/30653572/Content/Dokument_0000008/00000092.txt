@@ -1,0 +1,113 @@
+﻿9
+VERTRAULICH
+4,7.3. Startrichtungs- und Flugplatzzustands - Tafel
+1. frKgemeiree
+07
+Aktuelle
+2. Spezielle Anforderungen an die veränderlichen Informationen
+2,1 Aktuelle Startrichtung
+Startrichtung
+2
+2.2 Uebrige veränderliche Informationen
+25‘
+veränderliche Beschriftung
+Breite
+Flugplatz - Zustand (FPZ)
+je 1/2
+2 Zahlenschilder
+Code
+Start
+Me-
+La
+AC -
+Flugplatz
+3
+Flugplatz
+Zahl
+La
+Ritg
+teo
+Hi
+Lage
+Code Zahl
+je 1/2
+2 Zahlenschilder
+- ' *
+Ü
+BUOCHS
+07
+A
+>
+Meteo
+1
+
+Start/la
+I
+I
+I
+3
+1
+1
+1
+1
+1
+1
+La - Hi
+1
+Anschlagbrett Fisi 0f Abt
+Start - Ritg
+je 1/2
+Flpl Bergr
+1
+AC - Lage
+1
+
+A
+Von der ËZ an-
+geordnete primäre
+Startriehtung
+Feste Beschrif-
+tung
+Steckschild für Papier-
+streifen
+Von der EZ anqeordnete primäre
+Startrichtunq
+o
+•H
+ë
+Steckschilder mit den Buch-
+staben N,E,A sowie Parte ROT
+£
+f
+rH
+5
+Flpl
+ßerqr
+-p
+•H
+I
+-p
+£
+<8
+œ
+P
+I
+r-
+Steckschilder mit den Farben
+GRUEN, GELB, ROT
+Steckschilder mi* der ^Farben
+BLAU. VIOLETT, BRAUN, ROT
+32
+Start
+i
+Für jede der beiden möglichen Startrichtungen ist ein Leuchttransparent
+mit der entspr Richtung in Dekagrad erforderlich. Die Steuerung zwecks
+Darstellung der aktuellen Startriehtung erfolgt vom Kontrollturm.
+Die Tafel gemäss nebenstehender Einteilung soll am Anschlagbrett des
+Flsi Of Abt angebracht werden. Für die veränderlichen Informationen (*)
+sollen die gleichen Elemente wie bei ZET verwendet werden können.
+Steckschilder mit den Farben
+GRUEN, GELB, ROT
+Steckschilder mit den Farben
+GRUEN, ROT
+2 Zahlenschilder

@@ -9,17 +9,21 @@ using Image = System.Drawing.Image;
 
 namespace CMI.Engine.Asset.PreProcess
 {
-    public class PreProcessAnalyzerOptimizePdf : PreProcessAnalyzer
+    public class PreProcessAnalyzerOptimizePdf : ProcessAnalyzerBase
     {
-        public PreProcessAnalyzerOptimizePdf(FileResolution fileResolution, AssetPreparationSettings settings) : base(fileResolution, settings)
+        private readonly FileResolution fileResolution;
+        protected readonly AssetPreparationSettings settings;
+        public PreProcessAnalyzerOptimizePdf(FileResolution fileResolution, AssetPreparationSettings settings)
         {
+            this.fileResolution = fileResolution;
+            this.settings = settings;
         }
 
-        protected override void AnalyzeFiles(string tempFolder, List<RepositoryFile> files)
+        protected override void AnalyzeFiles(string rootOrSubFolder, List<RepositoryFile> files)
         {
             foreach (var file in files)
             {
-                var sourceFile = new FileInfo(Path.Combine(tempFolder, file.PhysicalName));
+                var sourceFile = new FileInfo(Path.Combine(rootOrSubFolder, file.PhysicalName));
                 if (sourceFile.Exists)
                 {
                     Log.Information("FileName: {FullName}, Detect suspicious file sizes", sourceFile.FullName);

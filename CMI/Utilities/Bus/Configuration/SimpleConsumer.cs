@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Castle.Core.Internal;
 using MassTransit;
 using Serilog;
 using LogContext = Serilog.Context.LogContext;
@@ -64,7 +63,7 @@ namespace CMI.Utilities.Bus.Configuration
                 var methodName = messageTypeName.Substring(0, messageTypeName.Length - "Request".Length);
 
                 var methods = manager.GetType().GetMethods();
-                var method = methods.Find(m => m.Name.Equals(methodName, StringComparison.InvariantCultureIgnoreCase));
+                var method = methods.First(m => m.Name.Equals(methodName, StringComparison.InvariantCultureIgnoreCase));
 
                 if (method == null)
                 {

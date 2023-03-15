@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3599" WIDTH="2530">
+<BottomMargin HEIGHT="3599" WIDTH="2530" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="94" WIDTH="398" VPOS="276" HPOS="300" language="de">
+<TextLine HEIGHT="70" WIDTH="368" VPOS="289" HPOS="313"><String WC="0.5899999737739563" CONTENT="N" HEIGHT="70" WIDTH="62" VPOS="289" HPOS="313"/><SP WIDTH="34" VPOS="289" HPOS="376"/><String WC="0.47333332896232605" CONTENT="&apos;WW" HEIGHT="58" WIDTH="270" VPOS="297" HPOS="411"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="124" WIDTH="474" VPOS="472" HPOS="1478" language="de">
+<TextLine HEIGHT="84" WIDTH="448" VPOS="493" HPOS="1491"><String WC="0.37833333015441895" CONTENT="£o777_" HEIGHT="82" WIDTH="180" VPOS="493" HPOS="1491"/><SP WIDTH="30" VPOS="503" HPOS="1672"/><String WC="0.39888888597488403" CONTENT="Sc7&gt;/.ef." HEIGHT="74" WIDTH="236" VPOS="503" HPOS="1703"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="140" WIDTH="1412" VPOS="1500" HPOS="544" language="de">
+<TextLine HEIGHT="116" WIDTH="1388" VPOS="1513" HPOS="557"><String WC="0.56499999761581421" CONTENT="Ausweisschriften" HEIGHT="90" WIDTH="668" VPOS="1513" HPOS="557"/><SP WIDTH="44" VPOS="1523" HPOS="1226"/><String WC="0.67266666889190674" CONTENT="Korrespondenzen" HEIGHT="106" WIDTH="674" VPOS="1523" HPOS="1271"/></TextLine>
+</TextBlock>
+<ComposedBlock ID="Page1_Block4" HEIGHT="3599" WIDTH="2530" VPOS="0" HPOS="0" TYPE="separatorsBox"><GraphicalElement ID="Page1_Block5" HEIGHT="42" WIDTH="2530" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block6" HEIGHT="49" WIDTH="2530" VPOS="3550" HPOS="0"/><GraphicalElement ID="Page1_Block7" HEIGHT="3599" WIDTH="40" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block8" HEIGHT="3599" WIDTH="34" VPOS="0" HPOS="2496"/></ComposedBlock><GraphicalElement ID="Page1_Block9" HEIGHT="8" WIDTH="450" VPOS="376" HPOS="306"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

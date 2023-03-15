@@ -32,16 +32,25 @@ namespace CMI.Manager.Asset.Tests
             {
                 // Now create all of the directories
                 foreach (var dirPath in Directory.GetDirectories(source, "*",
-                    SearchOption.AllDirectories))
+                             SearchOption.AllDirectories))
                 {
-                    Directory.CreateDirectory(dirPath.Replace(source, dest));
+                    if (dirPath.Contains("jp2_OK") || dirPath.Contains("jp2_NOK"))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(source, dest));
+                    }
                 }
 
-                // Copy all the files & Replaces any files with the same name
-                foreach (var newPath in Directory.GetFiles(source, "*.*",
-                    SearchOption.AllDirectories))
+                // Now copy all the files
+                foreach (var dirPath in Directory.GetDirectories(source, "jp2_*",
+                             SearchOption.AllDirectories))
                 {
-                    File.Copy(newPath, newPath.Replace(source, dest), true);
+                    // Copy all the files & Replaces any files with the same name
+                    foreach (var newPath in Directory.GetFiles(dirPath, "*.*",
+                                 SearchOption.AllDirectories))
+                    {
+                        
+                        File.Copy(newPath, newPath.Replace(source, dest), true);
+                    }
                 }
             }
         }

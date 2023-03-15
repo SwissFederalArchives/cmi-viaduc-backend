@@ -1,0 +1,40 @@
+﻿- 12 -
+Informationsgegensprechanlage
+5.3.1.
+Pilotengegensprechanlage
+5.3.2.
+Die Verbindungsaufnahme muss beidseitig erfolgen können.
+Fernschreibverbindung
+5.4.
+Uhrenanlage
+5.5.
+Wie Ziffer 4.5. für Kriegsflugplätze
+5.6.
+Funkbe s pre chung
+Wie Ziffer 4.6. für Kriegsflugplätze
+Informationsdarstellungen
+5.7.
+Zustands- und Einsatzmelde-Tafel (ZET) und Preparatione-Tafel (PT)
+5.7.1.
+Wie Ziffer 4.7.1. für Kriegsflugplätze
+5.7.2.
+5.7.3.
+Startrichtungs- und Flugplatzzustands-Tafel
+Wie Ziffer 4.7.3. für Kriegsflugplätze
+5.7.4.
+Einsatztransparent
+Ist nicht erforderlich.
+Orientierungstafeln "Staffelorganisation" und "Bestand"
+Wie Ziffer 4.7.2. Für Kriegsflugplätze
+- Ein Datenfernschreiber am Arbeitsplatz der Stg Ordonnanz im Zustandsraum
+für Ein- und Ausgabe von Informationen
+Mit der Piloten GS erfolgt die Vrb zwischen der Ei Ord und den Piloten auf
+den Alarmstandorten, sofern solche vorhanden sind.
+Gegensprechmöglichkeit zwischen Fl Ei Of und Flugdienstleiter sowie Nahzonen-
+Verkehrsleitung
+Es muss möglich sein, dass der Fl Ei Of durch geeignete Platzanordnung mit
+den Piloten auf den Alarmstandorten über die Pilotengegenspreehanlage der
+Ei Ord in Verbindung treten kann.
+Gemäss Pkt 5.2.1. müssen die Piloten auf den Alarmstandorten zwecks Durch-
+gabe von Startbefehlen im Falle "VOICE" auf die Ei Geltungen zum Starter
+EZ l/ll durchgeschaltet werden können.

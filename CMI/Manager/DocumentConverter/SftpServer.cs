@@ -12,7 +12,7 @@ using Serilog;
 
 namespace CMI.Manager.DocumentConverter
 {
-    internal class SftpServer
+    public class SftpServer
     {
         private const string password = @"dn9@<Lpw)u3\KCRH";
 
@@ -29,8 +29,6 @@ namespace CMI.Manager.DocumentConverter
             Licensing.Key = DocumentConverterSettings.Default.SftpLicenseKey;
             ConfigureAndStartFileServer();
         }
-
-        private EventHandler<FileTransferredEventArgs> FileServerOnFileDownloaded => (sender, e) => RemoveJobInternal(e.User);
 
         ~SftpServer()
         {
@@ -84,6 +82,11 @@ namespace CMI.Manager.DocumentConverter
                 Log.Error(e, e.Message);
                 throw;
             }
+        }
+
+        private void FileServerOnFileDownloaded(object sender, FileTransferredEventArgs e)
+        {
+            Log.Information($"Downloaded file {e.FullPath}");
         }
 
 

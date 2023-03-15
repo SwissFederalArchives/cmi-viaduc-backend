@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Image: </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="ocr-system" content="ABBYY FineReader Engine 12"/>
+      <meta name="ocr-capabilities"
+            content="ocr_page ocr_header ocr_footer ocr_carea ocr_par ocr_line ocrx_word"/>
+   </head>
+   <body>
+      <div class="ocr_page"
+           id="Page1"
+           title="image ; bbox 0 0 2530 3599; ppageno 0">
+         <div class="ocr_footer" id="block_d37e14" title="bbox 0 0 2530 3599">
+            <div class="ocr_carea" id="Page1_Block4" title="bbox 0 0 2530 3599"/>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block1"
+               title="bbox 300 276 698 370"
+               lang="de">
+               <span class="ocr_line" id="line_d37e16" title="bbox 313 289 681 359">
+                  <span class="ocrx_word"
+                        id="word_d37e17"
+                        title="bbox 313 289 375 359 ; x_wconf 58.99999737739563">N</span>
+                  <span class="ocrx_word"
+                        id="word_d37e19"
+                        title="bbox 411 297 681 355 ; x_wconf 47.333332896232605">'WW</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block2"
+               title="bbox 1478 472 1952 596"
+               lang="de">
+               <span class="ocr_line" id="line_d37e21" title="bbox 1491 493 1939 577">
+                  <span class="ocrx_word"
+                        id="word_d37e22"
+                        title="bbox 1491 493 1671 575 ; x_wconf 37.833333015441895">£o777_</span>
+                  <span class="ocrx_word"
+                        id="word_d37e24"
+                        title="bbox 1703 503 1939 577 ; x_wconf 39.8888885974884">Sc7&gt;/.ef.</span>
+               </span>
+            </p>
+            <p class="ocr_par"
+               dir="ltr"
+               id="Page1_Block3"
+               title="bbox 544 1500 1956 1640"
+               lang="de">
+               <span class="ocr_line" id="line_d37e26" title="bbox 557 1513 1945 1629">
+                  <span class="ocrx_word"
+                        id="word_d37e27"
+                        title="bbox 557 1513 1225 1603 ; x_wconf 56.49999976158142">Ausweisschriften</span>
+                  <span class="ocrx_word"
+                        id="word_d37e29"
+                        title="bbox 1271 1523 1945 1629 ; x_wconf 67.26666688919067">Korrespondenzen</span>
+               </span>
+            </p>
+         </div>
+      </div>
+   </body>
+</html>

@@ -10,17 +10,21 @@ using Image = System.Drawing.Image;
 
 namespace CMI.Engine.Asset.PreProcess
 {
-    public class PreProcessAnalyzerDetectAndFlagLargeDimensions : PreProcessAnalyzer
+    public class PreProcessAnalyzerDetectAndFlagLargeDimensions : ProcessAnalyzerBase
     {
-        public PreProcessAnalyzerDetectAndFlagLargeDimensions(FileResolution fileResolution, AssetPreparationSettings settings) : base(fileResolution, settings)
+        private readonly FileResolution fileResolution;
+        private readonly AssetPreparationSettings settings;
+        public PreProcessAnalyzerDetectAndFlagLargeDimensions(FileResolution fileResolution, AssetPreparationSettings settings)
         {
+            this.fileResolution = fileResolution;
+            this.settings = settings;
         }
 
-        protected override void AnalyzeFiles(string tempFolder, List<RepositoryFile> files)
+        protected override void AnalyzeFiles(string rootOrSubFolder, List<RepositoryFile> files)
         {
             foreach (var file in files)
             {
-                var sourceFile = new FileInfo(Path.Combine(tempFolder, file.PhysicalName));
+                var sourceFile = new FileInfo(Path.Combine(rootOrSubFolder, file.PhysicalName));
                 if (sourceFile.Exists)
                 {
                     Log.Information("FileName: {FullName}, detect and flag large dimensions", sourceFile.FullName);
@@ -104,6 +108,5 @@ namespace CMI.Engine.Asset.PreProcess
             var height = 25.4 * bitmap.Height / resolution;
             return width > settings.SizeThreshold || height > settings.SizeThreshold;
         }
-
     }
 }

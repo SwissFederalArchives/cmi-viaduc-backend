@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2022-09-14T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot637987519423369191">
+      <name>content</name>
+      <originalName>content</originalName>
+      <datei id="_953">
+        <name>CH-BAR#E3210A-01#2005-111#849.tif</name>
+        <originalName>CH-BAR#E3210A-01#2005-111#849.tif</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>f649d32f9fffa24474f2f79b2af568f8</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesamt für Wasser und Geologie (Biel/Bienne)</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von>
+        <datum>1881-01-01</datum>
+      </von>
+      <bis>
+        <datum>1967-12-31</datum>
+      </bis>
+    </entstehungszeitraum>
+    <ablieferungsnummer>2020/410</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Eidgenössisches Amt für Strassen- und Flussbau</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Eidgenössisches Amt für Strassen- und Flussbau: Technische Akten Flussbau (1960-1979)</name>
+      <ordnungssystemposition id="_3771460">
+        <nummer>2</nummer>
+        <titel>Aare</titel>
+        <datenschutz>false</datenschutz>
+        <dossier id="_3403157">
+          <titel>Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)</titel>
+          <erscheinungsform>keine Angabe</erscheinungsform>
+          <entstehungszeitraum>
+            <von>
+              <datum>1890-01-01</datum>
+            </von>
+            <bis>
+              <datum>1920-12-31</datum>
+            </bis>
+          </entstehungszeitraum>
+          <datenschutz>false</datenschutz>
+          <bemerkung>Glasplatte</bemerkung>
+          <zusatzDaten>
+            <merkmal name="Signatur">E3210A-01#2020/410#797*</merkmal>
+            <merkmal name="Stufe">Dossier</merkmal>
+            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2018","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E10239*","Title":"Eidgenössisches Amt für Strassen- und Flussbau (1960-1979)","DateRangeText":"1835-1979","ArchiveRecordId":"5147","Protected":false},{"IconId":12,"Level":"Teilbestand","RefCode":"E3210A-01*","Title":"Eidgenössisches Amt für Strassen- und Flussbau: Technische Akten Flussbau (1960-1979)","DateRangeText":"1838-1975","ArchiveRecordId":"1186609","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E3210A-01#2","Title":"Aare","DateRangeText":"1851-1975","ArchiveRecordId":"3771460","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E3210A-01#2020/410#797*","Title":"Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)","DateRangeText":"1890.01.01-1920.12.31","ArchiveRecordId":"32212020","Protected":false}]</merkmal>
+            <merkmal name="Identifikation digitales Magazin">925fafdc-021a-4316-8425-2f1fe3d8cc24@_3403157</merkmal>
+            <merkmal name="Entstehungszeitraum Anzeigetext">01.01.1890 - 31.12.1920</merkmal>
+          </zusatzDaten>
+          <dateiRef>_953</dateiRef>
+        </dossier>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

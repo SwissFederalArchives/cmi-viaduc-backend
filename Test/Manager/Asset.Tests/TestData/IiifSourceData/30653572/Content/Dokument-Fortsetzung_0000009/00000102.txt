@@ -1,0 +1,26 @@
+﻿
+lk
+
+11
+10
+
+
+A
+Möblierung:
+1
+
+1. Tische
+drate
+< 2 Normal - Tische
+- alle Uebrigen
+2. Stühle
+2.1 Dreh Stühle mit Rollen
+- Ei Ord X
+^ssssssssssssssssssssssb
+B
+1.1 Trippei -Tische
+-	Ei Ord x
+-	Stg Ord
+-	Zust Ord
+-	Ei Ord Y
+— *

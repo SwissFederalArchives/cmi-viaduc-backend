@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2023-01-19</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3563" WIDTH="2539">
+<BottomMargin HEIGHT="3563" WIDTH="2539" VPOS="0" HPOS="0"><GraphicalElement ID="Page1_Block1" HEIGHT="38" WIDTH="2473" VPOS="0" HPOS="32"/><GraphicalElement ID="Page1_Block2" HEIGHT="3346" WIDTH="39" VPOS="131" HPOS="0"/><GraphicalElement ID="Page1_Block3" HEIGHT="3466" WIDTH="38" VPOS="65" HPOS="2501"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

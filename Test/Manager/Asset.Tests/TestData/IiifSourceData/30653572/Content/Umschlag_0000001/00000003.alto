@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2023-01-19</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="2886" WIDTH="3890">
+<BottomMargin HEIGHT="2886" WIDTH="3890" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="52" WIDTH="106" VPOS="122" HPOS="1546" language="de">
+<TextLine HEIGHT="38" WIDTH="92" VPOS="129" HPOS="1553"><String WC="0.46000000834465027" CONTENT="1967" HEIGHT="38" WIDTH="92" VPOS="129" HPOS="1553"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="53" WIDTH="650" VPOS="124" HPOS="836" language="de">
+<TextLine HEIGHT="39" WIDTH="636" VPOS="131" HPOS="843"><String WC="0.53384613990783691" CONTENT="Meisterschaft" HEIGHT="32" WIDTH="306" VPOS="133" HPOS="843"/><SP WIDTH="24" VPOS="133" HPOS="1150"/><String WC="0.36666667461395264" CONTENT="der" HEIGHT="31" WIDTH="71" VPOS="133" HPOS="1175"/><SP WIDTH="21" VPOS="133" HPOS="1247"/><String WC="0.42555555701255798" CONTENT="Flugwaffe" HEIGHT="39" WIDTH="210" VPOS="131" HPOS="1269"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="48" WIDTH="197" VPOS="128" HPOS="601" language="de">
+<TextLine HEIGHT="34" WIDTH="182" VPOS="135" HPOS="608"><String WC="0.71625000238418579" CONTENT="1.7.1.1." HEIGHT="34" WIDTH="182" VPOS="135" HPOS="608"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block4" HEIGHT="39" WIDTH="21" VPOS="2572" HPOS="370" language="de">
+<TextLine HEIGHT="25" WIDTH="7" VPOS="2579" HPOS="377"><String WC="0.25999999046325684" CONTENT="i" HEIGHT="25" WIDTH="7" VPOS="2579" HPOS="377"/></TextLine>
+</TextBlock>
+<ComposedBlock ID="Page1_Block5" HEIGHT="2886" WIDTH="3890" VPOS="0" HPOS="0" TYPE="separatorsBox"><GraphicalElement ID="Page1_Block6" HEIGHT="46" WIDTH="3853" VPOS="0" HPOS="37"/><GraphicalElement ID="Page1_Block7" HEIGHT="47" WIDTH="3812" VPOS="2839" HPOS="42"/><GraphicalElement ID="Page1_Block8" HEIGHT="2842" WIDTH="49" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block9" HEIGHT="2839" WIDTH="37" VPOS="47" HPOS="3853"/></ComposedBlock>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

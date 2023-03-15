@@ -33,9 +33,8 @@ namespace CMI.Web.Frontend.api.Controllers
                 return BadRequest("Benutzer hat nicht die Role Ö2.");
             }
 
-            var split = model.DateOfBirth.Split('.');
-
-            model.DateOfBirth = split[2] + "-" + split[1] + "-" + split[0];
+            var date = DateTimeOffset.Parse(model.DateOfBirth);
+            model.DateOfBirth = $"{date.Year}-{date.Month.ToString().PadLeft(2, '0')}-{date.Day.ToString().PadLeft(2, '0')}"; 
             model.Language = userAccess.Language;
             model.UserId = userAccess.UserId;
 

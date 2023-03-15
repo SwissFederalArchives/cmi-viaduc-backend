@@ -64,6 +64,7 @@
         public const string AssetManagerSchdeduleForPackageSyncMessageQueue = "m.asset.manager.scheduleForPackageSync";
         public const string AssetManagerPrepareForRecognition = "m.asset.manager.prepareForRecognition";
         public const string AssetManagerPrepareForTransformation = "m.asset.manager.prepareForTransformation";
+        public const string AssetManagerRecognitionPostProcessing = "m.asset.manager.recognitionPostProcessing";
 
         public const string AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue = "m.asset.manager.updatePrimaerdatenAuftragStatus";
 
@@ -90,6 +91,7 @@
 
         // Requests the document converter handles
         public const string DocumentConverterJobInitRequestQueue = "r.documentConverter.manager.JobInitRequest";
+        public const string DocumentConverterJobEndRequestQueue = "r.documentConverter.manager.JobEndRequest";
         public const string DocumentConverterConversionStartRequestQueue = "r.documentConverter.manager.conversionStartRequest";
         public const string DocumentConverterExtractionStartRequestQueue = "r.documentConverter.manager.extractionStartRequest";
         public const string DocumentConverterSupportedFileTypesRequestQueue = "r.documentConverter.manager.supportedFileTypesRequest";

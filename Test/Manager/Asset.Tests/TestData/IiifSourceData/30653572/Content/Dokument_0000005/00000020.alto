@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2023-01-19</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="1801" WIDTH="1301">
+<TopMargin HEIGHT="28" WIDTH="1301" VPOS="0" HPOS="0">
+</TopMargin>
+<LeftMargin HEIGHT="1746" WIDTH="28" VPOS="28" HPOS="0">
+</LeftMargin>
+<RightMargin HEIGHT="1746" WIDTH="27" VPOS="28" HPOS="1274">
+</RightMargin>
+<BottomMargin HEIGHT="27" WIDTH="1301" VPOS="1774" HPOS="0">
+</BottomMargin>
+<PrintSpace HEIGHT="1746" WIDTH="1246" VPOS="28" HPOS="28">
+<TextBlock ID="Page1_Block1" HEIGHT="15" WIDTH="10" VPOS="77" HPOS="1220" language="en-US">
+<TextLine HEIGHT="13" WIDTH="10" VPOS="79" HPOS="1220"><String WC="0.11999999731779099" CONTENT="A]" HEIGHT="13" WIDTH="10" VPOS="79" HPOS="1220"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="25" WIDTH="17" VPOS="141" HPOS="420" language="en-US">
+<TextLine HEIGHT="18" WIDTH="11" VPOS="144" HPOS="422"><String WC="0.5899999737739563" CONTENT="♦" HEIGHT="18" WIDTH="11" VPOS="144" HPOS="422"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="21" WIDTH="20" VPOS="155" HPOS="544" language="fr">
+<TextLine HEIGHT="12" WIDTH="12" VPOS="160" HPOS="547"><String WC="0.77999997138977051" CONTENT="«" HEIGHT="12" WIDTH="12" VPOS="160" HPOS="547"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block4" HEIGHT="16" WIDTH="14" VPOS="1672" HPOS="151" language="fr">
+<TextLine HEIGHT="9" WIDTH="7" VPOS="1675" HPOS="154"><String WC="1." CONTENT="»" HEIGHT="9" WIDTH="7" VPOS="1675" HPOS="154"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block5" HEIGHT="16" WIDTH="10" VPOS="1740" HPOS="397" language="en-US">
+<TextLine HEIGHT="9" WIDTH="3" VPOS="1743" HPOS="400"><String WC="0.31999999284744263" CONTENT="I" HEIGHT="9" WIDTH="3" VPOS="1743" HPOS="400"/></TextLine>
+</TextBlock><Illustration ID="Page1_Block6" HEIGHT="1746" WIDTH="1246" VPOS="28" HPOS="28"/>
+</PrintSpace>
+</Page>
+</Layout>
+</alto>

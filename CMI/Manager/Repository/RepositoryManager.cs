@@ -60,9 +60,7 @@ namespace CMI.Manager.Repository
         public async Task<RepositoryPackageResult> GetPackage(string packageId, string archiveRecordId, int primaerdatenAuftragId)
         {
             var startTime = DateTime.Now;
-
-            // Getting the package including the metadata.xml 
-            var packageResult = await GetPackageInternal(packageId, archiveRecordId, true, new List<string>(), primaerdatenAuftragId);
+            var packageResult = await GetPackageInternal(packageId, archiveRecordId, new List<string>(), primaerdatenAuftragId, false);
 
             // Output duration
             var timespan = new TimeSpan(DateTime.Now.Ticks - startTime.Ticks);
@@ -84,9 +82,8 @@ namespace CMI.Manager.Repository
                 if (!string.IsNullOrEmpty(packageId) && !string.IsNullOrEmpty(archiveRecordId))
                 {
                     var fileTypesToIgnore = syncSettings.IgnorierteDateitypenFuerSynchronisierung.Split(',');
-                    // Getting the package, but for syncing we don't need the overhead of creating the metadata stuff
-                    var packageResult = await GetPackageInternal(packageId, archiveRecordId, false, fileTypesToIgnore.Select(f => f.Trim()).ToList(),
-                        primaerdatenId);
+                    var packageResult = await GetPackageInternal(packageId, archiveRecordId, fileTypesToIgnore.Select(f => f.Trim()).ToList(),
+                        primaerdatenId, true);
 
                     // Output duration
                     var timespan = new TimeSpan(DateTime.Now.Ticks - startTime.Ticks);
@@ -111,7 +108,7 @@ namespace CMI.Manager.Repository
                     return packageResult;
                 }
 
-                return new RepositoryPackageResult {ErrorMessage = "Invalid arguments for appending package"};
+                return new RepositoryPackageResult { ErrorMessage = "Invalid arguments for appending package" };
             }
         }
 
@@ -122,7 +119,7 @@ namespace CMI.Manager.Repository
             {
                 Success = false,
                 Valid = false,
-                PackageDetails = new RepositoryPackage {ArchiveRecordId = archiveRecordId}
+                PackageDetails = new RepositoryPackage { ArchiveRecordId = archiveRecordId }
             };
 
             try
@@ -171,8 +168,8 @@ namespace CMI.Manager.Repository
         }
 
 
-        internal async Task<RepositoryPackageResult> GetPackageInternal(string packageId, string archiveRecordId, bool createMetadataXml,
-            List<string> fileTypesToIgnore, int primaerdatenAuftragId)
+        internal async Task<RepositoryPackageResult> GetPackageInternal(string packageId, string archiveRecordId,
+            List<string> fileTypesToIgnore, int primaerdatenAuftragId, bool isExportForSyncProcess)
         {
             Debug.Assert(fileTypesToIgnore != null, "fileTypesToIgnore must not be null");
 
@@ -181,7 +178,7 @@ namespace CMI.Manager.Repository
             {
                 Success = false,
                 Valid = false,
-                PackageDetails = new RepositoryPackage {ArchiveRecordId = archiveRecordId}
+                PackageDetails = new RepositoryPackage { ArchiveRecordId = archiveRecordId }
             };
             var currentStatus = AufbereitungsStatusEnum.AuftragGestartet;
 
@@ -228,10 +225,7 @@ namespace CMI.Manager.Repository
                         LogFreeDiskSpace(packageId);
 
                         // Create the metadata.xml
-                        if (createMetadataXml)
-                        {
-                            await handler.CreateMetadataXml(Path.Combine(tempRootFolder, headerFolderName), retVal.PackageDetails, allIgnoredFiles);
-                        }
+                        await handler.CreateMetadataXml(Path.Combine(tempRootFolder, headerFolderName), retVal.PackageDetails, allIgnoredFiles);
 
                         // Get some information about the package
                         var numberOfFilesInZipFile =
@@ -257,9 +251,11 @@ namespace CMI.Manager.Repository
                         await UpdatePrimaerdatenAuftragStatus(primaerdatenAuftragId, currentStatus);
 
                         // Check if package is valid. 
-                        // Number of files must correspond. In case of just getting the files for OCR, the createMetadataXml is false and number of files is counted differently
-                        var isValidPackage = numberOfFilesInMetadata == numberOfFilesInZipFile ||
-                                             !createMetadataXml && numberOfFilesInZipFile == numberOfFilesInMetadataRespectingIgnored;
+                        // Number of files must correspond. In case of getting the files for the sync process
+                        // some files might be ignored and thus the count is different
+                        var isValidPackage = isExportForSyncProcess
+                            ? numberOfFilesInZipFile == numberOfFilesInMetadataRespectingIgnored
+                            : numberOfFilesInMetadata == numberOfFilesInZipFile;
 
                         var fi = new FileInfo(zipFileName);
                         if (isValidPackage)
@@ -727,19 +723,19 @@ namespace CMI.Manager.Repository
             var transferSpeed = syncSettings.FileTransferSpeedInKByte;
 
             if (downloadSpeed > 0)
-                // ReSharper disable once PossibleLossOfFraction
+            // ReSharper disable once PossibleLossOfFraction
             {
                 retVal += TimeSpan.FromSeconds(sizeInBytes / 1000 / downloadSpeed).Ticks;
             }
 
             if (zipSpeed > 0)
-                // ReSharper disable once PossibleLossOfFraction
+            // ReSharper disable once PossibleLossOfFraction
             {
                 retVal += TimeSpan.FromSeconds(sizeInBytes / 1000 / zipSpeed).Ticks;
             }
 
             if (transferSpeed > 0)
-                // ReSharper disable once PossibleLossOfFraction
+            // ReSharper disable once PossibleLossOfFraction
             {
                 retVal += TimeSpan.FromSeconds(sizeInBytes / 1000 / transferSpeed).Ticks;
             }

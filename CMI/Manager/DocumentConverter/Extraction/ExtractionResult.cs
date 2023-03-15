@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using CMI.Manager.DocumentConverter.Extraction.Interfaces;
+using OcrResultType = CMI.Contract.DocumentConverter.OcrResultType;
 
 namespace CMI.Manager.DocumentConverter.Extraction
 {
@@ -19,6 +23,16 @@ namespace CMI.Manager.DocumentConverter.Extraction
         public bool HasError { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        /// <summary>
+        /// Indicates if the result was created from an OCR process
+        /// </summary>
+        public bool IsOcrResult { get; set; }
+
+        /// <summary>
+        /// A list with created documents during an OCR process
+        /// </summary>
+        public Dictionary<OcrResultType, string> CreatedOcrFiles { get; set; } = new();
 
         public bool HasContent
         {

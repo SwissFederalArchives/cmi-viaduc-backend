@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="644" WIDTH="526">
+<TopMargin HEIGHT="29" WIDTH="526" VPOS="0" HPOS="0">
+</TopMargin>
+<LeftMargin HEIGHT="587" WIDTH="29" VPOS="29" HPOS="0">
+</LeftMargin>
+<RightMargin HEIGHT="587" WIDTH="28" VPOS="29" HPOS="498">
+</RightMargin>
+<BottomMargin HEIGHT="28" WIDTH="526" VPOS="616" HPOS="0">
+</BottomMargin>
+<PrintSpace HEIGHT="587" WIDTH="469" VPOS="29" HPOS="29">
+<TextBlock ID="Page1_Block1" HEIGHT="14" WIDTH="13" VPOS="144" HPOS="94" language="de">
+<TextLine HEIGHT="8" WIDTH="6" VPOS="147" HPOS="97"><String WC="0.25999999046325684" CONTENT="4" HEIGHT="8" WIDTH="6" VPOS="147" HPOS="97"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="28" WIDTH="26" VPOS="265" HPOS="138" language="de">
+<TextLine HEIGHT="19" WIDTH="16" VPOS="274" HPOS="147"><String WC="1." CONTENT="«" HEIGHT="19" WIDTH="16" VPOS="274" HPOS="147"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="36" WIDTH="23" VPOS="551" HPOS="352" language="de">
+<TextLine HEIGHT="26" WIDTH="13" VPOS="555" HPOS="361"><String WC="0.30000001192092896" CONTENT="I" HEIGHT="26" WIDTH="13" VPOS="555" HPOS="361"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block4" HEIGHT="33" WIDTH="27" VPOS="301" HPOS="169" language="de">
+<TextLine HEIGHT="31" WIDTH="25" VPOS="303" HPOS="169"><String WC="0.40999999642372131" CONTENT="V" HEIGHT="31" WIDTH="25" VPOS="303" HPOS="169"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block5" HEIGHT="118" WIDTH="83" VPOS="136" HPOS="141" language="de"><Shape><Polygon POINTS="141,136 224,136 224,158 211,158 211,159 210,159 210,254 141,254 141,136"/></Shape>
+<TextLine HEIGHT="84" WIDTH="66" VPOS="170" HPOS="143"><String WC="0.28999999165534973" CONTENT="3" HEIGHT="84" WIDTH="66" VPOS="170" HPOS="143"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block6" HEIGHT="81" WIDTH="5" VPOS="392" HPOS="53"/><Illustration ID="Page1_Block7" HEIGHT="587" WIDTH="469" VPOS="29" HPOS="29"/>
+</PrintSpace>
+</Page>
+</Layout>
+</alto>

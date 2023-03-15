@@ -4,6 +4,7 @@ using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Engine.Asset;
+using CMI.Engine.Asset.PreProcess;
 using CMI.Engine.Security;
 using CMI.Manager.Asset.Consumers;
 using MassTransit;

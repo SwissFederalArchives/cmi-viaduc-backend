@@ -111,19 +111,19 @@ namespace CMI.Access.Sql.Viaduc.AblieferndeStellen
                 {
                     Value = bezeichnung,
                     ParameterName = "p1",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 },
                 new SqlParameter
                 {
                     Value = kuerzel,
                     ParameterName = "p2",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 },
                 new SqlParameter
                 {
                     Value = string.Join(",", kontrollstelleList),
                     ParameterName = "p3",
-                    SqlDbType = SqlDbType.VarChar
+                    SqlDbType = SqlDbType.NVarChar
                 },
                 new SqlParameter
                 {
@@ -227,7 +227,7 @@ namespace CMI.Access.Sql.Viaduc.AblieferndeStellen
                     {
                         Value = kuerzel,
                         ParameterName = "p2",
-                        SqlDbType = SqlDbType.VarChar
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {

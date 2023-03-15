@@ -56,9 +56,9 @@ namespace CMI.Engine.PackageMetadata
             CopyXsdFiles(folderName);
 
             // Lesen der Bestellposition und aller Kinder aus dem Elastic Index. 
-            var getArchiveRecordsForPackageRequest = new GetArchiveRecordsForPackageRequest { PackageId = package.PackageId };
+            var getArchiveRecordsForPackageRequest = new GetArchiveRecordsForPackageRequest { ArchiveRecordId = package.ArchiveRecordId };
             var response = await indexClient.GetResponse<GetArchiveRecordsForPackageResponse>(getArchiveRecordsForPackageRequest);
-            
+
             var indexRecords = response.Message?.Result;
             Log.Debug($"Found the following archive records for pack" +
                       $"ageId {package.PackageId}: {JsonConvert.SerializeObject(indexRecords)}");
@@ -66,8 +66,13 @@ namespace CMI.Engine.PackageMetadata
             // If using the Alfresco Repository, then we simply return a "hard coded" file
             if (repositoryAccess.GetRepositoryName().StartsWith("Alfresco", StringComparison.InvariantCultureIgnoreCase))
             {
-                var defaultMetadata = GetFileFromRessource();
-                File.WriteAllText(Path.Combine(folderName, "metadata.xml"), defaultMetadata);
+                var directory = new DirectoryInfo(folderName);
+                if (directory.Parent != null)
+                {
+                    MoveMetadataXml(Path.Combine(directory.Parent.FullName, "content"), directory.FullName);
+                    package.Files.Remove(package.Files.FirstOrDefault(f =>
+                        f.PhysicalName.Equals("metadata.xml", StringComparison.InvariantCultureIgnoreCase)));
+                }
                 return;
             }
 
@@ -112,7 +117,6 @@ namespace CMI.Engine.PackageMetadata
             dip.SchemaLocation = "http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd";
             ((Paket) dip).SaveToFile(Path.Combine(folderName, "metadata.xml"));
         }
-
 
         /// <summary>
         ///     Initializes the folders in a helper collection.
@@ -418,7 +422,7 @@ namespace CMI.Engine.PackageMetadata
                     metadataAccess.GetExtendedPropertyValue(extensions, "ARELDA:Ablieferung/ablieferung/provenienz/registratur");
 
                 // Ordnungssystem
-                var teilbestand = orderedRecord.ArchiveplanContext.FirstOrDefault(c =>
+                var teilbestand = orderedRecord?.ArchiveplanContext.FirstOrDefault(c =>
                     c.Level.Equals(subFondsLevelIdentifier, StringComparison.InvariantCultureIgnoreCase));
                 ablieferung.Ordnungssystem.Name = teilbestand != null
                     ? teilbestand.Title
@@ -516,55 +520,55 @@ namespace CMI.Engine.PackageMetadata
             // Add optional data
             if (!string.IsNullOrEmpty(dossierRecord?.ReferenceCode))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Signatur", Value = dossierRecord.ReferenceCode});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Signatur", Value = dossierRecord.ReferenceCode });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.Level))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Stufe", Value = dossierRecord.Level});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Stufe", Value = dossierRecord.Level });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.FormerReferenceCode))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Frühere Signaturen", Value = dossierRecord.FormerReferenceCode});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = dossierRecord.FormerReferenceCode });
             }
 
             if (dossierRecord?.ArchiveplanContext.Count > 0)
             {
                 dossier.zusatzDaten.Add(new ZusatzDatenMerkmal
-                    {Name = "Archivplankontext", Value = JsonConvert.SerializeObject(dossierRecord.ArchiveplanContext)});
+                { Name = "Archivplankontext", Value = JsonConvert.SerializeObject(dossierRecord.ArchiveplanContext) });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.Land()))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Land", Value = dossierRecord.Land()});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Land", Value = dossierRecord.Land() });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.Form()))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Form", Value = dossierRecord.Form()});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Form", Value = dossierRecord.Form() });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.FrüheresAktenzeichen()))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Früheres Aktenzeichen", Value = dossierRecord.FrüheresAktenzeichen()});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Früheres Aktenzeichen", Value = dossierRecord.FrüheresAktenzeichen() });
             }
 
             if (!string.IsNullOrEmpty(dossierRecord?.PrimaryDataLink))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Identifikation digitales Magazin", Value = dossierRecord.PrimaryDataLink});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Identifikation digitales Magazin", Value = dossierRecord.PrimaryDataLink });
             }
 
             if (dossierRecord?.CreationPeriod != null)
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Entstehungszeitraum Anzeigetext", Value = dossierRecord.CreationPeriod.Text});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Entstehungszeitraum Anzeigetext", Value = dossierRecord.CreationPeriod.Text });
             }
 
             var reihenfolge =
                 metadataAccess.GetExtendedPropertyBagValue(extensions, "ARELDA:Dossier/Dossier/Zusatzdaten/Merkmal", "ReihenfolgeAnalogesDossier");
             if (!string.IsNullOrEmpty(reihenfolge))
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "ReihenfolgeAnalogesDossier", Value = reihenfolge});
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "ReihenfolgeAnalogesDossier", Value = reihenfolge });
             }
 
 
@@ -614,76 +618,76 @@ namespace CMI.Engine.PackageMetadata
             // Add optional data
             if (!string.IsNullOrEmpty(documentRecord?.ReferenceCode))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Signatur", Value = documentRecord.ReferenceCode});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Signatur", Value = documentRecord.ReferenceCode });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Level))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Stufe", Value = documentRecord.Level});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Stufe", Value = documentRecord.Level });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.FormerReferenceCode))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Frühere Signaturen", Value = documentRecord.FormerReferenceCode});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = documentRecord.FormerReferenceCode });
             }
 
             if (documentRecord?.ArchiveplanContext.Count > 0)
             {
                 dokument.zusatzDaten.Add(new ZusatzDatenMerkmal
-                    {Name = "Archivplankontext", Value = JsonConvert.SerializeObject(documentRecord.ArchiveplanContext)});
+                { Name = "Archivplankontext", Value = JsonConvert.SerializeObject(documentRecord.ArchiveplanContext) });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Form()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Form", Value = documentRecord.Form()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Form", Value = documentRecord.Form() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.WithinInfo))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Darin", Value = documentRecord.WithinInfo});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Darin", Value = documentRecord.WithinInfo });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Thema()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Thema", Value = documentRecord.Thema()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Thema", Value = documentRecord.Thema() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Format()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Format", Value = documentRecord.Format()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Format", Value = documentRecord.Format() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Urheber()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Urheber", Value = documentRecord.Urheber()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Urheber", Value = documentRecord.Urheber() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Verleger()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Verleger", Value = documentRecord.Verleger()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Verleger", Value = documentRecord.Verleger() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.Abdeckung()))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Abdeckung", Value = documentRecord.Abdeckung()});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Abdeckung", Value = documentRecord.Abdeckung() });
             }
 
             if (!string.IsNullOrEmpty(documentRecord?.PrimaryDataLink))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "Identifikation digitales Magazin", Value = documentRecord.PrimaryDataLink});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Identifikation digitales Magazin", Value = documentRecord.PrimaryDataLink });
             }
 
             if (documentRecord?.CreationPeriod != null)
             {
                 dokument.zusatzDaten.Add(
-                    new ZusatzDatenMerkmal {Name = "Entstehungszeitraum Anzeigetext", Value = documentRecord.CreationPeriod.Text});
+                    new ZusatzDatenMerkmal { Name = "Entstehungszeitraum Anzeigetext", Value = documentRecord.CreationPeriod.Text });
             }
 
             var reihenfolge =
                 metadataAccess.GetExtendedPropertyBagValue(extensions, "ARELDA:Dokument/Dokument/Zusatzdaten/Merkmal", "ReihenfolgeAnalogesDossier");
             if (!string.IsNullOrEmpty(reihenfolge))
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal {Name = "ReihenfolgeAnalogesDossier", Value = reihenfolge});
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "ReihenfolgeAnalogesDossier", Value = reihenfolge });
             }
 
 
@@ -757,17 +761,14 @@ namespace CMI.Engine.PackageMetadata
             }
         }
 
-        private string GetFileFromRessource()
+        private void MoveMetadataXml(string contentDir, string targetDir)
         {
-            var resourceName = "CMI.Engine.PackageMetadata.DefaultAlfrescoMetadataFile.xml";
-            var assembly = Assembly.GetExecutingAssembly();
-
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            Log.Information("Trying to move metadata.xml from content folder (Alfresco) to header folder.");
+            // There MUST be a metadata.xml in the content folder if we are using Alfresco
+            var sourceFile = new FileInfo(Path.Combine(contentDir, "metadata.xml"));
+            if (sourceFile.Exists)
             {
-                using (var reader = new StreamReader(stream ?? throw new InvalidOperationException(), Encoding.UTF8))
-                {
-                    return reader.ReadToEnd();
-                }
+                sourceFile.MoveTo(Path.Combine(targetDir, "metadata.xml"));
             }
         }
 
@@ -787,8 +788,8 @@ namespace CMI.Engine.PackageMetadata
             var retVal = new HistorischerZeitraum
             {
                 Von = new HistorischerZeitpunkt
-                    {Ca = creationPeriod.StartDateApproxIndicator, Datum = creationPeriod.StartDate.ToString("yyyy-MM-dd")},
-                Bis = new HistorischerZeitpunkt {Ca = creationPeriod.EndDateApproxIndicator, Datum = creationPeriod.EndDate.ToString("yyyy-MM-dd")}
+                { Ca = creationPeriod.StartDateApproxIndicator, Datum = creationPeriod.StartDate.ToString("yyyy-MM-dd") },
+                Bis = new HistorischerZeitpunkt { Ca = creationPeriod.EndDateApproxIndicator, Datum = creationPeriod.EndDate.ToString("yyyy-MM-dd") }
             };
             return retVal;
         }

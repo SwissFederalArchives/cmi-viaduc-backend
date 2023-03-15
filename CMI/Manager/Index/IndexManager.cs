@@ -62,7 +62,7 @@ namespace CMI.Manager.Index
         public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, bool includeFulltextContent, bool useUnanonymizedData)
         {
             var document = dbAccess.FindDocument(archiveRecordId, includeFulltextContent);
-            if (useUnanonymizedData && document.IsAnonymized)
+            if (document != null && useUnanonymizedData && document.IsAnonymized)
             {
                 var dbRecord = dbAccess.FindDbDocument(archiveRecordId, includeFulltextContent);
                 document.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
@@ -73,10 +73,11 @@ namespace CMI.Manager.Index
 
         // Returns all archive records for a given package, that is from dossier down to document
         // or in case of a document packageId all the items up to the dossier.
-        public List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string packageId)
+        public List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId)
         {
             var retVal = new List<ElasticArchiveRecord>();
-            var entryItem = dbAccess.FindDocumentByPackageId(packageId);
+            var entryItem = dbAccess.FindDocument(archiveRecordId, false);
+            
             if (entryItem != null)
             {
                 retVal.Add(entryItem);
@@ -129,6 +130,7 @@ namespace CMI.Manager.Index
             elasticArchiveRecord.PrimaryDataDownloadAccessTokens = archiveRecord.Security?.PrimaryDataDownloadAccessToken;
             elasticArchiveRecord.PrimaryDataFulltextAccessTokens = archiveRecord.Security?.PrimaryDataFulltextAccessToken;
             elasticArchiveRecord.PrimaryDataLink = archiveRecord.Metadata.PrimaryDataLink;
+            elasticArchiveRecord.ManifestLink = archiveRecord.Metadata.ManifestLink;
             elasticArchiveRecord.HasImage = archiveRecord.Display.ContainsImages;
             elasticArchiveRecord.HasAudioVideo = archiveRecord.Display.ContainsMedia;
             elasticArchiveRecord.CanBeOrdered = archiveRecord.Display.CanBeOrdered;

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Manager.Asset.Properties" GeneratedClassName="ViewerFileLocation">
+  <Profiles />
+  <Settings>
+    <Setting Name="ManifestOutputSaveDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.ViewerFileLocation.ManifestOutputSaveDirectory@@</Value>
+    </Setting>
+    <Setting Name="ContentOutputSaveDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.ViewerFileLocation.ContentOutputSaveDirectory@@</Value>
+    </Setting>
+    <Setting Name="OcrOutputSaveDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.ViewerFileLocation.OcrOutputSaveDirectory@@</Value>
+    </Setting>
+    <Setting Name="ImageOutputSaveDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.Asset.Properties.ViewerFileLocation.ImageOutputSaveDirectory@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

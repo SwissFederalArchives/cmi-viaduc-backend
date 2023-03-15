@@ -1,0 +1,291 @@
+﻿8
+
+VERTRAULICH
+
+
+NI
+
+
+2. Speziell» Anforderungen an die veränderlichen Informationen
+Veränderliche Beschriftung
+Breite
+- I
+-
+Flugplatz
+3
+I
+
+:
+CNJ
+je 1/2
+Code - Zahl
+2 Zahlenschilder
+
+je 1/2
+Fl St
+1-2 Zahlenschilder
+I
+Total Flz/Pil
+je 1/2
+je 1-2 Zahlenschilder
+NJ
+I
+je 1/2
+je 1-2 Zahlenschilder
+
+1/2
+Einsatzfaktor
+1 Zahlenschild
+F
+Einsatzart
+5
+4
+t
+co
+LO
+1
+CO
+<JD
+CNJ
+C)
+
+je 1/2
+Verband
+2 Zahlenschilder
+M-
+
+1
+Deckname
+3
+o
+ni
+
+LxJ
+3
+I
+sohriftung
+oo
+j
+
+Anzahl Flz
+je 1/2
+Zahlenschilder
+A
+GO
+I
+I
+
+I
+
+
+I
+-
+
+■
+Steckschild für Papierstrei-
+fen
+<v
+GO
+CO
+O
+CO
+-+->
+GO
+CO
+CT)
+c
+o
+CO
+CO
+c
+CO
+cn
+o
+CD
+
+CNJ
+CD
+>
+gd
+I
+NI
+CO
+CO
+£Z
+UJ
+CD
+CO
+c
+CD
+C
+tu
+NI
+Nl
+CO
+a.
+Z3
+c
+o
+«X
+I
+NI
+■+-•
+CD
+CO
+c
+' uü
+g5
+I
+«c
+UJ
+CD
+CO
+cc
+CD
+CO
+c:
+c:
+CO
+-O
+CD
+"O
+c
+CO
+_C2
+CD
+C_J
+CD
+TD
+c
+<-c
+JD
+CD
+>
+CD
+£Z
+T3
+C
+co
+-O
+CD
+CO-
+NI
+C
+-£Z
+CO
+NJ
+c
+5
+1
+
+Dnterverband
+• co
+NI
+CO
+co
+c:
+UJ
+!
+CD
+B
+co
+UC
+CD
+CQ
+CD
+E
+rc
+c:
+uc
+<D
+CD
+CD
+E
+co
+c
+dn
+CD
+CD
+TD
+C
+M
+-O
+£_
+>
+CD
+§
+CO
+NI
+C
+*x
+TD
+C
+CO
+_o
+CD
+>
+Steckschilder mit den
+Buchstaben A,B,B,F,I,L,O,R
+er
+Xj
+CO
+CO
+co
+co
+c
+co
+£_
+o
+CD
+T
+NI
+I
+CD
+TD
+o
+CG
+CO
+UJ
+
+I
+5
+GD
+CE
+CO
+CO
+CD
+CQ
+£
+Einsatzfähig
+..
+Steckschild für Papierstrei-
+fen
+1. Allgemeines
+Die Tafel gemäss nebenstehender Einteilung soll gleichbreit wie
+die Preparatione - Tafel ausgeführt und oberhalb dieser angeoracnt
+werden. Für Y spiegelbildliche Anordnung. Für die veränderlichen
+Informationen (*) sollen die gleichen Elemente wie bei ZET
+verwendet werden*
+Steckschild mit fester Be-
+fini s r? !
+S
+CQ
+Feste Beschrif- (
+tung
+b
+II
+II
+11
+S t'
+CD
+£X
+E >
+CO
+=g
+UJ
+4.7,2. Orientierungstafeln "Staffelorganisation11 und "Bestand11
+i
+Ünstel EA - Gr
+
+Steckschild für Papierstrei-
+fen

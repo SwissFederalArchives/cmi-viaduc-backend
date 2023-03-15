@@ -54,8 +54,11 @@
     <Compile Include="ExtractionStartResult.cs" />
     <Compile Include="IErrorResult.cs" />
     <Compile Include="JobContext.cs" />
+    <Compile Include="JobEndRequest.cs" />
+    <Compile Include="JobEndResult.cs" />
     <Compile Include="JobInfoDetails.cs" />
     <Compile Include="JobInitRequest.cs" />
+    <Compile Include="OcrResultType.cs" />
     <Compile Include="SupportedFileTypesRequest.cs" />
     <Compile Include="IFileProcessorFactory.cs" />
     <Compile Include="IDoc.cs" />

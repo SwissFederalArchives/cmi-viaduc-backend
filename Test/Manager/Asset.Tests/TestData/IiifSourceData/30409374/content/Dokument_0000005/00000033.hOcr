@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <title>Image: </title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <meta name="ocr-system" content="ABBYY FineReader Engine 12"/>
+      <meta name="ocr-capabilities"
+            content="ocr_page ocr_header ocr_footer ocr_carea ocr_par ocr_line ocrx_word"/>
+   </head>
+   <body>
+      <div class="ocr_page"
+           id="Page1"
+           title="image ; bbox 0 0 526 644; ppageno 0">
+         <div class="ocr_header" id="block_d25e14" title="bbox 0 0 526 29"/>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block1"
+            title="bbox 94 144 107 158"
+            lang="de">
+            <span class="ocr_line" id="line_d25e20" title="bbox 97 147 103 155">
+               <span class="ocrx_word"
+                     id="word_d25e21"
+                     title="bbox 97 147 103 155 ; x_wconf 25.999999046325684">4</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block2"
+            title="bbox 138 265 164 293"
+            lang="de">
+            <span class="ocr_line" id="line_d25e23" title="bbox 147 274 163 293">
+               <span class="ocrx_word"
+                     id="word_d25e24"
+                     title="bbox 147 274 163 293 ; x_wconf 100">«</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block3"
+            title="bbox 352 551 375 587"
+            lang="de">
+            <span class="ocr_line" id="line_d25e26" title="bbox 361 555 374 581">
+               <span class="ocrx_word"
+                     id="word_d25e27"
+                     title="bbox 361 555 374 581 ; x_wconf 30.000001192092896">I</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block4"
+            title="bbox 169 301 196 334"
+            lang="de">
+            <span class="ocr_line" id="line_d25e29" title="bbox 169 303 194 334">
+               <span class="ocrx_word"
+                     id="word_d25e30"
+                     title="bbox 169 303 194 334 ; x_wconf 40.99999964237213">V</span>
+            </span>
+         </p>
+         <p class="ocr_par"
+            dir="ltr"
+            id="Page1_Block5"
+            title="bbox 141 136 224 254"
+            lang="de">
+            <span class="ocr_line" id="line_d25e34" title="bbox 143 170 209 254">
+               <span class="ocrx_word"
+                     id="word_d25e35"
+                     title="bbox 143 170 209 254 ; x_wconf 28.999999165534973">3</span>
+            </span>
+         </p>
+         <div class="ocr_footer" id="block_d25e17" title="bbox 0 616 526 644"/>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3154" WIDTH="1840">
+<BottomMargin HEIGHT="3154" WIDTH="1840" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="32" WIDTH="127" VPOS="2976" HPOS="115" language="de">
+<TextLine HEIGHT="23" WIDTH="118" VPOS="2980" HPOS="119"><String WC="0.54222220182418823" CONTENT="»24/72250" HEIGHT="23" WIDTH="118" VPOS="2980" HPOS="119"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="23" WIDTH="21" VPOS="3059" HPOS="1421" language="en-US">
+<TextLine HEIGHT="15" WIDTH="11" VPOS="3062" HPOS="1426"><String WC="0.87999999523162842" CONTENT="ft" HEIGHT="15" WIDTH="11" VPOS="3062" HPOS="1426"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block3" HEIGHT="13" WIDTH="859" VPOS="170" HPOS="931"/><GraphicalElement ID="Page1_Block4" HEIGHT="10" WIDTH="858" VPOS="178" HPOS="61"/><GraphicalElement ID="Page1_Block5" HEIGHT="8" WIDTH="1728" VPOS="2963" HPOS="67"/><GraphicalElement ID="Page1_Block6" HEIGHT="34" WIDTH="1759" VPOS="3120" HPOS="45"/><GraphicalElement ID="Page1_Block7" HEIGHT="3082" WIDTH="41" VPOS="40" HPOS="0"/><GraphicalElement ID="Page1_Block8" HEIGHT="2768" WIDTH="9" VPOS="191" HPOS="489"/><GraphicalElement ID="Page1_Block9" HEIGHT="3084" WIDTH="13" VPOS="38" HPOS="922"/><GraphicalElement ID="Page1_Block10" HEIGHT="2775" WIDTH="9" VPOS="186" HPOS="1358"/><GraphicalElement ID="Page1_Block11" HEIGHT="10" WIDTH="1719" VPOS="295" HPOS="69"/><GraphicalElement ID="Page1_Block12" HEIGHT="9" WIDTH="1722" VPOS="413" HPOS="64"/><GraphicalElement ID="Page1_Block13" HEIGHT="7" WIDTH="1722" VPOS="531" HPOS="62"/><GraphicalElement ID="Page1_Block14" HEIGHT="8" WIDTH="1660" VPOS="646" HPOS="126"/><GraphicalElement ID="Page1_Block15" HEIGHT="7" WIDTH="1728" VPOS="764" HPOS="63"/><GraphicalElement ID="Page1_Block16" HEIGHT="8" WIDTH="1726" VPOS="880" HPOS="66"/><GraphicalElement ID="Page1_Block17" HEIGHT="7" WIDTH="1724" VPOS="997" HPOS="68"/><GraphicalElement ID="Page1_Block18" HEIGHT="6" WIDTH="847" VPOS="1113" HPOS="941"/><GraphicalElement ID="Page1_Block19" HEIGHT="6" WIDTH="839" VPOS="1114" HPOS="69"/><GraphicalElement ID="Page1_Block20" HEIGHT="7" WIDTH="1725" VPOS="1229" HPOS="64"/><GraphicalElement ID="Page1_Block21" HEIGHT="6" WIDTH="1725" VPOS="1345" HPOS="65"/><GraphicalElement ID="Page1_Block22" HEIGHT="6" WIDTH="1727" VPOS="1461" HPOS="64"/><GraphicalElement ID="Page1_Block23" HEIGHT="6" WIDTH="1728" VPOS="1576" HPOS="65"/><GraphicalElement ID="Page1_Block24" HEIGHT="7" WIDTH="1723" VPOS="1689" HPOS="68"/><GraphicalElement ID="Page1_Block25" HEIGHT="8" WIDTH="1719" VPOS="1803" HPOS="74"/><GraphicalElement ID="Page1_Block26" HEIGHT="7" WIDTH="1726" VPOS="1918" HPOS="67"/><GraphicalElement ID="Page1_Block27" HEIGHT="8" WIDTH="1723" VPOS="2034" HPOS="71"/><GraphicalElement ID="Page1_Block28" HEIGHT="9" WIDTH="1721" VPOS="2149" HPOS="69"/><GraphicalElement ID="Page1_Block29" HEIGHT="8" WIDTH="847" VPOS="2265" HPOS="947"/><GraphicalElement ID="Page1_Block30" HEIGHT="7" WIDTH="849" VPOS="2266" HPOS="70"/><GraphicalElement ID="Page1_Block31" HEIGHT="9" WIDTH="1724" VPOS="2381" HPOS="67"/><GraphicalElement ID="Page1_Block32" HEIGHT="9" WIDTH="1721" VPOS="2496" HPOS="73"/><GraphicalElement ID="Page1_Block33" HEIGHT="7" WIDTH="1720" VPOS="2612" HPOS="74"/><GraphicalElement ID="Page1_Block34" HEIGHT="6" WIDTH="1722" VPOS="2728" HPOS="72"/><GraphicalElement ID="Page1_Block35" HEIGHT="5" WIDTH="1727" VPOS="2844" HPOS="68"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

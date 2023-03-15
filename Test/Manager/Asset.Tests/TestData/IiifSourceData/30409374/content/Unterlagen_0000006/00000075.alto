@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3599" WIDTH="2527">
+<BottomMargin HEIGHT="3599" WIDTH="2527" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="39" WIDTH="32" VPOS="1854" HPOS="1805" language="de">
+<TextLine HEIGHT="33" WIDTH="23" VPOS="1860" HPOS="1810"><String WC="0.23999999463558197" CONTENT="5" HEIGHT="33" WIDTH="23" VPOS="1860" HPOS="1810"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="108" WIDTH="229" VPOS="2291" HPOS="451" language="de">
+<TextLine HEIGHT="3" WIDTH="10" VPOS="2373" HPOS="553"><String WC="0.2199999988079071" CONTENT="-" HEIGHT="3" WIDTH="10" VPOS="2373" HPOS="553"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="190" WIDTH="51" VPOS="0" HPOS="2127" language="fr">
+<TextLine HEIGHT="78" WIDTH="51" VPOS="1" HPOS="2127"><String WC="0.23000000417232513" CONTENT="F" HEIGHT="78" WIDTH="51" VPOS="1" HPOS="2127"/></TextLine>
+<TextLine HEIGHT="82" WIDTH="38" VPOS="107" HPOS="2135"><String WC="0.23000000417232513" CONTENT="S" HEIGHT="82" WIDTH="38" VPOS="107" HPOS="2135"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block4" HEIGHT="43" WIDTH="2467" VPOS="0" HPOS="60"/><GraphicalElement ID="Page1_Block5" HEIGHT="3429" WIDTH="37" VPOS="96" HPOS="0"/><GraphicalElement ID="Page1_Block6" HEIGHT="3560" WIDTH="40" VPOS="39" HPOS="2487"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

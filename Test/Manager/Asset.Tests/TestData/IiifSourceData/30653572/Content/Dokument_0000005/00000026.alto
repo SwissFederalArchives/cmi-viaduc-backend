@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2023-01-19</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3561" WIDTH="2537">
+<BottomMargin HEIGHT="3561" WIDTH="2537" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="38" WIDTH="86" VPOS="1298" HPOS="250" language="en-US">
+<TextLine HEIGHT="17" WIDTH="69" VPOS="1310" HPOS="259"><String WC="0.5350000262260437" CONTENT="Il" HEIGHT="17" WIDTH="17" VPOS="1310" HPOS="259"/><SP WIDTH="20" VPOS="1310" HPOS="277"/><String WC="0.56000000238418579" CONTENT="&apos;" HEIGHT="8" WIDTH="4" VPOS="1313" HPOS="298"/><SP WIDTH="22" VPOS="1313" HPOS="303"/><String WC="0.56999999284744263" CONTENT="■" HEIGHT="3" WIDTH="2" VPOS="1316" HPOS="326"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="251" WIDTH="160" VPOS="2203" HPOS="222" language="en-US">
+<TextLine HEIGHT="23" WIDTH="7" VPOS="2211" HPOS="357"><String WC="0.2800000011920929" CONTENT="!" HEIGHT="23" WIDTH="7" VPOS="2211" HPOS="357"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="161" WIDTH="653" VPOS="1459" HPOS="973" language="en-US">
+<TextLine HEIGHT="3" WIDTH="3" VPOS="1582" HPOS="984"><String WC="0.56999999284744263" CONTENT="■" HEIGHT="3" WIDTH="3" VPOS="1582" HPOS="984"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block4" HEIGHT="65" WIDTH="2485" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block5" HEIGHT="3494" WIDTH="47" VPOS="67" HPOS="2490"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

@@ -1,0 +1,153 @@
+﻿7
+•7• 1 • Zustands- und Ei.-.satzmelde-Tafel (ZET) und Preparatione-Tafel (Pt)
+
+1. Allgemeines
+Obere Beschriftung
+i
+2, V~fnng der Tafeln
+v
+3. Einteilung der Kolonnen, Beschriftung und Zubehör
+i
+Feste Beschriftung
+Veränderliche Informationen
+Breite
+Beschriftung
+Mittlere Beschriftung
+Unterstand
+oteckschilder SCHWARZ mit weissen Zahlen entspr den Unterstands-Nr
+1
+je 1/2
+Flz Nr
+4 Zahlenschilder
+Flz Zustand
+Steckschilder mit den Farben SCHWARZ, VIOLETT, SELB, GRUEN
+1
+je 1/2
+SIF-Code
+4 Zahlenschilder
+Bereitschaft auf h
+Steckschild für Papierstreifen
+2
+Alarmstufe
+Steckschilder SCHWARZ mit weisser Beschriftung Al, A3, A4
+1
+Konfiguration
+
+Deckname
+1/2
+1 Zahlenschild
+Unterverband
+Pilot
+2
+Missione-Nr
+3
+1
+müssen
+I
+Einteilung gemäss Zeichnung \~22102-rFl pl Ei KP Einteilung der ZET und PT".
+Der mittlere Beschriftungsbalken bei der ZET ist für die Bedürfnisse Erdkampf und Aufklärung beschriftet. Für LUV muss bei den
+Feldern "Deckname" und "Missione-Nr" die Beschriftung durch Aufsteckschilder angepasst werden.
+Für die Darstellung der veränderlichen Informationen auf den Schienen wird folgendes Material benötigt:
+Für die Darstellung der Mittel einer Fliegerstaffel wird je eine "Zustands- und Einsatzmelde-Tafel" und eine "Preparatione-Tafel"
+benötigt.
+5. Signalisierung von Aenderungen
+Bei Aenderungen an den Informationen der ZET bezeichnet die Bereitschaftsordonnanz 1 die betreffende
+Zeile durch Einschalteh einer Aenderungslampe. Gleichzeitig betätigt er einen Summer. Nach Kenntnis-
+nahme löscht die Zustandsordonnanz die entsprechnede Aenderungslampe. Die Signalisierung ist für die
+Positionen "Flugzeuge in Deckung" und "A-4" vorzusehen.
+Bei Aenderung der Information "Ausserhalb Deckung" und "In der Luft" macht die Start- bzw Aufschalt-
+ordonnanz, getrennt nach X und Y, den Zustandsraum mittels eines Summers aufmerksam. (Nur für Kriegsflpl)
+□
+CXl
+3
+1
+je 1/2
+2
+
+s
+■
+c
+8)
+X
+u
+□
+9
+in
+cm
+Zustande- und Einsatzmelde - Tafel
+_________________A_________________
+c
+Ui
+c
+V
+JC
+o
+in
+Preparations - Tafel
+_________A___________
+cn
+c
+a
+Q
+•5
+JM
+en
+c
+□
+ü
+5
+-Q
+ns
+-£
+»
+<n
+g
+JM
+U_
+C
+I
+N
+“T
+2
+3
+4
+5
+6
+7
+8
+-2.
+10
+JZ.
+14
+JI
+16
+Ji
+-Il
+20
+Steckschild für Papierstreifen
+Bei EA: Steckschild für Papierstreifen (weiss und farbig)
+'and Steckschilder mit den Farben BLAU, ROT, BLAU, SELB, GRUEN
+Bei LUV: Steckschilder GRUEN und WEISS mit schwarzem Punkt
+Bei EA: 4 Zahlenschilder
+Bei LUV: Steckschilder mit den Farben ROT, BLAU, GRUEN
+Bei EA: Steckschild für Papierstreifen (weiss und farbig)
+Bei LUV: Steckschilder GRUEN und WEISS mit schwarzem Punkt
+Weiteres Zubehör: - Grosser rot^j* Punkt (magnetisch): Bezeichnung eines Verbandsführers
+-	Grosser weisser Punkt mit "K" beschriftet (magnetisch): Bezeichnung eines Flugzeuges am Kran
+-	Kleiner roter Punkt (magnetisch): Bezeichnung einer Aenderung
+-	Gelber Strich (magnetisch): Bezeichnung eines Aufklärungsflugzeuges, dessen Fotoausrüstung den Detailanforde-
+rungen des Piloten entspricht. (Nur für Flpl mit AWR Aufkl)
+Das Zubehörmaterial soll übersichtlich und zweckmässig untergebracht werden.
+$
+"In der Luft" (grüner Pfeil),
+Die ZET muss im Abteil "Flugzeuge in Deckung" Platz für 2o Flugzeugschienen und im Abteil "Flugzeug ausserhalb Deckung” Platz
+für 18 Flugzeugschienen aufweisen. Die obersten 4 Positionen des Abteils "Flugzeuge ausserhalb Deckung" sind primär für die Flug-
+zeuge auf A-4-Standplatzen reserviert.
+Die PT muss Platz für 24 Steckschienen aufweisen.
+Pro ZET und PT sind 2o Flugzeugschienen und 24 Steckschienen zuzuteilen.
+
+4. Elektrisch gesteuerte Anzeigen
+Die pro Flugzeugschiene angezeigten Informationen "Ausserhalb Deckung" (gelber Strich) und
+vom bestehenden Aufschaltpult in der Kdo Zentrale gesteuert werden können.
+Die für aie A-4-Standplätze reservierten Felder sind mit einer Angabe der Btartrichtung zu bezeichnen. Die Anzeige der aktuellen
+Startrichtung erfolgt oarallel mit derjenigen an der "Startrichtungs- und Flugplatz-Zustands-Tafel" vom Kontrolltürm aus.

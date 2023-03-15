@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CMI.Engine.Asset.PreProcess;
 using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Asset.Consumers
@@ -23,7 +24,7 @@ namespace CMI.Manager.Asset.Consumers
         private readonly IScanProcessor scanProcessor;
         private readonly ITransformEngine transformEngine;
         private readonly IAssetPreparationEngine assetPreparationEngine;
-        private List<Func<PrepareForTransformationMessage, Task<PreprocessingResult>>> preparationSteps;
+        private List<Func<PrepareForTransformationMessage, Task<ProcessStepResult>>> preparationSteps;
 
         public PrepareForTransformationConsumer(IAssetManager assetManager, IScanProcessor scanProcessor, ITransformEngine transformEngine, IAssetPreparationEngine assetPreparationEngine)
         {
@@ -31,7 +32,7 @@ namespace CMI.Manager.Asset.Consumers
             this.scanProcessor = scanProcessor;
             this.transformEngine = transformEngine;
             this.assetPreparationEngine = assetPreparationEngine;
-            preparationSteps = new List<Func<PrepareForTransformationMessage, Task<PreprocessingResult>>>();
+            preparationSteps = new List<Func<PrepareForTransformationMessage, Task<ProcessStepResult>>>();
         }
 
         public async Task Consume(ConsumeContext<PrepareForTransformationMessage> context)
@@ -90,7 +91,7 @@ namespace CMI.Manager.Asset.Consumers
         /// In case we have a Benutzungskopie, we need to transform the metadata.xml
         /// </summary>
         /// <param name="message"></param>
-        private Task<PreprocessingResult> ConvertAreldaMetadataXml(PrepareForTransformationMessage message)
+        private Task<ProcessStepResult> ConvertAreldaMetadataXml(PrepareForTransformationMessage message)
         {
             try
             {
@@ -101,17 +102,17 @@ namespace CMI.Manager.Asset.Consumers
                     transformEngine.ConvertAreldaMetadataXml(tempFolder);
                 }
 
-                return Task.FromResult(new PreprocessingResult {Success = true});
+                return Task.FromResult(new ProcessStepResult {Success = true});
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while converting to AreldaMetadata xml.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult {Success = false, ErrorMessage = msg});
+                return Task.FromResult(new ProcessStepResult {Success = false, ErrorMessage = msg});
             }
         }
 
-        private Task<PreprocessingResult> DetectAndFlagLargeDimensions(PrepareForTransformationMessage message)
+        private Task<ProcessStepResult> DetectAndFlagLargeDimensions(PrepareForTransformationMessage message)
         {
             try
             {
@@ -119,17 +120,17 @@ namespace CMI.Manager.Asset.Consumers
                 var tempFolder = Path.Combine(GetTempFolder(message.RepositoryPackage), "content");
                 assetPreparationEngine.DetectAndFlagLargeDimensions(message.RepositoryPackage, tempFolder, message.PrimaerdatenAuftragId);
 
-                return Task.FromResult(new PreprocessingResult { Success = true });
+                return Task.FromResult(new ProcessStepResult { Success = true });
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while detecting large dimensions.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult { Success = false, ErrorMessage = msg });
+                return Task.FromResult(new ProcessStepResult { Success = false, ErrorMessage = msg });
             }
         }
 
-        private Task<PreprocessingResult> DetectAndOptimizePdf(PrepareForTransformationMessage message)
+        private Task<ProcessStepResult> DetectAndOptimizePdf(PrepareForTransformationMessage message)
         {
             try
             {
@@ -137,17 +138,17 @@ namespace CMI.Manager.Asset.Consumers
                 var tempFolder = Path.Combine(GetTempFolder(message.RepositoryPackage), "content");  
                 assetPreparationEngine.OptimizePdfIfRequired(message.RepositoryPackage, tempFolder, message.PrimaerdatenAuftragId);
 
-                return Task.FromResult(new PreprocessingResult { Success = true });
+                return Task.FromResult(new ProcessStepResult { Success = true });
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while detecting and optimizing pdf.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult { Success = false, ErrorMessage = msg });
+                return Task.FromResult(new ProcessStepResult { Success = false, ErrorMessage = msg });
             }
         }
 
-        private Task<PreprocessingResult> ConvertSingleJp2ToPdf(PrepareForTransformationMessage message)
+        private Task<ProcessStepResult> ConvertSingleJp2ToPdf(PrepareForTransformationMessage message)
         {
             try
             {
@@ -173,13 +174,13 @@ namespace CMI.Manager.Asset.Consumers
                 }
 
 
-                return Task.FromResult(new PreprocessingResult { Success = true });
+                return Task.FromResult(new ProcessStepResult { Success = true });
             }
             catch (Exception ex)
             {
                 var msg = "Unexpected error while converting single jpeg 2000 to pdf.";
                 Log.Error(ex, msg);
-                return Task.FromResult(new PreprocessingResult { Success = false, ErrorMessage = msg });
+                return Task.FromResult(new ProcessStepResult { Success = false, ErrorMessage = msg });
             }
         }
 
@@ -211,8 +212,8 @@ namespace CMI.Manager.Asset.Consumers
             repositoryPackage.Files.Clear();
             repositoryPackage.Folders.Clear();
 
-            var contentFolder = paket.Inhaltsverzeichnis.Ordner;
-            Debug.Assert(contentFolder.Count == 1, "There should be only one folder at the content level");
+            var contentFolder = paket.Inhaltsverzeichnis.Ordner.Where(o => o.Name.Equals("content", StringComparison.InvariantCultureIgnoreCase)).ToList();
+            Debug.Assert(contentFolder.Count == 1, "There should be one folder named content level");
             repositoryPackage.Files.AddRange(ConvertToRepositoryFiles(contentFolder.First().Datei));
             repositoryPackage.Folders.AddRange(ConvertToRepositoryFolders(contentFolder.First().Ordner));
         }
@@ -314,7 +315,7 @@ namespace CMI.Manager.Asset.Consumers
             }
         }
 
-        private async Task<PreprocessingResult> ExtractRepositoryPackage(PrepareForTransformationMessage message)
+        private async Task<ProcessStepResult> ExtractRepositoryPackage(PrepareForTransformationMessage message)
         {
             var packageFileName = message.RepositoryPackage.PackageFileName;
             var primaerdatenAuftragId = message.PrimaerdatenAuftragId;
@@ -325,8 +326,8 @@ namespace CMI.Manager.Asset.Consumers
                 PrimaerdatenAuftragId = primaerdatenAuftragId
             });
 
-            return success ? new PreprocessingResult {Success = true} : 
-                             new PreprocessingResult {Success = false, ErrorMessage = $"Failed to unzip package {packageFileName}"};
+            return success ? new ProcessStepResult {Success = true} : 
+                             new ProcessStepResult {Success = false, ErrorMessage = $"Failed to unzip package {packageFileName}"};
         }
     }
 }

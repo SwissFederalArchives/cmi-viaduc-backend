@@ -100,6 +100,9 @@ namespace CMI.Manager.Asset
                         await ProcessFiles(repositoryPackage.Files, Path.Combine(tempFolder, "content"), context);
                         await ProcessFolders(repositoryPackage.Folders, Path.Combine(tempFolder, "content"), context);
 
+                        // Transform any alto files to hOCR
+                        TransformAltoToHOcr(Path.Combine(tempFolder, "content"));
+
                         // if we are here everything is okay
                         Log.Information("Successfully processed files (fulltext extracted) from zip file {Name}", fi.Name);
                         processingTimeForMissingFiles += GetProcessingTimeOfIgnoredFilesInTicks(repositoryPackage.SizeInBytes - sizeInBytesOnDisk);
@@ -108,12 +111,6 @@ namespace CMI.Manager.Asset
                     {
                         Log.Error(ex, "Unexpected error while extracting full text. Error Message is: {Message}", ex.Message);
                         return false;
-                    }
-                    finally
-                    {
-                        // Delete the temp files
-                        Directory.Delete(tempFolder, true);
-                        File.Delete(packageFileName);
                     }
                 }
                 else
@@ -469,6 +466,36 @@ namespace CMI.Manager.Asset
             return false;
         }
 
+        public Task<bool> RemoveTemporaryFiles(ExtractZipArgument extractZipArgument)
+        {
+            var packageFileName = Path.Combine(Settings.Default.PickupPath, extractZipArgument.PackageFileName);
+            var fi = new FileInfo(packageFileName);
+            var tempFolder = Path.Combine(fi.DirectoryName ?? throw new InvalidOperationException(), fi.Name.Remove(fi.Name.Length - fi.Extension.Length));
+            try
+            {
+                Log.Information("Removing temporary files and zip file with name {Name}. ", fi.Name);
+                if (Directory.Exists(tempFolder))
+                {
+                    // Delete the temp files
+                    Directory.Delete(tempFolder, true);
+                }
+
+                if (File.Exists(fi.FullName))
+                {
+                    // Delete the zip file
+                    fi.Delete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while deleting temp files for package {packageFileName}. Error Message is: {Message}", packageFileName,
+                    ex.Message);
+                return Task.FromResult(false);
+            }
+
+            return Task.FromResult(true);
+        }
+
         private void CreateZipFile(string finalZipFolder, string finalZipFile, string tempFolder, bool createWithPassword, string id)
         {
             try
@@ -796,6 +823,36 @@ namespace CMI.Manager.Asset
             // Do transformation
             var result = transformEngine.TransformXml(metadataFile, transformationFile, paramCollection);
             File.WriteAllText(Path.Combine(tempFolder, "index.html"), result);
+        }
+
+        /// <summary>
+        /// Search all alto files in the directory and subdirectory and make a transformation to hOCR
+        /// </summary>
+        /// <param name="contentPath"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private bool TransformAltoToHOcr(string contentPath)
+        {
+            Log.Information($"Creating hOCR files for {contentPath}.");
+
+            var transformationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "OcrXsl", "alto__hocr.xsl");
+
+            // Get all files
+            var directory = new DirectoryInfo(contentPath);
+            var files = directory.GetFiles("*.alto", SearchOption.AllDirectories);
+
+            // Transform each file
+            foreach (var file in files)
+            {
+                var result = transformEngine.TransformXml(file.FullName, transformationFile, null);
+                var newFile = Path.ChangeExtension(file.FullName, ".hOcr");
+                if (file.DirectoryName != null)
+                {
+                    File.WriteAllText(newFile, result);
+                }
+            }
+
+            return true;
         }
 
         private long GetProcessingTimeOfIgnoredFilesInTicks(long sizeInBytes)

@@ -1,37 +1,123 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿
 using CMI.Utilities.DigitalRepository.CreateTestDataHelper.Properties;
 using DotCMIS;
 using DotCMIS.Client;
 using DotCMIS.Client.Impl;
 using DotCMIS.Data.Impl;
-using FSBlog.GoogleSearch.GoogleClient;
-using Newtonsoft.Json;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Web;
+using DotCMIS.Enums;
+
 
 namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
 {
     internal class CmisRepository
     {
-        private readonly List<SampleData> sampleData;
-        private readonly List<SampleFile> sampleFiles = new List<SampleFile>();
         private IFolder barFolder;
         private ISession session;
+        public string FileCopyDestinationPath { get; private set; }
+
+        public bool OverrideFiles { get; private set; }
+
+        public Dictionary<string, string> OnlyThisIdsWithThisFileUpdate { get; private set; }
+
 
         public CmisRepository()
         {
-            sampleData = JsonConvert.DeserializeObject<List<SampleData>>(File.ReadAllText("sampleData.json"));
-            if (File.Exists("sampleFiles.json"))
+            OnlyThisIdsWithThisFileUpdate = new Dictionary<string, string>();
+            OverrideFiles = false;
+            FileCopyDestinationPath = Settings.Default.FileCopyDestinationPath;
+        }
+
+        /// <summary>
+        ///     Starts the Harvest Service.
+        ///     Called by the service host when the service is started.
+        /// </summary>
+        public void Start()
+        {
+            Log.Information("service started");
+        }
+
+
+        public void StartDataUpload(List<AipData> aipData)
+        {
+            if (Directory.Exists(FileCopyDestinationPath))
             {
-                sampleFiles = JsonConvert.DeserializeObject<List<SampleFile>>(File.ReadAllText("sampleFiles.json"));
+                var directory = Directory.CreateDirectory(FileCopyDestinationPath);
+
+                var counter = 0;
+                var fileInfos = directory.GetFiles().Where(f => f.Extension == ".zip").ToList();
+
+                FileInfo fileInfo;
+                foreach (var aip in aipData)
+                {
+                    try
+                    {
+
+                        if (OnlyThisIdsWithThisFileUpdate.Count > 0 && OnlyThisIdsWithThisFileUpdate.ContainsKey(aip.Id))
+                        {
+                            fileInfo = fileInfos.First(f => f.Name.StartsWith(OnlyThisIdsWithThisFileUpdate[aip.Id]));
+                            StartFileUpload(fileInfo, aip);
+                        }
+                        else if (this.OnlyThisIdsWithThisFileUpdate.Count == 0)
+                        {
+                            if (fileInfos.Count > counter)
+                            {
+                                fileInfo = fileInfos[counter++];
+                            }
+                            else
+                            {
+                                counter = 0;
+                                fileInfo = fileInfos[counter];
+                            }
+                            StartFileUpload(fileInfo, aip);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                       Log.Warning(aip.Id + ": " + e);
+                    }
+                }
             }
-            else
+        }
+
+        private void StartFileUpload(FileInfo fileInfo, AipData aip)
+        {
+            string tempDirectory = fileInfo.Directory.FullName + "\\temp_" + aip.Id;
+            try
             {
-                LoadRandomSampleFiles("pdf", 1000);
-                File.WriteAllText("sampleFiles.json", JsonConvert.SerializeObject(sampleFiles));
+                Directory.CreateDirectory(tempDirectory);
+                ZipFile.ExtractToDirectory(fileInfo.FullName, tempDirectory);
+                if (Directory.Exists(tempDirectory + "\\Content"))
+                {
+                    if (Directory.Exists(tempDirectory + "\\header") && File.Exists(tempDirectory + "\\header\\metadata.xml"))
+                    {
+                        File.Move(tempDirectory + "\\header\\metadata.xml", tempDirectory + "\\Content\\metadata.xml");
+                        DeleteFoldersAndFiles(tempDirectory + "\\header");
+                        Directory.Delete(tempDirectory + "\\header");
+                    }
+                    else
+                    {
+                        Log.Warning("No metadata.xml found");
+                    }
+
+                    UploadTestData(tempDirectory + "\\Content", aip);
+                    Directory.Delete(tempDirectory + "\\Content");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, e.Message);
+            }
+            finally
+            {
+                Directory.Delete(tempDirectory,true);
             }
         }
 
@@ -53,14 +139,124 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             return session;
         }
 
-        public void CheckOrCreateRootFolder()
+        /// <summary>
+        /// BAR Folder muss immer da sein
+        /// </summary>
+        public void CheckRootFolder()
         {
             var root = session.GetRootFolder();
-            barFolder = CreateOrUpdateFolder("BAR", "Just a description for the root", root);
+            barFolder = root.GetDescendants(1)?.FirstOrDefault(c => ComparisonByIdIfPossible(c.Item, "BAR"))?.Item as IFolder;
         }
 
-        public IFolder CreateOrUpdateFolder(string name, string description, IFolder parent)
+
+        public Arguments CheckArguments(string[] args)
         {
+            var lastFoundTagWasIdTag = false;
+            var result = Arguments.Default;
+            for (int i = 0; i < args.Length; i++)
+            {
+                switch (args[i])
+                {
+                    case "":
+                        break;
+                    case "-o":
+                    case "-override":
+                        if (lastFoundTagWasIdTag && OnlyThisIdsWithThisFileUpdate.Count == 0)
+                        {
+                            return Arguments.Error;
+                        }
+
+                        lastFoundTagWasIdTag = false;
+                        if (args.Length > i + 1 && bool.TryParse(args[i + 1], out bool overrideFiles))
+                        {
+                            i++;
+                            OverrideFiles = overrideFiles;
+                            result = Arguments.UserConfig;
+                        }
+                        else
+                        {
+                            return Arguments.Error;
+                        }
+                        break;
+                    case "-p":
+                    case "-path":
+                        if (lastFoundTagWasIdTag && OnlyThisIdsWithThisFileUpdate.Count == 0)
+                        {
+                            return Arguments.Error;
+                        }
+                        lastFoundTagWasIdTag = false;
+                        if (args.Length > i + 1)
+                        {
+                            i++;
+                            FileCopyDestinationPath = args[i];
+                            if (!Directory.Exists(FileCopyDestinationPath))
+                            {
+                                return Arguments.DestinationPathNotExists;
+                            }
+                        }
+                        else
+                        {
+                            return Arguments.Error;
+                        }
+
+                        
+                        result = Arguments.UserConfig;
+                        break;
+                    case "-id":
+                    case "-ids":
+                        if (args.Length > i + 1)
+                        {
+
+                            var entry = args[i + 1];
+                            if (entry.Count(f => f == '|') == 1)
+                            {
+                                i++;
+                                var ventrY = entry.Split('|');
+                                int.TryParse(ventrY[0],  out var veId);
+                                OnlyThisIdsWithThisFileUpdate.Add(veId.ToString(), ventrY[1]);
+                            }
+                        }
+                        if (lastFoundTagWasIdTag)
+                        {
+                            return Arguments.Error;
+                        }
+                        lastFoundTagWasIdTag = true;
+                        break;
+                    case "-h":
+                    case "-help":
+                    case "help":
+                        return Arguments.Help;
+                    default:
+                        if (lastFoundTagWasIdTag)
+                        {
+                            var entry = args[i];
+                            if (entry.Count(f => f == '|') == 1)
+                            {
+                                var ventrY = entry.Split('|');
+                                int.TryParse(ventrY[0], out var veId);
+                                OnlyThisIdsWithThisFileUpdate.Add(veId.ToString(), ventrY[1]);
+                            }
+                            else
+                            {
+                                return Arguments.IdImportError;
+                            }
+
+                        }
+                        else
+                        {
+                            return Arguments.Unknow;
+                        }
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+
+        private IFolder CreateFolder(string name, string description, IFolder parent)
+        {
+            Log.Information("Create or Update folder: {name}", name);
             try
             {
                 // Too long names gives problems
@@ -70,28 +266,14 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
                 }
 
                 name = GetValidFileName(name);
-                var folder = parent.GetDescendants(1)?.FirstOrDefault(c => ComparisonByIdIfPossible(c.Item, name))?.Item as IFolder;
 
-                if (folder == null)
+                Log.Information($"Create folder: {name}");
+                var folder = parent.CreateFolder(new Dictionary<string, object>
                 {
-                    Log.Information($"Create folder: {name}");
-                    folder = parent.CreateFolder(new Dictionary<string, object>
-                    {
-                        {PropertyIds.ObjectTypeId, "cmis:folder"},
-                        {PropertyIds.Name, name.Trim()},
-                        {"cmis:description", description}
-                    });
-                }
-                else
-                {
-                    Log.Information($"Update folder: {name}");
-                    folder.UpdateProperties(new Dictionary<string, object>
-                    {
-                        {PropertyIds.Name, name},
-                        {"cmis:description", description}
-                    });
-                }
-
+                    {PropertyIds.ObjectTypeId, "cmis:folder"},
+                    {PropertyIds.Name, name.Trim()},
+                    {"cmis:description", description}
+                });
                 return folder;
             }
             catch (Exception ex)
@@ -101,6 +283,7 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             }
         }
 
+        
         private bool ComparisonByIdIfPossible(IFileableCmisObject folder, string name)
         {
             if (name.Contains("-"))
@@ -111,29 +294,43 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
 
             return folder.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase);
         }
-
+        
+        
         /// <summary>
         ///     Creates test data.
         /// </summary>
-        /// <param name="aipData">The aip data.</param>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void CreateTestData(List<AipData> aipData)
+        private void UploadTestData(string file, AipData data)
         {
-            // Loop through every entry in the list.
-            foreach (var data in aipData.OrderBy(a => a.Title))
+            var alfrescoName = data.Id + " - " + data.Title;
+            Log.Information(alfrescoName);
+            var existingFolder = GetFolder(data.AipAtDossierId);
+            if (existingFolder == null)
             {
-                var existingFolder = GetFolder(data.AipAtDossierId);
-                if (existingFolder == null)
+                Log.Information("New folder: {alfrescoName}", alfrescoName);
+                UploadFoldersAndFiles(CreateFolder(alfrescoName, data.AipAtDossierId, barFolder), file);
+            }
+            else if (OverrideFiles)
+            {
+                Log.Information("Existing folder override: {alfrescoName}", alfrescoName);
+
+                try
                 {
-                    // Create a folder with sub-folders and files for each of the items
-                    var newFolder = CreateOrUpdateFolder($"{data.Id} - {data.Title}", data.AipAtDossierId, barFolder);
-                    CreateFoldersAndFiles(newFolder, 1);
+                    existingFolder.DeleteTree(true, UnfileObject.Delete, true);
+                    existingFolder.Delete(true);
+                    Log.Information("Dateien gelöscht {alfrescoName}", alfrescoName);
                 }
-                else
+                catch (Exception e)
                 {
-                    CreateOrUpdateFolder($"{data.Id} - {data.Title}", data.AipAtDossierId, barFolder);
-                    Log.Information("Existing folder: {AipAtDossierId} - {Title}", data.AipAtDossierId, data.Title);
+                    // Exception wenn nicht vorhandene Daten gelöscht werden sollen
+                    Log.Information("alfrescoName: " + e.Message);
                 }
+
+                UploadFoldersAndFiles(CreateFolder(alfrescoName, data.AipAtDossierId, barFolder), file);
+            }
+            else 
+            {
+                Log.Information("Existing folder not override: {alfrescoName}", alfrescoName);
             }
         }
 
@@ -151,30 +348,7 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
 
             return fileName;
         }
-
-        private void LoadRandomSampleFiles(string fileType, int limit)
-        {
-            var limiter = 0;
-            var rnd = new Random(DateTime.Now.Millisecond);
-            while (sampleFiles.Count(s => s.Type == fileType) < limit && limiter < 20)
-            {
-                var sc = new SearchClient($"{sampleData[rnd.Next(sampleData.Count) - 1].Title} filetype:{fileType}");
-                var result = sc.Query(20).Where(r => r.CleanUri.AbsoluteUri.EndsWith(fileType)).ToList();
-
-                sampleFiles.AddRange(result.Select(r => new SampleFile
-                {
-                    Type = fileType,
-                    Url = r.CleanUri,
-                    Title = r.Text,
-                    FileName = GetValidFileName(r.Text) + $".{fileType}"
-                }));
-                if (!result.Any())
-                {
-                    limiter++;
-                }
-            }
-        }
-
+        
         private IFolder GetFolder(string aipAtDossierId)
         {
             var result = session.Query($"Select * from cmis:folder where cmis:description = '{aipAtDossierId}'", false);
@@ -190,30 +364,38 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             return null;
         }
 
-        private void CreateFoldersAndFiles(IFolder folder, int level)
+        private void UploadFoldersAndFiles(IFolder folder, string currentDirectory)
         {
-            var rnd = new Random(DateTime.Now.Millisecond);
-            var randomFolderNumbers = rnd.Next(5 - 2 * level < 0 ? 0 : 5 - 2 * level);
-            var randomFileNumbers = rnd.Next(1, 5);
-
-            for (var i = 0; i < randomFolderNumbers; i++)
+            Log.Information("Upload Directory {currentDirectory}", currentDirectory);
+            var directoryInfo = new DirectoryInfo(currentDirectory);
+            foreach (var directory in directoryInfo.GetDirectories())
             {
-                IFolder newFolder = null;
-                while (newFolder == null)
-                {
-                    newFolder = CreateOrUpdateFolder(sampleData[rnd.Next(sampleData.Count)].Title, "", folder);
-                }
-
-                CreateFoldersAndFiles(newFolder, level + 1);
+                UploadFoldersAndFiles(CreateFolder(directory.Name, "", folder), directory.FullName);
+                Directory.Delete(directory.FullName);
             }
 
-            for (var i = 0; i < randomFileNumbers; i++)
+            foreach (var newFile in Directory.GetFiles(currentDirectory))
             {
-                var file = DownloadNewFile();
-                if (File.Exists(file))
-                {
-                    CreateNewFile(folder, file);
-                }
+                var fileInfo = new FileInfo(newFile);
+                CreateNewFile(folder, fileInfo.FullName);
+
+                File.Delete(fileInfo.FullName);
+            }
+        }
+
+        private void DeleteFoldersAndFiles(string currentDirectory)
+        {
+            var directoryInfo = new DirectoryInfo(currentDirectory);
+            foreach (var directory in directoryInfo.GetDirectories())
+            {
+                DeleteFoldersAndFiles(directory.FullName);
+                Directory.Delete(directory.FullName);
+            }
+
+            foreach (var newFile in Directory.GetFiles(currentDirectory))
+            {
+                var fileInfo = new FileInfo(newFile);
+                File.Delete(fileInfo.FullName);
             }
         }
 
@@ -227,12 +409,11 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
                 properties[PropertyIds.ObjectTypeId] = "cmis:document";
 
                 var content = File.ReadAllBytes(fi.FullName);
-
                 var contentStream = new ContentStream
                 {
                     FileName = fi.Name,
-                    MimeType = "application/pdf",
-                    Length = content.Length,
+                    MimeType = MimeMapping.GetMimeMapping(file),
+                     Length = content.Length,
                     Stream = new MemoryStream(content)
                 };
 
@@ -243,59 +424,20 @@ namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Log.Error(e, e.Message);
+                throw;
             }
-
-            return null;
-        }
-
-        private string DownloadNewFile()
-        {
-            var success = false;
-            var limiter = 0;
-            while (success == false && limiter < 50)
-            {
-                var itemIndex = new Random(DateTime.Now.Millisecond).Next(sampleFiles.Count - 1);
-                var file = sampleFiles[itemIndex];
-                var tempFileName = Path.Combine(Path.GetTempPath(), file.FileName);
-                try
-                {
-                    if (!File.Exists(tempFileName))
-                    {
-                        using (var client = new WebClient())
-                        {
-                            client.DownloadFile(file.Url, tempFileName);
-                            success = true;
-                        }
-
-                        Log.Information($"Create file: {tempFileName}");
-                    }
-
-                    return tempFileName;
-                }
-                catch (Exception ex)
-                {
-                    limiter++;
-                    sampleFiles.RemoveAt(itemIndex);
-                    Log.Error($"Failed to download file from {file.Url}. Reason: {ex.Message}");
-                }
-            }
-
-            return null;
         }
     }
+}
 
-    internal class SampleData
-    {
-        public string Title { get; set; }
-    }
-
-    internal class SampleFile
-    {
-        public Uri Url { get; set; }
-        public string FileName { get; set; }
-
-        public string Title { get; set; }
-        public string Type { get; set; }
-    }
+public enum Arguments
+{
+    Default,
+    Help,
+    Error,
+    UserConfig,
+    Unknow,
+    DestinationPathNotExists,
+    IdImportError
 }

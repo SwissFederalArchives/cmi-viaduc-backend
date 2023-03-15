@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Autofac;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Asset;
@@ -6,7 +7,9 @@ using CMI.Contract.Messaging;
 using CMI.Contract.Parameter;
 using CMI.Engine.Asset;
 using CMI.Engine.Asset.ParameterSettings;
+using CMI.Engine.Asset.PostProcess;
 using CMI.Engine.Asset.PreProcess;
+using CMI.Engine.Asset.Solr;
 using CMI.Engine.MailTemplate;
 using CMI.Engine.Security;
 using CMI.Manager.Asset.Jobs;
@@ -47,12 +50,23 @@ namespace CMI.Manager.Asset.Infrasctructure
             builder.RegisterType<PdfManipulator>().As<IPdfManipulator>();
             builder.RegisterType<PreparationTimeCalculator>().As<IPreparationTimeCalculator>();
             builder.RegisterType<AssetPreparationEngine>().As<IAssetPreparationEngine>();
+            builder.RegisterType<AssetPostProcessingEngine>().As<IAssetPostProcessingEngine>();
+            builder.RegisterType<PostProcessCombineTextDocuments>().AsSelf();
+            builder.RegisterType<PostProcessJp2Converter>().AsSelf();
+            builder.Register(GetSolrConnectionInfo).As<SolrConnectionInfo>();
+            builder.RegisterType<PostProcessIiifOcrIndexer>().AsSelf();
             builder.Register(GetAssetPreparationSettings).As<AssetPreparationSettings>();
             builder.RegisterType<PreProcessAnalyzerDetectAndFlagLargeDimensions>().AsSelf();
             builder.RegisterType<PreProcessAnalyzerOptimizePdf>().AsSelf();
             builder.RegisterType<FileResolution>().AsSelf();
             builder.Register(GetChannelAssignmentDefinition).As<ChannelAssignmentDefinition>();
             builder.Register(GetScansZusammenfassenSettings).As< ScansZusammenfassenSettings>();
+            builder.Register(GetIiifManifestSettings).As<IiifManifestSettings>();
+            builder.Register(GetViewerFileLocationSettings).As<ViewerFileLocationSettings>();
+            builder.RegisterType<PostProcessManifestCreator>().As<IPostProcessManifestCreator>();
+            builder.RegisterType<PostProcessIiifFileDistributor>().AsSelf();
+            builder.RegisterType<PostProcessValidIiifFileTypeChecker>().AsSelf();
+            builder.Register(GetViewerConversionSettings).As<ViewerConversionSettings>();
 
             // register the different consumers and classes
             builder.RegisterType<PrimaerdatenAuftragAccess>().As<IPrimaerdatenAuftragAccess>().WithParameter("connectionString", DbConnectionSetting.Default.ConnectionString);
@@ -98,6 +112,13 @@ namespace CMI.Manager.Asset.Infrasctructure
             return parameterHelper.GetSetting<ScansZusammenfassenSettings>();
         }
 
+        private static ViewerConversionSettings GetViewerConversionSettings(IComponentContext arg)
+        {
+            // read and convert priorisierungs settings
+            var parameterHelper = arg.Resolve<IParameterHelper>();
+            return parameterHelper.GetSetting<ViewerConversionSettings>();
+        }
+
 
         private static ChannelAssignmentDefinition GetChannelAssignmentDefinition(IComponentContext arg)
         {
@@ -119,6 +140,40 @@ namespace CMI.Manager.Asset.Infrasctructure
             };
 
             return retVal;
+        }
+
+        private static SolrConnectionInfo GetSolrConnectionInfo(IComponentContext arg)
+        {
+            return new SolrConnectionInfo
+            {
+                SolrUrl = Settings.Default.SolrUrl,
+                SolrCoreName = Settings.Default.SolrCoreName,
+                SolrHighlightingPath = Settings.Default.hOcrCopyDestinationPath
+            };
+        }
+
+        private static IiifManifestSettings GetIiifManifestSettings(IComponentContext arg)
+        {
+            return new IiifManifestSettings
+            {
+                ApiServerUri = new Uri(IiifManifest.Default.ApiServerUri),
+                ImageServerUri = new Uri(IiifManifest.Default.ImageServerUri),
+                PublicManifestWebUri = new Uri(IiifManifest.Default.PublicManifestWebUri),
+                PublicDetailRecordUri = new Uri(IiifManifest.Default.PublicDetailRecordUri),
+                PublicContentWebUri = new Uri(IiifManifest.Default.PublicContentWebUri),
+                PublicOcrWebUri = new Uri(IiifManifest.Default.PublicOcrWebUri),
+            };
+        }
+
+        private static ViewerFileLocationSettings GetViewerFileLocationSettings(IComponentContext arg)
+        {
+            return new ViewerFileLocationSettings
+            {
+                ManifestOutputSaveDirectory = ViewerFileLocation.Default.ManifestOutputSaveDirectory,
+                ContentOutputSaveDirectory = ViewerFileLocation.Default.ContentOutputSaveDirectory,
+                OcrOutputSaveDirectory = ViewerFileLocation.Default.OcrOutputSaveDirectory,
+                ImageOutputSaveDirectory = ViewerFileLocation.Default.ImageOutputSaveDirectory
+            };
         }
     }
 }

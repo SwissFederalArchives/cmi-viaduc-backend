@@ -1,0 +1,158 @@
+﻿7
+: .7.1. Zustands- und Ji satznelde-Tafel (ZET) und Preparatione-T.afel (PT)
+1. Allgemeines
+Obere Beschriftung
+und eine
+T
+
+V
+
+CD
+Feste Beschriftung
+Veränderliche Informationen
+Breite
+Beschriftung
+Mittlere Beschriftung
+Steckschilder SCHWARZ mit weissen Zahlen entspr den Unterstands-Nr
+Unterstand
+1
+je 1/2
+Flz Nr
+4 Zahlenschilder
+Steckschilder mit den Farben SCHWARZ, VIOLETT, GELB, GRUEN
+Flz Zustand
+1
+je 1/2
+SIF-Code
+4 Zahlenschilder
+2
+Bereitschaft auf h
+Steckschild für Papierstreifen
+Steckschilder SCHWARZ mit weisser Beschriftung Al, A3, A4
+Alarmstufe
+1
+Konf iguration
+
+Deckname
+1/2
+Unterverband
+1 Zahlenschild
+2
+Pilot
+
+Missione-Nr
+JELB, GRUEN
+1
+t
+5. Signalisierung von Aenderungen
+4. Elektrisch gesteuerte Anzeigen
+müssen
+i
+
+c
+0)
+c
+V
+£
+rH
+Für die Darstellung der Mittel einer Fliegerstaffel wird je eine
+benötigt.
+3
+1
+je 1/2
+2
+Zustands- und Einsatzmelde - Tafel
+_________________A_________________
+Preparations - Tafel
+A___________
+c
+c
+H
+1
+u
+tn
+X
+cd
+c
+-g
+©
+Q
+-Q
+ro
+©
+■
+(fi
+□
+flj
+JN
+cd
+C
+□
+V
+C3
+c
+o
+c
+0J
+o
+lT>
+JN
+O
+rxi
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+XL
+18
+19
+20
+Steckschild für Papierstreifen
+Bei EA: Steckschild für Papierstreifen (weiss und farbig)
+•und Steckschilder mit den Farben BLAU, ROT, BLnU,
+Bei LUV; SteckscJ.ilder GRUEN und ./HISS mit schwarzem Punkt
+2. Um:- ng der ?■ f-’ln
+Bei EA: 4 Zahlenschilder
+Bei LUV: Steckschilder mit den Farben ROT, BLAU, GRUEN
+Bei EA: Steckschild für Panierstreifen (weiss ’und farbig)
+Bei LUV: Steckschilder GRUEN und ."GISS mit schwarzem Punkt
+Bei Aenderungen an den Informationen der ZET bezeichnet die Bereitschaftsordonnanz 1 die betreffende
+Zeile durch Einschalten einer Aenderungslampe. Gleichzeitig betätigt er einen Summer. Nach Kenntnis-
+nahme löscht die Zustandsordonnanz die entsprechnede Aenderungslampe. Die Signalisierung ist für die
+Positionen "Flugzeuge in Deckung" und "A-4" vorzusehen.
+Bei Aenderung der Information "Ausserhalb Deckung" und "In der Luft" macht die Start- bzw Aufschalt-
+ordonnanz, getrennt nach X und Y, den Zustandsraum mittels eines Summers aufmerksam. (Nur für Kriegsflpl)
+•■eiteres Zubehör: - Grosser roter Punkt (magnetisch): Bezeichnung *ines Verbandsf’ihrers
+-	Grosser weisser Punkt mit "K" beschriftet (magnetisch): Bezeichnung eines Flugzeuges am Kran
+-	Kleiner roter Punkt (magnetisch): Bezeichnung einer Aenderung
+-	Gelber Strich (magnetisch): Bezeichnung eines Aufklärungsflugzeuges, dessen Fotoausrüstung den Detailar.forde-
+rungen des i iloten entspricht. (Nur für Plpl mit AWR Aufkl)
+Das Zubehörmaterial soll übersichtlich und zweckmässig untergebracht werden.
+Die ZET muss im Abteil "Flugzeuge in Deckung" Platz für 2o Flugzeugschienen und im Abteil "Flugzeug ausserhalb Deckung" Platz
+für 18 Flugzeugschienen aufweisen. Die obersten 4 Positionen des Abteils "Flugzeuge ausserhalb Deckung" sind primär für die Flug-
+zeuge auf A-4-Standplatzen reserviert.
+Die PT muss Platz für 24 Steckschienen aufweisen.
+Pro ZET und PT sind 2o Flugzeugschienen ’und 24 Steckschienen zuzuteilen.
+Die nro Flugzeugschiene angezeigten Informationen "Ausserhalb Deckung" (gelber Strich) und "In der Luft" (grüner Pfeil),
+vom bestehenden Aufschaltpult in der Kdo Zentrale gesteuert werden können.
+ui“ für uie A-4-Standplatze reservierten Felder sind mit einer Angabe der Startrichtung zu bezeichnen. Die Anzeige der aktuellen
+Startrichtung erfolgt parallel mit derjenigen an der "Startrichtungs- und Flugplatz-Zustands-Tafel" vom Kontrollturm aus.
+"Preparatione-Tafel"
+"Zustands- und Einsatzmelde-Tafel
+3. Einteilung der Kolonnen, Beschriftung und äuheJ-iör
+Einteilung gemäss Zeichnung -22102-7‘’Tl pl Li KP inteilung der ZET und PT".
+Der mittlere Beschriftungsbalken bei der ZET ist für die Bedürfnisse Erdkampf und Aufklärung beschriftet. Für LUV muss bei den
+Feldern "Deckname" und "Missione-Nr" die Beschriftung durch Aufsteckschilder angepasst werden.
+Für die Darstellung der veränderlichen Informationen auf den Schienen wird folgendes Material benötigt:

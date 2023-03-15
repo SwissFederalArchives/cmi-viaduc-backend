@@ -1,0 +1,2337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2023-01-12T00:00:00+01:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot638091326211020686">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="COO.2080.100.2.2120345_D">
+        <name>Besuche aus dem Ausland 2008</name>
+        <originalName>Besuche aus dem Ausland 2008</originalName>
+        <ordner id="COO.2080.100.2.2151716_D">
+          <name>Besuch aus China</name>
+          <originalName>Besuch aus China</originalName>
+          <ordner id="COO.2080.100.2.2151718_D">
+            <name>Besuch aus China</name>
+            <originalName>Besuch aus China</originalName>
+            <datei id="COO.2080.100.2.2151717">
+              <name>p000095.pdf</name>
+              <originalName>Besuch aus China</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>b05a0e512ffec965589c4630dea951ed</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+        <ordner id="COO.2080.100.2.2165904_D">
+          <name>Besuch aus Demokratische Volksrepublik Korea</name>
+          <originalName>Besuch aus Demokratische Volksrepublik Korea</originalName>
+          <ordner id="COO.2080.100.2.2165909_D">
+            <name>Anfrage Besuch aus Demokratische Volksrepublik Korea</name>
+            <originalName>Anfrage Besuch aus Demokratische Volksrepublik Korea</originalName>
+            <datei id="COO.2080.100.2.2165908">
+              <name>p000096.pdf</name>
+              <originalName>Besuch aus Demokratische Volksrepublik Korea</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>e13d61d04aeb15d97312e03a81482211</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2165913_D">
+            <name>Antwort BAR Besuch aus Demokratische Volksrepublik Korea</name>
+            <originalName>Antwort BAR Besuch aus Demokratische Volksrepublik Korea</originalName>
+            <datei id="COO.2080.100.2.2165912">
+              <name>p000097.pdf</name>
+              <originalName>Antwort BAR Besuch aus Demokratische Volksrepublik Korea</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>aa1ff132285765dc296ab8e720156072</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+        <ordner id="COO.2080.100.2.2134140_D">
+          <name>Besuch aus Tschechien</name>
+          <originalName>Besuch aus Tschechien</originalName>
+          <ordner id="COO.2080.100.2.2132567_D">
+            <name>Studienreise ins Schweizerische Bundesarchiv</name>
+            <originalName>Studienreise ins Schweizerische Bundesarchiv</originalName>
+            <datei id="COO.2080.100.2.2132542">
+              <name>p000069.pdf</name>
+              <originalName>Studienreise ins Schweizerische Bundesarchiv</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>d823f9f99ceedec11fd034a3c47da50e</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2134649_D">
+            <name>Besuche aus Tschechien_ Gestaltung Programm</name>
+            <originalName>Besuche aus Tschechien: Gestaltung Programm</originalName>
+            <datei id="COO.2080.100.2.2134648">
+              <name>p000070.pdf</name>
+              <originalName>Besuche aus Tschechien: Gestaltung Programm</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>29541c5cd88dd09e221d188d482c30db</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2135000_D">
+            <name>Bestätigung Datum des Besuches</name>
+            <originalName>Bestätigung Datum des Besuches</originalName>
+            <datei id="COO.2080.100.2.2135001">
+              <name>p000071.pdf</name>
+              <originalName>Bestätigung Datum des Besuches</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>7facd95a387e010341fce75e822f8117</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2138086_D">
+            <name>Programm Studienreise Národni Archiv</name>
+            <originalName>Programm Studienreise Národni Archiv</originalName>
+            <datei id="COO.2080.100.2.2138087">
+              <name>p000077.pdf</name>
+              <originalName>Programm Studienreise Národni Archiv</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>c166bd75eacbdb2ca026bb0a4aa76d43</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2138111_D">
+            <name>Besuch aus Tschechien_ Vorschlag Programm INTERN</name>
+            <originalName>Besuch aus Tschechien: Vorschlag Programm INTERN</originalName>
+            <datei id="COO.2080.100.2.2138110">
+              <name>p000072.pdf</name>
+              <originalName>Besuch aus Tschechien: Vorschlag Programm INTERN</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>c598366c43153a64b4e3e922cce2e81d</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2140894_D">
+            <name>Besuch aus Tschechien_ Vorschlag Programm EXTERN</name>
+            <originalName>Besuch aus Tschechien: Vorschlag Programm EXTERN</originalName>
+            <datei id="COO.2080.100.2.2140893">
+              <name>p000073.pdf</name>
+              <originalName>Besuch aus Tschechien: Vorschlag Programm EXTERN</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>f8cef2fd65e3afb042b74ccbb7f3212b</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2142773_D">
+            <name>Besuch aus Tschechien_ engültiges Programm</name>
+            <originalName>Besuch aus Tschechien: engültiges Programm</originalName>
+            <datei id="COO.2080.100.2.2142772">
+              <name>p000074.pdf</name>
+              <originalName>Besuch einer Delegation des tschechischen Nationalarchivs im BAR und bei Memoriav</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>5263634bc406f7f1e578257ccfa84e31</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2142784_D">
+            <name>Besuch aus Tschechien_ engültiges Programm</name>
+            <originalName>Besuch aus Tschechien: engültiges Programm</originalName>
+            <datei id="COO.2080.100.2.2142783">
+              <name>p000075.pdf</name>
+              <originalName>Besuch aus Tschechien: engültiges Programm</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>a6b36d62c340254d0d3d16071373e382</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2145191_D">
+            <name>Visite de Tchéquie_ Programme définitif</name>
+            <originalName>Visite de Tchéquie: Programme définitif</originalName>
+            <datei id="COO.2080.100.2.2145190">
+              <name>p000076.pdf</name>
+              <originalName>Visite de Tchéquie: Programme définitif</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>a26e2870bb34e028ca405d15f6641e20</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2145232_D">
+            <name>Präsentation RIE Besuch_Tschechisches_Nationalarchiv_BAR_20080521</name>
+            <originalName>Präsentation RIE Besuch_Tschechisches_Nationalarchiv_BAR_20080521</originalName>
+            <datei id="COO.2080.100.2.2145231">
+              <name>p000078.pdf</name>
+              <originalName>Besuch_Tschechisches_Nationalarchiv_BAR_20080521</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>4a07f58582ab74c827ce7b93f5865299</pruefsumme>
+            </datei>
+            <datei id="COO.2080.100.2.2145924">
+              <name>p000079.pdf</name>
+              <originalName>Besuch_Tschechisches_Nationalarchiv_BAR_20080521</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>ef6ae0c8a3bac7c56e6450b452bb9a5d</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+        <ordner id="COO.2080.100.2.2143466_D">
+          <name>Besuch aus Uzbekistan</name>
+          <originalName>Besuch aus Uzbekistan</originalName>
+          <ordner id="COO.2080.100.2.2143468_D">
+            <name>Uzbekistan_ e-gov</name>
+            <originalName>Uzbekistan: e-gov</originalName>
+            <datei id="COO.2080.100.2.2143467">
+              <name>p000080.pdf</name>
+              <originalName>Uzbekistan: e-gov</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>88918bcd8dd1ca786c6a46788421e1a8</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2143472_D">
+            <name>Uzbekistan_ interne Koordination</name>
+            <originalName>Uzbekistan: interne Koordination</originalName>
+            <datei id="COO.2080.100.2.2143471">
+              <name>p000081.pdf</name>
+              <originalName>Uzbekistan: interne Koordination</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>4ea36353b7a4a8f40ceede4671225d24</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2150643_D">
+            <name>Usbekistan_ programme définitif</name>
+            <originalName>Usbekistan: programme définitif</originalName>
+            <datei id="COO.2080.100.2.2150642">
+              <name>p000082.pdf</name>
+              <originalName>Usbekistan: programme définitif</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>39880f4e3f7d8066200b57885be280eb</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2150647_D">
+            <name>Usbekistan_ Absage</name>
+            <originalName>Usbekistan: Absage</originalName>
+            <datei id="COO.2080.100.2.2150646">
+              <name>p000083.pdf</name>
+              <originalName>Usbekistan: Absage</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>0306575f6c1f2c9c5421160543bbd57f</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2150651_D">
+            <name>Uzbekistan_ Anpassung Datum und Programm</name>
+            <originalName>Uzbekistan: Anpassung Datum und Programm</originalName>
+            <datei id="COO.2080.100.2.2150650">
+              <name>p000084.pdf</name>
+              <originalName>Uzbekistan: Anpassung Datum und Programm</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>2c441696b57ca5c24a59109337f4d4b3</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2150665_D">
+            <name>Uzbekistan_ nouvelle proposition de programme</name>
+            <originalName>Uzbekistan: nouvelle proposition de programme</originalName>
+            <datei id="COO.2080.100.2.2150664">
+              <name>p000085.pdf</name>
+              <originalName>Uzbekistan: nouvelle proposition de programme</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>c3d40f35ff763f7c578f8b520b627ebf</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2151117_D">
+            <name>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv</name>
+            <originalName>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv</originalName>
+            <datei id="COO.2080.100.2.2151116">
+              <name>p000086.pdf</name>
+              <originalName>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>d3d5657cd12506a22e0eaa8a04ae3b4f</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2151788_D">
+            <name>Präsentation Uzbekistan, GEVER in der Praxis</name>
+            <originalName>Präsentation Uzbekistan, GEVER in der Praxis</originalName>
+            <datei id="COO.2080.100.2.2151787">
+              <name>p000087.pdf</name>
+              <originalName>Präsentation Usbekistan GEVER in der Praxis</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>9bdaf4728892de56b1e70b723a20dad5</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2152977_D">
+            <name>Usbekistan _ annulation</name>
+            <originalName>Usbekistan : annulation</originalName>
+            <datei id="COO.2080.100.2.2152976">
+              <name>p000088.pdf</name>
+              <originalName>Usbekistan : annulation</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>7c9581574db4ceb9941a7f57b9a10e30</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2153433_D">
+            <name>Präsentation Usbekistan GEVER in der Praxis, engl</name>
+            <originalName>Präsentation Usbekistan GEVER in der Praxis, engl.</originalName>
+            <datei id="COO.2080.100.2.2153432">
+              <name>p000089.pdf</name>
+              <originalName>Präsentation Usbekistan GEVER in der Praxis_EN</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>0d73301900e06808a19b0e9f04612d6b</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2153566_D">
+            <name>Präsentation RIE Besuch_Uzbekistan_ Nationalarchiv _EN</name>
+            <originalName>Präsentation RIE Besuch_Uzbekistan_ Nationalarchiv _EN</originalName>
+            <datei id="COO.2080.100.2.2153565">
+              <name>p000090.pdf</name>
+              <originalName>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv_EN</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>20f50dfd2f2a6536c6969cffa948529a</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2165918_D">
+            <name>Uzbekistan _ nouvelle date</name>
+            <originalName>Uzbekistan : nouvelle date</originalName>
+            <datei id="COO.2080.100.2.2165917">
+              <name>p000091.pdf</name>
+              <originalName>Uzbekistan : nouvelle date</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>734b2a59091d4e6587f814058ffc7cf6</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2172772_D">
+            <name>Programme définitif délégation ouzbèque</name>
+            <originalName>Programme définitif délégation ouzbèque</originalName>
+            <datei id="COO.2080.100.2.2172771">
+              <name>p000092.pdf</name>
+              <originalName>Programme définitif délégation ouzbèque</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>f644a75d003f9cbe705efaf40d11810e</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2177211_D">
+            <name>Remerciements Uzbekistan</name>
+            <originalName>Remerciements Uzbekistan</originalName>
+            <datei id="COO.2080.100.2.2177210">
+              <name>p000093.pdf</name>
+              <originalName>Remerciements Uzbekistan</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>5034625865788ee7cc454768b4660d83</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2177215_D">
+            <name>Remerciements BK</name>
+            <originalName>Remerciements BK</originalName>
+            <datei id="COO.2080.100.2.2177214">
+              <name>p000094.pdf</name>
+              <originalName>Remerciements BK</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>563a2ad31525af5c5359b3b0a64c5050</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2153577_D">
+        <name>Besuche im Ausland 2008</name>
+        <originalName>Besuche im Ausland 2008</originalName>
+        <ordner id="COO.2080.100.2.2153580_D">
+          <name>Bibliothek und Archive Kanada</name>
+          <originalName>Bibliothek und Archive Kanada</originalName>
+          <ordner id="COO.2080.100.2.2175136_D">
+            <name>Dokumente</name>
+            <originalName>Dokumente</originalName>
+            <ordner id="COO.2080.100.2.2175138_D">
+              <name>08 10 01 Swiss visit - Record Management Metadata Standard</name>
+              <originalName>08 10 01 Swiss visit - Record Management Metadata Standard</originalName>
+              <datei id="COO.2080.100.2.2175137">
+                <name>p000105.pdf</name>
+                <originalName>08 10 01 Swiss visit - Record Management Metadata Standard</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>26550e87db69dd428863f64bd30c3d40</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175145_D">
+              <name>081001 BASCS Presentation to Swiss delegation</name>
+              <originalName>081001 BASCS Presentation to Swiss delegation</originalName>
+              <datei id="COO.2080.100.2.2175144">
+                <name>p000106.pdf</name>
+                <originalName>081001 BASCS Presentation to Swiss delegation</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>30080a183f54ddb091c680353d30d8fa</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175152_D">
+              <name>2008 07 04 CARFI Final Report - web version F</name>
+              <originalName>2008 07 04 CARFI Final Report - web version F</originalName>
+              <datei id="COO.2080.100.2.2175148">
+                <name>p000107.pdf</name>
+                <originalName>2008 07 04 CARFI Final Report - web version F</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>9f7fee9ac289a79c1c4333d74b76b3b6</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175156_D">
+              <name>2008 07 04 CARFI Final Report - web version, E</name>
+              <originalName>2008 07 04 CARFI Final Report - web version, E</originalName>
+              <datei id="COO.2080.100.2.2175155">
+                <name>p000108.pdf</name>
+                <originalName>2008 07 04 CARFI Final Report - web version, E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>15413f4ffe814e91f86a356e6dbd7e38</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175163_D">
+              <name>080212_FINAL_RK Story_e_MS</name>
+              <originalName>080212_FINAL_RK Story_e_MS</originalName>
+              <datei id="COO.2080.100.2.2175162">
+                <name>p000109.pdf</name>
+                <originalName>080212_FINAL_RK Story_e_MS</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>3604ada8508148b42c1ca53c69a3ac48</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175167_D">
+              <name>080212_FINAL_RK Story_f_MS</name>
+              <originalName>080212_FINAL_RK Story_f_MS</originalName>
+              <datei id="COO.2080.100.2.2175166">
+                <name>p000110.pdf</name>
+                <originalName>080212_FINAL_RK Story_f_MS</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>294995e7406bf0243bd67ded68ab6edb</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175171_D">
+              <name>081003 Swiss Visit - Calendar FINAL</name>
+              <originalName>081003 Swiss Visit - Calendar FINAL</originalName>
+              <datei id="COO.2080.100.2.2175170">
+                <name>p000111.pdf</name>
+                <originalName>081003 Swiss Visit - Calendar FINAL</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>1d894994ce87d665addc649342790adc</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175175_D">
+              <name>Digital Format Guidelines 2007 v2_4_1_Feb</name>
+              <originalName>Digital Format Guidelines 2007 v2_4_1_Feb</originalName>
+              <datei id="COO.2080.100.2.2175174">
+                <name>p000112.pdf</name>
+                <originalName>Digital Format Guidelines 2007 v2_4_1_Feb</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>e72ccd1f716c37f93c60269a6b534585</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175183_D">
+              <name>ECMMS-ECMAP Testing Report (Final)</name>
+              <originalName>ECMMS-ECMAP Testing Report (Final)</originalName>
+              <datei id="COO.2080.100.2.2175182">
+                <name>p000113.pdf</name>
+                <originalName>ECMMS-ECMAP Testing Report (Final)</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>263cd87d9bb7eea2432f79c33feff36f</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175187_D">
+              <name>Executive Summary Presentation - RM and ECM Metadata Testing Projects</name>
+              <originalName>Executive Summary Presentation - RM and ECM Metadata Testing Projects</originalName>
+              <datei id="COO.2080.100.2.2175186">
+                <name>p000114.pdf</name>
+                <originalName>Executive Summary Presentation - RM and ECM Metadata Testing Projects</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>b717891c99ace94c1d417d28e99c8c3f</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175191_D">
+              <name>Format Standards V0.6 NoDate-03</name>
+              <originalName>Format Standards V0.6 NoDate-03</originalName>
+              <datei id="COO.2080.100.2.2175190">
+                <name>p000115.pdf</name>
+                <originalName>Format Standards V0.6 NoDate-03</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>58aa31220b14af42088b4fbf472adffa</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175195_D">
+              <name>NCA-#323252-v1-FINAL_DRAFT_-_NCA-#247870-V10-RDIMS_RECORDS_MANAGEMENT_FUNCTIONAL_REQUIREMENTS</name>
+              <originalName>NCA-#323252-v1-FINAL_DRAFT_-_NCA-#247870-V10-RDIMS_RECORDS_MANAGEMENT_FUNCTIONAL_REQUIREMENTS</originalName>
+              <datei id="COO.2080.100.2.2175194">
+                <name>p000116.pdf</name>
+                <originalName>NCA-#323252-v1-FINAL_DRAFT_-_NCA-#247870-V10-RDIMS_RECORDS_MANAGEMENT_FUNCTIONAL_REQUIREMENTS</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>876b60dc64d10f9d8c7c87b26d291a8e</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175198_D">
+              <name>RMMS-RMAP Testing Report (Final)</name>
+              <originalName>RMMS-RMAP Testing Report (Final)</originalName>
+              <datei id="COO.2080.100.2.2175197">
+                <name>p000117.pdf</name>
+                <originalName>RMMS-RMAP Testing Report (Final)</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>2c42348ea08407e4f2e4f80f96f2d9f4</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2175202_D">
+              <name>tdr_presentation_oct_08</name>
+              <originalName>tdr_presentation_oct_08</originalName>
+              <datei id="COO.2080.100.2.2175201">
+                <name>p000118.pdf</name>
+                <originalName>tdr_presentation_oct_08</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>927e783427155dce8a649f6b5f2a3324</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180914_D">
+              <name>2008 01 28 Institutional Report E</name>
+              <originalName>2008 01 28 Institutional Report E</originalName>
+              <datei id="COO.2080.100.2.2180913">
+                <name>p000119.pdf</name>
+                <originalName>2008 01 28 Institutional Report E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>a59e204d4432dfcf0fb6ec9e59a59343</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180918_D">
+              <name>2008 09 12 Integrated PPT for MIDA Training E</name>
+              <originalName>2008 09 12 Integrated PPT for MIDA Training E</originalName>
+              <datei id="COO.2080.100.2.2180917">
+                <name>p000120.pdf</name>
+                <originalName>2008 09 12 Integrated PPT for MIDA Training E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>1c59d70d9ed9fda40378855967da9d79</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180922_D">
+              <name>2008 09 25 Integrated MIDA Speaking Notes E</name>
+              <originalName>2008 09 25 Integrated MIDA Speaking Notes E</originalName>
+              <datei id="COO.2080.100.2.2180921">
+                <name>p000121.pdf</name>
+                <originalName>2008 09 25 Integrated MIDA Speaking Notes E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>25dd120d02db456987d248392b074775</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180926_D">
+              <name>2008 01 28  MIDA Flowchart E</name>
+              <originalName>2008 01 28  MIDA Flowchart E</originalName>
+              <datei id="COO.2080.100.2.2180925">
+                <name>p000122.pdf</name>
+                <originalName>2008 01 28  MIDA Flowchart E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>2fda98ccdc54c2467652ef405beb08ba</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180932_D">
+              <name>2008 06 11 Handout on Disposition Context E</name>
+              <originalName>2008 06 11 Handout on Disposition Context E</originalName>
+              <datei id="COO.2080.100.2.2180931">
+                <name>p000123.pdf</name>
+                <originalName>2008 06 11 Handout on Disposition Context E</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>cb87de68d364506d5fbdf092467e7be4</pruefsumme>
+              </datei>
+            </ordner>
+            <ordner id="COO.2080.100.2.2180936_D">
+              <name>Beispiel slide RDACS</name>
+              <originalName>Beispiel slide RDACS</originalName>
+              <datei id="COO.2080.100.2.2180935">
+                <name>p000124.pdf</name>
+                <originalName>csbfp-e</originalName>
+                <pruefalgorithmus>MD5</pruefalgorithmus>
+                <pruefsumme>050509cbca9c2a6a4a9d561972abac38</pruefsumme>
+              </datei>
+            </ordner>
+          </ordner>
+          <ordner id="COO.2080.100.2.2153591_D">
+            <name>Einladung und Terminanfrage</name>
+            <originalName>Einladung und Terminanfrage</originalName>
+            <datei id="COO.2080.100.2.2153589">
+              <name>p000100.pdf</name>
+              <originalName>Einladung und Terminanfrage</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>7d4cd54c9c037df5e7801c08f4b1d166</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2156721_D">
+            <name>Anfrage Ok konkret mit Interessensgebieten BAR</name>
+            <originalName>Anfrage Ok konkret mit Interessensgebieten BAR</originalName>
+            <datei id="COO.2080.100.2.2156722">
+              <name>p000101.pdf</name>
+              <originalName>Anfrage Ok konkret mit Interessensgebieten BAR</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>0b43c9bddba0da7a8572f0d09add3383</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2168879_D">
+            <name>Bestätigung Besuch und Antworten für uns relevanter Themen</name>
+            <originalName>Bestätigung Besuch und Antworten für uns relevanter Themen</originalName>
+            <datei id="COO.2080.100.2.2168878">
+              <name>p000102.pdf</name>
+              <originalName>Bestätigung Besuch und Antworten für uns relevanter Themen</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>fa1e3bb4c2322b44b03d65ddfc7ead43</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2168883_D">
+            <name>Terminbestätigung</name>
+            <originalName>Terminbestätigung</originalName>
+            <datei id="COO.2080.100.2.2168882">
+              <name>p000103.pdf</name>
+              <originalName>Terminbestätigung</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>c07c96489bd8cb0e3e25b2449c6ae348</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2180402_D">
+            <name>Präsentation BAR Worklunch 04.11.2008</name>
+            <originalName>Präsentation BAR Worklunch 04.11.2008</originalName>
+            <datei id="COO.2080.100.2.2180401">
+              <name>p000104.pdf</name>
+              <originalName>Präsentation BAR Worklunch 04.11.2008</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>2b828e2b119f4986a0abac08f6e84434</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2171340_D">
+        <name>Colloque sur les vols d’archives et leur trafic illicite</name>
+        <originalName>Colloque sur les vols d’archives et leur trafic illicite</originalName>
+        <ordner id="COO.2080.100.2.2171342_D">
+          <name>2008-09-18_24 Colloque sur les vols d'archives à Roubaix</name>
+          <originalName>2008-09-18/24 Colloque sur les vols d'archives à Roubaix</originalName>
+          <datei id="COO.2080.100.2.2171659">
+            <name>p000128.pdf</name>
+            <originalName>Re: Colloque sur les vols d'archives à Roubaix</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>2f2f4c24baec065568414841e82f7061</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2136985_D">
+        <name>IS&amp;T Archiving 2008 (Society for Imaging Science and Technology)</name>
+        <originalName>IS&amp;T Archiving 2008 (Society for Imaging Science and Technology)</originalName>
+        <ordner id="COO.2080.100.2.2136998_D">
+          <name>2008-04-03_79 Archiving2008 Planung</name>
+          <originalName>2008-04-03/79 Archiving2008 Planung</originalName>
+          <datei id="COO.2080.100.2.2136997">
+            <name>p000098.pdf</name>
+            <originalName>Archiving2008 Planung 2008</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>4df62e6aee497d1aee9c6adee32f7a99</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="COO.2080.100.2.2139234_D">
+          <name>2008-04-14_62 Archiving2008_Presentation</name>
+          <originalName>2008-04-14/62 Archiving2008_Presentation</originalName>
+          <datei id="COO.2080.100.2.2167972">
+            <name>p000099.pdf</name>
+            <originalName>Archiving2008_20080624</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>270cf0507d234e8d3457c723e34e7468</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2162782_D">
+        <name>Konferenz der EU-NationalarchivarInnen (EBNA)</name>
+        <originalName>Konferenz der EU-NationalarchivarInnen (EBNA)</originalName>
+        <ordner id="COO.2080.100.2.2131782_D">
+          <name>Ljubljana 10._11. April 2008</name>
+          <originalName>Ljubljana 10./11. April 2008</originalName>
+          <ordner id="COO.2080.100.2.2129926_D">
+            <name>2008-03-05_13 Einladung Archiv Slowenien</name>
+            <originalName>2008-03-05/13 Einladung Archiv Slowenien</originalName>
+            <datei id="COO.2080.100.2.2129885">
+              <name>p000126.pdf</name>
+              <originalName>Einladung Archiv Slovenien</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>939a30557cd42215da857415e4a35f6e</pruefsumme>
+            </datei>
+          </ordner>
+          <ordner id="COO.2080.100.2.2132368_D">
+            <name>2008-03-14_31 Registrationsformular EBNA</name>
+            <originalName>2008-03-14/31 Registrationsformular EBNA</originalName>
+            <datei id="COO.2080.100.2.2132304">
+              <name>p000127.pdf</name>
+              <originalName>Registrationsformular EBNA</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>0c60dda24a1cea708fdb38d1556de5d7</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+        <ordner id="COO.2080.100.2.2190838_D">
+          <name>Paris 18._19. November 2008</name>
+          <originalName>Paris 18./19. November 2008</originalName>
+          <ordner id="COO.2080.100.2.2190847_D">
+            <name>2009-01-05_15 EBNA meeting Paris 18_19.11.2008</name>
+            <originalName>2009-01-05/15 EBNA meeting Paris 18/19.11.2008</originalName>
+            <datei id="COO.2080.100.2.2190846">
+              <name>p000125.pdf</name>
+              <originalName>EBNA meeting Paris 18/19.11.2008</originalName>
+              <pruefalgorithmus>MD5</pruefalgorithmus>
+              <pruefsumme>0746597e5a3dbf7755d178751d23ee78</pruefsumme>
+            </datei>
+          </ordner>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2205293_D">
+        <name>Launch of the World Digital Library (UNESCO Headquarters - Paris)</name>
+        <originalName>Launch of the World Digital Library (UNESCO Headquarters - Paris)</originalName>
+        <ordner id="COO.2080.100.2.2204573_D">
+          <name>2009-03-10_23 Launch of the World Digital Library - Paris, April 21 2009</name>
+          <originalName>2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009</originalName>
+          <datei id="COO.2080.100.2.2204546">
+            <name>p000129.pdf</name>
+            <originalName>Launch of the World Digital Library - Paris, April 21 2009</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>79d74a05acce9b816c932092642c9764</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="COO.2080.100.2.2123489_D">
+        <name>World Summit on Information Society 2008 (WSIS)</name>
+        <originalName>World Summit on Information Society 2008 (WSIS)</originalName>
+        <ordner id="COO.2080.100.2.2123492_D">
+          <name>Internet Governance Forum_ Schweizer Beitrag für die open consultations 2.2.2008</name>
+          <originalName>Internet Governance Forum: Schweizer Beitrag für die open consultations 2.2.2008</originalName>
+          <datei id="COO.2080.100.2.2123491">
+            <name>p000130.pdf</name>
+            <originalName>Internet Governance Forum: Schweizer Beitrag für die open consultations 2.2.2008</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>44ffc46a9098115aeab756c3225e7a52</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="COO.2080.100.2.2123496_D">
+          <name>Internet Governance Forum_ Kurzkonsultation zum Schweizer Kommentar 8.2.2008</name>
+          <originalName>Internet Governance Forum: Kurzkonsultation zum Schweizer Kommentar 8.2.2008</originalName>
+          <datei id="COO.2080.100.2.2123495">
+            <name>p000131.pdf</name>
+            <originalName>Internet Governance Forum: Kurzkonsultation zum Schweizer Kommentar 8.2.2008</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>fa0ed1dce83adbca32dddcd4b390a5f8</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="COO.2080.100.2.2123500_D">
+          <name>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</name>
+          <originalName>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</originalName>
+          <datei id="COO.2080.100.2.2123499">
+            <name>p000132.pdf</name>
+            <originalName>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>dcc7e680a26c119efee305bc0eef1bb8</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="COO.2080.100.2.2169123_D">
+          <name>Umsetzung der WSIS-Resultate, Stand 9.9.08</name>
+          <originalName>Umsetzung der WSIS-Resultate, Stand 9.9.08</originalName>
+          <datei id="COO.2080.100.2.2169122">
+            <name>p000133.pdf</name>
+            <originalName>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>572e8777e8fd7c141a2cca66f9b7af57</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="COO.2080.100.2.3218594_D">
+          <name>Internet Governance Forum, Hyderabad, Dezember 2008, Kurzbericht</name>
+          <originalName>Internet Governance Forum, Hyderabad, Dezember 2008, Kurzbericht</originalName>
+          <datei id="COO.2080.100.2.3218593">
+            <name>p000134.pdf</name>
+            <originalName>Internet Governance Forum, Hyderabad, Dezember 2008, Kurzbericht</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>aebd3dc49b50cef8ae909a7949924ee6</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>GEVER</ablieferungstyp>
+    <ablieferndeStelle>Bundesarchiv</ablieferndeStelle>
+    <entstehungszeitraum>
+      <von>
+        <datum>2006-11-01</datum>
+      </von>
+      <bis>
+        <datum>2014-04-14</datum>
+      </bis>
+    </entstehungszeitraum>
+    <ablieferungsnummer>2014/121</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Schweizerisches Bundesarchiv</aktenbildnerName>
+      <systemName>Fabasoft eGov Suite Version 925</systemName>
+      <registratur>Zentrale Registratur</registratur>
+    </provenienz>
+    <ordnungssystem>
+      <name>Schweizerisches Bundesarchiv: Zentrale Ablage (2007-)</name>
+      <mitbenutzung>nein</mitbenutzung>
+      <ordnungssystemposition id="COO.2080.100.2.67">
+        <nummer>0</nummer>
+        <titel>Führung, Querschnittsaufgaben</titel>
+        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+        <datenschutz>false</datenschutz>
+        <ordnungssystemposition id="COO.2080.100.2.69">
+          <nummer>01</nummer>
+          <titel>Archivpolitik</titel>
+          <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+          <datenschutz>false</datenschutz>
+          <ordnungssystemposition id="COO.2080.100.2.71">
+            <nummer>011</nummer>
+            <titel>Internationale Archivpolitik</titel>
+            <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+            <datenschutz>false</datenschutz>
+            <ordnungssystemposition id="COO.2080.100.2.74">
+              <nummer>011.2</nummer>
+              <titel>Internationale Konferenzen / Veranstaltungen</titel>
+              <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+              <datenschutz>false</datenschutz>
+              <dossier id="COO.2080.100.2.2117258">
+                <aktenzeichen>011.2-2008</aktenzeichen>
+                <titel>Internationale Konferenzen / Veranstaltungen</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                <eroeffnungsdatum>
+                  <datum>2008-01-22</datum>
+                </eroeffnungsdatum>
+                <abschlussdatum>
+                  <datum>2014-02-20</datum>
+                </abschlussdatum>
+                <entstehungszeitraum>
+                  <von>
+                    <datum>1950-01-01</datum>
+                  </von>
+                  <bis>
+                    <datum>1960-12-31</datum>
+                  </bis>
+                </entstehungszeitraum>
+                <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                <datenschutz>false</datenschutz>
+                <zusatzDaten>
+                  <merkmal name="Signatur">E3120D#2014/121#3*</merkmal>
+                  <merkmal name="Stufe">Dossier</merkmal>
+                  <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2018","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E10796*","Title":"Schweizerisches Bundesarchiv (1979-)","DateRangeText":"1976-2004","ArchiveRecordId":"6764","Protected":false},{"IconId":12,"Level":"Teilbestand","RefCode":"E3120D*","Title":"Schweizerisches Bundesarchiv: Zentrale Ablage (2007-)","DateRangeText":"2006.11.01-2014.04.14","ArchiveRecordId":"26440573","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E3120D#0","Title":"Führung, Querschnittsaufgaben","DateRangeText":"2006.11.01-2014.04.14","ArchiveRecordId":"26517210","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E3120D#01","Title":"Archivpolitik","DateRangeText":"2006.11.01-2014.04.14","ArchiveRecordId":"26517215","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E3120D#011","Title":"Internationale Archivpolitik","DateRangeText":"2006.11.01-2014.04.14","ArchiveRecordId":"26517217","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E3120D#011.2","Title":"Internationale Konferenzen / Veranstaltungen","DateRangeText":"2007.01.25-2014.04.14","ArchiveRecordId":"26517220","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E3120D#2014/121#3*","Title":"Internationale Konferenzen / Veranstaltungen","DateRangeText":"1950-1960","ArchiveRecordId":"30409370","Protected":false}]</merkmal>
+                  <merkmal name="Form">Digital</merkmal>
+                  <merkmal name="Identifikation digitales Magazin">9833b452-b3b7-4a30-947d-4cbd2e47a473@COO.2080.100.2.2117258</merkmal>
+                  <merkmal name="Entstehungszeitraum Anzeigetext">1950 - 1960</merkmal>
+                </zusatzDaten>
+                <dossier id="COO.2080.100.2.2120345">
+                  <aktenzeichen>011.2-2008/Besuche aus dem Ausland 2008</aktenzeichen>
+                  <titel>Besuche aus dem Ausland 2008</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-02-01</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-02-01</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dossier id="COO.2080.100.2.2151716">
+                    <aktenzeichen>011.2-2008/Besuche aus dem Ausland 08/Besuch aus China</aktenzeichen>
+                    <titel>Besuch aus China</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-06-17</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-06-17</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2151718">
+                      <titel>Besuch aus China</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-17</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-17</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>WG: Visite officielle de Chine</bemerkung>
+                      <dateiRef>COO.2080.100.2.2151717</dateiRef>
+                    </dokument>
+                  </dossier>
+                  <dossier id="COO.2080.100.2.2165904">
+                    <aktenzeichen>011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea</aktenzeichen>
+                    <titel>Besuch aus Demokratische Volksrepublik Korea</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-08-26</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-08-26</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2165909">
+                      <titel>Anfrage Besuch aus Demokratische Volksrepublik Korea</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-08-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-08-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>pour organiser la visite à l'Archives fedérals suisses</bemerkung>
+                      <dateiRef>COO.2080.100.2.2165908</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2165913">
+                      <titel>Antwort BAR Besuch aus Demokratische Volksrepublik Korea</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-08-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-08-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>WG: visite à l'Archives fedérals suisses</bemerkung>
+                      <dateiRef>COO.2080.100.2.2165912</dateiRef>
+                    </dokument>
+                  </dossier>
+                  <dossier id="COO.2080.100.2.2134140">
+                    <aktenzeichen>011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien</aktenzeichen>
+                    <titel>Besuch aus Tschechien</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-03-20</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-03-17</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2132567">
+                      <titel>Studienreise ins Schweizerische Bundesarchiv</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-04-18</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-03-17</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Studienreise ins Schweizerische Bundesarchiv</bemerkung>
+                      <dateiRef>COO.2080.100.2.2132542</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2134649">
+                      <titel>Besuche aus Tschechien: Gestaltung Programm</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-03-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-03-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuche aus Tschechien</bemerkung>
+                      <dateiRef>COO.2080.100.2.2134648</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2135000">
+                      <titel>Bestätigung Datum des Besuches</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-03-27</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-03-27</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <dateiRef>COO.2080.100.2.2135001</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2138086">
+                      <titel>Programm Studienreise Národni Archiv</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-04-09</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-04-09</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <dateiRef>COO.2080.100.2.2138087</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2138111">
+                      <titel>Besuch aus Tschechien: Vorschlag Programm INTERN</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-04-09</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-04-09</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuche aus Tschechien</bemerkung>
+                      <dateiRef>COO.2080.100.2.2138110</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2140894">
+                      <titel>Besuch aus Tschechien: Vorschlag Programm EXTERN</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-04-23</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-04-23</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Studienreise ins Bundesarchiv</bemerkung>
+                      <dateiRef>COO.2080.100.2.2140893</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2142773">
+                      <titel>Besuch aus Tschechien: engültiges Programm</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-06</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-06</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuch einer Delegation des tschechischen Nationalarchivs im BAR und bei Memoriav</bemerkung>
+                      <dateiRef>COO.2080.100.2.2142772</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2142784">
+                      <titel>Besuch aus Tschechien: engültiges Programm</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-06</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-06</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Studienreise ins Bundesarchiv</bemerkung>
+                      <dateiRef>COO.2080.100.2.2142783</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2145191">
+                      <titel>Visite de Tchéquie: Programme définitif</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-19</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-19</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Visite de Tchéquie: Programme définitif</bemerkung>
+                      <dateiRef>COO.2080.100.2.2145190</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2145232">
+                      <titel>Präsentation RIE Besuch_Tschechisches_Nationalarchiv_BAR_20080521</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-19</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-19</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>PDF/A Version, Folie 46 Bild entfernt,Präsentation RIE Besuch_Tschechisches_Nationalarchiv_BAR_20080521</bemerkung>
+                      <dateiRef>COO.2080.100.2.2145231</dateiRef>
+                      <dateiRef>COO.2080.100.2.2145924</dateiRef>
+                    </dokument>
+                  </dossier>
+                  <dossier id="COO.2080.100.2.2143466">
+                    <aktenzeichen>011.2-2008/Besuche aus dem Ausland 08/Besuch aus Uzbekistan</aktenzeichen>
+                    <titel>Besuch aus Uzbekistan</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-05-08</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-05-08</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2143468">
+                      <titel>Uzbekistan: e-gov</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-08</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-08</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>à discuter demain, 1400</bemerkung>
+                      <dateiRef>COO.2080.100.2.2143467</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2143472">
+                      <titel>Uzbekistan: interne Koordination</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-05-08</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-05-08</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Uzbekistan: e-gov</bemerkung>
+                      <dateiRef>COO.2080.100.2.2143471</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2150643">
+                      <titel>Usbekistan: programme définitif</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-11</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-11</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuch Usbekistan</bemerkung>
+                      <dateiRef>COO.2080.100.2.2150642</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2150647">
+                      <titel>Usbekistan: Absage</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-11</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-11</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Absage Besuch E-Gov-Delegation aus Usbekistan</bemerkung>
+                      <dateiRef>COO.2080.100.2.2150646</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2150651">
+                      <titel>Uzbekistan: Anpassung Datum und Programm</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-11</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-11</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Uzbekistan: e-gov</bemerkung>
+                      <dateiRef>COO.2080.100.2.2150650</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2150665">
+                      <titel>Uzbekistan: nouvelle proposition de programme</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-11</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-11</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>RE: Uzbekistan: e-gov</bemerkung>
+                      <dateiRef>COO.2080.100.2.2150664</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2151117">
+                      <titel>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-12</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-12</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuch_Uzbekistan_Nationalarchiv_BAR_20080703</bemerkung>
+                      <dateiRef>COO.2080.100.2.2151116</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2151788">
+                      <titel>Präsentation Uzbekistan, GEVER in der Praxis</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-17</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-17</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Präsentation Usbekistan 3</bemerkung>
+                      <dateiRef>COO.2080.100.2.2151787</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2152977">
+                      <titel>Usbekistan : annulation</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-24</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-24</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuch Delegation aus Usbekistan</bemerkung>
+                      <dateiRef>COO.2080.100.2.2152976</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2153433">
+                      <titel>Präsentation Usbekistan GEVER in der Praxis, engl.</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-25</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-25</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Präsentation Usbekistan GEVER in der Praxis_EN</bemerkung>
+                      <dateiRef>COO.2080.100.2.2153432</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2153566">
+                      <titel>Präsentation RIE Besuch_Uzbekistan_ Nationalarchiv _EN</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Präsentation RIE Besuch_Uzbekistan_Nationalarchiv_BAR_EN</bemerkung>
+                      <dateiRef>COO.2080.100.2.2153565</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2165918">
+                      <titel>Uzbekistan : nouvelle date</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-08-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-08-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Besuch aus Uzbekistan</bemerkung>
+                      <dateiRef>COO.2080.100.2.2165917</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2172772">
+                      <titel>Programme définitif délégation ouzbèque</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-09-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-09-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Programme de la visite en Suisse de la délégation ouzbèque</bemerkung>
+                      <dateiRef>COO.2080.100.2.2172771</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2177211">
+                      <titel>Remerciements Uzbekistan</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-10-20</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-10-20</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Study visit of delegation from Uzbekistan on October 2, 2008</bemerkung>
+                      <dateiRef>COO.2080.100.2.2177210</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2177215">
+                      <titel>Remerciements BK</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-10-20</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-10-20</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Merci!</bemerkung>
+                      <dateiRef>COO.2080.100.2.2177214</dateiRef>
+                    </dokument>
+                  </dossier>
+                </dossier>
+                <dossier id="COO.2080.100.2.2153577">
+                  <aktenzeichen>011.2-2008/Besuche im Ausland 2008</aktenzeichen>
+                  <titel>Besuche im Ausland 2008</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-06-26</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-06-26</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dossier id="COO.2080.100.2.2153580">
+                    <aktenzeichen>011.2-2008/Besuche im Ausland 08/Bibliothek und Archive Kanada</aktenzeichen>
+                    <titel>Bibliothek und Archive Kanada</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-06-26</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-06-26</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dossier id="COO.2080.100.2.2175136">
+                      <aktenzeichen>011.2-2008/Besuche im Ausland 08/Bibliothek und Archive Kanada/Dokumente</aktenzeichen>
+                      <titel>Dokumente</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                      <eroeffnungsdatum>
+                        <datum>2008-10-07</datum>
+                      </eroeffnungsdatum>
+                      <abschlussdatum />
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-10-07</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <dokument id="COO.2080.100.2.2175138">
+                        <titel>08 10 01 Swiss visit - Record Management Metadata Standard</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>08 10 01 Swiss visit - Record Management Metadata Standard</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175137</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175145">
+                        <titel>081001 BASCS Presentation to Swiss delegation</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>081001 BASCS Presentation to Swiss delegation</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175144</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175152">
+                        <titel>2008 07 04 CARFI Final Report - web version F</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 07 04 CARFI Final Report - web version F</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175148</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175156">
+                        <titel>2008 07 04 CARFI Final Report - web version, E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 07 04 CARFI Final Report - web version, E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175155</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175163">
+                        <titel>080212_FINAL_RK Story_e_MS</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>080212_FINAL_RK Story_e_MS</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175162</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175167">
+                        <titel>080212_FINAL_RK Story_f_MS</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>080212_FINAL_RK Story_f_MS</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175166</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175171">
+                        <titel>081003 Swiss Visit - Calendar FINAL</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>081003 Swiss Visit - Calendar FINAL</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175170</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175175">
+                        <titel>Digital Format Guidelines 2007 v2_4_1_Feb</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>Digital Format Guidelines 2007 v2_4_1_Feb</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175174</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175183">
+                        <titel>ECMMS-ECMAP Testing Report (Final)</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>ECMMS-ECMAP Testing Report (Final)</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175182</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175187">
+                        <titel>Executive Summary Presentation - RM and ECM Metadata Testing Projects</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>Executive Summary Presentation - RM and ECM Metadata Testing Projects</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175186</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175191">
+                        <titel>Format Standards V0.6 NoDate-03</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>Format Standards V0.6 NoDate-03</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175190</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175195">
+                        <titel>NCA-#323252-v1-FINAL_DRAFT_-_NCA-#247870-V10-RDIMS_RECORDS_MANAGEMENT_FUNCTIONAL_REQUIREMENTS</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>NCA-#323252-v1-FINAL_DRAFT_-_NCA-#247870-V10-RDIMS_RECORDS_MANAGEMENT_FUNCTIONAL_REQUIREMENTS</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175194</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175198">
+                        <titel>RMMS-RMAP Testing Report (Final)</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>RMMS-RMAP Testing Report (Final)</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175197</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2175202">
+                        <titel>tdr_presentation_oct_08</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-10-07</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-10-07</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>tdr_presentation_oct_08</bemerkung>
+                        <dateiRef>COO.2080.100.2.2175201</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180914">
+                        <titel>2008 01 28 Institutional Report E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 01 28 Institutional Report E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180913</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180918">
+                        <titel>2008 09 12 Integrated PPT for MIDA Training E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 09 12 Integrated PPT for MIDA Training E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180917</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180922">
+                        <titel>2008 09 25 Integrated MIDA Speaking Notes E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 09 25 Integrated MIDA Speaking Notes E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180921</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180926">
+                        <titel>2008 01 28  MIDA Flowchart E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 01 28  MIDA Flowchart E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180925</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180932">
+                        <titel>2008 06 11 Handout on Disposition Context E</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>2008 06 11 Handout on Disposition Context E</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180931</dateiRef>
+                      </dokument>
+                      <dokument id="COO.2080.100.2.2180936">
+                        <titel>Beispiel slide RDACS</titel>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <registrierdatum>
+                          <datum>2008-11-05</datum>
+                        </registrierdatum>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>2008-11-05</datum>
+                          </von>
+                          <bis>
+                            <datum>2014-02-20</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                        <datenschutz>false</datenschutz>
+                        <bemerkung>csbfp-e</bemerkung>
+                        <dateiRef>COO.2080.100.2.2180935</dateiRef>
+                      </dokument>
+                    </dossier>
+                    <dokument id="COO.2080.100.2.2153591">
+                      <titel>Einladung und Terminanfrage</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-06-26</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-06-26</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Visite to Canada</bemerkung>
+                      <dateiRef>COO.2080.100.2.2153589</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2156721">
+                      <titel>Anfrage Ok konkret mit Interessensgebieten BAR</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-07-09</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-07-09</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <dateiRef>COO.2080.100.2.2156722</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2168879">
+                      <titel>Bestätigung Besuch und Antworten für uns relevanter Themen</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-09-08</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-09-08</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>AW: Re: Visite to Canada: Monika Jäggi and Jérémie Leuthold</bemerkung>
+                      <dateiRef>COO.2080.100.2.2168878</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2168883">
+                      <titel>Terminbestätigung</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-09-08</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-09-08</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>WG: Visite to Canada: Monika Jäggi and Jérémie Leuthold</bemerkung>
+                      <dateiRef>COO.2080.100.2.2168882</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2180402">
+                      <titel>Präsentation BAR Worklunch 04.11.2008</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-11-03</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-11-03</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Präsentation_Canada_4.11.08</bemerkung>
+                      <dateiRef>COO.2080.100.2.2180401</dateiRef>
+                    </dokument>
+                  </dossier>
+                </dossier>
+                <dossier id="COO.2080.100.2.2171340">
+                  <aktenzeichen>011.2-2008/Colloque sur les vols d’archives et leur trafic illicite</aktenzeichen>
+                  <titel>Colloque sur les vols d’archives et leur trafic illicite</titel>
+                  <inhalt>Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008</inhalt>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-09-18</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-09-18</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dokument id="COO.2080.100.2.2171342">
+                    <titel>2008-09-18/24 Colloque sur les vols d'archives à Roubaix</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-09-18</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-09-18</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Colloque sur les vols d'archives à Roubaix</bemerkung>
+                    <dateiRef>COO.2080.100.2.2171659</dateiRef>
+                  </dokument>
+                </dossier>
+                <dossier id="COO.2080.100.2.2136985">
+                  <aktenzeichen>011.2-2008/IS&amp;T Archiving 2008 (Society for Imaging Science and Technology)</aktenzeichen>
+                  <titel>IS&amp;T Archiving 2008 (Society for Imaging Science and Technology)</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Innovation und Erhaltung, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-04-03</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-04-03</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dokument id="COO.2080.100.2.2136998">
+                    <titel>2008-04-03/79 Archiving2008 Planung</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-04-03</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-04-03</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Archiving2008 Planung 2008</bemerkung>
+                    <dateiRef>COO.2080.100.2.2136997</dateiRef>
+                  </dokument>
+                  <dokument id="COO.2080.100.2.2139234">
+                    <titel>2008-04-14/62 Archiving2008_Presentation</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-04-14</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-04-14</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Archiving2008_20080624</bemerkung>
+                    <dateiRef>COO.2080.100.2.2167972</dateiRef>
+                  </dokument>
+                </dossier>
+                <dossier id="COO.2080.100.2.2162782">
+                  <aktenzeichen>011.2-2008/Konferenz der EU-NationalarchivarInnen (EBNA)</aktenzeichen>
+                  <titel>Konferenz der EU-NationalarchivarInnen (EBNA)</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-08-11</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-03-05</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dossier id="COO.2080.100.2.2131782">
+                    <aktenzeichen>011.2-2008/Konferenz der EU-NationalarchivarInnen (EBNA)/Ljubljana 10./11. April 2008</aktenzeichen>
+                    <titel>Ljubljana 10./11. April 2008</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Amtsleitung, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2008-03-13</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-03-05</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2129926">
+                      <titel>2008-03-05/13 Einladung Archiv Slowenien</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-03-13</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-03-05</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Einladung EBNA Archiv Slowenien</bemerkung>
+                      <dateiRef>COO.2080.100.2.2129885</dateiRef>
+                    </dokument>
+                    <dokument id="COO.2080.100.2.2132368">
+                      <titel>2008-03-14/31 Registrationsformular EBNA</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2008-04-03</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2008-03-14</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>Registrationsformular EBNA</bemerkung>
+                      <dateiRef>COO.2080.100.2.2132304</dateiRef>
+                    </dokument>
+                  </dossier>
+                  <dossier id="COO.2080.100.2.2190838">
+                    <aktenzeichen>011.2-2008/Konferenz der EU-NationalarchivarInnen (EBNA)/Paris 18./19. November 2008</aktenzeichen>
+                    <titel>Paris 18./19. November 2008</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                    <eroeffnungsdatum>
+                      <datum>2009-01-05</datum>
+                    </eroeffnungsdatum>
+                    <abschlussdatum />
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2009-01-05</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <dokument id="COO.2080.100.2.2190847">
+                      <titel>2009-01-05/15 EBNA meeting Paris 18/19.11.2008</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <registrierdatum>
+                        <datum>2009-01-05</datum>
+                      </registrierdatum>
+                      <entstehungszeitraum>
+                        <von>
+                          <datum>2009-01-05</datum>
+                        </von>
+                        <bis>
+                          <datum>2014-02-20</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                      <datenschutz>false</datenschutz>
+                      <bemerkung>WG: EBNA meeting Paris-Réunion EBNA Paris (1)</bemerkung>
+                      <dateiRef>COO.2080.100.2.2190846</dateiRef>
+                    </dokument>
+                  </dossier>
+                </dossier>
+                <dossier id="COO.2080.100.2.2205293">
+                  <aktenzeichen>011.2-2008/Launch of the World Digital Library (UNESCO Headquarters - Paris)</aktenzeichen>
+                  <titel>Launch of the World Digital Library (UNESCO Headquarters - Paris)</titel>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Ressort Stab, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2009-03-13</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2009-03-10</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dokument id="COO.2080.100.2.2204573">
+                    <titel>2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2009-03-13</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2009-03-10</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>UNESCO Kongress</bemerkung>
+                    <dateiRef>COO.2080.100.2.2204546</dateiRef>
+                  </dokument>
+                </dossier>
+                <dossier id="COO.2080.100.2.2123489">
+                  <aktenzeichen>011.2-2008/World Summit on Information Society 2008 (WSIS)</aktenzeichen>
+                  <titel>World Summit on Information Society 2008 (WSIS)</titel>
+                  <inhalt>Follow up 2008 / Plateforme tripartite</inhalt>
+                  <erscheinungsform>digital</erscheinungsform>
+                  <federfuehrendeOrganisationseinheit>Amtsleitung, BAR</federfuehrendeOrganisationseinheit>
+                  <eroeffnungsdatum>
+                    <datum>2008-02-14</datum>
+                  </eroeffnungsdatum>
+                  <abschlussdatum />
+                  <entstehungszeitraum>
+                    <von>
+                      <datum>2008-02-14</datum>
+                    </von>
+                    <bis>
+                      <datum>2014-02-20</datum>
+                    </bis>
+                  </entstehungszeitraum>
+                  <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                  <datenschutz>false</datenschutz>
+                  <dokument id="COO.2080.100.2.2123492">
+                    <titel>Internet Governance Forum: Schweizer Beitrag für die open consultations 2.2.2008</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-02-14</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-02-14</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Internet Governance Forum: Schweizer Beitrag für die open consultations 2.2.2008</bemerkung>
+                    <dateiRef>COO.2080.100.2.2123491</dateiRef>
+                  </dokument>
+                  <dokument id="COO.2080.100.2.2123496">
+                    <titel>Internet Governance Forum: Kurzkonsultation zum Schweizer Kommentar 8.2.2008</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-02-14</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-02-14</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Internet Governance Forum: Kurzkonsultation zum Schweizer Kommentar 8.2.2008</bemerkung>
+                    <dateiRef>COO.2080.100.2.2123495</dateiRef>
+                  </dokument>
+                  <dokument id="COO.2080.100.2.2123500">
+                    <titel>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-02-14</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-02-14</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Plateforme Tripartite für den WSIS, Sitzung 23.4.2008</bemerkung>
+                    <dateiRef>COO.2080.100.2.2123499</dateiRef>
+                  </dokument>
+                  <dokument id="COO.2080.100.2.2169123">
+                    <titel>Umsetzung der WSIS-Resultate, Stand 9.9.08</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2008-09-09</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2008-09-09</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Umsetzung der WSIS-Resultate, Stand 9.9.08: Umsetzung der WSIS-Resultate kommt langsam auf Touren: offene Konsultationen in Genf am 15. September 2008</bemerkung>
+                    <dateiRef>COO.2080.100.2.2169122</dateiRef>
+                  </dokument>
+                  <dokument id="COO.2080.100.2.3218594">
+                    <titel>Internet Governance Forum, Hyderabad, Dezember 2008, Kurzbericht</titel>
+                    <erscheinungsform>digital</erscheinungsform>
+                    <registrierdatum>
+                      <datum>2009-05-11</datum>
+                    </registrierdatum>
+                    <entstehungszeitraum>
+                      <von>
+                        <datum>2009-05-11</datum>
+                      </von>
+                      <bis>
+                        <datum>2014-02-20</datum>
+                      </bis>
+                    </entstehungszeitraum>
+                    <klassifizierungskategorie>Not categorized</klassifizierungskategorie>
+                    <datenschutz>false</datenschutz>
+                    <bemerkung>Internet Governance Forum, Hyderabad, Dezember 2008, Kurzbericht (BAKOM)</bemerkung>
+                    <dateiRef>COO.2080.100.2.3218593</dateiRef>
+                  </dokument>
+                </dossier>
+              </dossier>
+            </ordnungssystemposition>
+          </ordnungssystemposition>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

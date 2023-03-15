@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.DocumentConverter;
 using MassTransit;
@@ -15,16 +17,19 @@ namespace CMI.Engine.Asset
     {
         private readonly IRequestClient<ExtractionStartRequest> extractionRequestClient;
         private readonly IRequestClient<JobInitRequest> jobRequestClient;
+        private readonly IRequestClient<JobEndRequest> jobEndRequestClient;
         private readonly IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient;
         private readonly string sftpLicenseKey;
         private string[] supportedFileTypes;
 
         public TextEngine(IRequestClient<JobInitRequest> jobRequestClient,
+            IRequestClient<JobEndRequest> jobEndRequestClient,
             IRequestClient<ExtractionStartRequest> extractionRequestClient,
             IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient,
             string sftpLicenseKey)
         {
             this.jobRequestClient = jobRequestClient;
+            this.jobEndRequestClient = jobEndRequestClient;
             this.extractionRequestClient = extractionRequestClient;
             this.supportedFileTypesRequestClient = supportedFileTypesRequestClient;
             this.sftpLicenseKey = sftpLicenseKey;
@@ -70,24 +75,22 @@ namespace CMI.Engine.Asset
                     stopWatch.ElapsedMilliseconds,
                     lengthInBytes);
 
+                // Save the files from the ocr process
+                if (extractionResult.IsOcrResult)
+                {
+                    await DownloadAndStoreFiles(extractionResult, fi);
+                }
+
+                // Remove the job
+                await jobEndRequestClient.GetResponse<JobEndResult>(new JobEndRequest {JobGuid = extractionResult.JobGuid});
+                Log.Information($"Removed the job with the id {extractionResult.JobGuid}.");
+
                 return extractionResult.Text;
             }
             catch (Exception ex)
             {
                 Log.Error(ex, "Unexpected error while extracting text for file {FullName}", fi.FullName);
                 throw;
-            }
-            finally
-            {
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                    fi.Refresh();
-                    if (fi.Exists)
-                    {
-                        Log.Warning($"Unable to delete file '{fi.FullName}'");
-                    }
-                }
             }
         }
 
@@ -131,6 +134,59 @@ namespace CMI.Engine.Asset
                         toBeConverted.FullName);
                 }
             }
+        }
+
+        private async Task<bool> DownloadAndStoreFiles(ExtractionStartResult documentExtractionResult, FileInfo originalFile)
+        {
+            Licensing.Key = sftpLicenseKey;
+            var targetFolder = originalFile.Directory;
+            try
+            {
+                foreach (var createdOcrFile in documentExtractionResult.CreatedOcrFiles)
+                {
+                    using (var client = new Sftp())
+                    {
+                        await client.ConnectAsync(documentExtractionResult.UploadUrl, documentExtractionResult.Port);
+                        await client.LoginAsync(documentExtractionResult.User, documentExtractionResult.Password);
+
+                        var remotePath = $"{client.GetCurrentDirectory()}{createdOcrFile.Value}";
+                        var targetPath = Path.Combine(targetFolder!.FullName, HandlePdfFiles(createdOcrFile, originalFile));
+
+                        if (!await client.FileExistsAsync(remotePath))
+                        {
+                            throw new FileNotFoundException($"File '{createdOcrFile.Value}' not found on SFTP server");
+                        }
+
+                        await client.GetFileAsync(remotePath, targetPath);
+
+                        if (!File.Exists(targetPath))
+                        {
+                            throw new InvalidOperationException($"Was unable to download file  {targetPath} from sftp server");
+                        }
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, e.Message);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// PDF files that are recognized are re-saved as PDF under a temporary file name
+        /// Here we take care and apply the old original name
+        /// </summary>
+        private static string HandlePdfFiles(KeyValuePair<OcrResultType, string> createdOcrFile, FileInfo originalFile)
+        {
+            if (createdOcrFile.Key == OcrResultType.Pdf)
+            {
+                return originalFile.Name;
+            }
+
+            return createdOcrFile.Value;
         }
     }
 }

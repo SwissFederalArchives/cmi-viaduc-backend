@@ -62,5 +62,8 @@ namespace CMI.Manager.Asset
         Task DeleteOldDownloadAndSyncRecords(int olderThanXDays);
 
         Task<bool> ExtractZipFile(ExtractZipArgument extractZipArgument);
+
+        Task<bool> RemoveTemporaryFiles(ExtractZipArgument extractZipArgument);
+
     }
 }

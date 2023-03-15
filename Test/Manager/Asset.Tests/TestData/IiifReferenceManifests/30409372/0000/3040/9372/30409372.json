@@ -1,0 +1,179 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9372/30409372.json",
+  "label": {
+    "none": [
+      "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9372/_953.json",
+      "label": {
+        "none": [
+          "CH-BAR_E3210A-01_2005-111_849"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9372%2FCH-BAR_E3210A-01_2005-111_849.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "E3210A-01#2020/410#797*"
+        ],
+        "en": [
+          "E3210A-01#2020/410#797*"
+        ],
+        "fr": [
+          "E3210A-01#2020/410#797*"
+        ],
+        "it": [
+          "E3210A-01#2020/410#797*"
+        ],
+        "none": [
+          "E3210A-01#2020/410#797*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+        ],
+        "en": [
+          "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+        ],
+        "fr": [
+          "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+        ],
+        "it": [
+          "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+        ],
+        "none": [
+          "Lombach. Granitblöcke im Bachbett. ( Rosshaupt )  1890-1920. (digitale Kopie der Glassplatte)"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "01.01.1890 - 31.12.1920"
+        ],
+        "en": [
+          "01.01.1890 - 31.12.1920"
+        ],
+        "fr": [
+          "01.01.1890 - 31.12.1920"
+        ],
+        "it": [
+          "01.01.1890 - 31.12.1920"
+        ],
+        "none": [
+          "01.01.1890 - 31.12.1920"
+        ]
+      }
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30409372",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3040/9372/OCR-Text-komplett.zip",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Zip",
+      "format": "application/zip"
+    }
+  ],
+  "start": null
+}

@@ -52,24 +52,7 @@ namespace CMI.Engine.MailTemplate
 
         public override string Entstehungszeitraum => elasticArchiveRecord.CreationPeriod.Text;
 
-        public override string Aktenzeichen
-        {
-            get
-            {
-                var stringBuilder = new StringBuilder();
-                foreach (var az in elasticArchiveRecord.CustomFields.aktenzeichen)
-                {
-                    if (stringBuilder.Length > 0)
-                    {
-                        stringBuilder.Append(", ");
-                    }
-
-                    stringBuilder.Append(az.ToString());
-                }
-
-                return stringBuilder.ToString();
-            }
-        }
+        public override string Aktenzeichen => elasticArchiveRecord.Aktenzeichen() ?? "";
 
         public override string Schutzfristkategorie => elasticArchiveRecord?.ProtectionCategory;
         public override int? Schutzfristdauer => elasticArchiveRecord?.ProtectionDuration;

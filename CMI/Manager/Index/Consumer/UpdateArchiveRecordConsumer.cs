@@ -84,9 +84,6 @@ namespace CMI.Manager.Index.Consumer
                         // until the last sync of this record. We need to update those as well to be in sync
                         UpdateAnyProtectedRelatedRecords(elasticArchiveRecord);
 
-                        currentStatus = AufbereitungsStatusEnum.IndizierungAbgeschlossen;
-                        await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus);
-
                         // update the individual tokens for download and access 
                         // these tokens need to be updated even if the record has no primary data.
                         // Use case: Ö2 user asks for Einsichtsgesuch. It gets approved, but record may not (yet) have primary data.
@@ -102,28 +99,43 @@ namespace CMI.Manager.Index.Consumer
                         Log.Information(
                             $"Recalculated and updated individual tokens for archive record {context.Message.ArchiveRecord.ArchiveRecordId} in elastic index.");
 
-                        await context.Publish<IArchiveRecordUpdated>(new
+                        // When syncing a UoD with primarydata, the harvester sends
+                        // a first metadata update (without PrimparyDataLink) but with
+                        // the instruction not to report completion.
+                        // Else the sync would be marked as completed and this
+                        // this is not correct. 
+                        if (!context.Message.DoNotReportCompletion)
                         {
-                            context.Message.MutationId,
-                            context.Message.ArchiveRecord.ArchiveRecordId,
-                            ActionSuccessful = true,
-                            context.Message.PrimaerdatenAuftragId
-                        });
+                            currentStatus = AufbereitungsStatusEnum.IndizierungAbgeschlossen;
+                            await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus);
+
+                            await context.Publish<IArchiveRecordUpdated>(new
+                            {
+                                context.Message.MutationId,
+                                context.Message.ArchiveRecord.ArchiveRecordId,
+                                ActionSuccessful = true,
+                                context.Message.PrimaerdatenAuftragId
+                            });
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex, "Failed to update archiveRecord with conversationId {ConversationId} in Elastic or SQL", context.ConversationId);
-                    await context.Publish<IArchiveRecordUpdated>(new
+                    if (!context.Message.DoNotReportCompletion)
                     {
-                        context.Message.MutationId,
-                        context.Message.ArchiveRecord.ArchiveRecordId,
-                        ActionSuccessful = false,
-                        context.Message.PrimaerdatenAuftragId,
-                        ErrorMessage = ex.Message,
-                        ex.StackTrace
-                    });
-                    await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus, ex.Message);
+                        await context.Publish<IArchiveRecordUpdated>(new
+                        {
+                            context.Message.MutationId,
+                            context.Message.ArchiveRecord.ArchiveRecordId,
+                            ActionSuccessful = false,
+                            context.Message.PrimaerdatenAuftragId,
+                            ErrorMessage = ex.Message,
+                            ex.StackTrace
+                        });
+                        await PrimaerdatenAuftragHelper.UpdatePrimaerdatenAuftragStatus(context, AufbereitungsServices.IndexService, currentStatus,
+                            ex.Message);
+                    }
                 }
             }
         }

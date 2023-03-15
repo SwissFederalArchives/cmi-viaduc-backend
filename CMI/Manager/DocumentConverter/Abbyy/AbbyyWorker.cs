@@ -49,7 +49,11 @@ namespace CMI.Manager.DocumentConverter.Abbyy
         public ExtractionResult ExtractTextFromDocument(string inputFile, ITextExtractorSettings settings)
         {
             var retVal = new ExtractionResult(settings.MaxExtractionSize);
-            var outputFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N") + ".txt");
+            var fi = new FileInfo(inputFile);
+            var plainTextFile = new FileInfo(Path.ChangeExtension(fi.FullName, ".txt" ));
+            var altoFile = new FileInfo(Path.ChangeExtension(fi.FullName, ".alto"));
+            // Use a random generated filename
+            var pdfFile = new FileInfo(Path.Combine(fi.DirectoryName, $"{Path.GetRandomFileName()}.pdf"));
 
             var engine = enginesPool.GetEngine();
             bool isRecycleRequired = false;
@@ -63,22 +67,34 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                     SubscribeExtractionEvents((FRDocument) fineReaderDocument);
                     fineReaderDocument.Process();
 
-                    // Leerseiten überspringen bei einseitigen Dokumenten. 
-                    if (fineReaderDocument.Pages.Count == 1)
+                    // Plain text
+                    Log.Information("Exporting plain text for {inputFile}.", inputFile);
+                    fineReaderDocument.Export(plainTextFile.FullName, FileExportFormatEnum.FEF_TextUnicodeDefaults, null);
+                    retVal.CreatedOcrFiles.Add(OcrResultType.PlainText, plainTextFile.Name);
+
+                    // Alto text
+                    Log.Information("Exporting alto format for {inputFile}.", inputFile);
+                    fineReaderDocument.Export(altoFile.FullName, FileExportFormatEnum.FEF_ALTO, null);
+                    retVal.CreatedOcrFiles.Add(OcrResultType.Alto, altoFile.Name);
+
+                    // If the input file is PDF we re-save the pdf with a text layer
+                    if (fi.Extension.Equals(".pdf", StringComparison.InvariantCultureIgnoreCase))
                     {
-                        // IsEmpty nutzt die Einstellungen die über das Profil festgelegt wurden
-                        if (fineReaderDocument.Pages[0].IsEmpty())
-                        {
-                            Log.Information("The page {inputFile} was detected as empty.", inputFile);
-                            return retVal;
-                        }
+                        Log.Information("Exporting transformed pdf for {inputFile}.", inputFile);
+                        fineReaderDocument.Export(pdfFile.FullName, FileExportFormatEnum.FEF_PDF, null);
+                        retVal.CreatedOcrFiles.Add(OcrResultType.Pdf, pdfFile.Name);
                     }
 
-                    fineReaderDocument.Export(outputFile, FileExportFormatEnum.FEF_TextUnicodeDefaults, null);
-
-                    // Read the contents of the exported file
-                    using (var sr = new StreamReader(outputFile))
+                    // Leerseiten überspringen bei einseitigen Dokumenten. 
+                    // IsEmpty nutzt die Einstellungen die über das Profil festgelegt wurden
+                    if (fineReaderDocument.Pages.Count == 1 && fineReaderDocument.Pages[0].IsEmpty())
                     {
+                        Log.Information("The page {inputFile} was detected as empty.", inputFile);
+                    }
+                    else
+                    {
+                        // Read the contents of the exported file
+                        using var sr = new StreamReader(plainTextFile.FullName);
                         while (sr.Peek() >= 0)
                         {
                             retVal.Append(sr.ReadLine());
@@ -90,6 +106,7 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                     }
 
                     // Alles OK
+                    retVal.IsOcrResult = true;
                     return retVal;
                 }
                 finally
@@ -136,10 +153,6 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                 });
                 
                 enginesPool.ReleaseEngine(engine, isRecycleRequired);
-                if (File.Exists(outputFile))
-                {
-                    File.Delete(outputFile);
-                }
             }
 
             return retVal;

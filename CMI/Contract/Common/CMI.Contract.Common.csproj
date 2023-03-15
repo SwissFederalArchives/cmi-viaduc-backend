@@ -95,6 +95,7 @@
     <Compile Include="HarvestLogInfoRequest.cs" />
     <Compile Include="HarvestLogInfoResult.cs" />
     <Compile Include="HarvestStatusInfo.cs" />
+    <Compile Include="Iiif-Schemas\IiifPresentationV3.cs" />
     <Compile Include="IManuelleKorrekturManager.cs" />
     <Compile Include="IUpdatePrimaerdatenAuftragStatus.cs" />
     <Compile Include="LogDataFilter.cs" />
@@ -174,6 +175,7 @@
     <None Include="Gebrauchskopie\zusatzDaten.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Iiif-Schemas\iiif_3_0.json" />
     <None Include="packages.config" />
     <None Include="ViaducDataSchema.xsd">
       <SubType>Designer</SubType>

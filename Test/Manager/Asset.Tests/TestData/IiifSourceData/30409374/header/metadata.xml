@@ -1,0 +1,2037 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2022-09-14T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot637987523339624069">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_01WUSkwwJ1Q6C2wjKCCwa1_D">
+        <name>Unterlagen_0000002</name>
+        <originalName>Unterlagen_0000002</originalName>
+        <datei id="_QF2oFFLpYRU9lcfAglAZsP">
+          <name>00000007.jp2</name>
+          <originalName>00000007.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>82ca37a3402804b5f85b5c05da88dd25</pruefsumme>
+        </datei>
+        <datei id="_gujk9G9kSF6jHSr2FtDj9g">
+          <name>00000007_PREMIS.xml</name>
+          <originalName>00000007_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7889b67e2d6b779e686995834202771b</pruefsumme>
+        </datei>
+        <datei id="_7Yl7tksOjysc9UfZlqVeaA">
+          <name>00000008.jp2</name>
+          <originalName>00000008.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>265a917ae26da51aecb4f76d8fd6c79e</pruefsumme>
+        </datei>
+        <datei id="_lZ7beM5gCyA6oAfuwXona2">
+          <name>00000008_PREMIS.xml</name>
+          <originalName>00000008_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f40ebd9298b9c1f9ee4690f32e3ee9ec</pruefsumme>
+        </datei>
+        <datei id="_ae5Ggls2QmzeMBsxVbkXLR">
+          <name>00000009.jp2</name>
+          <originalName>00000009.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>72c570a7d51db710396a90877a4bb201</pruefsumme>
+        </datei>
+        <datei id="_pVzpKxt4aX66SRSsTKHBCa">
+          <name>00000009_PREMIS.xml</name>
+          <originalName>00000009_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>28b89e39b44f4ad505f944246341bd29</pruefsumme>
+        </datei>
+        <datei id="_1TpfG1MPU4xMrm0tsCzSJt">
+          <name>00000010.jp2</name>
+          <originalName>00000010.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a1aceb2ff7d23b8da367976a9ab5adbe</pruefsumme>
+        </datei>
+        <datei id="_XImqXC55Yxe4YWdAoZdveH">
+          <name>00000010_PREMIS.xml</name>
+          <originalName>00000010_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>bd690dd126cb5e75db6c4d22304423ab</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_63t5Bf9SE8nIRQrbBOq1fo_D">
+        <name>Dokument_0000005</name>
+        <originalName>Dokument_0000005</originalName>
+        <datei id="_wWh2LO35adaEKHvpKNNocB">
+          <name>00000030.jp2</name>
+          <originalName>00000030.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>85a21636412b3b71ab830600bf70e22b</pruefsumme>
+        </datei>
+        <datei id="_tHsP3bw9F8QkRhE8EBR6Ix">
+          <name>00000030_PREMIS.xml</name>
+          <originalName>00000030_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>493ebe6113ee3b1ff75ce7ea1cae117f</pruefsumme>
+        </datei>
+        <datei id="_YN0DbpJQzC44DGSVx4T9U1">
+          <name>00000031.jp2</name>
+          <originalName>00000031.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e3bb6208a364f0107eb980aec607c31a</pruefsumme>
+        </datei>
+        <datei id="_8kH9xSbGosF0YYJLhpLQYN">
+          <name>00000031_PREMIS.xml</name>
+          <originalName>00000031_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>aab57c4cebf658a0f6bba8c14be7e770</pruefsumme>
+        </datei>
+        <datei id="_vKoOJM65L8m0RnAVeL5uJ9">
+          <name>00000032.jp2</name>
+          <originalName>00000032.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b478b9c04251b50fb9c15f0fc7b6e3de</pruefsumme>
+        </datei>
+        <datei id="_wAgv9VyWM257ivmGD5cmLt">
+          <name>00000032_PREMIS.xml</name>
+          <originalName>00000032_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>8feec30e7c9f2eb10311200f2627c298</pruefsumme>
+        </datei>
+        <datei id="_r1GZlM3dLMf0jOgEFc3J4e">
+          <name>00000033.jp2</name>
+          <originalName>00000033.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>557fab8ba4c94968704b49beac02fe33</pruefsumme>
+        </datei>
+        <datei id="_G2TET4rb5yhA5J5b1csVt8">
+          <name>00000033_PREMIS.xml</name>
+          <originalName>00000033_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a99b8624eb1c2d1497304b450ba28cb0</pruefsumme>
+        </datei>
+        <datei id="_J6qBnqNpV5fGMgH9159dSY">
+          <name>00000034.jp2</name>
+          <originalName>00000034.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>14744021b4f1793d699e46a83748631a</pruefsumme>
+        </datei>
+        <datei id="_B057ejfY2shTwq7K9PKAJ2">
+          <name>00000034_PREMIS.xml</name>
+          <originalName>00000034_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>56a294a24e78f0c4c8c491967731a505</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_CCxcUnV5UmaMvJr3H3tUnv_D">
+        <name>Unterlagen_0000004</name>
+        <originalName>Unterlagen_0000004</originalName>
+        <datei id="_8JhJabTGIKWi8eRWngh7cA">
+          <name>00000020.jp2</name>
+          <originalName>00000020.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b88115d2d62da6b43f2d9c4c770e8c11</pruefsumme>
+        </datei>
+        <datei id="_cWQ31REvzQLYEnErS47mAD">
+          <name>00000020_PREMIS.xml</name>
+          <originalName>00000020_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1f8ec2b2a88d8a3126c9c2cdec316432</pruefsumme>
+        </datei>
+        <datei id="_xyy3vehr7Ln1wSPgoRU0Fz">
+          <name>00000021.jp2</name>
+          <originalName>00000021.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>081ed8fb6141351eabc54db6752d0eec</pruefsumme>
+        </datei>
+        <datei id="_iGFSYDsgtZIK823xuzcRZP">
+          <name>00000021_PREMIS.xml</name>
+          <originalName>00000021_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5ceda956ef44c4b3468444b79362eaa5</pruefsumme>
+        </datei>
+        <datei id="_yoEP0HbwZZgrAOd1wGRsuK">
+          <name>00000022.jp2</name>
+          <originalName>00000022.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>002fa710b9ee301f46640e34c8159145</pruefsumme>
+        </datei>
+        <datei id="_tZdz7kFmR11nd81An0CuEL">
+          <name>00000022_PREMIS.xml</name>
+          <originalName>00000022_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5cc506be6b40ae9d800818f1b939f23a</pruefsumme>
+        </datei>
+        <datei id="_TZ5EYolJ15eeuGbD4JCSv6">
+          <name>00000023.jp2</name>
+          <originalName>00000023.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4f942c9005f5a9eafee7b411df4de966</pruefsumme>
+        </datei>
+        <datei id="_GHgv9j2qjBgmTQfAz9Ph5p">
+          <name>00000023_PREMIS.xml</name>
+          <originalName>00000023_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f80c680333d61e72863833e3b22aa972</pruefsumme>
+        </datei>
+        <datei id="_avPiWe2aZq4mjjrYAoroj6">
+          <name>00000024.jp2</name>
+          <originalName>00000024.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>af30ec46792be775f9a94948b1cfced3</pruefsumme>
+        </datei>
+        <datei id="_AgN2Ea6VM63GY7SSWw2Pg9">
+          <name>00000024_PREMIS.xml</name>
+          <originalName>00000024_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>29c68da627a6c9ed06d4b33fafe10a30</pruefsumme>
+        </datei>
+        <datei id="_B0JuyRv81FZZEKvkjFdvx0">
+          <name>00000025.jp2</name>
+          <originalName>00000025.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d11ef888259e04227eb89e9c393c8da0</pruefsumme>
+        </datei>
+        <datei id="_xcmQ4WcQFCsZO8D4umhCDo">
+          <name>00000025_PREMIS.xml</name>
+          <originalName>00000025_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e2672bcdcab5d10d0d3c117a45b24922</pruefsumme>
+        </datei>
+        <datei id="_B6fzFyvfpHE0K1Xkui4OKL">
+          <name>00000026.jp2</name>
+          <originalName>00000026.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ac72ec08ae1c4c9b1129813072af40fd</pruefsumme>
+        </datei>
+        <datei id="_bbZdsJ8BRsneeBUlCKDTNK">
+          <name>00000026_PREMIS.xml</name>
+          <originalName>00000026_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7d88433438cc9caedb63b74eb6d033e2</pruefsumme>
+        </datei>
+        <datei id="_sPLDsVrjRZqiVIczp1bZPg">
+          <name>00000027.jp2</name>
+          <originalName>00000027.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>172d227675ff8a83480a8e16108e5573</pruefsumme>
+        </datei>
+        <datei id="_CiWmUF7bTeW96cDvuGQ6mA">
+          <name>00000027_PREMIS.xml</name>
+          <originalName>00000027_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>3fb121fdfc480b7dbda98e86fedeec01</pruefsumme>
+        </datei>
+        <datei id="_1a7upuLTts0OhU67bbofD2">
+          <name>00000028.jp2</name>
+          <originalName>00000028.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>8df5758d5a620f32f5fd4009cf3733a4</pruefsumme>
+        </datei>
+        <datei id="_pnr6AvsFiE3vlSQnPXtSJQ">
+          <name>00000028_PREMIS.xml</name>
+          <originalName>00000028_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b820ce311584f93f641bbd1b0c215406</pruefsumme>
+        </datei>
+        <datei id="_OHHJXg3ZJk4bYJECV0Us8c">
+          <name>00000029.jp2</name>
+          <originalName>00000029.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ec653d50302144542d66702f0ece8128</pruefsumme>
+        </datei>
+        <datei id="_FRKp4KfRymCUn1mKOH7hlC">
+          <name>00000029_PREMIS.xml</name>
+          <originalName>00000029_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>53608ce0f6478942feaa168ff97166ba</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_rUmwed1CigbsD7hUfKwRp2_D">
+        <name>Unterlagen_0000006</name>
+        <originalName>Unterlagen_0000006</originalName>
+        <datei id="_rr7ELK9mqUnSAksP2b1Exp">
+          <name>00000035.jp2</name>
+          <originalName>00000035.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4e00435037272cde9442582fc5ca2df7</pruefsumme>
+        </datei>
+        <datei id="_AvE0sOsX7FA8tPCTTgsIOy">
+          <name>00000035_PREMIS.xml</name>
+          <originalName>00000035_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a0ec4db8233b81a136536f613f36e576</pruefsumme>
+        </datei>
+        <datei id="_kf0A1FvmSgMQqOyNIS1F5U">
+          <name>00000036.jp2</name>
+          <originalName>00000036.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a4c56ba586cd49619a6266c365d61909</pruefsumme>
+        </datei>
+        <datei id="_WlLzT21DVC5GvQEX7I1Can">
+          <name>00000036_PREMIS.xml</name>
+          <originalName>00000036_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f2110d6eb1f430fa9aae1f110aee03ab</pruefsumme>
+        </datei>
+        <datei id="_ApzcULO2D7vD1NFCIglLN4">
+          <name>00000037.jp2</name>
+          <originalName>00000037.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>15c1684b40645a0b258a8f3043c821c4</pruefsumme>
+        </datei>
+        <datei id="_wk5zEbaBfQdpjs4Px9IK2X">
+          <name>00000037_PREMIS.xml</name>
+          <originalName>00000037_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>cbc0a23b1046ba58be975291ccab7fa6</pruefsumme>
+        </datei>
+        <datei id="_TdYYM03d7Av5aWUXekXswR">
+          <name>00000038.jp2</name>
+          <originalName>00000038.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>85f1dc2ec850e9cdc6d5c414a8988ca8</pruefsumme>
+        </datei>
+        <datei id="_T2eR4OCWRTbSWKF4qOZdvm">
+          <name>00000038_PREMIS.xml</name>
+          <originalName>00000038_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>db9f3acd0bd20c452985c22de61101ca</pruefsumme>
+        </datei>
+        <datei id="_KiYTzWSzDwShaXnH5Y8cmD">
+          <name>00000039.jp2</name>
+          <originalName>00000039.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9600aeec4754f0478a19c76ded8e3c8e</pruefsumme>
+        </datei>
+        <datei id="_gFErmQqGW1jUlinHL3vbcH">
+          <name>00000039_PREMIS.xml</name>
+          <originalName>00000039_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4db8e0093f8cdeb8a2983a0c408e7ace</pruefsumme>
+        </datei>
+        <datei id="_ChLARLNKHhi1HjbmBtSIqA">
+          <name>00000040.jp2</name>
+          <originalName>00000040.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5d0c5abe481c4eed307d87793a9da36b</pruefsumme>
+        </datei>
+        <datei id="_lESfPCMYJQ6jPXEbMwy3y0">
+          <name>00000040_PREMIS.xml</name>
+          <originalName>00000040_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>99842269ed9933435a42cefc10f0fb59</pruefsumme>
+        </datei>
+        <datei id="_jaR4bibJvA480yqAthPLeR">
+          <name>00000041.jp2</name>
+          <originalName>00000041.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0b18b592b5ae081132445b9442bb6588</pruefsumme>
+        </datei>
+        <datei id="_2nNEwoOiUiIQaNJVDVZQQx">
+          <name>00000041_PREMIS.xml</name>
+          <originalName>00000041_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1887de711f48aacf7bc06ad832e75e99</pruefsumme>
+        </datei>
+        <datei id="_KzP2rxQn9mkepG0lB2i6U1">
+          <name>00000042.jp2</name>
+          <originalName>00000042.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>223438fb591d316dcd106800c6e75c55</pruefsumme>
+        </datei>
+        <datei id="_JOcDUoEJVb671MIKyBsWe1">
+          <name>00000042_PREMIS.xml</name>
+          <originalName>00000042_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d67a1e4301567e4071bad7bde4cc9176</pruefsumme>
+        </datei>
+        <datei id="_hLQUACdM8Wpzi3SLQHEmcr">
+          <name>00000043.jp2</name>
+          <originalName>00000043.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9a4ae2c0bd21916cb262233e91129890</pruefsumme>
+        </datei>
+        <datei id="_CoEnBAK5EPnDIAByaoS2H5">
+          <name>00000043_PREMIS.xml</name>
+          <originalName>00000043_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>319c81fa0590f4e7ba5af4bdfd46e264</pruefsumme>
+        </datei>
+        <datei id="_Yi8awjjI32A9Aax8bZAPZi">
+          <name>00000044.jp2</name>
+          <originalName>00000044.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>513d456fce5bb637271c42c2cb84a0b4</pruefsumme>
+        </datei>
+        <datei id="_9DC9VBAIlfaVL4uZ2I89p0">
+          <name>00000044_PREMIS.xml</name>
+          <originalName>00000044_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e96fc3dea3c318147a10bf5dcb005e41</pruefsumme>
+        </datei>
+        <datei id="_z3OZw01TwH2xca06E7emGJ">
+          <name>00000045.jp2</name>
+          <originalName>00000045.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7d09fb24ca43bc9e5b0bd071997d246d</pruefsumme>
+        </datei>
+        <datei id="_nVOBgMXb9D8vswD9DzyN70">
+          <name>00000045_PREMIS.xml</name>
+          <originalName>00000045_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>06a146ffac8e6d6f2ffca6127e40b21d</pruefsumme>
+        </datei>
+        <datei id="_eXeYXNYRnNZLDPdMrbpg9v">
+          <name>00000046.jp2</name>
+          <originalName>00000046.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a1803a2aba1c909bcfd7846bb30b26d9</pruefsumme>
+        </datei>
+        <datei id="_FB84v8sMYz8cMKHXWi3us0">
+          <name>00000046_PREMIS.xml</name>
+          <originalName>00000046_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f3fe9fe7884a8324b76d8786152c3106</pruefsumme>
+        </datei>
+        <datei id="_yHOkyxTHPmhTiDsZXtwDzG">
+          <name>00000047.jp2</name>
+          <originalName>00000047.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e6d10d5f39e914f7f61afdf71385e501</pruefsumme>
+        </datei>
+        <datei id="_7f0fFf7uyVFF52DTNxl9um">
+          <name>00000047_PREMIS.xml</name>
+          <originalName>00000047_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e6ced356a837dadb13433803ec6608e4</pruefsumme>
+        </datei>
+        <datei id="_m5PVBVV3oHU9ZbLb4jbObo">
+          <name>00000048.jp2</name>
+          <originalName>00000048.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2dbc44e079079d7b61dee4b9f92ffd57</pruefsumme>
+        </datei>
+        <datei id="_qvZITb95DukGZo42qtozry">
+          <name>00000048_PREMIS.xml</name>
+          <originalName>00000048_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>82d1192016ec602859bfcef81c0364d4</pruefsumme>
+        </datei>
+        <datei id="_Jg8pBfszE3y0fexOSQK97z">
+          <name>00000049.jp2</name>
+          <originalName>00000049.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1e3b85c1fa260feca59ef91d300ebbf7</pruefsumme>
+        </datei>
+        <datei id="_IwqNhmVXzOFbeq0tGYbPe3">
+          <name>00000049_PREMIS.xml</name>
+          <originalName>00000049_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b85799b005098a20cb363eba5898a857</pruefsumme>
+        </datei>
+        <datei id="_sZ2lSoiBOnhFenBMs0V5HX">
+          <name>00000050.jp2</name>
+          <originalName>00000050.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b9dc7cc75a6b278a226c2a143b9a0ad0</pruefsumme>
+        </datei>
+        <datei id="_ow4UMNV0V0fYmXyIWG0fed">
+          <name>00000050_PREMIS.xml</name>
+          <originalName>00000050_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>75831812158689efd2380170cc0a5551</pruefsumme>
+        </datei>
+        <datei id="_2yNxMA8A9swCrkS0vHkKLo">
+          <name>00000051.jp2</name>
+          <originalName>00000051.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b9b1238ae5fb97f1d1c1b1104df7e397</pruefsumme>
+        </datei>
+        <datei id="_RV1m4zhGVGYN6r460Xik9d">
+          <name>00000051_PREMIS.xml</name>
+          <originalName>00000051_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5e70e1aa7ae0bee9abd7fddeae460828</pruefsumme>
+        </datei>
+        <datei id="_NlVEaIrucCnmC57ZTaRzQ3">
+          <name>00000052.jp2</name>
+          <originalName>00000052.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ae65b117944f9d9c98fa46fa014a9b87</pruefsumme>
+        </datei>
+        <datei id="_KjfCjYA7WPTwe77yCVPH9Y">
+          <name>00000052_PREMIS.xml</name>
+          <originalName>00000052_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0075f75786d98dcf0f032807a1d895b9</pruefsumme>
+        </datei>
+        <datei id="_4NwJWW0jYEggtaBThT4k2E">
+          <name>00000053.jp2</name>
+          <originalName>00000053.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>c94a848788f39ae7a7c0e0a37bd2bc33</pruefsumme>
+        </datei>
+        <datei id="_Qkrq8ISwwiAtWXGvw5ryyo">
+          <name>00000053_PREMIS.xml</name>
+          <originalName>00000053_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2ce6be411da85af1e50ff1ceaddf3a36</pruefsumme>
+        </datei>
+        <datei id="_eL53cKXPb4ffezbBT1YDh4">
+          <name>00000054.jp2</name>
+          <originalName>00000054.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b742b0e340b29714e19c547e119729ae</pruefsumme>
+        </datei>
+        <datei id="_Xx6a3Kcd1xALMEINDd0M51">
+          <name>00000054_PREMIS.xml</name>
+          <originalName>00000054_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>fc8143719d3bcf27d8c9289d8ed30e12</pruefsumme>
+        </datei>
+        <datei id="_LpZMbORF674AszV88NmxPM">
+          <name>00000055.jp2</name>
+          <originalName>00000055.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5785c30d252affa4f6385bf10b9baba8</pruefsumme>
+        </datei>
+        <datei id="_R2a3w2wihvfsyuTRo0IMpd">
+          <name>00000055_PREMIS.xml</name>
+          <originalName>00000055_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>724a9e67346b67a537ddf0f1ed84bebe</pruefsumme>
+        </datei>
+        <datei id="_nlDu9H4LAA7Anx4Nqqnq2c">
+          <name>00000056.jp2</name>
+          <originalName>00000056.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>14512d4a9f72a1e9c0ff61453e53b4ae</pruefsumme>
+        </datei>
+        <datei id="_5fgpyoqYFbtPzS09WDBoyV">
+          <name>00000056_PREMIS.xml</name>
+          <originalName>00000056_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a78016efae5689d60c9a40d78042fcb0</pruefsumme>
+        </datei>
+        <datei id="_rIniZRuihPJebVoGU1BTat">
+          <name>00000057.jp2</name>
+          <originalName>00000057.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>3fab0ed2cd0096f65f4f8db01eca571f</pruefsumme>
+        </datei>
+        <datei id="_hkjMcV7PqGecVXlYXRFHZj">
+          <name>00000057_PREMIS.xml</name>
+          <originalName>00000057_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>dd5a4eeaef41758e3a5f9a544c105d83</pruefsumme>
+        </datei>
+        <datei id="_C2LEt49uKU7TqMIZ93NTlW">
+          <name>00000058.jp2</name>
+          <originalName>00000058.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f5520ebdeda8b4604aa1be54cb5aa14d</pruefsumme>
+        </datei>
+        <datei id="_m15uM0CRnvfJsj6sDLtMhL">
+          <name>00000058_PREMIS.xml</name>
+          <originalName>00000058_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>973ca3276e2db57f24c784fa5d461c6d</pruefsumme>
+        </datei>
+        <datei id="_7okWrKRyh6LmHZTTEb2G0Y">
+          <name>00000059.jp2</name>
+          <originalName>00000059.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4e34625fbb0af4f05742caae6038b1cb</pruefsumme>
+        </datei>
+        <datei id="_hPVooI88UOlvLPBIsiIQzg">
+          <name>00000059_PREMIS.xml</name>
+          <originalName>00000059_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>096eab8807d92f9897d9ac31de7d8ec0</pruefsumme>
+        </datei>
+        <datei id="_2QvBNzUxXJhcgdrpuEEgXr">
+          <name>00000060.jp2</name>
+          <originalName>00000060.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>23db56a43eeb0dd2f3dfc2d16561668d</pruefsumme>
+        </datei>
+        <datei id="_KlG2gTrsQMIYdwMbUGZA9F">
+          <name>00000060_PREMIS.xml</name>
+          <originalName>00000060_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>33f291fdc3b9a633aeadea1965707f46</pruefsumme>
+        </datei>
+        <datei id="_8qtzFrL5rEYpGhkjQIWZx6">
+          <name>00000061.jp2</name>
+          <originalName>00000061.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>be93173292cec04b2a8c6b1cb3869eea</pruefsumme>
+        </datei>
+        <datei id="_H1M3icyuVinPZ5yTTnCzWU">
+          <name>00000061_PREMIS.xml</name>
+          <originalName>00000061_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d798a9c202fd20bbb91ec57acb908eef</pruefsumme>
+        </datei>
+        <datei id="_PcYxiL4iD5WltJXSPM2old">
+          <name>00000062.jp2</name>
+          <originalName>00000062.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5ac697bc204ce504bfe1a5629ef671bd</pruefsumme>
+        </datei>
+        <datei id="_5skN2lhNDm1kxaRRwdoa1q">
+          <name>00000062_PREMIS.xml</name>
+          <originalName>00000062_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5e8bf2bc6d4a4d87d8fccfb6a9594a80</pruefsumme>
+        </datei>
+        <datei id="_yo5Gebcw39m03UBgha5Zf6">
+          <name>00000063.jp2</name>
+          <originalName>00000063.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5ad9c95c881e0064698a9de90db287ce</pruefsumme>
+        </datei>
+        <datei id="_gvfkQdh7MzLhHpPmi432mp">
+          <name>00000063_PREMIS.xml</name>
+          <originalName>00000063_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>21b57435f80863672c5fd81ef428e22b</pruefsumme>
+        </datei>
+        <datei id="_XH2DFsjBDe1XZRP5VnrcOH">
+          <name>00000064.jp2</name>
+          <originalName>00000064.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f22d89ccedbdfa2679200f81b102e9f2</pruefsumme>
+        </datei>
+        <datei id="_6aZOket7L5Gsy0yEflVRS2">
+          <name>00000064_PREMIS.xml</name>
+          <originalName>00000064_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a76354b2b14b5d76c260148f56ba82e2</pruefsumme>
+        </datei>
+        <datei id="_AUmkGzMyhPk1dddgE449dQ">
+          <name>00000065.jp2</name>
+          <originalName>00000065.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1c5dc6a3e16956c3c02ba1d000336c34</pruefsumme>
+        </datei>
+        <datei id="_dj6kFkzmvkfAIqoDHXLLQT">
+          <name>00000065_PREMIS.xml</name>
+          <originalName>00000065_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>27f9bb3ad2473ab3db6b48f1b1a1491c</pruefsumme>
+        </datei>
+        <datei id="_4v5UiaXGzqihwlNSheF1GY">
+          <name>00000066.jp2</name>
+          <originalName>00000066.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b795db1c9ecb31a35043e18480fd309c</pruefsumme>
+        </datei>
+        <datei id="_NBrcyb0p70NPLEWvux8fa3">
+          <name>00000066_PREMIS.xml</name>
+          <originalName>00000066_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>145427c1e4d787712a22a803b200c6c0</pruefsumme>
+        </datei>
+        <datei id="_eF30PnFoqegoJ3MASd7gHK">
+          <name>00000067.jp2</name>
+          <originalName>00000067.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>37da57df5991075cb45ef94b4e1110d9</pruefsumme>
+        </datei>
+        <datei id="_butxKSESx5uysbMuHVtBq2">
+          <name>00000067_PREMIS.xml</name>
+          <originalName>00000067_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ab1bdb9175c7181df65a6fa3b7285ae7</pruefsumme>
+        </datei>
+        <datei id="_ARP90msJv41SwJH4IvvqT8">
+          <name>00000068.jp2</name>
+          <originalName>00000068.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>580dc89a268c66c11a5469c59403fb50</pruefsumme>
+        </datei>
+        <datei id="_Z8QxIsXlwrJNw6GNi9R8SS">
+          <name>00000068_PREMIS.xml</name>
+          <originalName>00000068_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1e96c551fd1e59c5079c374931dcd1c7</pruefsumme>
+        </datei>
+        <datei id="_gIXguVASuyIXl2RSRnt2Iu">
+          <name>00000069.jp2</name>
+          <originalName>00000069.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>fd260c496d3dea0d25acb2108c2ae464</pruefsumme>
+        </datei>
+        <datei id="_FfyrhbFQCOza73ZiqJMd3W">
+          <name>00000069_PREMIS.xml</name>
+          <originalName>00000069_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>17dbab22fa7cac707d296f7161e82fe3</pruefsumme>
+        </datei>
+        <datei id="_foZ6M8Am9UfJN6nLF6KYjd">
+          <name>00000070.jp2</name>
+          <originalName>00000070.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a5e61a4fd38bfa28add9b45008952d78</pruefsumme>
+        </datei>
+        <datei id="_sf5g7bqLpczgpK5q6sncB6">
+          <name>00000070_PREMIS.xml</name>
+          <originalName>00000070_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4caf7e736e8868533e0f0167e398ef4a</pruefsumme>
+        </datei>
+        <datei id="_jrP6d71uA8I4ifinGtIp78">
+          <name>00000071.jp2</name>
+          <originalName>00000071.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>45bc248751c51925e919ee582cbdc901</pruefsumme>
+        </datei>
+        <datei id="_mF2RLOsYrSaDuOJQtmbLTh">
+          <name>00000071_PREMIS.xml</name>
+          <originalName>00000071_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>afdf8ab0c3a4579a9f36a842f549948e</pruefsumme>
+        </datei>
+        <datei id="_yWiARmXWCE09aMff91Hrh6">
+          <name>00000072.jp2</name>
+          <originalName>00000072.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>419c1aaf4478d2bec14a698d6daba8dc</pruefsumme>
+        </datei>
+        <datei id="_w3sslStZIuvz2fno8I5tVq">
+          <name>00000072_PREMIS.xml</name>
+          <originalName>00000072_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0689af4abb09f562036fd0e3746b3775</pruefsumme>
+        </datei>
+        <datei id="_DqVf81oDBoGez17llgCQXb">
+          <name>00000073.jp2</name>
+          <originalName>00000073.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>db2a0aeffc6735e7c017c0e3c582c9c7</pruefsumme>
+        </datei>
+        <datei id="_MywKpPnY6Z3B9NELqvwR4k">
+          <name>00000073_PREMIS.xml</name>
+          <originalName>00000073_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>20d07dfdfed055003f287b5b402635be</pruefsumme>
+        </datei>
+        <datei id="_q0daTyop0CDvlcWItWgPPp">
+          <name>00000074.jp2</name>
+          <originalName>00000074.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d20f283bcba9d31489f75410a94e6eed</pruefsumme>
+        </datei>
+        <datei id="_s0KIphAacO36B7lGAc8tZW">
+          <name>00000074_PREMIS.xml</name>
+          <originalName>00000074_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>37ea16f04991a0426e24c66c0f4a9d84</pruefsumme>
+        </datei>
+        <datei id="_4z3yqMFBtwSSOgBRmaCyWh">
+          <name>00000075.jp2</name>
+          <originalName>00000075.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a94bfc54f40068af5ac4254f347dac5a</pruefsumme>
+        </datei>
+        <datei id="_lRMknYmJF2kgeWfUgzy0gk">
+          <name>00000075_PREMIS.xml</name>
+          <originalName>00000075_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7dedb10d97d7f93acee509a26f20b73b</pruefsumme>
+        </datei>
+        <datei id="_ewLhgOcc1GDhmmUPtsB5fy">
+          <name>00000076.jp2</name>
+          <originalName>00000076.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7795f90e0526d0690d121f56ae1cdba3</pruefsumme>
+        </datei>
+        <datei id="_9n0I46ARAN9i954Hl9qzCP">
+          <name>00000076_PREMIS.xml</name>
+          <originalName>00000076_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2a745aa36b17cfa1bca7ad25808496b5</pruefsumme>
+        </datei>
+        <datei id="_HtTvVN2nWJ0eRYUPB2QD2f">
+          <name>00000077.jp2</name>
+          <originalName>00000077.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7dcae78d1b0ce8a246790471c4623049</pruefsumme>
+        </datei>
+        <datei id="_c452VSqlvw2MakeMepjCzc">
+          <name>00000077_PREMIS.xml</name>
+          <originalName>00000077_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>377e926e6c54ee8673a754e666b15d72</pruefsumme>
+        </datei>
+        <datei id="_KnRDZjUv7p8GfwuUoV3Kn7">
+          <name>00000078.jp2</name>
+          <originalName>00000078.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ce35db1699e2c6b6b164697f9762b831</pruefsumme>
+        </datei>
+        <datei id="_rb6pS4YA98qkrPTgQetgMO">
+          <name>00000078_PREMIS.xml</name>
+          <originalName>00000078_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0ab75ec7b54d7f1b61b4e07c32c6d5e8</pruefsumme>
+        </datei>
+        <datei id="_S3lTDH3v6O8z0lUufa44Da">
+          <name>00000079.jp2</name>
+          <originalName>00000079.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9bd4328bb3dff884a8d1f9794db062ab</pruefsumme>
+        </datei>
+        <datei id="_DEV5CVNKqcyCueYWsyb5xN">
+          <name>00000079_PREMIS.xml</name>
+          <originalName>00000079_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7a130efe4971594efcd33eb2b99c0a3f</pruefsumme>
+        </datei>
+        <datei id="_qXuzLT5ilSGAqoKPx3UC46">
+          <name>00000080.jp2</name>
+          <originalName>00000080.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ba151d5112580dc2cfd4a05a4272dee6</pruefsumme>
+        </datei>
+        <datei id="_VwoihcVvbP1v3mpTsBT2Yu">
+          <name>00000080_PREMIS.xml</name>
+          <originalName>00000080_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5b8163e913d1aecf94bd11fe9aa04707</pruefsumme>
+        </datei>
+        <datei id="_s2H7VkMDBE5mCFn8aluW0r">
+          <name>00000081.jp2</name>
+          <originalName>00000081.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7e809f4f7feb50e878d32ea2022cf085</pruefsumme>
+        </datei>
+        <datei id="_fpjoA75kZwYVj4nyV8nccQ">
+          <name>00000081_PREMIS.xml</name>
+          <originalName>00000081_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>226b1132443f10bbbe7cc518b78e4f57</pruefsumme>
+        </datei>
+        <datei id="_QAHFFXzM86EXdzjZH09rFF">
+          <name>00000082.jp2</name>
+          <originalName>00000082.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>58c9907370486981358fe127d3316dd7</pruefsumme>
+        </datei>
+        <datei id="_7UAWr2LTHX2FCrw7Q2KGRc">
+          <name>00000082_PREMIS.xml</name>
+          <originalName>00000082_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>af8ef06970e14cf807de9cb1dd7869a0</pruefsumme>
+        </datei>
+        <datei id="_bieN33Ayug38k7GBd36g1p">
+          <name>00000083.jp2</name>
+          <originalName>00000083.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d1fa5130fdbcb3a5bc3453dc53ed765a</pruefsumme>
+        </datei>
+        <datei id="_FRmEnuIMtPHXzMSe5Is3eO">
+          <name>00000083_PREMIS.xml</name>
+          <originalName>00000083_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>645daf221375c48a7d83fcd2c05e3540</pruefsumme>
+        </datei>
+        <datei id="_zTUlwZD59ikXnooAofIAaD">
+          <name>00000084.jp2</name>
+          <originalName>00000084.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>41ace4de33a88116ff07339b0e07b5fa</pruefsumme>
+        </datei>
+        <datei id="_QrNvlygFWFI2n6n4dexpp0">
+          <name>00000084_PREMIS.xml</name>
+          <originalName>00000084_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5201d61c4be79ef868885f6c71885a77</pruefsumme>
+        </datei>
+        <datei id="_4DMNk77wUQp1Ntu5ExoXAO">
+          <name>00000085.jp2</name>
+          <originalName>00000085.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6e4681bb3bf3759af735d1fca38042ee</pruefsumme>
+        </datei>
+        <datei id="_NwDEYPoIxI5ZFm6TtF5tIM">
+          <name>00000085_PREMIS.xml</name>
+          <originalName>00000085_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b3c643bfd4c7e75004370e527f8a4426</pruefsumme>
+        </datei>
+        <datei id="_NNzhO2vDaFyTd5H4U7usGI">
+          <name>00000086.jp2</name>
+          <originalName>00000086.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>276e4fdf4bb2fc85633452be91511b42</pruefsumme>
+        </datei>
+        <datei id="_7iCjK5iKytg89Rl0PnjCxH">
+          <name>00000086_PREMIS.xml</name>
+          <originalName>00000086_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>604c02719913f82501d09ff4ac46689c</pruefsumme>
+        </datei>
+        <datei id="_Bd4DnTtAEUI1tTFFfhALtV">
+          <name>00000087.jp2</name>
+          <originalName>00000087.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e57e7654d472abec071faea3c1d2b791</pruefsumme>
+        </datei>
+        <datei id="_0JPy9b4gxnK5kAoZmTEKK5">
+          <name>00000087_PREMIS.xml</name>
+          <originalName>00000087_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>afc42ccba4b7f7e599946623f0450fbc</pruefsumme>
+        </datei>
+        <datei id="_Z9Tc1N80MzpVmxpHu9YbTP">
+          <name>00000088.jp2</name>
+          <originalName>00000088.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>90d624badc7260c5c9a492fbd4a8953d</pruefsumme>
+        </datei>
+        <datei id="_XMIr2lbGwbEiow26G1mLak">
+          <name>00000088_PREMIS.xml</name>
+          <originalName>00000088_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>41db65fdaf87f8edd398942664203d49</pruefsumme>
+        </datei>
+        <datei id="_Yr9hBx27uSUsQ5nhEoDXQg">
+          <name>00000089.jp2</name>
+          <originalName>00000089.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0af86fc0b97734f1706cd22ff7f48732</pruefsumme>
+        </datei>
+        <datei id="_dZu7c1Yod7tRsc4FNWf0EG">
+          <name>00000089_PREMIS.xml</name>
+          <originalName>00000089_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>817ba236ed28fa6e83d6a38405a2b34f</pruefsumme>
+        </datei>
+        <datei id="_LTLnW8QNtmaOZsDv69MtBM">
+          <name>00000090.jp2</name>
+          <originalName>00000090.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>acbb14d897e9ba055aa455142bd3d025</pruefsumme>
+        </datei>
+        <datei id="_FK1Sul6D9tqMxjW12bv2Is">
+          <name>00000090_PREMIS.xml</name>
+          <originalName>00000090_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>641467a29eeccd70419eda6eed1c37f7</pruefsumme>
+        </datei>
+        <datei id="_eN64LIa7DZvkIJvi9EqrgO">
+          <name>00000091.jp2</name>
+          <originalName>00000091.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>135fb8dbc703446eafd44b00d57a0f5c</pruefsumme>
+        </datei>
+        <datei id="_DUPpHPn6yzFiLBN4nuFmIb">
+          <name>00000091_PREMIS.xml</name>
+          <originalName>00000091_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d2bd0a66b295af079949b5fe1fa44939</pruefsumme>
+        </datei>
+        <datei id="_Aib3smUc5iFfgceWrGrlPH">
+          <name>00000092.jp2</name>
+          <originalName>00000092.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b535c946d9a2aabdc3eb0047d199d5ea</pruefsumme>
+        </datei>
+        <datei id="_8Uj5Hco4o1ej21clxF2M3q">
+          <name>00000092_PREMIS.xml</name>
+          <originalName>00000092_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ddd169066642d7250c5199630efae3d9</pruefsumme>
+        </datei>
+        <datei id="_6FNhZNU4e84aYM0F9trSyT">
+          <name>00000093.jp2</name>
+          <originalName>00000093.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>eea8fcfe187e4452303a49ee7d971e81</pruefsumme>
+        </datei>
+        <datei id="_2SDAhYeDS2bfUwAUmRdfyh">
+          <name>00000093_PREMIS.xml</name>
+          <originalName>00000093_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6d1dbd5fb3384511d23065b4ff8c8529</pruefsumme>
+        </datei>
+        <datei id="_BFOc7NjZnepYhfcD9GgVYz">
+          <name>00000094.jp2</name>
+          <originalName>00000094.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7610867787a6865f4ce85da6037a0136</pruefsumme>
+        </datei>
+        <datei id="_qFCIfR4FEE99v5aXUuIkbt">
+          <name>00000094_PREMIS.xml</name>
+          <originalName>00000094_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f8280df7af0bd708e21833227c511ed1</pruefsumme>
+        </datei>
+        <datei id="_cIeWynRsqKf7Ybxd1U5asG">
+          <name>00000095.jp2</name>
+          <originalName>00000095.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4e1c4dcdcc97c9db6265694689ed74fb</pruefsumme>
+        </datei>
+        <datei id="_IQG9K7KAuViao0DQVl2uwP">
+          <name>00000095_PREMIS.xml</name>
+          <originalName>00000095_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9bd199660b2bbd5c07b44bf30e2467df</pruefsumme>
+        </datei>
+        <datei id="_kmGLLl2GeWwm1IYXnnp5LL">
+          <name>00000096.jp2</name>
+          <originalName>00000096.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9975a8d5a31afe8a7c6b6733690dbb5d</pruefsumme>
+        </datei>
+        <datei id="_qh9HSexgTFv4W4Gq6x0B3X">
+          <name>00000096_PREMIS.xml</name>
+          <originalName>00000096_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9982ff9c95b91dea5c310bbb5aa0bbc4</pruefsumme>
+        </datei>
+        <datei id="_ubYhy5NWevrCXA8MXf1v3p">
+          <name>00000097.jp2</name>
+          <originalName>00000097.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1d31f21d86ffc98b59e08257b36168fd</pruefsumme>
+        </datei>
+        <datei id="_CtDURwFZB2WWe4xLduGqDe">
+          <name>00000097_PREMIS.xml</name>
+          <originalName>00000097_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>06ef443b543941f63c968c26c57d0cad</pruefsumme>
+        </datei>
+        <datei id="_RZkaODPUlxJVU9VTavMngr">
+          <name>00000098.jp2</name>
+          <originalName>00000098.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>989d1c2c74b89ceb0abf8d07d17be2b3</pruefsumme>
+        </datei>
+        <datei id="_N4Qw17ShaEErVohkZm0NS7">
+          <name>00000098_PREMIS.xml</name>
+          <originalName>00000098_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1bf44567f5105464b59ea6d56e1d9bcc</pruefsumme>
+        </datei>
+        <datei id="_Sg4LDIE1uSdwx4k9HzqzNr">
+          <name>00000099.jp2</name>
+          <originalName>00000099.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>40c3f0f5757afa19e7c84e678cdd178c</pruefsumme>
+        </datei>
+        <datei id="_Owv1Ub0UaKCdcrpiYhTXpN">
+          <name>00000099_PREMIS.xml</name>
+          <originalName>00000099_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6c9bee5244b4605fc98e6ce84782e25e</pruefsumme>
+        </datei>
+        <datei id="_6aBQniR73XT1h9SFyKqXD1">
+          <name>00000100.jp2</name>
+          <originalName>00000100.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>da4a84e2354d515134e26e89e1552def</pruefsumme>
+        </datei>
+        <datei id="_AOcQu77IXj0u2786H45mYJ">
+          <name>00000100_PREMIS.xml</name>
+          <originalName>00000100_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b50299274e6c84c3038bd570a9d94e16</pruefsumme>
+        </datei>
+        <datei id="_clpyq9SMsdXtpFkXZHClV7">
+          <name>00000101.jp2</name>
+          <originalName>00000101.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>03ab4e139115f5b219a80479c7074774</pruefsumme>
+        </datei>
+        <datei id="_e5bB8v61aRvRl39w25PyvB">
+          <name>00000101_PREMIS.xml</name>
+          <originalName>00000101_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>49a4d3b1990516fe7187183a1fae72e0</pruefsumme>
+        </datei>
+        <datei id="_34D2WMat6IgrAeK8wIQimU">
+          <name>00000102.jp2</name>
+          <originalName>00000102.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>29bea91e6c46ab8832fc48f6f5036c14</pruefsumme>
+        </datei>
+        <datei id="_fFEwgUjxZuNmN5lqLOgxvG">
+          <name>00000102_PREMIS.xml</name>
+          <originalName>00000102_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d6e1a0e616d05d2672d0f2b583c7a1a2</pruefsumme>
+        </datei>
+        <datei id="_RHerqM3N9J05yksFxe6wMB">
+          <name>00000103.jp2</name>
+          <originalName>00000103.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d9773b2c9c9d823ddd3d5ef8c58c9817</pruefsumme>
+        </datei>
+        <datei id="_IO2mwAWOUD4LFQ9XUL7kPC">
+          <name>00000103_PREMIS.xml</name>
+          <originalName>00000103_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a717fd992704e0112514d4dd8e913c0c</pruefsumme>
+        </datei>
+        <datei id="_15JwpQYLgDx6on9StjlErX">
+          <name>00000104.jp2</name>
+          <originalName>00000104.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>858e6f7d110d07a072aac080b0cd83ac</pruefsumme>
+        </datei>
+        <datei id="_chthSnDngOI9a03Ofi3Ab2">
+          <name>00000104_PREMIS.xml</name>
+          <originalName>00000104_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>838d98a8b9cacb0a314b97b42ee79291</pruefsumme>
+        </datei>
+        <datei id="_vR96dnkwqNkAJk8o5BLfvS">
+          <name>00000105.jp2</name>
+          <originalName>00000105.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d2a7f086cc152bad4c99a1f8d8b5c336</pruefsumme>
+        </datei>
+        <datei id="_plaKrbnUp0fsV0UAm1qZ33">
+          <name>00000105_PREMIS.xml</name>
+          <originalName>00000105_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d26a0f834bfa5206b05ce94061647ac9</pruefsumme>
+        </datei>
+        <datei id="_zKfCcPKIzn6RJZuSkzdTSX">
+          <name>00000106.jp2</name>
+          <originalName>00000106.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1d41915d779e64b56d27a11481539109</pruefsumme>
+        </datei>
+        <datei id="_tDx4PT5e0wC1Se2hklg1Gq">
+          <name>00000106_PREMIS.xml</name>
+          <originalName>00000106_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>36b36ab945565fbe303557de739b723e</pruefsumme>
+        </datei>
+        <datei id="_stm7bsBpaNwdEXAUzHtZ56">
+          <name>00000107.jp2</name>
+          <originalName>00000107.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>689d9916446e94d9fda52aac467590fa</pruefsumme>
+        </datei>
+        <datei id="_PTbS7XpB6w6bOfM5BhKvas">
+          <name>00000107_PREMIS.xml</name>
+          <originalName>00000107_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>7cdeea7d3ad379dee380ee7143236901</pruefsumme>
+        </datei>
+        <datei id="_1f0CD4aFomeB9kTeFOscfj">
+          <name>00000108.jp2</name>
+          <originalName>00000108.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>635a47a95f8e9d48137aeff33c2c637c</pruefsumme>
+        </datei>
+        <datei id="_HnJ3f5I1ncDrkZ2G69Aplr">
+          <name>00000108_PREMIS.xml</name>
+          <originalName>00000108_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d9ffbc17b1b2bb4fceb3300ad977547e</pruefsumme>
+        </datei>
+        <datei id="_jfgl71jaIxJcmfHM3GwPPG">
+          <name>00000109.jp2</name>
+          <originalName>00000109.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ad98e0dd4223f2ed7ac5ff7a8df4d595</pruefsumme>
+        </datei>
+        <datei id="_54KlIgyKloMDMKqiFp0k1x">
+          <name>00000109_PREMIS.xml</name>
+          <originalName>00000109_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5eb83aeb3d1154ecd4cef248e9baa1fa</pruefsumme>
+        </datei>
+        <datei id="_8QxTSpVx8KFs64Ne0VaPs0">
+          <name>00000110.jp2</name>
+          <originalName>00000110.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d530b2543034a7e3240269e71bd0f5a0</pruefsumme>
+        </datei>
+        <datei id="_XZg0cksYO6ruqAjYh3sIzN">
+          <name>00000110_PREMIS.xml</name>
+          <originalName>00000110_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>deb4c0d9688019d0857ce7c47f15a3e5</pruefsumme>
+        </datei>
+        <datei id="_raZPHvuxPvPeikLFa1w2cg">
+          <name>00000111.jp2</name>
+          <originalName>00000111.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>fc628e3a89e9efe31db6340a868cb3f2</pruefsumme>
+        </datei>
+        <datei id="_VAp68fvi34CYiFlKL95uHb">
+          <name>00000111_PREMIS.xml</name>
+          <originalName>00000111_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>89f2997b99a36a26ec5af14c2f34c8d5</pruefsumme>
+        </datei>
+        <datei id="_F66SuhxU3oqiwmItRhm63e">
+          <name>00000112.jp2</name>
+          <originalName>00000112.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ec20b38dc1aecdc4fcc4bd4c3057bc7e</pruefsumme>
+        </datei>
+        <datei id="_5InWQ11rRPhXzoRNm0XWr8">
+          <name>00000112_PREMIS.xml</name>
+          <originalName>00000112_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9be6d25f63ccec44ebc526d62436d48b</pruefsumme>
+        </datei>
+        <datei id="_a2u8hBgtlsbmN0kVNwOF77">
+          <name>00000113.jp2</name>
+          <originalName>00000113.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>6a8dcd922f1f2d486d57a355827d637b</pruefsumme>
+        </datei>
+        <datei id="_8G4FYwpvuCSyuKd2RJakVG">
+          <name>00000113_PREMIS.xml</name>
+          <originalName>00000113_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>828121941d6c7c0ed3bc30bfc8d6eda2</pruefsumme>
+        </datei>
+        <datei id="_zfrizuiRpId6YGlvsoQBSn">
+          <name>00000114.jp2</name>
+          <originalName>00000114.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>c01fe7fccf7f16dbbdaad8fdc633bd6e</pruefsumme>
+        </datei>
+        <datei id="_1gaIDOJfkcTb5mf2X1cohX">
+          <name>00000114_PREMIS.xml</name>
+          <originalName>00000114_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>4a550babaa21f434eb2f5dfa7080b108</pruefsumme>
+        </datei>
+        <datei id="_4vKg3KVMQU2gYJ7nk7ispV">
+          <name>00000115.jp2</name>
+          <originalName>00000115.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>647d7ae1d4830122b028de5b75149f53</pruefsumme>
+        </datei>
+        <datei id="_WoOU9aMdOmZpw8dMazff5P">
+          <name>00000115_PREMIS.xml</name>
+          <originalName>00000115_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>baa62b4205983f5d095e3e677b92a6b4</pruefsumme>
+        </datei>
+        <datei id="_HlQ42w3OiI8MXG3v3Djo7K">
+          <name>00000116.jp2</name>
+          <originalName>00000116.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>c71bbd08fa05800c2b91a84aa46ae940</pruefsumme>
+        </datei>
+        <datei id="_umdlrfZMLE0jlXd0mteqCM">
+          <name>00000116_PREMIS.xml</name>
+          <originalName>00000116_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>3c72823d7efda46ccb6aed4689f64593</pruefsumme>
+        </datei>
+        <datei id="_LDkuO5UCJCYVxSjvgf40rL">
+          <name>00000117.jp2</name>
+          <originalName>00000117.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>99105c410c07c011ae877d2797827180</pruefsumme>
+        </datei>
+        <datei id="_eF0iZUNjQGM95c5TZj29qn">
+          <name>00000117_PREMIS.xml</name>
+          <originalName>00000117_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2ef08872a229d3b81522d341e0dd5735</pruefsumme>
+        </datei>
+        <datei id="_nare4iyzuT2EC2utZVDqDl">
+          <name>00000118.jp2</name>
+          <originalName>00000118.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>876914a770e586dd1fe0ad4ec2cd0c48</pruefsumme>
+        </datei>
+        <datei id="_mcOUnDoqM3k9pooQwtlYkn">
+          <name>00000118_PREMIS.xml</name>
+          <originalName>00000118_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d2f0349c5b1f48dfb7576106b67a7aef</pruefsumme>
+        </datei>
+        <datei id="_0rCgWExmAt8z0elZGX2wyl">
+          <name>00000119.jp2</name>
+          <originalName>00000119.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b02437852ea2fc70c38d1a2769c587c4</pruefsumme>
+        </datei>
+        <datei id="_L7mdqOuyVcLoYhtux6RC9o">
+          <name>00000119_PREMIS.xml</name>
+          <originalName>00000119_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>8b06c054e530c278e9e085baa9d28e29</pruefsumme>
+        </datei>
+        <datei id="_gZpr16LW19Qbzvz8g1RdTu">
+          <name>00000120.jp2</name>
+          <originalName>00000120.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>3395545746bb46c8003fd248f447a7c8</pruefsumme>
+        </datei>
+        <datei id="_QhJxwffvDOf6nzJZ5i4PdY">
+          <name>00000120_PREMIS.xml</name>
+          <originalName>00000120_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9c692418b1db932f588d2cf6a8ee742c</pruefsumme>
+        </datei>
+        <datei id="_6L7vLP5rIXDletVzofZ66y">
+          <name>00000121.jp2</name>
+          <originalName>00000121.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>64a671c25e3ee04c9b689fd6a0890465</pruefsumme>
+        </datei>
+        <datei id="_9Gj89HUjvxS0EhAgZvxt7l">
+          <name>00000121_PREMIS.xml</name>
+          <originalName>00000121_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e80c7a69be5a2936f93204c13459e0cb</pruefsumme>
+        </datei>
+        <datei id="_nqlekwM9G2ubmb7KbfCRQJ">
+          <name>00000122.jp2</name>
+          <originalName>00000122.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>70bc816221b1e287bd3dec890c093d2a</pruefsumme>
+        </datei>
+        <datei id="_bO4C2XnEK2lF6DJq98ASsU">
+          <name>00000122_PREMIS.xml</name>
+          <originalName>00000122_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ea4bc1ef7dd37dec58a93c4e4c708491</pruefsumme>
+        </datei>
+        <datei id="_nwNIMZ6M6rrh7cab2427sn">
+          <name>00000123.jp2</name>
+          <originalName>00000123.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>210ebd70f1205d723307e21409b99662</pruefsumme>
+        </datei>
+        <datei id="_sj7sRjbJiOMhVg3Po7giKG">
+          <name>00000123_PREMIS.xml</name>
+          <originalName>00000123_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e453e8d2d2222acdbb20b9930fbfb057</pruefsumme>
+        </datei>
+        <datei id="_YOAfnp8725hQj2iPQtmH9K">
+          <name>00000124.jp2</name>
+          <originalName>00000124.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a1dbdeb64f9a436e3ce42be958984e97</pruefsumme>
+        </datei>
+        <datei id="_UXfhi6hn8rFJkId0KKNSVL">
+          <name>00000124_PREMIS.xml</name>
+          <originalName>00000124_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>fddc0bf21931e2d32a96e80ab0176269</pruefsumme>
+        </datei>
+        <datei id="_hcFiOsGR0S90CNbBsc2muh">
+          <name>00000125.jp2</name>
+          <originalName>00000125.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>5d66c69ae6eed95bafbab822271ecfe6</pruefsumme>
+        </datei>
+        <datei id="_bMAqHjvwsWH8UtCu4SYIC2">
+          <name>00000125_PREMIS.xml</name>
+          <originalName>00000125_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>39f1da971150168a9a4ee4e88ea6ffa7</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_ySjk6cY4VKB2eD5XVnUqLV_D">
+        <name>Subdossier_0000007</name>
+        <originalName>Subdossier_0000007</originalName>
+        <ordner id="_9ilDwCcEZj3qHBijGbyKOW_D">
+          <name>Dokument_0000009</name>
+          <originalName>Dokument_0000009</originalName>
+          <datei id="_MdApitAqZ4MRBnDc1vQo06">
+            <name>00000130.jp2</name>
+            <originalName>00000130.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>25b07ef869377e0b01bf49595ec959a8</pruefsumme>
+          </datei>
+          <datei id="_qH0Ff4yt44Om6QgUVrgvoa">
+            <name>00000130_PREMIS.xml</name>
+            <originalName>00000130_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>8c108bed82d4a20a1fc1ba94864c2ecb</pruefsumme>
+          </datei>
+          <datei id="_Lqa78pXa80oaREvq1T6GVC">
+            <name>00000131.jp2</name>
+            <originalName>00000131.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>54208876bf35229a9ae0fee7f37e2555</pruefsumme>
+          </datei>
+          <datei id="_MdP28u0SxohKFptyUwrl1u">
+            <name>00000131_PREMIS.xml</name>
+            <originalName>00000131_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>da61f34a5ca4a4bb857427fdc55e39f6</pruefsumme>
+          </datei>
+          <datei id="_iK9tvFxXteC2nRMrBZJm90">
+            <name>00000132.jp2</name>
+            <originalName>00000132.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>96d852dfaf1dd1a8b8b63b2c03fa8996</pruefsumme>
+          </datei>
+          <datei id="_gRXhRFSgr5zuRid7bGXGSC">
+            <name>00000132_PREMIS.xml</name>
+            <originalName>00000132_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>28e48b8b2ab7f8f05b1766d89afd1507</pruefsumme>
+          </datei>
+          <datei id="_sZS9ut4oynxIB6nGdZiTVt">
+            <name>00000133.jp2</name>
+            <originalName>00000133.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>e89b1164eeaa7f9de3ee17ca4c97bebc</pruefsumme>
+          </datei>
+          <datei id="_6tNT35Rjtnia0nhy4UuGOW">
+            <name>00000133_PREMIS.xml</name>
+            <originalName>00000133_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>c5a85a8570f9f1de13e1e579e1a3caf2</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_VENrLuWmEJAZkD6588jeQr_D">
+          <name>Umschlag_0000008</name>
+          <originalName>Umschlag_0000008</originalName>
+          <datei id="_DWVNzBJ17PVH74XA0z0vWu">
+            <name>00000126.jp2</name>
+            <originalName>00000126.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>228b274f61532a763310c40fa3802be9</pruefsumme>
+          </datei>
+          <datei id="_UrvbwuFChWW1i8pPJnKsTv">
+            <name>00000126_PREMIS.xml</name>
+            <originalName>00000126_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>be8133af964fd800048f5c43348a8ae3</pruefsumme>
+          </datei>
+          <datei id="_6WE2326pCriCfeChqwaUYJ">
+            <name>00000127.jp2</name>
+            <originalName>00000127.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>c670d2d109153997b7c7f611e191a5a5</pruefsumme>
+          </datei>
+          <datei id="_eYIS5cyD6xnZPkq3CA3CfU">
+            <name>00000127_PREMIS.xml</name>
+            <originalName>00000127_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>07406061fd2fd4d7f1e81ec3e6fb64df</pruefsumme>
+          </datei>
+          <datei id="_ayaN6z7EVcvlENiqSehUbF">
+            <name>00000128.jp2</name>
+            <originalName>00000128.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>417550ce3a0c3a5935c51e79e8972f5c</pruefsumme>
+          </datei>
+          <datei id="_M896tskojJsD2DdzpTY0BA">
+            <name>00000128_PREMIS.xml</name>
+            <originalName>00000128_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>6aae5eb55c40429da21fd1363d899b29</pruefsumme>
+          </datei>
+          <datei id="_UL6FjDnyiso0h6PVyMgJi8">
+            <name>00000129.jp2</name>
+            <originalName>00000129.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>02a784a40e8f853a8c320a1d145d94dc</pruefsumme>
+          </datei>
+          <datei id="_4lNnz2FswLF9DRNa0e83Jt">
+            <name>00000129_PREMIS.xml</name>
+            <originalName>00000129_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>1954ab24c9cf3bbc6d0373f8e3bb3b64</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_WyU7sI2WhiqqlIr8l0MQ8A_D">
+        <name>Umschlag_0000001</name>
+        <originalName>Umschlag_0000001</originalName>
+        <datei id="_14tVbpsYYwX2xE5Bmr0j5J">
+          <name>00000001.jp2</name>
+          <originalName>00000001.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>29bc25dfeeaaa9928b6378036b64b4d1</pruefsumme>
+        </datei>
+        <datei id="_0cXlRyS9V4kSUETZWVuF8c">
+          <name>00000001_PREMIS.xml</name>
+          <originalName>00000001_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>54108f88aa46c5a0ab2191d479aefbe9</pruefsumme>
+        </datei>
+        <datei id="_goL7FXW1ujWQsWkOPa7IGQ">
+          <name>00000002.jp2</name>
+          <originalName>00000002.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2774f7309de7c656f8333cc3eba2d585</pruefsumme>
+        </datei>
+        <datei id="_l3OF3UFKx8XZkvRF0FHENB">
+          <name>00000002_PREMIS.xml</name>
+          <originalName>00000002_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>f17f254f12b582488881e0f12b1740a7</pruefsumme>
+        </datei>
+        <datei id="_EFn4ZiNfTzLWsQWCxqZfOI">
+          <name>00000003.jp2</name>
+          <originalName>00000003.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ed806c1e5e70692eb1a2fd438df211c2</pruefsumme>
+        </datei>
+        <datei id="_IKm8Gl7ZSEb7LmCacTHR4W">
+          <name>00000003_PREMIS.xml</name>
+          <originalName>00000003_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>73977bc8f5b3c59bb54c215eb7071bc3</pruefsumme>
+        </datei>
+        <datei id="_3Hu5uLzO2GIT2gz1QWuKyn">
+          <name>00000004.jp2</name>
+          <originalName>00000004.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>628292c1bbd27b1c4ae0e4cbec8fee16</pruefsumme>
+        </datei>
+        <datei id="_GGQxXU5vpoaYh1Ftg8GpV3">
+          <name>00000004_PREMIS.xml</name>
+          <originalName>00000004_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d36dac66f6102dd9e5f1730f7689f058</pruefsumme>
+        </datei>
+        <datei id="_EVwHKLePBNRrjrw3SaDBs3">
+          <name>00000005.jp2</name>
+          <originalName>00000005.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1e8f4bda0ebfee135c62e190617a0dfc</pruefsumme>
+        </datei>
+        <datei id="_BP7YD9FRFW5urV5jBbP3je">
+          <name>00000005_PREMIS.xml</name>
+          <originalName>00000005_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>fd6b70666f0eb7a9a36f6de8fa7dcf53</pruefsumme>
+        </datei>
+        <datei id="_KLtJMbz1vaEKbXkKB3bOMW">
+          <name>00000006.jp2</name>
+          <originalName>00000006.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>b7271c9a2c44fb9ab3b8a2c18218ceb8</pruefsumme>
+        </datei>
+        <datei id="_QIefrlyS20JYScKw2TbJom">
+          <name>00000006_PREMIS.xml</name>
+          <originalName>00000006_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a1ae8718bad1ad0d4e1cd20c74ad7e5f</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_XuidsXmAAKtK6mf06VoyIS_D">
+        <name>Dokument_0000003</name>
+        <originalName>Dokument_0000003</originalName>
+        <datei id="_RUXvgZ3WAVn2BsbRz8ZzCO">
+          <name>00000011.jp2</name>
+          <originalName>00000011.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9da6b6dde2018cf8cd8a9602ef6a58a9</pruefsumme>
+        </datei>
+        <datei id="_e05ZqaeAhP94WFGg2m7urI">
+          <name>00000011_PREMIS.xml</name>
+          <originalName>00000011_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>009600138c565c5e0173ca12534a5b1b</pruefsumme>
+        </datei>
+        <datei id="_RYozJHwrMnhffb18sLjNX9">
+          <name>00000012.jp2</name>
+          <originalName>00000012.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1c9e97236d7824224d7624854e89d9a1</pruefsumme>
+        </datei>
+        <datei id="_A8qQoGKD4BwAR49o1w8GKm">
+          <name>00000012_PREMIS.xml</name>
+          <originalName>00000012_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>e2de6457e9b3fa2d706faf067f6f73a0</pruefsumme>
+        </datei>
+        <datei id="_Co7Ogb3hHgtKEAgb42yJ63">
+          <name>00000013.jp2</name>
+          <originalName>00000013.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>8dbe9d0ac6ebf9931094f0af473f881d</pruefsumme>
+        </datei>
+        <datei id="_aEuQy8jy8rYKFNa7PaoqrC">
+          <name>00000013_PREMIS.xml</name>
+          <originalName>00000013_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>bc7081b6f12a2d8dca9db1b36c65db22</pruefsumme>
+        </datei>
+        <datei id="_08gnPVKMxUSZCuHqM0FNTl">
+          <name>00000014.jp2</name>
+          <originalName>00000014.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>74af9ca70fa09b826a4f4eab46ad4ea0</pruefsumme>
+        </datei>
+        <datei id="_9xlHBBOZjPvt5rQTo0JK5O">
+          <name>00000014_PREMIS.xml</name>
+          <originalName>00000014_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2cb6d92ee8362c487c649867669ec22a</pruefsumme>
+        </datei>
+        <datei id="_nhH3x9nd3ezgPlpstsO9s8">
+          <name>00000015.jp2</name>
+          <originalName>00000015.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>362bbd4c4f9c56517aef48dbbc523fe9</pruefsumme>
+        </datei>
+        <datei id="_b3eKrDVTbqnb7LA2J60ZA2">
+          <name>00000015_PREMIS.xml</name>
+          <originalName>00000015_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>1a8c5ff94dc007ef39bd42b9e4fd8ce6</pruefsumme>
+        </datei>
+        <datei id="_moVtEUTxKTOS5OrB2PujIn">
+          <name>00000016.jp2</name>
+          <originalName>00000016.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>baf5893f01efcfc562174596bebf1553</pruefsumme>
+        </datei>
+        <datei id="_HP7dNYV0E7ZgSOrljP0GRU">
+          <name>00000016_PREMIS.xml</name>
+          <originalName>00000016_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>935c75e78f0dc48f5a9d61cf03804c4b</pruefsumme>
+        </datei>
+        <datei id="_VWJqjAjWElUUZec4H2swgV">
+          <name>00000017.jp2</name>
+          <originalName>00000017.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>87605fe1115375ea0b3c16e17465b1ba</pruefsumme>
+        </datei>
+        <datei id="_u90wcISlfSRgZ6JEW5RnJm">
+          <name>00000017_PREMIS.xml</name>
+          <originalName>00000017_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>98be2fcd0333c64c572aa9f81ad840c8</pruefsumme>
+        </datei>
+        <datei id="_UrkiweqK4TTmlbTfCnoJkO">
+          <name>00000018.jp2</name>
+          <originalName>00000018.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>ce4968b44212c6e97e615d075f9b74e0</pruefsumme>
+        </datei>
+        <datei id="_epwwqxOZ1vScfMxR1EC7JU">
+          <name>00000018_PREMIS.xml</name>
+          <originalName>00000018_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>167bb61157c1f83943de206716b1ac3c</pruefsumme>
+        </datei>
+        <datei id="_s7cYYajdbT75ehjVHAsPxT">
+          <name>00000019.jp2</name>
+          <originalName>00000019.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>46c9d5e3413bae0cb2d6c51e8270cd47</pruefsumme>
+        </datei>
+        <datei id="_mvzicZeE5t5QO4HBmzO9cB">
+          <name>00000019_PREMIS.xml</name>
+          <originalName>00000019_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>de3b47ad5dbf91137910185ee0f1d37f</pruefsumme>
+        </datei>
+      </ordner>
+      <datei id="_Dx4rK90eCqVQygT4hlPi23">
+        <name>Prozess_Digitalisierung_PREMIS.xml</name>
+        <originalName>Prozess_Digitalisierung_PREMIS.xml</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>22b77d5b9f302e6eeee8eb8e405c3ace</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesamt für Polizeiwesen (Bern)</ablieferndeStelle>
+    <ablieferungsnummer>1985/196_5168412</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Eidgenössische Polizeiabteilung (k. A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Polizeiabteilung: Personenregistratur (1901-1979)</name>
+      <ordnungssystemposition id="_Bduvi0zgOw4KpE5fX2580s">
+        <nummer>N</nummer>
+        <titel>Niederlassungsangelegenheiten von Ausländern, Aus- und Wegweisungen, Ausweisschriften für Flüchtlinge, Internierungen</titel>
+        <datenschutz>false</datenschutz>
+        <ordnungssystemposition id="_wdZ2aDURGLVQJnqAyZxW63">
+          <nummer>N14000</nummer>
+          <titel>Dossier N 14000 - 14999</titel>
+          <datenschutz>false</datenschutz>
+          <dossier id="_1JSJPqCLQ1TTj8udVLSJ0S">
+            <aktenzeichen>N14468</aktenzeichen>
+            <titel>SCHLEI, EDITH, 01.06.1920</titel>
+            <erscheinungsform>digital</erscheinungsform>
+            <entstehungszeitraum>
+              <von>
+                <datum>1943-01-01</datum>
+              </von>
+              <bis>
+                <datum>1968-12-31</datum>
+              </bis>
+            </entstehungszeitraum>
+            <datenschutz>false</datenschutz>
+            <zusatzDaten>
+              <merkmal name="Signatur">E4264#1985/196#21917*</merkmal>
+              <merkmal name="Stufe">Dossier</merkmal>
+              <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2018","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E10452*","Title":"Eidgenössische Polizeiabteilung (1902-1979)","DateRangeText":"1841-1991","ArchiveRecordId":"5913","Protected":false},{"IconId":12,"Level":"Teilbestand","RefCode":"E4264*","Title":"Polizeiabteilung: Personenregistratur (1901-1979)","DateRangeText":"1855-2018","ArchiveRecordId":"5914","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E4264#N","Title":"Niederlassungsangelegenheiten von Ausländern, Aus- und Wegweisungen, Ausweisschriften für Flüchtlinge, Internierungen","DateRangeText":"1904-2018","ArchiveRecordId":"3845984","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E4264#N14000","Title":"Dossier N 14000 - 14999","DateRangeText":"1915-1993","ArchiveRecordId":"5146425","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E4264#1985/196#21917*","Title":"SCHLEI, EDITH, 01.06.1920","DateRangeText":"1943-1968","ArchiveRecordId":"5168412","Protected":false}]</merkmal>
+              <merkmal name="Identifikation digitales Magazin">732d42b7-f2b6-45fc-8df1-66f1c0378b7a@_1JSJPqCLQ1TTj8udVLSJ0S</merkmal>
+              <merkmal name="Entstehungszeitraum Anzeigetext">1943 - 1968</merkmal>
+            </zusatzDaten>
+            <dossier id="_ySjk6cY4VKB2eD5XVnUqLV">
+              <titel>Subdossier_0000007</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <entstehungszeitraum>
+                <von>
+                  <datum>keine Angabe</datum>
+                </von>
+                <bis>
+                  <datum>keine Angabe</datum>
+                </bis>
+              </entstehungszeitraum>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000007</merkmal>
+              </zusatzDaten>
+              <dokument id="_9ilDwCcEZj3qHBijGbyKOW">
+                <titel>Dokument_0000009</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <datenschutz>false</datenschutz>
+                <zusatzDaten>
+                  <merkmal name="ReihenfolgeAnalogesDossier">000007.000002</merkmal>
+                </zusatzDaten>
+                <dateiRef>_MdApitAqZ4MRBnDc1vQo06</dateiRef>
+                <dateiRef>_qH0Ff4yt44Om6QgUVrgvoa</dateiRef>
+                <dateiRef>_Lqa78pXa80oaREvq1T6GVC</dateiRef>
+                <dateiRef>_MdP28u0SxohKFptyUwrl1u</dateiRef>
+                <dateiRef>_iK9tvFxXteC2nRMrBZJm90</dateiRef>
+                <dateiRef>_gRXhRFSgr5zuRid7bGXGSC</dateiRef>
+                <dateiRef>_sZS9ut4oynxIB6nGdZiTVt</dateiRef>
+                <dateiRef>_6tNT35Rjtnia0nhy4UuGOW</dateiRef>
+              </dokument>
+              <dokument id="_VENrLuWmEJAZkD6588jeQr">
+                <titel>Umschlag_0000008</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <datenschutz>false</datenschutz>
+                <zusatzDaten>
+                  <merkmal name="ReihenfolgeAnalogesDossier">000007.000001</merkmal>
+                </zusatzDaten>
+                <dateiRef>_DWVNzBJ17PVH74XA0z0vWu</dateiRef>
+                <dateiRef>_UrvbwuFChWW1i8pPJnKsTv</dateiRef>
+                <dateiRef>_6WE2326pCriCfeChqwaUYJ</dateiRef>
+                <dateiRef>_eYIS5cyD6xnZPkq3CA3CfU</dateiRef>
+                <dateiRef>_ayaN6z7EVcvlENiqSehUbF</dateiRef>
+                <dateiRef>_M896tskojJsD2DdzpTY0BA</dateiRef>
+                <dateiRef>_UL6FjDnyiso0h6PVyMgJi8</dateiRef>
+                <dateiRef>_4lNnz2FswLF9DRNa0e83Jt</dateiRef>
+              </dokument>
+            </dossier>
+            <dokument id="_01WUSkwwJ1Q6C2wjKCCwa1">
+              <titel>Unterlagen_0000002</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000002</merkmal>
+              </zusatzDaten>
+              <dateiRef>_QF2oFFLpYRU9lcfAglAZsP</dateiRef>
+              <dateiRef>_gujk9G9kSF6jHSr2FtDj9g</dateiRef>
+              <dateiRef>_7Yl7tksOjysc9UfZlqVeaA</dateiRef>
+              <dateiRef>_lZ7beM5gCyA6oAfuwXona2</dateiRef>
+              <dateiRef>_ae5Ggls2QmzeMBsxVbkXLR</dateiRef>
+              <dateiRef>_pVzpKxt4aX66SRSsTKHBCa</dateiRef>
+              <dateiRef>_1TpfG1MPU4xMrm0tsCzSJt</dateiRef>
+              <dateiRef>_XImqXC55Yxe4YWdAoZdveH</dateiRef>
+            </dokument>
+            <dokument id="_63t5Bf9SE8nIRQrbBOq1fo">
+              <titel>Dokument_0000005</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000005</merkmal>
+              </zusatzDaten>
+              <dateiRef>_wWh2LO35adaEKHvpKNNocB</dateiRef>
+              <dateiRef>_tHsP3bw9F8QkRhE8EBR6Ix</dateiRef>
+              <dateiRef>_YN0DbpJQzC44DGSVx4T9U1</dateiRef>
+              <dateiRef>_8kH9xSbGosF0YYJLhpLQYN</dateiRef>
+              <dateiRef>_vKoOJM65L8m0RnAVeL5uJ9</dateiRef>
+              <dateiRef>_wAgv9VyWM257ivmGD5cmLt</dateiRef>
+              <dateiRef>_r1GZlM3dLMf0jOgEFc3J4e</dateiRef>
+              <dateiRef>_G2TET4rb5yhA5J5b1csVt8</dateiRef>
+              <dateiRef>_J6qBnqNpV5fGMgH9159dSY</dateiRef>
+              <dateiRef>_B057ejfY2shTwq7K9PKAJ2</dateiRef>
+            </dokument>
+            <dokument id="_CCxcUnV5UmaMvJr3H3tUnv">
+              <titel>Unterlagen_0000004</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000004</merkmal>
+              </zusatzDaten>
+              <dateiRef>_8JhJabTGIKWi8eRWngh7cA</dateiRef>
+              <dateiRef>_cWQ31REvzQLYEnErS47mAD</dateiRef>
+              <dateiRef>_xyy3vehr7Ln1wSPgoRU0Fz</dateiRef>
+              <dateiRef>_iGFSYDsgtZIK823xuzcRZP</dateiRef>
+              <dateiRef>_yoEP0HbwZZgrAOd1wGRsuK</dateiRef>
+              <dateiRef>_tZdz7kFmR11nd81An0CuEL</dateiRef>
+              <dateiRef>_TZ5EYolJ15eeuGbD4JCSv6</dateiRef>
+              <dateiRef>_GHgv9j2qjBgmTQfAz9Ph5p</dateiRef>
+              <dateiRef>_avPiWe2aZq4mjjrYAoroj6</dateiRef>
+              <dateiRef>_AgN2Ea6VM63GY7SSWw2Pg9</dateiRef>
+              <dateiRef>_B0JuyRv81FZZEKvkjFdvx0</dateiRef>
+              <dateiRef>_xcmQ4WcQFCsZO8D4umhCDo</dateiRef>
+              <dateiRef>_B6fzFyvfpHE0K1Xkui4OKL</dateiRef>
+              <dateiRef>_bbZdsJ8BRsneeBUlCKDTNK</dateiRef>
+              <dateiRef>_sPLDsVrjRZqiVIczp1bZPg</dateiRef>
+              <dateiRef>_CiWmUF7bTeW96cDvuGQ6mA</dateiRef>
+              <dateiRef>_1a7upuLTts0OhU67bbofD2</dateiRef>
+              <dateiRef>_pnr6AvsFiE3vlSQnPXtSJQ</dateiRef>
+              <dateiRef>_OHHJXg3ZJk4bYJECV0Us8c</dateiRef>
+              <dateiRef>_FRKp4KfRymCUn1mKOH7hlC</dateiRef>
+            </dokument>
+            <dokument id="_rUmwed1CigbsD7hUfKwRp2">
+              <titel>Unterlagen_0000006</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000006</merkmal>
+              </zusatzDaten>
+              <dateiRef>_rr7ELK9mqUnSAksP2b1Exp</dateiRef>
+              <dateiRef>_AvE0sOsX7FA8tPCTTgsIOy</dateiRef>
+              <dateiRef>_kf0A1FvmSgMQqOyNIS1F5U</dateiRef>
+              <dateiRef>_WlLzT21DVC5GvQEX7I1Can</dateiRef>
+              <dateiRef>_ApzcULO2D7vD1NFCIglLN4</dateiRef>
+              <dateiRef>_wk5zEbaBfQdpjs4Px9IK2X</dateiRef>
+              <dateiRef>_TdYYM03d7Av5aWUXekXswR</dateiRef>
+              <dateiRef>_T2eR4OCWRTbSWKF4qOZdvm</dateiRef>
+              <dateiRef>_KiYTzWSzDwShaXnH5Y8cmD</dateiRef>
+              <dateiRef>_gFErmQqGW1jUlinHL3vbcH</dateiRef>
+              <dateiRef>_ChLARLNKHhi1HjbmBtSIqA</dateiRef>
+              <dateiRef>_lESfPCMYJQ6jPXEbMwy3y0</dateiRef>
+              <dateiRef>_jaR4bibJvA480yqAthPLeR</dateiRef>
+              <dateiRef>_2nNEwoOiUiIQaNJVDVZQQx</dateiRef>
+              <dateiRef>_KzP2rxQn9mkepG0lB2i6U1</dateiRef>
+              <dateiRef>_JOcDUoEJVb671MIKyBsWe1</dateiRef>
+              <dateiRef>_hLQUACdM8Wpzi3SLQHEmcr</dateiRef>
+              <dateiRef>_CoEnBAK5EPnDIAByaoS2H5</dateiRef>
+              <dateiRef>_Yi8awjjI32A9Aax8bZAPZi</dateiRef>
+              <dateiRef>_9DC9VBAIlfaVL4uZ2I89p0</dateiRef>
+              <dateiRef>_z3OZw01TwH2xca06E7emGJ</dateiRef>
+              <dateiRef>_nVOBgMXb9D8vswD9DzyN70</dateiRef>
+              <dateiRef>_eXeYXNYRnNZLDPdMrbpg9v</dateiRef>
+              <dateiRef>_FB84v8sMYz8cMKHXWi3us0</dateiRef>
+              <dateiRef>_yHOkyxTHPmhTiDsZXtwDzG</dateiRef>
+              <dateiRef>_7f0fFf7uyVFF52DTNxl9um</dateiRef>
+              <dateiRef>_m5PVBVV3oHU9ZbLb4jbObo</dateiRef>
+              <dateiRef>_qvZITb95DukGZo42qtozry</dateiRef>
+              <dateiRef>_Jg8pBfszE3y0fexOSQK97z</dateiRef>
+              <dateiRef>_IwqNhmVXzOFbeq0tGYbPe3</dateiRef>
+              <dateiRef>_sZ2lSoiBOnhFenBMs0V5HX</dateiRef>
+              <dateiRef>_ow4UMNV0V0fYmXyIWG0fed</dateiRef>
+              <dateiRef>_2yNxMA8A9swCrkS0vHkKLo</dateiRef>
+              <dateiRef>_RV1m4zhGVGYN6r460Xik9d</dateiRef>
+              <dateiRef>_NlVEaIrucCnmC57ZTaRzQ3</dateiRef>
+              <dateiRef>_KjfCjYA7WPTwe77yCVPH9Y</dateiRef>
+              <dateiRef>_4NwJWW0jYEggtaBThT4k2E</dateiRef>
+              <dateiRef>_Qkrq8ISwwiAtWXGvw5ryyo</dateiRef>
+              <dateiRef>_eL53cKXPb4ffezbBT1YDh4</dateiRef>
+              <dateiRef>_Xx6a3Kcd1xALMEINDd0M51</dateiRef>
+              <dateiRef>_LpZMbORF674AszV88NmxPM</dateiRef>
+              <dateiRef>_R2a3w2wihvfsyuTRo0IMpd</dateiRef>
+              <dateiRef>_nlDu9H4LAA7Anx4Nqqnq2c</dateiRef>
+              <dateiRef>_5fgpyoqYFbtPzS09WDBoyV</dateiRef>
+              <dateiRef>_rIniZRuihPJebVoGU1BTat</dateiRef>
+              <dateiRef>_hkjMcV7PqGecVXlYXRFHZj</dateiRef>
+              <dateiRef>_C2LEt49uKU7TqMIZ93NTlW</dateiRef>
+              <dateiRef>_m15uM0CRnvfJsj6sDLtMhL</dateiRef>
+              <dateiRef>_7okWrKRyh6LmHZTTEb2G0Y</dateiRef>
+              <dateiRef>_hPVooI88UOlvLPBIsiIQzg</dateiRef>
+              <dateiRef>_2QvBNzUxXJhcgdrpuEEgXr</dateiRef>
+              <dateiRef>_KlG2gTrsQMIYdwMbUGZA9F</dateiRef>
+              <dateiRef>_8qtzFrL5rEYpGhkjQIWZx6</dateiRef>
+              <dateiRef>_H1M3icyuVinPZ5yTTnCzWU</dateiRef>
+              <dateiRef>_PcYxiL4iD5WltJXSPM2old</dateiRef>
+              <dateiRef>_5skN2lhNDm1kxaRRwdoa1q</dateiRef>
+              <dateiRef>_yo5Gebcw39m03UBgha5Zf6</dateiRef>
+              <dateiRef>_gvfkQdh7MzLhHpPmi432mp</dateiRef>
+              <dateiRef>_XH2DFsjBDe1XZRP5VnrcOH</dateiRef>
+              <dateiRef>_6aZOket7L5Gsy0yEflVRS2</dateiRef>
+              <dateiRef>_AUmkGzMyhPk1dddgE449dQ</dateiRef>
+              <dateiRef>_dj6kFkzmvkfAIqoDHXLLQT</dateiRef>
+              <dateiRef>_4v5UiaXGzqihwlNSheF1GY</dateiRef>
+              <dateiRef>_NBrcyb0p70NPLEWvux8fa3</dateiRef>
+              <dateiRef>_eF30PnFoqegoJ3MASd7gHK</dateiRef>
+              <dateiRef>_butxKSESx5uysbMuHVtBq2</dateiRef>
+              <dateiRef>_ARP90msJv41SwJH4IvvqT8</dateiRef>
+              <dateiRef>_Z8QxIsXlwrJNw6GNi9R8SS</dateiRef>
+              <dateiRef>_gIXguVASuyIXl2RSRnt2Iu</dateiRef>
+              <dateiRef>_FfyrhbFQCOza73ZiqJMd3W</dateiRef>
+              <dateiRef>_foZ6M8Am9UfJN6nLF6KYjd</dateiRef>
+              <dateiRef>_sf5g7bqLpczgpK5q6sncB6</dateiRef>
+              <dateiRef>_jrP6d71uA8I4ifinGtIp78</dateiRef>
+              <dateiRef>_mF2RLOsYrSaDuOJQtmbLTh</dateiRef>
+              <dateiRef>_yWiARmXWCE09aMff91Hrh6</dateiRef>
+              <dateiRef>_w3sslStZIuvz2fno8I5tVq</dateiRef>
+              <dateiRef>_DqVf81oDBoGez17llgCQXb</dateiRef>
+              <dateiRef>_MywKpPnY6Z3B9NELqvwR4k</dateiRef>
+              <dateiRef>_q0daTyop0CDvlcWItWgPPp</dateiRef>
+              <dateiRef>_s0KIphAacO36B7lGAc8tZW</dateiRef>
+              <dateiRef>_4z3yqMFBtwSSOgBRmaCyWh</dateiRef>
+              <dateiRef>_lRMknYmJF2kgeWfUgzy0gk</dateiRef>
+              <dateiRef>_ewLhgOcc1GDhmmUPtsB5fy</dateiRef>
+              <dateiRef>_9n0I46ARAN9i954Hl9qzCP</dateiRef>
+              <dateiRef>_HtTvVN2nWJ0eRYUPB2QD2f</dateiRef>
+              <dateiRef>_c452VSqlvw2MakeMepjCzc</dateiRef>
+              <dateiRef>_KnRDZjUv7p8GfwuUoV3Kn7</dateiRef>
+              <dateiRef>_rb6pS4YA98qkrPTgQetgMO</dateiRef>
+              <dateiRef>_S3lTDH3v6O8z0lUufa44Da</dateiRef>
+              <dateiRef>_DEV5CVNKqcyCueYWsyb5xN</dateiRef>
+              <dateiRef>_qXuzLT5ilSGAqoKPx3UC46</dateiRef>
+              <dateiRef>_VwoihcVvbP1v3mpTsBT2Yu</dateiRef>
+              <dateiRef>_s2H7VkMDBE5mCFn8aluW0r</dateiRef>
+              <dateiRef>_fpjoA75kZwYVj4nyV8nccQ</dateiRef>
+              <dateiRef>_QAHFFXzM86EXdzjZH09rFF</dateiRef>
+              <dateiRef>_7UAWr2LTHX2FCrw7Q2KGRc</dateiRef>
+              <dateiRef>_bieN33Ayug38k7GBd36g1p</dateiRef>
+              <dateiRef>_FRmEnuIMtPHXzMSe5Is3eO</dateiRef>
+              <dateiRef>_zTUlwZD59ikXnooAofIAaD</dateiRef>
+              <dateiRef>_QrNvlygFWFI2n6n4dexpp0</dateiRef>
+              <dateiRef>_4DMNk77wUQp1Ntu5ExoXAO</dateiRef>
+              <dateiRef>_NwDEYPoIxI5ZFm6TtF5tIM</dateiRef>
+              <dateiRef>_NNzhO2vDaFyTd5H4U7usGI</dateiRef>
+              <dateiRef>_7iCjK5iKytg89Rl0PnjCxH</dateiRef>
+              <dateiRef>_Bd4DnTtAEUI1tTFFfhALtV</dateiRef>
+              <dateiRef>_0JPy9b4gxnK5kAoZmTEKK5</dateiRef>
+              <dateiRef>_Z9Tc1N80MzpVmxpHu9YbTP</dateiRef>
+              <dateiRef>_XMIr2lbGwbEiow26G1mLak</dateiRef>
+              <dateiRef>_Yr9hBx27uSUsQ5nhEoDXQg</dateiRef>
+              <dateiRef>_dZu7c1Yod7tRsc4FNWf0EG</dateiRef>
+              <dateiRef>_LTLnW8QNtmaOZsDv69MtBM</dateiRef>
+              <dateiRef>_FK1Sul6D9tqMxjW12bv2Is</dateiRef>
+              <dateiRef>_eN64LIa7DZvkIJvi9EqrgO</dateiRef>
+              <dateiRef>_DUPpHPn6yzFiLBN4nuFmIb</dateiRef>
+              <dateiRef>_Aib3smUc5iFfgceWrGrlPH</dateiRef>
+              <dateiRef>_8Uj5Hco4o1ej21clxF2M3q</dateiRef>
+              <dateiRef>_6FNhZNU4e84aYM0F9trSyT</dateiRef>
+              <dateiRef>_2SDAhYeDS2bfUwAUmRdfyh</dateiRef>
+              <dateiRef>_BFOc7NjZnepYhfcD9GgVYz</dateiRef>
+              <dateiRef>_qFCIfR4FEE99v5aXUuIkbt</dateiRef>
+              <dateiRef>_cIeWynRsqKf7Ybxd1U5asG</dateiRef>
+              <dateiRef>_IQG9K7KAuViao0DQVl2uwP</dateiRef>
+              <dateiRef>_kmGLLl2GeWwm1IYXnnp5LL</dateiRef>
+              <dateiRef>_qh9HSexgTFv4W4Gq6x0B3X</dateiRef>
+              <dateiRef>_ubYhy5NWevrCXA8MXf1v3p</dateiRef>
+              <dateiRef>_CtDURwFZB2WWe4xLduGqDe</dateiRef>
+              <dateiRef>_RZkaODPUlxJVU9VTavMngr</dateiRef>
+              <dateiRef>_N4Qw17ShaEErVohkZm0NS7</dateiRef>
+              <dateiRef>_Sg4LDIE1uSdwx4k9HzqzNr</dateiRef>
+              <dateiRef>_Owv1Ub0UaKCdcrpiYhTXpN</dateiRef>
+              <dateiRef>_6aBQniR73XT1h9SFyKqXD1</dateiRef>
+              <dateiRef>_AOcQu77IXj0u2786H45mYJ</dateiRef>
+              <dateiRef>_clpyq9SMsdXtpFkXZHClV7</dateiRef>
+              <dateiRef>_e5bB8v61aRvRl39w25PyvB</dateiRef>
+              <dateiRef>_34D2WMat6IgrAeK8wIQimU</dateiRef>
+              <dateiRef>_fFEwgUjxZuNmN5lqLOgxvG</dateiRef>
+              <dateiRef>_RHerqM3N9J05yksFxe6wMB</dateiRef>
+              <dateiRef>_IO2mwAWOUD4LFQ9XUL7kPC</dateiRef>
+              <dateiRef>_15JwpQYLgDx6on9StjlErX</dateiRef>
+              <dateiRef>_chthSnDngOI9a03Ofi3Ab2</dateiRef>
+              <dateiRef>_vR96dnkwqNkAJk8o5BLfvS</dateiRef>
+              <dateiRef>_plaKrbnUp0fsV0UAm1qZ33</dateiRef>
+              <dateiRef>_zKfCcPKIzn6RJZuSkzdTSX</dateiRef>
+              <dateiRef>_tDx4PT5e0wC1Se2hklg1Gq</dateiRef>
+              <dateiRef>_stm7bsBpaNwdEXAUzHtZ56</dateiRef>
+              <dateiRef>_PTbS7XpB6w6bOfM5BhKvas</dateiRef>
+              <dateiRef>_1f0CD4aFomeB9kTeFOscfj</dateiRef>
+              <dateiRef>_HnJ3f5I1ncDrkZ2G69Aplr</dateiRef>
+              <dateiRef>_jfgl71jaIxJcmfHM3GwPPG</dateiRef>
+              <dateiRef>_54KlIgyKloMDMKqiFp0k1x</dateiRef>
+              <dateiRef>_8QxTSpVx8KFs64Ne0VaPs0</dateiRef>
+              <dateiRef>_XZg0cksYO6ruqAjYh3sIzN</dateiRef>
+              <dateiRef>_raZPHvuxPvPeikLFa1w2cg</dateiRef>
+              <dateiRef>_VAp68fvi34CYiFlKL95uHb</dateiRef>
+              <dateiRef>_F66SuhxU3oqiwmItRhm63e</dateiRef>
+              <dateiRef>_5InWQ11rRPhXzoRNm0XWr8</dateiRef>
+              <dateiRef>_a2u8hBgtlsbmN0kVNwOF77</dateiRef>
+              <dateiRef>_8G4FYwpvuCSyuKd2RJakVG</dateiRef>
+              <dateiRef>_zfrizuiRpId6YGlvsoQBSn</dateiRef>
+              <dateiRef>_1gaIDOJfkcTb5mf2X1cohX</dateiRef>
+              <dateiRef>_4vKg3KVMQU2gYJ7nk7ispV</dateiRef>
+              <dateiRef>_WoOU9aMdOmZpw8dMazff5P</dateiRef>
+              <dateiRef>_HlQ42w3OiI8MXG3v3Djo7K</dateiRef>
+              <dateiRef>_umdlrfZMLE0jlXd0mteqCM</dateiRef>
+              <dateiRef>_LDkuO5UCJCYVxSjvgf40rL</dateiRef>
+              <dateiRef>_eF0iZUNjQGM95c5TZj29qn</dateiRef>
+              <dateiRef>_nare4iyzuT2EC2utZVDqDl</dateiRef>
+              <dateiRef>_mcOUnDoqM3k9pooQwtlYkn</dateiRef>
+              <dateiRef>_0rCgWExmAt8z0elZGX2wyl</dateiRef>
+              <dateiRef>_L7mdqOuyVcLoYhtux6RC9o</dateiRef>
+              <dateiRef>_gZpr16LW19Qbzvz8g1RdTu</dateiRef>
+              <dateiRef>_QhJxwffvDOf6nzJZ5i4PdY</dateiRef>
+              <dateiRef>_6L7vLP5rIXDletVzofZ66y</dateiRef>
+              <dateiRef>_9Gj89HUjvxS0EhAgZvxt7l</dateiRef>
+              <dateiRef>_nqlekwM9G2ubmb7KbfCRQJ</dateiRef>
+              <dateiRef>_bO4C2XnEK2lF6DJq98ASsU</dateiRef>
+              <dateiRef>_nwNIMZ6M6rrh7cab2427sn</dateiRef>
+              <dateiRef>_sj7sRjbJiOMhVg3Po7giKG</dateiRef>
+              <dateiRef>_YOAfnp8725hQj2iPQtmH9K</dateiRef>
+              <dateiRef>_UXfhi6hn8rFJkId0KKNSVL</dateiRef>
+              <dateiRef>_hcFiOsGR0S90CNbBsc2muh</dateiRef>
+              <dateiRef>_bMAqHjvwsWH8UtCu4SYIC2</dateiRef>
+            </dokument>
+            <dokument id="_WyU7sI2WhiqqlIr8l0MQ8A">
+              <titel>Umschlag_0000001</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000001</merkmal>
+              </zusatzDaten>
+              <dateiRef>_14tVbpsYYwX2xE5Bmr0j5J</dateiRef>
+              <dateiRef>_0cXlRyS9V4kSUETZWVuF8c</dateiRef>
+              <dateiRef>_goL7FXW1ujWQsWkOPa7IGQ</dateiRef>
+              <dateiRef>_l3OF3UFKx8XZkvRF0FHENB</dateiRef>
+              <dateiRef>_EFn4ZiNfTzLWsQWCxqZfOI</dateiRef>
+              <dateiRef>_IKm8Gl7ZSEb7LmCacTHR4W</dateiRef>
+              <dateiRef>_3Hu5uLzO2GIT2gz1QWuKyn</dateiRef>
+              <dateiRef>_GGQxXU5vpoaYh1Ftg8GpV3</dateiRef>
+              <dateiRef>_EVwHKLePBNRrjrw3SaDBs3</dateiRef>
+              <dateiRef>_BP7YD9FRFW5urV5jBbP3je</dateiRef>
+              <dateiRef>_KLtJMbz1vaEKbXkKB3bOMW</dateiRef>
+              <dateiRef>_QIefrlyS20JYScKw2TbJom</dateiRef>
+            </dokument>
+            <dokument id="_XuidsXmAAKtK6mf06VoyIS">
+              <titel>Dokument_0000003</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="ReihenfolgeAnalogesDossier">000003</merkmal>
+              </zusatzDaten>
+              <dateiRef>_RUXvgZ3WAVn2BsbRz8ZzCO</dateiRef>
+              <dateiRef>_e05ZqaeAhP94WFGg2m7urI</dateiRef>
+              <dateiRef>_RYozJHwrMnhffb18sLjNX9</dateiRef>
+              <dateiRef>_A8qQoGKD4BwAR49o1w8GKm</dateiRef>
+              <dateiRef>_Co7Ogb3hHgtKEAgb42yJ63</dateiRef>
+              <dateiRef>_aEuQy8jy8rYKFNa7PaoqrC</dateiRef>
+              <dateiRef>_08gnPVKMxUSZCuHqM0FNTl</dateiRef>
+              <dateiRef>_9xlHBBOZjPvt5rQTo0JK5O</dateiRef>
+              <dateiRef>_nhH3x9nd3ezgPlpstsO9s8</dateiRef>
+              <dateiRef>_b3eKrDVTbqnb7LA2J60ZA2</dateiRef>
+              <dateiRef>_moVtEUTxKTOS5OrB2PujIn</dateiRef>
+              <dateiRef>_HP7dNYV0E7ZgSOrljP0GRU</dateiRef>
+              <dateiRef>_VWJqjAjWElUUZec4H2swgV</dateiRef>
+              <dateiRef>_u90wcISlfSRgZ6JEW5RnJm</dateiRef>
+              <dateiRef>_UrkiweqK4TTmlbTfCnoJkO</dateiRef>
+              <dateiRef>_epwwqxOZ1vScfMxR1EC7JU</dateiRef>
+              <dateiRef>_s7cYYajdbT75ehjVHAsPxT</dateiRef>
+              <dateiRef>_mvzicZeE5t5QO4HBmzO9cB</dateiRef>
+            </dokument>
+            <dateiRef>_Dx4rK90eCqVQygT4hlPi23</dateiRef>
+          </dossier>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

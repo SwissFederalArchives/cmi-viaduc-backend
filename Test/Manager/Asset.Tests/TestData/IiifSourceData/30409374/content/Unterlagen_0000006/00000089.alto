@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3541" WIDTH="2527">
+<TopMargin HEIGHT="2122" WIDTH="2527" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="68" WIDTH="30" VPOS="0" HPOS="362" language="de">
+<TextLine HEIGHT="30" WIDTH="30" VPOS="0" HPOS="362"><String WC="0.57999998331069946" CONTENT="■" HEIGHT="30" WIDTH="30" VPOS="0" HPOS="362"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="160" WIDTH="378" VPOS="0" HPOS="966" language="rm">
+<TextLine HEIGHT="34" WIDTH="378" VPOS="0" HPOS="966"><String WC="1." CONTENT="—" HEIGHT="34" WIDTH="378" VPOS="0" HPOS="966"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block3" HEIGHT="68" WIDTH="2527" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block4" HEIGHT="1216" WIDTH="48" VPOS="0" HPOS="0"/><GraphicalElement ID="Page1_Block5" HEIGHT="2122" WIDTH="79" VPOS="0" HPOS="2448"/>
+</TopMargin>
+<LeftMargin HEIGHT="132" WIDTH="4" VPOS="2122" HPOS="0">
+</LeftMargin>
+<RightMargin HEIGHT="132" WIDTH="2463" VPOS="2122" HPOS="64">
+</RightMargin>
+<BottomMargin HEIGHT="1287" WIDTH="2527" VPOS="2254" HPOS="0"><GraphicalElement ID="Page1_Block6" HEIGHT="59" WIDTH="2460" VPOS="3482" HPOS="0"/><GraphicalElement ID="Page1_Block7" HEIGHT="1287" WIDTH="79" VPOS="2254" HPOS="2448"/>
+</BottomMargin>
+<PrintSpace HEIGHT="132" WIDTH="60" VPOS="2122" HPOS="4"><Illustration ID="Page1_Block8" HEIGHT="132" WIDTH="60" VPOS="2122" HPOS="4"/>
+</PrintSpace>
+</Page>
+</Layout>
+</alto>

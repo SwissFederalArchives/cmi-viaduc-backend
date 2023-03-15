@@ -6,6 +6,7 @@ using CMI.Contract.DocumentConverter;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
+using CMI.Engine.Asset.PreProcess;
 using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Asset.Infrasctructure;
 using CMI.Manager.Asset.Properties;
@@ -49,8 +50,6 @@ namespace CMI.Manager.Asset
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerExtractFulltextMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ExtractFulltextPackageConsumer>);
-                    ec.UseRetry(retryPolicy =>
-                        retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
@@ -63,6 +62,12 @@ namespace CMI.Manager.Asset
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerPrepareForRecognition, ec =>
                 {
                     ec.Consumer(ctx.Resolve<PrepareForRecognitionConsumer>);
+                    BusConfigurator.SetPrefetchCountForEndpoint(ec);
+                });
+
+                cfg.ReceiveEndpoint(BusConstants.AssetManagerRecognitionPostProcessing, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<RecognitionPostProcessingConsumer>);
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
@@ -87,11 +92,12 @@ namespace CMI.Manager.Asset
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue, ec => { ec.Consumer(ctx.Resolve<UpdatePrimaerdatenAuftragStatusConsumer>); });
                 cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);
-                helper.SubscribeAllSettingsInAssembly(Assembly.GetAssembly(typeof(Engine.Asset.AssetPreparationEngine)), cfg);
+                helper.SubscribeAllSettingsInAssembly(Assembly.GetAssembly(typeof(AssetPreparationEngine)), cfg);
             });
 
             builder.Register(CreateDoesExistInCacheRequestClient);
             builder.Register(CreateJobInitRequestClient);
+            builder.Register(CreateJobEndRequestClient);
             builder.Register(CreateSupportedFileTypesRequestClient);
             builder.Register(CreateDocumentConversionRequestClient);
             builder.Register(CreateDocumentExtractionRequestClient);
@@ -137,6 +143,14 @@ namespace CMI.Manager.Asset
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterJobInitRequestQueue);
 
             return bus.CreateRequestClient<JobInitRequest>(busUri, requestTimeout);
+        }
+
+        public IRequestClient<JobEndRequest> CreateJobEndRequestClient(IComponentContext context)
+        {
+            var requestTimeout = TimeSpan.FromMinutes(1);
+            var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterJobEndRequestQueue);
+
+            return bus.CreateRequestClient<JobEndRequest>(busUri, requestTimeout);
         }
 
         public IRequestClient<SupportedFileTypesRequest> CreateSupportedFileTypesRequestClient(IComponentContext context)

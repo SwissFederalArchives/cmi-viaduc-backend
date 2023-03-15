@@ -62,7 +62,7 @@ namespace CMI.Manager.DocumentConverter.Infrastructure
                     var serial = DocumentConverterSettings.Default.AbbyySerialNumber;
                     var poolSize = DocumentConverterSettings.Default.AbbyyEnginePoolSize;
                     Log.Information($"Found Abbyy installation. Creating engine pool with {poolSize} engines.");
-                    var pool = new EnginesPool(poolSize, serial, 60000)
+                    var pool = new EnginesPool(poolSize, serial, 90000)
                     {
                         AutoRecycleUsageCount = 100
                     };

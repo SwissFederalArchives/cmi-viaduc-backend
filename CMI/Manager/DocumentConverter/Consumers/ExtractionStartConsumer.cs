@@ -60,6 +60,13 @@ namespace CMI.Manager.DocumentConverter.Consumers
                     if (!extractionResult.HasError)
                     {
                         result.Text = extractionResult.ToString();
+                        result.IsOcrResult = extractionResult.IsOcrResult;
+                        result.CreatedOcrFiles = extractionResult.CreatedOcrFiles;
+                        result.JobGuid = jobGuid;
+                        result.Password = jobInfo.Result.Password;
+                        result.Port = jobInfo.Result.Port;
+                        result.UploadUrl = jobInfo.Result.UploadUrl;
+                        result.User = jobInfo.Result.User;
                     }
                     else
                     {
@@ -77,10 +84,6 @@ namespace CMI.Manager.DocumentConverter.Consumers
                         IsInvalid = true,
                         ErrorMessage = e.Message
                     });
-                }
-                finally
-                {
-                    sftpServer.RemoveJob(jobGuid);
                 }
             }
         }

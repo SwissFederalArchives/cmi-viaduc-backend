@@ -300,6 +300,11 @@ Examples for the token can be:
                                     <xs:documentation>A link or other identifier to the primary data for the unit.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
+                            <xs:element name="manifestLink" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>A link or other identifier to the IIIF manifest</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                             <xs:element name="aggregationFields">
                                 <xs:annotation>
                                     <xs:documentation>A collection of special values that allows filtering in the search client.</xs:documentation>

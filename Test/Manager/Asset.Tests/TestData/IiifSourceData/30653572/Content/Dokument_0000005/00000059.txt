@@ -1,0 +1,41 @@
+﻿- 11 -
+Detailanforderungen an die Ausrüstung der Trainingsflugplätze
+5.
+Räumliche Anforderungen
+5.1.
+DUB:
+Kontrollturm, ev in Staffelbaracke bei Halle 2
+EMM:
+FLORIDA - Stg - Büro, neuer Kontrollturm
+PAY:
+Telefon Verbindungen
+5.2.
+Die nachfolgend aufgeführten Arbeitsplätze müssen folgende Tf-Vrb aufweisen:
+Fl Ei Of
+5.2.1.
+5.2.2.
+Bereitschaftsordonnanz
+1 Hausautomatanschluss
+5.2.5.
+Zus tandsordonnanz
+5.2.4.
+Einsatzordonnanz
+1 Hausautomatanschluss
+5.3. Gegensprechanlage
+Die Zustands- u Einsatzmelde-Tafel, Preparatione-Tafel, die Startritg- und
+Flpl Zust Tafel sind so anzubringen, dass sie von allen Arbeitsplätzen aus
+gut sichtbar sind.
+1 LB-Tf für Uebungsverbindung zu Ber Ord 2.mit Sprechgarnitur. Kabellänge
+dem Aktionsradius angepasst»
+Anschluss an das Zustandsmeldesystem EA (zu Zustandsräumen und EA-Arbeits-
+gruppen der E£ I/h/a)
+Die Flpl Ei KP der Trainingsflugplätze bestehen aus dem Zustandsraum mit
+einem Arbeitsplatz für den Fl Ei Of. Sie werden in folgenden Räumen unter-
+gebracht :
+FLORIDA - Stg - Büro im Kontrollturm, ev alter Kontrollturm
+Die Flpl Ei KP umfassen folgende Arbeitsplätze:
+Fl Ei Of, Ei Ord, Ber Ord, Stg Ord, Zust Ord.
+1 Hausautomatanschluss
+1 Einsatzvrb zum Starter EZ l/ll.
+Diese Vrb muss zur Durchgabe von Startbefehlen an die Piloten im Falle
+"VOICE" auf die Piloten GS durchgeschaltet werden können.

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="3560" WIDTH="2527">
+<BottomMargin HEIGHT="3560" WIDTH="2527" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="37" WIDTH="72" VPOS="1431" HPOS="673" language="de">
+<TextLine HEIGHT="2" WIDTH="2" VPOS="1438" HPOS="714"><String WC="0.57999998331069946" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="1438" HPOS="714"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="189" WIDTH="326" VPOS="3337" HPOS="723" language="en-US"><Shape><Polygon POINTS="723,3337 1049,3337 1049,3444 1009,3444 1009,3477 1049,3477 1049,3526 850,3526 850,3464 957,3464 957,3444 723,3444 723,3337"/></Shape>
+<TextLine HEIGHT="11" WIDTH="15" VPOS="3373" HPOS="738"><String WC="0." CONTENT="A" HEIGHT="11" WIDTH="15" VPOS="3373" HPOS="738"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="92" WIDTH="72" VPOS="3202" HPOS="2132" language="en-US">
+<TextLine HEIGHT="43" WIDTH="35" VPOS="3248" HPOS="2161"><String WC="0.61500000953674316" CONTENT="A’" HEIGHT="43" WIDTH="35" VPOS="3248" HPOS="2161"/></TextLine>
+</TextBlock>
+<ComposedBlock ID="Page1_Block4" HEIGHT="3560" WIDTH="2527" VPOS="0" HPOS="0" TYPE="separatorsBox"><GraphicalElement ID="Page1_Block5" HEIGHT="48" WIDTH="1815" VPOS="0" HPOS="712"/><GraphicalElement ID="Page1_Block6" HEIGHT="35" WIDTH="2487" VPOS="3525" HPOS="0"/><GraphicalElement ID="Page1_Block7" HEIGHT="3" WIDTH="682" VPOS="30" HPOS="30"/><GraphicalElement ID="Page1_Block8" HEIGHT="3405" WIDTH="42" VPOS="123" HPOS="0"/><GraphicalElement ID="Page1_Block9" HEIGHT="3495" WIDTH="43" VPOS="33" HPOS="2484"/><GraphicalElement ID="Page1_Block10" HEIGHT="93" WIDTH="2" VPOS="30" HPOS="30"/></ComposedBlock><GraphicalElement ID="Page1_Block11" HEIGHT="154" WIDTH="3" VPOS="179" HPOS="998"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

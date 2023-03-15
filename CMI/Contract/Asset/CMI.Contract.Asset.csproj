@@ -48,7 +48,7 @@
     <Compile Include="AssetType.cs" />
     <Compile Include="ChannelAssignmentDefinition.cs" />
     <Compile Include="ExtractZipArgument.cs" />
-    <Compile Include="PreprocessingResult.cs" />
+    <Compile Include="ProcessStepResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryQueuesPrefetchCount.cs" />
   </ItemGroup>

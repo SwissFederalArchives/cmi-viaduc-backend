@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alto xmlns="http://www.loc.gov/standards/alto/ns-v2#" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/standards/alto/ns-v2# http://www.loc.gov/standards/alto/alto-v2.0.xsd">
+<Description>
+<MeasurementUnit>pixel</MeasurementUnit>
+<OCRProcessing ID="IdOcr"><ocrProcessingStep><processingDateTime>2022-11-02</processingDateTime><processingSoftware><softwareCreator>ABBYY</softwareCreator><softwareName>ABBYY FineReader Engine</softwareName><softwareVersion>12</softwareVersion></processingSoftware></ocrProcessingStep></OCRProcessing>
+</Description>
+<Styles>
+</Styles>
+<Layout>
+<Page ID="Page1" PHYSICAL_IMG_NR="1" HEIGHT="1802" WIDTH="2536">
+<BottomMargin HEIGHT="1802" WIDTH="2536" VPOS="0" HPOS="0">
+<TextBlock ID="Page1_Block1" HEIGHT="56" WIDTH="254" VPOS="1598" HPOS="1608" language="de">
+<TextLine HEIGHT="5" WIDTH="42" VPOS="1642" HPOS="1662"><String WC="1." CONTENT="." HEIGHT="4" WIDTH="4" VPOS="1643" HPOS="1662"/><SP WIDTH="32" VPOS="1642" HPOS="1667"/><String WC="1." CONTENT="." HEIGHT="5" WIDTH="4" VPOS="1642" HPOS="1700"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block2" HEIGHT="139" WIDTH="528" VPOS="881" HPOS="854" language="de"><Shape><Polygon POINTS="854,881 1259,881 1259,966 1382,966 1382,1020 854,1020 854,881"/></Shape>
+<TextLine HEIGHT="3" WIDTH="39" VPOS="911" HPOS="1208"><String WC="0.85000002384185791" CONTENT="■" HEIGHT="3" WIDTH="3" VPOS="911" HPOS="1208"/><SP WIDTH="32" VPOS="911" HPOS="1212"/><String WC="0.63999998569488525" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="911" HPOS="1245"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block3" HEIGHT="129" WIDTH="372" VPOS="1292" HPOS="313" language="de">
+<TextLine HEIGHT="5" WIDTH="124" VPOS="1391" HPOS="555"><String WC="0.79500001668930054" CONTENT=".." HEIGHT="5" WIDTH="20" VPOS="1391" HPOS="555"/><SP WIDTH="99" VPOS="1391" HPOS="576"/><String WC="0.67000001668930054" CONTENT="." HEIGHT="3" WIDTH="3" VPOS="1391" HPOS="676"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block4" HEIGHT="188" WIDTH="523" VPOS="1283" HPOS="699" language="de">
+<TextLine HEIGHT="3" WIDTH="3" VPOS="1311" HPOS="808"><String WC="0.57999998331069946" CONTENT="■" HEIGHT="3" WIDTH="3" VPOS="1311" HPOS="808"/></TextLine>
+<TextLine HEIGHT="3" WIDTH="3" VPOS="1363" HPOS="813"><String WC="0.56999999284744263" CONTENT="■" HEIGHT="3" WIDTH="3" VPOS="1363" HPOS="813"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block5" HEIGHT="630" WIDTH="352" VPOS="1146" HPOS="2158" language="de"><Shape><Polygon POINTS="2213,1146 2454,1146 2454,1294 2510,1294 2510,1776 2158,1776 2158,1661 2340,1661 2340,1398 2213,1398 2213,1146"/></Shape>
+<TextLine HEIGHT="53" WIDTH="352" VPOS="1723" HPOS="2158"><String WC="0.34999999403953552" CONTENT="1" HEIGHT="46" WIDTH="8" VPOS="1723" HPOS="2502"/></TextLine>
+</TextBlock>
+<TextBlock ID="Page1_Block6" HEIGHT="553" WIDTH="1265" VPOS="797" HPOS="826" language="de"><Shape><Polygon POINTS="1292,797 2091,797 2091,1164 1779,1164 1779,1298 1919,1298 1919,1350 1488,1350 1488,1247 826,1247 826,1117 1458,1117 1458,928 1292,928 1292,797"/></Shape>
+<TextLine HEIGHT="31" WIDTH="607" VPOS="1140" HPOS="860"><String WC="3.9999999105930328e-002" CONTENT="£" HEIGHT="27" WIDTH="13" VPOS="1144" HPOS="860"/><SP WIDTH="26" VPOS="1144" HPOS="874"/><String WC="0.61000001430511475" CONTENT="." HEIGHT="1" WIDTH="2" VPOS="1165" HPOS="901"/><SP WIDTH="96" VPOS="1142" HPOS="904"/><String WC="0.76999998092651367" CONTENT="&apos;" HEIGHT="2" WIDTH="2" VPOS="1142" HPOS="1001"/><SP WIDTH="97" VPOS="1142" HPOS="1004"/><String WC="0.62000000476837158" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="1153" HPOS="1102"/><SP WIDTH="83" VPOS="1145" HPOS="1105"/><String WC="0.5899999737739563" CONTENT="■" HEIGHT="2" WIDTH="2" VPOS="1145" HPOS="1189"/><SP WIDTH="195" VPOS="1145" HPOS="1192"/><String WC="1." CONTENT="-" HEIGHT="6" WIDTH="16" VPOS="1146" HPOS="1388"/><SP WIDTH="60" VPOS="1140" HPOS="1405"/><String STYLE="superscript" WC="0.97000002861022949" CONTENT=":" HEIGHT="10" WIDTH="1" VPOS="1140" HPOS="1466"/></TextLine>
+</TextBlock><GraphicalElement ID="Page1_Block7" HEIGHT="41" WIDTH="2435" VPOS="0" HPOS="64"/><GraphicalElement ID="Page1_Block8" HEIGHT="1725" WIDTH="41" VPOS="44" HPOS="0"/>
+</BottomMargin>
+</Page>
+</Layout>
+</alto>

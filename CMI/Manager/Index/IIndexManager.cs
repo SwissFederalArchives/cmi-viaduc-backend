@@ -31,9 +31,9 @@ namespace CMI.Manager.Index
         ///     Most often this will return just the ordered dossier, e.g. 1 record.
         ///     If that dossier has children, it will also return all the children
         /// </summary>
-        /// <param name="packageId">The package identifier.</param>
+        /// <param name="archiveRecordId">The id of the archive record that links to the package</param>
         /// <returns>List&lt;ElasticArchiveRecord&gt;.</returns>
-        List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string packageId);
+        List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId);
 
         void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
             string[] metadataAccessTokens, string[] fieldAccessTokens);

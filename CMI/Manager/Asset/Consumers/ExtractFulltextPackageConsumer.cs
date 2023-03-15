@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using MassTransit;
@@ -44,14 +46,14 @@ namespace CMI.Manager.Asset.Consumers
                     // Put the final message on the queue for indexing.
                     // Important: use bus address here, because we are in SSZ and the original message comes
                     // from the BV-Zone
-                    var ep = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.IndexManagerUpdateArchiveRecordMessageQueue));
-                    await ep.Send<IUpdateArchiveRecord>(new
+                    var ep = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.AssetManagerRecognitionPostProcessing));
+                    await ep.Send<RecognitionPostProcessingMessage>(new
                     {
                         MutationId = mutationId,
                         ArchiveRecord = archiveRecord,
                         PrimaerdatenAuftragId = primaerdatenAuftragId
                     });
-                    Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IUpdateArchiveRecord),
+                    Log.Information("Send {CommandName} message on PostProcessing queue with mutation ID: {MutationId}", nameof(RecognitionPostProcessingMessage),
                         mutationId);
                 }
                 else

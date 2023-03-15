@@ -215,7 +215,7 @@ namespace CMI.Engine.Asset.PreProcess
 
             // create Rectangle and Matrix objects
             var rectangle = new Rectangle(0, 0, imageInfo.PageSize.Width, imageInfo.PageSize.Height);
-            var matrix = new Matrix(new[] {rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY});
+            var matrix = new Matrix(new[] { rectangle.URX - rectangle.LLX, 0, 0, rectangle.URY - rectangle.LLY, rectangle.LLX, rectangle.LLY });
 
             // using ConcatenateMatrix (concatenate matrix) operator: defines how image must be placed
             page.Contents.Add(new ConcatenateMatrix(matrix));

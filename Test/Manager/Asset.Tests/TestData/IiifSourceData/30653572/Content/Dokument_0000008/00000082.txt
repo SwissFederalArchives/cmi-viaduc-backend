@@ -1,0 +1,38 @@
+﻿- 4 -
+- 1 Reserve-Anschluss
+Die Bedienung des Ultravox erfolgt durch die UTf Ordonnanz.
+Staffel Kdt
+4.2.3.
+- 1 Hausautomatanschluss
+4.2.4.
+4.2.5.
+- 1 Hausautomatanschluss
+- 1 Anschluss an die Truppenzentrale
+- je 1 Verbindung zu den Flz Bereitstellungsorganisationen X und Y.
+*
+- 1 Verbindung in den Munitionsstollen (
+*
+- je 1 Verbindung zu den Vorstollenwarten X und Y (nur bei Kav Flpl)
+(
+- 1 Einsatzverbindung zum Starter EZ l/ll (nur auf LUV-Flugplätzen)
+Diese Verbindung muss zwecks Durchgabe von Startbefehlen an die
+Piloten im Falle "VOICE" auf die Piloten GS durchgeschaltet werden
+können.
+Flugplatz Einsatz Of
+Die folgenden Verbindungen enden auf einem UTf, welches vom Flpl Ei Of
+selber bedient wird.
+Staffelräume
+- 1 Hausautomatanschluss (Wandstation in Schallschluckgehäuse).
+- 1 Einsatzverbindung zur Gruppe Aufklärung der EZ l/ll (
+Ein Parallelanschluss mit gesperrtem Anruf ist im Auswerteraum der
+Aufklärer zu installieren.
+Für den Flieger Einsatz Of ist ein Mikrotel und für die UTf Ordonnanz
+ein Mikrotel und eine Sprechgarnitur zuzuteilen.
+- Verbindung zu den Flugzeugbereitstellungsorganen auf den A-4 Standplätzen
+der LUV-Flpl
+nur bei Kav Flpl)
+nur auf Aufkl-Flpl)
+♦ Diese Verbindungen müssen bei Bedarf für Konferenzgespräche parallel
+geschaltet werden können. Für den Flpl Ei Of ist ein Mikrotel zuzuteilen.
+* Die mit Stern bezeichneten Verbindungen müssen bei Bedarf einzeln an ein
+auf dem Flpl bereits vorhandenes Ultravox angeschlossen werden können.

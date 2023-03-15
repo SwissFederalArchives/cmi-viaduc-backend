@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace CMI.Access.Onboarding.Response
@@ -25,9 +21,21 @@ namespace CMI.Access.Onboarding.Response
         [JsonProperty("verification")]
         public Verification Verification { get; set; }
         [JsonProperty("processSteps")]
-        public string[] ProcessSteps { get; set; }
+        public ProcessSteps[] ProcessSteps { get; set; }
         [JsonProperty("reviews")]
         public object[] Reviews { get; set; }
+    }
+
+    public class ProcessSteps
+    {
+        [JsonProperty("key")]
+        public string Key { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
+        [JsonProperty("subtype")]
+        public string Subtype { get; set; }
+        [JsonProperty("state")]
+        public string State { get; set; }
     }
 
     public class Customer

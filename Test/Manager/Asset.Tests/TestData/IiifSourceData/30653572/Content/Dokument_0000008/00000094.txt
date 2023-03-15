@@ -1,0 +1,67 @@
+﻿‘I
+10
+L__________________________...	_____________________________
+__________________________________________________________________________________________________________________	_________________________________________________________________________________________________________________________________________________________________________________________________________
+
+I
+
+Ausrücken _ _
+Ausrücken _ _
+Einsatz __ _
+Flugzeuge
+A
+i
+
+Achtung
+Xaver
+Flugzeuge
+auf A4 - 07
+Achtung
+Xaver
+Flugzeuge
+auf A4 - 25
+Achtung
+Xaver
+
+4.7-4. Einsatztransparent
+1. Allgemeines
+Mit dem Einsatztransparent werden dem LS-Speaker in der
+Kdo Zentrale standardisierte Lautsprecherrieidungen sig-
+nalisiert. Die Eingabe erfolgt von der Einsatzordonnanz
+im Zustandsraun pro Staffel getrennt.
+2. Anzeige auf den Sichtgeräten des LS-Speakers
+— Der Text einer Meldung muss auf einem Leuchttransparent
+ersichtlich sein. Gemäss nebenstehender Zeichnung sind
+4 verschiedene Varianten möglich.
+-	Die zu jeder Meldung gehörende Anzahl Flugzeuge muss
+ebenfalls als Leuchtschrift erscheinen. Die Zahlen-
+werte variieren zwischen 1 und 19.
+5. Eingabegerät für Einsatzordonnanz
+Mit dieser Eingabe müssen am Sichtgerät des LS—Speakers
+folgende Leuchtanzeigen ein- bzw ausgeschaltet werden
+können:
+-	Eine von insgesamt 4 verschiedenen Heidevarianten
+-	Beliebige Zahl im Bereich von 1 bis 19
+Soll eine Meldung durchgegeben werden, muss die Einsatz-
+ordonnanz den LS-Speaker durch Summersignal aufmerksam
+machen können.
+I
+i !
+tC !
+I
+I
+i
+I
+!
+I
+______________________________________	______________________________
+_________
+Anzahl
+Flugzeuge |
+Attenzione
+A4
+Partenza _ .
+Flugzeuge
+Bemerkung: Für die Anlage Yvonne entsprechende Aenderung der Beschriftung.
+Ausserdem sind für andere Flpl selbstverständlich die
+entsprechenden Pistenrichtungen anzugeben.
