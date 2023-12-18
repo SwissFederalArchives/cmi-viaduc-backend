@@ -53,6 +53,9 @@ namespace CMI.Manager.Order
                 cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetPrimaerdatenReportRecordsRequest)),
                     ec => { ec.Consumer(ctx.Resolve<IConsumer<GetPrimaerdatenReportRecordsRequest>>); });
 
+                cfg.ReceiveEndpoint(string.Format(BusConstants.OrderManagagerRequestBase, nameof(GetDownloadLogReportRecordsRequest)),
+                    ec => { ec.Consumer(ctx.Resolve<IConsumer<GetDownloadLogReportRecordsRequest>>); });
+
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerFindOrderingHistoryForVeRequestQueue,
                     ec => { ec.Consumer(ctx.Resolve<FindOrderHistoryForVeConsumer>); });
 

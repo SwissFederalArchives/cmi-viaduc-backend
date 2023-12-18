@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
@@ -414,6 +414,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SqlDbScripts\0091_TO_0092.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0092_TO_0093.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0093_TO_0094.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0094_TO_0095.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets')" />

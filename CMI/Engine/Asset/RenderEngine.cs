@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.DocumentConverter;
+using CMI.Engine.Asset.ParameterSettings;
+using CMI.Engine.Asset.PreProcess;
 using MassTransit;
 using Rebex;
 using Rebex.Net;
@@ -18,6 +20,8 @@ namespace CMI.Engine.Asset
         private readonly IRequestClient<JobInitRequest> jobInitRequestClient;
         private readonly IRequestClient<JobEndRequest> jobEndRequestClient;
         private readonly IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient;
+        private readonly ImageHelper imageHelper;
+        private readonly ViewerConversionSettings viewerConversionSettings;
         private readonly string sftpLicenseKey;
         private string[] supportedFileTypes;
 
@@ -25,12 +29,16 @@ namespace CMI.Engine.Asset
             IRequestClient<JobEndRequest> jobEndRequestClient,
             IRequestClient<ConversionStartRequest> conversionRequestClient,
             IRequestClient<SupportedFileTypesRequest> supportedFileTypesRequestClient,
+            ImageHelper imageHelper,
+            ViewerConversionSettings viewerConversionSettings,
             string sftpLicenseKey)
         {
             this.jobInitRequestClient = jobInitRequestClient;
             this.jobEndRequestClient = jobEndRequestClient;
             this.conversionRequestClient = conversionRequestClient;
             this.supportedFileTypesRequestClient = supportedFileTypesRequestClient;
+            this.imageHelper = imageHelper;
+            this.viewerConversionSettings = viewerConversionSettings;
             this.sftpLicenseKey = sftpLicenseKey;
         }
 
@@ -109,6 +117,16 @@ namespace CMI.Engine.Asset
                 Log.Error(ex, "Unexpected error while converting file {FullName}", fi.FullName);
                 throw;
             }
+        }
+
+        public Task<string> ConvertImageToPdf(string file)
+        {
+            if (File.Exists(file))
+            {
+                return Task.FromResult(imageHelper.ConvertToPdf(file, 100, viewerConversionSettings.JpegQualitaetInProzent));
+            }
+
+            return Task.FromResult(file);
         }
 
         private async Task UploadFile(JobInitResult jobInitResult, FileInfo toBeConverted)

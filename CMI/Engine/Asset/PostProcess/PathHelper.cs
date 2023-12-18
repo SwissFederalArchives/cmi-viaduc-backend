@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace CMI.Engine.Asset.PostProcess
 {
@@ -54,16 +50,16 @@ namespace CMI.Engine.Asset.PostProcess
         /// </summary>
         /// <param name="archiveId"></param>
         /// <returns></returns>
-        public static List<string> ArchiveIdToPathSegments(string archiveId)
+        public static List<PathItem> ArchiveIdToPathSegments(string archiveId)
         {
-            var retVal = new List<string>();
+            var retVal = new List<PathItem>();
 
             // Max length of scope id is 10 digits. As we like to split in 3 parts, we pad for 12
             var id = archiveId.PadLeft(12, '0');
 
             for (var i = 0; i < 3; i++)
             {
-                retVal.Add(id.Substring(i*4, 4));
+                retVal.Add(new (id.Substring(i*4, 4), id.Substring(i * 4, 4)));
             }
 
             return retVal;

@@ -23,3 +23,10 @@ For
 	2022-12-09: PVW-1343 [BUG] Fehler bei "Datum der Bewilligung", "Datum des Entscheids" und "Abschlussdatum"
 	2022-12-12: PVW-1343 [BUG] Fehler bei "Datum der Bewilligung", "Datum des Entscheids" und "Abschlussdatum"
 	2023-01-09: PVW-1370 BUG: Datepicker im Bestellwizard zeigt nicht korrektes Verhalten
+	2023-03-22: PVW-1388 Umsetzung Download Logs in M-C (Teil 1)	
+	2023-10-16: PVW-1504 Lesesaalreservation: Integration Buchungswidget im Bestellwizard des Online-Zugangs (nur bei Lesesaalbestellungen)
+	2023-10-16: PVW-1504 Lesesaalreservation: Integration Buchungswidget im Bestellwizard des Online-Zugangs (nur bei Lesesaalbestellungen) Teil 2
+	2023-11-09: PVW-1538 Unsetzung: Viewer-Icon in Suchresultatliste Fix
+	2024-11-16: PVW-1539 Umsetzung: Bug-Bounty
+	2024-11-16: PVW-1539 synk entfernt
+  2024-11-16: Version 1009 |||

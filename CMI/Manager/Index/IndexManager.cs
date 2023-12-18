@@ -76,8 +76,8 @@ namespace CMI.Manager.Index
         public List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId)
         {
             var retVal = new List<ElasticArchiveRecord>();
-            var entryItem = dbAccess.FindDocument(archiveRecordId, false);
-            
+            var entryItem = dbAccess.FindDocumentWithoutSecurity(archiveRecordId, false);
+
             if (entryItem != null)
             {
                 retVal.Add(entryItem);

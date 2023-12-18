@@ -37,6 +37,7 @@ namespace CMI.Manager.Index.Consumer
                     MutationId = context.Message.MutationId,
                     PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId,
                     ArchiveRecord = context.Message.ArchiveRecord,
+                    DoNotReportCompletion = context.Message.DoNotReportCompletion,
                     ElasticArchiveDbRecord = elasticArchiveRecord
                 });
             }

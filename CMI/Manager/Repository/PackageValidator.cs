@@ -24,13 +24,13 @@ namespace CMI.Manager.Repository
         // The official max length for files and folders is 260. But as we are creating a zip file that
         // end users will unzip in folders like C:\Temp or C:\Benutzer\MeinName\Downloads 
         // The MaxPathLength property is depending on the passed rootFolderName length.
-        public int MaxPathLength { get; private set; } = 200;
+        public int MaxPathLength { get; private set; } = 150;
 
         public void EnsureValidPhysicalFileAndFolderNames(RepositoryPackage package, string rootFolderName)
         {
             // Make sure, that the max path length is shortened, if the root folder name length is very long.
             // But do not make the max path length bigger than 200, as the end users unzip path might be
-            MaxPathLength = MaxAllowedPathLength - rootFolderName.Length < 200 ? MaxAllowedPathLength - rootFolderName.Length : MaxPathLength;
+            MaxPathLength = MaxAllowedPathLength - rootFolderName.Length < MaxPathLength ? MaxAllowedPathLength - rootFolderName.Length : MaxPathLength;
 
             CreateValidNames(package);
 

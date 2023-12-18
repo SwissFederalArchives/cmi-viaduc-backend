@@ -54,7 +54,7 @@ var localeFr = {
   "viaduc-title-dossier": "Dossier",
   "viaduc-title-archivplankontext": "Plan d'archivage",
   "viaduc-title-mehr_weniger_metadaten": "Plus/moins de métadonnées",
-  "viaduc-title-inhaltsverzeichnis": "Double-cliquez<br/><small class='text-muted'>sur la table des matières ou tapez Ctrl + O pour ouvrir le document.</small>",
+  "viaduc-title-inhaltsverzeichnis": "Table des matières<br/><small class='text-muted'>Double-cliquez ou tapez Ctrl+O pour ouvrir le document.</small><br/><small><a href='#' onclick='openTree()'>Développer</a></small>&nbsp/&nbsp<small><a href='#' onclick='closeTree()'>Fermer</a> l’arborescence</small>",        
   "viaduc-title-metadaten": "Métadonnées",
   "viaduc-title-ordnungssystem": "Système de classement",
   "viaduc-label-generation": "Génération",

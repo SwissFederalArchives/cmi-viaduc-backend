@@ -1,0 +1,286 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/_SFxlIfvTHsos9lISAGuPLP.json",
+  "label": {
+    "none": [
+      "Fotoalben, II. Kategorie-Presse"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/U_m_s_c_h_l_a_g_0000001/_iyvOGgLmRWnS3So2NCV2xQ.json",
+      "label": {
+        "none": [
+          "U_m_s_c_h_l_a_g_0000001"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000001%2F%2F%2F00000001.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Feldgottesdienst_katholisch/_LyiC8K3pequT0AXNIRT17l.json",
+      "label": {
+        "none": [
+          "Feldgottesdienst katholisch"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FFeldgottesdienst_katholisch%2F%2F%2F00000003.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json",
+      "label": {
+        "none": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F%2F00000005.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_91NUnAbspfGGSEg9kdkmo3.json",
+      "label": {
+        "none": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F%2F00000007.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "E27#1000/721#14086-1*"
+        ],
+        "en": [
+          "E27#1000/721#14086-1*"
+        ],
+        "fr": [
+          "E27#1000/721#14086-1*"
+        ],
+        "it": [
+          "E27#1000/721#14086-1*"
+        ],
+        "none": [
+          "E27#1000/721#14086-1*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "en": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "fr": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "it": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "none": [
+          "Fotoalben, II. Kategorie-Presse"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "zwischen 1600 und 1960"
+        ],
+        "en": [
+          "zwischen 1600 und 1960"
+        ],
+        "fr": [
+          "zwischen 1600 und 1960"
+        ],
+        "it": [
+          "zwischen 1600 und 1960"
+        ],
+        "none": [
+          "zwischen 1600 und 1960"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "06.H.3.k.2.b.2"
+        ],
+        "en": [
+          "06.H.3.k.2.b.2"
+        ],
+        "fr": [
+          "06.H.3.k.2.b.2"
+        ],
+        "it": [
+          "06.H.3.k.2.b.2"
+        ],
+        "none": [
+          "06.H.3.k.2.b.2"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Darin"
+        ],
+        "en": [
+          "Contains"
+        ],
+        "fr": [
+          "Contenu"
+        ],
+        "it": [
+          "Contiene"
+        ],
+        "none": [
+          "Darin"
+        ]
+      },
+      "value": {
+        "de": [
+          "Nr. 1 - 341"
+        ],
+        "en": [
+          "Nr. 1 - 341"
+        ],
+        "fr": [
+          "Nr. 1 - 341"
+        ],
+        "it": [
+          "Nr. 1 - 341"
+        ],
+        "none": [
+          "Nr. 1 - 341"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/30653558.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653558",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "start": null
+}

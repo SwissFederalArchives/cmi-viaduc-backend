@@ -477,6 +477,7 @@ namespace CMI.Access.Sql.Viaduc
                         Value = endTime,
                         SqlDbType = SqlDbType.DateTime
                     });
+                    
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -485,8 +486,45 @@ namespace CMI.Access.Sql.Viaduc
                         }
                     }
                 }
-                
                 return primaerdatenaufbereitungItems;
+            }
+        }
+        
+        public async Task<List<DownloadLogItem>> GetDownloadLogItemsByDate(DateTime startTime, DateTime endTime)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                var downloadLogItems = new List<DownloadLogItem>();
+
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * " +
+                                      "FROM " +
+                                      "DownloadLog " +
+                                      "WHERE DatumVorgang between @startTime AND @endTime";
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "startTime",
+                        Value = startTime,
+                        SqlDbType = SqlDbType.DateTime
+                    });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "endTime",
+                        Value = endTime,
+                        SqlDbType = SqlDbType.DateTime
+                    });
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            downloadLogItems.Add(DownloadLogItemFromReader(reader));
+                        }
+                    }
+                }
+
+                return downloadLogItems;
             }
         }
 
@@ -1832,10 +1870,28 @@ namespace CMI.Access.Sql.Viaduc
             primaerdatenAufbereitungItem.DigitalisierungsKategorieId = reader["DigitalisierungsKategorieId"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.PrimaerdatenAuftragId = reader["PrimaerdatenAuftragId"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.GroesseInBytes = reader["GroesseInBytes"].GetValueOrNull<long>();
-            primaerdatenAufbereitungItem.PackageMetadata = reader["PackageMetadata"].ToString();
+            primaerdatenAufbereitungItem.FileCount = reader["AnzahlDateien"].GetValueOrNull<int>();
 
             return primaerdatenAufbereitungItem;
         }
+
+        private DownloadLogItem DownloadLogItemFromReader(SqlDataReader reader)
+        {
+            return new DownloadLogItem
+            {
+                Token = reader["Token"] as string,
+                UserId = reader["UserId"] as string,
+                UserTokens = reader["UserTokens"] as string,
+                Vorgang = reader["Vorgang"] as string,
+                Signatur = reader["Signatur"] as string,
+                Titel = reader["Titel"] as string,
+                Zeitraum = reader["Zeitraum"] as string,
+                Schutzfrist = reader["Schutzfrist"] as string,
+                DatumErstellungToken = Convert.ToDateTime(reader["DatumErstellungToken"]),
+                DatumVorgang = Convert.ToDateTime(reader["DatumVorgang"])
+            };
+        }
+
 
         private OrderItem OrderItemFromReader(SqlDataReader reader)
         {

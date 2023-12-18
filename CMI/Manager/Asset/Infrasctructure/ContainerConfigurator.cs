@@ -58,7 +58,7 @@ namespace CMI.Manager.Asset.Infrasctructure
             builder.Register(GetAssetPreparationSettings).As<AssetPreparationSettings>();
             builder.RegisterType<PreProcessAnalyzerDetectAndFlagLargeDimensions>().AsSelf();
             builder.RegisterType<PreProcessAnalyzerOptimizePdf>().AsSelf();
-            builder.RegisterType<FileResolution>().AsSelf();
+            builder.RegisterType<ImageHelper>().AsSelf();
             builder.Register(GetChannelAssignmentDefinition).As<ChannelAssignmentDefinition>();
             builder.Register(GetScansZusammenfassenSettings).As< ScansZusammenfassenSettings>();
             builder.Register(GetIiifManifestSettings).As<IiifManifestSettings>();

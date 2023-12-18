@@ -63,8 +63,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"BAR"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"}
+                MetadataAccessTokens = new List<string> { "BAR" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" }
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
@@ -108,8 +108,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"Ö2"}
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" }
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
@@ -169,8 +169,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"Ö2"}
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" }
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
@@ -193,7 +193,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                     }
                 });
 
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>(setup => setup.CreateDownloadToken() == "VALID TOKEN");
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>(setup => setup.CreateLogToken() == "VALID TOKEN");
             var downloadTokenDataAccessMock = Mock.Of<IDownloadTokenDataAccess>();
             var downloadLogDataAccessMock = new Mock<IDownloadLogDataAccess>();
 
@@ -216,7 +216,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             ((NegotiatedContentResult<string>) result).Content.Should().Be("VALID TOKEN");
 
             downloadLogDataAccessMock.Verify(s => s.LogTokenGeneration(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>()));
+                It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>() ));
             mockUsageAnalizer.Verify(s => s.UpdateUsageStatistic(It.IsAny<string>(), It.IsAny<HttpRequestMessage>(), It.Is((int val) => val == 1)));
         }
 
@@ -249,8 +249,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"Ö2"},
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>()
             });
 
@@ -292,8 +292,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                PrimaryDataLink = "a valid packageid",
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -342,8 +343,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                PrimaryDataLink = "a valid packageid",
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -404,8 +406,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -480,8 +482,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"Ö2"},
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>()
             });
 
@@ -523,8 +525,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -573,8 +575,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -637,8 +639,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö1"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                MetadataAccessTokens = new List<string> { "Ö1" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -704,7 +706,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_Without_Valid_Token_Should_Return_BadRequest()
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
                     It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
@@ -729,7 +731,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_With_A_Valid_Token_But_No_UserId_Should_Return_Forbidden(string userId)
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
                     It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
@@ -754,7 +756,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_With_A_Valid_Token_But_InExistent_Ve_Should_Return_NotFound()
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
                     It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
@@ -770,7 +772,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
-                    Data = new EntityResult<ElasticArchiveRecord> {Items = new List<Entity<ElasticArchiveRecord>>()}
+                    Data = new EntityResult<ElasticArchiveRecord> { Items = new List<Entity<ElasticArchiveRecord>>() }
                 });
 
             var userDataAccessMock = Mock.Of<IUserDataAccess>();
@@ -790,7 +792,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_With_A_Valid_Token_And_Ve_Without_PrimaryData_Should_Return_BadRequest()
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
                     It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
@@ -806,8 +808,8 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"Ö2"},
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>()
             });
 
@@ -847,7 +849,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_With_A_Valid_Token_But_User_Has_No_Valid_PrimaryDownloadToken_Should_Return_Forbidden()
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
                     It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
@@ -863,15 +865,16 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
                     {
                         PackageId = "a package id"
                     }
-                }
+                },
+                PrimaryDataLink = "a package id"
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
@@ -909,7 +912,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         public async Task DownloadFile_With_A_Valid_Token_And_Access_To_Ve_Should_Work_And_Log_To_History()
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
 
@@ -927,15 +930,17 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                ReferenceCode = "E3300C#1996/320#145*",
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
                     {
                         PackageId = "a package id"
                     }
-                }
+                },
+                PrimaryDataLink = "a package id"
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
@@ -985,11 +990,15 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             kontrollstellenInformer.Verify(m => m.InformIfNecessary(It.IsAny<UserAccess>(), It.IsAny<IList<VeInfo>>()));
         }
 
+
         [Test]
-        public void DownloadFile_With_An_Exception_In_DownloadClient_Should_ReThrow_For_GlobalExceptionHandler()
+        [TestCase("E3/300C#1996/320#145*", "E3-300C#1996-320#145_15821.zip")]
+        [TestCase("J2.365-08#2021/77#?1?*", "J2.365-08#2021-77#-1-_15821.zip")]
+        [TestCase("E::3\\-01#1982/1#1016", "E--3--01#1982-1#1016_15821.zip")]
+        public async Task DownloadFile_Check_FileName_Without_InvalidFileNameChars(string referenceCode, string fileName)
         {
             // arrange
-            var downloadHelperMock = Mock.Of<IFileDownloadHelper>();
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
 
@@ -1007,15 +1016,91 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
                 ArchiveRecordId = "1",
-                MetadataAccessTokens = new List<string> {"Ö2"},
-                PrimaryDataDownloadAccessTokens = new List<string> {"BAR"},
+                ReferenceCode = referenceCode,
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
                     {
                         PackageId = "a package id"
                     }
-                }
+                },
+                PrimaryDataLink = "a package id"
+            });
+
+            var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
+            mockElasticResponse.SetupGet(m => m.Hits).Returns(new List<IHit<ElasticArchiveRecord>>
+            {
+                mockHit.Object
+            });
+
+            var elasticServiceMock = Mock.Of<IElasticService>(setup =>
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                new ElasticQueryResult<ElasticArchiveRecord>
+                {
+                    Data = new EntityResult<ElasticArchiveRecord>
+                    {
+                        Items = new List<Entity<ElasticArchiveRecord>>
+                        {
+                            new() {Data = mockElasticResponse.Object.Hits.FirstOrDefault().Source}
+                        }
+                    }
+                });
+
+            var userDataAccessMock = new Mock<IUserDataAccess>();
+            var response = new Mock<Response<DownloadAssetResult>>();
+            response.Setup(r => r.Message).Returns(new DownloadAssetResult());
+
+
+            var downloadClientMock = Mock.Of<IRequestClient<DownloadAssetRequest>>(setup =>
+                setup.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(response.Object));
+            var cacheHelperMock = Mock.Of<ICacheHelper>(setup => setup.GetStreamFromCache(It.IsAny<string>()) == Stream.Null);
+            var kontrollstellenInformer = new Mock<IKontrollstellenInformer>();
+
+            var sut = new FileController(downloadClientMock, null, null, downloadTokenDataAccessMock.Object, downloadLogDataAccess.Object,
+                elasticServiceMock, null, null, null, cacheHelperMock, userDataAccessMock.Object, null, downloadHelperMock,
+                kontrollstellenInformer.Object);
+            sut.GetUserAccessFunc = uid => new UserAccess(userId, "BAR", null, null, false);
+
+            // act
+            var result = await sut.DownloadFile(15821, "valid token", 1) as ResponseMessageResult;
+            // assert
+            result?.Response.Content.Headers.ContentDisposition.FileName.Should().Be(fileName);
+        }
+
+        [Test]
+        public void DownloadFile_With_An_Exception_In_DownloadClient_Should_ReThrow_For_GlobalExceptionHandler()
+        {
+            // arrange
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
+            var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
+            var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
+
+            downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
+                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>()))
+                .Returns(true);
+
+            var userId = "a user id";
+            downloadTokenDataAccessMock.Setup(m =>
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                .Returns(userId);
+
+            var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
+            mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
+            {
+                ArchiveRecordId = "1",
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
+                PrimaryData = new List<ElasticArchiveRecordPackage>
+                {
+                    new ElasticArchiveRecordPackage
+                    {
+                        PackageId = "a package id"
+                    }
+                },
+                PrimaryDataLink = "a package id"
             });
 
             var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();

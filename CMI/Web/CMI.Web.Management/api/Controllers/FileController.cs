@@ -24,20 +24,20 @@ namespace CMI.Web.Management.api.Controllers
         private readonly ICacheHelper cacheHelper;
         private readonly IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient;
         private readonly IRequestClient<DownloadAssetRequest> downloadClient;
-        private readonly IFileDownloadHelper downloadHelper;
+        private readonly IDownloadLogHelper downloadLogHelper;
         private readonly IDownloadTokenDataAccess downloadTokenDataAccess;
         private readonly IPublicOrder orderManagerClient;
 
         public FileController(IPublicOrder orderManagerClient,
             IDownloadTokenDataAccess downloadTokenDataAccess,
-            IFileDownloadHelper downloadHelper,
+            IDownloadLogHelper downloadLogHelper,
             IRequestClient<DownloadAssetRequest> downloadClient,
             IRequestClient<DoesExistInCacheRequest> doesExistInCacheClient,
             ICacheHelper cacheHelper)
         {
             this.orderManagerClient = orderManagerClient;
             this.downloadTokenDataAccess = downloadTokenDataAccess;
-            this.downloadHelper = downloadHelper;
+            this.downloadLogHelper = downloadLogHelper;
             this.downloadClient = downloadClient;
             this.doesExistInCacheClient = doesExistInCacheClient;
             this.cacheHelper = cacheHelper;
@@ -53,7 +53,7 @@ namespace CMI.Web.Management.api.Controllers
                 return Content(HttpStatusCode.Forbidden, "Invalid token");
             }
 
-            var ipAdress = downloadHelper.GetClientIp(Request);
+            var ipAdress = downloadLogHelper.GetClientIp(Request);
             if (!downloadTokenDataAccess.CheckTokenIsValidAndClean(token, orderItemId, DownloadTokenType.OrderItem, ipAdress))
             {
                 return BadRequest("Token expires or is not valid");
@@ -138,9 +138,9 @@ namespace CMI.Web.Management.api.Controllers
                 return StatusCode(HttpStatusCode.Gone);
             }
 
-            var ipAddress = downloadHelper.GetClientIp(Request);
-            var expires = DateTime.Now.AddMinutes(downloadHelper.GetConfigValueTokenValidTime());
-            var token = downloadHelper.CreateDownloadToken();
+            var ipAddress = downloadLogHelper.GetClientIp(Request);
+            var expires = DateTime.Now.AddMinutes(downloadLogHelper.GetConfigValueTokenValidTime());
+            var token = downloadLogHelper.CreateLogToken();
 
             downloadTokenDataAccess.CreateToken(token, orderItemId, DownloadTokenType.OrderItem, expires, ipAddress, userId);
             return Content(HttpStatusCode.OK, token);

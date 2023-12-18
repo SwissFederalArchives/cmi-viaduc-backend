@@ -1,0 +1,254 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/_3jJFXM24dBhG4huq8461yi.json",
+  "label": {
+    "none": [
+      "Fotoalben, II. Kategorie-Presse"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/U_m_s_c_h_l_a_g_0000009/_tvviZGUXFCCqV8xODPAqSk.json",
+      "label": {
+        "none": [
+          "U_m_s_c_h_l_a_g_0000009"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000009%2F%2F%2F00000041.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000011/_qliyCwRiZN9bCdmuNgoTWk.json",
+      "label": {
+        "none": [
+          "D_o_k_u_m_e_n_t_0000011"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000011%2F%2F%2F00000043.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "E27#1000/721#14086-9*"
+        ],
+        "en": [
+          "E27#1000/721#14086-9*"
+        ],
+        "fr": [
+          "E27#1000/721#14086-9*"
+        ],
+        "it": [
+          "E27#1000/721#14086-9*"
+        ],
+        "none": [
+          "E27#1000/721#14086-9*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "en": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "fr": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "it": [
+          "Fotoalben, II. Kategorie-Presse"
+        ],
+        "none": [
+          "Fotoalben, II. Kategorie-Presse"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "zwischen 1600 und 1960"
+        ],
+        "en": [
+          "zwischen 1600 und 1960"
+        ],
+        "fr": [
+          "zwischen 1600 und 1960"
+        ],
+        "it": [
+          "zwischen 1600 und 1960"
+        ],
+        "none": [
+          "zwischen 1600 und 1960"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "06.H.3.k.2.b.2"
+        ],
+        "en": [
+          "06.H.3.k.2.b.2"
+        ],
+        "fr": [
+          "06.H.3.k.2.b.2"
+        ],
+        "it": [
+          "06.H.3.k.2.b.2"
+        ],
+        "none": [
+          "06.H.3.k.2.b.2"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Darin"
+        ],
+        "en": [
+          "Contains"
+        ],
+        "fr": [
+          "Contenu"
+        ],
+        "it": [
+          "Contiene"
+        ],
+        "none": [
+          "Darin"
+        ]
+      },
+      "value": {
+        "de": [
+          "Numerisches Register zu Kat. II, Nr. 1 - 4511"
+        ],
+        "en": [
+          "Numerisches Register zu Kat. II, Nr. 1 - 4511"
+        ],
+        "fr": [
+          "Numerisches Register zu Kat. II, Nr. 1 - 4511"
+        ],
+        "it": [
+          "Numerisches Register zu Kat. II, Nr. 1 - 4511"
+        ],
+        "none": [
+          "Numerisches Register zu Kat. II, Nr. 1 - 4511"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/30653558.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653558",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "start": null
+}

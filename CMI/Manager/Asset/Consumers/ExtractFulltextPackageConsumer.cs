@@ -80,6 +80,15 @@ namespace CMI.Manager.Asset.Consumers
                     });
                     Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IArchiveRecordUpdated),
                         mutationId);
+
+                    // In any case remove the temp files
+                    Log.Information("Removing the temporary files for package {PackageFileName} and Auftrag with id {PrimaerdatenAuftragId}",
+                        context.Message.ArchiveRecord.PrimaryData[0].PackageFileName, context.Message.PrimaerdatenAuftragId);
+                    await assetManager.RemoveTemporaryFiles(new ExtractZipArgument
+                    {
+                        PackageFileName = context.Message.ArchiveRecord.PrimaryData[0].PackageFileName,
+                        PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId
+                    });
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace CMI.Contract.Order
         public int? PrimaerdatenAuftragId { get; set; }
         public long? GroesseInBytes { get; set; }
         public string AufbereitungsArt { get; set; }
-        public string PackageMetadata { get; set; }
+        public int? FileCount { get; set; }
         public int? DigitalisierungsKategorieId { get; set; }
     }
 }

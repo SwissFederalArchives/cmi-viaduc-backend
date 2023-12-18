@@ -13,10 +13,10 @@ using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.api.Templates;
 using Elasticsearch.Net;
 using Microsoft.Ajax.Utilities;
+using Namotion.Reflection;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NJsonSchema.Infrastructure;
 using Serilog;
 using SourceFilter = Nest.SourceFilter;
 

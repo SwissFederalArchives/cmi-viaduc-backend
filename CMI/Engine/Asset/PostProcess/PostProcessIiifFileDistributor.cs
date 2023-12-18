@@ -21,8 +21,8 @@ namespace CMI.Engine.Asset.PostProcess
         protected override void AnalyzeFiles(string rootOrSubFolder, List<RepositoryFile> files)
         {
             var parts = PathHelper.ArchiveIdToPathSegments(ArchiveRecordId);
-            var relPath = Path.Combine( string.Join("\\", parts), rootOrSubFolder.Replace(RootFolder.Equals(rootOrSubFolder, StringComparison.InvariantCultureIgnoreCase) ? 
-                RootFolder : RootFolder + "\\"  , ""));
+            var relPath = Path.Combine(string.Join("\\", parts.Select(p => p.ValidPath)), rootOrSubFolder.Replace(RootFolder.Equals(rootOrSubFolder, StringComparison.InvariantCultureIgnoreCase) ?
+                            RootFolder : RootFolder + "\\"  , ""));
             foreach (var file in files)
             {
                 var sourceFile = new FileInfo(Path.Combine(rootOrSubFolder, file.PhysicalName));

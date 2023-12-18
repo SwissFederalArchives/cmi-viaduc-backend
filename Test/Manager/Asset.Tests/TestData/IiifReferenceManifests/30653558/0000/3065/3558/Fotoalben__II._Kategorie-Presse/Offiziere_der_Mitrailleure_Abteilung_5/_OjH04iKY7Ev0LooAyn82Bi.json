@@ -1,0 +1,299 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json",
+  "label": {
+    "none": [
+      "Offiziere der Mitrailleure Abteilung 5"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/00000005.jpg",
+      "label": {
+        "none": [
+          "1"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3576,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json#annotations-page-painting-_OjH04iKY7Ev0LooAyn82Bi-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json#annotations-content-painting-_OjH04iKY7Ev0LooAyn82Bi-1",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3576,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000005.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000005.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2534
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/canvasses/_OjH04iKY7Ev0LooAyn82Bi-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2534
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/00000006.jpg",
+      "label": {
+        "none": [
+          "2"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3579,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json#annotations-page-painting-_OjH04iKY7Ev0LooAyn82Bi-2",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/_OjH04iKY7Ev0LooAyn82Bi.json#annotations-content-painting-_OjH04iKY7Ev0LooAyn82Bi-2",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3579,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000006.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000006.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2541
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/canvasses/_OjH04iKY7Ev0LooAyn82Bi-2"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2541
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "E27#1000/721#14086-1#4*"
+        ],
+        "en": [
+          "E27#1000/721#14086-1#4*"
+        ],
+        "fr": [
+          "E27#1000/721#14086-1#4*"
+        ],
+        "it": [
+          "E27#1000/721#14086-1#4*"
+        ],
+        "none": [
+          "E27#1000/721#14086-1#4*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ],
+        "en": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ],
+        "fr": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ],
+        "it": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ],
+        "none": [
+          "Offiziere der Mitrailleure Abteilung 5"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "01.01.1914 - 31.12.1918"
+        ],
+        "en": [
+          "01.01.1914 - 31.12.1918"
+        ],
+        "fr": [
+          "01.01.1914 - 31.12.1918"
+        ],
+        "it": [
+          "01.01.1914 - 31.12.1918"
+        ],
+        "none": [
+          "01.01.1914 - 31.12.1918"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Darin"
+        ],
+        "en": [
+          "Contains"
+        ],
+        "fr": [
+          "Contenu"
+        ],
+        "it": [
+          "Contiene"
+        ],
+        "none": [
+          "Darin"
+        ]
+      },
+      "value": {
+        "de": [
+          "Mitrailleure Abteilung 5"
+        ],
+        "en": [
+          "Mitrailleure Abteilung 5"
+        ],
+        "fr": [
+          "Mitrailleure Abteilung 5"
+        ],
+        "it": [
+          "Mitrailleure Abteilung 5"
+        ],
+        "none": [
+          "Mitrailleure Abteilung 5"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/_SFxlIfvTHsos9lISAGuPLP.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653558",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3065/3558/Fotoalben__II._Kategorie-Presse/Offiziere_der_Mitrailleure_Abteilung_5/Offiziere_der_Mitrailleure_Abteilung_5_OCR.txt",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-3065-3558-Fotoalben__II._Kategorie-Presse-Offiziere_der_Mitrailleure_Abteilung_5",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/jpeg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000005.jpg/full/150,/0/default.jpg",
+      "type": "Image"
+    }
+  ]
+}

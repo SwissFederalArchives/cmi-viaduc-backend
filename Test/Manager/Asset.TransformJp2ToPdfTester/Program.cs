@@ -47,7 +47,7 @@ namespace CMI.Manager.Asset.TransformJp2ToPdfTester
                 var metadataFile = Path.Combine(sourceFolder, "header", "metadata.xml");
                 var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
                 var settings = new ScansZusammenfassenSettings { DefaultAufloesungInDpi = 300, GroesseInProzent = sizeInPercent, JpegQualitaetInProzent = jpegQuality };
-                var scanProcessor = new ScanProcessor(new FileResolution(settings), settings);
+                var scanProcessor = new ScanProcessor(new ImageHelper(settings), settings);
                 // Create pdf documents from scanned jpeg 2000 scans.
                 scanProcessor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, sourceFolder);
             }

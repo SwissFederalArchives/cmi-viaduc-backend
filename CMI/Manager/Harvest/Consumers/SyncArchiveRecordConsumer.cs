@@ -174,7 +174,7 @@ namespace CMI.Manager.Harvest.Consumers
             try
             {
                 var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
-                    {ArchiveRecordId = archiveRecordId, IncludeFulltextContent = true});
+                { ArchiveRecordId = archiveRecordId, IncludeFulltextContent = true });
                 return result.Message.ElasticArchiveRecord;
             }
             catch (Exception e)

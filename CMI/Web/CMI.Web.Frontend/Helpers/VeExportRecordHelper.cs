@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Web;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Configuration;
+using Serilog;
 
 namespace CMI.Web.Frontend.Helpers
 {
@@ -30,6 +31,7 @@ namespace CMI.Web.Frontend.Helpers
         /// <returns></returns>
         public HttpResponseMessage CreateExcelFile(List<VeExportRecord> items, string language, string fileName, string defaultName)
         {
+            Log.Information("Create Excel File");
             MemoryStream stream = exportHelper.ExportToExcel(items, CreateColumnInfo(language));
             var retVal = new HttpResponseMessage(HttpStatusCode.OK);
             var contentType = MimeMapping.GetMimeMapping("xlsx");

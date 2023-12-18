@@ -979,3 +979,10 @@ hr{
 .table td.textWrapAll {
     word-break: break-all;
 }
+
+.jstree-default .jstree-ellipsis .jstree-anchor {
+    overflow: visible!important;
+    text-overflow: initial!important;
+    white-space: normal;
+    height: auto;
+}

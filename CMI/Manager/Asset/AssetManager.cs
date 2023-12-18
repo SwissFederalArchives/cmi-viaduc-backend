@@ -91,7 +91,7 @@ namespace CMI.Manager.Asset
                 if (Directory.Exists(tempFolder))
                 {
                     Log.Information("Found unzipped files. Starting to process...");
-                    var context = new JobContext {ArchiveRecordId = archiveRecord.ArchiveRecordId, PackageId = repositoryPackage.PackageId};
+                    var context = new JobContext { ArchiveRecordId = archiveRecord.ArchiveRecordId, PackageId = repositoryPackage.PackageId };
                     var sizeInBytesOnDisk = Directory.GetFiles(tempFolder, "*.*", SearchOption.AllDirectories).Select(f => new FileInfo(f).Length)
                         .Sum();
 
@@ -144,22 +144,22 @@ namespace CMI.Manager.Asset
                 throw new InvalidOperationException("Assets of type <Gebrauchskopie> require a packageId");
             }
 
-            if (File.Exists(fi.FullName))
+            var tempFolder = Path.Combine(fi.DirectoryName ?? throw new InvalidOperationException(), fi.Name.Remove(fi.Name.Length - fi.Extension.Length));
+            if (Directory.Exists(tempFolder))
             {
                 Log.Information("Found zip file {Name}. File is already unzipped.", fi.Name);
-                var tempFolder = Path.Combine(fi.DirectoryName ?? throw new InvalidOperationException(), fi.Name.Remove(fi.Name.Length - fi.Extension.Length));
                 try
                 {
                     var metadataFile = Path.Combine(tempFolder, "header", "metadata.xml");
-                    var paket = (PaketDIP)Paket.LoadFromFile(metadataFile);
+                    var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
 
                     var contentFolder = Path.Combine(tempFolder, "content");
-                    var context = new JobContext {ArchiveRecordId = package.ArchiveRecordId, PackageId = package.PackageId};
+                    var context = new JobContext { ArchiveRecordId = package.ArchiveRecordId, PackageId = package.PackageId };
                     await ConvertFiles(id, package.Files, paket, tempFolder, contentFolder, context);
                     await ConvertFolders(id, package.Folders, paket, tempFolder, contentFolder, context);
-                    
+
                     paket.Generierungsdatum = DateTime.Today;
-                    ((Paket)paket).SaveToFile(metadataFile);
+                    ((Paket) paket).SaveToFile(metadataFile);
 
                     AddReadmeFile(tempFolder);
                     AddDesignFiles(tempFolder);
@@ -193,9 +193,9 @@ namespace CMI.Manager.Asset
             }
             else
             {
-                Log.Warning("Unable to find the zip file {packageFileName} for conversion.", packageFileName);
+                Log.Warning("Unable to find the zip file {packageFileName} or directory for conversion.", packageFileName);
                 retVal.Valid = false;
-                retVal.ErrorMessage = $"Unable to find the zip file {packageFileName} for conversion.";
+                retVal.ErrorMessage = $"Unable to find the zip file {packageFileName} or directory for conversion.";
                 return retVal;
             }
 
@@ -276,7 +276,7 @@ namespace CMI.Manager.Asset
         /// <param name="primaerdatenAuftragId">Theprimary identifier for a job.</param>
         public async Task UnregisterJobFromPreparationQueue(int primaerdatenAuftragId)
         {
-            var auftrag = await auftragAccess.GetPrimaerdatenAuftrag(primaerdatenAuftragId);
+            var auftrag = await auftragAccess.GetPrimaerdatenAuftrag(primaerdatenAuftragId, false, true);
             if (auftrag != null)
             {
                 // To make sure, that we don't have a race condition at the end of an Auftrag
@@ -404,7 +404,7 @@ namespace CMI.Manager.Asset
         {
             if (newStatus.PrimaerdatenAuftragId > 0)
             {
-                Log.Information("Auftrag mit Id {PrimaerdatenAuftragId} wurde im {service}-Service auf Status {Status} gesetzt.",
+                Log.Information("Auftrag mit Id {PrimaerdatenAuftragId} wird jetzt im {service}-Service auf Status {Status} gesetzt.",
                     newStatus.PrimaerdatenAuftragId, newStatus.Service.ToString(), newStatus.Status.ToString());
 
                 var logId = await auftragAccess.UpdateStatus(new PrimaerdatenAuftragLog
@@ -414,6 +414,10 @@ namespace CMI.Manager.Asset
                     Service = newStatus.Service,
                     ErrorText = newStatus.ErrorText
                 }, newStatus.Verarbeitungskanal ?? 0);
+
+                Log.Debug("Auftrag mit Id {PrimaerdatenAuftragId} wurde im {service}-Service auf Status {Status} gesetzt.",
+                    newStatus.PrimaerdatenAuftragId, newStatus.Service.ToString(), newStatus.Status.ToString());
+
                 return logId;
             }
 
@@ -431,13 +435,19 @@ namespace CMI.Manager.Asset
 
             var packageFileName = Path.Combine(Settings.Default.PickupPath, extractZipArgument.PackageFileName);
             var fi = new FileInfo(packageFileName);
+            var tempFolder = Path.Combine(fi.DirectoryName ?? throw new InvalidOperationException(), fi.Name.Remove(fi.Name.Length - fi.Extension.Length));
 
             if (File.Exists(fi.FullName))
             {
-                Log.Information("Found zip file {Name}. Starting to extract...", fi.Name);
-                var tempFolder = Path.Combine(fi.DirectoryName ?? throw new InvalidOperationException(), fi.Name.Remove(fi.Name.Length - fi.Extension.Length));
+                Log.Information("Found zip file {Name} for PrimaerdatenAuftrag {PrimaerdatenAuftragId}. Starting to extract...", fi.Name, extractZipArgument.PrimaerdatenAuftragId);
                 try
                 {
+                    // The directory should not exist, but if it does, we do not unzip it
+                    if (Directory.Exists(tempFolder))
+                    {
+                        Directory.Delete(tempFolder, true);
+                    }
+
                     ZipFile.ExtractToDirectory(packageFileName, tempFolder);
 
                     // Primaerdatenauftrag could be 0 if we have a Benutzungskopie
@@ -453,6 +463,9 @@ namespace CMI.Manager.Asset
                         await UpdatePrimaerdatenAuftragStatus(status);
                     }
 
+                    // Delete the zip file to save disk space
+                    fi.Delete();
+
                     return true;
                 }
                 catch (Exception ex)
@@ -462,7 +475,12 @@ namespace CMI.Manager.Asset
                 }
             }
 
-            Log.Warning("Unable to find the zip file for {packageFileName}. Nothing was unzipped.", packageFileName);
+            if (Directory.Exists(tempFolder))
+            {
+                Log.Warning("Zip file was already unzipped and files were existing for {packageFileName}. Try to continue working with existing files.", packageFileName);
+                return true;
+            }
+            Log.Warning("Unable to find the zip file or unzipped directory for {packageFileName}. Nothing was unzipped.", packageFileName);
             return false;
         }
 
@@ -624,6 +642,17 @@ namespace CMI.Manager.Asset
             // This list does not contain files that didn't have the flag exported or should be skipped
             var conversionFiles = pdfManipulator.ConvertToConversionFiles(files.ToList(), tempFolder, true);
 
+            // Create a second list with only the skipped files that are of type tiff
+            var tifConversionFiles = files.Where(f => f.Exported && f.SkipOCR
+                                                                 && (f.PhysicalName.EndsWith(".tif", StringComparison.InvariantCultureIgnoreCase) ||
+                                                                     f.PhysicalName.EndsWith(".tiff", StringComparison.InvariantCultureIgnoreCase)))
+                .Select(f => new AssetConversionFile
+                {
+                    FullName = Path.Combine(tempFolder, f.PhysicalName),
+                    Id = Path.Combine(tempFolder, f.PhysicalName)
+                })
+                .ToList();
+
             var sw = new Stopwatch();
             sw.Start();
             var parallelism = Settings.Default.DocumentTransformParallelism;
@@ -631,7 +660,7 @@ namespace CMI.Manager.Asset
                 parallelism, files.Count, id);
             var supportedFileTypesForRendering = await renderEngine.GetSupportedFileTypes();
 
-
+            // Konversion/OCR mit Abbyy
             await conversionFiles.ParallelForEachAsync(async conversionFile =>
             {
                 var file = new FileInfo(conversionFile.FullName);
@@ -639,19 +668,28 @@ namespace CMI.Manager.Asset
                 conversionFile.ConvertedFile = await ConvertFile(file, supportedFileTypesForRendering, context);
             }, parallelism, true);
 
+            // Umwandlung von TIFF zu PDF
+            await tifConversionFiles.ParallelForEachAsync(async conversionFile =>
+            {
+                var file = new FileInfo(conversionFile.FullName);
+                Log.Information("Start pdf conversion for tif file: {file} for archive record or order id {id}", file, id);
+                conversionFile.ConvertedFile = await ConvertTifToPdfFile(file);
+            }, parallelism, true);
+
             // Now stich back files that were possibly splitted
             pdfManipulator.MergeSplittedFiles(conversionFiles);
 
             // Update the metadata.xml for all the converted files
             // As speed is not an issue, we're not doing it in parallel
-            foreach(var conversionFile in conversionFiles)
+            var allFiles = conversionFiles.Concat(tifConversionFiles);
+            foreach (var conversionFile in allFiles)
             {
                 var file = new FileInfo(conversionFile.FullName);
                 if (string.IsNullOrEmpty(conversionFile.ParentId))
                 {
                     MetadataXmlUpdater.UpdateFile(file, new FileInfo(conversionFile.ConvertedFile), paket, rootFolder);
                 }
-                
+
                 // Delete the original file, if the convertedFile exists and is not the same as the original file.
                 // In case of PDF the name of the original and converted file could be the same. --> PDF to PDF with OCR
                 if (file.Exists && conversionFile.ConvertedFile != file.FullName)
@@ -679,6 +717,17 @@ namespace CMI.Manager.Asset
 
             var targetExtension = GetTargetExtension(file);
             var convertedFile = await renderEngine.ConvertFile(file.FullName, targetExtension, context);
+            return convertedFile;
+        }
+
+        private async Task<string> ConvertTifToPdfFile(FileInfo file)
+        {
+            if (!file.Exists)
+            {
+                throw new FileNotFoundException($"Unable to find file {file.FullName}", file.FullName);
+            }
+
+            var convertedFile = await renderEngine.ConvertImageToPdf(file.FullName);
             return convertedFile;
         }
 
@@ -883,7 +932,7 @@ namespace CMI.Manager.Asset
                     Debug.Assert(workload is ArchiveRecordAppendPackage, "Workload must be of type ArchiveRecordAppendPackage");
                     // Vecteur Aufträge sind diejenigen Aufträge, wo die VE bereits im Elastic Index vorhanden ist, aber dort KEINE Primärdaten hat.
                     // Dieser erhalten die Kategorie 2-5. Die anderen Aufträge die Kategorie 6-9
-                    var elasticRecord = ((ArchiveRecordAppendPackage)workload).ElasticRecord;
+                    var elasticRecord = ((ArchiveRecordAppendPackage) workload).ElasticRecord;
                     if (elasticRecord != null && !elasticRecord.PrimaryData.Any())
                     {
                         return GetPriorisierungskategorie(sizeInBytes);

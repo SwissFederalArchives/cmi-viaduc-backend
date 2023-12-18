@@ -69,7 +69,7 @@ namespace CMI.Web.Frontend.DependencyInjection
             builder.RegisterType<KontrollstellenInformer>().As<IKontrollstellenInformer>();
 
             builder.RegisterType<OrderManagerClient>().As<IPublicOrder>();
-            builder.RegisterType<FileDownloadHelper>().As<IFileDownloadHelper>();
+            builder.RegisterType<DownloadLogHelper>().As<IDownloadLogHelper>();
 
             builder.Register(c => FrontendSettingsViaduc.Instance).As<ITranslator>().SingleInstance().ExternallyOwned();
             builder.Register(c => new UsageAnalyzer(GetUsageSettings(), UsageType.Download)).As<IUsageAnalyzer>().SingleInstance().ExternallyOwned();

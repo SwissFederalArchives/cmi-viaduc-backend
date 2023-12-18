@@ -54,7 +54,7 @@ var localeDe = {
   "viaduc-title-dossier": "Dossier",
   "viaduc-title-archivplankontext": "Archivplan",
   "viaduc-title-mehr_weniger_metadaten": "Mehr/weniger Metadaten",
-  "viaduc-title-inhaltsverzeichnis": "Inhaltsverzeichnis<br/><small class='text-muted'>Doppelklicken oder Ctrl-O, um Datei zu öffnen.</small>",
+  "viaduc-title-inhaltsverzeichnis": "Inhaltsverzeichnis<br/><small class='text-muted'>Doppelklicken oder Ctrl+O, um Datei zu öffnen.</small><br/><small>Baumstruktur <a href='#' onclick='openTree()'>aufklappen</a></small>&nbsp/&nbsp<small><a href='#' onclick='closeTree()'>schliessen</a></small>",
   "viaduc-title-metadaten": "Metadaten",
   "viaduc-title-ordnungssystem": "Ordnungssystem",
   "viaduc-label-generation": "Generation",

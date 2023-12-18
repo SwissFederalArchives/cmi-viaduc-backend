@@ -54,6 +54,7 @@ namespace CMI.Manager.Order.Infrastructure
             builder.RegisterType(typeof(SimpleConsumer<MarkOrderAsFaultedRequest, MarkOrderAsFaultedResponse, IPublicOrder>)).As(typeof(IConsumer<MarkOrderAsFaultedRequest>));
             builder.RegisterType(typeof(SimpleConsumer<ResetAufbereitungsfehlerRequest, ResetAufbereitungsfehlerResponse, IPublicOrder>)).As(typeof(IConsumer<ResetAufbereitungsfehlerRequest>));
             builder.RegisterType(typeof(SimpleConsumer<GetPrimaerdatenReportRecordsRequest, GetPrimaerdatenReportRecordsResponse, IPublicOrder>)).As(typeof(IConsumer<GetPrimaerdatenReportRecordsRequest>));
+            builder.RegisterType(typeof(SimpleConsumer<GetDownloadLogReportRecordsRequest, GetDownloadLogReportRecordsResponse, IPublicOrder>)).As(typeof(IConsumer<GetDownloadLogReportRecordsRequest>));
             builder.RegisterType(typeof(SimpleConsumer<UpdateOrderItemRequest, UpdateOrderItemResponse, IPublicOrder>)).As(typeof(IConsumer<UpdateOrderItemRequest>));
             // just register all the consumers
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())

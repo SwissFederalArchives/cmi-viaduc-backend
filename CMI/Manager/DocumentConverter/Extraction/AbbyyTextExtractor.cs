@@ -10,7 +10,7 @@ namespace CMI.Manager.DocumentConverter.Extraction
 {
     public class AbbyyTextExtractor : TextExtractorBase, INeedsAbbyyInstallation
     {
-        private static readonly string[] extensions = { "tif", "tiff", "pdf", "jp2" };
+        private static readonly string[] extensions = { "tif", "tiff", "pdf", "jp2", "jpg", "jpeg" };
         private readonly IAbbyyWorker abbyyWorker;
 
         private bool abbyPathExistsInSettings;

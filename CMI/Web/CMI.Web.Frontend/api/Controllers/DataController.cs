@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Primitives;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -15,6 +16,7 @@ using CMI.Web.Frontend.api.Dto;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.Helpers;
+using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
@@ -156,23 +158,21 @@ namespace CMI.Web.Frontend.api.Controllers
         [HttpGet]
         public IHttpActionResult ExportSearchResultToExcel(string searchText)
         {
-            ISearchResult searchResult;
+            Log.Information($"Starting to export search result to Excel for search text: { searchText}");
             var search = JsonConvert.DeserializeObject<SearchParameters>(searchText);
 
             try
             {
-                string language = WebHelper.GetClientLanguage(Request);
+                var language = WebHelper.GetClientLanguage(Request);
                 var error = entityProvider.CheckSearchParameters(search, language);
-                
                 if (!string.IsNullOrEmpty(error))
                 {
                     return new BadRequestErrorMessageResult(error, this);
                 }
                 var access = GetUserAccess(language);
-
                 search.Paging.Skip = 0;
                 search.Paging.Take = 10000;
-                searchResult = entityProvider.Search<SearchRecord>(search, access);
+                var searchResult = entityProvider.Search<SearchRecord>(search, access);
 
                 if (searchResult is SearchResult<SearchRecord> searchRecords)
                 {
@@ -189,7 +189,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 Log.Error(ex, "Search for {searchQuery} failed", JsonConvert.SerializeObject(search, Formatting.Indented));
                 return InternalServerError(ex);
             }
-
+            Log.Information("No records found that could be exported to Excel");
             return StatusCode(HttpStatusCode.NoContent);
         }
 
@@ -393,6 +393,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
         private List<VeExportRecord> ConvertExportData(List<SearchRecord> searchResults)
         {
+            Log.Information($"Starting to convert { searchResults.Count} records into Excel export format");
             return searchResults.Select(item => new VeExportRecord
             {
                 ReferenceCode = item.ReferenceCode,

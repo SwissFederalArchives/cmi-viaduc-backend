@@ -146,7 +146,7 @@ FROM ApplicationUser ";
                 using (var cmd = cn.CreateCommand())
                 {
                     cmd.CommandText =
-                        $"{Sql} WHERE ID in ({string.Join(",", userIds.Select(id => $"'{id}'"))} )";
+                        $"{Sql} WHERE ID in ({string.Join(",", userIds.Select(id => $"'{id.Replace("'", "''")}'"))} )";
 
                     using (var reader = cmd.ExecuteReader())
                     {

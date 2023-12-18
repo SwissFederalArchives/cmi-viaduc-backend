@@ -219,7 +219,7 @@ namespace CMI.Manager.Repository.Tests
             var list = validator.ConvertToRepositoryObject(package);
 
             // Assert
-            validator.MaxPathLength.Should().Be(200);
+            validator.MaxPathLength.Should().Be(150);
         }
 
         [Test]
@@ -258,7 +258,7 @@ namespace CMI.Manager.Repository.Tests
             {
                 new TempValidationObject
                 {
-                    // Erster Eintrag hat 200 Zeichen
+                    // Erster Eintrag hat 150 Zeichen
                     // Fullname sind 217
                     Path = $@"{longEntry}\Test",
                     Name = "My Directory",
@@ -275,8 +275,8 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             result.Key.Should().Be("id1");
-            // Ester Eintrag um 17 Zeichen gekürzt (und getrimmt)
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 17).Trim());
+            // Ester Eintrag um 67 Zeichen gekürzt (und getrimmt)
+            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 67).Trim());
         }
 
         [Test]
@@ -307,8 +307,8 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             result.Key.Should().Be("id2");
-            // zweiter Eintrag um 131 Zeichen gekürzt
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 131));
+            // zweiter Eintrag um 181 Zeichen gekürzt
+            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 181));
         }
 
         [Test]
@@ -316,15 +316,15 @@ namespace CMI.Manager.Repository.Tests
         {
             // Arrange
             var validator = new PackageValidator();
-            // 40 Zeichen
+            // 30 Zeichen
             var longEntry =
-                "Lorem ipsum dolor sit amet, consetetur s";
+                "Lorem ipsum dolor sit amet, co";
             var packageItems = new List<TempValidationObject>
             {
                 new TempValidationObject
                 {
-                    // Fullname sind 331
-                    Path = $@"{longEntry}1\{longEntry}2\{longEntry}3\{longEntry}4",
+                    // Fullname sind 169
+                    Path = $@"{longEntry}1\{longEntry}2\{longEntry}3",
                     Name = $"{longEntry}5",
                     FullName = $@"{longEntry}1\{longEntry}2\{longEntry}3\{longEntry}4\{longEntry}5",
                     HierachyLevel = 5, // gives an average lenth of 40 allowed chars per level
@@ -349,14 +349,14 @@ namespace CMI.Manager.Repository.Tests
         {
             // Arrange
             var validator = new PackageValidator();
-            // file name with 200 chars + 4 chars for extension
+            // file name with 150 chars + 4 chars for extension
             var longEntry =
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.pdf";
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, t dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.pdf";
             var packageItems = new List<TempValidationObject>
             {
                 new TempValidationObject
                 {
-                    // Fullname sind 208
+                    // Fullname sind 158
                     Path = @"Test",
                     Name = longEntry,
                     FullName = $@"Test\{longEntry}",
@@ -383,9 +383,9 @@ namespace CMI.Manager.Repository.Tests
         {
             // Arrange
             var validator = new PackageValidator();
-            // file name with 200 chars
+            // file name with 150 chars
             var longEntry =
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua, At vero eos et accusam et justo duo doloresi";
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, t dolore magna aliquyam erat, sed diam voluptua, At vero eos et accusam et justo duo doloresi";
             var packageItems = new List<TempValidationObject>
             {
                 new TempValidationObject
@@ -586,9 +586,9 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "T1").Name.Should().Be("this is a very long name for.pdf");
-            flatList.First(f => f.RepositoryId == "T2").Name.Should().Be("this is a very long name for_1.pdf");
-            flatList.First(f => f.RepositoryId == "T3").Name.Should().Be("this is a very long name for_2.pdf");
+            flatList.First(f => f.RepositoryId == "T1").Name.Should().Be("this is a very long n.pdf");
+            flatList.First(f => f.RepositoryId == "T2").Name.Should().Be("this is a very long n_1.pdf");
+            flatList.First(f => f.RepositoryId == "T3").Name.Should().Be("this is a very long n_2.pdf");
         }
     }
 }

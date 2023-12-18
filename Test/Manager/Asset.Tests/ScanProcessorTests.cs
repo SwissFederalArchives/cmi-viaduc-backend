@@ -65,7 +65,7 @@ namespace CMI.Manager.Asset.Tests
             // Make the file invalid to trigger the exception by removing one file reference in the first folder.
             paket.Inhaltsverzeichnis.Ordner[0].Ordner[0].Datei.RemoveAt(0);
             var settings = new ScansZusammenfassenSettings();
-            var processor = new ScanProcessor(new FileResolution(settings), settings);
+            var processor = new ScanProcessor(new ImageHelper(settings), settings);
 
             // Act(ion)
             Action action = () => processor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, rootFolder);
@@ -81,7 +81,7 @@ namespace CMI.Manager.Asset.Tests
             var rootFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestDataCopy\jp2_OK");
             var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
             var settings = new ScansZusammenfassenSettings { GroesseInProzent = 100, DefaultAufloesungInDpi = 300, JpegQualitaetInProzent = 80 };
-            var processor = new ScanProcessor(new FileResolution(settings), settings);
+            var processor = new ScanProcessor(new ImageHelper(settings), settings);
 
             // Add some weird files to the package
             AddFileToPackage("test01.txt", "D_o_k_u_m_e_n_t_0000001", paket, rootFolder);
@@ -118,7 +118,7 @@ namespace CMI.Manager.Asset.Tests
             var rootFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestDataCopy\jp2_NOK");
             var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
             var settings = new ScansZusammenfassenSettings { GroesseInProzent = 100, DefaultAufloesungInDpi = 300, JpegQualitaetInProzent = 80 };
-            var processor = new ScanProcessor(new FileResolution(settings), settings);
+            var processor = new ScanProcessor(new ImageHelper(settings), settings);
 
             // Act
             processor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, rootFolder);
@@ -144,7 +144,7 @@ namespace CMI.Manager.Asset.Tests
             var rootFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestDataCopy\jp2_OK");
             var paket = (PaketDIP) Paket.LoadFromFile(metadataFile);
             var settings = new ScansZusammenfassenSettings { GroesseInProzent = 100, DefaultAufloesungInDpi = 300, JpegQualitaetInProzent = 80 };
-            var processor = new ScanProcessor(new FileResolution(settings), settings);
+            var processor = new ScanProcessor(new ImageHelper(settings), settings);
 
             // Act
             processor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, rootFolder);

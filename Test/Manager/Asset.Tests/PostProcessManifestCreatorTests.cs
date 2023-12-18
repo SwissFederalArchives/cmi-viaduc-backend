@@ -29,6 +29,7 @@ namespace CMI.Manager.Asset.Tests
         [TestCase("30409372")]
         [TestCase("6865820")]
         [TestCase("30653572")]
+        [TestCase("30653558")]
         public void Check_if_manifest_creation_produces_reference_output(string archiveRecordId)
         {
             // Arrange

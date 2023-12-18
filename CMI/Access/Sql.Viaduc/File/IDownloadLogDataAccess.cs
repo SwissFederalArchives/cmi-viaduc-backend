@@ -12,9 +12,9 @@
         /// <param name="signatur">Signatur der VE</param>
         /// <param name="titel">Titel der VE</param>
         /// <param name="schutzfrist">Schutzfrist der VE</param>
-        void LogTokenGeneration(string token, string userId, string userTokens, string signatur, string titel, string schutzfrist);
+        void LogTokenGeneration(string token, string userId, string userTokens, string signatur, string titel, string schutzfrist, string zeitraum);
 
-
+        void LogViewerClick(string token, string userId, string userTokens, string signatur, string titel, string schutzfrist, string zeitraum);
         /// <summary>
         ///     Ergänzt den Logeintrag mit dem aktuellen Datum und schreibt den Vorgang auf den Log-Datensatz.
         ///     Dies bezeugt, dass nicht nur ein Token erzeugt wurde, sondern dass der Download tatsächlich gestartet wurde.

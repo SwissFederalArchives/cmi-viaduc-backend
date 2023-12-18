@@ -155,7 +155,16 @@ namespace CMI.Utilities.ProxyClients.Order
                 TerminDigitalisierung = terminDigitalisierung
             });
         }
-        
+
+        public async Task<List<DownloadLogItem>> GetDownloadLogReportRecords(LogDataFilter filter)
+        {
+            var client = GetRequestClient<GetDownloadLogReportRecordsRequest>(string.Empty, 3600);
+            var request = new GetDownloadLogReportRecordsRequest { Filter = filter };
+            var result = await client.GetResponse<GetDownloadLogReportRecordsResponse>(request);
+             
+            return result.Message.Items;
+        }
+
         public async Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId)
         {
             var client = GetRequestClient<GetStatusHistoryForOrderItemRequest>(BusConstants

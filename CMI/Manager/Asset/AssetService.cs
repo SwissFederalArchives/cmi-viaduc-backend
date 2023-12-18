@@ -132,14 +132,14 @@ namespace CMI.Manager.Asset
 
         public IRequestClient<DoesExistInCacheRequest> CreateDoesExistInCacheRequestClient(IComponentContext context)
         {
-            var requestTimeout = TimeSpan.FromMinutes(1);
+            var requestTimeout = TimeSpan.FromHours(1);
 
             return bus.CreateRequestClient<DoesExistInCacheRequest>(new Uri(new Uri(BusConfigurator.Uri), BusConstants.CacheDoesExistRequestQueue), requestTimeout);
         }
 
         public IRequestClient<JobInitRequest> CreateJobInitRequestClient(IComponentContext context)
         {
-            var requestTimeout = TimeSpan.FromMinutes(1);
+            var requestTimeout = TimeSpan.FromHours(1);
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterJobInitRequestQueue);
 
             return bus.CreateRequestClient<JobInitRequest>(busUri, requestTimeout);
@@ -147,7 +147,7 @@ namespace CMI.Manager.Asset
 
         public IRequestClient<JobEndRequest> CreateJobEndRequestClient(IComponentContext context)
         {
-            var requestTimeout = TimeSpan.FromMinutes(1);
+            var requestTimeout = TimeSpan.FromHours(1);
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterJobEndRequestQueue);
 
             return bus.CreateRequestClient<JobEndRequest>(busUri, requestTimeout);
@@ -155,7 +155,7 @@ namespace CMI.Manager.Asset
 
         public IRequestClient<SupportedFileTypesRequest> CreateSupportedFileTypesRequestClient(IComponentContext context)
         {
-            var requestTimeout = TimeSpan.FromMinutes(1);
+            var requestTimeout = TimeSpan.FromHours(1);
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.DocumentConverterSupportedFileTypesRequestQueue);
 
             return bus.CreateRequestClient<SupportedFileTypesRequest>(busUri, requestTimeout);
@@ -181,7 +181,7 @@ namespace CMI.Manager.Asset
 
         public IRequestClient<FindArchiveRecordRequest> CreateFindArchiveRecordRequestClient(IComponentContext context)
         {
-            var requestTimeout = TimeSpan.FromMinutes(1);
+            var requestTimeout = TimeSpan.FromHours(1);
             var busUri = new Uri(new Uri(BusConfigurator.Uri), BusConstants.IndexManagerFindArchiveRecordMessageQueue);
 
             return bus.CreateRequestClient<FindArchiveRecordRequest>(busUri, requestTimeout);

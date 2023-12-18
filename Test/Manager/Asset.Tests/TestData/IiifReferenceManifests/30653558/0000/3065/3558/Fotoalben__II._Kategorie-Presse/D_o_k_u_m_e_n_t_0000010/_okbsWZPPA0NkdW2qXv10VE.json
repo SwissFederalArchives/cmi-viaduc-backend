@@ -1,0 +1,191 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/_okbsWZPPA0NkdW2qXv10VE.json",
+  "label": {
+    "none": [
+      "D_o_k_u_m_e_n_t_0000010"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/00000039.jpg",
+      "label": {
+        "none": [
+          "1"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3572,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/_okbsWZPPA0NkdW2qXv10VE.json#annotations-page-painting-_okbsWZPPA0NkdW2qXv10VE-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/_okbsWZPPA0NkdW2qXv10VE.json#annotations-content-painting-_okbsWZPPA0NkdW2qXv10VE-1",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3572,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000010%2F%2F00000039.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000010%2F%2F00000039.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2534
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/canvasses/_okbsWZPPA0NkdW2qXv10VE-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2534
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/00000040.jpg",
+      "label": {
+        "none": [
+          "2"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3582,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/_okbsWZPPA0NkdW2qXv10VE.json#annotations-page-painting-_okbsWZPPA0NkdW2qXv10VE-2",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/_okbsWZPPA0NkdW2qXv10VE.json#annotations-content-painting-_okbsWZPPA0NkdW2qXv10VE-2",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3582,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000010%2F%2F00000040.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000010%2F%2F00000040.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2534
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/canvasses/_okbsWZPPA0NkdW2qXv10VE-2"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2534
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "D_o_k_u_m_e_n_t_0000010"
+        ],
+        "en": [
+          "D_o_k_u_m_e_n_t_0000010"
+        ],
+        "fr": [
+          "D_o_k_u_m_e_n_t_0000010"
+        ],
+        "it": [
+          "D_o_k_u_m_e_n_t_0000010"
+        ],
+        "none": [
+          "D_o_k_u_m_e_n_t_0000010"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3558/Fotoalben__II._Kategorie-Presse/_vpOgYnTPjOowAaLXqTDc3Y.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653558",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3065/3558/Fotoalben__II._Kategorie-Presse/D_o_k_u_m_e_n_t_0000010/D_o_k_u_m_e_n_t_0000010_OCR.txt",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-3065-3558-Fotoalben__II._Kategorie-Presse-D_o_k_u_m_e_n_t_0000010",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/jpeg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000010%2F%2F00000039.jpg/full/150,/0/default.jpg",
+      "type": "Image"
+    }
+  ]
+}

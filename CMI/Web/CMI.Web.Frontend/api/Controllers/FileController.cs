@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,7 +28,7 @@ namespace CMI.Web.Frontend.api.Controllers
     {
         private readonly ICacheHelper cacheHelper;
         private readonly IRequestClient<DownloadAssetRequest> downloadClient;
-        private readonly IFileDownloadHelper downloadHelper;
+        private readonly IDownloadLogHelper logLogHelper;
         private readonly IDownloadLogDataAccess downloadLogDataAccess;
         private readonly IDownloadTokenDataAccess downloadTokenDataAccess;
         private readonly IElasticService elasticService;
@@ -50,7 +52,7 @@ namespace CMI.Web.Frontend.api.Controllers
             ICacheHelper cacheHelper,
             IUserDataAccess userDataAccess,
             IOrderDataAccess orderDataAccess,
-            IFileDownloadHelper downloadHelper,
+            IDownloadLogHelper logLogHelper,
             IKontrollstellenInformer kontrollstellenInformer)
         {
             this.usageAnalyzer = usageAnalyzer;
@@ -64,7 +66,7 @@ namespace CMI.Web.Frontend.api.Controllers
             this.elasticService = elasticService;
             this.userDataAccess = userDataAccess;
             this.orderDataAccess = orderDataAccess;
-            this.downloadHelper = downloadHelper;
+            this.logLogHelper = logLogHelper;
             this.kontrollstellenInformer = kontrollstellenInformer;
 
             // Workaround für Unit-Test
@@ -151,7 +153,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     return NotFound();
                 }
 
-                var packageId = record.PrimaryData?.FirstOrDefault()?.PackageId ?? string.Empty;
+                var packageId = record.PrimaryDataLink ?? string.Empty;
                 var status = CheckStatusAsync(packageId, record, access);
                 if (!(status is StatusCodeResult) || ((StatusCodeResult) status).StatusCode != HttpStatusCode.OK)
                 {
@@ -186,7 +188,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 return Content(HttpStatusCode.Forbidden, "Invalid token");
             }
 
-            var ipAdress = downloadHelper.GetClientIp(Request);
+            var ipAdress = logLogHelper.GetClientIp(Request);
             if (!downloadTokenDataAccess.CheckTokenIsValidAndClean(token, archiveRecordId, DownloadTokenType.ArchiveRecord, ipAdress))
             {
                 return BadRequest("Token expired or is not valid");
@@ -211,7 +213,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 return NotFound();
             }
 
-            var packageId = record.PrimaryData.FirstOrDefault()?.PackageId ?? "";
+            var packageId = record.PrimaryDataLink ?? "";
             if (string.IsNullOrEmpty(packageId))
             {
                 return BadRequest("VE does not contain any primarydata and/or a valid packageid");
@@ -244,13 +246,17 @@ namespace CMI.Web.Frontend.api.Controllers
                     Content = new StreamContent(stream)
                 };
 
+                char[] invalidFileChars = Path.GetInvalidFileNameChars();
+                var signature = record.ReferenceCode.TrimEnd('*');
+                signature = invalidFileChars.Aggregate(signature, (current, someChar) => current.Replace(someChar, '-'));
+
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = archiveRecordId + ".zip"
+                    FileName = signature + "_" + archiveRecordId + ".zip"
                 };
 
-                await kontrollstellenInformer.InformIfNecessary(access, new[] {new VeInfo(archiveRecordId, reason)});
+                await kontrollstellenInformer.InformIfNecessary(access, new[] { new VeInfo(archiveRecordId, reason) });
                 downloadLogDataAccess.LogVorgang(token, "Download");
 
                 return ResponseMessage(result);
@@ -260,37 +266,6 @@ namespace CMI.Web.Frontend.api.Controllers
                 Log.Error(e, "(FileController:DownloadFile({ID}))", archiveRecordId);
                 throw;
             }
-        }
-
-        private IHttpActionResult CheckStatusAsync(string packageId, ElasticArchiveRecord record, UserAccess access)
-        {
-            if (string.IsNullOrEmpty(packageId))
-            {
-                return BadRequest("VE does not contain any primarydata and/or a valid packageid");
-            }
-
-            if (!CheckUserHasDownloadTokensForVe(access, record))
-            {
-                return StatusCode(HttpStatusCode.Forbidden);
-            }
-
-            return StatusCode(HttpStatusCode.OK);
-        }
-
-        private bool CheckUserHasDownloadTokensForVe(UserAccess access, int id)
-        {
-            var record = GetRecord(id, access);
-            return CheckUserHasDownloadTokensForVe(access, record);
-        }
-
-        private bool CheckUserHasDownloadTokensForVe(UserAccess access, ElasticArchiveRecord record)
-        {
-            if (record == null)
-            {
-                return false;
-            }
-
-            return access.HasAnyTokenFor(record.PrimaryDataDownloadAccessTokens);
         }
 
         [HttpGet]
@@ -322,25 +297,76 @@ namespace CMI.Web.Frontend.api.Controllers
                 }
             }
 
-            var ipAdress = downloadHelper.GetClientIp(Request);
-            var expires = DateTime.Now.AddMinutes(downloadHelper.GetConfigValueTokenValidTime());
-            var token = downloadHelper.CreateDownloadToken();
+            var ipAdress = logLogHelper.GetClientIp(Request);
+            var expires = DateTime.Now.AddMinutes(logLogHelper.GetConfigValueTokenValidTime());
+            var token = logLogHelper.CreateLogToken();
             LogTokenGeneration(archiveRecordId, token);
 
             downloadTokenDataAccess.CreateToken(token, archiveRecordId, DownloadTokenType.ArchiveRecord, expires, ipAdress, userId);
             return Content(HttpStatusCode.OK, token);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public IHttpActionResult LogViewerClick(int archiveRecordId)
+        {
+            var token = logLogHelper.CreateLogToken();
+            
+            var access = GetUserAccessFunc(null);
+            var ear = GetRecord(archiveRecordId, access);
+            var zeitraum = ear.CreationPeriod.Text;
+            var signatur = ear?.ReferenceCode ?? "unbekannt";
+            var titel = ear?.Title ?? "unbekannt";
+            var schutzfrist = ear?.ProtectionEndDate?.Date;
+            var userId = access?.UserId ?? "Viewer";
+            var userTokens = access?.CombinedTokens == null ? string.Empty : string.Join(", ", access.CombinedTokens);
+            downloadLogDataAccess.LogViewerClick(token, userId, userTokens,
+                signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum);
+            return StatusCode(HttpStatusCode.OK);
+        }
+
         private void LogTokenGeneration(int archiveRecordId, string token)
         {
             var access = GetUserAccessFunc(null);
             var ear = GetRecord(archiveRecordId, access);
+            var zeitraum = ear?.CreationPeriod?.Text;
             var signatur = ear?.ReferenceCode ?? "unbekannt";
             var titel = ear?.Title ?? "unbekannt";
             var schutzfrist = ear?.ProtectionEndDate?.Date;
-
+            
             downloadLogDataAccess.LogTokenGeneration(token, access.UserId, string.Join(", ", access.CombinedTokens),
-                signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt");
+                 signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum);
+        }
+        
+        private IHttpActionResult CheckStatusAsync(string packageId, ElasticArchiveRecord record, UserAccess access)
+        {
+            if (string.IsNullOrEmpty(packageId))
+            {
+                return BadRequest("VE does not contain any primarydata and/or a valid packageid");
+            }
+
+            if (!CheckUserHasDownloadTokensForVe(access, record))
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+
+            return StatusCode(HttpStatusCode.OK);
+        }
+
+        private bool CheckUserHasDownloadTokensForVe(UserAccess access, int id)
+        {
+            var record = GetRecord(id, access);
+            return CheckUserHasDownloadTokensForVe(access, record);
+        }
+
+        private bool CheckUserHasDownloadTokensForVe(UserAccess access, ElasticArchiveRecord record)
+        {
+            if (record == null)
+            {
+                return false;
+            }
+
+            return access.HasAnyTokenFor(record.PrimaryDataDownloadAccessTokens);
         }
     }
 }

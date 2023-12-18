@@ -30,6 +30,7 @@ namespace CMI.Contract.Order
         Task<DigipoolEntry[]> GetDigipool(int numberOfEntries);
         Task UpdateDigipool(List<int> orderItemIds, int? digitalisierungsKategorie, DateTime? terminDigitalisierung);
         Task <List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenReportRecords(LogDataFilter filter);
+        Task<List<DownloadLogItem>> GetDownloadLogReportRecords(LogDataFilter filter);
         Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId);
         Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId);
 

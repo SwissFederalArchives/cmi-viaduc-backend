@@ -27,7 +27,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
         {
             orderManagerClient = Mock.Of<IPublicOrder>();
             downloadTokenDataAccess = Mock.Of<IDownloadTokenDataAccess>();
-            downloadHelper = Mock.Of<IFileDownloadHelper>(c => c.GetClientIp(It.IsAny<HttpRequestMessage>()) == "0.0.0.0:127");
+            downloadLogHelper = Mock.Of<IDownloadLogHelper>(c => c.GetClientIp(It.IsAny<HttpRequestMessage>()) == "0.0.0.0:127");
             var downloadAssetResponse = new Mock<Response<DownloadAssetResult>>();
             downloadAssetResponse.Setup(r => r.Message).Returns(new DownloadAssetResult
             {
@@ -62,7 +62,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
 
         private IPublicOrder orderManagerClient;
         private IDownloadTokenDataAccess downloadTokenDataAccess;
-        private IFileDownloadHelper downloadHelper;
+        private IDownloadLogHelper downloadLogHelper;
         private IRequestClient<DownloadAssetRequest> downloadClient;
         private ICacheHelper cacheHelper;
         private IRequestClient<DownloadAssetRequest> downloadClientNoLink;
@@ -73,7 +73,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
         {
             var token = "  "; // Invalid token
             var recordId = 1;
-            var fileController = new FileController(orderManagerClient, downloadTokenDataAccess, downloadHelper, downloadClient,
+            var fileController = new FileController(orderManagerClient, downloadTokenDataAccess, downloadLogHelper, downloadClient,
                 doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
@@ -91,7 +91,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var dtm = Mock.Of<IDownloadTokenDataAccess>(c =>
                 c.CheckTokenIsValidAndClean(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) == false);
 
-            var fileController = new FileController(orderManagerClient, dtm, downloadHelper, downloadClient, doesExistInCacheClient, cacheHelper);
+            var fileController = new FileController(orderManagerClient, dtm, downloadLogHelper, downloadClient, doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
@@ -108,7 +108,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
                 c.CheckTokenIsValidAndClean(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) &&
                 c.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) == "");
 
-            var fileController = new FileController(orderManagerClient, dtm, downloadHelper, downloadClient, doesExistInCacheClient, cacheHelper);
+            var fileController = new FileController(orderManagerClient, dtm, downloadLogHelper, downloadClient, doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
@@ -126,7 +126,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
                 c.CheckTokenIsValidAndClean(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) &&
                 c.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) == "111");
             var omc = Mock.Of<IPublicOrder>(c => c.FindOrderItems(It.IsAny<int[]>()) == Task.FromResult(new OrderItem[0]));
-            var fileController = new FileController(omc, dtm, downloadHelper, downloadClient, doesExistInCacheClient, cacheHelper);
+            var fileController = new FileController(omc, dtm, downloadLogHelper, downloadClient, doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
@@ -144,7 +144,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
                 c.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) == "111");
             var omc = Mock.Of<IPublicOrder>(c =>
                 c.FindOrderItems(It.IsAny<int[]>()) == Task.FromResult(new[] {new OrderItem {Id = 100, Benutzungskopie = true}}));
-            var fileController = new FileController(omc, dtm, downloadHelper, downloadClientNoLink, doesExistInCacheClient, cacheHelper);
+            var fileController = new FileController(omc, dtm, downloadLogHelper, downloadClientNoLink, doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
@@ -163,7 +163,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
                 c.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), DownloadTokenType.OrderItem, It.IsAny<string>()) == "111");
             var omc = Mock.Of<IPublicOrder>(c =>
                 c.FindOrderItems(It.IsAny<int[]>()) == Task.FromResult(new[] {new OrderItem {Id = 100, Benutzungskopie = true}}));
-            var fileController = new FileController(omc, dtm, downloadHelper, downloadClient, doesExistInCacheClient, cacheHelper);
+            var fileController = new FileController(omc, dtm, downloadLogHelper, downloadClient, doesExistInCacheClient, cacheHelper);
 
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 

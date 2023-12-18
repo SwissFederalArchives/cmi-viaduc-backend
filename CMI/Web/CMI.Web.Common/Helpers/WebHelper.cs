@@ -36,7 +36,7 @@ namespace CMI.Web.Common.Helpers
         #region Filtering
 
         public static IList<Func<HttpContext, string, string, string>> StaticContentFilters = new List<Func<HttpContext, string, string, string>>();
-
+        
         #endregion
 
         public static string LanguageCookieName => GetStringSetting("languageCookieName", "viaduc_language");
@@ -55,6 +55,8 @@ namespace CMI.Web.Common.Helpers
 
         public static string SupportedLanguagesForChatBot => GetStringSetting("supportedLanguagesForChatBot", "de");
         public static string UrlForChatBot => GetStringSetting("urlForChatBot", "https://chatbot.bar.smartive.cloud/");
+
+        public static string URLReservation => GetStringSetting("urlReservation", "https://app.cituro.com/booking/3637098");
 
         public static string PublicClientUrl => GetStringSetting("publicClientUrl", "https://www.recherche.bar.admin.ch/recherche");
 

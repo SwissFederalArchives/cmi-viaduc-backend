@@ -14,6 +14,8 @@ namespace CMI.Engine.Asset
         /// <returns>The name of the converted file</returns>
         Task<string> ConvertFile(string file, string destinationExtension, JobContext context);
 
+        Task<string> ConvertImageToPdf(string file);
+
         /// <summary>
         ///     Returns a list with the supported file types.
         /// </summary>

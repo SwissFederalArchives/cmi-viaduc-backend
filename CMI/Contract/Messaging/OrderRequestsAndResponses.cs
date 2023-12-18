@@ -159,6 +159,16 @@ namespace CMI.Contract.Messaging
         public List<PrimaerdatenAufbereitungItem> Items { get; set; }
     }
 
+    public class GetDownloadLogReportRecordsRequest
+    {
+        public LogDataFilter Filter { get; set; }
+    }
+
+    public class GetDownloadLogReportRecordsResponse
+    {
+        public List<DownloadLogItem> Items { get; set; }
+    }
+
     public class GetStatusHistoryForOrderItemRequest
     {
         public int OrderItemId { get; set; }

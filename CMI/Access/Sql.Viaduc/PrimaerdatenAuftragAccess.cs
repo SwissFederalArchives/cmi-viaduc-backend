@@ -12,7 +12,7 @@ namespace CMI.Access.Sql.Viaduc
     public interface IPrimaerdatenAuftragAccess
     {
         Task<int> CreateOrUpdateAuftrag(PrimaerdatenAuftrag auftrag);
-        Task<PrimaerdatenAuftrag> GetPrimaerdatenAuftrag(int primaerdatenAuftragId, bool loadLogEntries = false);
+        Task<PrimaerdatenAuftrag> GetPrimaerdatenAuftrag(int primaerdatenAuftragId, bool loadLogEntries = false, bool skipMaxVarCharFields = false);
         Task<int> UpdateStatus(PrimaerdatenAuftragLog statusLog, int verarbeitungsKanal = 0);
         Task<PrimaerdatenAuftragStatusInfo> GetLaufendenAuftrag(int veId, AufbereitungsArtEnum aufbereitungsArt);
         Task<Dictionary<int, int>> GetCurrentWorkload(AufbereitungsArtEnum aufbereitungsArt);
@@ -52,28 +52,24 @@ namespace CMI.Access.Sql.Viaduc
                     return auftrag.PrimaerdatenAuftragId;
                 }
 
-                using (var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                var auftragId = await CreateAuftrag(auftrag, connection);
+                await InsertAuftragLog(new PrimaerdatenAuftragLog
                 {
-                    var auftragId = await CreateAuftrag(auftrag, connection);
-                    await InsertAuftragLog(new PrimaerdatenAuftragLog
-                    {
-                        PrimaerdatenAuftragId = auftragId,
-                        Service = auftrag.Service,
-                        Status = AufbereitungsStatusEnum.Registriert
-                    }, connection);
-                    tx.Complete();
-                    return auftragId;
-                }
+                    PrimaerdatenAuftragId = auftragId,
+                    Service = auftrag.Service,
+                    Status = AufbereitungsStatusEnum.Registriert
+                }, connection);
+                return auftragId;
             }
         }
 
-        public async Task<PrimaerdatenAuftrag> GetPrimaerdatenAuftrag(int primaerdatenAuftragId, bool loadLogEntries = false)
+        public async Task<PrimaerdatenAuftrag> GetPrimaerdatenAuftrag(int primaerdatenAuftragId, bool loadLogEntries = false, bool skipMaxVarCharFields = false)
         {
             PrimaerdatenAuftrag retVal;
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                retVal = await GetPrimaerdatenAuftragInternal(primaerdatenAuftragId, connection, loadLogEntries);
+                retVal = await GetPrimaerdatenAuftragInternal(primaerdatenAuftragId, connection, loadLogEntries, skipMaxVarCharFields);
             }
 
             return retVal;
@@ -84,41 +80,37 @@ namespace CMI.Access.Sql.Viaduc
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
-                using (var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                // Get Auftrag
+                var auftrag = await GetPrimaerdatenAuftragInternal(statusLog.PrimaerdatenAuftragId, connection, false, true);
+
+                // Update the status only, if it is not already erledigt
+                if (auftrag.Status != AufbereitungsStatusEnum.AuftragErledigt)
                 {
-                    // Get Auftrag
-                    var auftrag = await GetPrimaerdatenAuftragInternal(statusLog.PrimaerdatenAuftragId, connection);
-
-                    // Update the status only, if it is not already erledigt
-                    if (auftrag.Status != AufbereitungsStatusEnum.AuftragErledigt)
-                    {
-                        auftrag.Status = statusLog.Status;
-                    }
-
-                    auftrag.Service = statusLog.Service;
-                    auftrag.ErrorText = statusLog.ErrorText;
-
-                    if (verarbeitungsKanal > 0)
-                    {
-                        auftrag.Verarbeitungskanal = verarbeitungsKanal;
-                    }
-
-                    // If the status is "erledigt" then add other important info.
-                    if (auftrag.Status == AufbereitungsStatusEnum.AuftragErledigt)
-                    {
-                        auftrag.Abgeschlossen = true;
-                        auftrag.AbgeschlossenAm = DateTime.Now;
-                    }
-
-                    auftrag.ModifiedOn = DateTime.Now;
-                    await UpdateAuftrag(auftrag, connection, true);
-
-                    // Update log status
-                    var logId = await InsertAuftragLog(statusLog, connection);
-
-                    tx.Complete();
-                    return logId;
+                    auftrag.Status = statusLog.Status;
                 }
+
+                auftrag.Service = statusLog.Service;
+                auftrag.ErrorText = statusLog.ErrorText;
+
+                if (verarbeitungsKanal > 0)
+                {
+                    auftrag.Verarbeitungskanal = verarbeitungsKanal;
+                }
+
+                // If the status is "erledigt" then add other important info.
+                if (auftrag.Status == AufbereitungsStatusEnum.AuftragErledigt)
+                {
+                    auftrag.Abgeschlossen = true;
+                    auftrag.AbgeschlossenAm = DateTime.Now;
+                }
+
+                auftrag.ModifiedOn = DateTime.Now;
+                await UpdateAuftrag(auftrag, connection, true);
+
+                // Update log status
+                var logId = await InsertAuftragLog(statusLog, connection);
+
+                return logId;
             }
         }
 
@@ -314,12 +306,16 @@ namespace CMI.Access.Sql.Viaduc
         }
 
         private async Task<PrimaerdatenAuftrag> GetPrimaerdatenAuftragInternal(int primaerdatenAuftragId, SqlConnection connection,
-            bool loadLogEntries = false)
+            bool loadLogEntries = false, bool skipMaxVarCharFields = false)
         {
             PrimaerdatenAuftrag retVal = null;
             using (var cmd = connection.CreateCommand())
             {
-                cmd.CommandText = "SELECT * FROM PrimaerdatenAuftrag WHERE primaerdatenAuftragId = @primaerdatenAuftragId ";
+                cmd.CommandText = @$"SELECT PrimaerdatenAuftragId, AufbereitungsArt, GroesseInBytes, Verarbeitungskanal, Status, Service, 
+                                            PackageId, VeId, Abgeschlossen, AbgeschlossenAm, 
+                                            {(skipMaxVarCharFields ? "'' as Workload, '' as PackageMetadata," : "Workload, PackageMetadata,")}
+                                            GeschaetzteAufbereitungszeit, ErrorText, CreatedOn, ModifiedOn, PriorisierungsKategorie 
+                                    FROM PrimaerdatenAuftrag WHERE primaerdatenAuftragId = @primaerdatenAuftragId ";
                 cmd.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "primaerdatenAuftragId",
@@ -506,26 +502,26 @@ namespace CMI.Access.Sql.Viaduc
             return new PrimaerdatenAuftrag
             {
                 PrimaerdatenAuftragId = Convert.ToInt32(reader["PrimaerdatenAuftragId"]),
-                AufbereitungsArt = (AufbereitungsArtEnum)Enum.Parse(typeof(AufbereitungsArtEnum), reader["AufbereitungsArt"] as string ?? throw new InvalidOperationException()),
-                GroesseInBytes = reader["GroesseInBytes"] == DBNull.Value ? null : (long?)Convert.ToInt64(reader["GroesseInBytes"]),
-                Verarbeitungskanal = reader["Verarbeitungskanal"] == DBNull.Value ? null : (int?)Convert.ToInt32(reader["Verarbeitungskanal"]),
+                AufbereitungsArt = (AufbereitungsArtEnum) Enum.Parse(typeof(AufbereitungsArtEnum), reader["AufbereitungsArt"] as string ?? throw new InvalidOperationException()),
+                GroesseInBytes = reader["GroesseInBytes"] == DBNull.Value ? null : (long?) Convert.ToInt64(reader["GroesseInBytes"]),
+                Verarbeitungskanal = reader["Verarbeitungskanal"] == DBNull.Value ? null : (int?) Convert.ToInt32(reader["Verarbeitungskanal"]),
                 PriorisierungsKategorie = reader["PriorisierungsKategorie"] == DBNull.Value
                     ? null
-                    : (int?)Convert.ToInt32(reader["PriorisierungsKategorie"]),
-                Status = (AufbereitungsStatusEnum)Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
-                Service = (AufbereitungsServices)Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
+                    : (int?) Convert.ToInt32(reader["PriorisierungsKategorie"]),
+                Status = (AufbereitungsStatusEnum) Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
+                Service = (AufbereitungsServices) Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
                 PackageId = reader["PackageId"] as string,
                 PackageMetadata = reader["PackageMetadata"] as string,
                 VeId = Convert.ToInt32(reader["VeId"]),
                 Abgeschlossen = Convert.ToBoolean(reader["Abgeschlossen"]),
-                AbgeschlossenAm = reader["AbgeschlossenAm"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(reader["AbgeschlossenAm"]),
+                AbgeschlossenAm = reader["AbgeschlossenAm"] == DBNull.Value ? null : (DateTime?) Convert.ToDateTime(reader["AbgeschlossenAm"]),
                 GeschaetzteAufbereitungszeit = reader["GeschaetzteAufbereitungszeit"] == DBNull.Value
                     ? null
-                    : (int?)Convert.ToInt32(reader["GeschaetzteAufbereitungszeit"]),
+                    : (int?) Convert.ToInt32(reader["GeschaetzteAufbereitungszeit"]),
                 ErrorText = reader["ErrorText"] as string,
                 Workload = reader["Workload"] as string,
                 CreatedOn = Convert.ToDateTime(reader["CreatedOn"]),
-                ModifiedOn = reader["ModifiedOn"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(reader["ModifiedOn"])
+                ModifiedOn = reader["ModifiedOn"] == DBNull.Value ? null : (DateTime?) Convert.ToDateTime(reader["ModifiedOn"])
             };
         }
 
@@ -536,15 +532,15 @@ namespace CMI.Access.Sql.Viaduc
             return new PrimaerdatenAuftragStatusInfo
             {
                 PrimaerdatenAuftragId = Convert.ToInt32(reader["PrimaerdatenAuftragId"]),
-                AufbereitungsArt = (AufbereitungsArtEnum)Enum.Parse(typeof(AufbereitungsArtEnum), reader["AufbereitungsArt"] as string ?? throw new InvalidOperationException()),
-                Status = (AufbereitungsStatusEnum)Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
-                Service = (AufbereitungsServices)Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
+                AufbereitungsArt = (AufbereitungsArtEnum) Enum.Parse(typeof(AufbereitungsArtEnum), reader["AufbereitungsArt"] as string ?? throw new InvalidOperationException()),
+                Status = (AufbereitungsStatusEnum) Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
+                Service = (AufbereitungsServices) Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
                 VeId = Convert.ToInt32(reader["VeId"]),
                 GeschaetzteAufbereitungszeit = reader["GeschaetzteAufbereitungszeit"] == DBNull.Value
                     ? null
-                    : (int?)Convert.ToInt32(reader["GeschaetzteAufbereitungszeit"]),
+                    : (int?) Convert.ToInt32(reader["GeschaetzteAufbereitungszeit"]),
                 CreatedOn = Convert.ToDateTime(reader["CreatedOn"]),
-                ModifiedOn = reader["ModifiedOn"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(reader["ModifiedOn"])
+                ModifiedOn = reader["ModifiedOn"] == DBNull.Value ? null : (DateTime?) Convert.ToDateTime(reader["ModifiedOn"])
             };
         }
 
@@ -555,8 +551,8 @@ namespace CMI.Access.Sql.Viaduc
             {
                 PrimaerdatenAuftragLogId = Convert.ToInt32(reader["PrimaerdatenAuftragLogId"]),
                 PrimaerdatenAuftragId = Convert.ToInt32(reader["PrimaerdatenAuftragId"]),
-                Status = (AufbereitungsStatusEnum)Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
-                Service = (AufbereitungsServices)Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
+                Status = (AufbereitungsStatusEnum) Enum.Parse(typeof(AufbereitungsStatusEnum), reader["Status"] as string ?? throw new InvalidOperationException()),
+                Service = (AufbereitungsServices) Enum.Parse(typeof(AufbereitungsServices), reader["Service"] as string ?? throw new InvalidOperationException()),
                 ErrorText = reader["ErrorText"] as string,
                 CreatedOn = Convert.ToDateTime(reader["CreatedOn"])
             };

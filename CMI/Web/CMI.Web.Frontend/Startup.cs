@@ -24,7 +24,6 @@ using Newtonsoft.Json.Serialization;
 using NJsonSchema.Generation;
 using NSwag;
 using NSwag.AspNet.Owin;
-using NSwag.SwaggerGeneration;
 using Owin;
 using Serilog;
 using SameSiteMode = Microsoft.Owin.SameSiteMode;
@@ -43,7 +42,7 @@ namespace CMI.Web.Frontend
 
             ConfigureSecurity(app);
 
-            app.UseSwaggerUi3(new[] {typeof(ExternalController)}, settings =>
+            app.UseSwaggerUi3(new[] { typeof(ExternalController) }, settings =>
             {
                 settings.GeneratorSettings.DefaultUrlTemplate = "api/{controller}/{action}/{id?}";
                 settings.GeneratorSettings.Title = "Viaduc REST API";
@@ -62,7 +61,7 @@ namespace CMI.Web.Frontend
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 };
-            }, new SwaggerJsonSchemaGenerator(new JsonSchemaGeneratorSettings()));
+            });
 
 
             WebConfig.Configure();
@@ -122,10 +121,10 @@ namespace CMI.Web.Frontend
             var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, true);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
             app.UseKentorAuthServicesAuthentication(authOptions);
-            
+
             Log.Information("ConfigureSecurity: tokenExpiry={cookieExpireTimeInMinutes}",
                 FrontendSettingsViaduc.Instance.CookieExpireTimeInMinutes);
-            
+
             app.Use(async (context, next) => { await next.Invoke(); });
         }
 

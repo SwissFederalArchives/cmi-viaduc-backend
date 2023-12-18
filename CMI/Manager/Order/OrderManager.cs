@@ -182,6 +182,12 @@ namespace CMI.Manager.Order
             return dataItems;
         }
 
+        public Task<List<DownloadLogItem>> GetDownloadLogReportRecords(LogDataFilter filter)
+        {
+            var dataItems = sqlDataAccess.GetDownloadLogItemsByDate(filter.StartDate.GetValueOrDefault(new DateTime(2018, 1, 1)), filter.EndDate.GetValueOrDefault(DateTime.Now));
+            return dataItems;
+        }
+
         public async Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId)
         {
             return await sqlDataAccess.GetStatusHistoryForOrderItem(orderItemId);

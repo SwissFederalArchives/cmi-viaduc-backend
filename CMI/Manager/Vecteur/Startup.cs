@@ -7,7 +7,7 @@ using Autofac.Integration.WebApi;
 using CMI.Manager.Vecteur.Infrastructure;
 using NSwag;
 using NSwag.AspNet.Owin;
-using NSwag.SwaggerGeneration.Processors.Security;
+using NSwag.Generation.Processors.Security;
 using Owin;
 using Swashbuckle.Application;
 
@@ -44,14 +44,15 @@ namespace CMI.Manager.Vecteur
                         document.Info.Title = "Vecteur API";
                         document.Info.Version = "v1";
                         document.Info.Description = "API um Aufträge aus Viaduc zu verarbeiten.";
-                        document.SecurityDefinitions.Add("ApiKey", new SwaggerSecurityScheme
+                        document.SecurityDefinitions.Add("ApiKey", new OpenApiSecurityScheme
                         {
-                            Type = SwaggerSecuritySchemeType.ApiKey,
+                            Type = OpenApiSecuritySchemeType.ApiKey,
                             Scheme = "X-ApiKey",
-                            In = SwaggerSecurityApiKeyLocation.Header,
+                            In = OpenApiSecurityApiKeyLocation.Header,
                             Name = "X-ApiKey",
                             Description = "API key for request authorization."
                         });
+
                         document.Produces = new List<string> {"application/xml", "application/json"};
                         document.Consumes = new List<string> {"application/xml", "application/json"};
                     };
@@ -59,11 +60,13 @@ namespace CMI.Manager.Vecteur
                 .UseSwaggerUi3(typeof(Startup).Assembly, c =>
                 {
                     c.GeneratorSettings.DocumentProcessors.Add(
-                        new SecurityDefinitionAppender("ApiKey", new SwaggerSecurityScheme
+                        new SecurityDefinitionAppender("ApiKey", new OpenApiSecurityScheme
                         {
-                            Type = SwaggerSecuritySchemeType.ApiKey,
+                            Type = OpenApiSecuritySchemeType.ApiKey,
+                            Scheme = "X-ApiKey",
                             Name = "X-ApiKey",
-                            In = SwaggerSecurityApiKeyLocation.Header
+                            In = OpenApiSecurityApiKeyLocation.Header,
+                            Description = "API key for request authorization."
                         }));
                     c.GeneratorSettings.OperationProcessors.Add(new OperationSecurityScopeProcessor("ApiKey"));
                 })

@@ -53,14 +53,11 @@ namespace CMI.Manager.Asset.Consumers
 
                 // 1. Step: Extract Zip file(s)
                 preparationSteps.Add(ExtractRepositoryPackage);
-#if DEBUG
-#else
-
                 // 2. Step: Detect and mark files with large dimensions
                 preparationSteps.Add(DetectAndFlagLargeDimensions);
                 // 3. Step: Detect and optimize pdf files that need optimization
                 preparationSteps.Add(DetectAndOptimizePdf);
-#endif
+
                 foreach (var step in preparationSteps)
                 {
                     var result = await step(context.Message);
@@ -69,6 +66,16 @@ namespace CMI.Manager.Asset.Consumers
                     if (!result.Success)
                     {
                         await SendFailSync(context, result.ErrorMessage);
+
+                        // In any case remove the temp files
+                        Log.Information("Removing the temporary files for package {PackageFileName} and Auftrag with id {PrimaerdatenAuftragId}",
+                            context.Message.ArchiveRecord.PrimaryData[0].PackageFileName, context.Message.PrimaerdatenAuftragId);
+                        await assetManager.RemoveTemporaryFiles(new ExtractZipArgument
+                        {
+                            PackageFileName = context.Message.ArchiveRecord.PrimaryData[0].PackageFileName,
+                            PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId
+                        });
+
                         return;
                     }
                 }
@@ -83,7 +90,7 @@ namespace CMI.Manager.Asset.Consumers
                 // Forward the prepared data to the next processing point
                 var endpoint = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.AssetManagerExtractFulltextMessageQueue));
 
-                await endpoint.Send<IArchiveRecordExtractFulltextFromPackage>(new 
+                await endpoint.Send<IArchiveRecordExtractFulltextFromPackage>(new ArchiveRecordExtractFulltextFromPackage
                 {
                     MutationId = context.Message.MutationId,
                     ArchiveRecord = context.Message.ArchiveRecord,
@@ -102,15 +109,15 @@ namespace CMI.Manager.Asset.Consumers
             {
                 var result = await assetManager.ExtractZipFile(new ExtractZipArgument
                 {
-                    PackageFileName = repositoryPackage.PackageFileName, 
+                    PackageFileName = repositoryPackage.PackageFileName,
                     PrimaerdatenAuftragId = primaerdatenAuftragId
                 });
-                return result ? new ProcessStepResult{Success = true} : 
-                                new ProcessStepResult{Success = false, ErrorMessage = "Could not unzip package."};
+                return result ? new ProcessStepResult { Success = true } :
+                                new ProcessStepResult { Success = false, ErrorMessage = "Could not unzip package." };
             }
 
             Log.Warning("No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected.", primaerdatenAuftragId);
-            return new ProcessStepResult{Success = false, ErrorMessage = $"No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected." };
+            return new ProcessStepResult { Success = false, ErrorMessage = $"No package found for PrimaerdatenAuftrag with id {primaerdatenAuftragId} where one was expected." };
         }
 
         private Task<ProcessStepResult> DetectAndFlagLargeDimensions(PrepareForRecognitionMessage message)

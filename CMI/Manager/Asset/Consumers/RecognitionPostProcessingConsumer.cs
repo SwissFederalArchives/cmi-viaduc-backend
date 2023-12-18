@@ -67,10 +67,7 @@ namespace CMI.Manager.Asset.Consumers
                         {
                             await SendFailSync(context, result.ErrorMessage);
                             // In any case remove the temp files
-#if DEBUG
-#else
-                        await RemoveTemporaryFiles(context.Message);
-#endif
+                            await RemoveTemporaryFiles(context.Message);
                             return;
                         }
                     }
@@ -110,8 +107,8 @@ namespace CMI.Manager.Asset.Consumers
         private Task<ProcessStepResult> ShouldCreateViewerFiles(RecognitionPostProcessingMessage message)
         {
             var createManifestAllowed = message.ArchiveRecord.Security.PrimaryDataDownloadAccessToken.Contains(AccessRoles.RoleOe2) &&
-                         message.ArchiveRecord.Security.PrimaryDataFulltextAccessToken.Contains(AccessRoles.RoleOe2);
-             
+                                        message.ArchiveRecord.Security.PrimaryDataFulltextAccessToken.Contains(AccessRoles.RoleOe2);
+
             if (createManifestAllowed || Settings.Default.IgnoreAccessTokensForManifestCheck)
             {
                 return assetPostProcessingEngine.ContainsOnlyValidFileTypes(Settings.Default.PickupPath, message.ArchiveRecord);
@@ -158,10 +155,12 @@ namespace CMI.Manager.Asset.Consumers
         {
             return assetPostProcessingEngine.CombineSinglePageTextExtractsToTextDocument(Settings.Default.PickupPath, message.ArchiveRecord);
         }
+
         private Task<ProcessStepResult> SaveOCRTextInSolr(RecognitionPostProcessingMessage message)
         {
             return assetPostProcessingEngine.SaveOCRTextInSolr(Settings.Default.PickupPath, message.ArchiveRecord);
         }
+
         private Task<ProcessStepResult> CreateIiifManifests(RecognitionPostProcessingMessage message)
         {
             return assetPostProcessingEngine.CreateIiifManifests(Settings.Default.PickupPath, message.ArchiveRecord);
@@ -183,8 +182,9 @@ namespace CMI.Manager.Asset.Consumers
                 PrimaerdatenAuftragId = primaerdatenAuftragId
             });
 
-            return success ? new ProcessStepResult { Success = true } :
-                new ProcessStepResult { Success = false, ErrorMessage = $"Failed to remove temporary files {packageFileName}" };
+            return success
+                ? new ProcessStepResult {Success = true}
+                : new ProcessStepResult {Success = false, ErrorMessage = $"Failed to remove temporary files {packageFileName}"};
         }
     }
 }

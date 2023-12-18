@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using CMI.Contract.Common.Gebrauchskopie;
 using Iiif.API.Presentation;
-using Serilog;
 
 namespace CMI.Engine.Asset.PostProcess;
 
@@ -26,7 +25,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     private const string presentationContextUri = "http://iiif.io/api/presentation/3/context.json";
     private readonly ViewerFileLocationSettings locationSettings;
     private readonly IiifManifestSettings manifestSettings;
-    private List<string> pathItems = new();
+    private List<PathItem> pathItems = new();
     private string archiveRecordId;
     private List<DateiDIP> packageFiles;
     private List<OrdnerDIP> packageDirectories;
@@ -100,7 +99,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         {
             // subdossiers are saved in a path that has the same name as the dossier
             var dirName = GetDirectoryName(dossier.Id);
-            if (!string.IsNullOrEmpty(dirName))
+            if (dirName != null)
             {
                 pathItems.Add(dirName);
             }
@@ -126,8 +125,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     /// <returns>The URI of the generated manifest</returns>
     private Uri CreateCollectionManifestForDossier(DossierDIP dossier, Uri parentManifestId)
     {
-        var relativePath = string.Join("/", pathItems);
-        
+        var relativePath = string.Join("/", pathItems.Select(p => p.ValidPath));
+
         // Start des Manifests
         var presentation = new Presentation();
         
@@ -195,7 +194,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
 
 
         // Save the file
-        var path = Path.Combine(locationSettings.ManifestOutputSaveDirectory, string.Join("\\", pathItems));
+        var currentPath = string.Join("\\", pathItems.Select(p => p.ValidPath));
+        var path = Path.Combine(locationSettings.ManifestOutputSaveDirectory, currentPath);
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -229,7 +229,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
 
     private void CreateCollectionManifestForDokument(DokumentDIP dokument, Uri parentManifest, bool isFileRefToDossier = false)
     {
-        var relativePath = string.Join("/", pathItems);
+        var relativePath = string.Join("/", pathItems.Select(p => p.ValidPath));
 
         var popPathItem = false;
         var newRelPath = $"{relativePath}";
@@ -240,7 +240,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
             dokumentName = PathHelper.CreateShortValidUrlName(Path.GetFileNameWithoutExtension(GetFileName(dokument.DateiRef.First())), true);
             pathItems.Add(GetDirectoryName(dokument.Id));
             // if filename is null, then we do have a document that points to a directory, so we adjust the relative path 
-            newRelPath = $"{relativePath}/{GetDirectoryName(dokument.Id)}";
+            newRelPath = $"{relativePath}/{GetDirectoryName(dokument.Id)?.ValidPath}";
             popPathItem = true;
         }
 
@@ -303,16 +303,27 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         };
 
         var parts = PathHelper.ArchiveIdToPathSegments(archiveRecordId);
+        var pathParts = string.Join("\\", pathItems.Skip(parts.Count).Select(p => p.PhysicalPath));
 
-        var ocrFile = !isFileRefToDossier ?
-            $"{rootDirectory}\\content\\{string.Join("\\", pathItems.Skip(parts.Count).Select(p => p))}\\{GetDirectoryName(dokument.Id)}_OCR.txt" :
-            $"{rootDirectory}\\content\\{string.Join("\\", pathItems.Skip(parts.Count).Select(p => p))}\\content_OCR.txt";
+        var ocrFile = string.Empty;
+        if (string.IsNullOrEmpty(pathParts))
+        {
+            ocrFile = !isFileRefToDossier ?
+                $"{rootDirectory}\\content\\{GetDirectoryName(dokument.Id)?.PhysicalPath}_OCR.txt" :
+                $"{rootDirectory}\\content\\content_OCR.txt";
+        }
+        else
+        {
+            ocrFile = !isFileRefToDossier ?
+                $"{rootDirectory}\\content\\{pathParts}\\{GetDirectoryName(dokument.Id)?.PhysicalPath}_OCR.txt" :
+                $"{rootDirectory}\\content\\{pathParts}\\content_OCR.txt";
+        }
 
         if (File.Exists(ocrFile))
         {
             var id = !isFileRefToDossier
                 ? new Uri(manifestSettings.PublicOcrWebUri,
-                    $"{newRelPath}/{GetDirectoryName(dokument.Id)}_OCR.txt")
+                    $"{newRelPath}/{GetDirectoryName(dokument.Id)?.ValidPath}_OCR.txt")
                 : new Uri(manifestSettings.PublicOcrWebUri,
                     Path.ChangeExtension($"{newRelPath}/{dokumentName})",".txt"));
             
@@ -336,7 +347,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         presentation.Items = AddDokumentPages(dokument, newRelPath, isFileRefToDossier);
 
         // Save the file
-        var path = Path.Combine(locationSettings.ManifestOutputSaveDirectory, string.Join("\\", pathItems));
+        var currentPath = string.Join("\\", pathItems.Select(p => p.ValidPath));
+        var path = Path.Combine(locationSettings.ManifestOutputSaveDirectory, currentPath);
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -683,9 +695,9 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     private IiifItem GetManifestReference(string relativePath, DokumentDIP dokumentDip)
     {
         var fileName = GetFileName(dokumentDip.Id);
-        
+
         // if filename is null, then we do have a document that points to a directory 
-        var newRelPath = $"{relativePath}/{(string.IsNullOrEmpty(fileName) ? $"{GetDirectoryName(dokumentDip.Id)}/" : "")}";
+        var newRelPath = $"{relativePath}/{(string.IsNullOrEmpty(fileName) ? $"{GetDirectoryName(dokumentDip.Id)?.ValidPath}/" : "")}";
 
         var item = new IiifItem
         {
@@ -704,7 +716,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     private IiifItem GetCollectionReference(string relativePath, DossierDIP dossierDip)
     {
         var dirName = GetDirectoryName(dossierDip.Id);
-        var newRelPath = $"{relativePath}/{(string.IsNullOrEmpty(dirName) ? "" : $"{dirName}/")}";
+        var newRelPath = $"{relativePath}/{(dirName == null ? "" : $"{dirName.ValidPath}/")}";
         return new IiifItem
         {
             Id = new Uri(manifestSettings.PublicManifestWebUri, $"{newRelPath}{IdToValidUrl(dossierDip.Id)}.json"),
@@ -867,7 +879,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         return PathHelper.CreateShortValidUrlName(fileName, true);
     }
 
-    private string GetDirectoryName(string directoryRef)
+    private PathItem GetDirectoryName(string directoryRef)
     {
         // Unsere eigenen Metadata.xml haben beim Dossier (Ordner) noch ein "_D" angehängt
         // Ein "logisches" Dossier hat keinen Eintrag im Inhaltsverzeichnis, deshalb kann es nicht gefunden werden.
@@ -875,10 +887,10 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         var hit = packageDirectories.Find(f => f.Id == directoryRef || f.Id == directoryRef + "_D");
         if (hit != null)
         {
-            return PathHelper.CreateShortValidUrlName(hit.Name, false);
+            return new PathItem(hit.Name, PathHelper.CreateShortValidUrlName(hit.Name, false));
         }
 
-        return string.Empty;
+        return new PathItem(string.Empty, string.Empty);
     }
 
     private static List<DateiDIP> GetAllPackageFiles(PaketDIP paket)

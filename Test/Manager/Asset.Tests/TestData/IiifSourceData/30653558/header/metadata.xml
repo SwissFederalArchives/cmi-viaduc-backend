@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2023-01-27T00:00:00+01:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot638104236070351768">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_mUxkNuL5fRXDIoA0ozZqLg_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_taVWf1zJIp1FZKolO5Y3wT_D">
+          <name>U_m_s_c_h_l_a_g_0000007</name>
+          <originalName>U_m_s_c_h_l_a_g_0000007</originalName>
+          <datei id="_eBbhmyoh93kqg5Q9mKxvHe">
+            <name>00000033.jp2</name>
+            <originalName>00000033.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>08f5941e25fd3e8ffd7c530e8dfbed65</pruefsumme>
+          </datei>
+          <datei id="_73B7cGbtqziRJC2iwLteKE">
+            <name>00000033_PREMIS.xml</name>
+            <originalName>00000033_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>df001fe1f0da7cd2f3c9ad05d8bfd969</pruefsumme>
+          </datei>
+          <datei id="_IycrymMJ1SNt4MkeLC3siH">
+            <name>00000034.jp2</name>
+            <originalName>00000034.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>365052f8c83d40d84cab2295b800847e</pruefsumme>
+          </datei>
+          <datei id="_955fh7hzZRQw6mSgAtRDGN">
+            <name>00000034_PREMIS.xml</name>
+            <originalName>00000034_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5c8f780f2c5343f785121f868886fefb</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_zB6EW180t0wV4UUdaTKeD9_D">
+          <name>D_o_k_u_m_e_n_t_0000009</name>
+          <originalName>D_o_k_u_m_e_n_t_0000009</originalName>
+          <datei id="_XWbO7fLO41dM4eLpm3zNU5">
+            <name>00000035.jp2</name>
+            <originalName>00000035.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>d5bcbf316ad971cd757eb31369d0c7e9</pruefsumme>
+          </datei>
+          <datei id="_it74iySrrboN4MxdZvX9ZY">
+            <name>00000035_PREMIS.xml</name>
+            <originalName>00000035_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>478b5f26ccfa196410598b538ed71a2a</pruefsumme>
+          </datei>
+          <datei id="_orRFEWHWKLCJgf371va7RS">
+            <name>00000036.jp2</name>
+            <originalName>00000036.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>4847c0aa538f2a6410245ebcc4da7419</pruefsumme>
+          </datei>
+          <datei id="_OZ7pEKhpdz7YsVKYbJORaQ">
+            <name>00000036_PREMIS.xml</name>
+            <originalName>00000036_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b5eaf9877fd779589d986fb39f47b898</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_z5trSXo1v3VvQzSyMF4IXD_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_7uWs6hIoIGYeI7gXT4ZegT_D">
+          <name>U_m_s_c_h_l_a_g_0000010</name>
+          <originalName>U_m_s_c_h_l_a_g_0000010</originalName>
+          <datei id="_2ub0CB4GMrTvC2PiyM1PQc">
+            <name>00000047.jp2</name>
+            <originalName>00000047.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>a6fa607248d27b0e6606fb51005e0db3</pruefsumme>
+          </datei>
+          <datei id="_kAnPAEjjzfNCLDaDeB8H3s">
+            <name>00000047_PREMIS.xml</name>
+            <originalName>00000047_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>ec555abe97fbbbddba214bce8c9c7d25</pruefsumme>
+          </datei>
+          <datei id="_nHiqdJcMrajZbdcKSCvNLp">
+            <name>00000048.jp2</name>
+            <originalName>00000048.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>7274435bb0cb55d3a6cd05e15dcc5c13</pruefsumme>
+          </datei>
+          <datei id="_4awyYeXZfsKayQE9c8F25K">
+            <name>00000048_PREMIS.xml</name>
+            <originalName>00000048_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>e9509fdf631a4f496c23b97a744fd419</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_89auFmJd9VvCnrDTtSrc3m_D">
+          <name>D_o_k_u_m_e_n_t_0000012</name>
+          <originalName>D_o_k_u_m_e_n_t_0000012</originalName>
+          <datei id="_Ns6s4zDFoKTzxRlHyTqM6q">
+            <name>00000049.jp2</name>
+            <originalName>00000049.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>dc6bbebbc0f252bd8f1d0fbd08e38bd5</pruefsumme>
+          </datei>
+          <datei id="_bqWtPrRZsxVlEG9nualW1E">
+            <name>00000049_PREMIS.xml</name>
+            <originalName>00000049_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>54465cdf1d3bff7e739f3892e025d8a0</pruefsumme>
+          </datei>
+          <datei id="_C1lngApdQCD4JFjnPx8U3c">
+            <name>00000050.jp2</name>
+            <originalName>00000050.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>10494d043baca43484e78a498c8e2017</pruefsumme>
+          </datei>
+          <datei id="_WeqrVI77mUP4XJufk0kQ65">
+            <name>00000050_PREMIS.xml</name>
+            <originalName>00000050_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>8227f2f19670246d54b3d8eaacb5300d</pruefsumme>
+          </datei>
+          <datei id="_oXndN5shU4ERB5p5e3Tgzr">
+            <name>00000051.jp2</name>
+            <originalName>00000051.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b4bb9b9b7003d3f95860668faf24d9b6</pruefsumme>
+          </datei>
+          <datei id="_rEevNJifkC4LgWO9wo9zP4">
+            <name>00000051_PREMIS.xml</name>
+            <originalName>00000051_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5b6806d6c66c31b126fc6ee08131c695</pruefsumme>
+          </datei>
+          <datei id="_B06ineIl2JnjUJuh7B3YOG">
+            <name>00000052.jp2</name>
+            <originalName>00000052.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>7cd5c0010cf8be1785f2888638aff287</pruefsumme>
+          </datei>
+          <datei id="_ngjXVcoGjVwApnNYUPByex">
+            <name>00000052_PREMIS.xml</name>
+            <originalName>00000052_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>f96e965295696b9f5ca4435270f2feff</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_U1Q2qc6tW19iBdaWmtNImT_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_T09Zd4fr3gkhz6kxCfCXz3_D">
+          <name>U_m_s_c_h_l_a_g_0000002</name>
+          <originalName>U_m_s_c_h_l_a_g_0000002</originalName>
+          <datei id="_s0TXeLQ9pOWH22DXzh19f5">
+            <name>00000009.jp2</name>
+            <originalName>00000009.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>1f5c7a293849609ad9a6e9209c2c886a</pruefsumme>
+          </datei>
+          <datei id="_dY3ODuf7ASaTCwfkqswGGD">
+            <name>00000009_PREMIS.xml</name>
+            <originalName>00000009_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>37c056288a7cd17cb954c88f9954f94c</pruefsumme>
+          </datei>
+          <datei id="_mk18IdtqC5mYHVTtArBeF5">
+            <name>00000010.jp2</name>
+            <originalName>00000010.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5f2bd14b4d7a85c455e6501111c1ce5f</pruefsumme>
+          </datei>
+          <datei id="_QRHP049r2Fq7DlYrz5Run0">
+            <name>00000010_PREMIS.xml</name>
+            <originalName>00000010_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>1379cdeee00258465aef908ce83186bf</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_Tt845F3AcnO16RfzBSfbAB_D">
+          <name>Brückensprengung</name>
+          <originalName>Brückensprengung</originalName>
+          <datei id="_4VAgaWp3aW2mpEgMyw4r5h">
+            <name>00000011.jp2</name>
+            <originalName>00000011.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>223fb91b6fbfe1a6e07a41fcd891d9ea</pruefsumme>
+          </datei>
+          <datei id="_88owJkfwAGPXYHRHOtQi6x">
+            <name>00000011_PREMIS.xml</name>
+            <originalName>00000011_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>fc453d6a7e5168e4d014d63ac4837e6d</pruefsumme>
+          </datei>
+          <datei id="_rtEguCWcbzqtfNhC5qjgvY">
+            <name>00000012.jp2</name>
+            <originalName>00000012.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>2941716b4b179581c603233f11cf6d66</pruefsumme>
+          </datei>
+          <datei id="_Lvq93TPGHUv8WZ5V9BqDpN">
+            <name>00000012_PREMIS.xml</name>
+            <originalName>00000012_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b9720f20eddd964199a1f4cf3bcd6783</pruefsumme>
+          </datei>
+          <datei id="_9b3ItHjD6IbCuO8PMLq472">
+            <name>00000013.jp2</name>
+            <originalName>00000013.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>0f3a3d61cd46fc4f581a4b16ac55c26f</pruefsumme>
+          </datei>
+          <datei id="_pcOH2Ye7IYflBI3HlFVy84">
+            <name>00000013_PREMIS.xml</name>
+            <originalName>00000013_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>244c93abc71cbd19bd3e9546f4f3caaa</pruefsumme>
+          </datei>
+          <datei id="_27pqS0cTIWFiMCn4kjjiYi">
+            <name>00000014.jp2</name>
+            <originalName>00000014.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b946f4289a56acce4025001f5ce0a39e</pruefsumme>
+          </datei>
+          <datei id="_SUOu347EriMF6HqCeCnMKp">
+            <name>00000014_PREMIS.xml</name>
+            <originalName>00000014_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>16cc01cdd1f7bd3201ce807ed4ed81aa</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_SFxlIfvTHsos9lISAGuPLP_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_91NUnAbspfGGSEg9kdkmo3_D">
+          <name>Offiziere der Mitrailleure Abteilung 5</name>
+          <originalName>Offiziere der Mitrailleure Abteilung 5</originalName>
+          <datei id="_6EgczXwTddhGASVZ9yGq8s">
+            <name>00000007.jp2</name>
+            <originalName>00000007.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>108b0d0318eb889f8e75ff41064eccb9</pruefsumme>
+          </datei>
+          <datei id="_asQgy5SI2CUuS9gir4XiTI">
+            <name>00000007_PREMIS.xml</name>
+            <originalName>00000007_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>8aa078585a972620e8d77884ed9dc5bd</pruefsumme>
+          </datei>
+          <datei id="_zQ61sngENOrDblwZrfvHnm">
+            <name>00000008.jp2</name>
+            <originalName>00000008.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>0542acebd3254785fb2c3c9da20a6fcb</pruefsumme>
+          </datei>
+          <datei id="_wrcPh5bjOk0XH2CP96I29H">
+            <name>00000008_PREMIS.xml</name>
+            <originalName>00000008_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>96b4416fe6f5126156677ab9ae94f8e8</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_iyvOGgLmRWnS3So2NCV2xQ_D">
+          <name>U_m_s_c_h_l_a_g_0000001</name>
+          <originalName>U_m_s_c_h_l_a_g_0000001</originalName>
+          <datei id="_0ItkYeM5JGX89V4XRu8JBf">
+            <name>00000001.jp2</name>
+            <originalName>00000001.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5518f9550f9d95b7bb008e9b12699f2d</pruefsumme>
+          </datei>
+          <datei id="_GO0huCAXFdYwyXFec9iYJQ">
+            <name>00000001_PREMIS.xml</name>
+            <originalName>00000001_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>61940853e4485a1efb5139aa326b0e67</pruefsumme>
+          </datei>
+          <datei id="_vvxaxEfk4pFD7WiefHkup1">
+            <name>00000002.jp2</name>
+            <originalName>00000002.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>f8fa79e179ac592d946db9bb49d165d8</pruefsumme>
+          </datei>
+          <datei id="_mhzWBa6X2a7LMp2Vjpp22l">
+            <name>00000002_PREMIS.xml</name>
+            <originalName>00000002_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>a91e64b1218a4beaf83229f58c3417ab</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_LyiC8K3pequT0AXNIRT17l_D">
+          <name>Feldgottesdienst katholisch</name>
+          <originalName>Feldgottesdienst katholisch</originalName>
+          <datei id="_nZ0R2uUBJmat1KN6jBaJZx">
+            <name>00000003.jp2</name>
+            <originalName>00000003.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>3ad9f99318f4c7174b05db1684bd59a3</pruefsumme>
+          </datei>
+          <datei id="_XTxnEg8oj3m1Cy1hycbaQL">
+            <name>00000003_PREMIS.xml</name>
+            <originalName>00000003_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>ff8b80794eedeb7ab6bcb97a513dd407</pruefsumme>
+          </datei>
+          <datei id="_0wiWNggQNhE1weeRHanDq7">
+            <name>00000004.jp2</name>
+            <originalName>00000004.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>7af198391b8f3520a0b17515b12c5e0f</pruefsumme>
+          </datei>
+          <datei id="_vODTlMJBhh9Oze6A8JbG1b">
+            <name>00000004_PREMIS.xml</name>
+            <originalName>00000004_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>efafa3689a038bed9f170ced5436c37c</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_OjH04iKY7Ev0LooAyn82Bi_D">
+          <name>Offiziere der Mitrailleure Abteilung 5</name>
+          <originalName>Offiziere der Mitrailleure Abteilung 5</originalName>
+          <datei id="_1PZwcHTMHd5vhcxX6Aey8X">
+            <name>00000005.jp2</name>
+            <originalName>00000005.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>871d4c00e729cfecf203b0975d7f2beb</pruefsumme>
+          </datei>
+          <datei id="_NdPH4HbKliZTXWGRo93PVc">
+            <name>00000005_PREMIS.xml</name>
+            <originalName>00000005_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>fd8273db324281e8e1c2f077ad3a884a</pruefsumme>
+          </datei>
+          <datei id="_uGBpTxD6GfxsT7tDZf3Iid">
+            <name>00000006.jp2</name>
+            <originalName>00000006.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b6061850b4c5106be36f5f6e2e72f7c2</pruefsumme>
+          </datei>
+          <datei id="_9hmurLnSW7aMW2kd3BN8sr">
+            <name>00000006_PREMIS.xml</name>
+            <originalName>00000006_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>6c010e16941ba783aa25fcfa0dda2b99</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_vpOgYnTPjOowAaLXqTDc3Y_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_okbsWZPPA0NkdW2qXv10VE_D">
+          <name>D_o_k_u_m_e_n_t_0000010</name>
+          <originalName>D_o_k_u_m_e_n_t_0000010</originalName>
+          <datei id="_nF7xod9oeCmlz0IFB5f7Lx">
+            <name>00000039.jp2</name>
+            <originalName>00000039.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>1855ecfe6077f03c2237e022a6d23021</pruefsumme>
+          </datei>
+          <datei id="_e9xgDHZNojzY5YwlyDTZmU">
+            <name>00000039_PREMIS.xml</name>
+            <originalName>00000039_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>90ae94685c6331fd6906573daed6d994</pruefsumme>
+          </datei>
+          <datei id="_eGajW6eFSO1bW6DNBWUz0o">
+            <name>00000040.jp2</name>
+            <originalName>00000040.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>6107b51a0315d85f0f41f089e37d6020</pruefsumme>
+          </datei>
+          <datei id="_mbFiq95hpet5cMzDFwgpOe">
+            <name>00000040_PREMIS.xml</name>
+            <originalName>00000040_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>9755775984baf960595a380d546319a1</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_UFulip0IwwVareAHyAQ2Ul_D">
+          <name>U_m_s_c_h_l_a_g_0000008</name>
+          <originalName>U_m_s_c_h_l_a_g_0000008</originalName>
+          <datei id="_gcq9nECRT2XfMOe0XDNoTc">
+            <name>00000037.jp2</name>
+            <originalName>00000037.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>791fa833f350749b1c868196ec67f5ed</pruefsumme>
+          </datei>
+          <datei id="_AxkzQoeEMdu4iObc1ikWly">
+            <name>00000037_PREMIS.xml</name>
+            <originalName>00000037_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>7387f315fb0f651d1dd4f87dd203836a</pruefsumme>
+          </datei>
+          <datei id="_3nBNeslpIjzhz5BrpbGizL">
+            <name>00000038.jp2</name>
+            <originalName>00000038.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>81e3fb71c795549ed75cc368c51e3945</pruefsumme>
+          </datei>
+          <datei id="_IgZYVuDSgmKMS6enqyavzk">
+            <name>00000038_PREMIS.xml</name>
+            <originalName>00000038_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>405eb0bade0b23528b2f1ff0c3a8f758</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_Yk3DEqDiRjchIa7HrxVUbh_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_GizgwSP3YYqG5Ie3buUOEJ_D">
+          <name>D_o_k_u_m_e_n_t_0000008</name>
+          <originalName>D_o_k_u_m_e_n_t_0000008</originalName>
+          <datei id="_9M0IZwGm9KkYJb3EY90dCN">
+            <name>00000031.jp2</name>
+            <originalName>00000031.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>d97833d68ab7f1474d4ac058c590a49e</pruefsumme>
+          </datei>
+          <datei id="_EG5oG2vjpGSgZvH0tFO0tt">
+            <name>00000031_PREMIS.xml</name>
+            <originalName>00000031_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>fcfda36445dd0659111db7afb2a89d68</pruefsumme>
+          </datei>
+          <datei id="_ROCnqgwpxtLvZ2WAVLMnM9">
+            <name>00000032.jp2</name>
+            <originalName>00000032.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>85818a2909cfde720fb1528df1a63317</pruefsumme>
+          </datei>
+          <datei id="_NbJfltJVOLmZZQaCElq1fo">
+            <name>00000032_PREMIS.xml</name>
+            <originalName>00000032_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>31d2608482ea4f708a918b8b02e0b4cf</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_IiBKMfWDMXWUPVTgm2gpWi_D">
+          <name>U_m_s_c_h_l_a_g_0000006</name>
+          <originalName>U_m_s_c_h_l_a_g_0000006</originalName>
+          <datei id="_YYdMJeXzZhyLl4qfqTDzMV">
+            <name>00000029.jp2</name>
+            <originalName>00000029.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5a881b2b7f5c9525974b4a1cf45f331a</pruefsumme>
+          </datei>
+          <datei id="_XVjDf983BNLvzbrE29LqSD">
+            <name>00000029_PREMIS.xml</name>
+            <originalName>00000029_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>49871ddb319587a18abe816759167a1f</pruefsumme>
+          </datei>
+          <datei id="_4OOiO4lnL44SezfvU9p5cC">
+            <name>00000030.jp2</name>
+            <originalName>00000030.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>15523bb70341fb42e7767667214ded94</pruefsumme>
+          </datei>
+          <datei id="_TYySFqoGKUO9GyZG6IYlQi">
+            <name>00000030_PREMIS.xml</name>
+            <originalName>00000030_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>e0aeff8537dca1abd4d7cad868de0945</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_lqrzrSsyVWIyzx5PPtwwWx_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_GdF7YzMuIhiYR7QPPIDhvf_D">
+          <name>U_m_s_c_h_l_a_g_0000004</name>
+          <originalName>U_m_s_c_h_l_a_g_0000004</originalName>
+          <datei id="_ArEsyxYjgqxJ9igbnpKNNo">
+            <name>00000019.jp2</name>
+            <originalName>00000019.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>433f5bae869f74b3da8e4788b414e3cc</pruefsumme>
+          </datei>
+          <datei id="_Xmecz4z7GUEt7OXXRJSER5">
+            <name>00000019_PREMIS.xml</name>
+            <originalName>00000019_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>c7b73b9ba4f9e6ededd8c576d750eadf</pruefsumme>
+          </datei>
+          <datei id="_b1hDJUaLFbRxyqpRPfxjGq">
+            <name>00000020.jp2</name>
+            <originalName>00000020.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>2ad1471be3196b05b55b2d67a701b402</pruefsumme>
+          </datei>
+          <datei id="_XH0o2f91NJwQeH8vZVJapP">
+            <name>00000020_PREMIS.xml</name>
+            <originalName>00000020_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>b23d2408ff89d373901f2725f29c3bea</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_qZtjucBDjCQ6pTNNNDEDJO_D">
+          <name>D_o_k_u_m_e_n_t_0000006</name>
+          <originalName>D_o_k_u_m_e_n_t_0000006</originalName>
+          <datei id="_KCiVHUHQe6vBnyEiJOcdQf">
+            <name>00000021.jp2</name>
+            <originalName>00000021.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>e51f0e71db7368d2e30ac9fc77da1941</pruefsumme>
+          </datei>
+          <datei id="_11jwHq68KxjhdSYI1vCJCj">
+            <name>00000021_PREMIS.xml</name>
+            <originalName>00000021_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>efa9a3263c1a7a6d8ca204bb6477d0ec</pruefsumme>
+          </datei>
+          <datei id="_YmkhpYcdM7sYF7OmhOd1EO">
+            <name>00000022.jp2</name>
+            <originalName>00000022.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>501761933b788882a0fd8c57ef83abc8</pruefsumme>
+          </datei>
+          <datei id="_buB9o8JSrgICEXPDPMaNiX">
+            <name>00000022_PREMIS.xml</name>
+            <originalName>00000022_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>a06ac5ad9a6e4bd2327eb33a964032fc</pruefsumme>
+          </datei>
+          <datei id="_uhhkrIbpPm8hc383fO3HRA">
+            <name>00000023.jp2</name>
+            <originalName>00000023.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>708d20d10faaba8960bcc9b66ec76527</pruefsumme>
+          </datei>
+          <datei id="_0Konz2wdT9N2RcwqK9cqNE">
+            <name>00000023_PREMIS.xml</name>
+            <originalName>00000023_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>d0fe92d25091b729244074af260e2f9a</pruefsumme>
+          </datei>
+          <datei id="_ktix3srdy86nNGcQKlcgii">
+            <name>00000024.jp2</name>
+            <originalName>00000024.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>166c88be4ac260523dab8e3fd59ad80d</pruefsumme>
+          </datei>
+          <datei id="_L02eV0VgcNICcVCmPhRLIM">
+            <name>00000024_PREMIS.xml</name>
+            <originalName>00000024_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>d6c6160fb909241cb15fad95545d9b88</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_deUmWi2sKi8etuxXHaromd_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_P6HyX9gKweNKBliNMt8xkm_D">
+          <name>U_m_s_c_h_l_a_g_0000003</name>
+          <originalName>U_m_s_c_h_l_a_g_0000003</originalName>
+          <datei id="_G1FuUdFkkeAfCiHHkPOVHT">
+            <name>00000015.jp2</name>
+            <originalName>00000015.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>373c71343e29341bea0df494f7e67ddf</pruefsumme>
+          </datei>
+          <datei id="_aDCUwNq5eckE96WC8e6hAI">
+            <name>00000015_PREMIS.xml</name>
+            <originalName>00000015_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>0633ef47ce58948023fae08f1ad1ff7c</pruefsumme>
+          </datei>
+          <datei id="_PfIiFqJs04IWa0WclVaWzF">
+            <name>00000016.jp2</name>
+            <originalName>00000016.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>ff9dd56cacc263321a5e5558a84f2977</pruefsumme>
+          </datei>
+          <datei id="_1Zj5YLThce62LKf646gMGJ">
+            <name>00000016_PREMIS.xml</name>
+            <originalName>00000016_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>2dedf6a55ad0764e8568d5252434b5f0</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_QHYjFYTe68sn4LipxrPIUC_D">
+          <name>D_o_k_u_m_e_n_t_0000005</name>
+          <originalName>D_o_k_u_m_e_n_t_0000005</originalName>
+          <datei id="_WpmrcXCwq62cMzkgc3UTzy">
+            <name>00000017.jp2</name>
+            <originalName>00000017.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>035474e92ecc5a51e80b8a8f0dea7217</pruefsumme>
+          </datei>
+          <datei id="_rIHVkFfcu8tAA7vDXGtjij">
+            <name>00000017_PREMIS.xml</name>
+            <originalName>00000017_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>9631b28d43ebb4d51b7c7abc0c6aecb8</pruefsumme>
+          </datei>
+          <datei id="_bubjwTqY3i2gJSjL9GbDeg">
+            <name>00000018.jp2</name>
+            <originalName>00000018.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>cc96bad34bc0be1dc509165c2d23d582</pruefsumme>
+          </datei>
+          <datei id="_MHaDQ9YIxOZh3PFfDHD8tt">
+            <name>00000018_PREMIS.xml</name>
+            <originalName>00000018_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>0d179cf01ad983011ab34eab6c2f08ba</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_3jJFXM24dBhG4huq8461yi_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_qliyCwRiZN9bCdmuNgoTWk_D">
+          <name>D_o_k_u_m_e_n_t_0000011</name>
+          <originalName>D_o_k_u_m_e_n_t_0000011</originalName>
+          <datei id="_FXpzoaIqP3Zw54CvqJa6io">
+            <name>00000043.jp2</name>
+            <originalName>00000043.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>f6b48a12fbdfafda21098fe2078e85d4</pruefsumme>
+          </datei>
+          <datei id="_PsI820yKLfvj8he1ur3oBx">
+            <name>00000043_PREMIS.xml</name>
+            <originalName>00000043_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>d1a5d92d8e5710bdcb8b24c7278d2443</pruefsumme>
+          </datei>
+          <datei id="_PqXKgInoI3Jw0SFLG497Q4">
+            <name>00000044.jp2</name>
+            <originalName>00000044.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>6e7dd2030f8f15c169a7e41c5406cb16</pruefsumme>
+          </datei>
+          <datei id="_HJb3lKul00DtxFkS0ctxEA">
+            <name>00000044_PREMIS.xml</name>
+            <originalName>00000044_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>035e5612bc8f771e2418c028c56c8d5e</pruefsumme>
+          </datei>
+          <datei id="_EbnnETY46YNkFClY0S7OGw">
+            <name>00000045.jp2</name>
+            <originalName>00000045.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>21e813c4e6ef5b38a69b5672c4d9ace2</pruefsumme>
+          </datei>
+          <datei id="_9t3GKnBxtxgDBgyymjt1NO">
+            <name>00000045_PREMIS.xml</name>
+            <originalName>00000045_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5a5bd46fdba12aeec3a15ff6020cd3d8</pruefsumme>
+          </datei>
+          <datei id="_gDwdnnFTZqaI2gc7zVDg9e">
+            <name>00000046.jp2</name>
+            <originalName>00000046.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>34573aaa4e6625ba3780fa6325613c9e</pruefsumme>
+          </datei>
+          <datei id="_iWS4jfKwOJ6qeOJLAsJEXh">
+            <name>00000046_PREMIS.xml</name>
+            <originalName>00000046_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>87ed6f549ad2b5cf451999b3b4e7d82f</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_tvviZGUXFCCqV8xODPAqSk_D">
+          <name>U_m_s_c_h_l_a_g_0000009</name>
+          <originalName>U_m_s_c_h_l_a_g_0000009</originalName>
+          <datei id="_DpMisbIsozbANaInQ2MyZm">
+            <name>00000041.jp2</name>
+            <originalName>00000041.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>962b4acdf638d81de126f7ec0a2e195c</pruefsumme>
+          </datei>
+          <datei id="_Ksv2jQ5Y4ccQvB0NdVduSL">
+            <name>00000041_PREMIS.xml</name>
+            <originalName>00000041_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>a5f4ec7ae5b24cf645a20a4fc24b16f3</pruefsumme>
+          </datei>
+          <datei id="_4ViMDbDjHIxm6czwJbjE2I">
+            <name>00000042.jp2</name>
+            <originalName>00000042.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>5a10b27a8deaf244c721c7ebff8f6e68</pruefsumme>
+          </datei>
+          <datei id="_X3BbAey6i46oc79azoKoNh">
+            <name>00000042_PREMIS.xml</name>
+            <originalName>00000042_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>64410a70faec26b059a003e75057bda5</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <ordner id="_dGtnwQEQQMiGiCw8hX0U9G_D">
+        <name>Fotoalben, II. Kategorie-Presse</name>
+        <originalName>Fotoalben, II. Kategorie-Presse</originalName>
+        <ordner id="_CfZ6vj2Yl288UYpdbdrZk9_D">
+          <name>U_m_s_c_h_l_a_g_0000005</name>
+          <originalName>U_m_s_c_h_l_a_g_0000005</originalName>
+          <datei id="_PtdYnOIwgGgNxodzIcOHOK">
+            <name>00000025.jp2</name>
+            <originalName>00000025.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>c806461cd12fa463d4cdf6a4fa622f25</pruefsumme>
+          </datei>
+          <datei id="_4XS44eqpvwCLOl9gB2FpWT">
+            <name>00000025_PREMIS.xml</name>
+            <originalName>00000025_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>f8ec98e0a907edf60afddd7a59bf21cb</pruefsumme>
+          </datei>
+          <datei id="_4JiFeKAOs0YZQsDsnwdxx6">
+            <name>00000026.jp2</name>
+            <originalName>00000026.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>71313f40f0d280b78ea4585f87568c54</pruefsumme>
+          </datei>
+          <datei id="_Cxw7JPPuZJxgdxUefjIgPA">
+            <name>00000026_PREMIS.xml</name>
+            <originalName>00000026_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>9099d7f1663c9242019b55ad322c6da3</pruefsumme>
+          </datei>
+        </ordner>
+        <ordner id="_MS1BFeM1StwSVcU4uzZOOm_D">
+          <name>D_o_k_u_m_e_n_t_0000007</name>
+          <originalName>D_o_k_u_m_e_n_t_0000007</originalName>
+          <datei id="_DM7akp9utb4lVXU22aduNQ">
+            <name>00000027.jp2</name>
+            <originalName>00000027.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>acf3c35fea464d00320c30ebb1719ecd</pruefsumme>
+          </datei>
+          <datei id="_YoISX8DMUPanq3b5B1O2RU">
+            <name>00000027_PREMIS.xml</name>
+            <originalName>00000027_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>27bd3722a804134647c15a1e75b8e85f</pruefsumme>
+          </datei>
+          <datei id="_Ug7Ghn7o2iu6MYupX2o9WT">
+            <name>00000028.jp2</name>
+            <originalName>00000028.jp2</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>fc7044479693513fdfd8dfeafd66c766</pruefsumme>
+          </datei>
+          <datei id="_bQkr4QJfnHgySr4KcldveR">
+            <name>00000028_PREMIS.xml</name>
+            <originalName>00000028_PREMIS.xml</originalName>
+            <pruefalgorithmus>MD5</pruefalgorithmus>
+            <pruefsumme>baba4695e1052aa9730a65a454dd2856</pruefsumme>
+          </datei>
+        </ordner>
+      </ordner>
+      <datei id="_COHXWjZdGvKpzNbqfFQbdX">
+        <name>Prozess_Digitalisierung_PREMIS.xml</name>
+        <originalName>Prozess_Digitalisierung_PREMIS.xml</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>5a991587f414e84439ee0b30fb214e71</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Bundesverwaltung (Bern)</ablieferndeStelle>
+    <ablieferungsnummer>1000/721_1439206</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Bundesverwaltung (k.A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Landesverteidigung (1848-1950)</name>
+      <ordnungssystemposition id="_PDeW0k2ilmL3MwQLZcjSTm">
+        <nummer>06</nummer>
+        <titel>Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee</titel>
+        <datenschutz>false</datenschutz>
+        <ordnungssystemposition id="_v2QzTrDoI4g4kq1fxvjShX">
+          <nummer>06.H</nummer>
+          <titel>Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste</titel>
+          <datenschutz>false</datenschutz>
+          <ordnungssystemposition id="_sDUh8l7qH5Qqkd8XkjJUFi">
+            <nummer>06.H.3</nummer>
+            <titel>Aktivdienst 1914-1918</titel>
+            <datenschutz>false</datenschutz>
+            <ordnungssystemposition id="_ncAttlxxRHVOhoTiKcmIoh">
+              <nummer>06.H.3.k</nummer>
+              <titel>Aktivdienstberichte, Aktivdiensterinnerungen</titel>
+              <datenschutz>false</datenschutz>
+              <ordnungssystemposition id="_3Hd1Sr1eilMGiGZxxSl3QJ">
+                <nummer>06.H.3.k.2</nummer>
+                <titel>Aktivdiensterinnerungen, Fotosammlungen, Tagebücher</titel>
+                <datenschutz>false</datenschutz>
+                <ordnungssystemposition id="_DwrQpZNcdffHzDWQlyubzT">
+                  <nummer>06.H.3.k.2.b</nummer>
+                  <titel>Fotosammlungen über den Aktivdienst</titel>
+                  <datenschutz>false</datenschutz>
+                  <ordnungssystemposition id="_A6NKx00jP6M2Ntkr9te22E">
+                    <nummer>06.H.3.k.2.b.2</nummer>
+                    <titel>Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]</titel>
+                    <datenschutz>false</datenschutz>
+                    <dossier id="_Y6yMSOdX0WLuCcEDqNBxs8">
+                      <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                      <titel>Fotoalben, II. Kategorie-Presse</titel>
+                      <erscheinungsform>digital</erscheinungsform>
+                      <entstehungszeitraum>
+                        <von>
+                          <ca>true</ca>
+                          <datum>1600-01-01</datum>
+                        </von>
+                        <bis>
+                          <ca>true</ca>
+                          <datum>1960-12-31</datum>
+                        </bis>
+                      </entstehungszeitraum>
+                      <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                      <datenschutz>false</datenschutz>
+                      <zusatzDaten>
+                        <merkmal name="Signatur">E27#1000/721#14086*</merkmal>
+                        <merkmal name="Stufe">Dossier</merkmal>
+                        <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false}]</merkmal>
+                        <merkmal name="Form">Mikroforme</merkmal>
+                        <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Y6yMSOdX0WLuCcEDqNBxs8</merkmal>
+                        <merkmal name="Entstehungszeitraum Anzeigetext">ca. 1600 - ca. 1960</merkmal>
+                      </zusatzDaten>
+                      <dossier id="_mUxkNuL5fRXDIoA0ozZqLg">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 4389 - 5083</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-7*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-7*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439213","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_mUxkNuL5fRXDIoA0ozZqLg</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000007</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_taVWf1zJIp1FZKolO5Y3wT">
+                          <titel>U_m_s_c_h_l_a_g_0000007</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000007.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_eBbhmyoh93kqg5Q9mKxvHe</dateiRef>
+                          <dateiRef>_73B7cGbtqziRJC2iwLteKE</dateiRef>
+                          <dateiRef>_IycrymMJ1SNt4MkeLC3siH</dateiRef>
+                          <dateiRef>_955fh7hzZRQw6mSgAtRDGN</dateiRef>
+                        </dokument>
+                        <dokument id="_zB6EW180t0wV4UUdaTKeD9">
+                          <titel>D_o_k_u_m_e_n_t_0000009</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000007.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_XWbO7fLO41dM4eLpm3zNU5</dateiRef>
+                          <dateiRef>_it74iySrrboN4MxdZvX9ZY</dateiRef>
+                          <dateiRef>_orRFEWHWKLCJgf371va7RS</dateiRef>
+                          <dateiRef>_OZ7pEKhpdz7YsVKYbJORaQ</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_z5trSXo1v3VvQzSyMF4IXD">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Numerisches Register zu Kat. II, Nr. 4212 - 5785</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-10*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-10*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439216","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_z5trSXo1v3VvQzSyMF4IXD</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000010</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_7uWs6hIoIGYeI7gXT4ZegT">
+                          <titel>U_m_s_c_h_l_a_g_0000010</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000010.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_2ub0CB4GMrTvC2PiyM1PQc</dateiRef>
+                          <dateiRef>_kAnPAEjjzfNCLDaDeB8H3s</dateiRef>
+                          <dateiRef>_nHiqdJcMrajZbdcKSCvNLp</dateiRef>
+                          <dateiRef>_4awyYeXZfsKayQE9c8F25K</dateiRef>
+                        </dokument>
+                        <dokument id="_89auFmJd9VvCnrDTtSrc3m">
+                          <titel>D_o_k_u_m_e_n_t_0000012</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000010.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_Ns6s4zDFoKTzxRlHyTqM6q</dateiRef>
+                          <dateiRef>_bqWtPrRZsxVlEG9nualW1E</dateiRef>
+                          <dateiRef>_C1lngApdQCD4JFjnPx8U3c</dateiRef>
+                          <dateiRef>_WeqrVI77mUP4XJufk0kQ65</dateiRef>
+                          <dateiRef>_oXndN5shU4ERB5p5e3Tgzr</dateiRef>
+                          <dateiRef>_rEevNJifkC4LgWO9wo9zP4</dateiRef>
+                          <dateiRef>_B06ineIl2JnjUJuh7B3YOG</dateiRef>
+                          <dateiRef>_ngjXVcoGjVwApnNYUPByex</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_U1Q2qc6tW19iBdaWmtNImT">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 333 - 1637</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-2*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-2*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439208","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_U1Q2qc6tW19iBdaWmtNImT</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000002</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_T09Zd4fr3gkhz6kxCfCXz3">
+                          <titel>U_m_s_c_h_l_a_g_0000002</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000002.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_s0TXeLQ9pOWH22DXzh19f5</dateiRef>
+                          <dateiRef>_dY3ODuf7ASaTCwfkqswGGD</dateiRef>
+                          <dateiRef>_mk18IdtqC5mYHVTtArBeF5</dateiRef>
+                          <dateiRef>_QRHP049r2Fq7DlYrz5Run0</dateiRef>
+                        </dokument>
+                        <dokument id="_Tt845F3AcnO16RfzBSfbAB">
+                          <titel>Brückensprengung</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <entstehungszeitraum>
+                            <von>
+                              <datum>1914-01-01</datum>
+                            </von>
+                            <bis>
+                              <datum>1918-12-31</datum>
+                            </bis>
+                          </entstehungszeitraum>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="Signatur">E27#1000/721#14086-2#499*</merkmal>
+                            <merkmal name="Stufe">Dokument</merkmal>
+                            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-2*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439208","Protected":false},{"IconId":6,"Level":"Dokument","RefCode":"E27#1000/721#14086-2#499*","Title":"Brückensprengung","DateRangeText":"1914.01.01-1918.12.31","ArchiveRecordId":"3236336","Protected":false}]</merkmal>
+                            <merkmal name="Form">Glasplatte</merkmal>
+                            <merkmal name="Darin">Division 4</merkmal>
+                            <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Y6yMSOdX0WLuCcEDqNBxs8@_Tt845F3AcnO16RfzBSfbAB</merkmal>
+                            <merkmal name="Entstehungszeitraum Anzeigetext">01.01.1914 - 31.12.1918</merkmal>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000002.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_4VAgaWp3aW2mpEgMyw4r5h</dateiRef>
+                          <dateiRef>_88owJkfwAGPXYHRHOtQi6x</dateiRef>
+                          <dateiRef>_rtEguCWcbzqtfNhC5qjgvY</dateiRef>
+                          <dateiRef>_Lvq93TPGHUv8WZ5V9BqDpN</dateiRef>
+                          <dateiRef>_9b3ItHjD6IbCuO8PMLq472</dateiRef>
+                          <dateiRef>_pcOH2Ye7IYflBI3HlFVy84</dateiRef>
+                          <dateiRef>_27pqS0cTIWFiMCn4kjjiYi</dateiRef>
+                          <dateiRef>_SUOu347EriMF6HqCeCnMKp</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_SFxlIfvTHsos9lISAGuPLP">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 1 - 341</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-1*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-1*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439207","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_SFxlIfvTHsos9lISAGuPLP</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000001</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_91NUnAbspfGGSEg9kdkmo3">
+                          <titel>Offiziere der Mitrailleure Abteilung 5</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <entstehungszeitraum>
+                            <von>
+                              <datum>1914-01-01</datum>
+                            </von>
+                            <bis>
+                              <datum>1918-12-31</datum>
+                            </bis>
+                          </entstehungszeitraum>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="Signatur">E27#1000/721#14086-1#5*</merkmal>
+                            <merkmal name="Stufe">Dokument</merkmal>
+                            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-1*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439207","Protected":false},{"IconId":6,"Level":"Dokument","RefCode":"E27#1000/721#14086-1#5*","Title":"Offiziere der Mitrailleure Abteilung 5","DateRangeText":"1914.01.01-1918.12.31","ArchiveRecordId":"3236333","Protected":false}]</merkmal>
+                            <merkmal name="Form">Glasplatte</merkmal>
+                            <merkmal name="Darin">Mitrailleure Abteilung 5</merkmal>
+                            <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Y6yMSOdX0WLuCcEDqNBxs8@_91NUnAbspfGGSEg9kdkmo3</merkmal>
+                            <merkmal name="Entstehungszeitraum Anzeigetext">01.01.1914 - 31.12.1918</merkmal>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000001.000004</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_6EgczXwTddhGASVZ9yGq8s</dateiRef>
+                          <dateiRef>_asQgy5SI2CUuS9gir4XiTI</dateiRef>
+                          <dateiRef>_zQ61sngENOrDblwZrfvHnm</dateiRef>
+                          <dateiRef>_wrcPh5bjOk0XH2CP96I29H</dateiRef>
+                        </dokument>
+                        <dokument id="_iyvOGgLmRWnS3So2NCV2xQ">
+                          <titel>U_m_s_c_h_l_a_g_0000001</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000001.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_0ItkYeM5JGX89V4XRu8JBf</dateiRef>
+                          <dateiRef>_GO0huCAXFdYwyXFec9iYJQ</dateiRef>
+                          <dateiRef>_vvxaxEfk4pFD7WiefHkup1</dateiRef>
+                          <dateiRef>_mhzWBa6X2a7LMp2Vjpp22l</dateiRef>
+                        </dokument>
+                        <dokument id="_LyiC8K3pequT0AXNIRT17l">
+                          <titel>Feldgottesdienst katholisch</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <entstehungszeitraum>
+                            <von>
+                              <datum>1914-01-01</datum>
+                            </von>
+                            <bis>
+                              <datum>1918-12-31</datum>
+                            </bis>
+                          </entstehungszeitraum>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="Signatur">E27#1000/721#14086-1#3*</merkmal>
+                            <merkmal name="Stufe">Dokument</merkmal>
+                            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-1*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439207","Protected":false},{"IconId":6,"Level":"Dokument","RefCode":"E27#1000/721#14086-1#3*","Title":"Feldgottesdienst katholisch","DateRangeText":"1914.01.01-1918.12.31","ArchiveRecordId":"3236331","Protected":false}]</merkmal>
+                            <merkmal name="Form">Glasplatte</merkmal>
+                            <merkmal name="Darin">Regiment 32 Division 6</merkmal>
+                            <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Y6yMSOdX0WLuCcEDqNBxs8@_LyiC8K3pequT0AXNIRT17l</merkmal>
+                            <merkmal name="Entstehungszeitraum Anzeigetext">01.01.1914 - 31.12.1918</merkmal>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000001.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_nZ0R2uUBJmat1KN6jBaJZx</dateiRef>
+                          <dateiRef>_XTxnEg8oj3m1Cy1hycbaQL</dateiRef>
+                          <dateiRef>_0wiWNggQNhE1weeRHanDq7</dateiRef>
+                          <dateiRef>_vODTlMJBhh9Oze6A8JbG1b</dateiRef>
+                        </dokument>
+                        <dokument id="_OjH04iKY7Ev0LooAyn82Bi">
+                          <titel>Offiziere der Mitrailleure Abteilung 5</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <entstehungszeitraum>
+                            <von>
+                              <datum>1914-01-01</datum>
+                            </von>
+                            <bis>
+                              <datum>1918-12-31</datum>
+                            </bis>
+                          </entstehungszeitraum>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="Signatur">E27#1000/721#14086-1#4*</merkmal>
+                            <merkmal name="Stufe">Dokument</merkmal>
+                            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-1*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439207","Protected":false},{"IconId":6,"Level":"Dokument","RefCode":"E27#1000/721#14086-1#4*","Title":"Offiziere der Mitrailleure Abteilung 5","DateRangeText":"1914.01.01-1918.12.31","ArchiveRecordId":"3236332","Protected":false}]</merkmal>
+                            <merkmal name="Form">Glasplatte</merkmal>
+                            <merkmal name="Darin">Mitrailleure Abteilung 5</merkmal>
+                            <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Y6yMSOdX0WLuCcEDqNBxs8@_OjH04iKY7Ev0LooAyn82Bi</merkmal>
+                            <merkmal name="Entstehungszeitraum Anzeigetext">01.01.1914 - 31.12.1918</merkmal>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000001.000003</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_1PZwcHTMHd5vhcxX6Aey8X</dateiRef>
+                          <dateiRef>_NdPH4HbKliZTXWGRo93PVc</dateiRef>
+                          <dateiRef>_uGBpTxD6GfxsT7tDZf3Iid</dateiRef>
+                          <dateiRef>_9hmurLnSW7aMW2kd3BN8sr</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_vpOgYnTPjOowAaLXqTDc3Y">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 5084 - 5524</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-8*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-8*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439214","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_vpOgYnTPjOowAaLXqTDc3Y</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000008</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_okbsWZPPA0NkdW2qXv10VE">
+                          <titel>D_o_k_u_m_e_n_t_0000010</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000008.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_nF7xod9oeCmlz0IFB5f7Lx</dateiRef>
+                          <dateiRef>_e9xgDHZNojzY5YwlyDTZmU</dateiRef>
+                          <dateiRef>_eGajW6eFSO1bW6DNBWUz0o</dateiRef>
+                          <dateiRef>_mbFiq95hpet5cMzDFwgpOe</dateiRef>
+                        </dokument>
+                        <dokument id="_UFulip0IwwVareAHyAQ2Ul">
+                          <titel>U_m_s_c_h_l_a_g_0000008</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000008.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_gcq9nECRT2XfMOe0XDNoTc</dateiRef>
+                          <dateiRef>_AxkzQoeEMdu4iObc1ikWly</dateiRef>
+                          <dateiRef>_3nBNeslpIjzhz5BrpbGizL</dateiRef>
+                          <dateiRef>_IgZYVuDSgmKMS6enqyavzk</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_Yk3DEqDiRjchIa7HrxVUbh">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 3724 - 4390</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-6*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-6*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439212","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_Yk3DEqDiRjchIa7HrxVUbh</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000006</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_GizgwSP3YYqG5Ie3buUOEJ">
+                          <titel>D_o_k_u_m_e_n_t_0000008</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000006.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_9M0IZwGm9KkYJb3EY90dCN</dateiRef>
+                          <dateiRef>_EG5oG2vjpGSgZvH0tFO0tt</dateiRef>
+                          <dateiRef>_ROCnqgwpxtLvZ2WAVLMnM9</dateiRef>
+                          <dateiRef>_NbJfltJVOLmZZQaCElq1fo</dateiRef>
+                        </dokument>
+                        <dokument id="_IiBKMfWDMXWUPVTgm2gpWi">
+                          <titel>U_m_s_c_h_l_a_g_0000006</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000006.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_YYdMJeXzZhyLl4qfqTDzMV</dateiRef>
+                          <dateiRef>_XVjDf983BNLvzbrE29LqSD</dateiRef>
+                          <dateiRef>_4OOiO4lnL44SezfvU9p5cC</dateiRef>
+                          <dateiRef>_TYySFqoGKUO9GyZG6IYlQi</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_lqrzrSsyVWIyzx5PPtwwWx">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 2347 - 2980</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-4*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-4*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439210","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_lqrzrSsyVWIyzx5PPtwwWx</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000004</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_GdF7YzMuIhiYR7QPPIDhvf">
+                          <titel>U_m_s_c_h_l_a_g_0000004</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000004.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_ArEsyxYjgqxJ9igbnpKNNo</dateiRef>
+                          <dateiRef>_Xmecz4z7GUEt7OXXRJSER5</dateiRef>
+                          <dateiRef>_b1hDJUaLFbRxyqpRPfxjGq</dateiRef>
+                          <dateiRef>_XH0o2f91NJwQeH8vZVJapP</dateiRef>
+                        </dokument>
+                        <dokument id="_qZtjucBDjCQ6pTNNNDEDJO">
+                          <titel>D_o_k_u_m_e_n_t_0000006</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000004.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_KCiVHUHQe6vBnyEiJOcdQf</dateiRef>
+                          <dateiRef>_11jwHq68KxjhdSYI1vCJCj</dateiRef>
+                          <dateiRef>_YmkhpYcdM7sYF7OmhOd1EO</dateiRef>
+                          <dateiRef>_buB9o8JSrgICEXPDPMaNiX</dateiRef>
+                          <dateiRef>_uhhkrIbpPm8hc383fO3HRA</dateiRef>
+                          <dateiRef>_0Konz2wdT9N2RcwqK9cqNE</dateiRef>
+                          <dateiRef>_ktix3srdy86nNGcQKlcgii</dateiRef>
+                          <dateiRef>_L02eV0VgcNICcVCmPhRLIM</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_deUmWi2sKi8etuxXHaromd">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 1639 - 2346</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-3*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-3*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439209","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_deUmWi2sKi8etuxXHaromd</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000003</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_P6HyX9gKweNKBliNMt8xkm">
+                          <titel>U_m_s_c_h_l_a_g_0000003</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000003.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_G1FuUdFkkeAfCiHHkPOVHT</dateiRef>
+                          <dateiRef>_aDCUwNq5eckE96WC8e6hAI</dateiRef>
+                          <dateiRef>_PfIiFqJs04IWa0WclVaWzF</dateiRef>
+                          <dateiRef>_1Zj5YLThce62LKf646gMGJ</dateiRef>
+                        </dokument>
+                        <dokument id="_QHYjFYTe68sn4LipxrPIUC">
+                          <titel>D_o_k_u_m_e_n_t_0000005</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000003.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_WpmrcXCwq62cMzkgc3UTzy</dateiRef>
+                          <dateiRef>_rIHVkFfcu8tAA7vDXGtjij</dateiRef>
+                          <dateiRef>_bubjwTqY3i2gJSjL9GbDeg</dateiRef>
+                          <dateiRef>_MHaDQ9YIxOZh3PFfDHD8tt</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_3jJFXM24dBhG4huq8461yi">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Numerisches Register zu Kat. II, Nr. 1 - 4511</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-9*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-9*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439215","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_3jJFXM24dBhG4huq8461yi</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000009</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_qliyCwRiZN9bCdmuNgoTWk">
+                          <titel>D_o_k_u_m_e_n_t_0000011</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000009.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_FXpzoaIqP3Zw54CvqJa6io</dateiRef>
+                          <dateiRef>_PsI820yKLfvj8he1ur3oBx</dateiRef>
+                          <dateiRef>_PqXKgInoI3Jw0SFLG497Q4</dateiRef>
+                          <dateiRef>_HJb3lKul00DtxFkS0ctxEA</dateiRef>
+                          <dateiRef>_EbnnETY46YNkFClY0S7OGw</dateiRef>
+                          <dateiRef>_9t3GKnBxtxgDBgyymjt1NO</dateiRef>
+                          <dateiRef>_gDwdnnFTZqaI2gc7zVDg9e</dateiRef>
+                          <dateiRef>_iWS4jfKwOJ6qeOJLAsJEXh</dateiRef>
+                        </dokument>
+                        <dokument id="_tvviZGUXFCCqV8xODPAqSk">
+                          <titel>U_m_s_c_h_l_a_g_0000009</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000009.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_DpMisbIsozbANaInQ2MyZm</dateiRef>
+                          <dateiRef>_Ksv2jQ5Y4ccQvB0NdVduSL</dateiRef>
+                          <dateiRef>_4ViMDbDjHIxm6czwJbjE2I</dateiRef>
+                          <dateiRef>_X3BbAey6i46oc79azoKoNh</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dossier id="_dGtnwQEQQMiGiCw8hX0U9G">
+                        <aktenzeichen>06.H.3.k.2.b.2</aktenzeichen>
+                        <titel>Fotoalben, II. Kategorie-Presse</titel>
+                        <inhalt>Nr. 2981 - 3723</inhalt>
+                        <erscheinungsform>digital</erscheinungsform>
+                        <entstehungszeitraum>
+                          <von>
+                            <datum>1601-01-01</datum>
+                          </von>
+                          <bis>
+                            <datum>1959-12-31</datum>
+                          </bis>
+                        </entstehungszeitraum>
+                        <entstehungszeitraumAnmerkung>Dossierinhalt nicht datiert. Der Entstehungszeitraum entspricht dem ältesten und jüngsten Datum der Ablieferung.</entstehungszeitraumAnmerkung>
+                        <datenschutz>false</datenschutz>
+                        <zusatzDaten>
+                          <merkmal name="Signatur">E27#1000/721#14086-5*</merkmal>
+                          <merkmal name="Stufe">Subdossier</merkmal>
+                          <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"E*","Title":"Archiv des Schweizerischen Bundesstaates ab 1848","DateRangeText":"1848-2009","ArchiveRecordId":"28","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"E27*","Title":"Landesverteidigung (1848-1950)","DateRangeText":"1600-1960","ArchiveRecordId":"3582","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06","Title":"Stabsdienste, Dienstzweige, Hilfsdienste. Einsatz der Armee","DateRangeText":"1600-1966","ArchiveRecordId":"3847771","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H","Title":"Massnahmen bei aussenpolitischen Spannungen, Grenzbesetzungen, Aktivdienste","DateRangeText":"1848-1965","ArchiveRecordId":"3848128","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3","Title":"Aktivdienst 1914-1918","DateRangeText":"1909-1964","ArchiveRecordId":"3848146","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k","Title":"Aktivdienstberichte, Aktivdiensterinnerungen","DateRangeText":"1914-1935","ArchiveRecordId":"3848205","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2","Title":"Aktivdiensterinnerungen, Fotosammlungen, Tagebücher","DateRangeText":"1914-1935","ArchiveRecordId":"3848211","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b","Title":"Fotosammlungen über den Aktivdienst","DateRangeText":"1914-1919","ArchiveRecordId":"3848213","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"E27#06.H.3.k.2.b.2","Title":"Bildarchiv der geografisch-archivistischen Sektion des Armeestabes [Aktivdienst und Kriegsgeschehen]","DateRangeText":"1914-1919","ArchiveRecordId":"3848215","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"E27#1000/721#14086*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600 (ca.)-1960 (ca.)","ArchiveRecordId":"1439206","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"E27#1000/721#14086-5*","Title":"Fotoalben, II. Kategorie-Presse","DateRangeText":"1600-1960","ArchiveRecordId":"1439211","Protected":false}]</merkmal>
+                          <merkmal name="Identifikation digitales Magazin">72ac24ba-c288-4354-9836-b0504e04f8ab@_dGtnwQEQQMiGiCw8hX0U9G</merkmal>
+                          <merkmal name="Entstehungszeitraum Anzeigetext">zwischen 1600 und 1960</merkmal>
+                          <merkmal name="ReihenfolgeAnalogesDossier">000005</merkmal>
+                        </zusatzDaten>
+                        <dokument id="_CfZ6vj2Yl288UYpdbdrZk9">
+                          <titel>U_m_s_c_h_l_a_g_0000005</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000005.000001</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_PtdYnOIwgGgNxodzIcOHOK</dateiRef>
+                          <dateiRef>_4XS44eqpvwCLOl9gB2FpWT</dateiRef>
+                          <dateiRef>_4JiFeKAOs0YZQsDsnwdxx6</dateiRef>
+                          <dateiRef>_Cxw7JPPuZJxgdxUefjIgPA</dateiRef>
+                        </dokument>
+                        <dokument id="_MS1BFeM1StwSVcU4uzZOOm">
+                          <titel>D_o_k_u_m_e_n_t_0000007</titel>
+                          <erscheinungsform>digital</erscheinungsform>
+                          <datenschutz>false</datenschutz>
+                          <zusatzDaten>
+                            <merkmal name="ReihenfolgeAnalogesDossier">000005.000002</merkmal>
+                          </zusatzDaten>
+                          <dateiRef>_DM7akp9utb4lVXU22aduNQ</dateiRef>
+                          <dateiRef>_YoISX8DMUPanq3b5B1O2RU</dateiRef>
+                          <dateiRef>_Ug7Ghn7o2iu6MYupX2o9WT</dateiRef>
+                          <dateiRef>_bQkr4QJfnHgySr4KcldveR</dateiRef>
+                        </dokument>
+                      </dossier>
+                      <dateiRef>_COHXWjZdGvKpzNbqfFQbdX</dateiRef>
+                    </dossier>
+                  </ordnungssystemposition>
+                </ordnungssystemposition>
+              </ordnungssystemposition>
+            </ordnungssystemposition>
+          </ordnungssystemposition>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

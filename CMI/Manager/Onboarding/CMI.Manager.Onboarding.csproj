@@ -36,17 +36,17 @@
     <Reference Include="Autofac, Version=6.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Autofac.6.4.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit, Version=8.0.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.8.0.8\lib\net461\MassTransit.dll</HintPath>
+    <Reference Include="MassTransit, Version=8.0.16.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.8.0.16\lib\net462\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.Abstractions, Version=8.0.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.Abstractions.8.0.8\lib\net461\MassTransit.Abstractions.dll</HintPath>
+    <Reference Include="MassTransit.Abstractions, Version=8.0.16.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.Abstractions.8.0.16\lib\net462\MassTransit.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.Newtonsoft, Version=8.0.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.Newtonsoft.8.0.8\lib\net461\MassTransit.Newtonsoft.dll</HintPath>
+    <Reference Include="MassTransit.Newtonsoft, Version=8.0.16.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.Newtonsoft.8.0.16\lib\net462\MassTransit.Newtonsoft.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.RabbitMqTransport, Version=8.0.8.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.8.0.8\lib\net461\MassTransit.RabbitMqTransport.dll</HintPath>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=8.0.16.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MassTransit.RabbitMQ.8.0.16\lib\net462\MassTransit.RabbitMqTransport.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -83,18 +83,21 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Namotion.Reflection, Version=2.1.2.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Namotion.Reflection.2.1.2\lib\net45\Namotion.Reflection.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
     <Reference Include="NJsonSchema, Version=9.13.17.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NJsonSchema.9.13.37\lib\net45\NJsonSchema.dll</HintPath>
+      <HintPath>..\..\..\packages\NJsonSchema.10.9.0\lib\net45\NJsonSchema.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\RabbitMQ.Client.6.4.0\lib\net461\RabbitMQ.Client.dll</HintPath>
+      <HintPath>..\..\..\packages\RabbitMQ.Client.6.5.0\lib\net461\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
@@ -111,8 +114,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Aspose.Pdf;
@@ -11,10 +9,7 @@ using Aspose.Pdf.Operators;
 using Aspose.Pdf.Optimization;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.ParameterSettings;
-using CSJ2K;
-using CSJ2K.Util;
 using Serilog;
-using Image = System.Drawing.Image;
 using Matrix = Aspose.Pdf.Matrix;
 using Rectangle = Aspose.Pdf.Rectangle;
 
@@ -22,13 +17,12 @@ namespace CMI.Engine.Asset.PreProcess
 {
     public class ScanProcessor : IScanProcessor
     {
-        private ScansZusammenfassenSettings settings;
-        private EncoderParameters encoderParameters;
+        private readonly ScansZusammenfassenSettings settings;
         private PaketDIP paketToConvert;
         private string rootFolder;
-        private readonly FileResolution fileResolution;
+        private readonly ImageHelper imageHelper;
 
-        public ScanProcessor(FileResolution fileResolution, ScansZusammenfassenSettings settings)
+        public ScanProcessor(ImageHelper imageHelper, ScansZusammenfassenSettings settings)
         {
             try
             {
@@ -41,7 +35,7 @@ namespace CMI.Engine.Asset.PreProcess
                 throw;
             }
 
-            this.fileResolution = fileResolution;
+            this.imageHelper = imageHelper;
             this.settings = settings;
         }
 
@@ -69,12 +63,6 @@ namespace CMI.Engine.Asset.PreProcess
         {
             rootFolder = folder;
             paketToConvert = paket;
-
-            // Default settings for Image conversion 
-            encoderParameters = new EncoderParameters(1);
-            var encoderParameter = new EncoderParameter(Encoder.Quality, settings.JpegQualitaetInProzent);
-            encoderParameters.Param[0] = encoderParameter;
-            BitmapImageCreator.Register();
 
             foreach (var ordnungssystemposition in paket.Ablieferung.Ordnungssystem.Ordnungssystemposition)
             {
@@ -233,28 +221,19 @@ namespace CMI.Engine.Asset.PreProcess
         {
             var sw = new Stopwatch();
             sw.Start();
-            var stream = new MemoryStream(); // MSDN: disposing is not necessary
-
-            var decodedImage = J2kImage.FromFile(filePath);
-            var bitmap = decodedImage.As<Bitmap>();
-
-            var size = GetOriginalSizeEx(filePath, bitmap);
-
-            if (settings.GroesseInProzent != 100 && settings.GroesseInProzent > 0)
-            {
-                var faktor = settings.GroesseInProzent / 100d;
-                bitmap = ResizeImage(bitmap, (int) (bitmap.Width * faktor), (int) (bitmap.Height * faktor));
-            }
-
-            // Set resolution to the resolution of the premis file (if any)
-            // or the resolution of the bitmap if the bitmap reports a resolution higher than 150 dpi
-            var res = fileResolution.GetResolution(bitmap, filePath);
-            bitmap.SetResolution(res, res);
-
-            bitmap.Save(stream, GetEncoderInfo("image/jpeg"), encoderParameters);
-            bitmap.Dispose();
+            var jpegFile = imageHelper.ConvertToJpeg(filePath, settings.GroesseInProzent, settings.JpegQualitaetInProzent);
+            var size = GetOriginalSizeEx(filePath);
+            var bytes = File.ReadAllBytes(jpegFile);
+            var stream = new MemoryStream(bytes); // MSDN: disposing is not necessary
 
             Log.Verbose($"Took {sw.ElapsedMilliseconds} ms to create jpg from jp2 {filePath}", filePath);
+            
+            // delete the temp file
+            if (File.Exists(jpegFile))
+            {
+                File.Delete(jpegFile);
+            }
+
             return new ImageInfo
             {
                 Stream = stream,
@@ -262,59 +241,11 @@ namespace CMI.Engine.Asset.PreProcess
             };
         }
 
-        /// <summary>
-        ///     Resize the image to the specified width and height.
-        /// </summary>
-        /// <param name="image">The image to resize.</param>
-        /// <param name="width">The width to resize to.</param>
-        /// <param name="height">The height to resize to.</param>
-        /// <returns>The resized image.</returns>
-        public static Bitmap ResizeImage(Image image, int width, int height)
+        private Size GetOriginalSizeEx(string filePath)
         {
-            var destRect = new System.Drawing.Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
-
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-
-            image.Dispose();
-            return destImage;
-        }
-
-        private static ImageCodecInfo GetEncoderInfo(string mimeType)
-        {
-            int j;
-            ImageCodecInfo[] encoders;
-            encoders = ImageCodecInfo.GetImageEncoders();
-            for (j = 0; j < encoders.Length; ++j)
-            {
-                if (encoders[j].MimeType == mimeType)
-                {
-                    return encoders[j];
-                }
-            }
-
-            return null;
-        }
-
-        private Size GetOriginalSizeEx(string filePath, Bitmap image)
-        {
-            var dpi = fileResolution.GetResolution(image, filePath);
-            return new Size(72 * image.Width / dpi, 72 * image.Height / dpi);
+            var dpi = imageHelper.GetResolution(filePath);
+            var size = imageHelper.GetImageSize(filePath);
+            return new Size(72 * size.Width / dpi, 72 * size.Height / dpi);
         }
 
         private static DateiDIP GetDatei(string dateiRef, List<OrdnerDIP> ordnerList)

@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using CMI.Contract.Common;
-using CSJ2K.Util;
 
 namespace CMI.Engine.Asset
 {
     public abstract class ProcessAnalyzerBase
     {
-        protected ProcessAnalyzerBase()
-        {
-            BitmapImageCreator.Register();
-        }
-
         public virtual void AnalyzeRepositoryPackage(RepositoryPackage package, string rootFolder)
         {
             AnalyzeFiles(rootFolder, package.Files);

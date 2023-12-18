@@ -83,8 +83,8 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
                             // We assume that the document won't change between runs
                             Log.Warning("We have an existing file that seems to be used by another process. Skipping this file {fileName}.", fi.Name);
                             continue;
-                        }                    }
-
+                        }
+                    }
                     File.Copy(file.FullName, fi.FullName);
                 }
                 else
@@ -113,7 +113,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
 
                     // The source identifies correctly ONE document
                     var parts = PathHelper.ArchiveIdToPathSegments(ArchiveRecordId);
-                    var source = $"{string.Join("/", parts)}/{(string.IsNullOrEmpty(relativePath) ? "" : $"{relativePath}/")}";
+                    var source = $"{string.Join("/", parts.Select(p => p.ValidPath))}/{(string.IsNullOrEmpty(relativePath) ? "" : $"{relativePath}/")}";
                     if (source.EndsWith("/"))
                     {
                         source = source.Substring(0, source.Length - 1);
@@ -145,7 +145,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
     private DirectoryInfo GetHOcrDestinationDirectory(string sourceDirectory)
     {
         var parts = PathHelper.ArchiveIdToPathSegments(ArchiveRecordId);
-        var hOcrDirectory = new DirectoryInfo(solrConnectionInfo.SolrHighlightingPath + @$"\{string.Join("\\", parts)}");
+        var hOcrDirectory = new DirectoryInfo(solrConnectionInfo.SolrHighlightingPath + @$"\{string.Join("\\", parts.Select(p => p.ValidPath))}");
         var relativePath = sourceDirectory == RootFolder ? "" : sourceDirectory.Substring(RootFolder.Length + 1);
 
         var newPath = PathHelper.CreateShortValidUrlName(relativePath, false);
