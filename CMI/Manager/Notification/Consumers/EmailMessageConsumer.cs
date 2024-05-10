@@ -83,11 +83,12 @@ namespace CMI.Manager.Notification.Consumers
             }
             catch (SmtpException ex)
             {
-                Log.Error(ex.ToString());
+                Log.Error(ex, $"SmtpException: {ex.Message}");
+                throw;
             }
             catch (Exception e)
             {
-                Log.Error(e.ToString());
+                Log.Error(e, $"Exception: {e.Message}");
                 throw;
             }
 

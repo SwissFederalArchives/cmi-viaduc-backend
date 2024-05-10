@@ -29,7 +29,8 @@ public class SearchRequestBuilder : ISearchRequestBuilder
     {
         "level", "customFields.zugänglichkeitGemässBga", "aggregationFields.ordnungskomponenten", "aggregationFields.bestand",
         "aggregationFields.hasPrimaryData", "aggregationFields.creationPeriodYears001", "aggregationFields.creationPeriodYears005",
-        "aggregationFields.creationPeriodYears005", "aggregationFields.creationPeriodYears025", "aggregationFields.creationPeriodYears100"
+        "aggregationFields.creationPeriodYears005", "aggregationFields.creationPeriodYears025", "aggregationFields.creationPeriodYears100",
+        "aggregationFields.protectionEndDateDossier.year"
     };
 
     private readonly IElasticSettings elasticSettings;
@@ -298,7 +299,18 @@ public class SearchRequestBuilder : ISearchRequestBuilder
         aggregations &=
             CreateFacet(
                 new TermsAggregation("aggregationFields.creationPeriodYears100")
-                    {Field = "aggregationFields.creationPeriodYears100", Size = int.MaxValue, Order = order, Missing = "0"}, facetsFilters);
+                    {Field = "aggregationFields.creationPeriodYears100", 
+                        Size = int.MaxValue, Order = order, Missing = "0"}, facetsFilters);
+
+        aggregations &=
+            CreateFacet(
+                new TermsAggregation("aggregationFields.protectionEndDateDossier")
+                    { Field = "aggregationFields.protectionEndDateDossier.year", 
+                        Size = facetsFilters != null && facetsFilters.Any(fac => fac.Facet.StartsWith("aggregationFields.protectionEndDateDossier") && fac.ShowAll)
+                            ? int.MaxValue
+                            : 5,
+                        Order = order
+                    }, facetsFilters);
 
 
         aggregations &= new FilterAggregation("bestellbare_einheiten")
@@ -382,7 +394,6 @@ public class SearchRequestBuilder : ISearchRequestBuilder
             {
                 throw new BadRequestException("Filters contains an illegal field or syntax.");
             }
-
             secured.Add($"{splited[0]}:{splited[1].Escape()}");
         }
 

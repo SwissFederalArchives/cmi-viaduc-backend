@@ -1121,5 +1121,47 @@ FROM ApplicationUser ";
 
             return 0;
         }
+
+        public List<User> GetUsersByName(string search)
+        {
+            var retVal = new List<User>();
+
+            using (var cn = new SqlConnection(connectionString))
+            {
+                cn.Open();
+
+                using (var cmd = cn.CreateCommand())
+                {
+                    cmd.CommandText =
+                        $"{Sql} WHERE FirstName + ' ' + FamilyName like @p1 or FamilyName + ' ' + FirstName like @p2";
+
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        Value = $"%{search}%",
+                        ParameterName = "p1",
+                        SqlDbType = SqlDbType.NVarChar
+                    });
+
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        Value = $"%{search}%",
+                        ParameterName = "p2",
+                        SqlDbType = SqlDbType.NVarChar
+                    });
+
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while(reader.Read())
+                        {
+                            retVal.Add(reader.ToUser<User>());
+                        }
+                    }
+                }
+            }
+
+            return retVal;
+
+        }
     }
 }

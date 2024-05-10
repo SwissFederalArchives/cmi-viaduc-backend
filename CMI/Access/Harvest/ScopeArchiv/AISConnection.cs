@@ -20,7 +20,7 @@ namespace CMI.Access.Harvest.ScopeArchiv
             var serviceName = Settings.Default.OracleServiceName;
             var schema = Settings.Default.OracleSchemaName;
 
-            var connectionString = $"User Id={userId};Password={password};Host={host};Port={port};Direct=true;";
+            var connectionString = $"User Id={userId};Password={password};Host={host};Port={port};Direct=true;Unicode=true;";
             connectionString += string.IsNullOrEmpty(sid.Trim()) ? $"Service Name={serviceName};" : $"SID={sid};";
             var cn = new OracleConnection(connectionString);
             try

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
@@ -200,35 +202,67 @@ namespace CMI.Engine.MailTemplate
             return InElasticIndexierteVe.FromElasticArchiveRecord(GetElasticArchiveRecord(archiveRecordId, getUnprotectedVersion));
         }
 
+        /// <summary>
+        /// Holt den ArchiveRecord vom Elastic Index.
+        /// Da wir ab und zu Timeout Probleme hatten, und dies zu unschönen resultaten führten, haben wir
+        /// die Methode versucht robuster zu machen, indem bei einem Fehler (in der Regel ein RabbitMq Timeout)
+        /// der Aufruf erneut versucht wird. Ebenso haben wir das Timeout des Aufrufs erhöht.
+        /// </summary>
+        /// <param name="archiveRecordId"></param>
+        /// <param name="getUnprotectedVersion"></param>
+        /// <returns></returns>
         private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId, bool getUnprotectedVersion)
         {
-            try
+            ElasticArchiveRecord retVal;
+            var retryCount = 0;
+            var success = false;
+
+            do
             {
-                var requestClient = CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue);
-                var task = requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
+                try
                 {
-                    ArchiveRecordId = archiveRecordId,
-                    UseUnanonymizedData = getUnprotectedVersion
-                });
-                task.Wait();
-                return task.Result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
+                    // Bei Fehlerfall warten wir ab retryCount > 0
+                    // RetryCount = 0   -->    0 ms
+                    // RetryCount = 1   --> 2000 ms
+                    // RetryCount = 2   --> 8000 ms
+                    Thread.Sleep(1000 * ((3 ^ retryCount) - 1));
+
+                    var requestClient =
+                        CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue, 60);
+
+                    var result = AsyncHelper.RunSync(() => requestClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
+                    {
+                        ArchiveRecordId = archiveRecordId,
+                        UseUnanonymizedData = getUnprotectedVersion
+                    }));
+
+                    retVal = result.Message.ElasticArchiveRecord ?? new ElasticArchiveRecord
+                    {
+                        ArchiveRecordId = archiveRecordId,
+                        Title = "Record not found in Elastic",
+                        CreationPeriod = new ElasticTimePeriod()
+                    };
+
+                    // Could retrieve value from Elastic
+                    success = true;
+                }
+                catch (Exception e)
                 {
-                    ArchiveRecordId = archiveRecordId,
-                    Title = "Record not found in Elastic",
-                    CreationPeriod = new ElasticTimePeriod()
-                };
-            }
-            catch (Exception e)
-            {
-                Log.Warning("Es gab ein Problem beim Zusammenbauen von einem Record mit der id {archiveRecordId},es wird ein default Record zurückgegeben. Fehler: {message}", archiveRecordId, e.Message);
-                return new ElasticArchiveRecord
-                {
-                    ArchiveRecordId = archiveRecordId,
-                    Title = "Record not found in Elastic",
-                    CreationPeriod = new ElasticTimePeriod()
-                };
-            }
-           
+                    Log.Error(e,
+                        "Es gab ein Problem beim Zusammenbauen von einem Record mit der id {archiveRecordId},es wird ein default Record zurückgegeben. Fehler: {message}",
+                        archiveRecordId, e.Message);
+                    retVal = new ElasticArchiveRecord
+                    {
+                        ArchiveRecordId = archiveRecordId,
+                        Title = "Error while fetching record from Elastic",
+                        CreationPeriod = new ElasticTimePeriod()
+                    };
+
+                    retryCount++;
+                }
+            } while (retryCount < 3 && !success);
+
+            return retVal;
         }
 
         private Auftrag GetAuftrag(Ordering ordering, OrderItem orderItem)
@@ -280,9 +314,9 @@ namespace CMI.Engine.MailTemplate
         }
 
 
-        public static IRequestClient<T1> CreateRequestClient<T1>(IBus busControl, string relativeUri) where T1 : class
+        public static IRequestClient<T1> CreateRequestClient<T1>(IBus busControl, string relativeUri, int timeoutInSeconds = 20) where T1 : class
         {
-            var client = busControl.CreateRequestClient<T1>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(10));
+            var client = busControl.CreateRequestClient<T1>(new Uri(busControl.Address, relativeUri), TimeSpan.FromSeconds(timeoutInSeconds));
             return client;
         }
 
@@ -367,6 +401,36 @@ namespace CMI.Engine.MailTemplate
             }
 
             return allowUnanonymized;
+        }
+
+        /// <summary>
+        /// <see cref="https://github.com/aspnet/AspNetIdentity/blob/main/src/Microsoft.AspNet.Identity.Core/AsyncHelper.cs"/>
+        /// </summary>
+        internal static class AsyncHelper
+        {
+            private static readonly TaskFactory myTaskFactory = new
+                TaskFactory(CancellationToken.None,
+                    TaskCreationOptions.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default);
+
+            public static TResult RunSync<TResult>(Func<Task<TResult>> func)
+            {
+                return AsyncHelper.myTaskFactory
+                    .StartNew<Task<TResult>>(func)
+                    .Unwrap<TResult>()
+                    .GetAwaiter()
+                    .GetResult();
+            }
+
+            public static void RunSync(Func<Task> func)
+            {
+                AsyncHelper.myTaskFactory
+                    .StartNew<Task>(func)
+                    .Unwrap()
+                    .GetAwaiter()
+                    .GetResult();
+            }
         }
     }
 }

@@ -29,15 +29,9 @@ namespace CMI.Web.Common.Helpers
 
         public static readonly List<string> SupportedLanguages = new List<string> {"de", "fr", "it", "en"};
 
-        private static readonly Regex LanguageInUrlMatcher = new Regex("^.*/(?<language>(de|fr|it|en))/");
+        private static readonly Regex languageInUrlMatcher = new Regex("^.*/(?<language>(de|fr|it|en))/");
 
         public static readonly char[] UrlSplitter = {'/'};
-
-        #region Filtering
-
-        public static IList<Func<HttpContext, string, string, string>> StaticContentFilters = new List<Func<HttpContext, string, string, string>>();
-        
-        #endregion
 
         public static string LanguageCookieName => GetStringSetting("languageCookieName", "viaduc_language");
         public static string ClientTypeCookieName => GetStringSetting("clientTypeCookieName", "viaduc_client");
@@ -62,7 +56,7 @@ namespace CMI.Web.Common.Helpers
 
         public static string SwaggerBaseUrl => GetStringSetting("swaggerBaseUrl", "https://www.recherche.bar.admin.ch/recherche");
 
-        public static string ManagementAuthReturnUrl => GetStringSetting("managementAuthReturnUrl", "http://localhost/management/#/auth/success");
+        public static string ManagementAuthReturnUrl => GetStringSetting("managementAuthReturnUrl", "http://localhost/management/auth/success");
 
         public static string ManagementLogoutReturnUrl => GetStringSetting("managementLogoutReturnUrl", "http://localhost/management");
 
@@ -163,7 +157,7 @@ namespace CMI.Web.Common.Helpers
         public static string GetLanguageFromRequestUrl(string url)
         {
             string language = null;
-            var match = LanguageInUrlMatcher.Match(url.ToLowerInvariant());
+            var match = languageInUrlMatcher.Match(url.ToLowerInvariant());
             if (match.Success && SupportedLanguages.Contains(match.Groups["language"].Value.ToLowerInvariant()))
             {
                 language = match.Groups["language"].Value.ToLowerInvariant();

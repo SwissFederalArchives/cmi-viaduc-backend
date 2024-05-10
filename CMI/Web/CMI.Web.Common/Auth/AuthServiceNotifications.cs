@@ -5,12 +5,10 @@ using System.Security.Claims;
 using System.Web;
 using System.Xml;
 using CMI.Web.Common.Helpers;
-using Kentor.AuthServices.Configuration;
-using Kentor.AuthServices.Saml2P;
-using Kentor.AuthServices.WebSso;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 using Newtonsoft.Json;
+using Sustainsys.Saml2.Configuration;
+using Sustainsys.Saml2.Saml2P;
+using Sustainsys.Saml2.WebSso;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace CMI.Web.Common.Auth

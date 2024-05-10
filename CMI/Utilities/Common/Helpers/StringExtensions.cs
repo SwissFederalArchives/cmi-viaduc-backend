@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 
 namespace CMI.Utilities.Common.Helpers
 {
@@ -93,6 +94,19 @@ namespace CMI.Utilities.Common.Helpers
             }
 
             return char.ToLowerInvariant(str[0]) + str.Substring(1);
+        }
+
+        public static string StripHtml(this string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return value;
+            }
+
+            HtmlDocument htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(value);
+
+            return htmlDoc.DocumentNode.InnerText;
         }
     }
 }

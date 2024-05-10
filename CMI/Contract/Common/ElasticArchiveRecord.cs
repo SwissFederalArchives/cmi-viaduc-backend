@@ -43,6 +43,7 @@ namespace CMI.Contract.Common
 
         [JsonConverter(typeof(ExpandoObjectConverter))]
         public dynamic CustomFields { get; set; } = new ExpandoObject();
+        public ElasticDateWithYear ProtectionEndDate { get; set; }
     }
 
     /// <summary>
@@ -56,7 +57,6 @@ namespace CMI.Contract.Common
         public int AccessionDate { get; set; }
         public List<ElasticParentContentInfo> ParentContentInfos { get; set; }
         public ElasticBase64 Thumbnail { get; set; }
-        public ElasticDateWithYear ProtectionEndDate { get; set; }
         public string ProtectionCategory { get; set; }
         public int? ProtectionDuration { get; set; }
     }
@@ -128,6 +128,7 @@ namespace CMI.Contract.Common
         public List<int> CreationPeriodYears010 { get; set; }
         public List<int> CreationPeriodYears025 { get; set; }
         public List<int> CreationPeriodYears100 { get; set; }
+        public ElasticDateWithYear ProtectionEndDateDossier { get; set; }
     }
 
     public class UnanonymizedFields

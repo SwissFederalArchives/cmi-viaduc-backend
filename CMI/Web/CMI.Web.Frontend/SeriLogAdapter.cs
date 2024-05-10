@@ -1,6 +1,6 @@
 ﻿using System;
-using Kentor.AuthServices;
 using Serilog;
+using Sustainsys.Saml2;
 
 namespace CMI.Web.Frontend
 {

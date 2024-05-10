@@ -9,5 +9,6 @@
         public string WithinInfo { get; set; }
         public string Level { get; set; }
         public string Accessibility { get; set; }
+        public string SchutzfristendeDossier { get; set; }
     }
 }

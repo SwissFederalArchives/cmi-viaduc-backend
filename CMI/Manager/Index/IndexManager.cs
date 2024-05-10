@@ -176,12 +176,15 @@ namespace CMI.Manager.Index
             elasticArchiveRecord.ExternalDisplayTemplateName = archiveRecord.Display.ExternalDisplayTemplateName;
             elasticArchiveRecord.InternalDisplayTemplateName = archiveRecord.Display.InternalDisplayTemplateName;
             elasticArchiveRecord.LastSyncDate = DateTime.Now;
+            
+            TransferDataFromPropertyBag(elasticArchiveRecord, archiveRecord.Metadata.DetailData);
+
             elasticArchiveRecord.AggregationFields = new ElasticAggregationFields
             {
                 Bestand = archiveRecord.Display.ArchiveplanContext
                     .LastOrDefault(a => a.Level.Equals(levelIdentifier, StringComparison.InvariantCultureIgnoreCase))?.Title,
                 Ordnungskomponenten = archiveRecord.Metadata.AggregationFields.FirstOrDefault(a => a.AggregationName == "FondsOverview")?.Values,
-                HasPrimaryData = !string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink) || ContainsCustomFieldDigitaleVersion(elasticArchiveRecord.CustomFields)
+                HasPrimaryData = !string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink) || elasticArchiveRecord.HasCustomPropertyWithValue<ElasticHyperlink>("digitaleVersion")
             };
             // Only save references to Elastic that don't need to by anonymized, 
             // Problem is, that when two protected UoD have a reference on each other and then
@@ -223,13 +226,16 @@ namespace CMI.Manager.Index
                 ? archiveRecord.ElasticPrimaryData
                 : archiveRecord.PrimaryData.ToElasticArchiveRecordPackage();
 
-            TransferDataFromPropertyBag(elasticArchiveRecord, archiveRecord.Metadata.DetailData);
-
             // Add the creation period aggregation records
             // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html
             // According to elastic documentation histograms are calculated with this formula
             // bucket_key = Math.floor((value - offset) / interval) * interval + offset
             CalculateCreationPeriodBuckets(elasticArchiveRecord);
+
+            if (elasticArchiveRecord.Level.Equals("Dossier") && elasticArchiveRecord.ProtectionEndDate != null)
+            {
+                elasticArchiveRecord.AggregationFields.ProtectionEndDateDossier = elasticArchiveRecord.ProtectionEndDate;
+            }
 
             return elasticArchiveRecord;
         }
@@ -447,21 +453,6 @@ namespace CMI.Manager.Index
             return retVal;
         }
 
-        private static bool ContainsCustomFieldDigitaleVersion(dynamic customFields)
-        {
-            if (customFields is Dictionary<string, object> && ((IDictionary<string, object>) customFields).ContainsKey("digitaleVersion"))
-            {
-                var field =
-                    ((IDictionary<string, object>) customFields).FirstOrDefault(k =>
-                         k.Key.Equals("digitaleVersion", StringComparison.InvariantCultureIgnoreCase));
-                if (field.Value != null && !string.IsNullOrWhiteSpace(field.Value.ToString()))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
 
         /// <summary>
         /// Checks if the newly synced record has different texts than the existing corrections.

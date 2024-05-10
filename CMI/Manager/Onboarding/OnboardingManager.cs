@@ -275,8 +275,7 @@ namespace CMI.Manager.Onboarding
                     firstname = model.Firstname,
                     nationality = model.Nationality,
                     dateOfBirth = model.DateOfBirth,
-                    idType = model.IdType,
-                    email = model.Email,
+                    email = model.Email
                 },
                 processSteps = new[]
                 {

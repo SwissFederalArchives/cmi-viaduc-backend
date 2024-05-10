@@ -441,6 +441,11 @@ namespace CMI.Web.Frontend.api.Elastic
                         }
                     }
                 }
+                else if (entry.Key.StartsWith("facet_aggregationFields.protectionEndDateDossier"))
+                {
+                    var primaryAggregation = ((SingleBucketAggregate) entry.Value).First().Value;
+                    filteredAggregations.Add("aggregationFields.protectionEndDateDossier", primaryAggregation);
+                }
                 else if (entry.Key.StartsWith("facet_"))
                 {
                     var primaryAggregation = ((SingleBucketAggregate) entry.Value).First().Value;
@@ -488,6 +493,15 @@ namespace CMI.Web.Frontend.api.Elastic
                         item["filter"] = filter;
                     }
                 }
+                else if (aggregationName == "aggregationFields.protectionEndDateDossier")
+                {
+                    foreach (var item in itemCollection)
+                    {
+                        var begin = item["key"].Value<int>(); ;
+                        item["key"] = $"{begin}";
+                        item["filter"] = $"{aggregationName}.year:\"{begin}\"";
+                    }
+                }
                 else
                 {
                     foreach (var item in itemCollection)
@@ -495,8 +509,8 @@ namespace CMI.Web.Frontend.api.Elastic
                         var key = string.IsNullOrWhiteSpace(item["keyAsString"]?.ToString())
                             ? item["key"]?.ToString()
                             : item["keyAsString"].ToString();
-
-                        if (aggregationName == "customFields.zugänglichkeitGemässBga" || aggregationName == "level")
+                        
+                        if(aggregationName == "customFields.zugänglichkeitGemässBga" || aggregationName == "level")
                         {
                             item["key"] = "search.facetteEntry." + key;
                         }

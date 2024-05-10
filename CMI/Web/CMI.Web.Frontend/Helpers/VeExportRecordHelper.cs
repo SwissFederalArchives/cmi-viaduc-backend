@@ -86,6 +86,11 @@ namespace CMI.Web.Frontend.Helpers
                 {
                     ColumnName = nameof(VeExportRecord.Accessibility), MakeAutoWidth = true,
                     ColumnHeader = FrontendSettingsViaduc.Instance.GetTranslation(language, "veExportRecord.accessibility")
+                },
+                new ExcelColumnInfo
+                {
+                    ColumnName = nameof(VeExportRecord.SchutzfristendeDossier), MakeAutoWidth = true,
+                    ColumnHeader = FrontendSettingsViaduc.Instance.GetTranslation(language, "veExportRecord.schutzfristendeDossier")
                 }
             };
         }

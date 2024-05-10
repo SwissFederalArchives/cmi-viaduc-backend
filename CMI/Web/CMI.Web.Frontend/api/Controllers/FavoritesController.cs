@@ -200,6 +200,10 @@ namespace CMI.Web.Frontend.api.Controllers
                     veFavorite.CanBeDownloaded = veFavorite.HasPrimaryLink &&
                                                  access.HasAnyTokenFor(elasticHit.Data?.PrimaryDataDownloadAccessTokens);
                     veFavorite.ManifestLink = elasticHit.Data?.ManifestLink;
+
+                    veFavorite.SchutzfristendeDossier = elasticHit.Data?.Level == "Dossier" && elasticHit.Data?.ProtectionEndDate?.Year != null
+                        ? elasticHit.Data?.ProtectionEndDate?.Year.ToString()
+                        : string.Empty;
                     yield return veFavorite;
                 }
                 else
@@ -251,7 +255,8 @@ namespace CMI.Web.Frontend.api.Controllers
                 CreationPeriod = (item as VeFavorite).CreationPeriod,
                 WithinInfo = (item as VeFavorite).WithinInfo,
                 Level = (item as VeFavorite).Level,
-                Accessibility = VeExportRecordHelper.GetCustomField((item as VeFavorite).CustomFields, "zugänglichkeitGemässBga")
+                Accessibility = VeExportRecordHelper.GetCustomField((item as VeFavorite).CustomFields, "zugänglichkeitGemässBga"),
+                SchutzfristendeDossier = (item as VeFavorite).SchutzfristendeDossier
                 // ReSharper enable PossibleNullReferenceException
             }).ToList();
         }

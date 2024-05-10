@@ -162,8 +162,8 @@ namespace CMI.Access.Repository
                     var aipAtDossierId = metadataAccess.GetExtendedPropertyValue(extensions, "AIP-ID_Dossier-ID");
 
                     // First condition is used to check an BAR repository. Second condition only applies to CMI Alfresco Repro
-                    if (aipAtDossierId != null && aipAtDossierId.Equals(packageId, StringComparison.InvariantCultureIgnoreCase) ||
-                        description.Equals(packageId, StringComparison.InvariantCultureIgnoreCase))
+                    if (aipAtDossierId != null && aipAtDossierId.Equals(packageId, StringComparison.InvariantCulture) ||
+                        description.Equals(packageId, StringComparison.InvariantCulture))
                     {
                         Log.Verbose("Found correct folder object. Folder name is {Name}.", folder.Name);
                         var isDossier = !string.IsNullOrEmpty(metadataAccess.GetExtendedPropertyValue(extensions, "ARELDA:dossier/dossier@id")) ||
@@ -205,8 +205,8 @@ namespace CMI.Access.Repository
 
                     // For BAR repository: The last segment must match the catalogue reference value
                     // For Alfresco repository: Description must match the package id
-                    if (!isAlfresco && documentId.Equals(segments[2], StringComparison.InvariantCultureIgnoreCase) ||
-                        isAlfresco && description.Equals(packageId, StringComparison.InvariantCultureIgnoreCase))
+                    if (!isAlfresco && documentId.Equals(segments[2], StringComparison.InvariantCulture) ||
+                        isAlfresco && description.Equals(packageId, StringComparison.InvariantCulture))
                     {
                         Log.Verbose("Found correct folder object. Folder name is {Name}.", folder.Name);
                         var isDossier = !string.IsNullOrEmpty(metadataAccess.GetExtendedPropertyValue(extensions, "ARELDA:dossier/dossier@id"));

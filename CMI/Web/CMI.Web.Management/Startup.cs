@@ -15,7 +15,6 @@ using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management;
 using CMI.Web.Management.api.Configuration;
-using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
@@ -25,8 +24,10 @@ using Newtonsoft.Json.Serialization;
 using NSwag.AspNet.Owin;
 using Owin;
 using Serilog;
+using Sustainsys.Saml2.Owin;
 using SameSiteMode = Microsoft.Owin.SameSiteMode;
 using Swashbuckle.Application;
+using Microsoft.Owin.Host.SystemWeb;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -97,10 +98,6 @@ namespace CMI.Web.Management
         private void ConfigureSecurity(IAppBuilder app)
         {
             app.Use(async (context, next) => { await next.Invoke(); });
-            
-            app.UseKentorOwinCookieSaver();
-            
-            app.Use(async (context, next) => { await next.Invoke(); });            
 
             var connectionString = ManagementSettingsViaduc.Instance.SqlConnectionString;
             var userDataAccess = new UserDataAccess(connectionString);
@@ -117,7 +114,8 @@ namespace CMI.Web.Management
                 Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity = context => ValidateSessionIdIsActive(context, userDataAccess)
-                }
+                },
+                CookieManager = new SameSiteCookieManager(new SystemWebCookieManager())
             });
             
             app.Use(async (context, next) => { await next.Invoke(); });
@@ -126,7 +124,7 @@ namespace CMI.Web.Management
 
             app.Use(async (context, next) => { await next.Invoke(); });
 
-            var authOptions = new KentorAuthServicesAuthenticationOptions(true)
+            var authOptions = new Saml2AuthenticationOptions(true)
             {
                 SPOptions = {Logger = new SeriLogAdapter(Log.Logger)}
             };
@@ -134,7 +132,7 @@ namespace CMI.Web.Management
             var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, false);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
 
-            app.UseKentorAuthServicesAuthentication(authOptions);
+            app.UseSaml2Authentication(authOptions);
 
             app.Use(async (context, next) => { await next.Invoke(); });
 

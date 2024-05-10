@@ -64,6 +64,26 @@ namespace CMI.Contract.Common
                    ((IDictionary<string, object>) entity.CustomFields).Any(k => k.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
         }
 
+        public static bool HasCustomPropertyWithValue<T>(this ElasticArchiveRecord entity, string key)
+        {
+            if (entity.HasCustomProperty(key))
+            {
+                 var entry = ((IDictionary<string, object>) entity.CustomFields).First(k => k.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+
+                 if (entry.Value is T)
+                 {
+                     return entry.Value != null && !string.IsNullOrWhiteSpace(entry.Value.ToString());
+                 }
+
+                 if (entry.Value is List<T> innerList)
+                 {
+                     return innerList.Any();
+                 }
+            }
+
+            return false;
+        }
+
         public static void SetCustomProperty<T>(this T entity, string key, string value) where T : SearchRecord
         {
             if (entity.HasCustomProperty(key))

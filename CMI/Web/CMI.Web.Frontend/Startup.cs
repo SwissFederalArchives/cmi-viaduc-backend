@@ -14,18 +14,20 @@ using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend;
 using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Controllers;
-using Kentor.AuthServices.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using NJsonSchema.Generation;
 using NSwag;
 using NSwag.AspNet.Owin;
 using Owin;
 using Serilog;
+using Sustainsys.Saml2.Metadata;
+using Sustainsys.Saml2.Owin;
+using Sustainsys.Saml2.WebSso;
 using SameSiteMode = Microsoft.Owin.SameSiteMode;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -87,9 +89,7 @@ namespace CMI.Web.Frontend
         private void ConfigureSecurity(IAppBuilder app)
         {
             app.Use(async (context, next) => { await next.Invoke(); });
-            app.UseKentorOwinCookieSaver();
 
-            app.Use(async (context, next) => { await next.Invoke(); });
             var connectionString = FrontendSettingsViaduc.Instance.SqlConnectionString;
             var userDataAccess = new UserDataAccess(connectionString);
 
@@ -105,22 +105,25 @@ namespace CMI.Web.Frontend
                 Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity = context => ValidateSessionIdIsActive(context, userDataAccess)
-                }
+                },
+                CookieManager = new SameSiteCookieManager(new SystemWebCookieManager())
             });
 
             app.Use(async (context, next) => { await next.Invoke(); });
+
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             app.Use(async (context, next) => { await next.Invoke(); });
 
-            var authOptions = new KentorAuthServicesAuthenticationOptions(true)
+            var authOptions = new Saml2AuthenticationOptions(true)
             {
-                SPOptions = { Logger = new SeriLogAdapter(Log.Logger) }
+                SPOptions = { Logger = new SeriLogAdapter(Log.Logger)}
             };
 
             var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, true);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
-            app.UseKentorAuthServicesAuthentication(authOptions);
+
+            app.UseSaml2Authentication(authOptions);
 
             Log.Information("ConfigureSecurity: tokenExpiry={cookieExpireTimeInMinutes}",
                 FrontendSettingsViaduc.Instance.CookieExpireTimeInMinutes);
@@ -146,3 +149,4 @@ namespace CMI.Web.Frontend
         }
     }
 }
+

@@ -1,0 +1,58 @@
+PUT /_ingest/pipeline/protectionEndDateDossier
+{
+  "description": """"
+    PVW-1594 Suchen und Filtern nach Schutzfristende
+    Pipeline recalculates the quarter century facets.
+    
+    Procedure
+    Start/compile pipeline
+    Execute search
+    Delete pipeline
+    
+    Hints:
+    the search is async and you get back a task with which the status can be checked e.g. GET /_tasks/lk3AiZV9R5Wc3wiPFmaD6w:14445773
+    Es kann auch mit der "archiveRecordId" ein Test-Record modifiziert werden. Dazu die  <"match": {      "archiveRecordId> Suche unten verwenden
+  """, 
+ "processors" : [{
+     "script" : {
+        "lang" : "painless",
+        "source" : """
+       
+        if (ctx.aggregationFields != null && ctx.protectionEndDate != null && ctx.level == "Dossier")
+        {          
+          ctx.aggregationFields.protectionEndDateDossier = new ArrayList();
+          ctx.aggregationFields.protectionEndDateDossier = ctx.protectionEndDate;
+          
+          DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+          df.setTimeZone(TimeZone.getTimeZone("Europe/Amsterdam"));
+          Date date = new Date();
+          ctx.lastSyncDate = df.format(date);
+        }
+        """
+      }
+  }]
+}
+
+POST /archive/_update_by_query?pipeline=protectionEndDateDossier&conflicts=proceed&wait_for_completion=false
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "exists": {
+            "field": "protectionEndDate"
+          }
+        },
+        {
+          "match": {
+            "level": "Dossier"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+
+DELETE /_ingest/pipeline/protectionEndDateDossier

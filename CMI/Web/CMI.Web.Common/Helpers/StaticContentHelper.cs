@@ -1,15 +1,16 @@
-﻿using System;
+﻿using CMI.Web.Common.api;
+using HtmlAgilityPack;
+using Newtonsoft.Json.Linq;
+using Serilog;
+using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http.Controllers;
-using CMI.Web.Common.api;
-using HtmlAgilityPack;
-using Newtonsoft.Json.Linq;
-using Serilog;
 
 namespace CMI.Web.Common.Helpers
 {
@@ -189,11 +190,9 @@ namespace CMI.Web.Common.Helpers
             {
                 url += ".html";
             }
-
-            var contentPath = Path.Combine(DirectoryHelper.Instance.StaticPagePath, url);
-            contentPath = WebHelper.MapPathIfNeeded(contentPath);
-
-            return contentPath;
+           
+            var contentDirectory = Path.Combine(WebHelper.MapPathIfNeeded(DirectoryHelper.Instance.StaticPagePath));
+            return FindFileInContentDirectory(url, contentDirectory);
         }
 
         public static string GetContentMarkupFor(string url, string language, bool enableNotFound = false)
@@ -211,6 +210,14 @@ namespace CMI.Web.Common.Helpers
         {
             var contentPath = GetContentFilePath(url);
             return File.Exists(contentPath) ? File.ReadAllText(contentPath) : null;
+        }
+
+        private static string FindFileInContentDirectory(string url, string contentDirectory)
+        {
+            var files = Directory.GetFiles(contentDirectory, "*.html", SearchOption.AllDirectories);
+            var file = files.FirstOrDefault(f => f.EndsWith(url.Replace("/", @"\")));
+
+            return file;
         }
 
         #endregion

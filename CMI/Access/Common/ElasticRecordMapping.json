@@ -84,7 +84,17 @@
           },
           "creationPeriodYears100": {
             "type": "integer"
-          }
+          },
+          "protectionEndDateDossier": {
+            "properties": {
+              "date": {
+                "type": "date"
+              },
+              "year": {
+                "type": "long"
+              }
+            }
+          }          
         }
       },
       "archiveRecordId": {

@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common.api;
 using CMI.Web.Common.api.Attributes;
@@ -200,7 +201,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
             try
             {
-                language = language ?? WebHelper.GetClientLanguage(Request);
+                language ??= WebHelper.GetClientLanguage(Request);
 
                 var error = entityProvider.CheckSearchParameters(search, language);
                 if (!string.IsNullOrEmpty(error))
@@ -402,7 +403,9 @@ namespace CMI.Web.Frontend.api.Controllers
                 CreationPeriod = item.CreationPeriod?.Text,
                 WithinInfo = item.WithinInfo,
                 Level = item.Level,
-                Accessibility = VeExportRecordHelper.GetCustomField(item.CustomFields, "zugänglichkeitGemässBga")
+                Accessibility = VeExportRecordHelper.GetCustomField(item.CustomFields, "zugänglichkeitGemässBga"),
+                // IT, FR and DE: Dossier & EN: Dossiers
+                SchutzfristendeDossier = item.Level.StartsWith("Dossier") && item.ProtectionEndDate?.Date != null ? item.ProtectionEndDate?.Year.ToString() : string.Empty
             }).ToList();
         }
     }

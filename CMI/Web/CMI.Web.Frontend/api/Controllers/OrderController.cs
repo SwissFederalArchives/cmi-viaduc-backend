@@ -147,6 +147,15 @@ namespace CMI.Web.Frontend.api.Controllers
                 return BadRequest($"{nameof(param)} must not be null");
             }
 
+            // Sanitize the arguments
+            param.Ablieferung = param.Ablieferung.StripHtml();
+            param.Aktenzeichen = param.Aktenzeichen.StripHtml();
+            param.ArchivNr = param.ArchivNr.StripHtml();
+            param.BehaeltnisNr = param.BehaeltnisNr.StripHtml();
+            param.Bestand = param.Bestand.StripHtml();
+            param.Period = param.Period.StripHtml();
+            param.Title = param.Title.StripHtml();
+
             // Special logic for period
             var zeitraum = FormatZeitraumAccordingToSipSpecification(Trim(param.Period));
 
@@ -279,7 +288,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     }
                 }
 
-                Log.Debug("Fetching orderItems to exclude for user with id {UserId}", orderParams.UserId);
+                Log.Debug("Fetching orderItems to exclude for user with id {bestellerId}", bestellerId);
                 var orderItemIdsToExclude = basket
                     .Where(basketItem => basketItem.EinsichtsbewilligungNotwendig
                                          || orderParams.Type == OrderType.Digitalisierungsauftrag &&
@@ -287,7 +296,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     .Select(item => item.Id)
                     .ToList();
 
-                Log.Debug("Validating order by type for user with id {UserId}", orderParams.UserId);
+                Log.Debug("Validating order by type for user with id {bestellerId}", bestellerId);
                 DateTime? leseSaalDateAsDateTime = null;
                 switch (orderParams.Type)
                 {
@@ -330,7 +339,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
                 await kontrollstellenInformer.InformIfNecessary(userAccess, veInfoList);
 
-                Log.Information("Creating order for user with id {UserId}", orderParams.UserId);
+                Log.Information("Creating order for user with id {bestellerId}", bestellerId);
                 await client.CreateOrderFromBasket(creationRequest);
             }
             catch (Exception exception)

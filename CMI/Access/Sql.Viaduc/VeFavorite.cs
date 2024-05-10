@@ -19,5 +19,6 @@ namespace CMI.Access.Sql.Viaduc
         public string WithinInfo { get; set; }
         public dynamic CustomFields { get; set; }
         public string ManifestLink { get; set; }
+        public string SchutzfristendeDossier { get; set; }
     }
 }

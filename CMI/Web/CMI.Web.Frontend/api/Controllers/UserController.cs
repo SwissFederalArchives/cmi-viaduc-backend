@@ -105,13 +105,19 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetUsers(string search)
         {
             var userId = ControllerHelper.GetCurrentUserId();
             var language = WebHelper.GetClientLanguage(Request);
 
             var userAccess = userAccessProvider.GetUserAccess(language, userId);
-            return userAccess.CombinedTokens.Contains(AccessRoles.RoleBAR) ? userDataAccess.GetAllUsers().Where(u => !Users.IsSystemUser(u.Id)) : null;
+            if (userAccess.CombinedTokens.Contains(AccessRoles.RoleBAR) && search.Length > 2)
+            {
+                var users = userDataAccess.GetUsersByName(search).Where(u => !Users.IsSystemUser(u.Id));
+                return users.Count() > 0 ? users : null;
+            }
+            
+            return null;
         }
     }
 }

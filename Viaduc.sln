@@ -315,6 +315,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PainlessScripts", "Painless
 		CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt = CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt
 		CMI\DbScripts\PainlessScripts\RemoveDescriptors.txt = CMI\DbScripts\PainlessScripts\RemoveDescriptors.txt
 		RemoveNichtOnlineRecherchierbareDossiers.txt = RemoveNichtOnlineRecherchierbareDossiers.txt
+		CMI\DbScripts\PainlessScripts\Schutzfristende Dossier.txt = CMI\DbScripts\PainlessScripts\Schutzfristende Dossier.txt
 		CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt = CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt
 	EndProjectSection
 EndProject
