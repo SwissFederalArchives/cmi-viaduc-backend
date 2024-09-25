@@ -20,5 +20,8 @@
     <Setting Name="PublicContentWebUri" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://viaducdev.cmiag.ch/clientdev/files/content/</Value>
     </Setting>
+    <Setting Name="DataStorageProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">S3</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

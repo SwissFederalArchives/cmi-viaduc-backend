@@ -21,5 +21,11 @@ namespace CMI.Engine.Asset.Solr
 
         [SolrField("archive_record_id")]
         public string ArchiveRecordId { get; set; }
+
+        [SolrField("manifest_label")]
+        public string ManifestLabel { get; set; }
+
+        [SolrField("manifest_path")]
+        public string ManifestPath { get; set; }
     }
 }

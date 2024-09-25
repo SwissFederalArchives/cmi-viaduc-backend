@@ -225,7 +225,7 @@ namespace CMI.Engine.MailTemplate
                     // RetryCount = 0   -->    0 ms
                     // RetryCount = 1   --> 2000 ms
                     // RetryCount = 2   --> 8000 ms
-                    Thread.Sleep(1000 * ((3 ^ retryCount) - 1));
+                    Thread.Sleep(1000 * ((int) Math.Pow(3, retryCount) - 1));
 
                     var requestClient =
                         CreateRequestClient<FindArchiveRecordRequest>(bus, BusConstants.IndexManagerFindArchiveRecordMessageQueue, 60);

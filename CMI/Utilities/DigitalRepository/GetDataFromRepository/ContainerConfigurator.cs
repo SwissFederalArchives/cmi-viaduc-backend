@@ -8,7 +8,6 @@ using CMI.Contract.Monitoring;
 using CMI.Contract.Parameter;
 using CMI.Contract.Repository;
 using CMI.Engine.PackageMetadata;
-using CMI.Manager.Index.Consumer;
 using CMI.Manager.Repository;
 using CMI.Utilities.Bus.Configuration;
 using MassTransit;

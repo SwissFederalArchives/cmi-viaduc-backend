@@ -17,9 +17,11 @@ using CMI.Manager.Asset.ParameterSettings;
 using CMI.Manager.Asset.Properties;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Cache.Access;
+using CMI.Utilities.Common.Providers;
 using CMI.Utilities.Template;
 using MassTransit;
 using Newtonsoft.Json;
+using StorageProviderSettings = CMI.Contract.Common.StorageProviderSettings;
 
 namespace CMI.Manager.Asset.Infrasctructure
 {
@@ -31,6 +33,12 @@ namespace CMI.Manager.Asset.Infrasctructure
         public static ContainerBuilder CreateContainerBuilder()
         {
             var builder = new ContainerBuilder();
+
+            builder.Register(GetStorageProviderSettings);
+          
+            builder.RegisterType<S3Provider>().Keyed<IStorageProvider>(StorageProviders.S3);
+            builder.RegisterType<FileProvider>().Keyed<IStorageProvider>(StorageProviders.File);
+
             builder.RegisterType<CheckPendingDownloadRecordsJob>().AsSelf();
             builder.RegisterType<CheckPendingSyncRecordsJob>().AsSelf();
             builder.RegisterType<DeleteOldRecordsJob>().AsSelf();
@@ -62,9 +70,10 @@ namespace CMI.Manager.Asset.Infrasctructure
             builder.Register(GetChannelAssignmentDefinition).As<ChannelAssignmentDefinition>();
             builder.Register(GetScansZusammenfassenSettings).As< ScansZusammenfassenSettings>();
             builder.Register(GetIiifManifestSettings).As<IiifManifestSettings>();
+            
             builder.Register(GetViewerFileLocationSettings).As<ViewerFileLocationSettings>();
             builder.RegisterType<PostProcessManifestCreator>().As<IPostProcessManifestCreator>();
-            builder.RegisterType<PostProcessIiifFileDistributor>().AsSelf();
+            builder.RegisterType<PostProcessIiifFileDistributor>().AsSelf().WithParameter("storageProvider", IiifManifest.Default.DataStorageProvider == "S3"  ? StorageProviders.S3 : StorageProviders.File);
             builder.RegisterType<PostProcessValidIiifFileTypeChecker>().AsSelf();
             builder.Register(GetViewerConversionSettings).As<ViewerConversionSettings>();
 
@@ -173,6 +182,19 @@ namespace CMI.Manager.Asset.Infrasctructure
                 ContentOutputSaveDirectory = ViewerFileLocation.Default.ContentOutputSaveDirectory,
                 OcrOutputSaveDirectory = ViewerFileLocation.Default.OcrOutputSaveDirectory,
                 ImageOutputSaveDirectory = ViewerFileLocation.Default.ImageOutputSaveDirectory
+            };
+        }
+
+
+        private static StorageProviderSettings GetStorageProviderSettings(IComponentContext arg)
+        {
+            return new StorageProviderSettings
+            {
+                AccessKey = StorageProvider.Default.AccessKey,
+                SecretAccessKey = StorageProvider.Default.SecretAccessKey,
+                BucketName = StorageProvider.Default.BucketName,
+                Region = StorageProvider.Default.Region,
+                ServiceUrl = StorageProvider.Default.ServiceUrl
             };
         }
     }

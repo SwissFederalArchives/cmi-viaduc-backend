@@ -19,7 +19,9 @@ namespace CMI.Access.Common.Tests
             var uri = "(change here, but do not commit)";
             var node = new Uri(uri);
 
-            helper = new ElasticIndexHelper(node, "test2");
+            string username= "(change here, but do not commit)";
+            string pwd = "(change here,but do not commit)";
+            helper = new ElasticIndexHelper(node, "test2",username,pwd);
             if (helper.IndexExists("test2"))
             {
                 helper.DeleteIndex("test2");

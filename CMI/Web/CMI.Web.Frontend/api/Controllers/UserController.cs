@@ -6,6 +6,7 @@ using CMI.Contract.Common;
 using CMI.Contract.Parameter;
 using CMI.Manager.Order.Status;
 using CMI.Utilities.Logging.Configurator;
+using CMI.Web.Common.api;
 using CMI.Web.Common.api.Attributes;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
@@ -71,9 +72,9 @@ namespace CMI.Web.Frontend.api.Controllers
         {
             return new User
             {
-                FamilyName = ControllerHelper.GetFromClaim("/identity/claims/surname"),
-                FirstName = ControllerHelper.GetFromClaim("/identity/claims/givenname"),
-                EmailAddress = ControllerHelper.GetFromClaim("/identity/claims/emailaddress")
+                FamilyName = ControllerHelper.GetFromClaim(ClaimValueNames.FamilyName),
+                FirstName = ControllerHelper.GetFromClaim(ClaimValueNames.FirstName),
+                EmailAddress = ControllerHelper.GetFromClaim(ClaimValueNames.Email)
             };
         }
 
@@ -83,16 +84,19 @@ namespace CMI.Web.Frontend.api.Controllers
             var claims = authenticationHelper.GetClaimsForRequest(User, Request);
 
             user.Id = ControllerHelper.GetCurrentUserId();
-            user.UserExtId = ControllerHelper.GetFromClaim("/identity/claims/e-id/userExtId");
+            user.UserExtId = ControllerHelper.GetFromClaim(ClaimValueNames.UserExtId);
             user.Claims = new JObject {{"claims", JArray.FromObject(claims)}};
             user.EiamRoles = ControllerHelper.GetMgntRoleFromClaim();
-            user.IsInternalUser = ControllerHelper.IsInternalUser();
+            user.IsIdentifiedUser = ControllerHelper.IsIdentifiedUser();
+            user.QoAValue = ControllerHelper.GetQoAFromClaim();
+            user.HomeName = ControllerHelper.GetFromClaim(ClaimValueNames.HomeName);
+            user.RolePublicClient = ControllerHelper.GetInitialRoleFromClaim();
 
-            if (user.IsInternalUser)
+            if (user.IsIdentifiedUser)
             {
-                user.FamilyName = ControllerHelper.GetFromClaim("/identity/claims/surname");
-                user.FirstName = ControllerHelper.GetFromClaim("/identity/claims/givenname");
-                user.EmailAddress = ControllerHelper.GetFromClaim("/identity/claims/emailaddress");
+                user.FamilyName = ControllerHelper.GetFromClaim(ClaimValueNames.FamilyName);
+                user.FirstName = ControllerHelper.GetFromClaim(ClaimValueNames.FirstName);
+                user.EmailAddress = ControllerHelper.GetFromClaim(ClaimValueNames.Email);
             }
 
             userDataAccess.InsertUser(user);

@@ -1,7 +1,10 @@
 ﻿using System.IO;
+using Autofac.Features.Indexed;
 using CMI.Contract.Common;
 using CMI.Engine.Asset.PostProcess;
+using CMI.Utilities.Common.Providers;
 using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests;
@@ -33,15 +36,22 @@ public class PostProcessIiifFileDistributorTests
     public void DistributionOfFilesWorks()
     {
         // Arrange
-        var sut = new PostProcessIiifFileDistributor(new ViewerFileLocationSettings()
+        var providersMock = new Mock<IIndex<StorageProviders, IStorageProvider>>();
+
+
+        IStorageProvider fileProvider = new FileProvider();
+        providersMock.Setup(s => s.TryGetValue(StorageProviders.File, out fileProvider)).Returns(true);
+        var sut = new PostProcessIiifFileDistributor(new ViewerFileLocationSettings
         {
             ImageOutputSaveDirectory = destTempDir,
             OcrOutputSaveDirectory = destTempDir,
             ContentOutputSaveDirectory = destTempDir,
             ManifestOutputSaveDirectory = destTempDir
-        });
-        sut.ArchiveRecordId = "123456";
-        sut.RootFolder = sourceTempDir;
+        }, providersMock.Object, StorageProviders.File)
+        {
+            ArchiveRecordId = "123456",
+            RootFolder = sourceTempDir
+        };
 
         // Act
         sut.AnalyzeRepositoryPackage(package, sourceTempDir);

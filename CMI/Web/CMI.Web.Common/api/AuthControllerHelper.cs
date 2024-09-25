@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Authentication;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using System.Web;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
-using CMI.Manager.Order.Status;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using Microsoft.AspNet.Identity;
@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using SameSiteMode = Microsoft.Owin.SameSiteMode;
+using CMI.Contract.Common.Extensions;
 
 namespace CMI.Web.Common.api
 {
@@ -90,7 +91,7 @@ namespace CMI.Web.Common.api
         /// Die Methode entfernt die notwendigen Cookies und setzt die aktive SessionId des Benutzers auf der DB zurück.
         /// </summary>
         /// <param name="owinContext"></param>
-        public void OnExternalSignOut(IOwinContext owinContext, bool isPublicClient)
+        public virtual void OnExternalSignOut(IOwinContext owinContext, bool isPublicClient)
         {
             var cookieUserIdKey = isPublicClient ? WebHelper.CookiePcViaducUserIdKey : WebHelper.CookieMcViaducUserIdKey;
             var appCookieKey = isPublicClient ? WebHelper.CookiePcAppliationCookieKey : WebHelper.CookieMcAppliationCookieKey;
@@ -112,16 +113,62 @@ namespace CMI.Web.Common.api
                 new CookieOptions { HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict });
         }
 
+        private static void AddViaducElevatedLoginCookie(IOwinContext owinContext, bool isElevatedLogin, string cookieIdKey)
+        {
+            if (owinContext == null)
+            {
+                return;
+            }
+
+            owinContext.Response.Cookies.Append(cookieIdKey, isElevatedLogin.ToString(),
+                new CookieOptions { HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict });
+        }
+
+        private static void DeleteViaducElevatedLoginCookie(IOwinContext owinContext, string cookieIdKey)
+        {
+            if (owinContext == null)
+            {
+                return;
+            }
+
+            owinContext.Response.Cookies.Delete(cookieIdKey,
+                new CookieOptions { HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict });
+        }
+
+        private static bool GetViaducElevatedLoginCookie(IOwinContext owinContext, string cookieIdKey)
+        {
+            if (owinContext == null)
+                return false;
+
+            var cookie = owinContext.Request.Cookies[cookieIdKey];
+            if (!string.IsNullOrEmpty(cookie) && bool.TryParse(cookie, out var result))
+            {
+                return result;
+            }
+
+            return false;
+        }
+
         private string GetUserId(IEnumerable<Claim> claims)
         {
-            return claims?.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+            return claims?.FirstOrDefault(c => c.Type.Contains(ClaimValueNames.UserExtId))?.Value;
         }
 
         public Identity GetIdentity(HttpRequestMessage request, IPrincipal user, bool isPublicClient)
         {
             var userId = controllerHelper.GetCurrentUserId();
             var claims = authenticationHelper.GetClaimsForRequest(user, request);
-            
+            var owinContext = request?.GetOwinContext();
+
+            // Get the cookie to see if we are in an elevated login phase.
+            // If so, directly delete the cookie, so we do not enter an endless loop
+            var elevatedLoginCookieKey = isPublicClient ? WebHelper.CookiePcViaducElevatedLoginKey : WebHelper.CookieMcViaducElevatedLoginKey;
+            var isElevatedLogin = GetViaducElevatedLoginCookie(owinContext, elevatedLoginCookieKey);
+            if (isElevatedLogin)
+            {
+                DeleteViaducElevatedLoginCookie(owinContext, elevatedLoginCookieKey);
+            }
+
             if (!HasValidMandant(claims))
             {
                 Log.Warning("User hat noch keinen Antrag gestellt");
@@ -138,7 +185,7 @@ namespace CMI.Web.Common.api
                     Roles = new[]
                     {
                         isPublicClient
-                            ? controllerHelper.IsInternalUser() ? AccessRoles.RoleBVW : AccessRoles.RoleOe2
+                            ? controllerHelper.GetInitialRoleFromClaim()
                             : controllerHelper.GetMgntRoleFromClaim()
                     },
                     IssuedAccessTokens = new string[] { },
@@ -151,7 +198,7 @@ namespace CMI.Web.Common.api
                 ? userDataAccess.GetRoleForClient(userId)
                 : userDataAccess.GetEiamRoles(userId);
 
-            var authStatus = IsValidAuthRole(role, isPublicClient);
+            var authStatus = IsValidAuthRole(role, isPublicClient, isElevatedLogin);
 
             // Fehlerhafte Rolle oder Anmeldung
             if (authStatus == AuthStatus.KeineRolleDefiniert)
@@ -162,22 +209,43 @@ namespace CMI.Web.Common.api
                 throw new AuthenticationException(
                     $"Es wurde für den Benutzer keine Rolle definiert in der Datenbank oder Authentifikation hat fehlgeschlagen UserId:={userId}, AuthStatus='{authStatus}'");
             }
-            
-            var accessTokens = userDataAccess.GetTokensDesUser(userId);
 
-            var identity = new Identity
+            Identity identity;
+            if (authStatus == AuthStatus.Ok || authStatus == AuthStatus.NeuerBenutzer)
             {
-                IssuedClaims = claims.ToArray(),
-                Roles = new[] {role},
-                IssuedAccessTokens = accessTokens,
-                AuthStatus = authStatus,
-                RedirectUrl = GetReturnUrl(authStatus, isPublicClient)
-            };
-            AddAppRolesAndFeatures(userId, identity);
+                var accessTokens = userDataAccess.GetTokensDesUser(userId);
+
+                identity = new Identity
+                {
+                    IssuedClaims = claims.ToArray(),
+                    Roles = new[] {role},
+                    IssuedAccessTokens = accessTokens,
+                    AuthStatus = authStatus,
+                    RedirectUrl = GetReturnUrl(authStatus, isPublicClient)
+                };
+                AddAppRolesAndFeatures(userId, identity);
+            }
+            else
+            {
+                if (authStatus == AuthStatus.RequiresElevatedCheck)
+                {
+                    AddViaducElevatedLoginCookie(owinContext, true, elevatedLoginCookieKey);
+                }
+
+                identity = new Identity
+                {
+                    IssuedClaims = new ClaimInfo[]{},
+                    Roles = new string[]{},
+                    IssuedAccessTokens = new string[] { },
+                    AuthStatus = authStatus,
+                    RedirectUrl = GetReturnUrl(authStatus, isPublicClient)
+                };
+                OnExternalSignOut(owinContext, isPublicClient);
+            }
 
             try
             {
-                Log.Debug("(AuthController:GetClaims()): {CLAIMS}", JsonConvert.SerializeObject(identity, Formatting.Indented));
+                Log.Debug("(AuthController:GetClaims()): {CLAIMS}", JsonConvert.SerializeObject(identity, Formatting.None));
             }
             catch
             {
@@ -196,23 +264,25 @@ namespace CMI.Web.Common.api
                 return false;
             }
 
-            var isInternal = controllerHelper.IsInternalUser();
+            var isIdentified = controllerHelper.IsIdentifiedUser();
             var mgntRole = controllerHelper.GetMgntRoleFromClaim();
             try
             {
                 var userDataOnLogin = new User
                 {
                     Id = userId,
-                    IsInternalUser = isInternal,
+                    IsIdentifiedUser = isIdentified,
                     EiamRoles = mgntRole,
-                    UserExtId = controllerHelper.GetFromClaim("/identity/claims/e-id/userExtId"),
+                    QoAValue = controllerHelper.GetQoAFromClaim(),
+                    HomeName = controllerHelper.GetFromClaim(ClaimValueNames.HomeName),
+                    UserExtId = controllerHelper.GetFromClaim(ClaimValueNames.UserExtId),
                     Claims = new JObject {{"claims", JArray.FromObject(claims)}},
-                    FamilyName = isInternal ? controllerHelper.GetFromClaim("/identity/claims/surname") : user.FamilyName,
-                    FirstName = isInternal ? controllerHelper.GetFromClaim("/identity/claims/givenname") : user.FirstName,
-                    EmailAddress = isInternal ? controllerHelper.GetFromClaim("/identity/claims/emailaddress") : user.EmailAddress
+                    FamilyName = isIdentified ? controllerHelper.GetFromClaim(ClaimValueNames.FamilyName) : user.FamilyName,
+                    FirstName = isIdentified ? controllerHelper.GetFromClaim(ClaimValueNames.FirstName) : user.FirstName,
+                    EmailAddress = isIdentified ? controllerHelper.GetFromClaim(ClaimValueNames.Email) : user.EmailAddress
                 };
 
-                // Prüfen User Änderung enthält, falls ja Daten aktualisieren 
+                // Prüfen ob User Änderung enthält, falls ja Daten aktualisieren 
                 if (HasUserChanges(userDataOnLogin, user))
                 {
                     userDataAccess.UpdateUserOnLogin(userDataOnLogin, userId, loginSystem);
@@ -258,50 +328,94 @@ namespace CMI.Web.Common.api
                 return true;
             }
 
+            if (newUser.QoAValue != originalUser.QoAValue)
+            {
+                return true;
+            }
+
+            if (newUser.HomeName != originalUser.HomeName)
+            {
+                return true;
+            }
+
             return false;
         }
 
-        internal AuthStatus IsValidAuthRole(string role, bool isPublicClient)
+        internal AuthStatus IsValidAuthRole(string role, bool isPublicClient, bool isElevatedLogin = false)
         {
             if (string.IsNullOrWhiteSpace(role))
             {
                 return AuthStatus.KeineRolleDefiniert;
             }
 
-            if ((role == AccessRoles.RoleOe2 || role == AccessRoles.RoleOe3) &&
-                (controllerHelper.IsKerberosAuthentication() || controllerHelper.IsSmartcartAuthentication()))
+            if (role == AccessRoles.RoleOe2  && controllerHelper.GetQoAFromClaim() < 20)
             {
-                throw new AuthenticationException("Kerberos oder Smartcard dürfen nicht für Ö2 und Ö3 verwendet werden");
+                return AuthStatus.ZuTieferQoAWert;
             }
 
-            if ((role == AccessRoles.RoleBVW || role == AccessRoles.RoleAS || role == AccessRoles.RoleBAR) &&
-                !(controllerHelper.IsKerberosAuthentication() || controllerHelper.IsSmartcartAuthentication()))
+            // Ö3 muss mindestens ein 20er haben
+            if (role == AccessRoles.RoleOe3 && controllerHelper.GetQoAFromClaim() < 20)
             {
-                throw new AuthenticationException("Interne Benutzerrollen (BVW, AS und BAR) müssen Kerberos oder Smartcard verwenden");
+                return AuthStatus.ZuTieferQoAWert;
             }
 
+            if (role == AccessRoles.RoleOe3 && controllerHelper.GetQoAFromClaim() < 30)
+            {
+                Log.Warning("Ö3 Benutzer mit einem QoA-Wert kleiner 30 hat sich angemeldet. Er wird im Falle des Public Clients auf die MTan-Registrierungsseite weitergeleitet.");
+            }
+
+            if (role == AccessRoles.RoleBVW && controllerHelper.GetQoAFromClaim() < 40)
+            {
+                return AuthStatus.ZuTieferQoAWert;
+            }
+
+            if (role == AccessRoles.RoleAS && controllerHelper.GetQoAFromClaim() < 50)
+            {
+                // Ist man nicht schon im einem elevated Login, dann 
+                // muss der Level schon mindestens 40 (Windows/Kerberos) sein, damit
+                // wir einen zweiten Versuch machen.
+                if (!isElevatedLogin && controllerHelper.GetQoAFromClaim() >= 40)
+                {
+                    return AuthStatus.RequiresElevatedCheck;
+                }
+                return AuthStatus.ZuTieferQoAWert;
+            }
+
+            if (role == AccessRoles.RoleBAR && controllerHelper.GetQoAFromClaim() < 60)
+            {
+                // Ist man nicht schon im einem elevated Login, dann 
+                // muss der Level schon mindestens 40 (Windows/Kerberos) sein, damit
+                // wir einen zweiten Versuch machen.
+                if (!isElevatedLogin && controllerHelper.GetQoAFromClaim() >= 40)
+                {
+                    return AuthStatus.RequiresElevatedCheck;
+                }
+                return AuthStatus.KeineSmartcardAuthentication;
+            }
+
+            if (role == AccessRoles.RoleBAR && !controllerHelper.GetFromClaim(ClaimValueNames.HomeName).Contains("FED-LOGIN", StringComparison.CurrentCultureIgnoreCase) )
+            {
+                throw new AuthenticationException("Die BAR-Rolle verlangt zwingend ein FED-Login");
+            }
+
+            
             // Public-Client
             if (isPublicClient)
             {
                 switch (role.GetRolePublicClientEnum())
                 {
-                    // Keine spezial Behandlung
+                    // Keine weitere spezial Behandlung
                     case AccessRolesEnum.Ö2:
                     case AccessRolesEnum.BVW:
-                        return AuthStatus.Ok;
-
-                    // SMS-Anmeldung 
-                    case AccessRolesEnum.Ö3:
-                        return controllerHelper.IsMTanAuthentication()
-                            ? AuthStatus.Ok
-                            : AuthStatus.KeineMTanAuthentication;
-
-                    // Kerberos Pflicht
                     case AccessRolesEnum.AS:
                     case AccessRolesEnum.BAR:
-                        return controllerHelper.IsKerberosAuthentication()
+                        return AuthStatus.Ok;
+
+                    // Ö3 Anmeldung kann mit QoA-20 daher kommen. In diesem Fall entsprechenden Status zurücksenden 
+                    case AccessRolesEnum.Ö3:
+                        return controllerHelper.GetQoAFromClaim() >= 30
                             ? AuthStatus.Ok
-                            : AuthStatus.KeineKerberosAuthentication;
+                            : AuthStatus.KeineMTanAuthentication;
 
                     default:
                         throw new InvalidOperationException("Nicht definiertes Rollen handling");
@@ -311,12 +425,23 @@ namespace CMI.Web.Common.api
             // Management-Client
             switch (role)
             {
-                // Kerberos Pflicht
+                // Mindestens QoA 60 (smartcard) notwendig
                 case AccessRoles.RoleMgntAllow:
                 case AccessRoles.RoleMgntAppo:
-                    return controllerHelper.IsKerberosAuthentication()
-                        ? AuthStatus.Ok
-                        : AuthStatus.KeineKerberosAuthentication;
+                    if (controllerHelper.GetQoAFromClaim() >= 60)
+                    {
+                        return AuthStatus.Ok;
+                    }
+
+                    // Ist man nicht schon im einem elevated Login, dann 
+                    // muss der Level schon mindestens 40 (Windows/Kerberos) sein, damit
+                    // wir einen zweiten Versuch machen.
+                    if (!isElevatedLogin && controllerHelper.GetQoAFromClaim() >= 40)
+                    {
+                        return AuthStatus.RequiresElevatedCheck;
+                    }
+                    return AuthStatus.KeineSmartcardAuthentication;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(role), "Nicht definiertes Rollen handling");
             }
@@ -346,7 +471,7 @@ namespace CMI.Web.Common.api
 
         private bool HasValidMandant(IList<ClaimInfo> claims)
         {
-            var claimsRoles = claims.FirstOrDefault(c => c.Type.EndsWith("/identity/claims/e-id/profile/role"))?.Value;
+            var claimsRoles = claims.FirstOrDefault(c => c.Type.EndsWith(ClaimValueNames.EIdProfileRole))?.Value;
             Log.Information($"Claim Rolle {claimsRoles}");
             return !string.IsNullOrWhiteSpace(claimsRoles);
         }

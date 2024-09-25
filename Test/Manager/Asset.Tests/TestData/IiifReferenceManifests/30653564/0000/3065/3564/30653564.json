@@ -1,0 +1,214 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/30653564.json",
+  "label": {
+    "none": [
+      "Korrespondenten Nachname S"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/_clTzqfxdhmzYGEZe01lq3G.json",
+      "label": {
+        "none": [
+          "Schnell J."
+        ]
+      },
+      "type": "Collection"
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "J1.109-01#1000/1276#511*"
+        ],
+        "en": [
+          "J1.109-01#1000/1276#511*"
+        ],
+        "fr": [
+          "J1.109-01#1000/1276#511*"
+        ],
+        "it": [
+          "J1.109-01#1000/1276#511*"
+        ],
+        "none": [
+          "J1.109-01#1000/1276#511*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Korrespondenten Nachname S"
+        ],
+        "en": [
+          "Korrespondenten Nachname S"
+        ],
+        "fr": [
+          "Korrespondenten Nachname S"
+        ],
+        "it": [
+          "Korrespondenten Nachname S"
+        ],
+        "none": [
+          "Korrespondenten Nachname S"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "1809 - 1937"
+        ],
+        "en": [
+          "1809 - 1937"
+        ],
+        "fr": [
+          "1809 - 1937"
+        ],
+        "it": [
+          "1809 - 1937"
+        ],
+        "none": [
+          "1809 - 1937"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "2.F"
+        ],
+        "en": [
+          "2.F"
+        ],
+        "fr": [
+          "2.F"
+        ],
+        "it": [
+          "2.F"
+        ],
+        "none": [
+          "2.F"
+        ]
+      }
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653564",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3065/3564/OCR-Text-komplett.zip",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Zip",
+      "format": "application/zip"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3065-3564",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2022-09-14T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot637987583207401232">
+      <name>content</name>
+      <originalName>content</originalName>
+      <ordner id="_2KTzYC6WD2vVSuEirbRLR3_D">
+        <name>U_m_s_c_h_l_a_g_0000024</name>
+        <originalName>U_m_s_c_h_l_a_g_0000024</originalName>
+        <datei id="_BmHZw8YnIHknPaCWYfJJts">
+          <name>00001294.jp2</name>
+          <originalName>00001294.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a679bee978a65f4576b689ab10edab47</pruefsumme>
+        </datei>
+        <datei id="_S3lKcRSKRi1h4bW2Zh2ncm">
+          <name>00001294_PREMIS.xml</name>
+          <originalName>00001294_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>d008af76f1a3d0b13b949d7c08f0f190</pruefsumme>
+        </datei>
+        <datei id="_dRsLk5HrcJFBNnv6PM8pqi">
+          <name>00001295.jp2</name>
+          <originalName>00001295.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0e2a93ceca6be7a8d73fd9b387aa35f3</pruefsumme>
+        </datei>
+        <datei id="_2vopuYd0cYyWiDKqiE23vu">
+          <name>00001295_PREMIS.xml</name>
+          <originalName>00001295_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9f2a4f75f4e3d156153c972930eb09cf</pruefsumme>
+        </datei>
+        <datei id="_T1QrW0CNfIUOqhgThuXeYp">
+          <name>00001296.jp2</name>
+          <originalName>00001296.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>385540eb5b543c5428d4da0cbbf075d1</pruefsumme>
+        </datei>
+        <datei id="_0ffs1tQ3KCeiIWfA3UzHKM">
+          <name>00001296_PREMIS.xml</name>
+          <originalName>00001296_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>2c91a0b39cae50d7fcdf2eb449547858</pruefsumme>
+        </datei>
+        <datei id="_l0MyKmloqUk5kinPJN1MnC">
+          <name>00001297.jp2</name>
+          <originalName>00001297.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>491497465e1c2b717f0a3e9244d9b32b</pruefsumme>
+        </datei>
+        <datei id="_CIMsU1N0fjhjGG2vA0vsq5">
+          <name>00001297_PREMIS.xml</name>
+          <originalName>00001297_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>20bb7083c56e26c68a0f9b655bb32338</pruefsumme>
+        </datei>
+      </ordner>
+      <ordner id="_j197Tv3zUuS4Zvq6bG3j5G_D">
+        <name>D_o_k_u_m_e_n_t_0000062</name>
+        <originalName>D_o_k_u_m_e_n_t_0000062</originalName>
+        <datei id="_A62S579MiHpT9aBAYYOhfF">
+          <name>00001298.jp2</name>
+          <originalName>00001298.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>a2a8bb1fff5190e0c0aff3defc12982c</pruefsumme>
+        </datei>
+        <datei id="_cd0iJefO9q0eFGw1GrXYDs">
+          <name>00001298_PREMIS.xml</name>
+          <originalName>00001298_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>9c94f0abcc7a0ea250d945a919b86304</pruefsumme>
+        </datei>
+        <datei id="_PEtOI6LkXDKA2Dv7RYTIvk">
+          <name>00001299.jp2</name>
+          <originalName>00001299.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>c533bdb035e28efeb414ca60dd959219</pruefsumme>
+        </datei>
+        <datei id="_dOMOlL9vk8DZsfkdTPgqrr">
+          <name>00001299_PREMIS.xml</name>
+          <originalName>00001299_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>bdef116f917309f79896bab222f7404f</pruefsumme>
+        </datei>
+        <datei id="_b0JP54gGW8wOkUtkSZ5Iah">
+          <name>00001300.jp2</name>
+          <originalName>00001300.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>069d51cefd824b65dd00a4f90c3182b4</pruefsumme>
+        </datei>
+        <datei id="_FmxFdZgWncsqciavBL45yK">
+          <name>00001300_PREMIS.xml</name>
+          <originalName>00001300_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>0544de7598a864d4a3bc58f30e3301f5</pruefsumme>
+        </datei>
+        <datei id="_e9GUlkCoP0daMyEcqy9UmR">
+          <name>00001301.jp2</name>
+          <originalName>00001301.jp2</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>acd0e43c45e5a81a8138f01fd43963e5</pruefsumme>
+        </datei>
+        <datei id="_4hH8ClVxksACOUkZFEIeuX">
+          <name>00001301_PREMIS.xml</name>
+          <originalName>00001301_PREMIS.xml</originalName>
+          <pruefalgorithmus>MD5</pruefalgorithmus>
+          <pruefsumme>518e19e613fee18cb7e6cae4f2d577a2</pruefsumme>
+        </datei>
+      </ordner>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Keine Angaben (k.A.) 2</ablieferndeStelle>
+    <ablieferungsnummer>1000/1276_31273581</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Huber, Eugen (k.A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Huber Eugen: Archivalien des Zivilgesetzbuches, Manuskripte und Briefe</name>
+      <ordnungssystemposition id="_22WKvSmGyxAofLLYZGGUC4">
+        <nummer>2</nummer>
+        <titel>2. Teil</titel>
+        <datenschutz>false</datenschutz>
+        <ordnungssystemposition id="_suGsNomXxl60ifj5LlFFPr">
+          <nummer>2.F</nummer>
+          <titel>Allgemeine Korrespondenz</titel>
+          <datenschutz>false</datenschutz>
+          <dossier id="_uah1Re4JZA9gDLMQDsvKmy">
+            <aktenzeichen>2.F</aktenzeichen>
+            <titel>Korrespondenten Nachname S</titel>
+            <erscheinungsform>digital</erscheinungsform>
+            <entstehungszeitraum>
+              <von>
+                <datum>1809-01-01</datum>
+              </von>
+              <bis>
+                <datum>1937-12-31</datum>
+              </bis>
+            </entstehungszeitraum>
+            <datenschutz>false</datenschutz>
+            <zusatzDaten>
+              <merkmal name="Signatur">J1.109-01#1000/1276#511*</merkmal>
+              <merkmal name="Stufe">Dossier</merkmal>
+              <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"J*","Title":"Depositen und Schenkungen ab 1798","DateRangeText":"1424-2007.03.31","ArchiveRecordId":"33","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"J1.109*","Title":"Huber Eugen (1849-1923)","DateRangeText":"1809-1937","ArchiveRecordId":"3898","Protected":false},{"IconId":12,"Level":"Teilbestand","RefCode":"J1.109-01*","Title":"Huber Eugen: Archivalien des Zivilgesetzbuches, Manuskripte und Briefe","DateRangeText":"1809-1937","ArchiveRecordId":"3499808","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"J1.109-01#2","Title":"2. Teil","DateRangeText":null,"ArchiveRecordId":"3761375","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"J1.109-01#2.F","Title":"Allgemeine Korrespondenz","DateRangeText":null,"ArchiveRecordId":"3761448","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"J1.109-01#1000/1276#511*","Title":"Korrespondenten Nachname S","DateRangeText":"1809-1937","ArchiveRecordId":"31273581","Protected":false}]</merkmal>
+              <merkmal name="Identifikation digitales Magazin">c974835a-fd9c-44ae-a344-b8ab5c21dc3b@_uah1Re4JZA9gDLMQDsvKmy</merkmal>
+              <merkmal name="Entstehungszeitraum Anzeigetext">1809 - 1937</merkmal>
+            </zusatzDaten>
+            <dossier id="_clTzqfxdhmzYGEZe01lq3G">
+              <aktenzeichen>2.F</aktenzeichen>
+              <titel>Schnell J.</titel>
+              <erscheinungsform>digital</erscheinungsform>
+              <entstehungszeitraum>
+                <von>
+                  <datum>1876-01-01</datum>
+                </von>
+                <bis>
+                  <datum>1876-12-31</datum>
+                </bis>
+              </entstehungszeitraum>
+              <datenschutz>false</datenschutz>
+              <zusatzDaten>
+                <merkmal name="Signatur">J1.109-01#1000/1276#511-24*</merkmal>
+                <merkmal name="Stufe">Subdossier</merkmal>
+                <merkmal name="Frühere Signaturen">J1.109-01#1000/1276#447*</merkmal>
+                <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"J*","Title":"Depositen und Schenkungen ab 1798","DateRangeText":"1424-2007.03.31","ArchiveRecordId":"33","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"J1.109*","Title":"Huber Eugen (1849-1923)","DateRangeText":"1809-1937","ArchiveRecordId":"3898","Protected":false},{"IconId":12,"Level":"Teilbestand","RefCode":"J1.109-01*","Title":"Huber Eugen: Archivalien des Zivilgesetzbuches, Manuskripte und Briefe","DateRangeText":"1809-1937","ArchiveRecordId":"3499808","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"J1.109-01#2","Title":"2. Teil","DateRangeText":null,"ArchiveRecordId":"3761375","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"J1.109-01#2.F","Title":"Allgemeine Korrespondenz","DateRangeText":null,"ArchiveRecordId":"3761448","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"J1.109-01#1000/1276#511*","Title":"Korrespondenten Nachname S","DateRangeText":"1809-1937","ArchiveRecordId":"31273581","Protected":false},{"IconId":13,"Level":"Subdossier","RefCode":"J1.109-01#1000/1276#511-24*","Title":"Schnell J.","DateRangeText":"1876","ArchiveRecordId":"5758580","Protected":false}]</merkmal>
+                <merkmal name="Identifikation digitales Magazin">c974835a-fd9c-44ae-a344-b8ab5c21dc3b@_clTzqfxdhmzYGEZe01lq3G</merkmal>
+                <merkmal name="Entstehungszeitraum Anzeigetext">1876</merkmal>
+                <merkmal name="ReihenfolgeAnalogesDossier">000024</merkmal>
+              </zusatzDaten>
+              <dokument id="_2KTzYC6WD2vVSuEirbRLR3">
+                <titel>U_m_s_c_h_l_a_g_0000024</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <datenschutz>false</datenschutz>
+                <zusatzDaten>
+                  <merkmal name="ReihenfolgeAnalogesDossier">000024.000001</merkmal>
+                </zusatzDaten>
+                <dateiRef>_BmHZw8YnIHknPaCWYfJJts</dateiRef>
+                <dateiRef>_S3lKcRSKRi1h4bW2Zh2ncm</dateiRef>
+                <dateiRef>_dRsLk5HrcJFBNnv6PM8pqi</dateiRef>
+                <dateiRef>_2vopuYd0cYyWiDKqiE23vu</dateiRef>
+                <dateiRef>_T1QrW0CNfIUOqhgThuXeYp</dateiRef>
+                <dateiRef>_0ffs1tQ3KCeiIWfA3UzHKM</dateiRef>
+                <dateiRef>_l0MyKmloqUk5kinPJN1MnC</dateiRef>
+                <dateiRef>_CIMsU1N0fjhjGG2vA0vsq5</dateiRef>
+              </dokument>
+              <dokument id="_j197Tv3zUuS4Zvq6bG3j5G">
+                <titel>D_o_k_u_m_e_n_t_0000062</titel>
+                <erscheinungsform>digital</erscheinungsform>
+                <datenschutz>false</datenschutz>
+                <zusatzDaten>
+                  <merkmal name="ReihenfolgeAnalogesDossier">000024.000002</merkmal>
+                </zusatzDaten>
+                <dateiRef>_A62S579MiHpT9aBAYYOhfF</dateiRef>
+                <dateiRef>_cd0iJefO9q0eFGw1GrXYDs</dateiRef>
+                <dateiRef>_PEtOI6LkXDKA2Dv7RYTIvk</dateiRef>
+                <dateiRef>_dOMOlL9vk8DZsfkdTPgqrr</dateiRef>
+                <dateiRef>_b0JP54gGW8wOkUtkSZ5Iah</dateiRef>
+                <dateiRef>_FmxFdZgWncsqciavBL45yK</dateiRef>
+                <dateiRef>_e9GUlkCoP0daMyEcqy9UmR</dateiRef>
+                <dateiRef>_4hH8ClVxksACOUkZFEIeuX</dateiRef>
+              </dokument>
+            </dossier>
+          </dossier>
+        </ordnungssystemposition>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

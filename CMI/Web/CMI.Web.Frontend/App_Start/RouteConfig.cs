@@ -8,7 +8,7 @@ namespace CMI.Web.Frontend
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.RouteExistingFiles = true;
-
+            
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
@@ -42,11 +42,24 @@ namespace CMI.Web.Frontend
             );
 
             routes.MapRoute(
+                "IIIFContent",
+                "files/{subdirectory}/{*relativeFile}",
+                new { controller = "Files", action = "Index" },
+                new
+                {
+                    subdirectory = "(content|manifests|ocr)",
+                    relativeFile = "^(\\S)+?\\.(txt|pdf|svg|json|zip)$"
+                }
+            );
+
+            routes.MapRoute(
                 "Default",
                 "{lang}",
                 new {lang = "de", controller = "Home", action = "Index"},
                 new {lang = @"(de|fr|it|en)"}
             );
+
+           
         }
     }
 }

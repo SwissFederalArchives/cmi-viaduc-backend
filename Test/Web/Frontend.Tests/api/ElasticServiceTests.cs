@@ -685,10 +685,12 @@ namespace CMI.Web.Frontend.API.Tests.api
                     var response = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(responseMock));
                     var connection = new InMemoryConnection(response);
                     var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+                    string username = "(change here, but do not commit)";
+                    string pwd = "(change here,but do not commit)";
                     var settings = new ConnectionSettings(connectionPool, connection,
                         (serializer, values) => new JsonNetSerializer(
                             serializer, values, null, null,
-                            new[] { new ExpandoObjectConverter() }));
+                            new[] { new ExpandoObjectConverter() })).BasicAuthentication(username, pwd);
 
                     return new ElasticClient(settings);
                 });

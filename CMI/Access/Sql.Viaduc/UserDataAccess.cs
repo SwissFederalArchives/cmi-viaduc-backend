@@ -82,7 +82,10 @@ ModifiedBy,
 Birthday, 
 FabasoftDossier, 
 ReasonForRejection, 
-IsInternalUser, 
+IsIdentifiedUser, 
+QoAValue,
+HomeName,
+LastLoginDate,
 RolePublicClient, 
 EiamRoles, 
 ResearcherGroup, 
@@ -276,8 +279,11 @@ FROM ApplicationUser ";
                     cmd.AddParameter("CountryCode", SqlDbType.NVarChar, user.CountryCode);
                     cmd.AddParameter("PhoneNumber", SqlDbType.NVarChar, user.PhoneNumber);
                     cmd.AddParameter("Claims", SqlDbType.NVarChar, JsonConvert.SerializeObject(user.Claims, Formatting.Indented));
-                    cmd.AddParameter("IsInternalUser", SqlDbType.Bit, user.IsInternalUser);
-                    cmd.AddParameter("RolePublicClient", SqlDbType.NVarChar, user.IsInternalUser ? AccessRoles.RoleBVW : AccessRoles.RoleOe2);
+                    cmd.AddParameter("IsIdentifiedUser", SqlDbType.Bit, user.IsIdentifiedUser);
+                    cmd.AddParameter("QoAValue", SqlDbType.Int, user.QoAValue);
+                    cmd.AddParameter("HomeName", SqlDbType.NVarChar, user.HomeName);
+                    cmd.AddParameter("LastLoginDate", SqlDbType.DateTime, user.LastLoginDate);
+                    cmd.AddParameter("RolePublicClient", SqlDbType.NVarChar, user.RolePublicClient);
                     cmd.AddParameter("EiamRoles", SqlDbType.NVarChar, user.EiamRoles);
                     cmd.AddParameter("MobileNumber", SqlDbType.NVarChar, user.MobileNumber);
                     cmd.AddParameter("Language", SqlDbType.NVarChar, string.IsNullOrEmpty(user.Language) ? "de" : user.Language);
@@ -287,12 +293,12 @@ FROM ApplicationUser ";
                     cmd.CommandText = @"INSERT INTO ApplicationUser (
                         Id, FamilyName, FirstName, EmailAddress, UserExtId,
                         Birthday, Organization, Street, StreetAttachment, ZipCode,
-                        Town, CountryCode, PhoneNumber, Claims, IsInternalUser, Language,
+                        Town, CountryCode, PhoneNumber, Claims, IsIdentifiedUser, QoAValue, HomeName, LastLoginDate, Language,
                          RolePublicClient, EiamRoles, MobileNumber, CreatedBy, ActiveAspNetSessionId
                         ) VALUES (
                         @Id, @FamilyName, @FirstName, @EmailAddress, @UserExtId, 
                         @Birthday, @Organization, @Street, @StreetAttachment, @ZipCode, 
-                        @Town, @CountryCode, @PhoneNumber, @Claims, @IsInternalUser, @Language,
+                        @Town, @CountryCode, @PhoneNumber, @Claims, @IsIdentifiedUser, @QoAValue, @HomeName, @LastLoginDate, @Language,
                         @RolePublicClient, @EiamRoles, @MobileNumber, @CreatedBy, @ActiveAspNetSessionId)";
 
                     cmd.ExecuteNonQuery();
@@ -316,9 +322,11 @@ FROM ApplicationUser ";
                     cmd.AddParameter("ModifiedOn", SqlDbType.DateTime, DateTime.Now);
                     cmd.AddParameter("ModifiedBy", SqlDbType.NVarChar, modifiedBy);
                     cmd.AddParameter("EiamRoles", SqlDbType.NVarChar, user.EiamRoles);
+                    cmd.AddParameter("QoAValue", SqlDbType.Int, user.QoAValue);
+                    cmd.AddParameter("HomeName", SqlDbType.NVarChar, user.HomeName);
 
                     cmd.CommandText =
-                        "UPDATE ApplicationUser SET FamilyName = @FamilyName, FirstName = @FirstName, EmailAddress = @EmailAddress, Claims = @Claims, UserExtId = @UserExtId, ModifiedOn = @ModifiedOn, ModifiedBy = @ModifiedBy, EiamRoles = @EiamRoles WHERE ID = @Id;";
+                        "UPDATE ApplicationUser SET FamilyName = @FamilyName, FirstName = @FirstName, EmailAddress = @EmailAddress, Claims = @Claims, UserExtId = @UserExtId, ModifiedOn = @ModifiedOn, ModifiedBy = @ModifiedBy, EiamRoles = @EiamRoles, QoAValue = @QoAValue, HomeName = @HomeName WHERE ID = @Id;";
 
                     cmd.ExecuteNonQuery();
                 }
@@ -594,7 +602,7 @@ FROM ApplicationUser ";
                 using (var cmd = cn.CreateCommand())
                 {
                     cmd.CommandText = "UPDATE ApplicationUser " +
-                                      "SET ActiveAspNetSessionId = @p2 " +
+                                      "SET ActiveAspNetSessionId = @p2, LastLoginDate = getdate() " +
                                       "WHERE ID = @p1";
 
                     cmd.Parameters.Add(new SqlParameter

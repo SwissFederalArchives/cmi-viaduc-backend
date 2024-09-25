@@ -12,8 +12,8 @@ namespace CMI.Tools.IiifPresentationBuilder
     {
         static void Main(string[] args)
         {
-            var root = @"C:\Temp\Final\30409374";
-            var archiveRecordId = "30409374";
+            var root = @"C:\Temp\Final\6865820";
+            var archiveRecordId = "6865820";
 
 
             var metadataFile = new FileInfo(Path.Combine(root, "header", "metadata.xml"));
@@ -27,15 +27,16 @@ namespace CMI.Tools.IiifPresentationBuilder
             };
 
             // Create Manifest
-            var manifestCreator = new PostProcessManifestCreator(new IiifManifestSettings()
-                {
-                    ApiServerUri = new Uri("https://viaducdev.cmiag.ch/iiif/"),
-                    ImageServerUri = new Uri("https://viaducdev.cmiag.ch/image/"),
-                    PublicManifestWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/manifests/"),
-                    PublicContentWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/content/"),
-                    PublicOcrWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/ocr/"),
-                    PublicDetailRecordUri = new Uri("https://viaducdev.cmiag.ch/clientdev/")
-                },
+            var manifestSettings = new IiifManifestSettings()
+            {
+                ApiServerUri = new Uri("https://viaducdev.cmiag.ch/iiif/"),
+                ImageServerUri = new Uri("https://viaducdev.cmiag.ch/image/"),
+                PublicManifestWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/manifests/"),
+                PublicContentWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/content/"),
+                PublicOcrWebUri = new Uri("https://viaducdev.cmiag.ch/clientdev/files/ocr/"),
+                PublicDetailRecordUri = new Uri("https://viaducdev.cmiag.ch/clientdev/")
+            };
+            var manifestCreator = new PostProcessManifestCreator(manifestSettings,
                 location);
 
             manifestCreator.IgnoreFileNotFoundExceptions = true;
@@ -45,13 +46,14 @@ namespace CMI.Tools.IiifPresentationBuilder
 
             Console.WriteLine("PostProcessIiifOcrIndexer");
             var iiifOcrIndexer = new PostProcessIiifOcrIndexer(new SolrConnectionInfo
-                {SolrUrl = "SkipSolrForTesting", SolrHighlightingPath = root });
+                {SolrUrl = "SkipSolrForTesting", SolrHighlightingPath = root }, manifestSettings);
 
 
             var content = root + @"\content";
             var package = CreateTestData(content);
             iiifOcrIndexer.RootFolder = root;
             iiifOcrIndexer.ArchiveRecordId = archiveRecordId;
+            iiifOcrIndexer.Paket = paket;
             iiifOcrIndexer.AnalyzeRepositoryPackage(package, content);
 
             Console.WriteLine("PostProcessIiifOcrIndexer finish");

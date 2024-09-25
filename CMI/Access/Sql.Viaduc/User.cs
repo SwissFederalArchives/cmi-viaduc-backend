@@ -82,7 +82,13 @@ namespace CMI.Access.Sql.Viaduc
 
         [EditNotAllowed] public string ReasonForRejection { get; set; }
 
-        [EditNotAllowed] public bool IsInternalUser { get; set; }
+        [EditNotAllowed] public bool IsIdentifiedUser { get; set; }
+
+        [EditNotAllowed] public int QoAValue { get; set; }
+
+        [EditNotAllowed] public string HomeName { get; set; }
+
+        [EditNotAllowed] public DateTime? LastLoginDate { get; set; }
 
         [EditRequiresFeature(ApplicationFeature.BenutzerUndRollenBenutzerverwaltungFeldBenutzerrollePublicClientBearbeiten)]
         public string RolePublicClient { get; set; }
@@ -126,6 +132,7 @@ namespace CMI.Access.Sql.Viaduc
                 sb.AppendLine($"Erstellt von:\t\t\t\t{CreatedBy}");
                 sb.AppendLine($"Letzte Änderung am:\t{ModifiedOn:dd.MM.yyyy HH:mm}");
                 sb.AppendLine($"Letzte Änderung von:\t{ModifiedBy}");
+                sb.AppendLine($"Letztes Login:\t\t\t{LastLoginDate:dd.MM.yyyy HH:mm}");
                 return sb.ToString();
             }
         }

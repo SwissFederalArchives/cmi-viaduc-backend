@@ -19,7 +19,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000003%2F%2F%2F00000015.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000003%2F00000015.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -35,7 +35,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000005%2F%2F%2F00000017.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FD_o_k_u_m_e_n_t_0000005%2F00000017.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -248,6 +248,12 @@
       },
       "type": "Text",
       "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3065-3558-Fotoalben__II._Kategorie-Presse",
+      "@type": "SearchService2"
     }
   ],
   "start": null

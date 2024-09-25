@@ -1,0 +1,271 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json",
+  "label": {
+    "none": [
+      "U_m_s_c_h_l_a_g_0000024"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/00001294.jpg",
+      "label": {
+        "none": [
+          "1"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3735,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-page-painting-_2KTzYC6WD2vVSuEirbRLR3-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-content-painting-_2KTzYC6WD2vVSuEirbRLR3-1",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3735,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001294.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001294.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2672
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/canvasses/_2KTzYC6WD2vVSuEirbRLR3-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2672
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/00001295.jpg",
+      "label": {
+        "none": [
+          "2"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3734,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-page-painting-_2KTzYC6WD2vVSuEirbRLR3-2",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-content-painting-_2KTzYC6WD2vVSuEirbRLR3-2",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3734,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001295.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001295.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2668
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/canvasses/_2KTzYC6WD2vVSuEirbRLR3-2"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2668
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/00001296.jpg",
+      "label": {
+        "none": [
+          "3"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3736,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-page-painting-_2KTzYC6WD2vVSuEirbRLR3-3",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-content-painting-_2KTzYC6WD2vVSuEirbRLR3-3",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3736,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001296.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001296.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2668
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/canvasses/_2KTzYC6WD2vVSuEirbRLR3-3"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2668
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/00001297.jpg",
+      "label": {
+        "none": [
+          "4"
+        ]
+      },
+      "type": "Canvas",
+      "height": 3734,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-page-painting-_2KTzYC6WD2vVSuEirbRLR3-4",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json#annotations-content-painting-_2KTzYC6WD2vVSuEirbRLR3-4",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 3734,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001297.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001297.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2672
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/canvasses/_2KTzYC6WD2vVSuEirbRLR3-4"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2672
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ],
+        "en": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ],
+        "fr": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ],
+        "it": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ],
+        "none": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/_clTzqfxdhmzYGEZe01lq3G.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653564",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/U_m_s_c_h_l_a_g_0000024_OCR.txt",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-3065-3564-U_m_s_c_h_l_a_g_0000024",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/jpeg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001294.jpg/full/150,/0/default.jpg",
+      "type": "Image"
+    }
+  ]
+}

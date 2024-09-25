@@ -1,0 +1,224 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/_clTzqfxdhmzYGEZe01lq3G.json",
+  "label": {
+    "none": [
+      "Schnell J."
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/U_m_s_c_h_l_a_g_0000024/_2KTzYC6WD2vVSuEirbRLR3.json",
+      "label": {
+        "none": [
+          "U_m_s_c_h_l_a_g_0000024"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FU_m_s_c_h_l_a_g_0000024%2F00001294.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/D_o_k_u_m_e_n_t_0000062/_j197Tv3zUuS4Zvq6bG3j5G.json",
+      "label": {
+        "none": [
+          "D_o_k_u_m_e_n_t_0000062"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3564%2FD_o_k_u_m_e_n_t_0000062%2F00001298.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "J1.109-01#1000/1276#511-24*"
+        ],
+        "en": [
+          "J1.109-01#1000/1276#511-24*"
+        ],
+        "fr": [
+          "J1.109-01#1000/1276#511-24*"
+        ],
+        "it": [
+          "J1.109-01#1000/1276#511-24*"
+        ],
+        "none": [
+          "J1.109-01#1000/1276#511-24*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Schnell J."
+        ],
+        "en": [
+          "Schnell J."
+        ],
+        "fr": [
+          "Schnell J."
+        ],
+        "it": [
+          "Schnell J."
+        ],
+        "none": [
+          "Schnell J."
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "1876"
+        ],
+        "en": [
+          "1876"
+        ],
+        "fr": [
+          "1876"
+        ],
+        "it": [
+          "1876"
+        ],
+        "none": [
+          "1876"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "2.F"
+        ],
+        "en": [
+          "2.F"
+        ],
+        "fr": [
+          "2.F"
+        ],
+        "it": [
+          "2.F"
+        ],
+        "none": [
+          "2.F"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3065/3564/30653564.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30653564",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3065-3564",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

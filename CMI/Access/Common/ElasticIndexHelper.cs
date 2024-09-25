@@ -17,7 +17,7 @@ namespace CMI.Access.Common
     {
         private readonly string index;
 
-        public ElasticIndexHelper(Uri elasticUri, string indexName = "archive")
+        public ElasticIndexHelper(Uri elasticUri, string userName="", string pwd="", string indexName = "archive")
         {
             var pool = new SingleNodeConnectionPool(elasticUri);
             var settings = new ConnectionSettings(pool,
@@ -25,7 +25,12 @@ namespace CMI.Access.Common
                     serializer, values, null, null,
                     new[] {new ExpandoObjectConverter()}));
 
-            index = indexName;
+            index = indexName;    
+            
+            if (!string.IsNullOrEmpty(userName))
+            { 
+                settings.BasicAuthentication(userName, pwd);
+            }            
             settings.DefaultIndex(indexName);
             settings.ThrowExceptions();
             Client = new ElasticClient(settings);

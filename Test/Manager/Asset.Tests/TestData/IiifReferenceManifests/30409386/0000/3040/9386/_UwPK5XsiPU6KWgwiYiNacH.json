@@ -1,0 +1,244 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json",
+  "label": {
+    "none": [
+      "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3040/9386/00000009.jpg",
+      "label": {
+        "none": [
+          "1"
+        ]
+      },
+      "type": "Canvas",
+      "height": 1829,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json#annotations-page-painting-_UwPK5XsiPU6KWgwiYiNacH-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json#annotations-content-painting-_UwPK5XsiPU6KWgwiYiNacH-1",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 1829,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000009.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000009.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 2548
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/canvasses/_UwPK5XsiPU6KWgwiYiNacH-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 2548
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/3040/9386/00000010.jpg",
+      "label": {
+        "none": [
+          "2"
+        ]
+      },
+      "type": "Canvas",
+      "height": 2546,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json#annotations-page-painting-_UwPK5XsiPU6KWgwiYiNacH-2",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json#annotations-content-painting-_UwPK5XsiPU6KWgwiYiNacH-2",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 2546,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000010.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000010.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 1828
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/canvasses/_UwPK5XsiPU6KWgwiYiNacH-2"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 1828
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "M33#1000/1451#33#3*"
+        ],
+        "en": [
+          "M33#1000/1451#33#3*"
+        ],
+        "fr": [
+          "M33#1000/1451#33#3*"
+        ],
+        "it": [
+          "M33#1000/1451#33#3*"
+        ],
+        "none": [
+          "M33#1000/1451#33#3*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ],
+        "en": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ],
+        "fr": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ],
+        "it": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ],
+        "none": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "01.12.1943 - 31.05.1944"
+        ],
+        "en": [
+          "01.12.1943 - 31.05.1944"
+        ],
+        "fr": [
+          "01.12.1943 - 31.05.1944"
+        ],
+        "it": [
+          "01.12.1943 - 31.05.1944"
+        ],
+        "none": [
+          "01.12.1943 - 31.05.1944"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/30409386.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30409386",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-3040-9386",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/jpeg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000009.jpg/full/150,/0/default.jpg",
+      "type": "Image"
+    }
+  ]
+}

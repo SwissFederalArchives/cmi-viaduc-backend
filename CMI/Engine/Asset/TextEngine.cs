@@ -91,8 +91,8 @@ namespace CMI.Engine.Asset
                 }
 
                 // Remove the job
-                await jobEndRequestClient.GetResponse<JobEndResult>(new JobEndRequest { JobGuid = extractionResult.JobGuid });
-                Log.Debug($"Removed the job with the id {extractionResult.JobGuid}.");
+                await jobEndRequestClient.GetResponse<JobEndResult>(new JobEndRequest {JobGuid = extractionResult.JobGuid});
+                Log.Information($"Removed the job with the id {extractionResult.JobGuid}.");
 
                 return extractionResult.Text;
             }

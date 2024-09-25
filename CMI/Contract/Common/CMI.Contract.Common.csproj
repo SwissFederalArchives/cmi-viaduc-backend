@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="QueryDateRange.cs" />
     <Compile Include="QueryDateRangeEnum.cs" />
+    <Compile Include="StorageProviderSettings.cs" />
     <Compile Include="SyncInfoForReportResult.cs" />
     <Compile Include="RepositoryPackageExtension.cs" />
     <Compile Include="RepositoryPackageInfoResult.cs" />

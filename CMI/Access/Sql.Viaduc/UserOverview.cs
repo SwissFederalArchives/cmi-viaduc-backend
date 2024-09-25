@@ -61,7 +61,11 @@ namespace CMI.Access.Sql.Viaduc
 
         [Column(CanBeNull = false)] public bool BarInternalConsultation { get; set; }
 
-        [Column(CanBeNull = false)] public bool IsInternalUser { get; set; }
+        [Column(CanBeNull = false)] public bool IsIdentifiedUser { get; set; }
+
+        [Column(CanBeNull = false)] public int QoAValue { get; set; }
+
+        [Column(CanBeNull = false)] public string HomeName { get; set; }
 
         [Column(CanBeNull = true)] public string AblieferndeStellenId { get; set; }
 
@@ -80,5 +84,7 @@ namespace CMI.Access.Sql.Viaduc
         [Column(CanBeNull = true)] public DateTime? DownloadLimitDisabledUntil { get; set; }
 
         [Column(CanBeNull = true)] public DateTime? DigitalisierungsbeschraenkungAufgehobenBis { get; set; }
+
+        [Column(CanBeNull = true)] public DateTime? LastLoginDate { get; set; }
     }
 }

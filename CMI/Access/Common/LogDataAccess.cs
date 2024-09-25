@@ -19,11 +19,11 @@ namespace CMI.Access.Common
         private readonly string indexName;
 
 
-        public LogDataAccess() : this(Settings.Default.ElasticSearchUrl)
+        public LogDataAccess() : this(Settings.Default.ElasticSearchUrl, Settings.Default.ElasticSearchUsername, Settings.Default.ElasticSearchPWD)
         {
         }
 
-        public LogDataAccess(string elasticUri, string indexName = "logstash-*")
+        public LogDataAccess(string elasticUri, string elasticusername, string elasticpwd, string indexName = "logstash-*")
         {
             var pool = new SingleNodeConnectionPool(new Uri(elasticUri));
             var settings = new ConnectionSettings(pool, (serializer, values) => new JsonNetSerializer(
@@ -32,6 +32,10 @@ namespace CMI.Access.Common
 
             this.indexName = indexName;
             settings.DefaultIndex(indexName);
+            if (!string.IsNullOrEmpty(elasticusername))
+            {
+                settings.BasicAuthentication(elasticusername, elasticpwd);
+            }
             settings.ThrowExceptions();
             client = new ElasticClient(settings);
         }

@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Autofac.Features.Indexed;
 using CMI.Contract.Common;
+using CMI.Utilities.Common.Helpers;
+using CMI.Utilities.Common.Providers;
+using Serilog;
 
-namespace CMI.Engine.Asset.PostProcess
-{
+namespace CMI.Engine.Asset.PostProcess {
     public class PostProcessIiifFileDistributor : ProcessAnalyzerBase
     {
         private readonly ViewerFileLocationSettings locationSettings;
+
+        private readonly IStorageProvider fileProvider;
+        private readonly IStorageProvider configuredProvider;
         public string RootFolder { get; set; }
         public string ArchiveRecordId { get; set; }
 
-        public PostProcessIiifFileDistributor(ViewerFileLocationSettings locationSettings)
+        public PostProcessIiifFileDistributor(ViewerFileLocationSettings locationSettings, IIndex<StorageProviders, IStorageProvider> storageProviders, StorageProviders storageProvider)
         {
             this.locationSettings = locationSettings;
-           
+            if (!storageProviders.TryGetValue(StorageProviders.File, out fileProvider))
+            {
+                Log.Error("No File Provider");
+            }
+            if (!storageProviders.TryGetValue(StorageProviders.S3, out IStorageProvider s3Provider))
+            {
+                Log.Error("S3 Provider not available");
+            }
+            configuredProvider = storageProvider == StorageProviders.File ? fileProvider : s3Provider;
         }
 
         protected override void AnalyzeFiles(string rootOrSubFolder, List<RepositoryFile> files)
@@ -28,12 +43,12 @@ namespace CMI.Engine.Asset.PostProcess
                 var sourceFile = new FileInfo(Path.Combine(rootOrSubFolder, file.PhysicalName));
                 if (sourceFile.Exists)
                 {
-                    MoveFiles(sourceFile, relPath, ".txt", locationSettings.OcrOutputSaveDirectory);
-                    MoveFiles(sourceFile, relPath, ".jpg", locationSettings.ImageOutputSaveDirectory);
-                    MoveFiles(sourceFile, relPath, ".pdf", locationSettings.ContentOutputSaveDirectory);
+                    var t1 = fileProvider.CopyFileAsync(sourceFile, relPath, ".txt", locationSettings.OcrOutputSaveDirectory);
+                    var t2 = configuredProvider.CopyFileAsync(sourceFile, relPath, ".jpg", locationSettings.ImageOutputSaveDirectory);
+                    var t3 = configuredProvider.CopyFileAsync(sourceFile, relPath, ".pdf", locationSettings.ContentOutputSaveDirectory);
+                    Task.WaitAll(t1, t2, t3);
                 }
             }
-
             // Falls vorhanden verschieben
             MoveCombinedTextFiles(rootOrSubFolder, relPath);
         }
@@ -46,35 +61,10 @@ namespace CMI.Engine.Asset.PostProcess
             foreach (var file in di.GetFiles().Where(f => f.Name.EndsWith("_OCR.txt", StringComparison.InvariantCultureIgnoreCase) ||
                                                           f.Name.EndsWith("OCR-Text-komplett.zip", StringComparison.InvariantCultureIgnoreCase)))
             {
-                var targetFile = new FileInfo(Path.Combine(locationSettings.OcrOutputSaveDirectory, PathHelper.CreateShortValidUrlName(relPath, false), PathHelper.CreateShortValidUrlName(file.Name, true)));
-                MoveFile(targetFile, file);
+                var t1 = fileProvider.CopyFileAsync(file, relPath, file.Extension, locationSettings.OcrOutputSaveDirectory);
+                Task.WaitAll(t1);
             }
-        }
-
-        private void MoveFiles(FileInfo sourceFile, string relPath, string extension, string targetDirectory)
-        {
-            var file = new FileInfo(Path.ChangeExtension(sourceFile.FullName, extension));
-            if (file.Exists)
-            {
-                var targetFile = new FileInfo(Path.Combine(targetDirectory, PathHelper.CreateShortValidUrlName(relPath, false), PathHelper.CreateShortValidUrlName(file.Name, true)));
-                MoveFile(targetFile, file);
-            }
-        }
-
-        private static void MoveFile(FileInfo targetFile, FileInfo sourceFile)
-        {
-            // Delete existing file
-            if (targetFile.Exists)
-            {
-                targetFile.Delete();
-            }
-
-            if (!targetFile.Directory!.Exists)
-            {
-                targetFile.Directory.Create();
-            }
-
-            sourceFile.MoveTo(targetFile.FullName);
         }
     }
+
 }

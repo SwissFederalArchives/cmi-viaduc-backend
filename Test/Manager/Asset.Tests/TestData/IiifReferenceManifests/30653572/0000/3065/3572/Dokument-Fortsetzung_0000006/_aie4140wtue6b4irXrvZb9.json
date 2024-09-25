@@ -28,11 +28,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 3820,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000065.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000065.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000065.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000065.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -68,11 +68,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 5208,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000066.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000066.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000066.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000066.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -108,11 +108,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 5216,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000067.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000067.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000067.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000067.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -224,7 +224,7 @@
   "thumbnail": [
     {
       "format": "image/jpeg",
-      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F%2F00000065.jpg/full/150,/0/default.jpg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument-Fortsetzung_0000006%2F00000065.jpg/full/150,/0/default.jpg",
       "type": "Image"
     }
   ]

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
+using CMI.Web.Common.api;
 using WebGrease.Css.Extensions;
 
 namespace CMI.Web.Common.Auth
 {
     public static class AuthorizationHelper
     {
-        public const string RoleClaimPart = "/identity/claims/e-id/profile/role";
+        public static string RoleClaimPart => ClaimValueNames.EIdProfileRole;
 
         static AuthorizationHelper()
         {

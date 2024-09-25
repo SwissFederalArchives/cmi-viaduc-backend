@@ -302,7 +302,7 @@ namespace CMI.Contract.Common.Entities
             target.Birthday = source.Birthday;
             target.FabasoftDossier = source.FabasoftDossier;
             target.ReasonForRejection = source.ReasonForRejection;
-            target.IsInternalUser = source.IsInternalUser;
+            target.IsIdentifiedUser = source.IsIdentifiedUser;
             target.RolePublicClient = source.RolePublicClient;
             target.EiamRoles = source.EiamRoles;
             target.ResearcherGroup = source.ResearcherGroup;
@@ -312,7 +312,10 @@ namespace CMI.Contract.Common.Entities
             target.ReasonForRejectionDate = source.ReasonForRejectionDate;
             target.DownloadLimitDisabledUntil = source.DownloadLimitDisabledUntil;
             target.DigitalisierungsbeschraenkungAufgehobenBis = source.DigitalisierungsbeschraenkungAufgehobenBis;
+            target.QoAValue = source.QoAValue;
+            target.HomeName = source.HomeName;
             target.ActiveAspNetSessionId = source.ActiveAspNetSessionId;
+            target.LastLoginDate = source.LastLoginDate;
 
             // User-defined partial method
             OnDtoCreating(source, target);
@@ -354,7 +357,7 @@ namespace CMI.Contract.Common.Entities
             target.Birthday = source.Birthday;
             target.FabasoftDossier = source.FabasoftDossier;
             target.ReasonForRejection = source.ReasonForRejection;
-            target.IsInternalUser = source.IsInternalUser;
+            target.IsIdentifiedUser = source.IsIdentifiedUser;
             target.RolePublicClient = source.RolePublicClient;
             target.EiamRoles = source.EiamRoles;
             target.ResearcherGroup = source.ResearcherGroup;
@@ -364,7 +367,10 @@ namespace CMI.Contract.Common.Entities
             target.ReasonForRejectionDate = source.ReasonForRejectionDate;
             target.DownloadLimitDisabledUntil = source.DownloadLimitDisabledUntil;
             target.DigitalisierungsbeschraenkungAufgehobenBis = source.DigitalisierungsbeschraenkungAufgehobenBis;
+            target.QoAValue = source.QoAValue;
+            target.HomeName = source.HomeName;
             target.ActiveAspNetSessionId = source.ActiveAspNetSessionId;
+            target.LastLoginDate = source.LastLoginDate;
 
             // User-defined partial method
             OnEntityCreating(source, target);

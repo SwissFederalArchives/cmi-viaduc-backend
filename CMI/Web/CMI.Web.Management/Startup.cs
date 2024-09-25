@@ -11,6 +11,7 @@ using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common;
+using CMI.Web.Common.api;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management;
@@ -131,6 +132,8 @@ namespace CMI.Web.Management
 
             var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, false);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
+            authOptions.Notifications.SelectIdentityProvider += authServiceNotifications.SelectIdentityProvider;
+            authOptions.Notifications.AuthenticationRequestCreated += authServiceNotifications.AuthenticationRequestCreated;
 
             app.UseSaml2Authentication(authOptions);
 
@@ -156,7 +159,7 @@ namespace CMI.Web.Management
 
         private static Task ValidateSessionIdIsActive(CookieValidateIdentityContext context, UserDataAccess userDataAccess)
         {
-            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains(ClaimValueNames.UserExtId))?.Value;
             var user = userDataAccess.GetUser(userId);
 
             var activeAspNetSessionId = user?.ActiveAspNetSessionId;

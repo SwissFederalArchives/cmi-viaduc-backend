@@ -186,7 +186,7 @@ namespace CMI.Contract.Common.Entities
         public ApplicationUserDto() {
         }
 
-        public ApplicationUserDto(string iD, string familyName, string firstName, string organization, string street, string streetAttachment, string zipCode, string town, string countryCode, string emailAddress, string phoneNumber, string skypeName, string setting, string claims, global::System.DateTime created, global::System.DateTime updated, string fulltext, string userExtId, string language, global::System.DateTime createdOn, string createdBy, global::System.DateTime modifiedOn, string modifiedBy, global::System.DateTime? birthday, string fabasoftDossier, string reasonForRejection, bool isInternalUser, string rolePublicClient, string eiamRoles, bool researcherGroup, bool barInternalConsultation, byte[] identifierDocument, string mobileNumber, global::System.DateTime? reasonForRejectionDate, global::System.DateTime? downloadLimitDisabledUntil, global::System.DateTime? digitalisierungsbeschraenkungAufgehobenBis, string activeAspNetSessionId) {
+        public ApplicationUserDto(string iD, string familyName, string firstName, string organization, string street, string streetAttachment, string zipCode, string town, string countryCode, string emailAddress, string phoneNumber, string skypeName, string setting, string claims, global::System.DateTime created, global::System.DateTime updated, string fulltext, string userExtId, string language, global::System.DateTime createdOn, string createdBy, global::System.DateTime modifiedOn, string modifiedBy, global::System.DateTime? birthday, string fabasoftDossier, string reasonForRejection, bool isIdentifiedUser, string rolePublicClient, string eiamRoles, bool researcherGroup, bool barInternalConsultation, byte[] identifierDocument, string mobileNumber, global::System.DateTime? reasonForRejectionDate, global::System.DateTime? downloadLimitDisabledUntil, global::System.DateTime? digitalisierungsbeschraenkungAufgehobenBis, int? qoAValue, string homeName, string activeAspNetSessionId, global::System.DateTime? lastLoginDate) {
 
           this.ID = iD;
           this.FamilyName = familyName;
@@ -214,7 +214,7 @@ namespace CMI.Contract.Common.Entities
           this.Birthday = birthday;
           this.FabasoftDossier = fabasoftDossier;
           this.ReasonForRejection = reasonForRejection;
-          this.IsInternalUser = isInternalUser;
+          this.IsIdentifiedUser = isIdentifiedUser;
           this.RolePublicClient = rolePublicClient;
           this.EiamRoles = eiamRoles;
           this.ResearcherGroup = researcherGroup;
@@ -224,7 +224,10 @@ namespace CMI.Contract.Common.Entities
           this.ReasonForRejectionDate = reasonForRejectionDate;
           this.DownloadLimitDisabledUntil = downloadLimitDisabledUntil;
           this.DigitalisierungsbeschraenkungAufgehobenBis = digitalisierungsbeschraenkungAufgehobenBis;
+          this.QoAValue = qoAValue;
+          this.HomeName = homeName;
           this.ActiveAspNetSessionId = activeAspNetSessionId;
+          this.LastLoginDate = lastLoginDate;
         }
 
         #endregion
@@ -283,7 +286,7 @@ namespace CMI.Contract.Common.Entities
 
         public string ReasonForRejection { get; set; }
 
-        public bool IsInternalUser { get; set; }
+        public bool IsIdentifiedUser { get; set; }
 
         public string RolePublicClient { get; set; }
 
@@ -303,7 +306,13 @@ namespace CMI.Contract.Common.Entities
 
         public global::System.DateTime? DigitalisierungsbeschraenkungAufgehobenBis { get; set; }
 
+        public int? QoAValue { get; set; }
+
+        public string HomeName { get; set; }
+
         public string ActiveAspNetSessionId { get; set; }
+
+        public global::System.DateTime? LastLoginDate { get; set; }
 
         #endregion
     }

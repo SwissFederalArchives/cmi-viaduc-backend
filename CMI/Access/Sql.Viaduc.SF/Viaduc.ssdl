@@ -250,19 +250,19 @@
       </Documentation>
     </Property>
     <Property Name="CreatedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
-    <Property Name="CreatedBy" Type="varchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
     <Property Name="ModifiedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
-    <Property Name="ModifiedBy" Type="varchar" MaxLength="500" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="500" />
     <Property Name="Birthday" Type="datetime" />
-    <Property Name="FabasoftDossier" Type="varchar" MaxLength="1000" />
-    <Property Name="ReasonForRejection" Type="varchar" MaxLength="100">
+    <Property Name="FabasoftDossier" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ReasonForRejection" Type="nvarchar" MaxLength="1000">
       <Documentation>
         <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
       </Documentation>
     </Property>
-    <Property Name="IsInternalUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
-    <Property Name="RolePublicClient" Type="varchar" MaxLength="3" />
-    <Property Name="EiamRoles" Type="varchar" MaxLength="10" />
+    <Property Name="IsIdentifiedUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
+    <Property Name="RolePublicClient" Type="nvarchar" MaxLength="3" />
+    <Property Name="EiamRoles" Type="nvarchar" MaxLength="10" />
     <Property Name="ResearcherGroup" Type="bit" Nullable="false" devart:DefaultValue="0" />
     <Property Name="BarInternalConsultation" Type="bit" Nullable="false" devart:DefaultValue="0" />
     <Property Name="IdentifierDocument" Type="varbinary(max)">
@@ -282,11 +282,14 @@
         <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
       </Documentation>
     </Property>
+    <Property Name="QoAValue" Type="int" />
+    <Property Name="HomeName" Type="nvarchar" MaxLength="200" />
     <Property Name="ActiveAspNetSessionId" Type="nvarchar(max)" devart:DefaultValue="''" DefaultValue="">
       <Documentation>
         <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
       </Documentation>
     </Property>
+    <Property Name="LastLoginDate" Type="datetime" />
   </EntityType>
   <EntityType Name="ManuelleKorrektur">
     <Key>

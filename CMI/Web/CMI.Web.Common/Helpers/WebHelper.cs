@@ -26,6 +26,8 @@ namespace CMI.Web.Common.Helpers
         public const string CookieMcViaducUserIdKey = "V_MC_UserId";
         public const string CookiePcAppliationCookieKey = "V_PC_AppCookie";
         public const string CookieMcAppliationCookieKey = "V_MC_AppCookie";
+        public const string CookiePcViaducElevatedLoginKey = "V_PC_ElevatedLogin";
+        public const string CookieMcViaducElevatedLoginKey = "V_MC_ElevatedLogin";
 
         public static readonly List<string> SupportedLanguages = new List<string> {"de", "fr", "it", "en"};
 
@@ -72,9 +74,21 @@ namespace CMI.Web.Common.Helpers
 
         public static string ViewerUrl => GetStringSetting("viewer-url", "");
 
+
+        public static string BucketName => GetStringSetting("bucketName", "");
+        public static string Region => GetStringSetting("region", "");
+        public static string ServiceUrl => GetStringSetting("serviceUrl", "");
+        public static string SecretAccessKey => GetStringSetting("secretAccessKey", "");
+
+        public static string AccessKey => GetStringSetting("accessKey", "");
+
+        public static string DataStorageProvider => GetStringSetting("dataStorageProvider", "");
+
+        public static string ViewerFileLocationBaseDirectory => GetStringSetting("baseDirectory", "");
         #region CMI / App Settings
 
         public static CmiSettings Settings { get; } = new CmiSettings();
+        
 
         #endregion
 

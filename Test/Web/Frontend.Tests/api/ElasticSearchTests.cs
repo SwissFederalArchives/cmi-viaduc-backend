@@ -354,11 +354,15 @@ namespace CMI.Web.Frontend.API.Tests.api
         private void InitializeElasticClient()
         {
             var node = new Uri("http://localhost:9200");
+            string username = "(change here, but do not commit)";
+            string pwd = "(change here,but do not commit)";
             var pool = new SingleNodeConnectionPool(node);
             var settings = new ConnectionSettings(pool, connection,
                 (serializer, values) => new JsonNetSerializer(
                     serializer, values, null, null,
-                    new[] { new ExpandoObjectConverter() }));
+                    new[] { new ExpandoObjectConverter() }))
+                .BasicAuthentication(username, pwd);
+
             settings.DisableDirectStreaming();
             settings.EnableDebugMode();
             settings.DisablePing();

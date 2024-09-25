@@ -3,18 +3,16 @@
     public interface IControllerHelper
     {
         string GetCurrentUserId();
-        bool IsKerberosAuthentication();
-        bool IsSmartcartAuthentication();
-        bool IsMTanAuthentication();
 
         /// <summary>
-        ///     Kerberos-/Smartcard Anmeldung
+        /// Identifizierte Benutzer sind solche mit QoA >= 40
         /// </summary>
         /// <returns></returns>
-        bool IsInternalUser();
-
+        bool IsIdentifiedUser();
         string GetFromClaim(string field);
         string GetMgntRoleFromClaim();
         bool HasClaims();
+        string GetInitialRoleFromClaim();
+        int GetQoAFromClaim();
     }
 }

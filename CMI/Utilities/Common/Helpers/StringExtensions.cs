@@ -9,8 +9,8 @@ namespace CMI.Utilities.Common.Helpers
 {
     public static class StringExtensions
     {
-        private static readonly Regex ReplacementMatcher = new Regex(@"(?<start>\{)+(?<property>[\w\.\[\]]+)(?<format>:[^}]+)?(?<end>\})+",
-            RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+        private static readonly Regex replacementMatcher = new Regex(@"(?<start>\{)+(?<property>[\w\.\[\]]+)(?<format>:[^}]+)?(?<end>\})+",
+            RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.IgnoreCase, TimeSpan.FromSeconds(4));
 
         public static string FormatWith(this string format, object source)
         {
@@ -56,7 +56,7 @@ namespace CMI.Utilities.Common.Helpers
             }
 
             var values = new List<object>();
-            var rewrittenFormat = ReplacementMatcher.Replace(format, delegate(Match m)
+            var rewrittenFormat = replacementMatcher.Replace(format, delegate(Match m)
             {
                 var startGroup = m.Groups["start"];
                 var propertyGroup = m.Groups["property"];

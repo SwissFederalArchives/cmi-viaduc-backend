@@ -28,11 +28,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 3569,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F%2F00000011.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F00000011.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F%2F00000011.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F00000011.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -68,11 +68,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 3573,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F%2F00000012.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F00000012.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F%2F00000012.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F00000012.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -184,7 +184,7 @@
   "thumbnail": [
     {
       "format": "image/jpeg",
-      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F%2F00000011.jpg/full/150,/0/default.jpg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3572%2FDokument_0000003%2F00000011.jpg/full/150,/0/default.jpg",
       "type": "Image"
     }
   ]

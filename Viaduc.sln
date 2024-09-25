@@ -341,6 +341,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Onboarding", "CM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.IiifPresentationBuilder", "CMI\Tools\IiifPresentationBuilder\CMI.Tools.IiifPresentationBuilder.csproj", "{CB5D6DA9-0237-4099-863E-DC9F326212F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.ManifestImprover", "CMI\Tools\MainfestImprover\CMI.Tools.ManifestImprover.csproj", "{F88945ED-25E4-4AA0-B834-EEF3C9472061}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -747,6 +749,10 @@ Global
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -862,6 +868,7 @@ Global
 		{8A43FC2B-B28B-402D-83B9-701E63B23D8F} = {1928E5E9-5D05-4172-92F3-D5F822FF78E1}
 		{DF1C971F-28EF-4FBA-9216-76D04429928C} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
+		{F88945ED-25E4-4AA0-B834-EEF3C9472061} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94FF0BA7-507D-45AD-A448-D34E2C5341FE}

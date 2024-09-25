@@ -15,7 +15,7 @@ namespace CMI.Web.Frontend.Controllers
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
-            if (Session["CurrentCulture"] != null)
+            if (Session != null && Session["CurrentCulture"] != null)
             {
                 ChangeCulture(Session["CurrentCulture"].ToString());
             }
@@ -56,8 +56,10 @@ namespace CMI.Web.Frontend.Controllers
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
-            Session["CurrentCulture"] = lang;
+            if (Session != null)
+            {
+                Session["CurrentCulture"] = lang;
+            }
             currentLang = lang;
         }
     }

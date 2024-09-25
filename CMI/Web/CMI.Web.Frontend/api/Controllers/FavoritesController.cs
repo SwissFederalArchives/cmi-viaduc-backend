@@ -200,8 +200,8 @@ namespace CMI.Web.Frontend.api.Controllers
                     veFavorite.CanBeDownloaded = veFavorite.HasPrimaryLink &&
                                                  access.HasAnyTokenFor(elasticHit.Data?.PrimaryDataDownloadAccessTokens);
                     veFavorite.ManifestLink = elasticHit.Data?.ManifestLink;
-
-                    veFavorite.SchutzfristendeDossier = elasticHit.Data?.Level == "Dossier" && elasticHit.Data?.ProtectionEndDate?.Year != null
+                    // IT, FR and DE: Dossier & EN: Dossiers
+                    veFavorite.SchutzfristendeDossier = elasticHit.Data != null && elasticHit.Data.Level.StartsWith("Dossier") && elasticHit.Data?.ProtectionEndDate?.Year != null
                         ? elasticHit.Data?.ProtectionEndDate?.Year.ToString()
                         : string.Empty;
                     yield return veFavorite;

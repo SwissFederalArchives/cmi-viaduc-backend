@@ -1707,10 +1707,10 @@ namespace CMI.Access.Sql.Viaduc.EF
         /// <param name="language">Initial value of Language.</param>
         /// <param name="createdOn">Initial value of CreatedOn.</param>
         /// <param name="modifiedOn">Initial value of ModifiedOn.</param>
-        /// <param name="isInternalUser">Initial value of IsInternalUser.</param>
+        /// <param name="isIdentifiedUser">Initial value of IsIdentifiedUser.</param>
         /// <param name="researcherGroup">Initial value of ResearcherGroup.</param>
         /// <param name="barInternalConsultation">Initial value of BarInternalConsultation.</param>
-        public static ApplicationUser CreateApplicationUser(string iD, global::System.DateTime created, global::System.DateTime updated, string fulltext, string language, global::System.DateTime createdOn, global::System.DateTime modifiedOn, bool isInternalUser, bool researcherGroup, bool barInternalConsultation)
+        public static ApplicationUser CreateApplicationUser(string iD, global::System.DateTime created, global::System.DateTime updated, string fulltext, string language, global::System.DateTime createdOn, global::System.DateTime modifiedOn, bool isIdentifiedUser, bool researcherGroup, bool barInternalConsultation)
         {
             ApplicationUser applicationUser = new ApplicationUser();
             applicationUser.ID = iD;
@@ -1720,7 +1720,7 @@ namespace CMI.Access.Sql.Viaduc.EF
             applicationUser.Language = language;
             applicationUser.CreatedOn = createdOn;
             applicationUser.ModifiedOn = modifiedOn;
-            applicationUser.IsInternalUser = isInternalUser;
+            applicationUser.IsIdentifiedUser = isIdentifiedUser;
             applicationUser.ResearcherGroup = researcherGroup;
             applicationUser.BarInternalConsultation = barInternalConsultation;
             return applicationUser;
@@ -2511,7 +2511,7 @@ namespace CMI.Access.Sql.Viaduc.EF
         /// </summary>
         [EdmScalarPropertyAttribute()]
         [DataMemberAttribute()]
-        [StringLength(100)]
+        [StringLength(1000)]
         public virtual string ReasonForRejection
         {
             get
@@ -2538,35 +2538,35 @@ namespace CMI.Access.Sql.Viaduc.EF
         partial void OnReasonForRejectionChanged();
     
         /// <summary>
-        /// There are no comments for IsInternalUser in the schema.
+        /// There are no comments for IsIdentifiedUser in the schema.
         /// </summary>
         [EdmScalarPropertyAttribute(IsNullable=false)]
         [DataMemberAttribute()]
         [Required()]
-        public virtual bool IsInternalUser
+        public virtual bool IsIdentifiedUser
         {
             get
             {
-                bool value = _IsInternalUser;
-                OnGetIsInternalUser(ref value);
+                bool value = _IsIdentifiedUser;
+                OnGetIsIdentifiedUser(ref value);
                 return value;
             }
             set
             {
-                if (_IsInternalUser != value)
+                if (_IsIdentifiedUser != value)
                 {
-                  OnIsInternalUserChanging(ref value);
-                  ReportPropertyChanging("IsInternalUser");
-                  _IsInternalUser = StructuralObject.SetValidValue(value);
-                  ReportPropertyChanged("IsInternalUser");
-                  OnIsInternalUserChanged();
+                  OnIsIdentifiedUserChanging(ref value);
+                  ReportPropertyChanging("IsIdentifiedUser");
+                  _IsIdentifiedUser = StructuralObject.SetValidValue(value);
+                  ReportPropertyChanged("IsIdentifiedUser");
+                  OnIsIdentifiedUserChanged();
               }
             }
         }
-        private bool _IsInternalUser = true;
-        partial void OnGetIsInternalUser(ref bool value);
-        partial void OnIsInternalUserChanging(ref bool value);
-        partial void OnIsInternalUserChanged();
+        private bool _IsIdentifiedUser = true;
+        partial void OnGetIsIdentifiedUser(ref bool value);
+        partial void OnIsIdentifiedUserChanging(ref bool value);
+        partial void OnIsIdentifiedUserChanged();
     
         /// <summary>
         /// There are no comments for RolePublicClient in the schema.
@@ -2844,6 +2844,67 @@ namespace CMI.Access.Sql.Viaduc.EF
         partial void OnDigitalisierungsbeschraenkungAufgehobenBisChanged();
     
         /// <summary>
+        /// There are no comments for QoAValue in the schema.
+        /// </summary>
+        [EdmScalarPropertyAttribute()]
+        [DataMemberAttribute()]
+        public virtual int? QoAValue
+        {
+            get
+            {
+                int? value = _QoAValue;
+                OnGetQoAValue(ref value);
+                return value;
+            }
+            set
+            {
+                if (_QoAValue != value)
+                {
+                  OnQoAValueChanging(ref value);
+                  ReportPropertyChanging("QoAValue");
+                  _QoAValue = StructuralObject.SetValidValue(value);
+                  ReportPropertyChanged("QoAValue");
+                  OnQoAValueChanged();
+              }
+            }
+        }
+        private int? _QoAValue;
+        partial void OnGetQoAValue(ref int? value);
+        partial void OnQoAValueChanging(ref int? value);
+        partial void OnQoAValueChanged();
+    
+        /// <summary>
+        /// There are no comments for HomeName in the schema.
+        /// </summary>
+        [EdmScalarPropertyAttribute()]
+        [DataMemberAttribute()]
+        [StringLength(200)]
+        public virtual string HomeName
+        {
+            get
+            {
+                string value = _HomeName;
+                OnGetHomeName(ref value);
+                return value;
+            }
+            set
+            {
+                if (_HomeName != value)
+                {
+                  OnHomeNameChanging(ref value);
+                  ReportPropertyChanging("HomeName");
+                  _HomeName = StructuralObject.SetValidValue(value, true);
+                  ReportPropertyChanged("HomeName");
+                  OnHomeNameChanged();
+              }
+            }
+        }
+        private string _HomeName;
+        partial void OnGetHomeName(ref string value);
+        partial void OnHomeNameChanging(ref string value);
+        partial void OnHomeNameChanged();
+    
+        /// <summary>
         /// Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.
         /// </summary>
         [EdmScalarPropertyAttribute()]
@@ -2872,6 +2933,36 @@ namespace CMI.Access.Sql.Viaduc.EF
         partial void OnGetActiveAspNetSessionId(ref string value);
         partial void OnActiveAspNetSessionIdChanging(ref string value);
         partial void OnActiveAspNetSessionIdChanged();
+    
+        /// <summary>
+        /// There are no comments for LastLoginDate in the schema.
+        /// </summary>
+        [EdmScalarPropertyAttribute()]
+        [DataMemberAttribute()]
+        public virtual global::System.DateTime? LastLoginDate
+        {
+            get
+            {
+                global::System.DateTime? value = _LastLoginDate;
+                OnGetLastLoginDate(ref value);
+                return value;
+            }
+            set
+            {
+                if (_LastLoginDate != value)
+                {
+                  OnLastLoginDateChanging(ref value);
+                  ReportPropertyChanging("LastLoginDate");
+                  _LastLoginDate = StructuralObject.SetValidValue(value);
+                  ReportPropertyChanged("LastLoginDate");
+                  OnLastLoginDateChanged();
+              }
+            }
+        }
+        private global::System.DateTime? _LastLoginDate;
+        partial void OnGetLastLoginDate(ref global::System.DateTime? value);
+        partial void OnLastLoginDateChanging(ref global::System.DateTime? value);
+        partial void OnLastLoginDateChanged();
 
         #endregion
     }

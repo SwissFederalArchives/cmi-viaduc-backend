@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using CMI.Access.Sql.Viaduc;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common;
+using CMI.Web.Common.api;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend;
@@ -25,9 +26,7 @@ using NSwag;
 using NSwag.AspNet.Owin;
 using Owin;
 using Serilog;
-using Sustainsys.Saml2.Metadata;
 using Sustainsys.Saml2.Owin;
-using Sustainsys.Saml2.WebSso;
 using SameSiteMode = Microsoft.Owin.SameSiteMode;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -119,9 +118,11 @@ namespace CMI.Web.Frontend
             {
                 SPOptions = { Logger = new SeriLogAdapter(Log.Logger)}
             };
-
-            var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions, true);
+            
+            var authServiceNotifications = new AuthServiceNotifications(authOptions.SPOptions,  true);
             authOptions.Notifications.AcsCommandResultCreated += authServiceNotifications.AcsCommandResultCreated;
+            authOptions.Notifications.SelectIdentityProvider += authServiceNotifications.SelectIdentityProvider;
+            authOptions.Notifications.AuthenticationRequestCreated += authServiceNotifications.AuthenticationRequestCreated;
 
             app.UseSaml2Authentication(authOptions);
 
@@ -133,7 +134,7 @@ namespace CMI.Web.Frontend
 
         private static Task ValidateSessionIdIsActive(CookieValidateIdentityContext context, UserDataAccess userDataAccess)
         {
-            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains("/identity/claims/e-id/userExtId"))?.Value;
+            var userId = context.Identity.Claims.FirstOrDefault(c => c.Type.Contains(ClaimValueNames.UserExtId))?.Value;
             var user = userDataAccess.GetUser(userId);
 
             var activeAspNetSessionId = user?.ActiveAspNetSessionId;

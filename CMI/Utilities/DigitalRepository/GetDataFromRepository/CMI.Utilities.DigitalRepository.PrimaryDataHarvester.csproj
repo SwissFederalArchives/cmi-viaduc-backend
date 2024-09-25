@@ -39,13 +39,13 @@
     <Reference Include="Autofac, Version=6.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Autofac.6.4.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Devart.Data, Version=5.0.1654.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+    <Reference Include="Devart.Data, Version=6.0.59.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Libs\Devart\dotConnectOracle\9.3.230\Devart.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Libs\Devart\dotConnectOracle\10.3.59\Devart.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Devart.Data.Oracle, Version=9.3.230.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+    <Reference Include="Devart.Data.Oracle, Version=10.3.59.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Libs\Devart\dotConnectOracle\9.3.230\Devart.Data.Oracle.dll</HintPath>
+      <HintPath>..\..\..\..\Libs\Devart\dotConnectOracle\10.3.59\Devart.Data.Oracle.dll</HintPath>
     </Reference>
     <Reference Include="DotCMIS, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0377a82433ccbb00, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Apache.DotCMIS.0.6\lib\DotCMIS.dll</HintPath>
@@ -62,8 +62,8 @@
     <Reference Include="MassTransit.RabbitMqTransport, Version=8.0.16.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\MassTransit.RabbitMQ.8.0.16\lib\net462\MassTransit.RabbitMqTransport.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Microsoft.Extensions.Configuration.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
@@ -181,11 +181,11 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\packages\System.Text.Json.7.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Channels, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\System.Threading.Channels.7.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
@@ -238,10 +238,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Access\Common\CMI.Access.Common.csproj">
-      <Project>{09318bf3-44cd-43b7-ac61-faae6b957b3a}</Project>
-      <Name>CMI.Access.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Access\Repository\CMI.Access.Repository.csproj">
       <Project>{A208493F-92C2-4FA7-8A5C-358263CC8340}</Project>
       <Name>CMI.Access.Repository</Name>
@@ -269,10 +265,6 @@
     <ProjectReference Include="..\..\..\Engine\PackageMetadata\CMI.Engine.PackageMetadata.csproj">
       <Project>{C643F370-1CC2-43E7-83DF-E7DA1392878C}</Project>
       <Name>CMI.Engine.PackageMetadata</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Manager\Index\CMI.Manager.Index.csproj">
-      <Project>{1E7C16A5-7236-407C-B0A0-0394EA9F3A21}</Project>
-      <Name>CMI.Manager.Index</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Manager\Repository\CMI.Manager.Repository.csproj">
       <Project>{6CB59E48-6446-439F-ABC3-7242040AB926}</Project>

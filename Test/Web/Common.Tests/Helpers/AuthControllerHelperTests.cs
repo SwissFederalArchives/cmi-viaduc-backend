@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Security.Principal;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
@@ -10,6 +11,7 @@ using CMI.Web.Common.api;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
 using FluentAssertions;
+using Microsoft.Owin;
 using Moq;
 using NUnit.Framework;
 
@@ -38,94 +40,71 @@ namespace CMI.Web.Common.Tests.Helpers
         }
 
         [Test]
-        public void GetIdentity_For_InExisting_External_Public_Client_User_Should_Return_Valid_Identity()
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:20", "E-ID CH-LOGIN", "Ö2")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:30", "E-ID CH-LOGIN", "Ö2")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID FED-LOGIN", "BVW")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50", "E-ID FED-LOGIN", "BVW")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60", "E-ID FED-LOGIN", "BVW")]
+        public void GetIdentity_For_InExisting_External_Public_Client_User_Should_Return_Valid_Identity_With_Status_New_User_And_Specific_Role(string authType, string homeName, string roleResult)
         {
             // arrange
-            var controllerHelperMock = Mock.Of<IControllerHelper>();
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "Dummy"),
+                new(ClaimValueNames.AuthenticationMethod, authType),
+                new(ClaimValueNames.HomeName, homeName)
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö2"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock, authenticationHelperMock.Object, null);
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object, null);
 
             // act
             var result = sut.GetIdentity(null, null, true);
 
             // assert
             result.AuthStatus.Should().Be(AuthStatus.NeuerBenutzer);
-            result.Roles.Should().ContainInOrder(AccessRoles.RoleOe2);
+            result.Roles.Should().ContainInOrder(roleResult);
             result.IssuedAccessTokens.Length.Should().Be(0);
             result.RedirectUrl.Should().BeEmpty();
         }
 
-        [Test]
-        public void GetIdentity_For_InExisting_Internal_Public_Client_User_Should_Return_Valid_Identity()
-        {
-            // arrange
-            var controllerHelperMock = Mock.Of<IControllerHelper>(setup => setup.IsInternalUser());
+       
 
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "BVW"
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock, authenticationHelperMock.Object, null);
-
-            // act
-            var result = sut.GetIdentity(null, null, true);
-
-            // assert
-            result.AuthStatus.Should().Be(AuthStatus.NeuerBenutzer);
-            result.Roles.Should().ContainInOrder(AccessRoles.RoleBVW);
-            result.IssuedAccessTokens.Length.Should().Be(0);
-            result.RedirectUrl.Should().BeEmpty();
-        }
 
         [Test]
         public void GetIdentity_For_InExisting_Internal_Management_Client_User_Should_Return_Valid_Identity()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche-management-client.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                new(ClaimValueNames.HomeName, "E-ID FED-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "BVW"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
@@ -140,24 +119,22 @@ namespace CMI.Web.Common.Tests.Helpers
 
 
         [Test]
-        public void GetIdentity_For_Existing_User_Without_Role_Should_Throw_Exception()
+        public void GetIdentity_For_Existing_Management_Client_User_Without_Role_Should_Throw_Exception()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche-management-client.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                new(ClaimValueNames.HomeName, "E-ID FED-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "BVW"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var applicationRoleUserDataAccessMock = Mock.Of<IApplicationRoleUserDataAccess>();
 
@@ -167,9 +144,9 @@ namespace CMI.Web.Common.Tests.Helpers
 
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelperMock.Object,
+            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelper,
                 authenticationHelperMock.Object, webCmiConfigProviderMock.Object);
 
             // act
@@ -185,21 +162,19 @@ namespace CMI.Web.Common.Tests.Helpers
         public void GetIdentity_For_Existing_Public_Client_User_With_Role_And_Correct_AuthenticationMethod_Should_Return_Valid_Identity()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö2"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var applicationRoleUserDataAccessMock = Mock.Of<IApplicationRoleUserDataAccess>();
 
@@ -210,9 +185,9 @@ namespace CMI.Web.Common.Tests.Helpers
 
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelperMock.Object,
+            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelper,
                 authenticationHelperMock.Object, webCmiConfigProviderMock.Object);
 
             // act
@@ -225,26 +200,24 @@ namespace CMI.Web.Common.Tests.Helpers
             result.RedirectUrl.Should().BeEmpty();
         }
 
+        
         [Test]
         public void GetIdentity_For_Existing_Oe3_User_With_Role_And_Correct_AuthenticationMethod_Should_Return_Valid_Identity()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsMTanAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:30"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö3"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var applicationRoleUserDataAccessMock = Mock.Of<IApplicationRoleUserDataAccess>();
 
@@ -255,17 +228,61 @@ namespace CMI.Web.Common.Tests.Helpers
 
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelperMock.Object,
+            var sut = new AuthControllerHelper(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelper,
                 authenticationHelperMock.Object, webCmiConfigProviderMock.Object);
 
             // act
             var result = sut.GetIdentity(null, null, true);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.KeineMTanAuthentication);
+            result.AuthStatus.Should().Be(AuthStatus.Ok);
             result.Roles.Should().ContainInOrder("Ö3");
+            result.RedirectUrl.Should().Be("");
+        }
+
+        [Test]
+        public void GetIdentity_For_Existing_Oe3_User_With_Role_And_Insuficcient_QoA_Should_Return_KeineMTanAuthentication()
+        {
+            // arrange
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
+
+            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
+            authenticationHelperMock
+                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
+
+            var request = new Mock<HttpRequestMessage>();
+            var applicationRoleUserDataAccessMock = Mock.Of<IApplicationRoleUserDataAccess>();
+
+            var mockUserDataAccess = new Mock<IUserDataAccess>();
+            mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(
+                new User {Id = "1"});
+            mockUserDataAccess.Setup(m => m.GetRoleForClient(It.IsAny<string>())).Returns("Ö3");
+
+            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
+            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns((string _, string defaultValue) => defaultValue);
+
+            var sutMock = new Mock<AuthControllerHelper>(applicationRoleUserDataAccessMock, mockUserDataAccess.Object, controllerHelper,
+                authenticationHelperMock.Object, webCmiConfigProviderMock.Object);
+            sutMock.Setup(m => m.OnExternalSignOut(null, true));
+            var sut = sutMock.Object;
+
+            // act
+            var result = sut.GetIdentity(request.Object, null, true);
+
+            // assert
+            result.AuthStatus.Should().Be(AuthStatus.KeineMTanAuthentication);
+            result.Roles.Should().BeEmpty();
             result.RedirectUrl.Should().Be("www.recherche.bar.admin.ch/_pep/myaccount?returnURI=/my-appl/private/welcome.html&op=reg-mobile");
         }
 
@@ -279,28 +296,26 @@ namespace CMI.Web.Common.Tests.Helpers
         public void IsValidAuthRole_For_Empty_Role_Should_Return_KeineRolleDefiniert(string role, bool isPublicClient)
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "BVW"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
@@ -309,309 +324,110 @@ namespace CMI.Web.Common.Tests.Helpers
             // assert
             result.Should().Be(AuthStatus.KeineRolleDefiniert);
         }
-
+        
         [Test]
-        [TestCase("Ö2", true)]
-        [TestCase("Ö2", false)]
-        [TestCase("Ö3", true)]
-        [TestCase("Ö3", false)]
-        public void IsValidAuthRole_For_External_User_With_Internal_Authentication_Should_Throw_AuthenticationException(string role,
-            bool isKerberosAuth)
+        [TestCase("Ö2", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:10", "E-ID CH-LOGIN", false, AuthStatus.ZuTieferQoAWert)]
+        [TestCase("Ö3", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:10", "E-ID CH-LOGIN", false, AuthStatus.ZuTieferQoAWert)]
+        [TestCase("Ö3", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20", "E-ID CH-LOGIN", false, AuthStatus.KeineMTanAuthentication)]
+        [TestCase("BVW", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:30", "E-ID FED-LOGIN", false, AuthStatus.ZuTieferQoAWert)]
+        [TestCase("AS", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID FED-LOGIN", true, AuthStatus.ZuTieferQoAWert)]
+        [TestCase("BAR", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:50", "E-ID FED-LOGIN", true,AuthStatus.KeineSmartcardAuthentication)]
+        [TestCase("AS", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID FED-LOGIN", false, AuthStatus.RequiresElevatedCheck)]
+        [TestCase("BAR", "urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID FED-LOGIN", false, AuthStatus.RequiresElevatedCheck)]
+        public void IsValidAuthRole_For_User_With_Too_Low_QoA_Should_Return_Status_ZuTieferQoAWert(string role, string authMethod, string homeName, bool isElevatedLogin, AuthStatus expectedResult)
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(isKerberosAuth);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(!isKerberosAuth);
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, authMethod),
+                new(ClaimValueNames.HomeName, homeName)
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
-            var action = (Action) (() => { sut.IsValidAuthRole(role, true); });
+            var result = sut.IsValidAuthRole(role, true, isElevatedLogin); 
+
+            // assert
+            result.Should().Be(expectedResult);
+        }
+
+        [Test]
+        public void IsValidAuthRole_For_BAR_User_With_HomeName_Not_FED_Login_Should_throw_exception()
+        {
+            // arrange
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
+
+            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
+            authenticationHelperMock
+                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
+
+            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
+            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
+            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
+                .Returns((string _, string defaultValue) => defaultValue);
+
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
+                webCmiConfigProviderMock.Object);
+
+            // act
+            var action = (Action) (() => { sut.IsValidAuthRole("BAR", true); });
 
             // assert
             action.Should().Throw<AuthenticationException>()
-                .WithMessage("Kerberos oder Smartcard dürfen nicht für Ö2 und Ö3 verwendet werden");
+                .WithMessage("Die BAR-Rolle verlangt zwingend ein FED-Login");
         }
 
-        [Test]
-        [TestCase("BVW")]
-        [TestCase("BAR")]
-        [TestCase("AS")]
-        public void IsValidAuthRole_For_Internal_User_With_External_Authentication_Should_Throw_AuthenticationException(string role)
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var action = (Action) (() => { sut.IsValidAuthRole(role, true); });
-
-            // assert
-            action.Should().Throw<AuthenticationException>()
-                .WithMessage("Interne Benutzerrollen (BVW, AS und BAR) müssen Kerberos oder Smartcard verwenden");
-        }
-
-        [Test]
-        [TestCase("Ö2", false)]
-        [TestCase("BVW", true)]
-        public void IsValidAuthRole_For_Public_Client_Roles_Oe2_And_Bvw_Should_Return_Ok(string role, bool isInternalUser)
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(isInternalUser);
-            controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns("ALLOW");
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(isInternalUser);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(isInternalUser);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var result = sut.IsValidAuthRole(role, true);
-
-            // assert
-            result.Should().Be(AuthStatus.Ok);
-        }
-
-        [Test]
-        public void IsValidAuthRole_For_Public_Client_Roles_Oe3_Should_Return_Ok_If_IsMTanAuthentication()
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsMTanAuthentication()).Returns(true);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö3"
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var result = sut.IsValidAuthRole("Ö3", true);
-
-            // assert
-            result.Should().Be(AuthStatus.Ok);
-        }
-
-        [Test]
-        public void IsValidAuthRole_For_Public_Client_Roles_Oe3_Should_Return_KeineMTanAuthentication_When_User_Is_Missing_MTan_Claim()
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsMTanAuthentication()).Returns(false);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö3"
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var result = sut.IsValidAuthRole("Ö3", true);
-
-            // assert
-            result.Should().Be(AuthStatus.KeineMTanAuthentication);
-        }
-
-
-        [Test]
-        [TestCase("AS")]
-        [TestCase("BAR")]
-        public void IsValidAuthRole_For_Public_Client_Roles_As_And_Bar_Should_Return_Ok_When_LoggedIn_With_Kerberos(string role)
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var result = sut.IsValidAuthRole(role, true);
-
-            // assert
-            result.Should().Be(AuthStatus.Ok);
-        }
-
-        [Test]
-        [TestCase("AS")]
-        [TestCase("BAR")]
-        public void IsValidAuthRole_For_Public_Client_Roles_As_And_Bar_Should_Return_KeineKerberosAuthentication_When_Not_LoggedIn_With_Kerberos(
-            string role)
-        {
-            // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(true);
-
-            var authenticationHelperMock = new Mock<IAuthenticationHelper>();
-            authenticationHelperMock
-                .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
-
-            var mockUserDataAccess = Mock.Of<IUserDataAccess>();
-            var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
-            webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
-
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
-                webCmiConfigProviderMock.Object);
-
-            // act
-            var result = sut.IsValidAuthRole(role, true);
-
-            // assert
-            result.Should().Be(AuthStatus.KeineKerberosAuthentication);
-        }
-
+        
+       
+        
+       
         [Test]
         public void IsValidAuthRole_For_Public_Client_Roles_Oe1_Should_Throw_Exception()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "BAR-recherche.ALLOW"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                new(ClaimValueNames.HomeName, "E-ID CH-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "Ö1"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
@@ -621,36 +437,33 @@ namespace CMI.Web.Common.Tests.Helpers
             action.Should().Throw<InvalidOperationException>("Ö1 are not registered users, so they don't have a real session")
                 .WithMessage("Nicht definiertes Rollen handling");
         }
-
+        
         [Test]
         [TestCase("ALLOW")]
         [TestCase("APPO")]
-        public void IsValidAuthRole_For_Management_Client_Roles_Allow_And_Appo_Should_Return_Ok_When_LoggedIn_With_Kerberos(string role)
+        public void IsValidAuthRole_For_Management_Client_Roles_Allow_And_Appo_Should_Return_Ok(string role)
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, role),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                new(ClaimValueNames.HomeName, "E-ID FED-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
@@ -661,72 +474,68 @@ namespace CMI.Web.Common.Tests.Helpers
         }
 
         [Test]
-        [TestCase("ALLOW")]
-        [TestCase("APPO")]
+        [TestCase("ALLOW", false, AuthStatus.RequiresElevatedCheck)]
+        [TestCase("APPO", false, AuthStatus.RequiresElevatedCheck)]
+        [TestCase("ALLOW", true, AuthStatus.KeineSmartcardAuthentication)]
+        [TestCase("APPO", true, AuthStatus.KeineSmartcardAuthentication)]
         public void
-            IsValidAuthRole_For_Management_Client_Roles_Allow_And_Appo_Should_Return_KeineKerberosAuthentication_When_Not_LoggedIn_With_Kerberos(
-                string role)
+            IsValidAuthRole_For_Management_Client_Roles_Allow_And_Appo_With_Too_Low_QoA_Should_Return_KeineSmartcardAuthentication(
+                string role, bool isElevatedLogin, AuthStatus expectedResult)
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, role),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:50"),
+                new(ClaimValueNames.HomeName, "E-ID FED-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = role
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
-            var result = sut.IsValidAuthRole(role, false);
+            var result = sut.IsValidAuthRole(role, false, isElevatedLogin);
 
             // assert
-            result.Should().Be(AuthStatus.KeineKerberosAuthentication);
+            result.Should().Be(expectedResult);
         }
-
+        
         [Test]
         public void IsValidAuthRole_For_Management_Client_With_Unknown_Roles_Should_Throw_Exception()
         {
             // arrange
-            var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.IsKerberosAuthentication()).Returns(false);
-            controllerHelperMock.Setup(m => m.IsSmartcartAuthentication()).Returns(false);
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "dummy"),
+                new(ClaimValueNames.AuthenticationMethod, "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20"),
+                new(ClaimValueNames.HomeName, "E-ID FED-LOGIN")
+            };
+
+            var controllerHelper = new ControllerHelper(claims);
 
             var authenticationHelperMock = new Mock<IAuthenticationHelper>();
             authenticationHelperMock
                 .Setup(m => m.GetClaimsForRequest(It.IsAny<IPrincipal>(), It.IsAny<HttpRequestMessage>()))
-                .Returns(new List<ClaimInfo>
-                {
-                    new ClaimInfo
-                    {
-                        Type = "/identity/claims/e-id/profile/role",
-                        Value = "X-UNKNOWN"
-                    }
-                });
+                .Returns(claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList());
 
             var mockUserDataAccess = Mock.Of<IUserDataAccess>();
             var webCmiConfigProviderMock = new Mock<IWebCmiConfigProvider>();
             webCmiConfigProviderMock.Setup(m => m.GetStringSetting(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string key, string defaultValue) => defaultValue);
+                .Returns((string _, string defaultValue) => defaultValue);
 
-            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelperMock.Object, authenticationHelperMock.Object,
+            var sut = new AuthControllerHelper(null, mockUserDataAccess, controllerHelper, authenticationHelperMock.Object,
                 webCmiConfigProviderMock.Object);
 
             // act
@@ -736,6 +545,7 @@ namespace CMI.Web.Common.Tests.Helpers
             action.Should().Throw<ArgumentOutOfRangeException>().WithMessage("*Nicht definiertes Rollen handling*");
         }
 
+        
         [Test]
         public void TryUpdaterUser_With_InExistent_User_Should_Return_False()
         {
@@ -760,7 +570,7 @@ namespace CMI.Web.Common.Tests.Helpers
             mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User());
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
             controllerHelperMock.Setup(m => m.GetFromClaim(It.IsAny<string>())).Returns("claimvalue");
 
             var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
@@ -769,9 +579,9 @@ namespace CMI.Web.Common.Tests.Helpers
             sut.TryUpdateUser("1", new List<ClaimInfo>());
 
             // assert
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/surname")));
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/givenname")));
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/emailaddress")));
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.FamilyName)));
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.FirstName)));
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.Email)));
 
             mockUserDataAccess.Verify(m =>
                 m.UpdateUserOnLogin(It.Is<User>(u => u.EmailAddress == "claimvalue"), It.IsAny<string>(), It.IsAny<string>()));
@@ -786,11 +596,15 @@ namespace CMI.Web.Common.Tests.Helpers
             {
                 FamilyName = "Meier",
                 FirstName = "Bruno",
-                EmailAddress = "bruno.meier@cmiag.ch"
+                EmailAddress = "bruno.meier@cmiag.ch",
+                IsIdentifiedUser = false,
+                HomeName = "claimvalue",
+                QoAValue = 30
             });
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(false);
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(false);
+            controllerHelperMock.Setup(m => m.GetQoAFromClaim()).Returns(30);
             controllerHelperMock.Setup(m => m.GetFromClaim(It.IsAny<string>())).Returns("claimvalue");
 
             var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
@@ -799,9 +613,9 @@ namespace CMI.Web.Common.Tests.Helpers
             sut.TryUpdateUser("1", new List<ClaimInfo>());
 
             // assert
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/surname")), Times.Never);
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/givenname")), Times.Never);
-            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == "/identity/claims/emailaddress")), Times.Never);
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.FamilyName)), Times.Never);
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.FirstName)), Times.Never);
+            controllerHelperMock.Verify(m => m.GetFromClaim(It.Is<string>(val => val == ClaimValueNames.Email)), Times.Never);
 
             mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
@@ -815,14 +629,15 @@ namespace CMI.Web.Common.Tests.Helpers
             {
                 FamilyName = "Meier",
                 FirstName = "Bruno",
-                EmailAddress = "bruno.meier@cmiag.ch"
+                EmailAddress = "bruno.meier@cmiag.ch",
+                IsIdentifiedUser = true
             });
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/surname")).Returns("Meier");
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/givenname")).Returns("THOMAS");
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/emailaddress")).Returns("bruno.meier@cmiag.ch");
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FamilyName)).Returns("Meier");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FirstName)).Returns("THOMAS");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.Email)).Returns("bruno.meier@cmiag.ch");
 
             var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
 
@@ -830,7 +645,7 @@ namespace CMI.Web.Common.Tests.Helpers
             sut.TryUpdateUser("1", new List<ClaimInfo>());
 
             // assert
-            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()));
+            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
 
         [Test]
@@ -846,10 +661,10 @@ namespace CMI.Web.Common.Tests.Helpers
             });
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/surname")).Returns("Meier");
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/givenname")).Returns("Bruno");
-            controllerHelperMock.Setup(m => m.GetFromClaim("/identity/claims/emailaddress")).Returns("bruno.meier@BAR.ADMIN.ch");
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FamilyName)).Returns("Meier");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FirstName)).Returns("Bruno");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.Email)).Returns("bruno.meier@BAR.ADMIN.ch");
 
             var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
 
@@ -857,8 +672,69 @@ namespace CMI.Web.Common.Tests.Helpers
             sut.TryUpdateUser("1", new List<ClaimInfo>());
 
             // assert
-            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()));
+            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         }
+
+        [Test]
+        public void TryUpdaterUser_With_User_Should_Update_User_From_Db_If_QoA_Changes()
+        {
+            // arrange
+            var mockUserDataAccess = new Mock<IUserDataAccess>();
+            mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User
+            {
+                FamilyName = "Meier",
+                FirstName = "Bruno",
+                EmailAddress = "bruno.meier@cmiag.ch",
+                QoAValue = 50
+            });
+
+            var controllerHelperMock = new Mock<IControllerHelper>();
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(false);
+            controllerHelperMock.Setup(m => m.GetQoAFromClaim()).Returns(30);
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FamilyName)).Returns("Meier");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FirstName)).Returns("Bruno");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.Email)).Returns("bruno.meier@BAR.ADMIN.ch");
+
+            var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
+
+            // act
+            sut.TryUpdateUser("1", new List<ClaimInfo>());
+
+            // assert
+            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
+        [Test]
+        public void TryUpdaterUser_With_User_Should_Update_User_From_Db_If_HomeName_Changes()
+        {
+            // arrange
+            var mockUserDataAccess = new Mock<IUserDataAccess>();
+            mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User
+            {
+                FamilyName = "Meier",
+                FirstName = "Bruno",
+                EmailAddress = "bruno.meier@cmiag.ch",
+                QoAValue = 50,
+                HomeName = "Test"
+            });
+
+            var controllerHelperMock = new Mock<IControllerHelper>();
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(false);
+            controllerHelperMock.Setup(m => m.GetQoAFromClaim()).Returns(50);
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.HomeName)).Returns("Changed");
+            controllerHelperMock.Setup(m => m.GetFromClaim( ClaimValueNames.FamilyName)).Returns("Meier");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.FirstName)).Returns("Bruno");
+            controllerHelperMock.Setup(m => m.GetFromClaim(ClaimValueNames.Email)).Returns("bruno.meier@BAR.ADMIN.ch");
+
+            var sut = new AuthControllerHelper(null, mockUserDataAccess.Object, controllerHelperMock.Object, null, null);
+
+            // act
+            sut.TryUpdateUser("1", new List<ClaimInfo>());
+
+            // assert
+            mockUserDataAccess.Verify(m => m.UpdateUserOnLogin(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        }
+
 
         [Test]
         public void TryUpdaterUser_With_Internal_User_Should_Set_Standard_Role_Only_For_Allowed_User()
@@ -868,7 +744,7 @@ namespace CMI.Web.Common.Tests.Helpers
             mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User());
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
             controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns(AccessRoles.RoleMgntAllow);
             controllerHelperMock.Setup(m => m.GetFromClaim(It.IsAny<string>())).Returns("claimvalue");
 
@@ -894,7 +770,7 @@ namespace CMI.Web.Common.Tests.Helpers
             mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User());
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
             controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns(role);
             controllerHelperMock.Setup(m => m.GetFromClaim(It.IsAny<string>())).Returns("claimvalue");
 
@@ -921,7 +797,7 @@ namespace CMI.Web.Common.Tests.Helpers
             mockUserDataAccess.Setup(m => m.GetUser(It.IsAny<string>())).Returns(new User());
 
             var controllerHelperMock = new Mock<IControllerHelper>();
-            controllerHelperMock.Setup(m => m.IsInternalUser()).Returns(true);
+            controllerHelperMock.Setup(m => m.IsIdentifiedUser()).Returns(true);
             controllerHelperMock.Setup(m => m.GetMgntRoleFromClaim()).Returns(role);
             controllerHelperMock.Setup(m => m.GetFromClaim(It.IsAny<string>())).Returns("claimvalue");
 
@@ -983,6 +859,56 @@ namespace CMI.Web.Common.Tests.Helpers
 
             // asset
             action.Should().NotThrow();
+        }
+
+        [Test]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:20", "E-ID CH-LOGIN", "Ö2")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:30", "E-ID CH-LOGIN", "Ö2")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60", "E-ID CH-LOGIN", "Ö3")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:40", "E-ID FED-LOGIN", "BVW")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50", "E-ID FED-LOGIN", "BVW")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60", "E-ID FED-LOGIN", "BVW")]
+        public void Get_Initial_role_for_new_user_returns_correct_role(string authMethod, string homeName, string expectedResult)
+        {
+            // arrange
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "dummy"),
+                new(ClaimValueNames.AuthenticationMethod, authMethod),
+                new(ClaimValueNames.HomeName, homeName)
+            };
+
+            var sut = new ControllerHelper(claims);
+
+            // act
+            var result = sut.GetInitialRoleFromClaim(); 
+
+            // assert
+            result.Should().Be(expectedResult);
+        }
+
+        [Test]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:22", "E-ID CH-LOGIN")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:10", "E-ID CH-LOGIN")]
+        public void Get_Initial_role_for_new_user_returns_exception_for_unknown_authMethods(string authMethod, string homeName)
+        {
+            // arrange
+            var claims = new List<Claim>
+            {
+                new(ClaimValueNames.EIdProfileRole, "dummy"),
+                new(ClaimValueNames.AuthenticationMethod, authMethod),
+                new(ClaimValueNames.HomeName, homeName)
+            };
+
+            var sut = new ControllerHelper(claims);
+
+            // act
+            var action = (Action) (() => { sut.GetInitialRoleFromClaim(); });
+
+            // asset
+            action.Should().Throw<ArgumentException>();
         }
     }
 }

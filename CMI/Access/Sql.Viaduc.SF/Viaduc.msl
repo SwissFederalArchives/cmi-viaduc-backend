@@ -82,7 +82,6 @@
           <ScalarProperty Name="Birthday" ColumnName="Birthday" />
           <ScalarProperty Name="FabasoftDossier" ColumnName="FabasoftDossier" />
           <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
-          <ScalarProperty Name="IsInternalUser" ColumnName="IsInternalUser" />
           <ScalarProperty Name="RolePublicClient" ColumnName="RolePublicClient" />
           <ScalarProperty Name="EiamRoles" ColumnName="EiamRoles" />
           <ScalarProperty Name="ResearcherGroup" ColumnName="ResearcherGroup" />
@@ -93,6 +92,10 @@
           <ScalarProperty Name="DownloadLimitDisabledUntil" ColumnName="DownloadLimitDisabledUntil" />
           <ScalarProperty Name="DigitalisierungsbeschraenkungAufgehobenBis" ColumnName="DigitalisierungsbeschraenkungAufgehobenBis" />
           <ScalarProperty Name="ActiveAspNetSessionId" ColumnName="ActiveAspNetSessionId" />
+          <ScalarProperty Name="IsIdentifiedUser" ColumnName="IsIdentifiedUser" />
+          <ScalarProperty Name="QoAValue" ColumnName="QoAValue" />
+          <ScalarProperty Name="HomeName" ColumnName="HomeName" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

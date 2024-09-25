@@ -1,0 +1,257 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/30409386.json",
+  "label": {
+    "none": [
+      "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/3040/9386/_UwPK5XsiPU6KWgwiYiNacH.json",
+      "label": {
+        "none": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/jpeg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3040%2F9386%2F00000009.jpg/full/150,/0/default.jpg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Signatur"
+        ],
+        "en": [
+          "Reference code"
+        ],
+        "fr": [
+          "Cote"
+        ],
+        "it": [
+          "Segnatura"
+        ],
+        "none": [
+          "Signatur"
+        ]
+      },
+      "value": {
+        "de": [
+          "M33#1000/1451#33*"
+        ],
+        "en": [
+          "M33#1000/1451#33*"
+        ],
+        "fr": [
+          "M33#1000/1451#33*"
+        ],
+        "it": [
+          "M33#1000/1451#33*"
+        ],
+        "none": [
+          "M33#1000/1451#33*"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+        ],
+        "en": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+        ],
+        "fr": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+        ],
+        "it": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+        ],
+        "none": [
+          "Amerikanische Entflohene in Klosters im 2. Weltkrieg"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "01.06.1943 - 31.05.1944"
+        ],
+        "en": [
+          "01.06.1943 - 31.05.1944"
+        ],
+        "fr": [
+          "01.06.1943 - 31.05.1944"
+        ],
+        "it": [
+          "01.06.1943 - 31.05.1944"
+        ],
+        "none": [
+          "01.06.1943 - 31.05.1944"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "1"
+        ],
+        "en": [
+          "1"
+        ],
+        "fr": [
+          "1"
+        ],
+        "it": [
+          "1"
+        ],
+        "none": [
+          "1"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Darin"
+        ],
+        "en": [
+          "Contains"
+        ],
+        "fr": [
+          "Contenu"
+        ],
+        "it": [
+          "Contiene"
+        ],
+        "none": [
+          "Darin"
+        ]
+      },
+      "value": {
+        "de": [
+          "DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels"
+        ],
+        "en": [
+          "DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels"
+        ],
+        "fr": [
+          "DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels"
+        ],
+        "it": [
+          "DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels"
+        ],
+        "none": [
+          "DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels"
+        ]
+      }
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/30409386",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/0000/3040/9386/OCR-Text-komplett.zip",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Zip",
+      "format": "application/zip"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3040-9386",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

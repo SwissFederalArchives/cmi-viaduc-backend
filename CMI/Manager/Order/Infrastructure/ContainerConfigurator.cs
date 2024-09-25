@@ -25,7 +25,9 @@ namespace CMI.Manager.Order.Infrastructure
             var builder = new ContainerBuilder();
             builder.RegisterType<SearchIndexDataAccess>()
                 .As<ISearchIndexDataAccess>()
-                .WithParameter("address", new Uri(ElasticConnectionSetting.Default.ConnectionString));
+                .WithParameter("address", new Uri(ElasticConnectionSetting.Default.ConnectionString))
+                .WithParameter("username", ElasticConnectionSetting.Default.ElasticSearchUsername)
+                .WithParameter("password", ElasticConnectionSetting.Default.ElasticSearchPWD);
 
             builder.RegisterType<OrderManager>().As<IPublicOrder>();
             builder.RegisterType<OrderDataAccess>().As<IOrderDataAccess>().WithParameter("connectionString", DbConnectionSetting.Default.ConnectionString);

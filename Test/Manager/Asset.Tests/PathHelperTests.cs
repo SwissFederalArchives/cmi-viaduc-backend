@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CMI.Engine.Asset.PostProcess;
+using CMI.Utilities.Common.Helpers;
 using FluentAssertions;
 using NUnit.Framework;
 

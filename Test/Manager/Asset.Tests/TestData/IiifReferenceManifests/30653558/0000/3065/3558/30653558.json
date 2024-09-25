@@ -285,5 +285,11 @@
       "format": "application/zip"
     }
   ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3065-3558",
+      "@type": "SearchService2"
+    }
+  ],
   "start": null
 }

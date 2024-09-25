@@ -15,8 +15,9 @@ namespace CMI.Access.Common.Tests
         {
             var uri = "(change here, but do not commit)";
             var node = new Uri(uri);
-
-            helper = new ElasticIndexHelper(node, "test");
+            string username = "(change here, but do not commit)";
+            string pwd = "(change here,but do not commit)";
+            helper = new ElasticIndexHelper(node, "test", username, pwd);
             if (helper.IndexExists("test"))
             {
                 helper.DeleteIndex("test");
@@ -31,7 +32,7 @@ namespace CMI.Access.Common.Tests
         public void ShouldInsertARecord()
         {
             helper.CountDocuments.Should().Be(0);
-            helper.Index(new ElasticArchiveRecord {ArchiveRecordId = "100"});
+            helper.Index(new ElasticArchiveRecord { ArchiveRecordId = "100" });
             helper.CountDocuments.Should().Be(1);
         }
 

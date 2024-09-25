@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Xml;
+using CMI.Web.Common.api;
 using CMI.Web.Common.Helpers;
 using Newtonsoft.Json;
+using Serilog;
+using Sustainsys.Saml2;
 using Sustainsys.Saml2.Configuration;
+using Sustainsys.Saml2.Metadata;
 using Sustainsys.Saml2.Saml2P;
 using Sustainsys.Saml2.WebSso;
 using Formatting = Newtonsoft.Json.Formatting;
@@ -26,7 +33,7 @@ namespace CMI.Web.Common.Auth
 
         public void AcsCommandResultCreated(CommandResult result, Saml2Response response)
         {
-            spOptions.Logger.WriteVerbose("SAML2 {Saml2Response}:" + JsonConvert.SerializeObject(response, Formatting.Indented));
+            spOptions.Logger.WriteVerbose("SAML2 {Saml2Response}:" + JsonConvert.SerializeObject(response, Formatting.None));
             // Bereits in Anwendung auf Mandant BAR vorhanden
             if (!HasValidMandant(result))
             {
@@ -78,11 +85,13 @@ namespace CMI.Web.Common.Auth
                 return;
             }
 
+            
+
             spOptions.Logger.WriteVerbose("(AuthServiceNotifications:AcsCommandResultCreated()): {COMMANDRESULT}" +
-                                          JsonConvert.SerializeObject(result, Formatting.Indented,
+                                          JsonConvert.SerializeObject(result, Formatting.None,
                                               new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore}));
             spOptions.Logger.WriteVerbose("(AuthServiceNotifications:AcsCommandResultCreated()): {Saml2Response}" +
-                                          JsonConvert.SerializeObject(response, Formatting.Indented));
+                                          JsonConvert.SerializeObject(response, Formatting.None));
 
             // Fehlende Claims hinzufügen (Custom-Roles kommen sonst nicht mit!)
             var options = Options.FromConfiguration;
@@ -105,7 +114,7 @@ namespace CMI.Web.Common.Auth
             }
             
             spOptions.Logger.WriteVerbose("(AuthServiceNotifications:AcsCommandResultCreated()): {READCLAIMS}" +
-                                              JsonConvert.SerializeObject(((ClaimsIdentity) result.Principal.Identity).Claims, Formatting.Indented,
+                                              JsonConvert.SerializeObject(((ClaimsIdentity) result.Principal.Identity).Claims, Formatting.None,
                                                   new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore}));
         }
 
@@ -129,6 +138,12 @@ namespace CMI.Web.Common.Auth
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:SmartcardPKI":
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:NomadTelephony":
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:30":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:35":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:40":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:50":
+                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60":
                     return true;
                 default:
                     return false;
@@ -139,6 +154,52 @@ namespace CMI.Web.Common.Auth
         {
             var url = WebHelper.GetStringSetting("loginMandantErstellenUrl", "https://www.recherche.bar.admin.ch/recherche/private");
             return url;
+        }
+
+        public IdentityProvider SelectIdentityProvider(EntityId entityRequest, IDictionary<string, string> args)
+        {
+            Log.Information("Initiated {method} with the Idp Id of {id}", nameof(SelectIdentityProvider), entityRequest.Id);
+
+            // Im Public-Client erfolgt die Unterscheidung zwischen verschiedenen QoA-Levels
+            if (isPublicClient)
+            {
+                // Wir setzen zuerst den tiefsten QoA Level als Default
+                spOptions.RequestedAuthnContext = new Saml2RequestedAuthnContext(new Uri("urn:qoa.eiam.admin.ch:names:tc:ac:classes:20"),
+                    AuthnContextComparisonType.Minimum);
+
+                // Wenn wir einen idp angegeben haben, dann bedeutet dies, dass wir 
+                // denselben idp verwenden wollen, aber mit einer höheren QoA
+                // Damit umgehen wir die Limitation vom eIAM, die für einen im Bundesnetz angemeldeten Benutzer mit Smartcard
+                // nur der Level 40 zurückgegeben wird, und nicht wie 60 wie gefordert.
+                if (!string.IsNullOrEmpty(entityRequest.Id))
+                {
+                    switch (entityRequest.Id.ToLower())
+                    {
+                        case "level-60":
+                            spOptions.RequestedAuthnContext = new Saml2RequestedAuthnContext(new Uri("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60"),
+                                AuthnContextComparisonType.Minimum);
+                            break;
+                        case "level-50":
+                            spOptions.RequestedAuthnContext = new Saml2RequestedAuthnContext(new Uri("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50"),
+                                AuthnContextComparisonType.Minimum);
+                            break;
+                        default:
+                            throw new InvalidEnumArgumentException("Diese Option für den idp wird nicht unterstützt");
+                    }
+                }
+            }
+
+            // Indem wir die ID auf null zurücksetzen, wird der standardmässige IdP verwendet,
+            // aber eben mit einer Option die eine höheren AuthnContext verlangt.
+            entityRequest.Id = null;
+
+            // Dadurch wird der Standard Idp gemäss gewählter Konfiguration zurückgegeben.
+            return null;
+        }
+
+        public void AuthenticationRequestCreated(Saml2AuthenticationRequest authRequest, IdentityProvider idp, IDictionary<string, string> args)
+        {
+            Log.Information("Initiated AuthRequest is \n{xml}", authRequest.ToXml());
         }
     }
 }

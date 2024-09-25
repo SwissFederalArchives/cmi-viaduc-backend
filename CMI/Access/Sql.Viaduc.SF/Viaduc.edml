@@ -254,19 +254,19 @@
             </Documentation>
           </Property>
           <Property Name="CreatedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="500" />
           <Property Name="ModifiedOn" Type="datetime" Nullable="false" devart:DefaultValue="sysdatetime()" />
-          <Property Name="ModifiedBy" Type="varchar" MaxLength="500" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="500" />
           <Property Name="Birthday" Type="datetime" />
-          <Property Name="FabasoftDossier" Type="varchar" MaxLength="1000" />
-          <Property Name="ReasonForRejection" Type="varchar" MaxLength="100">
+          <Property Name="FabasoftDossier" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ReasonForRejection" Type="nvarchar" MaxLength="1000">
             <Documentation>
               <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
             </Documentation>
           </Property>
-          <Property Name="IsInternalUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
-          <Property Name="RolePublicClient" Type="varchar" MaxLength="3" />
-          <Property Name="EiamRoles" Type="varchar" MaxLength="10" />
+          <Property Name="IsIdentifiedUser" Type="bit" Nullable="false" devart:DefaultValue="1" />
+          <Property Name="RolePublicClient" Type="nvarchar" MaxLength="3" />
+          <Property Name="EiamRoles" Type="nvarchar" MaxLength="10" />
           <Property Name="ResearcherGroup" Type="bit" Nullable="false" devart:DefaultValue="0" />
           <Property Name="BarInternalConsultation" Type="bit" Nullable="false" devart:DefaultValue="0" />
           <Property Name="IdentifierDocument" Type="varbinary(max)">
@@ -286,11 +286,14 @@
               <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
             </Documentation>
           </Property>
+          <Property Name="QoAValue" Type="int" />
+          <Property Name="HomeName" Type="nvarchar" MaxLength="200" />
           <Property Name="ActiveAspNetSessionId" Type="nvarchar(max)" devart:DefaultValue="''" DefaultValue="">
             <Documentation>
               <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
             </Documentation>
           </Property>
+          <Property Name="LastLoginDate" Type="datetime" />
         </EntityType>
         <EntityType Name="ManuelleKorrektur">
           <Key>
@@ -684,19 +687,19 @@
             </Documentation>
           </Property>
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="9321e4b6-aeda-40c9-96f6-b94204b06742" />
-          <Property Name="CreatedBy" Type="String" MaxLength="500" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="8138b8a5-85bb-4654-9fae-5421ff99b754" />
+          <Property Name="CreatedBy" Type="String" MaxLength="500" Unicode="true" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="8138b8a5-85bb-4654-9fae-5421ff99b754" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="5a0f7ca3-8aa9-41c7-af4f-401c5cad254d" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="500" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="30db79eb-5ff5-4d3d-b5aa-424454d1cf7e" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="500" Unicode="true" ed:ValidateMaxLength="500" ed:ValidateRequired="false" ed:Guid="30db79eb-5ff5-4d3d-b5aa-424454d1cf7e" />
           <Property Name="Birthday" Type="DateTime" ed:ValidateRequired="false" ed:Guid="9457b0df-4836-422c-abf6-43d70e932b11" />
-          <Property Name="FabasoftDossier" Type="String" MaxLength="1000" ed:ValidateMaxLength="1000" ed:ValidateRequired="false" ed:Guid="38f47ec3-5f52-4a9a-963d-cd6543443325" />
-          <Property Name="ReasonForRejection" Type="String" MaxLength="100" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="ad15043c-a007-4798-b510-8b03acb4cf6a">
+          <Property Name="FabasoftDossier" Type="String" MaxLength="1000" Unicode="true" ed:ValidateMaxLength="1000" ed:ValidateRequired="false" ed:Guid="38f47ec3-5f52-4a9a-963d-cd6543443325" />
+          <Property Name="ReasonForRejection" Type="String" MaxLength="1000" Unicode="true" ed:ValidateMaxLength="1000" ed:ValidateRequired="false" ed:Guid="ad15043c-a007-4798-b510-8b03acb4cf6a">
             <Documentation>
               <Summary>In dieses Feld wird automatisch der Ablehnungsgrund eingetragen, welcher Swisscom beim Onboarding zurückgegeben hat.</Summary>
             </Documentation>
           </Property>
-          <Property Name="IsInternalUser" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="57ca3788-ad53-46c1-85a1-89a2780f115e" />
-          <Property Name="RolePublicClient" Type="String" MaxLength="3" ed:ValidateMaxLength="3" ed:ValidateRequired="false" ed:Guid="250d30f3-6571-4234-8f18-7f1d12d6b6b6" />
-          <Property Name="EiamRoles" Type="String" MaxLength="10" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="33b33907-b23d-485b-9be2-70c72d034c9d" />
+          <Property Name="IsIdentifiedUser" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="b8c1f91a-4482-4919-9caa-857663d5b7db" />
+          <Property Name="RolePublicClient" Type="String" MaxLength="3" Unicode="true" ed:ValidateMaxLength="3" ed:ValidateRequired="false" ed:Guid="250d30f3-6571-4234-8f18-7f1d12d6b6b6" />
+          <Property Name="EiamRoles" Type="String" MaxLength="10" Unicode="true" ed:ValidateMaxLength="10" ed:ValidateRequired="false" ed:Guid="33b33907-b23d-485b-9be2-70c72d034c9d" />
           <Property Name="ResearcherGroup" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="987ac55c-5865-4b22-a23f-af8321c409b0" />
           <Property Name="BarInternalConsultation" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="0cf3445f-45c3-4a50-905d-424786ab451a" />
           <Property Name="IdentifierDocument" Type="Binary" ed:ValidateRequired="false" ed:Guid="2ab9ec1f-ab4f-4e89-9b58-4c1f395ad5ff">
@@ -716,11 +719,14 @@
               <Summary>Gibt an, bis wann beim Benutzer die Digitalisierungsbeschränkung aufgehoben wird.</Summary>
             </Documentation>
           </Property>
+          <Property Name="QoAValue" Type="Int32" ed:ValidateRequired="false" ed:Guid="dc6aeb2c-45f6-4024-93f5-8bcad5e721e9" />
+          <Property Name="HomeName" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="45047650-a9b3-4e7a-b693-48d5788acce6" />
           <Property Name="ActiveAspNetSessionId" Type="String" DefaultValue="''" Unicode="true" ed:ValidateRequired="false" ed:Guid="2ca3ff55-9d61-49ad-90af-f188f5eb216a">
             <Documentation>
               <Summary>Enthält die ASP-Session ID falls der Benutzer nicht abgemeldet ist.</Summary>
             </Documentation>
           </Property>
+          <Property Name="LastLoginDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="33f466d6-022f-4905-821f-95e33c11b6ff" />
         </EntityType>
         <EntityType Name="ManuelleKorrektur" ed:Guid="75cbb171-fa3c-4d1e-9df7-c393423b7364">
           <Key>
@@ -948,7 +954,6 @@
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
                 <ScalarProperty Name="FabasoftDossier" ColumnName="FabasoftDossier" />
                 <ScalarProperty Name="ReasonForRejection" ColumnName="ReasonForRejection" />
-                <ScalarProperty Name="IsInternalUser" ColumnName="IsInternalUser" />
                 <ScalarProperty Name="RolePublicClient" ColumnName="RolePublicClient" />
                 <ScalarProperty Name="EiamRoles" ColumnName="EiamRoles" />
                 <ScalarProperty Name="ResearcherGroup" ColumnName="ResearcherGroup" />
@@ -959,6 +964,10 @@
                 <ScalarProperty Name="DownloadLimitDisabledUntil" ColumnName="DownloadLimitDisabledUntil" />
                 <ScalarProperty Name="DigitalisierungsbeschraenkungAufgehobenBis" ColumnName="DigitalisierungsbeschraenkungAufgehobenBis" />
                 <ScalarProperty Name="ActiveAspNetSessionId" ColumnName="ActiveAspNetSessionId" />
+                <ScalarProperty Name="IsIdentifiedUser" ColumnName="IsIdentifiedUser" />
+                <ScalarProperty Name="QoAValue" ColumnName="QoAValue" />
+                <ScalarProperty Name="HomeName" ColumnName="HomeName" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

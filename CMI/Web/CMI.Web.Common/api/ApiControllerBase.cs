@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Security.Claims;
+using System.Web.Http;
 using System.Web.Http.Cors;
 
 namespace CMI.Web.Common.api
@@ -7,6 +8,6 @@ namespace CMI.Web.Common.api
     [EnableCors("*", "*", "*")]
     public abstract class ApiControllerBase : ApiController
     {
-        protected ControllerHelper ControllerHelper => new ControllerHelper(this);
+        protected ControllerHelper ControllerHelper => new ControllerHelper(((ClaimsIdentity)this.User.Identity).Claims);
     }
 }

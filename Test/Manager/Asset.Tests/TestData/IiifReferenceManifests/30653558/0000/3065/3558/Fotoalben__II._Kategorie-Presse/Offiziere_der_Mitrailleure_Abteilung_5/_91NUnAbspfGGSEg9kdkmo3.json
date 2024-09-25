@@ -28,11 +28,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 3562,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000007.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000007.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000007.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000007.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -68,11 +68,11 @@
               "body": {
                 "format": "image/jpeg",
                 "height": 3571,
-                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000008.jpg/full/full/0/default.jpg",
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000008.jpg/full/full/0/default.jpg",
                 "service": [
                   {
                     "profile": "level2",
-                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000008.jpg",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000008.jpg",
                     "@type": "ImageService2"
                   }
                 ],
@@ -292,7 +292,7 @@
   "thumbnail": [
     {
       "format": "image/jpeg",
-      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F00000007.jpg/full/150,/0/default.jpg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000007.jpg/full/150,/0/default.jpg",
       "type": "Image"
     }
   ]

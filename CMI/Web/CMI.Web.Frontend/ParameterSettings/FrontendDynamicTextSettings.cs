@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using CMI.Contract.Parameter;
 
 namespace CMI.Web.Frontend.ParameterSettings
@@ -71,5 +67,6 @@ namespace CMI.Web.Frontend.ParameterSettings
         public string DeliveryTypeCommissionEN { get; set; }
 
         #endregion
+
     }
 }

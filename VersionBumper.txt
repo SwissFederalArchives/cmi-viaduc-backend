@@ -27,6 +27,13 @@ For
 	2023-10-16: PVW-1504 Lesesaalreservation: Integration Buchungswidget im Bestellwizard des Online-Zugangs (nur bei Lesesaalbestellungen)
 	2023-10-16: PVW-1504 Lesesaalreservation: Integration Buchungswidget im Bestellwizard des Online-Zugangs (nur bei Lesesaalbestellungen) Teil 2
 	2023-11-09: PVW-1538 Unsetzung: Viewer-Icon in Suchresultatliste Fix
-	2024-11-16: PVW-1539 Umsetzung: Bug-Bounty
-	2024-11-16: PVW-1539 synk entfernt
-  2024-11-16: Version 1009 |||
+	2023-11-16: PVW-1539 Umsetzung: Bug-Bounty
+	2023-11-16: PVW-1539 synk entfernt
+    2023-11-16: Version 1009 |||
+	2024-06-12: PVW-1723 Kein Feedback beim export von Mailvorlagen im MC
+	2024-06-18: PVW-1727-BUG]-Fehlverhalten-bei-manueller-Rollenzuteilung-in-Benutzerverwaltung
+	2024-07-03: Version to 2.3.0
+	2024-08-20: PVW-1765-BUG-Viewer-Suchbegriffe-passen-sich-im-Viewer-teilweise-nicht-an
+	2024-08-20: PVW-1765-BUG-Viewer-Suchbegriffe-passen-sich-im-Viewer-teilweise-nicht-an eye icon
+	2024-08-21: PVW-1765-BUG-Viewer: Suchbegriffe passen sich im Viewer teilweise nicht an Resultseite
+	2024-08-22: PVW-1656 BUG Diskrepanz zwischen Detail- und Listenansicht gewisser Datumsfelder im M-C Enumwerte

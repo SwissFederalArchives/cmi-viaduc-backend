@@ -19,7 +19,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000001%2F%2F%2F00000001.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FU_m_s_c_h_l_a_g_0000001%2F00000001.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -35,7 +35,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FFeldgottesdienst_katholisch%2F%2F%2F00000003.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FFeldgottesdienst_katholisch%2F00000003.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -51,7 +51,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F%2F00000005.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000005.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -67,7 +67,7 @@
       "thumbnail": [
         {
           "format": "image/jpeg",
-          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F%2F%2F00000007.jpg/full/150,/0/default.jpg",
+          "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000%2F3065%2F3558%2FFotoalben__II._Kategorie-Presse%2FOffiziere_der_Mitrailleure_Abteilung_5%2F00000007.jpg/full/150,/0/default.jpg",
           "type": "Image"
         }
       ]
@@ -280,6 +280,12 @@
       },
       "type": "Text",
       "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3065-3558-Fotoalben__II._Kategorie-Presse",
+      "@type": "SearchService2"
     }
   ],
   "start": null

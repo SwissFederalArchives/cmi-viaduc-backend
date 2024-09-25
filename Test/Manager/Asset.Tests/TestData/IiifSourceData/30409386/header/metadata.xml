@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="paketDIP" schemaVersion="4.1" xsi:schemaLocation="http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd" xmlns="http://bar.admin.ch/gebrauchskopie/v1">
+  <generierungsdatum>2024-08-29T00:00:00+02:00</generierungsdatum>
+  <inhaltsverzeichnis>
+    <ordner id="contentRoot638605479115864233">
+      <name>content</name>
+      <originalName>content</originalName>
+      <datei id="_CuSZsx6VoU5NOkIKLzfdzq">
+        <name>00000009.jp2</name>
+        <originalName>00000009.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>f8098774f0741465668364c3d871a320</pruefsumme>
+      </datei>
+      <datei id="_rgabeFisuFkXMMA3psNQLz">
+        <name>00000009_PREMIS.xml</name>
+        <originalName>00000009_PREMIS.xml</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>9812070998158d7ab609a718ecd39067</pruefsumme>
+      </datei>
+      <datei id="_roKn3vLPFuv3NU2EmixNoU">
+        <name>00000010.jp2</name>
+        <originalName>00000010.jp2</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>08c84ceab673b26fe39da6c924105768</pruefsumme>
+      </datei>
+      <datei id="_br2TEycQ00PFjDRkuOHDcK">
+        <name>00000010_PREMIS.xml</name>
+        <originalName>00000010_PREMIS.xml</originalName>
+        <pruefalgorithmus>MD5</pruefalgorithmus>
+        <pruefsumme>30b7158c6275d03a90349c8e25f43edb</pruefsumme>
+      </datei>
+    </ordner>
+  </inhaltsverzeichnis>
+  <ablieferung>
+    <ablieferungstyp>FILES</ablieferungstyp>
+    <ablieferndeStelle>Keine Angaben (k.A.) 2</ablieferndeStelle>
+    <ablieferungsnummer>1000/1451_1035917</ablieferungsnummer>
+    <provenienz>
+      <aktenbildnerName>Keine Angaben (k.A.)</aktenbildnerName>
+    </provenienz>
+    <ordnungssystem>
+      <name>Fotosammlung</name>
+      <ordnungssystemposition id="_XjkTULF1oJ6vdw1CvlH4CK">
+        <nummer>1</nummer>
+        <titel>Diverse Fotografien</titel>
+        <datenschutz>false</datenschutz>
+        <dossier id="_xSlDMJSjLoibPsOzUIxp21">
+          <aktenzeichen>1</aktenzeichen>
+          <titel>Amerikanische Entflohene in Klosters im 2. Weltkrieg</titel>
+          <inhalt>DKN. 1 Bereit zum Skifahren vor dem Hotel Silvretta, DKN. 2 Frank Corcoran mit eingegipsten Bein im Hotel Chesa Grischuna, DKN. 3 Skitour nach Silvretta, vor einer Berghütte, DKN. 4 Skitour nach Silvretta, auf der Piste, DKN. 5 Auf der Terrasse des Hotels</inhalt>
+          <erscheinungsform>digital</erscheinungsform>
+          <entstehungszeitraum>
+            <von>
+              <datum>1943-06-01</datum>
+            </von>
+            <bis>
+              <datum>1944-05-31</datum>
+            </bis>
+          </entstehungszeitraum>
+          <datenschutz>false</datenschutz>
+          <bemerkung>vgl. 451-6947 Brief Peter vom 10.1.1996</bemerkung>
+          <zusatzDaten>
+            <merkmal name="Signatur">M33#1000/1451#33*</merkmal>
+            <merkmal name="Stufe">Dossier</merkmal>
+            <merkmal name="Frühere Signaturen">M33#1#33*</merkmal>
+            <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"M*","Title":"Sammlungsgut (1848-)","DateRangeText":"1700-1995","ArchiveRecordId":"30","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"M33*","Title":"Fotosammlung","DateRangeText":"1847-1989","ArchiveRecordId":"4282","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"M33#1","Title":"Diverse Fotografien","DateRangeText":"1847-1989","ArchiveRecordId":"3667918","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"M33#1000/1451#33*","Title":"Amerikanische Entflohene in Klosters im 2. Weltkrieg","DateRangeText":"1943.06.01-1944.05.31","ArchiveRecordId":"1035917","Protected":false}]</merkmal>
+            <merkmal name="Form">Fotografie</merkmal>
+            <merkmal name="Identifikation digitales Magazin">c991a378-ce05-4665-a75d-8dd89d8c4b0a@_xSlDMJSjLoibPsOzUIxp21</merkmal>
+            <merkmal name="Entstehungszeitraum Anzeigetext">01.06.1943 - 31.05.1944</merkmal>
+          </zusatzDaten>
+          <dokument id="_UwPK5XsiPU6KWgwiYiNacH">
+            <titel>Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte</titel>
+            <erscheinungsform>digital</erscheinungsform>
+            <entstehungszeitraum>
+              <von>
+                <datum>1943-12-01</datum>
+              </von>
+              <bis>
+                <datum>1944-05-31</datum>
+              </bis>
+            </entstehungszeitraum>
+            <datenschutz>false</datenschutz>
+            <zusatzDaten>
+              <merkmal name="Signatur">M33#1000/1451#33#3*</merkmal>
+              <merkmal name="Stufe">Dokument</merkmal>
+              <merkmal name="Frühere Signaturen">M33#1#33#3*</merkmal>
+              <merkmal name="Archivplankontext">[{"IconId":4,"Level":"Archiv","RefCode":"CH-BAR#Unterlagen*","Title":"Gesamtbestand des Schweizerischen Bundesarchivs (1798-)","DateRangeText":"1424-2007","ArchiveRecordId":"1","Protected":false},{"IconId":10,"Level":"Hauptabteilung","RefCode":"M*","Title":"Sammlungsgut (1848-)","DateRangeText":"1700-1995","ArchiveRecordId":"30","Protected":false},{"IconId":5,"Level":"Bestand","RefCode":"M33*","Title":"Fotosammlung","DateRangeText":"1847-1989","ArchiveRecordId":"4282","Protected":false},{"IconId":19,"Level":"Serie","RefCode":"M33#1","Title":"Diverse Fotografien","DateRangeText":"1847-1989","ArchiveRecordId":"3667918","Protected":false},{"IconId":2,"Level":"Dossier","RefCode":"M33#1000/1451#33*","Title":"Amerikanische Entflohene in Klosters im 2. Weltkrieg","DateRangeText":"1943.06.01-1944.05.31","ArchiveRecordId":"1035917","Protected":false},{"IconId":6,"Level":"Dokument","RefCode":"M33#1000/1451#33#3*","Title":"Amerikanische Entflohene in Klosters im 2. Weltkrieg: Skitour nach Silvretta, vor einer Berghütte","DateRangeText":"1943.12.01-1944.05.31","ArchiveRecordId":"1038373","Protected":false}]</merkmal>
+              <merkmal name="Form">Abzug</merkmal>
+              <merkmal name="Identifikation digitales Magazin">c991a378-ce05-4665-a75d-8dd89d8c4b0a@_xSlDMJSjLoibPsOzUIxp21@_UwPK5XsiPU6KWgwiYiNacH</merkmal>
+              <merkmal name="Entstehungszeitraum Anzeigetext">01.12.1943 - 31.05.1944</merkmal>
+              <merkmal name="ReihenfolgeAnalogesDossier">000003</merkmal>
+            </zusatzDaten>
+            <dateiRef>_CuSZsx6VoU5NOkIKLzfdzq</dateiRef>
+            <dateiRef>_rgabeFisuFkXMMA3psNQLz</dateiRef>
+            <dateiRef>_roKn3vLPFuv3NU2EmixNoU</dateiRef>
+            <dateiRef>_br2TEycQ00PFjDRkuOHDcK</dateiRef>
+          </dokument>
+        </dossier>
+      </ordnungssystemposition>
+    </ordnungssystem>
+  </ablieferung>
+</paket>

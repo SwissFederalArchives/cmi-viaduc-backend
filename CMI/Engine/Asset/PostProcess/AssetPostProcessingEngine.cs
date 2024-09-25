@@ -145,7 +145,10 @@ namespace CMI.Engine.Asset.PostProcess
                     try
                     {
                         var folder = Path.Combine(tempFolder, "content");
+                        var metadataFile = new FileInfo(Path.Combine(tempFolder, "header", "metadata.xml"));
+
                         iiifOcrIndexer.RootFolder = folder;
+                        iiifOcrIndexer.Paket = (PaketDIP) Paket.LoadFromFile(metadataFile.FullName);
                         iiifOcrIndexer.ArchiveRecordId = repositoryPackage.ArchiveRecordId;
                         iiifOcrIndexer.AnalyzeRepositoryPackage(repositoryPackage, folder);
                     }

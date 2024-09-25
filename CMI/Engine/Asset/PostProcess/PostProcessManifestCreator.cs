@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using CMI.Contract.Common.Gebrauchskopie;
+using CMI.Utilities.Common.Helpers;
 using Iiif.API.Presentation;
 
 namespace CMI.Engine.Asset.PostProcess;
@@ -99,7 +100,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         {
             // subdossiers are saved in a path that has the same name as the dossier
             var dirName = GetDirectoryName(dossier.Id);
-            if (dirName != null)
+            if (!string.IsNullOrEmpty(dirName?.PhysicalPath))
             {
                 pathItems.Add(dirName);
             }
@@ -148,6 +149,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
                 new() {Id = parentManifestId, Type = "Collection"}
             };
         }
+        
+        var newRelPath = $"{relativePath}";
 
         AddDossierMetadata(dossier, presentation);
 
@@ -192,7 +195,17 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
             );
         }
 
-
+        // Search Service
+        presentation.Service = new List<ServiceElement>
+         {
+             new()
+             {
+                 Type = "SearchService2",               
+                 // behind the manifest part we need to add the content of the "source" field of the Solr index.
+                 // As / in the URL are interpreted differently we change them to "-" so the search can function 
+                 Id = new Uri(manifestSettings.ApiServerUri, $"iiif/search/collection/{newRelPath.Replace("/", "-")}")
+             }
+         };
         // Save the file
         var currentPath = string.Join("\\", pathItems.Select(p => p.ValidPath));
         var path = Path.Combine(locationSettings.ManifestOutputSaveDirectory, currentPath);
@@ -237,10 +250,17 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
 
         if (string.IsNullOrEmpty(dokumentName))
         {
-            dokumentName = PathHelper.CreateShortValidUrlName(Path.GetFileNameWithoutExtension(GetFileName(dokument.DateiRef.First())), true);
-            pathItems.Add(GetDirectoryName(dokument.Id));
+            dokumentName = PathHelper.CreateShortValidUrlName(Path.GetFileNameWithoutExtension(GetFileName(dokument.DateiRef.FirstOrDefault())), true);
+            var directoryName = GetDirectoryName(dokument.Id);
+
+            if (!string.IsNullOrEmpty(directoryName?.ValidPath))
+            {
+                pathItems.Add(directoryName);
+            }
+
             // if filename is null, then we do have a document that points to a directory, so we adjust the relative path 
-            newRelPath = $"{relativePath}/{GetDirectoryName(dokument.Id)?.ValidPath}";
+            newRelPath = $"{relativePath}{(!string.IsNullOrEmpty(directoryName?.ValidPath) ? $"/{directoryName.ValidPath}" : "")}";
+
             popPathItem = true;
         }
 
@@ -395,11 +415,11 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
                 }
 
                 fileName = PathHelper.CreateShortValidUrlName(fileName, true);
-                var dokumentFileName = isFileRefToDossier ? "" : GetFileName(dokument.Id);
+                var dokumentFileName = DokumentDateiOrdnerName(dokument, isFileRefToDossier);
 
                 retVal.Add(new IiifItem
                 {
-                    Id = new Uri(manifestSettings.ImageServerUri, $"iiif/2/{relativeUri}/{(string.IsNullOrEmpty(dokumentFileName) ? "" : dokumentFileName + "/")}{fileName}"),
+                    Id = new Uri(manifestSettings.ImageServerUri, $"iiif/2/{relativeUri}/{dokumentFileName}{fileName}"),
                     Type = "Canvas",
                     Label = label,
                     Width = dimensions.Width,
@@ -448,10 +468,12 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
 
     private BodyClass CreateImageBody(DokumentDIP dokument, string relativeUri, bool isFileRefToDossier, string fileName, Size dimensions)
     {
+        var dokumentFileName = DokumentDateiOrdnerName(dokument, isFileRefToDossier);
+
         return new BodyClass
         {
             Id = new Uri(manifestSettings.ImageServerUri,
-                $"iiif/2/{Uri.EscapeDataString($"{relativeUri}/{(isFileRefToDossier ? "" : GetFileName(dokument.Id) + "/")}{fileName}")}/full/full/0/default.jpg"),
+                $"iiif/2/{Uri.EscapeDataString($"{relativeUri}/{dokumentFileName}{fileName}")}/full/full/0/default.jpg"),
             Type = "Image",
             Format = "image/jpeg",
             Width = dimensions.Width,
@@ -461,7 +483,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
                 new()
                 {
                     Id = new Uri(manifestSettings.ImageServerUri,
-                        $"iiif/2/{Uri.EscapeDataString($"{relativeUri}/{(isFileRefToDossier ? "" : GetFileName(dokument.Id) + "/")}{fileName}")}"),
+                        $"iiif/2/{Uri.EscapeDataString($"{relativeUri}/{dokumentFileName}{fileName}")}"),
                     Type = "ImageService2",
                     Profile = "level2"
                 }
@@ -471,10 +493,11 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
 
     private BodyClass CreateDokumentBody(DokumentDIP dokument, string relativeUri, bool isFileRefToDossier, string fileName)
     {
+        var dokumentFileName = DokumentDateiOrdnerName(dokument, isFileRefToDossier);
         return new BodyClass
         {
             Id = new Uri(manifestSettings.PublicContentWebUri,
-                $"{relativeUri}/{(isFileRefToDossier ? "" : GetFileName(dokument.Id))}/{fileName}"),
+                $"{relativeUri}/{dokumentFileName}{fileName}"),
             Type = "foaf:Document",
             Format = GetMimeMapping(fileName)
         };
@@ -697,7 +720,9 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         var fileName = GetFileName(dokumentDip.Id);
 
         // if filename is null, then we do have a document that points to a directory 
-        var newRelPath = $"{relativePath}/{(string.IsNullOrEmpty(fileName) ? $"{GetDirectoryName(dokumentDip.Id)?.ValidPath}/" : "")}";
+         var newRelPath = $"{relativePath}/{(string.IsNullOrEmpty(fileName) ? (!string.IsNullOrEmpty(GetDirectoryName(dokumentDip.Id)?.ValidPath) ? 
+                                                                           $"{GetDirectoryName(dokumentDip.Id)?.ValidPath}/" : "") : "")}";
+
 
         var item = new IiifItem
         {
@@ -716,7 +741,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     private IiifItem GetCollectionReference(string relativePath, DossierDIP dossierDip)
     {
         var dirName = GetDirectoryName(dossierDip.Id);
-        var newRelPath = $"{relativePath}/{(dirName == null ? "" : $"{dirName.ValidPath}/")}";
+        var newRelPath = $"{relativePath}/{(!string.IsNullOrEmpty(dirName?.ValidPath) ? $"{dirName.ValidPath}/" : "")}";
+
         return new IiifItem
         {
             Id = new Uri(manifestSettings.PublicManifestWebUri, $"{newRelPath}{IdToValidUrl(dossierDip.Id)}.json"),
@@ -757,10 +783,14 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
                 case ".tiff":
                     thumbnailName = $"{Path.ChangeExtension(fi.Name, ".jpg")}";
                     thumbnailName = PathHelper.CreateShortValidUrlName(thumbnailName, true);
+                    if (relativePath.EndsWith("/"))
+                    {
+                        relativePath = relativePath.Substring(0, relativePath.Length - 1);
+                    }
 
-                    var newRelativePath = !isFileRefToDossier
-                        ? $"{Uri.EscapeDataString($"{relativePath}/{GetFileName(dokument.Id)}/{thumbnailName}")}/full/150,/0/default.jpg"
-                        : $"{Uri.EscapeDataString($"{relativePath}/{thumbnailName}")}/full/150,/0/default.jpg";
+                    var dokumentFileName = DokumentDateiOrdnerName(dokument, isFileRefToDossier);
+
+                    var newRelativePath = $"{Uri.EscapeDataString($"{relativePath}/{dokumentFileName}{thumbnailName}")}/full/150,/0/default.jpg";
 
                     return new List<ThumbnailElement>
                     {
@@ -792,6 +822,17 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         return new List<ThumbnailElement>();
     }
 
+    private string DokumentDateiOrdnerName(DokumentDIP dokument, bool isFileRefToDossier)
+    {
+        var dokumentFileName = isFileRefToDossier ? "" : GetFileName(dokument.Id);
+        if (!string.IsNullOrEmpty(dokumentFileName))
+        {
+            dokumentFileName += "/";
+        }
+
+        return dokumentFileName;
+    }
+
     /// <summary>
     ///     Adds a label value pair. If label contains a value the label is added as language invariant. Else you must provide
     ///     a value for each language.
@@ -813,7 +854,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         string labelDe = null, string labelFr = null, string labelIt = null, string labelEn = null,
         string valueDe = null, string valueFr = null, string valueIt = null, string valueEn = null)
     {
-        var retVal = new RequiredStatementElement() {Label = new LanguageValue(), Value = new LanguageValue()};
+        var retVal = new RequiredStatementElement {Label = new LanguageValue(), Value = new LanguageValue()};
 
         if (!string.IsNullOrEmpty(label))
         {
@@ -883,7 +924,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     {
         // Unsere eigenen Metadata.xml haben beim Dossier (Ordner) noch ein "_D" angehängt
         // Ein "logisches" Dossier hat keinen Eintrag im Inhaltsverzeichnis, deshalb kann es nicht gefunden werden.
-        // In diesem Fall liefern wir null zurück
+        // In diesem Fall liefern wir ein leeres PathItem zurück
         var hit = packageDirectories.Find(f => f.Id == directoryRef || f.Id == directoryRef + "_D");
         if (hit != null)
         {
@@ -940,10 +981,8 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
             {
                 return dateiSub;
             }
-            else
-            {
-                retVal.OrdnerList.Remove(retVal.OrdnerList.Last());
-            }
+
+            retVal.OrdnerList.Remove(retVal.OrdnerList.Last());
         }
 
         return null;

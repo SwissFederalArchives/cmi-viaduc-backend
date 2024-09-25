@@ -279,7 +279,8 @@ public class SearchRequestBuilder : ISearchRequestBuilder
 
         // Zeitraum Filter
         // Für die feinen Filter reicht, wenn wir maximal 10 Stück zurückliefern. Da wir am Ende nur die Facette zurückliefern, die  weniger als 10 Buckets haben
-        var order = new List<TermsOrder> {new() {Key = "_term"}};
+       // var order = new List<TermsOrder> {new() {Key = "_term"}};
+        var order = new List<TermsOrder> { new TermsOrder { Key = "_key" } };
         aggregations &=
             CreateFacet(
                 new TermsAggregation("aggregationFields.creationPeriodYears001")

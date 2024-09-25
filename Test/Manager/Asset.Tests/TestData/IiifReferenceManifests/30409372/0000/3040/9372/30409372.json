@@ -175,5 +175,11 @@
       "format": "application/zip"
     }
   ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-3040-9372",
+      "@type": "SearchService2"
+    }
+  ],
   "start": null
 }

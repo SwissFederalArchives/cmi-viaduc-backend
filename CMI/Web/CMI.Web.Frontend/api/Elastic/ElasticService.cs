@@ -168,6 +168,7 @@ namespace CMI.Web.Frontend.api.Elastic
             {
                 stopwatch.Start();
                 var searchRequest = searchRequestBuilder.Build(query, access);
+                string requestJson = client.RequestResponseSerializer.SerializeToString(searchRequest);
                 result.Response = client.Search<T>(searchRequest);
 
                 var json = client.RequestResponseSerializer.SerializeToString(searchRequest, SerializationFormatting.Indented);

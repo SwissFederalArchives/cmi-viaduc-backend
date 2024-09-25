@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Web.Management.api.Controllers;
@@ -31,6 +32,7 @@ namespace CMI.Web.Management
                 modelBuilder.GetEdmModel(),
                 new DefaultODataBatchHandler(GlobalConfiguration.DefaultServer));
 
+            config.SetTimeZoneInfo(TimeZoneInfo.Local);
             config.EnsureInitialized();
         }
     }

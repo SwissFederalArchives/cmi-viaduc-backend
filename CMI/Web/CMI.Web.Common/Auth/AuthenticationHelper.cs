@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Principal;
-using CMI.Web.Common.Helpers;
 using Microsoft.Owin.Security.OAuth;
 
 namespace CMI.Web.Common.Auth
@@ -13,6 +12,21 @@ namespace CMI.Web.Common.Auth
         public string Type { get; set; }
         public string Value { get; set; }
         public string Issuer { get; set; }
+
+        public static ClaimInfo ConvertClaimToClaimInfo(Claim claim)
+        {
+            if (claim == null)
+            {
+                return null;
+            }
+
+            return new ClaimInfo()
+            {
+                Type = claim.Type,
+                Value = claim.Value,
+                Issuer = claim.Issuer
+            };
+        }
     }
 
     public class AuthenticationHelper : IAuthenticationHelper
@@ -23,12 +37,7 @@ namespace CMI.Web.Common.Auth
         {
             var claimsIdentity = identity as ClaimsIdentity;
             var claims = claimsIdentity?.Claims ?? Enumerable.Empty<Claim>();
-            var transformedClaims = claims.Select(c => new ClaimInfo
-            {
-                Type = c.Type,
-                Value = c.Value,
-                Issuer = c.Issuer
-            }).ToList();
+            var transformedClaims = claims.Select(ClaimInfo.ConvertClaimToClaimInfo).ToList();
 
             return transformedClaims;
         }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using System.Net.Http;
 using Autofac;
+using Autofac.Core;
+using Autofac.Features.Indexed;
 using CMI.Access.Sql.Viaduc;
 using CMI.Access.Sql.Viaduc.File;
 using CMI.Contract.Common;
@@ -10,6 +10,7 @@ using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Contract.Parameter;
 using CMI.Utilities.Cache.Access;
+using CMI.Utilities.Common.Providers;
 using CMI.Utilities.ProxyClients.Order;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
@@ -21,11 +22,13 @@ using CMI.Web.Frontend.api.Entities;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Providers;
 using CMI.Web.Frontend.api.Templates;
+using CMI.Web.Frontend.Controllers;
 using CMI.Web.Frontend.Helpers;
 using CMI.Web.Frontend.ParameterSettings;
 
 using MassTransit;
 using Newtonsoft.Json.Linq;
+using StorageProviderSettings = CMI.Contract.Common.StorageProviderSettings;
 
 namespace CMI.Web.Frontend.DependencyInjection
 {
@@ -62,6 +65,12 @@ namespace CMI.Web.Frontend.DependencyInjection
                 .ExternallyOwned()
                 .WithParameter("internalFields", GetInternalFields());
             builder.RegisterType<PhysicalFileSystem>().As<IFileSystem>().SingleInstance();
+            builder.Register(GetStorageProviderSettings).AsSelf();
+
+            builder.RegisterType<S3Provider>().Keyed<IStorageProvider>(StorageProviders.S3);
+            builder.RegisterType<FileProvider>().Keyed<IStorageProvider>(StorageProviders.File);
+            builder.RegisterType<FilesController>().InstancePerRequest()
+                .WithParameter("storageProvider", WebHelper.DataStorageProvider == "S3" ? StorageProviders.S3 : StorageProviders.File); 
 
             builder.RegisterType<ModelData>().As<IModelData>();
             builder.RegisterType<CmiSettings>().As<ICmiSettings>();
@@ -112,6 +121,18 @@ namespace CMI.Web.Frontend.DependencyInjection
             usageSettings.Update();
 
             return usageSettings;
+        }
+
+        private static StorageProviderSettings GetStorageProviderSettings(IComponentContext arg)
+        {
+            return new StorageProviderSettings
+            {
+                AccessKey = WebHelper.AccessKey,
+                SecretAccessKey = WebHelper.SecretAccessKey,
+                BucketName = WebHelper.BucketName,
+                Region = WebHelper.Region,
+                ServiceUrl =WebHelper.ServiceUrl
+            };
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using CMI.Engine.Asset.PostProcess;
-using CMI.Utilities.Common;
+﻿using CMI.Utilities.Common;
 
 namespace CMI.Manager.Asset.Properties
 {
@@ -25,11 +24,18 @@ namespace CMI.Manager.Asset.Properties
             AddDescription<IiifManifest>(x => x.PublicDetailRecordUri, "Basis URL um auf die Detailseite einer VE zu verlinken.");
             AddDescription<IiifManifest>(x => x.PublicOcrWebUri, "URL wo die OCR Textdateien abgelegt sind.");
             AddDescription<IiifManifest>(x => x.PublicManifestWebUri, "URL des wo die Manifest zu finden sind.");
+            AddDescription<IiifManifest>(x => x.DataStorageProvider, "Welcher Provider so verwendet werden, aktuell gibt es nur dne S3 und den FileProvider.");
 
             AddDescription<ViewerFileLocation>(x => x.ManifestOutputSaveDirectory, "Verzeichnis wohin die Manifeste gespeichert werden");
             AddDescription<ViewerFileLocation>(x => x.ContentOutputSaveDirectory, "Verzeichnis wohin die Nutzdaten ohne Bilder abgelegt werden.");
             AddDescription<ViewerFileLocation>(x => x.OcrOutputSaveDirectory, "Verzeichnis wohin die OCR Textdaten abgelegt werden.");
             AddDescription<ViewerFileLocation>(x => x.ImageOutputSaveDirectory, "Verzeichnis wohin die Bilddateien abgelegt werden.");
+            
+            AddDescription<StorageProvider>(x => x.BucketName, "Der Bucket Name vom S3 Speicher.");
+            AddDescription<StorageProvider>(x => x.AccessKey, "Ein Art Passwort für den S3 Speicher.");
+            AddDescription<StorageProvider>(x => x.SecretAccessKey, "Ein Art Passwort für den S3 Speicher.");
+            AddDescription<StorageProvider>(x => x.Region, "In welcher Region ist der S3 Speicher.");
+            AddDescription<StorageProvider>(x => x.ServiceUrl, "Die Service Url vom S3 Speicher..");
         }
     }
 }
