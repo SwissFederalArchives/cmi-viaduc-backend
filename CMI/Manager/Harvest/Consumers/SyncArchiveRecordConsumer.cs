@@ -85,7 +85,7 @@ namespace CMI.Manager.Harvest.Consumers
                         }
 
                         // Fetch the (eventually) existing archive record
-                        var elasticRecord = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId);
+                        var elasticRecord = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
                         // Does the AIS data provide a primary data link?
                         if (string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink))
@@ -112,7 +112,10 @@ namespace CMI.Manager.Harvest.Consumers
                                 !cachedSettings.EnableFullResync())
                             {
                                 // Add the primary data from the existing record to the new ais data
-                                archiveRecord.ElasticPrimaryData = elasticRecord.PrimaryData;
+                                var elastivRecordWithPrimaryData = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId, MetadataToExclude.Nothing);
+                                archiveRecord.ElasticPrimaryData = elastivRecordWithPrimaryData.PrimaryData;
+                                // Also add the manifest link, or we loose it
+                                archiveRecord.Metadata.ManifestLink = elasticRecord.ManifestLink;
                                 await UpdateArchiveRecord(context, message, archiveRecord, false);
                             }
                             else
@@ -121,6 +124,9 @@ namespace CMI.Manager.Harvest.Consumers
                                 // As the export of the DIR does rely on metadata that is fetched from elastic,
                                 // we are going to update/insert the archive record in Elastic (but without the extracted OCR first)
                                 // The update in the index should be done quickly, so when the data is needed from the DIR it will be available
+
+                                // First also copy an eventually existing manifest link, so the current data is still available to the user
+                                archiveRecord.Metadata.ManifestLink = elasticRecord?.ManifestLink;
                                 await UpdateArchiveRecord(context, message, archiveRecord, true);
 
                                 // Now start getting the metadata info of the DIR package
@@ -169,12 +175,12 @@ namespace CMI.Manager.Harvest.Consumers
                 context.Message.MutationId);
         }
 
-        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId)
+        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
             try
             {
                 var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest
-                { ArchiveRecordId = archiveRecordId, IncludeFulltextContent = true });
+                { ArchiveRecordId = archiveRecordId, MetadataToExclude = metadataToExclude });
                 return result.Message.ElasticArchiveRecord;
             }
             catch (Exception e)

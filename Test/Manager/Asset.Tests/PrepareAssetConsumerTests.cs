@@ -73,7 +73,7 @@ namespace CMI.Manager.Asset.Tests
             assetManager.Setup(e => e.RegisterJobInPreparationQueue("999", "usuallySomeGuid", AufbereitungsArtEnum.Download,
                 AufbereitungsServices.AssetService,
                 It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>())).Returns(() => Task.FromResult(1));
-            indexManager.Setup(i => i.FindArchiveRecord("999", false, false)).Returns(() => new ElasticArchiveRecord());
+            indexManager.Setup(i => i.FindArchiveRecord("999", MetadataToExclude.OCRContentAndFiles, false)).Returns(() => new ElasticArchiveRecord());
 
             var findArchiveRecordResponseMock = new Mock<Response<FindArchiveRecordResponse>>();
 

@@ -1,0 +1,9 @@
+<cmi-viaduc-modal [(opened)]="open" [modalTitle]="getTitle()">
+	<cmi-viaduc-modal-body>
+		<span>{{'Der Benutzer erhält durch die Zuweisung zur Benutzergruppe DDS Zugang zu allen für die DDS freigegebenen Unterlagen. Möchten Sie fortfahren?' | translate: 'verifyModal.modalContemt'}}</span>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-secondary" (click)="cancel()">{{'Abbrechen' | translate: 'verifyModal.cancel'}}</button>
+		<button class="btn btn-primary" (click)="ok()">{{'Ja' | translate: 'verifyModal.yes'}}</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

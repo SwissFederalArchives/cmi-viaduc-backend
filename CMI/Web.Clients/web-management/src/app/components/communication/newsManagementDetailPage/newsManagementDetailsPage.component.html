@@ -1,0 +1,196 @@
+<div class="page page-home col-sm-12">
+    <div class="page-breadcrumb">
+        <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+    </div>
+
+    <cmi-viaduc-layout-left-content>
+        <div left>
+            <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+        </div>
+        <div *ngIf="news" content>
+            <div class="page-header">
+                <h2 class="page-content-title">{{pageHeader}}</h2>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+                <span class="icon icon--info" aria-hidden="true"></span>
+                <span class="sr-only">info:</span> Die Newstexte unterstützen das <a href="https://www.markdownguide.org/basic-syntax/" target="_blank">Markdown - Format.</a>
+            </div>
+
+            <form #formNews="ngForm" class="news-form">
+                <fieldset>
+                    <legend>Zeitraum</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'gültig von' | translate:
+                            'communication.validFrom'}}</label>
+                        <div class="col-sm-3">
+                            <span>
+                                <input class="form-control" name="news.fromDate" [(ngModel)]="news.fromDate"
+                                    placeholder="{{'TT.MM.JJJJ HH:MM' | translate: 'communication.dateTimeFormat'}}"
+                                    (change)="textChanged()">
+                                <span></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'gültig bis' | translate:
+                            'communication.validTo'}}</label>
+                        <div class="col-sm-3">
+                            <span>
+                                <input class="form-control" name="news.toDate" [(ngModel)]="news.toDate"
+                                    placeholder="{{'TT.MM.JJJJ HH:MM' | translate: 'communication.dateTimeFormat'}}"
+                                    (change)="textChanged()">
+                                <span></span>
+                            </span>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Deutsch (DE)</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Überschrift' | translate:
+                            'communication.headingDe'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <input class="form-control" name="news.deHeader" [(ngModel)]="news.deHeader"
+                                    placeholder="{{'Überschrift DE' | translate: 'communication.headingDe'}}"
+                                    (change)="textChanged()">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Text' | translate:
+                            'communication.textDe'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <textarea class="form-control" name="news.de" [(ngModel)]="news.de"
+                                    placeholder="{{'Text DE' | translate: 'communication.textDe'}}"
+                                    style="min-height: 100px" (change)="textChanged()"> </textarea>
+
+                                <cmi-markdown-preview [markdownText]="news.de"></cmi-markdown-preview>
+                            </span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Englisch (EN)</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Überschrift' | translate:
+                            'communication.headingEn'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <input class="form-control" name="news.enHeader" [(ngModel)]="news.enHeader"
+                                    placeholder="{{'Überschrift EN' | translate: 'communication.headingEn'}}"
+                                    (change)="textChanged()">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Text' | translate:
+                            'communication.textEn'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <textarea class="form-control" name="news.en" [(ngModel)]="news.en"
+                                    placeholder="{{'Text En' | translate: 'communication.textEn'}}"
+                                    style="min-height: 100px" (change)="textChanged()"> </textarea>
+
+                                <cmi-markdown-preview [markdownText]="news.en"></cmi-markdown-preview>
+                            </span>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Französisch (FR)</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Überschrift' | translate:
+                            'communication.headingFr'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <input class="form-control" name="news.frHeader" [(ngModel)]="news.frHeader"
+                                    placeholder="{{'Überschrift FR' | translate: 'communication.headingFr'}}"
+                                    (change)="textChanged()">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Text' | translate:
+                            'communication.textFr'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <textarea class="form-control" name="news.fr" [(ngModel)]="news.fr"
+                                    placeholder="{{'Text FR' | translate: 'communication.textFr'}}"
+                                    style="min-height: 100px" (change)="textChanged()"> </textarea>
+
+                                <cmi-markdown-preview [markdownText]="news.fr"></cmi-markdown-preview>
+                            </span>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <fieldset>
+                    <legend>Italienisch (IT)</legend>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Überschrift' | translate:
+                            'communication.headingIt'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <input class="form-control" name="news.itHeader" [(ngModel)]="news.itHeader"
+                                    placeholder="{{'Überschrift IT' | translate: 'communication.headingItr'}}"
+                                    (change)="textChanged()">
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="text-align: left">{{'Text' | translate:
+                            'communication.textIt'}}</label>
+
+                        <div class="col-sm-10">
+                            <span>
+                                <textarea class="form-control" name="news.it" [(ngModel)]="news.it"
+                                    placeholder="{{'Text IT' | translate: 'communication.textIt'}}"
+                                    style="min-height: 100px" (change)="textChanged()"> </textarea>
+
+                                <cmi-markdown-preview [markdownText]="news.it"></cmi-markdown-preview>
+                            </span>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset *ngIf="hasErrors">
+                    <div class="form-group has-warning col-sm-10">
+                        <span *ngFor="let e of errors" class="help-block col-sm-10" role="alert">
+                            {{e}}
+                        </span>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <button class="btn btn-primary" (click)="processChanges()">{{'Speichern' |
+                        translate:'communication.save'}}</button>
+                    <button class="btn btn-secondary" (click)="cancel()">{{'Abbrechen' |
+                        translate:'communication.cancel'}}</button>
+                </fieldset>
+            </form>
+
+        </div>
+    </cmi-viaduc-layout-left-content>
+</div>
+
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>

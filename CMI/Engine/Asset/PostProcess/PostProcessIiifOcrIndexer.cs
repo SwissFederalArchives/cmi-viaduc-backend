@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.Solr;
@@ -60,7 +61,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         solr = ServiceLocator.Current.GetInstance<ISolrOperations<SolrRecord>>();
         if (!Directory.Exists(solrConnectionInfo.SolrHighlightingPath))
         {
-            Directory.CreateDirectory(solrConnectionInfo.SolrHighlightingPath );
+            Directory.CreateDirectory(solrConnectionInfo.SolrHighlightingPath);
         }
 
         addParameters = new AddParameters
@@ -115,7 +116,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         if (directory.Exists)
         {
             var documents = packageFiles.Where(p => !p.Name.EndsWith(".xml") &&
-                                                    repositoryFiles.Select(r => r.PhysicalName).Contains(p.Name));
+                                                    repositoryFiles.Select(r => r.PhysicalName).Contains(p.Name)).Distinct();
             foreach (var file2 in documents)
             {
                 var sourceFile = new FileInfo(Path.Combine(tempFolder, file2.Name));
@@ -150,8 +151,8 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
                         Title = hOcrFile.Name,
                         ImageUrl = Uri.EscapeUriString($"{source}/{Path.ChangeExtension(PathHelper.CreateShortValidUrlName(hOcrFile.Name, true), ".jpg")}"),
                         OCRText = @$"{ocrFilePath}/{PathHelper.CreateShortValidUrlName(hOcrFile.Name, true)}",
-                        ManifestPath =  Uri.EscapeUriString(manifestPath.ToString()),
-                        ManifestLabel = GetLabel(source)
+                        ManifestPath = Uri.EscapeUriString(manifestPath.ToString()),
+                        ManifestLabel = GetLabel(source, dateiLocation)
                     }))
                     {
                         Log.Warning("Solr update not successful for file: {FullName}", hOcrFile.FullName);
@@ -183,9 +184,16 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         return destinationDirectory;
     }
 
-    private string GetLabel(string path)
+    private string GetLabel(string path, PackageFileLocation dateiLocation)
     {
-        return path?.Substring(path.LastIndexOf('/') + 1) ?? string.Empty;
+        // Special case. If we have a document in the root folder, the label should be taken from the document name.
+        if (path.EndsWith("content", StringComparison.InvariantCultureIgnoreCase) == false)
+        {
+            return path?.Substring(path.LastIndexOf('/') + 1) ?? string.Empty;
+        }
+
+        // In the other case, the label should be taken from here
+        return dateiLocation.OrdnerList[0].Name;
     }
 
     private Uri GetManifestPath(string source, PackageFileLocation dateiLocation)
@@ -226,7 +234,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         var files = paket.Inhaltsverzeichnis.Datei;
         var allFolders = paket.Inhaltsverzeichnis.Ordner.SelectManyAllInclusive(o => o.Ordner);
         files.AddRange(allFolders.SelectMany(f => f.Datei));
-        return files;
+        return files.Distinct().ToList();
     }
 
     private static List<OrdnerDIP> GetAllPackageDirectories(PaketDIP paket)
@@ -235,7 +243,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         return allFolders.ToList();
     }
 
-    private static PackageFileLocation FindFileInPackage(string dateiRef, List<OrdnerDIP> ordnerList, PackageFileLocation retVal = null,
+    private PackageFileLocation FindFileInPackage(string dateiRef, List<OrdnerDIP> ordnerList, PackageFileLocation retVal = null,
         OrdnerDIP parentOrdner = null)
     {
         retVal ??= new PackageFileLocation();
@@ -256,7 +264,16 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
             {
                 if (datei.Id == dateiRef)
                 {
-                    retVal.OrdnerList.Add(ordner);
+                    if (!ordner.Name.Equals("content", StringComparison.InvariantCultureIgnoreCase) && ordner != ordnerList.First())
+                    {
+                        retVal.OrdnerList.Add(ordner);
+                    }
+                    else
+                    {
+                        // the file is directly in the root and thus must belong to a dokument in the package. Have to find the id of the dokument
+                        retVal.OrdnerList.Add(GetOrdnerNameFromDokument(dateiRef));
+                    }
+
                     retVal.Datei = datei;
                     return retVal;
                 }
@@ -276,5 +293,23 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         return null;
     }
 
+    private OrdnerDIP GetOrdnerNameFromDokument(string dateiRef)
+    {
+        OrdnerDIP retVal = null;
+        var ns = XNamespace.Get("http://bar.admin.ch/gebrauchskopie/v1");
+        var paketXmlString = Paket.Serialize();
+        var xmlDocument = XDocument.Parse(paketXmlString);
+        var documentElements = xmlDocument.Root?.Descendants(ns + "dokument");
+        var document = documentElements?.FirstOrDefault(d => d.Descendants(ns + "dateiRef").Any(r => r.Value == dateiRef));
+        if (document != null)
+        {
+            retVal = new OrdnerDIP()
+            {
+                Id = document.Attribute("id")?.Value,
+                Name = document.Element(ns + "titel")?.Value
+            };
+        }
 
+        return retVal;
+    }
 }

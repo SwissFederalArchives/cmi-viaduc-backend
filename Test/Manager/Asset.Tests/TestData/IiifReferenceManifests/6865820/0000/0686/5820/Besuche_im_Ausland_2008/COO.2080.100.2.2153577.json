@@ -1,0 +1,165 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_im_Ausland_2008/COO.2080.100.2.2153577.json",
+  "label": {
+    "none": [
+      "Besuche im Ausland 2008"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_im_Ausland_2008/Bibliothek_und_Archive_Kanada/COO.2080.100.2.2153580.json",
+      "label": {
+        "none": [
+          "Bibliothek und Archive Kanada"
+        ]
+      },
+      "type": "Collection"
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Besuche im Ausland 2008"
+        ],
+        "en": [
+          "Besuche im Ausland 2008"
+        ],
+        "fr": [
+          "Besuche im Ausland 2008"
+        ],
+        "it": [
+          "Besuche im Ausland 2008"
+        ],
+        "none": [
+          "Besuche im Ausland 2008"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-06-26 - 2014-02-20"
+        ],
+        "en": [
+          "2008-06-26 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-06-26 - 2014-02-20"
+        ],
+        "it": [
+          "2008-06-26 - 2014-02-20"
+        ],
+        "none": [
+          "2008-06-26 - 2014-02-20"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "011.2-2008/Besuche im Ausland 2008"
+        ],
+        "en": [
+          "011.2-2008/Besuche im Ausland 2008"
+        ],
+        "fr": [
+          "011.2-2008/Besuche im Ausland 2008"
+        ],
+        "it": [
+          "011.2-2008/Besuche im Ausland 2008"
+        ],
+        "none": [
+          "011.2-2008/Besuche im Ausland 2008"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/6865820.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-0686-5820-Besuche_im_Ausland_2008",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

@@ -1,0 +1,106 @@
+<div class="nav-box box-orders">
+	<div class="header">
+		<span>{{'Auftragsübersicht' | translate:'home.ordersTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeOrders() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeOrders() ? 'Keine Berechtigung' : ''">
+			<a href="#{{'/de/auftragsuebersicht/auftraege' | localizeLink }}">{{'Aufträge' | translate:'home.ordersLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeOrdersEinsicht() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeOrdersEinsicht() ? 'Keine Berechtigung' : ''">
+			<a href="#{{'/de/auftragsuebersicht/einsichtsgesuche' | localizeLink }}">{{'Einsichtsgesuche' | translate:'home.ordersEinsichtLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeDigipoolOrders() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeDigipoolOrders() ? 'Keine Berechtigung' : ''">
+			<a href="#{{'/de/auftragsuebersicht/digitalisierungsauftraege' | localizeLink }}">{{'Digi-Pool' | translate:'home.digiPoolLabel' }}</a>
+		</li>
+	</ul>
+</div>
+
+<div class="nav-box box-usersAndRoles">
+	<div class="header">
+		<span>{{'Benutzer und Rollen' | translate:'home.usersAndRolesTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeBenutzerverwaltung() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeBenutzerverwaltung() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/benutzerundrollen/benutzer' | localizeLink }}">{{'Benutzerverwaltung' | translate:'home.usersLabel'	}}</a>
+		</li>
+		<li [ngClass]="canSeeRollenFunktionenMatrix() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeRollenFunktionenMatrix() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/benutzerundrollen/rollen' | localizeLink }}">{{'Rollen-Funktionen-Matrix' | translate:'home.rolesLabel' }}</a>
+		</li>
+	</ul>
+</div>
+
+
+
+<div class="nav-box box-collection">
+	<div class="header">
+		<span>{{'Anonymisierung' | translate:'home.anonymizationTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeAnonymization() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeAnonymization() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/anonymization/manuelleKorrekturen' | localizeLink }}">{{'Manuelle Korrekturen' | translate:'home.ManuelleKorrekturenTitle' }}</a>
+		</li>
+	</ul>
+</div>
+
+<div class="nav-box box-behoerdenZugriff">
+	<div class="header">
+		<span>{{'Behörden-Zugriff' | translate:'home.behoerdenZugriffTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeZustaendigeStellen() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeZustaendigeStellen() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/behoerdenzugriff/zustaendigestellen' | localizeLink }}">{{'Zuständige Stellen' | translate:'home.ablieferndeStelleLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeAccessTokens() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeAccessTokens() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/behoerdenzugriff/token' | localizeLink }}">{{'Access-Tokens' | translate:'home.tokenLabel' }}</a>
+		</li>
+	</ul>
+</div>
+
+
+<div class="nav-box box-collection">
+	<div class="header">
+		<span>{{'Sammlungen' | translate:'home.collectionTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeCollection() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeCollection() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/collection/collection' | localizeLink }}">{{'Virtuelle Sammlungen' | translate:'home.canSeeCollection' }}</a>
+		</li>
+	</ul>
+</div>
+
+<div class="nav-box box-reporting">
+	<div class="header">
+		<span>{{'Reporting' | translate:'home.reportingTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeStatisticReportsViewReports() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeStatisticReportsViewReports() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/reporting/statisticsReports' | localizeLink }}">{{'Statistiken und Reports' | translate:'home.reportsLabel' }}</a>
+		</li>
+		<li>
+			<a (click)="nyi()" href="javascript:void(0)">{{'Audit-Log' | translate:'home.auditLogLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeLoginformationen() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeLoginformationen() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/reporting/converterProgress' | localizeLink }}">{{'Abbyy Aktivität' | translate:'home.converterProgressLabel' }}</a>
+		</li>
+	</ul>
+</div>
+
+<div class="nav-box box-admin">
+	<div class="header">
+		<span>{{'Administration' | translate:'home.adminTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeEinstellungen() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeEinstellungen() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/administration/einstellungen' | localizeLink }}">{{'Einstellungen' | translate:'home.settingsLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeLoginformationen() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeLoginformationen() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/administration/logInformationen' | localizeLink }}">{{'Loginformationen' | translate:'home.logInformationLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeNews() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeNews() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/kommunikation/news' | localizeLink }}">{{'News' | translate:'home.newsLabel' }}</a>
+		</li>
+		<li [ngClass]="canSeeSystemstatus() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeSystemstatus() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/administration/systemstatus' | localizeLink }}">{{'Systemstatus' | translate:'home.systemstatus' }}</a>
+		</li>
+	</ul>
+</div>

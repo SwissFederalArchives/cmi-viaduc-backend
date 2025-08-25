@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Utilities.Bus.Configuration;
@@ -18,6 +8,17 @@ using CMI.Web.Management.api.Configuration;
 using MassTransit;
 using Newtonsoft.Json;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace CMI.Web.Management.api.Controllers
 {
@@ -176,8 +177,10 @@ namespace CMI.Web.Management.api.Controllers
             var aisDbTest = monitoringBus.CreateRequestClient<AisDbCheckRequest>(new Uri(address, BusConstants.MonitoringAisDbCheckQueue), timeout);
             var documentConverterInfo = monitoringBus.CreateRequestClient<DocumentConverterInfoRequest>(new Uri(address, BusConstants.MonitoringDocumentConverterInfoQueue), timeout);
             var abbyyOcrTest = monitoringBus.CreateRequestClient<AbbyyOcrTestRequest>(new Uri(address, BusConstants.MonitoringAbbyyOcrTestQueue), timeout);
-
             var anonymizedTest = monitoringBus.CreateRequestClient<AnonymizationTestRequest>(new Uri(address, BusConstants.IndexManagerAnonymizeTestMessageQueue), timeout);
+            var solrTest = monitoringBus.CreateRequestClient<SolrTestRequest>(new Uri(address, BusConstants.MonitoringSolrTestQueue), timeout);
+            var cantaloupeTest = monitoringBus.CreateRequestClient<CantaloupeTestRequest>(new Uri(address, BusConstants.MonitoringCantaloupeTestQueue), timeout);
+
 
             var t1 = Task.Run(() => TestDb());
             var t2 = TestRabbitMq();
@@ -187,8 +190,10 @@ namespace CMI.Web.Management.api.Controllers
             var t6 = TestAbbyyLicence(documentConverterInfo);
             var t7 = TestAbbyyExecute(abbyyOcrTest);
             var t8 = TestAnonymizedService(anonymizedTest);
+            var t9 = TestSolrService(solrTest);
+            var t10 = TestCantaloupeService(cantaloupeTest);
 
-            var results = await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7, t8);
+            var results = await Task.WhenAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             return results;
         }
 
@@ -323,6 +328,71 @@ namespace CMI.Web.Management.api.Controllers
             return result;
         }
 
+        private async Task<MonitoringResult> TestSolrService(IRequestClient<SolrTestRequest> requestClient)
+        {
+            var watch = new Stopwatch();
+            MonitoringResult result;
+            try
+            {
+                watch.Start();
+                var testResponse = (await requestClient.GetResponse<SolrTestResponse>(new SolrTestRequest{Timeout = ServiceTestRequestTimeout})).Message;
+                watch.Stop();
+
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Solr Execute",
+                    Status = testResponse.Ok ? HeartbeatStatus.Ok.ToString() : HeartbeatStatus.Nok.ToString(),
+                    Message = testResponse.Ok ? "Ok, " +  testResponse.SolrResponse : "Nok, Error: " + testResponse.SolrResponse + " " + testResponse.Exception?.Message,
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Solr Execute",
+                    Status = HeartbeatStatus.Nok.ToString(),
+                    Message = $"Viaduc service call failed. Exception: {ex.Message}",
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+
+            return result;
+        }
+
+        private async Task<MonitoringResult> TestCantaloupeService(IRequestClient<CantaloupeTestRequest> requestClient )
+        {
+            var watch = new Stopwatch();
+            MonitoringResult result;
+            try
+            {
+                watch.Start();
+                var testResponse = (await requestClient.GetResponse<CantaloupeTestResponse>(new CantaloupeTestRequest{ Timeout = ServiceTestRequestTimeout })).Message;
+                watch.Stop();
+
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Cantaloupe",
+                    Status = testResponse.Ok ? HeartbeatStatus.Ok.ToString() : HeartbeatStatus.Nok.ToString(),
+                    Message = testResponse.Ok ? "Ok, " + testResponse.CantaloupeResponse : "Nok, Error: " + testResponse.CantaloupeResponse + " " + testResponse.Exception?.Message,
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+            catch (Exception ex)
+            {
+                result = new MonitoringResult
+                {
+                    MonitoredServices = "Cantaloupe Execute",
+                    Status = HeartbeatStatus.Nok.ToString(),
+                    Message = $"Viaduc service call failed. Exception: {ex.Message}",
+                    ExecutionTime = watch.ElapsedMilliseconds
+                };
+            }
+
+            return result;
+        }
+
+
         private async Task<MonitoringResult> TestRabbitMq()
         {
             var result = new MonitoringResult {MonitoredServices = "RabbitMQ"};
@@ -359,7 +429,7 @@ namespace CMI.Web.Management.api.Controllers
                 result.Status = HeartbeatStatus.Nok.ToString();
             }
 
-            result.Message += $", Request uri: {baseUri}";
+            result.Message += $", Request uri: {baseUri}"; 
             result.ExecutionTime = watch.ElapsedMilliseconds;
 
             return result;

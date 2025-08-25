@@ -28,7 +28,7 @@ namespace CMI.Manager.Order.Tests
         private Mock<IOrderDataAccess> orderDataAccessMock;
 
         private async Task PerformTest(User currentUser, User besteller, Ordering ordering, OrderItem item, ElasticArchiveRecord elasticArchiveRecord,
-            Action<IAuftragsAktionen> aktion, IBus bus = null)
+            Action<IAuftragsAktionen> aktion, IBus bus = null, ElasticArchiveDbRecord elasticArchiveDbRecord = null)
         {
             ordering.Items = new[] {item};
 
@@ -38,12 +38,20 @@ namespace CMI.Manager.Order.Tests
                 .ReturnsAsync(new List<DigitalisierungsTermin>());
             orderDataAccessMock.Setup(foo => foo.GetIndividualAccessTokens(It.IsAny<int>(), It.IsAny<int>()))
                 .ReturnsAsync(new IndivTokens(new string [0], new string [0], new string[0]));
+            orderDataAccessMock.Setup(foo => foo.GetOrderItem(It.IsAny<int>()))
+                .ReturnsAsync(item);
 
             var userDataAccessMock = new Mock<IUserDataAccess>();
             userDataAccessMock.Setup(foo => foo.GetUser("besteller")).Returns(besteller);
 
             var idxSearchMock = new Mock<ISearchIndexDataAccess>();
-            idxSearchMock.Setup(foo => foo.FindDocument(item.VeId.ToString(), false)).Returns(elasticArchiveRecord);
+            idxSearchMock.Setup(foo => foo.FindDocument(item.VeId.ToString(), MetadataToExclude.OCRContentAndFiles)).Returns(elasticArchiveRecord);
+            idxSearchMock.Setup(foo => foo.FindDbDocument(item.VeId.ToString(), MetadataToExclude.OCRContentAndFiles)).Returns(elasticArchiveDbRecord ?? new ElasticArchiveDbRecord
+            {
+                PrimaryDataDownloadAccessTokens = elasticArchiveRecord.PrimaryDataDownloadAccessTokens,
+                ArchiveRecordId = elasticArchiveRecord.ArchiveRecordId,
+                IsAnonymized = elasticArchiveRecord.IsAnonymized
+            });
 
             var statusWechsler = new StatusWechsler(orderDataAccessMock.Object, userDataAccessMock.Object, idxSearchMock.Object, bus);
             await statusWechsler.Execute(aktion, new[] {item}, currentUser, new DateTime(2019, 1, 12));
@@ -62,7 +70,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(new[] {"BAR"}),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -82,7 +91,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(new[] {"BAR"}),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -114,7 +124,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -135,7 +146,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(new[] {"BAR"}),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -156,7 +168,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(new[] {"BAR"}),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -177,7 +190,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(),
-                ArchiveRecordId = item.VeId.Value.ToString()
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = false
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
@@ -197,7 +211,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(),
-                ArchiveRecordId = item.VeId?.ToString()
+                ArchiveRecordId = item.VeId?.ToString(),
+                IsAnonymized = false
             };
 
             var auftragErledigtMock = new Mock<IConsumer<IDigitalisierungsAuftragErledigt>>();
@@ -235,7 +250,8 @@ namespace CMI.Manager.Order.Tests
             var ear = new ElasticArchiveRecord
             {
                 PrimaryDataDownloadAccessTokens = new List<string>(),
-                ArchiveRecordId = item.VeId?.ToString()
+                ArchiveRecordId = item.VeId?.ToString(),
+                IsAnonymized = false
             };
 
 
@@ -259,6 +275,76 @@ namespace CMI.Manager.Order.Tests
             benutzungConsumer.Consumed.Select<IBenutzungskopieAuftragErledigt>().Any().Should().BeFalse();
             benutzungskopieErledigtMock.Verify(e => e.Consume(It.IsAny<ConsumeContext<IBenutzungskopieAuftragErledigt>>()), Times.Never);
             await harness.Stop();
+        }
+
+        [Test]
+        public async Task Statuswechsel_mit_ohne_Freigabe_behaelt_den_anonymisierten_Titel()
+        {
+            var currentUser = new User { Id = "current" };
+            var besteller = new User
+                { Id = "besteller", Access = new UserAccess("besteller", AccessRoles.RoleOe2, "DISALLOW", new string[0], false, "de") };
+
+            var item = new OrderItem { OrderId = 1, Id = 1001, VeId = 200, Status = OrderStatesInternal.ImBestellkorb};
+            var ordering = new Ordering { Id = 1, UserId = "besteller", Type = OrderType.Digitalisierungsauftrag, OrderDate = DateTime.Now };
+
+            var ear = new ElasticArchiveRecord
+            {
+                PrimaryDataDownloadAccessTokens = new List<string>(new[] { "BAR" }),
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = true,
+                Title = "Anonymisierter Titel"
+            };
+
+            var eardb = new ElasticArchiveDbRecord()
+            {
+                PrimaryDataDownloadAccessTokens = new List<string>(new[] { "BAR" }),
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = true,
+                Title = "Anonymisierter Titel",
+                UnanonymizedFields = new UnanonymizedFields()
+                {
+                    Title = "Titel im Klartext"
+                }
+            };
+
+            await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen(), null, eardb);
+            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Oeffentlichkeit);
+            item.Dossiertitel.Should().Be("Anonymisierter Titel");
+        }
+
+        [Test]
+        public async Task Statuswechsel_mit_automatischer_Freigabe_entanonymisiert_den_Titel()
+        {
+            var currentUser = new User { Id = "current" };
+            var besteller = new User
+                { Id = "besteller", Access = new UserAccess("besteller", AccessRoles.RoleOe2, "DISALLOW", new string[0], false, "de") };
+
+            var item = new OrderItem { OrderId = 1, Id = 1001, VeId = 200, Status = OrderStatesInternal.ImBestellkorb };
+            var ordering = new Ordering { Id = 1, UserId = "besteller", Type = OrderType.Digitalisierungsauftrag, OrderDate = DateTime.Now };
+
+            var ear = new ElasticArchiveRecord
+            {
+                PrimaryDataDownloadAccessTokens = new List<string>(new[] { "BAR", "Ö2" }),
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = true,
+                Title = "Anonymisierter Titel"
+            };
+
+            var eardb = new ElasticArchiveDbRecord()
+            {
+                PrimaryDataDownloadAccessTokens = new List<string>(new[] { "BAR", "Ö2" }),
+                ArchiveRecordId = item.VeId.Value.ToString(),
+                IsAnonymized = true,
+                Title = "Anonymisierter Titel",
+                UnanonymizedFields = new UnanonymizedFields()
+                {
+                    Title = "Titel im Klartext"
+                }
+            };
+
+            await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen(), null, eardb);
+            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Oeffentlichkeit);
+            item.Dossiertitel.Should().Be("Titel im Klartext");
         }
     }
 }

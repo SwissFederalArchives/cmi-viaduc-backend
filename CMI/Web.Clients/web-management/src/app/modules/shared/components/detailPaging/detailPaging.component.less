@@ -1,0 +1,51 @@
+.search-browser h4 {
+	margin-bottom: 5px;
+}
+
+.controls-container {
+	position: relative;
+	border-bottom: none;
+	padding: 10px 0;
+
+	.info {
+		padding-left: 56px;
+		padding-right: 56px;
+		text-align: center;
+	}
+
+	.controls {
+		position: absolute;
+		top: 10px;
+
+		&.right {
+			right: 0;
+		}
+
+		> li {
+			margin-left: 0;
+			padding: 0 8px;
+			display: inline;
+			color: #03344D;
+
+			> a:not(.disabled) & > a:not(.disabledDiv) {
+				color: #03344D;
+				cursor: pointer;
+			}
+
+			&.disabled > a {
+				color: #999;
+				border-color: #ddd;
+				cursor: not-allowed;
+				pointer-events: none;
+			}
+		}
+	}
+
+	.separator {
+		border-right: 1px solid #D5D5D5;
+	}
+
+	.separator-left {
+		border-left: 1px solid #D5D5D5;
+	}
+}

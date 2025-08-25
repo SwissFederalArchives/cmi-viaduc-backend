@@ -1,0 +1,147 @@
+<div class="page page-home col-sm-12">
+
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+
+		<div content>
+			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+
+			<div class="page-header">
+				<h2 class="page-content-title">
+					<span>Virtuelle Sammlungen</span>
+				</h2>
+			</div>
+			<div class="tablecontainer">
+				<div class="action-container">
+					<div class="row action-buttons">
+						<div class="col-xs-12">
+							<span class="orders-menu-actions">
+								<button type="button" class="btn btn-link" *ngIf="allowCollectionBearbeiten" (click)="addNewCollection()">
+									<span><span class="glyphicon glyphicon-plus-sign"></span> {{'Hinzufügen' | translate:'collections.add'}}</span>
+								</button>
+								<button type="button" *ngIf="allowCollectionBearbeiten" [disabled]="deleteButtonDisabled"
+										class="btn btn-link" (click)="toggleDeleteModal()">
+									<span><span class="icon icon--trash"></span> {{'Markierte Löschen' | translate:'collections.buttondelete'}}</span>
+								</button>
+								<button (click)="showColumnPickerModal()" class="btn btn-link">
+									<span><span class="icon icon--tools"></span>&nbsp;{{ 'Spaltenauswahl' | translate:'collections.columpicker' }}</span>
+								</button>
+								<button (click)="resetSortsAndFilters()" class="btn btn-link">
+									<span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{ 'Sortierung und Filter zurücksetzen' | translate:'collections.resetsort' }}</span>
+								</button>
+								<button (click)="saveColumns()" class="btn btn-link">
+									<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Ansicht speichern' | translate:'collections.save' }}</span>
+								</button>
+								<button (click)="resetColumnsToDefault()" class="btn btn-link">
+									<span><span class="icon icon--list-alt"></span>&nbsp;{{ 'Ansicht zurücksetzen' | translate:'collections.reset' }}</span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="row top-pagination">
+					<div class="col-xs-12">
+						<cmi-viaduc-odata-pagination [(collectionView)]="collections"></cmi-viaduc-odata-pagination>
+					</div>
+				</div>
+				<cmi-viaduc-grid #flexGrid
+								 [itemsSource]="collections"
+								 [dataMaps]="valueFilters"
+								 [name]="'collectionList'"
+								 [displaySelectionColumn]="true">
+					<ng-template *ngIf="allowCollectionBearbeiten" wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+						<a (click)="editCollection(cell.item)" disabled="disabled">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</a>
+					</ng-template>
+
+					<wj-flex-grid-column *ngFor="let col of visibleColumns"
+										 [visible]="col.visible"
+										 [binding]="col.key"
+										 [width]="col.width"
+										 [wordWrap]="col.wordWrap"
+										 [minWidth]="col.minWidth ? col.minWidth : 25"
+										 [format]="col.format"
+										 [dataType]="col.dataType ? col.dataType : 1"
+										 [header]="col.defaultLabel | translate:'collections.columns.' + col.key">
+
+						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" let-row="row" *ngIf="col.key === 'thumbnail'">
+							<div *ngIf="item.imageMimeType" >
+								<img (load)="onImageLoaded()"
+									 [src]="this._collectionService.getImageURL(item.collectionId)"
+									 [alt]="item.imageAltText" width="125px"/>
+							</div>
+						</ng-template>
+						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" f
+									 *ngIf="col.key === 'collectionTypeId'" >
+							<span *ngIf="item.collectionTypeId === 0">Sammlung</span>
+							<span *ngIf="item.collectionTypeId === 1">Themenblock</span>
+						</ng-template>
+						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'parentId'">
+							<span>{{item.parent?.title}}</span>
+						</ng-template>
+						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'childCollections'">
+							<ul class="childCollections" *ngIf="item.childCollections" >
+								<li *ngFor="let item of item.childCollections.split('|')">
+									{{item.trim()}}
+								</li>
+							</ul>
+						</ng-template>
+					</wj-flex-grid-column>
+
+				</cmi-viaduc-grid>
+
+				<ng-template #emptyTable>
+					<div class="col-xs-12">
+						<p>{{'Es sind noch keine Daten vorhanden.' | translate: 'behoerdenZugriff.NoDataYet'}}</p>
+					</div>
+				</ng-template>
+				<div class="row bottom-pagination">
+					<div class="col-xs-12">
+						<cmi-viaduc-odata-pagination [(collectionView)]="collections"></cmi-viaduc-odata-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</cmi-viaduc-layout-left-content>
+	<cmi-viaduc-modal [(opened)]="showDeleteModal"
+					  [modalTitle]="'Löschen' | translate:'behoerdenZugriff.loeschentitle'">
+		<cmi-viaduc-modal-body>
+			<p *ngIf="getQuantityOfCheckedItmesToDelete() == 1">{{'Wollen Sie den gewählten Eintrag "{0}" definitiv löschen?' |
+				translate:'behoerdenZugriff.confirmDeleteOne': getElementToDelete()}}</p>
+			<p *ngIf="getQuantityOfCheckedItmesToDelete() > 1">{{'Wollen Sie die gewählten {0} Einträge definitiv löschen?' |
+				translate:'behoerdenZugriff.confirmDelete': getQuantityOfCheckedItmesToDelete()}}</p>
+		</cmi-viaduc-modal-body>
+		<cmi-viaduc-modal-footer>
+			<div class="row">
+				<div class="col-xs-12">
+					<button type="button" class="btn btn-secondary" (click)="toggleDeleteModal()">
+						{{'Abbrechen' | translate:'behoerdenZugriff.cancel'}}
+					</button>
+					<button type="button" class="btn btn-primary" (click)="deleteCheckedCollection()">
+						{{'Löschen' | translate:'behoerdenZugriff.loeschen'}}
+					</button>
+				</div>
+			</div>
+		</cmi-viaduc-modal-footer>
+	</cmi-viaduc-modal>
+
+	<cmi-viaduc-column-picker
+		[controlId]="'userColumnPicker'"
+		[(showColumnPickerModal)]="showColumnPicker"
+		[visibleColumns]="visibleColumnsSelector"
+		[hiddenColumns]='hiddenColumns'
+		(showColumnClicked)="showColumn($event)"
+		(hideColumnClicked)="hideColumn($event)"
+	>
+	</cmi-viaduc-column-picker>
+</div>

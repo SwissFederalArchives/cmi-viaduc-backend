@@ -1,0 +1,89 @@
+<div class="page page-home col-sm-12">
+
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+
+		<div content>
+			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+
+			<div class="page-header">
+				<h2 class="page-content-title">
+					<span>{{'Access-Tokens' | translate:'behoerdenZugriff.tokenTitel'}}</span>
+				</h2>
+			</div>
+			<div class="tablecontainer">
+				<div class="action-container">
+					<div class="row action-buttons">
+						<div class="col-xs-12">
+							<span class="orders-menu-actions">
+								<button type="button" class="btn btn-link" *ngIf="allowAccessTokensBearbeiten" (click)="addNewToken()">
+									<span><span class="glyphicon glyphicon-plus-sign"></span> {{'Hinzufügen' | translate:'behoerdenZugriff.add'}}</span>
+								</button>
+								<button type="button" class="btn btn-link" *ngIf="allowAccessTokensBearbeiten" [disabled]="deleteButtonDisabled"
+										(click)="toggleDeleteModal()">
+									<span><span class="icon icon--trash"></span> {{'Markierte Löschen' | translate:'behoerdenZugriff.buttondelete'}}</span>
+								</button>
+								<button (click)="exportExcel()" class="btn btn-link">
+									<span><span class="icon icon--excel "></span> {{ 'Datenexport' | translate:'behoerdenZugriff.saveAsExcel' }}</span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="!loading">
+				<div class="row top-pagination">
+					<div class="col-xs-12">
+						<cmi-viaduc-odata-pagination [(collectionView)]="tokenList"></cmi-viaduc-odata-pagination>
+					</div>
+				</div>
+				<cmi-viaduc-grid #flexGrid [itemsSource]="tokenList" [name]="'tokenListPage'" [displaySelectionColumn]="true">
+
+					<ng-template wjFlexGridCellTemplate *ngIf="allowAccessTokensBearbeiten" [cellType]="'RowHeader'" let-cell="cell">
+						<a (click)="editToken(cell.item)" disabled="disabled">
+							<i class="glyphicon glyphicon-pencil"></i>
+						</a>
+					</ng-template>
+
+					<wj-flex-grid-column width="2*"
+										 [header]="'Access-Token' | translate: 'behoerdenZugriff.token'"
+										 [binding]="'token'">
+					</wj-flex-grid-column>
+
+					<wj-flex-grid-column width="2*"
+										 [header]="'Bezeichnung Access-Token' | translate:'behoerdenZugriff.bezeichnung'"
+										 [binding]="'bezeichnung'"
+					>
+					</wj-flex-grid-column>
+
+					<wj-flex-grid-column width="2*"
+										 [header]="'Zugewiesene zuständige Stellen' | translate:'behoerdenZugriff.zugewieseneablieferstellen'"
+										 [binding]="'ablieferndeStellenBezeichnung'"
+					>
+					</wj-flex-grid-column>
+				</cmi-viaduc-grid>
+				<ng-template #emptyTable>
+					<div class="col-xs-12">
+						<p>{{'Es sind noch keine Daten vorhanden.' | translate: 'behoerdenZugriff.NoDataYet'}}</p>
+					</div>
+				</ng-template>
+				<div class="row bottom-pagination">
+					<div class="col-xs-12">
+						<cmi-viaduc-odata-pagination [(collectionView)]="tokenList"></cmi-viaduc-odata-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</cmi-viaduc-layout-left-content>
+	<cmi-viaduc-delete-confirm [(showDeleteModal)]="showDeleteModal"
+							   (deleteClicked)="deleteCheckedToken()"
+							   [countOfCheckedItem]="getQuantityOfCheckedItemsToDelete()"
+							   [nameOfCheckedItem]="getElementToDelete()"></cmi-viaduc-delete-confirm>
+</div>

@@ -1,0 +1,53 @@
+<cmi-viaduc-modal [(opened)]="open" [modalTitle]="ids.length === 1 ? 'Auftrag abbrechen': 'Aufträge abbrechen'">
+		<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+			<cmi-spinner [hint]="'Statusänderung wird durchgeführt...'"></cmi-spinner>
+		</cmi-blocker>
+		<cmi-viaduc-modal-body>
+			<p>Bitte wählen Sie einen Abbruchgrund</p>
+			<form class="form-horizontal" #form="ngForm">
+				<fieldset>
+					<div class="form-group" [ngClass]="{'has-warning': abbruchGrund?.errors?.required}">
+						<label for="abbruchGrund" class="col-sm-4 control-label">Abbruchgrund *
+						</label>
+						<div class="col-sm-8">
+							<select class="form-control" required id="abbruchGrund" name="abbruchGrund" [(ngModel)]="selectedAbbruchgrund" #abbruchGrund="ngModel">
+								<option [ngValue]="null">Bitte wählen</option>
+								<option *ngFor="let x of gruende" [ngValue]="x">{{translateStatus(x)}}</option>
+							</select>
+							<span *ngIf="abbruchGrund?.errors?.required" class="help-block" role="alert">
+							{{'Dieses Feld muss ausgefüllt werden' | translate:'main.errorMandatoryField'}}
+						</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="bemerkungDossier" class="col-sm-4 control-label">Bemerkung zum Dossier
+						</label>
+						<div class="col-sm-8">
+						<textarea rows="4" class="form-control" name="bemerkungDossier" id="bemerkungDossier" [(ngModel)]="bemerkungDossier">
+						</textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="interneBemerkung" class="col-sm-4 control-label">Interne Bemerkung
+						</label>
+						<div class="col-sm-8">
+						<textarea rows="4" class="form-control" name="interneBemerkung" id="interneBemerkung" [(ngModel)]="interneBemerkung">
+						</textarea>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</cmi-viaduc-modal-body>
+		<cmi-viaduc-modal-footer>
+			<div class="row">
+				<div class="col-xs-12">
+					<p *ngIf="ids.length === 1; else plural">Wollen Sie den Auftrag wirklich abbrechen?</p>
+					<ng-template #plural>
+						<p>Wollen Sie die <strong>{{ids.length}}</strong> markierten Aufträge wirklich abbrechen?</p>
+					</ng-template>
+				</div>
+			</div>
+			<button class="btn btn-default" (click)="cancel()">Nein</button>
+			<button class="btn btn-primary" (click)="ok()" [disabled]="!form.valid">Ja</button>
+		</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

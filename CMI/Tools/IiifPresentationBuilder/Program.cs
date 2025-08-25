@@ -12,8 +12,8 @@ namespace CMI.Tools.IiifPresentationBuilder
     {
         static void Main(string[] args)
         {
-            var root = @"C:\Temp\Final\6865820";
-            var archiveRecordId = "6865820";
+            var root = @"C:\Temp\Final\31216103";
+            var archiveRecordId = "31216103";
 
 
             var metadataFile = new FileInfo(Path.Combine(root, "header", "metadata.xml"));
@@ -71,6 +71,11 @@ namespace CMI.Tools.IiifPresentationBuilder
             };
             
             var directoryInfo = new DirectoryInfo(sourceDir );
+
+            var root = new RepositoryFolder();
+            AddRepFiles(directoryInfo, root);
+            package.Files = root.Files;
+
             CreateFolder(directoryInfo, folderId, package);
 
             return package;

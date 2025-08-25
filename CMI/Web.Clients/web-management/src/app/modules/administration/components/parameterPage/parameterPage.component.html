@@ -1,0 +1,48 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div *ngIf="!loading" content>
+			<h1>Zentralisierte Parameterverwaltung</h1>
+			<div class="row">
+				<div class="col-md-4">
+					<input type="text" (keyup.enter)="searchParam()" class="form-control" [value]="searchString" (change)="onValueChanged($event)"/>
+				</div>
+				<div class="col-md-1">
+					<input type="button" (click)="searchParam()" value="Suchen" class="btn"/>
+				</div>
+				<div class="col-md-6">
+
+				</div>
+				<div class="col-md-1">
+					<input type="button" (click)="emitValidationEvent()" value="Validieren" class="btn"/>
+				</div>
+			</div>
+			<div class="row">
+				<b class="col-md-3">Name</b>
+				<b class="col-md-3">Beschreibung</b>
+				<b class="col-md-4">Wert</b>
+				<b class="col-md-2">Ist Default</b>
+			</div>
+			<div *ngFor="let name of parameterGroupNames">
+				<a data-toggle="collapse" class="collapsed datatoggle" [href]="'#'+ GetIdByName(name)"><h3><cmi-viaduc-highlight [text]="name" [highlight]="searchString"></cmi-viaduc-highlight></h3></a>
+				<div [id]="GetIdByName(name)" class="collapse">
+					<div *ngFor="let param of filteredParameterForGroup(name)" >
+						<cmi-viaduc-parameter [searchString]="searchedStringUpToDate ? searchString : ''" [parameter]="param" [validationEvent]="validationEvent" ></cmi-viaduc-parameter>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="loading">
+			<cmi-blocker class="cmi-visible cmi-fixed cmi-center cmi-shadow">
+				<cmi-spinner></cmi-spinner>
+			</cmi-blocker>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>

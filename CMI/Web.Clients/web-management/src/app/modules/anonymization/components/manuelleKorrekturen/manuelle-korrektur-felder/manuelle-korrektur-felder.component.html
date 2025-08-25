@@ -1,0 +1,56 @@
+<form [formGroup]="myForm" *ngIf="myForm" id="myForm">
+	<div class="col-xs-6 col-md-4">
+		<label [for]="'original_'+ feld.manuelleKorrekturFelderId"
+			   tooltip="{{feld.feldname}} gem. AIS">
+			{{localTranslate(feld.feldname)}} gem. AIS</label>
+		<textarea name="original" class="form-control" formControlName="original"
+				  rows="5" [id]="'original_'+ feld.manuelleKorrekturFelderId" readonly> </textarea>
+	</div>
+	<div class="col-xs-6 col-md-4">
+		<label [for]="'auto_'+ feld.manuelleKorrekturFelderId"
+			   tooltip="{{feld.feldname}} automatisch anonymisiert">
+			{{localTranslate(feld.feldname)}} automatisch anonymisiert</label>
+		<table>
+			<tr>
+				<td>
+					<textarea name="auto" class="form-control" formControlName="automatisch"
+							  [id]="'auto_'+ feld.manuelleKorrekturFelderId" rows="5" readonly> </textarea>
+				</td>
+				<td class="table-button">
+					<button class="btn btn-default" (click)="copyAutomatischerText()" [disabled]="!feld.original || !isEditMode">
+						<span class="glyphicon glyphicon-copy"></span>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-xs-12 col-md-4">
+		<label [for]="'manuell_'+ feld.manuelleKorrekturFelderId"
+			   tooltip="{{feld.feldname}} manuell korrigiert">
+			{{localTranslate(feld.feldname)}} manuell korrigiert</label>
+		<table>
+			<tr>
+				<td>
+					<textarea class="form-control " name="manuell" formControlName="manuell"
+							  (select)="selectionchange($event)" (click)="contextmenuShow = false"
+							  (input)="onManuellChanged()"
+							  (change)="changedText()" (contextmenu)="displayContextMenu($event)"
+							  [id]="'manuell_'+ feld.manuelleKorrekturFelderId" rows="5"
+							  [readOnly]="!feld.original"></textarea>
+					<div *ngIf="this.contextmenuShow" id='contextmenu'
+						 class="contextmenu" [ngStyle]="{'left.px': contextmenuX , 'top.px': contextmenuY}">
+						<a class="input-group-addon" title="Anonymisieren" (click)="anonymisieren()">
+							Anonymisieren
+							<i class="glyphicon glyphicon-certificate"></i>
+						</a>
+					</div>
+				</td>
+				<td class="table-button">
+					<button class="btn btn-default" (click)="deleteText()" [disabled]="!feld.original || !isEditMode">
+						<span class="icon icon--trash"></span>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

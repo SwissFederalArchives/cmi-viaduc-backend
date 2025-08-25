@@ -30,7 +30,7 @@ namespace CMI.Manager.Index.Consumer
                         ArchiveRecordId = context.Message.ArchiveRecordId,
                         ElasticArchiveRecord = indexManager.FindArchiveRecord(
                             context.Message.ArchiveRecordId, 
-                            context.Message.IncludeFulltextContent, 
+                            context.Message.MetadataToExclude, 
                             context.Message.UseUnanonymizedData)
                     });
                 }

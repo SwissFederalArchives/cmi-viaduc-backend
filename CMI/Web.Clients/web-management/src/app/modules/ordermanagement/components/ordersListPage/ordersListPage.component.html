@@ -1,0 +1,226 @@
+<div class="page page-order-overview col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div content>
+			<div class="page-content">
+				<div class="page-header">
+					<h2 class="page-content-title">
+						<span>{{'Aufträge' | translate:'ordersListPage.sichtAuftraegeTitle'}}</span>
+					</h2>
+				</div>
+				<div *ngIf="hasRight; else noRights">
+					<cmi-loader *ngIf="isBusy" class="cmi-visible"></cmi-loader>
+					<div class="action-container">
+						<div class="row action-buttons">
+							<div class="col-xs-12">
+								<span class="orders-menu-actions">
+								<wj-menu #preFilterMenu
+										 [header]="'Aufträge'"
+										 class="prefilterMenu"
+										 [value]="preFilter"
+										 [(selectedValue)]="preFilter"
+										 [isButton]="true"
+										 (selectedValueChange)="preFilterItemClicked($event)">
+									<wj-menu-item [value]="SelectionPreFilter.NurPendente">
+										<span class="glyphicon glyphicon-filter"></span>
+										{{'Pendente' | translate:'ordersListPage.nurPendente'}}
+									</wj-menu-item>
+									<wj-menu-item [value]="SelectionPreFilter.Alle">
+										<span class="glyphicon glyphicon-eye-open"></span>
+										{{'Alle' | translate:'ordersListPage.alle'}}
+									</wj-menu-item>
+									<wj-menu-item *ngIf="barcodeSet" [value]="SelectionPreFilter.Barcode">
+										<span class="glyphicon glyphicon-filter"></span>
+										{{'Barcode gefiltert' | translate:'ordersListPage.barcode'}}
+									</wj-menu-item>
+								</wj-menu>
+
+								<wj-menu #listMenu [header]="'Listenansicht'"
+										 (itemClicked)="listMenuItemClicked(listMenu)">
+									<wj-menu-item>
+										<span class="glyphicon glyphicon-floppy-save"></span>
+										<b>{{'Speichern' |translate:'ordersListPage.save'}}</b>
+										<br>
+										<small>
+											<i>{{'Speichert die aktuelle Spaltenansicht' |translate:'ordersListPage.saveText'}}</i>
+										</small>
+									</wj-menu-item>
+									<wj-menu-item>
+										<span class="icon icon--excel"></span>
+										<b>{{'Datenexport' | translate:'ordersListPage.export'}}</b>
+										<br>
+										<small>
+											<i>{{'Speichert die aktuelle Selektion als Excel Datei ab' | translate:'ordersListPage.exportText'}}</i>
+										</small>
+									</wj-menu-item>
+									<wj-menu-item>
+										<span class="icon icon--tools"></span>
+										<b>{{'Spaltenauswahl' |translate:'ordersListPage.columnsPicker'}}</b>
+										<br>
+										<small>
+											<i>{{'Ermöglicht das Ein/Ausblenden von Spalten' |translate:'ordersListPage.columsPickerText'}}</i>
+										</small>
+									</wj-menu-item>
+									<wj-menu-item>
+										<span class="glyphicon glyphicon-sort-by-order-alt"></span>
+										<b>{{'Sortierung und Filter zurücksetzen' |translate:'ordersListPage.resetSort'}}</b>
+										<br>
+										<small>
+											<i>{{'Setzt die Sortierungen und Filterwerte auf den Standard zurück' |translate:'ordersListPage.resetSortText'}}</i>
+										</small>
+									</wj-menu-item>
+									<wj-menu-item>
+										<span class="icon icon--list-alt"></span>
+										<b>{{'Ansicht zurücksetzen' |translate:'ordersListPage.reset'}}</b>
+										<br>
+										<small>
+											<i>{{'Setzt die Liste auf die Standardansicht zurück' |translate:'ordersListPage.resetText'}}</i>
+										</small>
+									</wj-menu-item>
+								</wj-menu>
+
+								<button (click)="refreshTable()" class="btn btn-link">
+									<span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'orderOverviewPage.refresh' }}</span>
+								</button>
+							</span>
+							</div>
+						</div>
+						<hr />
+						<div class="row action-buttons">
+							<div class="col-xs-12">
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showEntscheidHinterlegenModal()">
+									<span><span class="glyphicon glyphicon-tag"></span>&nbsp;{{ 'Freigabekontrolle ({0})' | translate:'orderOverviewPage.freigabekontrolle':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showAushebungsAuftrag()">
+									<span><span class="glyphicon glyphicon-print"></span>&nbsp;{{ 'Aushebungsauftrag ({0})' | translate:'orderOverviewPage.aushebungsAuftrag':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showAuftraegeAusleihenModal()">
+									<span><span class="glyphicon glyphicon-retweet-2"></span>&nbsp;{{ 'Aufträge ausleihen ({0})' | translate:'orderOverviewPage.ausleihen':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showAuftraegeReponierenModal()">
+									<span><span class="glyphicon glyphicon-transfer"></span>&nbsp;{{ 'Aufträge reponieren ({0})' | translate:'orderOverviewPage.reponieren':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showAuftraegeAbschliessenModal()">
+									<span><span class="glyphicon glyphicon-tick"></span>&nbsp;{{ 'Aufträge abschliessen ({0})' | translate:'orderOverviewPage.abschliessen':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showAuftraegeZuruecksetzenModal()">
+									<span><span class="glyphicon glyphicon-restart"></span>&nbsp;{{ 'Aufträge zurücksetzen ({0})' | translate:'orderOverviewPage.zuruecksetzen':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link"  [disabled]="checkedCount === 0" (click)="showAuftraegeAbbrechenModal()">
+									<span><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;{{ 'Aufträge abbrechen ({0})' | translate:'orderOverviewPage.abbrechen':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showVersandkontrolle()">
+									<span><span class="glyphicon glyphicon-print"></span>&nbsp;{{ 'Versandkontrolle ({0})' | translate:'orderOverviewPage.versandkontrolle':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showMahnungVersendenModal()">
+									<span><span class="glyphicon glyphicon-light-beacon"></span>&nbsp;{{ 'Mahnung versenden ({0})' | translate:'orderOverviewPage.mahnungVersenden':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" [disabled]="checkedCount === 0" (click)="showErinnerungVersendenModal()">
+									<span><span class="glyphicon glyphicon-bell"></span>&nbsp;{{ 'Erinnerung versenden ({0})' | translate:'orderOverviewPage.erinnerungVersenden':checkedCount }}</span>
+								</button>
+
+								<button class="btn btn-link" (click)="showBarCodeModal()">
+									<span><span class="glyphicon glyphicon-barcode"></span>&nbsp;{{ 'Barcodes einlesen' | translate:'orderOverviewPage.barcodesEinlesen'}}</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="row orderoverview-list">
+						<div class="col-xs-12">
+							<cmi-viaduc-orders-list #orderslist
+													[columns]="columns"
+													[visibleColumns]="visibleColumns"
+													[isEinsichtsGesuchListe]="false">
+							</cmi-viaduc-orders-list>
+						</div>
+
+						<cmi-viaduc-column-picker
+							[(showColumnPickerModal)]="showColumnPicker"
+							[visibleColumns]="visibleColumns"
+							[hiddenColumns]="hiddenColumns"
+							(showColumnClicked)="showColumn($event)"
+							(hideColumnClicked)="hideColumn($event)">
+						</cmi-viaduc-column-picker>
+
+						<cmi-viaduc-freigabekontrolle-modal *ngIf="showEntscheidHinterlegen"
+																[ids]="checkedIds"
+																(onSubmitted)="refreshTable()"
+																[(open)]="showEntscheidHinterlegen"
+																[datumBewilligung]="selectedBewilligungsDate"
+																[interneBemerkung]="selectedInternalComment"
+																[currentRolePublicClient]="selectedrolePublicClient">
+						</cmi-viaduc-freigabekontrolle-modal>
+
+						<cmi-viaduc-auftraege-abbrechen-modal *ngIf="showAuftraegeAbbrechen"
+															  [ids]="checkedIds"
+															  [(open)]="showAuftraegeAbbrechen"
+															  (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-abbrechen-modal>
+
+						<cmi-viaduc-auftraege-ausleihen-modal *ngIf="showAuftraegeAusleihen"
+																 [ids]="checkedIds"
+																 [(open)]="showAuftraegeAusleihen"
+																 (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-ausleihen-modal>
+
+						<cmi-viaduc-auftraege-abschliessen-modal *ngIf="showAuftraegeAbschliessen"
+																 [ids]="checkedIds"
+																 [(open)]="showAuftraegeAbschliessen"
+																 (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-abschliessen-modal>
+
+						<cmi-viaduc-auftraege-reponieren-modal *ngIf="showAuftraegeReponieren"
+																 [ids]="checkedIds"
+																 [(open)]="showAuftraegeReponieren"
+																 (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-reponieren-modal>
+
+						<cmi-viaduc-auftraege-zuruecksetzen-modal *ngIf="showAuftraegeZuruecksetzen"
+																 [ids]="checkedIds"
+																 [(open)]="showAuftraegeZuruecksetzen"
+																 (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-zuruecksetzen-modal>
+
+						<cmi-viaduc-auftraege-mahnung-senden-modal *ngIf="showAuftraegeMahnungVersenden"
+																  [ids]="checkedIds"
+																  [(open)]="showAuftraegeMahnungVersenden"
+																  (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-mahnung-senden-modal>
+
+
+						<cmi-viaduc-auftraege-erinnerung-senden-modal *ngIf="showAuftraegeErinnerungVersenden"
+																   [ids]="checkedIds"
+																   [(open)]="showAuftraegeErinnerungVersenden"
+																   (onSubmitted)="refreshTable()">
+						</cmi-viaduc-auftraege-erinnerung-senden-modal>
+
+						<cmi-viaduc-barcode-modal *ngIf="showBarCode"
+												  [(open)]="showBarCode"
+												  (onSubmitted)="barcodesChanged($event)">
+						</cmi-viaduc-barcode-modal>
+					</div>
+				</div>
+				<ng-template #noRights>
+					<div class="alert alert-danger" role="alert">
+						<span class="sr-only">error:</span> {{ 'Sie haben nicht das benötigte ApplicationFeature (Auftragsuebersicht) um auf die Seite zuzugreifen. Bitte wenden Sie sich an den App-Owner.' | translate:'ordersListPage.title'}}
+					</div>
+				</ng-template>
+
+			</div>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>

@@ -1,0 +1,80 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<div *ngIf="loading">
+		<cmi-blocker class="cmi-visible cmi-fixed cmi-center cmi-shadow">
+			<cmi-spinner [hint]="'Daten werden aufbereitet...'"></cmi-spinner>
+		</cmi-blocker>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div *ngIf="!loading" content>
+			<h1>Statistiken und Reports</h1>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title">Report Bereitstellung Primärdaten</h3>
+							<div class="form form-horizontal">
+								<div class="row">
+									<label for="startDate" class="col-md-4 control-label">Von</label>
+									<div class="col-md-8">
+										<wj-input-date-time [(value)]="startDate" [format]="'dd.MM.yyyy HH:mm'"
+															[timeStep]="15" id="startDate" style="width: 100%">
+										</wj-input-date-time>
+									</div>
+									<label for="endDate" class="col-md-4 control-label">Bis</label>
+									<div class="col-md-8">
+										<wj-input-date-time [(value)]="endDate" [format]="'dd.MM.yyyy HH:mm'"
+															[timeStep]="15" id="endDate" style="width: 100%">
+										</wj-input-date-time>
+									</div>
+									<label for="button" class="col-md-4 control-label"></label>
+									<div class="col-md-8">
+										<button id="button" class="btn btn-default" (click)="doExport()">Excel-Export
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-body">
+							<h3 class="card-title">Report Downloaddaten</h3>
+							<div class="form form-horizontal">
+								<div class="row">
+									<label for="startDateDownload" class="col-md-4 control-label">Von</label>
+									<div class="col-md-8">
+										<wj-input-date-time [(value)]="startDateDownload" [format]="'dd.MM.yyyy HH:mm'"
+															[timeStep]="15" id="startDateDownload" style="width: 100%">
+										</wj-input-date-time>
+									</div>
+								</div>
+								<div class="row">
+									<label for="endDateDownload" class="col-md-4 control-label">Bis</label>
+									<div class="col-md-8">
+										<wj-input-date-time [(value)]="endDateDownload" [format]="'dd.MM.yyyy HH:mm'"
+															[timeStep]="15" id="endDateDownload" style="width: 100%">
+										</wj-input-date-time>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-offset-4 col-md-8">
+										<button id="buttonDownload" class="btn btn-default" (click)="doExportDownload()">
+											Excel-Export
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>

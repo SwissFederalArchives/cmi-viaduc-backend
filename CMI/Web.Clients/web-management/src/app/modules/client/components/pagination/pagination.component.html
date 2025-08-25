@@ -1,0 +1,30 @@
+<nav class="pagination-container">
+	<div class="row">
+		<div class="col-md-8 col-sm-6 col-xs-12 col-reduced-margin">
+			<ul class="pagination">
+				<li *ngFor="let item of items" [ngClass]="item.classes">
+					<a *ngIf="item.enabled" href="javascript:void(0)" (click)="setPageIndex(item.index)"
+					   tooltip="{{ 'Seite {0} anzeigen' | translate:'search.browser.pageTooltip':(item.index+1) }}">{{
+						item.label
+						}}</a>
+					<a *ngIf="!item.enabled" disabled="disabled" aria-disabled="true">{{ item.label }}</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-4 col-sm-6 col-xs-12 col-reduced-margin">
+				<span class="form-group inline pull-right">
+					<label class="inline"
+						   for="pagingSize">{{ 'Anz. Treffer pro Seite' | translate:'pagination.anzahlTreffer' }}</label>
+					&nbsp;
+					<select class="form-control inline nopad"
+							id="pagingSize"
+							[(ngModel)]="pagingSize"
+							(change)="onChangePageSize()">
+							<option *ngFor="let skip of possiblePagingSizes"
+									[attr.value]="skip"
+									[attr.selected]=" skip.toString() === pagingSize.toString() ? 'selected' : ''">{{skip}}</option>
+					</select>
+				</span>
+		</div>
+	</div>
+</nav>

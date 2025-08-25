@@ -1,0 +1,159 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/COO.2080.100.2.2204573.json",
+  "label": {
+    "none": [
+      "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/p000129.pdf",
+      "label": {
+        "none": [
+          "p000129.pdf"
+        ]
+      },
+      "type": "Canvas",
+      "height": 1,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/COO.2080.100.2.2204573.json#annotations-page-painting-COO.2080.100.2.2204573-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/COO.2080.100.2.2204573.json#annotations-content-painting-COO.2080.100.2.2204573-1",
+              "type": "Annotation",
+              "body": {
+                "format": "application/pdf",
+                "id": "https://viaducdev.cmiag.ch/clientdev/files/content/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/p000129.pdf",
+                "type": "foaf:Document"
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/2009-03-10_23_Launch_of_the_World_3972F5/canvasses/COO.2080.100.2.2204573-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 1
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+        ],
+        "en": [
+          "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+        ],
+        "fr": [
+          "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+        ],
+        "it": [
+          "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+        ],
+        "none": [
+          "2009-03-10/23 Launch of the World Digital Library - Paris, April 21 2009"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2009-03-10 - 2014-02-20"
+        ],
+        "en": [
+          "2009-03-10 - 2014-02-20"
+        ],
+        "fr": [
+          "2009-03-10 - 2014-02-20"
+        ],
+        "it": [
+          "2009-03-10 - 2014-02-20"
+        ],
+        "none": [
+          "2009-03-10 - 2014-02-20"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Launch_of_the_World_Digital_Libra_26AFD7/COO.2080.100.2.2205293.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-0686-5820-Launch_of_the_World_Digital_Libra_26AFD7-2009-03-10_23_Launch_of_the_World_3972F5",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/svg+xml",
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+      "type": null
+    }
+  ]
+}

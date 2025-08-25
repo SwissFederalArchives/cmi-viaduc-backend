@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Utilities.Transkribus.Properties" GeneratedClassName="TranskribusSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TranskribusParameterSettings" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus.Properties.TranskribusParameterSettings@@</Value>
+    </Setting>
+    <Setting Name="TranskribusTimeOut" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus.Properties.TranskribusTimeOut@@</Value>
+    </Setting>
+    <Setting Name="TranskribusSftpPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">TW90rP8fVTtpf3Vjxefo</Value>
+    </Setting>
+    <Setting Name="TranskribusSftpHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TranskribusSFTPKeyFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TrankribusSFTPUser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">sftp_htruser</Value>
+    </Setting>
+    <Setting Name="TranskribusSftpPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TranskribusBindPathInput" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus..Properties.TranskribusBindPathInput@@</Value>
+    </Setting>
+    <Setting Name="TranskribusBindPathOutput" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus.Properties.TranskribusBindPathOutput@@</Value>
+    </Setting>
+    <Setting Name="BaseDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TranskribusClassifierURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus.Properties.TranskribusClassifierURL@@</Value>
+    </Setting>
+    <Setting Name="TranskribusDecodeURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">@@CMI.Utilities.Transkribus.Properties.TranskribusDecodeURL@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

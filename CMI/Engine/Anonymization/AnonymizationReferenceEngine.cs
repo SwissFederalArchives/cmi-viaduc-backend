@@ -47,7 +47,7 @@ namespace CMI.Engine.Anonymization
             foreach (var reference in elasticArchiveRecord.References)
             {
                 // Get the referenced record
-                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, true);
+                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.Nothing);
                 if (refRecord != null)
                 {
                     // Find the reference 
@@ -67,7 +67,7 @@ namespace CMI.Engine.Anonymization
             foreach (var reference in elasticArchiveRecord.References.Where(r => r.Protected))
             {
                 // Get the referenced record
-                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, true);
+                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 if (refRecord != null)
                 {
                     // Update the reference 
@@ -89,7 +89,7 @@ namespace CMI.Engine.Anonymization
             foreach (var child in children)
             {
                 // Get the corresponding db record
-                var childDbRecord = dbAccess.FindDbDocument(child.ArchiveRecordId, false);
+                var childDbRecord = dbAccess.FindDbDocument(child.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 if (childDbRecord != null)
                 {
                     UpdateArchivePlanContext(childDbRecord, elasticArchiveRecord);

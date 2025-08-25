@@ -59,12 +59,12 @@ namespace CMI.Manager.Index
             dbAccess.RemoveDocument(removeContext.Message.ArchiveRecordId);
         }
 
-        public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, bool includeFulltextContent, bool useUnanonymizedData)
+        public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, bool useUnanonymizedData)
         {
-            var document = dbAccess.FindDocument(archiveRecordId, includeFulltextContent);
+            var document = dbAccess.FindDocument(archiveRecordId, metadataToExclude);
             if (document != null && useUnanonymizedData && document.IsAnonymized)
             {
-                var dbRecord = dbAccess.FindDbDocument(archiveRecordId, includeFulltextContent);
+                var dbRecord = dbAccess.FindDbDocument(archiveRecordId, metadataToExclude);
                 document.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
             }
 
@@ -76,7 +76,7 @@ namespace CMI.Manager.Index
         public List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId)
         {
             var retVal = new List<ElasticArchiveRecord>();
-            var entryItem = dbAccess.FindDocumentWithoutSecurity(archiveRecordId, false);
+            var entryItem = dbAccess.FindDocumentWithoutSecurity(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
             if (entryItem != null)
             {
@@ -93,7 +93,7 @@ namespace CMI.Manager.Index
                     Log.Verbose("Ordered item is not dossier level. So we traverse up.");
                     if (!string.IsNullOrEmpty(entryItem.ParentArchiveRecordId))
                     {
-                        entryItem = dbAccess.FindDocumentWithoutSecurity(entryItem.ParentArchiveRecordId, false);
+                        entryItem = dbAccess.FindDocumentWithoutSecurity(entryItem.ParentArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                         if (entryItem != null)
                         {
                             Log.Verbose("Found parent item with id {ArchiveRecordId}. Adding to collection.", entryItem.ArchiveRecordId);
@@ -277,13 +277,13 @@ namespace CMI.Manager.Index
 
         public void UpdateDependentRecords(string archiveRecordId)
         {
-            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, false);
+            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
             anonymizationReferenceEngine.UpdateDependentRecords(dbRecord);
         }
 
         public void UpdateReferencesOfUnprotectedRecord(string archiveRecordId)
         {
-            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, false);
+            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
             anonymizationReferenceEngine.UpdateReferencesOfUnprotectedRecord(dbRecord);
         }
 

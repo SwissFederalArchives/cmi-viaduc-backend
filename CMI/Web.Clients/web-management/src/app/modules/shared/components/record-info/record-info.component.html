@@ -1,0 +1,30 @@
+<div class="record-info-container">
+	<table class="text-nowrap text-muted">
+		<tr>
+			<td class="record-info-label">
+				<small>
+					<span class="font-weight-bold">Erstellt:</span>
+				</small>
+			</td>
+			<td class="record-info-date">
+				<small>{{ createdOn | date:'dd.MM.yyyy HH:mm' }}</small>
+			</td>
+			<td class="record-info-user">
+				<small>{{ createdBy }}</small>
+			</td>
+		</tr>
+		<tr>
+			<td class="record-info-label">
+				<small>
+					<span class="font-weight-bold">Letzte Änderung:</span>
+				</small>
+			</td>
+			<td class="record-info-date">
+				<small>{{ modifiedOn | date:'dd.MM.yyyy HH:mm' }}</small>
+			</td>
+			<td class="record-info-user">
+				<small>{{ modifiedBy }}</small>
+			</td>
+		</tr>
+	</table>
+</div>

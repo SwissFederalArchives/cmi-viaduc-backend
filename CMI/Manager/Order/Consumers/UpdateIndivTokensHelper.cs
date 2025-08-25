@@ -73,7 +73,7 @@ namespace CMI.Manager.Order.Consumers
             var contextOrderDataAccess = auftragStatus.Context.OrderDataAccess;
             var sendEndpointProvider = auftragStatus.Context.Bus;
 
-            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId.ToString(), false);
+            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId.ToString(), MetadataToExclude.OCRContentAndFiles);
             
             // It is possible, that a VE record was delete while the order item is still in progress
             // So if the archiveRecord does not exist anymore, no need to update the Indiv Tokens

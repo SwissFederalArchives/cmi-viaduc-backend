@@ -1,0 +1,9 @@
+<div class="detail-hierarchy" *ngIf="items">
+    <span *ngFor="let item of items; let i = index;"
+		  [ngStyle]="{ 'padding-left.em': (inset * i) }">
+        <span tabindex="0" [ngClass]="{'selected': (i === items.length -1 ) }">
+            <span *ngIf="item.referenceCode">{{item.referenceCode}}&nbsp;</span>
+            <span>{{item.title}}</span>
+        </span>
+    </span>
+</div>

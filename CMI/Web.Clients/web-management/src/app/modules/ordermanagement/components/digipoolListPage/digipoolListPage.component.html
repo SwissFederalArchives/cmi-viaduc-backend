@@ -1,0 +1,174 @@
+<div class="page page-home col-sm-12">
+
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+
+		<div content>
+			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+
+			<div class="page-header">
+				<h2 class="page-content-title">
+					<span>{{'Digitalisierungsaufträge' | translate:'digipoolList.Titel'}}</span>
+				</h2>
+			</div>
+			<div *ngIf="hasRight(); else noRights">
+				<div *ngIf="digipoolList">
+					<div class="action-container">
+						<div class="row action-buttons">
+							<div class="col-xs-12">
+								<span class="orders-menu-actions">
+									<button (click)="showPriorisierungOverviewClick()" class="btn btn-link" [disabled]="!allowPriorisierungAnpassenAusfuehren">
+										<span><span class="icon icon--tools"></span>&nbsp;{{ 'Priorisierung anpassen' | translate:'digipoolList.priorisierungbutton' }}</span>
+									</button>
+									<button (click)="showAufbereitungsfehlerZuruecksetzenClick()" class="btn btn-link" [disabled]="!allowAufbereitungsfehlerZuruecksetzen">
+										<span><span class="glyphicon glyphicon-transfer"></span>&nbsp;{{ 'Aufbereitungsfehler zurücksetzen' | translate:'digipoolList.aufbereitungsfehlerZuruecksetzengbutton' }}</span>
+									</button>
+									<button (click)="saveColumns()" class="btn btn-link">
+										<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Ansicht speichern' | translate:'digipoolList.save' }}</span>
+									</button>
+									<button (click)="resetColumnsToDefault()" class="btn btn-link">
+										<span><span class="icon icon--list-alt"></span>&nbsp;{{ 'Ansicht zurücksetzen' | translate:'digipoolList.reset' }}</span>
+									</button>
+									<button (click)="resetSortsAndFilters()" class="btn btn-link">
+										<span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{'Sortierung und Filter zurücksetzen' |translate:'digipoolList.resetSort'}}</span>
+									</button>
+									<button (click)="refreshTable()" class="btn btn-link">
+										<span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'digipoolList.refresh' }}</span>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row top-pagination">
+						<div class="col-xs-12">
+							<cmi-viaduc-odata-pagination [(collectionView)]="digipoolList"></cmi-viaduc-odata-pagination>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<cmi-viaduc-grid #flexGrid [itemsSource]="digipoolList"
+											 class="wijmo-digipool-list"
+											 [dataMaps]="valueFilters"
+											 [displaySelectionColumn]="true"
+											 [enableMultiSort]="true"
+											 [name]="'digipool'">
+
+								<wj-flex-grid-column *ngFor="let col of columns" [visible]="col.visible"
+													 [binding]="col.key" [width]="col.width" [minWidth]="col.minWidth ? col.minWidth : 25"
+													 [format]="col.format"
+													 [dataType]="col.dataType ? col.dataType : 1"
+													 [header]="col.defaultLabel | translate:'digipoolList.columns.' + col.key">
+									<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'user'">
+										<a [routerLink]="_url.getNormalizedUrl('/benutzerundrollen/benutzer') + '/' + item.userId">
+											{{item.user}}</a>
+									</ng-template>
+									<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'orderItemId'">
+										<a [routerLink]="_url.getNormalizedUrl('/auftragsuebersicht/auftraege') + '/' + item.orderItemId">
+											{{item.orderItemId}}</a>
+									</ng-template>
+									<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'signatur'">
+												<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" *ngIf="item.veId && item.veId !==0;else emptyVeId" >
+												{{item.signatur}}</a>
+											<ng-template #emptyVeId>
+												{{item.signatur}}
+											</ng-template>
+									</ng-template>
+								</wj-flex-grid-column>
+
+							</cmi-viaduc-grid>
+							<ng-template #emptyTable>
+								<div class="col-xs-12">
+									<p>{{'Es sind noch keine Daten vorhanden.' | translate:
+										'digipoolList.NoDataYet'}}</p>
+								</div>
+							</ng-template>
+							<div class="row bottom-pagination">
+								<div class="col-xs-12">
+									<cmi-viaduc-odata-pagination
+										[(collectionView)]="digipoolList"></cmi-viaduc-odata-pagination>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<cmi-viaduc-modal [(opened)]="showPriorisierungOverview" [modalTitle]="'Priorisierung anpassen' | translate:'digipoolList.priorisierungtitel'">
+					<cmi-viaduc-modal-body>
+						<fieldset>
+							<label class="col-sm-6 control-label">{{'Digitalisierungskategorie "Spezial" setzen' | translate: 'digipoolList.priorisierungspezial'}}</label>
+
+							<div class="col-sm-6">
+								<div class="checkbox checkbox--right">
+									<label for="checkbox">
+										<input type="checkbox" id="checkbox" [(ngModel)]="setStatusSpezial">
+									</label>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<label class="col-sm-6 control-label">{{'Termin setzen' | translate: 'digipoolList.termin'}}</label>
+							<div class="col-sm-3">
+								<input	class="form-control"
+										id="termin"
+										type="date"
+										[(ngModel)]="selectedTerminDate"
+										name="termin"
+										aria-labelledby="Date DD.MM.YYYY">
+										<span class="help-block">{{'dd.MM.yyyy' | translate: 'digipoolList.helptime'}}</span>
+							</div>
+							<div class="col-sm-3">
+								<input class="form-control" type="text" id="time" [(ngModel)]="selectedTerminTime" [maxlength]="5">
+								<span class="help-block">{{'hh:mm' | translate: 'digipoolList.helptime'}}</span>
+							</div>
+						</fieldset>
+					</cmi-viaduc-modal-body>
+					<cmi-viaduc-modal-footer>
+						<div class="row">
+							<div class="col-xs-12">
+								<button type="button" class="btn btn-secondary" (click)="onCancelPriorisierungOverviewClick($event)">
+									{{'Abbrechen' | translate:'digipoolList.cancel'}}
+								</button>
+								<button type="button" class="btn btn-primary" (click)="onSavePriorisierungOverviewClick($event)" [disabled]="!validateTime()">
+									{{'Speichern' | translate:'digipoolList.save'}}
+								</button>
+							</div>
+						</div>
+					</cmi-viaduc-modal-footer>
+				</cmi-viaduc-modal>
+
+				<cmi-viaduc-modal [(opened)]="showAufbereitungsfehlerZuruecksetzen" [modalTitle]="'Aufbereitungsfehler zurücksetzen' | translate:'digipoolList.aufbereitungsfehlertitel'">
+					<cmi-viaduc-modal-body>
+						<div>
+							{{getAufbereitungsfehlerZuruecksetzenText}}
+						</div>
+					</cmi-viaduc-modal-body>
+					<cmi-viaduc-modal-footer>
+						<div class="row">
+							<div class="col-xs-12">
+								<button type="button" class="btn btn-secondary" (click)="onCancelAufbereitungsfehlerZuruecksetzenClick($event)">
+									{{'Abbrechen' | translate:'digipoolList.cancel'}}
+								</button>
+								<button type="button" class="btn btn-primary" (click)="onYesAufbereitungsfehlerZuruecksetzenClick($event)">
+									{{'Ja' | translate:'digipoolList.yes'}}
+								</button>
+							</div>
+						</div>
+					</cmi-viaduc-modal-footer>
+				</cmi-viaduc-modal>
+			</div>
+			<ng-template #noRights>
+				<div class="alert alert-danger" role="alert">
+					<span class="sr-only">error:</span>
+					{{ 'Sie haben nicht das benötigte ApplicationFeature (Digipool) um auf die Seite zuzugreifen. Bitte wenden Sie sich an den App-Owner.' |
+					translate:'digipoolList.title'}}
+				</div>
+			</ng-template>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>

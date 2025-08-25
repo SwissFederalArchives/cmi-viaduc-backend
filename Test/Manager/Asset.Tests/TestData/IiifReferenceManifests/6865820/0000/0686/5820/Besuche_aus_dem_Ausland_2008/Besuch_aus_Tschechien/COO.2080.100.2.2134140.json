@@ -1,0 +1,316 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/COO.2080.100.2.2134140.json",
+  "label": {
+    "none": [
+      "Besuch aus Tschechien"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Studienreise_ins_Schweizerische_B_51C213/COO.2080.100.2.2132567.json",
+      "label": {
+        "none": [
+          "Studienreise ins Schweizerische Bundesarchiv"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Besuche_aus_Tschechien__Gestaltun_B1B8B5/COO.2080.100.2.2134649.json",
+      "label": {
+        "none": [
+          "Besuche aus Tschechien: Gestaltung Programm"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Bestatigung_Datum_des_Besuches/COO.2080.100.2.2135000.json",
+      "label": {
+        "none": [
+          "Bestätigung Datum des Besuches"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Programm_Studienreise_Narodni_Archiv/COO.2080.100.2.2138086.json",
+      "label": {
+        "none": [
+          "Programm Studienreise Národni Archiv"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Besuch_aus_Tschechien__Vorschlag__0BE987/COO.2080.100.2.2138111.json",
+      "label": {
+        "none": [
+          "Besuch aus Tschechien: Vorschlag Programm INTERN"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Besuch_aus_Tschechien__Vorschlag__A12BC8/COO.2080.100.2.2140894.json",
+      "label": {
+        "none": [
+          "Besuch aus Tschechien: Vorschlag Programm EXTERN"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Besuch_aus_Tschechien__engultiges_FC259B/COO.2080.100.2.2142773.json",
+      "label": {
+        "none": [
+          "Besuch aus Tschechien: engültiges Programm"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Besuch_aus_Tschechien__engultiges_FC259B/COO.2080.100.2.2142784.json",
+      "label": {
+        "none": [
+          "Besuch aus Tschechien: engültiges Programm"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Visite_de_Tchequie__Programme_definitif/COO.2080.100.2.2145191.json",
+      "label": {
+        "none": [
+          "Visite de Tchéquie: Programme définitif"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Tschechien/Prasentation_RIE_Besuch_Tschechis_D464FE/COO.2080.100.2.2145232.json",
+      "label": {
+        "none": [
+          "Präsentation RIE Besuch_Tschechisches_Nationalarchiv_BAR_20080521"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Besuch aus Tschechien"
+        ],
+        "en": [
+          "Besuch aus Tschechien"
+        ],
+        "fr": [
+          "Besuch aus Tschechien"
+        ],
+        "it": [
+          "Besuch aus Tschechien"
+        ],
+        "none": [
+          "Besuch aus Tschechien"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-03-17 - 2014-02-20"
+        ],
+        "en": [
+          "2008-03-17 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-03-17 - 2014-02-20"
+        ],
+        "it": [
+          "2008-03-17 - 2014-02-20"
+        ],
+        "none": [
+          "2008-03-17 - 2014-02-20"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien"
+        ],
+        "en": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien"
+        ],
+        "fr": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien"
+        ],
+        "it": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien"
+        ],
+        "none": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Tschechien"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/COO.2080.100.2.2120345.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-0686-5820-Besuche_aus_dem_Ausland_2008-Besuch_aus_Tschechien",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

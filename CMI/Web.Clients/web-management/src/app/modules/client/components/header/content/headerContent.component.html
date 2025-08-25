@@ -1,0 +1,30 @@
+<div class="clearfix">
+	<section class="nav-services clearfix">
+		<div *ngIf="versionInfo" class="versioninfo">{{versionInfo}}</div>
+		<nav class="nav-service">
+			<ul class="download-link">
+				<li>&nbsp;
+					<a *ngIf="!authenticated" (click)="login()" href="javascript:void(0)"><span>{{ 'Anmelden' | translate:'header.anmelden' }}</span></a>
+					<a *ngIf="authenticated"><span>{{ username }}</span></a>&nbsp;&nbsp;
+					<a *ngIf="authenticated" (click)="logout()" href="javascript:void(0)"><span>{{ 'Abmelden' | translate:'header.abmelden' }}</span></a>
+				</li>
+			</ul>
+		</nav>
+	</section>
+</div>
+
+<div class="clearfix">
+	<a href="#/{{language}}" class="brand hidden-xs">
+		<img src="./assets/img/logo-CH.svg" onerror="this.onerror = null; this.src = './assets/img/logo-CH.png'"
+			 alt="Logo der Schweizerischen Eidgenossenschaft – zur Startseite"/>
+		<h1>{{ 'Management-Client des Online-Zugangs' | translate:'header.claim' }}</h1>
+	</a>
+</div>
+
+<div class="logininfo" *ngIf="!authenticated">
+<span>
+    <span>{{ 'Sie sind nicht angemeldet' | translate:'header.notLoggedInInfo'}}</span>
+    <a class="glyphicon glyphicon-info-sign infoicon" data-toggle="tooltip" data-placement="bottom"
+	   tooltip="{{'Melden Sie sich an, um die Management-Funktionen verwenden zu können.' | translate:'header.notLoggedInTip'}}"></a>
+</span>
+</div>

@@ -17,6 +17,7 @@ namespace CMI.Manager.Asset.Properties
             AddDescription<Settings>(x => x.hOcrCopyDestinationPath, "Der Pfad wo die erkannten Texte der Bilder gespeichert werden soll (Muss im Solr Verzeichnis liegen.)");
             AddDescription<Settings>(x => x.SolrCoreName, "Der Name des erzeugten Solr Core");
             AddDescription<Settings>(x => x.IgnoreAccessTokensForManifestCheck, "Soll auch Primärdaten erzeugt werden, wenn die VE keine Ö2 Download und Fulltext Tokens besitzt. Nur zum Testen wichtig.");
+            AddDescription<Settings>(x => x.CantaloupeUrl, "Die URL vom Cantaloupe Image Server.");
 
             AddDescription<IiifManifest>(x => x.ApiServerUri, "URL des API Servers oder Backend Servers.");
             AddDescription<IiifManifest>(x => x.ImageServerUri, "URL des Image Servers.");

@@ -1,0 +1,61 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div content>
+			<h1>Systemstatus</h1>
+
+			<h2>Applicationsstatus</h2>
+			<div class="row">
+				<div class="col-md-4">
+					<div *ngIf="applicationStatus === true" style="padding: 10px; width: 100%;" class="alert alert-success">Ok</div>
+					<div *ngIf="applicationStatus != true" style="padding: 10px; width: 100%;" class="alert alert-danger">Nok</div>
+				</div>
+				<div *ngIf="loadingWindowsServices === false"  class="col-md-2">
+					<button class="btn btn-primary icon-refresh"  type="button" (click)="onReload()">Aktualisieren</button>
+				</div>
+			</div>
+
+			<h2>Windows Services</h2>
+			<table>
+				<tr>
+					<th>Status</th>
+					<th>Service</th>
+					<th>Execution Time</th>
+					<th>Message</th>
+				</tr>
+				<tr *ngIf="loadingWindowsServices">
+					<td colspan="4"><cmi-spinner [hint]="'Prüfe Service Status...'"></cmi-spinner></td>
+				</tr>
+				<tr *ngFor="let stat of statuses">
+					<td [class]="stat.status === 'Ok' ? 'alert-success' :'alert-danger'">{{stat.status}}</td>
+					<td>{{stat.monitoredServices}}</td>
+					<td>{{stat.executionTime ? stat.executionTime + ' ms' : '-'}}</td>
+					<td>{{stat.message}}</td>
+				</tr>
+			</table>
+			<h2>Tests</h2>
+			<table>
+				<tr>
+					<th>Status</th>
+					<th>Test</th>
+					<th>Execution Time</th>
+					<th>Message</th>
+				</tr>
+				<tr *ngIf="loadingTests">
+					<td colspan="4"><cmi-spinner [hint]="'Prüfe Ressourcen...'"></cmi-spinner></td>
+				</tr>
+				<tr *ngFor="let result of testResults">
+					<td [class]="result.status === 'Ok' ? 'alert-success' :'alert-danger'">{{result.status}}</td>
+					<td>{{result.monitoredServices}}</td>
+					<td>{{result.executionTime ? result.executionTime + ' ms' : '-'}}</td>
+					<td>{{result.message}}</td>
+				</tr>
+			</table>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>

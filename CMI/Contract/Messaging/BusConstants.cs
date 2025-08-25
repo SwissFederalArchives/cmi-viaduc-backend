@@ -148,6 +148,8 @@
         public const string MonitoringAbbyyOcrTestQueue = "r.monitoring.abbyyOcrTest";
         public const string MonitoringDirCheckQueue = "r.monitoring.checkDir";
         public const string MonitoringDocumentConverterInfoQueue = "r.monitoring.documentConverterInfo";
+        public const string MonitoringSolrTestQueue = "r.monitoring.solrTest";
+        public const string MonitoringCantaloupeTestQueue = "r.monitoring.cantaloupeTest";
 
         // Events the Order Manager subscribes to
         public const string OrderManagerArchiveRecordUpdatedEventQueue = "e.order.manager.archiveRecordUpdated";
@@ -155,5 +157,6 @@
         // Messages the Onboarding Manager subscribes to
         public const string OnboardingManagerStartProcessMessageQueue = "m.onboarding.manager.startProcess";
         public const string OnboardingManagerHandleCallbackMessageQueue = "m.onboarding.manager.handleCallback";
+      
     }
 }

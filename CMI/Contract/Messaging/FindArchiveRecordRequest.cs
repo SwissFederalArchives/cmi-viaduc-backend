@@ -1,9 +1,11 @@
-﻿namespace CMI.Contract.Messaging
+﻿using CMI.Contract.Common;
+
+namespace CMI.Contract.Messaging
 {
     public class FindArchiveRecordRequest
     {
         public string ArchiveRecordId { get; set; }
-        public bool IncludeFulltextContent { get; set; }
+        public MetadataToExclude MetadataToExclude { get; set; }
         /// <summary>
         /// If set to true, the returned record contains the unprotected texts for title,
         /// withinInfo and other fields. Use with caution and only in circumstances where
@@ -11,4 +13,5 @@
         /// </summary>
         public bool UseUnanonymizedData { get; set; }
     }
+
 }

@@ -1,0 +1,392 @@
+<div class="page page-collection-detail col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div content *ngIf="detailItem">
+			<form [formGroup]="myForm" *ngIf="myForm" id="myForm" >
+				<div class="page-content manuelleKorrektur-detail">
+					<div class="page-header">
+						<h2 class="page-content-title">
+							<span>{{'Manuelle Korrekturen' | translate:'manuelleKorrekturenDetailPage.title'}}</span>
+						</h2>
+					</div>
+					<div class="action-container" [ngClass]="{'fixed-nav': isNavFixed}">
+						<div class="row action-buttons">
+							<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12" >
+								<span class="orders-menu-actions">
+									<button (click)="save(false)" [disabled]="!myForm.dirty" class="btn btn-link">
+										<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Speichern' | translate:'digipoolList.save' }}</span>
+									</button>
+									<button (click)="reset()" [disabled]="!myForm.dirty" class="btn btn-link">
+										<span><span class="glyphicon glyphicon-undo"></span>&nbsp;{{ 'Änderungen verwerfen' | translate:'role.cancel' }}</span>
+									</button>
+									<button class="btn btn-link" (click)="edit()" [disabled]="editMode" >
+										<span><span class="glyphicon glyphicon-edit"></span>&nbsp;{{ 'Bearbeiten' | translate:'manuelleKorrekturDetailPage.edit' }}</span>
+									</button>
+									<button class="btn btn-link" (click)="publizieren()"  [disabled]="!editMode || myForm.dirty" >
+										<span><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;{{ 'Publizieren' | translate:'manuelleKorrekturDetailPage.Publizieren' }}</span>
+									</button>
+								</span>
+							</div>
+							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 detail-paging" *ngIf="detailPagingEnabled" >
+								<cmi-viaduc-detail-paging [detailUrl]="getDetailBaseUrl()"
+														  [idProperty]="'manuelleKorrekturId'"
+														  [disableNavigation]="myForm.dirty"></cmi-viaduc-detail-paging>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="form-group">
+						<h3 class="title">Verzeichnungsdaten</h3>
+						<div class="row">
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="signatur" tooltip="Signatur">Signatur</label>
+									<div class="col-md-9 col-xs-8">
+										<div class="input-group">
+											<a class="input-group-addon" target="_blank"
+											   href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detailItem.manuelleKorrektur.veId}}"
+											   title="Öffnet die Detailansicht der Signatur in einem neuen Register">
+												<i class="glyphicon glyphicon-new-window"></i>
+											</a>
+											<input id="signatur" formControlName="signatur" readonly
+												   name="signatur" class="form-control"/>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label" for="hierachiestufe" tooltip="Hierarchiestufe">Hierarchiestufe</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="hierachiestufe" formControlName="hierachiestufe" readonly
+										   name="hierachiestufe" class="form-control"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label" for="veId" tooltip="ID der VE">ID der VE</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="veId" formControlName="veId" readonly
+										   name="veId" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" >
+							<div class="form-group col-md-12">
+								<div class="row">
+									<label class="col-md-1 col-xs-1 control-label" for="titel" tooltip="Titel">Titel</label>
+									<div class="col-md-11 col-xs-11">
+										<input id="titel" formControlName="titel" readonly
+											   name="titel" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row verzeichnungsdaten">
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="aktenzeichen" tooltip="Aktenzeichen">Aktenzeichen</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="aktenzeichen" formControlName="aktenzeichen" readonly
+											   name="aktenzeichen" class="form-control"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="entstehungszeitraum"
+										   tooltip="Entstehungszeitraum">Entstehungszeitraum</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="entstehungszeitraum" formControlName="entstehungszeitraum" readonly
+											   name="entstehungszeitraum" class="form-control"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="darin" tooltip="Darin">Darin</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="darin" formControlName="darin" readonly
+											   name="darin" class="form-control"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="zusätzlicheInformationen"
+										   tooltip="Zusätzliche Informationen">Zusätzliche Informationen</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="zusätzlicheInformationen" formControlName="zusätzlicheInformationen" readonly
+											   name="zusätzlicheInformationen" class="form-control"/>
+									</div>
+								</div>
+								<div class="row">
+									<label class="col-md-3 col-xs-4 control-label"  for="zugänglichkeitGemässBGA"
+										   tooltip="Zugänglichkeit gemäss BGA:">Zugänglichkeit gemäss BGA</label>
+									<div class="col-md-9 col-xs-8">
+										<input id="zugänglichkeitGemässBGA" readonly
+											   formControlName="zugänglichkeitGemässBGA"  name="zugänglichkeitGemässBGA"
+											   class="form-control"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-8">
+								<div class="row">
+									<label class="col-md-12 col-xs-12 control-label" tooltip="Archivplankontext" >
+										{{'Archivplankontext' | translate: ''}}
+									</label>
+									<div class="col-xs-12 col-md-12">
+										<cmi-archivplan-context
+											[items]="this.detailItem.archivplanKontext"></cmi-archivplan-context>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-8">
+								<div class="row">
+									<label class="col-md-3 col-xs-3 control-label label-2of3"
+										   tooltip="Schutzfristverzeichnung"
+										   for="schutzfristverzeichnung">
+										{{'Schutzfristverzeichnung' | translate:''}}
+									</label>
+									<div class="col-md-9 col-xs-9 content-2of3">
+										<input class="form-control"
+											   name="schutzfristverzeichnung"
+											   id="schutzfristverzeichnung" readonly
+											   formControlName="schutzfristverzeichnung">
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-3 control-label" tooltip="Zuständige Stelle"
+										   for="zuständigeStelle">
+										{{'Zuständige Stelle' | translate:''}}
+									</label>
+									<div class="col-md-9 col-xs-9">
+										<input class="form-control"
+											   name="zuständigeStelle"
+											   id="zuständigeStelle"
+											  formControlName="zuständigeStelle"
+											   readonly>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-3 control-label"
+										   tooltip="Publikationsrechte"
+										   for="publikationsrechte">
+										{{'Publikationsrechte' | translate:''}}
+									</label>
+									<div class="col-md-9 col-xs-9">
+										<input class="form-control"
+											   name="publikationsrechte"
+											   id="publikationsrechte"
+											 formControlName="publikationsrechte"
+											   readonly>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+								<label class="col-md-3 col-xs-3 control-label"
+									   tooltip="Anonymisiert zum Erfassungszeitpunk"
+									   for="anonymisiertZumErfassungszeitpunk">
+									{{'Anonymisiert' | translate:''}}
+								</label>
+								<div class="col-md-9 col-xs-9 checkbox marginCheckbox">
+									<input type="checkbox" disabled="true"
+										   name="anonymisiertZumErfassungszeitpunk"
+										   id="anonymisiertZumErfassungszeitpunk"
+										   formControlName="anonymisiertZumErfassungszeitpunk">
+								</div>
+							</div>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div class="row">
+									<label class="col-md-3 col-xs-3 control-label"
+										   tooltip="Schutzfristende"
+										   for="Schutzfristende">
+										{{'Schutzfristende' | translate:''}}
+									</label>
+									<div class="col-md-9 col-xs-9">
+										<input class="form-control"
+											   name="schutzfristende"
+											   id="schutzfristende"
+											   formControlName="schutzfristendeText"
+											   readonly>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="section-separator" />
+					<div class="form-group">
+						<h3 class="title">Anonymisierte Daten</h3>
+						<div class="row" *ngFor="let feld of sortedList; let i = index;">
+							<cmi-manuelle-korrektur-felder  [feld]="feld" (manuellTextChanged)="feldTextChanged($event, feld )"
+															[parentForm]="myForm"
+															[editMode]="this.editMode">
+							</cmi-manuelle-korrektur-felder>
+						</div>
+					</div>
+					<hr class="section-separator" />
+					<div class="form-group">
+						<div class="row">
+						<div class="col-md-12">
+							<h3 class="page-content-title">
+								<span>{{'Interne Bemerkungen' | translate:'manuelleKorrekturenDetailPage.notes'}}</span>
+							</h3>
+							<div>
+								<textarea class="form-control" name="kommentar" formControlName="kommentar"  rows="3"
+										  id="kommentar" > </textarea>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-3 col-xs-4 control-label" for="manuelleKorrekturId" tooltip="Anonymisierungs-Korrektur-ID">Anonymisierungs-Korrektur-ID</label>
+								<div class="col-md-9 col-xs-8">
+									<input id="manuelleKorrekturId" formControlName="manuelleKorrekturId" readonly
+										   name="manuelleKorrekturId" class="form-control"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<label class="col-md-3 col-xs-4 control-label" for="anonymisierungsstatus" tooltip="Anonymisierungsstatus">
+									<span>{{'Anonymisierungsstatus' | translate:'manuelleKorrekturenDetailPage.notes'}}</span></label>
+								<div class="col-md-9 col-xs-8">
+									<input id="anonymisierungsstatus" formControlName="anonymisierungsstatusText" readonly
+										   name="anonymisierungsstatus" class="form-control"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<hr class="section-separator" />
+					<div class="form-group">
+						<h2 class="title">Wird referenziert von</h2>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<h3 class="page-content-title">Untergeordnete Verzeichnungseinheiten:</h3>
+								<cmi-viaduc-grid  [itemsSource]="referenzen" [name]="'Untergeordnete Verzeichnungseinheiten'">
+									<wj-flex-grid-column width="2*"
+														 [header]="'Signatur' | translate: 'manuelleKorrekturenDetailPage.referenceCode'"
+														 [binding]="'referenceCode'">
+										<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" >
+											<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.archiveRecordId}}" target="_blank"  >
+												{{item.referenceCode}}</a>
+										</ng-template>
+									</wj-flex-grid-column>
+									<wj-flex-grid-column width="2*"
+														 [header]="'Titel' | translate:'manuelleKorrekturenDetailPage.title'"
+														 [binding]="'title'">
+									</wj-flex-grid-column>
+									<wj-flex-grid-column width="2*"
+														 [header]="'Entstehungszeitraum ' | translate:'manuelleKorrekturenDetailPage.dateRange'"
+														 [binding]="'dateRangeText'">
+									</wj-flex-grid-column>
+								</cmi-viaduc-grid>
+								<div class="row top-pagination" *ngIf="this.detailItem.untergeordneteVEs.length > 10">
+									<div class="col-xs-12">
+										<cmi-viaduc-odata-pagination [(collectionView)]="referenzen"></cmi-viaduc-odata-pagination>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<h3 class="page-content-title">VE Verweise</h3>
+								<cmi-viaduc-grid  [itemsSource]="verweise" [name]="'Untergeordnete Verzeichnungseinheiten'">
+									<wj-flex-grid-column width="2*" [header]="'Signatur' | translate: 'manuelleKorrekturenDetailPage.referenceCode'"
+														 [binding]="'referenceCode'" >
+										<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" >
+											<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.archiveRecordId}}" target="_blank"  >
+												{{item.referenceCode}}</a>
+										</ng-template>
+
+									</wj-flex-grid-column>
+									<wj-flex-grid-column width="2*"
+														 [header]="'Titel' | translate:'manuelleKorrekturenDetailPage.title'"
+														 [binding]="'title'">
+									</wj-flex-grid-column>
+									<wj-flex-grid-column width="2*"
+														 [header]="'Entstehungszeitraum ' | translate:'manuelleKorrekturenDetailPage.dateRange'"
+														 [binding]="'dateRangeText'">
+									</wj-flex-grid-column>
+
+								</cmi-viaduc-grid>
+								<div class="row top-pagination" *ngIf="this.detailItem.verweiseVEs.length > 10">
+									<div class="col-xs-12">
+										<cmi-viaduc-odata-pagination [(collectionView)]="verweise"></cmi-viaduc-odata-pagination>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr class="section-separator" />
+					<div class="form-group">
+						<h2 class="title">Historie der Anonymisierung der VE</h2>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<cmi-viaduc-grid  #dataMapGrid [itemsSource]="history" [name]="'Historie der Anonymisierung der VE'">
+
+									<wj-flex-grid-column width="2*"
+														 [header]="'Datum' | translate: 'manuelleKorrekturenDetailPage.datum'"
+														 [format]="'dd.MM.yyyy, HH:mm:ss'"
+														 [dataType]="4"
+														 [binding]="'erzeugtAm'">
+									</wj-flex-grid-column>
+
+									<wj-flex-grid-column width="2*"
+														 [header]="'Benutzer' | translate:'manuelleKorrekturenDetailPage.benutzer'"
+														 [binding]="'erzeugtVon'"
+									>
+									</wj-flex-grid-column>
+
+									<wj-flex-grid-column width="2*"   [dataMap]="statusMap"
+														 [header]="'Zielstatus' | translate:'manuelleKorrekturenDetailPage.status'"
+														 [binding]="'anonymisierungsstatus'"
+									>
+									</wj-flex-grid-column>
+								</cmi-viaduc-grid>
+
+
+								<div class="row top-pagination" *ngIf="this.detailItem.manuelleKorrektur.manuelleKorrekturStatusHistories.length > 10">
+									<div class="col-xs-12">
+										<cmi-viaduc-odata-pagination [(collectionView)]="history"></cmi-viaduc-odata-pagination>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<cmi-record-info [modifiedBy]="myForm.controls['geändertVon'].value"
+										 [modifiedOn]="myForm.controls['geändertAm'].value"
+										 [createdBy]="myForm.controls['erzeugtVon'].value"
+										 [createdOn]="myForm.controls['erzeugtAm'].value"></cmi-record-info>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div content *ngIf="detailItem === null">
+			<div class="alert alert-danger">
+				Der Datensatz wurde nicht gefunden. Dies kann passieren, wenn die Verzeichnungseinheit nicht mehr im Online-Zugang vorhanden ist.
+			</div>
+		</div>
+
+	</cmi-viaduc-layout-left-content>
+</div>
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>

@@ -81,6 +81,7 @@
     <Compile Include="Entities\ManuelleKorrekturDetailItem.cs" />
     <Compile Include="Entities\ManuelleKorrekturFelder.cs" />
     <Compile Include="Entities\Viaduc.DTOs.cs" />
+    <Compile Include="MetadataToExclude.cs" />
     <Compile Include="Extensions\SetUnanonymizedValuesService.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GetElasticLogRecordsResult.cs" />

@@ -1,0 +1,28 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../out-tsc/app",
+		"target": "ES2022",
+		"declarationMap": true,
+		"module": "es2015",
+		"baseUrl": "./",
+    "types": [],
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"paths": {
+			"jszip": [
+				"../node_modules/jszip/dist/jszip.min.js"
+			],
+			"@angular/*": [
+				"./node_modules/@angular/*"
+			]
+		}
+	},
+	"files": [
+		"main.ts"
+	],
+	"include": [
+		"**/*.d.ts"
+	]
+}

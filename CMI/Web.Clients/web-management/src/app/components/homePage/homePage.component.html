@@ -1,0 +1,52 @@
+<div class="page page-home col-sm-12">
+
+	<div *ngIf="authorized">
+
+		<div class="page-breadcrumb">
+			<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+		</div>
+
+		<cmi-viaduc-layout-left-content>
+			<div left>
+				<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+			</div>
+
+			<div content>
+				<div>
+					<h1 class="page-content-title">
+						{{ 'Willkommen im Management-Client' | translate:'home.title' }}
+					</h1>
+					<p>
+						{{ 'Wählen Sie in der Navigation die gewünschte Funktion aus.' | translate:'home.intro' }}
+					</p>
+				</div>
+			</div>
+		</cmi-viaduc-layout-left-content>
+	</div>
+
+	<div *ngIf="authenticated && !authorized" class="alert alert-warning">
+		<div>
+			<strong>{{ 'Sie haben nicht die erforderlichen Rechte' | translate:'home.noPermissionTitle' }}</strong><br/>
+			<span>{{ 'Wenden Sie sich an Ihren Applikations-Verantwortlichen.' | translate:'home.noPermissionDetails' }}</span><br/>
+		</div>
+	</div>
+
+	<div *ngIf="!authenticated">
+		<div *ngIf="authenticating" class="alert alert-info">
+			<div>
+				<strong>{{ 'Anmeldung' | translate:'home.authenticatingTitle' }}</strong><br/>
+				<span>{{ 'Bitte warten, Sie werden angemeldet.' | translate:'home.authenticatingDetails' }}</span><br/>
+			</div>
+		</div>
+
+		<div *ngIf="!authenticating" class="alert alert-info">
+			<div>
+				<strong>{{ 'Sie sind nicht angemeldet' | translate:'home.notLoggedInTitle' }}</strong><br/>
+				<span>{{ 'Bitte melden Sie sich an, um die Management-Funktionen verwenden zu können.' | translate:'home.notLoggedInDetails' }}</span><br/>
+				<a (click)="login()">{{ 'Zur Anmeldung' | translate:'home.goToLogin' }}</a>
+			</div>
+		</div>
+
+	</div>
+
+</div>

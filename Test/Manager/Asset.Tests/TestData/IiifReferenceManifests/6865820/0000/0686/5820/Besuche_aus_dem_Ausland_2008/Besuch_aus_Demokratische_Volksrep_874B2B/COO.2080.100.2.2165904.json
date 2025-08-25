@@ -1,0 +1,188 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Demokratische_Volksrep_874B2B/COO.2080.100.2.2165904.json",
+  "label": {
+    "none": [
+      "Besuch aus Demokratische Volksrepublik Korea"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Demokratische_Volksrep_874B2B/Anfrage_Besuch_aus_Demokratische__017157/COO.2080.100.2.2165909.json",
+      "label": {
+        "none": [
+          "Anfrage Besuch aus Demokratische Volksrepublik Korea"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Demokratische_Volksrep_874B2B/Antwort_BAR_Besuch_aus_Demokratis_C9DEF9/COO.2080.100.2.2165913.json",
+      "label": {
+        "none": [
+          "Antwort BAR Besuch aus Demokratische Volksrepublik Korea"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "en": [
+          "Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "fr": [
+          "Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "it": [
+          "Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "none": [
+          "Besuch aus Demokratische Volksrepublik Korea"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-08-26 - 2014-02-20"
+        ],
+        "en": [
+          "2008-08-26 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-08-26 - 2014-02-20"
+        ],
+        "it": [
+          "2008-08-26 - 2014-02-20"
+        ],
+        "none": [
+          "2008-08-26 - 2014-02-20"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "en": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "fr": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "it": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea"
+        ],
+        "none": [
+          "011.2-2008/Besuche aus dem Ausland 08/Besuch aus Demokratische Volksrepublik Korea"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/COO.2080.100.2.2120345.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-0686-5820-Besuche_aus_dem_Ausland_2008-Besuch_aus_Demokratische_Volksrep_874B2B",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

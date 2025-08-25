@@ -1,0 +1,159 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/COO.2080.100.2.2129926.json",
+  "label": {
+    "none": [
+      "2008-03-05/13 Einladung Archiv Slowenien"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/p000126.pdf",
+      "label": {
+        "none": [
+          "p000126.pdf"
+        ]
+      },
+      "type": "Canvas",
+      "height": 1,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/COO.2080.100.2.2129926.json#annotations-page-painting-COO.2080.100.2.2129926-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/COO.2080.100.2.2129926.json#annotations-content-painting-COO.2080.100.2.2129926-1",
+              "type": "Annotation",
+              "body": {
+                "format": "application/pdf",
+                "id": "https://viaducdev.cmiag.ch/clientdev/files/content/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/p000126.pdf",
+                "type": "foaf:Document"
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/2008-03-05_13_Einladung_Archiv_Slowenien/canvasses/COO.2080.100.2.2129926-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 1
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-03-05/13 Einladung Archiv Slowenien"
+        ],
+        "en": [
+          "2008-03-05/13 Einladung Archiv Slowenien"
+        ],
+        "fr": [
+          "2008-03-05/13 Einladung Archiv Slowenien"
+        ],
+        "it": [
+          "2008-03-05/13 Einladung Archiv Slowenien"
+        ],
+        "none": [
+          "2008-03-05/13 Einladung Archiv Slowenien"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-03-05 - 2014-02-20"
+        ],
+        "en": [
+          "2008-03-05 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-03-05 - 2014-02-20"
+        ],
+        "it": [
+          "2008-03-05 - 2014-02-20"
+        ],
+        "none": [
+          "2008-03-05 - 2014-02-20"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Konferenz_der_EU-Nationalarchivar_CBCF7B/Ljubljana_10._11._April_2008/COO.2080.100.2.2131782.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-0686-5820-Konferenz_der_EU-Nationalarchivar_CBCF7B-Ljubljana_10._11._April_2008-2008-03-05_13_Einladung_Archiv_Slowenien",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/svg+xml",
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+      "type": null
+    }
+  ]
+}

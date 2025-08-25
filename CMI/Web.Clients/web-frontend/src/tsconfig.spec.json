@@ -1,0 +1,33 @@
+{
+	"extends": "../tsconfig.json",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+		"outDir": "../out-tsc/spec",
+    "baseUrl": "./",
+		"module": "es2022",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"types": [
+			"jasmine",
+			"node"
+		],
+		"paths": {
+			"jszip": [
+				"../node_modules/jszip/dist/jszip.min.js"
+			],
+			"@angular/*": [
+				"./node_modules/@angular/*"
+			]
+		}
+	},
+	"files": [
+		"test.ts"
+  ],
+	"include": [
+		"**/*.spec.ts",
+		"**/*.d.ts"
+	],
+	"angularCompilerOptions": {
+		"preserveWhitespaces": true
+	}
+}

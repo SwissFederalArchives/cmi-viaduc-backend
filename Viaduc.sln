@@ -343,6 +343,73 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.IiifPresentationB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.ManifestImprover", "CMI\Tools\MainfestImprover\CMI.Tools.ManifestImprover.csproj", "{F88945ED-25E4-4AA0-B834-EEF3C9472061}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web.Clients", "Web.Clients", "{46D7470F-E369-4508-96DF-9FF92868934E}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web-core", "CMI\Web.Clients\web-core\", "{A582373E-CDB3-45C0-8429-D8B2DEE44F13}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62158"
+		Debug.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-core\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62158\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62158"
+		Release.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-core\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62158\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62158"
+		SlnRelativePath = "CMI\Web.Clients\web-core\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web-frontend", "CMI\Web.Clients\web-frontend\", "{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64121"
+		Debug.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64121\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64121"
+		Release.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64121\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64121"
+		SlnRelativePath = "CMI\Web.Clients\web-frontend\"
+	EndProjectSection
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web-management", "CMI\Web.Clients\web-management\", "{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_65047"
+		Debug.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-management\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65047\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_65047"
+		Release.AspNetCompiler.PhysicalPath = "CMI\Web.Clients\web-management\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65047\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "65047"
+		SlnRelativePath = "CMI\Web.Clients\web-management\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.AutomatedCacheFilesEmpty", "CMI\Tools\AutomatedCacheFilesEmpty\CMI.Tools.AutomatedCacheFilesEmpty.csproj", "{2652D20C-E69E-4DF5-8D18-1F325A62E687}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -753,6 +820,19 @@ Global
 		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F88945ED-25E4-4AA0-B834-EEF3C9472061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A582373E-CDB3-45C0-8429-D8B2DEE44F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A582373E-CDB3-45C0-8429-D8B2DEE44F13}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A582373E-CDB3-45C0-8429-D8B2DEE44F13}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -869,6 +949,10 @@ Global
 		{DF1C971F-28EF-4FBA-9216-76D04429928C} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 		{F88945ED-25E4-4AA0-B834-EEF3C9472061} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
+		{A582373E-CDB3-45C0-8429-D8B2DEE44F13} = {46D7470F-E369-4508-96DF-9FF92868934E}
+		{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9} = {46D7470F-E369-4508-96DF-9FF92868934E}
+		{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5} = {46D7470F-E369-4508-96DF-9FF92868934E}
+		{2652D20C-E69E-4DF5-8D18-1F325A62E687} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94FF0BA7-507D-45AD-A448-D34E2C5341FE}

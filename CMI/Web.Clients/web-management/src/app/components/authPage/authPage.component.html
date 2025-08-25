@@ -1,0 +1,27 @@
+<div class="row">
+	<div class="page page-auth-success col-sm-12 text-center">
+		<h1 *ngIf="success === true">{{ 'Anmeldung erfolgreich' | translate:'account.logInSuccessfulWait' }}</h1>
+		<h1 *ngIf="success === false">{{ 'Anmeldung fehlgeschlagen' | translate:'account.loginFailureOrAborted' }}</h1>
+
+		<div>
+			<b>Automatische Weiterleitung...</b>
+			<cmi-spinner></cmi-spinner>
+			<br>
+		</div>
+
+		<div class="alert alert-success" role="alert" *ngIf="success === true">
+			<p>Sie werden automatisch weitergeleitet. Sollten Sie nicht automatisch weitergeleitet werden, klicken Sie bitte auf den nachfolgenden Link.</p>
+			<a (click)="redirectToOriginBeforeLogin();"><span>{{ 'Jetzt weiterleiten' | translate:'account.redirectNow' }}</span></a>
+		</div>
+
+		<div class="alert alert-danger" role="alert" *ngIf="success === false">
+			<b>Fehler bei der Anmeldung</b>
+			<br/>
+			<br/>
+			<p>Bei der Anmeldung gab es ein Problem. Bitte versuchen Sie es später erneut oder melden Sie sich beim zuständigen Personal.</p>
+			<a (click)="redirectToOriginBeforeLogin();"><span>{{ 'Erneut probieren' | translate:'account.retry' }}</span></a>
+		</div>
+
+	</div>
+</div>
+

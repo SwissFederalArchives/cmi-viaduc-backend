@@ -1,0 +1,39 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<div *ngIf="loading">
+		<cmi-blocker class="cmi-visible cmi-fixed cmi-center cmi-shadow">
+			<cmi-spinner [hint]="'Logs werden aufbereitet...'"></cmi-spinner>
+		</cmi-blocker>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div *ngIf="!loading" content>
+			<h1>Log-Export</h1>
+			<fieldset>
+				<div class="form-group row">
+					<label for="startDate" class="col-sm-1 control-label">Von</label>
+					<div class="col-sm-3">
+						<wj-input-date-time [(value)]="startDate" [format]="'dd.MM.yyyy HH:mm'" [timeStep]="15" id="startDate">
+						</wj-input-date-time>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="endDate" class="col-sm-1 control-label">Bis</label>
+					<div class="col-sm-3">
+						<wj-input-date-time [(value)]="endDate" [format]="'dd.MM.yyyy HH:mm'" [timeStep]="15" id="endDate">
+						</wj-input-date-time>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-offset-1 col-sm-11">
+						<button class="btn btn-default" (click)="doExport()">Excel-Export</button>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>

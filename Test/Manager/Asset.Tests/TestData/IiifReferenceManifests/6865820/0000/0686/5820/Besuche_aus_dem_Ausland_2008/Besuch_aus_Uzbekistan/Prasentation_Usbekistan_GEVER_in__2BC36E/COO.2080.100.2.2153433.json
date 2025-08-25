@@ -1,0 +1,159 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/COO.2080.100.2.2153433.json",
+  "label": {
+    "none": [
+      "Präsentation Usbekistan GEVER in der Praxis, engl."
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/p000089.pdf",
+      "label": {
+        "none": [
+          "p000089.pdf"
+        ]
+      },
+      "type": "Canvas",
+      "height": 1,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/COO.2080.100.2.2153433.json#annotations-page-painting-COO.2080.100.2.2153433-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/COO.2080.100.2.2153433.json#annotations-content-painting-COO.2080.100.2.2153433-1",
+              "type": "Annotation",
+              "body": {
+                "format": "application/pdf",
+                "id": "https://viaducdev.cmiag.ch/clientdev/files/content/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/p000089.pdf",
+                "type": "foaf:Document"
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/Prasentation_Usbekistan_GEVER_in__2BC36E/canvasses/COO.2080.100.2.2153433-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 1
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Präsentation Usbekistan GEVER in der Praxis, engl."
+        ],
+        "en": [
+          "Präsentation Usbekistan GEVER in der Praxis, engl."
+        ],
+        "fr": [
+          "Präsentation Usbekistan GEVER in der Praxis, engl."
+        ],
+        "it": [
+          "Präsentation Usbekistan GEVER in der Praxis, engl."
+        ],
+        "none": [
+          "Präsentation Usbekistan GEVER in der Praxis, engl."
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-06-25 - 2014-02-20"
+        ],
+        "en": [
+          "2008-06-25 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-06-25 - 2014-02-20"
+        ],
+        "it": [
+          "2008-06-25 - 2014-02-20"
+        ],
+        "none": [
+          "2008-06-25 - 2014-02-20"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Besuche_aus_dem_Ausland_2008/Besuch_aus_Uzbekistan/COO.2080.100.2.2143466.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/0000-0686-5820-Besuche_aus_dem_Ausland_2008-Besuch_aus_Uzbekistan-Prasentation_Usbekistan_GEVER_in__2BC36E",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/svg+xml",
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+      "type": null
+    }
+  ]
+}

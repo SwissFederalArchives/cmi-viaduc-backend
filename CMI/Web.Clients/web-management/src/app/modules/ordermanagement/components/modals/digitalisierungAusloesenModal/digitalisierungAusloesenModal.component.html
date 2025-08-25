@@ -1,0 +1,16 @@
+<cmi-viaduc-modal *ngIf="ids && ids.length > 0" [(opened)]="open" [modalTitle]="'Digitalisierung auslösen'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="'Digitalisierung wird ausgelöst...'"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<p *ngIf="ids.length > 1; else singular">Wollen Sie für die {{ids.length}} markierten Aufträge wirklich eine Digitalisierung auslösen?</p>
+		<ng-template #singular>
+			<p>Wollen Sie für den Auftrag wirklich eine Digitalisierung auslösen?</p>
+		</ng-template>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel()">Abbrechen</button>
+		<button class="btn btn-primary" (click)="ok()">Bestätigen</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

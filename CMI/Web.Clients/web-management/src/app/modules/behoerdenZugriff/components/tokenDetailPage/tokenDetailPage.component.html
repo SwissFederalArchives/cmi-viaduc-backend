@@ -1,0 +1,86 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div *ngIf="ablieferndeStelleToken" content>
+			<form #formToken="ngForm">
+				<div class="page-header">
+				<h2 class="page-content-title">
+					<span>{{'Access-Token' | translate:'behoerdenZugriff.detail.tokenTitel'}}: {{tokenHeaderName}}</span>
+				</h2>
+			</div>
+				<div class="row" *ngIf="hasErrors">
+					<div class="col-sm-10">
+						<div class="alert alert-warning" role="alert">
+							<span class="sr-only">warning:</span>
+							<span *ngFor="let e of errors">
+								{{e}}
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">{{'Access-Token' | translate:
+							'behoerdenZugriff.detail.accesstoken'}} *</label>
+
+						<div class="col-sm-8">
+							<input class="form-control" maxlength="50"
+								   name="token"
+								   [(ngModel)]="ablieferndeStelleToken.token"
+								   placeholder="{{'Access-Token' | translate: 'behoerdenZugriff.detail.accesstokensampel'}}">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">{{'Bezeichnung Access-Token' | translate:
+							'behoerdenZugriff.detail.bezeichnung'}} *</label>
+
+						<div class="col-sm-8">
+							<input class="form-control" maxlength="255"
+								   name="bezeichnung"
+								   [(ngModel)]="ablieferndeStelleToken.bezeichnung"
+								   placeholder="{{'Bezeichnung' | translate: 'behoerdenZugriff.detail.bezeichnung'}}">
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" style="text-align: left">{{'Zugewiesene zuständige Stellen' | translate:
+							'behoerdenZugriff.detail.ablieferndestellen'}}</label>
+
+						<div class="col-sm-8">
+							 <textarea class="form-control" [disabled]="true"
+									   name="ablieferndeStellenBezeichnung"
+									   [(ngModel)]="ablieferndeStelleToken.ablieferndeStellenBezeichnung">
+							 </textarea>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-8">
+						<button class="btn btn-primary" (click)="processChanges()">{{'Speichern' |
+							translate:'behoerdenZugriff.detail.save'}}
+						</button>
+						<button class="btn btn-secondary" (click)="goToTokenList()">{{'Abbrechen' |
+							translate:'behoerdenZugriff.detail.cancel'}}
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>
+
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>
+
+

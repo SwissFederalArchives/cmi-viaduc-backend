@@ -223,7 +223,7 @@ namespace CMI.Manager.Asset
             }
 
             Log.Verbose("Asset for VE {VEID} is NOT in preparationQueue.", archiveRecordId);
-            var archiveRecord = await indexClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest { ArchiveRecordId = archiveRecordId });
+            var archiveRecord = await indexClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest { ArchiveRecordId = archiveRecordId, MetadataToExclude = MetadataToExclude.OCRContent});
             var retValue = new PreparationStatus
             {
                 AddedToQueueOn = DateTime.MinValue,

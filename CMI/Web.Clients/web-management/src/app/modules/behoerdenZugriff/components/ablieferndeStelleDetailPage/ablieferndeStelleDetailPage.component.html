@@ -1,0 +1,265 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div *ngIf="ablieferndeStelle" content>
+			<form #formStelleDetail="ngForm">
+				<div class="page-header">
+					<h2 class="page-content-title">
+						<span>{{'Zuständige Stelle' | translate:'behoerdenZugriff.detail.ablieferndestelleTitel'}}: {{ablieferndeStelleHeaderName}}</span>
+					</h2>
+				</div>
+
+				<div class="row">
+					<div class="form-group" [ngClass]="{'has-warning': (saveClicked && bezeichnung.errors && bezeichnung.errors.required)}">
+						<label class="col-sm-2 control-label">{{'Bezeichnung' | translate:
+							'behoerdenZugriff.detail.bezeichnung'}} *</label>
+
+						<div class="col-sm-8">
+							<input id="" maxlength="255"
+								class="form-control"
+								   [name]="ablieferndeStelle.bezeichnung"
+								   [(ngModel)]="ablieferndeStelle.bezeichnung"
+								   [ngModelOptions]="{standalone: true}"
+								   #bezeichnung="ngModel"
+								   placeholder="{{'Bezeichnung' | translate: 'behoerdenZugriff.detail.bezeichnung'}}"
+								   [attr.checked]="false ? '' : null"
+								   required>
+
+							<div class="help-block" *ngIf="saveClicked && bezeichnung.errors && bezeichnung.errors.required">
+								Dieses Feld ist ein Pflichtfeld
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group" [ngClass]="{'has-warning': (saveClicked && kuerzel.errors && kuerzel.errors.required)}">
+						<label class="col-sm-2 control-label">{{'Kürzel' | translate:
+							'behoerdenZugriff.detail.kuerzel'}} *</label>
+
+						<div class="col-sm-8">
+							<input class="form-control" maxlength="255"
+								   [name]="ablieferndeStelle.kuerzel"
+								   [(ngModel)]="ablieferndeStelle.kuerzel"
+								   [ngModelOptions]="{standalone: true}"
+								   #kuerzel="ngModel"
+								   placeholder="{{'Kürzel' | translate: 'behoerdenZugriff.detail.kuerzel'}}"
+								   required>
+
+							<div class="help-block" *ngIf="saveClicked && kuerzel.errors && kuerzel.errors.required">
+								Dieses Feld ist ein Pflichtfeld
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="row">
+						<div class="col-sm-12 col-reduced-margin">
+							<div class="form-group" [ngClass]="{'has-warning': (!ablieferndeStelle.ablieferndeStelleTokenList || ablieferndeStelle.ablieferndeStelleTokenList.length === 0) && saveClicked}">
+								<label class="col-sm-2 control-label no-bottom-margin">
+									{{'Access Tokens' | translate: 'behoerdenZugriff.detail.accesstoken'}} *
+								</label>
+								<div class="col-sm-8 no-bottom-margin">
+
+									<wj-multi-auto-complete [itemsSource]="tokenList?.tokens"
+															[displayMemberPath]="'displayName'"
+															[selectedValuePath]="'token'"
+															[ngModelOptions]="{standalone: true}"
+															[(ngModel)]="ablieferndeStelle.ablieferndeStelleTokenList"
+															#tokens="ngModel"
+															placeholder="{{'Access Token' | translate: 'behoerdenZugriff.detail.accesstoken'}}"
+															[required]="true">
+									</wj-multi-auto-complete>
+									<div class="help-text">
+										<small>Feld anklicken und CTRL+Leertaste betätigen um das Auswahlfenster zu öffnen.</small>
+									</div>
+									<div class="help-block" *ngIf="(!ablieferndeStelle.ablieferndeStelleTokenList || ablieferndeStelle.ablieferndeStelleTokenList.length === 0) && saveClicked">
+										Dieses Feld ist ein Pflichtfeld
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" id="ktrlstl-radio-group">Kontrollstelle</label>
+						<div class="col-sm-10">
+							<div class="radio radio--left">
+								<label for="radioform" id="radio-label-yes">
+									<input id="radioform" [(ngModel)]="hasKontrollstelle" [value]="true" type="radio" name="kontrollstelle-radio" aria-labelledby="ktrlstl-radio-group radio-label-yes">
+									Die zuständige Stelle verfügt über folgende Kontrollstellen
+								</label>
+
+								<div *ngIf="hasKontrollstelle">
+									<div class="form-group kontrollstellen-container" [ngClass]="{'has-warning': hasErrors && (!ablieferndeStelle.kontrollstellen || ablieferndeStelle.kontrollstellen.length === 0) && saveClicked}">
+										<label class="col-sm-2 control-label col-reduced-margin">
+											E-Mail-Adressen *
+										</label>
+										<div class="col-sm-8 col-reduced-margin">
+											<wj-list-box class="kontrollstellen-list" readonly="true" name="kontrollstellen-list" [itemsSource]="ablieferndeStelle.kontrollstellen" #wjListbox>
+												<ng-template wjItemTemplate let-item="item">
+													<div class="row kontrollstellen-row">
+														<div class="col-xs-10 no-bottom-margin">
+															{{item}}
+														</div>
+														<div class="col-xs-2 no-bottom-margin">
+															<button type="button"
+																	(click)="showDeleteModalClick(item)"
+																	tooltip="Kontrollstelle löschen"
+																	tooltipPlacement="left"
+																	class="btn btn-link delete-icon-col">
+																<span class="icon icon--trash"></span>
+															</button>
+														</div>
+													</div>
+												</ng-template>
+											</wj-list-box>
+
+											<div class="help-block" *ngIf="hasErrors && (!ablieferndeStelle.kontrollstellen || ablieferndeStelle.kontrollstellen.length === 0) && saveClicked">
+												Dies ist ein Pflichtfeld. Fügen Sie mit untenstehendem Formular neue Kontrollstellen hinzu.
+											</div>
+										</div>
+									</div>
+									<div class="form-group" [ngClass]="{'has-warning': newKontrollstelle.invalid && saveClicked}">
+										<label class="col-sm-2 control-label">
+											Neue Kontrollstelle
+										</label>
+										<div class="col-sm-6">
+											<input class="form-control"
+												   type="email"
+												   name="neueKontrollstelle"
+												   #newKontrollstelle="ngModel"
+												   [(ngModel)]="selectedKontrollstelle"
+												   placeholder="E-Mail-Adresse"
+												   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+											<div class="help-block" role="alert" *ngIf="newKontrollstelle.invalid && saveClicked">
+												<div *ngIf="newKontrollstelle.errors.pattern">
+													Die E-Mail-Adresse ist ungültig
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-4">
+											<button type="button" class="btn btn-primary" (click)="addKontrollstelle()" [disabled]="newKontrollstelle.invalid || newKontrollstelle?.value?.trim()?.length === 0">Hinzufügen</button>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="radio radio--left">
+								<label for="radioform2" id="radio-label-no">
+									<input id="radioform2" [(ngModel)]="hasKontrollstelle" [value]="false" type="radio" name="kontrollstelle-radio" aria-labelledby="ktrlstl-radio-group radio-label-no" (change)="showConfirmModalClick()">
+									Die zuständige Stelle wünscht ausdrücklich keine Kontrollstelle
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" style="text-align: left">{{'Zugewiesene Benutzer' | translate: 'behoerdenZugriff.detail.zugewiesenebenutzer'}}</label>
+						<div class="col-sm-8">
+							<ul>
+								<li *ngFor="let item of ablieferndeStelle.applicationUserList"><a href="javascript:void(0)" (click)="goToUserDetail(item.id)">{{item.firstName +' '+ item.familyName}}</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">
+							{{'Datensatz-Log' | translate:'user.createModifiyData'}}
+						</label>
+						<div class="col-sm-8">
+							 <textarea class="form-control"
+									   [rows]="5"
+									   [value]="ablieferndeStelle.createModifyData"
+									   disabled
+									   name="createModifiyData"> </textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" *ngIf="hasErrors">
+					<div class="col-sm-12">
+						<div class="alert alert-warning" role="alert">
+							<span class="sr-only">warning:</span>
+							<span *ngFor="let e of errors">
+								{{e}}
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-8">
+						<button class="btn btn-primary" (click)="processChanges()">{{'Speichern' |
+							translate:'behoerdenZugriff.detail.save'}}
+						</button>
+						<button class="btn btn-secondary" (click)="goToAblieferndeStelleList()">{{'Abbrechen' |
+							translate:'behoerdenZugriff.detail.cancel'}}
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</cmi-viaduc-layout-left-content>
+
+	<cmi-viaduc-delete-confirm  *ngIf="showDeleteModal"
+                                [countOfCheckedItem]="1"
+							   [nameOfCheckedItem]="emailToDelete"
+							   [(showDeleteModal)]="showDeleteModal"
+							   (deleteClicked)="removeKontrollstelle(emailToDelete)">
+	</cmi-viaduc-delete-confirm>
+
+	<cmi-viaduc-modal [(opened)]="showConfirmModal" [modalTitle]="'Warnung'" *ngIf="showConfirmModal" (closeClicked)="cancelConfirmModal()">
+		<cmi-viaduc-modal-body>
+			<p *ngIf="ablieferndeStelle.kontrollstellen && ablieferndeStelle.kontrollstellen.length > 0; else hasStellen">
+				Derzeit ist mindestens eine Kontrollstelle hinterlegt. Achtung: Mit der Auswahl dieses Buttons werden bestehende Kontrollstellen gelöscht.
+				<br />
+				Die zuständige Stelle erhält somit keine Mitteilungen mehr über Bestellungen oder Downloads der zugewiesenen AS-Benutzer.
+				<br />
+				<br />
+				Wollen Sie fortfahren?
+			</p>
+			<ng-template #hasStellen>
+				Mit der Auswahl dieses Buttons kann keine Kontrollstelle hinterlegt werden.
+				<br />
+				Die zuständige Stelle erhält somit keine Mitteilungen über Bestellungen oder Downloads der zugewiesenen AS-Benutzer.
+				<br />
+				<br />
+				Wollen Sie fortfahren?
+			</ng-template>
+		</cmi-viaduc-modal-body>
+		<cmi-viaduc-modal-footer>
+			<div class="row">
+				<div class="col-xs-12">
+					<button type="button" class="btn btn-secondary" (click)="cancelConfirmModal()">
+						Nein
+					</button>
+					<button type="button" class="btn btn-primary" (click)="setNoKontrollstellen()">
+						Ja
+					</button>
+				</div>
+			</div>
+		</cmi-viaduc-modal-footer>
+	</cmi-viaduc-modal>
+
+</div>
+
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>
+
+

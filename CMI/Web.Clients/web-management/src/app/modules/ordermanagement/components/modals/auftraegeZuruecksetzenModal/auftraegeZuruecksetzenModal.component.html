@@ -1,0 +1,32 @@
+<cmi-viaduc-modal *ngIf="ids && ids.length > 0" [(opened)]="open" [modalTitle]="ids.length === 1 ? 'Auftrag zurücksetzen': 'Aufträge zurücksetzen'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="'Statusänderung wird durchgeführt...'"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<div *ngIf="ids.length > 1; else singular">
+			<p>Wollen Sie die {{ids.length}} markierten Aufträge wirklich in den internen Status "Neu Eingegangen" zurücksetzen?</p>
+			<div class="alert alert-warning" role="alert">
+				<b>Achtung bei abgebrochenen Digitalisierungsaufträgen:</b>
+				<ul class="warning-list">
+					<li>Sind die Aufträge in der Massendigitalisierung bereits abgebrochen?</li>
+					<li>Ist der Logistiker informiert?</li>
+				</ul>
+			</div>
+		</div>
+		<ng-template #singular>
+			<p>Wollen Sie den Auftrag wirklich in den internen Status "Neu Eingegangen" zurücksetzen?</p>
+			<div class="alert alert-warning" role="alert">
+				<b>Achtung bei abgebrochenen Digitalisierungsaufträgen:</b>
+				<ul class="warning-list">
+					<li>Ist der Auftrag in der Massendigitalisierung bereits abgebrochen?</li>
+					<li>Ist der Logistiker informiert?</li>
+				</ul>
+			</div>
+		</ng-template>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel()">Abbrechen</button>
+		<button class="btn btn-primary" (click)="ok()">Bestätigen</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

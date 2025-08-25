@@ -135,8 +135,8 @@ public class AnonymizationReferenceEngineTests
 
         var elasticRecord = id1;
 
-        dbAccess.Setup(f => f.FindDbDocument("2", It.IsAny<bool>())).Returns(id2);
-        dbAccess.Setup(f => f.FindDbDocument("3", It.IsAny<bool>())).Returns(id3);
+        dbAccess.Setup(f => f.FindDbDocument("2", It.IsAny<MetadataToExclude>())).Returns(id2);
+        dbAccess.Setup(f => f.FindDbDocument("3", It.IsAny<MetadataToExclude>())).Returns(id3);
         dbAccess.Setup(f => f.GetChildren("1", true)).Returns(() => new List<ElasticArchiveRecord> { id2, id3 });
         dbAccess.Setup(f => f.UpdateDocument(It.IsAny<ElasticArchiveDbRecord>())).Callback(updateAction);
 

@@ -1,0 +1,208 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Colloque_sur_les_vols_d’archives__701DB4/COO.2080.100.2.2171340.json",
+  "label": {
+    "none": [
+      "Colloque sur les vols d’archives et leur trafic illicite"
+    ]
+  },
+  "type": "Collection",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/Colloque_sur_les_vols_d’archives__701DB4/2008-09-18_24_Colloque_sur_les_vo_D8413D/COO.2080.100.2.2171342.json",
+      "label": {
+        "none": [
+          "2008-09-18/24 Colloque sur les vols d'archives à Roubaix"
+        ]
+      },
+      "type": "Manifest",
+      "thumbnail": [
+        {
+          "format": "image/svg+xml",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/content/_icons/pdfThumbnail.svg",
+          "type": null
+        }
+      ]
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "en": [
+          "Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "fr": [
+          "Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "it": [
+          "Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "none": [
+          "Colloque sur les vols d’archives et leur trafic illicite"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Entstehungszeitraum"
+        ],
+        "en": [
+          "Creation period"
+        ],
+        "fr": [
+          "Date de création"
+        ],
+        "it": [
+          "Periodo di costituzione"
+        ],
+        "none": [
+          "Entstehungszeitraum"
+        ]
+      },
+      "value": {
+        "de": [
+          "2008-09-18 - 2014-02-20"
+        ],
+        "en": [
+          "2008-09-18 - 2014-02-20"
+        ],
+        "fr": [
+          "2008-09-18 - 2014-02-20"
+        ],
+        "it": [
+          "2008-09-18 - 2014-02-20"
+        ],
+        "none": [
+          "2008-09-18 - 2014-02-20"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Aktenzeichen"
+        ],
+        "en": [
+          "File reference"
+        ],
+        "fr": [
+          "Référence"
+        ],
+        "it": [
+          "Riferimento"
+        ],
+        "none": [
+          "Aktenzeichen"
+        ]
+      },
+      "value": {
+        "de": [
+          "011.2-2008/Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "en": [
+          "011.2-2008/Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "fr": [
+          "011.2-2008/Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "it": [
+          "011.2-2008/Colloque sur les vols d’archives et leur trafic illicite"
+        ],
+        "none": [
+          "011.2-2008/Colloque sur les vols d’archives et leur trafic illicite"
+        ]
+      }
+    },
+    {
+      "label": {
+        "de": [
+          "Darin"
+        ],
+        "en": [
+          "Contains"
+        ],
+        "fr": [
+          "Contenu"
+        ],
+        "it": [
+          "Contiene"
+        ],
+        "none": [
+          "Darin"
+        ]
+      },
+      "value": {
+        "de": [
+          "Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008"
+        ],
+        "en": [
+          "Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008"
+        ],
+        "fr": [
+          "Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008"
+        ],
+        "it": [
+          "Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008"
+        ],
+        "none": [
+          "Colloque sur les vols d’archives et leur trafic illicite; Roubaix, 20./21.11.2008"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/0000/0686/5820/6865820.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/6865820",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/collection/0000-0686-5820-Colloque_sur_les_vols_d’archives__701DB4",
+      "@type": "SearchService2"
+    }
+  ],
+  "start": null
+}

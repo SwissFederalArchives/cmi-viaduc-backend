@@ -8,17 +8,17 @@ namespace CMI.Access.Common
         void UpdateDocument(ElasticArchiveRecord elasticArchiveRecord);
         void RemoveDocument(string archiveRecordId);
 
-        ElasticArchiveRecord FindDocument(string archiveRecordId, bool includeFulltextContent);
+        ElasticArchiveRecord FindDocument(string archiveRecordId, MetadataToExclude metadataToExclude);
 
         /// <summary>
         /// Returns an archive record without anonymization
         /// </summary>
         /// <param name="archiveRecordId"></param>
-        /// <param name="includeFulltextContent"></param>
+        /// <param name="metadataToExclude"></param>
         /// <returns></returns>
-        ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, bool includeFulltextContent);
+        ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, MetadataToExclude metadataToExclude);
 
-        ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, bool includeFulltextContent);
+        ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, MetadataToExclude metadataToExclude);
 
         /// <summary>
         ///     Finds the document by its package identifier.

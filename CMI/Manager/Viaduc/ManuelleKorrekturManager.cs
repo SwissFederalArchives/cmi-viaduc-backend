@@ -27,12 +27,12 @@ namespace CMI.Manager.Viaduc
         public async Task<ManuelleKorrekturDetailItem> GetManuelleKorrektur(int manuelleKorrekturId)
         {
             var manuelleKorrektur = await dbManuelleKorrekturAccess.GetManuelleKorrektur(manuelleKorrekturId);
-            var elasticRecord = dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId.ToString(), false);
+            var elasticRecord = dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
             if (elasticRecord == null)
             {
                 return null;
             }
-            var verweise = elasticRecord.References.Select(r => dbSearchAccess.FindDocumentWithoutSecurity(r.ArchiveRecordId, false)).ToList();
+            var verweise = elasticRecord.References.Select(r => dbSearchAccess.FindDocumentWithoutSecurity(r.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles)).ToList();
             var elasticRecordChildren = dbSearchAccess.GetChildrenWithoutSecurity(elasticRecord.ArchiveRecordId, true);
 
             return await Task.FromResult(new ManuelleKorrekturDetailItem
@@ -143,7 +143,7 @@ namespace CMI.Manager.Viaduc
         
         private ElasticArchiveDbRecord GetElasticArchiveDbRecord(string id)
         {
-            return dbSearchAccess.FindDbDocument(id, false);
+            return dbSearchAccess.FindDbDocument(id, MetadataToExclude.OCRContentAndFiles);
         }
 
         private void ResetRecordToAISValues(ManuelleKorrekturDto manuelleKorrektur)

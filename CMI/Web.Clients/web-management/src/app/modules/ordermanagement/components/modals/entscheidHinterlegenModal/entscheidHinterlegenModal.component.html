@@ -1,0 +1,114 @@
+<cmi-viaduc-modal [(opened)]="open" [modalTitle]="stepNr === 1 ? 'Entscheid Gesuch hinterlegen' : 'Entscheid bestätigen'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="hint"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<form class="form-horizontal" #form="ngForm">
+			<div *ngIf="stepNr === 1">
+				<fieldset>
+					<div class="form-group">
+						<p>Anzahl ausgewählter Aufträge: {{filteredItems?.length || 0}}</p>
+					</div>
+					<div class="form-group" [ngClass]="{'has-warning': entscheidGesuch?.errors?.required}">
+						<label for="entscheidGesuch" class="col-sm-4 control-label">Entscheid Gesuch *
+						</label>
+						<div class="col-sm-8">
+							<select class="form-control" required id="entscheidGesuch" name="entscheidGesuch" [(ngModel)]="selectedEntscheid" #entscheidGesuch="ngModel">
+								<option [ngValue]="null">Bitte wählen</option>
+								<option *ngFor="let x of entscheide" [ngValue]="x">{{translateStatus(x)}}</option>
+							</select>
+							<span *ngIf="entscheidGesuch?.errors?.required" class="help-block" role="alert">
+							{{'Dieses Feld muss ausgefüllt werden' | translate:'main.errorMandatoryField'}}
+						</span>
+						</div>
+					</div>
+					<div class="form-group" [ngClass]="{'has-warning': (datumBewilligungField?.errors?.required || !isValidDate)}">
+						<label for="datumBewilligung" class="col-sm-4 control-label">Datum des Entscheids *
+						</label>
+						<div class="col-sm-8">
+							<input type="date"
+								   autocomplete="off"
+								   mwlFlatpickr
+								   class="form-control"
+								   name="datumBewilligung"
+								   [(ngModel)]="datumEntscheid"
+								   [minDateToday]="false"
+								   [allowInput]="true"
+								   (isValidChanged)="checkDate($event)"
+								   [required]="true"
+								   dateFormat="d.m.Y"
+								   #datumBewilligungField="ngModel"
+								   [placeholder]="'Bewilligungsdatum (tt.mm.jjjj)' | translate: 'entscheidHinterlegenModal.datumPlaceholder'"
+								   id="datumBewilligung"/>
+							<span *ngIf="(datumBewilligungField?.errors?.required || !isValidDate)" class="help-block" role="alert">
+							<span *ngIf="datumBewilligungField?.errors?.required">{{'Dieses Feld muss ausgefüllt werden' | translate:'main.errorMandatoryField'}}</span>
+							<span *ngIf="!isValidDate">{{'Bitte wählen Sie ein gültiges Datum aus (im Format tt.mm.jjjj)' | translate:'main.errorWrongDate'}}</span>
+						</span>
+
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="interneBemerkung" class="col-sm-4 control-label">Interne Bemerkung
+						</label>
+						<div class="col-sm-8">
+						<textarea rows="8" class="form-control" name="interneBemerkung" id="interneBemerkung" [(ngModel)]="interneBemerkung">
+						</textarea>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div *ngIf="stepNr === 2">
+				<div>
+					<p>
+						Sie haben für [<strong>{{user}}</strong>]
+						<br>
+						den Entscheid [<strong>{{translateStatus(selectedEntscheid)}}</strong>]
+						<br>
+						mit dem Datum des Entscheids [<strong>{{datumEntscheid}}</strong>]
+						<br>
+						und folgender interner Bemerkung [<strong>{{interneBemerkung || '-'}}</strong>]
+						<br>
+						für untenstehende Verzeichnungseinheiten ausgewählt
+					</p>
+
+					<table class="table table-simple small">
+						<thead>
+							<tr>
+								<th>Signatur</th>
+								<th>Aktenzeichen</th>
+								<th>Titel</th>
+								<th>Entstehungszeitraum</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of filteredItems">
+								<td>{{item.signatur}}</td>
+								<td>{{item.aktenzeichen}}</td>
+								<td>{{item.dossiertitel}}</td>
+								<td>{{item.zeitraumDossier}}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<button class="btn btn-default" (click)="seeHiddenOrderDetail()" *ngIf="showUnHideDataButton">
+						<span><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;{{ '[nicht sichtbare] Daten einsehen' | translate:'orderDetailPage.seeHiddenData' }}</span>
+					</button>
+					<br>
+					<br>
+					<p>Anzahl: {{filteredItems?.length || 0}}</p>
+				</div>
+			</div>
+		</form>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel($event)">Abbrechen</button>
+		<span *ngIf="stepNr === 1">
+			<button class="btn btn-primary" (click)="goNext($event)" [disabled]="!form.valid || !isValidDate">Weiter</button>
+		</span>
+		<span *ngIf="stepNr === 2">
+			<button class="btn btn-default" (click)="goPrev($event)">Zurück</button>
+			<button class="btn btn-primary" (click)="ok()" [disabled]="!form.valid || !isValidDate">Bestätigen</button>
+		</span>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

@@ -1,0 +1,36 @@
+.parameter-list {
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	margin-left: 5px;
+	margin-right: 5px;
+	div, var {
+		word-wrap: break-word;
+		.form-control[type='text'], .form-control[type='number'] {
+			display: initial;
+		}
+		.form-control[type='checkbox'] {
+			display: initial;
+			width: auto;
+		}
+		.form-control {
+			max-width: 100%;
+		}
+		textarea {
+			min-width: 100%;
+			min-height: 2rem;
+		}
+		.highlighted {
+			background: #ff9;
+			color: #000;
+			text-decoration: none;
+		}
+		.parameter-error {
+			color: red;
+			margin-top: 3px;
+		}
+	}
+	div[class*=col-], var[class*=col-]{
+		margin-top: 1em;
+		margin-bottom: 1em;
+	}
+}

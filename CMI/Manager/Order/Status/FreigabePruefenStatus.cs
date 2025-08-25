@@ -261,7 +261,7 @@ namespace CMI.Manager.Order.Status
 
             if (veId.HasValue)
             {
-                archiveRecord = Context.IndexAccess.FindDocument(veId.Value.ToString(), false);
+                archiveRecord = Context.IndexAccess.FindDocument(veId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
             }
 
             return !string.IsNullOrEmpty(archiveRecord?.PrimaryDataLink);

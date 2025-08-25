@@ -57,7 +57,8 @@ namespace CMI.Manager.Asset.Consumers
                         Log.Information("Start fetching usage copy for id {ArchiveRecordId} with type {AssetType}.", message.ArchiveRecordId,
                             message.AssetType);
 
-                        var archiveRecord = (await indexClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = message.ArchiveRecordId})).Message;
+                        var archiveRecord = (await indexClient.GetResponse<FindArchiveRecordResponse>(new FindArchiveRecordRequest {ArchiveRecordId = message.ArchiveRecordId, 
+                            MetadataToExclude = MetadataToExclude.OCRContent})).Message;
                         // Register the job in the queue
                         var auftragId = await assetManager.RegisterJobInPreparationQueue(message.ArchiveRecordId, message.AssetId,
                             AufbereitungsArtEnum.Download, AufbereitungsServices.AssetService, archiveRecord.ElasticArchiveRecord.PrimaryData,

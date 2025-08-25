@@ -1,0 +1,16 @@
+<cmi-viaduc-modal *ngIf="ids && ids.length > 0" [(opened)]="open" [modalTitle]="ids.length === 1 ? 'Auftrag reponieren': 'Aufträge reponieren'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="'Statusänderung wird durchgeführt...'"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<p *ngIf="ids.length > 1; else singular">Wollen Sie die {{ids.length}} markierten Aufträge wirklich in den internen Status «Zum Reponieren bereit» setzen?</p>
+		<ng-template #singular>
+			<p>Wollen Sie den Auftrag wirklich in den internen Status «Zum Reponieren bereit» setzen?</p>
+		</ng-template>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel()">Abbrechen</button>
+		<button class="btn btn-primary" (click)="ok()">Bestätigen</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

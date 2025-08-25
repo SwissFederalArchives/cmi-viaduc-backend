@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Transactions;
 using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc;
+using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Manager.Order.Status;
 using MassTransit;
@@ -126,6 +127,40 @@ namespace CMI.Manager.Order
             {
                 foreach (var orderItem in orderItems)
                 {
+                    // As anonymized data has been revealed to allow export of unanonymized data to templates
+                    // we must make sure we are not saving back this data to the db, or only if the Einsichtsgesuch was
+                    // approved
+                    if (orderItem.EntscheidGesuch != EntscheidGesuch.EinsichtsgesuchBewilligt &&
+                        orderItem.EntscheidGesuch != EntscheidGesuch.AuskunftsgesuchBewilligt &&
+                        orderItem.ApproveStatus != ApproveStatus.FreigegebenInSchutzfrist &&
+                        orderItem.ApproveStatus != ApproveStatus.FreigegebenAusserhalbSchutzfrist &&
+                        orderItem.ApproveStatus != ApproveStatus.FreigegebenDurchSystem)
+                    {
+                        // Restore the original anonymized fields
+                        if (orderItem.VeId.HasValue)
+                        {
+                            var originalOrderItem =
+                                searchIndexDataAccess.FindDbDocument(orderItem.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
+                            orderItem.Dossiertitel = originalOrderItem.Title;
+                            orderItem.Darin = originalOrderItem.WithinInfo;
+                            orderItem.ZusaetzlicheInformationen = originalOrderItem.ZusätzlicheInformationen();
+                        }
+                    }
+                    else
+                    {
+                        // When we have an approved state, we can save the unanonymized data
+                        if (orderItem.VeId.HasValue)
+                        {
+                            var ve = searchIndexDataAccess.FindDbDocument(orderItem.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
+                            if (ve.IsAnonymized)
+                            {
+                                orderItem.Dossiertitel = ve.UnanonymizedFields.Title;
+                                orderItem.Darin = ve.UnanonymizedFields.WithinInfo;
+                                orderItem.ZusaetzlicheInformationen = ve.UnanonymizedFields.ZusatzkomponenteZac1;
+                            }
+                        }
+                    }
+
                     await orderDataAccess.UpdateOrderItem(orderItem);
                 }
 

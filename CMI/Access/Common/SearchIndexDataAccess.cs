@@ -41,15 +41,15 @@ namespace CMI.Access.Common
             helper.Remove(archiveRecordId);
         }
 
-        public ElasticArchiveRecord FindDocument(string archiveRecordId, bool includeFulltextContent)
+        public ElasticArchiveRecord FindDocument(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
-            return helper.GetRecord(archiveRecordId, includeFulltextContent);
+            return helper.GetRecord(archiveRecordId, metadataToExclude);
         }
 
-        public ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, bool includeFulltextContent)
+        public ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
-            var record = FindDocument(archiveRecordId, includeFulltextContent);
-            var dbRecord = FindDbDocument(archiveRecordId, includeFulltextContent);
+            var record = FindDocument(archiveRecordId, metadataToExclude);
+            var dbRecord = FindDbDocument(archiveRecordId, metadataToExclude);
 
             record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
 
@@ -57,9 +57,9 @@ namespace CMI.Access.Common
 
         }
 
-        public ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, bool includeFulltextContent)
+        public ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, MetadataToExclude metadataToExclude)
         {
-            return helper.GetDbRecord(archiveRecordIdOrSignature, includeFulltextContent);
+            return helper.GetDbRecord(archiveRecordIdOrSignature, metadataToExclude);
         }
 
         public ElasticArchiveRecord FindDocumentByPackageId(string packageId)
@@ -89,7 +89,7 @@ namespace CMI.Access.Common
             var record = result.Documents.FirstOrDefault();
             if (record != null && record.IsAnonymized)
             {
-                var dbRecord = FindDbDocument(record.ArchiveRecordId, false);
+                var dbRecord = FindDbDocument(record.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
             }
             return record;
@@ -143,7 +143,7 @@ namespace CMI.Access.Common
             }
             else
             {
-                var current = FindDocument(archiveRecordId, false);
+                var current = FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 query = new BoolQuery
                 {
                     Must = new List<QueryContainer>
@@ -160,9 +160,9 @@ namespace CMI.Access.Common
             searchRequest.Query = query;
             searchRequest.From = 0;
             searchRequest.Size = ElasticSearchHitLimit;
-            var sourceFilter = new SourceFilter()
+            var sourceFilter = new SourceFilter
             {
-                Excludes = Infer.Fields(new[] {"primaryData.items.content", "thumbnail", "customFields.bildVorschau", "customFields.bildAnsicht"})
+                Excludes = Infer.Fields("primaryData.items", "thumbnail", "customFields.bildVorschau", "customFields.bildAnsicht")
             };
             searchRequest.Source = sourceFilter;
 

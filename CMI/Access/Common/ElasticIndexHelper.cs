@@ -104,14 +104,14 @@ namespace CMI.Access.Common
         public void Remove(string archiveRecordId)
         {
             // Let's check if the record we want to delete is available.
-            var record = GetRecord(archiveRecordId, false);
+            var record = GetRecord(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
             if (record != null)
             {
                 Client.Delete<ElasticArchiveRecord>(archiveRecordId);
             }
         }
 
-        public ElasticArchiveRecord GetRecord(string archiveRecordId, bool includeFulltextContent)
+        public ElasticArchiveRecord GetRecord(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
             if (IsNullOrEmpty(archiveRecordId))
             {
@@ -121,14 +121,13 @@ namespace CMI.Access.Common
             var r = Client.Search<ElasticArchiveRecord>(s =>
                 s.Source(sf =>
                     {
-                        if (!includeFulltextContent)
+                        return metadataToExclude switch
                         {
-                            return sf.Excludes(e => e
-                                .Fields("primaryData.items.content")
-                            );
-                        }
-
-                        return sf;
+                            MetadataToExclude.OCRContentAndFiles => sf.Excludes(e => e.Fields("primaryData.items")),
+                            MetadataToExclude.OCRContent => sf.Excludes(e => e.Fields("primaryData.items.content")),
+                            MetadataToExclude.Nothing => sf,
+                            _ => throw new ArgumentOutOfRangeException(nameof(metadataToExclude), metadataToExclude, null)
+                        };
                     })
                     .Query(q => q
                         .Ids(sel => sel.Values(archiveRecordId))
@@ -136,7 +135,7 @@ namespace CMI.Access.Common
             return r.Documents.FirstOrDefault();
         }
 
-        public ElasticArchiveDbRecord GetDbRecord(string archiveRecordIdOrSignature, bool includeFulltextContent)
+        public ElasticArchiveDbRecord GetDbRecord(string archiveRecordIdOrSignature, MetadataToExclude metadataToExclude)
         {
             if (IsNullOrEmpty(archiveRecordIdOrSignature))
             {
@@ -148,13 +147,13 @@ namespace CMI.Access.Common
                 var result = Client.Search<ElasticArchiveDbRecord>(s =>
                     s.Source(sf =>
                         {
-                            if (!includeFulltextContent)
+                            return metadataToExclude switch
                             {
-                                return sf.Excludes(e => e
-                                    .Fields("primaryData.items.content")
-                                );
-                            }
-                            return sf;
+                                MetadataToExclude.OCRContentAndFiles => sf.Excludes(e => e.Fields("primaryData.items")),
+                                MetadataToExclude.OCRContent => sf.Excludes(e => e.Fields("primaryData.items.content")),
+                                MetadataToExclude.Nothing => sf,
+                                _ => throw new ArgumentOutOfRangeException(nameof(metadataToExclude), metadataToExclude, null)
+                            };
                         })
                         .Query(q => q
                             .Ids(sel => sel.Values(veId))

@@ -1,0 +1,13 @@
+<div class="markdown-preview" *ngIf="!hideComponent">
+    <button type="button" (click)="vorschauAnzeigen = !vorschauAnzeigen">
+        <span *ngIf="!vorschauAnzeigen">
+            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;Vorschau anzeigen
+        </span>
+        <span *ngIf="vorschauAnzeigen">
+            <span class="glyphicon glyphicon-eye-close"></span>&nbsp;Vorschau schliessen
+        </span>
+    </button>
+    <div *ngIf="vorschauAnzeigen" class="markdown-preview-content">
+        <markdown [data]="markdownText" ngPreserveWhitespaces></markdown>
+    </div>
+</div>

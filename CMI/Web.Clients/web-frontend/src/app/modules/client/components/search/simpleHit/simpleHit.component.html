@@ -1,0 +1,60 @@
+<article class="search-result simple-hit">
+	<div class="row no-pad-bottom">
+		<div class="clearfix" style="position:relative">
+			<div class="col-md-1 no-pad-right col-xs-2">
+				<span class="thumbnail" [ngClass]="entity.iconClasses" aria-hidden="true"></span>
+			</div>
+			<div class="col-md-9 single-bottom-margin col-xs-7">
+				<h4 class="no-margin-bottom">
+					<a href="#{{ '/de/archiv/einheit/' + entity.archiveRecordId + hrefLinkExtension| localizeLink }}" [innerHtml]="htmlForTitle|anonymizedHtml"></a>
+					<span *ngIf="entity.isAnonymized && isBarUser" aria-label="{{'Für nicht berechtigte NutzerInnen anonymisiert.' | translate:'simpleHit.anonymToolTip'}}"
+						  [tooltip]="'Für nicht berechtigte NutzerInnen anonymisiert.' | translate:'simpleHit.anonymToolTip'" class="glyphicon glyphicon-eye-close text-danger"></span>
+				</h4>
+				<div class="signature">
+					<label>
+						<span>{{ 'Signatur' | translate: 'simpleHit.signatur'}}:&nbsp;</span><span>{{entity.referenceCode}}</span>
+					</label>
+					<label *ngIf="aktenzeichen">
+						<span>{{ 'Aktenzeichen' | translate: 'simpleHit.fileReference'}}:&nbsp;</span><span>{{aktenzeichen}}</span>
+					</label>
+				</div>
+
+				<div>
+					<img *ngIf="getPictureAsBase64() !== null" [src]="getPictureAsBase64()" [alt]="entity.title">
+					<p *ngIf="htmlForText && htmlForText !== 'null'; else emptyPTag" [innerHtml]="htmlForText|anonymizedHtml"></p>
+				</div>
+				<ng-template #emptyPTag>&nbsp;</ng-template>
+
+				<span id="archivePlanTitle{{entity.archiveRecordId}}" tabindex="-1"></span>
+				<div class="detail-hierarchy" *ngIf="displayArchivplanContext && entity._context?.ancestors">
+					<h4>{{'Archivplankontext' | translate:'simpleHit.archivplankontext'}}</h4>
+					<cmi-viaduc-detail-hierarchy [items]="entity._context.ancestors" [isBarUser]="isBarUser"></cmi-viaduc-detail-hierarchy>
+				</div>
+				<div *ngIf="enableExplanations">
+					<label>{{'Relevanz' | translate: 'simpleHit.relevance'}}&nbsp;</label>
+					<a (click)="toggleDisplayExplanation()">{{score}}</a>
+
+					<div *ngIf="displayExplanation">
+						<cmi-viaduc-explanation-treeview [explanation]="entity.explanation.explanation">
+						</cmi-viaduc-explanation-treeview>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-xs-3 no-pad-left">
+				<div class="info-container smaller-text">
+					<p *ngIf="entity?.creationPeriod">
+						{{entity?.creationPeriod?.text}}
+					</p>
+					<p *ngIf="entity?.level">{{entity.level}}</p>
+					<p *ngIf="entity?.customFields['zugänglichkeitGemässBga']"
+					   data-toggle="tooltip"
+					    tooltip="{{'Zugänglichkeit gemäss BGA' | translate:'simpleHit.zugangTooltip' }}">
+						{{entity.customFields["zugänglichkeitGemässBga"]}}
+					</p>
+
+					<cmi-viaduc-simple-hit-menu (menuClicked)="onMenuClicked($event)" [searchTerm]="searchTerm" [entity]="entity"></cmi-viaduc-simple-hit-menu>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>

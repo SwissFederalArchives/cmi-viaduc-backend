@@ -1,0 +1,43 @@
+<h2 class="sr-only">Navigation</h2>
+<!-- The mobile navigation -->
+<section [ngClass]="getMainMobileNavCss()">
+	<div class="table-row">
+		<div class="nav-mobile-header">
+			<div [ngClass]="getMainTableNavCss()">
+                    <span class="nav-mobile-logo">
+                        <img src="./assets/img/swiss.svg"
+							 onerror="this.onerror = null; this.src = './assets/img/swiss.png'"
+							 alt="Logo der Schweizerischen Eidgenossenschaft – zur Startseite"/>
+                    </span>
+				<h1><a href="#/">{{ 'Management-Client des Online-Zugangs' | translate:'header.title' }}</a></h1>
+			</div>
+		</div>
+		<div [ngClass]="getUserTableCellNavCss()">
+			<a class="nav-mobile-menu dropdown-toggle" (click)="toggleUserMobileNav()"><span
+				class="glyphicon glyphicon-user more-pad"></span></a>
+			<div class="drilldown dropdown-menu" role="menu">
+				<div class="drilldown-container" [style.height]="drillDownCointainerHeight">
+					<nav class="nav-page-list">
+						<ul role="menu">
+							<li class="infoicon-container" role="presentation" *ngIf="!authenticated">
+								<span>{{ 'Sie sind nicht angemeldet' | translate:'header.notLoggedInInfo'}}</span>
+								<span class="glyphicon glyphicon-info-sign infoicon" data-toggle="tooltip"
+									  data-placement="bottom"
+									  tooltip="{{ 'Melden Sie sich an, um die Management-Funktionen verwenden zu können.' | translate:'header.notLoggedInTip'}}"></span>
+							</li>
+							<li role="presentation">
+								<a *ngIf="!authenticated" (click)="login()" href="javascript:void(0)" role="menuitem">{{'Anmelden'
+									|
+									translate: 'header.anmelden'}}</a>
+								<a *ngIf="authenticated"><span>{{ username }}</span></a>&nbsp;&nbsp;
+								<a *ngIf="authenticated" (click)="logout()" href="javascript:void(0)"><span>{{ 'Abmelden' | translate:'header.abmelden' }}</span></a>
+							</li>
+						</ul>
+						<a class="yamm-close-bottom"><span class="icon icon--top" (click)="toggleUserMobileNav()"
+														   aria-hidden="true"></span></a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

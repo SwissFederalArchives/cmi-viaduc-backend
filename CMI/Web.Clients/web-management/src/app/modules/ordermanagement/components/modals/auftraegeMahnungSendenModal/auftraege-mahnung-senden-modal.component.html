@@ -1,0 +1,46 @@
+<cmi-viaduc-modal *ngIf="ids && ids.length > 0" [(opened)]="open" [modalTitle]="ids.length === 1 ? 'Ausleihen mahnen': 'Ausleihen mahnen'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="'Mahnungen werden versendet...'"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<p *ngIf="ids.length > 1; else singular">Wollen Sie für die {{ids.length}} markierten Aufträge wirklich eine Mahnung an den / die Benutzer versenden?</p>
+		<ng-template #singular>
+			<p>Wollen Sie für den Auftrag wirklich eine Mahnung an den Benutzer versenden?</p>
+		</ng-template>
+		<form [formGroup]="myForm">
+			<div class="row">
+				<!--vorlage-->
+				<div class="form-group col-md-12">
+					<label for="vorlage">Vorlage*</label>
+					<select id="vorlage" formControlName="vorlage" class="form-control" style="width: 100%;">
+						<option [ngValue]="null" disabled>Bitte wählen</option>
+						<option [ngValue]="1">1. Mahnung</option>
+						<option [ngValue]="2">2. Mahnung</option>
+					</select>
+					<div class="parameter-error" *ngIf="formControls.vorlage.invalid && (formControls.vorlage.dirty || formControls.vorlage.touched)">
+						<small *ngIf="formControls.vorlage.errors.required">Es muss ein Wert angegeben werden.</small>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<!--sprache-->
+				<div class="form-group col-md-12">
+					<label for="sprache">Sprache*</label>
+					<select id="sprache" formControlName="sprache" class="form-control" style="width: 100%;">
+						<option [ngValue]="null" disabled>Bitte wählen</option>
+						<option [ngValue]="'de'">Deutsch</option>
+						<option [ngValue]="'fr'">Französisch</option>
+					</select>
+					<div class="parameter-error" *ngIf="formControls.sprache.invalid && (formControls.sprache.dirty || formControls.sprache.touched)">
+						<small *ngIf="formControls.sprache.errors.required">Es muss ein Wert angegeben werden.</small>
+					</div>
+				</div>
+			</div>
+		</form>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel()">Abbrechen</button>
+		<button class="btn btn-primary" (click)="ok()" [disabled]="!myForm.valid">Bestätigen</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

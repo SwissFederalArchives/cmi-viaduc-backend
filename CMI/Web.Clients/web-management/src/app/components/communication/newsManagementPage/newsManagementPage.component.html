@@ -1,0 +1,53 @@
+<div class="page page-home col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+
+		<div content>
+			<div class="page-header">
+				<h2 class="page-content-title">
+					<span>{{'News' | translate:'communication.news'}}</span>
+				</h2>
+			</div>
+			<div class="tablecontainer" *ngIf="allowNewsBearbeiten">
+				<div class="action-container">
+					<div class="row action-buttons">
+						<div class="col-xs-12">
+							<span class="orders-menu-actions">
+								<button type="button" class="btn btn-link" (click)="addNews()">
+									<span><span class="glyphicon glyphicon-plus-sign"></span> {{'Hinzufügen' | translate:'communication.add'}}</span>
+								</button>
+								<button type="button" class="btn btn-link" [disabled]="deleteButtonDisabledText" (click)="deleteChecked()">
+									<span><span class="icon icon--trash"></span> {{'Ausgewählte Meldungen löschen' | translate:'communication.dDeleteSelected'}}</span>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<cmi-viaduc-grid #flexGrid [itemsSource]="newsForEditor" [name]="'newslist'" [displaySelectionColumn]="true">
+
+				<ng-template wjFlexGridCellTemplate *ngIf="allowNewsBearbeiten" [cellType]="'RowHeader'" let-cell="cell">
+					<a (click)="editNews(cell.item)" disabled="disabled">
+						<i class="glyphicon glyphicon-pencil"></i>
+					</a>
+				</ng-template>
+
+				<wj-flex-grid-column [header]="'Von' | translate:'communication.fromDate'" [binding]="'fromDate'"></wj-flex-grid-column>
+				<wj-flex-grid-column [header]="'Bis' | translate:'communication.toDate'" [binding]="'toDate'"></wj-flex-grid-column>
+				<wj-flex-grid-column [width]="'*'" [header]="'Überschrift DE' | translate:'communication.deHeader'" [binding]="'deHeader'"></wj-flex-grid-column>
+				<wj-flex-grid-column [width]="'2*'" [header]="'Text DE' | translate:'communication.DeText'" [binding]="'de'"></wj-flex-grid-column>
+
+			</cmi-viaduc-grid>
+
+
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>
+
+

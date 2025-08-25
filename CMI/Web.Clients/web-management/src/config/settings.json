@@ -1,0 +1,1151 @@
+{
+	"version": "0.11.0",
+	"authentication": {},
+	"search": {
+		"possiblePagingSizes": [
+			10,
+			25,
+			50,
+			100
+		]
+	},
+	"user": {
+		"settings": {},
+		"userListColumns": [
+			{
+				"defaultLabel":"Benutzer-ID",
+				"key": "id",
+				"visible": true,
+				"loadPerDefault": true,
+				"index": 0,
+				"dataType": 1
+			},
+			{
+				"defaultLabel":"userExtId",
+				"key": "userExtId",
+				"width":"*",
+				"visible": false,
+				"index": 1
+			},
+			{
+				"defaultLabel":"Erstellt am",
+				"key": "createdOn",
+				"width":"*",
+				"visible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Erstellt von",
+				"key": "createdBy",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Letzte Änderung am ",
+				"key": "modifiedOn",
+				"width":"*",
+				"visible": false,
+				"permanentVisible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Letzte Änderung von ",
+				"key": "modifiedBy",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Name",
+				"key": "familyName",
+				"width":"*",
+				"visible": true,
+				"index": 2
+			},
+			{
+				"defaultLabel":"Vorname(n)",
+				"key": "firstName",
+				"width":"*",
+				"visible": true,
+				"index": 3
+			},
+			{
+				"defaultLabel":"Organisation",
+				"key": "organization",
+				"width":"*",
+				"visible": true,
+				"index": 4
+			},
+			{
+				"defaultLabel":"Strasse / Nr. ",
+				"key": "street",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Zusatz",
+				"key": "streetAttachment",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"PLZ",
+				"key": "zipCode",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Ort",
+				"key": "town",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Land",
+				"key": "countryCode",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Telefon (Festnetz)",
+				"key": "phoneNumber",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Mobiltelefon",
+				"key": "mobileNumber",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Geburtsdatum",
+				"key": "birthday",
+				"width":"*",
+				"visible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"E-Mail",
+				"key": "emailAddress",
+				"width":"*",
+				"visible": true,
+				"index": 5
+			},
+			{
+				"defaultLabel":"Fabasoft-Dossier 622",
+				"key": "fabasoftDossier",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Bevorzugte Sprache",
+				"key": "language",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Benutzerrolle Public-Client",
+				"key": "rolePublicClient",
+				"width":"*",
+				"visible": true,
+				"index": 6
+			},
+			{
+				"defaultLabel":"eIAM-Rolle Management-Client",
+				"key": "eiamRoles",
+				"width":"*",
+				"visible": true,
+				"index": 7
+			},
+			{
+				"defaultLabel":"Ablehnungsgrund",
+				"key":"reasonForRejection",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Forschungsgruppe DDS",
+				"key":"researcherGroup",
+				"width":"*",
+				"visible": false,
+				"dataType": 3,
+				"align": "center"
+			},
+			{
+				"defaultLabel":"BAR-interne Konsultation",
+				"key": "barInternalConsultation",
+				"width":"*",
+				"visible": false,
+				"dataType": 3,
+				"align": "center"
+			},
+			{
+				"defaultLabel":"Zugewiesene zuständige Stellen",
+				"key": "ablieferndeStellenKuerzel",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Benutzerrolle Management-Client \"zugewiesen\"",
+				"key": "applicationUserRolles",
+				"width":"*",
+				"visible": true
+			},
+			{
+				"defaultLabel":"Zugewiesene Access Tokens",
+				"key": "ablieferndeStellenToken",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Identifizierungsmittel",
+				"key": "identifizierungsmittel",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Downloadbeschränkung",
+				"key": "downloadLimitDisabledUntil",
+				"width":"*",
+				"visible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Digitalisierungsbeschränkung",
+				"key": "digitalisierungsbeschraenkungAufgehobenBis",
+				"width":"*",
+				"visible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Letztes Login",
+				"key": "lastLoginDate",
+				"width":"*",
+				"visible": false,
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"HomeName",
+				"key": "homeName",
+				"width":"*",
+				"visible": false
+			},
+			{
+				"defaultLabel":"Qualität der Authentifizierung (QoA) bei der letzten Anmeldung",
+				"key": "qoaValue",
+				"width":"*",
+				"visible": false,
+				"dataType": 2,
+				"align": "left"
+			}
+		]
+	},
+	"orders": {
+		"ordersListColumns": [
+			{
+				"defaultLabel": "Auftrags-ID",
+				"key": "itemId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Auftragstyp",
+				"key": "orderingType",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Eingangsdatum",
+				"key": "orderingDate",
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"width": 150,
+				"visible": true,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Benutzer",
+				"key": "user",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Benutzer-ID",
+				"key": "userId",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Signatur",
+				"key": "signatur",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Titel",
+				"key": "dossiertitel",
+				"width": "*",
+				"minWidth": 200,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Interner Status",
+				"key": "status",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Bestell-ID",
+				"key": "orderId",
+				"visible": false,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Eingangsart",
+				"key": "eingangsart",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Geplante Ausgabe im Lesesaal",
+				"key": "orderingLesesaalDate",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Art der Arbeit",
+				"key": "orderingArtDerArbeit",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Bemerkung zur Bestellung",
+				"key": "orderingComment",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Bemerkung zum Dossier",
+				"key": "itemComment",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Interne Bemerkung",
+				"key": "internalComment",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Ausleihdauer",
+				"key": "ausleihdauer",
+				"visible": false,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Erwartetes Rückgabedatum",
+				"key": "erwartetesRueckgabeDatum",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Ausgabedatum",
+				"key": "ausgabedatum",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Abschlussdatum",
+				"key": "abschlussdatum",
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Mahndatum",
+				"key": "mahndatumInfo",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Anzahl Mahnungen",
+				"key": "anzahlMahnungen",
+				"visible": false,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Standort",
+				"key": "standort",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Behaeltniscode",
+				"key": "behaeltnisNummer",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Externer Status",
+				"key": "externalStatus",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Freigabestatus",
+				"key": "approveStatus",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Datum der Bewilligung",
+				"key": "bewilligungsDatum",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Personendaten (Verwaltungsausleihe, Art. 14.2 BGA)",
+				"key": "hasPersonendaten",
+				"visible": false,
+				"dataType": 3
+			},
+			{
+				"defaultLabel": "Begründung Einsichtnahme",
+				"key": "reason",
+				"visible": false
+			},
+			{
+				"defaultLabel": "ID der VE",
+				"key": "veId",
+				"visible": false,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Aktenzeichen",
+				"key": "aktenzeichen",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entstehungszeitraum",
+				"key": "zeitraumDossier",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Darin",
+				"key": "darin",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusätzliche informationen",
+				"key": "zusaetzlicheInformationen",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Hierarchiestufe",
+				"key": "hierarchiestufe",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Schutzfristenverzeichnung",
+				"key": "schutzfristverzeichnung",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zugänglichkeit gemäss BGA",
+				"key": "zugaenglichkeitGemaessBga",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Publikationsrechte",
+				"key": "publikationsrechte",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Behältnistyp",
+				"key": "behaeltnistyp",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zuständige Stelle",
+				"key": "zustaendigeStelle",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Identifikation digitales Magazin",
+				"key": "identifikationDigitalesMagazin",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Termin Digitalisierung",
+				"key": "terminDigitalisierung",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Abbruchgrund",
+				"key": "abbruchgrund",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Kategorie Digipool",
+				"key": "digitalisierungsKategorie",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Benutzungskopie",
+				"key": "benutzungskopie",
+				"visible": false,
+				"dataType": 3
+			},
+			{
+				"defaultLabel": "Benutzerrolle Public-Client zum Bestell-Zeitpunkt",
+				"key": "rolePublicClient",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Gebrauchskopie",
+				"key": "gebrauchskopieStatus",
+				"visible": false
+			}
+		],
+		"ordersEinsichtListColumns": [
+			{
+				"defaultLabel": "Auftrags-ID",
+				"key": "itemId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Bestell-ID",
+				"key": "orderId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Eingangsdatum",
+				"key": "orderingDate",
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"width": 150,
+				"visible": true,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Benutzer",
+				"key": "user",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Benutzer-ID",
+				"key": "userId",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Signatur",
+				"key": "signatur",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Titel",
+				"key": "dossiertitel",
+				"width": "*",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Zuständige Stelle",
+				"key": "zustaendigeStelle",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Identifikation digitales Magazin",
+				"key": "identifikationDigitalesMagazin",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Interner Status",
+				"key": "status",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Auftragstyp",
+				"key": "orderingType",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Begründung Einsichtsgesuch",
+				"key": "begruendungEinsichtsgesuch",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Eingangsart",
+				"key": "eingangsart",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Art der Arbeit",
+				"key": "orderingArtDerArbeit",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Bemerkung zum Dossier",
+				"key": "itemComment",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Interne Bemerkung",
+				"key": "internalComment",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Abschlussdatum",
+				"key": "abschlussdatum",
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Standort",
+				"key": "standort",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Behaeltniscode",
+				"key": "behaeltnisNummer",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Externer Status",
+				"key": "externalStatus",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entscheid Gesuch",
+				"key": "entscheidGesuch",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Datum des Entscheids",
+				"key": "datumDesEntscheids",
+				"format": "dd.MM.yyyy",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Personenbezogene Nachforschung",
+				"key": "personenbezogeneNachforschung",
+				"visible": false,
+				"dataType": 3
+			},
+			{
+				"defaultLabel": "Unterlagen, die Nutzer selber betreffen (Ja/Nein)",
+				"key": "unterlagenDieNutzerSelberBetreffen",
+				"visible": false,
+				"dataType": 3
+			},
+			{
+				"defaultLabel": "ID der VE",
+				"key": "veId",
+				"visible": false,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Aktenzeichen",
+				"key": "aktenzeichen",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entstehungszeitraum",
+				"key": "zeitraumDossier",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Darin",
+				"key": "darin",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusätzliche informationen",
+				"key": "zusaetzlicheInformationen",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Hierarchiestufe",
+				"key": "hierarchiestufe",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Schutzfristenverzeichnung",
+				"key": "schutzfristverzeichnung",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zugänglichkeit gemäss BGA",
+				"key": "zugaenglichkeitGemaessBga",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Publikationsrechte",
+				"key": "publikationsrechte",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Behältnistyp",
+				"key": "behaeltnistyp",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Abbruchgrund",
+				"key": "abbruchgrund",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Benutzerrolle Public-Client zum Bestell-Zeitpunkt",
+				"key": "rolePublicClient",
+				"visible": false
+			}
+		]
+	},
+	"digipool": {
+		"digipoolListColumns": [
+			{
+				"defaultLabel": "Auftrags-ID",
+				"key": "orderItemId",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 0,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Benutzer",
+				"key": "user",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 0
+			},
+			{
+				"defaultLabel": "Benutzer-ID",
+				"key": "userId",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Signatur",
+				"key": "signatur",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 1
+			},
+			{
+				"defaultLabel": "Titel",
+				"key": "dossierTitel",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 2
+			},
+			{
+				"defaultLabel": "Termin Digitalisierung",
+				"key": "terminDigitalisierung",
+				"format": "dd.MM.yyyy HH:mm",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 3,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Digitalisierungskategorie",
+				"key": "digitalisierunskategorie",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 4
+			},
+			{
+				"defaultLabel": "Priorität",
+				"key": "priority",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 5
+			},
+			{
+				"defaultLabel": "Bemerkung zur Bestellung",
+				"key": "orderingComment",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 6
+			},
+			{
+				"defaultLabel": "Interne Bemerkung",
+				"key": "internalComment",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 7
+			},
+			{
+				"defaultLabel": "Aufbereitungsfehler",
+				"key": "hasAufbereitungsfehler",
+				"width": "2*",
+				"visible": true,
+				"readonly": true,
+				"index": 8
+			}
+		]
+	},
+	"ablieferndeStellen": {
+		"listColumns": [
+			{
+				"defaultLabel": "Bezeichnung zuständige Stelle",
+				"key": "bezeichnung",
+				"width": "*",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Kürzel zuständige Stelle",
+				"key": "kuerzel",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Zugewiesene Access-Tokens",
+				"key": "ablieferndeStelleTokenAsString",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Zugewiesene Benutzer",
+				"key": "user",
+				"wordWrap": true,
+				"width": "*",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Letzte Änderung am",
+				"key": "modifiedOn",
+				"format": "dd.MM.yyyy HH:mm",
+				"visible": true,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Letzte Änderung von",
+				"key": "modifiedBy",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Kontrollstelle ja/nein",
+				"key": "hasKontrollstelle",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Kontrollstelle",
+				"key": "kontrollstellenAsString",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Erstellt am",
+				"key": "createdOn",
+				"format": "dd.MM.yyyy HH:mm",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Erstellt von",
+				"key": "createdBy",
+				"visible": false
+			}
+		]
+	},
+	"collections": {
+		"listColumns": [
+			{
+				"defaultLabel": "Bild",
+				"key": "thumbnail",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Titel",
+				"key": "title",
+				"width": "*",
+				"minWidth": 200,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Sammlungstyp",
+				"key": "collectionTypeId",
+				"minWidth": 100,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Gültig ab",
+				"key": "validFrom",
+				"minWidth": 100,
+				"dataType": 4,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Gültig bis",
+				"key": "validTo",
+				"minWidth": 100,
+				"dataType": 4,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Sortier-Reihenfolge",
+				"key": "sortOrder",
+				"minWidth": 100,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Enthalten in",
+				"key": "parent",
+				"minWidth": 150,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Enthält",
+				"key": "childCollections",
+				"minWidth": 150,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Kurzbeschreibung",
+				"key": "descriptionShort",
+				"minWidth": 200,
+				"wordWrap": true,
+				"visible": false
+			},
+			{
+				"defaultLabel": "Beschreibung",
+				"key": "description",
+				"minWidth": 200,
+				"wordWrap": true,
+				"visible": false
+			},
+			{
+				"defaultLabel": "Alt-Text",
+				"key": "imageAltText",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Sprache",
+				"key": "language",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Bildformat",
+				"key": "imageMineType",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Link",
+				"key": "link",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Erstellt am",
+				"key": "createdOn",
+				"format": "dd.MM.yyyy HH:mm",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Erstellt von",
+				"key": "createdBy",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Bearbeitet am",
+				"key": "modifiedOn",
+				"format": "dd.MM.yyyy HH:mm",
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Bearbeitet von",
+				"key": "modifiedBy",
+				"visible": false
+			}
+		]
+	},
+	"manuellekorrektur": {
+		"listColumns": [
+			{
+				"defaultLabel": "Anonymisierung-Korrektur-ID",
+				"key": "manuelleKorrekturId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "ID der VE",
+				"key": "veId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Signatur",
+				"key": "signatur",
+				"width": 200,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Titel gem. AIS",
+				"key": "titel",
+				"width": "*",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Titel automatisch anonymisiert",
+				"key": "titelAutomatischAnonymisiert",
+				"width": "*",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Titel manuell korrigiert",
+				"key": "titelManuellKorrigiert",
+				"width": "*",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Darin gem. AIS",
+				"key": "darinGemAIS",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Darin automatisch anonymisiert",
+				"key": "darinAutomatischAnonymisiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Darin manuell korrigiert",
+				"key": "darinManuellKorrigiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusatzkomponente gem. AIS",
+				"key": "zusatzkomponenteGemAIS",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusatzkomponente automatisch anonymisiert",
+				"key": "zusatzkomponenteAutomatischAnonymisiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusatzkomponente manuell korrigiert",
+				"key": "zusatzkomponenteManuellKorrigiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusätzliche Informationen gem. AIS",
+				"key": "zusaetzlicheInformationenGemAIS",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusätzliche Informationen automatisch anonymisiert",
+				"key": "zusaetzlicheInformationenAutomatischAnonymisiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zusätzliche Informationen manuell korrigiert",
+				"key": "zusaetzlicheInformationenManuellKorrigiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Verwandte VE gem. AIS",
+				"key": "verwandteVEGemAIS",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Verwandte VE automatisch anonymisiert",
+				"key": "verwandteVEAutomatischAnonymisiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Verwandte VE manuell korrigiert",
+				"key": "verwandteVEManuellKorrigiert",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Anonymisierungsstatus",
+				"key": "anonymisierungsstatus",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Interne Bemerkung",
+				"key": "kommentar",
+				"visible": true
+			},
+			{
+				"defaultLabel": "Schutzfristende",
+				"key": "schutzfristende",
+				"format": "dd.MM.yyyy",
+				"width": 150,
+				"visible": false,
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Erstellt am",
+				"key": "erzeugtAm",
+				"visible": true,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Erstellt von",
+				"key": "erzeugtVon",
+				"visible": true
+			},
+			{
+				"defaultLabel":"Letzte Änderung am",
+				"key": "geändertAm",
+				"visible": false,
+				"permanentVisible": false,
+				"format":"dd.MM.yyyy",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Letzte Änderung von",
+				"key": "geändertVon",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Hierarchiestufe",
+				"key": "hierachiestufe",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Aktenzeichen",
+				"key": "aktenzeichen",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entstehungszeitraum",
+				"key": "entstehungszeitraum",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zugänglichkeit gemäss BGA",
+				"key": "zugänglichkeitGemässBGA",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Schutzfristverzeichnung",
+				"key": "schutzfristverzeichnung",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Zuständige Stelle",
+				"key": "zuständigeStelle",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Publikationsrechte",
+				"key": "publikationsrechte",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Anonymisiert zum Erfassungszeitpunkt",
+				"key": "anonymisiertZumErfassungszeitpunk",
+				"visible": false,
+				"dataType": 3
+			}
+		]
+	}
+}

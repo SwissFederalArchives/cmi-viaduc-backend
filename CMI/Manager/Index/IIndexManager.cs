@@ -24,7 +24,7 @@ namespace CMI.Manager.Index
         /// <param name="removeContext">The remove context.</param>
         void RemoveArchiveRecord(ConsumeContext<IRemoveArchiveRecord> removeContext);
 
-        ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, bool includeFulltextContent, bool useUnanonymizedData);
+        ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, bool useUnanonymizedData);
 
         /// <summary>
         ///     Gets all the archive records for a specific primary data package.

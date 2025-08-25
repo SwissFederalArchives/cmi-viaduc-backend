@@ -1,0 +1,24 @@
+<div *ngIf="parameter" [class]="getErrorClass()" [title]="parameter.default ? parameter.default: ''">
+	<div class="col-md-3">
+		<cmi-viaduc-highlight [text]="name" [highlight]="searchString"></cmi-viaduc-highlight>
+	</div>
+	<var class="col-md-3">
+		{{parameter.description}}
+	</var>
+	<div class="col-md-4" [formGroup]="myForm">
+		<input *ngIf="parameter.type === 'checkbox'" type="checkbox" formControlName="parameterValue">
+		<input *ngIf="parameter.type !== 'textarea' && parameter.type !== 'checkbox'" [class]="getInputClass()" [type]="parameter.type" formControlName="parameterValue">
+		<textarea autoSize *ngIf="parameter.type == 'textarea'" [class]="getInputClass()" formControlName="parameterValue"></textarea>
+		<div class="parameter-error" *ngIf="formControls.parameterValue.invalid && (formControls.parameterValue.dirty || formControls.parameterValue.touched)">
+			<small *ngIf="formControls.parameterValue.errors.pattern">{{parameter.errrorMessage}}</small>
+			<small *ngIf="formControls.parameterValue.errors.required">Es muss ein Wert angegeben werden.</small>
+		</div>
+	</div>
+	<div class="col-md-2" *ngIf="!myForm.dirty" [formGroup]="myForm">
+		<input type="checkbox" id="isDefault" formControlName="isDefault" disabled>
+	</div>
+	<div class="col-md-2" *ngIf="myForm.dirty && allowEinstellungenBearbeiten" [formGroup]="myForm">
+		<input type="button" class="btn" value="Speichern" [disabled]="!myForm.valid" (click)="saveParameter()">
+		<input type="button" class="btn" value="Abbrechen" (click)="cancelEdit()">
+	</div>
+</div>

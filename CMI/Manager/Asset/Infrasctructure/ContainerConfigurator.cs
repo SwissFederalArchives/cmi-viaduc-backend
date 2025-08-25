@@ -105,6 +105,7 @@ namespace CMI.Manager.Asset.Infrasctructure
             return parameterHelper.GetSetting<AssetPreparationSettings>();
         }
 
+       
         private static AssetPackageSizeDefinition GetAssetPackageSizeDefinition(IComponentContext arg)
         {
             // read and convert priorisierungs settings

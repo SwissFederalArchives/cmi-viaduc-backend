@@ -51,7 +51,7 @@ namespace CMI.Manager.Order.Status
             // Benutzer ein passendes AS_XXX Token hat. Alle anderen Token werden nicht beachtet!
             if (Context.Besteller.Access.RolePublicClient == AccessRoles.RoleAS && Context.OrderItem.VeId.HasValue)
             {
-                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId.Value.ToString(), false);
+                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
                 if (veRecord != null)
                 {
                     if (Context.Besteller.Access.HasAsTokenFor(veRecord.PrimaryDataDownloadAccessTokens)) // nur AS_XXX Tokens sind hier gültig
@@ -139,7 +139,7 @@ namespace CMI.Manager.Order.Status
             }
 
             // Prüfen ob gültiger Record von Elasic geliefert wurde.
-            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId.Value.ToString(), false);
+            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
             if (veRecord == null || veRecord.ArchiveRecordId != currentOrderItem.VeId.Value.ToString())
             {
                 return false;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Engine.MailTemplate;
 using CMI.Manager.Order.Mails;
@@ -99,7 +100,7 @@ namespace CMI.Manager.Order.Status
             }
             else
             {
-                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId.Value.ToString(), false);
+                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
                 ((List<InElasticIndexierteVe>) emailExpando.VeList).Add(InElasticIndexierteVe.FromElasticArchiveRecord(veRecord));
             }
         }

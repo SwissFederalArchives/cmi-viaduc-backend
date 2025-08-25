@@ -1,0 +1,39 @@
+<div class="search-browser" *ngIf="getCurrentIndex() > -1; else notConfigured">
+	<nav class="controls-container"
+		 tooltip="{{'Speichern zum Navigieren' | translate: 'search.browser.saveToNavigate'}}"
+		 [tooltipDisabled]="!disableNavigation">
+		<div class="info">
+			{{ 'Treffer {0} von {1}' | translate:'search.browser.nOfM':(getCurrentIndex() + 1):getMax() }}
+		</div>
+		<span *ngIf="disableNavigation" class="showtooltip" tooltip="Speichern zum navigieren"></span>
+		<ul class="controls left">
+			<li class="separator" [ngClass]="{ 'disabled': !hasPrevious() || disableNavigation}" (click)="goToFirst()">
+				<a [attr.aria-disabled]="hasPrevious() ? '': 'true'">
+					<span class="icon icon--step-backward" tooltip="{{ 'Erster Treffer' | translate:'search.browser.first' }}"></span>
+				</a>
+			</li>
+			<li class="separator" [ngClass]="{ 'disabled': !hasPrevious() || disableNavigation}" (click)="goToPrevious()">
+				<a [attr.aria-disabled]="hasPrevious() ? '': 'true'">
+					<span class="icon icon--left" tooltip="{{ 'Vorheriger Treffer' | translate:'search.browser.previous' }}"></span>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="controls right">
+			<li class="separator-left" [ngClass]="{ 'disabled': !hasNext() || disableNavigation }" (click)="goToNext()">
+				<a [attr.aria-disabled]="hasNext() ? '': 'true'">
+					<span class="icon icon--right"  [ngClass]="{ 'disabled': disableNavigation }" tooltip="{{ 'Nächster Treffer' | translate:'search.browser.next' }}"></span>
+				</a>
+			</li>
+			<li class="separator-left" [ngClass]="{ 'disabled': !hasNext() || disableNavigation }" (click)="goToLast()">
+				<a [attr.aria-disabled]="hasNext() ? '': 'true'">
+					<span class="icon icon--step-forward"  [ngClass]="{ 'disabled': disableNavigation }" tooltip="{{ 'Letzter Treffer' | translate:'search.browser.last' }}"></span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+</div>
+<ng-template #notConfigured>
+	Error: Um das DetailPaging zu verwenden, muss zuerst das Paging via DetailPagingService gesetzt werden
+</ng-template>

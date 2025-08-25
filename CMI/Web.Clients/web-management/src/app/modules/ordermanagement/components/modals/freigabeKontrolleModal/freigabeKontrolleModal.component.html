@@ -1,0 +1,85 @@
+<cmi-viaduc-modal [(opened)]="open" [modalTitle]="'Freigabeprüfung'">
+	<cmi-blocker *ngIf="isLoading" class="cmi-visible cmi-fixed cmi-center cmi-shadow modal-loading-blocker">
+		<cmi-spinner [hint]="'Statusänderung wird durchgeführt...'"></cmi-spinner>
+	</cmi-blocker>
+
+	<cmi-viaduc-modal-body>
+		<form class="form-horizontal" #form="ngForm">
+			<fieldset>
+				<div class="form-group">
+					<p>Anzahl ausgewählter Aufträge: {{ids?.length || 0}}</p>
+				</div>
+				<div class="form-group" [ngClass]="{'has-warning': entscheidFreigabe?.errors?.required}">
+					<label for="entscheidFreigabe" class="col-sm-4 control-label">Freigabestatus *
+					</label>
+					<div class="col-sm-8">
+						<select class="form-control" required id="entscheidFreigabe" name="entscheidFreigabe" [(ngModel)]="selectedEntscheid" #entscheidFreigabe="ngModel">
+							<option [ngValue]="null">Bitte wählen</option>
+							<option *ngFor="let x of entscheide" [ngValue]="x">{{translateStatus(x)}}</option>
+						</select>
+						<span *ngIf="entscheidFreigabe?.errors?.required" class="help-block" role="alert">
+							{{'Dieses Feld muss ausgefüllt werden' | translate:'main.errorMandatoryField'}}
+						</span>
+					</div>
+				</div>
+				<div class="form-group" *ngIf="haveToEnterBewilligungsDatum"  [ngClass]="{'has-warning': (!isValidDate)}">
+					<label for="datumBewilligung" class="col-sm-4 control-label">Datum der Bewilligung *
+					</label>
+					<div class="col-sm-8">
+						<input type="date"
+							   class="form-control"
+							   name="datumBewilligung"
+							   autocomplete="off"
+							   dateFormat="d.m.Y"
+							   mwlFlatpickr
+							   [convertModelValue]="true"
+							   [enableTime]="false"
+							   [allowInput]="true"
+							   [(ngModel)]="datumBewilligung"
+							   [minDateToday]="false"
+							   (flatpickrValueUpdate)="checkDate($event)"
+							   [required]="haveToEnterBewilligungsDatum"
+							   [placeholder]="'Bewilligungsdatum (tt.mm.jjjj)' | translate: 'entscheidHinterlegenModal.datumPlaceholder'"
+							   id="datumBewilligung"/>
+						<span *ngIf="(!isValidDate)" class="help-block" role="alert">
+							<span *ngIf="!isValidDate">{{'Dieses Feld muss ausgefüllt werden' | translate:'main.errorMandatoryField'}}</span>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="interneBemerkung" class="col-sm-4 control-label">Interne Bemerkung
+					</label>
+					<div class="col-sm-8">
+						<textarea rows="8" class="form-control" name="interneBemerkung" id="interneBemerkung" [(ngModel)]="interneBemerkung">
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group" *ngIf="currentRolePublicClient==='Ö2' && haveToEnterBewilligungsDatum" [ngClass]="{'has-warning': currentRolePublicClient==='Ö2' && !isOe2UserConfirmed}">
+					<div class="col-sm-8 col-sm-offset-4">
+						<div class="checkbox checkbox--left">
+							<label for="chkConfirmOe2user">
+								<input type="checkbox" id="chkConfirmOe2user"
+								name="chkConfirmOe2user"
+								[checked]="false"
+								[required]="currentRolePublicClient==='Ö2'"
+								[(ngModel)]="isOe2UserConfirmed"
+								#chkConfirmOe2user="ngModel"
+								value="Nein">
+								{{'Benutzer/in ist nicht identifiziert. Auftrag trotzdem freigeben.' |
+								translate:'entscheidHinterlegenModal.confirmOe2Checkbox'}}
+							</label>
+						</div>
+						<span *ngIf="!isOe2UserConfirmed" class="help-block" role="alert">
+							<span>{{'Sie müssen die Freigabe bestätigen.' |
+								translate:'entscheidHinterlegenModal.confirmOe2RequiredMessage'}}</span>
+						</span>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</cmi-viaduc-modal-body>
+	<cmi-viaduc-modal-footer>
+		<button class="btn btn-default" (click)="cancel()">Abbrechen</button>
+		<button class="btn btn-primary" (click)="ok()" [disabled]="!form.valid || (haveToEnterBewilligungsDatum && !isValidDate)">Speichern</button>
+	</cmi-viaduc-modal-footer>
+</cmi-viaduc-modal>

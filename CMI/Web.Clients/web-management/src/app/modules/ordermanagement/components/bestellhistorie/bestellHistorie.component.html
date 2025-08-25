@@ -1,0 +1,30 @@
+<table class="table table-bordered">
+	<caption>{{'Bestellhistorie der Verzeichnungseinheit' | translate:''}}</caption>
+	<thead>
+	<tr>
+		<th>{{'Auftragstyp' | translate:''}}</th>
+		<th>{{'Freigabestatus' | translate:''}}</th>
+		<th>{{'Datum der Freigabe' | translate:''}}</th>
+		<th>{{'Entscheid Gesuch' | translate:''}}</th>
+		<th>{{'Datum Entscheid' | translate:''}}</th>
+		<th>{{'Benutzer' | translate:''}}</th>
+		<th>{{'Interne Bemerkung' | translate:''}}</th>
+		<th>{{'Sachbearbeiter' | translate:''}}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr *ngFor="let h of historyItems">
+		<th>{{getOrderType(h.auftragsTyp)}}</th>
+		<td>{{h.freigabestatus > 0 ? getApproveStatus(h.freigabestatus) : ''}}</td>
+		<td>{{getFormattedDate(h.datumDerFreigabe)}}</td>
+		<td>{{ h.entscheidGesuch > 0 ? getEntscheidGesuch(h.entscheidGesuch) : ''}}</td>
+		<td>{{getDateAsString(h.datumDesEntscheids)}}</td>
+		<td>{{h.besteller}}</td>
+		<td>{{h.interneBemerkung}}</td>
+		<td>{{h.sachbearbeiter}}</td>
+	</tr>
+	<tr *ngIf="!historyItems || historyItems.length === 0">
+		<td colspan="6">{{'Keine Einträge' | translate:''}}</td>
+	</tr>
+	</tbody>
+</table>

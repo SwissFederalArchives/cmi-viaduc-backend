@@ -1,0 +1,19 @@
+{
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../out-tsc/app",
+		"baseUrl": "./",
+		"types": [],
+		"paths": {
+			"jszip": [
+				"../node_modules/jszip/dist/jszip.min.js"
+			]
+		}
+	},
+	"files": [
+		"main.ts"
+	],
+	"include": [
+		"**/*.d.ts"
+	]
+}

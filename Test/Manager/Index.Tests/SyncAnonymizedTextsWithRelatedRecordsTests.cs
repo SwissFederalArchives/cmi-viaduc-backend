@@ -379,7 +379,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
             .Returns<ManuelleKorrekturDto, string>((x, _) => Task.FromResult(partialResultFunction.Invoke(x)));
 
         dbAccessMock.Setup(db =>
-            db.FindDbDocument(It.IsAny<string>(), It.IsAny<bool>())).Returns
+            db.FindDbDocument(It.IsAny<string>(), It.IsAny<MetadataToExclude>())).Returns
             <string, bool>(GetElasticArchiveDbRecordMoq);
 
         return indexManager;

@@ -1,0 +1,18 @@
+{
+	"$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+	"dest": "../dist/@cmi/viaduc-web-core",
+	"lib": {
+		"entryFile": "./public_api.ts",
+		"flatModuleFile": "viaduc-web-core",
+		"styleIncludePaths": [
+			"./lib/core/styles",
+			"./lib/wijmo/styles"
+		]
+	},
+	"assets": [
+		"./lib/**/*.less",
+		"./lib/**/*.scss",
+		"./lib/**/*.css"
+	],
+	"keepLifecycleScripts": true
+}

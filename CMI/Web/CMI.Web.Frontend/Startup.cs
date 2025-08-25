@@ -130,6 +130,24 @@ namespace CMI.Web.Frontend
                 FrontendSettingsViaduc.Instance.CookieExpireTimeInMinutes);
 
             app.Use(async (context, next) => { await next.Invoke(); });
+
+
+            // The FilesController that returns the IIIF files like manifests or the content pdfs
+            // requires a cors header that allows access from any other domain
+            // This is the only way we can do this with a normal controller that is not a webapi controller.
+            // Other option would have been to add the same in the global.asax file
+            app.Use(async (context, next) =>
+            {
+                if (context.Request.Path.StartsWithSegments(new PathString("/files")))
+                {
+                    context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+                    context.Response.Headers.Add("Access-Control-Allow-Methods", new[] { "GET" , "OPTIONS" });
+                    context.Response.Headers.Add("Access-Control-Allow-Headers", new[] { "Content-Type", "Authorization" });
+                    context.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Content-Disposition" });
+                }
+
+                await next();
+            });
         }
 
         private static Task ValidateSessionIdIsActive(CookieValidateIdentityContext context, UserDataAccess userDataAccess)

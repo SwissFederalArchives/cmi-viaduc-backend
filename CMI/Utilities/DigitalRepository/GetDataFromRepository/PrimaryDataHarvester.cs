@@ -56,7 +56,7 @@ namespace CMI.Utilities.DigitalRepository.PrimaryDataHarvester
                     new FindArchiveRecordRequest
                     {
                         ArchiveRecordId = veId, 
-                        IncludeFulltextContent = false,
+                        MetadataToExclude = MetadataToExclude.OCRContentAndFiles,
                         UseUnanonymizedData = false
                     })).Message;
                 if (archiveRecord.ArchiveRecordId == veId)

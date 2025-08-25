@@ -6,7 +6,7 @@ using Serilog;
 namespace CMI.Utilities.DigitalRepository.CreateTestDataHelper
 {
     /// <summary>
-    ///     Simple utility to create sample data in a CMIS compatible repository.
+    /// Simple utility to create sample data in a CMIS compatible repository.
     /// </summary>
     internal class Program
     {

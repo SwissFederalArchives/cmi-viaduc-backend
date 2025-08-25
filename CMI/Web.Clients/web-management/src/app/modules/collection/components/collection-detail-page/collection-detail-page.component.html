@@ -1,0 +1,266 @@
+<div class="page page-collection-detail col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+		<div content *ngIf="detailItem">
+			<form [formGroup]="myForm" *ngIf="myForm" id="myForm" (ngSubmit)="save()">
+				<div class="page-content collection-detail">
+					<div class="page-header">
+						<h2 class="page-content-title">
+							<span>{{'Virtuelle-Sammlung' | translate:'collectionDetailPage.title'}}</span>
+						</h2>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-6" [ngClass]="{'has-warning': (errors.title)}">
+							<label for="title" tooltip="Titel">Titel:</label>
+							<input id="title" formControlName="title" [autoFocus]="true"
+								   name="title" class="form-control"/>
+							<div *ngIf="errors.title" class="help-block">
+								{{ errors.title }}
+							</div>
+						</div>
+						<div class="form-group col-md-4" [ngClass]="{'has-warning': (errors.collectionTypeId)}">
+							<label tooltip="Sammlungstyp" for="collectionTypeId">
+								Sammlungstyp:
+							</label>
+							<select id="collectionTypeId" formControlName="collectionTypeId" (change)="collectionTypeChanged()"
+									name="collectionTypeId"  class="form-control" style="width: 100%">
+								<option *ngFor="let a of collectionTypes"
+										[ngValue]="a.collectionTypeId">{{a.name}}</option>
+							</select>
+							<div *ngIf="errors.collectionTypeId" class="help-block">
+								{{ errors.collectionTypeId }}
+							</div>
+						</div>
+						<div class="form-group col-md-2">
+							<label tooltip="Sprache" for="language">
+								Sprache:
+							</label>
+							<select id="language" formControlName="language"
+									class="form-control" style="width: 100%">
+								<option *ngFor="let lang of languages"
+										[ngValue]="lang.name">{{lang.name}}</option>
+							</select>
+							<div *ngIf="errors.language" class="help-block">
+								{{ errors.language }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-md-3" [ngClass]="{'has-warning': (errors.validFrom)}">
+							<label for="validFrom" tooltip="Gültig von">Gültig von:</label>
+							<input type="datetime-local" id="validFrom" formControlName="validFrom"
+								   autocomplete="off"
+								   mwlFlatpickr
+								   required
+								   [enableTime]="true"
+								   [maxDate]="this.detailItem.validTo"
+								   [convertModelValue]="true"
+								   [allowInput]="true"
+								   (flatpickrValueUpdate)="dataPickerValueUpdateVon($event)"
+								   dateFormat="d.m.Y"
+								   class="form-control"/>
+							<div *ngIf="errors.validFrom" class="help-block">
+								{{ errors.validFrom }}
+							</div>
+						</div>
+						<div class="form-group col-md-3" [ngClass]="{'has-warning': (errors.validTo)}">
+	            <label for="validTo" tooltip="Gültig bis">Gültig bis:</label>
+							<input type="datetime-local" id="validTo" formControlName="validTo"
+								   autocomplete="off"
+								   mwlFlatpickr
+								   required
+								   (flatpickrValueUpdate)="dataPickerValueUpdateBis($event)"
+								   [enableTime]="true"
+								   [minDate]="this.detailItem.validFrom"
+								   [convertModelValue]="true"
+								   [allowInput]="true"
+								   dateFormat="d.m.Y"
+								   class="form-control"/>
+							<div *ngIf="errors.validTo" class="help-block">
+								{{ errors.validTo }}
+							</div>
+						</div>
+						<div class="form-group col-md-4" [ngClass]="{'has-warning': (errors.parentId)}">
+							<div *ngIf="detailItem.parentId">
+								<label tooltip="Enthalten in" for="parentId">
+									Enthalten in:
+								</label>
+								<div class="input-group">
+									<a class="input-group-addon"
+									   [routerLink]="_url.getNormalizedUrl('/collection/collection') + '/' + detailItem.parentId"
+									   title="Öffnet den Vater">
+										<i class="glyphicon glyphicon-new-window"></i>
+									</a>
+									<select id="parentId" formControlName="parentId"
+											class="form-control" style="width: 100%">
+										<option [value]="null"></option>
+										<option *ngFor="let a of allowedParents | async"
+												[ngValue]="a.value">{{a.text}}</option>
+									</select>
+								</div>
+							</div>
+							<div *ngIf="!detailItem.parentId">
+								<label tooltip="Enthalten in" for="parentId2">
+									Enthalten in:
+								</label>
+								<select id="parentId2" formControlName="parentId"
+										class="form-control" style="width: 100%">
+									<option [value]="null"></option>
+									<option *ngFor="let a of allowedParents | async"
+											[ngValue]="a.value">{{a.text}}</option>
+								</select>
+							</div>
+							<div *ngIf="errors.parentId" class="help-block">
+								{{ errors.parentId }}
+							</div>
+						</div>
+						<div class="form-group col-md-2" [ngClass]="{'has-warning': (errors.sortOrder)}">
+							<label tooltip="Sortierung" for="sortOrder">
+								Sortierung:&nbsp;<i class="glyphicon glyphicon-info-sign"
+													title="Steuern Sie über diesen nummerischen Wert die Sortierung der Sammlungen und der Themenblöcke."></i>
+							</label>
+							<input type="number" id="sortOrder" formControlName="sortOrder"
+								   class="form-control"/>
+							<div *ngIf="errors.sortOrder" class="help-block">
+								{{ errors.sortOrder }}
+							</div>
+						</div>
+					</div>
+					<div class="row" *ngIf="myForm.controls['collectionTypeId'].value === 0">
+						<div class="form-group col-md-12" [ngClass]="{'has-warning': (errors.link)}">
+							<label for="link" tooltip="Suchlink">Suchlink:</label>
+							<textarea class="form-control" name="link" formControlName="link"
+									  id="link"> </textarea>
+							<div *ngIf="errors.link" class="help-block">
+								{{ errors.link }}
+							</div>
+							<div>
+								<small class="form-text text-muted">Kopieren Sie in dieses Feld die Suchabfrage die ausgeführt werden soll, wenn die Sammlung geöffnet wird.
+								</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="form-group col-md-12" [ngClass]="{'has-warning': (errors.descriptionShort)}">
+									<label for="descriptionShort" tooltip="Beschreibung kurz">Beschreibung kurz:</label>
+									<textarea #descriptionShort class="form-control" name="descriptionShort" formControlName="descriptionShort"
+											  id="descriptionShort" [rows]="4"></textarea>
+									<div *ngIf="errors.descriptionShort" class="help-block">
+										{{ errors.descriptionShort }}
+									</div>
+									<div>
+										<small class="form-text text-muted">Diese Beschreibung wird auf der Startseite unterhalb des Bildes angezeigt. Sie darf nicht länger als 512 Zeichen sein.
+										</small>
+									</div>
+									<cmi-markdown-preview [markdownText]="descriptionShort.value"></cmi-markdown-preview>
+								</div>
+								<div class="form-group col-md-12" [ngClass]="{'has-warning': (errors.description)}">
+									<label for="description" tooltip="Beschreibung">Beschreibung:</label>
+									<textarea #description class="form-control" name="description" formControlName="description"
+											  id="description" [rows]="6"></textarea>
+									<div *ngIf="errors.description" class="help-block">
+										{{ errors.description }}
+									</div>
+									<div>
+										<small class="form-text text-muted">
+											Erfassen Sie eine umfassende Beschreibung dieser Sammlung. Der Text wird dem Benutzer auf der Detailseite der Sammlung angezeigt.
+										</small>
+									</div>
+									<cmi-markdown-preview [markdownText]="description.value"></cmi-markdown-preview>
+								</div>
+							</div>
+							<div class="row" *ngIf="detailItem.collectionTypeId === 1">
+								<div class="col-md-12">
+									<table class="table table-bordered">
+										<caption>{{'Enthaltene Sammlungen oder Themenblöcke' | translate:''}}</caption>
+										<thead>
+										<tr>
+											<th>Titel</th>
+											<th>Sammlungstyp</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr *ngFor="let collection of detailItem.childCollections">
+											<td>
+												<a [routerLink]="_url.getNormalizedUrl('/collection/collection') + '/' + collection.collectionId">
+													{{collection.title}}
+												</a>
+											</td>
+											<td>{{getCollectionTypeName(collection.collectionTypeId) }}</td>
+										</tr>
+										<tr *ngIf="!detailItem.childCollections || detailItem.childCollections.length === 0">
+											<td colspan="2">{{'Keine Einträge' | translate:''}}</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row command-items">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">{{'Speichern' |
+										translate:'communication.save'}}</button>
+									<button type="button" class="btn btn-secondary" (click)="cancel()">{{'Abbrechen' |
+										translate:'communication.cancel'}}</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="row" *ngIf="!myForm.controls['image'].value">
+								<div class="form-group col-md-12 input-file" [ngClass]="{'has-warning': pictureToBig}">
+									<label for="imageInput" tooltip="Bild">Bild:</label>
+									<input type="file" id="imageInput" accept="image/*"
+										   name="imageInput" (change)="loadImageFromFile($event)" class="form-control"/>
+									<div *ngIf="pictureToBig" class="help-block">
+										Das Bild ist grösser als 1 MB.
+									</div>
+									<div>
+										<small class="form-text text-muted">
+											Erfassen Sie eine Bild für diese Sammlung. Das Bild kann bis zu 1 MB gross sein.<br/>
+											Beim Speichern wird das Bild auf die Grösse 800 x 565 opimiert.
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="row" *ngIf="myForm.controls['image'].value">
+								<div class="form-group col-md-12">
+									<label for="image" tooltip="Bild">Bild:</label>
+									<div class="image-container">
+										<button name="deleteImage" id="deleteImage" type="button" class="close" tooltip="Bild entfernen" aria-label="Bild entfernen" (click)="deleteImage()">
+											<span aria-hidden="true"><i class="glyphicon glyphicon-remove"></i></span>
+										</button>
+										<img class="form-control input-image" id="image" [src]="'data:' + myForm.controls['imageMimeType'].value  +
+										   ';base64,' + myForm.controls['image'].value" [alt]="myForm.controls['imageAltText'].value"/>
+									</div>
+								</div>
+							</div>
+							<div class="row" *ngIf="myForm.controls['image'].value">
+								<div class="form-group col-md-12" [ngClass]="{'has-warning': (errors.imageAltText)}">
+									<label for="imageAltText" tooltip="Alternativer Text für Bild">Alternativer Text für Bild:</label>
+									<input id="imageAltText" formControlName="imageAltText"
+										   class="form-control"/>
+									<div *ngIf="errors.imageAltText" class="help-block">
+										{{ errors.imageAltText }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<cmi-record-info [modifiedBy]="detailItem.modifiedBy" [modifiedOn]="detailItem.modifiedOn"
+											 [createdBy]="detailItem.createdBy" [createdOn]="detailItem.createdOn"></cmi-record-info>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</cmi-viaduc-layout-left-content>
+</div>
+<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>
