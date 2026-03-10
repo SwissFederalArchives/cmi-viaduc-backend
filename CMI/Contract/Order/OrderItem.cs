@@ -5,7 +5,7 @@ namespace CMI.Contract.Order
     public class OrderItem
     {
         public int Id { get; set; }
-        public int? VeId { get; set; }
+        public string VeId { get; set; }
         public string Comment { get; set; }
         public int OrderId { get; set; }
         public DateTime? BewilligungsDatum { get; set; }

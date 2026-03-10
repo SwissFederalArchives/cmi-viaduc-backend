@@ -22,7 +22,7 @@ namespace CMI.Web.Common.Helpers
                 ZugaenglichkeitGemaessBga = entity.HasCustomProperty("zugänglichkeitGemässBga")
                     ? entity.CustomFields.zugänglichkeitGemässBga
                     : "",
-                ZusaetzlicheInformationen = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.Extent,
+                ZusaetzlicheInformationen = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.ZusätzlicheInformationen(),
                 ZeitraumDossier = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.CreationPeriod?.Text,
                 Schutzfristverzeichnung = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.GetSchutzfristenVerzeichnung(),
                 Publikationsrechte = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.Publikationsrechte(),

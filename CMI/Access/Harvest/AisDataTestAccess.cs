@@ -1,12 +1,13 @@
-﻿using CMI.Contract.Harvest;
+﻿using System.Threading.Tasks;
+using CMI.Contract.Harvest;
 
 namespace CMI.Access.Harvest
 {
     public partial class AISDataAccess : IDbTestAccess
     {
-        public string GetDbVersion()
+        public Task<string> GetDbVersion()
         {
-            return dataProvider.GetDbVersion();
+            return aisDataProvider.GetDbVersion();
         }
     }
 }

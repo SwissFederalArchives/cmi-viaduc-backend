@@ -252,7 +252,7 @@ export interface ICollectionDto {
 
 export class VManuelleKorrekturDto implements IVManuelleKorrekturDto {
 	manuelleKorrekturId!: number;
-	veId!: number;
+	veId?: string | undefined;
 	signatur?: string | undefined;
 	schutzfristende!: Date;
 	titel?: string | undefined;
@@ -383,7 +383,7 @@ export class VManuelleKorrekturDto implements IVManuelleKorrekturDto {
 
 export interface IVManuelleKorrekturDto {
 	manuelleKorrekturId: number;
-	veId: number;
+	veId?: string | undefined;
 	signatur?: string | undefined;
 	schutzfristende: Date;
 	titel?: string | undefined;
@@ -548,7 +548,7 @@ export interface IArchiveRecordContextItem {
 
 export class ManuelleKorrekturDto implements IManuelleKorrekturDto {
 	manuelleKorrekturId!: number;
-	veId!: number;
+	veId?: string | undefined;
 	signatur?: string | undefined;
 	schutzfristende!: Date;
 	titel?: string | undefined;
@@ -656,7 +656,7 @@ export class ManuelleKorrekturDto implements IManuelleKorrekturDto {
 
 export interface IManuelleKorrekturDto {
 	manuelleKorrekturId: number;
-	veId: number;
+	veId?: string | undefined;
 	signatur?: string | undefined;
 	schutzfristende: Date;
 	titel?: string | undefined;
@@ -793,3 +793,216 @@ export interface IManuelleKorrekturStatusHistoryDto {
 	erzeugtVon?: string | undefined;
 	manuelleKorrektur?: ManuelleKorrekturDto | undefined;
 }
+
+export class VSyncAction implements IVSyncAction {
+	syncActionId!: number;
+	archiveRecordId?: string | undefined;
+	actionType?: string | undefined;
+	actionStatus?: number | undefined;
+	numberOfTries?: number | undefined;
+	createdOn?: Date | undefined;
+	modifiedOn?: Date | undefined;
+	syncActionLogId?: number | undefined;
+	logDate?: Date | undefined;
+	errorReason?: string | undefined;
+	actionStatusHistory?: string | undefined;
+
+	constructor(data?: IVSyncAction) {
+	}
+
+	init(_data?: any, _mappings?: any) {
+		if (_data) {
+			this.syncActionId = _data["SyncActionId"];
+			this.archiveRecordId = _data["ArchiveRecordId"];
+			this.actionType = _data["ActionType"];
+			this.actionStatus = _data["ActionStatus"];
+			this.numberOfTries = _data["NumberOfTries"];
+			this.createdOn = _data["CreatedOn"] ? new Date(_data["CreatedOn"].toString()) : <any>undefined;
+			this.modifiedOn = _data["ModifiedOn"] ? new Date(_data["ModifiedOn"].toString()) : <any>undefined;
+			this.syncActionLogId = _data["SyncActionLogId"];
+			this.logDate = _data["LogDate"] ? new Date(_data["LogDate"].toString()) : <any>undefined;
+			this.errorReason = _data["ErrorReason"];
+			this.actionStatusHistory = _data["ActionStatusHistory"];
+		}
+	}
+
+	static fromJS(data: any): VSyncAction {
+		data = typeof data === 'object' ? data : {};
+		let result = new VSyncAction();
+		result.init(data);
+		return result;
+	}
+
+	toJSON(data?: any) {
+		data = typeof data === 'object' ? data : {};
+		data["SyncActionId"] = this.syncActionId;
+		data["ArchiveRecordId"] = this.archiveRecordId;
+		data["ActionType"] = this.actionType;
+		data["ActionStatus"] = this.actionStatus;
+		data["NumberOfTries"] = this.numberOfTries;
+		data["CreatedOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
+		data["ModifiedOn"] = this.modifiedOn ? this.modifiedOn.toISOString() : <any>undefined;
+		data["SyncActionLogId"] = this.syncActionLogId;
+		data["LogDate"] = this.logDate ? this.logDate.toISOString() : <any>undefined;
+		data["ErrorReason"] = this.errorReason;
+		data["ActionStatusHistory"] = this.actionStatusHistory;
+		return data;
+	}
+}
+
+export interface IVSyncAction {
+	syncActionId: number;
+	archiveRecordId?: string | undefined;
+	actionType?: string | undefined;
+	actionStatus?: number | undefined;
+	numberOfTries?: number | undefined;
+	createdOn?: Date | undefined;
+	modifiedOn?: Date | undefined;
+	syncActionLogId?: number | undefined;
+	logDate?: Date | undefined;
+	errorReason?: string | undefined;
+	actionStatusHistory?: string | undefined;
+}
+
+export class SyncAction implements ISyncAction {
+	syncActionId!: number;
+	archiveRecordId?: string | undefined;
+	actionType?: string | undefined;
+	actionStatus?: number | undefined;
+	numberOfTries?: number | undefined;
+	createdOn?: Date | undefined;
+	modifiedOn?: Date | undefined;
+	constructor(data?: ISyncAction) {
+	}
+
+	init(_data?: any, _mappings?: any) {
+		if (_data) {
+			this.syncActionId = _data["syncActionId"];
+			this.archiveRecordId = _data["archiveRecordId"];
+			this.actionType = _data["actionType"];
+			this.actionStatus = _data["actionStatus"];
+			this.numberOfTries = _data["numberOfTries"];
+			this.createdOn = _data["createdOn"] ? new Date(_data["createdOn"].toString()) : <any>undefined;
+			this.modifiedOn = _data["modifiedOn"] ? new Date(_data["modifiedOn"].toString()) : <any>undefined;
+		}
+	}
+
+	static fromJS(data: any): SyncAction {
+		data = typeof data === 'object' ? data : {};
+		let result = new SyncAction();
+		result.init(data);
+		return result;
+	}
+
+	toJSON(data?: any) {
+		data = typeof data === 'object' ? data : {};
+		data["syncActionId"] = this.syncActionId;
+		data["archiveRecordId"] = this.archiveRecordId;
+		data["actionType"] = this.actionType;
+		data["actionStatus"] = this.actionStatus;
+		data["numberOfTries"] = this.numberOfTries;
+		data["createdOn"] = this.createdOn ? this.createdOn.toISOString() : <any>undefined;
+		data["codifiedOn"] = this.modifiedOn ? this.modifiedOn.toISOString() : <any>undefined;
+		return data;
+	}
+}
+
+export interface ISyncAction {
+	syncActionId: number;
+	archiveRecordId?: string | undefined;
+	actionType?: string | undefined;
+	actionStatus?: number | undefined;
+	numberOfTries?: number | undefined;
+	createdOn?: Date | undefined;
+	modifiedOn?: Date | undefined;
+}
+
+export class SyncActionLogDto implements ISyncActionLogDto {
+	syncActionLogId: number;
+	syncActionId: number;
+	logDate?: Date | undefined;
+	errorReason?: string | undefined;
+	actionStatusHistory?: string | undefined;
+
+	constructor(data?: ISyncActionLogDto) {
+	}
+
+	init(_data?: any, _mappings?: any) {
+		if (_data) {
+			this.syncActionId = _data["syncActionId"];
+			this.syncActionLogId = _data["syncActionLogId"];
+			this.logDate = _data["logDate"] ? new Date(_data["logDate"].toString()) : <any>undefined;
+			this.errorReason = _data["errorReason"];
+			this.actionStatusHistory = _data["actionStatusHistory"];
+		}
+	}
+
+	static fromJS(data: any): SyncActionLogDto {
+		data = typeof data === 'object' ? data : {};
+		let result = new SyncActionLogDto(data);
+		result.init(data);
+		return result;
+	}
+
+	toJSON(data?: any) {
+		data = typeof data === 'object' ? data : {};
+		data["syncActionId"] = this.syncActionId;
+		data["syncActionLogId"] = this.syncActionLogId;
+		data["logDate"] = this.logDate ? this.logDate : <any>undefined;
+		data["wrrorReason"] = this.errorReason;
+		data["actionStatusHistory"] = this.actionStatusHistory;
+		return data;
+	}
+}
+
+export interface ISyncActionLogDto {
+	syncActionLogId: number;
+	syncActionId: number;
+	logDate?: Date | undefined;
+	errorReason?: string | undefined;
+	actionStatusHistory?: string | undefined;
+}
+
+
+export interface ISyncNumberPerHourDto {
+	lastModified: string;
+	lastModifiedDay: Date;
+	recordCount?: number | undefined;
+	actionStatus?: number | undefined;
+}
+
+export class SyncNumberPerHourDto implements ISyncNumberPerHourDto {
+    lastModified: string;
+	lastModifiedDay: Date;
+    recordCount?: number;
+    actionStatus?: number;
+
+	constructor(data?: ISyncNumberPerHourDto) {
+	}
+
+	init(_data?: any, _mappings?: any) {
+		if (_data) {
+			this.lastModified = _data["lastModified"];
+			this.lastModifiedDay = _data["lastModifiedDay"] ? new Date(_data["lastModifiedDay"].toString()) : <any>undefined;
+			this.recordCount = _data["recordCount"];
+			this.actionStatus = _data["actionStatus"];
+		}
+	}
+
+	static fromJS(data: any): SyncNumberPerHourDto {
+		data = typeof data === 'object' ? data : {};
+		let result = new SyncNumberPerHourDto(data);
+		result.init(data);
+		return result;
+	}
+
+	toJSON(data?: any) {
+		data = typeof data === 'object' ? data : {};
+		data["lastModified"] = this.lastModified;
+		data["lastModifiedDay"] = this.lastModifiedDay ? this.lastModifiedDay : <any>undefined;
+		data["recordCount"] = this.recordCount;
+		data["actionStatus"] = this.actionStatus;
+		return data;
+	}
+}
+

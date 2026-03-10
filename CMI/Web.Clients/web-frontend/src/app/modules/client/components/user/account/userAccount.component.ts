@@ -9,7 +9,7 @@ import {
 	Utilities as _util
 } from '@cmi/viaduc-web-core';
 import { User, UserSetting, UserSettingType } from '../../../model';
-import { AuthorizationService, UrlService, UserService } from '../../../services';
+import { AuthorizationService, UserService } from '../../../services';
 import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import flatpickr from 'flatpickr';
@@ -56,7 +56,7 @@ export class UserAccountComponent implements OnInit {
 	}
 
 	public get eIAMLink(): string {
-		return this._url.getExternalHostUrl() + this._cfg.getSetting('account.eIAMLink', '/_pep/myaccount?returnURI=/recherche/#/konto/benutzerangaben');
+		return this._cfg.getSetting('account.myAccountUrl', 'https://www.myaccount.eiam.admin.ch')
 	}
 
 	private get countryCode(): string {
@@ -107,7 +107,6 @@ export class UserAccountComponent implements OnInit {
 		private _txt: TranslationService,
 		private _cfg: ConfigService,
 		private _cdr: ChangeDetectorRef,
-		private _url: UrlService,
 		private _toastr: ToastrService) {
 		this.isExternalUser = this._authorization.isExternalUser()
 		const lang = this._context.language;

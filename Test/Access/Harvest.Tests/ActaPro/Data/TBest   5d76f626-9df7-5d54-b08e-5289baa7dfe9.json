@@ -1,0 +1,283 @@
+{
+  "object": "document",
+  "type": "TBest",
+  "DocKey": "TBest   5d76f626-9df7-5d54-b08e-5289baa7dfe9",
+  "DocTitle": "Eidgenössische Finanzkontrolle: Zentrale Ablage (1919-1951)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "26.05.2025 21:25:43:404",
+  "block": {
+    "type": "TBest",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Best    2094b289-d6cc-590d-8941-da3768f91579"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Best"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "HERMAR"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "24.04.2020 06:18:50"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002 00:00:00"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1910-1951",
+        "timerange": {
+          "min": "01.01.1910",
+          "max": "31.12.1951",
+          "values": [
+            {
+              "value": "01.01.1910-31.12.1951",
+              "min": "01.01.1910",
+              "max": "31.12.1951"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-222222222222"
+      },
+      {
+        "type": "Bst_Id",
+        "value": "5d76f626-9df7-5d54-b08e-5289baa7dfe9"
+      },
+      {
+        "type": "ScopeID",
+        "value": "5100"
+      },
+      {
+        "type": "ApdID",
+        "value": "TBest   5d76f626-9df7-5d54-b08e-5289baa7dfe9"
+      },
+      {
+        "type": "Flag_EditCompleteSignatureDirectly",
+        "value": "1"
+      },
+      {
+        "type": "FreiSign",
+        "value": "6481A"
+      },
+      {
+        "type": "SignInherited",
+        "value": "E"
+      },
+      {
+        "type": "SignForInherit",
+        "value": "E6481A"
+      },
+      {
+        "type": "Bst_Signatur",
+        "value": "E6481A*"
+      },
+      {
+        "type": "Altsi",
+        "value": "E6481*"
+      },
+      {
+        "type": "Bst_Name",
+        "value": "Eidgenössische Finanzkontrolle: Zentrale Ablage (1919-1951)"
+      },
+      {
+        "type": "Bst_Bez",
+        "value": "E6481A*   Eidgenössische Finanzkontrolle: Zentrale Ablage (1919-1951), 1910-1951 (Teilbestand)"
+      },
+      {
+        "type": "Bst_Laufzeit",
+        "value": "1919-1951",
+        "timerange": {
+          "min": "01.01.1919",
+          "max": "31.12.1951",
+          "values": [
+            {
+              "value": "01.01.1919-31.12.1951",
+              "min": "01.01.1919",
+              "max": "31.12.1951"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Bestaendeuebersicht_Gp",
+        "fields": [
+          {
+            "type": "Bestaendeuebersicht_Key",
+            "value": "Thes    8a512268-cee5-56bd-82ab-17821a92e258"
+          },
+          {
+            "type": "Bestaendeuebersicht_RefDocType",
+            "value": "Thes"
+          },
+          {
+            "type": "Bestaendeuebersicht_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Bestaendeuebersicht_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Bestaendeuebersicht_Bez",
+            "value": "CH-BAR*/611 Finanzverwaltung (Gliederungseinheit)"
+          }
+        ]
+      },
+      {
+        "type": "Bestaendeuebersicht_Gp",
+        "fields": [
+          {
+            "type": "Bestaendeuebersicht_Key",
+            "value": "Thes    8a512268-cee5-56bd-82ab-17821a92e259"
+          },
+          {
+            "type": "Bestaendeuebersicht_RefDocType",
+            "value": "Thes"
+          },
+          {
+            "type": "Bestaendeuebersicht_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Bestaendeuebersicht_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Bestaendeuebersicht_Bez",
+            "value": "CH-BAR*/612 Finanzverwaltung (Gliederungseinheit)"
+          }
+        ]
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     e153d253-d5de-51df-9ce0-56289a61661d"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1971/185 Bundesverwaltung (1910-1950)"
+          }
+        ]
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     429cd2a2-a1f9-51bc-90ed-b13fd57d78ee"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1991/111 Bundesverwaltung (1914-1951)"
+          }
+        ]
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     542e9db4-9c8e-5d25-bdcd-a3818f7f94a4"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1996/276 Bundesverwaltung (1924-1936)"
+          }
+        ]
+      },
+      {
+        "type": "ZusVorhFindmittel",
+        "value": "Ablieferung 1971/185: Dossierverzeichnis\r\nAblieferung 1991/111: Dossierverzeichnis\r\nAblieferung 1996/276: Dossierverzeichnis"
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Status",
+        "value": "Abgeschlossen"
+      },
+      {
+        "type": "Export_id",
+        "value": "4b0b3506-343e-4331-a63e-b0d55080e428"
+      }
+    ]
+  }
+}

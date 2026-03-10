@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JSON>
+    <DigitizationOrder>
+        <Ablieferung>
+            <Ablieferungsnummer>1000/841</Ablieferungsnummer>
+            <AblieferndeStelle>Hauptabteilung Strassenverkehr (1914-1997)</AblieferndeStelle>
+            <AktenbildnerName/>
+        </Ablieferung>
+        <OrdnungsSystem>
+            <Signatur>E4261A*</Signatur>
+            <Name>Hauptabteilung Strassenverkehr: Zentrale Ablage (1914-1961)</Name>
+            <Stufe>Teilbestand</Stufe>
+            <UntergeordnetesOrdnungsSystem>
+                <Signatur>E4261A#11</Signatur>
+                <Name>Automobilgesetz vom 15.3.1932</Name>
+                <Stufe>Serie</Stufe>
+                <UntergeordnetesOrdnungsSystem>
+                    <Signatur>E4261A#11.13</Signatur>
+                    <Name>Vollziehungsverordnung zum MFG</Name>
+                    <Stufe>Serie</Stufe>
+                    <UntergeordnetesOrdnungsSystem>
+                        <Signatur>E4261A#11.13o</Signatur>
+                        <Name>Kühlerfiguren, Fixierständer</Name>
+                        <Stufe>Serie</Stufe>
+                        <UntergeordnetesOrdnungsSystem>null</UntergeordnetesOrdnungsSystem>
+                    </UntergeordnetesOrdnungsSystem>
+                </UntergeordnetesOrdnungsSystem>
+            </UntergeordnetesOrdnungsSystem>
+        </OrdnungsSystem>
+        <Dossier>
+            <Signatur>E4261A#1000/841#359*</Signatur>
+            <Titel>Vedol-Kühlerfiguren</Titel>
+            <Entstehungszeitraum>1936-1936</Entstehungszeitraum>
+            <Stufe>Dossier</Stufe>
+            <FrueheresAktenzeichen>null</FrueheresAktenzeichen>
+            <Aktenzeichen>11.13o.10</Aktenzeichen>
+            <Zusatzkomponente>null</Zusatzkomponente>
+            <Darin>null</Darin>
+            <Form>null</Form>
+            <Archivnummer>null</Archivnummer>
+            <VerzEinheitId>Vz fa8abaa3-daec-5d84-a0b8-c1203a0346b0</VerzEinheitId>
+            <UntergeordneteVerzEinheiten>null</UntergeordneteVerzEinheiten>
+            <Behaeltnisse>
+                <array>
+                    <BehaeltnisCode>1000/841_63</BehaeltnisCode>
+                    <BehaeltnisTyp>Bändelmappen</BehaeltnisTyp>
+                    <InformationsTraeger>Papier</InformationsTraeger>
+                    <Standort>1.1.114.02.05</Standort>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#366*</Signatur>
+                        <Titel>Kleinmotorräder und Fahrräder mit Hilfsmotoren</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.03</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#371*</Signatur>
+                        <Titel>Nationalrätliche Kommission in Locarno 17.-20.2.1931</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.14</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#370*</Signatur>
+                        <Titel>Kreisschreiben vom 19.11.1935 betr. a) Zahl der Mitfahrenden auf
+                            Motorrädern b) Fahrtrichtungsanzeiger für Velos</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.07</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#356*</Signatur>
+                        <Titel>Oldsmobile-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.07</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#352*</Signatur>
+                        <Titel>Gutachten und Berichte</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.02</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#347*</Signatur>
+                        <Titel>Sitzbreite</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13m.02</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#360*</Signatur>
+                        <Titel>Voisin-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.11</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#355*</Signatur>
+                        <Titel>Mercedes-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.05</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#345*</Signatur>
+                        <Titel>Ausländische Personentransporte auf Lastwagen</Titel>
+                        <Entstehungszeitraum>19320101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13l.02</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#361*</Signatur>
+                        <Titel>Beleuchtung</Titel>
+                        <Entstehungszeitraum>19330101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13p.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#357*</Signatur>
+                        <Titel>Plymouth-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.08</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#344*</Signatur>
+                        <Titel>Allgemeine Korrespondenz</Titel>
+                        <Entstehungszeitraum>19320101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13l.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#365*</Signatur>
+                        <Titel>Bremse</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.02</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#363*</Signatur>
+                        <Titel>Raddruck der Reifen (Art. 14.5 und 17.3 MFV), Pneugarantie</Titel>
+                        <Entstehungszeitraum>19330101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13q.03</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#350*</Signatur>
+                        <Titel>Ärztliche Führerprüfung</Titel>
+                        <Entstehungszeitraum>19320101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13n.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#349*</Signatur>
+                        <Titel>Verhalten gegenüber Strassenbahnen</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13m.07</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#369*</Signatur>
+                        <Titel>Soziussitz</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.06</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#367*</Signatur>
+                        <Titel>Anhänger am Motorrad und Side-Cars</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.04</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#353*</Signatur>
+                        <Titel>Chrysler-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.03</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#362*</Signatur>
+                        <Titel>Allgemeines</Titel>
+                        <Entstehungszeitraum>19330101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13q.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#348*</Signatur>
+                        <Titel>Richtungsanzeiger</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13m.04</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#346*</Signatur>
+                        <Titel>Allgemeine Korrespondenz</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13m.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#354*</Signatur>
+                        <Titel>Hupmobile-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.04</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#368*</Signatur>
+                        <Titel>Richtungsanzeiger für Motorräder und Side-Cars</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.05</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#358*</Signatur>
+                        <Titel>Rolls-Royce-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.09</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#359*</Signatur>
+                        <Titel>Vedol-Kühlerfiguren</Titel>
+                        <Entstehungszeitraum>19360101 19361231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.10</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#364*</Signatur>
+                        <Titel>Allgemeines</Titel>
+                        <Entstehungszeitraum>19350101 19351231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13r.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                    <EnthalteneVerzEinheiten>
+                        <Signatur>E4261A#1000/841#351*</Signatur>
+                        <Titel>Allgemeines</Titel>
+                        <Entstehungszeitraum>19340101 19341231</Entstehungszeitraum>
+                        <Aktenzeichen>11.13o.01</Aktenzeichen>
+                    </EnthalteneVerzEinheiten>
+                </array>
+            </Behaeltnisse>
+            <InSchutzfrist>false</InSchutzfrist>
+        </Dossier>
+        <Auftragsdaten>
+            <BemerkungenKunde>null</BemerkungenKunde>
+            <BemerkungenBar>null</BemerkungenBar>
+            <AuftragsId>null</AuftragsId>
+            <Bestelldatum>0001-01-01T00:00:00</Bestelldatum>
+            <BestelleinheitId>5072846</BestelleinheitId>
+            <Benutzungskopie>false</Benutzungskopie>
+        </Auftragsdaten>
+    </DigitizationOrder>
+    <Success>true</Success>
+    <ErrorMessage>null</ErrorMessage>
+</JSON>

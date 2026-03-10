@@ -14,6 +14,8 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -179,6 +181,10 @@
     <ProjectReference Include="..\..\Contract\Order\CMI.Contract.Order.csproj">
       <Project>{3FA6554C-7659-4BC8-9DB4-AD9FBA6F6948}</Project>
       <Name>CMI.Contract.Order</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\ActaPro\CMI.Utilities.ActaPro.csproj">
+      <Project>{88AB79CB-202C-45D8-840E-E8256AF252BD}</Project>
+      <Name>CMI.Utilities.ActaPro</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Logging\Configurator\CMI.Utilities.Logging.Configurator.csproj">
       <Project>{39326685-B5AB-40DC-8FA3-09A9502E7BE0}</Project>
@@ -448,6 +454,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SqlDbScripts\0096_TO_0097.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DbModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0097_TO_0098.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0098_TO_0099.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0099_TO_0100.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0100_TO_0101.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0101_TO_0102.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0102_TO_0103.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SqlDbScripts\0103_TO_0104.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\..\..\packages\Nerdbank.GitVersioning.3.4.255\build\Nerdbank.GitVersioning.targets')" />

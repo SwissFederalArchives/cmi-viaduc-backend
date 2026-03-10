@@ -5,7 +5,7 @@ namespace CMI.Engine.MailTemplate
 {
     public class VeFuerKontrollstelle : InElasticIndexierteVe
     {
-        public VeFuerKontrollstelle(ElasticArchiveRecord elasticArchiveRecord, int? begruendung) : base(elasticArchiveRecord)
+        public VeFuerKontrollstelle(ElasticArchiveRecord elasticArchiveRecord, ElasticArchiveRecord unprotectedRecord, int? begruendung) : base(elasticArchiveRecord, unprotectedRecord)
         {
             var idList = new List<int>();
             var hasBegruendung = begruendung != null && begruendung != 0;

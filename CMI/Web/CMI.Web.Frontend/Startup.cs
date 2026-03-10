@@ -22,6 +22,8 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using NJsonSchema.Generation;
+using NJsonSchema.NewtonsoftJson.Generation;
 using NSwag;
 using NSwag.AspNet.Owin;
 using Owin;
@@ -43,7 +45,7 @@ namespace CMI.Web.Frontend
 
             ConfigureSecurity(app);
 
-            app.UseSwaggerUi3(new[] { typeof(ExternalController) }, settings =>
+            app.UseSwaggerUi(new[] { typeof(ExternalController) }, settings =>
             {
                 settings.GeneratorSettings.DefaultUrlTemplate = "api/{controller}/{action}/{id?}";
                 settings.GeneratorSettings.Title = "Viaduc REST API";
@@ -58,10 +60,7 @@ namespace CMI.Web.Frontend
                         Url = WebHelper.SwaggerBaseUrl
                     });
                 };
-                settings.GeneratorSettings.SerializerSettings = new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+
             });
 
 

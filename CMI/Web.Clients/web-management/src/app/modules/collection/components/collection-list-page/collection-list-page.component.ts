@@ -217,7 +217,6 @@ export class CollectionListPageComponent implements OnInit {
 			if (userSettings.collectionSettings && userSettings.collectionSettings.columns) {
 				this.columns = userSettings.collectionSettings.columns;
 			} else {
-				console.log('hätte hier nicht rein sollen!!!');
 				this.resetColumnsToDefault();
 			}
 			this.refreshHiddenVisibleColumns();

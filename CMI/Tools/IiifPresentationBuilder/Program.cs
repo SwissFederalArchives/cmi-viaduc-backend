@@ -45,8 +45,8 @@ namespace CMI.Tools.IiifPresentationBuilder
             Console.WriteLine("Erzeugt");
 
             Console.WriteLine("PostProcessIiifOcrIndexer");
-            var iiifOcrIndexer = new PostProcessIiifOcrIndexer(new SolrConnectionInfo
-                {SolrUrl = "SkipSolrForTesting", SolrHighlightingPath = root }, manifestSettings);
+            var iiifOcrIndexer = new PostProcessIiifOcrIndexer(new SolrEngine(new SolrConnectionInfo
+                {SolrUrl = "SkipSolrForTesting", SolrHighlightingPath = root }), manifestSettings);
 
 
             var content = root + @"\content";

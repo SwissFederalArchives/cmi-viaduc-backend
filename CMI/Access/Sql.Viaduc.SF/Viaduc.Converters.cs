@@ -884,4 +884,472 @@ namespace CMI.Contract.Common.Entities
 
     }
 
+    public static partial class SyncActionConverter
+    {
+
+        public static SyncActionDto ToDto(this CMI.Access.Sql.Viaduc.EF.SyncAction source)
+        {
+            return source.ToDtoWithRelated(0);
+        }
+
+        public static SyncActionDto ToDtoWithRelated(this CMI.Access.Sql.Viaduc.EF.SyncAction source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = new SyncActionDto();
+
+            // Properties
+            target.SyncActionId = source.SyncActionId;
+            target.ArchiveRecordId = source.ArchiveRecordId;
+            target.ActionType = source.ActionType;
+            target.ActionStatus = source.ActionStatus;
+            target.NumberOfTries = source.NumberOfTries;
+            target.CreatedOn = source.CreatedOn;
+            target.ModifiedOn = source.ModifiedOn;
+
+            // Navigation Properties
+            if (level > 0) {
+              target.SyncActionLogs = source.SyncActionLogs.ToDtosWithRelated(level - 1);
+            }
+
+            // User-defined partial method
+            OnDtoCreating(source, target);
+
+            return target;
+        }
+
+        public static CMI.Access.Sql.Viaduc.EF.SyncAction ToEntity(this SyncActionDto source)
+        {
+            if (source == null)
+              return null;
+
+            var target = new CMI.Access.Sql.Viaduc.EF.SyncAction();
+
+            // Properties
+            target.SyncActionId = source.SyncActionId;
+            target.ArchiveRecordId = source.ArchiveRecordId;
+            target.ActionType = source.ActionType;
+            target.ActionStatus = source.ActionStatus;
+            target.NumberOfTries = source.NumberOfTries;
+            target.CreatedOn = source.CreatedOn;
+            target.ModifiedOn = source.ModifiedOn;
+
+            // User-defined partial method
+            OnEntityCreating(source, target);
+
+            return target;
+        }
+
+        public static List<SyncActionDto> ToDtos(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncAction> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDto())
+              .ToList();
+
+            return target;
+        }
+
+        public static List<SyncActionDto> ToDtosWithRelated(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncAction> source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDtoWithRelated(level))
+              .ToList();
+
+            return target;
+        }
+
+        public static List<CMI.Access.Sql.Viaduc.EF.SyncAction> ToEntities(this IEnumerable<SyncActionDto> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToEntity())
+              .ToList();
+
+            return target;
+        }
+
+        static partial void OnDtoCreating(CMI.Access.Sql.Viaduc.EF.SyncAction source, SyncActionDto target);
+
+        static partial void OnEntityCreating(SyncActionDto source, CMI.Access.Sql.Viaduc.EF.SyncAction target);
+
+    }
+
+    public static partial class SyncActionLogConverter
+    {
+
+        public static SyncActionLogDto ToDto(this CMI.Access.Sql.Viaduc.EF.SyncActionLog source)
+        {
+            return source.ToDtoWithRelated(0);
+        }
+
+        public static SyncActionLogDto ToDtoWithRelated(this CMI.Access.Sql.Viaduc.EF.SyncActionLog source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = new SyncActionLogDto();
+
+            // Properties
+            target.SyncActionLogId = source.SyncActionLogId;
+            target.SyncActionId = source.SyncActionId;
+            target.LogDate = source.LogDate;
+            target.ActionStatusHistory = source.ActionStatusHistory;
+            target.ErrorReason = source.ErrorReason;
+
+            // Navigation Properties
+            if (level > 0) {
+              target.SyncAction = source.SyncAction.ToDtoWithRelated(level - 1);
+            }
+
+            // User-defined partial method
+            OnDtoCreating(source, target);
+
+            return target;
+        }
+
+        public static CMI.Access.Sql.Viaduc.EF.SyncActionLog ToEntity(this SyncActionLogDto source)
+        {
+            if (source == null)
+              return null;
+
+            var target = new CMI.Access.Sql.Viaduc.EF.SyncActionLog();
+
+            // Properties
+            target.SyncActionLogId = source.SyncActionLogId;
+            target.SyncActionId = source.SyncActionId;
+            target.LogDate = source.LogDate;
+            target.ActionStatusHistory = source.ActionStatusHistory;
+            target.ErrorReason = source.ErrorReason;
+
+            // User-defined partial method
+            OnEntityCreating(source, target);
+
+            return target;
+        }
+
+        public static List<SyncActionLogDto> ToDtos(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncActionLog> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDto())
+              .ToList();
+
+            return target;
+        }
+
+        public static List<SyncActionLogDto> ToDtosWithRelated(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncActionLog> source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDtoWithRelated(level))
+              .ToList();
+
+            return target;
+        }
+
+        public static List<CMI.Access.Sql.Viaduc.EF.SyncActionLog> ToEntities(this IEnumerable<SyncActionLogDto> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToEntity())
+              .ToList();
+
+            return target;
+        }
+
+        static partial void OnDtoCreating(CMI.Access.Sql.Viaduc.EF.SyncActionLog source, SyncActionLogDto target);
+
+        static partial void OnEntityCreating(SyncActionLogDto source, CMI.Access.Sql.Viaduc.EF.SyncActionLog target);
+
+    }
+
+    public static partial class SyncInfoConverter
+    {
+
+        public static SyncInfoDto ToDto(this CMI.Access.Sql.Viaduc.EF.SyncInfo source)
+        {
+            return source.ToDtoWithRelated(0);
+        }
+
+        public static SyncInfoDto ToDtoWithRelated(this CMI.Access.Sql.Viaduc.EF.SyncInfo source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = new SyncInfoDto();
+
+            // Properties
+            target.SyncInfoId = source.SyncInfoId;
+            target.LastChangeDate = source.LastChangeDate;
+
+            // User-defined partial method
+            OnDtoCreating(source, target);
+
+            return target;
+        }
+
+        public static CMI.Access.Sql.Viaduc.EF.SyncInfo ToEntity(this SyncInfoDto source)
+        {
+            if (source == null)
+              return null;
+
+            var target = new CMI.Access.Sql.Viaduc.EF.SyncInfo();
+
+            // Properties
+            target.SyncInfoId = source.SyncInfoId;
+            target.LastChangeDate = source.LastChangeDate;
+
+            // User-defined partial method
+            OnEntityCreating(source, target);
+
+            return target;
+        }
+
+        public static List<SyncInfoDto> ToDtos(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncInfo> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDto())
+              .ToList();
+
+            return target;
+        }
+
+        public static List<SyncInfoDto> ToDtosWithRelated(this IEnumerable<CMI.Access.Sql.Viaduc.EF.SyncInfo> source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDtoWithRelated(level))
+              .ToList();
+
+            return target;
+        }
+
+        public static List<CMI.Access.Sql.Viaduc.EF.SyncInfo> ToEntities(this IEnumerable<SyncInfoDto> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToEntity())
+              .ToList();
+
+            return target;
+        }
+
+        static partial void OnDtoCreating(CMI.Access.Sql.Viaduc.EF.SyncInfo source, SyncInfoDto target);
+
+        static partial void OnEntityCreating(SyncInfoDto source, CMI.Access.Sql.Viaduc.EF.SyncInfo target);
+
+    }
+
+    public static partial class VSyncNumberPerHourConverter
+    {
+
+        public static VSyncNumberPerHourDto ToDto(this CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour source)
+        {
+            return source.ToDtoWithRelated(0);
+        }
+
+        public static VSyncNumberPerHourDto ToDtoWithRelated(this CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = new VSyncNumberPerHourDto();
+
+            // Properties
+            target.LastModified = source.LastModified;
+            target.LastModifiedDay = source.LastModifiedDay;
+            target.RecordCount = source.RecordCount;
+            target.ActionStatus = source.ActionStatus;
+
+            // User-defined partial method
+            OnDtoCreating(source, target);
+
+            return target;
+        }
+
+        public static CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour ToEntity(this VSyncNumberPerHourDto source)
+        {
+            if (source == null)
+              return null;
+
+            var target = new CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour();
+
+            // Properties
+            target.LastModified = source.LastModified;
+            target.LastModifiedDay = source.LastModifiedDay;
+            target.RecordCount = source.RecordCount;
+            target.ActionStatus = source.ActionStatus;
+
+            // User-defined partial method
+            OnEntityCreating(source, target);
+
+            return target;
+        }
+
+        public static List<VSyncNumberPerHourDto> ToDtos(this IEnumerable<CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDto())
+              .ToList();
+
+            return target;
+        }
+
+        public static List<VSyncNumberPerHourDto> ToDtosWithRelated(this IEnumerable<CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour> source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDtoWithRelated(level))
+              .ToList();
+
+            return target;
+        }
+
+        public static List<CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour> ToEntities(this IEnumerable<VSyncNumberPerHourDto> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToEntity())
+              .ToList();
+
+            return target;
+        }
+
+        static partial void OnDtoCreating(CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour source, VSyncNumberPerHourDto target);
+
+        static partial void OnEntityCreating(VSyncNumberPerHourDto source, CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour target);
+
+    }
+
+    public static partial class VSyncActionConverter
+    {
+
+        public static VSyncActionDto ToDto(this CMI.Access.Sql.Viaduc.EF.VSyncAction source)
+        {
+            return source.ToDtoWithRelated(0);
+        }
+
+        public static VSyncActionDto ToDtoWithRelated(this CMI.Access.Sql.Viaduc.EF.VSyncAction source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = new VSyncActionDto();
+
+            // Properties
+            target.SyncActionId = source.SyncActionId;
+            target.ArchiveRecordId = source.ArchiveRecordId;
+            target.ActionType = source.ActionType;
+            target.ActionStatus = source.ActionStatus;
+            target.NumberOfTries = source.NumberOfTries;
+            target.CreatedOn = source.CreatedOn;
+            target.ModifiedOn = source.ModifiedOn;
+            target.SyncActionLogId = source.SyncActionLogId;
+            target.LogDate = source.LogDate;
+            target.ErrorReason = source.ErrorReason;
+            target.ActionStatusHistory = source.ActionStatusHistory;
+
+            // User-defined partial method
+            OnDtoCreating(source, target);
+
+            return target;
+        }
+
+        public static CMI.Access.Sql.Viaduc.EF.VSyncAction ToEntity(this VSyncActionDto source)
+        {
+            if (source == null)
+              return null;
+
+            var target = new CMI.Access.Sql.Viaduc.EF.VSyncAction();
+
+            // Properties
+            target.SyncActionId = source.SyncActionId;
+            target.ArchiveRecordId = source.ArchiveRecordId;
+            target.ActionType = source.ActionType;
+            target.ActionStatus = source.ActionStatus;
+            target.NumberOfTries = source.NumberOfTries;
+            target.CreatedOn = source.CreatedOn;
+            target.ModifiedOn = source.ModifiedOn;
+            target.SyncActionLogId = source.SyncActionLogId;
+            target.LogDate = source.LogDate;
+            target.ErrorReason = source.ErrorReason;
+            target.ActionStatusHistory = source.ActionStatusHistory;
+
+            // User-defined partial method
+            OnEntityCreating(source, target);
+
+            return target;
+        }
+
+        public static List<VSyncActionDto> ToDtos(this IEnumerable<CMI.Access.Sql.Viaduc.EF.VSyncAction> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDto())
+              .ToList();
+
+            return target;
+        }
+
+        public static List<VSyncActionDto> ToDtosWithRelated(this IEnumerable<CMI.Access.Sql.Viaduc.EF.VSyncAction> source, int level)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToDtoWithRelated(level))
+              .ToList();
+
+            return target;
+        }
+
+        public static List<CMI.Access.Sql.Viaduc.EF.VSyncAction> ToEntities(this IEnumerable<VSyncActionDto> source)
+        {
+            if (source == null)
+              return null;
+
+            var target = source
+              .Select(src => src.ToEntity())
+              .ToList();
+
+            return target;
+        }
+
+        static partial void OnDtoCreating(CMI.Access.Sql.Viaduc.EF.VSyncAction source, VSyncActionDto target);
+
+        static partial void OnEntityCreating(VSyncActionDto source, CMI.Access.Sql.Viaduc.EF.VSyncAction target);
+
+    }
+
 }

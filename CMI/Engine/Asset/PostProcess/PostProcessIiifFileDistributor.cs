@@ -13,7 +13,6 @@ namespace CMI.Engine.Asset.PostProcess {
     public class PostProcessIiifFileDistributor : ProcessAnalyzerBase
     {
         private readonly ViewerFileLocationSettings locationSettings;
-
         private readonly IStorageProvider fileProvider;
         private readonly IStorageProvider configuredProvider;
         public string RootFolder { get; set; }

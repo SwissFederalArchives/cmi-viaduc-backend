@@ -131,7 +131,7 @@ namespace CMI.Utilities.ProxyClients.Order
             return result.Message.OrderItems;
         }
 
-        public async Task<bool> IsUniqueVeInBasket(int veId, string userId)
+        public async Task<bool> IsUniqueVeInBasket(string veId, string userId)
         {
             var client = GetRequestClient<IsUniqueVeInBasketRequest>();
             var result = await client.GetResponse<IsUniqueVeInBasketResponse>(new IsUniqueVeInBasketRequest {VeId = veId, UserId = userId});
@@ -173,7 +173,7 @@ namespace CMI.Utilities.ProxyClients.Order
             return result.Message.StatusHistory;
         }
 
-        public async Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId)
+        public async Task<List<Bestellhistorie>> GetOrderingHistoryForVe(string veId)
         {
             var client = GetRequestClient<FindOrderingHistoryForVeRequest>(BusConstants
                 .OrderManagerFindOrderingHistoryForVeRequestQueue);
@@ -386,12 +386,12 @@ namespace CMI.Utilities.ProxyClients.Order
             var serviceUrl = string.IsNullOrEmpty(queueEndpoint)
                 ? string.Format(BusConstants.OrderManagagerRequestBase, typeof(T1).Name)
                 : queueEndpoint;
-            
-            #if DEBUG
-                var requestTimeout = TimeSpan.FromSeconds(120);
-            #else
-                var requestTimeout = TimeSpan.FromSeconds(10);
-            #endif
+
+#if DEBUG
+            var requestTimeout = TimeSpan.FromSeconds(120);
+#else
+                var requestTimeout = TimeSpan.FromSeconds(60);
+#endif
 
             if (requestTimeOutInSeconds > 0)
             {

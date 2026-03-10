@@ -9,7 +9,13 @@
       <Value Profile="(Default)">120</Value>
     </Setting>
     <Setting Name="MaxNumberOfRetries" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="DeleteSyncActionBeforeDays" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">365</Value>
+    </Setting>
+    <Setting Name="DeleteSyncActionIntervalInHours" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">24</Value>
     </Setting>
   </Settings>
 </SettingsFile>

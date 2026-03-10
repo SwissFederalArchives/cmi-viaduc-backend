@@ -58,12 +58,13 @@ namespace CMI.Web.Common.Helpers
                 }
                 else
                 {
-                    Log.Information("Could not load routes: {routesPath}", routesPath);
+                    Log.Debug("Could not load routes: {routesPath}", routesPath);
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Could not load routes: {routesJson}", routesJson);
+                Log.Error(ex, "Could not load routes. Switch to debug, to view the routesJson.");
+                Log.Debug("The routes that could not be loaded: {routesJson}", routesJson);
             }
         }
 
@@ -148,7 +149,7 @@ namespace CMI.Web.Common.Helpers
             normalizations.TryGetValue(language, out var norms);
             components.TryGetValue(language, out var comps);
 
-            foreach (JObject route in routes.Children())
+            foreach (var route in routes.Children())
             {
                 var path = JsonHelper.GetTokenValue<string>(route, "path");
                 if (!string.IsNullOrEmpty(path))

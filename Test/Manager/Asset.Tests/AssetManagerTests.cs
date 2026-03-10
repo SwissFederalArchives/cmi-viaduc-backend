@@ -78,10 +78,10 @@ namespace CMI.Manager.Asset.Tests
             var preparationTimeCalculator = new Mock<IPreparationTimeCalculator>();
             var auftragAccess = new Mock<IPrimaerdatenAuftragAccess>();
             auftragAccess.Setup(e => e.CreateOrUpdateAuftrag(It.IsAny<PrimaerdatenAuftrag>())).Returns(Task.FromResult(1));
-            auftragAccess.Setup(e => e.GetLaufendenAuftrag(1, AufbereitungsArtEnum.Download)).Returns(Task.FromResult(
+            auftragAccess.Setup(e => e.GetLaufendenAuftrag("1", AufbereitungsArtEnum.Download)).Returns(Task.FromResult(
                 new PrimaerdatenAuftragStatusInfo
                     {PrimaerdatenAuftragId = 1, AufbereitungsArt = AufbereitungsArtEnum.Download}));
-            auftragAccess.Setup(e => e.GetLaufendenAuftrag(2, AufbereitungsArtEnum.Download))
+            auftragAccess.Setup(e => e.GetLaufendenAuftrag("2", AufbereitungsArtEnum.Download))
                 .Returns(Task.FromResult<PrimaerdatenAuftragStatusInfo>(null));
             auftragAccess.Setup(e => e.UpdateStatus(It.IsAny<PrimaerdatenAuftragLog>(), 0)).Returns(Task.FromResult(1));
             var indexClient = new Mock<IRequestClient<FindArchiveRecordRequest>>();

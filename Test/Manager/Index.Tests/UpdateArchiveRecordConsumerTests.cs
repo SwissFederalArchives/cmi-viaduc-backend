@@ -92,7 +92,7 @@ namespace CMI.Manager.Index.Tests
                 }
             };
             var mutationId = 124;
-            indexManager.Setup(e => e.ConvertArchiveRecord(ar)).Returns(new ElasticArchiveDbRecord());
+            indexManager.Setup(e => e.ConvertArchiveRecord(It.IsAny<ArchiveRecord>())).Returns(new ElasticArchiveDbRecord {ArchiveRecordId = "3245"});
             var harness = new InMemoryTestHarness();
             var consumer = harness.Consumer(() => new UpdateArchiveRecordConsumer(indexManager.Object));
 

@@ -90,6 +90,16 @@
     "IsRepeatable": 0
   },
   {
+    "ElementId": 11,
+    "ElementName": "ScopeID",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "ScopeID",
+    "TargetField": "ScopeID",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 1
+  },
+  {
     "ElementId": 18,
     "ElementName": "SIGNATURHISTORY",
     "SourceType": "Text (max. 4000 Z.)",
@@ -151,7 +161,7 @@
   },
   {
     "ElementId": 10153,
-    "ElementName": "ENTSTEHUNGSZEITRAUM__ANM.",
+    "ElementName": "ENTSTEHUNGSZEITRAUM__ANM",
     "SourceType": "Text (max. 4000 Z.)",
     "Label": "Entstehungszeitraum Anm.",
     "TargetField": "EntstehungszeitraumAnmerkung",
@@ -168,7 +178,7 @@
     "IsDefaultField": 0,
     "Type": "string",
     "IsRepeatable": 0
-  },  
+  },
   {
     "ElementId": 10174,
     "ElementName": "LAND",

@@ -119,7 +119,7 @@ namespace CMI.Contract.Messaging
 
     public class IsUniqueVeInBasketRequest
     {
-        public int VeId { get; set; }
+        public string VeId { get; set; }
         public string UserId { get; set; }
     }
 
@@ -218,7 +218,8 @@ namespace CMI.Contract.Messaging
 
     public class RecalcIndivTokens
     {
-        public int ArchiveRecordId { get; set; }
+        public string ArchiveRecordId { get; set; }
+        public string ScopeArchiveRecordId { get; set; }
         public string[] ExistingPrimaryDataDownloadAccessTokens { get; set; }
         public string[] ExistingPrimaryDataFulltextAccessTokens { get; set; }
         public string[] ExistingMetadataAccessTokens { get; set; }
@@ -227,7 +228,7 @@ namespace CMI.Contract.Messaging
 
     public class UpdateIndivTokens
     {
-        public long ArchiveRecordId { get; set; }
+        public string ArchiveRecordId { get; set; }
 
         public string[] CombinedPrimaryDataDownloadAccessTokens { get; set; }
         public string[] CombinedPrimaryDataFulltextAccessTokens { get; set; }

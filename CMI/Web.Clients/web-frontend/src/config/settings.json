@@ -36,7 +36,6 @@
 		}
 	},
 	"account": {
-		"eIAMLink": "/_pep/myaccount?returnURI=/recherche/#/konto/benutzerangaben",
 		"settingSections": [
 			{
 				"menu": "einstellungen",
@@ -170,8 +169,7 @@
 				"key": "abbruchgrundDisplay",
 				"visible": false
 			}
-		],
-		"partialEditUrl": "_pep/myaccount"
+		]
 	},
 	"authentication": {
 	},

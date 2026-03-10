@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CMI.Contract.Common.Gebrauchskopie;
+using CMI.Utilities.Common.Helpers;
+using Iiif.API.Presentation;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using CMI.Contract.Common.Gebrauchskopie;
-using CMI.Utilities.Common.Helpers;
-using Iiif.API.Presentation;
 
 namespace CMI.Engine.Asset.PostProcess;
 
@@ -33,6 +33,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
     private PaketDIP paket;
 
     private string rootDirectory;
+    private string preArchiveRecordId;
 
     /// <summary>
     /// Just for debugging we can set a flag that will ignore file not found exceptions
@@ -52,8 +53,9 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         packageFiles = GetAllPackageFiles(paket);
         packageDirectories = GetAllPackageDirectories(paket);
         this.paket = paket;
-        this.archiveRecordId = archiveRecordId;
         pathItems = PathHelper.ArchiveIdToPathSegments(archiveRecordId);
+        this.preArchiveRecordId = archiveRecordId.Substring(0, 8);
+        this.archiveRecordId = archiveRecordId.Substring(8, 36);
 
         // Get the root dossier from the manifest. This is the entry point
         var dossier = GetRootDossier();
@@ -162,7 +164,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
             {
                 new()
                 {
-                    Id = new Uri(manifestSettings.PublicDetailRecordUri, $"#/de/archiv/einheit/{archiveRecordId}"),
+                    Id = new Uri(manifestSettings.PublicDetailRecordUri, $"#/de/archiv/einheit/{preArchiveRecordId}{archiveRecordId}"),
                     Type = "Text",
                     Label = new LanguageValue
                     {
@@ -309,7 +311,7 @@ public class PostProcessManifestCreator : IPostProcessManifestCreator
         {
             new()
             {
-                Id = new Uri(manifestSettings.PublicDetailRecordUri, $"#/de/archiv/einheit/{archiveRecordId}"),
+                Id = new Uri(manifestSettings.PublicDetailRecordUri, $"#/de/archiv/einheit/{preArchiveRecordId}{archiveRecordId}"),
                 Type = "Text",
                 Label = new LanguageValue
                 {

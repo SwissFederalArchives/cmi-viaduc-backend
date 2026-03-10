@@ -57,7 +57,7 @@ namespace CMI.Web.Frontend.api.Elastic
                         var defaultFieldText = Regex.Match(searchText.Value, default_field, RegexOptions.IgnoreCase);
                         var fieldName = Regex.Match(defaultFieldText.Value, ":\"(?<field>.*?)\"").Groups["field"].Value;
 
-                        if (searchSettings.AdvancedSearchFields.Any(adsf => adsf.Key.Equals(fieldName)))
+                        if (searchSettings.AdvancedSearchFields.Any(adsf => adsf.Key.Equals(fieldName)) || fieldName.Equals("externalKeys.key") || fieldName.Equals("externalKeys.value"))
                         {
                             switch (fieldName)
                             {

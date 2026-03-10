@@ -89,5 +89,10 @@ namespace CMI.Web.Frontend
         {
             return GetRequestClient<HandleOnboardingCallbackRequest>(BusConstants.OnboardingManagerHandleCallbackMessageQueue);
         }
+        public static IRequestClient<IGetSecurityTokens> RegisterAisAccessTokensClient()
+        {
+            return GetRequestClient<IGetSecurityTokens>(BusConstants.AisAccessTokensRequestQueue);
+        }
+
     }
 }

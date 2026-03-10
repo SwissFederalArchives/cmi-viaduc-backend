@@ -5,7 +5,7 @@ describe('Entity Framework Tests', () => {
 
 	describe('init Tests', () => {
 		it('ArchiveRecordContextItem ', () => {
-			let archiveRecordContextItem = new ArchiveRecordContextItem();
+			const archiveRecordContextItem = new ArchiveRecordContextItem();
 			archiveRecordContextItem.title = 'Test';
 			archiveRecordContextItem.referenceCode = 'Sigi';
 			archiveRecordContextItem.archiveRecordId = '23569';
@@ -13,7 +13,7 @@ describe('Entity Framework Tests', () => {
 			archiveRecordContextItem.dateRangeText = '1982-2090';
 			archiveRecordContextItem.level = 'Serie';
 			archiveRecordContextItem.protected = true;
-			let data = archiveRecordContextItem.toJSON();
+			const data = archiveRecordContextItem.toJSON();
 			const lk =  ArchiveRecordContextItem.fromJS(data);
 			expect(lk.title).toBe(archiveRecordContextItem.title);
 			expect(lk.referenceCode).toBe(archiveRecordContextItem.referenceCode);
@@ -33,7 +33,7 @@ describe('Entity Framework Tests', () => {
 	it('VManuelleKorrekturDto ', () => {
 		let manuelleKorrekturDto = new VManuelleKorrekturDto();
 		manuelleKorrekturDto.titel = 'Test';
-		manuelleKorrekturDto.veId =  1235;
+		manuelleKorrekturDto.veId =  '1235';
 		manuelleKorrekturDto.signatur = 'sigi';
 		manuelleKorrekturDto.aktenzeichen = 'aktenzeichen';
 		manuelleKorrekturDto.anonymisiertZumErfassungszeitpunk = true;
@@ -65,7 +65,7 @@ describe('Entity Framework Tests', () => {
 		let data = manuelleKorrekturDto.toJSON();
 		const korrekturDto =  VManuelleKorrekturDto.fromJS(data);
 		expect(korrekturDto.titel ).toBe( 'Test');
-		expect(korrekturDto.veId ).toBe(  1235);
+		expect(korrekturDto.veId ).toBe(  '1235');
 		expect(korrekturDto.signatur ).toBe( 'sigi');
 		expect(korrekturDto.aktenzeichen ).toBe( 'aktenzeichen');
 		expect(korrekturDto.anonymisiertZumErfassungszeitpunk ).toBe( true);
@@ -98,7 +98,7 @@ describe('Entity Framework Tests', () => {
 	it('ManuelleKorrekturDto ', () => {
 		let manuelleKorrekturDto = new ManuelleKorrekturDto();
 		manuelleKorrekturDto.titel = 'Test';
-		manuelleKorrekturDto.veId =  1235;
+		manuelleKorrekturDto.veId =  '1235';
 		manuelleKorrekturDto.signatur = 'sigi';
 		manuelleKorrekturDto.aktenzeichen = 'aktenzeichen';
 		manuelleKorrekturDto.anonymisiertZumErfassungszeitpunk = true;
@@ -118,7 +118,7 @@ describe('Entity Framework Tests', () => {
 		let data = manuelleKorrekturDto.toJSON();
 		const korrekturDto =  ManuelleKorrekturDto.fromJS(data);
 		expect(korrekturDto.titel ).toBe( 'Test');
-		expect(korrekturDto.veId ).toBe(  1235);
+		expect(korrekturDto.veId ).toBe(  '1235');
 		expect(korrekturDto.signatur ).toBe( 'sigi');
 		expect(korrekturDto.aktenzeichen ).toBe( 'aktenzeichen');
 		expect(korrekturDto.anonymisiertZumErfassungszeitpunk ).toBe( true);

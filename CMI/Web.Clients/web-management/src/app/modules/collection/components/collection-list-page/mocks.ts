@@ -7,31 +7,34 @@ import {
 	EinsichtsgesuchUserSettings,
 	ManagementUserSettings, ManuelleKorrekturSettings,
 	OrderUserSettings,
+	SynchronizationMonitorSettings,
 	UserListUserSettings
 } from '../../../shared';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 @Injectable()
 class Mocks extends ToastPackage {
 	constructor() {
-		const toastConfig = { toastClass: 'custom-toast' };
+		const toastConfig = {toastClass: 'custom-toast'};
 		super(1, <IndividualConfig>toastConfig, 'test message', 'test title', 'show', new ToastRef(null));
 	}
 }
 
 const toastPackage = <Mocks>{};
+
 @NgModule(
 	{
-	providers: [
-		{ provide: ToastPackage, useValue:  toastPackage},
-		{ provide: ToastrService, useClass: ToastrService }
-	],
-	imports: [
-		ToastrModule.forRoot(), BrowserAnimationsModule
-	],
-	exports: [
-		ToastrModule
-	]
-})
+		providers: [
+			{provide: ToastPackage, useValue: toastPackage},
+			{provide: ToastrService, useClass: ToastrService}
+		],
+		imports: [
+			ToastrModule.forRoot(), BrowserAnimationsModule
+		],
+		exports: [
+			ToastrModule
+		]
+	})
 export class ToastrTestingModule {
 }
 
@@ -43,11 +46,21 @@ export class MockCollectionSettings implements CollectionSettings {
 	}
 }
 
+export class MockSynchronizationSettings implements SynchronizationMonitorSettings {
+	public columns: any;
+
+	constructor() {
+		this.columns = ['Test 2', 'Test1'];
+	}
+}
+
 export class MockUserSettings implements ManagementUserSettings {
 	constructor() {
 		this.collectionSettings = new MockCollectionSettings();
+		this.synchronizationMonitorSettings = new MockSynchronizationSettings();
 	}
 
+	public synchronizationMonitorSettings: SynchronizationMonitorSettings;
 	public ablieferndeStelleSettings: AblieferndeStelleSettings;
 	public collectionSettings: CollectionSettings;
 	public digipoolSettings: DigipoolUserSettings;

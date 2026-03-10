@@ -1,0 +1,97 @@
+{
+  "object": "document",
+  "type": "Mg",
+  "DocKey": "Mg      0541c342-3330-58f9-b0e2-59974252a87f",
+  "DocTitle": "1000/2_A_00112",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "06.12.2024 01:26:24:983",
+  "block": {
+    "type": "Mg",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Ms      c60c7108-b63c-5f3a-8c2c-e9e9bd3bfd11"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Ms"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "DONABAR"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "DFM_IMPORT"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "28.06.2018 20:17:01"
+      },
+      {
+        "type": "CreateDate",
+        "value": "19.12.2005 19:37:46"
+      },
+      {
+        "type": "Mr_Id",
+        "value": "Mr      8fcd3f4a-1d79-4cb3-b23c-06f8730e28c6"
+      },
+      {
+        "type": "Mg_Id",
+        "value": "0541c342-3330-58f9-b0e2-59974252a87f"
+      },
+      {
+        "type": "ScopeID",
+        "value": "2819977"
+      },
+      {
+        "type": "Bhlgrp_Typ",
+        "value": "Plastikkassette"
+      },
+      {
+        "type": "Mg_Titel_Compound",
+        "value": "1000/2_A_00112"
+      },
+      {
+        "type": "Mg_Bhlgrp_Gp",
+        "fields": [
+          {
+            "type": "Mg_Bhlgrp",
+            "value": "21567"
+          }
+        ]
+      },
+      {
+        "type": "Mg_Lagerungsorte",
+        "value": "1/1/291/04/06"
+      },
+      {
+        "type": "Mg_Informationstraeger",
+        "value": "Mikrofilm Diazo"
+      },
+      {
+        "type": "Mg_Behaeltniscode",
+        "value": "2819977"
+      },
+      {
+        "type": "Mg_Art",
+        "value": "Arbeitskopie"
+      }
+    ]
+  }
+}

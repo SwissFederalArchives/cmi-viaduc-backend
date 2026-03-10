@@ -1,4 +1,6 @@
-﻿namespace CMI.Contract.Harvest
+﻿using System.Threading.Tasks;
+
+namespace CMI.Contract.Harvest
 {
     public interface IDbResyncAccess
     {
@@ -7,6 +9,6 @@
         /// </summary>
         /// <param name="info">Information about who and when the request was sent.</param>
         /// <returns>Number of added records to the mutation table</returns>
-        int InitiateFullResync(ResyncRequestInfo info);
+        Task InitiateFullResync(ResyncRequestInfo info);
     }
 }

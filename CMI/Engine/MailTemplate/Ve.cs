@@ -25,5 +25,8 @@
         public abstract string Bestand { get; }
         public abstract string Ablieferung { get; }
         public abstract string ZusaetzlicheInformationen { get; }
+        public abstract string UnprotectedTitel { get; }
+        public abstract string UnprotectedDarin { get; }
+        public abstract string UnprotectedZusaetzlicheInformationen { get; }
     }
 }

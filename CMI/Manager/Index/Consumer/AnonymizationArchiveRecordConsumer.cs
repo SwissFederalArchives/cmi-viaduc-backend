@@ -38,6 +38,7 @@ namespace CMI.Manager.Index.Consumer
                     PrimaerdatenAuftragId = context.Message.PrimaerdatenAuftragId,
                     ArchiveRecord = context.Message.ArchiveRecord,
                     DoNotReportCompletion = context.Message.DoNotReportCompletion,
+                    RecordIdToBeDeleted = context.Message.RecordIdToBeDeleted,
                     ElasticArchiveDbRecord = elasticArchiveRecord
                 });
             }

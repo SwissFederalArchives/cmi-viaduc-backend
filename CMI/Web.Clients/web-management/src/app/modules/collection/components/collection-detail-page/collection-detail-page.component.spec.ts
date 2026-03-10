@@ -102,7 +102,11 @@ describe('CollectionDetail', () => {
 		}
 	};
 	let router = <Router>{};
-	let errorService = <ErrorService>{};
+	let errorService = <ErrorService>{
+		showOdataErrorIfNecessary(error) {
+			return;
+		}
+	};
 
 	beforeEach(waitForAsync(async () => {
 		await TestBed.configureTestingModule({
@@ -172,6 +176,7 @@ describe('CollectionDetail', () => {
 			collectionType.selectedIndex  = 0;
 			collectionType.dispatchEvent(new Event('change'));
 			sut.myForm.controls['link'].setValue('www.evelix.ch');
+			expect(sut.myForm.controls.collectionTypeId.value).toEqual(1);
 			expect(sut.myForm.valid).toBeTruthy();
 		});
 	}));
@@ -206,9 +211,7 @@ describe('CollectionDetail', () => {
 				const collectionType = fixture.debugElement.query(By.css('[name="collectionTypeId"]')).nativeElement;
 				collectionType.selectedIndex = 1;
 				collectionType.dispatchEvent(new Event('change'));
-			//	const link = fixture.debugElement.query(By.css('[name="link"]'));
-			//	expect(link=== undefined).toBeTruthy();
-
+				expect(sut.myForm.controls.collectionTypeId.value).toEqual(1);
 			});
 
 

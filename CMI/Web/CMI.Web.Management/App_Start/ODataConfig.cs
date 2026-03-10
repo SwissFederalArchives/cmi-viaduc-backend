@@ -21,10 +21,12 @@ namespace CMI.Web.Management
             var orderingName = nameof(OrderingFlatItemsController).Replace("Controller", "");
             var userOverviewName = nameof(UserOverviewController).Replace("Controller", "");
             var manuelleKorrekturName = nameof(VManuelleKorrekturenController).Replace("Controller", "");
+            var synchronisationen = nameof(VSynchronisationenController).Replace("Controller", "");
 
             modelBuilder.EntitySet<OrderingFlatItem>(orderingName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
             modelBuilder.EntitySet<UserOverview>(userOverviewName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
             modelBuilder.EntitySet<VManuelleKorrektur>(manuelleKorrekturName).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
+            modelBuilder.EntitySet<VSyncAction>(synchronisationen).EntityType.Count().Select().Filter().Expand().Page().OrderBy();
 
             config.MapODataServiceRoute(
                 "ODataRoute",

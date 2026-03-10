@@ -15,12 +15,12 @@ namespace CMI.Manager.Index.ValueExtractors
         ///     Thus we are appending the values from each element into one return value.
         /// </summary>
         /// <param name="detailData">The detail data.</param>
-        /// <param name="elementId">The element identifier.</param>
+        /// <param name="elementName">The element name.</param>
         /// <returns>T.</returns>
-        public override string GetValue(List<DataElement> detailData, string elementId)
+        public override string GetValue(List<DataElement> detailData, string elementName)
         {
             string retVal = null;
-            var dataElement = detailData.FirstOrDefault(d => elementId.Equals(d.ElementId, StringComparison.OrdinalIgnoreCase));
+            var dataElement = detailData.FirstOrDefault(d => elementName.Equals(d.ElementName, StringComparison.OrdinalIgnoreCase));
             if (dataElement?.ElementValue != null)
             {
                 foreach (var elementValue in dataElement.ElementValue.OrderBy(t => t.Sequence))

@@ -11,5 +11,7 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Models
         public DateTime DatumErstellungToken { get; set; }
         public bool ToBeDeleted { get; set; }
         public bool HasNoViewerManifest { get; set; }
+        public DateTime FileCreatedDate { get; set; }
+
     }
 }

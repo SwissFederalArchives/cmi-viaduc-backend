@@ -134,7 +134,7 @@ namespace CMI.Utilities.ProxyClients.Order
 #if DEBUG
             var requestTimeout = TimeSpan.FromSeconds(120);
 #else
-                var requestTimeout = TimeSpan.FromSeconds(10);
+                var requestTimeout = TimeSpan.FromSeconds(60);
 #endif
 
             if (requestTimeOutInSeconds > 0)

@@ -6,6 +6,7 @@
             width: 800px;
             font-size: 10pt;
             line-height: 13px;
+            color: black;
         }
         table {
             border-collapse: collapse;
@@ -63,7 +64,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -103,7 +104,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -174,6 +175,7 @@
         Mit freundlichen Grüssen
     </p>
     {{/IstDeutsch}}
+
     {{#IstFranzösisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
@@ -202,7 +204,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -216,6 +218,7 @@
     <p>
         Meilleures salutations,
     </p>
+
     <hr>
     <p style="color:red">
         <b>Eingeschränkte Auskunftsbewilligung</b>
@@ -244,7 +247,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/fr/archive/unite/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -312,6 +315,7 @@
         Meilleures salutations,
     </p>
     {{/IstFranzösisch}}
+
     {{#IstItalienisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
@@ -340,7 +344,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -380,7 +384,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/it/archivio/unita/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -401,6 +405,7 @@
     <p>
         Distinti saluti
     </p>
+
     <hr>
     <p style="color:red">
         <b>Einsichtsverweigerung (Auskunftsgesuch)</b>
@@ -448,6 +453,7 @@
         Distinti saluti
     </p>
     {{/IstItalienisch}}
+
     {{#IstEnglisch}}
     <p style="color:red">
         <b>Bewilligung Auskunftsgesuch ohne Auflagen</b>
@@ -476,7 +482,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -488,6 +494,7 @@
     <p>
         Yours sincerely
     </p>
+
     <hr>
     <p style="color:red">
         <b>Eingeschränkte Auskunftsbewilligung</b>
@@ -518,7 +525,7 @@
             <tr>
                 <td><a href="https://{{Global.PublicClientUrl}}/#/en/archive/unit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
@@ -541,6 +548,7 @@
     <p>
         Yours sincerely
     </p>
+
     <hr>
     <p style="color:red">
         <b>Einsichtsverweigerung (Auskunftsgesuch)</b>

@@ -1,0 +1,131 @@
+PUT /_ingest/pipeline/formerReferenceCodeToList
+{
+  "description": """"
+  PVW-2193 AISnew Korrektur: Suchbarkeit vom Feld "Frühere Signaturen"
+  
+  Procedure
+  Start/compile pipeline
+  Execute search
+  Delete pipeline
+  
+  Hints:
+  the search is async and you get back a task with which the status can be checked e.g. GET /_tasks/lk3AiZV9R5Wc3wiPFmaD6w:14445773
+  """, 
+  "processors" : [{
+    "script" : {
+      "lang" : "painless",
+      "source" : """
+      if (ctx.formerReferenceCode != null) {
+        
+        def previousValues = ctx.formerReferenceCode;
+          if (!(previousValues instanceof String)) {
+          return;
+        }
+        def newformerReferenceCode = new ArrayList();
+        if (previousValues != "") {
+          newformerReferenceCode.add(previousValues);
+        }
+        ctx.formerReferenceCode = new ArrayList(newformerReferenceCode);
+      }   
+      """
+      }
+    }] 
+  }
+
+  POST /archive/_update_by_query?pipeline=formerReferenceCodeToList&conflicts=proceed&wait_for_completion=false&scroll_size=100
+  {
+    "query": {
+        "exists": {
+        "field": "formerReferenceCode"
+        }
+    }
+ }
+      
+DELETE /_ingest/pipeline/formerReferenceCodeToList
+
+// Bestätige das Ergebnis der Umwandlung
+// Vor der 1. Ausführung müssen alle vom Type String sein (shiehe Unter wie das Ergebnis aussehen kann)
+// Nach der 1. Ausführung könnten die Typen gemischt sein (String und Array) -> formerReferenceCodeToList nochmal ausführen
+// Nach der X. Ausführung sollten alle Typen Array sein 
+
+GET archive/_search?timeout=600s
+{
+  "runtime_mappings": {
+    "formerReferenceCode_type": {
+      "type": "keyword",
+      "script": {
+        "source": """
+          // Prüfe zuerst, ob das Feld überhaupt existiert
+          if (!params._source.containsKey('formerReferenceCode')) {
+            emit("null");
+            return;
+          }
+
+          def v = params._source['formerReferenceCode'];
+
+          // Prüfe Typ
+          if (v instanceof List) {
+            emit("list");
+          } else if (v instanceof String) {
+            emit("string");
+          } else {
+            emit("other");
+          }
+        """
+      }
+    }
+  },
+  "query": {
+    // Optional: filter nur Dokumente, die das Feld überhaupt haben
+    "exists": {
+      "field": "formerReferenceCode"
+    }
+  },
+  "aggs": {
+    "types": {
+      "terms": {
+        "field": "formerReferenceCode_type"
+      }
+    }
+  },
+  "size": 0,
+    "track_total_hits": true
+}
+
+
+
+// Beispiel Ergebnis nach der 1. Ausführung
+{
+  "took": 36149,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 10000,
+      "relation": "gte"
+    },
+    "max_score": null,
+    "hits": []
+  },
+  "aggregations": {
+    "types": {
+      "doc_count_error_upper_bound": 0,
+      "sum_other_doc_count": 0,
+      "buckets": [
+        {
+          "key": "list",
+          "doc_count": 2058812
+        },
+        {
+          "key": "string",
+          "doc_count": 75621
+        }
+      ]
+    }
+  }
+}

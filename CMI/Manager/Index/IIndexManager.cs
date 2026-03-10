@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CMI.Contract.Common;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using CMI.Contract.Common;
-using CMI.Contract.Messaging;
-using MassTransit;
 
 namespace CMI.Manager.Index
 {
@@ -19,12 +17,12 @@ namespace CMI.Manager.Index
         ElasticArchiveRecord UpdateArchiveRecord(ElasticArchiveRecord elasticArchiveRecord);
 
         /// <summary>
-        ///     Removes an archive record from ElasticSearch
+        ///    Removes an archive record from ElasticSearch
         /// </summary>
-        /// <param name="removeContext">The remove context.</param>
-        void RemoveArchiveRecord(ConsumeContext<IRemoveArchiveRecord> removeContext);
+        /// <param name="archiveRecordId"> the id</param>
+        void RemoveArchiveRecord(string archiveRecordId);
 
-        ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, bool useUnanonymizedData);
+        ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData);
 
         /// <summary>
         ///     Gets all the archive records for a specific primary data package.

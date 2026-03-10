@@ -2,7 +2,6 @@
 using System.Text;
 using System.Windows.Forms;
 using Autofac;
-using CMI.Access.Harvest.ScopeArchiv;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Utilities.Bus.Configuration;
@@ -81,8 +80,7 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
         private void cmdTestIsUsageCopy_Click(object sender, EventArgs e)
         {
             var orderData = DigitalisierungsAuftrag.LoadFromFile(@"C:\Temp\DigiOrder_4891626.xml", Encoding.UTF8);
-            var result = DigitizationOrderBuilder.IsUsageCopy(orderData);
-            MessageBox.Show(result.ToString());
+            MessageBox.Show("ToDO");
         }
     }
 }

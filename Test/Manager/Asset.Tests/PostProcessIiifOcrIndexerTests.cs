@@ -34,12 +34,13 @@ namespace CMI.Manager.Asset.Tests
         public void MovingOfFiles_with_very_long_path_nameWorks()
         {
             // Arrange
-            var archiveRecordId = "30409374";
+            var archiveRecordId = "Vz      a2ad9673-74f1-5705-9775-7072b417d3d3";
             var sut = new PostProcessIiifOcrIndexer(
+                new SolrEngine(
                 new SolrConnectionInfo
                 {
                     SolrUrl = "SkipSolrForTesting", SolrHighlightingPath = destTempDir
-                },
+                }),
                 new IiifManifestSettings())
                 {
                     ArchiveRecordId = archiveRecordId,
@@ -54,11 +55,11 @@ namespace CMI.Manager.Asset.Tests
             sut.AnalyzeRepositoryPackage(package, sourceTempDir);
 
             // Assert
-            var ordner = "0000\\3040\\9374";
+            var ordner = "a2ad9673-74f\\1-5705-9775-\\7072b417d3d3";
             
 
             var file = Directory.GetFiles(destTempDir, "*.hOcr", SearchOption.AllDirectories);
-            file[0].Should().Be(Path.Combine(destTempDir, ordner,  "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.hOCR"));
+            file[0].Should().Be(Path.Combine(destTempDir, ordner, "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.hOCR"));
         }
     }
 }

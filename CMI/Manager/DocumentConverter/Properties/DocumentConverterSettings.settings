@@ -38,5 +38,8 @@
     <Setting Name="AbbyySerialNumber" Type="System.String" Scope="Application">
       <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.AbbyySerialNumber@@</Value>
     </Setting>
+    <Setting Name="SftpUserPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Manager.DocumentConverter.Properties.DocumentConverterSettings.SftpUserPassword@@</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

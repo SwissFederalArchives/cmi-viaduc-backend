@@ -138,16 +138,16 @@ namespace CMI.Web.Common.Auth
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:SmartcardPKI":
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:NomadTelephony":
                 case "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:20":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:30":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:35":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:40":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:50":
-                case "urn:qoa.eiam.admin.ch:names:tc:ac:classes:60":
                     return true;
-                default:
-                    return false;
             }
+
+            // Wenn irgend eine gültige QoA kommt, dann ist gut.
+            if (authType.StartsWith("urn:qoa.eiam.admin.ch:names:tc:ac:classes:"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private string GetLoginMandantErstellenUrl()

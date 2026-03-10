@@ -89,24 +89,18 @@ namespace CMI.Web.Common.api
             var qoAValue = GetQoAFromClaim();
             var homeName = GetFromClaim(ClaimValueNames.HomeName)?.ToLowerInvariant();
 
-            switch (qoAValue)
+            if (qoAValue < 40)
             {
-                case 20:
-                case 30:
-                    return AccessRoles.RoleOe2;
-                case 40:
-                case 50:
-                case 60:
-                    if (homeName != null && homeName.Contains("FED-LOGIN", StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        return AccessRoles.RoleBVW;
-                    }
-
-                    return AccessRoles.RoleOe3;
-                default: 
-                    throw new ArgumentException($"The passed QoAValue of {qoAValue} is not handled");
+                return AccessRoles.RoleOe2;
             }
-          
+
+            // In diesem Fall ist QoA >= 40
+            if (homeName != null && homeName.Contains("FED-LOGIN", StringComparison.CurrentCultureIgnoreCase))
+            {
+                return AccessRoles.RoleBVW;
+            }
+
+            return AccessRoles.RoleOe3;
         }
 
         public int GetQoAFromClaim()

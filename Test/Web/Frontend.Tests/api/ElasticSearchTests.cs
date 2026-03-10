@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.Helpers;
@@ -21,6 +15,12 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace CMI.Web.Frontend.API.Tests.api
 {
@@ -41,7 +41,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             // arrange
             var data = new List<TreeRecord>
             {
-                new ElasticArchiveRecord {ArchiveRecordId = "12345", Title = "Hund", All = "Ball"},
+                new ElasticArchiveRecord {ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Hund", All = "Ball"},
                 new ElasticArchiveRecord {ArchiveRecordId = "12346", Title = "Ball", All = "Hund"}
             };
             connection = new InMemoryConnection(GetInMemoryData(data));
@@ -74,7 +74,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var data = new List<TreeRecord>
             {
                 // OE3 user has no rights for this record
-                new ElasticArchiveDbRecord {ArchiveRecordId = "12345", Title = "Hund", All = "Ball", CustomFields = customFields,
+                new ElasticArchiveDbRecord {ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Hund", All = "Ball", CustomFields = customFields,
                     IsAnonymized = true, FieldAccessTokens = new List<string> { AccessRoles.RoleBAR }},
                 // This record is not anonymized
                 new ElasticArchiveRecord {ArchiveRecordId = "12353", Title = "Ball", All = "Hund", CustomFields = customFields},
@@ -119,7 +119,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             {
                 new ElasticArchiveDbRecord
                 {
-                    ArchiveRecordId = "12345", Title = "Hund", All = "Ball", CustomFields = customFields,
+                    ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Hund", All = "Ball", CustomFields = customFields,
                     IsAnonymized = true, FieldAccessTokens = new List<string> {AccessRoles.RoleBAR},
                     UnanonymizedFields = new()
                     {
@@ -172,7 +172,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var data = new List<TreeRecord>
             {
-                new ElasticArchiveDbRecord {ArchiveRecordId = "12345", Title = "Hund", All = "Ball", CustomFields = customFields,
+                new ElasticArchiveDbRecord {ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Hund", All = "Ball", CustomFields = customFields,
                     IsAnonymized = true, FieldAccessTokens = new List<string> { AccessRoles.RoleBAR },
                     UnanonymizedFields = new()
                     {
@@ -222,7 +222,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             {
                 new ElasticArchiveDbRecord
                 {
-                    ArchiveRecordId = "12345", Title = "Hund", All = "Ball", CustomFields = customFields,
+                    ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Hund", All = "Ball", CustomFields = customFields,
                     IsAnonymized = true, FieldAccessTokens = new List<string> {"EB_S31830999", AccessRoles.RoleBAR},
                     UnanonymizedFields = new()
                     {
@@ -268,7 +268,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             // arrange
             var data = new List<TreeRecord>
             {
-                new ElasticArchiveDbRecord {ArchiveRecordId = "12345", Title = "Test", All = "Test"}
+                new ElasticArchiveDbRecord {ArchiveRecordId = "Klas    2badb81d-ca89-5491-a0a2-78051750b341", Title = "Test", All = "Test"}
             };
             connectionForId = connection = new InMemoryConnection(GetInMemoryData(data));
            
@@ -276,7 +276,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleOe2, null, null, false);
            
             // act
-            var result = this.service.QueryForId<ElasticArchiveDbRecord>(12345, userAccess);
+            var result = this.service.QueryForId<ElasticArchiveDbRecord>("Klas    2badb81d-ca89-5491-a0a2-78051750b341", userAccess);
 
             // assert
             result.Response.Hits.Count.Should().Be(1);
@@ -284,25 +284,6 @@ namespace CMI.Web.Frontend.API.Tests.api
             clientProvider.Verify(c => c.GetElasticClient(It.IsAny<IElasticSettings>(), It.IsAny<ElasticQueryResult<ElasticArchiveDbRecord>>()), Times.Once);
         }
 
-        [Test]
-        public void Test_if_query_for_id_is__not_successfull_if_more_than_one_record_is_returned()
-        {
-            // arrange
-            var data = new List<TreeRecord>
-            {
-                new ElasticArchiveDbRecord {ArchiveRecordId = "12345", Title = "Test", All = "Test"},
-                new ElasticArchiveDbRecord {ArchiveRecordId = "12345", Title = "Haus am See", All = "Haus am See"}
-            };
-
-            connectionForId = connection = new InMemoryConnection(GetInMemoryData(data));
-
-            InitializeElasticClient();
-            var userAccess = new UserAccess("S31830999", AccessRoles.RoleOe3, null, null, false);
-           
-            // act
-            Assert.Throws<ArgumentException>(() => { this.service.QueryForId<ElasticArchiveDbRecord>(12345, userAccess); }, "Query For Id must return exactly one record");
-        }
-        
         #endregion
 
         #region private Methods

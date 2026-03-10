@@ -49,7 +49,7 @@ public class PostProcessIiifFileDistributorTests
             ManifestOutputSaveDirectory = destTempDir
         }, providersMock.Object, StorageProviders.File)
         {
-            ArchiveRecordId = "123456",
+            ArchiveRecordId = "Vz      4e5c641f-7789-5c35-8c8b-6a1fcf310913",
             RootFolder = sourceTempDir
         };
 
@@ -58,16 +58,16 @@ public class PostProcessIiifFileDistributorTests
 
         // Assert
         var txtFile = Directory.GetFiles(destTempDir, "*.txt", SearchOption.AllDirectories);
-        txtFile[0].Should().Be(Path.Combine(destTempDir, "0000\\0012\\3456", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_17D955.txt"));
+        txtFile[0].Should().Be(Path.Combine(destTempDir, "4e5c641f-778\\9-5c35-8c8b-\\6a1fcf310913", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_17D955.txt"));
 
         var jpgFile = Directory.GetFiles(destTempDir, "*.jpg", SearchOption.AllDirectories);
-        jpgFile[0].Should().Be(Path.Combine(destTempDir, "0000\\0012\\3456", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.jpg"));
+        jpgFile[0].Should().Be(Path.Combine(destTempDir, "4e5c641f-778\\9-5c35-8c8b-\\6a1fcf310913", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.jpg"));
 
         var pdfFile = Directory.GetFiles(destTempDir, "*.pdf", SearchOption.AllDirectories);
-        pdfFile[0].Should().Be(Path.Combine(destTempDir, "0000\\0012\\3456", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_FB7644.pdf"));
+        pdfFile[0].Should().Be(Path.Combine(destTempDir, "4e5c641f-778\\9-5c35-8c8b-\\6a1fcf310913", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_FB7644.pdf"));
 
         var zipFile = Directory.GetFiles(destTempDir, "*.zip", SearchOption.AllDirectories);
-        zipFile[0].Should().Be(Path.Combine(destTempDir, "0000\\0012\\3456", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_06907A.zip"));
+        zipFile[0].Should().Be(Path.Combine(destTempDir, "4e5c641f-778\\9-5c35-8c8b-\\6a1fcf310913", "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_06907A.zip"));
 
     }
 }

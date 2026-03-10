@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using CMI.Contract.Common;
-using CMI.Contract.Harvest;
+﻿using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Harvest.Infrastructure;
 using MassTransit;
 using Serilog;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using LogContext = Serilog.Context.LogContext;
 
 namespace CMI.Manager.Harvest.Consumers
@@ -51,17 +50,34 @@ namespace CMI.Manager.Harvest.Consumers
                 switch (message.Action.ToLowerInvariant())
                 {
                     case "update":
-                        var archiveRecord = harvestManager.BuildArchiveRecord(message.ArchiveRecordId);
-
-                        // If no records was found it could be, that the records was deleted or put into 
-                        // status "in Bearbeitung" after it was put on the queue. In this case we end
-                        // sync process
-                        if (archiveRecord == null)
+                        ArchiveRecord archiveRecord = null;
+                        try
                         {
-                            harvestManager.UpdateMutationStatus(new MutationStatusInfo
+                            archiveRecord = await harvestManager.BuildArchiveRecord(message.ArchiveRecordId);
+                        }
+                        catch(Exception ex)
+                        {
+                            Log.Error(ex.Message, "Unexpected error while building the archive record for id {archiveRecordId}", message.ArchiveRecordId);
+                            await harvestManager.UpdateMutationStatus(new MutationStatusInfo
                             {
                                 MutationId = context.Message.MutationId,
-                                NewStatus = ActionStatus.SyncAborted,
+                                NewStatus = ActionStatus.SyncFailed,
+                                ArchiveRecordId = message.ArchiveRecordId,
+                                ChangeFromStatus = ActionStatus.SyncInProgress,
+                                ErrorMessage = "Record could not be synced because the ACTApro system seems to be down."
+                            });
+                            return;
+                        }
+
+                        // If no records was found it could be, that the records was deleted or put into 
+                        // status "in Bearbeitung" after it was put on the queue. In this case we mark it as failed
+                        if (archiveRecord == null)
+                        {
+                            await harvestManager.UpdateMutationStatus(new MutationStatusInfo
+                            {
+                                MutationId = context.Message.MutationId,
+                                NewStatus = ActionStatus.SyncFailed,
+                                ArchiveRecordId = message.ArchiveRecordId,
                                 ChangeFromStatus = ActionStatus.SyncInProgress,
                                 ErrorMessage = "Record was not found in the database anymore. Might have been deleted in the meantime."
                             });
@@ -73,11 +89,12 @@ namespace CMI.Manager.Harvest.Consumers
                         // as this record MUST not be synced to Viaduc
                         if (!archiveRecord.Security.MetadataAccessToken.Any())
                         {
-                            harvestManager.UpdateMutationStatus(new MutationStatusInfo
+                            await harvestManager.UpdateMutationStatus(new MutationStatusInfo
                             {
                                 MutationId = context.Message.MutationId,
                                 NewStatus = ActionStatus.SyncAborted,
                                 ChangeFromStatus = ActionStatus.SyncInProgress,
+                                ArchiveRecordId = message.ArchiveRecordId,
                                 ErrorMessage =
                                     "Record can not be synced to Viaduc due to it's security level. Record should not have entered the sync queue in the first place."
                             });
@@ -87,36 +104,52 @@ namespace CMI.Manager.Harvest.Consumers
                         // Fetch the (eventually) existing archive record
                         var elasticRecord = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
+                        var deleteOldScopeRecord = false;  
+                        if (archiveRecord.Metadata.DetailData.Any(d => d.ElementName == "ScopeID") 
+                            && archiveRecord.Metadata.DetailData.First(d => d.ElementName == "ScopeID").ElementValue?.Count  > 0)
+                        {
+                            var scopeId = archiveRecord.Metadata.DetailData.First(d => d.ElementName == "ScopeID").ElementValue[0]?.TextValues[0].Value;
+                            elasticRecord = await GetElasticArchiveRecord(scopeId, MetadataToExclude.OCRContentAndFiles);
+                            // Make sure, that we really got the record with the scopeId.
+                            // If the record already is converted, the UUID is returned, even when we search for the scopeId
+                            if (elasticRecord != null && elasticRecord.ArchiveRecordId == scopeId)
+                            {
+                                deleteOldScopeRecord = true;
+                            }
+                        }
+
+                        if (elasticRecord != null && !(archiveRecord.Security.PrimaryDataDownloadAccessToken.Contains(AccessRoles.RoleOe2) &&
+                                                       archiveRecord.Security.PrimaryDataFulltextAccessToken.Contains(AccessRoles.RoleOe2)))
+                        {
+                            await DeleteProcessedPrimarydata(context, elasticRecord);
+                            // Also remove the manifest link, as the Primarydata a has been deleted.
+                            elasticRecord.ManifestLink = null;
+                        }
+
                         // Does the AIS data provide a primary data link?
                         if (string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink))
                         {
                             // Did the old record have a primary data link?
                             if (elasticRecord != null && !string.IsNullOrEmpty(elasticRecord.PrimaryDataLink))
                             {
-                                var epDel = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.CacheDeleteFile));
-                                await epDel.Send<IDeleteFileFromCache>(new
-                                {
-                                    archiveRecord.ArchiveRecordId
-                                });
-                                Log.Information("Put {CommandName} message on cache queue with mutation ID: {MutationId}",
-                                    nameof(IDeleteFileFromCache), context.Message.MutationId);
+                                await DeleteProcessedPrimarydata(context, elasticRecord);
                             }
 
-                            await UpdateArchiveRecord(context, message, archiveRecord, false);
+                            await UpdateArchiveRecord(context, message, archiveRecord, false, deleteOldScopeRecord);
                         }
                         else
                         {
                             // Is the primary data of the existing elastic record and the ais record the same?
                             // And is the full resync option NOT set
                             if (elasticRecord != null && elasticRecord.PrimaryDataLink == archiveRecord.Metadata.PrimaryDataLink &&
-                                !cachedSettings.EnableFullResync())
+                                     !cachedSettings.EnableFullResync())
                             {
                                 // Add the primary data from the existing record to the new ais data
-                                var elastivRecordWithPrimaryData = await GetElasticArchiveRecord(archiveRecord.ArchiveRecordId, MetadataToExclude.Nothing);
-                                archiveRecord.ElasticPrimaryData = elastivRecordWithPrimaryData.PrimaryData;
+                                var elastivRecordWithPrimaryData = await GetElasticArchiveRecord(elasticRecord.ArchiveRecordId, MetadataToExclude.Nothing);
+                                archiveRecord.ElasticPrimaryData = elastivRecordWithPrimaryData?.PrimaryData;
                                 // Also add the manifest link, or we loose it
                                 archiveRecord.Metadata.ManifestLink = elasticRecord.ManifestLink;
-                                await UpdateArchiveRecord(context, message, archiveRecord, false);
+                                await UpdateArchiveRecord(context, message, archiveRecord, false, deleteOldScopeRecord);
                             }
                             else
                             {
@@ -127,7 +160,7 @@ namespace CMI.Manager.Harvest.Consumers
 
                                 // First also copy an eventually existing manifest link, so the current data is still available to the user
                                 archiveRecord.Metadata.ManifestLink = elasticRecord?.ManifestLink;
-                                await UpdateArchiveRecord(context, message, archiveRecord, true);
+                                await UpdateArchiveRecord(context, message, archiveRecord, true, deleteOldScopeRecord);
 
                                 // Now start getting the metadata info of the DIR package
                                 var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress,
@@ -145,15 +178,31 @@ namespace CMI.Manager.Harvest.Consumers
 
                         break;
                     case "delete":
-                        var epDelete = await context.GetSendEndpoint(new Uri(context.SourceAddress,
-                            BusConstants.IndexManagerRemoveArchiveRecordMessageQueue));
-                        await epDelete.Send<IRemoveArchiveRecord>(new
+                        elasticRecord = await GetElasticArchiveRecord(message.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                        if (elasticRecord != null)
                         {
-                            message.MutationId,
-                            message.ArchiveRecordId
-                        });
-                        Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IRemoveArchiveRecord),
-                            context.Message.MutationId);
+                            await DeleteProcessedPrimarydata(context, elasticRecord);
+                            var epDelete = await context.GetSendEndpoint(new Uri(context.SourceAddress,
+                                BusConstants.IndexManagerRemoveArchiveRecordMessageQueue));
+                            await epDelete.Send<IRemoveArchiveRecord>(new
+                            {
+                                message.MutationId,
+                                message.ArchiveRecordId
+                            });
+                            Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IRemoveArchiveRecord),
+                                context.Message.MutationId);
+                        }
+                        else
+                        {
+                            await harvestManager.UpdateMutationStatus(new MutationStatusInfo
+                            {
+                                MutationId = context.Message.MutationId,
+                                NewStatus = ActionStatus.SyncAborted,
+                                ArchiveRecordId = message.ArchiveRecordId,
+                                ChangeFromStatus = ActionStatus.SyncInProgress,
+                                ErrorMessage = "Record could not be deleted because the archive record was not found in Elastic."
+                            });
+                        }
                         break;
                     default:
                         throw new NotSupportedException($"The action: {message.Action} is not a supported action name!");
@@ -161,15 +210,40 @@ namespace CMI.Manager.Harvest.Consumers
             }
         }
 
+        private static async Task DeleteProcessedPrimarydata(ConsumeContext<ISyncArchiveRecord> context,
+            ElasticArchiveRecord elasticRecord)
+        {
+            var epDelCache = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.CacheDeleteFile));
+            await epDelCache.Send<IDeleteFileFromCache>(new
+            {
+                elasticRecord.ArchiveRecordId
+            });
+
+            Log.Information("Put {CommandName} message on cache queue with mutation ID: {MutationId}",
+                nameof(IDeleteFileFromCache), context.Message.MutationId);
+            if (!string.IsNullOrWhiteSpace(elasticRecord.ManifestLink))
+            {
+                var epDelIiif = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.AssetManagerDeleteViewerFiles));
+                await epDelIiif.Send<IDeleteViewerFiles>(new
+                {
+                    elasticRecord.ManifestLink
+                });
+
+                Log.Information("Put {CommandName} message on cache queue with mutation ID: {MutationId}",
+                    nameof(IDeleteViewerFiles), context.Message.MutationId);
+            }
+        }
+
         private static async Task UpdateArchiveRecord(ConsumeContext<ISyncArchiveRecord> context, ISyncArchiveRecord message,
-            ArchiveRecord archiveRecord, bool doNotReportCompletion)
+            ArchiveRecord archiveRecord, bool doNotReportCompletion, bool recordIdToBeDeleted)
         {
             var ep = await context.GetSendEndpoint(new Uri(context.SourceAddress, BusConstants.IndexManagerUpdateArchiveRecordMessageQueue));
             await ep.Send<IUpdateArchiveRecord>(new
             {
                 message.MutationId,
                 ArchiveRecord = archiveRecord,
-                doNotReportCompletion
+                doNotReportCompletion,
+                recordIdToBeDeleted
             });
             Log.Information("Put {CommandName} message on index queue with mutation ID: {MutationId}", nameof(IUpdateArchiveRecord),
                 context.Message.MutationId);

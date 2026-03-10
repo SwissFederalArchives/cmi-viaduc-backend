@@ -42,7 +42,7 @@ namespace CMI.Web.Frontend.api.Controllers
         /// <summary>
         ///     Used to fetch one record using its id.
         /// </summary>
-        /// <param name="id">Id of the record to retrieve. Must be a positive value larger than 0.</param>
+        /// <param name="id">Id of the record to retrieve. It must be a UUID or a positive value larger than 0.</param>
         /// <param name="skip">Defines how many child records should be skipped in the result.</param>
         /// <param name="take">Defines how many child records should be returned. The maximum number is 500.</param>
         /// <returns>Entity&lt;DetailRecord&gt;</returns>
@@ -69,26 +69,30 @@ namespace CMI.Web.Frontend.api.Controllers
         ///     ```
         ///     or
         ///     ``` http
+        ///     GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities/Vz%20%20%20%20%201655064f-db23-5d63-8eec-2058b98fcd5a
+        ///     ```
+        ///     or
+        ///     ``` http
         ///     GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities/3812261?skip=0&amp;take=10
         ///     ```
         ///     ___
         /// </remarks>
         [HttpGet]
-        [Route("api/v1/entities/{id:int}")]
+        [Route("api/v1/entities/{id}")]
         [SwaggerResponse(HttpStatusCode.OK, typeof(Entity<DetailRecord>), Description = "Returns the details of the record.")]
         [SwaggerResponse(HttpStatusCode.InternalServerError, typeof(Exception),
             Description = "An internal server error is returned in case of a unknown error.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(string),
             Description = "If the request is somehow malformed, the reason of the cause is returned.")]
         [SwaggerResponse(HttpStatusCode.NotFound, typeof(void), Description = "If no record was found.")]
-        public IHttpActionResult GetEntity(int id, int? skip = null, int? take = null)
+        public IHttpActionResult GetEntity(string id, int? skip = null, int? take = null)
         {
             if (ControllerHelper.HasClaims())
             {
                 return BadRequest("request was authorized, but this API only accepts unauthorized requests");
             }
 
-            if (id <= 0)
+            if (string.IsNullOrEmpty(id))
             {
                 return BadRequest("Id must be a positive integer");
             }
@@ -124,7 +128,7 @@ namespace CMI.Web.Frontend.api.Controllers
         ///     Used to fetch multiple records
         /// </summary>
         /// <param name="ids">
-        ///     The id numbers of the records to retrieve as a comma separated list. Each value must be a positive value larger
+        ///     The ids of the records to retrieve as a comma separated list. Each value must be a UUID or a positive value larger
         ///     than 0.
         ///     The number of ids that can be passed must be less than 1000
         /// </param>
@@ -158,7 +162,7 @@ namespace CMI.Web.Frontend.api.Controllers
         ///     ```
         ///     or
         ///     ``` http
-        ///     GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities?ids=123,455,312&amp;skip=0&amp;take=10
+        ///     GET https://www.recherche.bar.admin.ch/recherche/api/v1/entities?ids=123,Vz%20%20%20%20%20%206005e7d9-1ac3-5ce4-9fe7-f8c97a30d685,312&amp;skip=0&amp;take=10
         ///     ```
         ///     ___
         /// </remarks>
@@ -187,17 +191,16 @@ namespace CMI.Web.Frontend.api.Controllers
                     ? ids.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries)
                         .Select(i =>
                         {
-                            var val = int.Parse(i);
-                            if (val >= 0)
+                            if (!string.IsNullOrEmpty(i))
                             {
-                                return val;
+                                return i;
                             }
 
                             throw new ArgumentOutOfRangeException();
                         })
                         .Distinct()
                         .ToList()
-                    : new List<int>();
+                    : new List<string>();
 
                 if (idList.Count > 1000)
                 {

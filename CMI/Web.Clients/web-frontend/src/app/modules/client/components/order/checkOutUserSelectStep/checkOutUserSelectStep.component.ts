@@ -24,7 +24,7 @@ export class CheckoutUserSelectStepComponent implements OnInit {
 	public loading = false;
 	public checkingKontingent = false;
 	public willexceedKontingent = false;
-	public isDroppedDown: boolean = false;
+	public isDroppedDown = false;
 
 	constructor(private _scs: ShoppingCartService,
 				private _userService: UserService,

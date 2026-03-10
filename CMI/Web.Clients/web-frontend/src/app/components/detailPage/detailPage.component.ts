@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {ArchiveModel, ClientContext, ConfigService, Entity, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
+import {ActivatedRoute, Router} from '@angular/router';
+import { ClientContext, ConfigService, Entity, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 import {
 	AuthorizationService,
 	EntityRenderService,
@@ -32,9 +32,9 @@ export class DetailPageComponent implements OnInit, AfterViewInit {
 	public searchTerm = '';
 	private _error: any;
 	private readonly _elem: any;
+	private _rootId: string;
 
-	constructor(private _archive: ArchiveModel,
-				private _context: ClientContext,
+	constructor(private _context: ClientContext,
 				private _entityService: EntityService,
 				private _renderService: EntityRenderService,
 				private _txt: TranslationService,
@@ -44,22 +44,26 @@ export class DetailPageComponent implements OnInit, AfterViewInit {
 				private _scs: ShoppingCartService,
 				private _seoService: SeoService,
 				private _elemRef: ElementRef,
-				public _config: ConfigService) {
+				public _config: ConfigService,
+				private _router: Router) {
 		this._elem = this._elemRef.nativeElement;
 	}
 
 	public ngOnInit(): void {
 		this._buildCrumbs();
 		this._seoService.setTitle(this._txt.translate('Detailansicht', 'detailPageComponent.pageTitle'));
-		this._route.params.subscribe(params => this._loadEntity(params['id']));
+		this.initSubscribe();
 	}
 
 	public ngAfterViewInit(): void {
 		_util.initJQForElement(this._elem);
 	}
 
+	private initSubscribe(){
+		this._route.params.subscribe(params =>	this._loadEntity(params['id']));
+	}
+
 	private _buildCrumbs(entity?: Entity): void {
-		const rootId = this._archive.ROOT_ID;
 		const lang = this._context.language;
 		this.crumbs = [];
 		this.crumbs.push(
@@ -88,84 +92,95 @@ export class DetailPageComponent implements OnInit, AfterViewInit {
 				url: this._url.getSearchResultUrl()
 			});
 		} else {
+			this._entityService.getArchivplanRootNodes().then(r => {
+				this._rootId = r[0];
+			});
+
 			this.crumbs.push({
 				label: this._txt.get('breadcrumb.archiveHome', 'Gesamtbestand'),
-				url: '/' + lang + '/archiv/einheit/' + rootId
+				url: '/' + lang + '/archiv/einheit/' + this._rootId
 			});
 		}
 
-		if (entity && entity.archiveRecordId !== rootId) {
+		if (entity && entity.archiveRecordId !== this._rootId) {
 			this.crumbs.push({label: entity.title, itemClasses: 'active'});
 		}
 	}
 
-	private async _loadEntity(idOrReference: string): Promise<void> {
+	private async _loadEntity(id: string): Promise<void> {
 		this.loading = true;
 		this._error = undefined;
 
 		try {
-			const id = this._url.getDetailIdFromReference(idOrReference);
-			await this._route.queryParams.subscribe(params =>	this.searchTerm = '&q=' +  params['q']);
+			await this._route.queryParams.subscribe(params => this.searchTerm = params['q']);
+			id = this._url.getDetailIdFromReference(id);
+			this.entity = await this._entityService.get(id);
 
-			if (this.searchTerm === '&q=undefined' || this.searchTerm === '&q='){
+			if (this.searchTerm !== undefined && this.searchTerm !== '') {
+				if (this.entity.archiveRecordId !== id) {
+					this.searchTerm = '?q=' + this.searchTerm;
+				} else {
+					this.searchTerm = '&q=' + this.searchTerm;
+
+				}
+			} else {
 				this.searchTerm = '';
 			}
+			if (this.entity.archiveRecordId !== id) {
+				this._router.navigateByUrl(this._url.getDetailUrl(this.entity.archiveRecordId) + this.searchTerm);
+			} else {
+				this.hasPermission = this.entity.fieldAccessTokens ? this._authorization.hasAnyAccessToken(this.entity.fieldAccessTokens) : true;
+				this.isBarUser = this._authorization.isBarUser();
 
-			this.entity = await this._entityService.get(id);
-			this.hasPermission = this.entity.fieldAccessTokens ? this._authorization.hasAnyAccessToken(this.entity.fieldAccessTokens) : true;
-			this.isBarUser = this._authorization.isBarUser();
-
-			if (this.entity.isAnonymized && this.isBarUser === true ) {
-				const result: AnonymizedResult = await this._entityService.getAnonymized(id);
-				this.fields = new Map(Object.entries(result));
-			}
-
-			this.items = [];
-
-			if (!_util.isEmpty(this.entity)) {
-				this._buildCrumbs(this.entity);
-
-				this.sections = [];
-				if (this.entity._context) {
-					const ctx = this.entity._context;
-					const items = [];
-					if (ctx.ancestors) {
-						Array.prototype.push.apply(items, ctx.ancestors);
-					}
-					this.entity.itemClasses = 'selected';
-					items.push(this.entity);
-					if (ctx.children) {
-						Array.prototype.push.apply(items, ctx.children);
-					}
-
-					this.items = items;
+				if (this.entity.isAnonymized && this.isBarUser === true) {
+					const result: AnonymizedResult = await this._entityService.getAnonymized(id);
+					this.fields = new Map(Object.entries(result));
 				}
 
-				if (this.entity._metadata) {
-					for (const key in this.entity._metadata) {
-						if (this.entity._metadata.hasOwnProperty(key)) {
-							const sec = this._renderService.renderSection(this.entity, key);
-							if (sec) {
-								this.sections.push(sec);
+				this.items = [];
+				if (!_util.isEmpty(this.entity)) {
+					this._buildCrumbs(this.entity);
+					this.sections = [];
+					if (this.entity._context) {
+						const ctx = this.entity._context;
+						const items = [];
+						if (ctx.ancestors) {
+							Array.prototype.push.apply(items, ctx.ancestors);
+						}
+						this.entity.itemClasses = 'selected';
+						items.push(this.entity);
+						if (ctx.children) {
+							Array.prototype.push.apply(items, ctx.children);
+						}
+
+						this.items = items;
+					}
+
+					if (this.entity._metadata) {
+						for (const key in this.entity._metadata) {
+							if (this.entity._metadata.hasOwnProperty(key)) {
+								const sec = this._renderService.renderSection(this.entity, key);
+								if (sec) {
+									this.sections.push(sec);
+								}
 							}
 						}
 					}
+
+					this.showViewerSection = this.entity.manifestLink && (this._authorization.isBarUser() ||
+						(this.entity?.primaryDataDownloadAccessTokens.filter(a => a === 'Ö2').length === 1
+							&& this.entity?.primaryDataFulltextAccessTokens.filter(a => a === 'Ö2').length === 1));
+
+
+					this.showDownloadSection = this._scs.canDownload(this.entity);
+					// Download wird NICHT angezeigt UND die VE ist bestellbar ODER
+					// Download wird NICHT angezeigt UND es gibt einen PrimarydataLink
+					this.showOrderSection = (!this.showDownloadSection && this.entity.canBeOrdered) || (!this.showDownloadSection && this.entity.primaryDataLink !== null);
+					this.deepLinkUrl = this._url.getExternalDetailUrl(encodeURIComponent(this.entity.archiveRecordId), this.entity.title);
+				} else {
+					this._error = this.createErrorMessage();
 				}
-
-				this.showViewerSection = this.entity.manifestLink && (this._authorization.isBarUser() ||
-					(this.entity?.primaryDataDownloadAccessTokens.filter(a => a === 'Ö2').length === 1
-					&& this.entity?.primaryDataFulltextAccessTokens.filter(a => a === 'Ö2').length === 1));
-
-				this.showDownloadSection = this._scs.canDownload(this.entity);
-				// Download wird NICHT angezeigt UND die VE ist bestellbar ODER
-				// Download wird NICHT angezeigt UND es gibt einen PrimarydataLink
-				this.showOrderSection = (!this.showDownloadSection && this.entity.canBeOrdered)  || (!this.showDownloadSection && this.entity.primaryDataLink !== null);
-				this.deepLinkUrl = this._url.getExternalDetailUrl(this.entity.archiveRecordId, this.entity.title);
-
-			} else {
-				this._error = this.createErrorMessage();
 			}
-
 		}
 			// eslint-disable-next-line
 		catch (err) {
@@ -178,8 +193,8 @@ export class DetailPageComponent implements OnInit, AfterViewInit {
 	private createErrorMessage(): any {
 		// Creating "safe" error message without exposing details
 		const details1 = this._txt.get('detail.notFoundMessage',
-				'Womöglich verfügen Sie nicht über die nötige Berechtigung, um die Seite aufzurufen (siehe <a href="#{0}">Anmelden und Identifizieren</a>).</br></br>',
-				this._url.getRegisterAndIdentifyInfo());
+			'Womöglich verfügen Sie nicht über die nötige Berechtigung, um die Seite aufzurufen (siehe <a href="#{0}">Anmelden und Identifizieren</a>).</br></br>',
+			this._url.getRegisterAndIdentifyInfo());
 
 		const details2 = this._txt.get('detail.notFoundMessage2',
 			'Bei Fragen zur Zugänglichkeit der Unterlagen im Bundesarchiv wenden Sie sich bitte an die Beratung oder per E-Mail an ' +

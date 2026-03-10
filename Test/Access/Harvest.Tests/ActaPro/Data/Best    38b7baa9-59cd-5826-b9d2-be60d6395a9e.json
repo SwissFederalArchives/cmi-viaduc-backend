@@ -1,0 +1,262 @@
+{
+  "object": "document",
+  "type": "Best",
+  "DocKey": "Best    38b7baa9-59cd-5826-b9d2-be60d6395a9e",
+  "DocTitle": "Schaefle Hans (keine Angabe)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "14.07.2025 17:02:26:507",
+  "block": {
+    "type": "Best",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Tekt    6caaaa44-0ea3-5859-ac01-f435820cc5a0"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Tekt"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "396"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U2051"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "08.09.2022 15:54:38"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002 00:00:00"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1915-1919",
+        "timerange": {
+          "min": "01.01.1915",
+          "max": "31.12.1919",
+          "values": [
+            {
+              "value": "01.01.1915-31.12.1919",
+              "min": "01.01.1915",
+              "max": "31.12.1919"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-222222222222"
+      },
+      {
+        "type": "Bst_Id",
+        "value": "38b7baa9-59cd-5826-b9d2-be60d6395a9e"
+      },
+      {
+        "type": "ScopeID",
+        "value": "4017"
+      },
+      {
+        "type": "ApdID",
+        "value": "Best    38b7baa9-59cd-5826-b9d2-be60d6395a9e"
+      },
+      {
+        "type": "Flag_EditCompleteSignatureDirectly",
+        "value": "0"
+      },
+      {
+        "type": "FreiSign",
+        "value": "1.216"
+      },
+      {
+        "type": "SignInherited",
+        "value": "J"
+      },
+      {
+        "type": "SignForInherit",
+        "value": "J1.216"
+      },
+      {
+        "type": "Bst_Signatur",
+        "value": "J1.216*"
+      },
+      {
+        "type": "Altsi",
+        "value": "JI.216*"
+      },
+      {
+        "type": "Bst_Name",
+        "value": "Schaefle Hans (keine Angabe)"
+      },
+      {
+        "type": "Bst_Bez",
+        "value": "J1.216*   Schaefle Hans (keine Angabe), 1915-1919 (Bestand)"
+      },
+      {
+        "type": "Bst_Laufzeit",
+        "value": "o.D."
+      },
+      {
+        "type": "Bst_ZusatzInfo",
+        "value": "RUCHTI, Jacob. Geschichte der Schweiz während des Weltkrieges 1914-1919 : politisch, wirtschaftlich und kulturell\r\nBand 2: Kriegswirtschaft und Kulturelles. Bern, 1930\r\n(Quelle: BAR interne Bestandesanalyse J I.216-Az. 561-16)"
+      },
+      {
+        "type": "Verweis",
+        "fields": [
+          {
+            "type": "Vw_Key",
+            "value": "Best    bd5ee9e6-b7bf-5d37-bc3c-ee4c092bb6d7"
+          },
+          {
+            "type": "Vw_RefDocType",
+            "value": "Best"
+          },
+          {
+            "type": "Vw_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Vw_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Vw_Typ",
+            "value": "Best"
+          },
+          {
+            "type": "Vw_Bez",
+            "value": "J2.78*   Société suisse de surveillance économique S.S.S. (1915-1920), 1915-1923 (Bestand)"
+          },
+          {
+            "type": "Vw_Rolle",
+            "value": "siehe auch (gültig)"
+          },
+          {
+            "type": "Vw_Rolle_Reversed",
+            "value": "siehe auch (gültig)"
+          },
+          {
+            "type": "Vw_Laufzeit",
+            "value": "keine Angabe"
+          }
+        ]
+      },
+      {
+        "type": "Aktenbildner_Gp",
+        "fields": [
+          {
+            "type": "OwnDocType",
+            "value": "Bestand"
+          },
+          {
+            "type": "Aktenbildner_Key",
+            "value": "Part    04111a94-d569-5f08-b161-f71e1e677068"
+          },
+          {
+            "type": "Aktenbildner_RefDocType",
+            "value": "Part"
+          },
+          {
+            "type": "Aktenbildner_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Aktenbildner_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Aktenbildner_Bez",
+            "value": "Schaefle, Hans (o.D.)"
+          },
+          {
+            "type": "Reference_Type",
+            "value": "Aktenbildner"
+          }
+        ]
+      },
+      {
+        "type": "Bst_Geschichte",
+        "value": "Der hier verzeichnete Nachlass wurde dem Bundesarchiv am 11.02.1991 von Ernst Hauser-Schaefle aus Schaffhausen zugeliefert und umfasst 0,1 Laufmeter. Weitere Akten der S.S.S. sind im Bundesarchiv im Bestand der S.S.S. (J II.78), sowie im Nachlass Oberst Adolf Obrecht, Armeekriegskommissär (J I.229), enthalten.\r\n(Quelle: BAR interne Bestandesanalyse J I.216-Az. 561-16)"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     ddccfd9f-0b7a-53e3-bdb5-debfbbe5e51f"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1000/1316 Hauser-Schaefle Ernst (1915-1919)"
+          }
+        ]
+      },
+      {
+        "type": "Bst_Darin",
+        "value": "Die Dokumente stammen aus den Jahren 1915 bis 1919. (Quelle: BAR interne Bestandesanalyse J I.216-Az. 561-16)"
+      },
+      {
+        "type": "ZusVorhFindmittel",
+        "value": "Ablieferung 1000/1316: Dossierverzeichnis"
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "NotizSchutzfrist",
+        "value": "Rechtsgrundlage: Art. 16.2 BGA Benutzung: gemäss BGA  Bewilligungsinstanz: BAR/AIZ  Quelle: Keine Benutzungsbestimmungen vorhanden, somit gilt Art. 16.2. BGA Registratur BAR: E3120C#2011/72#75*,     Az. 291-279; Az. 613.4-J1.216 Bearbeitung: Bana/08.03.2013"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Status",
+        "value": "Abgeschlossen"
+      },
+      {
+        "type": "Export_id",
+        "value": "818ac57f-ba2b-4ca1-acf6-8a6f0d3d409b"
+      }
+    ]
+  }
+}

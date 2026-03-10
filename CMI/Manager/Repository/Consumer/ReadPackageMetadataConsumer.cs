@@ -59,6 +59,13 @@ namespace CMI.Manager.Repository.Consumer
                         Log.Error(
                             "Failed to extract primary metadata from repository for archiveRecord with conversationId {ConversationId} with message {ErrorMessage}",
                             context.ConversationId, result?.ErrorMessage);
+
+                        if (result != null && string.IsNullOrEmpty(result.ErrorMessage))
+                        {
+                            result.ErrorMessage =
+                                $"Failed to extract primary metadata from repository. IsSuccess: {result.Success} IsValid: {result.Valid}";
+                        }
+
                         await context.Publish<IArchiveRecordUpdated>(new
                         {
                             context.Message.MutationId,

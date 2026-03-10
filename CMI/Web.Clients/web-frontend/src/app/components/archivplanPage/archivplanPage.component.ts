@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ClientContext, ConfigService, Entity, TranslationService } from '@cmi/viaduc-web-core';
 import { EntityService, SeoService, UrlService } from '../../modules/client/services';
 
@@ -25,12 +25,13 @@ export class ArchivplanPageComponent implements OnInit {
 	}
 
 	constructor(private _txt: TranslationService,
-		private _url: UrlService,
-		private _cfg: ConfigService,
-		private _route: ActivatedRoute,
-		private _entityService: EntityService,
-		private _seoService: SeoService,
-		private _context: ClientContext) {
+			private _url: UrlService,
+			private _cfg: ConfigService,
+			private _route: ActivatedRoute,
+			private _entityService: EntityService,
+			private _seoService: SeoService,
+			private _context: ClientContext,
+			private _router: Router) {
 		this._route.params.subscribe(params => this._openNode(params['id']));
 	}
 
@@ -41,12 +42,16 @@ export class ArchivplanPageComponent implements OnInit {
 		if (id) {
 			try {
 				const entity = await this._entityService.get(id);
-				if (entity) {
-					this.nodesToOpen = this._getNodesToOpen(entity);
+				if (id !== entity.archiveRecordId) {
+					this._router.navigate([this._url.getArchivplanUrl(entity.archiveRecordId)]);
 				} else {
-					this.error = true;
-					this.loading = false;
-					return;
+					if (entity) {
+						this.nodesToOpen = this._getNodesToOpen(entity);
+					} else {
+						this.error = true;
+						this.loading = false;
+						return;
+					}
 				}
 			}
 			// eslint-disable-next-line

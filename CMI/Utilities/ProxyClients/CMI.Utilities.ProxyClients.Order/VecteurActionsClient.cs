@@ -69,7 +69,7 @@ namespace CMI.Utilities.ProxyClients.Order
 
         private IRequestClient<T1> GetRequestClient<T1>(string serviceUrl) where T1 : class
         {
-            var requestTimeout = TimeSpan.FromSeconds(30);
+            var requestTimeout = TimeSpan.FromSeconds(60);
             return bus.CreateRequestClient<T1>(new Uri(bus.Address, serviceUrl), requestTimeout);
         }
     }

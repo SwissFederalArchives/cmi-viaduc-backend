@@ -14,6 +14,8 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,14 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActaProSystemNotAvailableException.cs" />
     <Compile Include="IDbMetadataAccess.cs" />
-    <Compile Include="IDbMutationQueueAccess.cs" />
     <Compile Include="IDbResyncAccess.cs" />
-    <Compile Include="IDbStatusAccess.cs" />
     <Compile Include="IDbExternalContentAccess.cs" />
     <Compile Include="IDbTestAccess.cs" />
-    <Compile Include="MutationStatus.cs" />
-    <Compile Include="OrderDetailData.cs" />
+    <Compile Include="VerzEinheitData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResyncRequestInfo.cs" />
   </ItemGroup>

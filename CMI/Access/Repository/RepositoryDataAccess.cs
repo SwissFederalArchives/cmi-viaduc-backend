@@ -181,14 +181,11 @@ namespace CMI.Access.Repository
         {
             Log.Debug("Getting document root for packageId: {packageId}", packageId);
             var segments = packageId.Split('@');
-            var isAlfresco = session.RepositoryInfo.ProductName.Equals("Alfresco Community", StringComparison.InvariantCultureIgnoreCase);
             Log.Debug("The repository product is {productName}.", session.RepositoryInfo.ProductName);
             Debug.Assert(segments.Length == 3, "Document Identifiert must contain 3 segments seperated by @.");
 
             // Get the query depending on the system
-            var select = isAlfresco
-                ? $"Select * from cmis:folder where cmis:description = '{packageId}'"
-                : $"Select * from cmis:folder where cmis:description = '{segments[0]}' AND cmis:path = '{segments[2]}'";
+            var select = $"Select * from cmis:folder where cmis:description = '{segments[0]}' AND cmis:path = '{segments[2]}'";
 
             // This query should return exactly one match
             var result = session.Query(select, false).FirstOrDefault();
@@ -199,14 +196,12 @@ namespace CMI.Access.Repository
                 var folder = session.GetObject(objectId) as IFolder;
                 if (folder != null)
                 {
-                    var description = result["cmis:description"].FirstValue.ToString();
                     var extensions = folder.GetExtensions(ExtensionLevel.Object);
                     var documentId = metadataAccess.GetExtendedPropertyValue(extensions, "Catalogue Reference");
 
                     // For BAR repository: The last segment must match the catalogue reference value
                     // For Alfresco repository: Description must match the package id
-                    if (!isAlfresco && documentId.Equals(segments[2], StringComparison.InvariantCulture) ||
-                        isAlfresco && description.Equals(packageId, StringComparison.InvariantCulture))
+                    if (documentId.Equals(segments[2], StringComparison.InvariantCulture))
                     {
                         Log.Verbose("Found correct folder object. Folder name is {Name}.", folder.Name);
                         var isDossier = !string.IsNullOrEmpty(metadataAccess.GetExtendedPropertyValue(extensions, "ARELDA:dossier/dossier@id"));

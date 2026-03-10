@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Web;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.api;
@@ -16,6 +9,13 @@ using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using Newtonsoft.Json;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CMI.Web.Frontend.api.Providers
 {
@@ -34,30 +34,36 @@ namespace CMI.Web.Frontend.api.Providers
             this.modelData = modelData;
         }
 
-        public string GetArchivplanHtml(int id, UserAccess access, string role, string language)
+        public string[] GetArchivplanRootNodes(UserAccess access, string role, string language)
         {
-            var entities = elasticService.QueryForId<TreeRecord>(id, access);
-            return CreateHtml(entities.Entries.Select(e => e.Data), role, language);
+            var entities = elasticService.QueryForRootNodes<TreeRecord>(access);
+            return entities.Entries.Select(e => e.Data.ArchiveRecordId).ToArray();
         }
 
-        public string GetArchivplanChildrenHtml(int id, UserAccess access, string role, string language)
+        public string GetArchivplanHtml(string id, UserAccess access, string role, string language)
         {
             var stopwatch = new Stopwatch();
-
-            var parentResult = elasticService.QueryForId<TreeRecord>(id, access);
-
             stopwatch.Start();
+            var entities = elasticService.QueryForId<TreeRecord>(id, access);
+            var result= CreateHtml(entities?.Entries.Select(e => e.Data), role, language);
+            Debug.WriteLine($"Get ArchivplanHtml for {id} {stopwatch.ElapsedMilliseconds}ms");
+            return result;
+        }
 
+        public string GetArchivplanChildrenHtml(string id, UserAccess access, string role, string language)
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+         
             var entities = elasticService.QueryForParentId(id, access);
-
             Debug.WriteLine($"Fetching child records took {stopwatch.ElapsedMilliseconds}ms");
             stopwatch.Start();
-            var html = CreateHtml(entities, role, language, parentResult.Entries[0]);
+            var html = CreateHtml(entities, role, language);
             Debug.WriteLine($"Creating html from records took {stopwatch.ElapsedMilliseconds}ms");
             return html;
         }
 
-        public Entity<T> GetEntity<T>(int id, UserAccess access, Paging paging = null) where T : TreeRecord, new()
+        public Entity<T> GetEntity<T>(string id, UserAccess access, Paging paging = null) where T : TreeRecord, new()
         {
             var metaOptions = new EntityMetaOptions
             {
@@ -67,7 +73,6 @@ namespace CMI.Web.Frontend.api.Providers
             };
 
             var found = elasticService.QueryForId<T>(id, access);
-
             var result = found != null && found.Exception == null
                 ? CreateEntityResult(access, found, metaOptions)
                 : null;
@@ -75,7 +80,7 @@ namespace CMI.Web.Frontend.api.Providers
             return result;
         }
 
-        public EntityResult<T> GetEntities<T>(List<int> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new()
+        public EntityResult<T> GetEntities<T>(List<string> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new()
         {
             var metaOptions = new EntityMetaOptions
             {
@@ -253,16 +258,16 @@ namespace CMI.Web.Frontend.api.Providers
             return string.Empty;
         }
 
-        private string CreateHtml(IEnumerable<TreeRecord> treeRecords, string role, string language, Entity<TreeRecord> parent = null)
+        private string CreateHtml(IEnumerable<TreeRecord> treeRecords, string role, string language)
         {
             // To reduce download size all unneeded whitespace is eliminated
             var s = new StringBuilder();
+
             foreach (var treeRecord in treeRecords)
             {
-                var row = $@"<ul class=""row""><li class=""recordTitle""><ul id=""Node{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" tabindex=""0""><li><a id=""{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" {GetClass(treeRecord)} aria-label=""{GetTranslationTreeNode(language, "expandLink", "Link aufklappen")} {HttpUtility.HtmlEncode(treeRecord.Title)}""></a></li><li><span aria-label=""{GetTranslationTreeNode(language, treeRecord.Level.ToLower(), "Typ " + treeRecord.Level)}""  class=""{GetIconName(treeRecord.Level)}""></span></li><li><a data-toggle=""tooltip"" title=""{HttpUtility.HtmlEncode(treeRecord.Title)}"" tabindex=""-1"" href=""{GetDetailUrl(treeRecord, language)}""><b>{HttpUtility.HtmlEncode(treeRecord.ReferenceCode)}</b>&nbsp;{AnonymizeText(treeRecord.Title,language)}&nbsp;</a></li><li><span>{HttpUtility.HtmlEncode(GetCreationPeriod(treeRecord))}{AddEyeOffIcon(treeRecord, language, role)}</span></li></ul></li><li id =""children{HttpUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" class=""tree-node-children""></li></ul>";
+                var row = $@"<ul class=""row""><li class=""recordTitle""><ul id=""Node{WebUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" tabindex=""0""><li><a id=""{WebUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" {GetClass(treeRecord)} aria-label=""{GetTranslationTreeNode(language, "expandLink", "Link aufklappen")} {WebUtility.HtmlEncode(treeRecord.Title)}""></a></li><li><span aria-label=""{GetTranslationTreeNode(language, treeRecord.Level.ToLower(), "Typ " + treeRecord.Level)}""  class=""{GetIconName(treeRecord.Level)}""></span></li><li><a data-toggle=""tooltip"" title=""{WebUtility.HtmlEncode(treeRecord.Title)}"" tabindex=""-1"" href=""{GetDetailUrl(treeRecord, language)}""><b>{WebUtility.HtmlEncode(treeRecord.ReferenceCode)}</b>&nbsp;{AnonymizeText(treeRecord.Title,language)}&nbsp;</a></li><li><span>{WebUtility.HtmlEncode(GetCreationPeriod(treeRecord))}{AddEyeOffIcon(treeRecord, language, role)}</span></li></ul></li><li {GetAISKeys(treeRecord)} id =""children{WebUtility.HtmlEncode(treeRecord.ArchiveRecordId)}"" class=""tree-node-children""></li></ul>";
                 s.Append(row);
             }
-
             // Müssen einen leeren Dummy Eintrag einfügen, ansonsten der Baum in Edge einen "null" Eintrag anzeigt. 
             // Fall sollte nicht mehr auftreten, da ChildCount nun nur noch die effektiv "sichtbaren" Kindern wiederspiegelt.
             if (s.Length == 0)
@@ -271,6 +276,17 @@ namespace CMI.Web.Frontend.api.Providers
             }
 
             return s.ToString();
+        }
+
+        private string GetAISKeys(TreeRecord treeRecord)
+        {
+            if (long.TryParse(treeRecord.ArchiveRecordId, out var scopeId))
+            {
+                return $"data-scopeKey=\"{scopeId}\" data-DocKey=\"{WebUtility.HtmlEncode(elasticService.ActaProMappingProvider.GetActaProId(treeRecord.ArchiveRecordId))}\"";
+            }
+            scopeId = elasticService.ActaProMappingProvider.GetScopeId(treeRecord.ArchiveRecordId);
+
+            return $"data-scopeKey=\"{scopeId}\" data-DocKey=\"{WebUtility.HtmlEncode(treeRecord.ArchiveRecordId)}\"";
         }
 
         private string AddEyeOffIcon(TreeRecord treeRecord, string language, string role)
@@ -289,7 +305,7 @@ namespace CMI.Web.Frontend.api.Providers
             var tooltip = translator.GetTranslation(language, "anonymized.Tooltip", "Aus Datenschutzgründen anonymisiert.");
 
             var html = $"<span data-toggle=\"tooltip\" data-placement=\"bottom\" class=text-anonymized title=\"{tooltip}\">{pattern}</span>";
-            return Regex.Replace(HttpUtility.HtmlEncode(value), pattern, html);
+            return Regex.Replace(WebUtility.HtmlEncode(value), pattern, html);
         }
 
         private string GetTranslationTreeNode(string language, string element, string text)

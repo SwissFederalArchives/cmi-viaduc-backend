@@ -1,0 +1,101 @@
+{
+  "object": "document",
+  "type": "Mg",
+  "DocKey": "Mg      79a2585b-be3a-58dd-8dd7-4abba0476e60",
+  "DocTitle": "469393",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "23.01.2025 13:41:46:691",
+  "block": {
+    "type": "Mg",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Ms      6e1f578e-d40d-517d-b041-1473a9520d0b"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Ms"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "Jati"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "U1937"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "23.01.2025 13:41:46"
+      },
+      {
+        "type": "CreateDate",
+        "value": "24.07.2003 11:37:11"
+      },
+      {
+        "type": "Mr_Id",
+        "value": "Mr      8fcd3f4a-1d79-4cb3-b23c-06f8730e28c6"
+      },
+      {
+        "type": "Mg_Id",
+        "value": "79a2585b-be3a-58dd-8dd7-4abba0476e60"
+      },
+      {
+        "type": "Export_id",
+        "value": "f29e2ec0-d1d7-4750-a572-f581a90aa84f"
+      },
+      {
+        "type": "ScopeID",
+        "value": "469393"
+      },
+      {
+        "type": "ApdID",
+        "value": "Mg      79a2585b-be3a-58dd-8dd7-4abba0476e60"
+      },
+      {
+        "type": "Bhlgrp_Typ",
+        "value": "Buch"
+      },
+      {
+        "type": "Mg_Titel_Compound",
+        "value": "469393"
+      },
+      {
+        "type": "Mg_Bhlgrp_Gp",
+        "fields": [
+          {
+            "type": "Mg_Bhlgrp",
+            "value": "12704"
+          }
+        ]
+      },
+      {
+        "type": "Mg_Lagerungsorte",
+        "value": "1/1/001/01/01"
+      },
+      {
+        "type": "Mg_Informationstraeger",
+        "value": "Papier"
+      },
+      {
+        "type": "Mg_Behaeltniscode",
+        "value": "469393"
+      }
+    ]
+  }
+}

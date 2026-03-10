@@ -37,7 +37,7 @@ namespace CMI.Manager.Vecteur
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
             app
-                .UseSwagger(typeof(Startup).Assembly, c =>
+                .UseSwaggerUi(typeof(Startup).Assembly, c =>
                 {
                     c.PostProcess = document =>
                     {
@@ -57,7 +57,7 @@ namespace CMI.Manager.Vecteur
                         document.Consumes = new List<string> {"application/xml", "application/json"};
                     };
                 })
-                .UseSwaggerUi3(typeof(Startup).Assembly, c =>
+                .UseSwaggerUi(typeof(Startup).Assembly, c =>
                 {
                     c.GeneratorSettings.DocumentProcessors.Add(
                         new SecurityDefinitionAppender("ApiKey", new OpenApiSecurityScheme

@@ -1,4 +1,5 @@
 ﻿using CMI.Contract.Common;
+using System.Threading.Tasks;
 
 namespace CMI.Contract.Harvest
 {
@@ -9,6 +10,7 @@ namespace CMI.Contract.Harvest
         /// </summary>
         /// <param name="archiveRecordId">The primary key id of the record in the AIS as a string.</param>
         /// <returns>ArchiveRecord.</returns>
-        ArchiveRecord GetArchiveRecord(string archiveRecordId);
+        Task<ArchiveRecord> GetArchiveRecord(string archiveRecordId);
+        Task<ArchiveRecordSecurity> GetAisAccessTokens(string archiveRecordId);
     }
 }

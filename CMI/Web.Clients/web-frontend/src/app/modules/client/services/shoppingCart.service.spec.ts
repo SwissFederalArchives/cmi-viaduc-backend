@@ -12,12 +12,12 @@ describe('ShoppingCartService', () => {
 	let serverBasket: OrderItem[] = [
 		<OrderItem> {
 			id: '1',
-			veId: 1,
+			veId: '1',
 			title: 'History of Darth Vader\'s lightsaber',
 			einsichtsbewilligungNotwendig: false
 		}, <OrderItem> {
 			id: '2',
-			veId: 2,
+			veId: '2',
 			title: 'Han Solos Milenium Falken?!',
 			einsichtsbewilligungNotwendig: true
 		}
@@ -144,7 +144,7 @@ describe('ShoppingCartService', () => {
 		});
 		it('Should the id of the first VE be 1', () => {
 			shoppingCartService.getBasket().subscribe(b => {
-				expect(b[0].veId).toBe(1);
+				expect(b[0].veId).toBe('1');
 			});
 		});
 		it('Should the title of the second VE be correct', () => {
@@ -154,7 +154,7 @@ describe('ShoppingCartService', () => {
 		});
 		it('Should the id of the second VE be 2', () => {
 			shoppingCartService.getBasket().subscribe(b => {
-				expect(b[1].veId).toBe(2);
+				expect(b[1].veId).toBe('2');
 			});
 		});
 	});

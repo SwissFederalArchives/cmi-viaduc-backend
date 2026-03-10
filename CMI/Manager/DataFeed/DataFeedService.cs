@@ -1,11 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Autofac;
+using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
+using CMI.Manager.DataFeed.Consumers;
 using CMI.Manager.DataFeed.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
 using Quartz;
+using Quartz.Impl;
 using Serilog;
 
 namespace CMI.Manager.DataFeed
@@ -37,13 +41,33 @@ namespace CMI.Manager.DataFeed
             Log.Information("DataFeed service is starting");
 
             // Configure Bus
-            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.DataFeedService, (cfg, ctx) => { });
+            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.DataFeedService, (cfg, ctx) =>
+            {
+                cfg.ReceiveEndpoint(BusConstants.DatafeedSchedulerTriggerMessageQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<SchedulerTriggerConsumer>);
+                    ec.UseRetry(retryPolicy =>
+                        retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                });
+
+                cfg.ReceiveEndpoint(BusConstants.DataFeedManagerActaProSyncRecordMessageQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<ActaProSyncRecordConsumer>);
+                    ec.UseRetry(retryPolicy =>
+                        retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                });
+
+            });
+            
+                // Start the timer
+            scheduler = await StdSchedulerFactory.GetDefaultScheduler();
+            containerBuilder.RegisterInstance<IScheduler>(scheduler);
+
             container = containerBuilder.Build();
+            await SchedulerConfigurator.Configure(container, scheduler);
+
             bus = container.Resolve<IBusControl>();
             bus.Start();
-
-            // Start the timer
-            scheduler = await SchedulerConfigurator.Configure(container);
 
             Log.Verbose("Starting scheduler");
             await scheduler.Start();

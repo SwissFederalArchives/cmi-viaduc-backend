@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using Amazon;
+﻿using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
+using Amazon.S3.IO;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
 using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
 using Serilog;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CMI.Utilities.Common.Providers
 {
@@ -62,6 +62,27 @@ namespace CMI.Utilities.Common.Providers
             }
         }
 
+        public Task DeleteFolderAsync(string key)
+        {
+            try
+            {
+                Log.Debug("Checking if dir exists on S3-storage with key {key}", key);
+
+                var s3DirectoryInfo = new S3DirectoryInfo(s3Client, storageProviderSettings.BucketName, key);
+                if (s3DirectoryInfo is { Exists: true })
+                {
+                    s3DirectoryInfo.Delete(true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "DeleteFolderAsync with key {key} has Error: {Message} ", key, ex.Message);
+            }
+            
+
+            return Task.CompletedTask;
+        }
+        
         public async Task<MemoryStream> ReadFileAsync(Uri fileUri)
         {
             var key = fileUri.ToString(); 
@@ -126,7 +147,7 @@ namespace CMI.Utilities.Common.Providers
                 return false;
             }
         }
-       
+
         public async Task<DownloadFileResult> LoadFileFromStorageAsync(string key)
         {
             try
@@ -168,34 +189,6 @@ namespace CMI.Utilities.Common.Providers
             return null;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="key"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns>A boolean value that represents the success or failure of
-        /// deleting all of the objects in the bucket.</returns>
-        private async Task<ListObjectsV2Response> DeleteObject(ListObjectsV2Request request, string key, CancellationToken cancellationToken)
-        {
-            ListObjectsV2Response response;
-            do
-            {
-                response = await s3Client.ListObjectsV2Async(request);
-                // If the response is truncated, set the request ContinuationToken
-                // from the NextContinuationToken property of the response.
-                request.ContinuationToken = response.NextContinuationToken;
-
-                if (cancellationToken.IsCancellationRequested) break;
-
-                response.S3Objects
-                    .ForEach(async obj => await s3Client.DeleteObjectAsync(storageProviderSettings.BucketName, key, cancellationToken));
-
-            } while (response.IsTruncated);
-
-            return response;
-        }
     }
 
     public class DownloadFileResult

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CMI.Contract.Messaging;
 using MassTransit;
+using Newtonsoft.Json;
 using Serilog;
 using LogContext = Serilog.Context.LogContext;
 
@@ -23,14 +24,28 @@ namespace CMI.Manager.ExternalContent.Consumers
                     context.ConversationId);
 
                 var message = context.Message;
-                var result = externalContentManager.GetDigitizationOrderData(message.ArchiveRecordId);
+                var result = await externalContentManager.GetDigitizationOrderData(message.ArchiveRecordId);
 
-                Log.Information("Sending {ResponseName} to {ResponseAddress} with conversationId {ConversationId}",
-                    nameof(GetDigitizationOrderDataResponse), context.ResponseAddress, context.ConversationId);
                 await context.RespondAsync<GetDigitizationOrderDataResponse>(new
                 {
                     Result = result
                 });
+
+                if (result.Success && result.DigitizationOrder != null)
+                {
+                    try
+                    {
+                        Log.Information("Sending {ResponseName} to {ResponseAddress} with conversationId {ConversationId}",
+                            nameof(GetDigitizationOrderDataResponse), context.ResponseAddress, context.ConversationId);
+                        Log.Information("Result is: {serializedValue}", result.DigitizationOrder.Serialize());
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Log.Error(ex, "Unexpected error while writing result to log after getting digitizationOrder");
+                        throw;
+                    }
+                }
+
             }
         }
     }

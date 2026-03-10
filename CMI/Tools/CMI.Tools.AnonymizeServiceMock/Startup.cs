@@ -32,7 +32,7 @@ namespace CMI.Tools.AnonymizeServiceMock
             Container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(Container);
 
-            app.UseSwagger(typeof(Startup).Assembly, c =>
+            app.UseSwaggerUi(typeof(Startup).Assembly, c =>
             {
                 c.PostProcess = document =>
                 {
@@ -71,7 +71,7 @@ namespace CMI.Tools.AnonymizeServiceMock
                     document.Consumes = new List<string> { "application/json" };
                 };
             })
-                .UseSwaggerUi3(typeof(Startup).Assembly, c =>
+                .UseSwaggerUi(typeof(Startup).Assembly, c =>
                 {
                     c.GeneratorSettings.DocumentProcessors.Add(
                         new SecurityDefinitionAppender("ApiKey", new OpenApiSecurityScheme

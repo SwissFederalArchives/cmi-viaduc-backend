@@ -90,12 +90,15 @@ namespace CMI.Web.Common.Helpers
                 var fileName = "translations." + language + ".json";
 
                 var sourcePath = queryContains("in") ? queryString["in"] : appInfo.DataPath;
-                var sourceFile = StringHelper.AddToString(sourcePath, @"\", fileName);
+                var sourceFile = Path.GetFullPath(Path.Combine(sourcePath, fileName));
+
                 var defaultSourceFile = StringHelper.AddToString(sourcePath, @"\", defaultFileName);
-                var partialSourceFile = StringHelper.AddToString(sourcePath, @"\", partialFileName);
+                var partialSourceFile = Path.GetFullPath(Path.Combine(sourcePath, partialFileName));
+
 
                 var outputPath = queryContains("out") ? queryString["out"] : DefaultOutputRoot;
-                var outputFile = StringHelper.AddToString(outputPath, @"\", fileName);
+                var outputFile = Path.GetFullPath(Path.Combine(outputPath, fileName));
+
 
                 Output.Write(string.Format("Generating {0} {1}:", appInfo.AppKey, fileName) + nl);
                 Output.Write(string.Format("- {0}", JsonConvert.SerializeObject(appInfo, Formatting.Indented)) + nl);

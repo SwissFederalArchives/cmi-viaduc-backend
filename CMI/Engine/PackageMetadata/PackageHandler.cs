@@ -187,7 +187,7 @@ namespace CMI.Engine.PackageMetadata
             switch (folder.FolderType)
             {
                 case PackageFolderType.Ablieferung:
-                    var orderedRecord = indexRecords.FirstOrDefault(i => i.PrimaryDataLink == packageId);
+                    var orderedRecord = indexRecords.FirstOrDefault(i => string.IsNullOrEmpty(i.PrimaryDataLink) ? false : i.PrimaryDataLink == packageId);
                     AddAblieferungData(dip.Ablieferung, extensions, orderedRecord);
                     break;
                 case PackageFolderType.OrdnungssystemPosition:
@@ -263,26 +263,39 @@ namespace CMI.Engine.PackageMetadata
         /// <exception cref="ArgumentOutOfRangeException">folder - Folder must be of type 'Dossier'</exception>
         private ElasticArchiveRecord GetArchiveRecordFromDossier(FolderInfo folder, List<ElasticArchiveRecord> indexRecords)
         {
-            if (folder.FolderType != PackageFolderType.Dossier)
+            try
             {
-                throw new ArgumentOutOfRangeException(nameof(folder), "Folder must be of type 'Dossier'");
+                if (folder.FolderType != PackageFolderType.Dossier)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(folder), "Folder must be of type 'Dossier'");
+                }
+
+                var extensions = folder.CmisFolder.GetExtensions(ExtensionLevel.Object);
+
+                var packageId = metadataAccess.GetExtendedPropertyValue(extensions, "AIP-ID_Dossier-ID");
+                var archiveRecord = indexRecords
+                    .Where(a => a != null)
+                    .FirstOrDefault(a => !string.IsNullOrEmpty(a.PrimaryDataLink) && a.PrimaryDataLink.Equals(packageId, StringComparison.InvariantCultureIgnoreCase));
+
+                if (archiveRecord != null)
+                {
+                    Log.Verbose("Found archive record to dossier folder with id {id}. Archive record id is {ArchiveRecordId}", folder.Id,
+                        archiveRecord.ArchiveRecordId);
+                }
+                else
+                {
+                    Log.Verbose("Unable to find archive record to dossier folder with id {id}.", folder.Id);
+                }
+
+                return archiveRecord;
             }
-
-            var extensions = folder.CmisFolder.GetExtensions(ExtensionLevel.Object);
-
-            var packageId = metadataAccess.GetExtendedPropertyValue(extensions, "AIP-ID_Dossier-ID");
-            var archiveRecord = indexRecords.FirstOrDefault(a => a.PrimaryDataLink.Equals(packageId, StringComparison.InvariantCultureIgnoreCase));
-            if (archiveRecord != null)
+            catch (Exception ex)
             {
-                Log.Verbose("Found archive record to dossier folder with id {id}. Archive record id is {ArchiveRecordId}", folder.Id,
-                    archiveRecord.ArchiveRecordId);
+                Log.Error(ex, "Unexpected while getting archive record from dossier. Folder: {folder}, Index records: {indexRecords}",
+                    JsonConvert.SerializeObject(folder),
+                    JsonConvert.SerializeObject(indexRecords));
+                throw;
             }
-            else
-            {
-                Log.Verbose("Unable to find archive record to dossier folder with id {id}.", folder.Id);
-            }
-
-            return archiveRecord;
         }
 
         /// <summary>
@@ -307,7 +320,7 @@ namespace CMI.Engine.PackageMetadata
             var dokumentId = metadataAccess.GetExtendedPropertyValue(extensions, "ARELDA:Dokument/Dokument@id");
             Log.Verbose("Found the id of the document:  {id}", dokumentId);
 
-            var archiveRecord = indexRecords.FirstOrDefault(a => a.PrimaryDataLink.EndsWith(dokumentId, StringComparison.InvariantCultureIgnoreCase));
+            var archiveRecord = indexRecords.FirstOrDefault(a => string.IsNullOrEmpty(a.PrimaryDataLink) ? false : a.PrimaryDataLink.EndsWith(dokumentId, StringComparison.InvariantCultureIgnoreCase));
             if (archiveRecord != null)
             {
                 Log.Verbose("Found archive record to document folder with id {id}. Archive record id is {ArchiveRecordId}", folder.Id,
@@ -528,9 +541,9 @@ namespace CMI.Engine.PackageMetadata
                 dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Stufe", Value = dossierRecord.Level });
             }
 
-            if (!string.IsNullOrEmpty(dossierRecord?.FormerReferenceCode))
+            if (dossierRecord?.FormerReferenceCode?.Any() ?? false)
             {
-                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = dossierRecord.FormerReferenceCode });
+                dossier.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = string.Join("; ", dossierRecord.FormerReferenceCode)});
             }
 
             if (dossierRecord?.ArchiveplanContext.Count > 0)
@@ -626,9 +639,9 @@ namespace CMI.Engine.PackageMetadata
                 dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Stufe", Value = documentRecord.Level });
             }
 
-            if (!string.IsNullOrEmpty(documentRecord?.FormerReferenceCode))
+            if (documentRecord?.FormerReferenceCode?.Any() ?? false)
             {
-                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = documentRecord.FormerReferenceCode });
+                dokument.zusatzDaten.Add(new ZusatzDatenMerkmal { Name = "Frühere Signaturen", Value = string.Join("; ", documentRecord.FormerReferenceCode)});
             }
 
             if (documentRecord?.ArchiveplanContext.Count > 0)

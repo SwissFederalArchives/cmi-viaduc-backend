@@ -8,9 +8,14 @@ export interface ManagementUserSettings extends UserUiSettings {
 	ablieferndeStelleSettings: AblieferndeStelleSettings;
 	collectionSettings: CollectionSettings;
 	manuelleKorrekturSettings: ManuelleKorrekturSettings;
+	synchronizationMonitorSettings: SynchronizationMonitorSettings;
 }
 
 export interface CollectionSettings {
+	columns: any;
+}
+
+export interface SynchronizationMonitorSettings {
 	columns: any;
 }
 

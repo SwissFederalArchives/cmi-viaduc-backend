@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 using CMI.Contract.Order;
+using CMI.Utilities.ActaPro;
 
 namespace CMI.Access.Sql.Viaduc
 {
@@ -649,7 +650,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         ParameterName = "VeId",
                         Value = ToDb(orderItem.VeId),
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -1014,9 +1015,10 @@ namespace CMI.Access.Sql.Viaduc
             }
         }
 
-        public async Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId)
+        public async Task<List<Bestellhistorie>> GetOrderingHistoryForVe(string veId)
         {
             var orderingHistory = new List<Bestellhistorie>();
+            var mappingProvider = new ActaProMappingProvider();
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -1035,9 +1037,10 @@ namespace CMI.Access.Sql.Viaduc
                                         (SELECT u.FamilyName + ', ' + u.Firstname FROM ApplicationUser u WHERE u.ID = i.SachbearbeiterId) As Sachbearbeiter
                                         FROM OrderItem i
                                         INNER JOIN Ordering o ON o.Id = i.OrderId
-                                        WHERE Ve = @p1 AND (ApproveStatus > 0 OR EntscheidGesuch > 0) ORDER BY o.OrderDate DESC";
+                                        WHERE (Ve = @p1 or Ve = @p2) AND (ApproveStatus > 0 OR EntscheidGesuch > 0) ORDER BY o.OrderDate DESC";
 
                     cmd.Parameters.AddWithValue("@p1", veId);
+                    cmd.Parameters.AddWithValue("@p2", mappingProvider.GetOtherId(veId));
 
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
@@ -1052,7 +1055,7 @@ namespace CMI.Access.Sql.Viaduc
             }
         }
 
-        public async Task AddToOrderExecutedWaitList(int veId, string serializedMessage)
+        public async Task AddToOrderExecutedWaitList(string veId, string serializedMessage)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -1066,7 +1069,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         ParameterName = "veId",
                         Value = veId,
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -1102,9 +1105,10 @@ namespace CMI.Access.Sql.Viaduc
             }
         }
 
-        public async Task<List<OrderExecutedWaitList>> GetVeFromOrderExecutedWaitList(int veId)
+        public async Task<List<OrderExecutedWaitList>> GetVeFromOrderExecutedWaitList(string veId)
         {
             var waitList = new List<OrderExecutedWaitList>();
+            var mappingProvider = new ActaProMappingProvider();
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -1112,14 +1116,10 @@ namespace CMI.Access.Sql.Viaduc
 
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "Select * from OrderExecutedWaitList where VeId = @veId and processed = 0";
+                    cmd.CommandText = "Select * from OrderExecutedWaitList where (VeId = @veId or VeId = @veId2) and processed = 0";
 
-                    cmd.Parameters.Add(new SqlParameter
-                    {
-                        ParameterName = "veId",
-                        Value = veId,
-                        SqlDbType = SqlDbType.Int
-                    });
+                    cmd.Parameters.AddWithValue("@veId", veId);
+                    cmd.Parameters.AddWithValue("@veId2", mappingProvider.GetOtherId(veId));
 
                     using (var reader = await cmd.ExecuteReaderAsync())
                     {
@@ -1225,7 +1225,7 @@ namespace CMI.Access.Sql.Viaduc
                                 TerminDigitalisierung = Convert.ToDateTime(reader["TerminDigitalisierung"]),
                                 Digitalisierunskategorie = Convert.ToInt32(reader["DigitalisierungsKategorie"]),
                                 OrderDate = Convert.ToDateTime(reader["OrderDate"]),
-                                VeId = ToInt32Opt(reader["Ve"]),
+                                VeId = reader["Ve"] as string,
                                 OrderingComment = reader["OrderingComment"] as string,
                                 OrderItemComment = reader["OrderItemComment"] as string,
                                 InternalComment = reader["InternalComment"] as string,
@@ -1316,7 +1316,7 @@ namespace CMI.Access.Sql.Viaduc
         ///     automatisch freigegeben wird, obwohl er das nicht dürfte.
         /// </param>
         /// <returns></returns>
-        public async Task<IndivTokens> GetIndividualAccessTokens(int veId, int ignoreOrderItemId = -1)
+        public async Task<IndivTokens> GetIndividualAccessTokens(string veId, int ignoreOrderItemId = -1)
         {
             var downloadTokens = new HashSet<string>();
             var fulltextTokens = new HashSet<string>();
@@ -1332,7 +1332,7 @@ namespace CMI.Access.Sql.Viaduc
                         {
                             ParameterName = "pVeId",
                             Value = veId,
-                            SqlDbType = SqlDbType.Int
+                            SqlDbType = SqlDbType.NVarChar
                         }
                     );
 
@@ -1411,9 +1411,9 @@ namespace CMI.Access.Sql.Viaduc
             return new IndivTokens(fulltextTokens.ToArray(), downloadTokens.ToArray(), fieldAccessTokens.ToArray());
         }
 
-        public async Task<bool> IsUniqueVeInBasket(int veId, string userId)
+        public async Task<bool> IsUniqueVeInBasket(string veId, string userId)
         {
-            if (veId == 0 || string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(veId) || string.IsNullOrEmpty(userId))
             {
                 return false;
             }
@@ -1444,7 +1444,7 @@ namespace CMI.Access.Sql.Viaduc
                         {
                             ParameterName = "p2",
                             Value = veId,
-                            SqlDbType = SqlDbType.Int
+                            SqlDbType = SqlDbType.NVarChar
                         }
                     );
 
@@ -1524,26 +1524,21 @@ namespace CMI.Access.Sql.Viaduc
             }
         }
 
-        public async Task<bool> HasEinsichtsbewilligung(int veId)
+        public async Task<bool> HasEinsichtsbewilligung(string veId)
         {
+            var mappingProvider = new ActaProMappingProvider();
             using (var connection = new SqlConnection(connectionString))
             {
                 await connection.OpenAsync();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.Parameters.Add(
-                        new SqlParameter
-                        {
-                            ParameterName = "pVeId",
-                            Value = veId,
-                            SqlDbType = SqlDbType.Int
-                        }
-                    );
+                    cmd.Parameters.AddWithValue("@pVeId", veId);
+                    cmd.Parameters.AddWithValue("@pVeId2", mappingProvider.GetOtherId(veId));
 
                     cmd.CommandText =
                         $@"select count(*)                           
                            from OrderItem 
-                           where OrderItem.Ve = @pVeId AND
+                           where (OrderItem.Ve = @pVeId or OrderItem.Ve = @pVeId2) AND
                                  Entscheidgesuch = {(int) EntscheidGesuch.EinsichtsgesuchBewilligt}";
 
                     var count = Convert.ToInt32(await cmd.ExecuteScalarAsync());
@@ -1660,7 +1655,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         ParameterName = "veId",
                         Value = ToDb(indexSnapshot.VeId),
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -1859,7 +1854,7 @@ namespace CMI.Access.Sql.Viaduc
             primaerdatenAufbereitungItem.OrderingType = reader["OrderingType"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.OrderItemId = reader["OrderItemId"].GetValueOrNull<int>();
             primaerdatenAufbereitungItem.Dossiertitel = reader["Dossiertitel"].ToString();
-            primaerdatenAufbereitungItem.VeId = reader["VeId"].GetValueOrNull<int>();
+            primaerdatenAufbereitungItem.VeId = reader["VeId"].ToString();
             primaerdatenAufbereitungItem.Signatur = reader["Signatur"].ToString();
             primaerdatenAufbereitungItem.NeuEingegangen = reader["NeuEingegangen"].GetValueOrNull<DateTime>();
             primaerdatenAufbereitungItem.Ausgeliehen = reader["Ausgeliehen"].GetValueOrNull<DateTime>();
@@ -1898,7 +1893,7 @@ namespace CMI.Access.Sql.Viaduc
             return new OrderItem
             {
                 Id = Convert.ToInt32(reader["ID"]),
-                VeId = ToInt32Opt(reader["Ve"]),
+                VeId = reader["Ve"] as string,
                 Comment = reader["Comment"] as string,
                 BewilligungsDatum = reader["BewilligungsDatum"] == DBNull.Value ? null : (DateTime?) Convert.ToDateTime(reader["BewilligungsDatum"]),
                 Bestand = reader["Bestand"] as string,

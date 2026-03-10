@@ -1,0 +1,212 @@
+<div class="page page-order-overview col-sm-12">
+	<div class="page-breadcrumb">
+		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	</div>
+	<cmi-viaduc-layout-left-content>
+		<div left>
+			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+		</div>
+
+		<div content>
+			<div class="page-header">
+				<h2 class="page-content-title">
+					<span>Überwachung</span>
+				</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#syncTab" data-toggle="tab">Synchronisation</a></li>
+						<li><a href="#perHourTab" data-toggle="tab">Anzahl pro Stunde</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content tab-border">
+						<div class="tab-pane active" id="syncTab">
+							<form [formGroup]="myForm" *ngIf="myForm" id="myForm">
+								<div class="row monitor-page">
+
+									<div class="col-lg-8 col-md-11 col-sm-12">
+										<!-- Ve-Ids -->
+										<div class="row">
+											<label tooltip="{{'Ve-Id(s)' | translate:'synchronization.veId'}}"
+												   class="col-lg-2 col-md-3 control-label">{{ 'Ve-Id(s)' | translate:'synchronization.veId' }}</label>
+											<div class="col-lg-10 col-md-9">
+												<input class="form-control" [autoFocus]="true"
+													   formControlName="veIds"
+													   type="text" id="veIds" (change)="searchVeIds()"
+													   name="veIds"/>
+											</div>
+										</div>
+										<div class="row">
+											<label tooltip="{{'Von' | translate:'synchronization.von'}}"
+												   class="col-lg-2 col-md-3 control-label">{{ 'Von' | translate:'synchronization.von' }}</label>
+											<div class="col-lg-4 col-md-9">
+												<input type="datetime-local"
+													   class="form-control"
+													   name="vonDatumFilter"
+													   id="vonDatumFilter"
+													   formControlName="vonDatumFilter"
+													   autocomplete="off"
+													   [allowInput]="true"
+													   [enableTime]="true"
+													   mwlFlatpickr
+													   (flatpickrValueUpdate)="dataPickerValueUpdate($event)"
+													   [convertModelValue]="true"
+													   dateFormat="d.m.Y H.i.S"/>
+											</div>
+											<label tooltip="{{'Bis' | translate:'synchronization.bis'}}"
+												   class="col-lg-2 col-md-3 control-label">{{ 'Bis' | translate:'synchronization.bis' }}</label>
+											<div class="col-lg-4 col-md-9">
+												<input type="datetime-local"
+													   class="form-control"
+													   name="bisDatumFilter"
+													   id="bisDatumFilter"
+													   formControlName="bisDatumFilter"
+													   autocomplete="off"
+													   [allowInput]="true"
+													   [enableTime]="true"
+													   mwlFlatpickr
+													   (flatpickrValueUpdate)="dataPickerValueUpdate($event)"
+													   [convertModelValue]="true"
+													   dateFormat="d.m.Y H.i.S"/>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-lg-1 col-md-1">
+										<button (click)="refreshTable()" class="mr-2 mb-2">
+											<span><span class="glyphicon glyphicon-refresh"></span></span>
+										</button>
+										<button (click)="exportExcel()" class="mr-2">
+											<span><span class="icon icon--excel"></span></span>
+										</button>
+									</div>
+								</div>
+
+							</form>
+
+							<div class="row">
+								<div class="col-md-12 col-xs-12">
+									<cmi-viaduc-grid #flexGrid
+													 class="wijmo-orders-list"
+													 style="max-height:400px;"
+													 [itemsSource]="synchronisationItems"
+													 [dataMaps]="valueFilters"
+													 [name]="'syncActionMonitor'"
+													 (initialized)="flexInitialized(flexGrid)"
+													 [defaultSortColumnKey]="'syncActionId'"
+													 [enableMultiSort]="true"
+													 (onFilterApplied)="onGridFilterApplied($event)">
+										<wj-flex-grid-column *ngFor="let col of visibleColumns" [visible]="col.visible"
+															 [binding]="col.key"
+															 [width]="col.width"
+															 [minWidth]="col.minWidth ? col.minWidth : 25"
+															 [format]="col.format"
+															 [dataType]="col.dataType ? col.dataType : 1"
+															 [header]="col.defaultLabel"
+															 [filter]="{ operator: 'eq' }">
+											<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item"
+														 *ngIf="col.key === 'archiveRecordId'">
+												<a href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.archiveRecordId}}"
+												   target="_blank"
+												   *ngIf="item.archiveRecordId && item.archiveRecordId !==0;else emptyVeId">
+													{{ item.archiveRecordId }}</a>
+												<ng-template #emptyVeId>
+													{{ 'Fehler' }}
+												</ng-template>
+											</ng-template>
+
+
+											<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item"
+														 *ngIf="col.key === 'numberOfTries'">
+												{{ item.numberOfTries != null ? item.numberOfTries : 0 }}
+											</ng-template>
+
+
+										</wj-flex-grid-column>
+									</cmi-viaduc-grid>
+								</div>
+							</div>
+							<div class="row bottom-pagination">
+								<div class="col-xs-12">
+									<cmi-viaduc-odata-pagination
+										[(collectionView)]="synchronisationItems"></cmi-viaduc-odata-pagination>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12">
+									<cmi-viaduc-grid #flexGridLog
+													 class="wijmo-orders-list"
+													 [name]="'syncActionLog'"
+													 [displaySelectionColumn]="false"
+													 [enableMultiSort]="false">
+										<wj-flex-grid-column [visible]="true"
+															 [binding]="'logDate'"
+															 [width]="300"
+															 [format]="'dd.MM.yyyy HH:mm:ss'"
+															 [dataType]="4"
+															 [header]="'Datum'">
+										</wj-flex-grid-column>
+										<wj-flex-grid-column [visible]="true"
+															 [binding]="'actionStatusHistory'"
+															 [width]="300"
+															 [dataType]="1"
+															 [header]="'Status'">
+										</wj-flex-grid-column>
+										<wj-flex-grid-column [visible]="true"
+															 [binding]="'errorReason'"
+															 width="*"
+															 [dataType]="1"
+															 [header]="'Fehlertext'">
+										</wj-flex-grid-column>
+									</cmi-viaduc-grid>
+								</div>
+							</div>
+
+						</div>
+						<div class="tab-pane" id="perHourTab">
+							<button class="btn btn-link" (click)="updateSyncNumberPerHourTable()"><i
+								class="glyphicon glyphicon-refresh"></i></button>
+							<span class="h3">Anzahl Tage</span>&nbsp;&nbsp;<input id="countDays"
+																				  type="number"
+																				  [ngModel]="this.countDays"
+																				  (input)="countDaysClick($event)"
+						>
+							<cmi-viaduc-grid #flexGridSyncPerHour
+											 class="wijmo-sync-list"
+											 [name]="'syncNumberPerHour'"
+											 [displaySelectionColumn]="false"
+											 [enableMultiSort]="false">
+								<wj-flex-grid-column [visible]="true"
+													 [binding]="'lastModified'"
+													 [width]="300"
+													 [format]="'dd.MM.yyyy HH:mm:ss'"
+													 [dataType]="4"
+													 [header]="'Datum Std.'">
+								</wj-flex-grid-column>
+								<wj-flex-grid-column [visible]="true"
+													 [binding]="'actionStatus'"
+													 [width]="300"
+													 [dataType]="1"
+													 [header]="'Status'">
+								</wj-flex-grid-column>
+								<wj-flex-grid-column [visible]="true"
+													 [binding]="'recordCount'"
+													 [width]="300"
+													 [dataType]="1"
+													 [header]="'Anzahl Records'">
+								</wj-flex-grid-column>
+							</cmi-viaduc-grid>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+		</div>
+
+	</cmi-viaduc-layout-left-content>
+</div>
+

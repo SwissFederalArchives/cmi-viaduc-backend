@@ -1,0 +1,1 @@
+This folder contains the db model made with DeZign for Databases (Expert) https://www.datanamic.com/

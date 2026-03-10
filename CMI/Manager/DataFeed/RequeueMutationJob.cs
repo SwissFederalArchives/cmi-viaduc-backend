@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using CMI.Contract.Harvest;
 using CMI.Manager.DataFeed.Properties;
+using CMI.Manager.DataFeed.SyncLog;
 using Quartz;
 using Serilog;
 
@@ -15,26 +15,25 @@ namespace CMI.Manager.DataFeed
     [DisallowConcurrentExecution]
     public class RequeueMutationJob : IJob
     {
-        private readonly IDbMutationQueueAccess dbMutationQueueAccess;
+        private readonly IDbSyncLogAccess dbSyncLogAccess;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CheckMutationQueueJob" /> class.
         /// </summary>
-        /// <param name="dbMutationQueueAccess">The db access class.</param>
-        public RequeueMutationJob(IDbMutationQueueAccess dbMutationQueueAccess)
+        /// <param name="dbSyncLogAccess">The db access class.</param>
+        public RequeueMutationJob(IDbSyncLogAccess dbSyncLogAccess)
         {
-            this.dbMutationQueueAccess = dbMutationQueueAccess;
+            this.dbSyncLogAccess = dbSyncLogAccess;
         }
 
-        public Task Execute(IJobExecutionContext context)
+        public async Task Execute(IJobExecutionContext context)
         {
             Log.Information("Starting to check if re-queuing records can be found.");
 
             var maxRetries = Settings.Default.MaxNumberOfRetries;
-            var recordsAffected = dbMutationQueueAccess.ResetFailedSyncOperations(maxRetries);
+            var recordsAffected = await dbSyncLogAccess.ResetFailedSyncOperations(maxRetries);
 
             Log.Information("Reset {recordsAffected} records to initial status.", recordsAffected);
-            return Task.CompletedTask;
         }
     }
 }

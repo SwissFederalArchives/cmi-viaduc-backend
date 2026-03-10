@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Castle.Components.DictionaryAdapter;
 using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
@@ -13,35 +8,18 @@ using CMI.Manager.Index.Config;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Index.Tests;
 
 [TestFixture]
 public class SyncAnonymizedTextsWithRelatedRecordsTests
 {
-    [Test]
-    public void If_archive_record_id_is_not_numeric_nothing_is_made()
-    {
-        // Arrange
-        Mock<ISearchIndexDataAccess> dbAccessMock = new();
-        Mock<IManuelleKorrekturAccess> dbManuelleKorrekturAccessMock = new();
-        Mock<IAnonymizationEngine> anomizationEngineMock = new();
-        Mock<IAnonymizationReferenceEngine> anonymizationWithManuelleKorrekturEngine = new();
-        var indexManager = SetupIndexManager(dbAccessMock, anomizationEngineMock, dbManuelleKorrekturAccessMock, anonymizationWithManuelleKorrekturEngine, null);
-        var elasticRecord = new ElasticArchiveDbRecord
-        {
-            ArchiveRecordId = "test",
-        };
-
-        // Act
-        var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
-
-        // Assert
-        anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Never);
-        dbManuelleKorrekturAccessMock.Verify(f => f.GetManuelleKorrektur(It.IsAny<int>()), Times.Never);
-        result.ArchiveRecordId.Should().Be(elasticRecord.ArchiveRecordId);
-    }
-
     [Test]
     public void If_No_ManuelleKorrektur_exists_then_no_updates_are_made()
     {
@@ -54,7 +32,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
 
         var elasticRecord = new ElasticArchiveDbRecord
         {
-            ArchiveRecordId = "7",
+            ArchiveRecordId = "Vz      6eaf8345-0bb6-43e3-8866-35d6cf4722bd",
             ParentArchiveRecordId = "12",
             FieldAccessTokens = new List<string> { "BAR" },
             IsAnonymized = false,
@@ -62,7 +40,9 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
             UnanonymizedFields = new UnanonymizedFields
             {
                 Title = "Ball Geheim"
-            }
+            },
+            ExternalKeys = new EditableList<ExternalKey>{new () { Key = "scopeArchiv", Value = "7" }}
+           
         };
 
         dbManuelleKorrekturAccessMock.Setup(db => db.GetManuelleKorrektur(It.IsAny<Func<ManuelleKorrektur, bool>>())).Returns(
@@ -73,6 +53,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
 
         // Assert
         anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Once);
+        dbManuelleKorrekturAccessMock.Verify(db => db.GetManuelleKorrektur(It.IsAny<Func<ManuelleKorrektur, bool>>()), Times.Exactly(2));
         result.Should().Be(elasticRecord);
     }
 
@@ -102,7 +83,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
 
         var manuelleKorrektur = new ManuelleKorrekturDto
         {
-            VeId = 7,
+            VeId = "7",
             Aktenzeichen = "XY",
             AnonymisiertZumErfassungszeitpunk = true,
             Anonymisierungsstatus = (int) AnonymisierungsStatusEnum.Published,
@@ -157,7 +138,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
 
         var manuelleKorrektur = new ManuelleKorrekturDto
         {
-            VeId = 7,
+            VeId = "7",
             Aktenzeichen = "XY",
             AnonymisiertZumErfassungszeitpunk = true,
             Anonymisierungsstatus = 1,
@@ -216,8 +197,8 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
             }
         };
         var manuelleKorrektur = new ManuelleKorrekturDto
-        {
-            VeId = 7,
+        {   
+            VeId = "7",
             Aktenzeichen = "XY",
             AnonymisiertZumErfassungszeitpunk = true,
             Anonymisierungsstatus = (int) AnonymisierungsStatusEnum.InProgress,
@@ -283,7 +264,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         elasticRecord.SetCustomProperty("bemerkungZurVe", "Heinz Harald Geschichtenbuch");
         var manuelleKorrektur = new ManuelleKorrekturDto
         {
-            VeId = 7,
+            VeId = "7",
             Aktenzeichen = "XY",
             AnonymisiertZumErfassungszeitpunk = true,
             Anonymisierungsstatus = 1,
@@ -339,7 +320,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         };
         var manuelleKorrektur = new ManuelleKorrekturDto
         {
-            VeId = 7,
+            VeId = "7",
             Aktenzeichen = "XY",
             AnonymisiertZumErfassungszeitpunk = true,
             Anonymisierungsstatus = 1,
@@ -381,10 +362,74 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         dbAccessMock.Setup(db =>
             db.FindDbDocument(It.IsAny<string>(), It.IsAny<MetadataToExclude>())).Returns
             <string, bool>(GetElasticArchiveDbRecordMoq);
-
         return indexManager;
     }
 
+
+    [Test]
+    public void If_ManuelleKorrektur_exists_but_still_has_the_ScopeId_then_update_the_manuelle_korrektur_but_verify_that_it_is_not_used()
+    {
+        // Arrange
+        Mock<ISearchIndexDataAccess> dbAccessMock = new();
+        var dbManuelleKorrekturAccessMock = new ManuelleKorrekturAccessFake();
+        Mock<IAnonymizationEngine> anomizationEngineMock = new();
+        Mock<IAnonymizationReferenceEngine> anonymizationWithManuelleKorrekturEngine = new();
+       
+        var elasticRecord = new ElasticArchiveDbRecord
+        {
+            ArchiveRecordId = "Vz      6eaf8345-0bb6-43e3-8866-35d6cf4722b",
+            ParentArchiveRecordId = "Klas    8cf618fd-246b-4ce5-8965-df547fcfc836",
+            FieldAccessTokens = new List<string> { "BAR" },
+            IsAnonymized = false,
+            Title = "Heinz Harald Geschichten ███",
+            UnanonymizedFields = new UnanonymizedFields
+            {
+                Title = "Heinz Harald Geschichten Buch"
+            },
+            ExternalKeys = new EditableList<ExternalKey> { new() { Key = "scopeArchiv", Value = "7" },
+                new() { Key = "ActaPro", Value = "Vz      6eaf8345-0bb6-43e3-8866-35d6cf4722b" } }
+        };
+        var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customFieldsConfig.json");
+        var config = new CustomFieldsConfiguration(configFile);
+        var indexManager = new IndexManager(dbAccessMock.Object, config, anomizationEngineMock.Object, dbManuelleKorrekturAccessMock, anonymizationWithManuelleKorrekturEngine.Object);
+
+
+        // Act
+        var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
+
+        // Assert
+        result.ArchiveRecordId.Should().Be(dbManuelleKorrekturAccessMock.ManuelleKorrektur.VeId, "ArchiveRecordId was not updated");
+    }
+
+    [Test]
+    public void If_ManuelleKorrektur_exists_but_still_has_the_ScopeId_then_delete_ManuelleKorrektur_when_FieldAccessTokens_isEmpty()
+    {
+        // Arrange
+        Mock<ISearchIndexDataAccess> dbAccessMock = new();
+        var dbManuelleKorrekturAccessMock = new ManuelleKorrekturAccessFake();
+        Mock<IAnonymizationEngine> anomizationEngineMock = new();
+        Mock<IAnonymizationReferenceEngine> anonymizationWithManuelleKorrekturEngine = new();
+
+        var elasticRecord = new ElasticArchiveRecord
+        {
+            ArchiveRecordId = "Vz      6eaf8345-0bb6-43e3-8866-35d6cf4722b",
+            ParentArchiveRecordId = "Klas    8cf618fd-246b-4ce5-8965-df547fcfc836",
+            FieldAccessTokens = new List<string> {  },
+            IsAnonymized = false,
+            Title = "Heinz Harald Geschichten ███",
+            ExternalKeys = new EditableList<ExternalKey> { new() { Key = "scopeArchiv", Value = "7" },
+                new() { Key = "ActaPro", Value = "Vz      6eaf8345-0bb6-43e3-8866-35d6cf4722b" } }
+        };
+        var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customFieldsConfig.json");
+        var config = new CustomFieldsConfiguration(configFile);
+        var indexManager = new IndexManager(dbAccessMock.Object, config, anomizationEngineMock.Object, dbManuelleKorrekturAccessMock, anonymizationWithManuelleKorrekturEngine.Object);
+        
+        // Act
+       indexManager.DeletePossiblyExistingManuelleKorrektur(elasticRecord);
+
+        // Assert
+        dbManuelleKorrekturAccessMock.ManuelleKorrektur.Should().BeNull("DeletePossiblyExistingManuelleKorrektur was not work");
+    }
 
     private ElasticArchiveDbRecord GetElasticArchiveDbRecordMoq(string archiveRecordIdOrSignature, bool includeFulltextContent)
     {
@@ -456,5 +501,4 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
 
         return null;
     }
-
 }

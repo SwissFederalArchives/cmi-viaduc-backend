@@ -9,7 +9,7 @@ export class OrderListDisplayItem implements OrderItem {
 	public period: string;
 	public referenceCode: string;
 	public comment: string;
-	public veId: number;
+	public veId: string;
 	public id: string;
 	public status: ExternalStatus;
 	public statusDisplay: string;

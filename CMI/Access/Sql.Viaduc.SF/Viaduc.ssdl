@@ -8,6 +8,11 @@
     <EntitySet Name="ManuelleKorrekturFelder" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturFeld" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturFeld" />
     <EntitySet Name="ManuelleKorrekturStatusHistories" EntityType="CMI.Access.Sql.Viaduc.EF.Store.ManuelleKorrekturStatusHistory" store:Type="Tables" Schema="dbo" Table="ManuelleKorrekturStatusHistory" />
     <EntitySet Name="v_ManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_ManuelleKorrektur" store:Type="Views" Schema="dbo" Table="v_ManuelleKorrektur" />
+    <EntitySet Name="SyncActions" EntityType="CMI.Access.Sql.Viaduc.EF.Store.SyncAction" store:Type="Tables" Schema="dbo" Table="SyncAction" />
+    <EntitySet Name="SyncActionLogs" EntityType="CMI.Access.Sql.Viaduc.EF.Store.SyncActionLog" store:Type="Tables" Schema="dbo" Table="SyncActionLog" />
+    <EntitySet Name="SyncInfos" EntityType="CMI.Access.Sql.Viaduc.EF.Store.SyncInfo" store:Type="Tables" Schema="dbo" Table="SyncInfo" />
+    <EntitySet Name="v_SyncNumberPerHours" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_SyncNumberPerHour" store:Type="Views" Schema="dbo" Table="v_SyncNumberPerHour" />
+    <EntitySet Name="v_SyncActions" EntityType="CMI.Access.Sql.Viaduc.EF.Store.v_SyncAction" store:Type="Views" Schema="dbo" Table="v_SyncAction" />
     <AssociationSet Name="Collection_Collection" Association="CMI.Access.Sql.Viaduc.EF.Store.Collection_Collection">
       <End Role="Collection" EntitySet="Collections" />
       <End Role="Collection1" EntitySet="Collections" />
@@ -19,6 +24,10 @@
     <AssociationSet Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1" Association="CMI.Access.Sql.Viaduc.EF.Store.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
       <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
       <End Role="ManuelleKorrekturStatusHistory" EntitySet="ManuelleKorrekturStatusHistories" />
+    </AssociationSet>
+    <AssociationSet Name="SyncAction_SyncActionLog" Association="CMI.Access.Sql.Viaduc.EF.Store.SyncAction_SyncActionLog">
+      <End Role="SyncAction" EntitySet="SyncActions" />
+      <End Role="SyncActionLog" EntitySet="SyncActionLogs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Collection">
@@ -296,7 +305,7 @@
       <PropertyRef Name="ManuelleKorrekturId" />
     </Key>
     <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="VeId" Type="int" Nullable="false" />
+    <Property Name="VeId" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
     <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
@@ -311,7 +320,7 @@
     <Property Name="Entstehungszeitraum" Type="nvarchar" MaxLength="100" />
     <Property Name="ZugänglichkeitGemässBGA" Type="nvarchar" Nullable="false" MaxLength="100" />
     <Property Name="Schutzfristverzeichnung" Type="nvarchar" MaxLength="200" />
-    <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="100" />
+    <Property Name="ZuständigeStelle" Type="nvarchar" MaxLength="255" />
     <Property Name="Publikationsrechte" Type="nvarchar" MaxLength="200" />
     <Property Name="AnonymisiertZumErfassungszeitpunk" Type="bit" Nullable="false" />
   </EntityType>
@@ -352,7 +361,7 @@
       <PropertyRef Name="AnonymisiertZumErfassungszeitpunk" />
     </Key>
     <Property Name="ManuelleKorrekturId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="VeId" Type="int" Nullable="false" />
+    <Property Name="VeId" Type="nvarchar" Nullable="false" MaxLength="255" />
     <Property Name="Signatur" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Schutzfristende" Type="datetime2" Nullable="false" />
     <Property Name="Titel" Type="nvarchar(max)" Nullable="false" />
@@ -385,6 +394,61 @@
     <Property Name="VerwandteVEGemAIS" Type="nvarchar(max)" />
     <Property Name="VerwandteVEAutomatischAnonymisiert" Type="nvarchar(max)" />
     <Property Name="VerwandteVEManuellKorrigiert" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SyncAction">
+    <Key>
+      <PropertyRef Name="SyncActionId" />
+    </Key>
+    <Property Name="SyncActionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ArchiveRecordId" Type="nvarchar" MaxLength="255" />
+    <Property Name="ActionType" Type="nvarchar" MaxLength="40" />
+    <Property Name="ActionStatus" Type="int" DefaultValue="0" />
+    <Property Name="NumberOfTries" Type="int" DefaultValue="0" />
+    <Property Name="CreatedOn" Type="datetime2" devart:DefaultValue="getdate()" />
+    <Property Name="ModifiedOn" Type="datetime2" devart:DefaultValue="getdate()" />
+  </EntityType>
+  <EntityType Name="SyncActionLog">
+    <Key>
+      <PropertyRef Name="SyncActionLogId" />
+    </Key>
+    <Property Name="SyncActionLogId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SyncActionId" Type="bigint" />
+    <Property Name="LogDate" Type="datetime2" devart:DefaultValue="getdate()" />
+    <Property Name="ActionStatusHistory" Type="nvarchar" MaxLength="40" />
+    <Property Name="ErrorReason" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SyncInfo">
+    <Key>
+      <PropertyRef Name="SyncInfoId" />
+    </Key>
+    <Property Name="SyncInfoId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LastChangeDate" Type="datetime2" />
+  </EntityType>
+  <EntityType Name="v_SyncNumberPerHour">
+    <Key>
+      <PropertyRef Name="LastModified" />
+      <PropertyRef Name="ActionStatus" />
+    </Key>
+    <Property Name="LastModified" Type="nvarchar" Nullable="false" MaxLength="4000" />
+    <Property Name="LastModifiedDay" Type="date" />
+    <Property Name="RecordCount" Type="int" />
+    <Property Name="ActionStatus" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="v_SyncAction">
+    <Key>
+      <PropertyRef Name="SyncActionId" />
+    </Key>
+    <Property Name="SyncActionId" Type="bigint" Nullable="false" />
+    <Property Name="ArchiveRecordId" Type="nvarchar" MaxLength="255" />
+    <Property Name="ActionType" Type="nvarchar" MaxLength="40" />
+    <Property Name="ActionStatus" Type="int" />
+    <Property Name="NumberOfTries" Type="int" />
+    <Property Name="CreatedOn" Type="datetime2" />
+    <Property Name="ModifiedOn" Type="datetime2" />
+    <Property Name="SyncActionLogId" Type="int" />
+    <Property Name="LogDate" Type="datetime2" />
+    <Property Name="ErrorReason" Type="nvarchar(max)" />
+    <Property Name="ActionStatusHistory" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="Collection_Collection">
     <End Role="Collection" Type="CMI.Access.Sql.Viaduc.EF.Store.Collection" Multiplicity="0..1" />
@@ -423,6 +487,20 @@
       </Principal>
       <Dependent Role="ManuelleKorrekturStatusHistory">
         <PropertyRef Name="ManuelleKorrekturId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SyncAction_SyncActionLog">
+    <End Role="SyncAction" Type="CMI.Access.Sql.Viaduc.EF.Store.SyncAction" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SyncActionLog" Type="CMI.Access.Sql.Viaduc.EF.Store.SyncActionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SyncAction">
+        <PropertyRef Name="SyncActionId" />
+      </Principal>
+      <Dependent Role="SyncActionLog">
+        <PropertyRef Name="SyncActionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

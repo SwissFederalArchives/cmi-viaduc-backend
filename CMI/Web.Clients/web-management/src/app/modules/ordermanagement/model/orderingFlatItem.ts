@@ -15,7 +15,7 @@ export class OrderingFlatItem {
 	public user: string;
 	public userId: string;
 	public itemId: number;
-	public veId: number;
+	public veId: string;
 	public itemComment: string;
 	public orderId: number;
 	public bewilligungsDatum: Date;

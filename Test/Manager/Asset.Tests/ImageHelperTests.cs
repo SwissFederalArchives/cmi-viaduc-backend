@@ -11,7 +11,7 @@ public class ImageHelperTests
     public void Reading_image_size_from_premis_file_returns_correct_dimensions()
     {
         // Arrange
-        var testFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\iiifSourceData\30409374\content\Dokument_0000003\00000011.jp2");
+        var testFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\iiifSourceData\Vz      a2ad9673-74f1-5705-9775-7072b417d3d3\content\Dokument_0000003\00000011.jp2");
 
         var sut = new ImageHelper(new ScansZusammenfassenSettings()
             { DefaultAufloesungInDpi = 300, GroesseInProzent = 100, JpegQualitaetInProzent = 100 });
@@ -46,7 +46,7 @@ public class ImageHelperTests
     public void Reading_image_resolution_from_premis_file_returns_correct_resolution()
     {
         // Arrange
-        var testFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\iiifSourceData\30409374\content\Dokument_0000003\00000011.jp2");
+        var testFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\iiifSourceData\Vz      a2ad9673-74f1-5705-9775-7072b417d3d3\content\Dokument_0000003\00000011.jp2");
 
         var sut = new ImageHelper(new ScansZusammenfassenSettings()
             { DefaultAufloesungInDpi = 100, GroesseInProzent = 100, JpegQualitaetInProzent = 100 });

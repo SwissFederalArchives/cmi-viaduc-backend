@@ -163,7 +163,7 @@ namespace CMI.Web.Management.api.Controllers
                 return StatusCode(HttpStatusCode.Forbidden);
             }
 
-            var item = await GetOrderingDetailItemInternal(id, true);
+            var item = await GetOrderingDetailItemInternal(id, UseUnanonymizedData.Yes);
 
             return Ok(item);
         }
@@ -173,7 +173,7 @@ namespace CMI.Web.Management.api.Controllers
         {
             var access = ManagementControllerHelper.GetUserAccess();
 
-            var detail = await GetOrderingDetailItemInternal(id, true);
+            var detail = await GetOrderingDetailItemInternal(id, UseUnanonymizedData.Yes);
             if (detail?.Item == null)
             {
                 return NotFound();
@@ -192,7 +192,7 @@ namespace CMI.Web.Management.api.Controllers
             return Ok(detail);
         }
 
-        private async Task<OrderingFlatDetailItem> GetOrderingDetailItemInternal(int id, bool nichtSichtbarEinsehen = false)
+        private async Task<OrderingFlatDetailItem> GetOrderingDetailItemInternal(int id, UseUnanonymizedData nichtSichtbarEinsehen = UseUnanonymizedData.No)
         {
             var ctx = new ViaducContext(WebHelper.Settings["sqlConnectionString"]);
             var flatItem = ctx.OrderingFlatItem.FirstOrDefault(i => i.ItemId == id);
@@ -205,15 +205,15 @@ namespace CMI.Web.Management.api.Controllers
             var item = new OrderingFlatDetailItem();
             item.FromFlatItem(flatItem);
 
-            if (flatItem.VeId.HasValue)
+            if (!string.IsNullOrEmpty(flatItem.VeId))
             {
-                var elasticItem = await GetElasticArchiveRecord(flatItem.VeId.Value.ToString(), nichtSichtbarEinsehen);
+                var elasticItem = await GetElasticArchiveRecord(flatItem.VeId, nichtSichtbarEinsehen);
                 if (elasticItem != null)
                 {
                     var ancestors = elasticItem.GetArchivePlanContext();
                     item.ArchivplanKontext = ancestors;
 
-                    if (nichtSichtbarEinsehen)
+                    if (nichtSichtbarEinsehen == UseUnanonymizedData.Yes)
                     {
                         var snapshot = OrderHelper.GetOrderingIndexSnapshot(elasticItem);
                         OrderHelper.ApplySnapshotToDetailItem(snapshot, item.Item);
@@ -224,7 +224,7 @@ namespace CMI.Web.Management.api.Controllers
                     Log.Warning("elasticRecord nicht gefunden ");
                 }
 
-                var orderHistory = (await orderManagerClient.GetOrderingHistoryForVe(flatItem.VeId.Value)).ToList();
+                var orderHistory = (await orderManagerClient.GetOrderingHistoryForVe(flatItem.VeId)).ToList();
                 item.OrderingHistory = orderHistory.Take(3);
                 item.HasMoreOrderingHistory = orderHistory.Count > 3;
             }
@@ -280,7 +280,7 @@ namespace CMI.Web.Management.api.Controllers
 
      
 
-        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId, bool nichtSichtbarEinsehen = false)
+        private async Task<ElasticArchiveRecord> GetElasticArchiveRecord(string archiveRecordId, UseUnanonymizedData nichtSichtbarEinsehen = UseUnanonymizedData.No)
         {
             var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(
                 new FindArchiveRecordRequest
@@ -292,9 +292,9 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetOrderingHistoryForVe(int id)
+        public async Task<IHttpActionResult> GetOrderingHistoryForVe(string veId)
         {
-            var orderHistory = (await orderManagerClient.GetOrderingHistoryForVe(id)).ToList();
+            var orderHistory = (await orderManagerClient.GetOrderingHistoryForVe(veId)).ToList();
             return Ok(orderHistory);
         }
 
@@ -499,15 +499,15 @@ namespace CMI.Web.Management.api.Controllers
             var snapshots = new List<OrderingIndexSnapshot>();
             foreach (var item in items)
             {
-                if (!item.VeId.HasValue)
+                if (string.IsNullOrEmpty(item.VeId))
                 {
                     return BadRequest("Formularbestellungen sind in dieser Funktion nicht zulässig");
                 }
 
-                var elasticItem = await GetElasticArchiveRecord(item.VeId.Value.ToString());
+                var elasticItem = await GetElasticArchiveRecord(item.VeId);
                 if (elasticItem == null)
                 {
-                    throw new Exception($"Ve with ID {item.VeId.Value} not found");
+                    throw new Exception($"Ve with ID {item.VeId} not found");
                 }
 
                 var snapshot = OrderHelper.GetOrderingIndexSnapshot(elasticItem);

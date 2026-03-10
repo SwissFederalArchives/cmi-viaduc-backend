@@ -27,7 +27,7 @@ namespace CMI.Contract.Order
 
         #region Zusätzlich für Anbindung Vecteur
 
-        public int? VeId { get; set; }
+        public string VeId { get; set; }
         public string OrderItemComment { get; set; }
         public DateTime OrderDate { get; set; }
         public ApproveStatus ApproveStatus { get; set; }

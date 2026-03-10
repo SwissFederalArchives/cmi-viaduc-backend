@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DigitalisierungsAuftrag xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/C:/Dev/CMInformatik/Viaduc/CMI/Contract/Common/Digitalisierungsauftrag.xsd">
+    <Ablieferung>
+        <Ablieferungsnummer>Ablieferungsnummer0</Ablieferungsnummer>
+        <AblieferndeStelle>AblieferndeStelle0</AblieferndeStelle>
+        <AktenbildnerName>AktenbildnerName0</AktenbildnerName>
+    </Ablieferung>
+    <OrdnungsSystem>
+        <Signatur>Signatur0</Signatur>
+        <Name>Name0</Name>
+    </OrdnungsSystem>
+    <Dossier>
+        <Signatur>Signatur1</Signatur>
+        <Titel>Titel0</Titel>
+        <Entstehungszeitraum>Entstehungszeitraum0</Entstehungszeitraum>
+        <Stufe>Stufe0</Stufe>
+        <VerzEinheitId></VerzEinheitId>
+        <InSchutzfrist>false</InSchutzfrist>
+    </Dossier>
+</DigitalisierungsAuftrag>

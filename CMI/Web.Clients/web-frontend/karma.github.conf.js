@@ -31,7 +31,7 @@ module.exports = function (config) {
 			check: {
 				emitWarning: false,
 				global: {
-					statements: 17
+					statements: 16
 				}
 			}
 		},

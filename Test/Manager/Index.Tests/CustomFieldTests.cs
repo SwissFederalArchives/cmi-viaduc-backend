@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
-using CMI.Access.Common;
+﻿using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
 using CMI.Engine.Anonymization;
@@ -12,6 +8,10 @@ using Microsoft.CSharp.RuntimeBinder;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
 namespace CMI.Manager.Index.Tests
 {
     [TestFixture]
@@ -164,6 +164,41 @@ namespace CMI.Manager.Index.Tests
 
             // Assert
             action.Should().Throw<FileNotFoundException>();
+        }
+
+        [Test]
+        public void Test_IndexManager_Should_Fill_ExternalKeys_Correctly()
+        {
+            // Arrange
+            var configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customFieldsConfig.json");
+            var mockSearchIndexAccess = new Mock<ISearchIndexDataAccess>();
+            var mockAnonymisationEngine = new Mock<IAnonymizationEngine>();
+            var mockManuelleKorrekturAccess = new Mock<IManuelleKorrekturAccess>();
+            var mockAnonymizationWithManuelleKorrekturEngine = new Mock<IAnonymizationReferenceEngine>();
+
+            mockSearchIndexAccess.Setup(s => s
+                    .UpdateDocument(It.IsAny<ElasticArchiveRecord>()))
+                .Callback(() => Console.WriteLine("Update Document was called"));
+
+            mockSearchIndexAccess.Setup(s => s
+                    .RemoveDocument(It.IsAny<string>()))
+                .Callback(() => Console.WriteLine("Remove Document was called"));
+
+            var config = new CustomFieldsConfiguration(configFile);
+            var indexmanager = new IndexManager(mockSearchIndexAccess.Object, config, mockAnonymisationEngine.Object, mockManuelleKorrekturAccess.Object, mockAnonymizationWithManuelleKorrekturEngine.Object);
+          
+            var dataElementFileVz1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data",
+                "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020.json");
+            var archiveRecord = JsonConvert.DeserializeObject<ArchiveRecord>(File.ReadAllText(dataElementFileVz1));
+
+            // Act
+            var elasticArchiveRecord = indexmanager.ConvertArchiveRecord(archiveRecord);
+
+            // Assert
+            elasticArchiveRecord.ExternalKeys.Should().NotBeNull("ExternalKeys Property should be filled correctly");
+            elasticArchiveRecord.ExternalKeys.Should().HaveCount(2, "ExternalKeys should have 2 elements");
+            elasticArchiveRecord.ExternalKeys.Should().Contain(x => x.Key == "ActaPro" && x.Value == "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020");
+            elasticArchiveRecord.ExternalKeys.Should().Contain(x => x.Key == "scopeArchiv" && x.Value == "21687162");
         }
     }
 }

@@ -1,0 +1,202 @@
+{
+  "object": "document",
+  "type": "Dokum",
+  "DocKey": "Vz      010efc87-3f8c-5fb5-947f-ee9ba4693020",
+  "DocTitle": "J2.143#1996/386#1119*   Schweizer Filmwochenschau vom 12.06.1964, 1964.06.12 (Dossier)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 12:02:50:145",
+  "block": {
+    "type": "Doku",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Vz"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "24"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U2051"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "U1917"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "12.08.2016"
+      },
+      {
+        "type": "CreateDate",
+        "value": "21.03.1982"
+      },
+      {
+        "type": "ScopeID",
+        "value": "21687162"
+      },
+      {
+        "type": "Vz_OwnSign",
+        "value": "J2.143#1996/386#1119*"
+      },
+      {
+        "type": "Vz_Titel",
+        "value": "Schweizer Filmwochenschau vom 12.06.1964"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1964.06.12"
+      },
+      {
+        "type": "Vz_Bez",
+        "value": "J2.143#1996/386#1119*   Schweizer Filmwochenschau vom 12.06.1964, 1964.06.12 (Dossier)"
+      },
+      {
+        "type": "Form_Gp",
+        "fields": [
+          {
+            "type": "Form",
+            "value": "Video"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Aktenzeichen",
+        "value": "1119"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1996/00386 Keine Angaben (k.A.) 2 (1940-1975)"
+          }
+        ]
+      },
+      {
+        "type": "Ablieferung_KatAutomatisierung",
+        "value": "2"
+      },
+      {
+        "type": "Ablieferung_Publikationsrechte",
+        "value": "BAR"
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "Vz_MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Vz_Schutzfristkategorie",
+        "value": "3"
+      },
+      {
+        "type": "Vz_Schutzfristbasisdatum",
+        "value": "Zeitraumende"
+      },
+      {
+        "type": "Vz_Schutzfristdauer",
+        "value": "0"
+      },
+      {
+        "type": "Vz_Schutzfristende",
+        "value": "31.12.1964",
+        "timerange": {
+          "min": "31.12.1964",
+          "max": "31.12.1964",
+          "values": [
+            {
+              "value": "31.12.1964-31.12.1964",
+              "min": "31.12.1964",
+              "max": "31.12.1964"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_ZugaenglichkeitBGA",
+        "value": "Frei zugänglich"
+      },
+      {
+        "type": "Partner_Gp",
+        "fields": [
+          {
+            "type": "Partner_Bez",
+            "value": "Schweizerisches Bundesarchiv (1979-)"
+          }
+        ]
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_"
+      },
+      {
+        "type": "Vz_AkTyp",
+        "value": "Akten allgemein"
+      },
+      {
+        "type": "Vz_Best",
+        "value": "Best    8a1d4ddf-e622-5b69-859f-2566e1a11da8"
+      },
+      {
+        "type": "Vz_Best_DocTitle",
+        "value": "J2.143*   Stiftung Schweizer Filmwochenschau (1942-1975), 1940-1976 (Bestand)"
+      },
+      {
+        "type": "Vz_Bestellsignatur",
+        "value": "J2.143* J2.143#1996/386#1119*"
+      },
+      {
+        "type": "Vz_Id",
+        "value": "010efc87-3f8c-5fb5-947f-ee9ba4693020"
+      }
+    ]
+  }
+}

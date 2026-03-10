@@ -26,7 +26,7 @@
 							<span *ngIf="row.isEmail && !row.isReadOnly" class="help-block email-hint">
 								{{'Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme. Falls Sie Ihre Daten für das Login ändern möchten, klicken Sie bitte hier:' |
 								translate: 'account.contact.changeLoginData'}}
-								<a [href]="eIAMLink">{{'Logindaten editieren.' | translate: 'account.contact.changeLoginDataLink'}}</a>
+								<a [href]="eIAMLink" target="_blank">{{'Logindaten editieren.' | translate: 'account.contact.changeLoginDataLink'}}</a>
 							</span>
                         </span>
 						<span *ngIf="(!row.isReadOnly) && allowEditingUserSettings">
@@ -54,7 +54,7 @@
 								<span *ngIf="row.isEmail && !row.isReadOnly" class="help-block email-hint">
 									{{'Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme. Falls Sie Ihre Daten für das Login ändern möchten, klicken Sie bitte hier:' |
 									translate: 'account.contact.changeLoginData'}}
-									<a [href]="eIAMLink">{{'Logindaten editieren.' | translate: 'account.contact.changeLoginDataLink'}}</a>
+									<a [href]="eIAMLink" target="_blank">{{'Logindaten editieren.' | translate: 'account.contact.changeLoginDataLink'}}</a>
 								</span>
                             </span>
 

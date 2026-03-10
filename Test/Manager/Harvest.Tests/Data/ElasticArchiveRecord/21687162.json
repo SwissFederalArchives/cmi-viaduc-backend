@@ -1,0 +1,164 @@
+{
+  "All": null,
+  "MetadataAccessTokens": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+  "TreePath": "00000000000000018132",
+  "TreeLevel": 0,
+  "Places": null,
+  "IsPhysicalyUsable": false,
+  "Permission": "Keine",
+  "PhysicalUsability": "Uneingeschränkt",
+  "Accessibility": "Öffentlich",
+  "Descriptors": [],
+  "Containers": [
+    {
+      "ContainerLocation": "1/1/291/04/06",
+      "ContainerType": "Plastikkassette",
+      "IdName": "Mg      0541c342-3330-58f9-b0e2-59974252a87f 2819977",
+      "ContainerCode": "2819977",
+      "ContainerCarrierMaterial": "Mikrofilm Diazo"
+    }
+  ],
+  "References": [],
+  "PrimaryData": [],
+  "LastSyncDate": "2023-01-07T13:52:27.4473945+02:00",
+  "AggregationFields": {
+    "Bestand": "E27* - Landesverteidigung - 1848-1950",
+    "Ordnungskomponenten": [],
+    "HasPrimaryData": false,
+    "CreationPeriodYears001": null,
+    "CreationPeriodYears005": null,
+    "CreationPeriodYears010": null,
+    "CreationPeriodYears025": null,
+    "CreationPeriodYears100": null,
+    "ProtectionEndDateDossier": {
+      "Date": "1964-12-31T23:59:00",
+      "Year": 1964
+    }
+  },
+  "FormerReferenceCode": "",
+  "Extent": null,
+  "AccessionDate": 0,
+  "ParentContentInfos": [
+    {
+      "Title": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)",
+      "WithinInfo": null
+    },
+    {
+      "Title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+      "WithinInfo": null
+    },
+    {
+      "Title": "E27* - Landesverteidigung - 1848-1950",
+      "WithinInfo": null
+    },
+    {
+      "Title": "Klaus Kinski",
+      "WithinInfo": null
+    }
+  ],
+  "Thumbnail": null,
+  "ProtectionCategory": "3",
+  "ProtectionDuration": 0,
+  "ExternalKeys": [
+    {
+      "Key": "scopeArchiv",
+      "Value": "21687162"
+    },
+    {
+      "Key": "ActaPro",
+      "Value": "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020"
+    }
+  ],
+  "PrimaryDataLink": null,
+  "ManifestLink": null,
+  "CanBeOrdered": false,
+  "WithinInfo": "",
+  "CustomFields": {
+    "signaturArchivplan": "J2.143#1996/386#1119*",
+    "veAblieferungLink": [
+      {
+        "Value": "1996/00386 Keine Angaben (k.A.) 2 (1940-1975)",
+        "EntityRecordId": "",
+        "EntityType": "Ablieferungen"
+      }
+    ],
+    "veOrdnungskomponenteLink": [],
+    "verwandteVe": [],
+    "bemerkungZurVe": [],
+    "land": [],
+    "zusatzkomponenteZac1": [],
+    "aktenzeichen": [ "1119" ],
+    "früheresAktenzeichen": [],
+    "vorgängerbehörden": [],
+    "nachfolgerbehörden": [],
+    "aipId": [],
+    "urheber": [],
+    "beteiligtePersonenKörperschaften": [],
+    "verleger": [],
+    "abdeckung": [],
+    "thema": [],
+    "format": [],
+    "kategorieDia": 2,
+    "digitalesFindmittelBeschreibung": [],
+    "digitalesFindmittelLink": [],
+    "digitaleVersion": [],
+    "zugänglichkeitGemässBga": "Frei zugänglich",
+    "zuständigeStelle": [ "Schweizerisches Bundesarchiv (1979-)" ]
+  },
+  "ProtectionEndDate": {
+    "Date": "1964-12-31T23:59:00",
+    "Year": 1964
+  },
+  "ArchiveRecordId": "21687162",
+  "Title": "Schweizer Filmwochenschau vom 12.06.1964",
+  "ReferenceCode": "J2.143#1996/386#1119*",
+  "IsAnonymized": false,
+  "IsLeaf": false,
+  "ParentArchiveRecordId": null,
+  "Level": "Dossier",
+  "ChildCount": 0,
+  "TreeSequence": 24,
+  "ArchiveplanContext": [
+    {
+      "IconId": 1,
+      "Level": "Archiv",
+      "RefCode": "CH-BAR#Unterlagen*",
+      "Title": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)",
+      "DateRangeText": "1424-2023",
+      "ArchiveRecordId": "216871621",
+      "Protected": false
+    },
+    {
+      "IconId": 2,
+      "Level": "Hauptabteilung",
+      "RefCode": "E*",
+      "Title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+      "DateRangeText": null,
+      "ArchiveRecordId": "21687163",
+      "Protected": false
+    },
+    {
+      "IconId": 3,
+      "Level": "Bestand",
+      "RefCode": "E27*",
+      "Title": "E27* - Landesverteidigung - 1848-1950",
+      "DateRangeText": null,
+      "ArchiveRecordId": "21687165",
+      "Protected": false
+    },
+    {
+      "IconId": 5,
+      "Level": "Serie",
+      "RefCode": "E27#01",
+      "Title": "Klaus Kinski",
+      "DateRangeText": null,
+      "ArchiveRecordId": "Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677",
+      "Protected": false
+    }
+  ],
+  "CreationPeriod": null,
+  "DisplayTemplateName": "Dossier",
+  "PrimaryDataDownloadAccessTokens": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+  "PrimaryDataFulltextAccessTokens": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+  "FieldAccessTokens": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ]
+}

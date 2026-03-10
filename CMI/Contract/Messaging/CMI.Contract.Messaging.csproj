@@ -14,6 +14,8 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,11 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActaProSyncRecord.cs" />
     <Compile Include="ArchiveRecordAppendPackage.cs" />
     <Compile Include="AssetReady.cs" />
     <Compile Include="BusConstants.cs" />
     <Compile Include="CacheConnectionInfoRequest.cs" />
     <Compile Include="CacheConnectionInfoResponse.cs" />
+    <Compile Include="IDeleteViewerFiles.cs" />
+    <Compile Include="ViaducDataProviderRequestsAndResponses.cs" />
     <Compile Include="CollectionRequestsAndResponses.cs" />
     <Compile Include="CreateOrderFromBasketResponse.cs" />
     <Compile Include="DownloadAssetRequest.cs" />
@@ -67,13 +72,15 @@
     <Compile Include="GetDigitizationOrderDataResponse.cs" />
     <Compile Include="GetElasticLogRecordsRequest.cs" />
     <Compile Include="GetElasticLogRecordsResponse.cs" />
-    <Compile Include="GetHarvestLogInfo.cs" />
+    <Compile Include="GetSecurityTokensResponse.cs" />
+    <Compile Include="IGetSecurityTokens.cs" />
     <Compile Include="IAnonymizeArchiveRecord.cs" />
     <Compile Include="ManuelleKorrekturRequestAndResponse.cs" />
     <Compile Include="RecognitionPostProcessingMessage.cs" />
     <Compile Include="OnboardingMessages.cs" />
     <Compile Include="PrepareForRecognitionMessage.cs" />
     <Compile Include="PrepareForTransformationMessage.cs" />
+    <Compile Include="SynchronisationRequestsAndResponses.cs" />
     <Compile Include="SyncInfoForReportRequest.cs" />
     <Compile Include="SyncInfoForReportResponse.cs" />
     <Compile Include="GetStammdatenRequest.cs" />
@@ -83,7 +90,6 @@
     <Compile Include="IArchiveRecordExtractFulltextFromPackage.cs" />
     <Compile Include="IArchiveRecordRemoved.cs" />
     <Compile Include="IArchiveRecordUpdated.cs" />
-    <Compile Include="GetHarvestStatusInfo.cs" />
     <Compile Include="DoesExistInCacheRequest.cs" />
     <Compile Include="DoesExistInCacheResponse.cs" />
     <Compile Include="IDownloadPackage.cs" />

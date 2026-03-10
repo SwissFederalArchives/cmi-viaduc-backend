@@ -2,18 +2,21 @@
 
 <head>
     <style TYPE="text/css">
-        html, body {
+        html,
+        body {
             font-family: Arial, Helvetica, sans-serif;
             width: 800px;
             font-size: 10pt;
             line-height: 13px;
+            color: black;
         }
 
         table {
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             padding-top: 2px;
             padding-left: 0px;
             padding-bottom: 2px;
@@ -41,9 +44,10 @@
         Sehr geehrter Herr / Sehr geehrte Frau
     </p>
     <p>
-        Mit Schreiben vom {{Erfassungsdatum}} hat uns <span style="color:red">Herr/Frau</span> {{Besteller.Vorname}} {{Besteller.Name}}
+        Mit Schreiben vom {{Erfassungsdatum}} hat uns <span style="color:red">Herr/Frau</span> {{Besteller.Vorname}}
+        {{Besteller.Name}}
         {{#Besteller.Organisation}}
-            ({{Besteller.Organisation}})
+        ({{Besteller.Organisation}})
         {{/Besteller.Organisation}}
         ein Auskunftsgesuch in folgende Unterlagen übermittelt:
     </p>
@@ -58,23 +62,28 @@
             </tr>
             {{#Aufträge}}
             <tr>
-                <td><a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a></td>
+                <td>
+                    <a href="https://{{Global.PublicClientUrl}}/#/de/archiv/einheit/{{BestellteVe.Id}}">{{BestellteVe.Signatur}}</a>
+                </td>
                 <td>{{BestellteVe.Aktenzeichen}}</td>
                 <td>{{BestellteVe.Band}}</td>
-                <td>{{BestellteVe.Titel}}</td>
+                <td>{{BestellteVe.UnprotectedTitel}}</td>
                 <td>{{BestellteVe.Entstehungszeitraum}}</td>
             </tr>
             {{/Aufträge}}
         </table>
     </p>
     <p>
-        Diese Unterlagen unterliegen gemäss Art. <span style="color:red">9/11/12</span> des Bundesgesetzes über die Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) noch einer Schutzfrist.
+        Diese Unterlagen unterliegen gemäss Art. <span style="color:red">9/11/12</span> des Bundesgesetzes über die
+        Archivierung (<a href="http://www.admin.ch/ch/d/sr/c152_1.html">BGA</a>, SR 152.1) noch einer Schutzfrist.
     </p>
     <p>
-        Gemäss Art. 15 BGA und Art. 20 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) kann jede Person über sie betreffende Daten, die beim Bundesarchiv oder bei den selbständig archivieren Stellen archiviert sind, Auskunft verlangen.
+        Gemäss Art. 15 BGA und Art. 20 der Archivierungsverordnung (<a href="http://www.admin.ch/ch/d/sr/c152_11.html">VBGA</a>, SR 152.11) kann jede Person über sie betreffende
+        Daten, die beim Bundesarchiv oder bei den selbständig archivieren Stellen archiviert sind, Auskunft verlangen.
     </p>
     <p>
-        <span style="color:red">Herr/Frau</span> {{Besteller.Name}} beschreibt die Art der Arbeit und den Zweck der Einsichtnahme folgendermassen:
+        <span style="color:red">Herr/Frau</span> {{Besteller.Name}} beschreibt die Art der Arbeit und den Zweck der
+        Einsichtnahme folgendermassen:
     </p>
     <p>
         <table class="noLine">
@@ -89,23 +98,34 @@
         </table>
     </p>
     <p>
-        Wir bitten Sie, das Auskunftsgesuch von <span style="color:red">Herrn / Frau</span> {{Besteller.Name}} materiell zu prüfen. Die massgebenden Kriterien für die Prüfung der Unterlagen sind in Art. 15 BGA, Art. 20 VBGA und in den Bestimmungen des DSG festgehalten. Die Identität von {{Besteller.Vorname}} {{Besteller.Name}} (geboren am {{Besteller.Geburtsdatum}}) wurde im Rahmen des Identifizierungsprozesses des Bundesarchivs geprüft und bestätigt.
+        Wir bitten Sie, das Auskunftsgesuch von <span style="color:red">Herrn / Frau</span> {{Besteller.Name}} materiell
+        zu prüfen. Die massgebenden Kriterien für die Prüfung der Unterlagen sind in Art. 15 BGA, Art. 20 VBGA und in
+        den Bestimmungen des DSG festgehalten. Die Identität von {{Besteller.Vorname}} {{Besteller.Name}} (geboren am
+        {{Besteller.Geburtsdatum}}) wurde im Rahmen des Identifizierungsprozesses des Bundesarchivs geprüft und
+        bestätigt.
     </p>
     <p>
-        Bitte teilen Sie uns Ihren Entscheid bis zum {{FrühestesErfassungsdatumPlus30Tage}} mit (Art. 1 <a href="http://www.admin.ch/ch/d/sr/c235.11.html">VDSG</a>). Andernfalls erwarten wir gerne Ihre schriftliche Mitteilung, damit wir <span style="color:red">die Gesuchstellerin / den Gesuchsteller</span> informieren können.
+        Bitte teilen Sie uns Ihren Entscheid bis zum {{FrühestesErfassungsdatumPlus30Tage}} mit (Art. 1 <a href="http://www.admin.ch/ch/d/sr/c235.11.html">VDSG</a>). Andernfalls erwarten wir gerne Ihre schriftliche
+        Mitteilung, damit wir <span style="color:red">die Gesuchstellerin / den Gesuchsteller</span> informieren können.
     </p>
-	<p>
-	
-	<span style="color:red">Wenn Digitalisierung ausgelöst oder digital vorhanden</span><br>
-	Die ersuchten Unterlagen werden derzeit digitalisiert. Personen mit der Rolle &laquo;Ablieferende Stelle&raquo; können die Digitalisate innerhalb der nächsten Tage herunterladen.
-	</p>
     <p>
-        Weitere allgemeine Hinweise zum Thema Einsichts-, Auskunfts- und Zugangsgesuche finden Sie im <a href="http://www.bar.admin.ch/content/dam/bar/de/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">Merkblatt Einsichtsgesuche</a>.
+        <span style="color:red">Wenn Unterlagen digital vorhanden</span><br>
+
+        Die ersuchten Unterlagen liegen digital vor. Personen mit der Rolle &laquo;Ablieferende Stelle&raquo; können sie
+        im Online-Zugang herunterladen.
+    </p>
+    <p>
+        Weitere allgemeine Hinweise zum Thema Einsichts-, Auskunfts- und Zugangsgesuche finden Sie im "Merkblatt
+        Einsichtsgesuche" (<a href="http://www.bar.admin.ch/content/dam/bar/de/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">DE</a>,
+        <a href="http://www.bar.admin.ch/content/dam/bar/fr/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">FR</a>,
+        <a href="http://www.bar.admin.ch/content/dam/bar/it/dokumente/kundeninformation/einsichtsgesuche_info_aemter.pdf">IT</a>)
+        und in den Musterauflagen (<a href="https://www.bar.admin.ch/dam/bar/de/dokumente/kundeninformation/Musterauflagen gem%C3%A4ss BGA und VBGA.pdf">DE</a>,
+        <a href="https://www.bar.admin.ch/dam/bar/de/dokumente/kundeninformation/Exemples%20de%20conditions%20selon%20la%20LAr%20et%20l_OLAr.pdf">FR</a>,
+        <a href="https://www.bar.admin.ch/dam/bar/de/dokumente/kundeninformation/Esempi%20di%20oneri%20secondo%20la%20LAr%20e%20l_OLAr.pdf">IT</a>).
     </p>
     <p>
         Vielen Dank für Ihre Bemühungen.
     </p>
-
     <p>
         Mit freundlichen Grüssen
     </p>

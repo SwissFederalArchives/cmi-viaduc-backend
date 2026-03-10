@@ -1,0 +1,151 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/53147d73-8e1/e-5445-9b48-/d398f5f34c55/_953.json",
+  "label": {
+    "none": [
+      "CH-BAR_E3210A-01_2005-111_849.tif"
+    ]
+  },
+  "type": "Manifest",
+  "items": [
+    {
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/53147d73-8e1/e-5445-9b48-/d398f5f34c55/CH-BAR_E3210A-01_2005-111_849.jpg",
+      "label": {
+        "none": [
+          "1"
+        ]
+      },
+      "type": "Canvas",
+      "height": 2480,
+      "items": [
+        {
+          "@context": "http://iiif.io/api/presentation/3/context.json",
+          "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/53147d73-8e1/e-5445-9b48-/d398f5f34c55/_953.json#annotations-page-painting-_953-1",
+          "items": [
+            {
+              "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/53147d73-8e1/e-5445-9b48-/d398f5f34c55/_953.json#annotations-content-painting-_953-1",
+              "type": "Annotation",
+              "body": {
+                "format": "image/jpeg",
+                "height": 2480,
+                "id": "https://viaducdev.cmiag.ch/image/iiif/2/53147d73-8e1%2Fe-5445-9b48-%2Fd398f5f34c55%2FCH-BAR_E3210A-01_2005-111_849.jpg/full/full/0/default.jpg",
+                "service": [
+                  {
+                    "profile": "level2",
+                    "@id": "https://viaducdev.cmiag.ch/image/iiif/2/53147d73-8e1%2Fe-5445-9b48-%2Fd398f5f34c55%2FCH-BAR_E3210A-01_2005-111_849.jpg",
+                    "@type": "ImageService2"
+                  }
+                ],
+                "type": "Image",
+                "width": 3443
+              },
+              "motivation": "painting",
+              "target": "https://viaducdev.cmiag.ch/clientdev/files/manifests/53147d73-8e1/e-5445-9b48-/d398f5f34c55/canvasses/_953-1"
+            }
+          ],
+          "type": "AnnotationPage"
+        }
+      ],
+      "width": 3443
+    }
+  ],
+  "metadata": [
+    {
+      "label": {
+        "de": [
+          "Titel"
+        ],
+        "en": [
+          "Title"
+        ],
+        "fr": [
+          "Titre"
+        ],
+        "it": [
+          "Titolo"
+        ],
+        "none": [
+          "Titel"
+        ]
+      },
+      "value": {
+        "de": [
+          "CH-BAR_E3210A-01_2005-111_849.tif"
+        ],
+        "en": [
+          "CH-BAR_E3210A-01_2005-111_849.tif"
+        ],
+        "fr": [
+          "CH-BAR_E3210A-01_2005-111_849.tif"
+        ],
+        "it": [
+          "CH-BAR_E3210A-01_2005-111_849.tif"
+        ],
+        "none": [
+          "CH-BAR_E3210A-01_2005-111_849.tif"
+        ]
+      }
+    }
+  ],
+  "partOf": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/manifests/53147d73-8e1/e-5445-9b48-/d398f5f34c55/53147d73-8e1e-5445-9b48-d398f5f34c55.json",
+      "type": "Collection"
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/#/de/archiv/einheit/Vz      53147d73-8e1e-5445-9b48-d398f5f34c55",
+      "label": {
+        "de": [
+          "Laden Sie die Unterlagen von der Detailansicht herunter"
+        ],
+        "en": [
+          "Download the documents from the detail view"
+        ],
+        "fr": [
+          "Téléchargez les documents depuis l’affichage complet"
+        ],
+        "it": [
+          "Scarica i documenti dalla visualizzazione dei dettagli"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    },
+    {
+      "id": "https://viaducdev.cmiag.ch/clientdev/files/ocr/53147d73-8e1/e-5445-9b48-/d398f5f34c55/CH-BAR_E3210A-01_2005-111_849.txt",
+      "label": {
+        "de": [
+          "Download OCR"
+        ],
+        "en": [
+          "Download OCR"
+        ],
+        "fr": [
+          "Download OCR"
+        ],
+        "it": [
+          "Download OCR"
+        ]
+      },
+      "type": "Text",
+      "format": "text/plain"
+    }
+  ],
+  "service": [
+    {
+      "profile": "http://iiif.io/api/search/1/search",
+      "@id": "https://viaducdev.cmiag.ch/iiif/iiif/search/manifest/53147d73-8e1-e-5445-9b48--d398f5f34c55",
+      "@type": "SearchService1"
+    }
+  ],
+  "start": null,
+  "thumbnail": [
+    {
+      "format": "image/jpeg",
+      "id": "https://viaducdev.cmiag.ch/image/iiif/2/53147d73-8e1%2Fe-5445-9b48-%2Fd398f5f34c55%2FCH-BAR_E3210A-01_2005-111_849.jpg/full/150,/0/default.jpg",
+      "type": "Image"
+    }
+  ]
+}

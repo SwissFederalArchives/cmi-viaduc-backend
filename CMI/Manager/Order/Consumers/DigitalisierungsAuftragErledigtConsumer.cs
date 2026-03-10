@@ -57,7 +57,8 @@ namespace CMI.Manager.Order.Consumers
                     // Der Download wird automatisch ausgelöst, nachdem dieser Auftrag registriert wurde
                     var prepareAssetRequest = new PrepareAssetRequest
                     {
-                        ArchiveRecordId = message.ArchiveRecordId,
+                        // wir verwenden explizit die ArchiveRecordId aus dem Elastic-Index, da diese evtl. von der im Context.Message abweicht
+                        ArchiveRecordId = archiveRecord.ElasticArchiveRecord.ArchiveRecordId,  
                         AssetType = AssetType.Gebrauchskopie,
                         CallerId = message.GetType().Name,
                         AssetId = archiveRecord.ElasticArchiveRecord.PrimaryDataLink,
@@ -74,7 +75,7 @@ namespace CMI.Manager.Order.Consumers
                     Log.Information(
                         "Die VE mit Id {ArchiveRecordId} wurde digitalisiert, aber bis jetzt nicht neu synchronisiert. Wir schreiben sie in die Wait List",
                         message.ArchiveRecordId);
-                    await orderDataAccess.AddToOrderExecutedWaitList(Convert.ToInt32(message.ArchiveRecordId), JsonConvert.SerializeObject(message));
+                    await orderDataAccess.AddToOrderExecutedWaitList(message.ArchiveRecordId, JsonConvert.SerializeObject(message));
                 }
             }
         }

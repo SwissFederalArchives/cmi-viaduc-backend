@@ -25,13 +25,13 @@ namespace CMI.Manager.Asset.Tests
 
 
         [Test]
-        [TestCase("30409374")]
-        [TestCase("30409372")]
-        [TestCase("6865820")]
-        [TestCase("30653572")]
-        [TestCase("30653558")]
-        [TestCase("30653564")]
-        [TestCase("30409386")]
+        [TestCase("Vz      a2ad9673-74f1-5705-9775-7072b417d3d3")]
+        [TestCase("Vz      53147d73-8e1e-5445-9b48-d398f5f34c55")]
+        // Filename too long [TestCase("Vz      7b109ee5-88a6-599b-85a3-e8fd5605ffab")]
+        [TestCase("Vz      653228fc-8db5-5242-a31f-1e3204006fbb")]
+        // Filename too long[TestCase("30653558")]
+        [TestCase("Klas    32ee8574-c007-5e3d-840c-88f989060eab")]
+        [TestCase("Vz      8570842c-33cb-5c98-8c2d-df9e5dd3ef33")]
 
         public void Check_if_manifest_creation_produces_reference_output(string archiveRecordId)
         {

@@ -94,7 +94,7 @@
                 "type": "long"
               }
             }
-          }          
+          }
         }
       },
       "archiveRecordId": {
@@ -161,9 +161,6 @@
             "index": false
           }
         }
-      },
-      "containsPersonRelatedInformation": {
-        "type": "boolean"
       },
       "creationPeriod": {
         "properties": {
@@ -564,12 +561,16 @@
           }
         }
       },
-      "externalDisplayTemplateName": {
-        "type": "keyword",
-        "index": false
-      },
-      "firstChildArchiveRecordId": {
-        "type": "keyword"
+      "externalKeys": {
+        "type": "nested",
+        "properties": {
+          "key": {
+            "type": "keyword"
+          },
+          "value": {
+            "type": "keyword"
+          }
+        }
       },
       "formerReferenceCode": {
         "copy_to": [
@@ -577,13 +578,7 @@
         ],
         "type": "keyword"
       },
-      "hasAudioVideo": {
-        "type": "boolean"
-      },
-      "hasImage": {
-        "type": "boolean"
-      },
-      "internalDisplayTemplateName": {
+      "displayTemplateName": {
         "type": "keyword",
         "index": false
       },
@@ -594,9 +589,6 @@
         "type": "boolean"
       },
       "isPhysicalyUsable": {
-        "type": "boolean"
-      },
-      "isRoot": {
         "type": "boolean"
       },
       "lastSyncDate": {
@@ -620,9 +612,6 @@
         "type": "keyword"
       },
       "primaryDataFulltextAccessTokens": {
-        "type": "keyword"
-      },
-      "nextArchiveRecordId": {
         "type": "keyword"
       },
       "parentArchiveRecordId": {
@@ -653,12 +642,6 @@
             "type": "keyword"
           }
         }
-      },
-      "playingLengthInS": {
-        "type": "long"
-      },
-      "previousArchiveRecordId": {
-        "type": "keyword"
       },
       "primaryData": {
         "properties": {

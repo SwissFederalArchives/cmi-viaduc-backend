@@ -31,7 +31,7 @@ namespace CMI.Manager.Harvest.Consumers
                 if (context.Message.ActionSuccessful)
                 {
                     harvestManager.UpdateMutationStatus(new MutationStatusInfo
-                        {MutationId = context.Message.MutationId, NewStatus = ActionStatus.SyncCompleted});
+                        {MutationId = context.Message.MutationId, ArchiveRecordId = context.Message.ArchiveRecordId, NewStatus = ActionStatus.SyncCompleted});
                 }
                 else
                 {
@@ -40,6 +40,7 @@ namespace CMI.Manager.Harvest.Consumers
                         MutationId = context.Message.MutationId,
                         NewStatus = ActionStatus.SyncFailed,
                         ErrorMessage = context.Message.ErrorMessage,
+                        ArchiveRecordId = context.Message.ArchiveRecordId,
                         StackTrace = context.Message.StackTrace
                     });
                 }

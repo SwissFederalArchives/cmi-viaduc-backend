@@ -5,6 +5,7 @@ using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Utilities.Bus.Configuration.Properties;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Extensions.Logging;
 
@@ -47,6 +48,38 @@ namespace CMI.Utilities.Bus.Configuration
             .As<IBusControl>()
             .As<IBus>()
             .ExternallyOwned();
+        }
+
+        public static void ConfigureBusModern(IServiceCollection services, MonitoredServices monitoringName = MonitoredServices.NotMonitored,
+            Action<IBusRegistrationConfigurator> consumerAddAction = null,
+            Action<IBusRegistrationContext, IRabbitMqBusFactoryConfigurator> registrationAction = null)
+        {
+            Log.Information("Configuring Bus uri={uri} user={user}", Settings.Default.RabbitMqUri, Settings.Default.RabbitMqUserName);
+
+            // Configure Logging for Masstransit using Serilog 
+            LogContext.ConfigureCurrentLogContext(new SerilogLoggerFactory(Log.Logger));
+
+            services.AddMassTransit(x =>
+            {
+                consumerAddAction?.Invoke(x);
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(new Uri(Settings.Default.RabbitMqUri), hst =>
+                    {
+                        hst.Username(Settings.Default.RabbitMqUserName);
+                        hst.Password(Settings.Default.RabbitMqPassword);
+                    });
+
+                    if (monitoringName != MonitoredServices.NotMonitored)
+                    {
+                        cfg.ReceiveEndpoint(string.Format(BusConstants.MonitoringServiceHeartbeatRequestQueue, monitoringName.ToString()),
+                            ec => { ec.Consumer(() => new HeartbeatConsumer(monitoringName.ToString())); });
+                    }
+
+                    registrationAction?.Invoke(context, cfg);
+                });
+            });
         }
 
         public static void ConfigureDefaultRetryPolicy(IRetryConfigurator retryPolicy)

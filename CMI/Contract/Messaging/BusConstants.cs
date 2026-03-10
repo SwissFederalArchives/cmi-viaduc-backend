@@ -25,8 +25,15 @@
     /// </summary>
     public static class BusConstants
     {
+        // Messages the Datafeed Manager subscribes to
+        public const string DatafeedSchedulerTriggerMessageQueue = "m.datafeed.manager.schedulerTrigger";
+        public const string DataFeedManagerActaProSyncRecordMessageQueue = "m.datafeed.manager.initiateSync";
+
+
         // Messages the Harvest Manager subscribes to
         public const string HarvestManagerSyncArchiveRecordMessageQueue = "m.harvest.manager.syncArchiveRecord";
+        public const string AisAccessTokensRequestQueue = "r.order.manager.getAisAccessTokens";
+
 
         public const string HarvestManagerResyncArchiveDatabaseMessageQueue = "m.harvest.manager.resyncArchiveDatabase";
 
@@ -65,6 +72,8 @@
         public const string AssetManagerPrepareForRecognition = "m.asset.manager.prepareForRecognition";
         public const string AssetManagerPrepareForTransformation = "m.asset.manager.prepareForTransformation";
         public const string AssetManagerRecognitionPostProcessing = "m.asset.manager.recognitionPostProcessing";
+
+        public const string AssetManagerDeleteViewerFiles = "m.asset.manager.deleteViewerFiles";
 
         public const string AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue = "m.asset.manager.updatePrimaerdatenAuftragStatus";
 
@@ -157,6 +166,6 @@
         // Messages the Onboarding Manager subscribes to
         public const string OnboardingManagerStartProcessMessageQueue = "m.onboarding.manager.startProcess";
         public const string OnboardingManagerHandleCallbackMessageQueue = "m.onboarding.manager.handleCallback";
-      
+
     }
 }

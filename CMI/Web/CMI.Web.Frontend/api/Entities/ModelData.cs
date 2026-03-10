@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CMI.Contract.Common;
+﻿using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Templates;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CMI.Web.Frontend.api.Entities
 {
@@ -38,15 +39,14 @@ namespace CMI.Web.Frontend.api.Entities
 
             if (entity?.Level != null)
             {
-                if (GetTypeByName(entity.Level) != null)
+                if(GetTypeByName(string.Format(TemplateBaseSubNamePattern, entity.DisplayTemplateName?.ToLower())) != null)
                 {
-                    type = GetTypeByName(entity.Level) ?? type;
+                    return GetTypeByName(string.Format(TemplateBaseSubNamePattern, entity.DisplayTemplateName.ToLower())) ?? type;
                 }
-                else if (!string.IsNullOrEmpty(entity.ExternalDisplayTemplateName))
+                var templateName = entity.GetGermanLevelName();
+                if (GetTypeByName(string.Format(TemplateBaseSubNamePattern, templateName)) != null)
                 {
-                    var formId = entity.ExternalDisplayTemplateName.Split(':')[0];
-                    var templatetypeName = string.Format(TemplateBaseSubNamePattern, formId);
-                    type = GetTypeByName(templatetypeName) ?? type;
+                    type = GetTypeByName(string.Format(TemplateBaseSubNamePattern, templateName)) ?? type;
                 }
             }
 

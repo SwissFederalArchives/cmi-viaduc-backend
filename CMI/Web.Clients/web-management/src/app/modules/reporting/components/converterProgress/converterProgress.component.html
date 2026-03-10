@@ -59,7 +59,8 @@
 							<div class="row" *ngIf="showDetails">
 								<div class="col-md-12">
 									<div class="small">
-										Ve-Id: {{detail.context.archiveRecordId}}<br/>
+										Ve-Id: <a href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detail.context.archiveRecordId}}"
+												  target="_blank"> {{detail.context.archiveRecordId}}</a><br/>
 										{{getFormattedStartedOn(detail)}}<br/>
 										Package-Id: {{detail.context.packageId}}<br/>
 									</div>
@@ -97,7 +98,8 @@
 							<div class="row" *ngIf="showDetails">
 								<div class="col-md-12">
 									<div class="small">
-										Ve-Id: {{detail.context.archiveRecordId}}<br/>
+										Ve-Id: <a href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detail.context.archiveRecordId}}"
+												  target="_blank"> {{detail.context.archiveRecordId}}</a><br/>
 										{{getFormattedStartedOn(detail)}}<br/>
 										Package-Id: {{detail.context.packageId}}<br/>
 									</div>

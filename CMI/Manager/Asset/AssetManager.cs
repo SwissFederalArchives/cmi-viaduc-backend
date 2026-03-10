@@ -110,6 +110,7 @@ namespace CMI.Manager.Asset
                     catch (Exception ex)
                     {
                         Log.Error(ex, "Unexpected error while extracting full text. Error Message is: {Message}", ex.Message);
+                        
                         return false;
                     }
                 }
@@ -209,7 +210,7 @@ namespace CMI.Manager.Asset
         /// <returns><c>true</c> if [is in preparation queue] [the specified archive record identifier]; otherwise, <c>false</c>.</returns>
         public async Task<PreparationStatus> CheckPreparationStatus(string archiveRecordId)
         {
-            var auftrag = await auftragAccess.GetLaufendenAuftrag(int.Parse(archiveRecordId), AufbereitungsArtEnum.Download);
+            var auftrag = await auftragAccess.GetLaufendenAuftrag(archiveRecordId, AufbereitungsArtEnum.Download);
             if (auftrag != null)
             {
                 return new PreparationStatus
@@ -247,7 +248,7 @@ namespace CMI.Manager.Asset
 
             var auftrag = new PrimaerdatenAuftrag
             {
-                VeId = int.Parse(archiveRecordId),
+                VeId = archiveRecordId,
                 AufbereitungsArt = aufbereitungsArt,
                 PackageId = packageId,
                 Service = service,

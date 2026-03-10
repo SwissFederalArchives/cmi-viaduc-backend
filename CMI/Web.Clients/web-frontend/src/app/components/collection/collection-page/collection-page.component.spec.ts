@@ -82,7 +82,7 @@ describe('auto generate CollectionPageComponent', () => {
 		let _seoService = new SeoService(_title, _txt);
 		let collectionItemResult = CollectionItemResult.fromJS({
 			item:  CollectionDto.fromJS({
-				collectionId:3,
+				collectionId: 3,
 				title: 'Test Titel',
 				validFrom: moment(Date.now()).toDate(),
 				validTo:  moment(Date.now()).toDate(),

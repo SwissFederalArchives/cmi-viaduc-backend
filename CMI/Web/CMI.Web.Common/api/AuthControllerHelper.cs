@@ -105,6 +105,17 @@ namespace CMI.Web.Common.api
             {
                 HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict
             });
+            //  Explicitly delete session cookie on client side
+            owinContext.Response.Cookies.Delete("ASP.NET_SessionId", new CookieOptions
+            {
+                HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict
+            });
+
+            // Remove EIAM-related cookie
+            owinContext.Response.Cookies.Delete("cookiesession1", new CookieOptions
+            {
+                HttpOnly = true, Secure = true, SameSite = SameSiteMode.Strict
+            });
         }
 
         private static void AddViaducSessionCookie(IOwinContext owinContext, string userId, string cookieUserIdKey)
@@ -479,7 +490,7 @@ namespace CMI.Web.Common.api
         private string GetOeDreiKeineMobilenummerErfasst()
         {
             return webCmiConfigProvider.GetStringSetting("oeDreiKeineMobilenummerErfasst",
-                "www.recherche.bar.admin.ch/_pep/myaccount?returnURI=/my-appl/private/welcome.html&op=reg-mobile");
+                "https://www.myaccount.eiam.admin.ch");
         }
 
         private string GetPublicClientUrl()

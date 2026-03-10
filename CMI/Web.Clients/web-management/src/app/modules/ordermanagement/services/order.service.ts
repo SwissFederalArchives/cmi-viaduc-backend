@@ -46,8 +46,8 @@ export class OrderService {
 		return [];
 	}
 
-	public getOrderingHistoryForVe(id: number): Observable<Bestellhistorie[]> {
-		return this._http.get<Bestellhistorie[]>(this._orderApiUrl + '/GetOrderingHistoryForVe?id=' + id);
+	public getOrderingHistoryForVe(veId: string): Observable<Bestellhistorie[]> {
+		return this._http.get<Bestellhistorie[]>(this._orderApiUrl + '/GetOrderingHistoryForVe?veId=' + veId);
 	}
 
 	public getAushebungsAuftragHtml(ids: number[]): Observable<string> {

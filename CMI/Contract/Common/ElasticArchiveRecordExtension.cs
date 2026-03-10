@@ -511,6 +511,80 @@ namespace CMI.Contract.Common
             }
         }
 
+        ///<summary>
+        /// Returns the German name for the given record level, or the lowercased level if not found.
+        /// </summary>
+        /// <param name="record">The TreeRecord to get the German level name for.</param>
+        /// <returns>German level name as string.</returns>
+        public static string GetGermanLevelName(this TreeRecord record)
+        {
+            try
+            {
+                switch (record.Level.ToLower())
+                {
+                    case "accessions":
+                    case "versement":
+                    case "accessione":
+                        return "akzession";
+                    case "archives":
+                    case "archivio":
+
+                        return "archiv";
+
+                    case "fonds":
+                    case "fondo":
+
+                        return "bestand";
+
+                    case "fonds series":
+                    case "série des fonds":
+                    case "serie di fondi":
+
+                        return "beständeserie";
+
+                    case "documents":
+                    case "document":
+                    case "documento":
+
+                        return "dokument";
+
+                    case "dossiers":
+
+                        return "dossier";
+
+                    case "main departments":
+                    case "division":
+                    case "sezione principale":
+
+                        return "hauptabteilung";
+
+                    case "series":
+                    case "série":
+
+                        return "serie";
+
+                    case "sub-dossiers":
+                    case "sous-dossier":
+                    case "sezione di dossier":
+
+                        return "subdossier";
+
+                    case "sub-fonds":
+                    case "sous-fonds":
+                    case "sezione di fondo":
+                        return "teilbestand";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error while translating the record");
+                throw;
+            }
+
+            return record.Level.ToLower();
+        }
+
         private static void TranslateCustomFieldZugaenglichkeitGemässBga(this SearchRecord record, CultureInfo cultureInfo)
         {
             dynamic customFields = record.CustomFields;
@@ -613,7 +687,7 @@ namespace CMI.Contract.Common
                 };
             }
 
-            return new ManuelleKorrekturDto(-1, Convert.ToInt32(record.ArchiveRecordId), record.ReferenceCode, record.ProtectionEndDate.Date,
+            return new ManuelleKorrekturDto(-1, record.ArchiveRecordId, record.ReferenceCode, record.ProtectionEndDate.Date,
                 record.IsAnonymized ? record.UnanonymizedFields?.Title : record.Title, DateTime.Now, null, null, null, 
                 0, string.Empty, record.Level, record.Aktenzeichen(), record.CreationPeriod.Text,
                 record.HasCustomProperty("zugänglichkeitGemässBga") ? record.CustomFields.zugänglichkeitGemässBga : "",

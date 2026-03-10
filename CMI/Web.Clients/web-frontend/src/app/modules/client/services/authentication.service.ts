@@ -93,11 +93,8 @@ export class AuthenticationService {
 	}
 
 	public edit(): void {
-		const hostUrl = this._urlService.getExternalHostUrl();
-		const baseUrl = this._urlService.getExternalBaseUrl();
-		const partialEditUrl = this._config.getSetting('account.partialEditUrl');
 		const returnUrl = this._router.url;
-		const targetUrl = _util.addToString(hostUrl, '/', partialEditUrl) + '?returnURL=' + baseUrl + '#' + returnUrl;
+		const targetUrl = this._config.getSetting('account.myAccountUrl', 'https://www.myaccount.eiam.admin.ch')
 
 		this._setUrl(editReturnUrlKey, returnUrl);
 		window.location.assign(targetUrl);

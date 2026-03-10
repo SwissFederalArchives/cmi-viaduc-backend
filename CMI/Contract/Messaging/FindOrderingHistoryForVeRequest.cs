@@ -2,6 +2,6 @@
 {
     public class FindOrderingHistoryForVeRequest
     {
-        public int VeId { get; set; }
+        public string VeId { get; set; }
     }
 }

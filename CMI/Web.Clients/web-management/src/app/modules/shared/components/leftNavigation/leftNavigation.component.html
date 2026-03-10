@@ -85,6 +85,20 @@
 	</ul>
 </div>
 
+<div class="nav-box ">
+	<div class="header">
+		<span>{{'Synchronisation' | translate:'home.synchronizationTitle' }}</span>
+	</div>
+	<ul>
+		<li [ngClass]="canSeeSynchronizationViewAdd() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeSynchronizationViewAdd() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/synchronization/add' | localizeLink }}">{{'Hinzufügen' | translate:'home.synchronizationAdd' }}</a>
+		</li>
+		<li [ngClass]="canSeeSynchronizationViewMonitor() ? '' : 'disabled'" data-toggle="tooltip" [title]="!canSeeSynchronizationViewMonitor() ? 'Keine Berechtigung' : ''">
+			<a href="#{{ '/de/synchronization/monitor' | localizeLink }}">{{'Überwachen' | translate:'home.synchronizationMonitor' }}</a>
+		</li>
+	</ul>
+</div>
+
 <div class="nav-box box-admin">
 	<div class="header">
 		<span>{{'Administration' | translate:'home.adminTitle' }}</span>

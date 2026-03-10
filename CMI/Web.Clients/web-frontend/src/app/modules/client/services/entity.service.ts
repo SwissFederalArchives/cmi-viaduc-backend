@@ -59,6 +59,13 @@ export class EntityService {
 		const url = `${apiDataUrl}/GetArchivplanHtml${queryString}`;
 		return this._http.get<string>(url, this._http.noCaching).toPromise();
 	}
+
+	public getArchivplanRootNodes(): Promise<string[]> {
+		const apiDataUrl = this._options.serverUrl + this._options.publicPort + '/api/Data';
+
+		const url = `${apiDataUrl}/GetArchivplanRootNodes`;
+		return this._http.get<string[]>(url, this._http.noCaching).toPromise();
+	}
 }
 
 export class MockEntityService {

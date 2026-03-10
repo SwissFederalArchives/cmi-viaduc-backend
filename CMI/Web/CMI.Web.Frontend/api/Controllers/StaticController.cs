@@ -24,8 +24,8 @@ namespace CMI.Web.Frontend.api.Controllers
             language = language ?? WebHelper.GetLanguageFromRequestUrl(url) ?? WebHelper.GetClientLanguage(Request);
 
             // prevent XSS
-            url = HttpUtility.HtmlEncode(url.Trim());
-            language = HttpUtility.HtmlEncode(language);
+            url = WebUtility.HtmlEncode(url.Trim());
+            language = WebUtility.HtmlEncode(language);
 
             var statusCode = HttpStatusCode.OK;
             var contentHtml = string.Empty;
@@ -84,7 +84,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var language = WebHelper.GetLanguageFromRequestUrl(url) ?? WebHelper.GetClientLanguage(Request);
 
             // prevent XSS
-            url = HttpUtility.HtmlEncode(url.Trim());
+            url = WebUtility.HtmlEncode(url.Trim());
 
             var statusCode = HttpStatusCode.OK;
             var content = "";

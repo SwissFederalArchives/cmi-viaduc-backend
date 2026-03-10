@@ -6,5 +6,6 @@ namespace CMI.Contract.Messaging
         bool ActionSuccessful { get; set; }
         string ErrorMessage { get; set; }
         string StackTrace { get; set; }
+        string ArchiveRecordId { get; set; }
     }
 }

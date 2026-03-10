@@ -19,8 +19,8 @@ export class CheckoutWorkplaceReservationStepComponent implements OnInit {
 	public form: FormGroup;
 	public safeURL: any;
 	public workplacealReadyReserved:  string;
-	public showModalDialog: boolean = false;
-	public showModalHit: boolean= false;
+	public showModalDialog = false;
+	public showModalHit = false;
 
 	constructor(private _cfg: ConfigService,
 				private _sanitizer: DomSanitizer,

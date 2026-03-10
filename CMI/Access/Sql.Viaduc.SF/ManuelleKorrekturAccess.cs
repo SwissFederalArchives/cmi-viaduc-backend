@@ -47,9 +47,7 @@ namespace CMI.Access.Sql.Viaduc.EF
         /// <returns></returns>
         public Task<bool> CheckCanInsertManuelleKorrektur(string id)
         {
-            return int.TryParse(id, out int veId) ? 
-                Task.FromResult(!dbContext.ManuelleKorrekturen.Any(m => m.VeId == veId)) : 
-                Task.FromResult(!dbContext.ManuelleKorrekturen.Any(m => m.Signatur == id));
+            return Task.FromResult(!dbContext.ManuelleKorrekturen.Any(m => m.VeId == id || m.Signatur == id));
         }
 
         public async Task<ManuelleKorrekturDto> Publizieren(int manuelleKorrekturId, string userId)
@@ -79,7 +77,7 @@ namespace CMI.Access.Sql.Viaduc.EF
 
             if (value.ManuelleKorrekturId <= 0)
             {
-                var check = CheckCanInsertManuelleKorrektur(value.VeId.ToString()).Result;
+                var check = CheckCanInsertManuelleKorrektur(value.VeId).Result;
                 if (!check)
                 {
                     throw new ArgumentException("Schon vorhanden");
@@ -117,7 +115,7 @@ namespace CMI.Access.Sql.Viaduc.EF
                 item.Signatur = value.Signatur;
                 item.Titel = value.Titel;
                 item.VeId = value.VeId;
-                item.ZuständigeStelle = value.ZuständigeStelle;
+                item.ZuständigeStelle = value.ZuständigeStelle is {Length: > 255} ? value.ZuständigeStelle.Substring(0, 255) : value.ZuständigeStelle;
                 item.ZugänglichkeitGemässBGA = value.ZugänglichkeitGemässBGA;
                 item.Anonymisierungsstatus = value.Anonymisierungsstatus;
 

@@ -283,7 +283,7 @@ namespace CMI.Web.Common.Tests.Helpers
             // assert
             result.AuthStatus.Should().Be(AuthStatus.KeineMTanAuthentication);
             result.Roles.Should().BeEmpty();
-            result.RedirectUrl.Should().Be("www.recherche.bar.admin.ch/_pep/myaccount?returnURI=/my-appl/private/welcome.html&op=reg-mobile");
+            result.RedirectUrl.Should().Be("https://www.myaccount.eiam.admin.ch");
         }
 
         [Test]
@@ -887,28 +887,6 @@ namespace CMI.Web.Common.Tests.Helpers
 
             // assert
             result.Should().Be(expectedResult);
-        }
-
-        [Test]
-        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:22", "E-ID CH-LOGIN")]
-        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:10", "E-ID CH-LOGIN")]
-        public void Get_Initial_role_for_new_user_returns_exception_for_unknown_authMethods(string authMethod, string homeName)
-        {
-            // arrange
-            var claims = new List<Claim>
-            {
-                new(ClaimValueNames.EIdProfileRole, "dummy"),
-                new(ClaimValueNames.AuthenticationMethod, authMethod),
-                new(ClaimValueNames.HomeName, homeName)
-            };
-
-            var sut = new ControllerHelper(claims);
-
-            // act
-            var action = (Action) (() => { sut.GetInitialRoleFromClaim(); });
-
-            // asset
-            action.Should().Throw<ArgumentException>();
         }
     }
 }

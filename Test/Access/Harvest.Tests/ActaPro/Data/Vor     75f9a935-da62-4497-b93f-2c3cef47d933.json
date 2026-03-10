@@ -1,0 +1,209 @@
+{
+  "object": "document",
+  "type": "Vor",
+  "DocKey": "Vor     75f9a935-da62-4497-b93f-2c3cef47d933",
+  "DocTitle": "E1234#1000/721#8#3*   Test Subdossier, 1988 (Subdossier)",
+  "CreationDate": "30.10.2024 15:38:41:083",
+  "OwnerID": "Sica",
+  "CreatorID": "Sica",
+  "ChangeDate": "22.11.2024 15:44:02:318",
+  "block": {
+    "type": "Vor",
+    "fields": [
+      {
+        "type": "Vz_Id",
+        "value": "Vz      c0b4d8da-c886-4311-b5d5-1ab3a2aad9b3"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86"
+      },
+      {
+        "type": "Vorg_Id",
+        "value": "75f9a935-da62-4497-b93f-2c3cef47d933"
+      },
+      {
+        "type": "Export_id",
+        "value": "f0265bd4-c196-4dc0-b596-bada8592e686"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_f0265bd4-c196-4dc0-b596-bada8592e686"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "Sica"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "Sica"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "30.10.2024 16:01:32"
+      },
+      {
+        "type": "CreateDate",
+        "value": "30.10.2024 15:38:41"
+      },
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Vz      c0b4d8da-c886-4311-b5d5-1ab3a2aad9b3"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Vz"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Best",
+        "value": "Best    343043cf-38ac-48c4-8997-b3c95964cf1a"
+      },
+      {
+        "type": "Vz_Best_DocTitle",
+        "value": "E12345   Bestand Carla (Bestand)"
+      },
+      {
+        "type": "Vz_AkTyp",
+        "value": "Akten allgemein"
+      },
+      {
+        "type": "Vz_OwnSign",
+        "value": "E1234#1000/721#8#3*"
+      },
+      {
+        "type": "Vz_Titel",
+        "value": "Test Subdossier"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1988",
+        "timerange": {
+          "min": "01.01.1988",
+          "max": "31.12.1988",
+          "values": [
+            {
+              "value": "01.01.1988-31.12.1988",
+              "min": "01.01.1988",
+              "max": "31.12.1988"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_Bez",
+        "value": "E1234#1000/721#8#3*   Test Subdossier, 1988 (Subdossier)"
+      },
+      {
+        "type": "Behaeltnis_Gp",
+        "fields": [
+          {
+            "type": "Behaeltnis_Bez",
+            "value": "-"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Klassifizierung",
+        "value": "keine Angabe"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1000/721"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Darin_Gp",
+        "fields": [
+          {
+            "type": "Vz_Darin",
+            "value": "WEBOZ"
+          }
+        ]
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "NotizSchutzfrist",
+        "value": "Dieses Subdossier ist öffentlich"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Abliefernde Stelle"
+      },
+      {
+        "type": "Vz_Schutzfristkategorie",
+        "value": "Art. 9.2 BGA (0 Jahren)"
+      },
+      {
+        "type": "Vz_Schutzfristbasisdatum",
+        "value": "Zeitraumende"
+      },
+      {
+        "type": "Vz_Schutzfristdauer",
+        "value": "0"
+      },
+      {
+        "type": "Vz_Schutzfristende",
+        "value": "31.12.1988",
+        "timerange": {
+          "min": "31.12.1988",
+          "max": "31.12.1988",
+          "values": [
+            {
+              "value": "31.12.1988-31.12.1988",
+              "min": "31.12.1988",
+              "max": "31.12.1988"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_ZugaenglichkeitBGA",
+        "value": "Frei zugänglich"
+      },
+      {
+        "type": "Status",
+        "value": "In Bearbeitung"
+      },
+      {
+        "type": "Vz_MetadatenPubl",
+        "value": "Ja"
+      }
+    ]
+  }
+}

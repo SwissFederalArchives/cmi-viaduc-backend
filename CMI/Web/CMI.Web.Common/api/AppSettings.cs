@@ -119,6 +119,7 @@ namespace CMI.Web.Common.api
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "url", WebHelper.MatomoUrl);
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "siteId", WebHelper.MatomoSiteId);
                 SettingsHelper.InjectInfo(settingsObj, "viewer", "url", WebHelper.ViewerUrl);
+                SettingsHelper.InjectInfo(settingsObj, "account", "myAccountUrl", WebHelper.MyAccountUrl);
             }
         }
 
@@ -128,25 +129,28 @@ namespace CMI.Web.Common.api
         {
             try
             {
-                translations[language] = new JObject();
-                var path = StringHelper.AddToString(ClientConfigDirectory, @"\", $"translations.{language.ToLower()}.json");
+                if (string.IsNullOrWhiteSpace(language) || language.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                {
+                    Log.Warning("Invalid language parameter: {language}", language);
+                    return;
+                }
 
-                if (!File.Exists(path))
+                string safeFileName = $"translations.{language.ToLower()}.json";
+                string fullPath = Path.GetFullPath(Path.Combine(ClientConfigDirectory, safeFileName));
+
+                if (!fullPath.StartsWith(ClientConfigDirectory, StringComparison.OrdinalIgnoreCase) || !File.Exists(fullPath))
                 {
                     return;
                 }
 
-                var trans = JsonHelper.GetJsonFromFile(path);
-                if (trans != null)
-                {
-                    translations[language] = trans;
-                }
+                translations[language] = JsonHelper.GetJsonFromFile(fullPath) ?? new JObject();
             }
             catch (Exception ex)
             {
                 Log.Debug(ex, "Could not init translations for {language}", language);
             }
         }
+
 
         protected JObject BuildSettingsData(string configDirectory, string clientConfigDirectory, bool allowInternal = false)
         {

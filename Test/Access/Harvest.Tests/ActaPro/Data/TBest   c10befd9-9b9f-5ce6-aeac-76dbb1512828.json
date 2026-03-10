@@ -1,0 +1,157 @@
+{
+  "object": "document",
+  "type": "TBest",
+  "DocKey": "TBest   c10befd9-9b9f-5ce6-aeac-76dbb1512828",
+  "DocTitle": "Eidgenössische Alkoholverwaltung: Zentrale Ablage (1956-2017 )",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 11:05:18:948",
+  "block": {
+    "type": "TBest",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Best    740bacb0-caf6-595e-9a8c-699ef525cb75"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Best"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "3"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "SIEBERCA"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "12.04.2023"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1881-2017",
+        "timerange": {
+          "min": "01.01.1881",
+          "max": "31.12.2017",
+          "values": [
+            {
+              "value": "01.01.1881-31.12.2017",
+              "min": "01.01.1881",
+              "max": "31.12.2017"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "Bst_Id",
+        "value": "c10befd9-9b9f-5ce6-aeac-76dbb1512828"
+      },
+      {
+        "type": "ScopeID",
+        "value": "4867"
+      },
+      {
+        "type": "Bst_Signatur",
+        "value": "E6400C*"
+      },
+      {
+        "type": "Bst_Name",
+        "value": "Eidgenössische Alkoholverwaltung: Zentrale Ablage (1956-2017 )"
+      },
+      {
+        "type": "Bst_Bez",
+        "value": "E6400C*   Eidgenössische Alkoholverwaltung: Zentrale Ablage (1956-2017 ), 1881-2017 (Teilbestand)"
+      },
+      {
+        "type": "Bst_ZusatzInfo",
+        "value": "Ersatzverfilmung"
+      },
+      {
+        "type": "Bestaendeuebersicht_Gp",
+        "fields": [
+          {
+            "type": "Bestaendeuebersicht_Bez",
+            "value": "CH-BAR*/632 Alkoholverwaltung (Gliederungseinheit)"
+          }
+        ]
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1000/01056 Eidgenössische Alkoholverwaltung (Bern 9) (1894-1966) | 1984/00082 Eidgenössische Alkoholverwaltung (Bern 9) (1912-1971) | 1984/00094 Eidgenössische Alkoholverwaltung (Bern 9) (1915-1970) | 1986/00036 Eidgenössische Alkoholverwaltung (Bern 9) (1933-1980) | 1988/00155 Eidgenössische Alkoholverwaltung (Bern 9) (1979-1985) | 1989/00151 Eidgenössische Alkoholverwaltung (Bern 9) (1985-1986) | 1989/00154 Eidgenössische Alkoholverwaltung (Bern 9) (1978-1988) | 1990/00012 Eidgenössische Alkoholverwaltung (Bern 9) (1988-1989) | 1990/00209 Eidgenössische Alkoholverwaltung (Bern 9) (1986-1987) | 1991/00131 Eidgenössische Alkoholverwaltung (Bern 9) (1987-1988) | 1991/00132 Eidgenössische Alkoholverwaltung (Bern 9) (1988-1990) | 1992/00125 Eidgenössische Alkoholverwaltung (Bern 9) (1988-1989) | 1993/00020 Eidgenössische Alkoholverwaltung (Bern 9) (1990-1991) | 1993/00039 Eidgenössische Alkoholverwaltung (Bern 9) (1983-1986) | 1993/00054 Eidgenössische Alkoholverwaltung (Bern 9) (1986-1989) | 1993/00066 Eidgenössische Alkoholverwaltung (Bern 9) (1981-1990) | 1993/00113 Eidgenössische Alkoholverwaltung (Bern 9) (1986-1989) | 1993/00145 Eidgenössische Alkoholverwaltung (Bern 9) (1887-1988) | 1993/00198 Eidgenössische Alkoholverwaltung (Bern 9) (1989-1990) | 1993/00209 Eidgenössische Alkoholverwaltung (Bern 9) (1902-1983) | 1993/00220 Eidgenössische Alkoholverwaltung (Bern 9) (1990-1991) | 1994/00172 Eidgenössische Alkoholverwaltung (Bern 9) (1990-1991) | 1994/00173 Eidgenössische Alkoholverwaltung (Bern 9) (1991-1992) | 1996/00388 Eidgenössische Alkoholverwaltung (Bern 9) (1961-1989) | 1996/00389 Eidgenössische Alkoholverwaltung (Bern 9) (1990-1992) | 1996/00390 Eidgenössische Alkoholverwaltung (Bern 9) (1991-1993) | 1996/00391 Eidgenössische Alkoholverwaltung (Bern 9) (1993-1994) | 1996/00392 Eidgenössische Alkoholverwaltung (Bern 9) (1993-1994) | 1997/00196 Eidgenössische Alkoholverwaltung (Bern 9) (1956-1985) | 1997/00199 Eidgenössische Alkoholverwaltung (Bern 9) (1947-1990) | 2016/00083 Eidgenössische Alkoholverwaltung (Bern 9) (1881-2016) | 2016/00084 Eidgenössische Alkoholverwaltung (Bern 9) (1948-2015) | 2016/00085 Eidgenössische Alkoholverwaltung (Bern 9) (1939-2002) | 2016/00086 Eidgenössische Alkoholverwaltung (Bern 9) (1900-2000) | 2016/00087 Eidgenössische Alkoholverwaltung (Bern 9) (1957) | 2018/00017 Oberzolldirektion (Bern) (1980-2017) | 2018/00018 Oberzolldirektion (Bern) (1939-2017) | 2018/00039 Oberzolldirektion (Bern) (1990-2017) | 2023/00042 Archiv für Agrargeschichte (Bern) (1926-1966)"
+          }
+        ]
+      },
+      {
+        "type": "ZusVorhFindmittel",
+        "value": "Ablieferung 1000/1056: Dossierverzeichnis_x000D_\r\nAblieferung 1984/82: Dossierverzeichnis_x000D_\r\nAblieferung 1984/94: Dossierverzeichnis_x000D_\r\nAblieferung 1986/36: Dossierverzeichnis_x000D_\r\nAblieferung 1988/155: Dossierverzeichnis_x000D_\r\nAblieferung 1989/151: Dossierverzeichnis_x000D_\r\nAblieferung 1989/154: Dossierverzeichnis_x000D_\r\nAblieferung 1990/12: Dossierverzeichnis_x000D_\r\nAblieferung 1990/209: Dossierverzeichnis_x000D_\r\nAblieferung 1991/131: Dossierverzeichnis_x000D_\r\nAblieferung 1991/132: Dossierverzeichnis_x000D_\r\nAblieferung 1992/125: Dossierverzeichnis_x000D_\r\nAblieferung 1993/113: Dossierverzeichnis_x000D_\r\nAblieferung 1993/145: Dossierverzeichnis_x000D_\r\nAblieferung 1993/198: Dossierverzeichnis_x000D_\r\nAblieferung 1993/20: Dossierverzeichnis_x000D_\r\nAblieferung 1993/209: Dossierverzeichnis_x000D_\r\nAblieferung 1993/220: Dossierverzeichnis_x000D_\r\nAblieferung 1993/39: Dossierverzeichnis_x000D_\r\nAblieferung 1993/54: Dossierverzeichnis_x000D_\r\nAblieferung 1993/66: Dossierverzeichnis_x000D_\r\nAblieferung 1994/172: Dossierverzeichnis_x000D_\r\nAblieferung 1994/173: Dossierverzeichnis_x000D_\r\nAblieferung 1996/388: Dossierverzeichnis_x000D_\r\nAblieferung 1996/389: Dossierverzeichnis_x000D_\r\nAblieferung 1996/390: Dossierverzeichnis_x000D_\r\nAblieferung 1996/391: Dossierverzeichnis_x000D_\r\nAblieferung 1996/392: Dossierverzeichnis_x000D_\r\nAblieferung 1997/196: Dossierverzeichnis_x000D_\r\nAblieferung 1997/199: Dossierverzeichnis"
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "Form",
+        "value": "Ablieferung 1984/94: Amtsbücher und Karteien"
+      },
+      {
+        "type": "Internet_sichtbar",
+        "value": "Ja"
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_"
+      }
+    ]
+  }
+}

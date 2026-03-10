@@ -65,7 +65,6 @@ namespace CMI.Web.Common.Helpers
         public static string FrontendAuthReturnUrl => GetStringSetting("frontendAuthReturnUrl", "https://www.recherche.bar.admin.ch/recherche/#/auth/success");
 
         public static string FrontendLogoutReturnUrl => GetStringSetting("frontendLogoutReturnUrl", "https://www.recherche.bar.admin.ch/recherche");
-
         public static string MatomoUrl => GetStringSetting("matomo-url", "");
         public static int MatomoSiteId => GetIntSetting("matomo-siteId");
 
@@ -85,6 +84,9 @@ namespace CMI.Web.Common.Helpers
         public static string DataStorageProvider => GetStringSetting("dataStorageProvider", "");
 
         public static string ViewerFileLocationBaseDirectory => GetStringSetting("baseDirectory", "");
+
+        public static string MyAccountUrl => GetStringSetting("myAccountUrl", "https://www.myaccount.eiam.admin.ch");
+
         #region CMI / App Settings
 
         public static CmiSettings Settings { get; } = new CmiSettings();

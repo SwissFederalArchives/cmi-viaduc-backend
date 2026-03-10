@@ -5,7 +5,6 @@ using System.IO;
 using CMI.Access.Common;
 using CMI.Contract.Common;
 using CMI.Tools.AutomatedCacheFilesEmpty.Models;
-// ReSharper disable LocalizableElement
 
 namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
 {
@@ -45,6 +44,9 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                     Console.WriteLine($"Querying archive record for ID: {archiveRecordId}");
                     var archiveRecord = searchIndexDataAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
+                    DateTime fileCreationDate = File.GetCreationTime(file);
+
+                    // Skip files without manifest (no viewer access)
                     if (archiveRecord == null || string.IsNullOrEmpty(archiveRecord.ManifestLink))
                     {
                         Console.WriteLine($"Archive record not found or manifest link is empty for ID: {archiveRecordId}");
@@ -54,6 +56,8 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                             ArchiveRecordId = archiveRecordId,
                             ReferenceCode = "",
                             FileSizeInMb = new FileInfo(file).Length / (1024.0 * 1024.0),
+                            FileCreatedDate = fileCreationDate,
+                            DatumErstellungToken = DateTime.MinValue,
                             ToBeDeleted = false,
                             HasNoViewerManifest = true
                         });
@@ -64,15 +68,31 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                     string referenceCode = archiveRecord.ReferenceCode;
                     var latestLog = GetLatestDownloadLog(referenceCode);
 
-                    var datumErstellungToken = latestLog?.DatumErstellungToken ?? new DateTime(1900, 1, 1);
+                    DateTime lastRelevantDate;
+                    bool hasDownloadLog = latestLog != null;
+
+                    if (hasDownloadLog)
+                    {
+                        // Use download date from log
+                        lastRelevantDate = latestLog.DatumErstellungToken;
+                    }
+                    else
+                    {
+                        // No download log — use file creation date as reference
+                        lastRelevantDate = fileCreationDate;
+                    }
+
+                    bool toBeDeleted = lastRelevantDate < DateTime.Today.AddDays(-xDays);
+
                     results.Add(new CacheCheckResult
                     {
                         FilePath = file,
                         ArchiveRecordId = archiveRecordId,
                         ReferenceCode = referenceCode,
                         FileSizeInMb = new FileInfo(file).Length / (1024.0 * 1024.0),
-                        DatumErstellungToken = datumErstellungToken,
-                        ToBeDeleted = datumErstellungToken < DateTime.Today.AddDays(xDays * -1),
+                        FileCreatedDate = fileCreationDate,
+                        DatumErstellungToken = lastRelevantDate,
+                        ToBeDeleted = toBeDeleted,
                         HasNoViewerManifest = false
                     });
                 }

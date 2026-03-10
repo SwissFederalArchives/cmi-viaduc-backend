@@ -32,9 +32,6 @@ export class StaticContentComponent implements OnChanges {
 		private _seoService: SeoService	) {
 	}
 
-	public ngOnInit(): void {
-	}
-
 	public ngOnChanges(changes: {[propertyName: string]: SimpleChange}) {
 		if (changes['url'] && this.url !== undefined) {
 			const oldRoute = this._static.getStaticRouteInfo(changes['url']['previousValue']);

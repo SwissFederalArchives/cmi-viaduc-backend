@@ -15,7 +15,7 @@ namespace CMI.Manager.Order.Status
         private static readonly Lazy<FreigabePruefenStatus> lazy =
             new Lazy<FreigabePruefenStatus>(() => new FreigabePruefenStatus());
 
-        private FreigabePruefenStatus()
+        protected FreigabePruefenStatus()
         {
         }
 
@@ -113,7 +113,7 @@ namespace CMI.Manager.Order.Status
                 PrepareMailMitteilungBestellungMitTeilbewilligung();
             }
 
-            if (Context.OrderItem.VeId.HasValue)
+            if (!string.IsNullOrWhiteSpace(Context.OrderItem.VeId))
             {
                 UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(this);
             }
@@ -128,7 +128,7 @@ namespace CMI.Manager.Order.Status
             }
 
             var builder = new DataBuilder(Context.Bus)
-                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllAnonymized)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllWithoutTitleAnonymized)
                 .AddUser(Context.CurrentUser.Id)
                 .AddBesteller(Context.Ordering.UserId)
                 .AddBestellung(Context.Ordering);
@@ -159,7 +159,7 @@ namespace CMI.Manager.Order.Status
             }
 
             var builder = new DataBuilder(Context.Bus)
-                .SetDataProtectionLevel(DataBuilderProtectionStatus.DependentOnApproveStatus)
+                .SetDataProtectionLevel(DataBuilderProtectionStatus.AllAnonymized)
                 .AddUser(Context.CurrentUser.Id)
                 .AddBesteller(Context.Ordering.UserId)
                 .AddBestellung(Context.Ordering);
@@ -252,16 +252,16 @@ namespace CMI.Manager.Order.Status
             builder.AddAuftraege(Context.Ordering, orderItems, propertyName);
         }
 
-        private bool VeLiegtDigitalVor(int? veId)
+        private bool VeLiegtDigitalVor(string veId)
         {
             // Für die Ermittlung von VeLiegtDigitalVor kann nicht OrderItem.IdentifikationDigitalesMagazin verwendet werden.
             // Darum werden Daten vom Elastic geholt.
 
             ElasticArchiveRecord archiveRecord = null;
 
-            if (veId.HasValue)
+            if (!string.IsNullOrWhiteSpace(veId))
             {
-                archiveRecord = Context.IndexAccess.FindDocument(veId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
+                archiveRecord = Context.IndexAccess.FindDocument(veId, MetadataToExclude.OCRContentAndFiles);
             }
 
             return !string.IsNullOrEmpty(archiveRecord?.PrimaryDataLink);

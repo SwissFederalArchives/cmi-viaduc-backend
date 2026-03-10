@@ -64,28 +64,13 @@ Examples for the token can be:
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="externalDisplayTemplateName" type="xs:string">
+                            <xs:element name="displayTemplateName" type="xs:string">
                                 <xs:annotation>
-                                    <xs:documentation>The name or identification of the display template to use for public view.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="internalDisplayTemplateName" type="xs:string">
-                                <xs:annotation>
-                                    <xs:documentation>The name or identification of the display template to use for internal view.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="containsImages" type="xs:boolean">
-                                <xs:annotation>
-                                    <xs:documentation>A flag indicating if the archive items contains any images.</xs:documentation>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="containsMedia" type="xs:boolean">
-                                <xs:annotation>
-                                    <xs:documentation>A flag indicating if the archive items contains any videos or audio files.</xs:documentation>
+                                    <xs:documentation>The name or identification of the display template to use for view.</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
                             <xs:element name="canBeOrdered" type="xs:boolean"/>
-                            <xs:element name="archiveplanContext">
+                            <xs:element name="ArchiveplanContext">
                                 <xs:annotation>
                                     <xs:documentation>A list that contains all the information to quickly build an archive plan for display. </xs:documentation>
                                 </xs:annotation>
@@ -96,16 +81,7 @@ Examples for the token can be:
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element name="previousArchiveRecordId" type="xs:string"
-                                nillable="true">
-                                <xs:annotation>
-                                    <xs:documentation/>
-                                </xs:annotation>
-                            </xs:element>
-                            <xs:element name="nextArchiveRecordId" type="xs:string" nillable="true"/>
                             <xs:element name="parentArchiveRecordId" type="xs:string"
-                                nillable="true"/>
-                            <xs:element name="firstChildArchiveRecordId" type="xs:string"
                                 nillable="true"/>
                         </xs:sequence>
                     </xs:complexType>
@@ -116,24 +92,13 @@ Examples for the token can be:
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element ref="detailData"/>
+                            <xs:element ref="DetailData"/>
                             <xs:element name="usage">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="alwaysVisibleOnline" type="xs:boolean">
-                                            <xs:annotation>
-                                                <xs:documentation>Internal flag indicating that the unit should be visible online. Can be used to override a protection end date. Attribute is used in the calculation of the end visibility of meta- and primarydata.</xs:documentation>
-                                            </xs:annotation>
-                                        </xs:element>
                                         <xs:element name="isPhysicalyUsable" type="xs:boolean">
                                             <xs:annotation>
                                                 <xs:documentation>Indicates if the material can be used in the reading room.</xs:documentation>
-                                            </xs:annotation>
-                                        </xs:element>
-                                        <xs:element name="containsPersonRelatedData"
-                                            type="xs:boolean">
-                                            <xs:annotation>
-                                                <xs:documentation>Flag indicating that the material contains person related information.</xs:documentation>
                                             </xs:annotation>
                                         </xs:element>
                                         <xs:element name="protectionCategory" type="xs:string">
@@ -213,13 +178,18 @@ Examples for the token can be:
                                                 </xs:restriction>
                                             </xs:simpleType>
                                         </xs:element>
+                                        <xs:element name="alwaysVisibleOnline" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Internal flag indicating that the unit should be visible online. Can be used to override a protection end date. Attribute is used in the calculation of the end visibility of meta- and primarydata.</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:element>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
                             <xs:element ref="nodeInfo"/>
-                            <xs:element minOccurs="0" name="descriptors">
+                            <xs:element minOccurs="0" name="Descriptors">
                                 <xs:annotation>
-                                    <xs:documentation>A list of descriptors (keywords) that help categorize the current UoD.</xs:documentation>
+                                    <xs:documentation>A list of Descriptors (keywords) that help categorize the current UoD.</xs:documentation>
                                 </xs:annotation>
                                 <xs:complexType>
                                     <xs:sequence>
@@ -249,6 +219,7 @@ Examples for the token can be:
                                                   <xs:element minOccurs="0"
                                                   name="containerCarrierMaterial" type="xs:string"/>
                                                 </xs:sequence>
+                                                <xs:attribute name="containerId" type="xs:string"/>
                                             </xs:complexType>
                                         </xs:element>
                                     </xs:sequence>
@@ -256,7 +227,7 @@ Examples for the token can be:
                                         use="required"/>
                                 </xs:complexType>
                             </xs:element>
-                            <xs:element minOccurs="0" name="references">
+                            <xs:element minOccurs="0" name="References">
                                 <xs:annotation>
                                     <xs:documentation>ArchiveRecords may be linked to other archiveRecords.</xs:documentation>
                                 </xs:annotation>
@@ -305,7 +276,7 @@ Examples for the token can be:
                                     <xs:documentation>A link or other identifier to the IIIF manifest</xs:documentation>
                                 </xs:annotation>
                             </xs:element>
-                            <xs:element name="aggregationFields">
+                            <xs:element name="AggregationFields">
                                 <xs:annotation>
                                     <xs:documentation>A collection of special values that allows filtering in the search client.</xs:documentation>
                                 </xs:annotation>
@@ -320,10 +291,9 @@ Examples for the token can be:
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element maxOccurs="1" minOccurs="0" name="primaryData">
+                <xs:element maxOccurs="1" minOccurs="0" name="PrimaryData">
                     <xs:annotation>
-                        <xs:documentation>The actual "pyhisical" records. In our case these are either digital born data, or scanned files.
-</xs:documentation>
+                        <xs:documentation>The actual "pyhisical" records. In our case these are either digital born data, or scanned files.</xs:documentation>
                     </xs:annotation>
                     <xs:complexType>
                         <xs:sequence>
@@ -385,7 +355,7 @@ It is possible, that an archive record has a package coming from the file system
             <xs:attribute name="archiveRecordId" type="xs:string"/>
         </xs:complexType>
     </xs:element>
-    <xs:element name="detailData">
+    <xs:element name="DetailData">
         <xs:annotation>
             <xs:documentation>This element is used to list all individual datafields the item can have.</xs:documentation>
         </xs:annotation>
@@ -404,7 +374,7 @@ It is possible, that an archive record has a package coming from the file system
                 <xs:element name="elementValue" maxOccurs="unbounded">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="textValues">
+                            <xs:element name="TextValues">
                                 <xs:annotation>
                                     <xs:documentation>A data element can have several text representations in different languages. Mostly, only default language representation will be available, but for date ranges (ca. 1950 / approx. 1950) or boolans (Ja / Yes) different languages will be available.</xs:documentation>
                                 </xs:annotation>
@@ -479,19 +449,9 @@ It is possible, that an archive record has a package coming from the file system
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
-            <xs:attribute name="elementId" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>Optionally the internal id of the element if any.</xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
             <xs:attribute name="elementName" type="xs:string" use="required">
                 <xs:annotation>
                     <xs:documentation>A unique name for an element. </xs:documentation>
-                </xs:annotation>
-            </xs:attribute>
-            <xs:attribute name="eadCode" type="xs:string">
-                <xs:annotation>
-                    <xs:documentation>Optionally the EAD code for that element.</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
             <xs:attribute name="elementType" use="required">
@@ -614,6 +574,7 @@ This is required for the best possible search experience using date ranges.
                     <xs:element name="seeAlso" type="xs:string" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:sequence>
+            <xs:attribute name="descriptorId" type="xs:string"/>
             <xs:attribute name="function" type="xs:string">
                 <xs:annotation>
                     <xs:documentation>Optional a function describing in what kind of relationship this descriptor represents.</xs:documentation>
@@ -655,11 +616,6 @@ This is required for the best possible search experience using date ranges.
                 <xs:element name="isLeaf" type="xs:boolean">
                     <xs:annotation>
                         <xs:documentation>A leaf is a node without a child</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="isRoot" type="xs:boolean">
-                    <xs:annotation>
-                        <xs:documentation>Indicates a root node.</xs:documentation>
                     </xs:annotation>
                 </xs:element>
                 <xs:element name="level" type="xs:int">
@@ -730,8 +686,7 @@ This is required for the best possible search experience using date ranges.
                     <xs:documentation>The file id as definied in the SIP.</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element maxOccurs="unbounded" minOccurs="0" name="extendedProperties"
-                type="extendedProperty"/>
+
             <xs:element name="contentText" type="xs:string" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>The whole content of the document as text only. Can be used for full text indexing.
@@ -791,12 +746,5 @@ This is required for the best possible search experience using date ranges.
             <xs:element name="values" type="xs:string" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="aggregationName" type="xs:string"/>
-    </xs:complexType>
-    <xs:complexType name="extendedProperty">
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="name" type="xs:string"/>
-            </xs:extension>
-        </xs:simpleContent>
     </xs:complexType>
 </xs:schema>

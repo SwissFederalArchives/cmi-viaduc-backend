@@ -39,7 +39,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR },
@@ -51,7 +51,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 CombinedPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR },
@@ -79,7 +79,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new string[] { AccessRoles.RoleBAR },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleOe3 },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleOe3 },
@@ -91,7 +91,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new[] { AccessRoles.RoleBAR, "DDS" },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleOe3 },
                 CombinedPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleOe3 },
@@ -119,7 +119,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new string[] { },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleOe3 },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleOe3 },
@@ -131,7 +131,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new string[] { },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleOe3 },
                 CombinedPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleOe3 },
@@ -159,7 +159,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR },
@@ -171,7 +171,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new[] { AccessRoles.RoleBAR, "EB_12345" },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleBAR},
                 CombinedPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR, "FG_12345" },
@@ -199,7 +199,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR },
@@ -211,7 +211,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new[] { AccessRoles.RoleBAR, "EB_12345" },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 CombinedPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR, "FG_12345" },
@@ -239,7 +239,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 ExistingPrimaryDataDownloadAccessTokens = new[] { AccessRoles.RoleBAR, AccessRoles.RoleAS },
@@ -251,7 +251,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = new[] { AccessRoles.RoleBAR },
                 CombinedMetadataAccessTokens = new[] { AccessRoles.RoleBAR },
                 CombinedPrimaryDataDownloadAccessTokens = new[] { "EB_12345", AccessRoles.RoleBAR, AccessRoles.RoleAS },
@@ -287,7 +287,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 ExistingFieldAccessTokens = roles,
                 ExistingMetadataAccessTokens = roles,
                 ExistingPrimaryDataDownloadAccessTokens = roles,
@@ -299,7 +299,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 12345,
+                ArchiveRecordId = "12345",
                 CombinedFieldAccessTokens = indivRoles.Union(roles).ToArray(),
                 // es benötigt keine individuellen MetadatenAccessTokens
                 CombinedMetadataAccessTokens = tokensFromDb.ExistingMetadataAccessTokens,
@@ -336,7 +336,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 ExistingFieldAccessTokens = new string[] { },
                 ExistingMetadataAccessTokens = new string[] { },
                 ExistingPrimaryDataDownloadAccessTokens = new string[] { },
@@ -348,7 +348,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 CombinedFieldAccessTokens = new string[] { },
                 CombinedMetadataAccessTokens = new string[] { },
                 CombinedPrimaryDataDownloadAccessTokens = new string[] { },
@@ -382,7 +382,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 ExistingFieldAccessTokens = new string[] { },
                 ExistingMetadataAccessTokens = new string[] { },
                 ExistingPrimaryDataDownloadAccessTokens = new string[] { },
@@ -394,7 +394,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 CombinedFieldAccessTokens = new string[] { },
                 CombinedMetadataAccessTokens = new string[] { },
                 CombinedPrimaryDataDownloadAccessTokens = new string[] { },
@@ -432,7 +432,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 ExistingFieldAccessTokens = roles,
                 ExistingMetadataAccessTokens = roles,
                 ExistingPrimaryDataDownloadAccessTokens = roles,
@@ -444,7 +444,7 @@ namespace CMI.Manager.Order.Tests
             //assert
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 CombinedFieldAccessTokens = roles,
                 CombinedMetadataAccessTokens = roles,
                 CombinedPrimaryDataDownloadAccessTokens = rollsWithoutIndiv,
@@ -479,7 +479,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 ExistingFieldAccessTokens = roles,
                 ExistingMetadataAccessTokens = roles,
                 ExistingPrimaryDataDownloadAccessTokens = roles,
@@ -499,7 +499,7 @@ namespace CMI.Manager.Order.Tests
             };
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 CombinedFieldAccessTokens = resultRolls,
                 // es benötigt keine individuellen MetadatenAccessTokens
                 CombinedMetadataAccessTokens = tokensFromDb.ExistingMetadataAccessTokens,
@@ -535,7 +535,7 @@ namespace CMI.Manager.Order.Tests
 
             var tokensFromDb = new RecalcIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 ExistingFieldAccessTokens = roles,
                 ExistingMetadataAccessTokens = roles,
                 ExistingPrimaryDataDownloadAccessTokens = roles,
@@ -553,7 +553,7 @@ namespace CMI.Manager.Order.Tests
             };
             var expected = new UpdateIndivTokens
             {
-                ArchiveRecordId = 45123,
+                ArchiveRecordId = "45123",
                 CombinedFieldAccessTokens = resultRolls,
                 // es benötigt keine individuellen MetadatenAccessTokens
                 CombinedMetadataAccessTokens = roles,
@@ -569,6 +569,114 @@ namespace CMI.Manager.Order.Tests
         }
 
 
+        [Test]
+        public async Task There_are_UpdateIndivTokens_from_actaPro_and_scopeId_available_and_both_are_complied()
+        {
+            // arrange
+            var indivRolesScope = new[]
+            {
+                "EB_Frizt"
+            };
+
+            var indivRoles = new[]
+            {
+                "EB_Eugen"
+            };
+            var roles = new[]
+            {
+               AccessRoles.RoleAS, AccessRoles.RoleBVW, AccessRoles.RoleMgntAllow, AccessRoles.RoleMgntAppo,AccessRoles.RoleOe3, AccessRoles.RoleBAR
+            };
+            var existingIndivTokens = new IndivTokens(
+                indivRoles, new string[] { }, new string[] { });
+
+            var existingIndivTokensScope = new IndivTokens(
+                indivRolesScope, new string[] { }, new string[] { });
+            CreatingSpeMocksWithCallbackData(existingIndivTokens, existingIndivTokensScope, "Arch_0815", "45123");
+
+            var tokensFromDb = new RecalcIndivTokens
+            {
+                ArchiveRecordId = "Arch_0815",
+                ScopeArchiveRecordId = "45123",
+                ExistingFieldAccessTokens = new string[] { },
+                ExistingMetadataAccessTokens = new string[] { },
+                ExistingPrimaryDataDownloadAccessTokens = new string[] { },
+                ExistingPrimaryDataFulltextAccessTokens = roles
+            };
+            // act
+            await UpdateIndivTokensHelper.SendToIndexManager(tokensFromDb, dataAccess.Object, sendEndpointProvider.Object, new Uri("https://cmiag.ch/"));
+
+            //assert
+            var expected = new UpdateIndivTokens
+            {
+                ArchiveRecordId = "Arch_0815",
+                CombinedFieldAccessTokens = new string[] { },
+                CombinedMetadataAccessTokens = new string[] { },
+                CombinedPrimaryDataDownloadAccessTokens = new string[] { },
+                // not Combined
+                CombinedPrimaryDataFulltextAccessTokens = roles.Union(indivRoles).Union(indivRolesScope).ToArray()
+            };
+            sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
+            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+        }
+
+        [Test]
+        public async Task There_are_same_UpdateIndivTokens_from_actaPro_and_scopeId_available_and_both_are_not_complied()
+        {
+            // arrange
+            var indivRolesScope = new[]
+            {
+                "EB_Frizt"
+            };
+
+            var indivRoles = new[]
+            {
+                "EB_Frizt"
+            };
+            var roles = new[]
+            {
+               AccessRoles.RoleAS, AccessRoles.RoleBVW, AccessRoles.RoleMgntAllow, AccessRoles.RoleMgntAppo,AccessRoles.RoleOe3, AccessRoles.RoleBAR
+            };
+            var existingIndivTokens = new IndivTokens(
+                indivRoles, new string[] { }, new string[] { });
+
+            var existingIndivTokensScope = new IndivTokens(
+                indivRolesScope, new string[] { }, new string[] { });
+            CreatingSpeMocksWithCallbackData(existingIndivTokens, existingIndivTokensScope, "Arch_0815", "45123");
+
+            var tokensFromDb = new RecalcIndivTokens
+            {
+                ArchiveRecordId = "Arch_0815",
+                ScopeArchiveRecordId = "45123",
+                ExistingFieldAccessTokens = new string[] { },
+                ExistingMetadataAccessTokens = new string[] { },
+                ExistingPrimaryDataDownloadAccessTokens = new string[] { },
+                ExistingPrimaryDataFulltextAccessTokens = roles
+            };
+            // act
+            await UpdateIndivTokensHelper.SendToIndexManager(tokensFromDb, dataAccess.Object, sendEndpointProvider.Object, new Uri("https://cmiag.ch/"));
+
+            //assert
+            var expected = new UpdateIndivTokens
+            {
+                ArchiveRecordId = "Arch_0815",
+                CombinedFieldAccessTokens = new string[] { },
+                CombinedMetadataAccessTokens = new string[] { },
+                CombinedPrimaryDataDownloadAccessTokens = new string[] { },
+                // not Combined
+                CombinedPrimaryDataFulltextAccessTokens = roles.Union(indivRoles).ToArray() // Not .Union(indivRolesScope)
+            };
+            sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
+            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+        }
+
         /// <summary>
         /// Creating Mocks with data response
         /// </summary>
@@ -581,7 +689,29 @@ namespace CMI.Manager.Order.Tests
             sendEndpoint.Setup(ep =>
                     ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()))
                 .Callback<UpdateIndivTokens, CancellationToken>(UpdateIndivTokensConsumerTest);
-            dataAccess.Setup(m => m.GetIndividualAccessTokens(It.IsAny<int>(), It.IsAny<int>())).Returns(Task.FromResult(indivTokens));
+            dataAccess.Setup(m => m.GetIndividualAccessTokens(It.IsAny<string>(), It.IsAny<int>())).Returns(Task.FromResult(indivTokens));
+            sendEndpointProvider = new Mock<ISendEndpointProvider>();
+            sendEndpointProvider.Setup(m => m.GetSendEndpoint(It.IsAny<Uri>())).Returns(Task.FromResult(sendEndpoint.Object));
+        }
+
+
+        /// <summary>
+        ///  Creating Mocks with data response
+        /// </summary>
+        /// <param name="indivTokensArchiv">the tokens how dataAccess answered by call GetIndividualAccessTokens archiveRecord ID</param>
+        /// <param name="indivTokensScope">the tokens how dataAccess answered by call GetIndividualAccessTokens scopeId</param>
+        /// <param name="archiveRecordId"></param>
+        /// <param name="scopeId"></param>
+        private void CreatingSpeMocksWithCallbackData(IndivTokens indivTokensArchiv, IndivTokens indivTokensScope, string archiveRecordId, string scopeId)
+        {
+            dataAccess = new Mock<IOrderDataAccess>();
+            sendEndpoint = new Mock<ISendEndpoint>();
+
+            sendEndpoint.Setup(ep =>
+                    ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()))
+                .Callback<UpdateIndivTokens, CancellationToken>(UpdateIndivTokensConsumerTest);
+            dataAccess.Setup(m => m.GetIndividualAccessTokens(archiveRecordId, It.IsAny<int>())).Returns(Task.FromResult(indivTokensArchiv));
+            dataAccess.Setup(m => m.GetIndividualAccessTokens(scopeId, It.IsAny<int>())).Returns(Task.FromResult(indivTokensScope));
             sendEndpointProvider = new Mock<ISendEndpointProvider>();
             sendEndpointProvider.Setup(m => m.GetSendEndpoint(It.IsAny<Uri>())).Returns(Task.FromResult(sendEndpoint.Object));
         }

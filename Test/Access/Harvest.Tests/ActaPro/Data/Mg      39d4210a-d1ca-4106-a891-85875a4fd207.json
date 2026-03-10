@@ -1,0 +1,97 @@
+{
+  "object": "document",
+  "type": "Mg",
+  "DocKey": "Mg      39d4210a-d1ca-4106-a891-85875a4fd207",
+  "DocTitle": "1234",
+  "CreationDate": "06.12.2024 10:11:01:116",
+  "OwnerID": "fei",
+  "CreatorID": "fei",
+  "ChangeDate": "06.12.2024 10:11:30:344",
+  "block": {
+    "type": "Mg",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Ms      843fee99-bdbb-45a2-bbdf-39b85f03dc82"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Ms"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "fei"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "fei"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "06.12.2024 10:11:30"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.12.2024 10:11:01"
+      },
+      {
+        "type": "Mr_Id",
+        "value": "Mr      1b8309bc-ad4b-4ece-9774-c6f7e95db572"
+      },
+      {
+        "type": "Mg_Id",
+        "value": "39d4210a-d1ca-4106-a891-85875a4fd207"
+      },
+      {
+        "type": "Export_id",
+        "value": "98b1c6c3-f18b-426f-bd7b-7a2e7a7f43e2"
+      },
+      {
+        "type": "ScopeID",
+        "value": "1234"
+      },
+      {
+        "type": "Bhlgrp_Typ",
+        "value": "Bundesordner"
+      },
+      {
+        "type": "Mg_Titel_Compound",
+        "value": "1234"
+      },
+      {
+        "type": "Mg_Bhlgrp_Gp",
+        "fields": [
+          {
+            "type": "Mg_Bhlgrp",
+            "value": "1234"
+          }
+        ]
+      },
+      {
+        "type": "Mg_Lagerungsorte",
+        "value": "Mag-El/Magazinstellplatz"
+      },
+      {
+        "type": "Mg_Informationstraeger",
+        "value": "Film 8 mm - Arbeitskopie"
+      },
+      {
+        "type": "Mg_Behaeltniscode",
+        "value": "1234"
+      }
+    ]
+  }
+}

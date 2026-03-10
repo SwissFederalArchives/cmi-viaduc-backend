@@ -1,0 +1,108 @@
+{
+  "object": "document",
+  "type": "Klas",
+  "DocKey": "Klas    6c63ee5b-2afa-5d42-8d0a-60cd27464ebd",
+  "DocTitle": "J2.143#20.1964   Schweizer Filmwochenschau 1964, 1964.01.02-1964.12.25 (Serie)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 11:13:03:816",
+  "block": {
+    "type": "Klas",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Klas    ae766f70-d5a8-5301-9181-0393e871199b"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Klas"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "25"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U2051"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "U1917"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "01.02.2018"
+      },
+      {
+        "type": "CreateDate",
+        "value": "24.08.2011"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1964.01.02-1964.12.25"
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "Kl_Id",
+        "value": "6c63ee5b-2afa-5d42-8d0a-60cd27464ebd"
+      },
+      {
+        "type": "Kl_Best",
+        "value": "Best    8a1d4ddf-e622-5b69-859f-2566e1a11da8"
+      },
+      {
+        "type": "ScopeID",
+        "value": "21677520"
+      },
+      {
+        "type": "Kl_Signatur",
+        "value": "J2.143#20.1964"
+      },
+      {
+        "type": "Kl_Name",
+        "value": "Schweizer Filmwochenschau 1964"
+      },
+      {
+        "type": "Kl_Bez",
+        "value": "J2.143#20.1964   Schweizer Filmwochenschau 1964, 1964.01.02-1964.12.25 (Serie)"
+      },
+      {
+        "type": "Internet_sichtbar",
+        "value": "Ja"
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_"
+      }
+    ]
+  }
+}

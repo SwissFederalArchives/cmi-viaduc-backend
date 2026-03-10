@@ -1,0 +1,98 @@
+PUT /_ingest/pipeline/SetExternalKey
+{
+  "description": """"
+   PVW-1930 Aktualisierung Elastic Index
+    Pipeline sets the ArchivRecordId in the ExternalKeys field
+    It is assumed that the key is from scopeArchiv
+    
+    Procedure
+    Start/compile pipeline
+    Execute search
+    Delete pipeline
+    
+    Hints:
+    the search is async and you get back a task with which the status can be checked e.g. GET /_tasks/lk3AiZV9R5Wc3wiPFmaD6w:14445773
+ """, 
+  "processors" : [{
+     "script" : {
+        "lang" : "painless",
+        "source" : """
+       
+        if (ctx.externalKeys != null)
+        {
+          ctx.externalKeys.add([
+    	        "key": "scopeArchiv",
+              "value" : ctx.archiveRecordId
+            ])
+        } else {
+            ctx.externalKeys = new ArrayList();
+            ctx.externalKeys.add([
+    	        "key": "scopeArchiv",
+              "value" : ctx.archiveRecordId
+            ])
+        }
+        """
+      }
+  }]
+}
+
+POST /archive/_update_by_query?pipeline=SetExternalKey&conflicts=proceed&wait_for_completion=false&scroll_size=100
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "exists": {
+            "field": "archiveRecordId"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "nested": {
+            "path": "externalKeys",
+            "query": {
+              "exists": {
+                "field": "externalKeys"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+/* Records welche noch nicht über die external Keys verfügen 
+   Zum prüfen ob alles erledigt ist                       */
+GET archive/_search
+{
+  "track_total_hits": true,
+  "_source": [
+    "_id"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "exists": {
+            "field": "archiveRecordId"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "nested": {
+            "path": "externalKeys",
+            "query": {
+              "exists": {
+                "field": "externalKeys"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

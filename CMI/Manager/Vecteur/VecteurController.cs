@@ -98,12 +98,12 @@ namespace CMI.Manager.Vecteur
                     return Content(HttpStatusCode.Forbidden, onlyFaultedItemsInDigipoolExceptionMessage);
                 }
 
-                if (digipoolEntry.VeId.HasValue)
+                if (!string.IsNullOrWhiteSpace(digipoolEntry.VeId))
                 {
                     // Hat die Bestellung eine VE-ID, so holen wir die Details zum Record aus Elastic und
                     // bereiten die Bestellung über den Dienst auf.
                     Log.Verbose($"Fetching ve {digipoolEntry.VeId} from elastic index");
-                    var orderedItemRecord = await messageBusCallHelper.GetElasticArchiveRecord(digipoolEntry.VeId.ToString());
+                    var orderedItemRecord = await messageBusCallHelper.GetElasticArchiveRecord(digipoolEntry.VeId);
 
                     if (orderedItemRecord == null)
                     {
@@ -115,9 +115,21 @@ namespace CMI.Manager.Vecteur
 
                     // Lade Dossier, falls bestellte Einheit nicht das Dossier ist
                     ElasticArchiveRecord dossierRecord;
-                    dossierRecord = auftrag.Dossier.VerzEinheitId.ToString() != orderedItemRecord.ArchiveRecordId
-                        ? await messageBusCallHelper.GetElasticArchiveRecord(auftrag.Dossier.VerzEinheitId.ToString())
-                        : orderedItemRecord;
+                    if (orderedItemRecord?.Level == "Dossier")
+                    {
+                        dossierRecord = orderedItemRecord;
+                    }
+                    else if (string.IsNullOrWhiteSpace(auftrag.Dossier?.VerzEinheitId))
+                    {
+                        throw new Exception(
+                            $"There is no dossier ID for this digipoolEntry with OrderItemId {digipoolEntry.OrderItemId} and Signatur {digipoolEntry.Signatur}");
+                    }
+                    else
+                    {
+                        Log.Debug("Fetching dossier VE with id  {VerzEinheitId} for ordered level {level}", auftrag.Dossier.VerzEinheitId, orderedItemRecord.Level);
+                        dossierRecord = await messageBusCallHelper.GetElasticArchiveRecord(auftrag.Dossier.VerzEinheitId);
+                        Log.Debug("Successfully retrieved dossier record with id {id}", dossierRecord.ArchiveRecordId);
+                    }
 
                     if (dossierRecord.ProtectionEndDate?.Date == null)
                     {

@@ -57,13 +57,12 @@ namespace CMI.Web.Frontend.api.Entities
                     {
                         continue;
                     }
-
                     Entity<T> item;
                     var isAnonymized = false;
                     // Aus Performance Gründen holen wir das Detailitem nur, wenn das Items grundsätzlich anonymisiert sein könnte
                     if (contextItem.Protected)
                     {
-                        var record = elasticService.QueryForId<TreeRecord>(Convert.ToInt32(id), access).Data.Items.FirstOrDefault()?.Data;
+                        var record = elasticService.QueryForId<TreeRecord>(id, access).Data.Items.FirstOrDefault()?.Data;
                         contextItem.Title = record?.Title;
                         isAnonymized = true;
                     }
@@ -162,16 +161,29 @@ namespace CMI.Web.Frontend.api.Entities
             }
 
             var query = new ElasticQuery();
-            var id = entity.ArchiveRecordId;
+            var actaProId = entity.ArchiveRecordId;
+            if (long.TryParse(entity.ArchiveRecordId, out var scopeId))
+            {
+                actaProId = elasticService.ActaProMappingProvider.GetActaProId(entity.ArchiveRecordId);
+            }
+            else
+            {
+                scopeId = elasticService.ActaProMappingProvider.GetScopeId(entity.ArchiveRecordId);
+            }
 
             query.Query = new BoolQuery
             {
-                Filter = new QueryContainer[]
+                Should = new QueryContainer[]
                 {
                     new TermQuery
                     {
                         Field = elasticSettings.ParentIdField,
-                        Value = id
+                        Value = scopeId
+                    },
+                    new TermQuery
+                    {
+                        Field = elasticSettings.ParentIdField,
+                        Value = actaProId
                     }
                 },
                 MustNot = new QueryContainer[]
@@ -179,7 +191,7 @@ namespace CMI.Web.Frontend.api.Entities
                     new TermQuery
                     {
                         Field = elasticSettings.IdField,
-                        Value = id
+                        Value = entity.ArchiveRecordId
                     }
                 }
             };
@@ -216,7 +228,7 @@ namespace CMI.Web.Frontend.api.Entities
             var type = modelData.GetEntityType(entity);
             if (type == null)
             {
-                Log.Information($"No type found for entiy level {entity?.Level} and external template {entity.ExternalDisplayTemplateName}");
+                Log.Information($"No type found for entiy level {entity?.Level} and template {entity.DisplayTemplateName}");
                 return null;
             }
 

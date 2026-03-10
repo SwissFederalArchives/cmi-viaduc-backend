@@ -42,6 +42,7 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                     CreateCell("Reference Code"),
                     CreateCell("File Size (MB)"),
                     CreateCell("Last Downloaded Date"),
+                    CreateCell("File Created Date"),
                     CreateCell("To Be Deleted"),
                     CreateCell("Has no Viewer manifest")
                 );
@@ -55,10 +56,11 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                         CreateCell(checkResult.FilePath),
                         CreateCell(checkResult.ArchiveRecordId),
                         CreateCell(checkResult.ReferenceCode),
-                        CreateCell(checkResult.FileSizeInMb.ToString("F2")), // Format as a string with 2 decimal places
-                        CreateCell(checkResult.DatumErstellungToken.ToString("yyyy-MM-dd HH:mm:ss")), // Convert DateTime to string
-                        CreateCell(checkResult.ToBeDeleted.ToString()), 
-                        CreateCell(checkResult.HasNoViewerManifest.ToString()) 
+                        CreateCell(checkResult.FileSizeInMb.ToString("F2")),
+                        CreateCell(checkResult.DatumErstellungToken.ToString("yyyy-MM-dd HH:mm:ss")),
+                        CreateCell(checkResult.FileCreatedDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                        CreateCell(checkResult.ToBeDeleted.ToString()),
+                        CreateCell(checkResult.HasNoViewerManifest.ToString())
                     );
                     sheetData.AppendChild(dataRow);
                 }

@@ -127,40 +127,45 @@ namespace CMI.Manager.Order
             {
                 foreach (var orderItem in orderItems)
                 {
-                    // As anonymized data has been revealed to allow export of unanonymized data to templates
-                    // we must make sure we are not saving back this data to the db, or only if the Einsichtsgesuch was
-                    // approved
-                    if (orderItem.EntscheidGesuch != EntscheidGesuch.EinsichtsgesuchBewilligt &&
-                        orderItem.EntscheidGesuch != EntscheidGesuch.AuskunftsgesuchBewilligt &&
-                        orderItem.ApproveStatus != ApproveStatus.FreigegebenInSchutzfrist &&
-                        orderItem.ApproveStatus != ApproveStatus.FreigegebenAusserhalbSchutzfrist &&
-                        orderItem.ApproveStatus != ApproveStatus.FreigegebenDurchSystem)
+                    ElasticArchiveDbRecord originalOrderItem = null;
+                    if (!string.IsNullOrEmpty(orderItem.VeId))
                     {
-                        // Restore the original anonymized fields
-                        if (orderItem.VeId.HasValue)
+                        originalOrderItem =
+                            searchIndexDataAccess.FindDbDocument(orderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+                    }
+
+                    // A VE could be deleted after the order was made. So we need to check
+                    if (originalOrderItem != null)
+                    {
+                        // As anonymized data has been revealed to allow export of unanonymized data to templates
+                        // we must make sure we are not saving back this data to the db, or only if the Einsichtsgesuch was
+                        // approved
+                        if (orderItem.EntscheidGesuch != EntscheidGesuch.EinsichtsgesuchBewilligt &&
+                            orderItem.EntscheidGesuch != EntscheidGesuch.AuskunftsgesuchBewilligt &&
+                            orderItem.ApproveStatus != ApproveStatus.FreigegebenInSchutzfrist &&
+                            orderItem.ApproveStatus != ApproveStatus.FreigegebenAusserhalbSchutzfrist &&
+                            orderItem.ApproveStatus != ApproveStatus.FreigegebenDurchSystem)
                         {
-                            var originalOrderItem =
-                                searchIndexDataAccess.FindDbDocument(orderItem.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
+                            // Restore the original anonymized fields
                             orderItem.Dossiertitel = originalOrderItem.Title;
                             orderItem.Darin = originalOrderItem.WithinInfo;
                             orderItem.ZusaetzlicheInformationen = originalOrderItem.ZusätzlicheInformationen();
                         }
-                    }
-                    else
-                    {
-                        // When we have an approved state, we can save the unanonymized data
-                        if (orderItem.VeId.HasValue)
+                        else
                         {
-                            var ve = searchIndexDataAccess.FindDbDocument(orderItem.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
-                            if (ve.IsAnonymized)
+                            // When we have an approved state, we can save the unanonymized data
+                            if (originalOrderItem.IsAnonymized)
                             {
-                                orderItem.Dossiertitel = ve.UnanonymizedFields.Title;
-                                orderItem.Darin = ve.UnanonymizedFields.WithinInfo;
-                                orderItem.ZusaetzlicheInformationen = ve.UnanonymizedFields.ZusatzkomponenteZac1;
+                                orderItem.Dossiertitel = originalOrderItem.UnanonymizedFields.Title;
+                                orderItem.Darin = originalOrderItem.UnanonymizedFields.WithinInfo;
+                                orderItem.ZusaetzlicheInformationen = originalOrderItem.UnanonymizedFields.ZusatzkomponenteZac1;
                             }
                         }
-                    }
 
+                        // We store the id here, because It is possible, that a VE record was ordered with old ScopeId and now the same record was synced again from ActaPro
+                        orderItem.VeId = originalOrderItem.ArchiveRecordId;
+                    }
+                    // Auch Manuelle Bestellungen müssen gespeichert werden -> Status Update PVW-2032 
                     await orderDataAccess.UpdateOrderItem(orderItem);
                 }
 

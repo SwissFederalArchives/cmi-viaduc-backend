@@ -161,7 +161,7 @@ export class ManuelleKorrekturListComponent implements OnInit {
 			dataTypes: {
 				signatur: DataType.String,
 				anonymisierungsstatus: DataType.String,
-				veId: DataType.Number,
+				veId: DataType.String,
 				erzeugtAm: DataType.Date
 			},
 			canFilter: true,

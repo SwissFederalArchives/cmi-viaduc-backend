@@ -1,4 +1,4 @@
-// © 2017 ABBYY Production LLC
+// ï¿½ 2017 ABBYY Production LLC
 // SAMPLES code is property of ABBYY, exclusive rights are reserved. 
 //
 // DEVELOPER is allowed to incorporate SAMPLES into his own APPLICATION and modify it under 

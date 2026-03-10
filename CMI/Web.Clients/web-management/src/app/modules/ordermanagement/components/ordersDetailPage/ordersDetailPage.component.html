@@ -253,7 +253,7 @@
 											<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.signatur" [tooltipDisabled]="!detailRecord.signatur">
 												<div class="input-group">
 													<a class="input-group-addon" target="_blank"
-														*ngIf="detailRecord.signatur && detailRecord.veId && detailRecord.veId !==0"
+														*ngIf="detailRecord.signatur && detailRecord.veId && detailRecord.veId !== ''"
 														href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detailRecord.veId}}"
 														title="Öffnet die Detailansicht der Signatur in einem neuen Register">
 														<i class="glyphicon glyphicon-new-window"></i>
@@ -470,7 +470,7 @@
 											<div class="col-md-12 col-xs-12">
 												<cmi-viaduc-bestell-historie [historyItems]="detailRecord?.orderingHistory"></cmi-viaduc-bestell-historie>
 												<a href="javascript:void(0)" (click)="loadOrderHistoryModal()"
-												   *ngIf="detailRecord.veId && detailRecord.veId !== 0 && detailRecord.hasMoreOrderingHistory">
+												   *ngIf="detailRecord.veId && detailRecord.veId !== '' && detailRecord.hasMoreOrderingHistory">
 													{{'Alle	Historyeinträge anzeigen' | translate:''}}
 												</a>
 											</div>

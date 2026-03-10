@@ -10,5 +10,6 @@ namespace CMI.Contract.Messaging
         ElasticArchiveDbRecord ElasticArchiveDbRecord { get; set; }
         // This flag can be used to surpress the ArchiveRecordUpdatedEvent
         bool DoNotReportCompletion { get; set; }
+        bool RecordIdToBeDeleted { get; set; }
     }
 }

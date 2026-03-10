@@ -1,45 +1,37 @@
-﻿using System;
+﻿using CMI.Contract.Common;
+using CMI.Contract.Common.Gebrauchskopie;
+using CMI.Engine.Asset.Solr;
+using CMI.Utilities.Common.Helpers;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using CMI.Contract.Common;
-using CMI.Contract.Common.Gebrauchskopie;
-using CMI.Engine.Asset.Solr;
-using CMI.Utilities.Common.Helpers;
-using CommonServiceLocator;
-using Serilog;
-using SolrNet;
+using MassTransit;
 
 namespace CMI.Engine.Asset.PostProcess;
 
 public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
 {
-    private readonly SolrConnectionInfo solrConnectionInfo;
     private readonly IiifManifestSettings manifestSettings;
-    private AddParameters addParameters;
-    private ISolrOperations<SolrRecord> solr;
     private List<DateiDIP> packageFiles;
     private List<OrdnerDIP> packageDirectories;
+    private readonly ISolrEngine solrEngine;
 
     public string RootFolder { get; set; }
     public string ArchiveRecordId { get; set; }
     public PaketDIP Paket { get; set; }
 
-    public PostProcessIiifOcrIndexer(SolrConnectionInfo solrConnectionInfo, IiifManifestSettings manifestSettings)
+    public PostProcessIiifOcrIndexer(ISolrEngine solrEngine, IiifManifestSettings manifestSettings)
     {
-        this.solrConnectionInfo = solrConnectionInfo;
         this.manifestSettings = manifestSettings;
+        this.solrEngine = solrEngine;
     }
 
     public override void AnalyzeRepositoryPackage(RepositoryPackage package, string rootFolder)
     {
-        if (!solrConnectionInfo.SolrUrl.Equals("SkipSolrForTesting"))
-        {
-            InitializeSolr();
-        }
-
         Debug.Assert(Paket != null, "Paket property must be set before calling AnalyzeRepositoryPackage");
         packageFiles = GetAllPackageFiles(Paket);
         packageDirectories = GetAllPackageDirectories(Paket);
@@ -47,28 +39,10 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         base.AnalyzeRepositoryPackage(package, rootFolder);
     }
 
-
     protected override void AnalyzeFiles(string rootOrSubFolder, List<RepositoryFile> files)
     {
         CopyOcrFiles(rootOrSubFolder);
         IndexOcrFiles(rootOrSubFolder, files);
-    }
-
-    private void InitializeSolr()
-    {
-        Startup.InitContainer();
-        Startup.Init<SolrRecord>(solrConnectionInfo.SolrUrl + solrConnectionInfo.SolrCoreName);
-        solr = ServiceLocator.Current.GetInstance<ISolrOperations<SolrRecord>>();
-        if (!Directory.Exists(solrConnectionInfo.SolrHighlightingPath))
-        {
-            Directory.CreateDirectory(solrConnectionInfo.SolrHighlightingPath);
-        }
-
-        addParameters = new AddParameters
-        {
-            CommitWithin = 1000,
-            Overwrite = true
-        };
     }
 
     private void CopyOcrFiles(string rootOrSubFolder)
@@ -108,8 +82,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
             }
         }
     }
-
-
+    
     private void IndexOcrFiles(string tempFolder, List<RepositoryFile> repositoryFiles)
     {
         var directory = new DirectoryInfo(tempFolder);
@@ -140,8 +113,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
 
                     // The path is the URI of the manifest in which the document is contained
                     var manifestPath = GetManifestPath(source, dateiLocation);
-
-                    if (!UploadSolr(new SolrRecord
+                    var result = solrEngine.UploadDocument(new SolrRecord
                     {
                         Id = $"{source}/{PathHelper.CreateShortValidUrlName(Path.GetFileNameWithoutExtension(hOcrFile.Name), false)}",
                         ArchiveRecordId = ArchiveRecordId,
@@ -153,7 +125,9 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
                         OCRText = @$"{ocrFilePath}/{PathHelper.CreateShortValidUrlName(hOcrFile.Name, true)}",
                         ManifestPath = Uri.EscapeUriString(manifestPath.ToString()),
                         ManifestLabel = GetLabel(source, dateiLocation)
-                    }))
+                    }).Result;
+                        
+                    if (!result)
                     {
                         Log.Warning("Solr update not successful for file: {FullName}", hOcrFile.FullName);
                     }
@@ -169,7 +143,7 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
     private DirectoryInfo GetHOcrDestinationDirectory(string sourceDirectory)
     {
         var parts = PathHelper.ArchiveIdToPathSegments(ArchiveRecordId);
-        var hOcrDirectory = new DirectoryInfo(solrConnectionInfo.SolrHighlightingPath + @$"\{string.Join("\\", parts.Select(p => p.ValidPath))}");
+        var hOcrDirectory = new DirectoryInfo(solrEngine.ConnectionInfo.SolrHighlightingPath + @$"\{string.Join("\\", parts.Select(p => p.ValidPath))}");
         var relativePath = sourceDirectory == RootFolder ? "" : sourceDirectory.Substring(RootFolder.Length + 1);
 
         var newPath = PathHelper.CreateShortValidUrlName(relativePath, false);
@@ -209,25 +183,6 @@ public class PostProcessIiifOcrIndexer : ProcessAnalyzerBase
         return new Uri(manifestSettings.PublicManifestWebUri, relativeName);
     }
 
-    private bool UploadSolr(SolrRecord document)
-    {
-        if (solrConnectionInfo.SolrUrl.Equals("SkipSolrForTesting"))
-        {
-            return true;
-        }
-
-        var result = solr.Add(document, addParameters);
-        if (result.Status == 0)
-        {
-            var commitResult = solr.Commit();
-            if (commitResult.Status == 0)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     private static List<DateiDIP> GetAllPackageFiles(PaketDIP paket)
     {

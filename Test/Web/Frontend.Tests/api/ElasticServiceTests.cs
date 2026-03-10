@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Templates;
@@ -357,7 +358,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             // act
             var query = new ElasticQuery();
             var clientProvider = CreateClientProvider(mockResponse);
-            var srb = new SearchRequestBuilder(elasticSettings.Object, new QueryTransformationService(null), new List<TemplateField>());
+            var srb = new SearchRequestBuilder(elasticSettings.Object,
+                new QueryTransformationService(new SearchSetting() { AdvancedSearchFields = [new SearchFieldDefinition() { Key = "Test" }] }),
+                new List<TemplateField>());
             var service = new ElasticService(clientProvider, srb, elasticSettings.Object, new List<TemplateField>());
             var result = service.RunQuery<DetailRecord>(query, userAccess);
             var record = result.Data.Items[0].Data;
@@ -489,7 +492,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             // act
             var query = new ElasticQuery();
             var clientProvider = CreateClientProvider(mockResponse);
-            var srb = new SearchRequestBuilder(elasticSettings.Object, new QueryTransformationService(null), new List<TemplateField>());
+            var srb = new SearchRequestBuilder(elasticSettings.Object, 
+                new QueryTransformationService(new SearchSetting(){AdvancedSearchFields = [new SearchFieldDefinition(){Key = "Test"}]}),
+                new List<TemplateField>());
             var service = new ElasticService(clientProvider, srb, elasticSettings.Object, new List<TemplateField>());
             var result = service.RunQuery<DetailRecord>(query, userAccess);
             var record = result.Data.Items[0].Data;
@@ -522,7 +527,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             // act
             var query = new ElasticQuery();
             var clientProvider = CreateClientProvider(mockResponse);
-            var srb = new SearchRequestBuilder(elasticSettings.Object, new QueryTransformationService(null), new List<TemplateField>());
+            var srb = new SearchRequestBuilder(elasticSettings.Object,
+                new QueryTransformationService(new SearchSetting() { AdvancedSearchFields = [new SearchFieldDefinition() { Key = "Test" }] }),
+                new List<TemplateField>());
             var service = new ElasticService(clientProvider, srb, elasticSettings.Object, new List<TemplateField>());
             var result = service.RunQuery<DetailRecord>(query, userAccess);
             var record = result.Data.Items[0].Data;
@@ -590,13 +597,15 @@ namespace CMI.Web.Frontend.API.Tests.api
             // act
             var query = new ElasticQuery();
             var clientProvider = CreateClientProvider(mockResponse);
-            var srb = new SearchRequestBuilder(elasticSettings.Object, new QueryTransformationService(null), new List<TemplateField>());
+            var srb = new SearchRequestBuilder(elasticSettings.Object, 
+                new QueryTransformationService(new SearchSetting() { AdvancedSearchFields = [new SearchFieldDefinition() { Key = "Test" }] }),
+                new List<TemplateField>());
             var service = new ElasticService(clientProvider, srb, elasticSettings.Object, new List<TemplateField>
             {
                 new() {DbFieldName = "CustomFields.BemerkungZurVe"},
                 // Not really an internal field but to test if other fields than customFields are correctly removed
                 new() {DbFieldName = "WithinInfo"}
-            });
+            }   );
             var result = service.RunQuery<DetailRecord>(query, userAccess);
             var record = result.Data.Items[0].Data;
 

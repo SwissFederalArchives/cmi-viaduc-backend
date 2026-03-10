@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using CMI.Access.Common;
+﻿using CMI.Access.Common;
 using CMI.Contract.Common;
+using System.Linq;
 
 namespace CMI.Engine.Anonymization
 {
@@ -84,9 +84,15 @@ namespace CMI.Engine.Anonymization
 
         private void SyncArchiveplanAndParentContentInfos(ElasticArchiveDbRecord elasticArchiveRecord)
         {
+            var externalKeyId = elasticArchiveRecord?.ExternalKeys?
+                                    .FirstOrDefault(e => e?.Key == "scopeArchiv")?.Value
+                                ?? elasticArchiveRecord?.ArchiveRecordId;
+
             // Get all children
-            var children = dbAccess.GetChildren(elasticArchiveRecord.ArchiveRecordId, true).ToList();
-            foreach (var child in children)
+            var children = dbAccess.GetChildren(elasticArchiveRecord.ArchiveRecordId, externalKeyId, true).ToList();
+            
+            // The getchildren also returns the current record, so we have to filter that out
+            foreach (var child in children.Where(c => c.ArchiveRecordId != elasticArchiveRecord.ArchiveRecordId))
             {
                 // Get the corresponding db record
                 var childDbRecord = dbAccess.FindDbDocument(child.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);

@@ -1,5 +1,6 @@
 ﻿using CMI.Contract.Common;
 using CMI.Contract.Harvest;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Harvest
 {
@@ -12,34 +13,27 @@ namespace CMI.Manager.Harvest
         /// </summary>
         /// <param name="archiveRecordId">The id of the archive id in the AIS</param>
         /// <returns>ArchiveRecord.</returns>
-        ArchiveRecord BuildArchiveRecord(string archiveRecordId);
+        Task<ArchiveRecord> BuildArchiveRecord(string archiveRecordId);
+
+        /// <summary>
+        ///     Gets access tokens for VeId from the AIS
+        /// </summary>
+        /// <param name="archiveRecordId">The id of the archive id in the AIS</param>
+        /// <returns>ArchiveRecordSecurity.</returns>
+        Task<ArchiveRecordSecurity> GetAisAccessTokens(string archiveRecordId);
 
         /// <summary>
         ///     Updates the mutation status in the mutation table.
         /// </summary>
         /// <param name="info">Object with information about the change.</param>
         /// <returns>Task.</returns>
-        int UpdateMutationStatus(MutationStatusInfo info);
+        Task<int> UpdateMutationStatus(MutationStatusInfo info);
 
         /// <summary>
         ///     Initiates a full resync of all archive records.
         /// </summary>
         /// <param name="info">Information about who and when the request was sent.</param>
         /// <returns>Number of added records to the mutation table</returns>
-        int InitiateFullResync(ResyncRequestInfo info);
-
-        /// <summary>
-        ///     Gets the status information on how many records are waiting for sync, or are in sync.
-        /// </summary>
-        /// <param name="dateRange">A date range to analize</param>
-        /// <returns>HarvestStatusInfo.</returns>
-        HarvestStatusInfo GetStatusInfo(QueryDateRangeEnum dateRange);
-
-        /// <summary>
-        ///     Gets the detailed log information for the data harvesting.
-        /// </summary>
-        /// <param name="request">The request object.</param>
-        /// <returns>HarvestLogInfo.</returns>
-        HarvestLogInfoResult GetLogInfo(HarvestLogInfoRequest request);
+        Task InitiateFullResync(ResyncRequestInfo info);
     }
 }

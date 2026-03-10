@@ -1,0 +1,769 @@
+{
+  "ElasticPrimaryData": null,
+  "Security": {
+    "MetadataAccessToken": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+    "PrimaryDataFulltextAccessToken": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+    "PrimaryDataDownloadAccessToken": [ "BAR", "AS", "BVW", "Ö3", "Ö2", "Ö1" ],
+    "FieldAccessToken": [ "BAR" ]
+  },
+  "Display": {
+    "DisplayTemplateName": "Dossier",
+    "CanBeOrdered": false,
+    "ArchiveplanContext": [
+      {
+        "IconId": 1,
+        "Level": "Archiv",
+        "RefCode": "CH-BAR#Unterlagen*",
+        "Title": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)",
+        "DateRangeText": "1424-2023",
+        "Protected": false,
+        "ArchiveRecordId": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86"
+      },
+      {
+        "IconId": 2,
+        "Level": "Hauptabteilung",
+        "RefCode": "E*",
+        "Title": "Archiv des Schweizerischen Bundesstaates ab 1848",
+        "DateRangeText": null,
+        "Protected": false,
+        "ArchiveRecordId": "Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555"
+      },
+      {
+        "IconId": 3,
+        "Level": "Bestand",
+        "RefCode": "E27*",
+        "Title": "E27* - Landesverteidigung - 1848-1950",
+        "DateRangeText": null,
+        "Protected": false,
+        "ArchiveRecordId": "Best    63b63d89-f681-4d3f-bd51-b4fd79698022"
+      },
+      {
+        "IconId": 5,
+        "Level": "Serie",
+        "RefCode": "E27#01",
+        "Title": "Klaus Kinski",
+        "DateRangeText": null,
+        "Protected": false,
+        "ArchiveRecordId": "Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677"
+      }
+    ],
+    "ParentArchiveRecordId": "Klas    6c63ee5b-2afa-5d42-8d0a-60cd27464ebd"
+  },
+  "Metadata": {
+    "DetailData": [
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "Dossier"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "STUFE",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "Schweizer Filmwochenschau vom 12.06.1964"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "TITEL",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "BEMERKUNG_ZUR_VE",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "Land",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ZUSATZKOMPONENTE_ZAC1",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "Darin",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "1119"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "Aktenzeichen",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "J2.143#1996/386#1119*"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "SIGNATUR",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "J2.143#1996/386#1119*"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "SIGNATUR_ARCHIVPLAN",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "GESCHICHTE_DER_VE",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "SIGNATURHISTORY",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "VERWANDTE_VE",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "1996/00386 Keine Angaben (k.A.) 2 (1940-1975)"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": "",
+              "EntityType": "Ablieferungen",
+              "Value": "1996/00386 Keine Angaben (k.A.) 2 (1940-1975)"
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "VE_ABLIEFERUNG_LINK",
+        "ElementType": 13,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "Schweizerisches Bundesarchiv (1979-)"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": "",
+              "EntityType": "",
+              "Value": "Schweizerisches Bundesarchiv (1979-)"
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "ZUSTÄNDIGE_STELLE_(LINK)",
+        "ElementType": 13,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "Umfang",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "FRÜHERES_AKTENZEICHEN",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "URHEBER",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "BETEILIGTE_PERSONEN_KÖRPERSCHAFTEN",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "VERLEGER",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ABDECKUNG",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "THEMA",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "FORMAT",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "DIGITALE_VERSION",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "Frei zugänglich"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "ZUGÄNGLICHKEIT_GEMÄSS_BGA",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [
+              {
+                "Lang": "de-CH",
+                "IsDefaultLang": true,
+                "Value": "21687162"
+              }
+            ],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 0,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "ScopeID",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "AIP_ID",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ENTSTEHUNGSZEITRAUM__ANM",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": null,
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [
+          {
+            "TextValues": [],
+            "DateRange": {
+              "From": null,
+              "FromDate": "0001-01-01T00:00:00",
+              "SearchFromDate": "0001-01-01T00:00:00",
+              "FromApproxIndicator": false,
+              "To": null,
+              "ToDate": "0001-01-01T00:00:00",
+              "SearchToDate": "0001-01-01T00:00:00",
+              "ToApproxIndicator": false,
+              "DateOperator": 0
+            },
+            "DurationInSeconds": 0,
+            "FloatValue": {
+              "DecimalPositions": 0,
+              "Value": 0.0
+            },
+            "IntValue": 2,
+            "BooleanValue": false,
+            "TimeValue": "0001-01-01T00:00:00",
+            "DateValue": "0001-01-01T00:00:00",
+            "BlobValueBase64": {
+              "MimeType": null,
+              "Value": null
+            },
+            "Link": {
+              "Href": null,
+              "Value": null
+            },
+            "EntityLink": {
+              "EntityRecordId": null,
+              "EntityType": null,
+              "Value": null
+            },
+            "Sequence": 0
+          }
+        ],
+        "ElementName": "KATEGORIE_DIA",
+        "ElementType": 6,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ContainerLocation",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ContainerType",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ContainerCode",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      },
+      {
+        "ElementValue": [],
+        "ElementName": "ContainerCarrierMaterial",
+        "ElementType": 0,
+        "IncludeInFullTextIndex": false,
+        "Visibility": 0
+      }
+    ],
+    "Usage": {
+      "IsPhysicalyUsable": false,
+      "ProtectionCategory": "3",
+      "ProtectionBaseDate": null,
+      "ProtectionDuration": 0,
+      "ProtectionEndDate": "1964-12-31T23:59:00",
+      "CannotFallBelow": false,
+      "AdjustedManually": false,
+      "ProtectionNote": null,
+      "Permission": "Keine",
+      "PhysicalUsability": "Uneingeschränkt",
+      "Accessibility": "Öffentlich",
+      "UsageNotes": null,
+      "License": 0
+    },
+    "NodeInfo": {
+      "ParentArchiveRecordId": null,
+      "Path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86; Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555; Best    63b63d89-f681-4d3f-bd51-b4fd79698022; Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677; Klas    4757993a-1b89-4ad2-9f1c-ca0420eacce1",
+      "Sequence": 24,
+      "IsLeaf": false,
+      "Level": 0,
+      "ChildCount": 0
+    },
+    "Descriptors": [],
+    "Containers": {
+      "Container": [
+        {
+          "ContainerLocation": "1/1/291/04/06",
+          "ContainerType": "Plastikkassette",
+          "IdName": "Mg      0541c342-3330-58f9-b0e2-59974252a87f 2819977",
+          "ContainerCode": "2819977",
+          "ContainerCarrierMaterial": "Mikrofilm Diazo"
+        }
+      ],
+      "NumberOfContainers": 0
+    },
+    "References": [],
+    "AccessionDate": 0,
+    "PrimaryDataLink": null,
+    "ManifestLink": null,
+    "AggregationFields": [
+      {
+        "Values": [],
+        "AggregationName": "FondsOverview"
+      }
+    ]
+  },
+  "PrimaryData": [],
+  "ArchiveRecordId": "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020"
+}

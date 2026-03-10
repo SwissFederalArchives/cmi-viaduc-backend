@@ -17,6 +17,7 @@ namespace CMI.Manager.DocumentConverter.Properties
             AddDescription<DocumentConverterSettings>(x => x.SftpLicenseKey, "Lizenz-Schlüssel für den Rebex SFTP-Server");
             AddDescription<DocumentConverterSettings>(x => x.SftpPrivateCertKey, "Base64 Encoded Zertifikatinhalt");
             AddDescription<DocumentConverterSettings>(x => x.SftpPrivateCertPassword, "Passwort für Zertifikat");
+            AddDescription<DocumentConverterSettings>(x => x.SftpUserPassword, "Passwort des SFTP Users");
             AddDescription<DocumentConverterSettings>(x => x.OCRTextExtractionProfile, "Das Profil für die OCR Text-Extraktion bei der Synchronisation.");
             AddDescription<DocumentConverterSettings>(x => x.PDFTextLayerExtractionProfile, "Das Profil für die OCR Erkennung bei der Erstellung von Gebrauchskopien.");
             AddDescription<DocumentConverterSettings>(x => x.AbbyyEnginePoolSize, "Die Grösse des Abbyy-Engine Pools.");

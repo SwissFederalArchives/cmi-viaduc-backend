@@ -5,7 +5,7 @@ namespace CMI.Contract.Order
     public class PrimaerdatenReportRecord
     {
         public int? OrderId { get; set; }
-        public int? VeId { get; set; }
+        public string VeId { get; set; }
         public string Signatur { get; set; }
         public long Size { get; set; }
         public int FileCount { get; set; }

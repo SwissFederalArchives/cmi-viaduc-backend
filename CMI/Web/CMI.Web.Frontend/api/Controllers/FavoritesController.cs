@@ -177,14 +177,16 @@ namespace CMI.Web.Frontend.api.Controllers
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
 
             var found = elasticService
-                .QueryForIds<ElasticArchiveRecord>(veIds, access, new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0}).Entries;
+                .QueryForIds<ElasticArchiveRecord>(veIds, access, new Paging { Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0 }).Entries;
+
 
             foreach (var f in favorites)
             {
                 if (f is VeFavorite veFavorite)
                 {
-                    var elasticHit = found.FirstOrDefault(e => e?.Data?.ArchiveRecordId == veFavorite.VeId.ToString());
-                    if (elasticHit == null)
+                    var elasticHit = found.FirstOrDefault(e => e?.Data?.ArchiveRecordId == veFavorite.VeId
+                                                               || e?.Data?.ExternalKeys.First(e => e.Key == "scopeArchiv").Value == veFavorite.VeId);
+                    if (elasticHit?.Data == null)
                     {
                         continue;
                     }
@@ -195,13 +197,13 @@ namespace CMI.Web.Frontend.api.Controllers
                     veFavorite.Level = elasticHit.Data?.Level;
                     veFavorite.CreationPeriod = elasticHit.Data?.CreationPeriod?.Text;
                     veFavorite.ReferenceCode = elasticHit.Data?.ReferenceCode;
-                    veFavorite.CanBeOrdered = elasticHit.Data?.CanBeOrdered ?? false;
+                    veFavorite.CanBeOrdered = elasticHit.Data.CanBeOrdered;
                     veFavorite.HasPrimaryLink = !string.IsNullOrWhiteSpace(elasticHit.Data?.PrimaryDataLink);
                     veFavorite.CanBeDownloaded = veFavorite.HasPrimaryLink &&
                                                  access.HasAnyTokenFor(elasticHit.Data?.PrimaryDataDownloadAccessTokens);
                     veFavorite.ManifestLink = elasticHit.Data?.ManifestLink;
                     // IT, FR and DE: Dossier & EN: Dossiers
-                    veFavorite.SchutzfristendeDossier = elasticHit.Data != null && elasticHit.Data.Level.StartsWith("Dossier") && elasticHit.Data?.ProtectionEndDate?.Year != null
+                    veFavorite.SchutzfristendeDossier = elasticHit.Data.Level.StartsWith("Dossier") && elasticHit.Data?.ProtectionEndDate?.Year != null
                         ? elasticHit.Data?.ProtectionEndDate?.Year.ToString()
                         : string.Empty;
                     yield return veFavorite;

@@ -92,6 +92,7 @@ namespace CMI.Manager.Asset
                 cfg.ReceiveEndpoint(BusConstants.AssetManagerUpdatePrimaerdatenAuftragStatusMessageQueue, ec => { ec.Consumer(ctx.Resolve<UpdatePrimaerdatenAuftragStatusConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringSolrTestQueue, ec => { ec.Consumer(ctx.Resolve<SolrTestConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringCantaloupeTestQueue, ec => { ec.Consumer(ctx.Resolve<CantaloupeTestConsumer>); });
+                cfg.ReceiveEndpoint(BusConstants.AssetManagerDeleteViewerFiles, ec => { ec.Consumer(ctx.Resolve<DeleteViewerFilesConsumer>); });
 
                 cfg.UseNewtonsoftJsonSerializer();
                 helper.SubscribeAllSettingsInAssembly(Assembly.GetExecutingAssembly(), cfg);

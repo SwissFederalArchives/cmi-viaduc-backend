@@ -9,10 +9,12 @@ namespace CMI.Engine.MailTemplate
     public class InElasticIndexierteVe : Ve
     {
         private readonly ElasticArchiveRecord elasticArchiveRecord;
+        private readonly ElasticArchiveRecord unprotectedElasticArchiveRecord;
 
-        protected InElasticIndexierteVe(ElasticArchiveRecord elasticArchiveRecord)
+        protected InElasticIndexierteVe(ElasticArchiveRecord elasticArchiveRecord, ElasticArchiveRecord unprotectedElasticArchiveRecord)
         {
             this.elasticArchiveRecord = elasticArchiveRecord;
+            this.unprotectedElasticArchiveRecord = unprotectedElasticArchiveRecord;
         }
 
         public override string TeilBestand
@@ -63,6 +65,9 @@ namespace CMI.Engine.MailTemplate
         public override string ZustaendigeStelle => elasticArchiveRecord.ZuständigeStelle() ?? "";
 
         public override string ZusaetzlicheInformationen => elasticArchiveRecord.ZusätzlicheInformationen() ?? "";
+        public override string UnprotectedTitel => unprotectedElasticArchiveRecord.Title;
+        public override string UnprotectedDarin => unprotectedElasticArchiveRecord.WithinInfo;
+        public override string UnprotectedZusaetzlicheInformationen => unprotectedElasticArchiveRecord.ZusätzlicheInformationen() ?? "";
 
 
         public override Behältnis[] Behältnisse
@@ -104,9 +109,9 @@ namespace CMI.Engine.MailTemplate
 
         public override string Ablieferung => elasticArchiveRecord.Ablieferung();
 
-        public static InElasticIndexierteVe FromElasticArchiveRecord(ElasticArchiveRecord r)
+        public static InElasticIndexierteVe FromElasticArchiveRecord(ElasticArchiveRecord record, ElasticArchiveRecord unprotectedRecord)
         {
-            return new InElasticIndexierteVe(r);
+            return new InElasticIndexierteVe(record, unprotectedRecord);
         }
 
 

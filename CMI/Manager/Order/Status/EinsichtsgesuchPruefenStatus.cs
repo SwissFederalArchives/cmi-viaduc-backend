@@ -100,8 +100,8 @@ namespace CMI.Manager.Order.Status
             }
             else
             {
-                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
-                ((List<InElasticIndexierteVe>) emailExpando.VeList).Add(InElasticIndexierteVe.FromElasticArchiveRecord(veRecord));
+                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+                ((List<InElasticIndexierteVe>) emailExpando.VeList).Add(InElasticIndexierteVe.FromElasticArchiveRecord(veRecord, veRecord));
             }
         }
     }

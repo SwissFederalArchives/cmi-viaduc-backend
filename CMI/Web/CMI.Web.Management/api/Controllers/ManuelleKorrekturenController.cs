@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web.Http;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Entities;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace CMI.Web.Management.api.Controllers
 {
@@ -50,7 +52,7 @@ namespace CMI.Web.Management.api.Controllers
         {
             var access = ManagementControllerHelper.GetUserAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AnonymisierungManuelleKorrekturenBearbeiten);
-            return await manuelleKorrekturManagerClient.BatchAddManuelleKorrektur(veIds, access.UserId);
+            return await manuelleKorrekturManagerClient.BatchAddManuelleKorrektur(veIds.Select(WebUtility.UrlDecode).ToArray(), access.UserId);
         }
 
         [HttpPost]

@@ -52,10 +52,7 @@ if (!$versionDots.Count.Equals(5)) {
     Return 
 }
 
-Function Import-All-OpenSource {
-    Import-OpenSource "cmi-viaduc-web-core"
-    Import-OpenSource "cmi-viaduc-web-frontend"
-    Import-OpenSource "cmi-viaduc-web-management"
+Function Import-All-OpenSource {    
     Import-OpenSource "cmi-viaduc-backend"
 	Import-OpenSource "cmi-iiif-backend"
 	Import-OpenSource "cmi-iiif-frontend"
@@ -90,7 +87,18 @@ Function Import-OpenSource($ProjectName, $FilesOrDirsToExclude, $ResultName) {
     Copy-Item $UnzipPath/* $ClonePath -Recurse
 
     # Publizieren des Repositories
+   # Publish-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+
+   if (-not (git -C $ClonePath rev-parse --quiet --verify HEAD)) {
+    # Repo is empty → call empty repo version
+    Publish-Git-Repository-EmptyRepo -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+}
+else {
+    # Normal case → use original
     Publish-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+}
+
+
 }
 
 Function Get-Git-Repository {
@@ -113,6 +121,44 @@ Function Get-Git-Repository {
         Write-Error "Error when connecting to $GitRepoUrl"
     }
 
+}
+# New function only for empty repos
+Function Publish-Git-Repository-EmptyRepo {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$GitRepoUrl,
+        [Parameter(Mandatory = $true)]
+        [string]$CloneFolder,
+        [Parameter(Mandatory = $true)]
+        [string]$VersionTag
+    )
+
+    Write-Host "Publishing (empty repo case) to $GitRepoUrl"
+    $currentDir = Get-Location
+
+    try {
+        Set-Location -Path $CloneFolder
+
+        # Always create 'main' if repo is empty
+        git checkout -B main
+        git add --all
+        git commit -m $VersionTag
+
+        git push -u $GitRepoUrl main
+        if (-not $?) { throw "Error with git push of branch 'main'!" }
+
+        git tag $VersionTag
+        git push $GitRepoUrl $VersionTag
+
+        gh release create $VersionTag 2>$null | Out-Null
+    }
+    catch {
+        Write-Error "Error when publishing empty repo to $GitRepoUrl"
+        throw
+    }
+    finally {
+        Set-Location $currentDir
+    }
 }
 
 Function Publish-Git-Repository {

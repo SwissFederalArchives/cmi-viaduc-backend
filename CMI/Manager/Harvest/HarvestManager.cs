@@ -1,23 +1,22 @@
 ﻿using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 using Serilog;
+using System.Threading.Tasks;
+using CMI.Manager.Harvest.SyncLog;
 
 namespace CMI.Manager.Harvest
 {
     public class HarvestManager : IHarvestManager
     {
         private readonly IDbMetadataAccess dbAccess;
-        private readonly IDbMutationQueueAccess queueAccess;
+        private readonly IDbSyncLogAccess syncLogAccess;
         private readonly IDbResyncAccess resyncAccess;
-        private readonly IDbStatusAccess statusAccess;
 
-        public HarvestManager(IDbMetadataAccess dbAccess, IDbMutationQueueAccess queueAccess, IDbResyncAccess resyncAccess,
-            IDbStatusAccess statusAccess)
+        public HarvestManager(IDbMetadataAccess dbAccess, IDbSyncLogAccess syncLogAccess, IDbResyncAccess resyncAccess)
         {
             this.dbAccess = dbAccess;
-            this.queueAccess = queueAccess;
+            this.syncLogAccess = syncLogAccess;
             this.resyncAccess = resyncAccess;
-            this.statusAccess = statusAccess;
         }
 
         /// <summary>
@@ -27,9 +26,19 @@ namespace CMI.Manager.Harvest
         /// </summary>
         /// <param name="archiveRecordId">The id of the archive id in the AIS</param>
         /// <returns></returns>
-        public ArchiveRecord BuildArchiveRecord(string archiveRecordId)
+        public async Task<ArchiveRecord> BuildArchiveRecord(string archiveRecordId)
         {
-            return dbAccess.GetArchiveRecord(archiveRecordId);
+            return await dbAccess.GetArchiveRecord(archiveRecordId);
+        }
+
+        /// <summary>
+        ///  Gets accesstokens for a Ve_Id  from the AIS        
+        /// </summary>
+        /// <param name="archiveRecordId">The id of the archive id in the AIS</param>
+        /// <returns></returns>
+        public async Task<ArchiveRecordSecurity> GetAisAccessTokens(string archiveRecordId)
+        {
+            return await dbAccess.GetAisAccessTokens(archiveRecordId);
         }
 
         /// <summary>
@@ -37,9 +46,9 @@ namespace CMI.Manager.Harvest
         /// </summary>
         /// <param name="info">Object with information about the change.</param>
         /// <returns>Task.</returns>
-        public int UpdateMutationStatus(MutationStatusInfo info)
+        public async Task<int> UpdateMutationStatus(MutationStatusInfo info)
         {
-            return queueAccess.UpdateMutationStatus(info);
+            return await syncLogAccess.UpdateMutationStatus(info);
         }
 
         /// <summary>
@@ -47,33 +56,10 @@ namespace CMI.Manager.Harvest
         /// </summary>
         /// <param name="info">Information about who and when the request was sent.</param>
         /// <returns>Number of added records to the mutation table</returns>
-        public int InitiateFullResync(ResyncRequestInfo info)
+        public async Task InitiateFullResync(ResyncRequestInfo info)
         {
-            Log.Information("About to insert record ids into mutation table for full resync. Command was started by {username} at {startTime}",
-                info.Username, info.IssueDate);
-            var affectedRecords = resyncAccess.InitiateFullResync(info);
-            Log.Information("Finished inserting record ids into mutation table. A total of {affectedRecords} were added.", affectedRecords);
-            return affectedRecords;
-        }
-
-        /// <summary>
-        ///     Gets the status information on how many records are waiting for sync, or are in sync.
-        /// </summary>
-        /// <param name="dateRange">A date range to analize</param>
-        /// <returns>HarvestStatusInfo.</returns>
-        public HarvestStatusInfo GetStatusInfo(QueryDateRangeEnum dateRange)
-        {
-            return statusAccess.GetStatusInfo(dateRange);
-        }
-
-        /// <summary>
-        ///     Gets the detailed log information for the data harvesting.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        /// <returns>HarvestLogInfo.</returns>
-        public HarvestLogInfoResult GetLogInfo(HarvestLogInfoRequest request)
-        {
-            return statusAccess.GetLogInfo(request);
+            Log.Information("About to initiate a full resync");
+            await resyncAccess.InitiateFullResync(info);
         }
     }
 }

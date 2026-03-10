@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using CMI.Contract.Messaging;
+using CMI.Utilities.ActaPro;
 using MassTransit;
 using Serilog;
 using LogContext = Serilog.Context.LogContext;
@@ -24,8 +25,40 @@ namespace CMI.Manager.Cache
                 try
                 {
                     var file = new FileInfo(path);
-                    exists = file.Exists;
-                    fileSizeInBytes = file.Exists ? file.Length : 0;
+                    if (file.Exists)
+                    {
+                        exists = true;
+                        fileSizeInBytes = file.Length;
+                    }
+                    else
+                    {
+                        // Try alternative path
+                        var mappingProvider = new ActaProMappingProvider();
+                        var otherId = mappingProvider.GetOtherId(context.Message.Id);
+
+                        if (otherId != "-1")
+                        {
+                            path = Path.Combine(
+                                Properties.CacheSettings.Default.BaseDirectory,
+                                context.Message.RetentionCategory.ToString(),
+                                otherId);
+
+                            file = new FileInfo(path);
+                            if (file.Exists)
+                            {
+                                exists = true;
+                                fileSizeInBytes = file.Length;
+
+                                // In this case rename the file to the expected id
+                                var newPath = Path.Combine(
+                                    Properties.CacheSettings.Default.BaseDirectory,
+                                    context.Message.RetentionCategory.ToString(),
+                                    context.Message.Id);
+                                file.MoveTo(newPath);
+                                Log.Information("Renamed cached file from {oldPath} to {newPath}", path, newPath);
+                            }
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {

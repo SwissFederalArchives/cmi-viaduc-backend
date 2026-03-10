@@ -1,0 +1,602 @@
+{
+  "object": "document",
+  "type": "Vz",
+  "DocKey": "Vz      685f0872-f984-4f66-88a4-e6cd873fb1d0",
+  "DocTitle": "1960/1*   Test Dossier Silvana, 1988-1990 (Dossier)",
+  "CreationDate": "16.01.2025 10:26:50:219",
+  "OwnerID": "Acch",
+  "CreatorID": "Acch",
+  "ChangeDate": "03.04.2025 17:38:56:487",
+  "block": {
+    "type": "Vz",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Klas    cd81e4fb-8e2c-497e-944e-c285917f9700"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Klas"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "Acch"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "Acch"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "03.04.2025 17:38:56"
+      },
+      {
+        "type": "CreateDate",
+        "value": "16.01.2025 10:26:50"
+      },
+      {
+        "type": "ScopeID",
+        "value": "684660"
+      },
+      {
+        "type": "ApdID",
+        "value": "Vz      685f0872-f984-4f66-88a4-e6cd873fb1d0"
+      },
+      {
+        "type": "SignForInherit",
+        "value": "1960/1"
+      },
+      {
+        "type": "Vz_OwnSign",
+        "value": "1960/1*"
+      },
+      {
+        "type": "Altsi_Gp",
+        "fields": [
+          {
+            "type": "Altsi",
+            "value": "1960/1 123"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Titel",
+        "value": "Test Dossier Silvana"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1988-1990",
+        "timerange": {
+          "min": "01.01.1988",
+          "max": "31.12.1990",
+          "values": [
+            {
+              "value": "01.01.1988-31.12.1990",
+              "min": "01.01.1988",
+              "max": "31.12.1990"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_Bez",
+        "value": "1960/1*   Test Dossier Silvana, 1988-1990 (Dossier)"
+      },
+      {
+        "type": "Laufzeit_Anm",
+        "value": "Anmerkung zum Entstehungszeitraum"
+      },
+      {
+        "type": "Vz_SchachtelNr",
+        "value": "1"
+      },
+      {
+        "type": "Behaeltnis_Gp",
+        "fields": [
+          {
+            "type": "Behaeltnis_Key",
+            "value": "Mg      39d4210a-d1ca-4106-a891-85875a4fd207"
+          },
+          {
+            "type": "Behaeltnis_DocType",
+            "value": "Mg"
+          },
+          {
+            "type": "Behaeltnis_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Behaeltnis_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Behaeltnis_Bez",
+            "value": "1234"
+          },
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Behaeltnis_Mg_Behaeltniscode",
+            "value": "1234"
+          },
+          {
+            "type": "Behaeltnis_Bhlgrp_Typ",
+            "value": "Bundesordner"
+          },
+          {
+            "type": "Behaeltnis_Mg_Informationstraeger",
+            "value": "Film 8 mm - Arbeitskopie"
+          },
+          {
+            "type": "Behaeltnis_Mg_Lagerungsorte",
+            "value": "Mag-El/Magazinstellplatz"
+          },
+          {
+            "type": "Behaeltnis_Vz_OwnSign",
+            "value": "1960/1*"
+          },
+          {
+            "type": "Behaeltnis_Vz_Titel",
+            "value": "Test Dossier Silvana"
+          },
+          {
+            "type": "Behaeltnis_Laufzeit",
+            "value": "1988-1990"
+          }
+        ]
+      },
+      {
+        "type": "Behaeltnis_Gp",
+        "fields": [
+          {
+            "type": "Behaeltnis_Key",
+            "value": "Mg      79a2585b-be3a-58dd-8dd7-4abba0476e60"
+          },
+          {
+            "type": "Behaeltnis_DocType",
+            "value": "Mg"
+          },
+          {
+            "type": "Behaeltnis_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Behaeltnis_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Behaeltnis_Bez",
+            "value": "469393"
+          },
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Behaeltnis_Mg_Behaeltniscode",
+            "value": "469393"
+          },
+          {
+            "type": "Behaeltnis_Bhlgrp_Typ",
+            "value": "Buch"
+          },
+          {
+            "type": "Behaeltnis_Mg_Informationstraeger",
+            "value": "Papier"
+          },
+          {
+            "type": "Behaeltnis_Mg_Lagerungsorte",
+            "value": "1/1/001/01/01"
+          },
+          {
+            "type": "Behaeltnis_Vz_OwnSign",
+            "value": "1960/1*"
+          },
+          {
+            "type": "Behaeltnis_Vz_Titel",
+            "value": "Test Dossier Silvana"
+          },
+          {
+            "type": "Behaeltnis_Laufzeit",
+            "value": "1988-1990"
+          }
+        ]
+      },
+      {
+        "type": "IdentDigiMagazin",
+        "value": "id-digi-mag"
+      },
+      {
+        "type": "Vz_Klassifizierung",
+        "value": "nicht klassifiziert"
+      },
+      {
+        "type": "Vz_GeschUnterlagen_Gp",
+        "fields": [
+          {
+            "type": "Vz_GeschUnterlagen",
+            "value": "Das hier ist eine sehr lange Geschichte der Unterlagen."
+          }
+        ]
+      },
+      {
+        "type": "Vz_Zusatzkomponente",
+        "value": "zac"
+      },
+      {
+        "type": "Vz_Aktenzeichen",
+        "value": "1234"
+      },
+      {
+        "type": "Vz_Az_Gp",
+        "fields": [
+          {
+            "type": "Vz_Az",
+            "value": "Alt 123"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Urheber",
+        "value": "ich nin der Urheber"
+      },
+      {
+        "type": "Vz_BeteilPersKoerpersch",
+        "value": "du warst auch beteiligt"
+      },
+      {
+        "type": "Vz_Verleger",
+        "value": "er war der Verleger"
+      },
+      {
+        "type": "Vz_Abdeckung",
+        "value": "alles ist abgedeckt"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     d7ae2a94-245f-54d0-a0a9-a5b6b61650a7"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1960/1 Kommission des Nationalrats für auswärtige Angelegenheiten (1936-1991) (1803-1813)"
+          },
+          {
+            "type": "Ablieferung_AblNum",
+            "value": "1960/1"
+          },
+          {
+            "type": "Ablieferung_ZustaendigeStelle",
+            "value": "Kommission des Nationalrats für die Post-, Telegrafen- und Telefonverwaltung (1949.06-1962.11)-Part    5de4aadf-afb8-51de-8ee6-67d2a5ad6769;Kommission des Ständerats für auswärtige Angelegenheiten (1941-1991)-Part    a306826e-fe8a-5709-bd30-19495e0421c7;test;"
+          },
+          {
+            "type": "Ablieferung_Registraturperiode",
+            "value": "01.01.2010-01.01.2020",
+            "timerange": {
+              "min": "01.01.2010",
+              "max": "01.01.2020",
+              "values": [
+                {
+                  "value": "01.01.2010-01.01.2020",
+                  "min": "01.01.2010",
+                  "max": "01.01.2020"
+                }
+              ]
+            }
+          },
+          {
+            "type": "Ablieferung_KatAutomatisierung",
+            "value": "4"
+          },
+          {
+            "type": "Ablieferung_Publikationsrechte",
+            "value": "BAR"
+          },
+          {
+            "type": "Ablieferung_InQuerySichtbar",
+            "value": "1"
+          },
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Reference_Type",
+            "value": "Ablieferung"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Format",
+        "value": "Excel"
+      },
+      {
+        "type": "Vz_Darin_Gp",
+        "fields": [
+          {
+            "type": "Vz_Darin",
+            "value": "Hier weitere Infos WEBOZ"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Sprache",
+        "value": "deutsch"
+      },
+      {
+        "type": "Vz_Thema",
+        "value": "hier ein Thema"
+      },
+      {
+        "type": "Vz_DigiVersion_Gp",
+        "fields": [
+          {
+            "type": "Vz_DigiVersion_URL",
+            "value": "https://www.recherche.bar.admin.ch"
+          },
+          {
+            "type": "Vz_DigiVersion_Bez",
+            "value": "Online-Zugang des Bundesarchivs"
+          }
+        ]
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Nicht öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Abliefernde Stelle"
+      },
+      {
+        "type": "MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Vz_Schutzfristkategorie",
+        "value": "Art. 9.1 BGA"
+      },
+      {
+        "type": "Vz_Schutzfristbasisdatum",
+        "value": "Unbekannt"
+      },
+      {
+        "type": "Vz_Schutzfristdauer",
+        "value": "30"
+      },
+      {
+        "type": "Vz_Schutzfristende",
+        "value": "01.01.2020",
+        "timerange": {
+          "min": "01.01.2020",
+          "max": "01.01.2020",
+          "values": [
+            {
+              "value": "01.01.2020-01.01.2020",
+              "min": "01.01.2020",
+              "max": "01.01.2020"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_ZugaenglichkeitBGA",
+        "value": "Prüfung nötig"
+      },
+      {
+        "type": "Verw_Ve_Gp",
+        "fields": [
+          {
+            "type": "Verw_Ve",
+            "value": "verwandte VEs gibt es ganz viele."
+          }
+        ]
+      },
+      {
+        "type": "Verweis",
+        "fields": [
+          {
+            "type": "Vw_Key",
+            "value": "Vz      88dfaf7c-76b6-4617-821f-093deeaff6d3"
+          },
+          {
+            "type": "Vw_RefDocType",
+            "value": "Vz"
+          },
+          {
+            "type": "Vw_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Vw_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Vw_Typ",
+            "value": "Vz"
+          },
+          {
+            "type": "Vw_Bez",
+            "value": "Stellungnahme der Generalstabsabteilung vom Augus"
+          }
+        ]
+      },
+      {
+        "type": "Vz_ZusatzInfo_Gp",
+        "fields": [
+          {
+            "type": "Vz_ZusatzInfo",
+            "value": "hier ein paar zusätzliche Informationen"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Notiz_Gp",
+        "fields": [
+          {
+            "type": "Vz_Notiz_Erfassdatum",
+            "value": "03.04.2025",
+            "timerange": {
+              "min": "03.04.2025",
+              "max": "03.04.2025",
+              "values": [
+                {
+                  "value": "03.04.2025-03.04.2025",
+                  "min": "03.04.2025",
+                  "max": "03.04.2025"
+                }
+              ]
+            }
+          },
+          {
+            "type": "Vz_Notiz_Erfassuser",
+            "value": "Acch"
+          },
+          {
+            "type": "Vz_Notiz_Notiz",
+            "value": "eine Notiz"
+          }
+        ]
+      },
+      {
+        "type": "Status",
+        "value": "In Bearbeitung"
+      },
+      {
+        "type": "Deskriptor_Gp",
+        "fields": [
+          {
+            "type": "Deskriptor_Key",
+            "value": "Thes    00000073Admin"
+          },
+          {
+            "type": "Deskriptor_DocType",
+            "value": "Thes"
+          },
+          {
+            "type": "Deskriptor_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Deskriptor_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Deskriptor_Bez",
+            "value": "Glückspiel"
+          }
+        ]
+      },
+      {
+        "type": "Deskriptor_Gp",
+        "fields": [
+          {
+            "type": "Deskriptor_Key",
+            "value": "Thes    00000052Admin"
+          },
+          {
+            "type": "Deskriptor_DocType",
+            "value": "Thes"
+          },
+          {
+            "type": "Deskriptor_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Deskriptor_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Deskriptor_Bez",
+            "value": "Befreiuung vom Kriegsdienst"
+          }
+        ]
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86"
+      },
+      {
+        "type": "Export_id",
+        "value": "1d95722d-68a4-4fb6-9a8a-75bf5df4526d"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_1d95722d-68a4-4fb6-9a8a-75bf5df4526d"
+      },
+      {
+        "type": "Vz_AkTyp",
+        "value": "Akten allgemein"
+      },
+      {
+        "type": "Vz_Best",
+        "value": "Best    02016335-594f-4e7a-9315-7050146f5468"
+      },
+      {
+        "type": "Vz_Best_DocTitle",
+        "value": "*   Test Bestand Silvana (Bestand)"
+      },
+      {
+        "type": "Vz_Bestellsignatur",
+        "value": "* 1960/1*"
+      },
+      {
+        "type": "Vz_Id",
+        "value": "685f0872-f984-4f66-88a4-e6cd873fb1d0"
+      },
+      {
+        "type": "Ablieferung_KatAutomatisierung",
+        "value": "4"
+      },
+      {
+        "type": "Ablieferung_Publikationsrechte",
+        "value": "BAR"
+      }
+    ]
+  }
+}

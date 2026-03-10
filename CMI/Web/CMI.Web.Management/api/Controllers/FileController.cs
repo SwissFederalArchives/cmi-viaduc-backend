@@ -43,11 +43,17 @@ namespace CMI.Web.Management.api.Controllers
             this.cacheHelper = cacheHelper;
         }
 
+        /// <summary>
+        /// Download a file
+        /// </summary>
+        /// <param name="id">The ID is the 'itemId' field from the 'OrderingFlatItem' type script class and is of the 'Number' type there</param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public async Task<IHttpActionResult> DownloadFile(int id, string token)
         {
-            var orderItemId = id;
+            var orderItemId = id.ToString();
             if (string.IsNullOrWhiteSpace(token))
             {
                 return Content(HttpStatusCode.Forbidden, "Invalid token");
@@ -65,7 +71,7 @@ namespace CMI.Web.Management.api.Controllers
                 return Content(HttpStatusCode.Forbidden, "No User found for the requested Downloadtoken");
             }
 
-            var orderItem = (await orderManagerClient.FindOrderItems(new[] {orderItemId})).FirstOrDefault();
+            var orderItem = (await orderManagerClient.FindOrderItems(new[] {id})).FirstOrDefault();
             if (orderItem == null)
             {
                 return BadRequest("OrderItem does not exist in DB");
@@ -80,8 +86,8 @@ namespace CMI.Web.Management.api.Controllers
 
             var downloadAssetResult = (await downloadClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
             {
-                ArchiveRecordId = orderItem.VeId.ToString(),
-                OrderItemId = orderItemId,
+                ArchiveRecordId = orderItem.VeId,
+                OrderItemId = id,
                 AssetType = AssetType.Benutzungskopie,
                 Recipient = userId,
                 RetentionCategory = CacheRetentionCategory.UsageCopyBenutzungskopie,
@@ -142,7 +148,7 @@ namespace CMI.Web.Management.api.Controllers
             var expires = DateTime.Now.AddMinutes(downloadLogHelper.GetConfigValueTokenValidTime());
             var token = downloadLogHelper.CreateLogToken();
 
-            downloadTokenDataAccess.CreateToken(token, orderItemId, DownloadTokenType.OrderItem, expires, ipAddress, userId);
+            downloadTokenDataAccess.CreateToken(token, orderItemId.ToString(), DownloadTokenType.OrderItem, expires, ipAddress, userId);
             return Content(HttpStatusCode.OK, token);
         }
     }

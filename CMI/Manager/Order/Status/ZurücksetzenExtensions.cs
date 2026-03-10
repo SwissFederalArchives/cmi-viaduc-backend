@@ -19,7 +19,7 @@ namespace CMI.Manager.Order.Status
 
             UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);
 
-            if (auftragStatus.Context.OrderItem.VeId.HasValue)
+            if (!string.IsNullOrWhiteSpace(auftragStatus.Context.OrderItem.VeId))
             {
                 UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);
             }

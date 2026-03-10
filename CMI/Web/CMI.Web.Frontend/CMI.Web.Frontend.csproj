@@ -24,6 +24,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,32 +93,32 @@
       <HintPath>..\..\..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Configuration.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks, Version=6.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.6.0.11\lib\net461\Microsoft.Extensions.Diagnostics.HealthChecks.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks, Version=6.0.36.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.6.0.36\lib\net461\Microsoft.Extensions.Diagnostics.HealthChecks.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions, Version=6.0.11.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.6.0.11\lib\net461\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions, Version=6.0.36.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.6.0.36\lib\net461\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.FileProviders.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=6.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.FileProviders.Abstractions.6.0.1\lib\net461\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Hosting.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=6.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Hosting.Abstractions.6.0.1\lib\net461\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.3\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Options, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Options.8.0.2\lib\net462\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Abstractions, Version=7.5.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.IdentityModel.Abstractions.7.5.2\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
@@ -168,8 +170,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Namotion.Reflection, Version=2.1.2.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Namotion.Reflection.2.1.2\lib\net45\Namotion.Reflection.dll</HintPath>
+    <Reference Include="Namotion.Reflection, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Namotion.Reflection.3.2.0\lib\net462\Namotion.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NEST.7.17.5\lib\net461\Nest.dll</HintPath>
@@ -184,23 +186,29 @@
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Newtonsoft.Json.Bson.1.0.3\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
-    <Reference Include="NJsonSchema, Version=10.9.0.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NJsonSchema.10.9.0\lib\net45\NJsonSchema.dll</HintPath>
+    <Reference Include="NJsonSchema, Version=11.1.0.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NJsonSchema.11.1.0\lib\net462\NJsonSchema.dll</HintPath>
     </Reference>
-    <Reference Include="NSwag.Annotations, Version=13.20.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NSwag.Annotations.13.20.0\lib\net45\NSwag.Annotations.dll</HintPath>
+    <Reference Include="NJsonSchema.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NJsonSchema.Annotations.11.1.0\lib\net462\NJsonSchema.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="NSwag.AspNet.Owin, Version=13.20.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NSwag.AspNet.Owin.13.20.0\lib\net45\NSwag.AspNet.Owin.dll</HintPath>
+    <Reference Include="NJsonSchema.NewtonsoftJson, Version=11.1.0.0, Culture=neutral, PublicKeyToken=c2f9c3bdfae56102, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NJsonSchema.NewtonsoftJson.11.1.0\lib\net462\NJsonSchema.NewtonsoftJson.dll</HintPath>
     </Reference>
-    <Reference Include="NSwag.Core, Version=13.20.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NSwag.Core.13.20.0\lib\net45\NSwag.Core.dll</HintPath>
+    <Reference Include="NSwag.Annotations, Version=14.2.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NSwag.Annotations.14.2.0\lib\net462\NSwag.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="NSwag.Generation, Version=13.20.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NSwag.Generation.13.20.0\lib\net45\NSwag.Generation.dll</HintPath>
+    <Reference Include="NSwag.AspNet.Owin, Version=14.2.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NSwag.AspNet.Owin.14.2.0\lib\net462\NSwag.AspNet.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="NSwag.Generation.WebApi, Version=13.20.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NSwag.Generation.WebApi.13.20.0\lib\net45\NSwag.Generation.WebApi.dll</HintPath>
+    <Reference Include="NSwag.Core, Version=14.2.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NSwag.Core.14.2.0\lib\net462\NSwag.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NSwag.Generation, Version=14.2.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NSwag.Generation.14.2.0\lib\net462\NSwag.Generation.dll</HintPath>
+    </Reference>
+    <Reference Include="NSwag.Generation.WebApi, Version=14.2.0.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NSwag.Generation.WebApi.14.2.0\lib\net462\NSwag.Generation.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="NSwag.SwaggerGeneration.WebApi, Version=12.3.1.0, Culture=neutral, PublicKeyToken=c2d88086e098d109, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NSwag.SwaggerGeneration.WebApi.12.3.1\lib\net45\NSwag.SwaggerGeneration.WebApi.dll</HintPath>
@@ -617,6 +625,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data_Template\web.sustainsys.config" />
+    <Content Include="App_Data_Template\ACTApro-ScopeID.json" />
     <None Include="Properties\PublishProfiles\Publish local.pubxml">
       <SubType>Designer</SubType>
     </None>
@@ -745,6 +754,7 @@
     <Compile Include="Helpers\IUsageAnalyzer.cs" />
     <Compile Include="Helpers\UsageAnalyzer.cs" />
     <Compile Include="Helpers\FrontendTranslationHelper.cs" />
+    <Compile Include="Helpers\AccessTokenComparer.cs" />
     <Compile Include="Helpers\VeExportRecordHelper.cs" />
     <Compile Include="Models\ContentIndexModel.cs" />
     <Compile Include="ParameterSettings\DigitalisierungsbeschraenkungSettings.cs" />
@@ -784,6 +794,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\Access\Common\CMI.Access.Common.csproj">
+      <Project>{09318bf3-44cd-43b7-ac61-faae6b957b3a}</Project>
+      <Name>CMI.Access.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Access\Sql.Viaduc\CMI.Access.Sql.Viaduc.csproj">
       <Project>{713F2501-9065-454B-9E14-2599A1F3D4E8}</Project>
       <Name>CMI.Access.Sql.Viaduc</Name>
@@ -824,9 +838,17 @@
       <Project>{4D85737D-2F6C-4640-9B85-C169F5FF2B41}</Project>
       <Name>CMI.Engine.MailTemplate</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Manager\Harvest\CMI.Manager.Harvest.csproj">
+      <Project>{cf7ca51d-0543-4f19-bee1-1af6d056cc7b}</Project>
+      <Name>CMI.Manager.Harvest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Manager\Order\CMI.Manager.Order.csproj">
       <Project>{7AC720AA-B1A6-4690-A5C7-669115EAF2B5}</Project>
       <Name>CMI.Manager.Order</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Utilities\ActaPro\CMI.Utilities.ActaPro.csproj">
+      <Project>{88ab79cb-202c-45d8-840e-e8256af252bd}</Project>
+      <Name>CMI.Utilities.ActaPro</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Utilities\Bus\Configuration\CMI.Utilities.Bus.Configuration.csproj">
       <Project>{72606585-274A-444F-AA34-C7F228F94460}</Project>

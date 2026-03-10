@@ -8,6 +8,11 @@
     <EntitySet Name="ManuelleKorrekturFelder" EntityType="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturFeld" />
     <EntitySet Name="ManuelleKorrekturStatusHistories" EntityType="CMI.Access.Sql.Viaduc.EF.ManuelleKorrekturStatusHistory" />
     <EntitySet Name="VManuelleKorrekturen" EntityType="CMI.Access.Sql.Viaduc.EF.VManuelleKorrektur" />
+    <EntitySet Name="SyncActions" EntityType="CMI.Access.Sql.Viaduc.EF.SyncAction" />
+    <EntitySet Name="SyncActionLogs" EntityType="CMI.Access.Sql.Viaduc.EF.SyncActionLog" />
+    <EntitySet Name="SyncInfos" EntityType="CMI.Access.Sql.Viaduc.EF.SyncInfo" />
+    <EntitySet Name="VSyncNumberPerHours" EntityType="CMI.Access.Sql.Viaduc.EF.VSyncNumberPerHour" />
+    <EntitySet Name="VSyncActions" EntityType="CMI.Access.Sql.Viaduc.EF.VSyncAction" />
     <AssociationSet Name="Collection_CollectionSet" Association="CMI.Access.Sql.Viaduc.EF.Collection_Collection">
       <End Role="Parent" EntitySet="Collections" />
       <End Role="ChildCollections" EntitySet="Collections" />
@@ -19,6 +24,10 @@
     <AssociationSet Name="FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1Set" Association="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturStatusHistory_ManuelleKorrektur1">
       <End Role="ManuelleKorrektur" EntitySet="ManuelleKorrekturen" />
       <End Role="ManuelleKorrekturStatusHistories" EntitySet="ManuelleKorrekturStatusHistories" />
+    </AssociationSet>
+    <AssociationSet Name="SyncAction_SyncActionLogSet" Association="CMI.Access.Sql.Viaduc.EF.SyncAction_SyncActionLog">
+      <End Role="SyncAction" EntitySet="SyncActions" />
+      <End Role="SyncActionLogs" EntitySet="SyncActionLogs" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Collection" ed:Guid="67cb0d2a-7dd5-4262-833a-2bcdfbb2403b">
@@ -298,7 +307,7 @@
       <PropertyRef Name="ManuelleKorrekturId" />
     </Key>
     <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="5b57e645-9675-4285-98ca-212f6a3809d0" />
-    <Property Name="VeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="cb274ef3-f313-405c-a0f9-df0d150ed50e" />
+    <Property Name="VeId" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="cb274ef3-f313-405c-a0f9-df0d150ed50e" />
     <Property Name="Signatur" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="29bfcf06-abc2-4976-b875-06b6c8c10eda" />
     <Property Name="Schutzfristende" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="d431ed63-ce36-4651-ba7d-adf667fd8ef9" />
     <Property Name="Titel" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="3f6d943b-3271-450c-a2bd-c26edb176027" />
@@ -313,7 +322,7 @@
     <Property Name="Entstehungszeitraum" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="e7ac9884-6ea6-468e-9734-dfc8be8e905d" />
     <Property Name="ZugänglichkeitGemässBGA" Type="String" Nullable="false" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="true" ed:Guid="7157be0c-e2ca-4916-ba69-64fdcd1cf2e8" />
     <Property Name="Schutzfristverzeichnung" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="6e7442e5-e6d6-477a-94c1-4d8a641ad054" />
-    <Property Name="ZuständigeStelle" Type="String" MaxLength="100" Unicode="true" ed:ValidateMaxLength="100" ed:ValidateRequired="false" ed:Guid="75f0be29-1db3-4c1a-8b5d-06081db84b94" />
+    <Property Name="ZuständigeStelle" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="75f0be29-1db3-4c1a-8b5d-06081db84b94" />
     <Property Name="Publikationsrechte" Type="String" MaxLength="200" Unicode="true" ed:ValidateMaxLength="200" ed:ValidateRequired="false" ed:Guid="3c4870c2-231e-455e-b6b9-6987ad37f58f" />
     <Property Name="AnonymisiertZumErfassungszeitpunk" Type="Boolean" Nullable="false" ed:ValidateRequired="true" ed:Guid="fec5d041-aeb3-474e-bd7f-950ed860e94c" />
     <NavigationProperty Name="ManuelleKorrekturFelder" Relationship="CMI.Access.Sql.Viaduc.EF.FK_ManuelleKorrekturFelder_ManuelleKorrektur" FromRole="ManuelleKorrektur" ToRole="ManuelleKorrekturFelder" ed:Guid="aa9eb6e8-7880-4d8e-8c0e-6255357f50ec" />
@@ -358,7 +367,7 @@
       <PropertyRef Name="AnonymisiertZumErfassungszeitpunk" />
     </Key>
     <Property Name="ManuelleKorrekturId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="fb6124e6-34f4-49a1-b35d-fba917dd05a6" />
-    <Property Name="VeId" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="04e367b9-bdb1-4ec5-bd09-d0ed6ab683b6" />
+    <Property Name="VeId" Type="String" Nullable="false" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="true" ed:Guid="04e367b9-bdb1-4ec5-bd09-d0ed6ab683b6" />
     <Property Name="Signatur" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="da03391a-1923-4d6a-86d2-f62d9653623a" />
     <Property Name="Schutzfristende" Type="DateTime" Nullable="false" ed:ValidateRequired="true" ed:Guid="47f653bf-5350-4570-a0fb-067170a5ed44" />
     <Property Name="Titel" Type="String" Nullable="false" Unicode="true" ed:ValidateRequired="true" ed:Guid="ab334613-527e-4edf-b06f-5f784abd898d" />
@@ -391,6 +400,63 @@
     <Property Name="VerwandteVEGemAIS" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="74c29b05-d03a-4582-90b6-e3c2a3042faa" />
     <Property Name="VerwandteVEAutomatischAnonymisiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="b881490f-5eb0-4fe0-96aa-10db60017e24" />
     <Property Name="VerwandteVEManuellKorrigiert" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="613d384c-701b-44a1-94be-c0246b28a56a" />
+  </EntityType>
+  <EntityType Name="SyncAction" ed:Guid="48e003be-4a15-495a-b879-ae40b06d4274">
+    <Key>
+      <PropertyRef Name="SyncActionId" />
+    </Key>
+    <Property Name="SyncActionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="ba7930c6-8731-4d01-aa29-34163de30974" />
+    <Property Name="ArchiveRecordId" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="a442f9ab-baf3-4a43-9ac9-424cf408e137" />
+    <Property Name="ActionType" Type="String" MaxLength="40" Unicode="true" ed:ValidateMaxLength="40" ed:ValidateRequired="false" ed:Guid="f096a44a-e936-4a9e-8df3-e44ea4378195" />
+    <Property Name="ActionStatus" Type="Int32" DefaultValue="0" ed:ValidateRequired="false" ed:Guid="7f87fb4c-ea6d-49f4-8f5e-35314ec63b98" />
+    <Property Name="NumberOfTries" Type="Int32" DefaultValue="0" ed:ValidateRequired="false" ed:Guid="c5731f39-b90b-4cfd-8515-a40f5177f8a9" />
+    <Property Name="CreatedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="b8834e6c-2ec8-4044-8c5c-e500ad60867a" />
+    <Property Name="ModifiedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="accab236-9608-4c59-9f6d-7e20659827e0" />
+    <NavigationProperty Name="SyncActionLogs" Relationship="CMI.Access.Sql.Viaduc.EF.SyncAction_SyncActionLog" FromRole="SyncAction" ToRole="SyncActionLogs" ed:Guid="e3f042cc-1138-4e9d-99db-19c3274c6fe8" />
+  </EntityType>
+  <EntityType Name="SyncActionLog" ed:Guid="ac1b90ac-487c-43f2-8d9d-b47b9bb76357">
+    <Key>
+      <PropertyRef Name="SyncActionLogId" />
+    </Key>
+    <Property Name="SyncActionLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="b3643867-1660-40c2-b781-29914f852324" />
+    <Property Name="SyncActionId" Type="Int64" ed:ValidateRequired="false" ed:Guid="a6416411-1d24-4351-974f-bf4d090fa13f" />
+    <Property Name="LogDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="8221c941-5480-4f98-8567-e5038d5fed7c" />
+    <Property Name="ActionStatusHistory" Type="String" MaxLength="40" Unicode="true" ed:ValidateMaxLength="40" ed:ValidateRequired="false" ed:Guid="f473c6be-a260-4c1f-af34-7d46ae6afef7" />
+    <Property Name="ErrorReason" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="b6e39764-a74f-44c8-a0a8-843c2ce310ee" />
+    <NavigationProperty Name="SyncAction" Relationship="CMI.Access.Sql.Viaduc.EF.SyncAction_SyncActionLog" FromRole="SyncActionLogs" ToRole="SyncAction" ed:Guid="4af69ab1-2d66-42d6-9969-ab3be65e6a95" />
+  </EntityType>
+  <EntityType Name="SyncInfo" ed:Guid="c6eddf42-01dd-45f9-a6c9-046a3b701da5">
+    <Key>
+      <PropertyRef Name="SyncInfoId" />
+    </Key>
+    <Property Name="SyncInfoId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:ValidateRequired="true" ed:Guid="2c29bfae-0d2f-4373-bf75-b51b338015b7" />
+    <Property Name="LastChangeDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="c14156c6-f4bc-4aec-a2d8-2515533d91ea" />
+  </EntityType>
+  <EntityType Name="VSyncNumberPerHour" ed:Guid="0a13c9ba-d6fe-43c8-a653-4bc26fed2df9">
+    <Key>
+      <PropertyRef Name="LastModified" />
+      <PropertyRef Name="ActionStatus" />
+    </Key>
+    <Property Name="LastModified" Type="String" Nullable="false" MaxLength="4000" Unicode="true" ed:ValidateMaxLength="4000" ed:ValidateRequired="true" ed:Guid="610d825f-e522-4ec9-80c5-655382250637" />
+    <Property Name="LastModifiedDay" Type="DateTime" ed:ValidateRequired="false" ed:Guid="ca43cf8d-8f9c-472c-a32c-233b552a31c4" />
+    <Property Name="RecordCount" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="90f1e650-071d-46f4-9ab8-50f0beb8e44d" />
+    <Property Name="ActionStatus" Type="Int32" Nullable="false" ed:ValidateRequired="true" ed:Guid="d7299ccd-9bb8-409a-b904-b6f5a048f62b" />
+  </EntityType>
+  <EntityType Name="VSyncAction" ed:Guid="afbf11bb-36b5-49b9-9747-f4eff486984d">
+    <Key>
+      <PropertyRef Name="SyncActionId" />
+    </Key>
+    <Property Name="SyncActionId" Type="Int64" Nullable="false" ed:ValidateRequired="true" ed:Guid="b6468dd1-1a91-4b3d-b557-81c1b0e21023" />
+    <Property Name="ArchiveRecordId" Type="String" MaxLength="255" Unicode="true" ed:ValidateMaxLength="255" ed:ValidateRequired="false" ed:Guid="eed1c8d5-cb74-4c28-af41-18b254ee89ba" />
+    <Property Name="ActionType" Type="String" MaxLength="40" Unicode="true" ed:ValidateMaxLength="40" ed:ValidateRequired="false" ed:Guid="e4f2a068-62c4-4629-9003-fb39a792fd32" />
+    <Property Name="ActionStatus" Type="Int32" ed:ValidateRequired="false" ed:Guid="8142d705-09ae-427f-b52a-96dbf1be4304" />
+    <Property Name="NumberOfTries" Type="Int32" ed:ValidateRequired="false" ed:Guid="62e3490a-8fff-4b3c-8b23-87424e47c3d8" />
+    <Property Name="CreatedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="eafeb4b7-0c95-42df-a21e-e49019f96e41" />
+    <Property Name="ModifiedOn" Type="DateTime" ed:ValidateRequired="false" ed:Guid="018e664c-af2f-4c5f-9860-1087ec0c4fe8" />
+    <Property Name="SyncActionLogId" Type="Int32" ed:ValidateRequired="false" ed:Guid="abbb8cea-0d87-47fe-bc21-ab6c786f61c0" />
+    <Property Name="LogDate" Type="DateTime" ed:ValidateRequired="false" ed:Guid="ae2b683b-cbf4-472d-80d4-b9bd538e0e0d" />
+    <Property Name="ErrorReason" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="6938173d-8004-4742-890a-b79f1491f7e6" />
+    <Property Name="ActionStatusHistory" Type="String" Unicode="true" ed:ValidateRequired="false" ed:Guid="f7bdd61e-7166-4c0e-965b-e38c482ce7cf" />
   </EntityType>
   <Association Name="Collection_Collection" ed:Guid="fbe07d51-f04c-43f2-8c4e-e1f493f628db">
     <End Role="Parent" Type="CMI.Access.Sql.Viaduc.EF.Collection" Multiplicity="0..1" />
@@ -429,6 +495,20 @@
       </Principal>
       <Dependent Role="ManuelleKorrekturStatusHistories">
         <PropertyRef Name="ManuelleKorrekturId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SyncAction_SyncActionLog" ed:Guid="160f355b-4e0b-4ea9-ad0a-96852e47d58b">
+    <End Role="SyncAction" Type="CMI.Access.Sql.Viaduc.EF.SyncAction" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SyncActionLogs" Type="CMI.Access.Sql.Viaduc.EF.SyncActionLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SyncAction">
+        <PropertyRef Name="SyncActionId" />
+      </Principal>
+      <Dependent Role="SyncActionLogs">
+        <PropertyRef Name="SyncActionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

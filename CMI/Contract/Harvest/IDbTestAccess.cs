@@ -1,7 +1,9 @@
-﻿namespace CMI.Contract.Harvest
+﻿using System.Threading.Tasks;
+
+namespace CMI.Contract.Harvest
 {
     public interface IDbTestAccess
     {
-        string GetDbVersion();
+        Task<string> GetDbVersion();
     }
 }

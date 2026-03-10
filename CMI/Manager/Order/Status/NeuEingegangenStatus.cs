@@ -49,9 +49,9 @@ namespace CMI.Manager.Order.Status
         {
             // Bei Verwaltungsausleihen soll das System nur dann eine automatische Freigabe erteilen, wenn der 
             // Benutzer ein passendes AS_XXX Token hat. Alle anderen Token werden nicht beachtet!
-            if (Context.Besteller.Access.RolePublicClient == AccessRoles.RoleAS && Context.OrderItem.VeId.HasValue)
+            if (Context.Besteller.Access.RolePublicClient == AccessRoles.RoleAS && !string.IsNullOrWhiteSpace(Context.OrderItem.VeId))
             {
-                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
+                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
                 if (veRecord != null)
                 {
                     if (Context.Besteller.Access.HasAsTokenFor(veRecord.PrimaryDataDownloadAccessTokens)) // nur AS_XXX Tokens sind hier gültig
@@ -75,7 +75,7 @@ namespace CMI.Manager.Order.Status
             var kannAutomatischFreigeben = KannAutomatischFreigeben(Context.OrderItem, Context.Besteller)
                 .ConfigureAwait(false)
                 .GetAwaiter()
-                .GetResult(); ;
+                .GetResult(); 
 
             if (kannAutomatischFreigeben)
             {
@@ -133,14 +133,14 @@ namespace CMI.Manager.Order.Status
         {
             // Nur Bestellungen die mit einer VE in der Datenbank verknüpft sind, könn(t)en automatsich 
             // freigegeben werden.
-            if (!currentOrderItem.VeId.HasValue)
+            if (string.IsNullOrWhiteSpace(currentOrderItem.VeId))
             {
                 return false;
             }
 
             // Prüfen ob gültiger Record von Elasic geliefert wurde.
-            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId.Value.ToString(), MetadataToExclude.OCRContentAndFiles);
-            if (veRecord == null || veRecord.ArchiveRecordId != currentOrderItem.VeId.Value.ToString())
+            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+            if (veRecord == null || veRecord.ArchiveRecordId != currentOrderItem.VeId)
             {
                 return false;
             }
@@ -150,7 +150,7 @@ namespace CMI.Manager.Order.Status
                 return true;
             }
 
-            var indivTokens = await Context.OrderDataAccess.GetIndividualAccessTokens(currentOrderItem.VeId.Value, currentOrderItem.Id);
+            var indivTokens = await Context.OrderDataAccess.GetIndividualAccessTokens(currentOrderItem.VeId, currentOrderItem.Id);
             return besteller.Access.HasAnyTokenFor(indivTokens.PrimaryDataDownloadAccessTokens);
         }
     }

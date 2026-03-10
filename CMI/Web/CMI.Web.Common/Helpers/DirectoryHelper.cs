@@ -1,8 +1,8 @@
+using CMI.Utilities.Common.Helpers;
+using Serilog;
 using System;
 using System.IO;
 using System.Linq;
-using CMI.Utilities.Common.Helpers;
-using Serilog;
 
 namespace CMI.Web.Common.Helpers
 {
@@ -19,6 +19,9 @@ namespace CMI.Web.Common.Helpers
         private string staticDefaultPath;
 
         private string staticPagePath;
+
+        private string mappingTableDirectory;
+
         public static IDirectoryHelper Instance { get; } = new DirectoryHelper();
 
         public string ClientDefaultPath
@@ -46,6 +49,20 @@ namespace CMI.Web.Common.Helpers
                 }
 
                 return staticPagePath;
+            }
+        }
+
+        public string MappingTableDirectory
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(mappingTableDirectory))
+                {
+                    mappingTableDirectory = ServiceHelper.Settings?["mappingTableDirectory"];
+                    Log.Information("Setting mappingTableDirectory to {mappingTableDirectory}", mappingTableDirectory);
+                }
+
+                return mappingTableDirectory;
             }
         }
 

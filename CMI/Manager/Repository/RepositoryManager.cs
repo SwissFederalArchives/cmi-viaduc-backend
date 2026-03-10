@@ -156,6 +156,10 @@ namespace CMI.Manager.Repository
                     retVal.Success = true;
                     retVal.Valid = true;
                 }
+                else
+                {
+                    retVal.ErrorMessage = $"Did not find repository root folder for package with id {packageId}. ";
+                }
             }
             catch (Exception ex)
             {

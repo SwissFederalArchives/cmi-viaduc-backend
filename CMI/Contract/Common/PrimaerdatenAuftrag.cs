@@ -19,7 +19,7 @@ namespace CMI.Contract.Common
 
         public AufbereitungsServices Service { get; set; }
 
-        public int VeId { get; set; }
+        public string VeId { get; set; }
 
         public int? GeschaetzteAufbereitungszeit { get; set; }
 
@@ -47,7 +47,7 @@ namespace CMI.Contract.Common
 
         public PrimaerdatenAuftrag(int primaerdatenAuftragId, AufbereitungsArtEnum aufbereitungsArt, long? groesseInBytes, int? verarbeitungskanal,
             int? priorisierungsKategorie, AufbereitungsStatusEnum status, AufbereitungsServices service, string packageId, string packageMetadata,
-            int veId, bool abgeschlossen, DateTime? abgeschlossenAm, int? geschaetzteAufbereitungszeit, string errorText, string workload,
+            string veId, bool abgeschlossen, DateTime? abgeschlossenAm, int? geschaetzteAufbereitungszeit, string errorText, string workload,
             DateTime createdOn, DateTime? modifiedOn, List<PrimaerdatenAuftragLog> primaerdatenAuftragLogs)
         {
             PrimaerdatenAuftragId = primaerdatenAuftragId;

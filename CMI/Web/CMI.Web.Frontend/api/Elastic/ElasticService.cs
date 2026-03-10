@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
+﻿using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Extensions;
+using CMI.Utilities.ActaPro;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.api;
+using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.api.Templates;
 using Elasticsearch.Net;
-using Microsoft.Ajax.Utilities;
 using Namotion.Reflection;
 using Nest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using SourceFilter = Nest.SourceFilter;
 
 namespace CMI.Web.Frontend.api.Elastic
@@ -32,18 +34,25 @@ namespace CMI.Web.Frontend.api.Elastic
         private readonly ISearchRequestBuilder searchRequestBuilder;
         private readonly IElasticSettings elasticSettings;
         private readonly List<TemplateField> internalFields;
+        public ActaProMappingProvider ActaProMappingProvider { get; }
 
-        public ElasticService(IElasticClientProvider clientProvider, ISearchRequestBuilder searchRequestBuilder, IElasticSettings elasticSettings, List<TemplateField> internalFields)
+        public ElasticService(IElasticClientProvider clientProvider, ISearchRequestBuilder searchRequestBuilder, IElasticSettings elasticSettings,
+            List<TemplateField> internalFields)
         {
             this.clientProvider = clientProvider;
             this.searchRequestBuilder = searchRequestBuilder;
             this.elasticSettings = elasticSettings;
             this.internalFields = internalFields;
+            var mappingTableDirectory = DirectoryHelper.Instance.MappingTableDirectory != null
+                ? DirectoryHelper.Instance.MappingTableDirectory
+                // For testing purposes, use the default mapping table directory
+                : "Test";
+            ActaProMappingProvider = new ActaProMappingProvider(mappingTableDirectory);
         }
 
         protected string BaseUrl => elasticSettings.BaseUrl;
 
-        public ElasticQueryResult<T> QueryForId<T>(int id, UserAccess access, bool translated = true) where T : TreeRecord
+        public ElasticQueryResult<T> QueryForId<T>(string id, UserAccess access, bool translated = true) where T : TreeRecord
         {
             var query = new ElasticQuery
             {
@@ -55,13 +64,9 @@ namespace CMI.Web.Frontend.api.Elastic
                         EnableHighlighting = false,
                         EnableAggregations = false
                     }
-                },
-                Query = new TermQuery
-                {
-                    Field = elasticSettings.IdField,
-                    Value = id.ToStringInvariant()
                 }
-            };
+            }; 
+            query.Query = QueryByIdOrExternalKey(id);
 
             var result = RunQuery<T>(query, access, translated);
             if (result.Response.Hits.Count == 1)
@@ -69,9 +74,20 @@ namespace CMI.Web.Frontend.api.Elastic
                 return result;
             }
 
-            if (result.Response.Hits.Count > 1)
+            if (result.Response.Hits.Count == 2)
             {
-                throw new ArgumentException("Query For Id must return exactly one record");
+                // This can happen if we have a record that was not correctly deleted after a successful sync
+                // Thus there is still existing the record with the scopeId as the primary key and the
+                // new record with the doc key. THIS SHOULD NOT HAPPEN, BUT when it does, return the docKey and delete the scopeId
+                RemoveRecordWithScopeId(result);
+
+                // Call again the same. Should now return 1 record
+                return QueryForId<T>(id, access, translated);
+            }
+
+            if (result.Response.Hits.Count > 2)
+            {
+                throw new ArgumentException($"Query For Id must return exactly one record, but we have found {result.Response.Hits.Count} for id {id}");
             }
 
             return null;
@@ -89,57 +105,20 @@ namespace CMI.Web.Frontend.api.Elastic
         /// <param name="id">Die ArchiveRecord ID der VE dessen Kinder geholt werden sollen.</param>
         /// <param name="access">Die Zugriffsrechte des Benutzers</param>
         /// <returns></returns>
-        public List<TreeRecord> QueryForParentId(int id, UserAccess access)
+        public List<TreeRecord> QueryForParentId(string id, UserAccess access)
         {
-            var client = clientProvider.GetElasticClient<TreeRecord>(elasticSettings);
-            var result = new List<TreeRecord>();
+            SearchScopeOrActaProId(id, out long scopeId, out string actaProId);
 
-            // Den SourceFilter erstellen, der nur die Felder des TreeRecords enthält
-            // Danach noch um die unanonymisierten Felder erweitern.
-            var sourceFilter = GetSourceFilterForType<TreeRecord>();
-            sourceFilter.Includes.And(Infer.Field("UnanonymizedFields".ToLowerCamelCase()));
-
-            var search = new SearchDescriptor<ElasticArchiveDbRecord>()
-                .Index(elasticSettings.DefaultIndex)
-                .From(0)
-                .Sort(s => s.Ascending(nameof(TreeRecord.Title).ToLowerCamelCase()))
-                .Sort(s => s.Ascending(nameof(TreeRecord.TreeSequence).ToLowerCamelCase()))
-                .Query(q => searchRequestBuilder.GetQueryWithSecurity(new TermQuery
-                {
-                    Field = elasticSettings.ParentIdField,
-                    Value = id.ToStringInvariant()
-                }, access))
-                .Size(10000)
-                .Source(x => x.Includes(i => i.Fields(sourceFilter.Includes)))
-                .Scroll("15s");
-
-            // Suche ausführen
-            var resultPart = client.Search<ElasticArchiveDbRecord>(search);
-
-            while (resultPart.IsValid && resultPart.Documents.Count > 0)
-            {
-                // Die unanonymisierten Daten für die berechtigten Benutzer "aufdecken"
-                foreach (var treeRecord in resultPart.Documents.Where(d => d.IsAnonymized))
-                {
-                    if (access != null && access.HasAnyTokenFor(treeRecord.FieldAccessTokens))
-                    {
-                        treeRecord.SetUnanonymizedValuesForAuthorizedUser(treeRecord);
-                    }
-                }
-                result.AddRange(resultPart.Documents.Select(d => (TreeRecord) d));
-                resultPart = client.Scroll<ElasticArchiveDbRecord>("15s", resultPart.ScrollId);
-            }
-
-            return result;
+            return QueryForParentId(access, scopeId, actaProId);
         }
 
-        public ElasticQueryResult<T> QueryForIds<T>(IList<int> ids, UserAccess access, Paging p = null) where T : TreeRecord
+        public ElasticQueryResult<T> QueryForIds<T>(IList<string> ids, UserAccess access, Paging p = null) where T : TreeRecord
         {
             var query = BuildQueryForIds(ids, p);
             return RunQuery<T>(query, access);
         }
 
-        public ElasticQueryResult<T> QueryForIdsWithoutSecurityFilter<T>(IList<int> ids, Paging p = null) where T : TreeRecord
+        public ElasticQueryResult<T> QueryForIdsWithoutSecurityFilter<T>(IList<string> ids, Paging p = null) where T : TreeRecord
         {
             var query = BuildQueryForIds(ids, p);
             return RunQueryWithoutSecurityFilters<T>(query);
@@ -168,7 +147,6 @@ namespace CMI.Web.Frontend.api.Elastic
             {
                 stopwatch.Start();
                 var searchRequest = searchRequestBuilder.Build(query, access);
-                string requestJson = client.RequestResponseSerializer.SerializeToString(searchRequest);
                 result.Response = client.Search<T>(searchRequest);
 
                 var json = client.RequestResponseSerializer.SerializeToString(searchRequest, SerializationFormatting.Indented);
@@ -297,7 +275,123 @@ namespace CMI.Web.Frontend.api.Elastic
             return result;
         }
 
-        private ElasticQuery BuildQueryForIds(IList<int> ids, Paging p)
+
+        public ElasticQueryResult<T> QueryForRootNodes<T>(UserAccess access) where T : TreeRecord
+        {
+            var query = new ElasticQuery
+            {
+                SearchParameters = new SearchParameters
+                {
+                    Options = new SearchOptions
+                    {
+                        EnableExplanations = false,
+                        EnableHighlighting = false,
+                        EnableAggregations = false
+                    }
+                },
+                Query = new MatchQuery
+                {
+                    Field = elasticSettings.TreeLevelField,
+                    Query = "1"
+                }
+            };
+
+            return RunQuery<T>(query, access);
+        }
+
+        private List<TreeRecord> QueryForParentId(UserAccess access, long scopeId, string actaProId)
+        {
+            var client = clientProvider.GetElasticClient<TreeRecord>(elasticSettings);
+            var result = new List<TreeRecord>();
+            // Den SourceFilter erstellen, der nur die Felder des TreeRecords enthält
+            // Danach noch um die unanonymisierten Felder erweitern.
+            var sourceFilter = GetSourceFilterForType<TreeRecord>();
+            sourceFilter.Includes.And(Infer.Field("UnanonymizedFields".ToLowerCamelCase()));
+
+            var search = new SearchDescriptor<ElasticArchiveDbRecord>()
+                .Index(elasticSettings.DefaultIndex)
+                .From(0)
+                .Sort(s => s.Ascending(nameof(TreeRecord.Title).ToLowerCamelCase()))
+                .Sort(s => s.Ascending(nameof(TreeRecord.TreeSequence).ToLowerCamelCase()))
+                .Query(_ =>
+                    searchRequestBuilder.GetQueryWithSecurity(CreateQueryForParentScopeId(scopeId, actaProId), access)
+                )
+                .Size(10000)
+                .Source(x => x.Includes(i => i.Fields(sourceFilter.Includes)))
+                .Scroll("15s");
+
+            // Suche ausführen
+            var resultPart = client.Search<ElasticArchiveDbRecord>(search);
+
+            while (resultPart.IsValid && resultPart.Documents.Count > 0)
+            {
+                // Die unanonymisierten Daten für die berechtigten Benutzer "aufdecken"
+                foreach (var treeRecord in resultPart.Documents.Where(d => d.IsAnonymized))
+                {
+                    if (access != null && access.HasAnyTokenFor(treeRecord.FieldAccessTokens))
+                    {
+                        treeRecord.SetUnanonymizedValuesForAuthorizedUser(treeRecord);
+                    }
+                }
+                result.AddRange(resultPart.Documents.Select(d => (TreeRecord) d));
+                resultPart = client.Scroll<ElasticArchiveDbRecord>("15s", resultPart.ScrollId);
+            }
+            return result;
+        }
+
+
+        private ElasticArchiveDbRecord GetElasticDbRecordById(string archiveRecordId, UserAccess access)
+        {
+            var dbRecord = QueryForId<ElasticArchiveDbRecord>(archiveRecordId, access);
+
+            if (dbRecord.Response.Hits.Count == 1)
+            {
+                return dbRecord.Response.Hits.First().Source;
+            }
+
+            return null;
+        }
+
+        private BoolQuery CreateQueryForParentScopeId(long scopeId, string actaProId)
+        {
+            var boolQuery = new BoolQuery();
+            if (string.IsNullOrEmpty(actaProId) && scopeId < 1)
+            {
+                return boolQuery;
+            }
+            if (scopeId > 0)
+            {
+                boolQuery.Should = new QueryContainer[]
+                {
+                    new TermQuery
+                    {
+                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
+                        Value = scopeId
+                    }, 
+                    new TermQuery
+                    {
+                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
+                        Value = actaProId
+                    }
+                };
+            }
+            else
+            {
+                boolQuery.Must = new QueryContainer[]
+                {
+                    new TermQuery
+                    {
+                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
+                        Value = actaProId
+                    }
+                };
+            }
+
+            return boolQuery;
+        }
+
+
+        private ElasticQuery BuildQueryForIds(IList<string> ids, Paging p)
         {
             var query = new ElasticQuery
             {
@@ -312,14 +406,17 @@ namespace CMI.Web.Frontend.api.Elastic
                     }
                 }
             };
-
             if (ids.Count != 0)
             {
-                query.Query = new TermsQuery
+                var boolQuery = new BoolQuery();
+                var idQueries = new List<QueryContainer>();
+                foreach (var id in ids)
                 {
-                    Field = elasticSettings.IdField,
-                    Terms = ids.Select(i => i.ToStringInvariant())
-                };
+                    idQueries.Add(QueryByIdOrExternalKey(id));
+                }
+
+                boolQuery.Should = idQueries;
+                query.Query = boolQuery;
             }
             else
             {
@@ -327,6 +424,54 @@ namespace CMI.Web.Frontend.api.Elastic
             }
 
             return query;
+        }
+
+        private BoolQuery QueryByIdOrExternalKey(string id)
+        {
+            var externalKeyOrId = new BoolQuery();
+
+            if (int.TryParse(id, out int _))
+            {
+                var queryForId = new TermQuery
+                {
+                    Field = elasticSettings.IdField,
+                    Value = id
+                };
+                var queryForExternalKeys = new ExternalKeysQueryProvider();
+                var externalScopeKeysQuery = queryForExternalKeys.CreateExternalKeysQuery(id, "scopeArchiv");
+                var docKey = ActaProMappingProvider.GetActaProId(id);
+                if (!string.IsNullOrEmpty(docKey))
+                {
+                    var externalKeysDocKeyQuery = queryForExternalKeys.CreateExternalKeysQuery(docKey, "ActaPro");
+                    externalKeyOrId.Should = new[] {externalScopeKeysQuery, externalKeysDocKeyQuery, queryForId};
+                }
+                else
+                {
+                    externalKeyOrId.Should = new[] { externalScopeKeysQuery, queryForId };
+                }
+            }
+            else
+            {
+                var queryForId = new TermQuery
+                {
+                    Field = elasticSettings.IdField,
+                    Value = id
+                };
+                var queryForExternalKeys = new ExternalKeysQueryProvider();
+                var externalKeysDocKeyQuery = queryForExternalKeys.CreateExternalKeysQuery(id, "ActaPro");
+                var mappedScopeId = ActaProMappingProvider.GetScopeId(id);
+                if (mappedScopeId > 0)
+                {
+                    var externalScopeKeysQuery = queryForExternalKeys.CreateExternalKeysQuery(mappedScopeId.ToString(), "scopeArchiv");
+                    externalKeyOrId.Should = new[] { externalScopeKeysQuery, externalKeysDocKeyQuery, queryForId };
+                }
+                else
+                {
+                    externalKeyOrId.Should = new[] { externalKeysDocKeyQuery, queryForId };
+                }
+            }
+
+            return externalKeyOrId;
         }
 
         private void ProcessQueryResult<T>(ElasticQueryResult<T> result, FacetFilters[] facetsFilters, UserAccess access,
@@ -386,27 +531,15 @@ namespace CMI.Web.Frontend.api.Elastic
 
         private void ProcessAnonymizedRecords<T>(T data, UserAccess access) where T : TreeRecord
         {
-            if (data.IsAnonymized && access != null && access.HasAnyTokenFor(data.FieldAccessTokens) &&
-                !(data is ElasticArchiveDbRecord))
+            if (data.IsAnonymized && access != null && access.HasAnyTokenFor(data.FieldAccessTokens))
             {
-                var dbRecord = GetElasticDbRecordById(Convert.ToInt32(data.ArchiveRecordId), access);
+                var dbRecord = data as ElasticArchiveDbRecord ?? GetElasticDbRecordById(data.ArchiveRecordId, access);
+
                 if (dbRecord != null)
                 {
                     data.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
                 }
             }
-        }
-
-        private ElasticArchiveDbRecord GetElasticDbRecordById(int archiveRecordId, UserAccess access)
-        {
-            var dbRecord = QueryForId<ElasticArchiveDbRecord>(archiveRecordId, access);
-
-            if (dbRecord.Response.Hits.Count == 1)
-            {
-                return dbRecord.Response.Hits.First().Source;
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -546,8 +679,7 @@ namespace CMI.Web.Frontend.api.Elastic
 
             return string.Empty;
         }
-
-
+        
         private void Postprocess(JObject entity, bool omitEmptyValues = true)
         {
             if (entity == null)
@@ -682,5 +814,124 @@ namespace CMI.Web.Frontend.api.Elastic
             var filter = new SourceFilter() { Includes = Infer.Fields(fields) };
             return filter;
         }
+
+        public AccessTokens QueryTokensForId(string archiveRecordId)
+        {
+            var query = new ElasticQuery
+            {
+                SearchParameters = new SearchParameters
+                {
+                    Options = new SearchOptions
+                    {
+                        EnableExplanations = false,
+                        EnableHighlighting = false,
+                        EnableAggregations = false
+                    }
+                },
+                Query = new TermQuery
+                {
+                    Field = elasticSettings.IdField,
+                    Value = archiveRecordId
+                }
+            };
+
+            var result = RunQueryWithoutSecurityFilters<ElasticArchiveRecord>(query);
+            var record = result?.Response?.Hits?.FirstOrDefault()?.Source;
+
+            if (record == null)
+                return new AccessTokens(); // empty result instead of null for safety
+
+            return new AccessTokens
+            {
+                MetadataAccessTokens = string.Join(", ", record.MetadataAccessTokens ?? new List<string>()),
+                FulltextAccessTokens = string.Join(", ", record.PrimaryDataFulltextAccessTokens ?? new List<string>()),
+                DownloadAccessTokens = string.Join(", ", record.PrimaryDataDownloadAccessTokens ?? new List<string>()),
+                FieldAccessTokens = string.Join(", ", record.FieldAccessTokens ?? new List<string>())
+            };
+        }
+
+        private void SearchScopeOrActaProId(string id, out long scopeId, out string actaProId)
+        {
+            if (long.TryParse(id, out scopeId))
+            {
+                actaProId = ActaProMappingProvider.GetActaProId(id);
+            }
+            else
+            {
+                actaProId = id;
+                scopeId = ActaProMappingProvider.GetScopeId(id);
+            }
+        }
+
+        /// <summary>
+        /// Removes one of the records from the elastic index, if the query result contains two hits 
+        /// when queried by id.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="result"></param>
+        private void RemoveRecordWithScopeId<T>(ElasticQueryResult<T> result) where T : TreeRecord
+        {
+            // Make sure we only process data where we have exactly two hits.
+            if (result.Response.Hits.Count != 2)
+            {
+                return;
+            }
+
+            var client = clientProvider.GetElasticClient<T>(elasticSettings);
+            var hit1 = result.Response.Hits.First();
+            var hit2 = result.Response.Hits.Last();
+
+            if (long.TryParse(hit1.Id, out var hit1Id))
+            {
+                // Validation: Make sure the id's of the two hits are equal
+                var docKey = ActaProMappingProvider.GetActaProId(hit1Id.ToString());
+                if (docKey.Equals(hit2.Id, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // Delete
+                    Log.Information("Deleting elastic record with id {hit1Id} after query by id returned two hits", hit1Id);
+                    client.Delete<ElasticArchiveRecord>(hit1Id);
+                    return;
+                }
+            }
+
+            if (long.TryParse(hit2.Id, out var hit2Id))
+            {
+                // Validation: Make sure the id's of the two hits are equal
+                var docKey = ActaProMappingProvider.GetActaProId(hit2Id.ToString());
+                if (docKey.Equals(hit1.Id, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // Delete
+                    Log.Information("Deleting elastic record with id {hit2Id} after query by id returned two hits", hit2Id);
+                    client.Delete<ElasticArchiveRecord>(hit2Id);
+                    return;
+                }
+            }
+
+            // If we come here, we have the strange case, that we have identical docKeys, but with different length.
+            // When testing we have found: 
+            // Vz    d592a897-aa0d-5e1c-9cbb-a18f35491dba
+            // Vz      d592a897-aa0d-5e1c-9cbb-a18f35491dba
+            // The correct length is 44 chars
+            var guidPart1 = hit1.Id.Split(' ').Select(t => t.Trim()).Last();
+            var guidPart2 = hit2.Id.Split(' ').Select(t => t.Trim()).Last();
+            if (guidPart1 == guidPart2)
+            {
+                // hit 2 is not correct
+                if (hit1.Id.Length == 44 && hit2.Id.Length != 44)
+                {
+                    Log.Information("Deleting elastic record with id {hit2Id} after query by id returned two hits", hit2.Id);
+                    client.Delete<ElasticArchiveRecord>(hit2.Id);
+                }
+
+                // hit 1 is not correct
+                if (hit2.Id.Length == 44 && hit1.Id.Length != 44)
+                {
+                    Log.Information("Deleting elastic record with id {hit1Id} after query by id returned two hits", hit1.Id);
+                    client.Delete<ElasticArchiveRecord>(hit1.Id);
+                }
+            }
+        }
+
+
     }
 }

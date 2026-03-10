@@ -72,13 +72,9 @@ namespace CMI.Web.Management
             config
                 .EnableSwagger(c => c.SingleApiVersion("v1", "Schnittstelle Manager Client Viaduc"))
                 .EnableSwaggerUi();
-            app.UseSwaggerUi3(typeof(Startup).Assembly, settings =>
+            app.UseSwaggerUi(typeof(Startup).Assembly, settings =>
             {
                 settings.GeneratorSettings.DefaultUrlTemplate = "api/{controller}/{action}/{id}";
-                settings.GeneratorSettings.SerializerSettings = new JsonSerializerSettings
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
             });
         }
 

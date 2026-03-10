@@ -62,6 +62,7 @@ namespace CMI.Manager.Asset.Infrasctructure
             builder.RegisterType<PostProcessCombineTextDocuments>().AsSelf();
             builder.RegisterType<PostProcessJp2Converter>().AsSelf();
             builder.Register(GetSolrConnectionInfo).As<SolrConnectionInfo>();
+            builder.RegisterType<SolrEngine>().As<ISolrEngine>();
             builder.RegisterType<PostProcessIiifOcrIndexer>().AsSelf();
             builder.Register(GetAssetPreparationSettings).As<AssetPreparationSettings>();
             builder.RegisterType<PreProcessAnalyzerDetectAndFlagLargeDimensions>().AsSelf();
@@ -74,6 +75,7 @@ namespace CMI.Manager.Asset.Infrasctructure
             builder.Register(GetViewerFileLocationSettings).As<ViewerFileLocationSettings>();
             builder.RegisterType<PostProcessManifestCreator>().As<IPostProcessManifestCreator>();
             builder.RegisterType<PostProcessIiifFileDistributor>().AsSelf().WithParameter("storageProvider", IiifManifest.Default.DataStorageProvider == "S3"  ? StorageProviders.S3 : StorageProviders.File);
+            builder.RegisterType<ManifestHelper>().As<IManifestHelper>().WithParameter("storageProvider", IiifManifest.Default.DataStorageProvider == "S3" ? StorageProviders.S3 : StorageProviders.File);
             builder.RegisterType<PostProcessValidIiifFileTypeChecker>().AsSelf();
             builder.Register(GetViewerConversionSettings).As<ViewerConversionSettings>();
 

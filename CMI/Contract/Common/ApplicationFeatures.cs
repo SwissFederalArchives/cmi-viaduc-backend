@@ -188,7 +188,16 @@ namespace CMI.Contract.Common
         AnonymisierungManuelleKorrekturenEinsehen = 10000100,
 
         [Description("Anonymisierung-ManuelleKorrektur-Bearbeiten")]
-        AnonymisierungManuelleKorrekturenBearbeiten = 10000101
+        AnonymisierungManuelleKorrekturenBearbeiten = 10000101,
+
+        [Description("Synchronization-Hinzufügen-Einsehen")]
+        SynchronizationHinzufuegenEinsehen = 10000102,
+
+        [Description("Synchronization-Überwachen-Einsehen")]
+        SynchronizationUeberwachenEinsehen = 10000103,
+
+        [Description("Synchronization-Hinzufügen-Bearbeiten")]
+        SynchronizationHinzufuegenBearbeiten = 10000104
     }
 
     public class ApplicationFeatureInfo

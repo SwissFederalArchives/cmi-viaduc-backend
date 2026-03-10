@@ -85,18 +85,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Sql.Viaduc", "CM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DigitalRepository", "DigitalRepository", "{1928E5E9-5D05-4172-92F3-D5F822FF78E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Utilities.DigitalRepository.CreateTestDataHelper", "CMI\Utilities\DigitalRepository\CreateTestDataHelper\CMI.Utilities.DigitalRepository.CreateTestDataHelper.csproj", "{4234E126-25E1-4C69-962C-5D016B464211}"
-	ProjectSection(ProjectDependencies) = postProject
-		{95103430-9D5B-4D04-8F56-7FE82E91A44F} = {95103430-9D5B-4D04-8F56-7FE82E91A44F}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FormTemplate", "FormTemplate", "{A5239BEE-65AD-4C4F-9587-EE42F2AF3844}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Utilities.FormTemplate.Helper", "CMI\Utilities\FormTemplate\Helper\CMI.Utilities.FormTemplate.Helper.csproj", "{5C6087A1-A3D0-4618-B871-66A8A2B90AFD}"
-	ProjectSection(ProjectDependencies) = postProject
-		{95103430-9D5B-4D04-8F56-7FE82E91A44F} = {95103430-9D5B-4D04-8F56-7FE82E91A44F}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Contract.Repository", "CMI\Contract\Repository\CMI.Contract.Repository.csproj", "{7D2520D6-A2FD-4D99-8DCA-213BB2AD5CF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Host.Repository", "CMI\Host\Repository\CMI.Host.Repository.csproj", "{345D0D13-D95D-4BC3-BD29-C401555D62BD}"
@@ -180,7 +168,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{708F46A9-ED85-4A44-BEDC-D502F52C58CE}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Enable-AutoRedirects.ps1 = Enable-AutoRedirects.ps1
 		Local.testsettings = Local.testsettings
+		RemoveAllBindingRedirect.ps1 = RemoveAllBindingRedirect.ps1
+		RemoveBindingRedirect.ps1 = RemoveBindingRedirect.ps1
 		version.json = version.json
 		VersionBumper.txt = VersionBumper.txt
 	EndProjectSection
@@ -313,9 +304,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PainlessScripts", "PainlessScripts", "{AD20D956-1A5B-47DA-B16C-C4006242D407}"
 	ProjectSection(SolutionItems) = preProject
 		CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt = CMI\DbScripts\PainlessScripts\CreationPeriodCalculator.txt
+		CMI\DbScripts\PainlessScripts\DeleteDuplicateExternalKeyandRecords.txt = CMI\DbScripts\PainlessScripts\DeleteDuplicateExternalKeyandRecords.txt
+		CMI\DbScripts\PainlessScripts\FormerReferenceCodeToArray.txt = CMI\DbScripts\PainlessScripts\FormerReferenceCodeToArray.txt
 		CMI\DbScripts\PainlessScripts\RemoveDescriptors.txt = CMI\DbScripts\PainlessScripts\RemoveDescriptors.txt
 		RemoveNichtOnlineRecherchierbareDossiers.txt = RemoveNichtOnlineRecherchierbareDossiers.txt
 		CMI\DbScripts\PainlessScripts\Schutzfristende Dossier.txt = CMI\DbScripts\PainlessScripts\Schutzfristende Dossier.txt
+		CMI\DbScripts\PainlessScripts\SetExternalKey.txt = CMI\DbScripts\PainlessScripts\SetExternalKey.txt
 		CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt = CMI\DbScripts\PainlessScripts\UpdateFieldHasPrimaryData.txt
 	EndProjectSection
 EndProject
@@ -334,8 +328,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Engine.Anonymization.Tests", "Test\Engine\Anonymization.Tests\CMI.Engine.Anonymization.Tests.csproj", "{31C2E733-D822-47B8-B02B-FE458AF8BD5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Sql.Viaduc.EF", "CMI\Access\Sql.Viaduc.SF\CMI.Access.Sql.Viaduc.EF.csproj", "{CED136DF-B922-481D-9F57-6E88BC91827D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Utilities.DigitalRepository.PrimaryDataHarvester", "CMI\Utilities\DigitalRepository\GetDataFromRepository\CMI.Utilities.DigitalRepository.PrimaryDataHarvester.csproj", "{8A43FC2B-B28B-402D-83B9-701E63B23D8F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Access.Onboarding", "CMI\Access\Onboarding\CMI.Access.Onboarding.csproj", "{DF1C971F-28EF-4FBA-9216-76D04429928C}"
 EndProject
@@ -409,6 +401,16 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web-management", "CMI\Web.C
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.AutomatedCacheFilesEmpty", "CMI\Tools\AutomatedCacheFilesEmpty\CMI.Tools.AutomatedCacheFilesEmpty.csproj", "{2652D20C-E69E-4DF5-8D18-1F325A62E687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Manager.DataFeed.Tests", "Test\Manager\DataFeed.Tests\CMI.Manager.DataFeed.Tests.csproj", "{1EF878DF-E603-4DDF-8930-CE54DEE1C28A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ActaPro", "ActaPro", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Utilities.ActaPro", "CMI\Utilities\ActaPro\CMI.Utilities.ActaPro.csproj", "{88AB79CB-202C-45D8-840E-E8256AF252BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Utilities.ActaPro.Tests", "Test\Utilities\ActaPro.Tests\CMI.Utilities.ActaPro.Tests\CMI.Utilities.ActaPro.Tests.csproj", "{56E64ED3-6F4E-4325-BCFE-990D14D63349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMI.Tools.ElasticTreeSequenceUpdater", "CMI\Tools\ElasticTreeSequenceUpdater\CMI.Tools.ElasticTreeSequenceUpdater.csproj", "{82486669-9F23-4F04-914D-4B5258F9371C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -512,14 +514,6 @@ Global
 		{713F2501-9065-454B-9E14-2599A1F3D4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{713F2501-9065-454B-9E14-2599A1F3D4E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{713F2501-9065-454B-9E14-2599A1F3D4E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4234E126-25E1-4C69-962C-5D016B464211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4234E126-25E1-4C69-962C-5D016B464211}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4234E126-25E1-4C69-962C-5D016B464211}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4234E126-25E1-4C69-962C-5D016B464211}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C6087A1-A3D0-4618-B871-66A8A2B90AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C6087A1-A3D0-4618-B871-66A8A2B90AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C6087A1-A3D0-4618-B871-66A8A2B90AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C6087A1-A3D0-4618-B871-66A8A2B90AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D2520D6-A2FD-4D99-8DCA-213BB2AD5CF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D2520D6-A2FD-4D99-8DCA-213BB2AD5CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D2520D6-A2FD-4D99-8DCA-213BB2AD5CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -804,10 +798,6 @@ Global
 		{CED136DF-B922-481D-9F57-6E88BC91827D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CED136DF-B922-481D-9F57-6E88BC91827D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CED136DF-B922-481D-9F57-6E88BC91827D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A43FC2B-B28B-402D-83B9-701E63B23D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A43FC2B-B28B-402D-83B9-701E63B23D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A43FC2B-B28B-402D-83B9-701E63B23D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A43FC2B-B28B-402D-83B9-701E63B23D8F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF1C971F-28EF-4FBA-9216-76D04429928C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF1C971F-28EF-4FBA-9216-76D04429928C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF1C971F-28EF-4FBA-9216-76D04429928C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -833,6 +823,22 @@ Global
 		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2652D20C-E69E-4DF5-8D18-1F325A62E687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EF878DF-E603-4DDF-8930-CE54DEE1C28A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EF878DF-E603-4DDF-8930-CE54DEE1C28A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EF878DF-E603-4DDF-8930-CE54DEE1C28A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EF878DF-E603-4DDF-8930-CE54DEE1C28A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88AB79CB-202C-45D8-840E-E8256AF252BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88AB79CB-202C-45D8-840E-E8256AF252BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88AB79CB-202C-45D8-840E-E8256AF252BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88AB79CB-202C-45D8-840E-E8256AF252BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E64ED3-6F4E-4325-BCFE-990D14D63349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E64ED3-6F4E-4325-BCFE-990D14D63349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E64ED3-6F4E-4325-BCFE-990D14D63349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E64ED3-6F4E-4325-BCFE-990D14D63349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82486669-9F23-4F04-914D-4B5258F9371C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82486669-9F23-4F04-914D-4B5258F9371C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82486669-9F23-4F04-914D-4B5258F9371C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82486669-9F23-4F04-914D-4B5258F9371C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -865,9 +871,6 @@ Global
 		{D0CB96A3-F09E-46F3-B3AE-DF11E627F0E4} = {D235CC5B-8528-4867-9105-E568054F9E92}
 		{713F2501-9065-454B-9E14-2599A1F3D4E8} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
 		{1928E5E9-5D05-4172-92F3-D5F822FF78E1} = {FAA1D80D-9047-4775-A2BC-979F0ABB5414}
-		{4234E126-25E1-4C69-962C-5D016B464211} = {1928E5E9-5D05-4172-92F3-D5F822FF78E1}
-		{A5239BEE-65AD-4C4F-9587-EE42F2AF3844} = {FAA1D80D-9047-4775-A2BC-979F0ABB5414}
-		{5C6087A1-A3D0-4618-B871-66A8A2B90AFD} = {A5239BEE-65AD-4C4F-9587-EE42F2AF3844}
 		{7D2520D6-A2FD-4D99-8DCA-213BB2AD5CF6} = {F58E5DAB-21F8-4BFA-90DF-70C4E8FF0668}
 		{345D0D13-D95D-4BC3-BD29-C401555D62BD} = {49E2F683-BA0F-4380-BE65-77E1CD1B4D87}
 		{A208493F-92C2-4FA7-8A5C-358263CC8340} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
@@ -945,7 +948,6 @@ Global
 		{DA8884E6-DC8C-401E-8845-F54300EDF03D} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 		{31C2E733-D822-47B8-B02B-FE458AF8BD5F} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
 		{CED136DF-B922-481D-9F57-6E88BC91827D} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
-		{8A43FC2B-B28B-402D-83B9-701E63B23D8F} = {1928E5E9-5D05-4172-92F3-D5F822FF78E1}
 		{DF1C971F-28EF-4FBA-9216-76D04429928C} = {63F3F03A-B708-4794-AFB4-48B5F3C921B4}
 		{CB5D6DA9-0237-4099-863E-DC9F326212F5} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 		{F88945ED-25E4-4AA0-B834-EEF3C9472061} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
@@ -953,6 +955,11 @@ Global
 		{B2A864AC-7CAB-4659-9391-ECB4A41B6CD9} = {46D7470F-E369-4508-96DF-9FF92868934E}
 		{652EA24B-7EAF-4BDC-92FE-8419A14E9DC5} = {46D7470F-E369-4508-96DF-9FF92868934E}
 		{2652D20C-E69E-4DF5-8D18-1F325A62E687} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
+		{1EF878DF-E603-4DDF-8930-CE54DEE1C28A} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {FAA1D80D-9047-4775-A2BC-979F0ABB5414}
+		{88AB79CB-202C-45D8-840E-E8256AF252BD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{56E64ED3-6F4E-4325-BCFE-990D14D63349} = {39CC7C12-E90B-45B5-9EE2-993C3EA68D7D}
+		{82486669-9F23-4F04-914D-4B5258F9371C} = {42F9B273-FDB3-44DB-86EA-D76EC99790AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94FF0BA7-507D-45AD-A448-D34E2C5341FE}

@@ -50,6 +50,12 @@ const defaultRouteChildren: any = <Routes>[
 		resolve: {preloaded: PreloadedResolver},
 	},
 	{
+		path: 'synchronization',
+		loadChildren:  () => import('./modules/synchronization/synchronization.module').then(m => m.SynchronizationModule),
+		canActivateChild: [AuthGuard],
+		resolve: {preloaded: PreloadedResolver},
+	},
+	{
 		path: 'benutzerundrollen',
 		_localize: {'fr': 'usersandroles', 'it': 'usersandroles', 'en': 'usersandroles'},
 		loadChildren:  () => import('./modules/usersAndRoles/usersAndRoles.module').then(m => m.UsersAndRolesModule),

@@ -163,7 +163,7 @@ export class FavoriteMenuComponent {
 					const list = this.lists.filter(l => l.id === change.id)[0];
 					this._favoriteService.getFavoritesContainedOnList(list.id).then(items => {
 						// not all are VeFavorite there are also SearchFavorite,therefore check to null
-						const item = items.filter(i => (<VeFavorite>i)?.veId?.toString() === this.entityId);
+						const item = items.filter(i => (<VeFavorite>i)?.veId === this.entityId);
 						this._favoriteService.removeFavorite(change.id, item[0].id).then(
 							() => this._toastr.success(this._txt.get('favorites.saveSuccessfull', 'Favoriten erfolgreich mutiert.'))
 						);

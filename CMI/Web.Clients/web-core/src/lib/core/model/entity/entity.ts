@@ -11,13 +11,10 @@ export interface Entity {
 	title: string;
 	treeSequence?: number;
 	isAnonymized?: boolean;
-	HasImage?: boolean;
-	HasAudioVideo?: boolean;
 	nichtOnlineRecherchierbareDossiers?: string;
 	isWithinProtectionRange?: boolean;
 	canBeOrdered?: boolean;
 	isPhysicalyUsable?: boolean;
-	containsPersonRelatedInformation?: boolean;
 	customFields: any[];
 	primaryDataLink?: any[];
 	itemClasses?: string;

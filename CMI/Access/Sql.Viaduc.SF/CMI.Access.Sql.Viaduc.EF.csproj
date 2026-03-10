@@ -15,6 +15,8 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,9 +66,12 @@
     <Compile Include="Helper\AccessHelper.cs" />
     <Compile Include="ICollectionAccess.cs" />
     <Compile Include="IManuelleKorrekturAccess.cs" />
+    <Compile Include="ISynchronisationAccess.cs" />
+    <Compile Include="IViaducDataProvider.cs" />
     <Compile Include="ManuelleKorrekturAccess.cs" />
     <Compile Include="MissingDllWorkaround.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SynchronisationAccess.cs" />
     <Compile Include="Viaduc.Converters.cs">
       <DependentUpon>Viaduc.edml</DependentUpon>
     </Compile>
@@ -75,6 +80,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Viaduc.edml</DependentUpon>
     </Compile>
+    <Compile Include="ViaducDataProvider.cs" />
     <Compile Include="ViaducDbCommandInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>

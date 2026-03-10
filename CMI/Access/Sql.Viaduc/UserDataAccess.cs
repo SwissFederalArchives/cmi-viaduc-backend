@@ -148,8 +148,13 @@ FROM ApplicationUser ";
 
                 using (var cmd = cn.CreateCommand())
                 {
-                    cmd.CommandText =
-                        $"{Sql} WHERE ID in ({string.Join(",", userIds.Select(id => $"'{id.Replace("'", "''")}'"))} )";
+
+                    cmd.CommandText = $"{Sql} WHERE ID IN ({string.Join(",", userIds.Select((_, i) => $"@p{i}"))})";
+
+                    for (int i = 0; i < userIds.Length; i++)
+                    {
+                        cmd.Parameters.Add(new SqlParameter($"@p{i}", SqlDbType.NVarChar) { Value = userIds[i] });
+                    }
 
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -730,7 +735,7 @@ FROM ApplicationUser ";
             AddOrDeleteAmtToUser(userId, ablieferndeStelleId, query.ToString());
         }
 
-        public void CleanAndAddAblieferndeStelleToUser(string userId, List<int> ablieferndeStelleIds, string modifiedByUserId)
+       public void CleanAndAddAblieferndeStelleToUser(string userId, List<int> ablieferndeStelleIds, string modifiedByUserId)
         {
             if (string.IsNullOrEmpty(userId))
             {
@@ -752,16 +757,20 @@ FROM ApplicationUser ";
                 using (var cmd = cn.CreateCommand())
                 {
                     var query = new StringBuilder();
-                    query.Append($"DELETE FROM ApplicationUserAblieferndeStelle WHERE UserId = '{userId}' ");
+                    query.Append("DELETE FROM ApplicationUserAblieferndeStelle WHERE UserId = @userId; ");
+                    cmd.Parameters.Add(new SqlParameter("@userId", SqlDbType.NVarChar) { Value = userId });
 
+                    int i = 0;
                     foreach (var ablieferndeStelleId in ablieferndeStelleIds)
                     {
-                        query.Append($"IF EXISTS ( SELECT 1 FROM ApplicationUser WHERE Id = '{userId}') ");
-                        query.Append($"AND EXISTS ( SELECT 1 FROM AblieferndeStelle WHERE AblieferndeStelleId = {ablieferndeStelleId}) ");
+                        var paramName = $"@stelleId{i}";
+                        query.Append("IF EXISTS (SELECT 1 FROM ApplicationUser WHERE Id = @userId) ");
+                        query.Append($"AND EXISTS (SELECT 1 FROM AblieferndeStelle WHERE AblieferndeStelleId = {paramName}) ");
                         query.Append("BEGIN ");
-                        query.Append(
-                            $"  INSERT INTO ApplicationUserAblieferndeStelle (UserId,  AblieferndeStelleId) VALUES ('{userId}', {ablieferndeStelleId}) ");
+                        query.Append($"INSERT INTO ApplicationUserAblieferndeStelle (UserId, AblieferndeStelleId) VALUES (@userId, {paramName}); ");
                         query.Append("END ");
+                        cmd.Parameters.Add(new SqlParameter(paramName, SqlDbType.Int) { Value = ablieferndeStelleId });
+                        i++;
                     }
 
                     cmd.CommandText += query;
@@ -770,6 +779,7 @@ FROM ApplicationUser ";
                 }
             }
         }
+
 
         public byte[] GetIdentifierDocument(string userId)
         {
@@ -954,7 +964,7 @@ FROM ApplicationUser ";
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p1", Value = access.UserId, SqlDbType = SqlDbType.NVarChar});
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p2", Value = DateTime.Now, SqlDbType = SqlDbType.DateTime});
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p3", Value = reasonId, SqlDbType = SqlDbType.Int});
-                    cmd.Parameters.Add(new SqlParameter {ParameterName = "p4", Value = ToDb(record.ArchiveRecordId), SqlDbType = SqlDbType.Int});
+                    cmd.Parameters.Add(new SqlParameter {ParameterName = "p4", Value = ToDb(record.ArchiveRecordId), SqlDbType = SqlDbType.NVarChar });
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p5", Value = ToDb(record.ReferenceCode), SqlDbType = SqlDbType.NVarChar});
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p6", Value = ToDb(record.Title), SqlDbType = SqlDbType.NVarChar});
                     cmd.Parameters.Add(new SqlParameter {ParameterName = "p7", Value = ToDb(record.Aktenzeichen()), SqlDbType = SqlDbType.NVarChar});

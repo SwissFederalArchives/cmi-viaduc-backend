@@ -36,7 +36,7 @@ namespace CMI.Access.Common
         ///     children are returned
         /// </param>
         /// <returns>IEnumerable&lt;ElasticArchiveRecord&gt;.</returns>
-        IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, bool allLevels);
+        IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, string externalKeyId, bool allLevels);
 
         /// <summary>
         ///     Gets the children to an archive record using the unprotected version of the data
@@ -47,7 +47,7 @@ namespace CMI.Access.Common
         ///     children are returned
         /// </param>
         /// <returns>IEnumerable&lt;ElasticArchiveRecord&gt;.</returns>
-        IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, bool allLevels);
+        IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, string externalKeyId, bool allLevels);
 
         void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
             string[] metadataAccessTokens, string[] fieldAccessTokens);

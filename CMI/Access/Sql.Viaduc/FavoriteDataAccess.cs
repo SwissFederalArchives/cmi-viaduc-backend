@@ -207,7 +207,7 @@ namespace CMI.Access.Sql.Viaduc
                 {
                     Value = veFavorite.VeId,
                     ParameterName = "p2",
-                    SqlDbType = SqlDbType.Int
+                    SqlDbType = SqlDbType.NVarChar
                 });
                 cmd.Parameters.Add(new SqlParameter
                 {
@@ -357,7 +357,7 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         Value = veId,
                         ParameterName = "p2",
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
 
                     using (var reader = cmd.ExecuteReader())
@@ -419,7 +419,7 @@ namespace CMI.Access.Sql.Viaduc
                                     CreatedAt = createdAt,
                                     Kind = type,
                                     Id = id,
-                                    VeId = reader.GetInt32(2)
+                                    VeId = reader.GetString(2)
                                 };
                             }
                         }
@@ -608,7 +608,7 @@ namespace CMI.Access.Sql.Viaduc
 
                 foreach (var row in dt.AsEnumerable())
                 {
-                    var veId = Convert.ToInt32(row["verzeichnungseinheit_id"]);
+                    var veId = row["verzeichnungseinheit_id"].ToString();
                     var existingItem = existingItems.Cast<VeFavorite>().FirstOrDefault(l => l.VeId == veId);
 
                     if (existingItem == null)

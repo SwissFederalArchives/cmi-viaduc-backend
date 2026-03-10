@@ -26,9 +26,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_in_protection_with_approve_status_FreigegebenDurchSystem_returns_true()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenDurchSystem};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenDurchSystem};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
+                { Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -42,9 +42,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_in_protection_with_approve_status_FreigegebenAusserhalbSchutzfrist_returns_false()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenAusserhalbSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1",  ApproveStatus = ApproveStatus.FreigegebenAusserhalbSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
+                {Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -58,9 +58,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_in_protection_with_approve_status_FreigegebenInSchutzfrist_returns_true()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
+                { Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(9999, 12, 31), Year = 9999}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -74,9 +74,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_not_in_protection_with_approve_status_FreigegebenDurchSystem_returns_false()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenDurchSystem};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenDurchSystem};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
+                { Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -90,9 +90,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_not_in_protection_with_approve_status_FreigegebenAusserhalbSchutzfrist_returns_false()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenAusserhalbSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenAusserhalbSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
+                { Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -106,9 +106,9 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_VE_not_in_protection_with_approve_status_FreigegebenInSchutzfrist_returns_true()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord
-                {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
+                { Level = "Dossier", ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -204,7 +204,7 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_if_ve_not_found_should_return_RequestEntityTooLarge()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, null);
 
             // Act
@@ -219,7 +219,7 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_if_ve_has_no_protectionEndDate_should_return_RequestEntityTooLarge()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord {ArchiveRecordId = "1", ProtectionEndDate = null};
 
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
@@ -251,7 +251,7 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_Exception_in_method_with_digipoolEntry_not_null_should_return_413_return_code()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, OrderItemId = 999};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, OrderItemId = 999};
             var orderManagerMock = new Mock<IPublicOrder>();
             orderManagerMock.Setup(x => x.GetDigipool(It.IsAny<int>())).ReturnsAsync(new[] {digiPoolEntry});
             var mailHelperMock = new Mock<IMailHelper>();
@@ -278,7 +278,7 @@ namespace CMI.Manager.Vecteur.Tests
             // Arrange
             var archiveRecord = new ElasticArchiveRecord
                 {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, HasAufbereitungsfehler = true};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, HasAufbereitungsfehler = true};
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
             // Act
@@ -309,7 +309,7 @@ namespace CMI.Manager.Vecteur.Tests
         public void GetNextDigitalisierungsauftrag_returns_service_not_available_if_index_manager_is_not_running()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var controller =
                 ArrangeControllerForGetNextDigitalisierungsauftragWithIndexManagerException(new[] {digiPoolEntry}, new RequestTimeoutException());
 
@@ -347,7 +347,7 @@ namespace CMI.Manager.Vecteur.Tests
         {
             // Arrange
             var archiveRecord = new ElasticArchiveRecord {ProtectionEndDate = null};
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, HasAufbereitungsfehler = false};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist, HasAufbereitungsfehler = false};
 
             var controller = ArrangeControllerForGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
 
@@ -363,7 +363,7 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetNextDigitalisierungsauftrag_with_missing_must_fields_returns_internal_exception()
         {
             // Arrange
-            var digiPoolEntry = new DigipoolEntry {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
+            var digiPoolEntry = new DigipoolEntry {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenInSchutzfrist};
             var archiveRecord = new ElasticArchiveRecord
                 {ProtectionEndDate = new ElasticDateWithYear {Date = new DateTime(1900, 12, 31), Year = 1900}};
             var controller = ArrangeControllerForInvalidGetNextDigitalisierungsauftrag(new[] {digiPoolEntry}, archiveRecord);
@@ -422,7 +422,7 @@ namespace CMI.Manager.Vecteur.Tests
         public async Task GetStatus_with_with_valid_id_returns_content()
         {
             // Arrange
-            var orderItem = new OrderItem {VeId = 1, ApproveStatus = ApproveStatus.FreigegebenDurchSystem, Status = OrderStatesInternal.Ausgeliehen};
+            var orderItem = new OrderItem {VeId = "1", ApproveStatus = ApproveStatus.FreigegebenDurchSystem, Status = OrderStatesInternal.Ausgeliehen};
             var controller = ArrangeControllerForGetStatus(new[] {orderItem});
 
             // Act

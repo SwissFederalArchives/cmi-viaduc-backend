@@ -1,0 +1,471 @@
+{
+  "object": "document",
+  "type": "Vz",
+  "DocKey": "Vz      76949ff4-e208-5858-809e-fbddb188c588",
+  "DocTitle": "B0#1000/1483#2649*   Korrespondenz zwischen dem Finanzminister und anderen Ministern über Zoll- und Handelsfragen; sowie Korrespondenz zwischen dem Finanzminister und den Kantonen Aargau und Baden, 1799-1802 (Dossier)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "24.09.2025 09:49:52:435",
+  "block": {
+    "type": "Vz",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Klas    a6b8618e-5ce0-5b3e-972e-87328906a270"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Klas"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "9"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "marlies"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "DFM_IMPORT"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "24.09.2025 09:49:52"
+      },
+      {
+        "type": "CreateDate",
+        "value": "19.11.2010 13:15:14"
+      },
+      {
+        "type": "ScopeID",
+        "value": "7689193"
+      },
+      {
+        "type": "ApdID",
+        "value": "Vz      76949ff4-e208-5858-809e-fbddb188c588"
+      },
+      {
+        "type": "Flag_EditCompleteSignatureDirectly",
+        "value": "1"
+      },
+      {
+        "type": "SignInherited",
+        "value": "B0"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     7c90e712-0fd1-56ef-8109-84e59f8726d6"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Reference_Type",
+            "value": "Ablieferung"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1000/1483 Bundesverwaltung (1712-1857)"
+          },
+          {
+            "type": "Ablieferung_AblNum",
+            "value": "1000/1483"
+          },
+          {
+            "type": "Ablieferung_ZustaendigeStelle",
+            "value": "Schweizerisches Bundesarchiv (nach 1979)-Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da;Bundesamt für Rüstung armasuisse (2004-)-Part    200a5421-e3fc-54f3-b191-5c41ffd9b5e7;Kommando Operationen (2018-)-Part    2cedbfb1-a2a6-56bf-8cc6-2c0c66930a80;"
+          },
+          {
+            "type": "Ablieferung_KatAutomatisierung",
+            "value": "2"
+          },
+          {
+            "type": "Ablieferung_Anhang3VBGA",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Publikationsrechte",
+            "value": "BAR"
+          },
+          {
+            "type": "Ablieferung_InQuerySichtbar",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "AblDocKey",
+        "value": "Abl     7c90e712-0fd1-56ef-8109-84e59f8726d6"
+      },
+      {
+        "type": "LaufNumVz",
+        "value": "2649"
+      },
+      {
+        "type": "SignForInherit",
+        "value": "B0#1000/1483#2649"
+      },
+      {
+        "type": "Vz_OwnSign",
+        "value": "B0#1000/1483#2649*"
+      },
+      {
+        "type": "Altsi_Gp",
+        "fields": [
+          {
+            "type": "Altsi",
+            "value": "B0#1000/1483#2649-2654*"
+          }
+        ]
+      },
+      {
+        "type": "Altsi_Gp",
+        "fields": [
+          {
+            "type": "Altsi",
+            "value": "B0#1000/1483#2650*"
+          }
+        ]
+      },
+      {
+        "type": "Altsi_Gp",
+        "fields": [
+          {
+            "type": "Altsi",
+            "value": "B0#1000/1483#2651*"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Titel",
+        "value": "Korrespondenz zwischen dem Finanzminister und anderen Ministern über Zoll- und Handelsfragen; sowie Korrespondenz zwischen dem Finanzminister und den Kantonen Aargau und Baden"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1799-1802",
+        "timerange": {
+          "min": "01.01.1799",
+          "max": "31.12.1802",
+          "values": [
+            {
+              "value": "01.01.1799-31.12.1802",
+              "min": "01.01.1799",
+              "max": "31.12.1802"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_Bez",
+        "value": "B0#1000/1483#2649*   Korrespondenz zwischen dem Finanzminister und anderen Ministern über Zoll- und Handelsfragen; sowie Korrespondenz zwischen dem Finanzminister und den Kantonen Aargau und Baden, 1799-1802 (Dossier)"
+      },
+      {
+        "type": "Vz_SchachtelNr",
+        "value": "2649"
+      },
+      {
+        "type": "Behaeltnis_Gp",
+        "fields": [
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Behaeltnis_Key",
+            "value": "Mg      f4eb33af-04d3-5243-b7b4-3d016250fc0e"
+          },
+          {
+            "type": "Behaeltnis_DocType",
+            "value": "Mg"
+          },
+          {
+            "type": "Behaeltnis_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Behaeltnis_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Behaeltnis_Mg_Behaeltniscode",
+            "value": "1000/1483_2649"
+          },
+          {
+            "type": "Behaeltnis_Bhlgrp_Typ",
+            "value": "Buch"
+          },
+          {
+            "type": "Behaeltnis_Mg_Informationstraeger",
+            "value": "Papier"
+          },
+          {
+            "type": "Behaeltnis_Mg_Lagerungsorte",
+            "value": "1.1.001.01.01"
+          },
+          {
+            "type": "Behaeltnis_Vz_OwnSign",
+            "value": "B0#1000/1483#2649*"
+          },
+          {
+            "type": "Behaeltnis_Vz_Titel",
+            "value": "Korrespondenz zwischen dem Finanzminister und anderen Ministern über Zoll- und Handelsfragen; sowie Korrespondenz zwischen dem Finanzminister und den Kantonen Aargau und Baden"
+          },
+          {
+            "type": "Behaeltnis_Laufzeit",
+            "value": "1799-1802"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Klassifizierung",
+        "value": "keine Angabe"
+      },
+      {
+        "type": "Vz_Land_Gp",
+        "fields": [
+          {
+            "type": "Vz_Land",
+            "value": "Schweiz"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Land_Gp",
+        "fields": [
+          {
+            "type": "Vz_Land",
+            "value": "Luxemburg"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Land_Gp",
+        "fields": [
+          {
+            "type": "Vz_Land",
+            "value": "Deutschland"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Aktenzeichen",
+        "value": "C.04.9"
+      },
+      {
+        "type": "Vz_Az_Gp",
+        "fields": [
+          {
+            "type": "Vz_Az",
+            "value": "B0.14"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Az_Gp",
+        "fields": [
+          {
+            "type": "Vz_Az",
+            "value": "B0.15"
+          }
+        ]
+      },
+      {
+        "type": "Vz_Darin_Gp",
+        "fields": [
+          {
+            "type": "Vz_Darin",
+            "value": "2649 = 1799-1801; Korrespondenz zwischen dem Finanzminister und anderen Ministern über Zoll- und Handelsfragen v.a. über Einführung, Beibehaltung oder Aufhebung von Zöllen und anderen Abgaben [Bittschriften aus verschiedenen Kantonen], z.B. des Tabak- und des Weinzolls(1) oder der Sustgebühren, über die Einhaltung von Zollvorschriften z.B. der Gewichtsgrenzen für Wagenladungen(2), über die Zollpraxis anderer Staaten und allfällige Retorsionsmassnahmen(3), über die Behinderung des Transits von Feldfrüchten der Bauern des solothurnischen und baslerischen Leimentals durch französische Zöllner(4), ferner über den Abschluss von Handelsverträgen mit dem Ausland [Projekt eines Vertrages mit Frankreich](5), über die Einfuhr und Transit von Salz, über Importverbote, schliesslich über die Finanzierung des Baus und des Unterhalts von Strassen und Brücken mittels Zollerträgen(6).\\2649-2654 = Korrespondenz der Kantone, v.a. der Verwaltungskammern und Zollbehörden, an den Finanzminister über die Organisation des Zollwesens, die Errichtung von Zollstätten und die Einführung eines neuen einheitlichen Zollsystems, über personelle Fragen wie Anstellungen und Besoldungen, über Zollpachten und damit zusammenhängende Entschädigungsfragen(7), über die Einhaltung von Zollvorschriften, über Zollvergehen und Schmuggel, ferner über die Erhebung von Zöllen und anderen Abgaben im allgemeinen - Ein-, Ausfuhr- und Transitzölle, Kaufhauszölle, Weg- und Geleitgelder usw. - und in besonderen Fällen, über Zolltarife(8) [Beilagen: Tarife und Reglemente, z.T. aus der Zeit vor 1798] und Zollerträge [z.T. mit Tabellen], über die Frage der Zollbefreiung für helvetisches und französisches Militär und für die Messe in Zurzach, über ausländische Zollpraktiken sowie die Erhebung von Brückenzöllen durch französisches Militär(9). Korrspondenz über Handelsfragen, den Abschluss von Handelsverträgen, v.a. mit Frankreich(10), über die Kontrolle des Handels mit Salz und anderen Lebensmitteln, Ein- und Ausfuhrverbote [mit Verzeichnissen verbotener Waren] und über Bau und Unterhalt von Lagerhäusern [Susten], Strassen und Brücken(11) [verschiedene Projekte](12)\\2649 = Aargau, Baden, 1799-1802\\2650 = Aargau, Baden, 1800-1801\\2650 = Basel, Bellinzona, 1800-1802\\2651 = Bern, 1801\\2651 = Freiburg, 1800-1801\\2652 = Léman, 1799-1802\\2653 = Linth, Lugano, 1801\\2653 = Luzern, Rätien, 1801-1802\\2653 = Oberland, 1802\\2654 = Baden, Léman, 1800\\2654 = Säntis, 1799-1802\\2654 = Schaffhausen, 1802\\2654 = Solothurn, 1799-1801\\2654 = Thurgau, Waldstätten, 1800-1802\\2654 = Wallis, 1801-1802\\2654 = Zürich, 1800-1801\\Weitere Korrespondenz zwischen dem Finanzminister und den Kantonen siehe Nummer 2656-2674"
+          }
+        ]
+      },
+      {
+        "type": "Vz_DigiVersion_Gp",
+        "fields": [
+          {
+            "type": "Vz_DigiVersion_URL",
+            "value": "https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=182,286"
+          },
+          {
+            "type": "Vz_DigiVersion_Bez",
+            "value": "Stream SFW_0999, Start dieses Beitrags: 03:02; Ende: 04:46"
+          }
+        ]
+      },
+      {
+        "type": "Vz_DigiVersion_Gp",
+        "fields": [
+          {
+            "type": "Vz_DigiVersion_URL",
+            "value": "https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=286,377"
+          },
+          {
+            "type": "Vz_DigiVersion_Bez",
+            "value": "Start dieses Beitrags: 04:46; Ende: 06:17"
+          }
+        ]
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Vz_Schutzfristkategorie",
+        "value": "Art. 9.1 BGA"
+      },
+      {
+        "type": "Vz_Schutzfristbasisdatum",
+        "value": "Zeitraumende"
+      },
+      {
+        "type": "Vz_Schutzfristdauer",
+        "value": "30"
+      },
+      {
+        "type": "Vz_Schutzfristende",
+        "value": "31.12.1832",
+        "timerange": {
+          "min": "31.12.1832",
+          "max": "31.12.1832",
+          "values": [
+            {
+              "value": "31.12.1832-31.12.1832",
+              "min": "31.12.1832",
+              "max": "31.12.1832"
+            }
+          ]
+        }
+      },
+      {
+        "type": "ZBGA_AblKatAuto",
+        "value": "2"
+      },
+      {
+        "type": "Vz_ZugaenglichkeitBGA",
+        "value": "Frei zugänglich"
+      },
+      {
+        "type": "Partner_Gp",
+        "fields": [
+          {
+            "type": "Partner_Key",
+            "value": "Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da"
+          },
+          {
+            "type": "Partner_DocType",
+            "value": "Part"
+          },
+          {
+            "type": "Partner_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Partner_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Partner_Bez",
+            "value": "Schweizerisches Bundesarchiv (nach 1979)"
+          }
+        ]
+      },
+      {
+        "type": "Verw_Ve_Gp",
+        "fields": [
+          {
+            "type": "Verw_Ve",
+            "value": "Siehe auch B0#1000/1483#2654*"
+          }
+        ]
+      },
+      {
+        "type": "Verw_Ve_Gp",
+        "fields": [
+          {
+            "type": "Verw_Ve",
+            "value": "Siehe auch B0#1000/1483#2655*"
+          }
+        ]
+      },
+      {
+        "type": "Vz_ZusatzInfo_Gp",
+        "fields": [
+          {
+            "type": "Vz_ZusatzInfo",
+            "value": "(1): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 579-589 bzw. 598\\(2): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 811-817\\(3): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 758-765\\(4): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 530-434; siehe auch die Nummern 790, 1111, 1112, 1119 und 1132\\(5): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 338-379\\(6): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 877-899\\(7): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 537-546; siehe auch Nr. 2654. Vergleiche ferner Bestand C \"Archiv der Mediationszeit 1803-1813\" Nr. 356 (Forderungen von Xavier Neri aus Lugano)\\(8): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 486-501\\(9): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 963-967\\(10): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 338-379; siehe auch die Nummern 1963 und 2649\\(11): Vergleiche Aktensammlung aus der Zeit der Helvetischen Republik Bd. 15, S. 819-823 und S. 950-962\\(12): Die Akten in den Bänden Nr. 2649-2654 sind zwar grundsätzlich kantonsweise zusammengefasst, aber nicht immer konsequent, sodass sich Akten aus einem Kanton in mehr als einem Band finden können. Nr. 2654 sind die Dokumente aus den aufgeführten Kantonen sogar in ziemlichem Durcheinander zusammengebunden"
+          }
+        ]
+      },
+      {
+        "type": "Status",
+        "value": "Abgeschlossen"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-222222222222"
+      },
+      {
+        "type": "Export_id",
+        "value": "56d95d19-d111-4147-af9f-c45e8d24c776"
+      },
+      {
+        "type": "Vz_AkTyp",
+        "value": "Akten allgemein"
+      },
+      {
+        "type": "Vz_Best",
+        "value": "Best    3b5cc627-e6af-5dc8-9dde-7c10ed2a3bba"
+      },
+      {
+        "type": "Vz_Best_DocTitle",
+        "value": "B0*   Zentralarchiv der Helvetischen Republik (1798-1803), 1643-1857 (Bestand)"
+      },
+      {
+        "type": "Vz_Bestellsignatur",
+        "value": "B0* B0#1000/1483#2649*"
+      },
+      {
+        "type": "Vz_Id",
+        "value": "76949ff4-e208-5858-809e-fbddb188c588"
+      }
+    ]
+  }
+}

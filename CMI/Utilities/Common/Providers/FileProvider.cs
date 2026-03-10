@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CMI.Utilities.Common.Helpers;
+using Serilog;
+using System;
 using System.IO;
 using System.Threading.Tasks;
-using CMI.Utilities.Common.Helpers;
-using Serilog;
 using Path = System.IO.Path;
 
 namespace CMI.Utilities.Common.Providers
@@ -18,6 +18,16 @@ namespace CMI.Utilities.Common.Providers
                 var targetFile = new FileInfo(Path.Combine(targetDirectory, PathHelper.CreateShortValidUrlName(relPath, false), PathHelper.CreateShortValidUrlName(file.Name, true)));
                 await CopyFileInternal(targetFile, file);
             }
+        }
+
+        public Task DeleteFolderAsync(string filename)
+        {
+            var directory = new DirectoryInfo(filename);
+            if (directory.Exists)
+            {
+                directory.Delete(true);
+            }
+            return Task.CompletedTask;
         }
 
         public async Task<MemoryStream> ReadFileAsync(Uri fileUir)
@@ -57,6 +67,7 @@ namespace CMI.Utilities.Common.Providers
         {
             var networkFile = fileUir.LocalPath;
             Log.Information("FileProvider ReadFileFromNetworkDrive {networkFile}", networkFile);
+
             try
             {
                 using var stream = File.OpenRead(networkFile);

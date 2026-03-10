@@ -14,6 +14,18 @@ namespace CMI.Manager.Order.Consumers
         public static async Task SendToIndexManager(RecalcIndivTokens recalcTokens, IOrderDataAccess dataAccess, ISendEndpointProvider sendEndpointProvider, Uri uri)
         {
             var indivTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ArchiveRecordId);
+
+            if (!string.IsNullOrWhiteSpace(recalcTokens.ScopeArchiveRecordId) && recalcTokens.ArchiveRecordId != recalcTokens.ScopeArchiveRecordId)
+            {
+                var indivScopeTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ScopeArchiveRecordId);
+                if(indivScopeTokens != null)
+                {
+                    indivTokens = new IndivTokens(indivTokens.PrimaryDataFulltextAccessTokens.Union(indivScopeTokens.PrimaryDataFulltextAccessTokens).ToArray(),
+                        indivTokens.PrimaryDataDownloadAccessTokens.Union(indivScopeTokens.PrimaryDataDownloadAccessTokens).ToArray(),
+                        indivTokens.FieldDataAccessTokens.Union(indivScopeTokens.FieldDataAccessTokens).ToArray());
+                }
+            }
+
             // es benötigt keine individuellen MetadatenAccessTokens  
             var metadata = recalcTokens.ExistingMetadataAccessTokens;
 
@@ -62,26 +74,30 @@ namespace CMI.Manager.Order.Consumers
             // die Property 'Context' NULL SEIN WIRD!
 
             var orderItemVeId = auftragStatus.Context.OrderItem.VeId;
-            if (!orderItemVeId.HasValue)
+            if (string.IsNullOrWhiteSpace(orderItemVeId))
             {
                 return; // Bei Aufträgen ohne Ve (=Formularbestellung) kann kein Token zurückgesetzt werden. 
             }
 
 
             var busAddress = auftragStatus.Context.Bus.Address;
-            var archiveRecordId = orderItemVeId.Value;
+            var archiveRecordId = orderItemVeId;
             var contextOrderDataAccess = auftragStatus.Context.OrderDataAccess;
             var sendEndpointProvider = auftragStatus.Context.Bus;
 
-            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId.ToString(), MetadataToExclude.OCRContentAndFiles);
+            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
             
             // It is possible, that a VE record was delete while the order item is still in progress
             // So if the archiveRecord does not exist anymore, no need to update the Indiv Tokens
             if (archiveRecord != null)
             {
+                // It is possible, that a VE record was with old ScopeId ordered
+                archiveRecordId = archiveRecord.ArchiveRecordId;
+
                 var recalcTokens = new RecalcIndivTokens
                 {
                     ArchiveRecordId = archiveRecordId,
+                    ScopeArchiveRecordId = archiveRecord.ExternalKeys.Any(e => e.Key == "scopeArchiv") ? archiveRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value : string.Empty,
                     ExistingMetadataAccessTokens = archiveRecord.MetadataAccessTokens.ToArray(),
                     ExistingPrimaryDataDownloadAccessTokens = archiveRecord.PrimaryDataDownloadAccessTokens.ToArray(),
                     ExistingPrimaryDataFulltextAccessTokens = archiveRecord.PrimaryDataFulltextAccessTokens.ToArray(),

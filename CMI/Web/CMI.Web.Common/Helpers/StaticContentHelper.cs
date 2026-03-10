@@ -110,7 +110,7 @@ namespace CMI.Web.Common.Helpers
                 var appRoot = context.VirtualPathRoot;
                 var relativeUrl = GetRelativeUrl(appRoot, update.url);
 
-                var updatedHtml = HttpUtility.UrlDecode(update.markup);
+                var updatedHtml = WebUtility.UrlDecode(update.markup);
                 updatedHtml = CleanupEditedMarkup(appRoot, updatedHtml);
 
                 var updatedDoc = new HtmlDocument();
@@ -190,20 +190,39 @@ namespace CMI.Web.Common.Helpers
             {
                 url += ".html";
             }
-           
-            var contentDirectory = Path.Combine(WebHelper.MapPathIfNeeded(DirectoryHelper.Instance.StaticPagePath));
-            return FindFileInContentDirectory(url, contentDirectory);
+            string basePath = WebHelper.MapPathIfNeeded(DirectoryHelper.Instance.StaticPagePath);
+            string fullPath = Path.GetFullPath(Path.Combine(basePath, url));
+
+            if (!fullPath.StartsWith(basePath, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new UnauthorizedAccessException("Invalid path traversal attempt.");
+            }
+
+            return  FindFileInContentDirectory(fullPath, basePath);
+            
         }
 
         public static string GetContentMarkupFor(string url, string language, bool enableNotFound = false)
         {
-            var contentPath = GetContentFilePath(url);
-            if (!File.Exists(contentPath) && enableNotFound)
+            try
             {
-                contentPath = WebHelper.MapPathIfNeeded($"{DirectoryHelper.Instance.StaticPagePath}/{language}/404.html");
+                string contentPath = GetContentFilePath(url);
+                return File.ReadAllText(contentPath);
             }
-
-            return File.Exists(contentPath) ? File.ReadAllText(contentPath) : null;
+            catch (FileNotFoundException)
+            {
+                if (enableNotFound)
+                {
+                    string notFoundPath = GetContentFilePath($"{language}/404.html");
+                    return File.ReadAllText(notFoundPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log error to prevent information leakage
+                Log.Error(ex, "Error loading static content");
+            }
+            return null;
         }
 
         public static string GetContent(string url)

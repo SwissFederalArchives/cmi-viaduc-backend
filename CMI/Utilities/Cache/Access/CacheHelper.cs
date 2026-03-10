@@ -69,7 +69,7 @@ namespace CMI.Utilities.Cache.Access
             Log.Information("Preparing for Downloading from sftpUrl {sftpUrl}", sftpUrl);
 
             var regexObj =
-                new Regex(@"sftp://(?<username>\w+):(?<password>\w*)@(?<host>\S+):(?<port>\d+)/(?<record>\w+)",
+                new Regex(@"sftp://(?<username>\w+):(?<password>\w*)@(?<host>\S+):(?<port>\d+)/(?<record>[\w\s-]+)",
                     RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace);
 
             var match = regexObj.Match(sftpUrl);
@@ -133,7 +133,7 @@ namespace CMI.Utilities.Cache.Access
                 return CacheRetentionCategory.UsageCopyBarOrAS;
             }
 
-            if (int.TryParse(archiveRecord.ArchiveRecordId, out var veId) && await orderDataAccess.HasEinsichtsbewilligung(veId))
+            if (!string.IsNullOrWhiteSpace(archiveRecord.ArchiveRecordId) && await orderDataAccess.HasEinsichtsbewilligung(archiveRecord.ArchiveRecordId))
             {
                 return CacheRetentionCategory.UsageCopyEB;
             }

@@ -9,17 +9,17 @@ namespace CMI.Access.Sql.Viaduc.File
         ///     - Alle nicht mehr gültigen Tokens werden entfernt (wird so gelöst um BatchJob usw. zu vermeiden)
         /// </summary>
         /// <returns></returns>
-        bool CheckTokenIsValidAndClean(string token, int recordId, DownloadTokenType tokenType, string ipAdress);
+        bool CheckTokenIsValidAndClean(string token, string recordId, DownloadTokenType tokenType, string ipAdress);
 
         /// <summary>
         /// </summary>
         /// <param name="token"></param>
         /// <param name="ipAdress"></param>
         /// <returns></returns>
-        bool CreateToken(string token, int recordId, DownloadTokenType tokenType, DateTime tokenExpiryTime, string ipAdress, string userId);
+        bool CreateToken(string token, string recordId, DownloadTokenType tokenType, DateTime tokenExpiryTime, string ipAdress, string userId);
 
-        string GetUserIdByToken(string token, int recordId, DownloadTokenType tokenType, string ipAdress);
+        string GetUserIdByToken(string token, string recordId, DownloadTokenType tokenType, string ipAdress);
 
-        void CleanUpOldToken(string token, int recordId, DownloadTokenType tokenType);
+        void CleanUpOldToken(string token, string recordId, DownloadTokenType tokenType);
     }
 }

@@ -74,7 +74,7 @@
 											{{item.orderItemId}}</a>
 									</ng-template>
 									<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'signatur'">
-												<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" *ngIf="item.veId && item.veId !==0;else emptyVeId" >
+												<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" *ngIf="item.veId && item.veId !== '';else emptyVeId" >
 												{{item.signatur}}</a>
 											<ng-template #emptyVeId>
 												{{item.signatur}}

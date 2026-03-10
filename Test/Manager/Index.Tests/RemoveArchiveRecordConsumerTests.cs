@@ -31,7 +31,7 @@ namespace CMI.Manager.Index.Tests
             var ar = new ArchiveRecord {ArchiveRecordId = "3457"};
             var mutationId = 6667;
             var errMsg = "Hi I'm an error";
-            indexManager.Setup(e => e.RemoveArchiveRecord(It.IsAny<ConsumeContext<IRemoveArchiveRecord>>())).Throws(new Exception(errMsg));
+            indexManager.Setup(e => e.RemoveArchiveRecord(It.IsAny<string>())).Throws(new Exception(errMsg));
 
             var harness = new InMemoryTestHarness();
             var consumer = harness.Consumer(() => new RemoveArchiveRecordConsumer(indexManager.Object));
@@ -76,7 +76,7 @@ namespace CMI.Manager.Index.Tests
             // Arrange
             var ar = new ArchiveRecord {ArchiveRecordId = "32245"};
             var mutationId = 1243;
-            indexManager.Setup(e => e.RemoveArchiveRecord(It.IsAny<ConsumeContext<IRemoveArchiveRecord>>()));
+            indexManager.Setup(e => e.RemoveArchiveRecord(It.IsAny<string>()));
 
             var harness = new InMemoryTestHarness();
             var consumer = harness.Consumer(() => new RemoveArchiveRecordConsumer(indexManager.Object));

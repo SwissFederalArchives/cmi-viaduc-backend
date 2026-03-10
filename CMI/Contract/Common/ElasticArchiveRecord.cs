@@ -25,7 +25,7 @@ namespace CMI.Contract.Common
         public int TreeSequence { get; set; }
         public List<ElasticArchiveplanContextItem> ArchiveplanContext { get; set; }
         public ElasticTimePeriod CreationPeriod { get; set; }
-        public string ExternalDisplayTemplateName { get; set; }
+        public string DisplayTemplateName { get; set; }
         public List<string> PrimaryDataDownloadAccessTokens { get; set; }
         public List<string> PrimaryDataFulltextAccessTokens { get; set; }
         public List<string> FieldAccessTokens { get; set; }
@@ -51,14 +51,14 @@ namespace CMI.Contract.Common
     /// </summary>
     public class DetailRecord : SearchRecord
     {
-        public string FormerReferenceCode { get; set; }
+        public List<string> FormerReferenceCode { get; set; }
         public string Extent { get; set; }
-        public bool HasImage { get; set; }
         public int AccessionDate { get; set; }
         public List<ElasticParentContentInfo> ParentContentInfos { get; set; }
         public ElasticBase64 Thumbnail { get; set; }
         public string ProtectionCategory { get; set; }
         public int? ProtectionDuration { get; set; }
+        public List<ExternalKey> ExternalKeys { get; set; }
     }
 
     public class ElasticArchiveRecord : DetailRecord
@@ -68,6 +68,7 @@ namespace CMI.Contract.Common
             PrimaryData = new List<ElasticArchiveRecordPackage>();
             References = new List<ElasticReference>();
             Containers = new List<ElasticContainer>();
+            ExternalKeys = new List<ExternalKey>();
             Descriptors = new List<ElasticDescriptor>();
             ArchiveplanContext = new List<ElasticArchiveplanContextItem>();
             ParentContentInfos = new List<ElasticParentContentInfo>();
@@ -76,17 +77,9 @@ namespace CMI.Contract.Common
 
         public string All { get; set; }
         public List<string> MetadataAccessTokens { get; set; }
-        public bool HasAudioVideo { get; set; }
-        public int PlayingLengthInS { get; set; }
         public string TreePath { get; set; }
         public int TreeLevel { get; set; }
-        public bool IsRoot { get; set; }
         public List<ElasticPlace> Places { get; set; }
-        public string InternalDisplayTemplateName { get; set; }
-        public string PreviousArchiveRecordId { get; set; }
-        public string NextArchiveRecordId { get; set; }
-        public string FirstChildArchiveRecordId { get; set; }
-        public bool ContainsPersonRelatedInformation { get; set; }
         public bool IsPhysicalyUsable { get; set; }
         public string Permission { get; set; }
         public string PhysicalUsability { get; set; }
@@ -95,7 +88,7 @@ namespace CMI.Contract.Common
         public List<ElasticContainer> Containers { get; set; }
         public List<ElasticReference> References { get; set; }
 
-        [XmlArrayItem("package", IsNullable = false, ElementName = "primaryData")]
+        [XmlArrayItem("package", IsNullable = false, ElementName = "PrimaryData")]
         public List<ElasticArchiveRecordPackage> PrimaryData { get; set; }
 
         public DateTime LastSyncDate { get; set; }
@@ -108,6 +101,12 @@ namespace CMI.Contract.Common
     public class ElasticArchiveDbRecord : ElasticArchiveRecord
     {
         public UnanonymizedFields UnanonymizedFields { get; set; } = new UnanonymizedFields();
+    }
+
+    public class ExternalKey
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
     }
 
     public class PermissionInfo

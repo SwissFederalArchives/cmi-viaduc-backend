@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using CMI.Contract.Common;
+using CMI.Contract.Messaging;
 using CMI.Web.Common.api;
 using CMI.Web.Common.api.Attributes;
 using CMI.Web.Common.Helpers;
+using CMI.Web.Frontend.Helpers;
 using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Entities;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.ParameterSettings;
+using MassTransit;
 using Newtonsoft.Json.Linq;
 using Serilog;
 
@@ -27,14 +32,19 @@ namespace CMI.Web.Frontend.api.Controllers
         private readonly ManagementClientSettings managementClientSettings;
         private readonly FrontendDynamicTextSettings frontendDynamicTextSettings;
         private readonly SynonymFinder synonymFinder;
+        private readonly IElasticService elasticService;
+        private readonly IRequestClient<IGetSecurityTokens> securityTokenClient;
 
-        public PublicController(IEntityProvider entityProvider, IModelData modelData, ManagementClientSettings managementClientSettings, FrontendDynamicTextSettings frontendDynamicTextSettings)
+
+        public PublicController(IEntityProvider entityProvider, IModelData modelData, ManagementClientSettings managementClientSettings, FrontendDynamicTextSettings frontendDynamicTextSettings, 
+            IElasticService elasticService, IRequestClient<IGetSecurityTokens> securityTokenClient)
         {
             this.entityProvider = entityProvider;
             this.modelData = modelData;
             this.managementClientSettings = managementClientSettings;
             this.frontendDynamicTextSettings = frontendDynamicTextSettings;
-
+            this.elasticService = elasticService;
+            this.securityTokenClient = securityTokenClient;
             var woerterbuch = new FileWoerterbuch(new PhysicalFileSystem(), Path.Combine(DirectoryHelper.Instance.ConfigDirectory, "Synonyme"));
             var settingAsText = ServiceHelper.Settings["synonymMaxInputWords"];
             int maxInputWords;
@@ -81,10 +91,10 @@ namespace CMI.Web.Frontend.api.Controllers
                 {
                     var access = GetUserAccess(selectedLanguage);
 
-                    var ids = new List<int>();
+                    var ids = new List<string>();
                     foreach (var node in entryNodes.Children())
                     {
-                        ids.Add(JsonHelper.FindTokenValue<int>(node, "archiveRecordId"));
+                        ids.Add(JsonHelper.FindTokenValue<string>(node, "archiveRecordId"));
                     }
 
                     var result = entityProvider.GetEntities<TreeRecord>(ids, access);
@@ -181,5 +191,54 @@ namespace CMI.Web.Frontend.api.Controllers
         {
             return SecurityHelper.VerifyCaptcha(data, FrontendSettingsViaduc.Instance.GetServerSettings());
         }
+        [HttpGet]
+        [Route("api/Public/GetAccessTokens")]
+        public async Task<IHttpActionResult> GetAccessTokens(string id)
+        {
+            var result = new AccessTokenCheckResult
+            {
+                VeId = id,
+                Calculated = new AccessTokens(),
+                Elastic = new AccessTokens(),
+                CheckError = false
+            };
+
+            try
+            {
+                var securityResponse = await securityTokenClient.GetResponse<GetSecurityTokensResponse>(new { ArchiveRecordId = id });
+                result.Calculated = securityResponse.Message.Calculated ?? new AccessTokens();
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, "SecurityTokens not available for id {Id}", id);
+            }
+
+            try
+            {
+                var elastictokens = elasticService.QueryTokensForId(id);
+                if (elastictokens != null)
+                {
+                    result.Elastic = elastictokens;
+                    result.CheckError = !AccessTokenComparer.TokensMatch(result.Calculated, result.Elastic);
+                    
+                }
+
+              
+            }
+            catch (Exception ex)
+            {
+                Log.Warning(ex, "Elastic record not available for id {Id}", id);
+            }
+
+            var json = JObject.FromObject(result); // Keep as JObject, not .ToString()
+            return Json(json, new Newtonsoft.Json.JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            });
+
+
+        }
+
+        
     }
 }

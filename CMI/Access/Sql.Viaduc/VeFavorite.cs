@@ -4,7 +4,7 @@ namespace CMI.Access.Sql.Viaduc
 {
     public class VeFavorite : IFavorite
     {
-        public int VeId { get; set; }
+        public string VeId { get; set; }
         public string ReferenceCode { get; set; }
         public bool CanBeOrdered { get; set; }
         public bool CanBeDownloaded { get; set; }

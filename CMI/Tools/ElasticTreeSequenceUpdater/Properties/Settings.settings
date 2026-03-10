@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CMI.Tools.ElasticTreeSequenceUpdater.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BulkBatchSize" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">5000</Value>
+    </Setting>
+    <Setting Name="SQLiteDbPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\TreeSequenceUpdates.db</Value>
+    </Setting>
+    <Setting Name="LogFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Temp\Logs\treeSequenceUpdater.log</Value>
+    </Setting>
+    <Setting Name="ElasticSearchUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Web.Frontend.AppData_Template.ConfigJson.ElasticUsername@@</Value>
+    </Setting>
+    <Setting Name="ElasticSearchPWD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Web.Frontend.AppData_Template.ConfigJson.ElasticPWD@@</Value>
+    </Setting>
+    <Setting Name="ElasticSearchUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">@@CMI.Web.Frontend.AppData_Template.ConfigJson.ElasticUrl@@</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

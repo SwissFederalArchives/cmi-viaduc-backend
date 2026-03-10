@@ -28,15 +28,11 @@
             "searchEndDate": "1990-12-31T00:00:00",
             "years": [ 1990 ]
           },
-          "hasImage": false,
-          "hasAudioVideo": false,
-          "playingLengthInS": 0,
           "canBeOrdered": true,
           "treePath": "000000000100000000280000004672000000467700038948160003894989000389500400043975850004397586",
           "treeSequence": 512,
           "treeLevel": 9,
           "isLeaf": true,
-          "isRoot": false,
           "accessionDate": 2005,
           "parentContentInfos": [
             { "title": "Gesamtbestand des schweizerischen Bundesarchivs (1798-)" },
@@ -49,8 +45,7 @@
             { "title": "Studienkommission für strategische Fragen" },
             { "title": "Studienkommission für strategische Fragen" }
           ],
-          "externalDisplayTemplateName": "10032: BAR Dossier",
-          "internalDisplayTemplateName": "10032: BAR Dossier",
+          "displayTemplateName": "10032: BAR Dossier",
           "archiveplanContext": [
             {
               "iconId": 4,
@@ -124,10 +119,7 @@
               "archiveRecordId": "4397586"
             }
           ],
-          "previousArchiveRecordId": "0",
-          "nextArchiveRecordId": "5130687",
           "parentArchiveRecordId": "4397585",
-          "firstChildArchiveRecordId": "-1",
           "childCount": 0,
           "thumbnail": {},
           "protectionEndDate": {
@@ -135,8 +127,6 @@
             "year": 2020
           },
           "protectionCategory": "Art. 9.1 BGA",
-          "containsPersonRelatedInformation": false,
-          "isPhysicalyUsable": true,
           "protectionDuration": 30,
           "permission": "nicht erhoben",
           "physicalUsability": "Uneingeschränkt",

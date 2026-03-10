@@ -99,6 +99,9 @@ namespace CMI.Web.Frontend.DependencyInjection
             builder.Register(c => BusConfig.RegisterPrepareAssetCallback()).As<IRequestClient<PrepareAssetRequest>>();
             builder.Register(c => BusConfig.RegisterStartOnboardingProcessClient()).As<IRequestClient<StartOnboardingProcessRequest>>();
             builder.Register(c => BusConfig.RegisterHandleOnboardingCallbackClient()).As<IRequestClient<HandleOnboardingCallbackRequest>>();
+
+            builder.Register(c => BusConfig.RegisterAisAccessTokensClient()).As<IRequestClient<IGetSecurityTokens>>();
+
         }
 
         private static List<TemplateField> GetInternalFields()

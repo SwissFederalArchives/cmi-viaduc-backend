@@ -17,9 +17,14 @@ namespace CMI.Manager.Index.ValueExtractors
             {
                 retVal = new ElasticTimePeriod
                 {
+                    // If start date has a time part, then we don't care
                     StartDate = value.DateRange.FromDate,
+                    // If End Date is smaller than MaxDate, then check if it has a time part.
+                    // If it has a TimeOfDay value, use this, or else the toDate will show 23.59:59
                     EndDate = value.DateRange.ToDate <= DateTime.MaxValue.AddDays(-1)
-                        ? value.DateRange.ToDate.AddDays(1).AddSeconds(-1)
+                        ? value.DateRange.ToDate.TimeOfDay == new TimeSpan(0)
+                            ? value.DateRange.ToDate.AddDays(1).AddSeconds(-1)
+                            : value.DateRange.ToDate
                         : DateTime.MaxValue,
                     SearchStartDate = value.DateRange.SearchFromDate,
                     SearchEndDate = value.DateRange.SearchToDate,

@@ -23,6 +23,7 @@ namespace CMI.Engine.MailTemplate
             Archivnummer = orderItem.ArchivNummer;
             Band = string.Empty;
             TitelTeilBestand = string.Empty;
+            UnprotectedTitel = orderItem.Dossiertitel;
         }
 
         public string Archivnummer { get; }
@@ -33,6 +34,9 @@ namespace CMI.Engine.MailTemplate
 
         public override string Ablieferung { get; }
         public override string ZusaetzlicheInformationen { get; }
+        public override string UnprotectedTitel { get; }
+        public override string UnprotectedDarin { get; }
+        public override string UnprotectedZusaetzlicheInformationen { get; }
 
         public override string Signatur { get; }
         public override string Titel { get; }

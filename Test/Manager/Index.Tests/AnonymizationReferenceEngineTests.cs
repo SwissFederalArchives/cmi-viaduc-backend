@@ -18,7 +18,7 @@ public class AnonymizationReferenceEngineTests
         ReferenceCode = "Signatur1",
         Title = "Ein ███ Titel1",
         Level = "Dossier",
-        CreationPeriod = new ElasticTimePeriod {Text = "1990-1995"},
+        CreationPeriod = new ElasticTimePeriod { Text = "1990-1995" },
         UnanonymizedFields = new UnanonymizedFields
         {
             Title = "Ein anonymisierter Titel1",
@@ -45,7 +45,15 @@ public class AnonymizationReferenceEngineTests
             new() {Title = "Archivname"},
             new() {Title = "Bestandname"},
             new() {Title = "Ein ███ Titel1"},
-        }
+        },
+        ExternalKeys =
+        [
+            new ExternalKey
+            {
+                Key = "scopeArchiv",
+                Value = "1"
+            }
+        ]
     };
 
     private readonly ElasticArchiveDbRecord id2 = new()
@@ -137,7 +145,7 @@ public class AnonymizationReferenceEngineTests
 
         dbAccess.Setup(f => f.FindDbDocument("2", It.IsAny<MetadataToExclude>())).Returns(id2);
         dbAccess.Setup(f => f.FindDbDocument("3", It.IsAny<MetadataToExclude>())).Returns(id3);
-        dbAccess.Setup(f => f.GetChildren("1", true)).Returns(() => new List<ElasticArchiveRecord> { id2, id3 });
+        dbAccess.Setup(f => f.GetChildren("1", "1", true)).Returns(() => new List<ElasticArchiveRecord> { id2, id3 });
         dbAccess.Setup(f => f.UpdateDocument(It.IsAny<ElasticArchiveDbRecord>())).Callback(updateAction);
 
         // Act

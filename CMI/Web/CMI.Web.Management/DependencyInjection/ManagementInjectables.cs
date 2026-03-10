@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Autofac;
 using CMI.Access.Sql.Viaduc;
 using CMI.Access.Sql.Viaduc.AblieferndeStellen;
@@ -9,6 +10,7 @@ using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Contract.Parameter;
+using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Cache.Access;
 using CMI.Utilities.ProxyClients.Order;
 using CMI.Utilities.Template;
@@ -27,6 +29,7 @@ namespace CMI.Web.Management.DependencyInjection
         {
             builder.RegisterType<OrderManagerClient>().AsSelf();
             builder.RegisterType<CollectionManagerClient>().As<ICollectionManager>();
+            builder.RegisterType<SynchronisationManagerClient>().As<ISynchronisationManager>();
             builder.RegisterType<ManuelleKorrekturManagerClient>().As<IManuelleKorrekturManager>();
             builder.RegisterType<ExcelExportHelper>().AsSelf();
             builder.RegisterType<CacheHelper>().As<ICacheHelper>().WithParameter("sftpLicenseKey", WebHelper.Settings["sftpLicenseKey"]);
@@ -37,6 +40,7 @@ namespace CMI.Web.Management.DependencyInjection
             builder.RegisterType<ViaducDb>().AsSelf().WithParameter(nameof(connectionString), connectionStringEF);
             builder.RegisterType<AccessHelper>().AsSelf();
             builder.RegisterType<ManuelleKorrekturAccess>().As<IManuelleKorrekturAccess>();
+            builder.RegisterType<SynchronisationAccess>().As<ISynchronisationAccess>();
             builder.RegisterType<UserDataAccess>().As<IUserDataAccess>().InstancePerRequest().WithParameter(nameof(connectionString), connectionString);
             builder.RegisterType<ApplicationRoleDataAccess>().As<IApplicationRoleDataAccess>().InstancePerRequest().WithParameter(nameof(connectionString), connectionString);
             builder.RegisterType<ApplicationRoleUserDataAccess>().As<IApplicationRoleUserDataAccess>().InstancePerRequest().WithParameter(nameof(connectionString), connectionString);
@@ -64,6 +68,9 @@ namespace CMI.Web.Management.DependencyInjection
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .AssignableTo<IConsumer>()
                 .AsSelf();
+
+
         }
+
     }
 }

@@ -10,10 +10,11 @@ namespace CMI.Web.Frontend.api.Interfaces
 {
     public interface IEntityProvider
     {
-        string GetArchivplanHtml(int id, UserAccess access, string role, string language);
-        string GetArchivplanChildrenHtml(int id, UserAccess access, string role, string language);
-        Entity<T> GetEntity<T>(int id, UserAccess access, Paging paging = null) where T : TreeRecord, new();
-        EntityResult<T> GetEntities<T>(List<int> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new();
+        string[] GetArchivplanRootNodes(UserAccess access, string role, string language);
+        string GetArchivplanHtml(string id, UserAccess access, string role, string language);
+        string GetArchivplanChildrenHtml(string id, UserAccess access, string role, string language);
+        Entity<T> GetEntity<T>(string id, UserAccess access, Paging paging = null) where T : TreeRecord, new();
+        EntityResult<T> GetEntities<T>(List<string> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new();
 
         List<Entity<T>> GetResultAsEntities<T>(UserAccess access, ElasticQueryResult<T> result, EntityMetaOptions options = null)
             where T : TreeRecord, new();

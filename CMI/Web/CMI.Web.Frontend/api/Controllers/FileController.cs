@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using CMI.Access.Sql.Viaduc;
@@ -81,14 +82,14 @@ namespace CMI.Web.Frontend.api.Controllers
 
         public Func<string, UserAccess> GetUserAccessFunc { get; set; }
 
-        private ElasticArchiveRecord GetRecord(int archiveRecordId, UserAccess access)
+        private ElasticArchiveRecord GetRecord(string archiveRecordId, UserAccess access)
         {
             var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
             return entityResult.Entries.FirstOrDefault()?.Data;
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> PrepareAsset(int id, string link, string lang)
+        public async Task<IHttpActionResult> PrepareAsset(string id, string link, string lang)
         {
             try
             {
@@ -112,7 +113,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     return NotFound();
                 }
 
-                var packageId = record.PrimaryData.FirstOrDefault()?.PackageId ?? string.Empty;
+                var packageId = record.PrimaryDataLink ?? string.Empty;
                 var status = CheckStatusAsync(packageId, record, access);
                 if (!(status is StatusCodeResult) || ((StatusCodeResult) status).StatusCode != HttpStatusCode.OK)
                 {
@@ -141,7 +142,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetAssetInfo(int id)
+        public async Task<IHttpActionResult> GetAssetInfo(string id)
         {
             try
             {
@@ -180,7 +181,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> DownloadFile(int id, string token, int reason = 0)
+        public async Task<IHttpActionResult> DownloadFile(string id, string token, int reason = 0)
         {
             var archiveRecordId = id;
             if (string.IsNullOrWhiteSpace(token))
@@ -233,10 +234,10 @@ namespace CMI.Web.Frontend.api.Controllers
 
                 var downloadAssetResult = (await downloadClient.GetResponse<DownloadAssetResult>(new DownloadAssetRequest
                 {
-                    ArchiveRecordId = archiveRecordId.ToString(),
+                    ArchiveRecordId = archiveRecordId,
                     AssetType = AssetType.Gebrauchskopie,
                     Recipient = userId,
-                    AssetId = record.PrimaryData.FirstOrDefault()?.PackageId,
+                    AssetId = packageId,
                     RetentionCategory = await cacheHelper.GetRetentionCategory(record, access.RolePublicClient, orderDataAccess)
                 })).Message;
 
@@ -269,7 +270,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetOneTimeToken(int archiveRecordId)
+        public IHttpActionResult GetOneTimeToken(string archiveRecordId)
         {
             var access = GetUserAccessFunc(null);
             var userId = access.UserId;
@@ -308,7 +309,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IHttpActionResult LogViewerClick(int archiveRecordId)
+        public IHttpActionResult LogViewerClick(string archiveRecordId)
         {
             var token = logLogHelper.CreateLogToken();
             
@@ -325,7 +326,7 @@ namespace CMI.Web.Frontend.api.Controllers
             return StatusCode(HttpStatusCode.OK);
         }
 
-        private void LogTokenGeneration(int archiveRecordId, string token)
+        private void LogTokenGeneration(string archiveRecordId, string token)
         {
             var access = GetUserAccessFunc(null);
             var ear = GetRecord(archiveRecordId, access);
@@ -353,7 +354,7 @@ namespace CMI.Web.Frontend.api.Controllers
             return StatusCode(HttpStatusCode.OK);
         }
 
-        private bool CheckUserHasDownloadTokensForVe(UserAccess access, int id)
+        private bool CheckUserHasDownloadTokensForVe(UserAccess access, string id)
         {
             var record = GetRecord(id, access);
             return CheckUserHasDownloadTokensForVe(access, record);

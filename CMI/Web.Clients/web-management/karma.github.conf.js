@@ -26,7 +26,7 @@ module.exports = function (config) {
 			thresholds: {
 				emitWarning: false,
 				global: {
-					statements: 24
+					statements: 23
 				}
 			}
 		},

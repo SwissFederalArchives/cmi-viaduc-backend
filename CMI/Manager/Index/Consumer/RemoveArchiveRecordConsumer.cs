@@ -38,10 +38,11 @@ namespace CMI.Manager.Index.Consumer
 
                 try
                 {
-                    indexManager.RemoveArchiveRecord(context);
+                    indexManager.RemoveArchiveRecord(context.Message.ArchiveRecordId);
 
                     await context.Publish<IArchiveRecordRemoved>(new
                     {
+                        context.Message.ArchiveRecordId,
                         context.Message.MutationId,
                         ActionSuccessful = true
                     });

@@ -23,18 +23,18 @@
     "@angular/platform-browser": "18.2.13",
     "@angular/platform-browser-dynamic": "18.2.13",
     "@angular/router": "18.2.13",
-    "@mescius/wijmo.styles": "^5.20251.34",
     "@jonkoops/matomo-tracker": "0.7.0",
-		"angularx-flatpickr": "^8.1.0",
-    "core-js": "^3.41.0",
+    "@mescius/wijmo.styles": "^5.20251.34",
+    "angularx-flatpickr": "^8.1.0",
+    "core-js": "^3.46.0",
     "flatpickr": "^4.6.13",
     "karma-jasmine": "^5.1.0",
     "marked": "^14.1.4",
     "ngx-device-detector": "8.0.0",
     "rxjs": "^7.8.2",
     "web-animations-js": "^2.3.2",
-    "webpack": "^5.98.0",
-    "zone.js": "0.15.0"
+    "webpack": "^5.102.1",
+    "zone.js": "^0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.14",
@@ -48,7 +48,7 @@
     "@types/node": "^18.19.79",
     "@typescript-eslint/eslint-plugin": "^8.26.0",
     "@typescript-eslint/parser": "^8.26.0",
-		"eslint": "^9.21.0",
+    "eslint": "^9.21.0",
     "file-saver": "2.0.5",
     "jasmine-core": "^5.6.0",
     "jasmine-spec-reporter": "~7.0.0",
@@ -61,11 +61,12 @@
     "karma-jasmine-utils": "^1.3.0",
     "karma-teamcity-reporter": "^1.1.0",
     "moment": "^2.30.1",
-    "ngx-markdown": "^19.1.0",
-    "ngx-toastr": "^19.0.0",
+    "ngx-markdown": "^19.1.1",
+    "ngx-toastr": "^19.1.0",
     "protractor": "^7.0.0",
     "puppeteer": "^24.3.1",
     "ts-node": "^10.9.2",
-    "typescript": ">=5.4.0 and <5.6.0"
-	}
+    "typescript": ">=5.4.0 and <5.6.0",
+    "webpack-dev-server": "^5.2.2"
+  }
 }

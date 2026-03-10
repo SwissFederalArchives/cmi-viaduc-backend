@@ -14,6 +14,7 @@ namespace CMI.Web.Frontend.api.Interfaces
 
         string IdField { get; }
         string ParentIdField { get; }
+        string TreeLevelField { get; }
 
         string Username { get; set; }
         string Password { get; set; }

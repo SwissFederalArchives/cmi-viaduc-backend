@@ -1,0 +1,78 @@
+{
+  "object": "document",
+  "type": "Arch",
+  "DocKey": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f",
+  "DocTitle": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 10:55:32:826",
+  "block": {
+    "type": "Arch",
+    "fields": [
+      {
+        "type": "Root_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U1940"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "03.09.2018"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1424-2007",
+        "timerange": {
+          "min": "01.01.1424",
+          "max": "31.12.2007",
+          "values": [
+            {
+              "value": "01.01.1424-31.12.2007",
+              "min": "01.01.1424",
+              "max": "31.12.2007"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Ar_Id",
+        "value": "b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "Ar_Name",
+        "value": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)"
+      },
+      {
+        "type": "Ar_Kuerz",
+        "value": "CH-BAR#Unterlagen*"
+      },
+      {
+        "type": "ScopeID",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Bez",
+        "value": "CH-BAR#Unterlagen*   Gesamtbestand des Schweizerischen Bundesarchivs (1798-), 1424-2007 (Archiv)"
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "Internet_sichtbar",
+        "value": "Ja"
+      }
+    ]
+  }
+}

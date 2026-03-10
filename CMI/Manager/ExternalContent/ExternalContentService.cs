@@ -1,12 +1,14 @@
-﻿using Autofac;
-using CMI.Contract.Messaging;
+﻿using CMI.Contract.Messaging;
 using CMI.Contract.Monitoring;
 using CMI.Manager.ExternalContent.Consumers;
 using CMI.Manager.ExternalContent.Infrastructure;
 using CMI.Utilities.Bus.Configuration;
 using CMI.Utilities.Logging.Configurator;
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using System.Reflection;
+using System.Runtime.Remoting.Contexts;
 
 namespace CMI.Manager.ExternalContent
 {
@@ -15,13 +17,13 @@ namespace CMI.Manager.ExternalContent
     /// </summary>
     public class ExternalContentService
     {
-        private ContainerBuilder containerBuilder;
+        private IServiceCollection services;
         private IBusControl bus;
 
         public ExternalContentService()
         {
             // Configure IoC Container
-            containerBuilder = ContainerConfigurator.Configure();
+            services = ContainerConfigurator.Configure();
             LogConfigurator.ConfigureForService();
         }
 
@@ -34,21 +36,25 @@ namespace CMI.Manager.ExternalContent
             Log.Information("ExternalContent service is starting");
 
             // Configure Bus
-            BusConfigurator.ConfigureBus(containerBuilder, MonitoredServices.ExternalContentService, (cfg, ctx) =>
+            BusConfigurator.ConfigureBusModern(services, MonitoredServices.ExternalContentService, AddConsumers, (context, cfg) =>
             {
                 cfg.ReceiveEndpoint(BusConstants.ManagementApiGetDigitizationOrderData,
-                    ec => { ec.Consumer(ctx.Resolve<DigitizationOrderConsumer>); });
+                    ec => { ec.ConfigureConsumer<DigitizationOrderConsumer>(context); });
                 cfg.UseNewtonsoftJsonSerializer();
             });
 
-            // Add the bus instance to the IoC container
-            var container = containerBuilder.Build();
-            bus = container.Resolve<IBusControl>();
+            var provider = services.BuildServiceProvider();
+            bus = provider.GetRequiredService<IBusControl>();
             bus.Start();
 
             Log.Information("ExternalContent service started");
         }
 
+        private void AddConsumers(IBusRegistrationConfigurator x)
+        {
+            // registers all IConsumer implementations in this assembly
+            x.AddConsumers(Assembly.GetExecutingAssembly());
+        }
 
         /// <summary>
         ///     Stops the ExternalContent Service.

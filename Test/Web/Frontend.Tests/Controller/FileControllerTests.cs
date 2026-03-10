@@ -36,7 +36,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             // arrange
             var userDataAccessMock = Mock.Of<IUserDataAccess>(setup => setup.GetUser(It.IsAny<string>()) == new User());
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord> { Items = new List<Entity<ElasticArchiveRecord>>() }
@@ -48,7 +48,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = sut.GetOneTimeToken(1);
+            var result = sut.GetOneTimeToken("1");
 
             // assert
             result.Should().BeOfType<StatusCodeResult>();
@@ -75,7 +75,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
 
             var userDataAccessMock = Mock.Of<IUserDataAccess>(setup => setup.GetUser(It.IsAny<string>()) == new User());
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -93,7 +93,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "Ö2", null, null, false);
 
             // act
-            var result = sut.GetOneTimeToken(1);
+            var result = sut.GetOneTimeToken("1");
 
             // assert
             result.Should().BeOfType<StatusCodeResult>();
@@ -118,7 +118,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -154,7 +154,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "Ö2", null, null, false);
 
             // act
-            var result = sut.GetOneTimeToken(1);
+            var result = sut.GetOneTimeToken("1");
 
             // assert
             result.Should().BeOfType<NegotiatedContentResult<string>>();
@@ -181,7 +181,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
 
             var userDataAccessMock = Mock.Of<IUserDataAccess>(setup => setup.GetUser(It.IsAny<string>()) == new User());
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -209,7 +209,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "Ö2", null, null, false);
 
             // act
-            var result = sut.GetOneTimeToken(1);
+            var result = sut.GetOneTimeToken("1");
 
             // assert
             result.Should().BeOfType<NegotiatedContentResult<string>>();
@@ -225,7 +225,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // arrange
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord> { Items = new List<Entity<ElasticArchiveRecord>>() }
@@ -235,7 +235,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.GetAssetInfo(1);
+            var result = await sut.GetAssetInfo("1");
 
             // assert
             result.Should().BeOfType<NotFoundResult>();
@@ -260,7 +260,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -277,7 +277,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.GetAssetInfo(1);
+            var result = await sut.GetAssetInfo("1");
 
             // assert
             result.Should().BeOfType<BadRequestErrorMessageResult>();
@@ -311,7 +311,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -328,7 +328,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "Ö1", null, null, false);
 
             // act
-            var result = await sut.GetAssetInfo(1);
+            var result = await sut.GetAssetInfo("1");
 
             // assert
             result.Should().BeOfType<StatusCodeResult>();
@@ -362,7 +362,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -390,7 +390,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var result = await sut.GetAssetInfo(1);
+            var result = await sut.GetAssetInfo("1");
 
             // assert
             result.Should().BeOfType<OkNegotiatedContentResult<GetAssetStatusResult>>();
@@ -424,7 +424,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -447,7 +447,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var action = (Func<Task<IHttpActionResult>>) (async () => await sut.GetAssetInfo(1));
+            var action = (Func<Task<IHttpActionResult>>) (async () => await sut.GetAssetInfo("1"));
 
             // assert
             action.Should().ThrowAsync<Exception>("the global exception handler is used to avoid publish callstacks").WithMessage("Error in StatusClient");
@@ -458,7 +458,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
         {
             // arrange
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord> { Items = new List<Entity<ElasticArchiveRecord>>() }
@@ -468,7 +468,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.PrepareAsset(1, null, "");
+            var result = await sut.PrepareAsset("1",null, "");
 
             // assert
             result.Should().BeOfType<NotFoundResult>();
@@ -493,7 +493,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -510,7 +510,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.PrepareAsset(1, "", "");
+            var result = await sut.PrepareAsset("1","", "");
 
             // assert
             result.Should().BeOfType<BadRequestErrorMessageResult>();
@@ -527,6 +527,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 ArchiveRecordId = "1",
                 MetadataAccessTokens = new List<string> { "Ö1" },
                 PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
+                PrimaryDataLink = "a valid packageid",
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -543,7 +544,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -560,7 +561,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "Ö1", null, null, false);
 
             // act
-            var result = await sut.PrepareAsset(1, "", "");
+            var result = await sut.PrepareAsset("1","", "");
 
             // assert
             result.Should().BeOfType<StatusCodeResult>();
@@ -577,6 +578,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 ArchiveRecordId = "1",
                 MetadataAccessTokens = new List<string> { "Ö1" },
                 PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
+                PrimaryDataLink = "a valid packageid",
                 PrimaryData = new List<ElasticArchiveRecordPackage>
                 {
                     new ElasticArchiveRecordPackage
@@ -593,7 +595,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -624,7 +626,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var result = await sut.PrepareAsset(1, "", "");
+            var result = await sut.PrepareAsset("1","", "");
 
             // assert
             result.Should().BeOfType<OkNegotiatedContentResult<PrepareAssetResult>>();
@@ -657,7 +659,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -679,7 +681,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = userId => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var action = (Func<Task<IHttpActionResult>>) (async () => await sut.PrepareAsset(1, "http://thisisalink.com", "de"));
+            var action = (Func<Task<IHttpActionResult>>) (async () => await sut.PrepareAsset("1","http://thisisalink.com", "de"));
 
             // assert
             action.Should().ThrowAsync<Exception>("the global exception handler is used to avoid publish callstacks")
@@ -696,7 +698,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var sut = new FileController(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
             // act
-            var result = await sut.DownloadFile(1, token);
+            var result = await sut.DownloadFile("1",token);
 
             // assert
             ((NegotiatedContentResult<string>) result).StatusCode.Should().Be(HttpStatusCode.Forbidden);
@@ -709,7 +711,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(false);
 
@@ -717,7 +719,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 downloadHelperMock, null);
 
             // act
-            var result = await sut.DownloadFile(1, "invalid or old token");
+            var result = await sut.DownloadFile("1","invalid or old token");
 
             // assert
             result.Should().BeOfType<BadRequestErrorMessageResult>().Which.Message.Should()
@@ -734,19 +736,19 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var sut = new FileController(null, null, null, downloadTokenDataAccessMock.Object, null, null, null, null, null, null, null, null,
                 downloadHelperMock, null);
 
             // act
-            var result = await sut.DownloadFile(1, "valid token");
+            var result = await sut.DownloadFile("1","valid token");
 
             // assert
             result.Should().BeOfType<NegotiatedContentResult<string>>().Which.StatusCode.Should().Be(HttpStatusCode.Forbidden);
@@ -759,17 +761,17 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord> { Items = new List<Entity<ElasticArchiveRecord>>() }
@@ -782,7 +784,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.DownloadFile(1, "valid token");
+            var result = await sut.DownloadFile("1","valid token");
 
             // assert
             result.Should().BeOfType<NotFoundResult>();
@@ -795,19 +797,19 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
-                ArchiveRecordId = "1",
+                ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
                 MetadataAccessTokens = new List<string> { "Ö2" },
                 PrimaryDataDownloadAccessTokens = new List<string> { "Ö2" },
                 PrimaryData = new List<ElasticArchiveRecordPackage>()
@@ -819,7 +821,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -838,7 +840,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, null, null, null, false);
 
             // act
-            var result = await sut.DownloadFile(1, "valid token");
+            var result = await sut.DownloadFile("Best    9c427a63-b945-524c-820a-c411451025d9","valid token");
 
             // assert
             result.Should().BeOfType<BadRequestErrorMessageResult>().Which.Message.Should()
@@ -852,13 +854,13 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
             var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
@@ -883,7 +885,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -902,7 +904,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, "Ö2", null, null, false);
 
             // act
-            var result = await sut.DownloadFile(1, "valid token");
+            var result = await sut.DownloadFile("1","valid token");
 
             // assert
             result.Should().BeOfType<StatusCodeResult>().Which.StatusCode.Should().Be(HttpStatusCode.Forbidden);
@@ -917,19 +919,19 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
 
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
             mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
             {
-                ArchiveRecordId = "1",
+                ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
                 ReferenceCode = "E3300C#1996/320#145*",
                 MetadataAccessTokens = new List<string> { "Ö2" },
                 PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
@@ -950,7 +952,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             });
 
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -978,7 +980,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var result = await sut.DownloadFile(1, "valid token", 1);
+            var result = await sut.DownloadFile("Best    9c427a63-b945-524c-820a-c411451025d9", "valid token", 1);
 
             // assert
             result.Should().BeOfType<ResponseMessageResult>().Subject.Response
@@ -1003,13 +1005,13 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
 
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
@@ -1036,7 +1038,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             });
 
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -1064,7 +1066,87 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var result = await sut.DownloadFile(15821, "valid token", 1) as ResponseMessageResult;
+            var result = await sut.DownloadFile("15821", "valid token", 1) as ResponseMessageResult;
+            // assert
+            result?.Response.Content.Headers.ContentDisposition.FileName.Should().Be(fileName);
+        }
+
+
+
+        [Test]
+        [TestCase("E3/300C#1996/320#145*", "\"E3-300C#1996-320#145_Best    9c427a63-b945-524c-820a-c411451025d9.zip\"")]
+        [TestCase("J2.365-08#2021/77#?1?*", "\"J2.365-08#2021-77#-1-_Best    9c427a63-b945-524c-820a-c411451025d9.zip\"")]
+        [TestCase("E::3\\-01#1982/1#1016", "\"E--3--01#1982-1#1016_Best    9c427a63-b945-524c-820a-c411451025d9.zip\"")]
+        public async Task DownloadFile_Check_FileName_Without_InvalidFileNameChars_With_NewAIS(string referenceCode, string fileName)
+        {
+            // arrange
+            var downloadHelperMock = Mock.Of<IDownloadLogHelper>();
+            var downloadTokenDataAccessMock = new Mock<IDownloadTokenDataAccess>();
+            var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
+
+            downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>()))
+                .Returns(true);
+
+            var userId = "a user id";
+            downloadTokenDataAccessMock.Setup(m =>
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                .Returns(userId);
+
+            var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
+            mockHit.SetupGet(m => m.Source).Returns(new ElasticArchiveRecord
+            {
+                ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
+                ReferenceCode = referenceCode,
+                MetadataAccessTokens = new List<string> { "Ö2" },
+                PrimaryDataDownloadAccessTokens = new List<string> { "BAR" },
+                PrimaryData = new List<ElasticArchiveRecordPackage>
+                {
+                    new ElasticArchiveRecordPackage
+                    {
+                        PackageId = "a package id"
+                    }
+                },
+                PrimaryDataLink = "a package id"
+            });
+
+            var mockElasticResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
+            mockElasticResponse.SetupGet(m => m.Hits).Returns(new List<IHit<ElasticArchiveRecord>>
+            {
+                mockHit.Object
+            });
+
+            var elasticServiceMock = Mock.Of<IElasticService>(setup =>
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
+                new ElasticQueryResult<ElasticArchiveRecord>
+                {
+                    Data = new EntityResult<ElasticArchiveRecord>
+                    {
+                        Items = new List<Entity<ElasticArchiveRecord>>
+                        {
+                            new() {Data = mockElasticResponse.Object.Hits.FirstOrDefault().Source}
+                        }
+                    }
+                });
+
+            var userDataAccessMock = new Mock<IUserDataAccess>();
+            var response = new Mock<Response<DownloadAssetResult>>();
+            response.Setup(r => r.Message).Returns(new DownloadAssetResult());
+
+
+            var downloadClientMock = Mock.Of<IRequestClient<DownloadAssetRequest>>(setup =>
+                setup.GetResponse<DownloadAssetResult>(It.IsAny<DownloadAssetRequest>(), It.IsAny<CancellationToken>(), It.IsAny<RequestTimeout>()) == Task.FromResult(response.Object));
+            var cacheHelperMock = Mock.Of<ICacheHelper>(setup => setup.GetStreamFromCache(It.IsAny<string>()) == Stream.Null);
+            var kontrollstellenInformer = new Mock<IKontrollstellenInformer>();
+
+            var sut = new FileController(downloadClientMock, null, null, downloadTokenDataAccessMock.Object, downloadLogDataAccess.Object,
+                elasticServiceMock, null, null, null, cacheHelperMock, userDataAccessMock.Object, null, downloadHelperMock,
+                kontrollstellenInformer.Object);
+            sut.GetUserAccessFunc = uid => new UserAccess(userId, "BAR", null, null, false);
+
+            // act
+            var result = await sut.DownloadFile("Best    9c427a63-b945-524c-820a-c411451025d9", "valid token", 1) as ResponseMessageResult;
             // assert
             result?.Response.Content.Headers.ContentDisposition.FileName.Should().Be(fileName);
         }
@@ -1078,13 +1160,13 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var downloadLogDataAccess = new Mock<IDownloadLogDataAccess>();
 
             downloadTokenDataAccessMock.Setup(m => m.CheckTokenIsValidAndClean(It.IsAny<string>(),
-                    It.IsAny<int>(), It.IsAny<DownloadTokenType>(),
+                    It.IsAny<string>(), It.IsAny<DownloadTokenType>(),
                     It.IsAny<string>()))
                 .Returns(true);
 
             var userId = "a user id";
             downloadTokenDataAccessMock.Setup(m =>
-                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
+                    m.GetUserIdByToken(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadTokenType>(), It.IsAny<string>()))
                 .Returns(userId);
 
             var mockHit = new Mock<IHit<ElasticArchiveRecord>>();
@@ -1109,7 +1191,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 mockHit.Object
             });
             var elasticServiceMock = Mock.Of<IElasticService>(setup =>
-                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<int>(), It.IsAny<UserAccess>(), true) ==
+                setup.QueryForId<ElasticArchiveRecord>(It.IsAny<string>(), It.IsAny<UserAccess>(), true) ==
                 new ElasticQueryResult<ElasticArchiveRecord>
                 {
                     Data = new EntityResult<ElasticArchiveRecord>
@@ -1136,7 +1218,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             sut.GetUserAccessFunc = uid => new UserAccess(userId, "BAR", null, null, false);
 
             // act
-            var action = new Func<Task<IHttpActionResult>>(() => sut.DownloadFile(1, "valid token", 1));
+            var action = new Func<Task<IHttpActionResult>>(() => sut.DownloadFile("1","valid token", 1));
 
             // assert
             action.Should().ThrowAsync<Exception>().WithMessage("Error in downloadClient");

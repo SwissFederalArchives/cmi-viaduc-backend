@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
+using CMI.Utilities.ActaPro;
 using CMI.Web.Common.api;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Entities;
@@ -51,7 +52,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             this.SetupServiceMock();
 
             // when
-            var treeRecord = new TreeRecord {IsLeaf = false, TreeSequence = 12};
+            var treeRecord = new TreeRecord {ArchiveRecordId = "28", IsLeaf = false, TreeSequence = 12};
             var userAccess = new UserAccess("id1", string.Empty, string.Empty, new[] {"1", "2"}, true);
             var result = entityDecorator.GetChildren(treeRecord, 11, userAccess, null);
 
@@ -72,7 +73,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             this.SetupServiceMock();
 
             // when
-            var treeRecord = new TreeRecord {IsLeaf = false, TreeSequence = 3};
+            var treeRecord = new TreeRecord {ArchiveRecordId = "28", IsLeaf = false, TreeSequence = 3};
             var userAccess = new UserAccess("id1", string.Empty, string.Empty, new[] {"1", "2"}, true);
             var paging = new Paging {Skip = 22, OrderBy = "me", Total = 0};
             var result = entityDecorator.GetChildren(treeRecord, 11, userAccess, paging);
@@ -90,7 +91,7 @@ namespace CMI.Web.Frontend.API.Tests.api
            this.SetupMocksWithResults();
 
            // when
-           var treeRecord = new TreeRecord {IsLeaf = false, TreeSequence = 3};
+           var treeRecord = new TreeRecord { ArchiveRecordId = "28", IsLeaf = false, TreeSequence = 3};
            var userAccess = new UserAccess("id1", string.Empty, string.Empty, new[] {"1", "2"}, true);
            var result = entityDecorator.GetChildren(treeRecord, 11, userAccess, null);
 
@@ -119,6 +120,8 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             elasticService.Setup(e => e.RunQuery<TreeRecord>(It.IsAny<ElasticQuery>(), It.IsAny<UserAccess>(), true))
                 .Returns(new ElasticQueryResult<TreeRecord>());
+
+            elasticService.Setup(e => e.ActaProMappingProvider).Returns(new ActaProMappingProvider());
         }
 
         private void SetupMocksWithResults()
@@ -130,6 +133,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             entityProvider.Setup(e =>
                     e.GetResultAsEntities(It.IsAny<UserAccess>(), It.IsAny<ElasticQueryResult<TreeRecord>>(), It.IsAny<EntityMetaOptions>()))
                 .Returns(items);
+            elasticService.Setup(e => e.ActaProMappingProvider).Returns(new ActaProMappingProvider());
         }
 
         #endregion

@@ -17,6 +17,7 @@ namespace CMI.Web.Frontend.api.Configuration
 
         public string IdField { get; } = "archiveRecordId";
         public string ParentIdField { get; } = "parentArchiveRecordId";
+        public string TreeLevelField { get; } = "treeLevel";
 
         public string BaseUrl { get; set; }
 

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition.Primitives;
-using System.Linq;
-using System.Net;
-using System.Web.Http;
-using System.Web.Http.Results;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
-using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Common.api;
 using CMI.Web.Common.api.Attributes;
@@ -17,10 +9,15 @@ using CMI.Web.Frontend.api.Dto;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.Helpers;
-using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace CMI.Web.Frontend.api.Controllers
 {
@@ -44,7 +41,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetPermissions(int entityId)
+        public IHttpActionResult GetPermissions(string entityId)
         {
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
 
@@ -71,9 +68,8 @@ namespace CMI.Web.Frontend.api.Controllers
 
             return Ok(permissionInfo);
         }
-
         [HttpGet]
-        public string GetArchivplanHtml(int id)
+        public string GetArchivplanHtml(string id)
         {
             var role = GetUserPublicClientRole();
             var language = WebHelper.GetClientLanguage(Request);
@@ -83,7 +79,17 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public string GetArchivplanChildrenHtml(int id)
+        public string[] GetArchivplanRootNodes()
+        {
+            var role = GetUserPublicClientRole();
+            var language = WebHelper.GetClientLanguage(Request);
+            var access = GetUserAccess(language);
+
+            return entityProvider.GetArchivplanRootNodes(access, role, language);
+        }
+
+        [HttpGet]
+        public string GetArchivplanChildrenHtml(string id)
         {
             var role = GetUserPublicClientRole();
             var language = WebHelper.GetClientLanguage(Request);
@@ -92,7 +98,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public Entity<DetailRecord> GetEntity(int id, string language = null, [FromUri] string paging = null)
+        public Entity<DetailRecord> GetEntity(string id, string language = null, [FromUri] string paging = null)
         {
             var access = GetUserAccess(language ?? WebHelper.GetClientLanguage(Request));
 
@@ -108,7 +114,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult GetAnonymized(int id)
+        public IHttpActionResult GetAnonymized(string id)
         {
             if (AccessRoles.RoleBAR != GetUserPublicClientRole())
             {
@@ -149,8 +155,8 @@ namespace CMI.Web.Frontend.api.Controllers
             var access = GetUserAccess(language ?? WebHelper.GetClientLanguage(Request));
 
             var idList = !string.IsNullOrEmpty(ids)
-                ? ids.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(i => int.Parse(i)).ToList()
-                : new List<int>();
+                ? ids.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(i => i).ToList()
+                : new List<string>();
 
             return entityProvider.GetEntities<TreeRecord>(idList, access, paging);
         }

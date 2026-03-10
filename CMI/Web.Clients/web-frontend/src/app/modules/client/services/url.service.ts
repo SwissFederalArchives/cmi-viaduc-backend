@@ -171,6 +171,11 @@ export class UrlService {
 		return url;
 	}
 
+	public getArchivplanUrl(id: string): string {
+		const url = this.localizeUrl(this._context.language, '/suche/archivplan/' + id);
+		return url;
+	}
+
 	public getAccountUrl(): string {
 		return this.localizeUrl(this._context.language, '/konto');
 	}

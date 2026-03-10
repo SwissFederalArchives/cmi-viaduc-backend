@@ -7,6 +7,6 @@
         string ErrorMessage { get; set; }
         string StackTrace { get; set; }
         int PrimaerdatenAuftragId { get; set; }
-        int ArchiveRecordId { get; set; }
+        string ArchiveRecordId { get; set; }
     }
 }

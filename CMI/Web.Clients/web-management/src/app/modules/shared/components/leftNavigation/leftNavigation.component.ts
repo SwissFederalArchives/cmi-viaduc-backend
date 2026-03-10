@@ -83,4 +83,12 @@ export class LeftNavigationComponent{
 	public canSeeAnonymization(): boolean {
 		return true;
 	}
+
+	public canSeeSynchronizationViewAdd(): boolean {
+		return this._authorization.hasApplicationFeature(ApplicationFeatureEnum.SynchronizationHinzufuegenEinsehen);
+	}
+
+	public canSeeSynchronizationViewMonitor(): boolean {
+		return this._authorization.hasApplicationFeature(ApplicationFeatureEnum.SynchronizationUeberwachenEinsehen);
+	}
 }

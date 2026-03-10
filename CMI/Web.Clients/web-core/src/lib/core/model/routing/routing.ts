@@ -90,7 +90,7 @@ export class Routing {
 			return path;
 		}
 		const trans = normalize ? this.normalizations[language] : this.localizations[language];
-		const parts = path.toLowerCase().split('/');
+		const parts = path.split('/');
 		let i = 0;
 		while (i < parts.length && _util.isEmpty(parts[i])) {
 			i += 1;
@@ -112,11 +112,13 @@ export class Routing {
 				prop = _util.toUrlComponent(part);
 			}
 
-			if (trans.hasOwnProperty(prop)) {
-				parts[i] = trans[prop];
+			if (trans.hasOwnProperty(prop.toLowerCase())) {
+				// Übersetzungen sind alle klein
+				parts[i] = trans[prop.toLowerCase()];
 			}
 			i += 1;
 		}
+
 		return parts.join('/');
 	}
 

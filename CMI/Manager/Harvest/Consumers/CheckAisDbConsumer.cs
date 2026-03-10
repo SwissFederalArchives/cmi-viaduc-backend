@@ -28,7 +28,7 @@ namespace CMI.Manager.Harvest.Consumers
 
                 try
                 {
-                    response.DbVersion = dbTestAccess.GetDbVersion();
+                    response.DbVersion = await dbTestAccess.GetDbVersion();
                     response.Ok = true;
                 }
                 catch (Exception ex)

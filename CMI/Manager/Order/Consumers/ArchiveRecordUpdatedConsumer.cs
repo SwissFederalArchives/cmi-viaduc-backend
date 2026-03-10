@@ -52,7 +52,7 @@ namespace CMI.Manager.Order.Consumers
                         var ep = await context.GetSendEndpoint(new Uri(bus.Address, BusConstants.DigitalisierungsAuftragErledigtEvent));
                         await ep.Send<IDigitalisierungsAuftragErledigt>(new
                         {
-                            message.ArchiveRecordId,
+                            context.Message.ArchiveRecordId,    // Use this ArchiveRecordId from the current message, as it might be different from what was stored
                             message.OrderItemId,
                             message.OrderDate,
                             message.OrderUserId,

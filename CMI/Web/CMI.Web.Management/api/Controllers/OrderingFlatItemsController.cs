@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -86,7 +86,6 @@ namespace CMI.Web.Management.api.Controllers
             return Ok(finalResult);
         }
 
-
         private List<OrderingFlatItem> ConvertSelectSomeList(IQueryable sourceList)
         {
             var serialized = JsonConvert.SerializeObject(sourceList);
@@ -94,7 +93,6 @@ namespace CMI.Web.Management.api.Controllers
 
             return list;
         }
-        
 
         private async Task UnanonymizeResult(IEnumerable<OrderingFlatItem> anonymizedRecords)
         {
@@ -107,8 +105,8 @@ namespace CMI.Web.Management.api.Controllers
                 var result = await findArchiveRecordClient.GetResponse<FindArchiveRecordResponse>(
                     new FindArchiveRecordRequest
                     {
-                        ArchiveRecordId = anonymizedRecord.VeId.ToString(),
-                        UseUnanonymizedData = true
+                        ArchiveRecordId = anonymizedRecord.VeId,
+                        UseUnanonymizedData = UseUnanonymizedData.Yes
                     });
 
                 if (result.Message.ElasticArchiveRecord != null)

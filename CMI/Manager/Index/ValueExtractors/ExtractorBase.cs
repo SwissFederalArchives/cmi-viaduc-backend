@@ -16,12 +16,12 @@ namespace CMI.Manager.Index.ValueExtractors
         ///     Returns an empty collection if the element cannot be found in the collection.
         /// </summary>
         /// <param name="detailData">The detail data.</param>
-        /// <param name="elementId">The element identifier.</param>
+        /// <param name="elementName">The element name.</param>
         /// <returns>List&lt;T&gt;.</returns>
-        public List<T> GetListValues(List<DataElement> detailData, string elementId)
+        public List<T> GetListValues(List<DataElement> detailData, string elementName)
         {
             var retVal = new List<T>();
-            var dataElement = detailData.FirstOrDefault(d => elementId.Equals(d.ElementId, StringComparison.OrdinalIgnoreCase));
+            var dataElement = detailData.FirstOrDefault(d => elementName.Equals(d.ElementName, StringComparison.OrdinalIgnoreCase));
             if (dataElement != null)
             {
                 foreach (var elementValue in dataElement.ElementValue.OrderBy(t => t.Sequence))
@@ -39,11 +39,11 @@ namespace CMI.Manager.Index.ValueExtractors
         ///     Returns null, if the data element cannont be found, or does not contain a value.
         /// </summary>
         /// <param name="detailData">The detail data.</param>
-        /// <param name="elementId">The element identifier.</param>
+        /// <param name="elementName">The element identifier.</param>
         /// <returns>T.</returns>
-        public virtual T GetValue(List<DataElement> detailData, string elementId)
+        public virtual T GetValue(List<DataElement> detailData, string elementName)
         {
-            var dataElement = detailData.FirstOrDefault(d => elementId.Equals(d.ElementId, StringComparison.OrdinalIgnoreCase));
+            var dataElement = detailData.FirstOrDefault(d => elementName.Equals(d.ElementName, StringComparison.OrdinalIgnoreCase));
             if (dataElement == null)
             {
                 return default;

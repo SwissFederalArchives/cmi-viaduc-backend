@@ -25,14 +25,14 @@ namespace CMI.Contract.Order
 
         Task<OrderItem[]> FindOrderItems(int[] orderItemIds);
 
-        Task<bool> IsUniqueVeInBasket(int ve, string userId);
+        Task<bool> IsUniqueVeInBasket(string ve, string userId);
 
         Task<DigipoolEntry[]> GetDigipool(int numberOfEntries);
         Task UpdateDigipool(List<int> orderItemIds, int? digitalisierungsKategorie, DateTime? terminDigitalisierung);
         Task <List<PrimaerdatenAufbereitungItem>> GetPrimaerdatenReportRecords(LogDataFilter filter);
         Task<List<DownloadLogItem>> GetDownloadLogReportRecords(LogDataFilter filter);
         Task<IEnumerable<StatusHistory>> GetStatusHistoryForOrderItem(int orderItemId);
-        Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId);
+        Task<List<Bestellhistorie>> GetOrderingHistoryForVe(string veId);
 
         Task EntscheidFreigabeHinterlegen(string currentUserId, List<int> orderItemIds, ApproveStatus entscheid, DateTime? datumBewilligung,
             string interneBemerkung);

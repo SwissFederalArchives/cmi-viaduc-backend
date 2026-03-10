@@ -249,7 +249,7 @@ namespace CMI.Web.Management.api.Controllers
                 if (response.Ok)
                 {
                     result.Status = HeartbeatStatus.Ok.ToString();
-                    result.Message = $"Ok, DB Version = {response.DbVersion}";
+                    result.Message = $"Ok, {response.DbVersion}";
                 }
                 else
                 {
@@ -391,7 +391,6 @@ namespace CMI.Web.Management.api.Controllers
 
             return result;
         }
-
 
         private async Task<MonitoringResult> TestRabbitMq()
         {

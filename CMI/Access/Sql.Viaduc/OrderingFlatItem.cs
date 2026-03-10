@@ -39,7 +39,7 @@ namespace CMI.Access.Sql.Viaduc
 
         [Column] public string User { get; set; }
 
-        [Column(CanBeNull = true)] public int? VeId { get; set; }
+        [Column(CanBeNull = true)] public string VeId { get; set; }
 
         [EditEinsichtsgesuchRequiresFeature(ApplicationFeature.AuftragsuebersichtEinsichtsgesucheBereichAuftragsdatenUndBereichFreigabeBearbeiten)]
         [EditAuftragRequiresFeature(ApplicationFeature.AuftragsuebersichtAuftraegeBemerkungZumDossierEdit)]

@@ -8,6 +8,7 @@
 // the code is regenerated.
 //------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 namespace CMI.Contract.Common.Entities
@@ -20,7 +21,7 @@ namespace CMI.Contract.Common.Entities
         public CollectionDto() {
         }
 
-        public CollectionDto(int collectionId, int? parentId, string language, string title, string descriptionShort, string description, global::System.DateTime validFrom, global::System.DateTime validTo, int collectionTypeId, byte[] image, byte[] thumbnail, string imageAltText, string imageMimeType, string link, string collectionPath, int sortOrder, global::System.DateTime createdOn, string createdBy, global::System.DateTime? modifiedOn, string modifiedBy, List<CollectionDto> childCollections, CollectionDto parent) {
+        public CollectionDto(int collectionId, int? parentId, string language, string title, string descriptionShort, string description, DateTime validFrom, DateTime validTo, int collectionTypeId, byte[] image, byte[] thumbnail, string imageAltText, string imageMimeType, string link, string collectionPath, int sortOrder, DateTime createdOn, string createdBy, DateTime? modifiedOn, string modifiedBy, List<CollectionDto> childCollections, CollectionDto parent) {
 
           this.CollectionId = collectionId;
           this.ParentId = parentId;
@@ -62,9 +63,9 @@ namespace CMI.Contract.Common.Entities
 
         public string Description { get; set; }
 
-        public global::System.DateTime ValidFrom { get; set; }
+        public DateTime ValidFrom { get; set; }
 
-        public global::System.DateTime ValidTo { get; set; }
+        public DateTime ValidTo { get; set; }
 
         public int CollectionTypeId { get; set; }
 
@@ -82,11 +83,11 @@ namespace CMI.Contract.Common.Entities
 
         public int SortOrder { get; set; }
 
-        public global::System.DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
 
-        public global::System.DateTime? ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
         public string ModifiedBy { get; set; }
 
@@ -108,7 +109,7 @@ namespace CMI.Contract.Common.Entities
         public CollectionListItemDto() {
         }
 
-        public CollectionListItemDto(int collectionId, int? parentId, string language, string title, string descriptionShort, string description, global::System.DateTime validFrom, global::System.DateTime validTo, int collectionTypeId, string imageAltText, string imageMimeType, string link, string collectionPath, int sortOrder, global::System.DateTime createdOn, string createdBy, global::System.DateTime? modifiedOn, string modifiedBy, string parent, string childCollections) {
+        public CollectionListItemDto(int collectionId, int? parentId, string language, string title, string descriptionShort, string description, DateTime validFrom, DateTime validTo, int collectionTypeId, string imageAltText, string imageMimeType, string link, string collectionPath, int sortOrder, DateTime createdOn, string createdBy, DateTime? modifiedOn, string modifiedBy, string parent, string childCollections) {
 
           this.CollectionId = collectionId;
           this.ParentId = parentId;
@@ -148,9 +149,9 @@ namespace CMI.Contract.Common.Entities
 
         public string Description { get; set; }
 
-        public global::System.DateTime ValidFrom { get; set; }
+        public DateTime ValidFrom { get; set; }
 
-        public global::System.DateTime ValidTo { get; set; }
+        public DateTime ValidTo { get; set; }
 
         public int CollectionTypeId { get; set; }
 
@@ -164,11 +165,11 @@ namespace CMI.Contract.Common.Entities
 
         public int SortOrder { get; set; }
 
-        public global::System.DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
 
-        public global::System.DateTime? ModifiedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
 
         public string ModifiedBy { get; set; }
 
@@ -186,7 +187,7 @@ namespace CMI.Contract.Common.Entities
         public ApplicationUserDto() {
         }
 
-        public ApplicationUserDto(string iD, string familyName, string firstName, string organization, string street, string streetAttachment, string zipCode, string town, string countryCode, string emailAddress, string phoneNumber, string skypeName, string setting, string claims, global::System.DateTime created, global::System.DateTime updated, string fulltext, string userExtId, string language, global::System.DateTime createdOn, string createdBy, global::System.DateTime modifiedOn, string modifiedBy, global::System.DateTime? birthday, string fabasoftDossier, string reasonForRejection, bool isIdentifiedUser, string rolePublicClient, string eiamRoles, bool researcherGroup, bool barInternalConsultation, byte[] identifierDocument, string mobileNumber, global::System.DateTime? reasonForRejectionDate, global::System.DateTime? downloadLimitDisabledUntil, global::System.DateTime? digitalisierungsbeschraenkungAufgehobenBis, int? qoAValue, string homeName, string activeAspNetSessionId, global::System.DateTime? lastLoginDate) {
+        public ApplicationUserDto(string iD, string familyName, string firstName, string organization, string street, string streetAttachment, string zipCode, string town, string countryCode, string emailAddress, string phoneNumber, string skypeName, string setting, string claims, DateTime created, DateTime updated, string fulltext, string userExtId, string language, DateTime createdOn, string createdBy, DateTime modifiedOn, string modifiedBy, DateTime? birthday, string fabasoftDossier, string reasonForRejection, bool isIdentifiedUser, string rolePublicClient, string eiamRoles, bool researcherGroup, bool barInternalConsultation, byte[] identifierDocument, string mobileNumber, DateTime? reasonForRejectionDate, DateTime? downloadLimitDisabledUntil, DateTime? digitalisierungsbeschraenkungAufgehobenBis, int? qoAValue, string homeName, string activeAspNetSessionId, DateTime? lastLoginDate) {
 
           this.ID = iD;
           this.FamilyName = familyName;
@@ -262,9 +263,9 @@ namespace CMI.Contract.Common.Entities
 
         public string Claims { get; set; }
 
-        public global::System.DateTime Created { get; set; }
+        public DateTime Created { get; set; }
 
-        public global::System.DateTime Updated { get; set; }
+        public DateTime Updated { get; set; }
 
         public string Fulltext { get; set; }
 
@@ -272,15 +273,15 @@ namespace CMI.Contract.Common.Entities
 
         public string Language { get; set; }
 
-        public global::System.DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
 
-        public global::System.DateTime ModifiedOn { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
         public string ModifiedBy { get; set; }
 
-        public global::System.DateTime? Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         public string FabasoftDossier { get; set; }
 
@@ -300,11 +301,11 @@ namespace CMI.Contract.Common.Entities
 
         public string MobileNumber { get; set; }
 
-        public global::System.DateTime? ReasonForRejectionDate { get; set; }
+        public DateTime? ReasonForRejectionDate { get; set; }
 
-        public global::System.DateTime? DownloadLimitDisabledUntil { get; set; }
+        public DateTime? DownloadLimitDisabledUntil { get; set; }
 
-        public global::System.DateTime? DigitalisierungsbeschraenkungAufgehobenBis { get; set; }
+        public DateTime? DigitalisierungsbeschraenkungAufgehobenBis { get; set; }
 
         public int? QoAValue { get; set; }
 
@@ -312,7 +313,7 @@ namespace CMI.Contract.Common.Entities
 
         public string ActiveAspNetSessionId { get; set; }
 
-        public global::System.DateTime? LastLoginDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
 
         #endregion
     }
@@ -324,7 +325,7 @@ namespace CMI.Contract.Common.Entities
         public ManuelleKorrekturDto() {
         }
 
-        public ManuelleKorrekturDto(int manuelleKorrekturId, int veId, string signatur, global::System.DateTime schutzfristende, string titel, global::System.DateTime erzeugtAm, string erzeugtVon, global::System.DateTime? geändertAm, string geändertVon, int anonymisierungsstatus, string kommentar, string hierachiestufe, string aktenzeichen, string entstehungszeitraum, string zugänglichkeitGemässBGA, string schutzfristverzeichnung, string zuständigeStelle, string publikationsrechte, bool anonymisiertZumErfassungszeitpunk, List<ManuelleKorrekturFeldDto> manuelleKorrekturFelder, List<ManuelleKorrekturStatusHistoryDto> manuelleKorrekturStatusHistories) {
+        public ManuelleKorrekturDto(int manuelleKorrekturId, string veId, string signatur, DateTime schutzfristende, string titel, DateTime erzeugtAm, string erzeugtVon, DateTime? geändertAm, string geändertVon, int anonymisierungsstatus, string kommentar, string hierachiestufe, string aktenzeichen, string entstehungszeitraum, string zugänglichkeitGemässBGA, string schutzfristverzeichnung, string zuständigeStelle, string publikationsrechte, bool anonymisiertZumErfassungszeitpunk, List<ManuelleKorrekturFeldDto> manuelleKorrekturFelder, List<ManuelleKorrekturStatusHistoryDto> manuelleKorrekturStatusHistories) {
 
           this.ManuelleKorrekturId = manuelleKorrekturId;
           this.VeId = veId;
@@ -355,19 +356,19 @@ namespace CMI.Contract.Common.Entities
 
         public int ManuelleKorrekturId { get; set; }
 
-        public int VeId { get; set; }
+        public string VeId { get; set; }
 
         public string Signatur { get; set; }
 
-        public global::System.DateTime Schutzfristende { get; set; }
+        public DateTime Schutzfristende { get; set; }
 
         public string Titel { get; set; }
 
-        public global::System.DateTime ErzeugtAm { get; set; }
+        public DateTime ErzeugtAm { get; set; }
 
         public string ErzeugtVon { get; set; }
 
-        public global::System.DateTime? GeändertAm { get; set; }
+        public DateTime? GeändertAm { get; set; }
 
         public string GeändertVon { get; set; }
 
@@ -452,7 +453,7 @@ namespace CMI.Contract.Common.Entities
         public ManuelleKorrekturStatusHistoryDto() {
         }
 
-        public ManuelleKorrekturStatusHistoryDto(int manuelleKorrekturStatusHistoryId, int manuelleKorrekturId, int anonymisierungsstatus, global::System.DateTime erzeugtAm, string erzeugtVon, ManuelleKorrekturDto manuelleKorrektur) {
+        public ManuelleKorrekturStatusHistoryDto(int manuelleKorrekturStatusHistoryId, int manuelleKorrekturId, int anonymisierungsstatus, DateTime erzeugtAm, string erzeugtVon, ManuelleKorrekturDto manuelleKorrektur) {
 
           this.ManuelleKorrekturStatusHistoryId = manuelleKorrekturStatusHistoryId;
           this.ManuelleKorrekturId = manuelleKorrekturId;
@@ -472,7 +473,7 @@ namespace CMI.Contract.Common.Entities
 
         public int Anonymisierungsstatus { get; set; }
 
-        public global::System.DateTime ErzeugtAm { get; set; }
+        public DateTime ErzeugtAm { get; set; }
 
         public string ErzeugtVon { get; set; }
 
@@ -492,7 +493,7 @@ namespace CMI.Contract.Common.Entities
         public VManuelleKorrekturDto() {
         }
 
-        public VManuelleKorrekturDto(int manuelleKorrekturId, int veId, string signatur, global::System.DateTime schutzfristende, string titel, global::System.DateTime erzeugtAm, string erzeugtVon, global::System.DateTime? geändertAm, string geändertVon, int anonymisierungsstatus, string kommentar, string hierachiestufe, string aktenzeichen, string entstehungszeitraum, string zugänglichkeitGemässBGA, string schutzfristverzeichnung, string zuständigeStelle, string publikationsrechte, bool anonymisiertZumErfassungszeitpunk, string titelGemAIS, string titelAutomatischAnonymisiert, string titelManuellKorrigiert, string darinGemAIS, string darinAutomatischAnonymisiert, string darinManuellKorrigiert, string zusatzkomponenteGemAIS, string zusatzkomponenteAutomatischAnonymisiert, string zusatzkomponenteManuellKorrigiert, string zusaetzlicheInformationenGemAIS, string zusaetzlicheInformationenAutomatischAnonymisiert, string zusaetzlicheInformationenManuellKorrigiert, string verwandteVEGemAIS, string verwandteVEAutomatischAnonymisiert, string verwandteVEManuellKorrigiert) {
+        public VManuelleKorrekturDto(int manuelleKorrekturId, string veId, string signatur, DateTime schutzfristende, string titel, DateTime erzeugtAm, string erzeugtVon, DateTime? geändertAm, string geändertVon, int anonymisierungsstatus, string kommentar, string hierachiestufe, string aktenzeichen, string entstehungszeitraum, string zugänglichkeitGemässBGA, string schutzfristverzeichnung, string zuständigeStelle, string publikationsrechte, bool anonymisiertZumErfassungszeitpunk, string titelGemAIS, string titelAutomatischAnonymisiert, string titelManuellKorrigiert, string darinGemAIS, string darinAutomatischAnonymisiert, string darinManuellKorrigiert, string zusatzkomponenteGemAIS, string zusatzkomponenteAutomatischAnonymisiert, string zusatzkomponenteManuellKorrigiert, string zusaetzlicheInformationenGemAIS, string zusaetzlicheInformationenAutomatischAnonymisiert, string zusaetzlicheInformationenManuellKorrigiert, string verwandteVEGemAIS, string verwandteVEAutomatischAnonymisiert, string verwandteVEManuellKorrigiert) {
 
           this.ManuelleKorrekturId = manuelleKorrekturId;
           this.VeId = veId;
@@ -536,19 +537,19 @@ namespace CMI.Contract.Common.Entities
 
         public int ManuelleKorrekturId { get; set; }
 
-        public int VeId { get; set; }
+        public string VeId { get; set; }
 
         public string Signatur { get; set; }
 
-        public global::System.DateTime Schutzfristende { get; set; }
+        public DateTime Schutzfristende { get; set; }
 
         public string Titel { get; set; }
 
-        public global::System.DateTime ErzeugtAm { get; set; }
+        public DateTime ErzeugtAm { get; set; }
 
         public string ErzeugtVon { get; set; }
 
-        public global::System.DateTime? GeändertAm { get; set; }
+        public DateTime? GeändertAm { get; set; }
 
         public string GeändertVon { get; set; }
 
@@ -601,6 +602,197 @@ namespace CMI.Contract.Common.Entities
         public string VerwandteVEAutomatischAnonymisiert { get; set; }
 
         public string VerwandteVEManuellKorrigiert { get; set; }
+
+        #endregion
+    }
+
+    public partial class SyncActionDto
+    {
+        #region Constructors
+
+        public SyncActionDto() {
+        }
+
+        public SyncActionDto(long syncActionId, string archiveRecordId, string actionType, int? actionStatus, int? numberOfTries, DateTime? createdOn, DateTime? modifiedOn, List<SyncActionLogDto> syncActionLogs) {
+
+          this.SyncActionId = syncActionId;
+          this.ArchiveRecordId = archiveRecordId;
+          this.ActionType = actionType;
+          this.ActionStatus = actionStatus;
+          this.NumberOfTries = numberOfTries;
+          this.CreatedOn = createdOn;
+          this.ModifiedOn = modifiedOn;
+          this.SyncActionLogs = syncActionLogs;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public long SyncActionId { get; set; }
+
+        public string ArchiveRecordId { get; set; }
+
+        public string ActionType { get; set; }
+
+        public int? ActionStatus { get; set; }
+
+        public int? NumberOfTries { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        #endregion
+
+        #region Navigation Properties
+
+        public List<SyncActionLogDto> SyncActionLogs { get; set; }
+
+        #endregion
+    }
+
+    public partial class SyncActionLogDto
+    {
+        #region Constructors
+
+        public SyncActionLogDto() {
+        }
+
+        public SyncActionLogDto(int syncActionLogId, long? syncActionId, DateTime? logDate, string actionStatusHistory, string errorReason, SyncActionDto syncAction) {
+
+          this.SyncActionLogId = syncActionLogId;
+          this.SyncActionId = syncActionId;
+          this.LogDate = logDate;
+          this.ActionStatusHistory = actionStatusHistory;
+          this.ErrorReason = errorReason;
+          this.SyncAction = syncAction;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public int SyncActionLogId { get; set; }
+
+        public long? SyncActionId { get; set; }
+
+        public DateTime? LogDate { get; set; }
+
+        public string ActionStatusHistory { get; set; }
+
+        public string ErrorReason { get; set; }
+
+        #endregion
+
+        #region Navigation Properties
+
+        public SyncActionDto SyncAction { get; set; }
+
+        #endregion
+    }
+
+    public partial class SyncInfoDto
+    {
+        #region Constructors
+
+        public SyncInfoDto() {
+        }
+
+        public SyncInfoDto(long syncInfoId, DateTime? lastChangeDate) {
+
+          this.SyncInfoId = syncInfoId;
+          this.LastChangeDate = lastChangeDate;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public long SyncInfoId { get; set; }
+
+        public DateTime? LastChangeDate { get; set; }
+
+        #endregion
+    }
+
+    public partial class VSyncNumberPerHourDto
+    {
+        #region Constructors
+
+        public VSyncNumberPerHourDto() {
+        }
+
+        public VSyncNumberPerHourDto(string lastModified, DateTime? lastModifiedDay, int recordCount, int actionStatus) {
+
+          this.LastModified = lastModified;
+          this.LastModifiedDay = lastModifiedDay;
+          this.RecordCount = recordCount;
+          this.ActionStatus = actionStatus;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string LastModified { get; set; }
+
+        public DateTime? LastModifiedDay { get; set; }
+
+        public int RecordCount { get; set; }
+
+        public int ActionStatus { get; set; }
+
+        #endregion
+    }
+
+    public partial class VSyncActionDto
+    {
+        #region Constructors
+
+        public VSyncActionDto() {
+        }
+
+        public VSyncActionDto(long syncActionId, string archiveRecordId, string actionType, int? actionStatus, int? numberOfTries, DateTime? createdOn, DateTime? modifiedOn, int? syncActionLogId, DateTime? logDate, string errorReason, string actionStatusHistory) {
+
+          this.SyncActionId = syncActionId;
+          this.ArchiveRecordId = archiveRecordId;
+          this.ActionType = actionType;
+          this.ActionStatus = actionStatus;
+          this.NumberOfTries = numberOfTries;
+          this.CreatedOn = createdOn;
+          this.ModifiedOn = modifiedOn;
+          this.SyncActionLogId = syncActionLogId;
+          this.LogDate = logDate;
+          this.ErrorReason = errorReason;
+          this.ActionStatusHistory = actionStatusHistory;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public long SyncActionId { get; set; }
+
+        public string ArchiveRecordId { get; set; }
+
+        public string ActionType { get; set; }
+
+        public int? ActionStatus { get; set; }
+
+        public int? NumberOfTries { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+
+        public DateTime? ModifiedOn { get; set; }
+
+        public int? SyncActionLogId { get; set; }
+
+        public DateTime? LogDate { get; set; }
+
+        public string ErrorReason { get; set; }
+
+        public string ActionStatusHistory { get; set; }
 
         #endregion
     }

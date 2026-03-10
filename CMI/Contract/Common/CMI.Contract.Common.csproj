@@ -14,6 +14,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,6 +58,8 @@
   <ItemGroup>
     <Compile Include="AccessRolesEnum.cs" />
     <Compile Include="AccessRolesEnumExtensions.cs" />
+    <Compile Include="AccessTokenCheckResult.cs" />
+    <Compile Include="AccessTokens.cs" />
     <Compile Include="AISDatabaseNotFoundOrNotRunningException.cs" />
     <Compile Include="ApplicationFeatures.cs" />
     <Compile Include="AccessRoles.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Entities\ManuelleKorrekturDetailItem.cs" />
     <Compile Include="Entities\ManuelleKorrekturFelder.cs" />
     <Compile Include="Entities\Viaduc.DTOs.cs" />
+    <Compile Include="ISynchronisationManager.cs" />
     <Compile Include="MetadataToExclude.cs" />
     <Compile Include="Extensions\SetUnanonymizedValuesService.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -104,6 +109,7 @@
     <Compile Include="ModulFunktionsblock.cs" />
     <Compile Include="MutationRecord.cs" />
     <Compile Include="DropDownListItem.cs" />
+    <Compile Include="MutationStatus.cs" />
     <Compile Include="OnboardingModel.cs" />
     <Compile Include="PrimaerdatenAuftrag.cs" />
     <Compile Include="PrimaerdatenAuftragEnums.cs" />
@@ -124,6 +130,7 @@
     <Compile Include="RequiredDtoField.cs" />
     <Compile Include="AssetExtractionFile.cs" />
     <Compile Include="SyncInfoForReport.cs" />
+    <Compile Include="UseUnanonymizedData.cs" />
     <Compile Include="ViaducDataSchema.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +140,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />
     <EmbeddedResource Include="Digitalisierungsauftrag.xsd">

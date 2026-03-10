@@ -7,6 +7,8 @@ namespace CMI.Utilities.Common.Providers
     public interface IStorageProvider
     {
         Task CopyFileAsync(FileInfo sourceFile, string relPath, string extension, string targetDirectory);
+        
+        Task DeleteFolderAsync(string key);
 
         Task<MemoryStream> ReadFileAsync(Uri fileUri);
     }

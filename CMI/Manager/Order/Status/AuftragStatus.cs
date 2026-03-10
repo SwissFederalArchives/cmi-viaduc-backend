@@ -13,7 +13,11 @@ namespace CMI.Manager.Order.Status
 {
     public abstract class AuftragStatus : IAuftragsAktionen
     {
-        public StatuswechselContext Context => StatuswechselContext.Current;
+        public virtual StatuswechselContext Context
+        {
+            get => StatuswechselContext.Current;
+            protected set => StatuswechselContext.Current = value;
+        }
 
         public abstract OrderStatesInternal OrderStateInternal { get; }
 
@@ -23,19 +27,19 @@ namespace CMI.Manager.Order.Status
             switch (vorlage)
             {
                 case Vorlage.Musterbrief_EG_BGA_Art_09_11_12:
-                    InVorlageExportieren<Musterbrief_EG_BGA_Art_09_11_12>(sprache);
+                    InVorlageExportieren<Musterbrief_EG_BGA_Art_09_11_12>(sprache, DataBuilderProtectionStatus.DependentOnApproveStatus);
                     break;
                 case Vorlage.Musterbrief_EG_BGA_Art_15:
-                    InVorlageExportieren<Musterbrief_EG_BGA_Art_15>(sprache);
+                    InVorlageExportieren<Musterbrief_EG_BGA_Art_15>(sprache, DataBuilderProtectionStatus.DependentOnApproveStatus);
                     break;
                 case Vorlage.Musterbrief_EG_J:
-                    InVorlageExportieren<Musterbrief_EG_J>(sprache);
+                    InVorlageExportieren<Musterbrief_EG_J>(sprache, DataBuilderProtectionStatus.DependentOnApproveStatus);
                     break;
                 case Vorlage.Weiterleitung_Entscheid_gemäss_Art_13_BGA:
-                    InVorlageExportieren<Weiterleitung_Entscheid_gemaess_Art_13_BGA>(sprache);
+                    InVorlageExportieren<Weiterleitung_Entscheid_gemaess_Art_13_BGA>(sprache, DataBuilderProtectionStatus.AllAnonymized);
                     break;
                 case Vorlage.Weiterleitung_Entscheid_gemäss_Art_15_BGA:
-                    InVorlageExportieren<Weiterleitung_Entscheid_gemaess_Art_15_BGA>(sprache);
+                    InVorlageExportieren<Weiterleitung_Entscheid_gemaess_Art_15_BGA>(sprache, DataBuilderProtectionStatus.AllAnonymized);
                     break;
                 default:
                     throw new ArgumentException("Invalid template name");
@@ -134,7 +138,7 @@ namespace CMI.Manager.Order.Status
             ThrowReadableInvalidOperation();
         }
 
-        private void InVorlageExportieren<T>(string sprache) where T : EmailTemplate, new()
+        private void InVorlageExportieren<T>(string sprache, DataBuilderProtectionStatus protectionStatus) where T : EmailTemplate, new()
         {
             dynamic emailExpando = Context.MailPortfolio.GetUnfinishedMailData<T>("InVorlageExportieren");
             var dataBuilder = new DataBuilder(Context.Bus, emailExpando ?? new ExpandoObject());
@@ -143,7 +147,7 @@ namespace CMI.Manager.Order.Status
             {
                 // Das EMail mit seine Grunddaten erstellen:
                 emailExpando = dataBuilder
-                    .SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
+                    .SetDataProtectionLevel(protectionStatus)
                     .AddSprache(sprache)
                     .AddUser(Context.CurrentUser.Id)
                     .AddBesteller(Context.Besteller.Id)
@@ -153,7 +157,7 @@ namespace CMI.Manager.Order.Status
                 Context.MailPortfolio.BeginUnfinishedMail<T>("InVorlageExportieren", emailExpando);
             }
 
-            dataBuilder.SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized);
+            dataBuilder.SetDataProtectionLevel(protectionStatus);
             dataBuilder.AddAuftraege(new[] {Context.OrderItem.Id});
 
             var auftragsliste = (List<Auftrag>) emailExpando.Aufträge;

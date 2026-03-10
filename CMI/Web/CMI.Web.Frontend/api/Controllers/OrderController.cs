@@ -54,11 +54,11 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpPost]
-        public async Task<IHttpActionResult> AddToBasket(int veId)
+        public async Task<IHttpActionResult> AddToBasket(string veId)
         {
-            if (veId <= 0)
+            if (string.IsNullOrWhiteSpace(veId))
             {
-                return BadRequest($"{nameof(veId)} must be greater than 0");
+                return BadRequest($"veId is Null Or WhiteSpace");
             }
 
             var userId = ControllerHelper.GetCurrentUserId();
@@ -125,9 +125,9 @@ namespace CMI.Web.Frontend.api.Controllers
 
             var userId = ControllerHelper.GetCurrentUserId();
             // Check VE is exists already in basket
-            if (int.TryParse(entity.ArchiveRecordId, out var veId) && !await client.IsUniqueVeInBasket(veId, userId))
+            if (!string.IsNullOrWhiteSpace(entity.ArchiveRecordId) && !await client.IsUniqueVeInBasket(entity.ArchiveRecordId, userId))
             {
-                return Content(HttpStatusCode.OK, new OrderItemDto {VeId = veId});
+                return Content(HttpStatusCode.OK, new OrderItemDto {VeId = entity.ArchiveRecordId });
             }
 
             var settings = FrontendSettingsViaduc.Instance;
@@ -275,9 +275,9 @@ namespace CMI.Web.Frontend.api.Controllers
                     // check if the title of the CE has to be anonymized for the other user
                     foreach (var orderItem in basket)
                     {
-                        if (orderItem.VeId.HasValue)
+                        if (!string.IsNullOrWhiteSpace(orderItem.VeId))
                         {
-                            var archiveDbRecord = elasticService.QueryForId<ElasticArchiveDbRecord>(orderItem.VeId.Value, userAccess, false).Entries.FirstOrDefault().Data;
+                            var archiveDbRecord = elasticService.QueryForId<ElasticArchiveDbRecord>(orderItem.VeId, userAccess, false).Entries.FirstOrDefault().Data;
                             if (archiveDbRecord.IsAnonymized)
                             {
                                 orderItem.Title = archiveDbRecord.Title;
@@ -334,8 +334,8 @@ namespace CMI.Web.Frontend.api.Controllers
                     BestellerId = bestellerId
                 };
 
-                var veInfoList = basket.Where(item => item.VeId.HasValue && !orderItemIdsToExclude.Contains(item.Id))
-                    .Select(item => new VeInfo((int)item.VeId, item.Reason)).ToList();
+                var veInfoList = basket.Where(item => !string.IsNullOrWhiteSpace(item.VeId) && !orderItemIdsToExclude.Contains(item.Id))
+                    .Select(item => new VeInfo(item.VeId, item.Reason)).ToList();
 
                 await kontrollstellenInformer.InformIfNecessary(userAccess, veInfoList);
 
@@ -539,7 +539,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     Behaeltnistyp = itemDb.Behaeltnistyp,
                     IdentifikationDigitalesMagazin = itemDb.IdentifikationDigitalesMagazin,
                     ZugaenglichkeitGemaessBga = itemDb.ZugaenglichkeitGemaessBga,
-                    Standort = itemDb.ZugaenglichkeitGemaessBga,
+                    Standort = itemDb.Standort,
                     Schutzfristverzeichnung = itemDb.Schutzfristverzeichnung,
                     ExternalStatus = OrderStatusTranslator.GetExternalStatus(orderType, itemDb.Status),
                     Reason = itemDb.Reason,
@@ -548,14 +548,31 @@ namespace CMI.Web.Frontend.api.Controllers
                     TerminDigitalisierung = itemDb.TerminDigitalisierung,
                     EntscheidGesuch = itemDb.EntscheidGesuch,
                     DatumDesEntscheids = itemDb.DatumDesEntscheids,
-                    Abbruchgrund = itemDb.Abbruchgrund
+                    Abbruchgrund = itemDb.Abbruchgrund,
+                    BehaeltnisNummer = itemDb.BehaeltnisNummer,
+                    Ablieferung = itemDb.Ablieferung,
+                    Abschlussdatum = itemDb.Abschlussdatum,
+                    AnzahlMahnungen = itemDb.AnzahlMahnungen,
+                    ApproveStatus = itemDb.ApproveStatus,
+                    ArchivNummer = itemDb.ArchivNummer,
+                    AusgabeDatum = itemDb.Ausgabedatum,
+                    Ausleihdauer = itemDb.Ausleihdauer,
+                    Benutzungskopie = itemDb.Benutzungskopie,
+                    Bestand = itemDb.Bestand,
+                    DatumDerFreigabe = itemDb.DatumDerFreigabe,
+                    GebrauchskopieStatus = itemDb.GebrauchskopieStatus,
+                    HatAufbereitungsfehler = itemDb.HasAufbereitungsfehler,
+                    InternalComment = itemDb.InternalComment,
+                    MahndatumInfo = itemDb.MahndatumInfo,
+                    SachbearbeiterId = itemDb.SachbearbeiterId,
+                    Status = itemDb.Status
                 });
             }
 
             // Fügt sicherheitsrelevante Informationen zum order item hinzu
             if (needsSecurityInfo)
             {
-                var veIdList = orderItemsDb.Where(item => item.VeId != null).Select(item => (int) item.VeId).ToList();
+                var veIdList = orderItemsDb.Where(item => item.VeId != null).Select(item => item.VeId).ToList();
 
                 UserAccess access = null;
                 List<Entity<ElasticArchiveRecord>> orderItemsElastic = null;
@@ -571,7 +588,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
                 if (orderItemsElastic != null)
                 {
-                    foreach (var itemDto in orderItemsRet.Where(i => i.VeId.HasValue))
+                    foreach (var itemDto in orderItemsRet.Where(i => !string.IsNullOrWhiteSpace(i.VeId)))
                     {
                         var elasticData = orderItemsElastic
                             .FirstOrDefault(item => itemDto.VeId.ToString() == item.Data.ArchiveRecordId)?.Data;
@@ -617,7 +634,24 @@ namespace CMI.Web.Frontend.api.Controllers
                 TerminDigitalisierung = orderItemDto.TerminDigitalisierung,
                 EntscheidGesuch = orderItemDto.EntscheidGesuch,
                 DatumDesEntscheids = orderItemDto.DatumDesEntscheids,
-                Abbruchgrund = orderItemDto.Abbruchgrund
+                Abbruchgrund = orderItemDto.Abbruchgrund,
+                BehaeltnisNummer = orderItemDto.BehaeltnisNummer,
+                Ablieferung = orderItemDto.Ablieferung,
+                Abschlussdatum = orderItemDto.Abschlussdatum,
+                AnzahlMahnungen = orderItemDto.AnzahlMahnungen,
+                ApproveStatus = orderItemDto.ApproveStatus,
+                ArchivNummer = orderItemDto.ArchivNummer,
+                Ausgabedatum = orderItemDto.AusgabeDatum,
+                Ausleihdauer = orderItemDto.Ausleihdauer,
+                Benutzungskopie = orderItemDto.Benutzungskopie,
+                Bestand = orderItemDto.Bestand,
+                DatumDerFreigabe = orderItemDto.DatumDerFreigabe,
+                GebrauchskopieStatus = orderItemDto.GebrauchskopieStatus,
+                HasAufbereitungsfehler = orderItemDto.HatAufbereitungsfehler,
+                InternalComment = orderItemDto.InternalComment,
+                MahndatumInfo = orderItemDto.MahndatumInfo,
+                SachbearbeiterId = orderItemDto.SachbearbeiterId,
+                Status = orderItemDto.Status
             };
 
             return orderItem;

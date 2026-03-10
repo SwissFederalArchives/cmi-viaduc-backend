@@ -45,23 +45,23 @@ namespace CMI.Access.Sql.Viaduc
 
         Task<OrderItem[]> FindOrderItems(int[] orderItemIds);
 
-        Task<IndivTokens> GetIndividualAccessTokens(int veId, int ignoreOrderItemId = -1);
+        Task<IndivTokens> GetIndividualAccessTokens(string veId, int ignoreOrderItemId = -1);
 
-        Task<bool> HasEinsichtsbewilligung(int veId);
+        Task<bool> HasEinsichtsbewilligung(string veId);
 
         Task ChangeUserForOrdering(int orderingId, string newUserId);
 
         Task UpdateOrderDetail(UpdateOrderDetailData data);
 
-        Task<bool> IsUniqueVeInBasket(int veId, string userId);
+        Task<bool> IsUniqueVeInBasket(string veId, string userId);
 
-        Task<List<Bestellhistorie>> GetOrderingHistoryForVe(int veId);
+        Task<List<Bestellhistorie>> GetOrderingHistoryForVe(string veId);
 
-        Task AddToOrderExecutedWaitList(int veId, string serializedMessage);
+        Task AddToOrderExecutedWaitList(string veId, string serializedMessage);
 
         Task MarkOrderAsProcessedInWaitList(int waitListId);
 
-        Task<List<OrderExecutedWaitList>> GetVeFromOrderExecutedWaitList(int veId);
+        Task<List<OrderExecutedWaitList>> GetVeFromOrderExecutedWaitList(string veId);
 
         Task<List<OrderItemByUser>> GetOrderItemsByUser(int[] orderItemIds);
     }

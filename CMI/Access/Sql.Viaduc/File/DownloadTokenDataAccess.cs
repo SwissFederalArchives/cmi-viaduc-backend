@@ -15,14 +15,14 @@ namespace CMI.Access.Sql.Viaduc.File
             this.connectionString = connectionString;
         }
 
-        public string GetUserIdByToken(string token, int recordId, DownloadTokenType tokenType, string ipAdress)
+        public string GetUserIdByToken(string token, string recordId, DownloadTokenType tokenType, string ipAdress)
         {
             if (string.IsNullOrEmpty(token))
             {
                 return "";
             }
 
-            if (recordId <= 0)
+            if (string.IsNullOrWhiteSpace(recordId))
             {
                 return "";
             }
@@ -62,7 +62,7 @@ namespace CMI.Access.Sql.Viaduc.File
                     {
                         Value = recordId,
                         ParameterName = "recordId",
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -78,14 +78,14 @@ namespace CMI.Access.Sql.Viaduc.File
             return foundUserId;
         }
 
-        public bool CheckTokenIsValidAndClean(string token, int recordId, DownloadTokenType tokenType, string ipAdress)
+        public bool CheckTokenIsValidAndClean(string token, string recordId, DownloadTokenType tokenType, string ipAdress)
         {
             if (string.IsNullOrEmpty(token))
             {
                 return false;
             }
 
-            if (recordId <= 0)
+            if (string.IsNullOrWhiteSpace(recordId))
             {
                 return false;
             }
@@ -133,7 +133,7 @@ namespace CMI.Access.Sql.Viaduc.File
                     {
                         Value = recordId,
                         ParameterName = "recordId",
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -149,7 +149,7 @@ namespace CMI.Access.Sql.Viaduc.File
             }
         }
 
-        public void CleanUpOldToken(string token, int recordId, DownloadTokenType tokenType)
+        public void CleanUpOldToken(string token, string recordId, DownloadTokenType tokenType)
         {
             using (var cn = new SqlConnection(connectionString))
             {
@@ -178,7 +178,7 @@ namespace CMI.Access.Sql.Viaduc.File
                     {
                         Value = recordId,
                         ParameterName = "recordId",
-                        SqlDbType = SqlDbType.Int
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -192,7 +192,7 @@ namespace CMI.Access.Sql.Viaduc.File
             }
         }
 
-        bool IDownloadTokenDataAccess.CreateToken(string token, int recordId, DownloadTokenType tokenType, DateTime tokenExpiryTime, string ipAdress,
+        bool IDownloadTokenDataAccess.CreateToken(string token, string recordId, DownloadTokenType tokenType, DateTime tokenExpiryTime, string ipAdress,
             string userId)
         {
             if (string.IsNullOrEmpty(token))
@@ -200,7 +200,7 @@ namespace CMI.Access.Sql.Viaduc.File
                 return false;
             }
 
-            if (recordId <= 0)
+            if (string.IsNullOrWhiteSpace(recordId))
             {
                 return false;
             }
@@ -237,7 +237,7 @@ namespace CMI.Access.Sql.Viaduc.File
                 {
                     Value = recordId,
                     ParameterName = "recordId",
-                    SqlDbType = SqlDbType.Int
+                    SqlDbType = SqlDbType.NVarChar
                 },
                 new SqlParameter
                 {

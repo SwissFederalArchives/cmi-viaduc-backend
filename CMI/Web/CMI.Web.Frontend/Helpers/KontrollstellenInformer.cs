@@ -107,7 +107,8 @@ namespace CMI.Web.Frontend.Helpers
             foreach (var archiveRecord in relevanteArchiveRecords)
             {
                 var veInfo = veInfoList.First(e => e.VeId.ToString() == archiveRecord.ArchiveRecordId);
-                var ve = new VeFuerKontrollstelle(archiveRecord, veInfo.BegruendungId);
+                // In diesem Fall ist der archiveRecord in jedem Fall auch "unprotected"
+                var ve = new VeFuerKontrollstelle(archiveRecord, archiveRecord, veInfo.BegruendungId);
 
                 veList.Add(ve);
             }
@@ -125,13 +126,13 @@ namespace CMI.Web.Frontend.Helpers
 
     public class VeInfo
     {
-        public VeInfo(int veId, int? begruendungId)
+        public VeInfo(string veId, int? begruendungId)
         {
             VeId = veId;
             BegruendungId = begruendungId;
         }
 
-        public int VeId { get; }
+        public string VeId { get; }
 
         public int? BegruendungId { get; }
     }

@@ -161,7 +161,7 @@ namespace CMI.Engine.MailTemplate
             {
                 var ordering = GetOrdering(orderItem.OrderId);
 
-                auftraege.Add(orderItem.VeId.HasValue
+                auftraege.Add(!string.IsNullOrWhiteSpace(orderItem.VeId)
                     ? GetAuftragForOrderItemWithVeId(ordering, orderItem)
                     : GetAuftragFormularbestellung(ordering, orderItem));
             }
@@ -197,9 +197,11 @@ namespace CMI.Engine.MailTemplate
         }
 
 
-        private InElasticIndexierteVe GetVe(string archiveRecordId, bool getUnprotectedVersion)
+        private InElasticIndexierteVe GetVe(string archiveRecordId, UseUnanonymizedData getUnprotectedVersion)
         {
-            return InElasticIndexierteVe.FromElasticArchiveRecord(GetElasticArchiveRecord(archiveRecordId, getUnprotectedVersion));
+            var defaultRecord = GetElasticArchiveRecord(archiveRecordId, getUnprotectedVersion);
+            var unprotectedRecord = GetElasticArchiveRecord(archiveRecordId, UseUnanonymizedData.Yes);
+            return InElasticIndexierteVe.FromElasticArchiveRecord(defaultRecord, unprotectedRecord);
         }
 
         /// <summary>
@@ -211,7 +213,7 @@ namespace CMI.Engine.MailTemplate
         /// <param name="archiveRecordId"></param>
         /// <param name="getUnprotectedVersion"></param>
         /// <returns></returns>
-        private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId, bool getUnprotectedVersion)
+        private ElasticArchiveRecord GetElasticArchiveRecord(string archiveRecordId, UseUnanonymizedData getUnprotectedVersion)
         {
             ElasticArchiveRecord retVal;
             var retryCount = 0;
@@ -267,9 +269,9 @@ namespace CMI.Engine.MailTemplate
 
         private Auftrag GetAuftrag(Ordering ordering, OrderItem orderItem)
         {
-            return orderItem.VeId.HasValue
-                ? GetAuftragForOrderItemWithVeId(ordering, orderItem)
-                : GetAuftragFormularbestellung(ordering, orderItem);
+            return string.IsNullOrWhiteSpace(orderItem.VeId)
+                ? GetAuftragFormularbestellung(ordering, orderItem)
+                : GetAuftragForOrderItemWithVeId(ordering, orderItem);
         }
 
         private Auftrag GetAuftragFormularbestellung(Ordering ordering, OrderItem orderItem)
@@ -286,10 +288,14 @@ namespace CMI.Engine.MailTemplate
 
         private Auftrag GetAuftragForOrderItemWithVeId(Ordering ordering, OrderItem orderItem)
         {
-            var bestellterRecord = useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ? 
-                GetElasticArchiveRecord(orderItem.VeId.ToString(), true) : 
-                GetElasticArchiveRecord(orderItem.VeId.ToString(), AllowUnanonymized(orderItem.ApproveStatus));
+            var defaultRecord = GetElasticArchiveRecord(orderItem.VeId, AllowUnanonymized(orderItem.ApproveStatus));
+            var unprotectedRecord = GetElasticArchiveRecord(orderItem.VeId, UseUnanonymizedData.Yes);
+
+            var bestellterRecord = useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ? unprotectedRecord : defaultRecord;
+            var unprotectedBestellterRecord = unprotectedRecord;
+
             ElasticArchiveRecord auszuhebenderRecord = null;
+            ElasticArchiveRecord unprotectedAuszuhebenderRecord = null;
             var besteller = GetPerson(ordering.UserId);
 
             if (ordering.Type == OrderType.Digitalisierungsauftrag)
@@ -297,18 +303,20 @@ namespace CMI.Engine.MailTemplate
                 var dossierId = bestellterRecord.GetAuszuhebendeArchiveRecordId();
                 if (dossierId != null)
                 {
-                    auszuhebenderRecord = GetElasticArchiveRecord(dossierId, true);
+                    auszuhebenderRecord = GetElasticArchiveRecord(dossierId, UseUnanonymizedData.Yes);
+                    unprotectedAuszuhebenderRecord = auszuhebenderRecord;
                 }
             }
             else
             {
                 auszuhebenderRecord = bestellterRecord;
+                unprotectedAuszuhebenderRecord = unprotectedBestellterRecord;
             }
 
             var auftrag = new Auftrag(orderItem,
                 ordering,
-                InElasticIndexierteVe.FromElasticArchiveRecord(bestellterRecord),
-                InElasticIndexierteVe.FromElasticArchiveRecord(auszuhebenderRecord),
+                InElasticIndexierteVe.FromElasticArchiveRecord(bestellterRecord, unprotectedBestellterRecord),
+                InElasticIndexierteVe.FromElasticArchiveRecord(auszuhebenderRecord, unprotectedAuszuhebenderRecord),
                 besteller);
             return auftrag;
         }
@@ -331,15 +339,16 @@ namespace CMI.Engine.MailTemplate
         {
             foreach (var orderItem in orderItems)
             {
-                if (orderItem.VeId.HasValue)
+                if (!string.IsNullOrWhiteSpace(orderItem.VeId))
                 {
-                    if (useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ||
-                        useUnanonymizedData == DataBuilderProtectionStatus.DependentOnApproveStatus && AllowUnanonymized(orderItem.ApproveStatus))
+                    if (useUnanonymizedData != DataBuilderProtectionStatus.AllAnonymized)
                     {
-                        var ve = GetVe(orderItem.VeId.Value.ToString(), true);
+                        var ve = GetVe(orderItem.VeId, AllowUnanonymized(orderItem.ApproveStatus));
                         orderItem.Dossiertitel = ve.Titel;
                         orderItem.Darin = ve.Darin;
                         orderItem.ZusaetzlicheInformationen = ve.ZusaetzlicheInformationen;
+                        // It is possible, that a VE record was with old ScopeId ordered
+                        orderItem.VeId = ve.Id;
                     }
                 }
             }
@@ -348,38 +357,43 @@ namespace CMI.Engine.MailTemplate
         /// <summary>
         /// Depending on the approve status the user is allowed to see unanonymized data
         /// </summary>
-        private bool AllowUnanonymized(ApproveStatus approveStatus)
+        private UseUnanonymizedData AllowUnanonymized(ApproveStatus approveStatus)
         {
             switch (approveStatus)
             {
-                case ApproveStatus.NichtGeprueft:
+                case ApproveStatus.ZurueckgewiesenTeilbewilligungVorhanden:
+                    return UseUnanonymizedData.NoButTitle;
+
                 case ApproveStatus.ZurueckgewiesenEinsichtsbewilligungNoetig:
                 case ApproveStatus.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist:
-                case ApproveStatus.ZurueckgewiesenTeilbewilligungVorhanden:
                 case ApproveStatus.ZurueckgewiesenFormularbestellungNichtErlaubt:
                 case ApproveStatus.ZurueckgewiesenDossierangabenUnzureichend:
-                    return false;
+                case ApproveStatus.NichtGeprueft:
+                    return UseUnanonymizedData.No;
 
                 case ApproveStatus.FreigegebenDurchSystem:
                 case ApproveStatus.FreigegebenAusserhalbSchutzfrist:
                 case ApproveStatus.FreigegebenInSchutzfrist:
                 case ApproveStatus.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligung:
-                    return true;
+                    return UseUnanonymizedData.Yes;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(approveStatus), approveStatus, null);
             }
         }
 
-        private bool TryGetProtectionStatus(string archiveRecordId)
+        private UseUnanonymizedData TryGetProtectionStatus(string archiveRecordId)
         {
-            var allowUnanonymized = false;
+            var allowUnanonymized = UseUnanonymizedData.No;
             switch (useUnanonymizedData)
             {
                 case DataBuilderProtectionStatus.AllUnanonymized:
-                    allowUnanonymized = true;
+                    allowUnanonymized = UseUnanonymizedData.Yes;
                     break;
                 case DataBuilderProtectionStatus.AllAnonymized:
-                    allowUnanonymized = false;
+                    allowUnanonymized = UseUnanonymizedData.No;
+                    break;
+                case DataBuilderProtectionStatus.AllWithoutTitleAnonymized:
+                    allowUnanonymized = UseUnanonymizedData.NoButTitle;
                     break;
                 case DataBuilderProtectionStatus.DependentOnApproveStatus:
                 {
@@ -388,7 +402,7 @@ namespace CMI.Engine.MailTemplate
                     {
                         if (expando.Bestellung is Bestellung bestellung)
                         {
-                            var orderItem = bestellung.Ordering.Items.FirstOrDefault(p => p.VeId == Convert.ToInt32(archiveRecordId));
+                            var orderItem = bestellung.Ordering.Items.FirstOrDefault(p => p.VeId == archiveRecordId);
                             if (orderItem != null)
                             {
                                 allowUnanonymized = AllowUnanonymized(orderItem.ApproveStatus);

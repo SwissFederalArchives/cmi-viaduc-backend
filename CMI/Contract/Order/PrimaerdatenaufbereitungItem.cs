@@ -7,7 +7,7 @@ namespace CMI.Contract.Order
         public int? OrderingType { get; set; }
         public int? OrderItemId { get; set; }
         public string Dossiertitel { get; set; }
-        public int? VeId { get; set; }
+        public string VeId { get; set; }
         public string Signatur { get; set; }
         public DateTime? NeuEingegangen { get; set; }
         public DateTime? Ausgeliehen { get; set; }

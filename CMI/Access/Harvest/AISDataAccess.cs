@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CMI.Access.Harvest.ScopeArchiv;
+﻿using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 
@@ -11,66 +10,47 @@ namespace CMI.Access.Harvest
     ///     Implemented as partial class where some interfaces are declared in the respective partial file, to make it
     ///     more obvious which parts belong to which interface.
     /// </summary>
-    public partial class AISDataAccess : IDbMutationQueueAccess, IDbMetadataAccess
+    public partial class AISDataAccess : IDbMetadataAccess
     {
-        private readonly IAISDataProvider dataProvider;
-        private readonly ArchiveRecordBuilder recordBuilder;
+        private readonly IAISDataProvider aisDataProvider;
+        private readonly IArchiveRecordBuilder recordBuilder;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AISDataAccess" /> class.
         /// </summary>
         /// <param name="recordBuilder">The archive record build</param>
-        /// <param name="dataProvider">The data provider.</param>
-        public AISDataAccess(ArchiveRecordBuilder recordBuilder, DigitizationOrderBuilder digitizationOrderBuilder, IAISDataProvider dataProvider)
+        /// <param name="digitizationOrderBuilder"></param>
+        /// <param name="aisDataProvider">The data provider for the AIS.</param>
+        public AISDataAccess(IArchiveRecordBuilder recordBuilder, IDigitizationOrderBuilder digitizationOrderBuilder, IAISDataProvider aisDataProvider)
         {
             this.recordBuilder = recordBuilder;
             this.digitizationOrderBuilder = digitizationOrderBuilder;
-            this.dataProvider = dataProvider;
+            this.aisDataProvider = aisDataProvider;
         }
+
+        #region IDbMetadataAccess
 
         /// <summary>
         ///     Gets an archive record from the AIS.
         /// </summary>
         /// <param name="archiveRecordId">The primary key id of the record in the AIS as a string.</param>
         /// <returns>ArchiveRecord.</returns>
-        ArchiveRecord IDbMetadataAccess.GetArchiveRecord(string archiveRecordId)
+        async Task<ArchiveRecord> IDbMetadataAccess.GetArchiveRecord(string archiveRecordId)
         {
-            return recordBuilder.Build(archiveRecordId);
+            return await recordBuilder.Build(archiveRecordId);
         }
 
         /// <summary>
-        ///     Gets the pending mutations from the AIS.
+        ///     Gets an ais access tokens from the AIS.
         /// </summary>
-        /// <returns>A list with the records that need to be synced.</returns>
-        public List<MutationRecord> GetPendingMutations()
+        /// <param name="archiveRecordId">The primary key id of the record in the AIS as a string.</param>
+        /// <returns>ArchiveRecord.</returns>
+        async Task<ArchiveRecordSecurity> IDbMetadataAccess.GetAisAccessTokens(string archiveRecordId)
         {
-            return dataProvider.GetPendingMutations();
+            return await recordBuilder.BuildSecurityTokens(archiveRecordId);
         }
 
-        /// <summary>
-        ///     Updates the mutation status of a mutation record in the AIS.
-        /// </summary>
-        /// <param name="info">Object with detailed information about the status change.</param>
-        /// <returns>The number of affected records.</returns>
-        public int UpdateMutationStatus(MutationStatusInfo info)
-        {
-            return dataProvider.UpdateMutationStatus(info);
-        }
-
-        /// <summary>Makes a bulk update of the mutation status in the AIS.</summary>
-        /// <param name="infos">List ob objects with detailed information about the status change.</param>
-        /// <returns>The number of affected records.</returns>
-        public int BulkUpdateMutationStatus(List<MutationStatusInfo> infos)
-        {
-            return dataProvider.BulkUpdateMutationStatus(infos);
-        }
-
-        /// <summary>Reset failed or lost synchronize operations in the mutation table to the initial status.</summary>
-        /// <param name="maxRetries">Maximum number of times a failed operation is reset.</param>
-        /// <returns>Number of records that were reset.</returns>
-        public int ResetFailedSyncOperations(int maxRetries)
-        {
-            return dataProvider.ResetFailedSyncOperations(maxRetries);
-        }
+        
+        #endregion
     }
 }

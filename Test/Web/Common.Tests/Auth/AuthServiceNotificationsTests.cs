@@ -62,5 +62,23 @@ namespace CMI.Web.Common.Tests.Auth
             Assert.IsFalse(resultEmpty);
             Assert.IsFalse(resultWrongAuth);
         }
+
+        [Test]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:20")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:30")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:40")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:50")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:60")]
+        [TestCase("urn:qoa.eiam.admin.ch:names:tc:ac:classes:51")]
+        public void TestIsValidLoginTypeQoA(string qoa)
+        {
+            // ARRANGE
+
+            // ACT
+            var result = testObject.Object.IsValidLoginType(qoa);
+
+            // ASSERT
+            Assert.IsTrue(result);
+        }
     }
 }

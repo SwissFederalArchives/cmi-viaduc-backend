@@ -27,7 +27,7 @@ namespace CMI.Web.Frontend.api.Dto
 
         public DateTime? BewilligungsDatum { get; set; }
 
-        public int? VeId { get; set; }
+        public string VeId { get; set; }
         public int Id { get; set; }
         public int OrderId { get; set; }
         public bool HasPersonendaten { get; set; }
@@ -50,5 +50,22 @@ namespace CMI.Web.Frontend.api.Dto
         public EntscheidGesuch EntscheidGesuch { get; set; }
         public DateTime? DatumDesEntscheids { get; set; }
         public Abbruchgrund Abbruchgrund { get; set; }
+        public string BehaeltnisNummer { get; set; }
+        public string Ablieferung { get; set; }
+        public DateTime? Abschlussdatum { get; set; }
+        public int AnzahlMahnungen { get; set; }
+        public ApproveStatus ApproveStatus { get; set; }
+        public string ArchivNummer { get; set; }
+        public DateTime? AusgabeDatum { get; set; }
+        public int Ausleihdauer { get; set; }
+        public bool? Benutzungskopie { get; set; }
+        public string Bestand { get; set; }
+        public DateTime? DatumDerFreigabe { get; set; }
+        public GebrauchskopieStatus GebrauchskopieStatus { get; set; }
+        public bool HatAufbereitungsfehler { get; set; }
+        public string InternalComment { get; set; }
+        public string MahndatumInfo { get; set; }
+        public string SachbearbeiterId { get; set; }
+        public OrderStatesInternal Status { get; set; }
     }
 }

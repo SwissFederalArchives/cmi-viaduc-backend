@@ -1,5 +1,5 @@
 {
-	"version": "0.11.0",
+	"version": "0.12.0",
 	"authentication": {},
 	"search": {
 		"possiblePagingSizes": [
@@ -411,8 +411,7 @@
 			{
 				"defaultLabel": "ID der VE",
 				"key": "veId",
-				"visible": false,
-				"dataType": 2
+				"visible": false
 			},
 			{
 				"defaultLabel": "Aktenzeichen",
@@ -639,8 +638,7 @@
 			{
 				"defaultLabel": "ID der VE",
 				"key": "veId",
-				"visible": false,
-				"dataType": 2
+				"visible": false
 			},
 			{
 				"defaultLabel": "Aktenzeichen",
@@ -975,8 +973,7 @@
 			{
 				"defaultLabel": "ID der VE",
 				"key": "veId",
-				"visible": true,
-				"dataType": 2
+				"visible": true
 			},
 			{
 				"defaultLabel": "Signatur",
@@ -1145,6 +1142,72 @@
 				"key": "anonymisiertZumErfassungszeitpunk",
 				"visible": false,
 				"dataType": 3
+			}
+		]
+	},
+	"synchronizationMonitor": {
+		"listColumns": [
+			{
+				"defaultLabel": "ID",
+				"key": "syncActionId",
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "VE-Id",
+				"key": "archiveRecordId",
+				"width": 400,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Aktion",
+				"key": "actionType",
+				"width": 200,
+				"visible": true
+			},
+			{
+				"defaultLabel": "Status",
+				"key": "actionStatus",
+				"width": 80,
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel": "Anzahl Versuche",
+				"key": "numberOfTries",
+				"width": 80,
+				"visible": true,
+				"dataType": 2
+			},
+			{
+				"defaultLabel":"Erfasst am",
+				"key": "createdOn",
+				"visible": true,
+				"width": 300,
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Geändert am",
+				"key": "modifiedOn",
+				"visible": true,
+				"width": 300,
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"dataType": 4
+			},
+			{
+				"defaultLabel":"Letzter Log Eintrag",
+				"key": "logDate",
+				"visible": true,
+				"width": 300,
+				"format": "dd.MM.yyyy HH:mm:ss",
+				"dataType": 4
+			},
+			{
+				"defaultLabel": "Log Meldung",
+				"key": "actionStatusHistory",
+				"width": "*",
+				"visible": true
 			}
 		]
 	}

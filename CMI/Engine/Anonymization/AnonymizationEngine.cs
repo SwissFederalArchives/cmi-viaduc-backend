@@ -85,7 +85,7 @@ namespace CMI.Engine.Anonymization
             {
                 if (archiveplanContextItem.Protected)
                 {
-                    request.Values.Add($"{archiveplancontextKey}-{archiveplanContextItem.ArchiveRecordId}", archiveplanContextItem.Title);
+                    request.Values.Add($"{archiveplancontextKey}#{archiveplanContextItem.ArchiveRecordId}", archiveplanContextItem.Title);
                 }
 
                 textBuilder.AppendLine(
@@ -101,7 +101,7 @@ namespace CMI.Engine.Anonymization
             {
                 if (reference.Protected)
                 {
-                    request.Values.Add($"{referenceKey}-{reference.ArchiveRecordId}", reference.ReferenceName);
+                    request.Values.Add($"{referenceKey}#{reference.ArchiveRecordId}", reference.ReferenceName);
                 }
             }
 
@@ -198,7 +198,7 @@ namespace CMI.Engine.Anonymization
 
         private void SetSpecialTexts(KeyValuePair<string, string> item, ElasticArchiveDbRecord elasticArchiveDbRecord)
         {
-            var identifiers = item.Key.Split('-');
+            var identifiers = item.Key.Split('#');
             string key = identifiers[1];
             string fieldName = identifiers[0];
 

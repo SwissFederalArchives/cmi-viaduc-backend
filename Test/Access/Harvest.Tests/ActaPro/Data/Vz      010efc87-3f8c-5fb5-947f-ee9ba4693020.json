@@ -1,0 +1,302 @@
+{
+  "object": "document",
+  "type": "Vz",
+  "DocKey": "Vz      55956872-0e3b-5258-83fc-a2d23cfd599c",
+  "DocTitle": "B0#1000/1483#1085*   Niederlassungsbewilligungen und Erteilung des helv. Bürgerrechts(1). Verzeichnisse der 1798 eingebürgerten Bündner \"Patrioten\", und der erteilten Niederlassungsbewilligungen [nach Kantonen], mit Namen und Personalien, Basel - Freiburg, 1798-1803 (Dossier)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "04.09.2025 15:45:58:159",
+  "block": {
+    "type": "Vz",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Klas    1c1b10f5-5ec8-5abd-b34e-5d36ddaeddfb"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Klas"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "123"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U1924"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "U1972"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "15.06.2017 14:01:20"
+      },
+      {
+        "type": "CreateDate",
+        "value": "18.12.2012 11:28:44"
+      },
+      {
+        "type": "ScopeID",
+        "value": "29388944"
+      },
+      {
+        "type": "ApdID",
+        "value": "Vz      55956872-0e3b-5258-83fc-a2d23cfd599c"
+      },
+      {
+        "type": "Flag_EditCompleteSignatureDirectly",
+        "value": "1"
+      },
+      {
+        "type": "SignInherited",
+        "value": "B0"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "OwnDocType",
+            "value": "Dossier"
+          },
+          {
+            "type": "Ablieferung_Key",
+            "value": "Abl     7c90e712-0fd1-56ef-8109-84e59f8726d6"
+          },
+          {
+            "type": "Ablieferung_RefDocType",
+            "value": "Abl"
+          },
+          {
+            "type": "Ablieferung_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Ablieferung_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Reference_Type",
+            "value": "Ablieferung"
+          },
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1000/1483 Bundesverwaltung (1712-1857)"
+          },
+          {
+            "type": "Ablieferung_AblNum",
+            "value": "1000/1483"
+          },
+          {
+            "type": "Ablieferung_ZustaendigeStelle",
+            "value": "Schweizerisches Bundesarchiv (nach 1979)-Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da;"
+          },
+          {
+            "type": "Ablieferung_KatAutomatisierung",
+            "value": "2"
+          },
+          {
+            "type": "Ablieferung_Anhang3VBGA",
+            "value": "0"
+          },
+          {
+            "type": "Ablieferung_Publikationsrechte",
+            "value": "BAR"
+          },
+          {
+            "type": "Ablieferung_InQuerySichtbar",
+            "value": "1"
+          }
+        ]
+      },
+      {
+        "type": "AblDocKey",
+        "value": "Abl     7c90e712-0fd1-56ef-8109-84e59f8726d6"
+      },
+      {
+        "type": "LaufNumVz",
+        "value": "1085"
+      },
+      {
+        "type": "SignForInherit",
+        "value": "B0#1000/1483#1085"
+      },
+      {
+        "type": "Vz_OwnSign",
+        "value": "B0#1000/1483#1085*"
+      },
+      {
+        "type": "Vz_Titel",
+        "value": "Niederlassungsbewilligungen und Erteilung des helv. Bürgerrechts(1). Verzeichnisse der 1798 eingebürgerten Bündner \"Patrioten\", und der erteilten Niederlassungsbewilligungen [nach Kantonen], mit Namen und Personalien, Basel - Freiburg"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1798-1803",
+        "timerange": {
+          "min": "01.01.1798",
+          "max": "31.12.1803",
+          "values": [
+            {
+              "value": "01.01.1798-31.12.1803",
+              "min": "01.01.1798",
+              "max": "31.12.1803"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Vz_Bez",
+        "value": "B0#1000/1483#1085*   Niederlassungsbewilligungen und Erteilung des helv. Bürgerrechts(1). Verzeichnisse der 1798 eingebürgerten Bündner \"Patrioten\", und der erteilten Niederlassungsbewilligungen [nach Kantonen], mit Namen und Personalien, Basel - Freiburg, 1798-1803 (Dossier)"
+      },
+      {
+        "type": "Vz_SchachtelNr",
+        "value": "1085"
+      },
+      {
+        "type": "Vz_Klassifizierung",
+        "value": "keine Angabe"
+      },
+      {
+        "type": "Vz_Aktenzeichen",
+        "value": "C.01.3"
+      },
+      {
+        "type": "Vz_Darin_Gp",
+        "fields": [
+          {
+            "type": "Vz_Darin",
+            "value": "1084 = Aargau-Baden\\1085 = Basel-Freiburg\\1086 = Léman-Luzern\\1087 = Oberland-Zürich"
+          }
+        ]
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "MetadatenPubl",
+        "value": "Ja"
+      },
+      {
+        "type": "Vz_Schutzfristkategorie",
+        "value": "Art. 9.1 BGA"
+      },
+      {
+        "type": "Vz_Schutzfristbasisdatum",
+        "value": "Zeitraumende"
+      },
+      {
+        "type": "Vz_Schutzfristdauer",
+        "value": "30"
+      },
+      {
+        "type": "Vz_Schutzfristende",
+        "value": "31.12.1833",
+        "timerange": {
+          "min": "31.12.1833",
+          "max": "31.12.1833",
+          "values": [
+            {
+              "value": "31.12.1833-31.12.1833",
+              "min": "31.12.1833",
+              "max": "31.12.1833"
+            }
+          ]
+        }
+      },
+      {
+        "type": "ZBGA_AblKatAuto",
+        "value": "2"
+      },
+      {
+        "type": "Vz_ZugaenglichkeitBGA",
+        "value": "Frei zugänglich"
+      },
+      {
+        "type": "Partner_Gp",
+        "fields": [
+          {
+            "type": "Partner_Key",
+            "value": "Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da"
+          },
+          {
+            "type": "Partner_DocType",
+            "value": "Part"
+          },
+          {
+            "type": "Partner_RefTyp",
+            "value": "L"
+          },
+          {
+            "type": "Partner_DocOrder",
+            "value": "0"
+          },
+          {
+            "type": "Partner_Bez",
+            "value": "Schweizerisches Bundesarchiv (nach 1979)"
+          }
+        ]
+      },
+      {
+        "type": "Vz_ZusatzInfo_Gp",
+        "fields": [
+          {
+            "type": "Vz_ZusatzInfo",
+            "value": "(1): Akten über das Niederlassungs- und Bürgerrecht enthalten auch die Nr. 536-538, 964-1072, 1090 a, 1284-1293 und 1321"
+          }
+        ]
+      },
+      {
+        "type": "Status",
+        "value": "Abgeschlossen"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-222222222222"
+      },
+      {
+        "type": "Export_id",
+        "value": "98c1d014-31ee-4ab0-b78d-1e6b51b107fd"
+      },
+      {
+        "type": "Vz_AkTyp",
+        "value": "Akten allgemein"
+      },
+      {
+        "type": "Vz_Best",
+        "value": "Best    3b5cc627-e6af-5dc8-9dde-7c10ed2a3bba"
+      },
+      {
+        "type": "Vz_Best_DocTitle",
+        "value": "B0*   Zentralarchiv der Helvetischen Republik (1798-1803), 1643-1857 (Bestand)"
+      },
+      {
+        "type": "Vz_Bestellsignatur",
+        "value": "B0* B0#1000/1483#1085*"
+      },
+      {
+        "type": "Vz_Id",
+        "value": "55956872-0e3b-5258-83fc-a2d23cfd599c"
+      }
+    ]
+  }
+}

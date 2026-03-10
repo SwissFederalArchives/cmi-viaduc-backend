@@ -1,0 +1,190 @@
+{
+  "object": "document",
+  "type": "Best",
+  "DocKey": "Best    8a1d4ddf-e622-5b69-859f-2566e1a11da8",
+  "DocTitle": "Stiftung Schweizer Filmwochenschau (1942-1975)",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 11:08:19:155",
+  "block": {
+    "type": "Best",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Tekt    2d75a3e4-7ea8-5c35-a82e-b3a47cf31c69"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Tekt"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "418"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U2051"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "08.09.2022"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1940-1976",
+        "timerange": {
+          "min": "01.01.1940",
+          "max": "31.12.1976",
+          "values": [
+            {
+              "value": "01.01.1940-31.12.1976",
+              "min": "01.01.1940",
+              "max": "31.12.1976"
+            }
+          ]
+        }
+      },
+      {
+        "type": "Sperr_Unsichtbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unterlage_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Sperr_Unbestellbar_Inherit",
+        "value": "1"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "Bst_Id",
+        "value": "8a1d4ddf-e622-5b69-859f-2566e1a11da8"
+      },
+      {
+        "type": "ScopeID",
+        "value": "4205"
+      },
+      {
+        "type": "Bst_Signatur",
+        "value": "J2.143*"
+      },
+      {
+        "type": "Altsi",
+        "value": "JII.143*"
+      },
+      {
+        "type": "Bst_Name",
+        "value": "Stiftung Schweizer Filmwochenschau (1942-1975)"
+      },
+      {
+        "type": "Bst_Bez",
+        "value": "J2.143*   Stiftung Schweizer Filmwochenschau (1942-1975), 1940-1976 (Bestand)"
+      },
+      {
+        "type": "Bst_ZusatzInfo",
+        "value": "- Gasser, Bernhard, Ciné Journal Suisse, Aperçu historique (1923-1945) et analyse de tous les numéros de 1945, Travelling 53/54 Documents Cinémathèque suisse, Lausanne 1978-79_x000D_\r\n- Malek-Madani, Cyrus, Die Schweizerische Filmpolitik 1933 - 1945, 1984_x000D_\r\n- Mazzola, Roberta, Le Ciné-journal suisse, premiere année, in: Equinoxe, Nr. 7, 1992 s. 81_x000D_\r\n_x000D_\r\n(Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)"
+      },
+      {
+        "type": "Verweis",
+        "fields": [
+          {
+            "type": "Vw_Bez",
+            "value": "4217 ¦ J2.225* ¦ siehe auch (gültig) ¦  ¦"
+          }
+        ]
+      },
+      {
+        "type": "Aktenbildner_Gp",
+        "fields": [
+          {
+            "type": "Aktenbildner_Bez",
+            "value": "Stiftung Schweizer Filmwochenschau (1942-1975)"
+          }
+        ]
+      },
+      {
+        "type": "Bst_Geschichte",
+        "value": "1963 hat das Schweizerische Bundesarchiv BAR der Schweizer Filmwochenschau SFW ein Archivierungsangebot für das Filmmaterial der Jahre 1940-1955 unterbreitet. Im folgenden Jahr wurden die Nummern 527-1090 der deutschen und italienischen Positiv-Version ans BAR abgeliefert. Die Negative und die französische Version sowie die älteren Nummern aus Nitratmaterial blieben in Genf. Zwischen 1965 und 1975 wurden in 6 Tranchen die restlichen Filme (bis Nr. 1651) der deutschen und italienischen Version abgeliefert. 1975 gelangten auch die Communiqués und die Geschäftsakten der SFW ins BAR, nachdem das BAR sie als Bundesakten eingefordert hatte. Im Rahmen der Zielsetzungen des Vereins Memoriav vereinbarten das Schweizer Filmarchiv - Cinémathèque Suisse und das BAR innerhalb des Folgeprojekts \"Politische Information\" die Schweizerischen Filmwochenschauen zu sichern und zu vermitteln. Die Cinémathèque Suisse übernahm die Übertragung der SFW-Produktionen von 1940-1975 auf Videokassetten und übergab diese dem BAR. Die Cinémathèque Suisse und das BAR teilen sich zum Zwecke der Sicherheit und zur Verbesserung der Benutzungsmöglichkeiten in die Aufgabe der Aufbewahrung der Schweizerischen Filmwochenschauen. Die Cinémathèque Suisse verwahrt sämtliche Versionen auf Filmspulen in französischer und deutscher Sprache und alle Negative und sämtliches Nitratmaterial. Das BAR bewahrt die Originalserie der italienischen Version auf Filmspulen und die bestehende Serie Videokassetten Umatic und Videokopien Beta digital auf. Mit der Unterstützung der Cinémathèque Suisse erstellt das BAR ein digitales Findmittel zu den Produktionen der Schweizerischen Filmwochenschauen 1940 - 1975._x000D_\r\n_x000D_\r\n(Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)_x000D_\r\nAblieferung 2004/483: Memoriav-Projekt"
+      },
+      {
+        "type": "Ablieferung_Gp",
+        "fields": [
+          {
+            "type": "Ablieferung_Bez",
+            "value": "1975/00035 k.A. Organisation (1940-1975) | 1975/00061 Schweizer Filmwochenschau (Genf) (1940-1975) | 1975/00096 Keine Angaben (1952-1975) | 1975/00097 k.A. Organisation (s.d. (sine dato)) | 1976/00216 Schweizer Filmwochenschau (Genf) (1942-1976) | 1982/00197 Armeestabsteil 522.3 (k.A.) (1940-1975) | 1985/00116 Schweizer Fernsehen DRS (Zürich) (1940-1975) | 1995/00566 k.A. Organisation (1940-1975) | 1996/00386 Keine Angaben (k.A.) 2 (1940-1975) | 2004/00483 Memoriav - Verein zur Erhaltung des audiovisuellen Kulturgutes der Schweiz (Bern) (1960) | 2008/00065 Schweizerisches Bundesarchiv (Bern) (1958-1969)"
+          }
+        ]
+      },
+      {
+        "type": "Verw_Ve",
+        "value": "Verwandte Verzeichnungseinheiten im BAR:_x000D_ _x000D_ - Bestand: Sekretariat/Generalsekretariat und Abteilung für kulturelle Angelegenheiten _x000D_ E 3001(A) -/5,  Bd. 20, 21 Wochenschau\t\t_x000D_ - Bestand: Generalsekretariat EDI E 3001 (B) -/1, Bd. 48, 49 Filmwochenschau_x000D_ - Bestand:Generalsekretariat EDI E 3001 (B) -/2, Bd. 79, 80 Filmwochenschau _x000D_ - Bestand: Bundesamt für Kulturpflege E 3011 (A) 1979/105, Bd. 19, 20, 21 Filmwochenschau_x000D_ - Bestand: Persönliche Sekretariate der Departementsvorsteher und Chefbeamten Handakten Bundesrat Philipp Etter E 3800 (-) 1979/171,  Bd. 1, 2 Internationale Filmkammer, Schweizerische Filmwochenschau, geistige Landesverteidigung \t\t_x000D_ - Bestand: Schweizer Fernsehen J 2.225 Tagesschauen von SFDRS_x000D_ - Bestand: Télévision Suisse Romande J 2.240 Téléjournal von TSR_x000D_ - Bestand: Schweizerische Filmwochenschau J 2.143_x000D_ - Sachsystematische Kompetenzenkartei 443:1-03 _x000D_ _x000D_ _x000D_ Verwandtes Material in anderen Archiven, Bibliotheken und Dokumentationsstellen: _x000D_ _x000D_ Sendungen von Schweizer Fernsehen DRS, Télévision Suisse Romande TSR, Schweizer Radio DRS und Radio Suisse Romande RSR _x000D_ _x000D_ (Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)"
+      },
+      {
+        "type": "Bst_Darin",
+        "value": "Inhalt schriftliche Unterlagen:_x000D_\r\n_x000D_\r\nDas Sekretariat der Stiftung wurde durch das Sekretariat der Schweizerischen Filmkammer geführt. Der Stiftungsrat war gegenüber der SFK und dem EDI mit Bezug auf das gesamte Wochenschauunternehmen das verwantwortliche Organ. In den Aufgabenbereich des Stiftungsrates fielen die Wahl des Delegierten des Stiftungsrates, der Abschluss von Verträgen, Anstellungsverträge mit dem Personal des Unternehmens, die Prüfung der Voranschläge und der Rechnungen sowie die Aufsicht über die Gestaltung der Wochenschau. Der Delegierte des Stiftungsrates hatte seinerseits zur Hauptaufgabe die Beaufsichtigung der technischen und administrativen Arbeiten der Wochenschauen._x000D_\r\nDer Chefredaktor war für die Programmgestaltung der Wochenschau verantwortlich. Er besorgte auch den Schnitt der Filme. Die Aufnahmearbeiten machte ein Chefoperateur. Die Montage der Filme wurde von der Filmwochenschau besorgt._x000D_\r\nDie Korrespondenzen zeigen den inländischen und ausländischen Briefverkehr zwischen 1966 und 1975 auf. Die Buchhaltungs- und Verwaltungsunterlagen enthalten Jahresbilanzen, Konti, Rechnungsbelege, Salärkarten, Lieferscheine, Check- und Postcheckhefte, eine topographische Auflistung der Wochenschauabonnenten sowie Personalunterlagen, Bewerbungen, Verträge, Versicherungen und AHV- und Krankenkasseabgaben. Zu den Kongressen der INA sind von 1964 bis 1974 und zur Zusammenarbeit mit den Kinoverbänden in der Schweiz von 1946 bis 1972 Unterlagen vorhanden. Weiter gibt es  Belege zu allen Filmwochenschauproduktionen von 1940 bis 1975. Die Akten EDI enthalten Unterlagen zur Finanzierung, Direktion und Sujets der Wochenschauen. Es hat dazu noch Protokolle, Budgets, Bilanzen und Konti sowie Redaktionsberichte, technische Rapporte und allgemeine Fragen und Kritiken betreffend die Wochenschauen. Weiter sind Unterlagen  zum Stiftungsrat vorhanden. _x000D_\r\n_x000D_\r\n_x000D_\r\nInhalt Filmunterlagen: _x000D_\r\n_x000D_\r\nDie Beiträge behandeln Themen zu Politik, Sport, Kultur, Wirtschaft, Militär und weitere Aspekte des täglichen Lebens. Der Autor Bernhard Gasser untersuchte sämtliche Ausgaben der Schweizerischen Filmwochenschau von 1945 nach ihrem Inhalt. Die Beiträge mit den Themen humanitäre Hilfe, Dokumentarfilme und soziale Probleme machten fast die Hälfte aller Wochenschauen in jenem Jahr aus. Die andere Hälfte behandelte die Themen Sport, Wirtschaft in der Schweiz, Bundesbehörden, General und andere Persönlichkeiten, traditionelle Kulturfeste, Kunst, Ausstellungen sowie diverse andere Ereignisse._x000D_\r\nDie Filmwochenschauen nach dem 2. Weltkrieg nehmen immer mehr den Charakter eines Magazins, z.T. eines Boulvard-Magazins an. Beiträge mit inhaltlichen Themen der geistigen Landesverteidigung (humanitäre Hilfe, Dokumentarfilm, soziale Probleme, General etc.) werden abgelöst durch Sendungen über Filmstars, Sportereignisse oder kulturelle Anlässe._x000D_\r\n_x000D_\r\n(Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)"
+      },
+      {
+        "type": "ZusVorhFindmittel",
+        "value": "Ablieferung 1975/61: Dossierverzeichnis_x000D_\r\nAblieferung 1975/97: Dossierverzeichnis_x000D_\r\nAblieferung 1976/216: Dossierverzeichnis_x000D_\r\nAblieferung 1982/197: Dossierverzeichnis_x000D_\r\nAblieferung 1995/566: Dossierverzeichnis_x000D_\r\nAblieferung 2004/483: DatenbankDossierverzeichnis"
+      },
+      {
+        "type": "NotizFindmittel",
+        "value": "Zusätzliche Findhilfsmittel: Siehe J2.143#1982/197* und J2.143#1985/116*. | - Abgabeverzeichnis zu schriftlichen Unterlagen\t_x000D_\r\n- Computer-Ausdruck des Sachkatalogs\t_x000D_\r\n- MS-Access-Tabelle zu Filmwochenschauen_x000D_\r\n- Liste zu Begleittexten und Basiskatalog _x000D_\r\n- Liste zu Filmwochenschauen_x000D_\r\n_x000D_\r\n(Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)_x000D_\r\nAblieferung 2004/483: dies ist ein provisorisches Verzeichnis, welches aufgrund der Videokopie J2.143#1996/386 Band 855, SFW-Nr. 914-1 erstellt wurde. Es muss noch überprüft werden, sobald geklärt ist, wo die Filmrolle aufbewahrt wird._x000D_\r\nAblieferung 1982/197: die Dossiers #19 bis #38 wurden nachhinein erstellt. Es wurden digitale Daten gefunden und an dieser Ablieferung angehängt."
+      },
+      {
+        "type": "Zugaenglichkeit",
+        "value": "Öffentlich"
+      },
+      {
+        "type": "Benutzbarkeit",
+        "value": "Uneingeschränkt"
+      },
+      {
+        "type": "NotizSchutzfrist",
+        "value": "Pour les films:                                          Ablieferung: 1996/386, 2004/483                 Rechtsgrundlage: BGA Art. 16.1 _x000D_ Benutzung: gemäss BGA Art. 9.2_x000D_ Bewilligungsinstanz: BAR/AIZ_x000D_ Quelle: Antrag Direktion BAR, 22.2.2012_x000D_ Registratur BAR: 613.4/Bestände Projekt \"Politische Information\"_x000D_ Bearbeitung: Ae/6.12.2011_x000D_ _x000D_ Alle übrigen Ablieferungen (Papierakten):           Rechtsgrundlage: BGA Art. 16.1_x000D_ Benutzung: gemäss BGA_x000D_ Bewilligungsinstanz: BAR/AIZ_x000D_ Quelle: Vereinbarung, 22./29.3.1996_x000D_ Registratur: CH-BAR#E3120C#2011/72#286*, Az. 292-6_x000D_ Bearbeitung: Frma, 3.10.2012"
+      },
+      {
+        "type": "Bewilligungstyp",
+        "value": "Keine"
+      },
+      {
+        "type": "Form",
+        "value": "Schriftliche Unterlagen: Korrespondenzen, Verwaltungsunterlagen, Presseartikel, Kommentare in dt, fr, it zu den einzelnen Filmwochenschauen;_x000D_ _x000D_ Filmunterlagen: Filmspulen, Videokassetten Umatic, Videokassetten Beta Digital (ca. 3 - 10-minütige Wochenschauen mit 1 - 8 Beiträgen pro Wochenschau)_x000D_ _x000D_ (Quelle: BAR interne Bestandesanalyse J 2.143 (-)-Az. 562-12)_x000D_ Ablieferung 1982/197: inkl. sachsystematische Kartei zu den Wochenschaufilmen Nr. 1 - 1651"
+      },
+      {
+        "type": "Internet_sichtbar",
+        "value": "Ja"
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_"
+      }
+    ]
+  }
+}

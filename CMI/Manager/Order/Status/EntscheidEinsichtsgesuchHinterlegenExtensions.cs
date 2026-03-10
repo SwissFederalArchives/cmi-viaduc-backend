@@ -28,7 +28,7 @@ namespace CMI.Manager.Order.Status
             auftragStatus.Context.OrderItem.Abschlussdatum = auftragStatus.Context.TransactionTimeStamp;
             auftragStatus.Context.SetNewStatus(AuftragStatusRepo.Abgeschlossen);
 
-            if (!auftragStatus.Context.OrderItem.VeId.HasValue)
+            if (string.IsNullOrWhiteSpace(auftragStatus.Context.OrderItem.VeId))
             {
                 throw new Exception(
                     "Die Funktion EntscheidGesuchHinterlegen kann nur aufgerufen werden, wenn der Auftrag den Verweis auf eine Verzeichniseinheit enthält.");

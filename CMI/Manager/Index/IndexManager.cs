@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
-using CMI.Access.Common;
+﻿using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Entities;
 using CMI.Contract.Common.Extensions;
-using CMI.Contract.Messaging;
 using CMI.Engine.Anonymization;
 using CMI.Manager.Index.Config;
 using CMI.Manager.Index.Properties;
 using CMI.Manager.Index.ValueExtractors;
 using CMI.Utilities.Common.Helpers;
-using MassTransit;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Index
 {
@@ -53,19 +51,27 @@ namespace CMI.Manager.Index
             dbAccess.UpdateDocument(elasticArchiveRecord);
             return elasticArchiveRecord;
         }
-
-        public void RemoveArchiveRecord(ConsumeContext<IRemoveArchiveRecord> removeContext)
+        
+        public void RemoveArchiveRecord(string archiveRecordId)
         {
-            dbAccess.RemoveDocument(removeContext.Message.ArchiveRecordId);
+            dbAccess.RemoveDocument(archiveRecordId);
         }
 
-        public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, bool useUnanonymizedData)
+        public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData)
         {
             var document = dbAccess.FindDocument(archiveRecordId, metadataToExclude);
-            if (document != null && useUnanonymizedData && document.IsAnonymized)
+            if (document != null && useUnanonymizedData != UseUnanonymizedData.No && document.IsAnonymized)
             {
                 var dbRecord = dbAccess.FindDbDocument(archiveRecordId, metadataToExclude);
-                document.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+               
+                if (useUnanonymizedData == UseUnanonymizedData.NoButTitle)
+                {
+                    document.Title = dbRecord.UnanonymizedFields.Title;
+                }
+                else
+                {
+                    document.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+                }
             }
 
             return document;
@@ -82,7 +88,7 @@ namespace CMI.Manager.Index
             {
                 retVal.Add(entryItem);
                 Log.Verbose("Added ordered item with id {ArchiveRecordId} to list", entryItem.ArchiveRecordId);
-                retVal.AddRange(dbAccess.GetChildrenWithoutSecurity(entryItem.ArchiveRecordId, true));
+                retVal.AddRange(dbAccess.GetChildrenWithoutSecurity(entryItem.ArchiveRecordId, entryItem.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true));
                 Log.Verbose("Added the children of the ordered item with id {ArchiveRecordId} to list. Found {Count} children",
                     entryItem.ArchiveRecordId, retVal.Count - 1);
 
@@ -131,14 +137,11 @@ namespace CMI.Manager.Index
             elasticArchiveRecord.PrimaryDataFulltextAccessTokens = archiveRecord.Security?.PrimaryDataFulltextAccessToken;
             elasticArchiveRecord.PrimaryDataLink = archiveRecord.Metadata.PrimaryDataLink;
             elasticArchiveRecord.ManifestLink = archiveRecord.Metadata.ManifestLink;
-            elasticArchiveRecord.HasImage = archiveRecord.Display.ContainsImages;
-            elasticArchiveRecord.HasAudioVideo = archiveRecord.Display.ContainsMedia;
             elasticArchiveRecord.CanBeOrdered = archiveRecord.Display.CanBeOrdered;
             elasticArchiveRecord.TreePath = archiveRecord.Metadata.NodeInfo.Path;
             elasticArchiveRecord.TreeSequence = archiveRecord.Metadata.NodeInfo.Sequence;
             elasticArchiveRecord.TreeLevel = archiveRecord.Metadata.NodeInfo.Level;
             elasticArchiveRecord.IsLeaf = archiveRecord.Metadata.NodeInfo.IsLeaf;
-            elasticArchiveRecord.IsRoot = archiveRecord.Metadata.NodeInfo.IsRoot;
             elasticArchiveRecord.ChildCount = archiveRecord.Metadata.NodeInfo.ChildCount;
             elasticArchiveRecord.AccessionDate = archiveRecord.Metadata.AccessionDate;
             elasticArchiveRecord.ProtectionEndDate = archiveRecord.Metadata.Usage.ProtectionEndDate.HasValue
@@ -154,7 +157,6 @@ namespace CMI.Manager.Index
             elasticArchiveRecord.PhysicalUsability = archiveRecord.Metadata.Usage.PhysicalUsability;
             elasticArchiveRecord.Permission = archiveRecord.Metadata.Usage.Permission;
             elasticArchiveRecord.IsPhysicalyUsable = archiveRecord.Metadata.Usage.IsPhysicalyUsable;
-            elasticArchiveRecord.ContainsPersonRelatedInformation = archiveRecord.Metadata.Usage.ContainsPersonRelatedData;
             elasticArchiveRecord.Places = null;
             elasticArchiveRecord.ParentContentInfos =
                 archiveRecord.Display.ArchiveplanContext.Select(c => new ElasticParentContentInfo { Title = c.Title }).ToList();
@@ -169,12 +171,8 @@ namespace CMI.Manager.Index
                 Protected = a.Protected
             })
                 .ToList();
-            elasticArchiveRecord.FirstChildArchiveRecordId = archiveRecord.Display.FirstChildArchiveRecordId;
-            elasticArchiveRecord.PreviousArchiveRecordId = archiveRecord.Display.PreviousArchiveRecordId;
-            elasticArchiveRecord.NextArchiveRecordId = archiveRecord.Display.NextArchiveRecordId;
             elasticArchiveRecord.ParentArchiveRecordId = archiveRecord.Metadata.NodeInfo.ParentArchiveRecordId;
-            elasticArchiveRecord.ExternalDisplayTemplateName = archiveRecord.Display.ExternalDisplayTemplateName;
-            elasticArchiveRecord.InternalDisplayTemplateName = archiveRecord.Display.InternalDisplayTemplateName;
+            elasticArchiveRecord.DisplayTemplateName = archiveRecord.Display.DisplayTemplateName;
             elasticArchiveRecord.LastSyncDate = DateTime.Now;
             
             TransferDataFromPropertyBag(elasticArchiveRecord, archiveRecord.Metadata.DetailData);
@@ -186,10 +184,10 @@ namespace CMI.Manager.Index
                 Ordnungskomponenten = archiveRecord.Metadata.AggregationFields.FirstOrDefault(a => a.AggregationName == "FondsOverview")?.Values,
                 HasPrimaryData = !string.IsNullOrEmpty(archiveRecord.Metadata.PrimaryDataLink) || elasticArchiveRecord.HasCustomPropertyWithValue<ElasticHyperlink>("digitaleVersion")
             };
-            // Only save references to Elastic that don't need to by anonymized, 
+            // Only save References to Elastic that don't need to by anonymized, 
             // Problem is, that when two protected UoD have a reference on each other and then
             // a user gets permission to view UoD #1, then he automatically sees the Title of UoD #2 for which
-            // he does not have a permission. As this can't be solved, we are not storing references to protected UoD
+            // he does not have a permission. As this can't be solved, we are not storing References to protected UoD
             elasticArchiveRecord.References = archiveRecord.Metadata.References
                 .Where(r => r.Protected == false)
                 .Select(s => new ElasticReference
@@ -231,7 +229,7 @@ namespace CMI.Manager.Index
             // According to elastic documentation histograms are calculated with this formula
             // bucket_key = Math.floor((value - offset) / interval) * interval + offset
             CalculateCreationPeriodBuckets(elasticArchiveRecord);
-
+            
             if (elasticArchiveRecord.Level.Equals("Dossier") && elasticArchiveRecord.ProtectionEndDate != null)
             {
                 elasticArchiveRecord.AggregationFields.ProtectionEndDateDossier = elasticArchiveRecord.ProtectionEndDate;
@@ -248,29 +246,32 @@ namespace CMI.Manager.Index
         /// <returns>The eventually updated record</returns>
         public ElasticArchiveDbRecord SyncAnonymizedTextsWithRelatedRecords(ElasticArchiveDbRecord elasticArchiveRecord)
         {
-            if (int.TryParse(elasticArchiveRecord.ArchiveRecordId, out int veId))
+            // Check if there exists a manual correction of anonymized texts
+            var manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == elasticArchiveRecord.ArchiveRecordId).Result;
+            if (manuelleKorrektur == null && elasticArchiveRecord.ExternalKeys != null)
             {
-                // Check if there exists a manual correction of anonymized texts
-                var manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == veId).Result;
-                if (manuelleKorrektur != null)
+                var scopeArchiveRecordId = elasticArchiveRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value;
+                manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == scopeArchiveRecordId).Result;
+            }
+
+            if (manuelleKorrektur != null)
+            {
+                var result = SyncRecordWithManuelleKorrektur(manuelleKorrektur, elasticArchiveRecord);
+                if (result.HasChanges)
                 {
-                    var result = SyncRecordWithManuelleKorrektur(manuelleKorrektur, elasticArchiveRecord);
-                    if (result.HasChanges)
-                    {
-                        dbManuelleKorrekturAccess.InsertOrUpdateManuelleKorrektur(manuelleKorrektur, "System");
-                    }
-
-                    elasticArchiveRecord.IsAnonymized = result.IsAnonymized;
-
-                    if (result.CanSkipTitleUpdate)
-                    {
-                        return elasticArchiveRecord;
-                    }
+                    dbManuelleKorrekturAccess.InsertOrUpdateManuelleKorrektur(manuelleKorrektur, "System");
                 }
 
-                anonymizationReferenceEngine.UpdateSelf(elasticArchiveRecord);
-                anonymizationReferenceEngine.UpdateDependentRecords(elasticArchiveRecord);
+                elasticArchiveRecord.IsAnonymized = result.IsAnonymized;
+
+                if (result.CanSkipTitleUpdate)
+                {
+                    return elasticArchiveRecord;
+                }
             }
+
+            anonymizationReferenceEngine.UpdateSelf(elasticArchiveRecord);
+            anonymizationReferenceEngine.UpdateDependentRecords(elasticArchiveRecord);
 
             return elasticArchiveRecord;
         }
@@ -292,13 +293,16 @@ namespace CMI.Manager.Index
             // Es existieren nur FieldAccessTokens, wenn der Datensatz in Schutzfrist ist und gesperrt ist
             if (!elasticArchiveRecord.FieldAccessTokens.Any())
             {
-                if (int.TryParse(elasticArchiveRecord.ArchiveRecordId, out int veId))
+                var manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == elasticArchiveRecord.ArchiveRecordId).Result;
+                if (manuelleKorrektur == null)
                 {
-                    var manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == veId).Result;
-                    if (manuelleKorrektur != null)
-                    {
-                        dbManuelleKorrekturAccess.DeleteManuelleKorrektur(manuelleKorrektur.ManuelleKorrekturId);
-                    }
+                    var scopeArchiveRecordId = elasticArchiveRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value;
+                    manuelleKorrektur = dbManuelleKorrekturAccess.GetManuelleKorrektur(mk => mk.VeId == scopeArchiveRecordId).Result;
+                }
+
+                if (manuelleKorrektur != null)
+                {
+                    dbManuelleKorrekturAccess.DeleteManuelleKorrektur(manuelleKorrektur.ManuelleKorrekturId);
                 }
             }
         }
@@ -341,6 +345,21 @@ namespace CMI.Manager.Index
                     {
                         value = "Keine Angabe";
                     }
+                    if (fieldConfiguration.TargetField == "ScopeID" && !string.IsNullOrWhiteSpace(value.ToString()) )
+                    {
+                        if (value is List<string> {Count: > 0} list)
+                        {
+                            elasticArchiveRecord.ExternalKeys.Add(new ExternalKey { Key = "scopeArchiv", Value = list.FirstOrDefault() });
+                        }
+                        else
+                        {
+                            elasticArchiveRecord.ExternalKeys.Add(new ExternalKey { Key = "scopeArchiv", Value = value.ToString() });
+                        }
+                        
+                        elasticArchiveRecord.ExternalKeys.Add(new ExternalKey { Key = "ActaPro", Value = elasticArchiveRecord.ArchiveRecordId });
+                        continue;
+                    }
+                    
 
                     if (value != null)
                     {
@@ -382,6 +401,14 @@ namespace CMI.Manager.Index
                     case ElasticFieldTypes.TypeString:
                         var textExtractor = new TextExtractor();
                         retVal = GetValue(detailData, fieldConfiguration, textExtractor);
+
+                        // Some fields need concatenation of repeated values into one string with new lines
+                        var doConcatRepeatedValues = NeedsRepeatedValuesConcatenation(fieldConfiguration);
+                        if (doConcatRepeatedValues)
+                        {
+                            retVal = string.Join(Environment.NewLine, (List<string>) retVal);
+                        }
+
                         break;
                     case ElasticFieldTypes.TypeTimePeriod:
                         var timePeriodExtractor = new TimePeriodExtractor();
@@ -436,18 +463,13 @@ namespace CMI.Manager.Index
             // that stiches the data together in one field.
             if (detailData.First().ElementType == DataElementElementType.memo)
             {
-                retVal = extractor.GetValue(detailData, fieldConfiguration.ElementId);
+                retVal = extractor.GetValue(detailData, fieldConfiguration.ElementName);
             }
             else
             {
                 retVal = fieldConfiguration.IsRepeatable
-                    ? extractor.GetListValues(detailData, fieldConfiguration.ElementId)
-                    : extractor.GetValue(detailData, fieldConfiguration.ElementId);
-            }
-
-            if (fieldConfiguration.IsDefaultField && retVal is List<string>)
-            {
-                retVal = string.Join(Environment.NewLine, (List<string>) retVal);
+                    ? extractor.GetListValues(detailData, fieldConfiguration.ElementName)
+                    : extractor.GetValue(detailData, fieldConfiguration.ElementName);
             }
 
             return retVal;
@@ -458,7 +480,7 @@ namespace CMI.Manager.Index
         /// Checks if the newly synced record has different texts than the existing corrections.
         /// 1. If the automatic anonymized text from the service has changed, copy the new value to the automatic field
         ///    and indicate that there are changes
-        /// 2. If the original value from the AIS has changed, we can later skip the update of references in case of the title
+        /// 2. If the original value from the AIS has changed, we can later skip the update of References in case of the title
         ///    and as well indicate that there are changes
         /// </summary>
         /// <param name="manuelleKorrektur"></param>
@@ -475,6 +497,13 @@ namespace CMI.Manager.Index
 
             };
             var isPublished = manuelleKorrektur.Anonymisierungsstatus == (int) AnonymisierungsStatusEnum.Published;
+
+            if (manuelleKorrektur.VeId != archiveRecord.ArchiveRecordId)
+            {
+                manuelleKorrektur.VeId = archiveRecord.ArchiveRecordId;
+                result.HasChanges = true;
+            }
+            
             foreach (var feld in manuelleKorrektur.ManuelleKorrekturFelder)
             {
                 switch (feld.Feldname)
@@ -612,6 +641,23 @@ namespace CMI.Manager.Index
             {
                 feld.Manuell = "=== Überprüfung erforderlich ===" + Environment.NewLine + feld.Manuell;
             }
+        }
+
+        private static bool NeedsRepeatedValuesConcatenation(FieldConfiguration fieldConfiguration)
+        {
+            // All fields that are not default fields do not need concatenation
+            if (!fieldConfiguration.IsDefaultField)
+            {
+                return false;
+            }
+
+            // Only Title and WithinInfo need concatenation of repeated values
+            return fieldConfiguration.TargetField switch
+            {
+                "Title" => true,
+                "WithinInfo" => true,
+                _ => false
+            };
         }
     }
 }

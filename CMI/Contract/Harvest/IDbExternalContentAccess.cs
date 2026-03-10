@@ -1,4 +1,5 @@
 ﻿using CMI.Contract.Common;
+using System.Threading.Tasks;
 
 namespace CMI.Contract.Harvest
 {
@@ -12,6 +13,6 @@ namespace CMI.Contract.Harvest
         /// </summary>
         /// <param name="archiveRecordId">The archive record identifier.</param>
         /// <returns>DigitizationOrderDataResult.</returns>
-        DigitizationOrderDataResult GetDigitizationOrderData(string archiveRecordId);
+        Task<DigitizationOrderDataResult> GetDigitizationOrderData(string archiveRecordId);
     }
 }

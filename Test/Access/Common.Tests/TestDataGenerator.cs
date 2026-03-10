@@ -32,11 +32,8 @@ namespace CMI.Access.Common.Tests
                         "verschlüsselte Nachrichten"
                     }, id);
 
-            record.HasImage = false;
-            record.HasAudioVideo = false;
-            record.FormerReferenceCode = string.Empty;
-
-            record.PlayingLengthInS = id % 31 == 0 ? (int) (91 * id) % 3600 : 0;
+            record.FormerReferenceCode = [];
+            
             record.Extent = PickFromArray(
                                 new[] {"1", "2", "5", "21"}, id) +
                             " " +

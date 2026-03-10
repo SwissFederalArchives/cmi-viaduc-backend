@@ -7,6 +7,7 @@ using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Entities;
 using CMI.Engine.Anonymization;
+using CMI.Utilities.ActaPro;
 using Serilog;
 
 namespace CMI.Manager.Viaduc
@@ -27,21 +28,19 @@ namespace CMI.Manager.Viaduc
         public async Task<ManuelleKorrekturDetailItem> GetManuelleKorrektur(int manuelleKorrekturId)
         {
             var manuelleKorrektur = await dbManuelleKorrekturAccess.GetManuelleKorrektur(manuelleKorrekturId);
-            var elasticRecord = dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId.ToString(), MetadataToExclude.OCRContentAndFiles);
+            var elasticRecord = dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId, MetadataToExclude.OCRContentAndFiles);
             if (elasticRecord == null)
             {
                 return null;
             }
             var verweise = elasticRecord.References.Select(r => dbSearchAccess.FindDocumentWithoutSecurity(r.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles)).ToList();
-            var elasticRecordChildren = dbSearchAccess.GetChildrenWithoutSecurity(elasticRecord.ArchiveRecordId, true);
-
+            var elasticRecordChildren = dbSearchAccess.GetChildrenWithoutSecurity(elasticRecord.ArchiveRecordId, elasticRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true);
             return await Task.FromResult(new ManuelleKorrekturDetailItem
             {
                 ArchivplanKontext = elasticRecord.GetArchivePlanContext(),
                 UntergeordneteVEs = CovertToArchiveRecordContextItems(elasticRecordChildren),
                 VerweiseVEs = CovertToArchiveRecordContextItems(verweise),
                 ManuelleKorrektur = manuelleKorrektur
-
             });
         }
 
@@ -75,6 +74,7 @@ namespace CMI.Manager.Viaduc
         {
             var result = new Dictionary<string, string>();
             var successfullyAdded = false;
+            var actaProMappingProvider = new ActaProMappingProvider();
 
             foreach (var id in identifiers)
             {
@@ -96,6 +96,16 @@ namespace CMI.Manager.Viaduc
                         continue;
                     }
                     var archiveRecord = GetElasticArchiveDbRecord(identifier);
+                    if (archiveRecord == null)
+                    {
+                        var scopeId = actaProMappingProvider.GetScopeId(identifier);
+                        if (scopeId > 0)
+                        {
+                            result.Add(result.Count.ToString(), $"VE mit der ActaPro VE-ID '{identifier}' wurde mit Scope VE-ID '{scopeId}' gefunden.");
+                            archiveRecord = GetElasticArchiveDbRecord(scopeId.ToString());
+                        }
+                    }
+
                     if (archiveRecord == null)
                     {
                         // Signatur (E5330-01#1982/1#1010*) kann nicht als Key verwendet werden

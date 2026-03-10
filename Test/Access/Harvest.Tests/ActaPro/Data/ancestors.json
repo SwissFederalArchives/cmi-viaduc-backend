@@ -1,0 +1,47 @@
+{
+  "document": {
+    "doctype": "Klas",
+    "path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86; Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555; Best    63b63d89-f681-4d3f-bd51-b4fd79698022; Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677; Klas    4757993a-1b89-4ad2-9f1c-ca0420eacce1",
+    "Kl_Name": "Revision der Militärartikel",
+    "Kl_Signatur": "E27#01.B",
+    "id": "Klas    4757993a-1b89-4ad2-9f1c-ca0420eacce1",
+    "title": "E27#01.B   Revision der Militärartikel, 01.01.1895-31.12.1940 (Serie)",
+    "Laufzeit": "18950101 19401231"
+  },
+  "ancestors": [
+    {
+      "doctype": "Arch",
+      "path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86",
+      "Ar_Kuerz": "CH-BAR#Unterlagen*",
+      "Ar_Name": "Gesamtbestand des Schweizerischen Bundesarchivs (1798-)",
+      "id": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86",
+      "title": "CH-BAR#Unterlagen*   Gesamtbestand des Schweizerischen Bundesarchivs (1798-), 1424-31.12.2023 (Archiv)",
+      "Laufzeit": "14240101 20231231"
+    },
+    {
+      "doctype": "Tekt",
+      "path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86; Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555",
+      "id": "Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555",
+      "title": "E*   Archiv des Schweizerischen Bundesstaates ab 1848 (Hauptabteilung)",
+      "Te_Name": "Archiv des Schweizerischen Bundesstaates ab 1848",
+      "Te_Sign": "E*"
+    },
+    {
+      "doctype": "Best",
+      "path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86; Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555; Best    63b63d89-f681-4d3f-bd51-b4fd79698022",
+      "id": "Best    63b63d89-f681-4d3f-bd51-b4fd79698022",
+      "Bst_Name": "E27* - Landesverteidigung - 1848-1950",
+      "title": "E27* - Landesverteidigung - 1848-1950",
+      "Bst_Signatur": "E27*"
+    },
+    {
+      "doctype": "Klas",
+      "path": "Arch    2d4296a2-9493-4ce8-be59-43ca27e5ab86; Tekt    ff09f321-6b55-409f-9d2e-4ea63f925555; Best    63b63d89-f681-4d3f-bd51-b4fd79698022; Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677",
+      "id": "Klas    8d9dd4ad-c10b-48e3-bcc2-8948142df677",
+      "Kl_Name": "Klaus Kinski",
+      "title": "E27#01",
+      "Kl_Signatur": "E27#01"
+
+    }
+  ]
+}

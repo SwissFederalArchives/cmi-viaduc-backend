@@ -20,27 +20,38 @@ param (
 
 
 Function Export-All-OpenSource {
+    # (unchanged) exclude these helper scripts when zipping
     $ToExclude = 'export-all-opensource.ps1', 'publish-all-opensource.ps1'
-    Export-OpenSource "cmi-viaduc-web-core" $ToExclude
-    Export-OpenSource "cmi-viaduc-web-frontend"
-    Export-OpenSource "cmi-viaduc-web-management"
-	Export-OpenSource "cmi-iiif-frontend"
-	Export-OpenSource "cmi-iiif-backend"
+    
+    # ❌ REMOVE these (old, separate repos):
+    # Export-OpenSource "cmi-viaduc-web-core" $ToExclude
+    # Export-OpenSource "cmi-viaduc-web-frontend"
+    # Export-OpenSource "cmi-viaduc-web-management"
 
+    # ✅ KEEP IIIF as separate repos (unchanged)
+    Export-OpenSource "cmi-iiif-frontend"
+    Export-OpenSource "cmi-iiif-backend"
+
+    # ✅ Export the monorepo once. Reuse your existing exclude list.
     $ToExclude = @(
-                   'RemoveBindingRedirect.ps1', 
-                   'Update Binding Redirects - readme.txt',
-                   'Change Script Art. 12.3.sql',
-                   'Change Script PVW-426 .sql',
-                   'Change Script PVW-798.sql',
-                   'Change Script PVW-895 Anonymization.sql',
-                   'Small Tests for FK_VIADUC_DIR_ACCESS.sql',
-                   'Small Tests for FK_VIADUC_VE_ACCESS_TKN.sql',
-                   'Viaduc DB Objects for scopeArchiv Database.sql'
-                  )
+        'RemoveBindingRedirect.ps1', 
+        'Update Binding Redirects - readme.txt',
+        'Change Script Art. 12.3.sql',
+        'Change Script PVW-426 .sql',
+        'Change Script PVW-798.sql',
+        'Change Script PVW-895 Anonymization.sql',
+        'Small Tests for FK_VIADUC_DIR_ACCESS.sql',
+        'Small Tests for FK_VIADUC_VE_ACCESS_TKN.sql',
+        'Viaduc DB Objects for scopeArchiv Database.sql'
+    )
+
+    # NOTE: ResultName stays as before to minimize change. 
+    # If you prefer the zip to be called 'cmi-viaduc.zip', set -ResultName "cmi-viaduc".
     Export-OpenSource -ProjectName "viaduc" -FilesOrDirsToExclude $ToExclude -ResultName "cmi-viaduc-backend"
+
     Write-Host "Finished exporting repositories"
 }
+
 
 
 Function Export-OpenSource([string] $ProjectName, [string[]] $FilesOrDirsToExclude, [string] $ResultName) {
@@ -176,10 +187,28 @@ Function Write-Replacements {
         {
             Write-IIIF-Backend-Replacements
         }		
-        "viaduc"
-        {
-            Write-Viaduc-Replacements
-        }
+        "viaduc" {
+			# backend at repo root
+			Write-Viaduc-Replacements
+
+			# Temporarily point ProjectName to each client subfolder under viaduc
+			$origProjectName = $ProjectName
+			try {
+				$ProjectName = Join-Path $origProjectName 'CMI\Web.Clients\web-core'
+				Write-Core-Replacements
+
+				$ProjectName = Join-Path $origProjectName 'CMI\Web.Clients\web-frontend'
+				Write-Frontend-Replacements
+
+				$ProjectName = Join-Path $origProjectName 'CMI\Web.Clients\web-management'
+				Write-Management-Replacements
+			}
+			finally {
+				# Always restore to keep Write-Readme and later steps safe
+				$ProjectName = $origProjectName
+			}
+		}
+
         Default
         {
             Write-Error("Unbekanntes Projekt $ProjectName")

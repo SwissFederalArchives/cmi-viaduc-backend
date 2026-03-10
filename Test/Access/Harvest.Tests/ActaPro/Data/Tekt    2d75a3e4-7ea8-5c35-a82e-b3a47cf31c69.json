@@ -1,0 +1,92 @@
+{
+  "object": "document",
+  "type": "Tekt",
+  "DocKey": "Tekt    2d75a3e4-7ea8-5c35-a82e-b3a47cf31c69",
+  "DocTitle": "Depositen und Schenkungen ab 1798",
+  "CreationDate": "01.01.2008",
+  "OwnerID": "ACTAPRO",
+  "CreatorID": "ACTAPRO",
+  "ChangeDate": "05.12.2024 10:55:33:576",
+  "block": {
+    "type": "Tekt",
+    "fields": [
+      {
+        "type": "Ref_Gp",
+        "fields": [
+          {
+            "type": "Ref_DocKey",
+            "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+          },
+          {
+            "type": "Ref_Doctype",
+            "value": "Arch"
+          },
+          {
+            "type": "Ref_Type",
+            "value": "P"
+          },
+          {
+            "type": "Ref_DocOrder",
+            "value": "5"
+          }
+        ]
+      },
+      {
+        "type": "ChangeUserID",
+        "value": "U1926"
+      },
+      {
+        "type": "CreateUserID",
+        "value": "SCOPE_ADMIN"
+      },
+      {
+        "type": "ChangeDate",
+        "value": "26.09.2011"
+      },
+      {
+        "type": "CreateDate",
+        "value": "06.08.2002"
+      },
+      {
+        "type": "Laufzeit",
+        "value": "1424-2007.03.31"
+      },
+      {
+        "type": "Ar_Id",
+        "value": "Arch    b83a8ece-92dc-506d-9baa-4126a74c139f"
+      },
+      {
+        "type": "Te_Id",
+        "value": "2d75a3e4-7ea8-5c35-a82e-b3a47cf31c69"
+      },
+      {
+        "type": "Te_Bez",
+        "value": "J*   Depositen und Schenkungen ab 1798, 1424-2007.03.31 (Hauptabteilung)"
+      },
+      {
+        "type": "UUID",
+        "value": "stab_"
+      },
+      {
+        "type": "ScopeID",
+        "value": "33"
+      },
+      {
+        "type": "Status",
+        "value": "abgeschlossen"
+      },
+      {
+        "type": "Internet_sichtbar",
+        "value": "Ja"
+      },
+      {
+        "type": "Te_Sign",
+        "value": "J*"
+      },
+      {
+        "type": "Te_Name",
+        "value": "Depositen und Schenkungen ab 1798"
+      }
+    ]
+  }
+}

@@ -1,9 +1,9 @@
-﻿using System.Reflection;
-using Autofac;
-using CMI.Access.Harvest;
-using CMI.Access.Harvest.ScopeArchiv;
+﻿using CMI.Access.Harvest;
+using CMI.Access.Harvest.ActaPro;
 using CMI.Contract.Harvest;
-using MassTransit;
+using System.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace CMI.Manager.ExternalContent.Infrastructure
 {
     /// <summary>
@@ -11,27 +11,26 @@ namespace CMI.Manager.ExternalContent.Infrastructure
     /// </summary>
     internal class ContainerConfigurator
     {
-        public static ContainerBuilder Configure()
+        public static IServiceCollection Configure()
         {
-            var builder = new ContainerBuilder();
+            var services = new ServiceCollection();
 
-            // register the different consumers and classes
-            builder.RegisterType<ExternalContentManager>().As<IExternalContentManager>();
-            builder.RegisterType<LanguageSettings>().AsSelf();
-            builder.RegisterType<ApplicationSettings>().AsSelf();
-            builder.RegisterType<CachedLookupData>().AsSelf();
-            builder.RegisterType<SipDateBuilder>().AsSelf();
-            builder.RegisterType<DigitizationOrderBuilder>().AsSelf();
-            builder.RegisterType<ArchiveRecordBuilder>().AsSelf();
-            builder.RegisterType<AISDataAccess>().As<IDbExternalContentAccess>();
-            builder.RegisterType<AISDataProvider>().As<IAISDataProvider>();
+            services.AddScoped<IExternalContentManager, ExternalContentManager>();
+            services.AddScoped<IDbExternalContentAccess, AISDataAccess>();
+            services.AddScoped<IAISDataProvider, ActaProAISDataProvider>();
+            services.AddScoped<IArchiveRecordBuilder, ActaProArchiveRecordBuilder>();
+            services.AddScoped<IDigitizationOrderBuilder, ActaProDigitizationOrderBuilder>();
+            services.AddScoped<IActaProClient, ActaProClient>();
 
-            // register all the consumers
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-                .AssignableTo<IConsumer>()
-                .AsSelf();
+            services.AddSingleton<CachedLookupData>();
+            services.AddSingleton<TokenProvider>();
+            services.AddScoped<AuthHandler>();
+            services.AddScoped<IAuthService, AuthService>();
 
-            return builder;
+            services.AddHttpClient<IActaProClient, ActaProClient>()
+                .AddHttpMessageHandler<AuthHandler>();
+
+            return services;
         }
     }
 }

@@ -6,7 +6,7 @@ export interface OrderItem {
 	period: string;
 	referenceCode: string;
 	comment: string;
-	veId: number;
+	veId: string;
 	id: string;
 	couldNeedAReason: boolean;
 	reason: number;

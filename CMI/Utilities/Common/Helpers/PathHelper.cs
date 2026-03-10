@@ -55,12 +55,12 @@ namespace CMI.Utilities.Common.Helpers
         {
             var retVal = new List<PathItem>();
 
-            // Max length of scope id is 10 digits. As we like to split in 3 parts, we pad for 12
-            var id = archiveId.PadLeft(12, '0');
-
+            // ActaPro Id is 'Vz      a2ad9673-74f1-5705-9775-7072b417d3d3'
+            var id = archiveId.Length == 36 ? archiveId : archiveId.Substring(archiveId.Length - 36, 36);
+             
             for (var i = 0; i < 3; i++)
             {
-                retVal.Add(new (id.Substring(i*4, 4), id.Substring(i * 4, 4)));
+                retVal.Add(new (id.Substring(i*12, 12), id.Substring(i * 12, 12)));
             }
 
             return retVal;

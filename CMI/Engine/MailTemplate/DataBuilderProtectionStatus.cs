@@ -4,5 +4,6 @@ public enum DataBuilderProtectionStatus
 {
     AllAnonymized,
     AllUnanonymized,
-    DependentOnApproveStatus
+    DependentOnApproveStatus,
+    AllWithoutTitleAnonymized
 }

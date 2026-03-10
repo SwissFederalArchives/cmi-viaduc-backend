@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CMI.Access.Common.Properties;
+﻿using CMI.Access.Common.Properties;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Extensions;
 using CMI.Utilities.Common.Helpers;
 using Elasticsearch.Net;
 using Nest;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CMI.Utilities.ActaPro;
+using Newtonsoft.Json;
 
 namespace CMI.Access.Common
 {
@@ -16,6 +18,7 @@ namespace CMI.Access.Common
     {
         private readonly ElasticIndexHelper helper;
         public const int  ElasticSearchHitLimit = 10000;
+        public ActaProMappingProvider ActaProMappingProvider { get; }
 
         public SearchIndexDataAccess()
         {
@@ -24,6 +27,7 @@ namespace CMI.Access.Common
             string pwd = Settings.Default.ElasticSearchPWD;
             var node = new Uri(uri);
             helper = new ElasticIndexHelper(node, username, pwd);
+            ActaProMappingProvider = new ActaProMappingProvider();
         }
 
         public SearchIndexDataAccess(Uri address, string username, string password)
@@ -95,15 +99,15 @@ namespace CMI.Access.Common
             return record;
         }
 
-        public IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, bool allLevels)
+        public IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, string externalKeyId, bool allLevels)
         {
-            return GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, allLevels);
+            return GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, externalKeyId, allLevels);
         }
 
-        public IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, bool allLevels)
+        public IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, string externalKeyId, bool allLevels)
         {
-            var children = GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, allLevels).ToList();
-            var childrenDbRecord = GetChildrenInternal<ElasticArchiveDbRecord>(archiveRecordId, allLevels).ToList();
+            var children = GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, externalKeyId, allLevels).ToList();
+            var childrenDbRecord = GetChildrenInternal<ElasticArchiveDbRecord>(archiveRecordId, externalKeyId, allLevels).ToList();
 
             // Now overwrite potentially anonymized fields with the clear values
             foreach (var child in children)
@@ -126,15 +130,36 @@ namespace CMI.Access.Common
         }
 
 
-        private IEnumerable<T> GetChildrenInternal<T>(string archiveRecordId, bool allLevels) where T : class
+        private IEnumerable<T> GetChildrenInternal<T>(string archiveRecordId, string externalKeyId, bool allLevels) where T : class
         {
             // Required to use typed search request, or else the default index setting is ignored.
             // See https://github.com/elastic/elasticsearch-net/issues/1906
             var searchRequest = new SearchRequest<T>();
             QueryContainer query;
 
-            if (!allLevels)
+            if(!allLevels && int.TryParse(externalKeyId, out _))
             {
+                Log.Debug("GetChildrenInternal with externalKeyId from scope: {externalKeyId}", externalKeyId);
+                query = new BoolQuery
+                {
+                    Should = new List<QueryContainer>
+                    {
+                        new TermQuery
+                        {
+                            Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
+                            Value = externalKeyId
+                        },
+                        new TermQuery
+                        {
+                            Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
+                            Value = archiveRecordId
+                        }
+                    }
+                };
+            }
+            else if (!allLevels)
+            {
+                Log.Debug("GetChildrenInternal with docKey: {archiveRecordId}", archiveRecordId);
                 query = new TermQuery
                 {
                     Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
@@ -143,20 +168,66 @@ namespace CMI.Access.Common
             }
             else
             {
-                var current = FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
-                query = new BoolQuery
+                Log.Debug("GetChildrenInternal with all levels: {archiveRecordId} and externalKey {externalKeyId}", archiveRecordId, externalKeyId);
+
+                // This is the case if a record was not yet synced. It containts the treePath with the concatenated scope Ids
+                // To make sure we get all child records, we must also search the treepath with the mapped ids.
+                var current = FindDocument(externalKeyId, MetadataToExclude.OCRContentAndFiles);
+                // It is also possible that an ActaPro record is associated with the ScopeId.
+                if (int.TryParse(current?.ArchiveRecordId, out _))
                 {
-                    Must = new List<QueryContainer>
+                    var scopeIds = new List<int>();
+                    for (var i = 0; i < current.TreePath.Length; i += 10)
                     {
-                        new WildcardQuery
-                            {Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(), Value = current != null ? current.TreePath + "*" : ""},
-                        new NumericRangeQuery
-                            {Field = nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase(), GreaterThan = current?.TreeLevel ?? 999}
+                        scopeIds.Add(int.Parse(current.TreePath.Substring(i, 10)));
                     }
-                };
+
+                    var uuIds = scopeIds.Select(s => ActaProMappingProvider.GetActaProId(s.ToString()) ?? s.ToString());
+                    var actaProTreePath = string.Join("", uuIds);
+
+                    query = new BoolQuery
+                    {
+                        Must = new List<QueryContainer>
+                        {
+                            new NumericRangeQuery
+                                {Field = nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase(), GreaterThan = current?.TreeLevel ?? 999},
+                            new BoolQuery()
+                            {
+                                Should = new List<QueryContainer>
+                                {
+                                    new WildcardQuery
+                                    {
+                                        Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
+                                        Value = current.TreePath + "*"
+                                    },
+                                    new WildcardQuery
+                                    {
+                                        Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
+                                        Value = !string.IsNullOrEmpty(actaProTreePath) ? actaProTreePath + "*" : ""
+                                    },
+                                }
+                            }
+                        },
+                    };
+                }
+                else
+                {
+                    query = new BoolQuery
+                    {
+                        Must = new List<QueryContainer>
+                        {
+                            new WildcardQuery
+                            {
+                                Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
+                                Value = current != null ? current.TreePath + "*" : ""
+                            },
+                            new NumericRangeQuery
+                                {Field = nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase(), GreaterThan = current?.TreeLevel ?? 999}
+                        }
+                    };
+                }
             }
 
-            
             searchRequest.Query = query;
             searchRequest.From = 0;
             searchRequest.Size = ElasticSearchHitLimit;
@@ -167,7 +238,10 @@ namespace CMI.Access.Common
             searchRequest.Source = sourceFilter;
 
             var result = helper.Client.Search<T>(searchRequest);
+            
+            Log.Debug("Found the following child documents: {documents}", JsonConvert.SerializeObject(result.Documents));
             return result.Documents;
         }
+
     }
 }
