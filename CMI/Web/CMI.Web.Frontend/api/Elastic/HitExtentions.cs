@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
-using Elasticsearch.Net;
-using Nest;
+using Elastic.Clients.Elasticsearch.Core.Search;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using Elastic.Clients.Elasticsearch.Core.Explain;
 
 namespace CMI.Web.Frontend.api.Elastic;
 
 public static class HitExtentions
 {
-    public static JObject GetHighlightingObj<T>(this IHit<T> hit, UserAccess access, string title ) where T : TreeRecord
+    public static JObject GetHighlightingObj<T>(this Hit<T> hit, UserAccess access, string title) where T : TreeRecord
     {
         if (hit.Highlight == null || !hit.Highlight.Any())
         {
@@ -60,8 +61,8 @@ public static class HitExtentions
 
         return highlightobj;
     }
-    
-    public static JObject GetExplanationObj<T>(this IHit<T> hit, IElasticsearchSerializer serializer) where T : TreeRecord
+
+    public static JObject GetExplanationObj<T>(this Hit<T> hit) where T : TreeRecord
     {
         if (hit?.Explanation?.Value == null)
         {
@@ -71,13 +72,13 @@ public static class HitExtentions
         var explanationsObj = new JObject
         {
             {"value", hit.Explanation.Value},
-            {"explanation", GetExplanationWithObscuredValues(serializer.SerializeToString(hit.Explanation))}
+            {"explanation", GetExplanationWithObscuredValues(hit.Explanation)}
         };
 
         return explanationsObj;
     }
-    
-    private static List<string> FindHighlights<T>(IHit<T> hit, string key) where T : TreeRecord
+
+    private static List<string> FindHighlights<T>(Hit<T> hit, string key) where T : TreeRecord
     {
         var foundHighlight = hit.Highlight.FirstOrDefault(kv => kv.Key == key);
 
@@ -101,9 +102,10 @@ public static class HitExtentions
         enumerable = enumerable.Take(1);
         return enumerable.ToList();
     }
-    
-    private static string GetExplanationWithObscuredValues(string serializedExplanation)
+
+    private static string GetExplanationWithObscuredValues(Explanation explanation)
     {
+        var serializedExplanation = System.Text.Json.JsonSerializer.Serialize(explanation, new JsonSerializerOptions(JsonSerializerDefaults.Web));
         if (string.IsNullOrEmpty(serializedExplanation))
         {
             return serializedExplanation;

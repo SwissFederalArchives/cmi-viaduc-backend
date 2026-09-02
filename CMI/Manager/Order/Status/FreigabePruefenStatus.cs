@@ -201,7 +201,7 @@ namespace CMI.Manager.Order.Status
                 case MailTo.Kunde:
                     expando.Weiterleitung = false;
                     expando.To = ((Person) expando.Besteller).EmailAddress;
-                    expando.Sprachen = new[] {new Sprache(((Person) expando.Besteller).Sprache)};
+                    expando.Sprachen = new[] { new Sprache(((Person) expando.Besteller).Sprache) };
                     break;
                 case MailTo.FreigabeManager:
                     expando.Weiterleitung = true;
@@ -261,7 +261,9 @@ namespace CMI.Manager.Order.Status
 
             if (!string.IsNullOrWhiteSpace(veId))
             {
-                archiveRecord = Context.IndexAccess.FindDocument(veId, MetadataToExclude.OCRContentAndFiles);
+                archiveRecord = Context.IndexAccess.FindDocument(veId, MetadataToExclude.OCRContentAndFiles).ConfigureAwait(false)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             return !string.IsNullOrEmpty(archiveRecord?.PrimaryDataLink);

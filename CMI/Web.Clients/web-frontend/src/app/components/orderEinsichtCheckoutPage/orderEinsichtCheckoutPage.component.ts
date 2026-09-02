@@ -3,9 +3,10 @@ import {Ordering, ShippingType, TranslationService, Utilities as _util} from '@c
 import {AuthorizationService, SeoService, ShoppingCartService, UrlService} from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-order-einsicht-checkout-page',
-	templateUrl: 'orderEinsichtCheckoutPage.component.html',
-	styleUrls: ['./orderEinsichtCheckoutPage.component.less']
+    selector: 'cmi-viaduc-order-einsicht-checkout-page',
+    templateUrl: 'orderEinsichtCheckoutPage.component.html',
+    styleUrls: ['./orderEinsichtCheckoutPage.component.less'],
+    standalone: false
 })
 export class
 OrderEinsichtCheckoutPageComponent implements OnInit {

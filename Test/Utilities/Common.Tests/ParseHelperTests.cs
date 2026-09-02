@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using CMI.Utilities.Common.Helpers;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Utilities.Common.Tests
@@ -20,10 +20,10 @@ namespace CMI.Utilities.Common.Tests
             var resultParseValueSwissUsDate = parseValueUsDate.ParseDateTimeSwiss();
 
             // ASSERT
-            resultParseValueSwissDate.Should().NotBeNull();
-            resultParseValueSwissDate.Should().Be(new DateTime(2018, 7, 6));
+            resultParseValueSwissDate.ShouldNotBeNull();
+            resultParseValueSwissDate.ShouldBe(new DateTime(2018, 7, 6));
 
-            resultParseValueSwissUsDate.Should().BeNull();
+            resultParseValueSwissUsDate.ShouldBeNull();
         }
 
         [Test]
@@ -38,9 +38,9 @@ namespace CMI.Utilities.Common.Tests
             var resultParseValueEmpty = string.Empty.ParseDateTimeSwiss();
 
             // ASSERT
-            resultParseValueText.Should().BeNull();
-            resultParseValueNull.Should().BeNull();
-            resultParseValueEmpty.Should().BeNull();
+            resultParseValueText.ShouldBeNull();
+            resultParseValueNull.ShouldBeNull();
+            resultParseValueEmpty.ShouldBeNull();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -21,13 +21,13 @@ namespace CMI.Utilities.Template.Tests
         [Test]
         public void AnEmptyTemplateShouldReturnAnEmptyResult()
         {
-            mailHelper.TransformToHtml("", new object()).Should().Be("");
+            mailHelper.TransformToHtml("", new object()).ShouldBe("");
         }
 
         [Test]
         public void ATemplateWithoutPlaceholdersShouldReturnTheTemplate()
         {
-            mailHelper.TransformToHtml("Hello", new object()).Should().Be("Hello");
+            mailHelper.TransformToHtml("Hello", new object()).ShouldBe("Hello");
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace CMI.Utilities.Template.Tests
         {
             var data = new Dictionary<string, object>();
             data["InteractiveUser"] = new Person {Name = "Peter"};
-            mailHelper.TransformToHtml("Hello {{InteractiveUser.Name}}", data).Should().Be("Hello Peter");
+            mailHelper.TransformToHtml("Hello {{InteractiveUser.Name}}", data).ShouldBe("Hello Peter");
         }
 
         [Test]
@@ -51,8 +51,8 @@ namespace CMI.Utilities.Template.Tests
             var result = mailHelper.TransformToHtml(serializeObject, data);
 
             var email = JsonConvert.DeserializeObject<MailTemplate>(result);
-            email.Body.Should().Be("Hello Peter\r\nDein Auftrag kann abgeholt werden.");
-            email.To.Should().Be("meier@cmiag.ch");
+            email.Body.ShouldBe("Hello Peter\r\nDein Auftrag kann abgeholt werden.");
+            email.To.ShouldBe("meier@cmiag.ch");
         }
 
 
@@ -62,7 +62,7 @@ namespace CMI.Utilities.Template.Tests
             dynamic expando = new ExpandoObject();
             expando.Text = "Hello\r\nWorld!";
             string r = mailHelper.TransformToHtml("{{Text}}", expando);
-            r.Should().Be("Hello<br>World!");
+            r.ShouldBe("Hello<br>World!");
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace CMI.Utilities.Template.Tests
             dynamic expando = new ExpandoObject();
             expando.Text = "Hello\nWorld!";
             string r = mailHelper.TransformToHtml("{{Text}}", expando);
-            r.Should().Be("Hello<br>World!");
+            r.ShouldBe("Hello<br>World!");
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace CMI.Utilities.Template.Tests
             dynamic expando = new ExpandoObject();
             expando.Text = "hello";
             string r = mailHelper.TransformToHtml("<HTML><H1>\n{{Text}}</H1>\n</HTML>", expando);
-            r.Should().Be("<HTML><H1>\nhello</H1>\n</HTML>");
+            r.ShouldBe("<HTML><H1>\nhello</H1>\n</HTML>");
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace CMI.Utilities.Template.Tests
             dynamic expando = new ExpandoObject();
             expando.Text = "hä";
             string r = mailHelper.TransformToHtml("{{Text}}", expando);
-            r.Should().Be("h&#228;");
+            r.ShouldBe("h&#228;");
         }
 
         [Test]
@@ -98,7 +98,7 @@ namespace CMI.Utilities.Template.Tests
             dynamic expando = new ExpandoObject();
             expando.Text = "hello";
             string r = mailHelper.TransformToHtml("<HTML><H1>{{Text}}</H1></HTML>", expando);
-            r.Should().Be("<HTML><H1>hello</H1></HTML>");
+            r.ShouldBe("<HTML><H1>hello</H1></HTML>");
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Datum = new DateTime(2019, 5, 16, 13, 15, 02);
 
             string r = mailHelper.TransformToHtml("<HTML><H1>{{Datum}}</H1></HTML>", expando);
-            r.Should().Be("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
+            r.ShouldBe("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
         }
 
         [Test]
@@ -119,7 +119,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Datum = new DateTime(2019, 5, 16, 13, 15, 02).ToString("dd.MM.yyyy HH:mm");
 
             string r = mailHelper.TransformToHtml("<html lang=\"en\"><H1>{{Datum}}</H1></html>", expando, "de");
-            r.Should().Be("<html lang=\"en\"><H1>16.05.2019 13:15</H1></html>");
+            r.ShouldBe("<html lang=\"en\"><H1>16.05.2019 13:15</H1></html>");
         }
 
         [Test]
@@ -129,7 +129,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Datum = new DateTime(2019, 5, 16, 13, 15, 02);
 
             string r = mailHelper.TransformToHtml("<HTML><H1>{{Datum}}</H1></HTML>", expando, "fr");
-            r.Should().Be("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
+            r.ShouldBe("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Datum = new DateTime(2019, 5, 16, 13, 15, 02);
 
             string r = mailHelper.TransformToHtml("<HTML><H1>{{Datum}}</H1></HTML>", expando, "it");
-            r.Should().Be("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
+            r.ShouldBe("<HTML><H1>16.05.2019 13:15:02</H1></HTML>");
         }
 
         [Test]
@@ -149,7 +149,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Datum = new DateTime(2019, 5, 16, 13, 15, 02);
 
             string r = mailHelper.TransformToHtml("<HTML><H1>{{Datum}}</H1></HTML>", expando, "en");
-            r.Should().Be("<HTML><H1>16/05/2019 13:15:02</H1></HTML>");
+            r.ShouldBe("<HTML><H1>16/05/2019 13:15:02</H1></HTML>");
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Zahl = 1234567.50M;
 
             string r = mailHelper.TransformToText("{{Zahl}}", expando, "de");
-            r.Should().Be("1234567.50");
+            r.ShouldBe("1234567.50");
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Zahl = 1234567.50M;
 
             string r = mailHelper.TransformToText("{{Zahl}}", expando, "de");
-            r.Should().Be("1234567.50");
+            r.ShouldBe("1234567.50");
         }
 
         [Test]
@@ -179,7 +179,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Zahl = 1234567.50M;
 
             string r = mailHelper.TransformToText("{{Zahl}}", expando, "it");
-            r.Should().Be("1234567.50");
+            r.ShouldBe("1234567.50");
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace CMI.Utilities.Template.Tests
             expando.Zahl = 1234567.50M;
 
             string r = mailHelper.TransformToText("{{Zahl}}", expando, "en");
-            r.Should().Be("1234567.50");
+            r.ShouldBe("1234567.50");
         }
     }
 

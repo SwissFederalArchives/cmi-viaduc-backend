@@ -29,8 +29,8 @@ namespace CMI.Manager.Cache.Tests
             };
 
             var mockFile = new Mock<FileInfoBase>();
-            mockFile.Setup(m => m.CreationTime).Returns(DateTime.Now);
-            mockFile.Setup(m => m.LastAccessTime).Returns(DateTime.Now);
+            mockFile.Setup(m => m.CreationTime).Returns(DateTime.Now.AddSeconds(-1));
+            mockFile.Setup(m => m.LastAccessTime).Returns(DateTime.Now.AddSeconds(-1));
 
             var mockParameterHelper = new Mock<IParameterHelper>();
             mockParameterHelper
@@ -45,7 +45,7 @@ namespace CMI.Manager.Cache.Tests
                     return path.EndsWith(CacheRetentionCategory.UsageCopyEB.ToString()) ? new[] {"fileA", "fileB"} : new string[0];
                 });
 
-            mockFileSystem.Setup(m => m.FileInfo.FromFileName(It.IsAny<string>())).Returns(mockFile.Object);
+            mockFileSystem.Setup(m => m.FileInfo.New(It.IsAny<string>())).Returns(mockFile.Object);
             mockFileSystem.Setup(m => m.File.Delete(It.IsAny<string>()));
 
             var sut = new CacheDeleter(mockParameterHelper.Object, mockFileSystem.Object, mockSleeper.Object);
@@ -79,8 +79,8 @@ namespace CMI.Manager.Cache.Tests
                 .Returns(parameter);
 
             var mockFile = new Mock<FileInfoBase>();
-            mockFile.Setup(m => m.CreationTime).Returns(DateTime.Now);
-            mockFile.Setup(m => m.LastAccessTime).Returns(DateTime.Now);
+            mockFile.Setup(m => m.CreationTime).Returns(DateTime.Now.AddSeconds(-1));
+            mockFile.Setup(m => m.LastAccessTime).Returns(DateTime.Now.AddSeconds(-1));
 
             var mockFileSystem = new Mock<IFileSystem>();
             mockFileSystem
@@ -100,7 +100,7 @@ namespace CMI.Manager.Cache.Tests
                     return new string[0];
                 });
 
-            mockFileSystem.Setup(m => m.FileInfo.FromFileName(It.IsAny<string>())).Returns(mockFile.Object);
+            mockFileSystem.Setup(m => m.FileInfo.New(It.IsAny<string>())).Returns(mockFile.Object);
             mockFileSystem.Setup(m => m.File.Delete(It.IsAny<string>()));
 
             var sut = new CacheDeleter(mockParameterHelper.Object, mockFileSystem.Object, mockSleeper.Object);
@@ -156,7 +156,7 @@ namespace CMI.Manager.Cache.Tests
                     return new string[0];
                 });
 
-            mockFileSystem.Setup(m => m.FileInfo.FromFileName(It.IsAny<string>())).Returns(mockFile.Object);
+            mockFileSystem.Setup(m => m.FileInfo.New(It.IsAny<string>())).Returns(mockFile.Object);
             mockFileSystem.Setup(m => m.File.Delete(It.IsAny<string>()));
 
             var sut = new CacheDeleter(mockParameterHelper.Object, mockFileSystem.Object, mockSleeper.Object);

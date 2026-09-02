@@ -2,7 +2,6 @@ import {UserAccountComponent} from '../..';
 import {
 	CountriesService,
 	Countries,
-	CoreModule,
 	TranslationService,
 	ConfigService,
 	ClientContext
@@ -16,6 +15,19 @@ import {ToastrService} from 'ngx-toastr';
 import {User} from '../../../model';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {provideRouter} from "@angular/router";
+import {NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
+@Pipe({
+	name: 'translate'
+})
+class MockTranslatePipe implements PipeTransform {
+	transform(value: string): string {
+		return value;
+	}
+}
 
 describe('UserAccount', () => {
 	let sut: UserAccountComponent;
@@ -30,7 +42,7 @@ describe('UserAccount', () => {
 	let context: any;
 	let toastr: ToastrService;
 
-	beforeEach(() => {
+	beforeEach(waitForAsync(async () => {
 		toastr = <any>{};
 		context = <any>{
 			authenticated: true,
@@ -42,10 +54,10 @@ describe('UserAccount', () => {
 			}
 		};
 		countriesService = <CountriesService>{
-			getCountries(language: string): Countries {
+			getCountries(_language: string): Countries {
 				return <Countries> [];
 			},
-			sortCountriesByName(countries: Countries, clone: boolean = true): Countries {
+			sortCountriesByName(countries: Countries, _clone: boolean = true): Countries {
 				return countries;
 			}
 		};
@@ -59,7 +71,7 @@ describe('UserAccount', () => {
 			hasMoreThenOe2Rights(): boolean {
 				return this.isInternalUser();
 			},
-			hasRole(r: string): boolean {
+			hasRole(_r: string): boolean {
 				return true;
 			},
 			roles: {
@@ -77,24 +89,27 @@ describe('UserAccount', () => {
 			}
 		};
 		cfg = <ConfigService>{
-			getSetting(key: string, defaultValue?: any): any {
+			getSetting(_key: string, defaultValue?: any): any {
 				return defaultValue;
 			}
 		};
 		txt = <TranslationService>{
-			translate: (text, key) => {
+			translate: (text, _key) => {
 				return text;
 			},
-			get(key: string, defaultValue?: string, ...args): string {
+			get(_key: string, defaultValue?: string, ..._args): string {
 				return defaultValue;
 			}
 		};
 
-		TestBed.configureTestingModule({
+		await TestBed.configureTestingModule({
 			imports: [
-				CoreModule
+				FormsModule,
+				ReactiveFormsModule,
+				MockTranslatePipe
 			],
 			providers: [
+				provideRouter([]),
 				{ provide: TranslationService, useValue: txt },
 				{ provide: ConfigService, useValue: cfg },
 				{ provide: ToastrService, useValue: toastr },
@@ -106,45 +121,53 @@ describe('UserAccount', () => {
 			],
 			declarations: [
 				UserAccountComponent
-			]
-		});
-	});
+			],
+			schemas: [NO_ERRORS_SCHEMA]
+		}).compileComponents();
+	}));
 
-	beforeEach(waitForAsync(async() => {
+	// FIX 3: Helferfunktion entkoppelt die Instanziierung.
+	// Dadurch greifen Spies in den inneren Blöcken, BEVOR ngOnInit evaluiert wird.
+	async function createComponentInstance() {
 		fixture = TestBed.createComponent(UserAccountComponent);
 		sut = fixture.componentInstance;
 		sut.ngOnInit();
 		fixture.detectChanges();
-		await fixture.whenRenderingDone();
+		await fixture.whenStable();
+	}
+
+	it('should create an instance', waitForAsync(async () => {
+		await createComponentInstance();
+		expect(sut).toBeTruthy();
 	}));
 
-	it('should create an instance', () => {
-		expect(sut).toBeTruthy();
-	});
-
 	describe('when user is Ö2 OR Ö3', () => {
-		beforeEach(() => {
+		beforeEach(waitForAsync(async () => {
 			let authService = TestBed.inject(AuthorizationService);
 			spyOn(authService, 'isInternalUser').and.returnValue(false);
-			sut.ngOnInit();
-		});
+			await createComponentInstance();
+		}));
 
-		it('should show a hint to also edit the email in eiam (PVW-258, AK-1, AK-2)', waitForAsync(async() => {
+		it('should show a hint to also edit the email in eiam (PVW-258, AK-1, AK-2)', waitForAsync(async () => {
 			fixture.detectChanges();
+			await fixture.whenStable();
 
-			const emailSpan = fixture.debugElement.query(By.css('.email-hint'));
-			expect(emailSpan.nativeElement.innerText).toContain('Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme');
+			const emailHint = fixture.debugElement.query(By.css('.email-hint'));
+			expect(emailHint).toBeTruthy();
+			expect(emailHint.nativeElement.innerText).toContain('Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme');
 		}));
 
 		describe('when user is editing his data', () => {
-			beforeEach(() => {
+			beforeEach(waitForAsync(async () => {
 				sut.onChangeSettingsClicked();
 				fixture.detectChanges();
-			});
+				await fixture.whenStable();
+			}));
 
 			it('should show a hint to also edit the email in eiam', () => {
-				const emailSpan = fixture.debugElement.query(By.css('.email-hint'));
-				expect(emailSpan.nativeElement.innerText).toContain('Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme');
+				const emailHint = fixture.debugElement.query(By.css('.email-hint'));
+				expect(emailHint).toBeTruthy();
+				expect(emailHint.nativeElement.innerText).toContain('Mobiltelefon-Nummer und E-Mail-Adresse dienen zur Kontaktaufnahme');
 			});
 
 			it('should be possible to edit the email', () => {
@@ -155,30 +178,30 @@ describe('UserAccount', () => {
 	});
 
 	describe('when user is BAR, BVW or AS', () => {
-		beforeEach(waitForAsync(async() => {
+		beforeEach(waitForAsync(async () => {
 			let authService = TestBed.inject(AuthorizationService);
 			spyOn(authService, 'isInternalUser').and.returnValue(true);
-			sut.ngOnInit();
-			fixture.detectChanges();
-			await fixture.whenStable();
+			await createComponentInstance();
 		}));
 
-		it('should NOT show a hint to edit the email in eiam', waitForAsync(async() => {
+		it('should NOT show a hint to edit the email in eiam', waitForAsync(async () => {
 			fixture.detectChanges();
+			await fixture.whenStable();
 
-			const emailSpan = fixture.debugElement.query(By.css('.email-hint'));
-			expect(emailSpan).toBeFalsy();
+			const emailHint = fixture.debugElement.query(By.css('.email-hint'));
+			expect(emailHint).toBeFalsy(); // Muss null/falsy sein, da ausgeblendet
 		}));
 
 		describe('when user is editing his data', () => {
-			beforeEach(() => {
+			beforeEach(waitForAsync(async () => {
 				sut.onChangeSettingsClicked();
 				fixture.detectChanges();
-			});
+				await fixture.whenStable();
+			}));
 
 			it('should NOT show a hint to edit the email in eiam', () => {
-				const emailSpan = fixture.debugElement.query(By.css('.email-hint'));
-				expect(emailSpan).toBeFalsy();
+				const emailHint = fixture.debugElement.query(By.css('.email-hint'));
+				expect(emailHint).toBeFalsy();
 			});
 
 			it('should NOT be possible to edit the email', () => {

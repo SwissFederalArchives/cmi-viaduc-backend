@@ -1,12 +1,14 @@
 ﻿using CMI.Access.Sql.Viaduc;
-using Nest;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 using System;
+using System.Collections.Generic;
 
 namespace CMI.Web.Frontend.api.Search
 {
     public class ProtectionEndDateDossierTranslator : IFieldTranslator
     {
-        public QueryContainer CreateQueryForField(SearchField field, UserAccess access)
+        public Query CreateQueryForField(SearchField field, UserAccess access)
         {
             var startDateKey = "protectionEndDate.date";
             var endDateKey = "protectionEndDate.date";
@@ -36,32 +38,31 @@ namespace CMI.Web.Frontend.api.Search
                 searchTo = ConvertTo(searchFromString);
             }
 
-            var startQuery = new DateRangeQuery
+            var startQuery = new DateRangeQuery(startDateKey)
             {
-                Field = startDateKey,
                 Format = "dd.MM.yyyy",
-                LessThanOrEqualTo = searchTo.ToString("dd.MM.yyyy")
+                Lte = new DateMathExpression(searchTo.ToString("dd.MM.yyyy"))
             };
-            var endQuery = new DateRangeQuery
+
+
+            var endQuery = new DateRangeQuery(endDateKey)
             {
-                Field = endDateKey,
                 Format = "dd.MM.yyyy",
-                GreaterThanOrEqualTo = searchFrom.ToString("dd.MM.yyyy")
+                Gte = new DateMathExpression(searchFrom.ToString("dd.MM.yyyy"))
             };
+
+            var matchQuery = new MatchQuery(
+                new Field("level"), 
+                "Dossier");
 
             return new BoolQuery
             {
-                Must = new QueryContainer[]
+                Must = new List<Query>
                 {
                     startQuery,
                     endQuery,
-                    new MatchQuery
-                    {
-                        Query = "Dossier",
-                        Field = "level"
-                    }
+                    matchQuery
                 }
-
             };
         }
 

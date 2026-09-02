@@ -1,17 +1,18 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 @Component({
-	selector: 'cmi-viaduc-delete-confirm',
-	templateUrl: 'deleteConfirm.component.html'
+    selector: 'cmi-viaduc-delete-confirm',
+    templateUrl: 'deleteConfirm.component.html',
+    standalone: false
 })
 export class DeleteConfirmComponent {
 	@Input()
-	public controlId: string;
+	public controlId!: string;
 
 	@Input()
-	public nameOfCheckedItem: any;
+	public nameOfCheckedItem!: any;
 
 	@Input()
-	public countOfCheckedItem: number;
+	public countOfCheckedItem!: number;
 
 	@Output() // 2-Way-Binding {Variable + 'Change'}
 	public showDeleteModalChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -26,7 +27,7 @@ export class DeleteConfirmComponent {
 		this.showDeleteModalChange.emit(val);
 	}
 
-	private _showDeleteModal: boolean;
+	private _showDeleteModal!: boolean;
 
 	@Output()
 	public deleteClicked: EventEmitter<void> = new EventEmitter<void>();
@@ -35,13 +36,13 @@ export class DeleteConfirmComponent {
 	public cancelClicked: EventEmitter<void> = new EventEmitter<void>();
 
 	// eslint-disable-next-line
-	public onDeleteClick(event): void {
+	public onDeleteClick(event: any): void {
 		this.deleteClicked.emit();
 		this.showDeleteModal = false;
 	}
 
 	// eslint-disable-next-line
-	public onCancelClick(event): void {
+	public onCancelClick(event: any): void {
 		this.cancelClicked.emit();
 		this.showDeleteModal = false;
 	}

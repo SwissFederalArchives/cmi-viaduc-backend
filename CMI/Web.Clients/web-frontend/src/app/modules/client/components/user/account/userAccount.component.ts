@@ -18,9 +18,10 @@ import {French} from 'flatpickr/dist/l10n/fr';
 import {Italian} from 'flatpickr/dist/l10n/it';
 
 @Component({
-	selector: 'cmi-viaduc-user-account',
-	templateUrl: 'userAccount.component.html',
-	styleUrls: ['./userAccount.component.less']
+    selector: 'cmi-viaduc-user-account',
+    templateUrl: 'userAccount.component.html',
+    styleUrls: ['./userAccount.component.less'],
+    standalone: false
 })
 export class UserAccountComponent implements OnInit {
 	public name: string;
@@ -185,7 +186,7 @@ export class UserAccountComponent implements OnInit {
 	}
 
 	public getLanguageFromUserSetting(userSetting: UserSetting): string {
-		const match = this._languages.find(c => c.code === userSetting.value);
+		const match = this._languages.find((c: any) => c.code === userSetting.value);
 		return match != null ? match.name : '';
 	}
 
@@ -420,7 +421,7 @@ export class UserAccountComponent implements OnInit {
 	}
 
 	private _getLanguageCodeFromLanguageName(languageName: string): string {
-		const match = this._languages.find(c => c.name === languageName);
+		const match = this._languages.find((c: any) => c.name === languageName);
 		return match.code;
 	}
 

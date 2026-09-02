@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthorizationService, ShoppingCartService, UrlService} from '../../../services';
 import {ArtDerArbeit, ClientContext, Ordering, ShippingType, StammdatenService, TranslationService} from '@cmi/viaduc-web-core';
 import moment from 'moment';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {German} from 'flatpickr/dist/l10n/de';
 import {French} from 'flatpickr/dist/l10n/fr';
 import flatpickr from 'flatpickr';
@@ -10,9 +10,10 @@ import {Italian} from 'flatpickr/dist/l10n/it';
 import { FlatPickrOutputOptions} from 'angularx-flatpickr/lib/flatpickr.directive';
 
 @Component({
-	selector: 'cmi-viaduc-order-details-step',
-	templateUrl: 'checkoutOrderDetailsStep.component.html',
-	styleUrls: ['./checkoutOrderDetailsStep.component.less']
+    selector: 'cmi-viaduc-order-details-step',
+    templateUrl: 'checkoutOrderDetailsStep.component.html',
+    styleUrls: ['./checkoutOrderDetailsStep.component.less'],
+    standalone: false
 })
 export class CheckoutOrderDetailsStepComponent implements OnInit {
 	public isAsUser = false;
@@ -53,9 +54,12 @@ export class CheckoutOrderDetailsStepComponent implements OnInit {
 		this.isAsUser = this._author.isAsUser();
 		this.form = this._formBuilder.group({
 			artDerArbeitDropdown: [ordering.artDerArbeit || undefined, this.isAsUser ? null : Validators.required],
-			konsultierungsDatum:  new FormControl (null,
-				ordering.type === ShippingType.Lesesaalausleihen ?
-					[Validators.required, this.dateValueValidator.bind(this)] : null),
+			konsultierungsDatum: new FormControl(
+				null,
+				ordering.type === ShippingType.Lesesaalausleihen
+					? [Validators.required, this.dateValueValidator.bind(this)]
+					: []
+			),
 			bemerkungBestellung: [ordering.comment, null],
 			termsofUse: [ordering.termsAccepted, Validators.requiredTrue]
 		});
@@ -104,14 +108,16 @@ export class CheckoutOrderDetailsStepComponent implements OnInit {
 		this.onNextClicked.emit();
 	}
 
-	public dateValueValidator(control: FormControl): any | null {
-		if (this._scs.isValidLesesaalDate(control.value)){
+
+	public dateValueValidator = (control: AbstractControl): ValidationErrors | null => {
+		if (this._scs.isValidLesesaalDate(control.value)) {
 			return null;
 		}
 
-		// return error object
-		return {'invalidDateValue': {'value': control.value}};
-	}
+		return {
+			invalidDateValue: { value: control.value }
+		};
+	};
 
 	public goBack() {
 		this._saveActiveOrder();

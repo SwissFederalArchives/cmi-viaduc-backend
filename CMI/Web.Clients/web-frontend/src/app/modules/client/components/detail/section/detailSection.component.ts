@@ -4,9 +4,10 @@ import {EntityRenderService} from '../../../services/entityRender.service';
 import {Entity, EntityMetadata} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-detail-section',
-	templateUrl: 'detailSection.component.html',
-	styleUrls: ['./detailSection.component.less']
+    selector: 'cmi-viaduc-detail-section',
+    templateUrl: 'detailSection.component.html',
+    styleUrls: ['./detailSection.component.less'],
+    standalone: false
 })
 export class DetailSectionComponent implements OnInit {
 
@@ -27,7 +28,7 @@ export class DetailSectionComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		const rows = this.rows = [];
+		const rows: any[] = this.rows = [];
 
 		for (const key in this.data) {
 			if (this.data.hasOwnProperty(key)) {

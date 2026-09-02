@@ -2,8 +2,9 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ContextService} from '../../services/context.service';
 
 @Component({
-	selector: 'cmi-viaduc-header',
-	templateUrl: 'header.component.html'
+    selector: 'cmi-viaduc-header',
+    templateUrl: 'header.component.html',
+    standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 

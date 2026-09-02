@@ -5,6 +5,7 @@ import {AuthenticationService, AuthorizationService, ShoppingCartService, UrlSer
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {of} from 'rxjs';
+import {DownloadTokenService} from "../../../services/downloadToken.service";
 
 describe('SimpleHitMenuComponent', () => {
 	let simpleHitMenuComponent: SimpleHitMenuComponent;
@@ -48,8 +49,10 @@ describe('SimpleHitMenuComponent', () => {
 		};
 		let searchService: any = <any> {};
 
+		let _fileTokenService: DownloadTokenService;
+
 		scs = new ShoppingCartService(toastr, context, authentication, authService, router, http, url, options, cfg, txt, searchService);
-		simpleHitMenuComponent = new SimpleHitMenuComponent(elemRef, ui, scs, router, cfg, url);
+		simpleHitMenuComponent = new SimpleHitMenuComponent(elemRef, ui, scs, router, _fileTokenService, cfg, url);
 	});
 
 	describe('When a VE has downloadAllowed set to true and has a primaryDataLink', () => {

@@ -18,9 +18,10 @@ import {CollectionView} from '@mescius/wijmo';
 import {map} from 'rxjs/operators';
 
 @Component({
-	selector: 'cmi-viaduc-order-overview-page',
-	templateUrl: 'orderOverviewPage.component.html',
-	styleUrls: ['./orderOverviewPage.component.less']
+    selector: 'cmi-viaduc-order-overview-page',
+    templateUrl: 'orderOverviewPage.component.html',
+    styleUrls: ['./orderOverviewPage.component.less'],
+    standalone: false
 })
 export class OrderOverviewPage implements OnInit, AfterViewInit {
 	public loading: boolean;
@@ -61,9 +62,6 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 		this._seoService.setTitle(this._txt.translate('Bestellübersicht', 'orderOverviewPage.pageTitle'));
 		this._buildCrumbs();
 		this._initTableView();
-		this._createFilterMaps().then((m) => {
-			this.valueFilters =	m;
-		});
 	}
 
 	public ngAfterViewInit(): void {
@@ -79,11 +77,6 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 	private _initTableView() {
 		this.loading = true;
 
-		// deepcopy
-		this.columns = this._cfg.getSetting('account.orderOverviewColumns').map(x => Object.assign({}, x));
-		this.translateColumns();
-		this.refreshHiddenVisibleColumns();
-
 		const artDerArbeitenSub = this._stm.getArtDerArbeiten();
 		const reasonSub = this._stm.getReasons();
 
@@ -91,21 +84,41 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 			this.artDerArbeit = vals[0];
 			this.reasons = vals[1];
 
-			this._scs.getOrderings().subscribe(orderings => {
-				this.orderDisplayItems = new CollectionView(this.postProcessOrdering(orderings));
-				this.rowCount = this._getRowCount();
-				this.originalRowCount = this.rowCount;
-				this.isEmptyResult = this.rowCount === 0;
-			}, () => { return
-			}, () => {
-				this.loading = false;
+
+			this._scs.getOrderings().subscribe({
+				next: (orderings) => {
+					const items = this.postProcessOrdering(orderings);
+					this.orderDisplayItems = new CollectionView(items);
+
+					this.rowCount = 	this.orderDisplayItems.itemCount;
+					this.originalRowCount = 	this.orderDisplayItems.itemCount;
+					this.isEmptyResult = 	this.orderDisplayItems.itemCount === 0;
+				},
+				error: () => {
+
+				},
+				complete: () => {
+					setTimeout(() => {
+						this.flexGrid.itemsSource = this.orderDisplayItems;
+
+						// deepcopy
+						this.columns = this._cfg.getSetting('account.orderOverviewColumns').map((x: any) => Object.assign({}, x));
+						this.translateColumns();
+						this.refreshHiddenVisibleColumns();
+						this._createFilterMaps().then((m) => {
+							this.valueFilters =	m;
+						});
+						this.flexGrid.dataMaps = this.valueFilters;
+
+					}, 50);
+					this.loading = false;
+				}
 			});
 		});
-
 	}
 
 	public onGridFilterChanged() {
-		this.rowCount = this.flexGrid.rows.length;
+		this.rowCount = this.flexGrid?.rows?.length;
 	}
 
 	private _buildCrumbs(): void {
@@ -124,19 +137,14 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 	private _createFilterMaps(): Promise<any> {
 		const obs = forkJoin([
 			this._stamm.getReasons().pipe(map((r: Reason[]) => {
-				const pairs = [];
-				for (const item of r) {
-					pairs.push({name: item.name});
-				}
+				const pairs = r.map(item => ({name: item.name}));
 				return new DataMap(pairs, 'name', 'name');
 			})),
 			this._stamm.getArtDerArbeiten().pipe(map((a: ArtDerArbeit[]) => {
-				const pairs = [];
-				for (const item of a) {
-					pairs.push({name: item.name});
-				}
+				const pairs = a.map(item => ({name: item.name}));
 				return new DataMap(pairs, 'name', 'name');
-			}))]);
+			}))
+		]);
 
 		return obs.toPromise().then(res => {
 			const reasonList = res[0] as DataMap;
@@ -148,15 +156,12 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 			maps['abbruchgrundDisplay'] =  this._wjs.getDataMap(Abbruchgrund, this._dec.translateAbbruchgrund.bind(this));
 			maps['entscheidGesuchDisplay'] =  this._wjs.getDataMap(EntscheidGesuchStatus, this._dec.translateEntscheidGesuchStatus.bind(this));
 			maps['artDerArbeitDisplay'] = artDerArbeitList;
-			maps['orderingEinsichtsgesuchZweck'] = reasonList;
+			maps['reasonDisplay'] = reasonList;
 
 			return maps;
 		});
 	}
 
-	private _getRowCount(): number {
-		return this.orderDisplayItems ? this.orderDisplayItems.itemCount : 0;
-	}
 
 	public _getVisibleColumns(): any[] {
 		return this.columns.filter(c => c.visible);
@@ -224,11 +229,15 @@ export class OrderOverviewPage implements OnInit, AfterViewInit {
 	}
 
 	public resetSortsAndFilters() {
+		if (!this.flexGrid) return;
+
 		this.flexGrid.filter.clear();
 		this.flexGrid.resetGridState();
 	}
 
 	public resetView() {
+		if (!this.flexGrid) return;
+
 		this.flexGrid.resetGridState();
 		this._initTableView();
 	}

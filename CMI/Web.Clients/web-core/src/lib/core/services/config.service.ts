@@ -12,7 +12,7 @@ export class ConfigService {
 		return 10;
 	}
 
-	private _findSetting(container, key) {
+	private _findSetting(container: any, key: any) {
 		const  vs = container;
 		let	v,
 			ks = [],
@@ -36,7 +36,7 @@ export class ConfigService {
 		return v;
 	}
 
-	private _saveSetting(container, key, value) {
+	private _saveSetting(container: any, key: any, value: any) {
 		let settingSection = container;
 		if (settingSection) {
 			if (settingSection.hasOwnProperty(key)) {

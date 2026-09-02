@@ -2,8 +2,9 @@ import {AfterViewInit, Component, ElementRef} from '@angular/core';
 import {ClientContext, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-footer-content',
-	templateUrl: 'footerContent.component.html'
+    selector: 'cmi-viaduc-footer-content',
+    templateUrl: 'footerContent.component.html',
+    standalone: false
 })
 export class FooterContentComponent implements AfterViewInit {
 	private _elem: any;

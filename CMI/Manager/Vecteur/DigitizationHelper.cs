@@ -37,7 +37,7 @@ namespace CMI.Manager.Vecteur
                     return response.Result.DigitizationOrder;
                 }
 
-                Log.Error("Error Message returned {response.Result.ErrorMessage}", response.Result.ErrorMessage);
+                Log.Error("Error Message returned {errorMessage}", response.Result.ErrorMessage);
                 throw new InvalidOperationException(response.Result.ErrorMessage);
             }
             catch (Exception e)

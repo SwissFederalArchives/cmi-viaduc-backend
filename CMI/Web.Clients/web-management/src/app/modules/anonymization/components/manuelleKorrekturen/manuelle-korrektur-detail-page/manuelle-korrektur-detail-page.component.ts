@@ -8,8 +8,7 @@ import {
 	ManuelleKorrekturStatusHistoryDto,
 	CmiGridComponent
 } from '@cmi/viaduc-web-core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {combineLatest} from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DetailPagingService, ErrorService, UrlService} from '../../../../shared';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -17,13 +16,14 @@ import {switchMap} from 'rxjs/operators';
 import {ManuelleKorrekturenService} from '../../../services/manuelleKorrekturen-services';
 import {CollectionView} from '@mescius/wijmo';
 import {DataMap} from '@mescius//wijmo.grid';
-import * as moment from 'moment';
+import moment from 'moment';
 import {SortDescription, } from '@mescius/wijmo';
 
 @Component({
-	selector: 'cmi-manuelle-korrektur-detail-page',
-	templateUrl: './manuelle-korrektur-detail-page.component.html',
-	styleUrls: ['./manuelle-korrektur-detail-page.component.less']
+    selector: 'cmi-manuelle-korrektur-detail-page',
+    templateUrl: './manuelle-korrektur-detail-page.component.html',
+    styleUrls: ['./manuelle-korrektur-detail-page.component.less'],
+    standalone: false
 })
 
 export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate implements OnInit {
@@ -31,18 +31,18 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 	@ViewChild('flexGridReferenzen', { static: true })
 	public flexGridReferenzen: CmiGridComponent;
 
-	public statusMap: DataMap;
-	public detailItem: ManuelleKorrekturDetailItem;
-	public myForm: FormGroup;
+	public statusMap!: DataMap;
+	public detailItem!: ManuelleKorrekturDetailItem;
+	public myForm!: FormGroup;
 	public crumbs: any;
-	public isNavFixed = false;
+	public isNavFixed: boolean = false;
 	public detailPagingEnabled = false;
-	public history: CollectionView;
-	public referenzen: CollectionView;
-	public verweise: CollectionView;
-	public editMode = false;
+	public history!: CollectionView;
+	public referenzen!: CollectionView;
+	public verweise!: CollectionView;
+	public editMode: boolean = false;
 	public sortedList: ManuelleKorrekturFeldDto[] = [];
-	public loading: boolean;
+	public loading!: boolean;
 
 	constructor(private _service: ManuelleKorrekturenService,
 				private formbuilder: FormBuilder,
@@ -62,41 +62,45 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 			this.detailPagingEnabled = this._dps.getCurrentIndex() > -1;
 			return this._service.getManuelleKorrektur(id);
 		}));
-		combineLatest([ManuelleKorrekturDetailItem$])
-			.subscribe(([manuelleKorrekturDetailItem]) => {
-				this.detailItem = manuelleKorrekturDetailItem;
-				this.loading = false;
-				if (this.detailItem !== null) {
-					this.sortFelder();
-					this.initForm();
-					this.buildCrumbs();
-				}
+		ManuelleKorrekturDetailItem$.subscribe(manuelleKorrekturDetailItem => {
+
+			this.detailItem = manuelleKorrekturDetailItem;
+			this.loading = false;
+			if (this.detailItem !== null) {
+				this.sortFelder();
+				this.initForm();
+				this.buildCrumbs();
+			}
 		});
 	}
 
 	private sortFelder() {
 		this.sortedList = [];
 		let titel, darin, bemerkungZurVe, verwandteVe, zusatzkomponenteZac1: ManuelleKorrekturFeldDto;
-		for (const feld of this.detailItem.manuelleKorrektur.manuelleKorrekturFelder) {
-			if (feld.feldname === 'Titel') {
-				titel = feld;
-			} else if (feld.feldname === 'Darin') {
-				darin = feld;
-			} else if (feld.feldname === 'BemerkungZurVe') {
-				bemerkungZurVe = feld;
-			} else if (feld.feldname === 'VerwandteVe') {
-				verwandteVe = feld;
-			} else if (feld.feldname === 'ZusatzkomponenteZac1') {
-				zusatzkomponenteZac1 = feld;
+		if ( this.detailItem?.manuelleKorrektur !== null &&
+			this.detailItem.manuelleKorrektur.manuelleKorrekturFelder?.length > 0) {
+			for (const feld of this.detailItem.manuelleKorrektur.manuelleKorrekturFelder) {
+				if (feld.feldname === 'Titel') {
+					titel = feld;
+				} else if (feld.feldname === 'Darin') {
+					darin = feld;
+				} else if (feld.feldname === 'BemerkungZurVe') {
+					bemerkungZurVe = feld;
+				} else if (feld.feldname === 'VerwandteVe') {
+					verwandteVe = feld;
+				} else if (feld.feldname === 'ZusatzkomponenteZac1') {
+					zusatzkomponenteZac1 = feld;
+				}
 			}
 		}
-
-		this.sortedList.push(titel, darin, bemerkungZurVe, verwandteVe, zusatzkomponenteZac1);
+		if (titel && darin && bemerkungZurVe && verwandteVe && zusatzkomponenteZac1) {
+			this.sortedList.push(titel, darin, bemerkungZurVe, verwandteVe, zusatzkomponenteZac1);
+		}
 	}
 
 	/* eslint-disable */
 	@HostListener('window:scroll', ['$event'])
-	public onScroll(event) {
+	public onScroll(event: any) {
 		const verticalOffset = window.pageYOffset
 			|| document.documentElement.scrollTop
 			|| document.body.scrollTop || 0;
@@ -113,7 +117,6 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 	}
 
 	public canDeactivate(): boolean {
-
 		if (this.myForm) {
 			return !this.myForm.dirty;
 		}
@@ -149,68 +152,94 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 	private reloadData(detailItem: ManuelleKorrekturDto): void {
 		// fetch latest data
 		this._service.getManuelleKorrektur(detailItem.manuelleKorrekturId).subscribe(r => {
-			this.detailItem = r;
+			if (r !== null) {
+				this.detailItem = r;
+			}
 			this.sortFelder();
 			this.initForm();
 		});
 	}
 
 	private initForm() {
-		this.myForm = this.formbuilder.group({
-			manuelleKorrekturId: [this.detailItem.manuelleKorrektur.manuelleKorrekturId, Validators.required],
-			veId:[this.detailItem.manuelleKorrektur.veId],
-			signatur: [this.detailItem.manuelleKorrektur.signatur],
-			schutzfristende: this.detailItem.manuelleKorrektur.schutzfristende,
-			schutzfristendeText: [moment(this.detailItem.manuelleKorrektur.schutzfristende).format('DD.MM.YYYY')],
-			titel: [this.detailItem.manuelleKorrektur.titel],
-			darin: this.detailItem.manuelleKorrektur.manuelleKorrekturFelder.find(f => f.feldname === 'Darin').original,
-			zusätzlicheInformationen: this.detailItem.manuelleKorrektur.manuelleKorrekturFelder.find(f => f.feldname === 'BemerkungZurVe').original,
-			erzeugtAm: [this.detailItem.manuelleKorrektur.erzeugtAm],
-			erzeugtVon: [this.detailItem.manuelleKorrektur.erzeugtVon],
-			geändertAm: [this.detailItem.manuelleKorrektur.geändertAm],
-			geändertVon: [this.detailItem.manuelleKorrektur.geändertVon],
-			kommentar: [this.detailItem.manuelleKorrektur.kommentar],
-			hierachiestufe:[this.detailItem.manuelleKorrektur.hierachiestufe],
-			aktenzeichen:[this.detailItem.manuelleKorrektur.aktenzeichen],
-			entstehungszeitraum:[this.detailItem.manuelleKorrektur.entstehungszeitraum],
-			zugänglichkeitGemässBGA:[this.detailItem.manuelleKorrektur.zugänglichkeitGemässBGA],
-			schutzfristverzeichnung:[this.detailItem.manuelleKorrektur.schutzfristverzeichnung],
-			zuständigeStelle:[this.detailItem.manuelleKorrektur.zuständigeStelle],
-			publikationsrechte:[this.detailItem.manuelleKorrektur.publikationsrechte],
-			anonymisiertZumErfassungszeitpunk:[this.detailItem.manuelleKorrektur.anonymisiertZumErfassungszeitpunk],
-			manuelleKorrekturFelder:[this.detailItem.manuelleKorrektur.manuelleKorrekturFelder],
-			anonymisierungsstatus: [this.detailItem.manuelleKorrektur.anonymisierungsstatus],
-			anonymisierungsstatusText: this.getAnonymisierungsStatus(this.detailItem.manuelleKorrektur.anonymisierungsstatus)
-		});
-		this.editMode = this.detailItem.manuelleKorrektur.anonymisierungsstatus === 0;
-		const sorrtedArray:Array<ManuelleKorrekturStatusHistoryDto> =
-			this.detailItem.manuelleKorrektur.manuelleKorrekturStatusHistories.sort((mksh1, mksh2) => {
-				if (mksh1.erzeugtAm > mksh2.erzeugtAm) {
-					return -1;
-				}
-				if (mksh1.erzeugtAm < mksh2.erzeugtAm) {
-					return 1;
-				}
+		const mk = this.detailItem?.manuelleKorrektur;
+		const felder = mk?.manuelleKorrekturFelder ?? [];
 
-				return 0;
-			});
-		this.history = new CollectionView(sorrtedArray);
+		const getFeldOriginal = (name: string): string => {
+			return felder.find(f => f.feldname === name)?.original ?? '';
+		};
+
+		const darin = getFeldOriginal('Darin');
+		const bemerkung = getFeldOriginal('BemerkungZurVe');
+
+		this.myForm = this.formbuilder.group({
+			manuelleKorrekturId: new FormControl(mk?.manuelleKorrekturId, [Validators.required]),
+			veId: new FormControl(mk?.veId),
+			signatur: new FormControl(mk?.signatur),
+			schutzfristende: new FormControl(mk?.schutzfristende),
+
+			schutzfristendeText: new FormControl(
+				moment(mk?.schutzfristende).format('DD.MM.YYYY')
+			),
+
+			titel: new FormControl(mk?.titel),
+			darin: new FormControl(darin),
+			zusätzlicheInformationen: new FormControl(bemerkung),
+
+			erzeugtAm: new FormControl(mk?.erzeugtAm),
+			erzeugtVon: new FormControl(mk?.erzeugtVon ?? ''),
+			geändertAm: new FormControl(mk?.geändertAm ?? null),
+			geändertVon: new FormControl(mk?.geändertVon ?? null),
+
+			kommentar: new FormControl(mk?.kommentar),
+			hierachiestufe: new FormControl(mk?.hierachiestufe),
+			aktenzeichen: new FormControl(mk?.aktenzeichen),
+
+			entstehungszeitraum: new FormControl(mk?.entstehungszeitraum ?? null),
+
+			zugänglichkeitGemässBGA: new FormControl(mk?.zugänglichkeitGemässBGA),
+			schutzfristverzeichnung: new FormControl(mk?.schutzfristverzeichnung),
+			zuständigeStelle: new FormControl(mk?.zuständigeStelle),
+			publikationsrechte: new FormControl(mk?.publikationsrechte),
+
+			anonymisiertZumErfassungszeitpunk: new FormControl(
+				mk?.anonymisiertZumErfassungszeitpunk
+			),
+
+			manuelleKorrekturFelder: new FormControl(felder),
+
+			anonymisierungsstatus: new FormControl(mk?.anonymisierungsstatus),
+
+			anonymisierungsstatusText: this.getAnonymisierungsStatus(
+				mk?.anonymisierungsstatus ?? -1
+			)
+		});
+
+		this.editMode = mk?.anonymisierungsstatus === 0;
+
+		const sortedArray: ManuelleKorrekturStatusHistoryDto[] =
+			(mk?.manuelleKorrekturStatusHistories ?? [])
+				.slice()
+				.sort((a, b) =>
+					a.erzeugtAm > b.erzeugtAm ? -1 : a.erzeugtAm < b.erzeugtAm ? 1 : 0
+				);
+
+		this.history = new CollectionView(sortedArray);
 		this.history.pageSize = 10;
-		this.referenzen = new CollectionView(this.detailItem.untergeordneteVEs );
+
+		this.referenzen = new CollectionView(this.detailItem?.untergeordneteVEs ?? []);
 		this.referenzen.pageSize = 10;
 		this.referenzen.sortDescriptions.push(new SortDescription('referenceCode', true));
-		this.verweise = new CollectionView(this.detailItem.verweiseVEs);
+
+		this.verweise = new CollectionView(this.detailItem?.verweiseVEs ?? []);
 		this.verweise.pageSize = 10;
 		this.verweise.sortDescriptions.push(new SortDescription('referenceCode', true));
-		const maps: { [id: string]: DataMap; } = {};
-		maps['history.anonymisierungsstatus'] = new DataMap([
-			{ key: 2, name: 'Prüfung notwendig'},
-			{ key: 0, name: 'In Bearbeitung'},
-			{ key: 1, name: 'Publiziert'}
-		], 'key', 'name');
-		this.statusMap = maps['history.anonymisierungsstatus'];
-	}
 
+		this.statusMap = new DataMap([
+			{ key: 2, name: 'Prüfung notwendig' },
+			{ key: 0, name: 'In Bearbeitung' },
+			{ key: 1, name: 'Publiziert' }
+		], 'key', 'name');
+	}
 	private buildCrumbs(): void {
 		const crumbs: any[] = this.crumbs = [];
 		const menu = 'anonymization';
@@ -229,12 +258,14 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 
 		crumbs.push({
 			url: this._url.getNormalizedUrl(`/${menu}/${manuelleKorrekturen}/${id}`),
-			label: this.detailItem.manuelleKorrektur.titel
+			label: this.detailItem.manuelleKorrektur ? this.detailItem.manuelleKorrektur.titel : ''
 		});
 	}
 
 	public reset() {
-		this.reloadData(this.detailItem.manuelleKorrektur);
+		if (this.detailItem.manuelleKorrektur) {
+			this.reloadData(this.detailItem.manuelleKorrektur);
+		}
 	}
 
 	public getDetailBaseUrl(): string {
@@ -271,6 +302,8 @@ export class ManuelleKorrekturDetailPageComponent extends ComponentCanDeactivate
 				return 'Publiziert';
 			case 2:
 				return 'Prüfung notwendig';
+			default:
+				return '';
 		}
 	}
 }

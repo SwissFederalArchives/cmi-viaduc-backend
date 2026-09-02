@@ -1,777 +1,801 @@
 <div class="page page-order-einsicht-detail col-sm-12">
-	<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
-		<div content>
-			<div class="page-content">
-				<form #formEinsichtDetail="ngForm">
-					<div class="page-header">
-						<h2 class="page-content-title">
-							<span>{{'Einsichtsgesuch-Detail' | translate:'ordersEinsichtDetailPage.title'}}</span>
-						</h2>
-					</div>
-					<div *ngIf="hasRight(); else noRights">
-						<div class="action-container" [ngClass]="{'fixed-nav': isNavFixed}">
-							<div class="row action-buttons">
-								<div class="col-xs-12" [ngClass]="detailPagingEnabled ? 'col-md-12' : 'col-md'">
-									<span class="orders-menu-actions">
-										<button class="btn btn-link" (click)="showEntscheidHinterlegenModal()">
-											<span><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ 'Entscheid Gesuch hinterlegen' | translate:'ordersEinsichtDetailPage.entscheidHinterlegen' }}</span>
-										</button>
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
+    <div content>
+      <div class="page-content">
+        <form #formEinsichtDetail="ngForm">
+          <div class="page-header">
+            <h2 class="page-content-title">
+              <span>{{'Einsichtsgesuch-Detail' | translate:'ordersEinsichtDetailPage.title'}}</span>
+            </h2>
+          </div>
+          @if (hasRight()) {
+            <div>
+              <div class="action-container" [ngClass]="{'fixed-nav': isNavFixed}">
+                <div class="row action-buttons">
+                  <div class="col-xs-12" [ngClass]="detailPagingEnabled ? 'col-md-12' : 'col-md'">
+                    <span class="orders-menu-actions">
+                      <button class="btn btn-link" (click)="showEntscheidHinterlegenModal()">
+                        <span><span class="glyphicon glyphicon-ok"></span>&nbsp;{{ 'Entscheid Gesuch hinterlegen' | translate:'ordersEinsichtDetailPage.entscheidHinterlegen' }}</span>
+                      </button>
+                      <button class="btn btn-link" (click)="showInVorlageExportierenModal()">
+                        <span><span class="glyphicon glyphicon-message-forward"></span>&nbsp;{{ 'In Vorlage exportieren' | translate:'ordersEinsichtDetailPage.inVorlageExportieren' }}</span>
+                      </button>
+                      <button class="btn btn-link" (click)="showDigitalisierungsauftragAusfuehren()">
+                        <span><span class="glyphicon glyphicon-transfer"></span>&nbsp;{{ 'Digitalisierung auslösen' | translate:'ordersEinsichtDetailPage.digitalisierungsauftragAusfuehren' }}</span>
+                      </button>
+                      <button class="btn btn-link" (click)="showAuftraegeZuruecksetzenModal()">
+                        <span><span class="glyphicon glyphicon-restart"></span>&nbsp;{{ 'Auftrag zurücksetzen' | translate:'ordersEinsichtDetailPage.zuruecksetzenSingular' }}</span>
+                      </button>
+                      <button class="btn btn-link" (click)="showEinsichtsgesucheAbbrechenModal()">
+                        <span><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;{{ 'Auftrag abbrechen' | translate:'orderOverviewPage.abbrechensingular' }}</span>
+                      </button>
+                      <button class="btn btn-link" (click)="seeHiddenOrderDetail()">
+                        <span><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;{{ '[nicht sichtbare] Daten einsehen' | translate:'orderDetailPage.seeHiddenData' }}</span>
+                      </button>
+                    </span>
+                  </div>
+                  @if (detailPagingEnabled) {
+                    <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 detail-paging">
+                      <cmi-viaduc-detail-paging [detailUrl]="getDetailBaseUrl()" [idProperty]="'itemId'" [disableNavigation]="getFormIsDirty()"></cmi-viaduc-detail-paging>
+                    </div>
+                  }
+                  <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                    <button (click)="reset()" class="btn btn-link">
+                      <span><span class="glyphicon glyphicon-undo"></span>&nbsp;{{ 'Änderungen verwerfen' | translate:'role.cancel' }}</span>
+                    </button>
+                    <button (click)="updateOrderDetail()" class="btn btn-link">
+                      <span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Speichern' | translate:'role.save' }}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row order-detail" #detailWrapper>
+                @if (!loading && fieldInfos && detailRecord) {
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <h3 class="title">Auftragsdaten</h3>
+                      <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                          <div class="row">
+                            <label class="col-md-3 col-xs-3 control-label" tooltip="Auftragstyp" for="orderingType">
+                              {{'Auftragstyp' | translate:''}}
+                            </label>
+                            <div class="col-md-9 col-xs-9"
+                              [tooltip]="getOrderType(detailRecord.orderingType)"
+                              [tooltipDisabled]="!(detailRecord.orderingType >= 0)">
+                              <input class="form-control"
+                                name="orderingType"
+                                id="orderingType"
+                                [disabled]="true"
+                                [value]="getOrderType(detailRecord.orderingType)">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-md-4">
+                            <div class="row">
+                              <label class="col-md-3 col-xs-3 control-label" tooltip="Bestell-ID" for="orderId">
+                                {{'Bestell-ID' | translate:''}}
+                              </label>
+                              <div class="col-md-9 col-xs-9">
+                                <input class="form-control"
+                                  name="orderId"
+                                  id="orderId"
+                                  [disabled]="isFieldReadonly('orderId')"
+                                  [(ngModel)]="detailRecord.orderId"
+                                  required>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-12 col-md-4">
+                              <div class="row">
+                                <label class="col-md-3 col-xs-3 control-label" tooltip="Auftrags-ID" for="itemId">
+                                  {{'Auftrags-ID' | translate:''}}
+                                </label>
+                                <div class="col-md-9 col-xs-9">
+                                  <input class="form-control"
+                                    name="itemId"
+                                    id="itemId"
+                                    [disabled]="isFieldReadonly('itemId')"
+                                    [(ngModel)]="detailRecord.itemId"
+                                    required>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xs-12 col-md-12">
+                                <div class="row">
+                                  <label tooltip="Benutzer" class="col-md-1 col-xs-3 control-label" for="user">
+                                    {{'Benutzer' | translate:''}}
+                                  </label>
+                                  <div class="col-md-11 col-xs-9" [tooltip]="detailRecord.user" [tooltipDisabled]="!detailRecord.user">
+                                    <div class="input-group">
+                                      @if (detailRecord.user) {
+                                        <a class="input-group-addon" target="_blank"
+                                          [routerLink]="_url.getNormalizedUrl('/benutzerundrollen/benutzer') + '/' + detailRecord.userId"
+                                          title="Öffnet die Detailansicht des Benutzers in einem neuen Register">
+                                          <i class="glyphicon glyphicon-new-window"></i>
+                                        </a>
+                                      }
+                                      <input class="form-control"
+                                        name="user"
+                                        id="user"
+                                        [disabled]="isFieldReadonly('user')"
+                                        [(ngModel)]="detailRecord.user"
+                                        required>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-8 col-xs-12">
+                                  <div class="row">
+                                    <label tooltip="Bemerkung zum Dossier" class="col-md-3 col-xs-3 control-label label-2of3" for="itemComment">
+                                      {{'Bemerkung zum Dossier' | translate:''}}
+                                    </label>
+                                    <div class="col-md-9 col-xs-9 content-2of3" [tooltip]="detailRecord.itemComment" [tooltipDisabled]="!detailRecord.itemComment">
+                                      <textarea class="form-control"
+                                        name="itemComment"
+                                        rows="1"
+                                        id="itemComment"
+                                        [disabled]="isFieldReadonly('itemComment')"
+                                        [(ngModel)]="detailRecord.itemComment"
+                                        required>
+                                      </textarea>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4 col-xs-12">
+                                  <div class="row">
+                                    <label class="col-md-3 col-xs-3 control-label" tooltip="Art der Arbeit" for="orderingArtDerArbeitId">
+                                      {{'Art der Arbeit' | translate:''}}
+                                    </label>
+                                    <div class="col-md-9 col-xs-9">
+                                      <select name="orderingArtDerArbeitId"
+                                        id="orderingArtDerArbeitId" class="form-control"
+                                        [(ngModel)]="detailRecord.orderingArtDerArbeitId"
+                                        [disabled]="isFieldReadonly('orderingArtDerArbeitId')">
+                                        <option [value]="null" disabled>Bitte wählen</option>
+                                        @for (a of artDerArbeiten; track a) {
+                                          <option [ngValue]="a.id">{{a.name}}</option>
+                                        }
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-12 col-md-4">
+                                  <div class="row">
+                                    <label class="col-md-3 col-xs-3 control-label" tooltip="Benutzerrolle Public-Client zum Bestell-Zeitpunkt" for="rolePublicClient">
+                                      {{'Benutzerrolle Public-Client zum Bestell-Zeitpunkt' | translate:''}}
+                                    </label>
+                                    <div class="col-md-9 col-xs-9"
+                                      [tooltip]="detailRecord.rolePublicClient"
+                                      [tooltipDisabled]="!detailRecord.rolePublicClient">
+                                      <input class="form-control"
+                                        name="rolePublicClient"
+                                        id="rolePublicClient"
+                                        [disabled]="true"
+                                        [value]="detailRecord.rolePublicClient">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <hr class="section-separator" />
+                                <h3 class="title">Verzeichnungsdaten</h3>
+                                <div class="row">
+                                  <div class="col-xs-12 col-md-4">
+                                    <div class="row">
+                                      <label tooltip="Signatur" class="col-md-3 col-xs-3 control-label" for="signatur">
+                                        {{'Signatur' | translate:''}}
+                                      </label>
+                                      <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.signatur" [tooltipDisabled]="!detailRecord.signatur">
+                                        <div class="input-group">
+                                          @if (detailRecord.signatur && detailRecord.veId && detailRecord.veId !==0) {
+                                            <a class="input-group-addon" target="_blank"
+                                              href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detailRecord.veId}}"
+                                              title="Öffnet die Detailansicht der Signatur in einem neuen Register">
+                                              <i class="glyphicon glyphicon-new-window"></i>
+                                            </a>
+                                          }
+                                          <input class="form-control"
+                                            name="signatur"
+                                            id="signatur"
+                                            [disabled]="isFieldReadonly('signatur')"
+                                            [(ngModel)]="detailRecord.signatur"
+                                            required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-4">
+                                      <div class="row">
+                                        <label tooltip="Hierarchiestufe" class="col-md-3 col-xs-3 control-label" for="hierarchieStufe">
+                                          {{'Hierarchiestufe' | translate:''}}
+                                        </label>
+                                        <div class="col-md-9 col-xs-9">
+                                          <input class="form-control"
+                                            name="hierarchieStufe"
+                                            id="hierarchieStufe"
+                                            [disabled]="isFieldReadonly('hierarchiestufe')"
+                                            [(ngModel)]="detailRecord.hierarchiestufe"
+                                            required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-xs-12 col-md-4">
+                                        <div class="row">
+                                          <label tooltip="ID der VE" class="col-md-3 col-xs-3 control-label" for="veId">
+                                            {{'ID der VE' | translate:''}}
+                                          </label>
+                                          <div class="col-md-9 col-xs-9">
+                                            <input class="form-control"
+                                              name="veId"
+                                              id="veId"
+                                              [disabled]="isFieldReadonly('veId')"
+                                              [(ngModel)]="detailRecord.veId"
+                                              required>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                          <div class="row">
+                                            <label tooltip="Title" class="col-md-1 col-xs-3 control-label" for="title">
+                                              {{'Titel' | translate:''}}
+                                            </label>
+                                            <div class="col-md-11 col-xs-9" [tooltip]="detailRecord.dossiertitel" [tooltipDisabled]="!detailRecord.dossiertitel">
+                                              <input class="form-control"
+                                                name="title"
+                                                id="title"
+                                                [disabled]="isFieldReadonly('dossiertitel')"
+                                                [(ngModel)]="detailRecord.dossiertitel"
+                                                required>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-xs-12 col-md-4 verzeichnungsdaten">
+                                            <div class="row">
+                                              <label tooltip="Aktenzeichen" class="col-md-3 col-xs-3 control-label" for="aktenzeichen">
+                                                {{'Aktenzeichen' | translate:''}}
+                                              </label>
+                                              <div class="col-md-9 col-xs-9">
+                                                <input class="form-control"
+                                                  name="aktenzeichen"
+                                                  id="aktenzeichen"
+                                                  [disabled]="isFieldReadonly('aktenzeichen')"
+                                                  [(ngModel)]="detailRecord.aktenzeichen"
+                                                  required>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <label tooltip="Entstehungszeitraum" class="col-md-3 col-xs-3 control-label" for="creationPeriod">
+                                                  {{'Entstehungszeitraum' | translate:''}}
+                                                </label>
+                                                <div class="col-md-9 col-xs-9">
+                                                  <input class="form-control"
+                                                    name="creationPeriod"
+                                                    id="creationPeriod"
+                                                    [disabled]="isFieldReadonly('zeitraumDossier')"
+                                                    [(ngModel)]="detailRecord.zeitraumDossier"
+                                                    required>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <label tooltip="Darin" class="col-md-3 col-xs-3 control-label" for="darin">
+                                                    {{'Darin' | translate:''}}
+                                                  </label>
+                                                  <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.darin" [tooltipDisabled]="!detailRecord.darin">
+                                                    <textarea class="form-control"
+                                                      name="darin"
+                                                      id="darin"
+                                                      rows="1"
+                                                      [disabled]="isFieldReadonly('darin')"
+                                                      [(ngModel)]="detailRecord.darin">
+                                                    </textarea>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <label tooltip="Zusätzliche Informationen" class="col-md-3 col-xs-3 control-label" for="zusaetzlicheInformationen">
+                                                    {{'Zusätzliche Informationen' | translate:''}}
+                                                  </label>
+                                                  <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.zusaetzlicheInformationen" [tooltipDisabled]="!detailRecord.zusaetzlicheInformationen">
+                                                    <input class="form-control"
+                                                      name="zusaetzlicheInformationen"
+                                                      id="zusaetzlicheInformationen"
+                                                      [disabled]="isFieldReadonly('zusaetzlicheInformationen')"
+                                                      [(ngModel)]="detailRecord.zusaetzlicheInformationen"
+                                                      required>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row">
+                                                    <label tooltip="Zugänglichkeit gemäss BGA" class="col-md-3 col-xs-3 control-label" for="zgbga">
+                                                      {{'Zugänglichkeit gemäss BGA' | translate:''}}
+                                                    </label>
+                                                    <div class="col-md-9 col-xs-9"
+                                                      [tooltip]="detailRecord.zugaenglichkeitGemaessBga"
+                                                      [tooltipDisabled]="!detailRecord.zugaenglichkeitGemaessBga">
+                                                      <input class="form-control"
+                                                        name="zgbga"
+                                                        id="zgbga"
+                                                        [disabled]="isFieldReadonly('zugaenglichkeitGemaessBga')"
+                                                        [(ngModel)]="detailRecord.zugaenglichkeitGemaessBga"
+                                                        required>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-xs-12 col-md-8">
+                                                    <div class="row">
+                                                      <label tooltip="Archivplankontext" class="col-md-12 col-xs-12 control-label">
+                                                        {{'Archivplankontext' | translate: ''}}
+                                                      </label>
+                                                      <div class="col-xs-12 col-md-12">
+                                                        @if (detailRecord.archivplanKontext && detailRecord.archivplanKontext.length > 0) {
+                                                          <cmi-archivplan-context
+                                                          [items]="detailRecord.archivplanKontext"></cmi-archivplan-context>
+                                                        }
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <div class="col-xs-12 col-md-8">
+                                                    <div class="row">
+                                                      <label class="col-md-3 col-xs-3 control-label label-2of3"
+                                                        tooltip="Schutzfristverzeichnung"
+                                                        for="schutzfristVerzeichnung">
+                                                        {{'Schutzfristverzeichnung' | translate:''}}
+                                                      </label>
+                                                      <div class="col-md-9 col-xs-9 content-2of3" [tooltip]="detailRecord.schutzfristverzeichnung" [tooltipDisabled]="!detailRecord.schutzfristverzeichnung">
+                                                        <input class="form-control"
+                                                          name="schutzfristVerzeichnung"
+                                                          id="schutzfristVerzeichnung"
+                                                          [disabled]="isFieldReadonly('schutzfristverzeichnung')"
+                                                          [(ngModel)]="detailRecord.schutzfristverzeichnung"
+                                                          required>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-4">
+                                                      <div class="row">
+                                                        <label tooltip="Zuständige Stelle" class="col-md-3 col-xs-3 control-label" for="zustaendigeStelle">
+                                                          {{'Zuständige Stelle' | translate:''}}
+                                                        </label>
+                                                        <div class="col-md-9 col-xs-9">
+                                                          <input class="form-control"
+                                                            name="zustaendigeStelle"
+                                                            id="zustaendigeStelle"
+                                                            [disabled]="isFieldReadonly('zustaendigeStelle')"
+                                                            [(ngModel)]="detailRecord.zustaendigeStelle"
+                                                            required>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="row">
+                                                      <div class="col-xs-12 col-md-4">
+                                                        <div class="row">
+                                                          <label class="col-md-3 col-xs-3 control-label"
+                                                            tooltip="Publikationsrechte"
+                                                            for="publikationsrechte">
+                                                            {{'Publikationsrechte' | translate:''}}
+                                                          </label>
+                                                          <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.publikationsrechte" [tooltipDisabled]="!detailRecord.publikationsrechte">
+                                                            <input class="form-control"
+                                                              name="publikationsrechte"
+                                                              id="publikationsrechte"
+                                                              [disabled]="isFieldReadonly('publikationsrechte')"
+                                                              [(ngModel)]="detailRecord.publikationsrechte"
+                                                              required>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <hr class="section-separator" />
+                                                      <h3 class="title">Freigabe</h3>
+                                                      <div class="row">
+                                                        <div class="col-xs-12 col-md-12">
+                                                          <div class="row">
+                                                            <div class="col-md-12 col-xs-12">
+                                                              <cmi-viaduc-bestell-historie [historyItems]="detailRecord?.orderingHistory"></cmi-viaduc-bestell-historie>
+                                                              @if (detailRecord.veId && detailRecord.veId !== 0 && detailRecord.hasMoreOrderingHistory) {
+                                                                <a href="javascript:void(0)" (click)="loadOrderHistoryModal()"
+                                                                  >
+                                                                  {{'Alle	Historyeinträge anzeigen' | translate:''}}
+                                                                </a>
+                                                              }
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="row">
+                                                        <div class="col-xs-12 col-md-4">
+                                                        </div>
+                                                      </div>
+                                                      <div class="row">
+                                                        <div class="col-xs-12 col-md-8">
+                                                          <div class="row">
+                                                            <label tooltip="Begründung Einsichtsgesuch" class="col-md-3 col-xs-3 control-label label-2of3" for="begruendungEinsichtsgesuch">
+                                                              {{'Begründung Einsichtsgesuch' | translate:''}}
+                                                            </label>
+                                                            <div class="col-md-9 col-xs-9 content-2of3"	[tooltip]="detailRecord.begruendungEinsichtsgesuch" [tooltipDisabled]="!detailRecord.begruendungEinsichtsgesuch">
+                                                              <textarea class="form-control"
+                                                                name="begruendungEinsichtsgesuch"
+                                                                id="begruendungEinsichtsgesuch"
+                                                                rows="2"
+                                                                [disabled]="isFieldReadonly('begruendungEinsichtsgesuch')"
+                                                                [(ngModel)]="detailRecord.begruendungEinsichtsgesuch"
+                                                                required>
+                                                              </textarea>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-xs-12 col-md-4">
+                                                          <div class="row">
+                                                            <div class="col-md-12">
+                                                              <div class="row">
+                                                                <label tooltip="Eigene Unterlagen" class="col-md-3 col-xs-3 control-label" for="eigeneUnterlagen">
+                                                                  {{'Eigene Unterlagen' | translate:''}}
+                                                                </label>
+                                                                <div class="col-md-9 col-xs-9">
+                                                                  <select name="eigeneUnterlagen"
+                                                                    id="eigeneUnterlagen" class="form-control"
+                                                                    [(ngModel)]="detailRecord.unterlagenDieNutzerSelberBetreffen"
+                                                                    [disabled]="isFieldReadonly('unterlagenDieNutzerSelberBetreffen')">
+                                                                    <option [value]="null" disabled>Bitte wählen</option>
+                                                                    <option [value]="true">Ja</option>
+                                                                    <option [value]="false">Nein</option>
+                                                                  </select>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div class="row">
+                                                            <label tooltip="Personenbezogene Nachforschung" class="col-md-3 col-xs-3 control-label" for="personenbezogeneNachforschung">
+                                                              {{'Personenbezogene Nachforschung' | translate:''}}
+                                                            </label>
+                                                            <div class="col-md-9 col-xs-9">
+                                                              <select name="personenbezogeneNachforschung"
+                                                                id="personenbezogeneNachforschung" class="form-control"
+                                                                [(ngModel)]="detailRecord.personenbezogeneNachforschung"
+                                                                [disabled]="isFieldReadonly('personenbezogeneNachforschung')">
+                                                                <option [value]="null" disabled>Bitte wählen</option>
+                                                                <option [value]="true">Ja</option>
+                                                                <option [value]="false">Nein</option>
+                                                              </select>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="row">
+                                                        <div class="col-xs-12 col-md-4">
+                                                          <div class="row">
+                                                            <label tooltip="Entscheid Gesuch" class="col-md-3 col-xs-3 control-label"
+                                                              for="entscheidGesuch">
+                                                              {{'Entscheid Gesuch' | translate:''}}
+                                                            </label>
+                                                            <div class="col-md-9 col-xs-9">
+                                                              <input class="form-control"
+                                                                name="entscheidGesuch"
+                                                                id="entscheidGesuch"
+                                                                [disabled]="true"
+                                                                [value]="getEntscheidGesuch(detailRecord.entscheidGesuch)"
+                                                                required>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-md-4">
+                                                            <div class="row">
+                                                              <label tooltip="Datum des Entscheids" class="col-md-3 col-xs-3 control-label" for="datumDesEntscheids">
+                                                                {{'Datum des Entscheids' | translate:''}}
+                                                              </label>
+                                                              <div class="col-md-9 col-xs-9">
+                                                                <input class="form-control"
+                                                                  name="datumDesEntscheids"
+                                                                  id="datumDesEntscheids"
+                                                                  [ngModel]="getFormattedDateWithoutTime(detailRecord.datumDesEntscheids)"
+                                                                  [disabled]="true">
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-md-4">
+                                                              <div class="row">
+                                                                <label tooltip="Abbruchgrund" class="col-md-3 col-xs-3 control-label" for="abbruchgrund">
+                                                                  {{'Abbruchgrund' | translate:''}}
+                                                                </label>
+                                                                <div class="col-md-9 col-xs-9">
+                                                                  <input class="form-control"
+                                                                    name="abbruchgrund"
+                                                                    id="abbruchgrund"
+                                                                    [value]="getAbbruchgrund(detailRecord.abbruchgrund)"
+                                                                    [disabled]="isFieldReadonly('abbruchgrund')"
+                                                                    required>
+                                                                  </div>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                            <hr class="section-separator" />
+                                                            <h3 class="title">Logistik</h3>
+                                                            <div class="row">
+                                                              <div class="col-xs-12 col-md-4">
+                                                                <div class="row">
+                                                                  <label tooltip="Eingangsdatum" class="col-md-3 col-xs-3 control-label" for="orderingDate">
+                                                                    {{'Eingangsdatum' | translate:''}}
+                                                                  </label>
+                                                                  <div class="col-md-9 col-xs-9">
+                                                                    <input class="form-control"
+                                                                      name="orderingDate"
+                                                                      id="orderingDate"
+                                                                      [disabled]="true"
+                                                                      [ngModel]="getFormattedDate(detailRecord.orderingDate)">
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                                <div class="col-xs-12 col-md-4">
+                                                                  <div class="row">
+                                                                    <label tooltip="Abschlussdatum" class="col-md-3 col-xs-3 control-label" for="abschlussdatum">
+                                                                      {{'Abschlussdatum' | translate:''}}
+                                                                    </label>
+                                                                    <div class="col-md-9 col-xs-9">
+                                                                      <input class="form-control"
+                                                                        name="abschlussdatum"
+                                                                        id="abschlussdatum"
+                                                                        [disabled]="true"
+                                                                        [ngModel]="getFormattedDate(detailRecord.abschlussdatum)">
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="col-xs-12 col-md-4">
+                                                                    <div class="row">
+                                                                      <label tooltip="Eingangsart" class="col-md-3 col-xs-3 control-label" for="eingangsart">
+                                                                        {{'Eingangsart' | translate:''}}
+                                                                      </label>
+                                                                      <div class="col-md-9 col-xs-9">
+                                                                        <input class="form-control"
+                                                                          name="eingangsart"
+                                                                          id="eingangsart"
+                                                                          [value]="getEingangsart(detailRecord.eingangsart)"
+                                                                          [disabled]="isFieldReadonly('eingangsart')"
+                                                                          required>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="row">
+                                                                    <div class="col-xs-12 col-md-4">
+                                                                      <div class="row">
+                                                                        <label tooltip="Identifikation digitales Magazin" class="col-md-3 col-xs-3 control-label" for="idDigitalesMagazin">
+                                                                          {{'Identifikation digitales Magazin' | translate:''}}
+                                                                        </label>
+                                                                        <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.identifikationDigitalesMagazin" [tooltipDisabled]="!detailRecord.identifikationDigitalesMagazin">
+                                                                          <input class="form-control"
+                                                                            name="idDigitalesMagazin"
+                                                                            id="idDigitalesMagazin"
+                                                                            [disabled]="isFieldReadonly('identifikationDigitalesMagazin')"
+                                                                            [(ngModel)]="detailRecord.identifikationDigitalesMagazin"
+                                                                            required>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                      <div class="col-xs-12 col-md-4">
+																		  <div class="row">
+																			  <label class="col-md-3 col-xs-3 control-label"
+		                                                                             tooltip="Entstehung digitale Inhalte" tooltip="Entstehung digitale Inhalte"
+		                                                                             for="entstehungDigitaleInhalte">{{'Entstehung digitale Inhalte' | translate:''}}
+																			  </label>
+																			  <div class="col-md-9 col-xs-9" [tooltip]="detailRecord.entstehungDigitaleInhalte" [tooltipDisabled]="!detailRecord.entstehungDigitaleInhalte">
+																				  <input class="form-control"
+			                                                                             name="entstehungDigitaleInhalte"
+			                                                                             id="entstehungDigitaleInhalte"
+			                                                                             [disabled]="true"
+			                                                                             [(ngModel)]="detailRecord.entstehungDigitaleInhalte" >
+																			  </div>
+																		  </div>
+																	  </div>
+                                                                        <div class="col-xs-12 col-md-4">
+                                                                          <div class="row">
+                                                                            <label tooltip="Behältniscode" class="col-md-3 col-xs-3 control-label" for="behaeltnisCode">
+                                                                              {{'Behältniscode' | translate:''}}
+                                                                            </label>
+                                                                            <div class="col-md-9 col-xs-9"
+                                                                              [tooltip]="detailRecord.behaeltnisNummer"
+                                                                              [tooltipDisabled]="!detailRecord.behaeltnisNummer">
+                                                                              <input class="form-control"
+                                                                                name="behaeltnisCode"
+                                                                                id="behaeltnisCode"
+                                                                                [disabled]="isFieldReadonly('behaeltnisNummer')"
+                                                                                [(ngModel)]="detailRecord.behaeltnisNummer"
+                                                                                required>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                          <div class="col-xs-12 col-md-4">
+                                                                            <div class="row">
+                                                                              <label tooltip="Interner Status" class="col-md-3 col-xs-3 control-label" for="internalStatus">
+                                                                                {{'Interner Status' | translate:''}}
+                                                                              </label>
+                                                                              <div class="col-md-9 col-xs-9">
+                                                                                <input class="form-control"
+                                                                                  name="internalStatus"
+                                                                                  id="internalStatus"
+                                                                                  [disabled]="true"
+                                                                                  [value]="getInternalStatus()"
+                                                                                  required>
+                                                                                </div>
+                                                                              </div>
+																		  </div>
+                                                                            <div class="col-xs-12 col-md-4">
+                                                                              <div class="row">
+                                                                                <label tooltip="Externer Status" class="col-md-3 col-xs-3 control-label" for="externalStatus">
+                                                                                  {{'Externer Status' | translate:''}}
+                                                                                </label>
+                                                                                <div class="col-md-9 col-xs-9">
+                                                                                  <input class="form-control"
+                                                                                    name="externalStatus"
+                                                                                    id="externalStatus"
+                                                                                    [disabled]="true"
+                                                                                    [value]="getExternalStatus()"
+                                                                                    required>
+                                                                                  </div>
+                                                                                </div>
+																			</div>
+                                                                            <div class="col-xs-12 col-md-4">
+                                                                                <div class="row">
+                                                                                  <label tooltip="Behältnistyp" class="col-md-3 col-xs-3 control-label" for="behaeltnistyp">
+                                                                                    {{'Behältnistyp' | translate:''}}
+                                                                                  </label>
+                                                                                  <div class="col-md-9 col-xs-9"
+                                                                                    [tooltip]="detailRecord.behaeltnistyp"
+                                                                                    [tooltipDisabled]="!detailRecord.behaeltnistyp">
+                                                                                    <input class="form-control"
+                                                                                      name="behaeltnistyp"
+                                                                                      id="behaeltnistyp"
+                                                                                      [disabled]="isFieldReadonly('behaeltnistyp')"
+                                                                                      [(ngModel)]="detailRecord.behaeltnistyp"
+                                                                                      required>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                            </div>
+					            											<div class="row">
+					            											  <div class="col-xs-12 col-md-4">
+					            													<div class="row">
+					            														<label class="col-md-3 col-xs-3 control-label" tooltip="Standort" for="standort">
+					            															{{'Standort' | translate:''}}
+					            														</label>
+					            														<div class="col-md-9 col-xs-9"
+					            															 [tooltip]="detailRecord.standort"
+					            															 [tooltipDisabled]="!detailRecord.standort">
+					            															<input class="form-control"
+					            																   name="standort"
+					            																   id="standort"
+					            																   [disabled]="isFieldReadonly('standort')"
+					            																   [(ngModel)]="detailRecord.standort"
+					            																   required>
+					            														</div>
+					            													</div>
+					            											  </div>
+					            											</div>
+					            											  <div class="row">
+					            												<div class="col-xs-12 col-md-12">
+					            												  <div class="row">
+					            													<label tooltip="Interne Bemerkung" class="col-md-1 col-xs-3 control-label" for="internalComment">
+					            													  {{'Interne Bemerkung' | translate:''}}
+					            													</label>
+					            													<div class="col-md-11 col-xs-9" [tooltip]="detailRecord.internalComment" [tooltipDisabled]="!detailRecord.internalComment">
+					            													  <textarea class="form-control"
+					            														name="internalComment"
+					            														rows="2"
+					            														id="internalComment"
+					            														[disabled]="isFieldReadonly('internalComment')"
+					            														[(ngModel)]="detailRecord.internalComment"
+					            														required>
+					            													  </textarea>
+					            													</div>
+					            												  </div>
+					            												</div>
+					            											  </div>
+                                                                              <div class="row">
+                                                                                <div class="col-xs-12 col-md-8">
+                                                                                  <table class="table table-bordered">
+                                                                                    <caption>{{'Historie interner Status des Auftrags' | translate:''}}</caption>
+                                                                                    <thead>
+                                                                                      <tr>
+                                                                                        <th>Datum</th>
+                                                                                        <th>Benutzer</th>
+                                                                                        <th>Zielstatus</th>
+                                                                                      </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                      @for (h of detailRecord.statusHistory; track h) {
+                                                                                        <tr>
+                                                                                          <th>{{getFormattedStatusHistoryDate(h)}}</th>
+                                                                                          <td>{{h.changedBy}}</td>
+                                                                                          <td>{{getFormattedStatusHistoryToStatus(h)}}</td>
+                                                                                        </tr>
+                                                                                      }
+                                                                                      @if (!detailRecord.statusHistory || detailRecord.statusHistory.length === 0) {
+                                                                                        <tr>
+                                                                                          <td colspan="3">{{'Keine Einträge' | translate:''}}</td>
+                                                                                        </tr>
+                                                                                      }
+                                                                                    </tbody>
+                                                                                  </table>
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                          </div>
+                                                                        }
+                                                                        @if (showEntscheidHinterlegen) {
+                                                                          <cmi-viaduc-entscheid-hinterlegen-modal
+                                                                            [items]="[detailRecord]"
+                                                                            (onSubmitted)="init()"
+                                                                            [(open)]="showEntscheidHinterlegen"
+                                                                            [user]="detailRecord.user">
+                                                                          </cmi-viaduc-entscheid-hinterlegen-modal>
+                                                                        }
+                                                                        @if (showAuftraegeZuruecksetzen) {
+                                                                          <cmi-viaduc-auftraege-zuruecksetzen-modal
+                                                                            [ids]="[detailRecord.itemId]"
+                                                                            [(open)]="showAuftraegeZuruecksetzen"
+                                                                            (onSubmitted)="init()">ö
+                                                                          </cmi-viaduc-auftraege-zuruecksetzen-modal>
+                                                                        }
+                                                                        @if (showInVorlageExportieren) {
+                                                                          <cmi-viaduc-in-vorlage-exportieren-modal
+                                                                            [ids]="[detailRecord.itemId]"
+                                                                            [(open)]="showInVorlageExportieren"
+                                                                            (onSubmitted)="init()">
+                                                                          </cmi-viaduc-in-vorlage-exportieren-modal>
+                                                                        }
+                                                                        @if (showDigitalisierungAusloesen) {
+                                                                          <cmi-viaduc-digitalisierung-ausloesen-modal
+                                                                            [ids]="[detailRecord.itemId]"
+                                                                            [(open)]="showDigitalisierungAusloesen"
+                                                                            (onSubmitted)="init()">
+                                                                          </cmi-viaduc-digitalisierung-ausloesen-modal>
+                                                                        }
+                                                                        @if (showEinsichtsgesucheAbbrechen) {
+                                                                          <cmi-viaduc-auftraege-abbrechen-modal
+                                                                            [ids]="[detailRecord.itemId]"
+                                                                            [(open)]="showEinsichtsgesucheAbbrechen"
+                                                                            (onSubmitted)="init()">
+                                                                          </cmi-viaduc-auftraege-abbrechen-modal>
+                                                                        }
+                                                                      </div>
+                                                                    </div>
+                                                                  } @else {
+                                                                    <div class="alert alert-danger" role="alert">
+                                                                      <span class="sr-only">error:</span> {{ 'Sie haben nicht das benötigte ApplicationFeature (Auftragsuebersicht) um auf die Seite zuzugreifen. Bitte wenden Sie sich an den App-Owner.' | translate:'ordersListPage.title'}}
+                                                                    </div>
+                                                                  }
+                                                                </form>
+                                                              </div>
+                                                            </div>
+                                                          </cmi-viaduc-layout-left-content>
+                                                        </div>
 
-										<button class="btn btn-link" (click)="showInVorlageExportierenModal()">
-											<span><span class="glyphicon glyphicon-message-forward"></span>&nbsp;{{ 'In Vorlage exportieren' | translate:'ordersEinsichtDetailPage.inVorlageExportieren' }}</span>
-										</button>
+                                                        <cmi-viaduc-modal [modalTitle]="'Bestellhistorie der Verzeichnungseinheit'" [(opened)]="showOrderHistoryModal" class="history-modal">
+                                                          <cmi-viaduc-modal-body>
+                                                            <div class="row">
+                                                              <div class="col-xs-12">
+                                                                <cmi-viaduc-bestell-historie [historyItems]="historyItems"></cmi-viaduc-bestell-historie>
+                                                              </div>
+                                                            </div>
+                                                          </cmi-viaduc-modal-body>
+                                                        </cmi-viaduc-modal>
 
-										<button class="btn btn-link" (click)="showDigitalisierungsauftragAusfuehren()">
-											<span><span class="glyphicon glyphicon-transfer"></span>&nbsp;{{ 'Digitalisierung auslösen' | translate:'ordersEinsichtDetailPage.digitalisierungsauftragAusfuehren' }}</span>
-										</button>
-
-										<button class="btn btn-link" (click)="showAuftraegeZuruecksetzenModal()">
-											<span><span class="glyphicon glyphicon-restart"></span>&nbsp;{{ 'Auftrag zurücksetzen' | translate:'ordersEinsichtDetailPage.zuruecksetzenSingular' }}</span>
-										</button>
-
-										<button class="btn btn-link" (click)="showEinsichtsgesucheAbbrechenModal()">
-											<span><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;{{ 'Auftrag abbrechen' | translate:'orderOverviewPage.abbrechensingular' }}</span>
-										</button>
-
-										<button class="btn btn-link" (click)="seeHiddenOrderDetail()">
-											<span><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;{{ '[nicht sichtbare] Daten einsehen' | translate:'orderDetailPage.seeHiddenData' }}</span>
-										</button>
-									</span>
-								</div>
-
-								<div class="col-lg-3 col-md-4 col-sm-5 col-xs-12 detail-paging" *ngIf="detailPagingEnabled">
-									<cmi-viaduc-detail-paging [detailUrl]="getDetailBaseUrl()" [idProperty]="'itemId'" [disableNavigation]="getFormIsDirty()"></cmi-viaduc-detail-paging>
-								</div>
-
-								<div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
-									<button (click)="reset()" class="btn btn-link">
-										<span><span class="glyphicon glyphicon-undo"></span>&nbsp;{{ 'Änderungen verwerfen' | translate:'role.cancel' }}</span>
-									</button>
-									<button (click)="updateOrderDetail()" class="btn btn-link">
-										<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Speichern' | translate:'role.save' }}</span>
-									</button>
-								</div>
-							</div>
-						</div>
-
-						<div class="row order-detail" #detailWrapper>
-							<div *ngIf="!loading && fieldInfos && detailRecord" class="col-xs-12">
-								<div class="form-group">
-
-									<h3 class="title">Auftragsdaten</h3>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label" tooltip="Auftragstyp" for="orderingType">
-													{{'Auftragstyp' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9"
-													 [tooltip]="getOrderType(detailRecord.orderingType)"
-													 [tooltipDisabled]="!(detailRecord.orderingType >= 0)">
-													<input class="form-control"
-														   name="orderingType"
-														   id="orderingType"
-														   [disabled]="true"
-														   [value]="getOrderType(detailRecord.orderingType)">
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label" tooltip="Bestell-ID" for="orderId">
-													{{'Bestell-ID' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="orderId"
-														   id="orderId"
-														   [disabled]="isFieldReadonly('orderId')"
-														   [(ngModel)]="detailRecord.orderId"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label" tooltip="Auftrags-ID" for="itemId">
-													{{'Auftrags-ID' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="itemId"
-														   id="itemId"
-														   [disabled]="isFieldReadonly('itemId')"
-														   [(ngModel)]="detailRecord.itemId"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-12">
-											<div class="row">
-												<label tooltip="Benutzer" class="col-md-1 col-xs-3 control-label" for="user">
-													{{'Benutzer' | translate:''}}
-												</label>
-												<div class="col-md-11 col-xs-9" [tooltip]="detailRecord.user" [tooltipDisabled]="!detailRecord.user">
-													<div class="input-group">
-														<a class="input-group-addon" target="_blank"
-														   *ngIf="detailRecord.user"
-														   [routerLink]="_url.getNormalizedUrl('/benutzerundrollen/benutzer') + '/' + detailRecord.userId"
-														   title="Öffnet die Detailansicht des Benutzers in einem neuen Register">
-															<i class="glyphicon glyphicon-new-window"></i>
-														</a>
-														<input class="form-control"
-															   name="user"
-															   id="user"
-															   [disabled]="isFieldReadonly('user')"
-															   [(ngModel)]="detailRecord.user"
-															   required>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-8 col-xs-12">
-											<div class="row">
-												<label tooltip="Bemerkung zum Dossier" class="col-md-3 col-xs-3 control-label label-2of3" for="itemComment">
-													{{'Bemerkung zum Dossier' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9 content-2of3" [tooltip]="detailRecord.itemComment" [tooltipDisabled]="!detailRecord.itemComment">
-													<textarea class="form-control"
-															  name="itemComment"
-															  rows="1"
-															  id="itemComment"
-															  [disabled]="isFieldReadonly('itemComment')"
-															  [(ngModel)]="detailRecord.itemComment"
-															  required>
-													</textarea>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 col-xs-12">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label" tooltip="Art der Arbeit" for="orderingArtDerArbeitId">
-													{{'Art der Arbeit' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<select name="orderingArtDerArbeitId"
-															id="orderingArtDerArbeitId" class="form-control"
-															[(ngModel)]="detailRecord.orderingArtDerArbeitId"
-															[disabled]="isFieldReadonly('orderingArtDerArbeitId')">
-														<option [value]="null" disabled>Bitte wählen</option>
-														<option *ngFor="let a of artDerArbeiten" [ngValue]="a.id">{{a.name}}</option>
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label" tooltip="Benutzerrolle Public-Client zum Bestell-Zeitpunkt" for="rolePublicClient">
-													{{'Benutzerrolle Public-Client zum Bestell-Zeitpunkt' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9"
-													 [tooltip]="detailRecord.rolePublicClient"
-													 [tooltipDisabled]="!detailRecord.rolePublicClient">
-													<input class="form-control"
-														   name="rolePublicClient"
-														   id="rolePublicClient"
-														   [disabled]="true"
-														   [value]="detailRecord.rolePublicClient">
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<hr class="section-separator" />
-									<h3 class="title">Verzeichnungsdaten</h3>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Signatur" class="col-md-3 col-xs-3 control-label" for="signatur">
-													{{'Signatur' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.signatur" [tooltipDisabled]="!detailRecord.signatur">
-													<div class="input-group">
-														<a class="input-group-addon" target="_blank"
-															*ngIf="detailRecord.signatur && detailRecord.veId && detailRecord.veId !==0"
-															href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + detailRecord.veId}}"
-															title="Öffnet die Detailansicht der Signatur in einem neuen Register">
-															<i class="glyphicon glyphicon-new-window"></i>
-														</a>
-														<input class="form-control"
-															   name="signatur"
-															   id="signatur"
-															   [disabled]="isFieldReadonly('signatur')"
-															   [(ngModel)]="detailRecord.signatur"
-															   required>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Hierarchiestufe" class="col-md-3 col-xs-3 control-label" for="hierarchieStufe">
-													{{'Hierarchiestufe' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="hierarchieStufe"
-														   id="hierarchieStufe"
-														   [disabled]="isFieldReadonly('hierarchiestufe')"
-														   [(ngModel)]="detailRecord.hierarchiestufe"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="ID der VE" class="col-md-3 col-xs-3 control-label" for="veId">
-													{{'ID der VE' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="veId"
-														   id="veId"
-														   [disabled]="isFieldReadonly('veId')"
-														   [(ngModel)]="detailRecord.veId"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-12">
-											<div class="row">
-												<label tooltip="Title" class="col-md-1 col-xs-3 control-label" for="title">
-													{{'Titel' | translate:''}}
-												</label>
-												<div class="col-md-11 col-xs-9" [tooltip]="detailRecord.dossiertitel" [tooltipDisabled]="!detailRecord.dossiertitel">
-													<input class="form-control"
-														   name="title"
-														   id="title"
-														   [disabled]="isFieldReadonly('dossiertitel')"
-														   [(ngModel)]="detailRecord.dossiertitel"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4 verzeichnungsdaten">
-											<div class="row">
-												<label tooltip="Aktenzeichen" class="col-md-3 col-xs-3 control-label" for="aktenzeichen">
-													{{'Aktenzeichen' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="aktenzeichen"
-														   id="aktenzeichen"
-														   [disabled]="isFieldReadonly('aktenzeichen')"
-														   [(ngModel)]="detailRecord.aktenzeichen"
-														   required>
-												</div>
-											</div>
-											<div class="row">
-												<label tooltip="Entstehungszeitraum" class="col-md-3 col-xs-3 control-label" for="creationPeriod">
-													{{'Entstehungszeitraum' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="creationPeriod"
-														   id="creationPeriod"
-														   [disabled]="isFieldReadonly('zeitraumDossier')"
-														   [(ngModel)]="detailRecord.zeitraumDossier"
-														   required>
-												</div>
-											</div>
-											<div class="row">
-												<label tooltip="Darin" class="col-md-3 col-xs-3 control-label" for="darin">
-													{{'Darin' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.darin" [tooltipDisabled]="!detailRecord.darin">
-													<textarea class="form-control"
-															  name="darin"
-															  id="darin"
-															  rows="1"
-															  [disabled]="isFieldReadonly('darin')"
-															  [(ngModel)]="detailRecord.darin">
-													</textarea>
-												</div>
-											</div>
-											<div class="row">
-												<label tooltip="Zusätzliche Informationen" class="col-md-3 col-xs-3 control-label" for="zusaetzlicheInformationen">
-													{{'Zusätzliche Informationen' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.zusaetzlicheInformationen" [tooltipDisabled]="!detailRecord.zusaetzlicheInformationen">
-													<input class="form-control"
-														   name="zusaetzlicheInformationen"
-														   id="zusaetzlicheInformationen"
-														   [disabled]="isFieldReadonly('zusaetzlicheInformationen')"
-														   [(ngModel)]="detailRecord.zusaetzlicheInformationen"
-														   required>
-												</div>
-											</div>
-											<div class="row">
-												<label tooltip="Zugänglichkeit gemäss BGA" class="col-md-3 col-xs-3 control-label" for="zgbga">
-													{{'Zugänglichkeit gemäss BGA' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9"
-													 [tooltip]="detailRecord.zugaenglichkeitGemaessBga"
-													 [tooltipDisabled]="!detailRecord.zugaenglichkeitGemaessBga">
-													<input class="form-control"
-														   name="zgbga"
-														   id="zgbga"
-														   [disabled]="isFieldReadonly('zugaenglichkeitGemaessBga')"
-														   [(ngModel)]="detailRecord.zugaenglichkeitGemaessBga"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-8">
-											<div class="row">
-												<label tooltip="Archivplankontext" class="col-md-12 col-xs-12 control-label">
-													{{'Archivplankontext' | translate: ''}}
-												</label>
-												<div class="col-xs-12 col-md-12">
-													<cmi-archivplan-context
-														*ngIf="detailRecord.archivplanKontext && detailRecord.archivplanKontext.length > 0"
-														[items]="detailRecord.archivplanKontext"></cmi-archivplan-context>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-8">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label label-2of3"
-													   tooltip="Schutzfristverzeichnung"
-													   for="schutzfristVerzeichnung">
-													{{'Schutzfristverzeichnung' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9 content-2of3" [tooltip]="detailRecord.schutzfristverzeichnung" [tooltipDisabled]="!detailRecord.schutzfristverzeichnung">
-													<input class="form-control"
-														   name="schutzfristVerzeichnung"
-														   id="schutzfristVerzeichnung"
-														   [disabled]="isFieldReadonly('schutzfristverzeichnung')"
-														   [(ngModel)]="detailRecord.schutzfristverzeichnung"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Zuständige Stelle" class="col-md-3 col-xs-3 control-label" for="zustaendigeStelle">
-													{{'Zuständige Stelle' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="zustaendigeStelle"
-														   id="zustaendigeStelle"
-														   [disabled]="isFieldReadonly('zustaendigeStelle')"
-														   [(ngModel)]="detailRecord.zustaendigeStelle"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label class="col-md-3 col-xs-3 control-label"
-													   tooltip="Publikationsrechte"
-													   for="publikationsrechte">
-													{{'Publikationsrechte' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.publikationsrechte" [tooltipDisabled]="!detailRecord.publikationsrechte">
-													<input class="form-control"
-														   name="publikationsrechte"
-														   id="publikationsrechte"
-														   [disabled]="isFieldReadonly('publikationsrechte')"
-														   [(ngModel)]="detailRecord.publikationsrechte"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<hr class="section-separator" />
-									<h3 class="title">Freigabe</h3>
-									<div class="row">
-										<div class="col-xs-12 col-md-12">
-											<div class="row">
-												<div class="col-md-12 col-xs-12">
-													<cmi-viaduc-bestell-historie [historyItems]="detailRecord?.orderingHistory"></cmi-viaduc-bestell-historie>
-													<a href="javascript:void(0)" (click)="loadOrderHistoryModal()"
-													   *ngIf="detailRecord.veId && detailRecord.veId !== 0 && detailRecord.hasMoreOrderingHistory">
-														{{'Alle	Historyeinträge anzeigen' | translate:''}}
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-8">
-											<div class="row">
-												<label tooltip="Begründung Einsichtsgesuch" class="col-md-3 col-xs-3 control-label label-2of3" for="begruendungEinsichtsgesuch">
-													{{'Begründung Einsichtsgesuch' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9 content-2of3"	[tooltip]="detailRecord.begruendungEinsichtsgesuch" [tooltipDisabled]="!detailRecord.begruendungEinsichtsgesuch">
-													<textarea class="form-control"
-															  name="begruendungEinsichtsgesuch"
-															  id="begruendungEinsichtsgesuch"
-															  rows="2"
-															  [disabled]="isFieldReadonly('begruendungEinsichtsgesuch')"
-															  [(ngModel)]="detailRecord.begruendungEinsichtsgesuch"
-															  required>
-													</textarea>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<div class="col-md-12">
-													<div class="row">
-														<label tooltip="Eigene Unterlagen" class="col-md-3 col-xs-3 control-label" for="eigeneUnterlagen">
-															{{'Eigene Unterlagen' | translate:''}}
-														</label>
-														<div class="col-md-9 col-xs-9">
-															<select name="eigeneUnterlagen"
-																	id="eigeneUnterlagen" class="form-control"
-																	[(ngModel)]="detailRecord.unterlagenDieNutzerSelberBetreffen"
-																	[disabled]="isFieldReadonly('unterlagenDieNutzerSelberBetreffen')">
-																<option [value]="null" disabled>Bitte wählen</option>
-																<option [value]="true">Ja</option>
-																<option [value]="false">Nein</option>
-															</select>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<label tooltip="Personenbezogene Nachforschung" class="col-md-3 col-xs-3 control-label" for="personenbezogeneNachforschung">
-													{{'Personenbezogene Nachforschung' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<select name="personenbezogeneNachforschung"
-															id="personenbezogeneNachforschung" class="form-control"
-															[(ngModel)]="detailRecord.personenbezogeneNachforschung"
-															[disabled]="isFieldReadonly('personenbezogeneNachforschung')">
-														<option [value]="null" disabled>Bitte wählen</option>
-														<option [value]="true">Ja</option>
-														<option [value]="false">Nein</option>
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Entscheid Gesuch" class="col-md-3 col-xs-3 control-label"
-													   for="entscheidGesuch">
-													{{'Entscheid Gesuch' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="entscheidGesuch"
-														   id="entscheidGesuch"
-														   [disabled]="true"
-														   [value]="getEntscheidGesuch(detailRecord.entscheidGesuch)"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Datum des Entscheids" class="col-md-3 col-xs-3 control-label" for="datumDesEntscheids">
-													{{'Datum des Entscheids' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="datumDesEntscheids"
-														   id="datumDesEntscheids"
-														   [ngModel]="getFormattedDateWithoutTime(detailRecord.datumDesEntscheids)"
-														   [disabled]="true">
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Abbruchgrund" class="col-md-3 col-xs-3 control-label" for="abbruchgrund">
-													{{'Abbruchgrund' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="abbruchgrund"
-														   id="abbruchgrund"
-														   [value]="getAbbruchgrund(detailRecord.abbruchgrund)"
-														   [disabled]="isFieldReadonly('abbruchgrund')"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<hr class="section-separator" />
-									<h3 class="title">Logistik</h3>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Eingangsdatum" class="col-md-3 col-xs-3 control-label" for="orderingDate">
-													{{'Eingangsdatum' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="orderingDate"
-														   id="orderingDate"
-														   [disabled]="true"
-														   [ngModel]="getFormattedDate(detailRecord.orderingDate)">
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Abschlussdatum" class="col-md-3 col-xs-3 control-label" for="abschlussdatum">
-													{{'Abschlussdatum' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="abschlussdatum"
-														   id="abschlussdatum"
-														   [disabled]="true"
-														   [ngModel]="getFormattedDate(detailRecord.abschlussdatum)">
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Eingangsart" class="col-md-3 col-xs-3 control-label" for="eingangsart">
-													{{'Eingangsart' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="eingangsart"
-														   id="eingangsart"
-														   [value]="getEingangsart(detailRecord.eingangsart)"
-														   [disabled]="isFieldReadonly('eingangsart')"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Identifikation digitales Magazin" class="col-md-3 col-xs-3 control-label" for="idDigitalesMagazin">
-													{{'Identifikation digitales Magazin' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.identifikationDigitalesMagazin" [tooltipDisabled]="!detailRecord.identifikationDigitalesMagazin">
-													<input class="form-control"
-														   name="idDigitalesMagazin"
-														   id="idDigitalesMagazin"
-														   [disabled]="isFieldReadonly('identifikationDigitalesMagazin')"
-														   [(ngModel)]="detailRecord.identifikationDigitalesMagazin"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Standort" class="col-md-3 col-xs-3 control-label" for="standort">
-													{{'Standort' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9" [tooltip]="detailRecord.standort" [tooltipDisabled]="!detailRecord.standort">
-													<input class="form-control"
-														   name="standort"
-														   id="standort"
-														   [disabled]="isFieldReadonly('standort')"
-														   [(ngModel)]="detailRecord.standort"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Behältniscode" class="col-md-3 col-xs-3 control-label" for="behaeltnisCode">
-													{{'Behältniscode' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9"
-													 [tooltip]="detailRecord.behaeltnisNummer"
-													 [tooltipDisabled]="!detailRecord.behaeltnisNummer">
-													<input class="form-control"
-														   name="behaeltnisCode"
-														   id="behaeltnisCode"
-														   [disabled]="isFieldReadonly('behaeltnisNummer')"
-														   [(ngModel)]="detailRecord.behaeltnisNummer"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Interner Status" class="col-md-3 col-xs-3 control-label" for="internalStatus">
-													{{'Interner Status' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="internalStatus"
-														   id="internalStatus"
-														   [disabled]="true"
-														   [value]="getInternalStatus()"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Externer Status" class="col-md-3 col-xs-3 control-label" for="externalStatus">
-													{{'Externer Status' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9">
-													<input class="form-control"
-														   name="externalStatus"
-														   id="externalStatus"
-														   [disabled]="true"
-														   [value]="getExternalStatus()"
-														   required>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-4">
-											<div class="row">
-												<label tooltip="Behältnistyp" class="col-md-3 col-xs-3 control-label" for="behaeltnistyp">
-													{{'Behältnistyp' | translate:''}}
-												</label>
-												<div class="col-md-9 col-xs-9"
-													 [tooltip]="detailRecord.behaeltnistyp"
-													 [tooltipDisabled]="!detailRecord.behaeltnistyp">
-													<input class="form-control"
-														   name="behaeltnistyp"
-														   id="behaeltnistyp"
-														   [disabled]="isFieldReadonly('behaeltnistyp')"
-														   [(ngModel)]="detailRecord.behaeltnistyp"
-														   required>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-12">
-											<div class="row">
-												<label tooltip="Interne Bemerkung" class="col-md-1 col-xs-3 control-label" for="internalComment">
-													{{'Interne Bemerkung' | translate:''}}
-												</label>
-												<div class="col-md-11 col-xs-9" [tooltip]="detailRecord.internalComment" [tooltipDisabled]="!detailRecord.internalComment">
-													<textarea class="form-control"
-															  name="internalComment"
-															  rows="2"
-															  id="internalComment"
-															  [disabled]="isFieldReadonly('internalComment')"
-															  [(ngModel)]="detailRecord.internalComment"
-															  required>
-													</textarea>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-8">
-											<table class="table table-bordered">
-												<caption>{{'Historie interner Status des Auftrags' | translate:''}}</caption>
-												<thead>
-												<tr>
-													<th>Datum</th>
-													<th>Benutzer</th>
-													<th>Zielstatus</th>
-												</tr>
-												</thead>
-												<tbody>
-												<tr *ngFor="let h of detailRecord.statusHistory">
-													<th>{{getFormattedStatusHistoryDate(h)}}</th>
-													<td>{{h.changedBy}}</td>
-													<td>{{getFormattedStatusHistoryToStatus(h)}}</td>
-												</tr>
-												<tr *ngIf="!detailRecord.statusHistory || detailRecord.statusHistory.length === 0">
-													<td colspan="3">{{'Keine Einträge' | translate:''}}</td>
-												</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-							<cmi-viaduc-entscheid-hinterlegen-modal *ngIf="showEntscheidHinterlegen"
-																	[items]="[detailRecord]"
-																	(onSubmitted)="init()"
-																	[(open)]="showEntscheidHinterlegen"
-																	[user]="detailRecord.user">
-							</cmi-viaduc-entscheid-hinterlegen-modal>
-
-							<cmi-viaduc-auftraege-zuruecksetzen-modal *ngIf="showAuftraegeZuruecksetzen"
-																	  [ids]="[detailRecord.itemId]"
-																	  [(open)]="showAuftraegeZuruecksetzen"
-																	  (onSubmitted)="init()">ö
-							</cmi-viaduc-auftraege-zuruecksetzen-modal>
-
-							<cmi-viaduc-in-vorlage-exportieren-modal *ngIf="showInVorlageExportieren"
-																	 [ids]="[detailRecord.itemId]"
-																	 [(open)]="showInVorlageExportieren"
-																	 (onSubmitted)="init()">
-							</cmi-viaduc-in-vorlage-exportieren-modal>
-
-							<cmi-viaduc-digitalisierung-ausloesen-modal *ngIf="showDigitalisierungAusloesen"
-																  [ids]="[detailRecord.itemId]"
-																  [(open)]="showDigitalisierungAusloesen"
-																  (onSubmitted)="init()">
-							</cmi-viaduc-digitalisierung-ausloesen-modal>
-
-							<cmi-viaduc-auftraege-abbrechen-modal *ngIf="showEinsichtsgesucheAbbrechen"
-																  [ids]="[detailRecord.itemId]"
-																  [(open)]="showEinsichtsgesucheAbbrechen"
-																  (onSubmitted)="init()">
-							</cmi-viaduc-auftraege-abbrechen-modal>
-
-						</div>
-					</div>
-					<ng-template #noRights>
-						<div class="alert alert-danger" role="alert">
-							<span class="sr-only">error:</span> {{ 'Sie haben nicht das benötigte ApplicationFeature (Auftragsuebersicht) um auf die Seite zuzugreifen. Bitte wenden Sie sich an den App-Owner.' | translate:'ordersListPage.title'}}
-						</div>
-					</ng-template>
-				</form>
-			</div>
-		</div>
-	</cmi-viaduc-layout-left-content>
-</div>
-
-<cmi-viaduc-modal [modalTitle]="'Bestellhistorie der Verzeichnungseinheit'" [(opened)]="showOrderHistoryModal" class="history-modal">
-	<cmi-viaduc-modal-body>
-		<div class="row">
-			<div class="col-xs-12">
-				<cmi-viaduc-bestell-historie [historyItems]="historyItems"></cmi-viaduc-bestell-historie>
-			</div>
-		</div>
-	</cmi-viaduc-modal-body>
-</cmi-viaduc-modal>
-
-<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>
+                                                        <cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>

@@ -1,342 +1,622 @@
-﻿using CMI.Contract.Common;
-using FluentAssertions;
+using CMI.Contract.Common;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Transport;
+using Shouldly;
 using Moq;
-using Nest;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CMI.Access.Common.Tests
 {
     [TestFixture]
     public class ElasticIndexHelperTests
     {
-        private Mock<IElasticClient> elasticClientMock;
-       
+        private Mock<ElasticsearchClient> elasticClientMock;
+
         private ElasticIndexHelper helper;
 
         [SetUp]
         public void SetUp()
         {
-           elasticClientMock = new Mock<IElasticClient>();
+           elasticClientMock = new Mock<ElasticsearchClient>();
         }
 
         [Test]
-        public void Should_Read_ElasticRecordDB_with_ScopeId_get_VE_with_NewAIS_And_Find_ScopeId_As_ExternalKey()
+        public async Task Should_Read_ElasticRecordDB_with_ScopeId_get_VE_with_NewAIS_And_Find_ScopeId_As_ExternalKey()
         {
             // Arrange
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
+            var hit = new Hit<ElasticArchiveDbRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveDbRecord
             {
-                new ElasticArchiveDbRecord
-                {
-                    ArchiveRecordId = "Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e",
-                    Title = "TestTitle",
-                    All = "TestAll",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "5690308" }]
-                }
-            }.ToList());
-          
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponseWithRecord.Object);
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
-
-            // Act
-            var record = helper.GetDbRecord("5690308", MetadataToExclude.OCRContentAndFiles);
-
-            //Assert
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("5690308");
-            record.ArchiveRecordId.Should().Be("Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e");
-
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Once);
-        }
-
-        [Test]
-        public void Should_Read_ElasticRecordDB_with_ScopeId_get_VE_with_NewAIS_And_Find_ScopeId_As_DocId()
-        {
-            // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-           
-
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
+                ArchiveRecordId = "Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e",
+                Title = "TestTitle",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "5690308"}]
+            };
+            var list = new[]
             {
-                new ElasticArchiveDbRecord
-                {
-                    ArchiveRecordId = "Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e",
-                    Title = "TestTitle",
-                    All = "TestAll"
-                }
-            }.ToList());
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
 
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>())).Returns(mockSearchResponseWithRecord.Object);
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponse.Object);
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
-
-
-            // Act
-            var record = helper.GetDbRecord("5690308", MetadataToExclude.OCRContentAndFiles);
-
-            //Assert
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("5690308");
-            record.ArchiveRecordId.Should().Be("Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e");
-
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Exactly(1));
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Once);
-        }
-
-        [Test]
-        public void Should_Read_ElasticRecordDB_with_Null_Id_get_Null()
-        {
-            // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>())).Returns(mockSearchResponse.Object);
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
           
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponse.Object);
-
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
 
             // Act
-            var record = helper.GetDbRecord("", MetadataToExclude.OCRContentAndFiles);
+            var record = await helper.GetDbRecord("5690308", MetadataToExclude.OCRContentAndFiles);
 
             //Assert
-            record.Should().BeNull();
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Never);
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("5690308");
+            record.ArchiveRecordId.ShouldBe("Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e");
+
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(),
+                It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
-        public void Should_Read_ElasticRecord_with_Null_Id_get_Null()
+        public async Task Should_Read_ElasticRecordDB_with_ScopeId_get_VE_with_NewAIS_And_Find_ScopeId_As_DocId()
         {
             // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>())).Returns(mockSearchResponse.Object);
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveRecord>>();
+            var hit = new Hit<ElasticArchiveDbRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveDbRecord
+            {
+                ArchiveRecordId = "Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e",
+                Title = "TestTitle",
+                All = "TestAll"
+            };
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetDbRecord("5690308", MetadataToExclude.OCRContentAndFiles);
+
+            //Assert
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("5690308");
+            record.ArchiveRecordId.ShouldBe("Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e");
+      
+        
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(),
+                It.IsAny<CancellationToken>()), Times.Exactly(0));
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveDbRecord>(It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Test]
+        public async Task Should_Read_ElasticRecordDB_with_Null_Id_get_Null()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveDbRecord>("", "test-index");
+            hit.Source = new ElasticArchiveDbRecord();
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetDbRecord("", MetadataToExclude.OCRContentAndFiles);
+
+            //Assert
+            record.ShouldBeNull();
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Test]
+        public async Task Should_Read_ElasticRecord_with_Null_Id_get_Null()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveDbRecord>(null, "test-index");
+            hit.Source = new ElasticArchiveDbRecord();
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetRecord("", MetadataToExclude.OCRContentAndFiles);
+
+            //Assert
+            record.ShouldBeNull();
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Test]
+        public async Task  Should_Read_ElasticRecordDB_with_NewAIS_get_VE_with_NewAIS()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveDbRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveDbRecord
+            {
+                ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
+                Title = "Niclas Beste",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "5690308"}]
+            };
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
+            var response = new GetResponse<ElasticArchiveDbRecord>() { Found = true, Source = hit.Source };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(response, 200);
+
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveDbRecord>
+                (It.IsAny<GetRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(getResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetDbRecord("Best    9c427a63-b945-524c-820a-c411451025d9", MetadataToExclude.OCRContentAndFiles);
+
+            //Assert
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("5690308");
+            record.ArchiveRecordId.ShouldBe("Best    9c427a63-b945-524c-820a-c411451025d9");
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.GetAsync<ElasticArchiveDbRecord>(It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()), Times.Once);
+
+        }
+
+
+        [Test]
+        public async Task Should_Read_ElasticRecordDB_with_Encode_NewAIS_get_VE_with_NewAIS()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveDbRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveDbRecord
+            {
+                ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
+                Title = "Niclas Beste",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey { Key = "scopeArchiv", Value = "5690308" }]
+            };
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
+            var response = new GetResponse<ElasticArchiveDbRecord>() { Found = true, Source = hit.Source };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(response, 200);
+
+
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveDbRecord>
+                (It.IsAny<GetRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(getResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetDbRecord("Best%20%20%20%209c427a63-b945-524c-820a-c411451025d9", MetadataToExclude.OCRContentAndFiles);
+
+            //Assert
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("5690308");
+            record.ArchiveRecordId.ShouldBe("Best    9c427a63-b945-524c-820a-c411451025d9");
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.GetAsync<ElasticArchiveDbRecord>(It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Test]
+        public async Task Should_Read_ElasticRecord_with_ScopeId_get_VE_with_NewAIS()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveRecord
+            {
+                ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
+                Title = "Heiz Kitle",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey { Key = "scopeArchiv", Value = "4641" }]
+            };
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveRecord>(list)
+            };
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+
+
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>
+                (It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            var record = await helper.GetRecord("4641", MetadataToExclude.OCRContentAndFiles);
+
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("4641");
+            record.ArchiveRecordId.ShouldBe("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Test]
+        public async Task Should_Read_ElasticRecord_with_NewAIS_get_VE_with_NewAIS()
+        {
+            // Arrange
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            var hitRecord = new ElasticArchiveRecord
+            {
+                ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
+                Title = "Heiz Kitle",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "4641"}]
+            };
+            hit.Source = hitRecord;
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveRecord>(list)
+            };
+            var response = new GetResponse<ElasticArchiveRecord>(){Found = true, Source = hitRecord};
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(response, 200);
+
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>
+                (It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveRecord>
+                (It.IsAny<GetRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(getResponse));
+
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
             
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveRecord>>())).Returns(mockSearchResponseWithRecord.Object);
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
 
             // Act
-            var record = helper.GetRecord("", MetadataToExclude.OCRContentAndFiles);
+            var record = await helper.GetRecord("TBest   32da7073-4641-514c-a7eb-0c552e8675c7", MetadataToExclude.OCRContentAndFiles);
 
-            //Assert
-            record.Should().BeNull();
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Never);
-        }
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("4641");
 
-        [Test]
-        public void Should_Read_ElasticRecordDB_with_NewAIS_get_VE_with_NewAIS()
-        {
-            // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
+            record.ArchiveRecordId.ShouldBe("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
 
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
-            {
-                new ElasticArchiveDbRecord
-                {
-                    ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
-                    Title = "Niclas Beste",
-                    All = "TestAll",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "5690308" }]
-                }
-            }.ToList());
-
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>())).Returns(mockSearchResponseWithRecord.Object);
-
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponseWithRecord.Object);
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
-
-            // Act
-            var record = helper.GetDbRecord("Best    9c427a63-b945-524c-820a-c411451025d9", MetadataToExclude.OCRContentAndFiles);
-
-            //Assert
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("5690308");
-            record.ArchiveRecordId.Should().Be("Best    9c427a63-b945-524c-820a-c411451025d9");
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Once);
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.GetAsync<ElasticArchiveRecord>(It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()), Times.Once);
         }
 
 
         [Test]
-        public void Should_Read_ElasticRecordDB_with_Encode_NewAIS_get_VE_with_NewAIS()
+        public async Task Should_Read_ElasticRecord_with_Signature()
         {
             // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
+            var hit = new Hit<ElasticArchiveDbRecord>("1", "test-index");
+            hit.Source = new ElasticArchiveDbRecord
             {
-                new ElasticArchiveDbRecord
-                {
-                    ArchiveRecordId = "Best    9c427a63-b945-524c-820a-c411451025d9",
-                    Title = "Niclas Beste",
-                    All = "TestAll",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "5690308" }]
-                }
-            }.ToList());
+                ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
+                Title = "Heiz Lassak",
+                All = "Test All",
+                ReferenceCode = "E4320B#1987/187#310*",
+                ExternalKeys = [new ExternalKey { Key = "scopeArchiv", Value = "4641" }]
+            };
+            var list = new[]
+            {
+                hit
+            };
+            var temp = new SearchResponse<ElasticArchiveDbRecord>
+            {
+                HitsMetadata = new HitsMetadata<ElasticArchiveDbRecord>(list)
+            };
 
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>())).Returns(mockSearchResponseWithRecord.Object);
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(temp, 200);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveDbRecord>
+                (It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(searchResponse));
 
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponseWithRecord.Object);
-
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
 
             // Act
-            var record = helper.GetDbRecord("Best%20%20%20%209c427a63-b945-524c-820a-c411451025d9", MetadataToExclude.OCRContentAndFiles);
+            var record = await helper.GetDbRecord("E4320B#1987/187#310*", MetadataToExclude.OCRContentAndFiles);
 
-            //Assert
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("5690308");
-            record.ArchiveRecordId.Should().Be("Best    9c427a63-b945-524c-820a-c411451025d9");
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Never);
+            record.ShouldNotBeNull();
+            record.ArchiveRecordId.ShouldNotBe("4641");
+
+            record.ArchiveRecordId.ShouldBe("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
+
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveDbRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync(It.IsAny<Action<SearchRequestDescriptor<ElasticArchiveRecord>>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>(), It.IsAny<CancellationToken>()), Times.Never);
+            elasticClientMock.Verify(e => e.SearchAsync<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>(), It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        #region Remove Tests
+
+        [Test]
+        public async Task Remove_Should_Delete_Record_When_Record_Exists_And_DeleteIsSuccessful()
+        {
+            // Arrange
+            var archiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7";
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            var hitRecord = new ElasticArchiveRecord
+            {
+                ArchiveRecordId = archiveRecordId,
+                Title = "Test Record",
+                All = "TestAll"
+            };
+            hit.Source = hitRecord;
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new SearchResponse<ElasticArchiveRecord>
+                {
+                    HitsMetadata = new HitsMetadata<ElasticArchiveRecord>(new[] { hit })
+                }, 200);
+
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new GetResponse<ElasticArchiveRecord> { Found = true, Source = hitRecord }, 200);
+
+            var deleteResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new DeleteResponse(), 200);
+
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>(
+                It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(searchResponse));
+
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveRecord>(
+                It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(getResponse));
+
+            elasticClientMock.Setup(x => x.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(deleteResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            await helper.Remove(archiveRecordId);
+
+            // Assert
+            elasticClientMock.Verify(e => e.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(),
+                It.IsAny<CancellationToken>()), Times.Once);
         }
 
         [Test]
-        public void Should_Read_ElasticRecord_with_ScopeId_get_VE_with_NewAIS()
+        public async Task Remove_Should_Not_Delete_When_Record_Does_Not_Exist()
         {
             // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveRecord>());
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveRecord>>();
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
-            {
-                new ElasticArchiveRecord
-                {
-                    ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
-                    Title = "Heiz Kitle",
-                    All = "TestAll",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "4641"}]
-                }
-            }.ToList());
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>())).Returns(mockSearchResponse.Object);
+            var archiveRecordId = "NonExistent123";
 
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveRecord>>())).Returns(mockSearchResponseWithRecord.Object);
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new GetResponse<ElasticArchiveRecord> { Found = false }, 404);
 
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveRecord>(
+                It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(getResponse));
 
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
 
             // Act
-            var record = helper.GetRecord("4641", MetadataToExclude.OCRContentAndFiles);
+            await helper.Remove(archiveRecordId);
 
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("4641");
-            record.ArchiveRecordId.Should().Be("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Once);
+            // Assert
+            elasticClientMock.Verify(e => e.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(),
+                It.IsAny<CancellationToken>()), Times.Never);
         }
 
         [Test]
-        public void Should_Read_ElasticRecord_with_NewAIS_get_VE_with_NewAIS()
+        public async Task Remove_Should_Call_Delete_Even_When_Delete_Fails()
         {
             // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveRecord>());
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveRecord>>();
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
+            var archiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7";
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            var hitRecord = new ElasticArchiveRecord
             {
-                new ElasticArchiveRecord
+                ArchiveRecordId = archiveRecordId,
+                Title = "Test Record",
+                All = "TestAll"
+            };
+            hit.Source = hitRecord;
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new SearchResponse<ElasticArchiveRecord>
                 {
-                    ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
-                    Title = "Heiz Kitle",
-                    All = "TestAll",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "4641"}]
-                }
-            }.ToList());
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>())).Returns(mockSearchResponseWithRecord.Object);
+                    HitsMetadata = new HitsMetadata<ElasticArchiveRecord>(new[] { hit })
+                }, 200);
 
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveRecord>>())).Returns(mockSearchResponseWithRecord.Object);
+            var getResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new GetResponse<ElasticArchiveRecord> { Found = true, Source = hitRecord }, 200);
 
-         
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
+            var deleteResponse = new DeleteResponse();
 
-            // Act
-            var record = helper.GetRecord("TBest   32da7073-4641-514c-a7eb-0c552e8675c7", MetadataToExclude.OCRContentAndFiles);
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>(
+                It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(searchResponse));
 
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("4641");
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveRecord>(
+                It.IsAny<GetRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(getResponse));
 
-            record.ArchiveRecordId.Should().Be("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
+            elasticClientMock.Setup(x => x.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(deleteResponse));
 
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Once);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Never);
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act - sollte keine Exception werfen, sondern nur loggen
+            await helper.Remove(archiveRecordId);
+
+            // Assert
+            elasticClientMock.Verify(e => e.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(),
+                It.IsAny<CancellationToken>()), Times.Once);
         }
-
 
         [Test]
-        public void Should_Read_ElasticRecord_with_Signature()
+        public async Task Remove_Should_Work_With_ScopeId()
         {
             // Arrange
-            var mockSearchResponse = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponse.Setup(x => x.Documents).Returns(new List<ElasticArchiveDbRecord>());
-            var mockSearchResponseWithRecord = new Mock<ISearchResponse<ElasticArchiveDbRecord>>();
-            mockSearchResponseWithRecord.Setup(x => x.Documents).Returns(new[]
+            var scopeId = "5690308";
+            var actualId = "Klas    c592a85a-2bf4-5931-9990-bd17eb36ac3e";
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            var hitRecord = new ElasticArchiveRecord
             {
-                new ElasticArchiveDbRecord
+                ArchiveRecordId = actualId,
+                Title = "Test Record",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey { Key = "scopeArchiv", Value = scopeId }]
+            };
+            hit.Source = hitRecord;
+
+            var searchResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new SearchResponse<ElasticArchiveRecord>
                 {
-                    ArchiveRecordId = "TBest   32da7073-4641-514c-a7eb-0c552e8675c7",
-                    Title = "Heiz Lassak",
-                    All = "Test All",
-                    ReferenceCode = "E4320B#1987/187#310*",
-                    ExternalKeys = [new ExternalKey {Key = "scopeArchiv", Value = "4641"}]
-                }
-            }.ToList());
-            elasticClientMock.Setup(x => x.Search
-                (It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>())).Returns(mockSearchResponseWithRecord.Object);
+                    HitsMetadata = new HitsMetadata<ElasticArchiveRecord>(new[] { hit })
+                }, 200);
 
-            elasticClientMock.Setup(x => x.Search<ElasticArchiveDbRecord>
-                (It.IsAny<SearchRequest<ElasticArchiveDbRecord>>())).Returns(mockSearchResponseWithRecord.Object);
+            var deleteResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new DeleteResponse(), 200);
 
+            elasticClientMock.Setup(x => x.SearchAsync<ElasticArchiveRecord>(
+                It.IsAny<SearchRequest>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(searchResponse));
 
-            helper = new ElasticIndexHelper(elasticClientMock.Object);
+            elasticClientMock.Setup(x => x.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(deleteResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
 
             // Act
-            var record = helper.GetDbRecord("E4320B#1987/187#310*", MetadataToExclude.OCRContentAndFiles);
+            await helper.Remove(scopeId);
 
-            record.Should().NotBeNull();
-            record.ArchiveRecordId.Should().NotBe("4641");
-
-            record.ArchiveRecordId.Should().Be("TBest   32da7073-4641-514c-a7eb-0c552e8675c7");
-
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveDbRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search(It.IsAny<Func<SearchDescriptor<ElasticArchiveRecord>, ISearchRequest>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveRecord>(It.IsAny<SearchRequest<ElasticArchiveRecord>>()), Times.Never);
-            elasticClientMock.Verify(e => e.Search<ElasticArchiveDbRecord>(It.IsAny<SearchRequest<ElasticArchiveDbRecord>>()), Times.Once);
+            // Assert
+            elasticClientMock.Verify(e => e.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(),
+                It.IsAny<CancellationToken>()), Times.Once);
         }
+
+        [Test]
+        public async Task Remove_Should_Work_With_ActaProId_When_Direct_Lookup_Succeeds()
+        {
+            // Arrange
+            // ActaPro DocKey mit 44 Zeichen Länge wird übergeben
+            var actaProDocKey = "Best    9c427a63-b945-524c-820a-c411451025d9";
+            var scopeId = "5690308"; // Der Record hat eine ScopeId
+
+            var hit = new Hit<ElasticArchiveRecord>("1", "test-index");
+            var hitRecord = new ElasticArchiveRecord
+            {
+                ArchiveRecordId = scopeId, // Record wurde mit ScopeId indexiert
+                Title = "Test Record via ActaPro",
+                All = "TestAll",
+                ExternalKeys = [new ExternalKey { Key = "scopeArchiv", Value = scopeId }]
+            };
+            hit.Source = hitRecord;
+
+            // GetAsync für die DocKey gibt einen Record mit ScopeId zurück
+            var foundResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new GetResponse<ElasticArchiveRecord> { Found = true, Source = hitRecord }, 200);
+
+            var deleteResponse = TestableResponseFactory.CreateSuccessfulResponse(
+                new DeleteResponse(), 200);
+
+            elasticClientMock.Setup(x => x.GetAsync<ElasticArchiveRecord>(
+                It.IsAny<GetRequest>(), 
+                It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(foundResponse));
+
+            elasticClientMock.Setup(x => x.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.FromResult(deleteResponse));
+
+            helper = new ElasticIndexHelper(elasticClientMock.Object, "test-index");
+
+            // Act
+            await helper.Remove(actaProDocKey);
+
+            // Assert - Delete wurde mit der ScopeId aufgerufen
+            elasticClientMock.Verify(e => e.DeleteAsync<ElasticArchiveRecord>(
+                It.IsAny<Id>(),
+                It.IsAny<CancellationToken>()), Times.Once);
+
+            // Verify - GetAsync wurde für die DocKey aufgerufen und gab einen Record mit ScopeId zurück
+            elasticClientMock.Verify(e => e.GetAsync<ElasticArchiveRecord>(
+                It.IsAny<GetRequest>(), 
+                It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        #endregion
     }
 }
+

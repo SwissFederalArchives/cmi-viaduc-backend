@@ -1,10 +1,10 @@
-﻿using System.Threading;
+using System.Threading;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Messaging;
 using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Cache;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,7 +71,7 @@ namespace CMI.Manager.Asset.Tests
             
             // Assert
             Assert.IsTrue(await harness.Consumed.Any<GetAssetStatusRequest>());
-            result.Message.Status.Should().Be(AssetDownloadStatus.InCache);
+            result.Message.Status.ShouldBe(AssetDownloadStatus.InCache);
             await harness.Stop();
         }
 
@@ -100,7 +100,7 @@ namespace CMI.Manager.Asset.Tests
             });
             // Assert
             Assert.IsTrue(await harness.Consumed.Any<GetAssetStatusRequest>());
-            result.Message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
+            result.Message.Status.ShouldBe(AssetDownloadStatus.InPreparationQueue);
             await harness.Stop();
         }
 
@@ -134,7 +134,7 @@ namespace CMI.Manager.Asset.Tests
             });
 
             // Assert
-            result.Message.Status.Should().Be(AssetDownloadStatus.RequiresPreparation);
+            result.Message.Status.ShouldBe(AssetDownloadStatus.RequiresPreparation);
         }
 
     }

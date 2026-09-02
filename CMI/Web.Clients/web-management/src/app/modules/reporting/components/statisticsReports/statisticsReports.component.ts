@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {UiServiceMC, UrlService} from '../../../shared/index';
-import * as moment from 'moment';
+import moment from 'moment';
 import {TranslationService} from '@cmi/viaduc-web-core';
 import {HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import * as fileSaver from 'file-saver';
 import { StatisticReportService } from '../../services';
 
 @Component({
-	selector: 'cmi-statistics-reports',
-	templateUrl: './statisticsReports.component.html',
-	styleUrls: ['./statisticsReports.component.less']
+    selector: 'cmi-statistics-reports',
+    templateUrl: './statisticsReports.component.html',
+    styleUrls: ['./statisticsReports.component.less'],
+    standalone: false
 })
 export class StatisticsReportsComponent implements OnInit {
 	public crumbs: any[] = [];
@@ -17,7 +18,7 @@ export class StatisticsReportsComponent implements OnInit {
 	public endDate: Date;
 	public startDateDownload: Date;
 	public endDateDownload: Date;
-	public loading: boolean;
+	public loading: boolean = false;
 
 	constructor(private  statisticService: StatisticReportService,
 				private _txt: TranslationService,
@@ -34,7 +35,7 @@ export class StatisticsReportsComponent implements OnInit {
 	public doExport() {
 		this.loading = true;
 		this.statisticService.getStatisticReportData(this.startDate, this.endDate).subscribe(
-			event => {
+			(event: any) => {
 				if (event.type === HttpEventType.Response) {
 					try {
 						const contentDisposition: string = event.headers.get('content-disposition');
@@ -48,7 +49,7 @@ export class StatisticsReportsComponent implements OnInit {
 					}
 				}
 			},
-			(error) => {
+			(error: any) => {
 				this.loading = false;
 				this.handleError(error);
 			},
@@ -60,7 +61,7 @@ export class StatisticsReportsComponent implements OnInit {
 	public doExportDownload() {
 		this.loading = true;
 		this.statisticService.getStatisticReportDownloadData(this.startDateDownload, this.endDateDownload).subscribe(
-			event => {
+			(event: any) => {
 				if (event.type === HttpEventType.Response) {
 					try {
 						const contentDisposition: string = event.headers.get('content-disposition');
@@ -74,7 +75,7 @@ export class StatisticsReportsComponent implements OnInit {
 					}
 				}
 			},
-			(error) => {
+			(error: any) => {
 				this.loading = false;
 				this.handleError(error);
 			},
@@ -84,17 +85,29 @@ export class StatisticsReportsComponent implements OnInit {
 	}
 
 	private handleError(err: HttpErrorResponse): any {
-		if (err.headers.get('content-type').startsWith('application/json')) {
+		const contentType = err?.headers?.get('content-type');
+		if (contentType?.startsWith('application/json')) {
 			const reader = new FileReader();
 			reader.addEventListener('loadend', (e) => {
-				const errorInfo = JSON.parse(e.target.result.toString());
-				this._ui.showError(errorInfo.message, this._txt.get('StatisticsReport.downloadFail', 'Statistikreport konnten nicht heruntergeladen werden.'));
+				const target = e.target as FileReader | null;
+
+				if (!target?.result) {
+					return;
+				}
+
+				const errorInfo = JSON.parse(target.result.toString());
+				this._ui.showError(
+					errorInfo.message,
+					this._txt.get('StatisticsReport.downloadFail', 'Statistikreport konnten nicht heruntergeladen werden.'));
 			});
 			reader.readAsText(err.error);
 		} else {
-			this._ui.showError(this._txt.get('StatisticsReport.downloadFail', 'Statistikreport konnten nicht heruntergeladen werden.'), err.message);
+			this._ui.showError(this._txt.get('StatisticsReport.downloadFail', 'Statistikreport konnten nicht heruntergeladen werden.'),	err.message
+			);
 		}
 	}
+
+
 
 	private _buildCrumbs(): void {
 		const crumbs: any[] = this.crumbs = [];

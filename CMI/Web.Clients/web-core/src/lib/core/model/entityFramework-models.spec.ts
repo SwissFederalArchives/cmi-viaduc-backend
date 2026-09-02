@@ -76,7 +76,7 @@ describe('Entity Framework Tests', () => {
 		expect(korrekturDto.darinGemAIS ).toBe( 'darinGemAIS');
 		expect(korrekturDto.darinManuellKorrigiert ).toBe( 'darinManuellKorrigiert');
 		expect(korrekturDto.entstehungszeitraum ).toBe( '1982');
-		expect(korrekturDto.geändertAm.toDateString() ).toBe( manuelleKorrekturDto.geändertAm.toDateString());
+		expect(korrekturDto.geändertAm?.toDateString() ).toBe( manuelleKorrekturDto.geändertAm.toDateString());
 		expect(korrekturDto.geändertVon ).toBe( 'Pet');
 		expect(korrekturDto.hierachiestufe ).toBe( 'tief');
 		expect(korrekturDto.kommentar ).toBe( 'kommentat');
@@ -126,7 +126,7 @@ describe('Entity Framework Tests', () => {
 		expect(korrekturDto.erzeugtAm.toDateString() ).toBe( manuelleKorrekturDto.erzeugtAm.toDateString());
 		expect(korrekturDto.erzeugtVon ).toBe( 'Pet');
 		expect(korrekturDto.entstehungszeitraum ).toBe( '1982');
-		expect(korrekturDto.geändertAm.toDateString() ).toBe( manuelleKorrekturDto.geändertAm.toDateString());
+		expect(korrekturDto.geändertAm?.toDateString() ).toBe( manuelleKorrekturDto.geändertAm.toDateString());
 		expect(korrekturDto.geändertVon ).toBe( 'Pet');
 		expect(korrekturDto.hierachiestufe ).toBe( 'tief');
 		expect(korrekturDto.kommentar ).toBe( 'kommentat');

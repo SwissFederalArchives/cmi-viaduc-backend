@@ -1,12 +1,16 @@
-using System;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using CMI.Access.Common;
 using CMI.Contract.Common;
 using CMI.Contract.Parameter;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Dynamic;
+using System.Linq;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace CMI.Manager.Index
 {
@@ -22,11 +26,11 @@ namespace CMI.Manager.Index
             this.parameterHelper = parameterHelper;
         }
 
-        public GetElasticLogRecordsResult GetElasticLogRecords(LogDataFilter filter)
+        public async Task<GetElasticLogRecordsResult> GetElasticLogRecords(LogDataFilter filter)
         {
             var sw = new Stopwatch();
             sw.Start();
-            var raw = logDataAccess.GetLogData(filter);
+            var raw = await logDataAccess.GetLogData(filter);
             var result = new GetElasticLogRecordsResult
             {
                 Records = raw.Select(ToElasticLogRecord).ToList(),
@@ -53,65 +57,64 @@ namespace CMI.Manager.Index
         }
 
 
+        /// <summary>
+        /// Normalizes an Elasticsearch date value to local time.
+        /// If the dateKind is unspecified then it is assumed to be in UTC. When the JSON deserializer produces a
+        /// <see cref="DateTimeKind.Unspecified"/> value (i.e., no timezone suffix was present in
+        /// the raw JSON), the datetime is treated as UTC before converting to local time.
+        /// </summary>
+        internal static DateTime NormalizeElasticsearchTimestampToLocal(DateTime timestamp)
+        {
+            if (timestamp.Kind == DateTimeKind.Unspecified)
+            {
+                // Elasticsearch @timestamp values are always UTC; treat Unspecified accordingly.
+                timestamp = DateTime.SpecifyKind(timestamp, DateTimeKind.Utc);
+            }
+
+            return timestamp.ToLocalTime();
+        }
+
         private ElasticLogRecord ToElasticLogRecord(ElasticRawLogRecord record)
         {
-            var retVal = new ElasticLogRecord
+            try
             {
-                Id = record.Id,
-                Index = record.Index,
-                Exception = record.Exception,
-                Timestamp = record.Timestamp,
-                Level = record.Level,
-                MessageTemplate = record.MessageTemplate,
-                Message = ConvertMessageTemplate(record.MessageTemplate, record.Properties),
-                ArchiveRecordId = GetProperty<string>(record.Properties, nameof(ElasticLogRecord.ArchiveRecordId)),
-                ConversationId = GetProperty<string>(record.Properties, nameof(ElasticLogRecord.ConversationId)),
-                MainAssembly = GetProperty<string>(record.Properties, nameof(ElasticLogRecord.MainAssembly)),
-                MachineName = GetProperty<string>(record.Properties, nameof(ElasticLogRecord.MachineName)),
-                ProcessId = GetProperty<long>(record.Properties, nameof(ElasticLogRecord.ProcessId)),
-                ThreadId = GetProperty<long>(record.Properties, nameof(ElasticLogRecord.ThreadId))
-            };
-            return retVal;
-        }
+                var timestamp = NormalizeElasticsearchTimestampToLocal(record.Timestamp);
 
-        private string ConvertMessageTemplate(string recordMessageTemplate, ExpandoObject props)
-        {
-            var pattern = @".*?\{(?<name>.*?)(\:(?<format>.*?))?\}.*?";
-            var input = recordMessageTemplate;
-
-            foreach (Match m in Regex.Matches(input, pattern, RegexOptions.Multiline))
-            foreach (Capture capture in m.Groups["name"].Captures)
-            {
-                var format = m.Groups["format"].Success ? m.Groups["format"].Captures[0] : null;
-                input = input.Replace($"{{{capture.Value + (format != null ? ":" + format.Value : "")}}}",
-                    GetProperty<string>(props, capture.Value, format?.Value));
-            }
-
-            return input;
-        }
-
-        private T GetProperty<T>(ExpandoObject props, string name, string formatString = null)
-        {
-            var obj = props.FirstOrDefault(p => p.Key.Equals(name, StringComparison.InvariantCultureIgnoreCase)).Value;
-            if (obj != null)
-            {
-                if (typeof(T) == typeof(string))
+                var retVal = new ElasticLogRecord
                 {
-                    if (string.IsNullOrEmpty(formatString))
-                    {
-                        return (T) (object) obj.ToString();
-                    }
-                    else
-                    {
-                        var template = "{0:" + formatString + "}";
-                        return (T) (object) string.Format(template, obj);
-                    }
-                }
+                    Id = record.Id,
+                    Index = record.Index,
+                    Exception = record.Exception,
+                    Timestamp = timestamp,
+                    Level = record.Level,
+                    MessageTemplate = record.MessageTemplate,
+                    Message = ReplaceTemplate(record.MessageTemplate, record.Properties),
+                    ArchiveRecordId = record.Properties.ContainsKey(nameof(ElasticLogRecord.ArchiveRecordId)) ? record.Properties[nameof(ElasticLogRecord.ArchiveRecordId)].GetString() :
+                           record.Properties.ContainsKey("archiveRecordIdOrSignature") ? record.Properties["archiveRecordIdOrSignature"].GetString() : string.Empty,
+                    ConversationId = record.Properties.ContainsKey(nameof(ElasticLogRecord.ConversationId)) ? record.Properties[nameof(ElasticLogRecord.ConversationId)].GetString() : string.Empty,
+                    MainAssembly = record.Properties[nameof(ElasticLogRecord.MainAssembly)].GetString(),
+                    MachineName = record.Properties[nameof(ElasticLogRecord.MachineName)].GetString(),
+                    ProcessId = record.Properties[nameof(ElasticLogRecord.ProcessId)].GetInt64(),
+                    ThreadId = record.Properties[nameof(ElasticLogRecord.ThreadId)].GetInt64()
+                };
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Unexpected error in {methodName}", nameof(ToElasticLogRecord));
+                throw;
+            }
+        }
 
-                return (T) obj;
+        public static string ReplaceTemplate(string recordMessageTemplate, Dictionary<string, JsonElement> values)
+        {
+            foreach (var kvp in values)
+            {
+                recordMessageTemplate = recordMessageTemplate.Replace($"{{{kvp.Key}}}", kvp.ToString());
             }
 
-            return default;
+            return recordMessageTemplate;
         }
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading.Tasks;
 using CMI.Access.Common;
 using CMI.Contract.Common;
 using CMI.Tools.AutomatedCacheFilesEmpty.Models;
@@ -25,7 +26,7 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
         /// <param name="directoryPath">Path to the directory containing zip files.</param>
         /// <param name="xDays">Number of days to filter by last download date.</param>
         /// <returns>List of CacheCheckResult objects containing analysis results.</returns>
-        public List<CacheCheckResult> ProcessFiles(string directoryPath, int xDays)
+        public async Task< List<CacheCheckResult>> ProcessFiles(string directoryPath, int xDays)
         {
             var results = new List<CacheCheckResult>();
             var files = Directory.GetFiles(directoryPath, "*.*");
@@ -42,7 +43,7 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty.Services
                     }
 
                     Console.WriteLine($"Querying archive record for ID: {archiveRecordId}");
-                    var archiveRecord = searchIndexDataAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                    var archiveRecord = await searchIndexDataAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
                     DateTime fileCreationDate = File.GetCreationTime(file);
 

@@ -234,10 +234,26 @@
     .oben-behaeltnis {
         left: 57mm;
         top: 65mm;
-        width: 107mm;
+        width: 70mm;
         height: 15mm;
         border-left: none;
         border-top: none;
+    }
+     .oben-aushebungstyp {
+        left: 127mm;
+        top: 65mm;
+        width: 37mm;
+        height: 15mm;
+        border-left: none;
+        border-top: none;
+    }
+     .oben-erfassungsdatum {
+        left: 127mm;
+        top: 80mm;
+        width: 37mm;
+        height: 15mm;
+		border-left: none;
+		border-top: none;
     }
 
 
@@ -343,9 +359,9 @@
     }
 
     .unten-barcode {
-        left: 94mm;
+        left: 127mm;
         top: 215mm;
-        width: 90mm;
+        width: 57mm;
         height: 15mm;
         border-top: none;
         border-left: none;
@@ -356,7 +372,16 @@
 		border-left: none;
 		left:71mm;
 		top:215mm;
-		width:23mm;
+		width:28mm;
+		height:15mm;
+		}
+
+    .unten-Aushebungstyp {
+		border-top: none;
+		border-left: none;
+		left:99mm;
+		top:215mm;
+		width:28mm;
 		height:15mm;
 		}
 
@@ -478,7 +503,7 @@
         {{#ZugaenglichkeitGemaessBga}}
             <div class="label">Zugänglichkeit gem. BGA</div>
             <div class="data">
-                <div>{{.}}</div>
+                <div>{{AuszuhebendeVe.ZugaenglichkeitGemaessBga}}</div>
             </div>
         {{/ZugaenglichkeitGemaessBga}}
       </div>
@@ -492,6 +517,10 @@
 
         </div>
 
+      </div>
+       <div class="with-border oben-aushebungstyp">
+        <div class="label">Aushebungstyp</div>
+       <div class"data">{{Bestellung.Aushebungstyp}}</div>
       </div>
 
       <div class="without-border oben-rotiert">
@@ -713,6 +742,12 @@
 	      <div class="label">Auftrags ID</div>
 	      <div class"data">{{Id}}</div>
 	  </div>
+	  
+	  <div class="with-border unten-Aushebungstyp">
+        <!-- {{Id}} -->
+        <div class="label">Aushebungstyp</div>
+		<div class"data">{{Bestellung.Aushebungstyp}}</div>
+      </div>
 
       <div class="with-border unten-barcode">
         <!-- {{Id}} -->

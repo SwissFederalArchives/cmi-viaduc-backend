@@ -48,13 +48,13 @@ namespace CMI.Manager.Index
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerUpdateArchiveRecordMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<UpdateArchiveRecordConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerAnonymizeArchiveRecordMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<AnonymizationArchiveRecordConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerAnonymizeTestMessageQueue, ec =>
@@ -64,7 +64,7 @@ namespace CMI.Manager.Index
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerRemoveArchiveRecordMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<RemoveArchiveRecordConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerFindArchiveRecordMessageQueue,
@@ -76,8 +76,18 @@ namespace CMI.Manager.Index
                         ec.Consumer(ctx.Resolve<IConsumer<GetArchiveRecordsForPackageRequest>>);
                     });
 
+                cfg.ReceiveEndpoint(BusConstants.IndexManagerFindArchiveRecordsWithContainerCodeMessageQueue, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<FindAllArchiveRecordsFromContainerConsumer>);
+                });
+
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerUpdateIndivTokensMessageQueue,
-                    ec => { ec.Consumer(ctx.Resolve<UpdateIndivTokensConsumer>); });
+                    ec =>
+                    {
+                        ec.Consumer(ctx.Resolve<UpdateIndivTokensConsumer>);
+                        ec.UseMessageRetry(retryPolicy =>
+                            retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                    });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringElasticSearchTestQueue,
                     ec => { ec.Consumer(ctx.Resolve<TestElasticSearchRequestConsumer>); });
                 cfg.ReceiveEndpoint(BusConstants.IndexManagerGetElasticLogRecordsRequestQueue,

@@ -18,5 +18,6 @@
         public string ZustaendigeStelle { get; set; }
         public string IdentifikationDigitalesMagazin { get; set; }
         public string Aktenzeichen { get; set; }
+        public string EntstehungDigitaleInhalte { get; set; }
     }
 }

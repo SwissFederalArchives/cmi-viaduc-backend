@@ -14,7 +14,7 @@ export class RoleService {
 
 	// region Roles
 
-	public getRoleInfos(paging: Paging = null): Observable<PagedResult<any>> {
+	public getRoleInfos(paging: Paging | null = null): Observable<PagedResult<any>> {
 		let queryString = `?language=${this._context.language}`;
 		if (paging) {
 			queryString += '&paging=' + encodeURIComponent(JSON.stringify(paging));
@@ -24,14 +24,14 @@ export class RoleService {
 		return this._http.get<PagedResult<any>>(url, this._http.noCaching);
 	}
 
-	public getRoleInfo(roleId: string): Promise<DetailResult<any>> {
+	public getRoleInfo(roleId: string): Promise<DetailResult<any> | undefined> {
 		const queryString = `?roleId=${roleId}&language=${this._context.language}`;
 
 		const url = `${this._apiUrl}/GetRoleInfo${queryString}`;
 		return this._http.get<DetailResult<any>>(url, this._http.noCaching).toPromise();
 	}
 
-	public getRoles(): Promise<PagedResult<any>> {
+	public getRoles(): Promise<PagedResult<any> | undefined>  {
 		const url = `${this._apiUrl}/GetRoles`;
 		return this._http.get<PagedResult<any>>(url, this._http.noCaching).toPromise();
 	}
@@ -45,7 +45,7 @@ export class RoleService {
 	// endregion
 
 	// region Users
-	public getUserInfo(userId: string): Promise<DetailResult<any>> {
+	public getUserInfo(userId: string): Promise<DetailResult<any> | undefined> {
 		const queryString = `?userId=${userId}&language=${this._context.language}`;
 		const url = `${this._apiUrl}/GetUserInfo${queryString}`;
 		return this._http.get<DetailResult<any>>(url, this._http.noCaching).toPromise();

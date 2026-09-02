@@ -4,10 +4,11 @@ import {StaticContentService} from '../../services';
 import {SeoService} from '../../services';
 
 @Component({
-	selector: 'cmi-static-content',
-	templateUrl: 'staticContent.component.html',
-	styleUrls: ['./staticContent.component.less'],
-	encapsulation: ViewEncapsulation.None
+    selector: 'cmi-static-content',
+    templateUrl: 'staticContent.component.html',
+    styleUrls: ['./staticContent.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class StaticContentComponent implements OnChanges {
 	@Input()

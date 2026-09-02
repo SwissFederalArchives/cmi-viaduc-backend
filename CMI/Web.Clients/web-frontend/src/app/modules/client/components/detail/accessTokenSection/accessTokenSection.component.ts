@@ -2,9 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CoreOptions, Entity, HttpService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-access-token',
-	templateUrl: 'accessTokenSection.component.html',
-	styleUrls: ['./accessTokenSection.component.less']
+    selector: 'cmi-viaduc-access-token',
+    templateUrl: 'accessTokenSection.component.html',
+    styleUrls: ['./accessTokenSection.component.less'],
+    standalone: false
 })
 export class AccessTokenComponent implements OnInit {
 

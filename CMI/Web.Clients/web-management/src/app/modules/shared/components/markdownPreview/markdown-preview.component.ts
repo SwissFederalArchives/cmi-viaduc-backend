@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'cmi-markdown-preview',
-	templateUrl: 'markdown-preview.component.html',
-	styleUrls: ['./markdown-preview.component.less']
+    selector: 'cmi-markdown-preview',
+    templateUrl: 'markdown-preview.component.html',
+    styleUrls: ['./markdown-preview.component.less'],
+    standalone: false
 })
 
 export class MarkdownPreviewComponent {
@@ -24,5 +25,5 @@ export class MarkdownPreviewComponent {
 		return this._markdownText;
 	}
 
-	private _markdownText: string;
+	private _markdownText: string = '';
 }

@@ -20,9 +20,10 @@ import {ToastrService} from 'ngx-toastr';
 declare const jQuery: any;
 
 @Component({
-	selector: 'cmi-viaduc-download-section',
-	templateUrl: 'downloadSection.component.html',
-	styleUrls: ['./downloadSection.component.less']
+    selector: 'cmi-viaduc-download-section',
+    templateUrl: 'downloadSection.component.html',
+    styleUrls: ['./downloadSection.component.less'],
+    standalone: false
 })
 export class DownloadSectionComponent implements OnInit, OnDestroy, AfterViewInit {
 	public get entity(): Entity {
@@ -121,6 +122,18 @@ export class DownloadSectionComponent implements OnInit, OnDestroy, AfterViewIni
 			return this._txt.get('downloadSection.unknown', 'unbekannt');
 		}
 
+		moment.updateLocale('custom', {
+			relativeTime: {
+				s:  this._txt.get('downloadSection.s',  'ein paar Sekunden'),
+				ss: this._txt.get('downloadSection.ss', '%d Sekunden'),
+				m: this._txt.get('downloadSection.m', 'eine Minute'),
+				mm: this._txt.get('downloadSection.mm', '%d Minuten'),
+				h: this._txt.get('downloadSection.h', 'eine Stunde'),
+				hh: this._txt.get('downloadSection.hh', '%d Stunden'),
+				d: this._txt.get('downloadSection.d', 'ein Tag'),
+				dd: this._txt.get('downloadSection.dd', '%d Tage')
+			}
+		});
 		return moment.duration(estimatedPreparationDuration).humanize();
 	}
 
@@ -145,11 +158,11 @@ export class DownloadSectionComponent implements OnInit, OnDestroy, AfterViewIni
 				this._refreshAssetInfo();
 			}, 15000);
 		}
-
+		const zugaenglichkeitGemaessBga: string =this.entity?.customFields?.length > 0 ? this.entity?.customFields.find(c =>
+			c.key === 'zugänglichkeitGemässBga')[0] : '';
 		this.innerhalbSchutzfrist = (this.entity
-			&& this.entity.customFields['zugänglichkeitGemässBga']
-			&& (this.entity.customFields['zugänglichkeitGemässBga'] === 'In Schutzfrist'
-				|| this.entity.customFields['zugänglichkeitGemässBga'] === 'Prüfung nötig'));
+			&& zugaenglichkeitGemaessBga && (zugaenglichkeitGemaessBga === 'In Schutzfrist'
+				|| zugaenglichkeitGemaessBga === 'Prüfung nötig'));
 
 		this._stm.getReasons().subscribe(data => {
 			this.reasons = data;

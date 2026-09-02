@@ -5,9 +5,10 @@ import {ClientContext, Entity, TranslationService} from '@cmi/viaduc-web-core';
 import {UrlService} from '../../../services';
 
 @Component({
-	selector: 'cmi-viaduc-order-section',
-	templateUrl: 'orderSection.component.html',
-	styleUrls: ['./orderSection.component.less']
+    selector: 'cmi-viaduc-order-section',
+    templateUrl: 'orderSection.component.html',
+    styleUrls: ['./orderSection.component.less'],
+    standalone: false
 })
 export class OrderSectionComponent {
 	@Input()

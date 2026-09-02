@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using CMI.Utilities.ActaPro;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 [TestFixture]
@@ -16,7 +16,7 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetScopeId("Arch    b83a8ece-92dc-506d-9baa-222222222222");
 
         // ASSERT
-        result.Should().Be(1L);
+        result.ShouldBe(1L);
     }
 
     [Test]
@@ -29,7 +29,7 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetScopeId(string.Empty);
 
         // ASSERT
-        result.Should().Be(-1L);
+        result.ShouldBe(-1L);
     }
 
     [Test]
@@ -42,7 +42,7 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetScopeId("XXX");
 
         // ASSERT
-        result.Should().Be(-1L);
+        result.ShouldBe(-1L);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetScopeId("Vz      91cb05de-eaa6-5a7f-8793-3fa8f3d632d5");
 
         // ASSERT
-        result.Should().Be(3244391L);
+        result.ShouldBe(3244391L);
     }
 
     [Test]
@@ -69,7 +69,7 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetActaProId(scopeId.ToString());
 
         // ASSERT
-        result.Should().Be("Vz      91cb05de-eaa6-5a7f-8793-3fa8f3d632d5");
+        result.ShouldBe("Vz      91cb05de-eaa6-5a7f-8793-3fa8f3d632d5");
     }
 
 
@@ -83,6 +83,6 @@ public class ActaProMappingProviderTests
         var result = actaProMappingProvider.GetActaProId("4b");
 
         // ASSERT
-        result.Should().Be("");
+        result.ShouldBe("");
     }
 }

@@ -2,20 +2,21 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {ConfigService, Paging, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-pagination',
-	templateUrl: 'pagination.component.html',
-	styleUrls: ['./pagination.component.less']
+    selector: 'cmi-viaduc-pagination',
+    templateUrl: 'pagination.component.html',
+    styleUrls: ['./pagination.component.less'],
+    standalone: false
 })
 export class PaginationComponent implements OnInit, OnChanges {
 
 	@Input()
-	public paging: Paging;
+	public paging!: Paging;
 
 	@Output()
 	public onPaged: EventEmitter<Paging> = new EventEmitter<Paging>();
 
-	public pagingSize: number;
-	public possiblePagingSizes: number[];
+	public pagingSize!: number;
+	public possiblePagingSizes!: number[];
 
 	public items: any[] = [];
 
@@ -101,11 +102,14 @@ export class PaginationComponent implements OnInit, OnChanges {
 
 	public get pageIndex(): number {
 		const p = this._paging();
+		if (!p){
+			return 0;
+		}
 		return _util.isNumber(p.take) && (p.take > 0) ? Math.floor(p.skip / p.take) : 0;
 	}
 
 	public get pageCount(): number {
-		const p = this._paging();
+		const p: Paging = this._paging();
 		if (_util.isNumber(p.take) && _util.isNumber(p.total) && (p.take > 0)) {
 			return Math.floor(p.total / p.take) + (p.total % p.take > 0 ? 1 : 0);
 		}
@@ -124,10 +128,12 @@ export class PaginationComponent implements OnInit, OnChanges {
 		if (i < 0) {
 			i = 0;
 		}
-		const skippedHitsToReachLastPage = p.total - (p.total % p.take);
-		p.skip = Math.min(skippedHitsToReachLastPage, i * p.take);
-		this._refresh();
-		this.onPaged.emit(p);
+		if (p !== undefined) {
+			const skippedHitsToReachLastPage = p.total - (p.total % p.take);
+			p.skip = Math.min(skippedHitsToReachLastPage, i * p.take);
+			this._refresh();
+			this.onPaged.emit(p);
+		}
 	}
 
 	public pageIndexIsNavigable(i: number): boolean {
@@ -135,7 +141,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 	}
 
 	private _getNumberOfNavigableAndCompletelyFilledPages(): number {
-		const currentHitlistPageLimit = Math.ceil(this.paging.total / this.paging.take);
+		const currentHitlistPageLimit: number = Math.ceil(this.paging.total / this.paging.take);
 		return currentHitlistPageLimit;
 	}
 }

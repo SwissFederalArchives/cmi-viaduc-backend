@@ -1,6 +1,6 @@
-﻿using CMI.Contract.Common;
+using CMI.Contract.Common;
 using CMI.Web.Frontend.Helpers;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -27,7 +27,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 FieldAccessTokens = "Ö1, Ö2, Ö3, BVW, AS, BAR"
             };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeTrue();
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeTrue();
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var a = new AccessTokens { FieldAccessTokens = "BAR, AS, F1" };
             var b = new AccessTokens { FieldAccessTokens = "BAR, AS, F2" };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeFalse();
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeFalse();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var a = new AccessTokens { MetadataAccessTokens = "BAR, EG_123, FG_456" };
             var b = new AccessTokens { MetadataAccessTokens = "BAR" };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeTrue();
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeTrue();
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var a = new AccessTokens { MetadataAccessTokens = "BAR" };
             var b = new AccessTokens { MetadataAccessTokens = "AS" };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeFalse();
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeFalse();
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var a = new AccessTokens();
             var b = new AccessTokens();
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeTrue();
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeTrue();
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 FieldAccessTokens = "AS" // BAR missing, FG_999 ignored
             };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeFalse("BAR is missing in b and should not be ignored");
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeFalse("BAR is missing in b and should not be ignored");
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace CMI.Web.Frontend.API.Tests.api
                 FieldAccessTokens = "BAR, AS"
             };
 
-            AccessTokenComparer.TokensMatch(a, b).Should().BeTrue("FG_999 should be ignored");
+            AccessTokenComparer.TokensMatch(a, b).ShouldBeTrue("FG_999 should be ignored");
         }
     }
 }

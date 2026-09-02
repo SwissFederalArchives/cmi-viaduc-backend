@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.PostProcess;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests
@@ -54,7 +54,7 @@ namespace CMI.Manager.Asset.Tests
             var refManifestFiles = new DirectoryInfo(referenceDir).GetFiles("*.*", SearchOption.AllDirectories);
 
             // At least the count should be the same
-            refManifestFiles.Length.Should().Be(newManifestFiles.Length);
+            refManifestFiles.Length.ShouldBe(newManifestFiles.Length);
 
             // Check if all files are exactly the same
             foreach (var refManifestFile in refManifestFiles)
@@ -70,7 +70,7 @@ namespace CMI.Manager.Asset.Tests
 
                 var newContent = File.ReadAllText(newFile.FullName);
 
-                refContent.Should().BeEquivalentTo(newContent);
+                refContent.ShouldBe(newContent);
             }
 
             // Remove temp files

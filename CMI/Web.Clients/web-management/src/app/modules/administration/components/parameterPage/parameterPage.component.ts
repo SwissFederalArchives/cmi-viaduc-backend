@@ -6,21 +6,22 @@ import {UrlService} from '../../../shared/services';
 import {ParameterComponent} from '../parameter/parameter.component';
 
 @Component({
-	selector: 'cmi-viaduc-parameterPage',
-	templateUrl: './parameterPage.component.html',
-	styleUrls: ['./parameterPage.component.less']
+    selector: 'cmi-viaduc-parameterPage',
+    templateUrl: './parameterPage.component.html',
+    styleUrls: ['./parameterPage.component.less'],
+    standalone: false
 })
 export class ParameterPageComponent extends ComponentCanDeactivate implements OnInit {
 
 	@ViewChildren(ParameterComponent)
-	public paramComponents: QueryList<ParameterComponent>;
+	public paramComponents!: QueryList<ParameterComponent>;
 
-	public loading = true;
+	public loading: boolean = true;
 	public filteredParameters: Parameter[] = [];
 	private _allParameters: Parameter[] = [];
 	public validationEvent: EventEmitter<void> = new EventEmitter<void>();
 	public searchString = '';
-	public searchedStringUpToDate: boolean;
+	public searchedStringUpToDate!: boolean;
 	public crumbs: any[] = [];
 
 	constructor(private _params: ParameterService, private _txt: TranslationService, private _url: UrlService) {
@@ -40,8 +41,10 @@ export class ParameterPageComponent extends ComponentCanDeactivate implements On
 
 	public async getAllParameters() {
 		this._params.getAllParameters().then(response => {
-			this._allParameters = response;
-			this.filteredParameters = this._allParameters;
+			if (response !== undefined) {
+				this._allParameters = response;
+				this.filteredParameters = this._allParameters;
+			}
 			this.loading = false;
 		});
 	}

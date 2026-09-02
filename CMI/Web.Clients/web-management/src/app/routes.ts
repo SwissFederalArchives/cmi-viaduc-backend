@@ -185,7 +185,9 @@ function assertRoutes(routes: any[]) {
 			}
 			if (!_util.isEmpty(route.component)) {
 				const resolve = route.resolve = _util.isObject(route.resolve) ? route.resolve : {};
-				resolve['preloaded'] = PreloadedResolver;
+				if (resolve && typeof resolve === 'object') {
+					(resolve as any)['preloaded'] = PreloadedResolver;
+				}
 			}
 		}
 	});

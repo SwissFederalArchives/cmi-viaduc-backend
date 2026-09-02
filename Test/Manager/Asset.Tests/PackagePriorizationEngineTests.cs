@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Engine.Asset;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
 
@@ -27,15 +27,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 4, DownloadQueuePrefetchCount = 4});
 
-            engine.MaxJobCountPerChannelForDownload[1].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[2].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForDownload[1].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[2].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[4].ShouldBe(1);
 
-            engine.MaxJobCountPerChannelForSync[1].Should().Be(1);
-            engine.MaxJobCountPerChannelForSync[2].Should().Be(1);
-            engine.MaxJobCountPerChannelForSync[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForSync[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForSync[1].ShouldBe(1);
+            engine.MaxJobCountPerChannelForSync[2].ShouldBe(1);
+            engine.MaxJobCountPerChannelForSync[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForSync[4].ShouldBe(1);
         }
 
         [Test]
@@ -44,15 +44,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 8, DownloadQueuePrefetchCount = 8});
 
-            engine.MaxJobCountPerChannelForDownload[1].Should().Be(2);
-            engine.MaxJobCountPerChannelForDownload[2].Should().Be(2);
-            engine.MaxJobCountPerChannelForDownload[3].Should().Be(2);
-            engine.MaxJobCountPerChannelForDownload[4].Should().Be(2);
+            engine.MaxJobCountPerChannelForDownload[1].ShouldBe(2);
+            engine.MaxJobCountPerChannelForDownload[2].ShouldBe(2);
+            engine.MaxJobCountPerChannelForDownload[3].ShouldBe(2);
+            engine.MaxJobCountPerChannelForDownload[4].ShouldBe(2);
 
-            engine.MaxJobCountPerChannelForSync[1].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[2].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[3].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[4].Should().Be(2);
+            engine.MaxJobCountPerChannelForSync[1].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[2].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[3].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[4].ShouldBe(2);
         }
 
         [Test]
@@ -61,15 +61,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 6, DownloadQueuePrefetchCount = 6});
 
-            engine.MaxJobCountPerChannelForDownload[1].Should().Be(2);
-            engine.MaxJobCountPerChannelForDownload[2].Should().Be(2);
-            engine.MaxJobCountPerChannelForDownload[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForDownload[1].ShouldBe(2);
+            engine.MaxJobCountPerChannelForDownload[2].ShouldBe(2);
+            engine.MaxJobCountPerChannelForDownload[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[4].ShouldBe(1);
 
-            engine.MaxJobCountPerChannelForSync[1].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[2].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForSync[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForSync[1].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[2].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForSync[4].ShouldBe(1);
         }
 
 
@@ -79,15 +79,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 6, DownloadQueuePrefetchCount = 4});
 
-            engine.MaxJobCountPerChannelForDownload[1].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[2].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForDownload[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForDownload[1].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[2].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForDownload[4].ShouldBe(1);
 
-            engine.MaxJobCountPerChannelForSync[1].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[2].Should().Be(2);
-            engine.MaxJobCountPerChannelForSync[3].Should().Be(1);
-            engine.MaxJobCountPerChannelForSync[4].Should().Be(1);
+            engine.MaxJobCountPerChannelForSync[1].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[2].ShouldBe(2);
+            engine.MaxJobCountPerChannelForSync[3].ShouldBe(1);
+            engine.MaxJobCountPerChannelForSync[4].ShouldBe(1);
         }
 
         [Test]
@@ -104,16 +104,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 6, DownloadQueuePrefetchCount = 4});
 
-            engine.KategorieRangesPerChannel[1].Should().HaveCount(1);
-            engine.KategorieRangesPerChannel[2].Should().HaveCount(1);
-            engine.KategorieRangesPerChannel[3].Should().HaveCount(1);
-            engine.KategorieRangesPerChannel[4].Should().HaveCount(2);
+            engine.KategorieRangesPerChannel[1].Count.ShouldBe(1);
+            engine.KategorieRangesPerChannel[2].Count.ShouldBe(1);
+            engine.KategorieRangesPerChannel[3].Count.ShouldBe(1);
+            engine.KategorieRangesPerChannel[4].Count.ShouldBe(2);
 
-            engine.KategorieRangesPerChannel[1].Should().BeEquivalentTo(new List<List<int>> {new List<int> {1, 2, 3}});
-            engine.KategorieRangesPerChannel[2].Should().BeEquivalentTo(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7}});
-            engine.KategorieRangesPerChannel[3].Should().BeEquivalentTo(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9}});
-            engine.KategorieRangesPerChannel[4].Should()
-                .BeEquivalentTo(new List<List<int>> {new List<int> {6, 7, 8, 9}, new List<int> {1, 2, 3, 4, 5}});
+            engine.KategorieRangesPerChannel[1].ShouldBe(new List<List<int>> {new List<int> {1, 2, 3}});
+            engine.KategorieRangesPerChannel[2].ShouldBe(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7}});
+            engine.KategorieRangesPerChannel[3].ShouldBe(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9}});
+            engine.KategorieRangesPerChannel[4].ShouldBe(new List<List<int>> {new List<int> {6, 7, 8, 9}, new List<int> {1, 2, 3, 4, 5}});
         }
 
         [Test]
@@ -130,16 +129,15 @@ namespace CMI.Manager.Asset.Tests
             var engine = new PackagePriorizationEngine(null, channelAssignmentDefinition,
                 new RepositoryQueuesPrefetchCount {SyncQueuePrefetchCount = 6, DownloadQueuePrefetchCount = 4});
 
-            engine.KategorieRangesPerChannel[1].Should().HaveCount(3);
-            engine.KategorieRangesPerChannel[2].Should().HaveCount(1);
-            engine.KategorieRangesPerChannel[3].Should().HaveCount(1);
-            engine.KategorieRangesPerChannel[4].Should().HaveCount(3);
+            engine.KategorieRangesPerChannel[1].Count.ShouldBe(3);
+            engine.KategorieRangesPerChannel[2].Count.ShouldBe(1);
+            engine.KategorieRangesPerChannel[3].Count.ShouldBe(1);
+            engine.KategorieRangesPerChannel[4].Count.ShouldBe(3);
 
-            engine.KategorieRangesPerChannel[1].Should()
-                .BeEquivalentTo(new List<List<int>> {new List<int> {3}, new List<int> {2}, new List<int> {1}});
-            engine.KategorieRangesPerChannel[2].Should().BeEquivalentTo(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7}});
-            engine.KategorieRangesPerChannel[3].Should().BeEquivalentTo(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9}});
-            engine.KategorieRangesPerChannel[4].Should().BeEquivalentTo(new List<List<int>>
+            engine.KategorieRangesPerChannel[1].ShouldBe(new List<List<int>> {new List<int> {3}, new List<int> {2}, new List<int> {1}});
+            engine.KategorieRangesPerChannel[2].ShouldBe(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7}});
+            engine.KategorieRangesPerChannel[3].ShouldBe(new List<List<int>> {new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9}});
+            engine.KategorieRangesPerChannel[4].ShouldBe(new List<List<int>>
                 {new List<int> {6, 7, 8, 9}, new List<int> {4, 5}, new List<int> {1, 2, 3}});
         }
 
@@ -155,7 +153,7 @@ namespace CMI.Manager.Asset.Tests
 
             var newJobs = await engine.GetNextJobsForExecution(AufbereitungsArtEnum.Download);
 
-            newJobs.Count.Should().Be(0);
+            newJobs.Count.ShouldBe(0);
         }
 
         [Test]
@@ -188,11 +186,11 @@ namespace CMI.Manager.Asset.Tests
 
             var newJobs = await engine.GetNextJobsForExecution(AufbereitungsArtEnum.Download);
 
-            newJobs.Count.Should().Be(4);
-            newJobs[1].Should().BeEquivalentTo(new[] {100});
-            newJobs[2].Should().BeEquivalentTo(new[] {200});
-            newJobs[3].Should().BeEquivalentTo(new[] {300});
-            newJobs[4].Should().BeEquivalentTo(new[] {400});
+            newJobs.Count.ShouldBe(4);
+            newJobs[1].ShouldBe(new[] {100});
+            newJobs[2].ShouldBe(new[] {200});
+            newJobs[3].ShouldBe(new[] {300});
+            newJobs[4].ShouldBe(new[] {400});
         }
 
         [Test]
@@ -226,11 +224,11 @@ namespace CMI.Manager.Asset.Tests
 
             var newJobs = await engine.GetNextJobsForExecution(AufbereitungsArtEnum.Download);
 
-            newJobs.Count.Should().Be(4);
-            newJobs[1].Should().BeEquivalentTo(new[] {100, 110});
-            newJobs[2].Should().BeEquivalentTo(new[] {200});
-            newJobs[3].Should().BeEquivalentTo(new[] {300, 310});
-            newJobs[4].Should().BeEquivalentTo(new[] {400, 410});
+            newJobs.Count.ShouldBe(4);
+            newJobs[1].ShouldBe(new[] {100, 110});
+            newJobs[2].ShouldBe(new[] {200});
+            newJobs[3].ShouldBe(new[] {300, 310});
+            newJobs[4].ShouldBe(new[] {400, 410});
         }
 
         [Test]
@@ -265,11 +263,11 @@ namespace CMI.Manager.Asset.Tests
 
             var newJobs = await engine.GetNextJobsForExecution(AufbereitungsArtEnum.Download);
 
-            newJobs.Count.Should().Be(4);
-            newJobs[1].Should().BeEquivalentTo(new[] {100, 110});
-            newJobs[2].Should().BeEquivalentTo(new[] {200});
-            newJobs[3].Should().BeEquivalentTo(new[] {300, 310});
-            newJobs[4].Should().BeEquivalentTo(new[] {400, 500});
+            newJobs.Count.ShouldBe(4);
+            newJobs[1].ShouldBe(new[] {100, 110});
+            newJobs[2].ShouldBe(new[] {200});
+            newJobs[3].ShouldBe(new[] {300, 310});
+            newJobs[4].ShouldBe(new[] {400, 500});
         }
     }
 }

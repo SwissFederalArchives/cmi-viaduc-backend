@@ -4,9 +4,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-abschliessen-modal',
-	templateUrl: 'auftraegeAbschliessenModal.component.html',
-	styleUrls: ['./auftraegeAbschliessenModal.component.less']
+    selector: 'cmi-viaduc-auftraege-abschliessen-modal',
+    templateUrl: 'auftraegeAbschliessenModal.component.html',
+    styleUrls: ['./auftraegeAbschliessenModal.component.less'],
+    standalone: false
 })
 export class AuftraegeAbschliessenModalComponent {
 

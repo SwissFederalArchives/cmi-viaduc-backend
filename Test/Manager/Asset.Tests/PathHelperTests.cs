@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CMI.Engine.Asset.PostProcess;
 using CMI.Utilities.Common.Helpers;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests
@@ -22,7 +22,7 @@ namespace CMI.Manager.Asset.Tests
             // Act
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, false);
             // Assert
-            result.Should().Be("this_is_a_test__to_see___if___cha_4FA714");
+            result.ShouldBe("this_is_a_test__to_see___if___cha_4FA714");
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace CMI.Manager.Asset.Tests
             // Act
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, true);
             // Assert
-            result.Should().Be("this_is_____a_test.json");
+            result.ShouldBe("this_is_____a_test.json");
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace CMI.Manager.Asset.Tests
             // Act
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, true);
             // Assert
-            result.Should().Be("this_is_____a_test_for_a_file_who_C8A8BF.json");
+            result.ShouldBe("this_is_____a_test_for_a_file_who_C8A8BF.json");
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace CMI.Manager.Asset.Tests
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, true);
             
             // Assert
-            result.Should().Be(@"C:\Temp\This_is_a_very_long_path_name_tha_0E79E0\This_is_a_very_long_path_name_tha_0E79E0\testfile.txt");
+            result.ShouldBe(@"C:\Temp\This_is_a_very_long_path_name_tha_0E79E0\This_is_a_very_long_path_name_tha_0E79E0\testfile.txt");
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace CMI.Manager.Asset.Tests
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, true);
 
             // Assert
-            result.Should().Be(@"This_is_a_very_long_path_name_tha_0E79E0\This_is_a_very_long_path_name_tha_0E79E0\testfile.txt");
+            result.ShouldBe(@"This_is_a_very_long_path_name_tha_0E79E0\This_is_a_very_long_path_name_tha_0E79E0\testfile.txt");
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace CMI.Manager.Asset.Tests
             var result = PathHelper.CreateShortValidUrlName(fileOrPathName, true);
 
             // Assert
-            result.Should().Be(@"Die_Hute_der_hoheren_Larchen_sind_CD0DE7\eae£aeaioc\auoAOU.txt");
+            result.ShouldBe(@"Die_Hute_der_hoheren_Larchen_sind_CD0DE7\eae£aeaioc\auoAOU.txt");
         }
     }
 }

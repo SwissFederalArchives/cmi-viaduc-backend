@@ -4,8 +4,9 @@ import {ClientContext, SearchRequest, TranslationService} from '@cmi/viaduc-web-
 import {SeoService, UrlService} from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-simple-search-page',
-	templateUrl: 'simpleSearchPage.component.html'
+    selector: 'cmi-viaduc-simple-search-page',
+    templateUrl: 'simpleSearchPage.component.html',
+    standalone: false
 })
 export class SimpleSearchPageComponent implements OnInit {
 	constructor(private _context: ClientContext,

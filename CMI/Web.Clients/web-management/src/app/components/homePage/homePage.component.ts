@@ -4,9 +4,10 @@ import {AuthenticationService} from '../../modules/client/services/authenticatio
 import {AuthorizationService, UrlService} from '../../modules/shared/services';
 
 @Component({
-	selector: 'cmi-viaduc-home-page',
-	templateUrl: 'homePage.component.html',
-	styleUrls: ['./homePage.component.less']
+    selector: 'cmi-viaduc-home-page',
+    templateUrl: 'homePage.component.html',
+    styleUrls: ['./homePage.component.less'],
+    standalone: false
 })
 export class HomePageComponent implements OnInit {
 

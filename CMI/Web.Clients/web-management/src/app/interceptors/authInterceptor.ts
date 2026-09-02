@@ -3,7 +3,7 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, of} from 'rxjs';
 import {throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {ClientContext} from '@cmi/viaduc-web-core';
+import {ClientContext, Session} from '@cmi/viaduc-web-core';
 import {AuthenticationService} from '../modules/client';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	private handleAuthError(err: HttpErrorResponse): Observable<any> {
 		// handle your auth error or rethrow
 		if (err.status === 401 || err.status === 403) {
-			this.context.currentSession = null;
+			this.context.currentSession = <Session>{};
 			this.auth.login();
 			return of(err.message);
 		}

@@ -13,7 +13,7 @@ export class DateUtilityService {
       return '';
     }
 
-    const momentDate = moment(date);
+    const momentDate = moment.utc(date);
 
     if (!momentDate.isValid()) {
       return '';

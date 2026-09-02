@@ -9,10 +9,13 @@ using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
 using CMI.Web.Frontend.api.Templates;
-using Elasticsearch.Net;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Aggregations;
+using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Transport;
+using Elastic.Transport.Extensions;
 using Namotion.Reflection;
-using Nest;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
@@ -20,7 +23,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using SourceFilter = Nest.SourceFilter;
+using System.Text.Json;
+using System.Threading.Tasks;
+using SourceFilter = Elastic.Clients.Elasticsearch.Core.Search.SourceFilter;
 
 namespace CMI.Web.Frontend.api.Elastic
 {
@@ -52,7 +57,7 @@ namespace CMI.Web.Frontend.api.Elastic
 
         protected string BaseUrl => elasticSettings.BaseUrl;
 
-        public ElasticQueryResult<T> QueryForId<T>(string id, UserAccess access, bool translated = true) where T : TreeRecord
+        public async Task<ElasticQueryResult<T>> QueryForId<T>(string id, UserAccess access, bool translated = true) where T : TreeRecord
         {
             var query = new ElasticQuery
             {
@@ -68,7 +73,7 @@ namespace CMI.Web.Frontend.api.Elastic
             }; 
             query.Query = QueryByIdOrExternalKey(id);
 
-            var result = RunQuery<T>(query, access, translated);
+            var result = await RunQuery<T>(query, access, translated);
             if (result.Response.Hits.Count == 1)
             {
                 return result;
@@ -79,10 +84,10 @@ namespace CMI.Web.Frontend.api.Elastic
                 // This can happen if we have a record that was not correctly deleted after a successful sync
                 // Thus there is still existing the record with the scopeId as the primary key and the
                 // new record with the doc key. THIS SHOULD NOT HAPPEN, BUT when it does, return the docKey and delete the scopeId
-                RemoveRecordWithScopeId(result);
+                await RemoveRecordWithScopeId(result);
 
                 // Call again the same. Should now return 1 record
-                return QueryForId<T>(id, access, translated);
+                return await QueryForId<T>(id, access, translated);
             }
 
             if (result.Response.Hits.Count > 2)
@@ -105,26 +110,26 @@ namespace CMI.Web.Frontend.api.Elastic
         /// <param name="id">Die ArchiveRecord ID der VE dessen Kinder geholt werden sollen.</param>
         /// <param name="access">Die Zugriffsrechte des Benutzers</param>
         /// <returns></returns>
-        public List<TreeRecord> QueryForParentId(string id, UserAccess access)
+        public async Task<List<TreeRecord>> QueryForParentId(string id, UserAccess access)
         {
             SearchScopeOrActaProId(id, out long scopeId, out string actaProId);
 
-            return QueryForParentId(access, scopeId, actaProId);
+            return await QueryForParentId(access, scopeId, actaProId);
         }
 
-        public ElasticQueryResult<T> QueryForIds<T>(IList<string> ids, UserAccess access, Paging p = null) where T : TreeRecord
+        public Task<ElasticQueryResult<T>> QueryForIds<T>(IList<string> ids, UserAccess access, Paging p = null) where T : TreeRecord
         {
             var query = BuildQueryForIds(ids, p);
             return RunQuery<T>(query, access);
         }
 
-        public ElasticQueryResult<T> QueryForIdsWithoutSecurityFilter<T>(IList<string> ids, Paging p = null) where T : TreeRecord
+        public Task<ElasticQueryResult<T>> QueryForIdsWithoutSecurityFilter<T>(IList<string> ids, Paging p = null) where T : TreeRecord
         {
             var query = BuildQueryForIds(ids, p);
             return RunQueryWithoutSecurityFilters<T>(query);
         }
 
-        public ElasticQueryResult<T> RunQuery<T>(ElasticQuery query, UserAccess access, bool translated = true) where T : TreeRecord
+        public async Task<ElasticQueryResult<T>> RunQuery<T>(ElasticQuery query, UserAccess access, bool translated = true) where T : TreeRecord
         {
             var stopwatch = new Stopwatch();
             var info = StringHelper.AddToString(BaseUrl, "/", elasticSettings.DefaultIndex);
@@ -146,8 +151,10 @@ namespace CMI.Web.Frontend.api.Elastic
             try
             {
                 stopwatch.Start();
-                var searchRequest = searchRequestBuilder.Build(query, access);
-                result.Response = client.Search<T>(searchRequest);
+                var searchRequest = searchRequestBuilder.Build(client, query, access);
+                result.Response = await client.SearchAsync<T>(searchRequest);
+
+                ThrowIfNotSuccessful(result.Response, info);
 
                 var json = client.RequestResponseSerializer.SerializeToString(searchRequest, SerializationFormatting.Indented);
                 Log.Debug(json);
@@ -157,24 +164,15 @@ namespace CMI.Web.Frontend.api.Elastic
                 Debug.WriteLine($"Fetched record from web in  {stopwatch.ElapsedMilliseconds}ms");
                 result.Status = (int) HttpStatusCode.OK;
 
-                ProcessQueryResult(result, query.SearchParameters?.FacetsFilters, access, client.SourceSerializer, translated);
+                await ProcessQueryResult(result, query.SearchParameters?.FacetsFilters, access, translated);
             }
-            catch (Exception ex)
+            catch (UnexpectedTransportException ex)
             {
-                var statusCode = (ex as ElasticsearchClientException)?.Response?.HttpStatusCode;
+                var statusCode = ex.HResult;
+                var debugInformation = (ex)?.DebugInformation;
 
-                if (statusCode.HasValue)
-                {
-                    Log.Warning(ex, "Exception on Elastic query: {0}", result.RequestInfo);
-                    result.Status = statusCode.Value;
-                }
-                else
-                {
-                    Log.Error(ex, "Exception on Elastic query: {0}", result.RequestInfo);
-                    result.Status = (int) HttpStatusCode.InternalServerError;
-                }
-
-                var debugInformation = (ex as ElasticsearchClientException)?.DebugInformation;
+                Log.Error(ex, "Transport exception on Elastic query: {0}", result.RequestInfo);
+                result.Status = statusCode;
 
                 if (!string.IsNullOrEmpty(debugInformation))
                 {
@@ -184,6 +182,11 @@ namespace CMI.Web.Frontend.api.Elastic
 
                 result.Exception = ex;
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "General exception on Elastic query: {0}", result.RequestInfo);
+                result.Status = (int) HttpStatusCode.InternalServerError;
+            }
             finally
             {
                 Log.Debug("RunQueryCompleted: {RequestInfo}, {RequestRaw}, {ResponseRaw}", result.RequestInfo, result.RequestRaw, result.ResponseRaw);
@@ -192,14 +195,19 @@ namespace CMI.Web.Frontend.api.Elastic
             return result;
         }
 
-        public string[] GetLaender()
+        public async Task<string[]> GetLaender()
+        {
+            return await GetLaenderAsync();
+        }
+
+        private async Task<string[]> GetLaenderAsync()
         {
             var searchRequest = new SearchRequest<ElasticArchiveRecord>
             {
-                Aggregations = new AggregationDictionary
+                Aggregations = new Dictionary<string, Aggregation>()
                 {
                     {
-                        "A", new TermsAggregation("B")
+                        "A", new TermsAggregation
                         {
                             Field = "customFields.land.keyword", Size = int.MaxValue
                         }
@@ -207,17 +215,24 @@ namespace CMI.Web.Frontend.api.Elastic
                 },
                 Size = 0
             };
-
             var client = clientProvider.GetElasticClient<TreeRecord>(elasticSettings);
-            var response = client.Search<TreeRecord>(searchRequest);
+            var response = await client.SearchAsync<TreeRecord>(searchRequest);
 
-            return ((BucketAggregate) response.Aggregations["A"]).Items
-                .Select(keyedBucket => ((KeyedBucket<object>) keyedBucket).Key.ToString())
+            if (!response.IsSuccess())
+            {
+                Log.Error("Fehler beim Abrufen der Länder: {info}", response.DebugInformation);
+                return Array.Empty<string>();
+            }
+
+            return response.Aggregations?.GetStringTerms("A")
+                ?.Buckets
+                .Select(b => b.Key.Value?.ToString())
                 .OrderBy(value => value)
                 .ToArray();
         }
 
-        public ElasticQueryResult<T> RunQueryWithoutSecurityFilters<T>(ElasticQuery query) where T : TreeRecord
+
+        public async Task<ElasticQueryResult<T>> RunQueryWithoutSecurityFilters<T>(ElasticQuery query) where T : TreeRecord
         {
             var info = StringHelper.AddToString(BaseUrl, "/", elasticSettings.DefaultIndex);
             info = StringHelper.AddToString(info, "/", elasticSettings.DefaultTypeName);
@@ -241,32 +256,24 @@ namespace CMI.Web.Frontend.api.Elastic
                 searchRequestBuilder.AddSort(p?.Paging?.OrderBy, p?.Paging?.SortOrder, request);
                 searchRequestBuilder.ExcludeUnwantedFields(request);
 
-                result.Response = client.Search<T>(request);
+                result.Response = await client.SearchAsync<T>(request);
                 result.TimeInMilliseconds = (int) Math.Round((DateTime.Now - started).TotalMilliseconds);
                 result.Status = (int) HttpStatusCode.OK;
                 // Ohne Übersetzung, weil es nur Daten für BAR Benutzer speichert/anzeigt
-                ProcessQueryResult(result, null, null, client.SourceSerializer, false);
+                await ProcessQueryResult(result, null, null,false);
             }
             catch (Exception ex)
             {
-                var statusCode = (ex as ElasticsearchClientException)?.Response?.HttpStatusCode;
-
-                if (statusCode.HasValue)
-                {
-                    Log.Warning(ex, "Exception on Elastic query: {0}", result.RequestInfo);
-                    result.Status = statusCode.Value;
-                }
-                else
-                {
-                    Log.Error(ex, "Exception on Elastic query: {0}", result.RequestInfo);
-                    result.Status = (int) HttpStatusCode.InternalServerError;
-                }
-
+                var statusCode = (ex as ElasticsearchClientException)?.HttpsStatus;
                 var debugInformation = (ex as ElasticsearchClientException)?.DebugInformation;
+
+                Log.Error(ex, "Exception on Elastic query: {0}", result.RequestInfo);
+                result.Status = statusCode ?? (int) HttpStatusCode.InternalServerError;
 
                 if (!string.IsNullOrEmpty(debugInformation))
                 {
-                    Log.Information(ex, "Additional information about the prior exception. Debug information: {0}", debugInformation);
+                    Log.Information(ex, "Additional information about the prior exception. Debug information: {0}",
+                        debugInformation);
                 }
 
                 result.Exception = ex;
@@ -276,7 +283,7 @@ namespace CMI.Web.Frontend.api.Elastic
         }
 
 
-        public ElasticQueryResult<T> QueryForRootNodes<T>(UserAccess access) where T : TreeRecord
+        public Task<ElasticQueryResult<T>> QueryForRootNodes<T>(UserAccess access) where T : TreeRecord
         {
             var query = new ElasticQuery
             {
@@ -289,42 +296,60 @@ namespace CMI.Web.Frontend.api.Elastic
                         EnableAggregations = false
                     }
                 },
-                Query = new MatchQuery
-                {
-                    Field = elasticSettings.TreeLevelField,
-                    Query = "1"
-                }
+                Query = new MatchQuery(new Field(elasticSettings.TreeLevelField), "1")
             };
 
             return RunQuery<T>(query, access);
         }
 
-        private List<TreeRecord> QueryForParentId(UserAccess access, long scopeId, string actaProId)
+        public async Task<List<TreeRecord>> QueryForParentId(UserAccess access, long scopeId, string actaProId)
         {
             var client = clientProvider.GetElasticClient<TreeRecord>(elasticSettings);
             var result = new List<TreeRecord>();
             // Den SourceFilter erstellen, der nur die Felder des TreeRecords enthält
             // Danach noch um die unanonymisierten Felder erweitern.
             var sourceFilter = GetSourceFilterForType<TreeRecord>();
-            sourceFilter.Includes.And(Infer.Field("UnanonymizedFields".ToLowerCamelCase()));
+            sourceFilter.Includes?.And(Infer.Field("UnanonymizedFields".ToLowerCamelCase()));
 
-            var search = new SearchDescriptor<ElasticArchiveDbRecord>()
-                .Index(elasticSettings.DefaultIndex)
-                .From(0)
-                .Sort(s => s.Ascending(nameof(TreeRecord.Title).ToLowerCamelCase()))
-                .Sort(s => s.Ascending(nameof(TreeRecord.TreeSequence).ToLowerCamelCase()))
-                .Query(_ =>
-                    searchRequestBuilder.GetQueryWithSecurity(CreateQueryForParentScopeId(scopeId, actaProId), access)
-                )
-                .Size(10000)
-                .Source(x => x.Includes(i => i.Fields(sourceFilter.Includes)))
-                .Scroll("15s");
+            // Open a Point-In-Time (PIT) context
+            var pitResponse = await client.OpenPointInTimeAsync(client.ElasticsearchClientSettings.DefaultIndex, o => o
+                .KeepAlive("1m")
+            );
 
-            // Suche ausführen
-            var resultPart = client.Search<ElasticArchiveDbRecord>(search);
+            var pitId = pitResponse.Id;
+            ICollection<FieldValue> searchAfter = null;
 
-            while (resultPart.IsValid && resultPart.Documents.Count > 0)
+            while (true)
             {
+                // Suche ausführen
+                var resultPart = await client.SearchAsync<ElasticArchiveDbRecord>(
+                    elasticSettings.DefaultIndex,   // Index hier!
+                    s => s
+                        .Query(searchRequestBuilder.GetQueryWithSecurity(
+                         client, CreateQueryForParentScopeId(scopeId, actaProId), access))
+                        .From(0)
+                        .Size(10000)
+                        .Sort(s => s
+                            .Field(f => f
+                                .Field(nameof(TreeRecord.Title).ToLowerCamelCase())
+                                .Order(SortOrder.Asc)
+                            )
+                            .Field(f => f
+                                .Field(nameof(TreeRecord.TreeSequence).ToLowerCamelCase())
+                                .Order(SortOrder.Asc)
+                            )
+                        )
+                        .Source(sourceFilter)
+                        .SearchAfter(searchAfter)
+                        .Pit(p => p
+                            .Id(pitId)
+                            .KeepAlive("15s")
+                        )
+                );
+
+                if (resultPart.Documents.Count == 0)
+                    break;
+
                 // Die unanonymisierten Daten für die berechtigten Benutzer "aufdecken"
                 foreach (var treeRecord in resultPart.Documents.Where(d => d.IsAnonymized))
                 {
@@ -334,15 +359,19 @@ namespace CMI.Web.Frontend.api.Elastic
                     }
                 }
                 result.AddRange(resultPart.Documents.Select(d => (TreeRecord) d));
-                resultPart = client.Scroll<ElasticArchiveDbRecord>("15s", resultPart.ScrollId);
+
+                // Prepare search_after for the next iteration
+                var lastHit = resultPart.Hits.Last();
+                searchAfter = (ICollection<FieldValue>) lastHit.Sort;
             }
+
             return result;
         }
 
 
-        private ElasticArchiveDbRecord GetElasticDbRecordById(string archiveRecordId, UserAccess access)
+        protected virtual async Task<ElasticArchiveDbRecord> GetElasticDbRecordById(string archiveRecordId, UserAccess access)
         {
-            var dbRecord = QueryForId<ElasticArchiveDbRecord>(archiveRecordId, access);
+            var dbRecord = await QueryForId<ElasticArchiveDbRecord>(archiveRecordId, access);
 
             if (dbRecord.Response.Hits.Count == 1)
             {
@@ -361,29 +390,17 @@ namespace CMI.Web.Frontend.api.Elastic
             }
             if (scopeId > 0)
             {
-                boolQuery.Should = new QueryContainer[]
+                boolQuery.Should = new Query[]
                 {
-                    new TermQuery
-                    {
-                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                        Value = scopeId
-                    }, 
-                    new TermQuery
-                    {
-                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                        Value = actaProId
-                    }
+                    new TermQuery(new Field(nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()), FieldValue.Long(scopeId)), 
+                    new TermQuery(new Field( nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()), FieldValue.String(actaProId))
                 };
             }
             else
             {
-                boolQuery.Must = new QueryContainer[]
+                boolQuery.Must = new Query[]
                 {
-                    new TermQuery
-                    {
-                        Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                        Value = actaProId
-                    }
+                    new TermQuery(new Field( nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()), FieldValue.String(actaProId))
                 };
             }
 
@@ -409,7 +426,7 @@ namespace CMI.Web.Frontend.api.Elastic
             if (ids.Count != 0)
             {
                 var boolQuery = new BoolQuery();
-                var idQueries = new List<QueryContainer>();
+                var idQueries = new List<Query>();
                 foreach (var id in ids)
                 {
                     idQueries.Add(QueryByIdOrExternalKey(id));
@@ -426,17 +443,13 @@ namespace CMI.Web.Frontend.api.Elastic
             return query;
         }
 
-        private BoolQuery QueryByIdOrExternalKey(string id)
+        protected virtual BoolQuery QueryByIdOrExternalKey(string id)
         {
             var externalKeyOrId = new BoolQuery();
 
             if (int.TryParse(id, out int _))
             {
-                var queryForId = new TermQuery
-                {
-                    Field = elasticSettings.IdField,
-                    Value = id
-                };
+                var queryForId = new TermsQuery(elasticSettings.IdField, new TermsQueryField(new List<FieldValue> { id }));
                 var queryForExternalKeys = new ExternalKeysQueryProvider();
                 var externalScopeKeysQuery = queryForExternalKeys.CreateExternalKeysQuery(id, "scopeArchiv");
                 var docKey = ActaProMappingProvider.GetActaProId(id);
@@ -452,11 +465,7 @@ namespace CMI.Web.Frontend.api.Elastic
             }
             else
             {
-                var queryForId = new TermQuery
-                {
-                    Field = elasticSettings.IdField,
-                    Value = id
-                };
+                var queryForId = new TermQuery(new Field(elasticSettings.IdField), FieldValue.String(id));
                 var queryForExternalKeys = new ExternalKeysQueryProvider();
                 var externalKeysDocKeyQuery = queryForExternalKeys.CreateExternalKeysQuery(id, "ActaPro");
                 var mappedScopeId = ActaProMappingProvider.GetScopeId(id);
@@ -474,26 +483,42 @@ namespace CMI.Web.Frontend.api.Elastic
             return externalKeyOrId;
         }
 
-        private void ProcessQueryResult<T>(ElasticQueryResult<T> result, FacetFilters[] facetsFilters, UserAccess access,
-            IElasticsearchSerializer serializer, bool translated = true) where T : TreeRecord
+        private async Task ProcessQueryResult<T>(
+    ElasticQueryResult<T> result,
+    FacetFilters[] facetsFilters,
+    UserAccess access,
+    bool translated = true)
+    where T : TreeRecord
         {
+            var client = clientProvider.GetElasticClient<T>(elasticSettings);
             var response = result.Response;
 
-            var hits = response?.Hits ?? new List<IHit<T>>();
+            var hits = response?.HitsMetadata?.Hits
+                       ?? new List<Hit<T>>();
 
-            result.TotalNumberOfHits = response?.HitsMetadata != null ? (int) response.HitsMetadata.Total.Value : -1;
+            result.TotalNumberOfHits =
+                (int) (response?.HitsMetadata.Total?.Value1?.Value ?? 0);
+
             var entries = new List<Entity<T>>();
+
             foreach (var hit in hits)
             {
-                var data = JsonConvert.DeserializeObject<T>(serializer.SerializeToString(hit.Source));
+                var source = hit.Source;
 
-                ProcessAnonymizedRecords(data, access);
+                if (source == null)
+                    continue;
+
+                // Falls du wirklich neu serialisieren musst (meist unnötig in v9)
+                var json = client.RequestResponseSerializer.SerializeToString(source);
+                var data = JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+                
+                await ProcessAnonymizedRecords(data, access);
 
                 var entry = new Entity<T>
                 {
                     Data = data,
                     Highlight = hit.GetHighlightingObj(access, data.Title),
-                    Explanation = hit.GetExplanationObj(serializer)
+                    Explanation = hit.GetExplanationObj()
                 };
 
                 if (access != null)
@@ -502,12 +527,14 @@ namespace CMI.Web.Frontend.api.Elastic
                     {
                         data.Translate(access.Language);
                     }
-                    entry.IsDownloadAllowed = access.HasAnyTokenFor(data?.PrimaryDataDownloadAccessTokens);
+
+                    entry.IsDownloadAllowed =
+                        access.HasAnyTokenFor(data?.PrimaryDataDownloadAccessTokens);
                 }
 
                 // Remove internal fields
-                // This is only for added security, as internal fields are actually excluded from the result set
-                if (access == null || !access.HasAnyTokenFor(new[] {AccessRolesEnum.BAR.ToString()}))
+                if (access == null ||
+                    !access.HasAnyTokenFor(new[] { AccessRolesEnum.BAR.ToString() }))
                 {
                     RemoveInternalFields(data);
                 }
@@ -515,25 +542,34 @@ namespace CMI.Web.Frontend.api.Elastic
                 entries.Add(entry);
             }
 
-            var entityResult = new EntityResult<T> {Items = entries};
-
-            if (response?.Aggregations.Any() != null)
+            var entityResult = new EntityResult<T>
             {
-                var filteredAggregations = GetfilteredAggregations(response.Aggregations, facetsFilters, out var chosenCreationPeriodAggregation);
+                Items = entries
+            };
+
+            // Aggregations (v9)
+            if (response?.Aggregations != null && response.Aggregations.Count > 0)
+            {
+                var filteredAggregations =
+                    GetfilteredAggregations(response.Aggregations,
+                        facetsFilters,
+                        out var chosenCreationPeriodAggregation);
+
                 var facette = filteredAggregations.CreateSerializableAggregations();
 
                 ComplementAggregations(facette, chosenCreationPeriodAggregation);
+
                 result.Facets = facette;
             }
 
             result.Data = entityResult;
         }
 
-        private void ProcessAnonymizedRecords<T>(T data, UserAccess access) where T : TreeRecord
+        private async Task ProcessAnonymizedRecords<T>(T data, UserAccess access) where T : TreeRecord
         {
             if (data.IsAnonymized && access != null && access.HasAnyTokenFor(data.FieldAccessTokens))
             {
-                var dbRecord = data as ElasticArchiveDbRecord ?? GetElasticDbRecordById(data.ArchiveRecordId, access);
+                var dbRecord = data as ElasticArchiveDbRecord ?? await GetElasticDbRecordById(data.ArchiveRecordId, access);
 
                 if (dbRecord != null)
                 {
@@ -548,10 +584,10 @@ namespace CMI.Web.Frontend.api.Elastic
         ///     - Aggregationen die mit 'facet_' beginnen werden nicht zurückgegeben. Stattdessen wird das Child von diesen
         ///     Aggregationen zurückgegeben.
         /// </summary>
-        private Dictionary<string, IAggregate> GetfilteredAggregations(AggregateDictionary aggs, FacetFilters[] facetsFilters,
-            out string chosenCreationPeriodAggregation)
+        private Dictionary<string, AggregateDictionary> GetfilteredAggregations(AggregateDictionary aggs, FacetFilters[] facetsFilters,
+           out string chosenCreationPeriodAggregation)
         {
-            var filteredAggregations = new Dictionary<string, IAggregate>();
+            var filteredAggregations = new Dictionary<string, AggregateDictionary>();
             var found = false;
             chosenCreationPeriodAggregation = string.Empty;
 
@@ -561,15 +597,15 @@ namespace CMI.Web.Frontend.api.Elastic
                 {
                     if (!found)
                     {
-                        var primaryAggregation = ((SingleBucketAggregate) entry.Value).First().Value;
+                        var primaryAggregation = entry.Value;
 
                         // Wähle den Bucket, der weniger als 10 Einträge hat. Oder dann ganz am Ende den Jahrhundertfilter
-                        if (GetSelectedCreationPeriod(facetsFilters) == string.Empty && (((BucketAggregate) primaryAggregation).Items.Count < 10 ||
+                        if (GetSelectedCreationPeriod(facetsFilters) == string.Empty && ((((FilterAggregate) primaryAggregation)?.Aggregations?.Values.First() as LongTermsAggregate).Buckets.Count  < 10 ||
                                                                                          entry.Key == "facet_aggregationFields.creationPeriodYears100"
                             ) ||
                             GetSelectedCreationPeriod(facetsFilters) == entry.Key)
                         {
-                            filteredAggregations.Add("aggregationFields.creationPeriodYears", primaryAggregation);
+                            filteredAggregations.Add("aggregationFields.creationPeriodYears", ((FilterAggregate) entry.Value).Aggregations);
                             found = true;
                             chosenCreationPeriodAggregation = entry.Key.Remove(0, 6);
                         }
@@ -577,17 +613,15 @@ namespace CMI.Web.Frontend.api.Elastic
                 }
                 else if (entry.Key.StartsWith("facet_aggregationFields.protectionEndDateDossier"))
                 {
-                    var primaryAggregation = ((SingleBucketAggregate) entry.Value).First().Value;
-                    filteredAggregations.Add("aggregationFields.protectionEndDateDossier", primaryAggregation);
+                    filteredAggregations.Add("aggregationFields.protectionEndDateDossier", ((FilterAggregate) entry.Value).Aggregations);
                 }
                 else if (entry.Key.StartsWith("facet_"))
                 {
-                    var primaryAggregation = ((SingleBucketAggregate) entry.Value).First().Value;
-                    filteredAggregations.Add(entry.Key.Remove(0, 6), primaryAggregation);
+                    filteredAggregations.Add(entry.Key.Remove(0, 6), ((FilterAggregate) entry.Value).Aggregations);
                 }
                 else
                 {
-                    filteredAggregations.Add(entry.Key, entry.Value);
+                    filteredAggregations.Add(entry.Key, ((FilterAggregate) entry.Value).Aggregations);
                 }
             }
 
@@ -607,7 +641,7 @@ namespace CMI.Web.Frontend.api.Elastic
 
                     foreach (var item in itemCollection)
                     {
-                        var begin = item["key"].Value<int>();
+                        int begin = item["key"]?.Value<int>() ?? 0;
                         var end = begin + itemRange - 1;
                         string newKey;
                         string filter;
@@ -643,8 +677,7 @@ namespace CMI.Web.Frontend.api.Elastic
                         var key = string.IsNullOrWhiteSpace(item["keyAsString"]?.ToString())
                             ? item["key"]?.ToString()
                             : item["keyAsString"].ToString();
-                        
-                        if(aggregationName == "customFields.zugänglichkeitGemässBga" || aggregationName == "level")
+                        if (aggregationName == "customFields.zugänglichkeitGemässBga" || aggregationName == "level")
                         {
                             item["key"] = "search.facetteEntry." + key;
                         }
@@ -815,7 +848,7 @@ namespace CMI.Web.Frontend.api.Elastic
             return filter;
         }
 
-        public AccessTokens QueryTokensForId(string archiveRecordId)
+        public async Task<AccessTokens> QueryTokensForId(string archiveRecordId)
         {
             var query = new ElasticQuery
             {
@@ -828,14 +861,10 @@ namespace CMI.Web.Frontend.api.Elastic
                         EnableAggregations = false
                     }
                 },
-                Query = new TermQuery
-                {
-                    Field = elasticSettings.IdField,
-                    Value = archiveRecordId
-                }
+                Query = new TermQuery (new Field(elasticSettings.IdField), FieldValue.String(archiveRecordId))
             };
 
-            var result = RunQueryWithoutSecurityFilters<ElasticArchiveRecord>(query);
+            var result = await RunQueryWithoutSecurityFilters<ElasticArchiveRecord>(query);
             var record = result?.Response?.Hits?.FirstOrDefault()?.Source;
 
             if (record == null)
@@ -869,7 +898,7 @@ namespace CMI.Web.Frontend.api.Elastic
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="result"></param>
-        private void RemoveRecordWithScopeId<T>(ElasticQueryResult<T> result) where T : TreeRecord
+        private async Task RemoveRecordWithScopeId<T>(ElasticQueryResult<T> result) where T : TreeRecord
         {
             // Make sure we only process data where we have exactly two hits.
             if (result.Response.Hits.Count != 2)
@@ -889,7 +918,7 @@ namespace CMI.Web.Frontend.api.Elastic
                 {
                     // Delete
                     Log.Information("Deleting elastic record with id {hit1Id} after query by id returned two hits", hit1Id);
-                    client.Delete<ElasticArchiveRecord>(hit1Id);
+                    await client.DeleteAsync<ElasticArchiveRecord>(hit1Id);
                     return;
                 }
             }
@@ -902,7 +931,7 @@ namespace CMI.Web.Frontend.api.Elastic
                 {
                     // Delete
                     Log.Information("Deleting elastic record with id {hit2Id} after query by id returned two hits", hit2Id);
-                    client.Delete<ElasticArchiveRecord>(hit2Id);
+                    await client.DeleteAsync<ElasticArchiveRecord>(hit2Id);
                     return;
                 }
             }
@@ -920,18 +949,56 @@ namespace CMI.Web.Frontend.api.Elastic
                 if (hit1.Id.Length == 44 && hit2.Id.Length != 44)
                 {
                     Log.Information("Deleting elastic record with id {hit2Id} after query by id returned two hits", hit2.Id);
-                    client.Delete<ElasticArchiveRecord>(hit2.Id);
+                    await client.DeleteAsync<ElasticArchiveRecord>(hit2.Id);
                 }
 
                 // hit 1 is not correct
                 if (hit2.Id.Length == 44 && hit1.Id.Length != 44)
                 {
                     Log.Information("Deleting elastic record with id {hit1Id} after query by id returned two hits", hit1.Id);
-                    client.Delete<ElasticArchiveRecord>(hit1.Id);
+                    await client.DeleteAsync<ElasticArchiveRecord>(hit1.Id);
                 }
             }
         }
 
+        private void ThrowIfNotSuccessful<T>(SearchResponse<T> response, string info) where T : TreeRecord
+        {
+            if (!response.IsSuccess())
+            {
+                Exception innerException = null;
+                int? httpStatus = null;
+
+                if (response.TryGetOriginalException(out var ex))
+                {
+                    innerException = ex;
+                }
+
+                if (response.ApiCallDetails.HttpStatusCode != null)
+                {
+                    httpStatus = response.ApiCallDetails.HttpStatusCode;
+                }
+
+                var debugInformation = response?.DebugInformation;
+
+                throw new ElasticsearchClientException("Exception on Elastic query", httpStatus, debugInformation, innerException);
+            }
+        }
 
     }
+
+
+    public class ElasticsearchClientException : Exception
+    {
+        public int? HttpsStatus { get; }
+        public string DebugInformation { get; }
+
+        public ElasticsearchClientException(string message, int? httpStatus, string debugInformation, Exception inner = null)
+            : base(message, inner)
+        {
+            HttpsStatus = httpStatus;
+            DebugInformation = debugInformation;
+        }
+    }
+
+
 }

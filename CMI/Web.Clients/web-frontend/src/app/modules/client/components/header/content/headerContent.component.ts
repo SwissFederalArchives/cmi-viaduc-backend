@@ -6,9 +6,10 @@ import {UrlService} from '../../../services';
 import {AuthenticationService} from '../../../services';
 
 @Component({
-	selector: 'cmi-viaduc-header-content',
-	templateUrl: 'headerContent.component.html',
-	styleUrls: ['./headerContent.component.less'],
+    selector: 'cmi-viaduc-header-content',
+    templateUrl: 'headerContent.component.html',
+    styleUrls: ['./headerContent.component.less'],
+    standalone: false
 })
 export class HeaderContentComponent implements AfterViewInit {
 	private _elem: any;

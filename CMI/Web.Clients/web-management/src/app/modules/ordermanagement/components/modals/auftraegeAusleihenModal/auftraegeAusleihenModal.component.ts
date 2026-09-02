@@ -2,11 +2,13 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {OrderService} from '../../../services';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
+import {finalize} from "rxjs";
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-ausleihen-modal',
-	templateUrl: 'auftraegeAusleihenModal.component.html',
-	styleUrls: ['./auftraegeAusleihenModal.component.less']
+    selector: 'cmi-viaduc-auftraege-ausleihen-modal',
+    templateUrl: 'auftraegeAusleihenModal.component.html',
+    styleUrls: ['./auftraegeAusleihenModal.component.less'],
+    standalone: false
 })
 export class AuftraegeAusleihenModalComponent {
 
@@ -40,15 +42,26 @@ export class AuftraegeAusleihenModalComponent {
 	}
 
 	public ok() {
-		this.isLoading = true;
-		this._ord.auftraegeAusleihen(this.ids).subscribe(() => {
-			this._toastr.success('Statusänderung erfolgreich durchgeführt', 'Erfolgreich');
-			this.open = false;
-			this.onSubmitted.emit(true);
-			this.isLoading = false;
-		}, (e) => {
-			this._err.showError(e);
-			this.isLoading = false;
-		});
+		this._ord
+			.auftraegeAusleihen(this.ids)
+			.pipe(
+				finalize(() => {
+					this.isLoading = false;
+				})
+			)
+			.subscribe({
+				next: () => {
+					this._toastr.success(
+						'Statusänderung erfolgreich durchgeführt',
+						'Erfolgreich'
+					);
+
+					this.open = false;
+					this.onSubmitted.emit(true);
+				},
+				error: (e: unknown) => {
+					this._err.showError(e);
+				}
+			});
 	}
 }

@@ -4,10 +4,11 @@ import {AggregationEntry, TranslationService} from '@cmi/viaduc-web-core';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
-	selector: 'cmi-viaduc-facette-entry',
-	templateUrl: 'searchFacetteEntry.component.html',
-	styleUrls: ['./searchFacetteEntry.component.less'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'cmi-viaduc-facette-entry',
+    templateUrl: 'searchFacetteEntry.component.html',
+    styleUrls: ['./searchFacetteEntry.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SearchFacetteEntryComponent implements OnInit {
 

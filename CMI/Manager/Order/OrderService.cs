@@ -143,19 +143,24 @@ namespace CMI.Manager.Order
                 cfg.ReceiveEndpoint(BusConstants.AushebungsauftraegeDruckenRequestQueue,
                     ec => { ec.Consumer(ctx.Resolve<AushebungsauftraegeDruckenRequestConsumer>); });
 
-                cfg.ReceiveEndpoint(BusConstants.RecalcIndivTokens, ec => { ec.Consumer(ctx.Resolve<RecalcIndivTokensConsumer>); });
+                cfg.ReceiveEndpoint(BusConstants.RecalcIndivTokens, ec =>
+                {
+                    ec.Consumer(ctx.Resolve<RecalcIndivTokensConsumer>);
+                    ec.UseMessageRetry(retryPolicy =>
+                        retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungAusloesenRequestQueue,
                     ec => { ec.Consumer(ctx.Resolve<DigitalisierungAusloesenRequestConsumer>); });
 
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEvent, ec =>
                 {
                     ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtConsumer>);
-                    ec.UseRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.OrderManagerArchiveRecordUpdatedEventQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ArchiveRecordUpdatedConsumer>);
-                    ((MassTransit.IPipeConfigurator<ConsumeContext>) ec).UseRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry((Action<IRetryConfigurator>) BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
                 cfg.ReceiveEndpoint(BusConstants.DigitalisierungsAuftragErledigtEventError,
                     ec => { ec.Consumer(ctx.Resolve<DigitalisierungsAuftragErledigtErrorConsumer>); });
@@ -165,9 +170,9 @@ namespace CMI.Manager.Order
                     // Wenn Vecteur meldet, dass Auftrag erledigt ist, kann es sein, dass die Daten eventuell noch nicht in den SFTP hochgeladen wurden.
                     // Der Consumer löst in diesem Fall eine Exception aus. Durch den Retry versuchen wir es noch ein paar mal
 #if DEBUG
-                    ec.UseRetry(retryPolicy => retryPolicy.Interval(5, TimeSpan.FromSeconds(2)));
+                    ec.UseMessageRetry(retryPolicy => retryPolicy.Interval(5, TimeSpan.FromSeconds(2)));
 #else
-                    ec.UseRetry(retryPolicy => retryPolicy.Interval(10, TimeSpan.FromMinutes(30)));
+                    ec.UseMessageRetry(retryPolicy => retryPolicy.Interval(10, TimeSpan.FromMinutes(30)));
 #endif
                 });
                 cfg.ReceiveEndpoint(BusConstants.BenutzungskopieAuftragErledigtEventError,

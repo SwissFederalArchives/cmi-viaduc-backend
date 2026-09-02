@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using CMI.Contract.Order;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Order.Tests
@@ -14,8 +14,8 @@ namespace CMI.Manager.Order.Tests
             foreach (OrderStatesInternal osi in Enum.GetValues(typeof(OrderStatesInternal)))
             {
                 var status = AuftragStatusRepo.GetStatus(osi);
-                status.Should().NotBeNull("every OrderStatesInternal must have a corresponding AuftragStatus.");
-                status.OrderStateInternal.Should().Be(osi, "the status code must match.");
+                status.ShouldNotBeNull("every OrderStatesInternal must have a corresponding AuftragStatus.");
+                status.OrderStateInternal.ShouldBe(osi, "the status code must match.");
             }
         }
     }

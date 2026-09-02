@@ -15,7 +15,7 @@ export class CoreOptions {
 	public readonly spinnerAppearanceDelayInSeconds: number;
 
 	constructor() {
-		const config = this.clientConfig = window['viaducclient'] || {};
+		const config = this.clientConfig = (window as any).viaducclient || {};
 
 		const loc = window.location;
 		const port = isNaN(parseInt(loc.port, 10)) ? undefined : parseInt(loc.port, 10);

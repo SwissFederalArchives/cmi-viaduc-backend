@@ -4,9 +4,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-reponieren-modal',
-	templateUrl: 'auftraege-reponieren-modal.component.html',
-	styleUrls: ['./auftraege-reponieren-modal.component.less']
+    selector: 'cmi-viaduc-auftraege-reponieren-modal',
+    templateUrl: 'auftraege-reponieren-modal.component.html',
+    styleUrls: ['./auftraege-reponieren-modal.component.less'],
+    standalone: false
 })
 export class AuftraegeReponierenModalComponent {
 

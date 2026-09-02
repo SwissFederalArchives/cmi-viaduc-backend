@@ -3,7 +3,11 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class SessionStorageService {
 	public getItem<T>(key: string): T {
-		return <T>JSON.parse(window.sessionStorage.getItem(key) || null);
+		const result = window.sessionStorage.getItem(key);
+		if (result) {
+			return <T>JSON.parse(result);
+		}
+		return <T>null;
 	}
 
 	public removeItem(key: string): void {

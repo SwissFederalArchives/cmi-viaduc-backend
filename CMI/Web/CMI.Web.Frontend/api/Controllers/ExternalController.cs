@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
@@ -85,7 +86,7 @@ namespace CMI.Web.Frontend.api.Controllers
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(string),
             Description = "If the request is somehow malformed, the reason of the cause is returned.")]
         [SwaggerResponse(HttpStatusCode.NotFound, typeof(void), Description = "If no record was found.")]
-        public IHttpActionResult GetEntity(string id, int? skip = null, int? take = null)
+        public async Task<IHttpActionResult> GetEntity(string id, int? skip = null, int? take = null)
         {
             if (ControllerHelper.HasClaims())
             {
@@ -108,7 +109,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
                 // The children should/must always be sorted by treeSequence. Thus we are not allowing a different sort order.
                 var paging = new Paging {OrderBy = "treeSequence", SortOrder = "Ascending", Skip = skip, Take = take};
-                var res = entityProvider.GetEntity<DetailRecord>(id, access, paging);
+                var res = await entityProvider.GetEntity<DetailRecord>(id, access, paging);
 
                 if (res == null)
                 {
@@ -173,7 +174,7 @@ namespace CMI.Web.Frontend.api.Controllers
             Description = "An internal server error is returned in case of a unknown error.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(string),
             Description = "If the request is somehow malformed, the reason of the cause is returned.")]
-        public IHttpActionResult GetEntities(string ids, int? skip = null, int? take = null)
+        public async Task<IHttpActionResult> GetEntities(string ids, int? skip = null, int? take = null)
         {
             if (ControllerHelper.HasClaims())
             {
@@ -213,7 +214,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
                     // The children should/must always be sorted by treeSequence. Thus we are not allowing a different sort order.
                     var paging = new Paging {OrderBy = "treeSequence", SortOrder = "Ascending", Skip = skip, Take = take};
-                    var res = entityProvider.GetEntities<TreeRecord>(idList, access, paging);
+                    var res = await entityProvider.GetEntities<TreeRecord>(idList, access, paging);
 
                     return Ok(res);
                 }
@@ -416,7 +417,7 @@ namespace CMI.Web.Frontend.api.Controllers
         [SwaggerResponse(HttpStatusCode.InternalServerError, null, Description = "An internal server error is returned in case of a unknown error.")]
         [SwaggerResponse(HttpStatusCode.BadRequest, typeof(string),
             Description = "If the request is somehow malformed, the reason of the cause is returned.")]
-        public IHttpActionResult Search([FromBody] SearchParameters search)
+        public async Task<IHttpActionResult> Search([FromBody] SearchParameters search)
         {
             if (ControllerHelper.HasClaims())
             {
@@ -435,7 +436,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
                 var access = GetUserAccess(clientLanguage);
 
-                var res = entityProvider.Search<SearchRecord>(search, access);
+                var res = await entityProvider.Search<SearchRecord>(search, access);
                 var errorResult = res as ErrorSearchResult;
                 if (errorResult == null)
                 {

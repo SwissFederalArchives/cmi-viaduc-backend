@@ -4,12 +4,13 @@ import {ErrorInfo, TranslationService, Utilities as _util} from '@cmi/viaduc-web
 import {SessionStorageService} from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-newusererror-page',
-	templateUrl: 'errorNewUserPage.component.html'
+    selector: 'cmi-viaduc-newusererror-page',
+    templateUrl: 'errorNewUserPage.component.html',
+    standalone: false
 })
 export class ErrorNewUserPageComponent implements OnInit {
 
-	public error: ErrorInfo;
+	public error!: ErrorInfo;
 
 	constructor(private _txt: TranslationService, private _route: ActivatedRoute, private _sessionStorage: SessionStorageService) {
 	}

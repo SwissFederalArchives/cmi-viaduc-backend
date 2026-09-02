@@ -2,16 +2,18 @@ import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmit
 import {ConfigService, Entity, UiService, Utilities as _util} from '@cmi/viaduc-web-core';
 import {ShoppingCartService, UrlService} from '../../../services';
 import {Router} from '@angular/router';
+import {DownloadTokenService} from "../../../services/downloadToken.service";
 
 @Component({
-	selector: 'cmi-viaduc-simple-hit-menu',
-	templateUrl: 'simpleHitMenu.component.html',
-	styleUrls: ['./simpleHitMenu.component.less'],
-	host: {
-		'(document:click)': 'checkOutsideClick($event)'
-	},
-	changeDetection: ChangeDetectionStrategy.Default,
-	encapsulation: ViewEncapsulation.None
+    selector: 'cmi-viaduc-simple-hit-menu',
+    templateUrl: 'simpleHitMenu.component.html',
+    styleUrls: ['./simpleHitMenu.component.less'],
+    host: {
+        '(document:click)': 'checkOutsideClick($event)'
+    },
+    changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class SimpleHitMenuComponent implements AfterViewInit, OnInit {
 	@Input()
@@ -36,6 +38,7 @@ export class SimpleHitMenuComponent implements AfterViewInit, OnInit {
 				private _ui: UiService,
 				private _scs: ShoppingCartService,
 				private _router: Router,
+				private _fileTokenService: DownloadTokenService,
 				public _config: ConfigService,
 				private _url: UrlService) {
 		this._elem = this._elemRef.nativeElement;
@@ -80,5 +83,9 @@ export class SimpleHitMenuComponent implements AfterViewInit, OnInit {
 	}
 	public goToDetailDownload() {
 		this._router.navigate([this._url.getDetailUrl(this.entity.archiveRecordId)], {fragment: 'downloadSection'});
+	}
+
+	public logViewerClick() {
+		this._fileTokenService.logViewerClick(this.entity.archiveRecordId).subscribe();
 	}
 }

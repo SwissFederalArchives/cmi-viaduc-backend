@@ -1,26 +1,36 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {CollectionDetailPageComponent} from './collection-detail-page.component';
+import CollectionDetailPageComponent from './collection-detail-page.component';
 import {CollectionService} from '../../services';
-import {ApplicationFeatureEnum, ClientContext, CollectionDto, CollectionListItemDto, CoreModule, TranslationService} from '@cmi/viaduc-web-core';
-import {AuthorizationService, ErrorService, SharedModule, UrlService} from '../../../shared';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ApplicationFeatureEnum, ClientContext, CollectionDto,
+	CollectionListItemDto, TranslationService} from '@cmi/viaduc-web-core';
+import {AuthorizationService, ErrorService, UrlService} from '../../../shared';
+import {ActivatedRoute, ParamMap, provideRouter} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MockUserSettingsParamMap} from './mocks';
-import * as moment from 'moment';
+import moment from 'moment';
 import {By} from '@angular/platform-browser';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core'; // Pipe & PipeTransform importiert
+
+// FIX 1: Lokale Mock-Pipe für das Template erstellen
+@Pipe({
+	name: 'translate'
+})
+class MockTranslatePipe implements PipeTransform {
+	transform(value: string): string {
+		return value;
+	}
+}
 
 describe('CollectionDetail', () => {
-	// const mockFileReader =  new MockFileReader();
 	let defaultLanguage = 'en';
 	let clientContext = <ClientContext>{defaultLanguage: defaultLanguage, language: 'de'};
 	let fixture: ComponentFixture<CollectionDetailPageComponent>;
 	let sut: CollectionDetailPageComponent;
 	let collectionService = <CollectionService>{
 		getAllowedParents(currentItemId: number): Observable<any[] | null> {
-			let collectionList: CollectionListItemDto[] = new Array(CollectionListItemDto[1]);
+			let collectionList: CollectionListItemDto[] = [];
 			collectionList[0] = CollectionListItemDto.fromJS(
 				{
 					collectionId: 1,
@@ -101,7 +111,6 @@ describe('CollectionDetail', () => {
 			return of ( new MockUserSettingsParamMap()).pipe();
 		}
 	};
-	let router = <Router>{};
 	let errorService = <ErrorService>{
 		showOdataErrorIfNecessary(error) {
 			return;
@@ -110,10 +119,15 @@ describe('CollectionDetail', () => {
 
 	beforeEach(waitForAsync(async () => {
 		await TestBed.configureTestingModule({
-			imports: [CoreModule.forRoot(), SharedModule.forRoot()],
+			imports: [
+				FormsModule,
+				ReactiveFormsModule,
+				MockTranslatePipe // FIX 2: In die Imports eingefügt, da Standalone
+			],
 			declarations: [CollectionDetailPageComponent],
 			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
+				provideRouter([]),
 				{provide: CollectionService, useValue: collectionService},
 				{provide: UrlService, useValue: urlService},
 				{provide: FormBuilder, useValue: new FormBuilder()},
@@ -122,17 +136,17 @@ describe('CollectionDetail', () => {
 				{provide: ActivatedRoute, useValue: activatedRoute},
 				{provide: ToastrService, useValue: toastrService},
 				{provide: AuthorizationService, useValue: authorizationService},
-				{provide: TranslationService, useValue: translationService },
-				{provide: Router, useValue: router},
+				{provide: TranslationService, useValue: translationService }
 			]
+		}).overrideComponent(CollectionDetailPageComponent, {
+			set: { host: {} }
 		}).compileComponents();
 	}));
 
 	beforeEach(waitForAsync ( async () => {
 		fixture = TestBed.createComponent(CollectionDetailPageComponent);
 		sut = fixture.componentInstance;
-		await sut.ngOnInit();
-
+		fixture.detectChanges();
 		await fixture.whenStable();
 	}));
 
@@ -213,7 +227,5 @@ describe('CollectionDetail', () => {
 				collectionType.dispatchEvent(new Event('change'));
 				expect(sut.myForm.controls.collectionTypeId.value).toEqual(1);
 			});
-
-
 	});
 });

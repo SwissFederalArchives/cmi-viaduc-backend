@@ -3,12 +3,13 @@ import {AuthenticationService} from '../../../services';
 import {ClientContext, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-header-content',
-	templateUrl: 'headerContent.component.html'
+    selector: 'cmi-viaduc-header-content',
+    templateUrl: 'headerContent.component.html',
+    standalone: false
 })
 export class HeaderContentComponent implements AfterViewInit {
 	private _elem: any;
-	private _languages: any[];
+	private _languages!: any[];
 
 	constructor(private _context: ClientContext,
 				private _txt: TranslationService,
@@ -38,7 +39,7 @@ export class HeaderContentComponent implements AfterViewInit {
 
 	public get versionInfo(): string {
 		const v = this._context.client.version;
-		return v ? `${v.major}.${v.minor}.${v.revision}.${v.build}` : void 0;
+		return v ? `${v.major}.${v.minor}.${v.revision}.${v.build}` : '0.0.1';
 	}
 
 	public get languages(): any[] {

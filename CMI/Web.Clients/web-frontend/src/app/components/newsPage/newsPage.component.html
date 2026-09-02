@@ -1,11 +1,15 @@
-<div *ngIf="hasNews">
-	<div class="list-group-header"><h2>{{'Aktuell' | translate: 'news.heading'}}</h2></div>
-	<div class="list-group-item" *ngFor="let n of news">
-		<div>
-			<span class="news-publication-date">{{n.fromDate}}</span>
-			<br>
-			<span class="news-heading">{{n.heading}}</span>
-		</div>
-		<markdown [data]="n.text" ngPreserveWhitespaces></markdown>
-	</div>
-</div>
+@if (hasNews) {
+  <div>
+    <div class="list-group-header"><h2>{{'Aktuell' | translate: 'news.heading'}}</h2></div>
+    @for (n of news; track n) {
+      <div class="list-group-item">
+        <div>
+          <span class="news-publication-date">{{n.fromDate}}</span>
+          <br>
+            <span class="news-heading">{{n.heading}}</span>
+          </div>
+          <markdown [data]="n.text" ngPreserveWhitespaces></markdown>
+        </div>
+      }
+    </div>
+  }

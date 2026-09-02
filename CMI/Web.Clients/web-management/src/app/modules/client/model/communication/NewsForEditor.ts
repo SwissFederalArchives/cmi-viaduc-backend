@@ -1,21 +1,21 @@
 import {News} from './News';
 
 export class NewsForEditor implements News {
-	public id: string;
-	public fromDate: string;
-	public toDate: string;
-	public de: string;
-	public en: string;
-	public fr: string;
-	public it: string;
-	public deHeader: string;
-	public enHeader: string;
-	public frHeader: string;
-	public itHeader: string;
+	public id!: string;
+	public fromDate!: string;
+	public toDate!: string;
+	public de!: string;
+	public en!: string;
+	public fr!: string;
+	public it!: string;
+	public deHeader!: string;
+	public enHeader!: string;
+	public frHeader!: string;
+	public itHeader!: string;
 
-	public hasChanged: boolean;
-	public editMe: boolean;
-	public deleteMe: boolean;
+	public hasChanged!: boolean;
+	public editMe!: boolean;
+	public deleteMe!: boolean;
 
 	constructor(private _parent: News) {
 		this.transferValues();

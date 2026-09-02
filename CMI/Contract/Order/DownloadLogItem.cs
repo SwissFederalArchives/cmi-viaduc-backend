@@ -14,5 +14,5 @@ public class DownloadLogItem
     public string Schutzfrist { get; set; }
     public DateTime DatumVorgang { get; set; }
     public DateTime DatumErstellungToken { get; set; }
-
+    public string EntstehungDigitaleInhalte { get; set; }
 }

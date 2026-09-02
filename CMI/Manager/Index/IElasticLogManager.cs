@@ -1,10 +1,11 @@
 using CMI.Contract.Common;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Index
 {
     public interface IElasticLogManager
     {
-        GetElasticLogRecordsResult GetElasticLogRecords(LogDataFilter filter);
+        Task<GetElasticLogRecordsResult> GetElasticLogRecords(LogDataFilter filter);
 
         void DeleteOldLogIndexes();
     }

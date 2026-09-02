@@ -13,16 +13,17 @@ import {DetailPagingService} from '../../../shared/services';
 import {DateUtilityService} from '../../../shared/services/date-utility.service';
 
 @Component({
-	selector: 'cmi-viaduc-user-roles-page',
-	templateUrl: 'userRolesPage.component.html',
-	styleUrls: ['./userRolesPage.component.less']
+    selector: 'cmi-viaduc-user-roles-page',
+    templateUrl: 'userRolesPage.component.html',
+    styleUrls: ['./userRolesPage.component.less'],
+    standalone: false
 })
-export class UserRolesPageComponent implements OnInit {
+class UserRolesPageComponent implements OnInit {
 
 	@ViewChild('flexGrid', { static: true })
 	public flexGrid: CmiGridComponent;
 
-	public loading: boolean;
+	public loading!: boolean;
 	public error: any;
 	public crumbs: any[] = [];
 	public columns: any[] = [];
@@ -31,7 +32,7 @@ export class UserRolesPageComponent implements OnInit {
 	public hiddenColumns: any[] = [];
 	public visibleColumns: any[] = [];
 	public visibleColumnsSelector: any[] = [];
-	public userList: ODataCollectionView;
+	public userList!: ODataCollectionView;
 
 	private _language: any = [{name:'de', code:'de'}, {name:'fr', code:'fr'}, {name:'it', code:'it'}, {name:'en', code:'en'}];
 
@@ -105,7 +106,7 @@ export class UserRolesPageComponent implements OnInit {
 	}
 
 	public resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('user.userListColumns', {}).map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('user.userListColumns', {}).map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 		this.ngOnInit();
 		this._resetSorts();
@@ -167,7 +168,7 @@ export class UserRolesPageComponent implements OnInit {
 		});
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.userListSettings = <UserListUserSettings> {
 			columns: cols
@@ -248,7 +249,7 @@ export class UserRolesPageComponent implements OnInit {
 
 	private _loadDataMaps() {
 		const countries = this._countriesService.getCountries(this._context.language);
-		const countriesList = [];
+		const countriesList: any [] = [];
 		this._countriesService.sortCountriesByName(countries).forEach(c => countriesList.push({name: c.code}));
 		const countrymap = new DataMap(countriesList, 'name', 'name');
 
@@ -301,3 +302,5 @@ export class UserRolesPageComponent implements OnInit {
 		return this._dateUtilityService.formatDate(date);
 	}
 }
+
+export default UserRolesPageComponent

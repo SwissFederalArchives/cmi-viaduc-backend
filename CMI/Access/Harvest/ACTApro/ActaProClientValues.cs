@@ -38,6 +38,7 @@ public class ActaProClientValues
     public const string StufeDokument = "Dokument";
     public const string StufeSubdossier = "Subdossier";
     public const string StufeDossier = "Dossier";
+    public const string StufeDatei = "Datei";
 
 
     public static string[] AllVerzEinheitDocTypes =

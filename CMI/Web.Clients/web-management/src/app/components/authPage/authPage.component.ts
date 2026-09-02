@@ -2,12 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../modules/client/services/authentication.service';
 
 @Component({
-	selector: 'cmi-viaduc-auth-page',
-	templateUrl: 'authPage.component.html'
+    selector: 'cmi-viaduc-auth-page',
+    templateUrl: 'authPage.component.html',
+    standalone: false
 })
 export class AuthPageComponent implements OnInit {
 
-	public success: boolean;
+	public success: boolean = false;
 
 	constructor(private _authentication: AuthenticationService) {
 	}

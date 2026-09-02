@@ -21,7 +21,7 @@ namespace CMI.Manager.Order.Status
 
         public override void SetStatusAushebungBereit()
         {
-            Context.ThrowIfAuftragstypIsNot(new[] {OrderType.Digitalisierungsauftrag});
+            Context.ThrowIfAuftragstypIsNot(new[] { OrderType.Digitalisierungsauftrag });
             Context.ThrowIfUserIsNot(Users.Vecteur);
 
             Context.SetNewStatus(AuftragStatusRepo.FuerAushebungBereit);
@@ -101,7 +101,7 @@ namespace CMI.Manager.Order.Status
                 orderDate, digitalisierungsKategorie)
                 .ConfigureAwait(false)
                 .GetAwaiter()
-                .GetResult(); ;
+                .GetResult();
 
             var terminManager = new DigitalisierungsTerminManager(Context.OrderDataAccess);
             var newTermin = terminManager.GetNextPossibleTermin(orderDate, latestTermine, kontingent);

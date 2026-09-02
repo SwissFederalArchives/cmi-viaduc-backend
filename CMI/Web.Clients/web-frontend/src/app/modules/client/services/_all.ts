@@ -15,9 +15,8 @@ import {NewsService} from './news.service';
 import {PublicService} from './synonym.service';
 import {StaticContentService} from './staticContent.service';
 import {DownloadTokenService} from './downloadToken.service';
-import {UnbluService} from './unblu.service';
-import {ChatBotService} from './chatbot.service';
 import {CollectionService} from './collection.service';
+import {ChatbotService} from "./chatbot.service";
 
 export const ALL_SERVICES = [
 	SessionStorageService,
@@ -33,11 +32,10 @@ export const ALL_SERVICES = [
 	AdvancedSearchService,
 	SearchService,
 	ShoppingCartService,
-	UnbluService,
 	StaticContentService,
 	NewsService,
 	PublicService,
-	ChatBotService,
 	DownloadTokenService,
-	CollectionService
+	CollectionService,
+	ChatbotService
 ];

@@ -1,7 +1,7 @@
-﻿using CMI.Contract.DocumentConverter;
+using CMI.Contract.DocumentConverter;
 using CMI.Manager.DocumentConverter.Abbyy;
 using CMI.Manager.DocumentConverter.Extraction;
-using FluentAssertions;
+using Shouldly;
 using FREngine;
 using MassTransit;
 using Moq;
@@ -24,9 +24,9 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed-Unknown"));
 
             // Assert
-            result.HasError.Should().BeTrue();
-            result.ErrorMessage.Should().NotBeNullOrEmpty();
-            result.ErrorMessage.Should().Contain("Ungültiges Profil <DocumentArchiving_Speed-Unknown> für Textextraktion angegeben.");
+            result.HasError.ShouldBeTrue();
+            result.ErrorMessage.ShouldNotBeNullOrEmpty();
+            result.ErrorMessage.ShouldContain("Ungültiges Profil <DocumentArchiving_Speed-Unknown> für Textextraktion angegeben.");
             enginePool.Verify(s => s.ReleaseEngine(It.IsAny<IEngine>(), It.IsAny<bool>()), Times.Exactly(1));
 
         }
@@ -43,9 +43,9 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed"));
 
             // Assert
-            result.HasError.Should().BeTrue();
-            result.ErrorMessage.Should().NotBeNullOrEmpty();
-            result.ErrorMessage.Should().Contain("Anzahl Dokumente überschritten");
+            result.HasError.ShouldBeTrue();
+            result.ErrorMessage.ShouldNotBeNullOrEmpty();
+            result.ErrorMessage.ShouldContain("Anzahl Dokumente überschritten");
             enginePool.Verify(s => s.ReleaseEngine(It.IsAny<IEngine>(), It.IsAny<bool>()), Times.Exactly(1));
 
         }
@@ -62,9 +62,9 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.ExtractTextFromDocument("anything", new DefaultTextExtractorSettings("DocumentArchiving_Speed"));
 
             // Assert
-            result.HasError.Should().BeFalse();
-            result.ErrorMessage.Should().BeNullOrEmpty();
-            result.ToString().Should().BeNullOrEmpty();
+            result.HasError.ShouldBeFalse();
+            result.ErrorMessage.ShouldBeNullOrEmpty();
+            result.ToString().ShouldBeNullOrEmpty();
             enginePool.Verify(s => s.ReleaseEngine(It.IsAny<IEngine>(), It.IsAny<bool>()), Times.Exactly(1));
 
         }

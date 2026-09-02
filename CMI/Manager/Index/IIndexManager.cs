@@ -14,15 +14,26 @@ namespace CMI.Manager.Index
         /// </summary>
         /// <param name="elasticArchiveRecord"></param>
         /// <returns></returns>
-        ElasticArchiveRecord UpdateArchiveRecord(ElasticArchiveRecord elasticArchiveRecord);
+        Task<ElasticArchiveRecord> UpdateArchiveRecord(ElasticArchiveRecord elasticArchiveRecord);
 
         /// <summary>
         ///    Removes an archive record from ElasticSearch
         /// </summary>
         /// <param name="archiveRecordId"> the id</param>
-        void RemoveArchiveRecord(string archiveRecordId);
+        Task RemoveArchiveRecord(string archiveRecordId);
 
-        ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData);
+        Task<ElasticArchiveRecord> FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData);
+
+
+        /// <summary>
+        /// Finds a document by a set of query terms.
+        /// The key is the field name and the value is the value to search for.
+        /// The given terms are combined with AND.
+        /// </summary>
+        /// <param name="queryTerms"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="useUnanonymizedData"></param>
+        Task<List<ElasticArchiveRecord>> FindDocument(Dictionary<string, string> queryTerms, int pageSize, UseUnanonymizedData useUnanonymizedData);
 
         /// <summary>
         ///     Gets all the archive records for a specific primary data package.
@@ -31,9 +42,9 @@ namespace CMI.Manager.Index
         /// </summary>
         /// <param name="archiveRecordId">The id of the archive record that links to the package</param>
         /// <returns>List&lt;ElasticArchiveRecord&gt;.</returns>
-        List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId);
+        Task<List<ElasticArchiveRecord>> GetArchiveRecordsForPackage(string archiveRecordId);
 
-        void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
+        Task UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
             string[] metadataAccessTokens, string[] fieldAccessTokens);
 
         /// <summary>
@@ -65,7 +76,7 @@ namespace CMI.Manager.Index
         /// information are in sync. 
         /// </summary>
         /// <param name="archiveRecordId"></param>
-        void UpdateDependentRecords(string archiveRecordId);
+        Task UpdateDependentRecords(string archiveRecordId);
 
         /// <summary>
         /// Checks the references of an unprotected record, if those point
@@ -78,6 +89,6 @@ namespace CMI.Manager.Index
         /// But as we can't be sure that this will happen, we update the references
         /// </summary>
         /// <param name="archiveRecordId"></param>
-        void UpdateReferencesOfUnprotectedRecord(string archiveRecordId);
+        Task UpdateReferencesOfUnprotectedRecord(string archiveRecordId);
     }
 }

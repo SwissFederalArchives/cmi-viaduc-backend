@@ -2,8 +2,9 @@ import {Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
-	selector: 'cmi-viaduc-static-page',
-	templateUrl: 'staticPage.component.html'
+    selector: 'cmi-viaduc-static-page',
+    templateUrl: 'staticPage.component.html',
+    standalone: false
 })
 export class StaticPageComponent implements OnDestroy {
 

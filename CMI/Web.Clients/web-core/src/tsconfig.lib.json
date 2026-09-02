@@ -1,33 +1,29 @@
 {
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
-		"outDir": "../out-tsc/lib",
-		"target": "ES2022",
-		"declarationMap": true,
-		"module": "ES2022",
-		"moduleResolution": "node",
-		"declaration": true,
-		"esModuleInterop":  true,
-		"allowSyntheticDefaultImports": true,
-		"sourceMap": true,
-		"inlineSources": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-		"types": [],
-		"lib": [
-			"dom",
-			"ES2022"
-		],
-		"paths": {
-			"jszip": [
-				"../node_modules/jszip/dist/jszip.min.js"
-			],
-			"@angular/*": [
-				"./node_modules/@angular/*"
-			]
-		},
-		"baseUrl": "./"
-	},
+    "outDir": "../out-tsc/lib",
+    "target": "ES2022",
+    "declarationMap": true,
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "types": [],
+    "paths": {
+      "jszip": [
+        "../node_modules/jszip/dist/jszip.min.js"
+      ],
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ]
+    },
+    "baseUrl": "./"
+  },
 	"angularCompilerOptions": {
 		"compilationMode": "partial",
 		"annotateForClosureCompiler": true,

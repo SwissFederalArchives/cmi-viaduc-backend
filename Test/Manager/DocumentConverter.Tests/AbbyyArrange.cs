@@ -31,7 +31,8 @@ namespace CMI.Manager.DocumentConverter.Tests
             engine.Setup(s => s.CreateFRDocumentFromImage(It.IsAny<string>(), null)).Returns(document.Object);
             var p = new Mock<DocumentProcessingParams>();
             p.Setup(s => s.PageProcessingParams.RecognizerParams.SetPredefinedTextLanguage(It.IsAny<string>()));
-            engine.Setup(s => s.CreateDocumentProcessingParams()).Returns(() => p.Object);
+            p.Setup(s => s.PageProcessingParams.PerformPreprocessing).Returns(false);
+            engine.Setup(s => s.CreateDocumentProcessingParams()).Returns(p.Object);
             var enginePool = new Mock<IEnginesPool>();
             enginePool.Setup(s => s.GetEngine()).Returns(engine.Object);
             return enginePool;

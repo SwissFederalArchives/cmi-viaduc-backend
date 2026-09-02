@@ -65,7 +65,12 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                 {
                     fineReaderDocument = LoadFineReaderDocument(inputFile, settings.TextExtractionProfile, engine, settings.Context);
                     SubscribeExtractionEvents((FRDocument) fineReaderDocument);
-                    fineReaderDocument.Process();
+                    
+                    // We do not want to use preprocessing, because it would change the input file (e.g. deskewing) and we want to keep the original file unchanged for the transformation step.
+                    var processingParams = engine.CreateDocumentProcessingParams();
+                    processingParams.PageProcessingParams.PerformPreprocessing = false;
+
+                    fineReaderDocument.Process(processingParams);
 
                     // Plain text
                     Log.Information("Exporting plain text for {inputFile}.", inputFile);
@@ -172,8 +177,12 @@ namespace CMI.Manager.DocumentConverter.Abbyy
                 {
                     fineReaderDocument = LoadFineReaderDocument(inputFile.FullName, profile, engine, context);
                     SubscribeTransformEvents((FRDocument) fineReaderDocument);
-                    fineReaderDocument.Process();
+                    
+                    // We do not want to use preprocessing, because it would change the input file (e.g. deskewing) and we want to keep the original file unchanged for the transformation step.
+                    var processingParams = engine.CreateDocumentProcessingParams();
+                    processingParams.PageProcessingParams.PerformPreprocessing = false;
 
+                    fineReaderDocument.Process(processingParams);
                     fineReaderDocument.Export(targetFile.FullName, FileExportFormatEnum.FEF_PDF, null);
 
                     // Alles OK
@@ -231,7 +240,7 @@ namespace CMI.Manager.DocumentConverter.Abbyy
 
         private FRDocument LoadFineReaderDocument(string inputFile, string profile, IEngine engine, JobContext context)
         {
-            var customProfile = Path.Combine(new FileInfo(this.GetType().Assembly.Location).DirectoryName, "AbbyyProfile.ini");
+            var customProfile = Path.Combine(new FileInfo(GetType().Assembly.Location).DirectoryName, "AbbyyProfile.ini");
             CheckIfProfileIsValid(profile);
             CheckLicence(engine);
             engine.LoadPredefinedProfile(profile);
@@ -246,7 +255,7 @@ namespace CMI.Manager.DocumentConverter.Abbyy
 
             var fineReaderDocument = engine.CreateFRDocumentFromImage(inputFile);
             sourceFile = inputFile;
-            this.jobContext = context;
+            jobContext = context;
             return fineReaderDocument;
         }
 

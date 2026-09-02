@@ -12,11 +12,12 @@ export const DATE_RANGE_FIELD_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-	selector: 'cmi-viaduc-date-range-field',
-	templateUrl: 'dateRangeField.component.html',
-	styleUrls: ['./dateRangeField.component.less'],
-	encapsulation: ViewEncapsulation.None,
-	providers: [DATE_RANGE_FIELD_VALUE_ACCESSOR]
+    selector: 'cmi-viaduc-date-range-field',
+    templateUrl: 'dateRangeField.component.html',
+    styleUrls: ['./dateRangeField.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    providers: [DATE_RANGE_FIELD_VALUE_ACCESSOR],
+    standalone: false
 })
 export class DateRangeFieldComponent implements ControlValueAccessor {
 
@@ -134,7 +135,7 @@ export class DateRangeFieldComponent implements ControlValueAccessor {
 		this._emitValidation(valid);
 	}
 
-	private _emitValidation(isValid) {
+	private _emitValidation(isValid: boolean) {
 		this.isValid = isValid;
 
 		if (this.selectedField instanceof AdvancedSearchField) {

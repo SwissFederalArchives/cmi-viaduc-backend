@@ -4,9 +4,10 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-  selector: 'cmi-checkout-workplace-reservation-step',
-  templateUrl: './checkout-workplace-reservation-step.component.html',
-  styleUrls: ['./checkout-workplace-reservation-step.component.less']
+    selector: 'cmi-checkout-workplace-reservation-step',
+    templateUrl: './checkout-workplace-reservation-step.component.html',
+    styleUrls: ['./checkout-workplace-reservation-step.component.less'],
+    standalone: false
 })
 export class CheckoutWorkplaceReservationStepComponent implements OnInit {
 

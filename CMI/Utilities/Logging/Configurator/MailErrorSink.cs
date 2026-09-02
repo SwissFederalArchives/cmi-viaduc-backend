@@ -51,7 +51,7 @@ namespace CMI.Utilities.Logging.Configurator
             }
         }
 
-        public async void Emit(LogEvent logEvent)
+        public void Emit(LogEvent logEvent)
         {
             if (logEvent.Level < LogEventLevel.Error ||
                 !initOk)
@@ -72,7 +72,10 @@ namespace CMI.Utilities.Logging.Configurator
 
                 try
                 {
-                    var endpoint = await bus.GetSendEndpoint(new Uri(bus.Address, BusConstants.NotificationManagerMessageQueue));
+                    var endpoint = bus.GetSendEndpoint(new Uri(bus.Address, BusConstants.NotificationManagerMessageQueue))
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult();
                     var emailMessage = new EmailMessage
                     {
                         To = entry.MailAddresses,
@@ -80,7 +83,10 @@ namespace CMI.Utilities.Logging.Configurator
                         Body = WebUtility.HtmlEncode(message).Replace("\n", "<br>\n")
                     };
 
-                    endpoint.Send<IEmailMessage>(emailMessage).Wait();
+                    endpoint.Send<IEmailMessage>(emailMessage)
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult(); 
 
                     Log.Information("Fehlermeldung wird versandt an {MailAddresses}.", entry.MailAddresses);
                 }

@@ -69,7 +69,7 @@ namespace CMI.Web.Frontend.api.Controllers
             }
 
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
-            var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(veId, access, false);
+            var entityResult = await elasticService.QueryForId<ElasticArchiveRecord>(veId, access, false);
             var entity = entityResult.Response?.Hits?.FirstOrDefault()?.Source;
 
             if (entity == null)
@@ -92,7 +92,8 @@ namespace CMI.Web.Frontend.api.Controllers
             var indexSnapShot = OrderHelper.GetOrderingIndexSnapshot(entityResult.Entries.FirstOrDefault()?.Data);
 
             var orderItemDb = await client.AddToBasket(indexSnapShot, userId);
-            return Content(HttpStatusCode.Created, ConvertDbItemToDto(orderItemDb, OrderType.Bestellkorb, true));
+            var orderItemDto = await ConvertDbItemToDto(orderItemDb, OrderType.Bestellkorb, true);
+            return Content(HttpStatusCode.Created, orderItemDto);
         }
 
         [HttpPost]
@@ -103,8 +104,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 return BadRequest($"{nameof(signatur)}");
             }
 
-            var searchResult =
-                entityProvider.SearchByReferenceCodeWithoutSecurity<ElasticArchiveRecord>(signatur);
+            var searchResult = await entityProvider.SearchByReferenceCodeWithoutSecurity<ElasticArchiveRecord>(signatur);
             var searchRecordResult = searchResult as SearchResult<ElasticArchiveRecord>;
             ElasticArchiveRecord entity = null;
             if (searchRecordResult?.Entities != null)
@@ -162,7 +162,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var orderItemDb = await client.AddToBasketCustom(Trim(param.Bestand), Trim(param.Ablieferung),
                 Trim(param.BehaeltnisNr), Trim(param.ArchivNr), Trim(param.Aktenzeichen), Trim(param.Title), zeitraum,
                 ControllerHelper.GetCurrentUserId());
-            return Content(HttpStatusCode.Created, ConvertDbItemToDto(orderItemDb, OrderType.Bestellkorb, true));
+            return Content(HttpStatusCode.Created, await ConvertDbItemToDto(orderItemDb, OrderType.Bestellkorb, true));
         }
 
         [HttpPost]
@@ -277,8 +277,8 @@ namespace CMI.Web.Frontend.api.Controllers
                     {
                         if (!string.IsNullOrWhiteSpace(orderItem.VeId))
                         {
-                            var archiveDbRecord = elasticService.QueryForId<ElasticArchiveDbRecord>(orderItem.VeId, userAccess, false).Entries.FirstOrDefault().Data;
-                            if (archiveDbRecord.IsAnonymized)
+                            var archiveDbRecord = (await elasticService.QueryForId<ElasticArchiveDbRecord>(orderItem.VeId, userAccess, false)).Entries.FirstOrDefault()?.Data;
+                            if (archiveDbRecord is {IsAnonymized: true})
                             {
                                 orderItem.Title = archiveDbRecord.Title;
                                 orderItem.Darin = archiveDbRecord.WithinInfo;
@@ -463,7 +463,7 @@ namespace CMI.Web.Frontend.api.Controllers
         {
             var orderItemsDb = (await client.GetBasket(ControllerHelper.GetCurrentUserId())).ToList();
 
-            return ConvertDbItemsToDto(orderItemsDb, OrderType.Bestellkorb, true);
+            return await ConvertDbItemsToDto(orderItemsDb, OrderType.Bestellkorb, true);
         }
 
         [HttpGet]
@@ -486,7 +486,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     PersonenbezogeneNachforschung = ordering.PersonenbezogeneNachforschung,
                     HasEigenePersonendaten = ordering.HasEigenePersonendaten,
                     RolePublicClient = ordering.RolePublicClient,
-                    Items = ConvertDbItemsToDto(ordering.Items.ToList(), ordering.Type, false)
+                    Items = await ConvertDbItemsToDto(ordering.Items.ToList(), ordering.Type, false)
                 };
                 orderings.Add(newOrdering);
             }
@@ -494,9 +494,9 @@ namespace CMI.Web.Frontend.api.Controllers
             return orderings.OrderByDescending(o => o.OrderDate).ToArray();
         }
 
-        private OrderItemDto ConvertDbItemToDto(OrderItem orderItemDb, OrderType orderType, bool needsSecurityInfo)
+        private async Task<OrderItemDto> ConvertDbItemToDto(OrderItem orderItemDb, OrderType orderType, bool needsSecurityInfo)
         {
-            return ConvertDbItemsToDto(new List<OrderItem> {orderItemDb}, orderType, needsSecurityInfo)
+            return (await ConvertDbItemsToDto(new List<OrderItem> { orderItemDb }, orderType, needsSecurityInfo))
                 .FirstOrDefault();
         }
 
@@ -512,7 +512,7 @@ namespace CMI.Web.Frontend.api.Controllers
         ///     correctly filled using information from the elastic index.
         /// </param>
         /// <returns>OrderItemDto[].</returns>
-        private OrderItemDto[] ConvertDbItemsToDto(List<OrderItem> orderItemsDb, OrderType orderType,
+        private async Task<OrderItemDto[]> ConvertDbItemsToDto(List<OrderItem> orderItemsDb, OrderType orderType,
             bool needsSecurityInfo)
         {
             var orderItemsRet = new List<OrderItemDto>();
@@ -565,7 +565,8 @@ namespace CMI.Web.Frontend.api.Controllers
                     InternalComment = itemDb.InternalComment,
                     MahndatumInfo = itemDb.MahndatumInfo,
                     SachbearbeiterId = itemDb.SachbearbeiterId,
-                    Status = itemDb.Status
+                    Status = itemDb.Status,
+                    EntstehungDigitaleInhalte = itemDb.EntstehungDigitaleInhalte
                 });
             }
 
@@ -582,8 +583,8 @@ namespace CMI.Web.Frontend.api.Controllers
                     access = GetUserAccess(WebHelper.GetClientLanguage(Request));
                     // Need to call without security, as the list of manual added basket items could contain items that are not visible to the user
                     // but depending on the data we need to fill the properties EinsichtsbewilligungNotwendig and CouldNeedAReason
-                    orderItemsElastic = elasticService.QueryForIdsWithoutSecurityFilter<ElasticArchiveRecord>(veIdList,
-                        new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0}).Entries;
+                    orderItemsElastic = (await elasticService.QueryForIdsWithoutSecurityFilter<ElasticArchiveRecord>(veIdList,
+                        new Paging { Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0 })).Entries;
                 }
 
                 if (orderItemsElastic != null)
@@ -651,7 +652,9 @@ namespace CMI.Web.Frontend.api.Controllers
                 InternalComment = orderItemDto.InternalComment,
                 MahndatumInfo = orderItemDto.MahndatumInfo,
                 SachbearbeiterId = orderItemDto.SachbearbeiterId,
-                Status = orderItemDto.Status
+                Status = orderItemDto.Status,
+                Aushebungstyp = orderItemDto.Aushebungstyp,
+                EntstehungDigitaleInhalte = orderItemDto.EntstehungDigitaleInhalte
             };
 
             return orderItem;

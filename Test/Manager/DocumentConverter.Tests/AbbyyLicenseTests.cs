@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using CMI.Manager.DocumentConverter.Abbyy;
-using FluentAssertions;
+using Shouldly;
 using FREngine;
 using Moq;
 
@@ -20,7 +20,7 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.GetRemainingPages();
 
             // Assert
-            result.Should().Be(99);
+            result.ShouldBe(99);
         }
 
   

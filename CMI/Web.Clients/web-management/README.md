@@ -64,7 +64,8 @@ The application contains the management GUI for Viaduc.
 - Change to the directory `web-management` with a command line tool
   - Run: `npm run link` to link `web-core` as component
   - Run: `npm i` to install the dependencies
-  - Run: `npm run build` build the project into a `dist` folder inside `web-management`.
+  - Run: `npm run build` to build the project into the `dist` folder inside `web-management`
+  - Run: `npm run build-local` to build the project directly into `..\..\Web\CMI.Web.Management\client`
 
 # Customization
 
@@ -83,7 +84,7 @@ The application contains the management GUI for Viaduc.
 - Variant a.)
   - Build using `npm run build` and start ASP.NET (`CMI.Viaduc.Web.Management`)
 - Variant b.)
-  - Start running build (file watch) using `npm run start` and ASP.NET (`CMI.Viaduc.Web.Management`)
+  - Start running build (file watch) using `npm run start` and ASP.NET (`CMI.Viaduc.Web.Management`); the watcher writes directly into `..\..\Web\CMI.Web.Management\client`
 
 # Authors
 

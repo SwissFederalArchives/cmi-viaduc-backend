@@ -15,7 +15,7 @@ export class DefaultContextGuard  {
 	public canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
 		let language: string = route.params['lang'];
 		if (!_util.isEmpty(language) && !this._languageTester.test(language)) {
-			language = undefined;
+			language = '';
 		}
 		const rte1stPart = route.root.children.length > 0 ? route.root.children[0] : route;
 		if (!language && rte1stPart.url && rte1stPart.url.length > 0 && this._languageTester.test(rte1stPart.url[0].path)) {

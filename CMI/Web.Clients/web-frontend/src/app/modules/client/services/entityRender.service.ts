@@ -155,7 +155,7 @@ export class EntityRenderService {
 			return this._renderArray(row, path, val.value, this._renderBase64.bind(this));
 		} else if (_util.isObject(val)) {
 			if (path.toLowerCase().indexOf('bildvorschau') >= 0) {
-				const lrg = row.entity.customFields['bildAnsicht'] || {};
+				const lrg = row.entity.customFields.find(c => c.key === 'bildAnsicht') || {};
 				row.data = (row.data || {});
 				const images = row.data.images = (row.data.images || []);
 				images.push(<EntityImage>{

@@ -1,101 +1,108 @@
 <div class="page page-home col-sm-12">
 
-	<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
 
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
 
-		<div content>
-			<div class="page-header">
-				<h2 class="page-content-title">
-					<span>{{'Benutzerverwaltung' | translate:'usersAndRoles.benutzer'}}</span>
-				</h2>
-			</div>
-			<div class="tablecontainer">
-				<div class="action-container">
-					<div class="row action-buttons">
-						<div class="col-xs-12">
-							<span class="orders-menu-actions">
-								<button (click)="saveColumns()" class="btn btn-link">
-									<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Ansicht speichern' | translate:'usersAndRoles.save' }}</span>
-								</button>
-								<button (click)="exportExcel()" class="btn btn-link">
-									<span><span class="icon icon--excel"></span>&nbsp;{{ 'Datenexport' | translate:'usersAndRoles.export' }}</span>
-								</button>
-								<button (click)="showColumnPickerModal()" class="btn btn-link">
-									<span><span class="icon icon--tools"></span>&nbsp;{{ 'Spaltenauswahl' | translate:'usersAndRoles.columpicker' }}</span>
-								</button>
-								<button (click)="resetSortsAndFilters()" class="btn btn-link">
-									<span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{ 'Sortierung und Filter zurücksetzen' | translate:'usersAndRoles.resetsort' }}</span>
-								</button>
-								<button (click)="resetColumnsToDefault()" class="btn btn-link">
-									<span><span class="icon icon--list-alt"></span>&nbsp;{{ 'Ansicht zurücksetzen' | translate:'usersAndRoles.reset' }}</span>
-								</button>
-								<button (click)="refreshTable()" class="btn btn-link">
-									<span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'usersAndRoles.refresh' }}</span>
-								</button>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
+    <div content>
+      <div class="page-header">
+        <h2 class="page-content-title">
+          <span>{{'Benutzerverwaltung' | translate:'usersAndRoles.benutzer'}}</span>
+        </h2>
+      </div>
+      <div class="tablecontainer">
+        <div class="action-container">
+          <div class="row action-buttons">
+            <div class="col-xs-12">
+              <span class="orders-menu-actions">
+                <button (click)="saveColumns()" class="btn btn-link">
+                  <span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Ansicht speichern' | translate:'usersAndRoles.save' }}</span>
+                </button>
+                <button (click)="exportExcel()" class="btn btn-link">
+                  <span><span class="icon icon--excel"></span>&nbsp;{{ 'Datenexport' | translate:'usersAndRoles.export' }}</span>
+                </button>
+                <button (click)="showColumnPickerModal()" class="btn btn-link">
+                  <span><span class="icon icon--tools"></span>&nbsp;{{ 'Spaltenauswahl' | translate:'usersAndRoles.columpicker' }}</span>
+                </button>
+                <button (click)="resetSortsAndFilters()" class="btn btn-link">
+                  <span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{ 'Sortierung und Filter zurücksetzen' | translate:'usersAndRoles.resetsort' }}</span>
+                </button>
+                <button (click)="resetColumnsToDefault()" class="btn btn-link">
+                  <span><span class="icon icon--list-alt"></span>&nbsp;{{ 'Ansicht zurücksetzen' | translate:'usersAndRoles.reset' }}</span>
+                </button>
+                <button (click)="refreshTable()" class="btn btn-link">
+                  <span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'usersAndRoles.refresh' }}</span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<div class="list-user-roles">
-				<div class="row top-pagination">
-					<div class="col-xs-12">
-						<cmi-viaduc-odata-pagination [(collectionView)]="userList"></cmi-viaduc-odata-pagination>
-					</div>
-				</div>
-				<cmi-viaduc-grid  #flexGrid  [itemsSource]="userList" [name]="'userRolesPage'" [dataMaps]="valueFilters" [enableMultiSort]="true" [defaultSortColumnKey]="'id'">
+      <div class="list-user-roles">
+        <div class="row top-pagination">
+          <div class="col-xs-12">
+            <cmi-viaduc-odata-pagination [(collectionView)]="userList"></cmi-viaduc-odata-pagination>
+          </div>
+        </div>
+        <cmi-viaduc-grid  #flexGrid  [itemsSource]="userList" [name]="'userRolesPage'" [dataMaps]="valueFilters" [enableMultiSort]="true" [defaultSortColumnKey]="'id'">
 
-					<ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
-						<a (click)="show(cell.item)">
-							<i class="glyphicon glyphicon-eye-open"></i>
-						</a>
-					</ng-template>
+          <ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+            <a (click)="show(cell.item)">
+              <i class="glyphicon glyphicon-eye-open"></i>
+            </a>
+          </ng-template>
 
-					<wj-flex-grid-column *ngFor="let col of columns" [visible]="col.visible"
-										 [binding]="col.key" [width]="col.width" [minWidth]="col.minWidth ? col.minWidth : 25"
-										 [format]="col.format"
-										 [dataType]="col.dataType ? col.dataType : 1"
-										 [header]="col.defaultLabel | translate:'usersAndRoles.columns.' + col.key"
-										 [align]= "col.align ? col.align : ''"
-										 [allowResizing]="true" >
+          @for (col of columns; track col) {
+            <wj-flex-grid-column [visible]="col.visible"
+              [binding]="col.key" [width]="col.width" [minWidth]="col.minWidth ? col.minWidth : 25"
+              [format]="col.format"
+              [dataType]="col.dataType ? col.dataType : 1"
+              [header]="col.defaultLabel | translate:'usersAndRoles.columns.' + col.key"
+              [align]= "col.align ? col.align : ''"
+              [allowResizing]="true" >
+              <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                @if (cell.col.dataType === 4) {
+                  <span>{{ formatDate(cell.item[cell.col.binding], cell.col.format) }}</span>
+                }
+                @if (cell.col.dataType !== 4) {
+                  <span>{{ cell.item[cell.col.binding] }}</span>
+                }
+              </ng-template>
+            </wj-flex-grid-column>
+          }
+        </cmi-viaduc-grid>
+        <div class="row bottom-pagination">
+          <div class="col-xs-12">
+            <cmi-viaduc-odata-pagination [(collectionView)]="userList"></cmi-viaduc-odata-pagination>
+          </div>
+        </div>
+      </div>
+      <ng-template #emptyTable>
+        <div class="list-user-roles">
+          <h4>{{txt.get('usersAndRoles.nodata', 'Es konnten keine Benutzer gefunden werden (Suchkriterien bzw. Filter anpassen)')}}</h4>
+        </div>
+      </ng-template >
 
-						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-							<span *ngIf="cell.col.dataType === 4">{{ formatDate(cell.item[cell.col.binding], cell.col.format) }}</span>
-							<span *ngIf="cell.col.dataType !== 4">{{ cell.item[cell.col.binding] }}</span>
-						</ng-template>
-					</wj-flex-grid-column>
-				</cmi-viaduc-grid>
-				<div class="row bottom-pagination">
-					<div class="col-xs-12">
-						<cmi-viaduc-odata-pagination [(collectionView)]="userList"></cmi-viaduc-odata-pagination>
-					</div>
-				</div>
-			</div>
-			<ng-template #emptyTable>
-				<div class="list-user-roles">
-					<h4>{{txt.get('usersAndRoles.nodata', 'Es konnten keine Benutzer gefunden werden (Suchkriterien bzw. Filter anpassen)')}}</h4>
-				</div>
-			</ng-template >
+      <cmi-viaduc-column-picker
+        [controlId]="'userColumnPicker'"
+        [(showColumnPickerModal)]="showColumnPicker"
+        [visibleColumns]="visibleColumnsSelector"
+        [hiddenColumns]='hiddenColumns'
+        (showColumnClicked)="showColumn($event)"
+        (hideColumnClicked)="hideColumn($event)"
+        >
+      </cmi-viaduc-column-picker>
 
-			<cmi-viaduc-column-picker
-				[controlId]="'userColumnPicker'"
-				[(showColumnPickerModal)]="showColumnPicker"
-				[visibleColumns]="visibleColumnsSelector"
-				[hiddenColumns]='hiddenColumns'
-				(showColumnClicked)="showColumn($event)"
-				(hideColumnClicked)="hideColumn($event)"
-			>
-			</cmi-viaduc-column-picker>
-
-			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
-		</div>
-	</cmi-viaduc-layout-left-content>
+      @if (loading) {
+        <cmi-loader class="cmi-visible"></cmi-loader>
+      }
+    </div>
+  </cmi-viaduc-layout-left-content>
 
 </div>

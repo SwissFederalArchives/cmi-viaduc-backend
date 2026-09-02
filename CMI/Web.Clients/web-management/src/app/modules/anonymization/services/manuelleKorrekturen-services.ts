@@ -11,9 +11,9 @@ export class ManuelleKorrekturenService {
 		this._createBaseUrl = this._options.serverUrl + this._options.publicPort + '/api/ManuelleKorrekturen/';
 	}
 
-	public async BatchAddManuelleKorrektur(veIds: string[]): Promise<Map<string, string>> {
+	public async BatchAddManuelleKorrektur(veIds: string[]): Promise<Record<string, string>> {
 		const url = this._createBaseUrl + 'BatchAddManuelleKorrektur';
-		return this.http.post<Map<string, string>>(url, veIds, this.http.noCaching).toPromise();
+		return this.http.post<Record<string, string>>(url, veIds, this.http.noCaching).toPromise();
 	}
 
 	public batchDelete(itemsToDelete: number[]): Observable<any> {

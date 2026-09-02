@@ -46,14 +46,14 @@ namespace CMI.Manager.DataFeed
                 cfg.ReceiveEndpoint(BusConstants.DatafeedSchedulerTriggerMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<SchedulerTriggerConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DataFeedManagerActaProSyncRecordMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ActaProSyncRecordConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
 

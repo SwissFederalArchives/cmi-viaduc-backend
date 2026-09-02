@@ -4,9 +4,10 @@ import {PublicService} from '../../../../services';
 import {SynonymGruppe} from '../../../../model';
 
 @Component({
-	selector: 'cmi-viaduc-search-synonym-icon',
-	templateUrl: 'searchSynonymeIcon.component.html',
-	styleUrls: ['searchSynonymeIcon.component.less']
+    selector: 'cmi-viaduc-search-synonym-icon',
+    templateUrl: 'searchSynonymeIcon.component.html',
+    styleUrls: ['searchSynonymeIcon.component.less'],
+    standalone: false
 })
 export class SearchSynonymeIconComponent implements OnInit {
 	@Input()

@@ -1,6 +1,7 @@
 ﻿using CMI.Access.Common;
 using CMI.Contract.Common;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CMI.Engine.Anonymization
 {
@@ -22,8 +23,14 @@ namespace CMI.Engine.Anonymization
         /// <param name="elasticArchiveDbRecord">The db record containing the sources for the update</param>
         public void UpdateDependentRecords(ElasticArchiveDbRecord elasticArchiveDbRecord)
         {
-            SyncArchiveplanAndParentContentInfos(elasticArchiveDbRecord);
-            SyncReferences(elasticArchiveDbRecord);
+            SyncArchiveplanAndParentContentInfos(elasticArchiveDbRecord)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+            SyncReferences(elasticArchiveDbRecord)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
         }
 
         /// <summary>
@@ -34,20 +41,26 @@ namespace CMI.Engine.Anonymization
         {
             UpdateArchivePlanContext(elasticArchiveRecord, elasticArchiveRecord);
             UpdateParentContentInfos(elasticArchiveRecord, elasticArchiveRecord);
-            SyncOwnReferences(elasticArchiveRecord);
+            SyncOwnReferences(elasticArchiveRecord)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public void UpdateReferencesOfUnprotectedRecord(ElasticArchiveDbRecord elasticArchiveRecord)
         {
-            SyncOwnReferences(elasticArchiveRecord);
+            SyncOwnReferences(elasticArchiveRecord)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult(); 
         }
 
-        private void SyncReferences(ElasticArchiveDbRecord elasticArchiveRecord)
+        private async Task SyncReferences(ElasticArchiveDbRecord elasticArchiveRecord)
         {
             foreach (var reference in elasticArchiveRecord.References)
             {
                 // Get the referenced record
-                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.Nothing);
+                var refRecord = await dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.Nothing);
                 if (refRecord != null)
                 {
                     // Find the reference 
@@ -55,19 +68,19 @@ namespace CMI.Engine.Anonymization
                     if (backRef != null)
                     {
                         backRef.ReferenceName = GetReferenceName(elasticArchiveRecord);
-                        dbAccess.UpdateDocument(refRecord);
+                        await dbAccess.UpdateDocument(refRecord);
                     }
                 }
             }
         }
 
-        private void SyncOwnReferences(ElasticArchiveDbRecord elasticArchiveRecord)
+        private async Task SyncOwnReferences(ElasticArchiveDbRecord elasticArchiveRecord)
         {
             var wasUpdated = false;
             foreach (var reference in elasticArchiveRecord.References.Where(r => r.Protected))
             {
                 // Get the referenced record
-                var refRecord = dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                var refRecord = await dbAccess.FindDbDocument(reference.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 if (refRecord != null)
                 {
                     // Update the reference 
@@ -78,24 +91,24 @@ namespace CMI.Engine.Anonymization
 
             if (wasUpdated)
             {
-                dbAccess.UpdateDocument(elasticArchiveRecord);
+                await dbAccess.UpdateDocument(elasticArchiveRecord);
             }
         }
 
-        private void SyncArchiveplanAndParentContentInfos(ElasticArchiveDbRecord elasticArchiveRecord)
+        private async Task SyncArchiveplanAndParentContentInfos(ElasticArchiveDbRecord elasticArchiveRecord)
         {
             var externalKeyId = elasticArchiveRecord?.ExternalKeys?
                                     .FirstOrDefault(e => e?.Key == "scopeArchiv")?.Value
                                 ?? elasticArchiveRecord?.ArchiveRecordId;
 
             // Get all children
-            var children = dbAccess.GetChildren(elasticArchiveRecord.ArchiveRecordId, externalKeyId, true).ToList();
+            var children = await dbAccess.GetChildren(elasticArchiveRecord.ArchiveRecordId, externalKeyId, true);
             
             // The getchildren also returns the current record, so we have to filter that out
             foreach (var child in children.Where(c => c.ArchiveRecordId != elasticArchiveRecord.ArchiveRecordId))
             {
                 // Get the corresponding db record
-                var childDbRecord = dbAccess.FindDbDocument(child.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                var childDbRecord = await dbAccess.FindDbDocument(child.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 if (childDbRecord != null)
                 {
                     UpdateArchivePlanContext(childDbRecord, elasticArchiveRecord);

@@ -1,9 +1,10 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-	selector: 'cmi-viaduc-highlight',
-	templateUrl: './highlight.component.html',
-	styleUrls: ['./highlight.component.less']
+    selector: 'cmi-viaduc-highlight',
+    templateUrl: './highlight.component.html',
+    styleUrls: ['./highlight.component.less'],
+    standalone: false
 })
 
 export class HighlightComponent {

@@ -5,9 +5,10 @@ import {UrlService} from '../../../services/url.service';
 import {ClientContext, ConfigService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-usersetting-list',
-	templateUrl: 'userSettingList.component.html',
-	styleUrls: ['./userSettingList.component.less']
+    selector: 'cmi-viaduc-usersetting-list',
+    templateUrl: 'userSettingList.component.html',
+    styleUrls: ['./userSettingList.component.less'],
+    standalone: false
 })
 export class UserSettingListComponent implements OnInit {
 	public loading: boolean;

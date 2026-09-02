@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CMI.Contract.Messaging;
 using MassTransit;
+using Serilog;
 
 namespace CMI.Manager.Index.Consumer
 {
@@ -17,14 +19,23 @@ namespace CMI.Manager.Index.Consumer
             this.indexManager = indexManager;
         }
 
-        public Task Consume(ConsumeContext<UpdateIndivTokens> context)
+        public async Task Consume(ConsumeContext<UpdateIndivTokens> context)
         {
-            indexManager.UpdateTokens(context.Message.ArchiveRecordId.ToString(),
-                context.Message.CombinedPrimaryDataDownloadAccessTokens,
-                context.Message.CombinedPrimaryDataFulltextAccessTokens,
-                context.Message.CombinedMetadataAccessTokens,
-                context.Message.CombinedFieldAccessTokens);
-            return Task.CompletedTask;
+            try
+            {
+                await indexManager.UpdateTokens(context.Message.ArchiveRecordId,
+                    context.Message.CombinedPrimaryDataDownloadAccessTokens,
+                    context.Message.CombinedPrimaryDataFulltextAccessTokens,
+                    context.Message.CombinedMetadataAccessTokens,
+                    context.Message.CombinedFieldAccessTokens);
+            }
+            catch (Exception e)
+            {
+                Log.Warning(e, "{CommandName} has an error for record with ArchiveRecordId: {ArchiveRecordId}", nameof(UpdateIndivTokens),
+                    context.Message.ArchiveRecordId);
+                throw;
+            }
+          
         }
     }
 }

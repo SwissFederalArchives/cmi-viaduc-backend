@@ -8,7 +8,7 @@ export class NewsService {
 				private _http: HttpService) {
 	}
 
-	public async getAllNewsForManagementClient(): Promise<News[]> {
+	public async getAllNewsForManagementClient(): Promise<News[] | any> {
 		const url = this._createBaseUrl() + '/GetAllNewsForManagementClient';
 		return await this._http.get<News[]>(url, this._http.noCaching).toPromise();
 	}

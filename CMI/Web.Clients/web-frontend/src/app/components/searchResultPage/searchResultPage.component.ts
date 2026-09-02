@@ -21,9 +21,10 @@ import {SearchService, SeoService, UrlService} from '../../modules/client/servic
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-	selector: 'cmi-viaduc-search-result-page',
-	templateUrl: 'searchResultPage.component.html',
-	styleUrls: ['./searchResultPage.component.less']
+    selector: 'cmi-viaduc-search-result-page',
+    templateUrl: 'searchResultPage.component.html',
+    styleUrls: ['./searchResultPage.component.less'],
+    standalone: false
 })
 export class SearchResultPageComponent implements OnInit {
 	@ViewChild('facetteList', { static: true})
@@ -47,8 +48,8 @@ export class SearchResultPageComponent implements OnInit {
 
 	private _captchaToken: string = undefined;
 
-	private _sortingField;
-	private _pagingSize;
+	private _sortingField: any;
+	private _pagingSize: number;
 	private _userSettings: UserUiSettings;
 	public crumbs: any[];
 	public searchTerm= '';
@@ -99,7 +100,8 @@ export class SearchResultPageComponent implements OnInit {
 
 		const paging = this._context.search.request.paging;
 		if (paging) {
-			this._sortingField =  {"sortOrder" : paging.sortOrder ?? this.selectedSortingField.sortOrder, "orderBy": paging.orderBy ?? this.selectedSortingField.orderBy};
+			this._sortingField =  {"sortOrder" : paging.sortOrder ??
+					this.selectedSortingField.sortOrder, "orderBy": paging.orderBy ?? this.selectedSortingField.orderBy};
 			this._pagingSize = paging.take;
 		} else {
 			this._sortingField = this._userSettings.selectedSortingField;
@@ -134,9 +136,9 @@ export class SearchResultPageComponent implements OnInit {
 		this.lowerPaginationEnabled = paginationPosition.indexOf('bottom') >= 0 || !this.upperPaginationEnabled;
 	}
 
-	private _createLastExecutedSimpleSearchModel(request) {
-		const query = request.query || <any>{};
-		const searchGroups = query.searchGroups || <any>[];
+	private _createLastExecutedSimpleSearchModel(request: any) {
+		const query: any = request.query || <any>{};
+		const searchGroups: any = query.searchGroups || <any>[];
 
 		if (_util.isEmpty(searchGroups)) {
 			return;
@@ -309,7 +311,7 @@ export class SearchResultPageComponent implements OnInit {
 		this._preProcessRequest(request);
 		this._delayShowLoading();
 		this._searchService.searchExport(request).subscribe(
-			event => {
+			(event: any) => {
 				this._fileSaver.saveDownloadResponseToFile(event);
 			},
 			() => {

@@ -1,4 +1,17 @@
-﻿using System;
+﻿using CMI.Access.Sql.Viaduc;
+using CMI.Access.Sql.Viaduc.File;
+using CMI.Contract.Asset;
+using CMI.Contract.Common;
+using CMI.Contract.Messaging;
+using CMI.Utilities.Cache.Access;
+using CMI.Web.Common.api;
+using CMI.Web.Common.Helpers;
+using CMI.Web.Frontend.api.Interfaces;
+using CMI.Web.Frontend.Helpers;
+using Elastic.Clients.Elasticsearch;
+using MassTransit;
+using Serilog;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -9,18 +22,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
-using CMI.Access.Sql.Viaduc;
-using CMI.Access.Sql.Viaduc.File;
-using CMI.Contract.Asset;
-using CMI.Contract.Common;
-using CMI.Contract.Messaging;
-using CMI.Utilities.Cache.Access;
-using CMI.Web.Common.api;
-using CMI.Web.Common.Helpers;
-using CMI.Web.Frontend.api.Interfaces;
-using CMI.Web.Frontend.Helpers;
-using MassTransit;
-using Serilog;
 
 namespace CMI.Web.Frontend.api.Controllers
 {
@@ -82,10 +83,10 @@ namespace CMI.Web.Frontend.api.Controllers
 
         public Func<string, UserAccess> GetUserAccessFunc { get; set; }
 
-        private ElasticArchiveRecord GetRecord(string archiveRecordId, UserAccess access)
+        private async Task<ElasticArchiveRecord> GetRecord(string archiveRecordId, UserAccess access)
         {
-            var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
-            return entityResult.Entries.FirstOrDefault()?.Data;
+            var entityResult = await elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
+            return entityResult?.Entries?.FirstOrDefault()?.Data;
         }
 
         [HttpPost]
@@ -106,7 +107,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 var access = GetUserAccessFunc(null);
 
                 var userId = access.UserId;
-                var record = GetRecord(id, access);
+                var record = await GetRecord(id, access);
 
                 if (record == null)
                 {
@@ -147,7 +148,8 @@ namespace CMI.Web.Frontend.api.Controllers
             try
             {
                 var access = GetUserAccessFunc(null);
-                var record = GetRecord(id, access);
+                var record = await GetRecord(id, access);
+
 
                 if (record == null)
                 {
@@ -206,7 +208,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var access = GetUserAccessFunc(userId);
             var user = userDataAccess.GetUser(userId);
 
-            var entityResult = elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
+            var entityResult = await elasticService.QueryForId<ElasticArchiveRecord>(archiveRecordId, access);
             var record = entityResult.Entries.FirstOrDefault()?.Data;
 
             if (record == null)
@@ -270,13 +272,14 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetOneTimeToken(string archiveRecordId)
+        public async Task<IHttpActionResult> GetOneTimeToken(string archiveRecordId)
         {
             var access = GetUserAccessFunc(null);
             var userId = access.UserId;
             var user = userDataAccess.GetUser(userId);
 
-            if (!CheckUserHasDownloadTokensForVe(access, archiveRecordId))
+            var hasToken = await CheckUserHasDownloadTokensForVe(access, archiveRecordId);
+            if (!hasToken)
             {
                 return StatusCode(HttpStatusCode.Forbidden);
             }
@@ -301,7 +304,7 @@ namespace CMI.Web.Frontend.api.Controllers
             var ipAdress = logLogHelper.GetClientIp(Request);
             var expires = DateTime.Now.AddMinutes(logLogHelper.GetConfigValueTokenValidTime());
             var token = logLogHelper.CreateLogToken();
-            LogTokenGeneration(archiveRecordId, token);
+            await LogTokenGeneration(archiveRecordId, token);
 
             downloadTokenDataAccess.CreateToken(token, archiveRecordId, DownloadTokenType.ArchiveRecord, expires, ipAdress, userId);
             return Content(HttpStatusCode.OK, token);
@@ -309,12 +312,13 @@ namespace CMI.Web.Frontend.api.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IHttpActionResult LogViewerClick(string archiveRecordId)
+        public async Task<IHttpActionResult> LogViewerClick(string archiveRecordId)
         {
             var token = logLogHelper.CreateLogToken();
             
             var access = GetUserAccessFunc(null);
-            var ear = GetRecord(archiveRecordId, access);
+            var ear = await GetRecord(archiveRecordId, access);
+
             var zeitraum = ear.CreationPeriod.Text;
             var signatur = ear?.ReferenceCode ?? "unbekannt";
             var titel = ear?.Title ?? "unbekannt";
@@ -322,21 +326,21 @@ namespace CMI.Web.Frontend.api.Controllers
             var userId = access?.UserId ?? "Viewer";
             var userTokens = access?.CombinedTokens == null ? string.Empty : string.Join(", ", access.CombinedTokens);
             downloadLogDataAccess.LogViewerClick(token, userId, userTokens,
-                signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum);
+                signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum, ear.EntstehungDigitaleInhalte());
             return StatusCode(HttpStatusCode.OK);
         }
 
-        private void LogTokenGeneration(string archiveRecordId, string token)
+        private async Task LogTokenGeneration(string archiveRecordId, string token)
         {
             var access = GetUserAccessFunc(null);
-            var ear = GetRecord(archiveRecordId, access);
+            var ear = await GetRecord(archiveRecordId, access);
             var zeitraum = ear?.CreationPeriod?.Text;
             var signatur = ear?.ReferenceCode ?? "unbekannt";
             var titel = ear?.Title ?? "unbekannt";
             var schutzfrist = ear?.ProtectionEndDate?.Date;
             
             downloadLogDataAccess.LogTokenGeneration(token, access.UserId, string.Join(", ", access.CombinedTokens),
-                 signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum);
+                 signatur, titel, schutzfrist?.ToString("dd.MM.yyyy") ?? "unbekannt", zeitraum, ear.EntstehungDigitaleInhalte());
         }
         
         private IHttpActionResult CheckStatusAsync(string packageId, ElasticArchiveRecord record, UserAccess access)
@@ -354,9 +358,9 @@ namespace CMI.Web.Frontend.api.Controllers
             return StatusCode(HttpStatusCode.OK);
         }
 
-        private bool CheckUserHasDownloadTokensForVe(UserAccess access, string id)
+        private async Task<bool> CheckUserHasDownloadTokensForVe(UserAccess access, string id)
         {
-            var record = GetRecord(id, access);
+            var record = await GetRecord(id, access);
             return CheckUserHasDownloadTokensForVe(access, record);
         }
 

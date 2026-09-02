@@ -13,7 +13,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 		super();
 	}
 
-	public handleError(error) {
+	public handleError(error: any) {
 		this._handleErrorInternal(error);
 	}
 
@@ -103,7 +103,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 		}
 	}
 
-	private _logAndShowHttpError(e: any, errorTitle) {
+	private _logAndShowHttpError(e: any, errorTitle: any) {
 		let msg = (e.error || {}).exceptionMessage;
 		msg = msg || e.message;
 		const index = msg.indexOf('faulted:');
@@ -114,7 +114,7 @@ export class GlobalErrorHandler extends ErrorHandler {
 		this._toastr.error(msg, errorTitle, {disableTimeOut: true, closeButton: true, positionClass: 'toast-top-center'});
 	}
 
-	private _logError(error, category: string) {
+	private _logError(error: any, category: string) {
 		const date = `${moment().format('DD.MM.YYYY, HH:mm:ss')} | ${category} | `;
 		console.error(date, error);
 	}

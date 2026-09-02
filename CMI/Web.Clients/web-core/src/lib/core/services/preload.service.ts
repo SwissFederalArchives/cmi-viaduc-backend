@@ -49,7 +49,7 @@ export class PreloadService {
 		return Promise.all([
 			this._loadTranslations(lang),
 			this._loadSettings(),
-			loadModelData ? this._loadModelData() : () => void 0,
+			loadModelData ? this._loadModelData() : (): any => void 0,
 		]).then(() => {
 			this._isPreloading = false;
 			this._isPreloaded = true;
@@ -67,7 +67,7 @@ export class PreloadService {
 	}
 
 	private _loadTranslations(language: string): Promise<any> {
-		let promise: Promise<any> = null;
+		let promise: Promise<any> | null = null;
 
 		const inlined = document.getElementById(inlinedTranslationsIdPrefix + language);
 		if (inlined && inlined.innerHTML) {
@@ -98,7 +98,7 @@ export class PreloadService {
 	}
 
 	private _loadSettings(): Promise<any> {
-		let promise: Promise<any> = null;
+		let promise: Promise<any> | null = null;
 
 		const inlined = document.getElementById(inlinedSettingsId);
 		if (inlined && inlined.innerHTML) {
@@ -125,7 +125,7 @@ export class PreloadService {
 	}
 
 	private _loadModelData(): Promise<any> {
-		let promise: Promise<any> = null;
+		let promise: Promise<any> | null  = null;
 
 		const inlined = document.getElementById(inlinedModelDataId);
 		if (inlined && inlined.innerHTML) {

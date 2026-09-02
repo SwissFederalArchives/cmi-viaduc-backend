@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using CMI.Manager.DocumentConverter.Abbyy;
 using CMI.Manager.DocumentConverter.Extraction;
 using CMI.Manager.DocumentConverter.Extraction.Interfaces;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
 
@@ -27,8 +27,8 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.ExtractText(new Doc(new FileInfo(Path.GetTempFileName()), "id"), new DefaultTextExtractorSettings("Dummy"));
 
             // Test
-            result.HasError.Should().BeTrue();
-            result.ErrorMessage.Should().StartWith("Missing-Message");
+            result.HasError.ShouldBeTrue();
+            result.ErrorMessage.ShouldStartWith("Missing-Message");
         }
 
         [Test]
@@ -75,9 +75,9 @@ namespace CMI.Manager.DocumentConverter.Tests
             var result = sut.ExtractText(new Doc(new FileInfo(Path.GetTempFileName()), "id"), new DefaultTextExtractorSettings("Dummy"));
 
             // Test
-            result.HasError.Should().BeFalse();
-            result.ErrorMessage.Should().BeNullOrEmpty();
-            result.ToString().Should().Be("Test\r\n");
+            result.HasError.ShouldBeFalse();
+            result.ErrorMessage.ShouldBeNullOrEmpty();
+            result.ToString().ShouldBe("Test\r\n");
         }
 
     }

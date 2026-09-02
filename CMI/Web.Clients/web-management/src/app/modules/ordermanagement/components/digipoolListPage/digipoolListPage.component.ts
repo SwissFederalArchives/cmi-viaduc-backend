@@ -13,21 +13,22 @@ import {DigipoolUserSettings, ManagementUserSettings} from '../../../shared/mode
 import {FlexGridFilter} from '@mescius/wijmo.grid.filter';
 
 @Component({
-	selector: 'cmi-viaduc-digipoollist-page',
-	templateUrl: 'digipoolListPage.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./digipoolListPage.component.less']
+    selector: 'cmi-viaduc-digipoollist-page',
+    templateUrl: 'digipoolListPage.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./digipoolListPage.component.less'],
+    standalone: false
 })
 export class DigipoolListPageComponent implements OnInit {
-	public loading: boolean;
+	public loading!: boolean;
 	public crumbs: any[] = [];
-	public digipoolList: CollectionView;
+	public digipoolList!: CollectionView;
 	public columns: any[] = [];
 	public showPriorisierungOverview = false;
 	public showAufbereitungsfehlerZuruecksetzen = false;
 	public setStatusSpezial = false;
-	public selectedTerminDate: string;
-	public selectedTerminTime: string;
+	public selectedTerminDate!: string;
+	public selectedTerminTime!: string;
 	public valueFilters: any;
 
 	@ViewChild('flexGrid', { static: false })
@@ -38,7 +39,7 @@ export class DigipoolListPageComponent implements OnInit {
 
 	private placeholderDate = 'dd.MM.yyyy';
 	private placeholderTime = '12:00';
-	private selectedListItem: number;
+	private selectedListItem!: number;
 
 	constructor(private _orderService: OrderService,
 				private _txt: TranslationService,
@@ -112,7 +113,7 @@ export class DigipoolListPageComponent implements OnInit {
 	}
 
 	public resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('digipool.digipoolListColumns', {}).map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('digipool.digipoolListColumns', {}).map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 		this._loadDigipoolList();
 
@@ -120,6 +121,7 @@ export class DigipoolListPageComponent implements OnInit {
 			this.flexGrid.resetGridState();
 		}
 	}
+
 
 	public showPriorisierungOverviewClick(): void {
 		this.setStatusSpezial = false;
@@ -130,11 +132,11 @@ export class DigipoolListPageComponent implements OnInit {
 	}
 
 	/* eslint-disable */
-	public onCancelPriorisierungOverviewClick(event): void {
+	public onCancelPriorisierungOverviewClick(event: any): void {
 		this.showPriorisierungOverview = false;
 	}
 
-	public onSavePriorisierungOverviewClick(event): void {
+	public onSavePriorisierungOverviewClick(event: any): void {
 		const selectedDigipoolItemsIds = this.flexGrid.checkedItems.map(i => i.orderItemId);
 
 		let digitalisierungskategorie = null;
@@ -142,7 +144,7 @@ export class DigipoolListPageComponent implements OnInit {
 			digitalisierungskategorie = DigitalisierungsKategorie.Spezial;
 		}
 
-		let datum = null;
+		let datum: string = '';
 		if (this.selectedTerminDate !== undefined && this.selectedTerminDate !== null && this.selectedTerminDate !== this.placeholderDate) {
 			datum = this.selectedTerminDate;
 		}
@@ -166,11 +168,11 @@ export class DigipoolListPageComponent implements OnInit {
 		this.showAufbereitungsfehlerZuruecksetzen = true;
 	}
 
-	public onCancelAufbereitungsfehlerZuruecksetzenClick(event): void {
+	public onCancelAufbereitungsfehlerZuruecksetzenClick(event: any): void {
 		this.showAufbereitungsfehlerZuruecksetzen = false;
 	}
 
-	public onYesAufbereitungsfehlerZuruecksetzenClick(event): void {
+	public onYesAufbereitungsfehlerZuruecksetzenClick(event:any ): void {
 		const selectedDigipoolItemsIds = this.flexGrid.checkedItems.map(i => i.orderItemId);
 
 		this._orderService.resetAufbereitungsfehler(selectedDigipoolItemsIds).subscribe(
@@ -198,7 +200,7 @@ export class DigipoolListPageComponent implements OnInit {
 
 	private clearDigipoolListSavedState() {
 		for (let i = window.sessionStorage.length - 1; i >= 0; i--) {
-			if (window.sessionStorage.key(i).startsWith('digipool')) {
+			if (window.sessionStorage.key(i)?.startsWith('digipool')) {
 				window.sessionStorage.removeItem(window.sessionStorage.key(i));
 			}
 		}
@@ -276,7 +278,7 @@ export class DigipoolListPageComponent implements OnInit {
 	}
 
 	// Falls das Item nicht gefunden wurde, wird false zurückgegeben.
-	private selectPageOfItem(item):boolean {
+	private selectPageOfItem(item: any):boolean {
 		this.digipoolList.beginUpdate();
 		this.digipoolList.moveToFirstPage();
 
@@ -306,7 +308,7 @@ export class DigipoolListPageComponent implements OnInit {
 		this._loadDigipoolList();
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.digipoolSettings = <DigipoolUserSettings> {
 			columns: cols

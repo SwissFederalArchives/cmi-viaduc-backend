@@ -4,7 +4,8 @@ import {ClientContext} from '@cmi/viaduc-web-core';
 import {UrlService} from '../../shared/services';
 
 @Directive({
-	selector: '[localizedLink]'
+    selector: '[localizedLink]',
+    standalone: false
 })
 export class LocalizedLinkDirective {
 
@@ -12,7 +13,7 @@ export class LocalizedLinkDirective {
 	}
 
 	@Input('localizedLink')
-	public url: string;
+	public url!: string;
 
 	@HostListener('click')
 	public onClick() {

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using CMI.Web.Common.Helpers;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -31,7 +31,7 @@ namespace CMI.Web.Common.Tests
             jObj.RemoveDescendantsByName(attributesToCleanup);
 
             var expectedJson = GetJsonFromResource("CMI.Web.Common.Tests.Resources.simpleResult.json");
-            jObj.ToString().Should().Be(expectedJson);
+            jObj.ToString().ShouldBe(expectedJson);
         }
 
         private static string GetJsonFromResource(string resourceName)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,7 +6,7 @@ using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Order.Consumers;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using Moq;
 using NUnit.Framework;
@@ -58,11 +58,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { AccessRoles.RoleBAR }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -98,11 +98,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { AccessRoles.RoleOe3 }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -138,11 +138,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { AccessRoles.RoleOe3 }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -178,11 +178,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { AccessRoles.RoleBAR, "EB_12345" }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -218,11 +218,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { AccessRoles.RoleBAR, "EB_12345" }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
         [Test]
@@ -258,11 +258,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = new[] { "EB_12345", AccessRoles.RoleBAR, AccessRoles.RoleAS }
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
 
@@ -308,11 +308,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = tokensFromDb.ExistingPrimaryDataFulltextAccessTokens
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
         [Test]
@@ -355,11 +355,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = roles
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -402,11 +402,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = roles
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
 
@@ -451,12 +451,12 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = rollsWithoutIndiv
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
             // Oe2 User benötigen keine indiv Token
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
         [Test]
@@ -507,12 +507,12 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = resultRolls
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
             // Besitzt die VE ein Ö2 Token , so benötigt es keine Individuellen Token
-            testResultTokens.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(AccessRoles.RoleOe1, AccessRoles.RoleOe2, AccessRoles.RoleOe3);
-            testResultTokens.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(AccessRoles.RoleOe1, AccessRoles.RoleOe2, AccessRoles.RoleOe3);
+            testResultTokens.CombinedPrimaryDataDownloadAccessTokens.ShouldBe([AccessRoles.RoleOe1, AccessRoles.RoleOe2, AccessRoles.RoleOe3], ignoreOrder: true);
+            testResultTokens.CombinedPrimaryDataFulltextAccessTokens.ShouldBe([AccessRoles.RoleOe1, AccessRoles.RoleOe2, AccessRoles.RoleOe3], ignoreOrder: true);
         }
 
         [Test]
@@ -561,11 +561,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = resultRolls
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            testResultTokens.CombinedFieldAccessTokens.Should().BeEquivalentTo(expected.CombinedFieldAccessTokens);
-            testResultTokens.CombinedMetadataAccessTokens.Should().BeEquivalentTo(expected.CombinedMetadataAccessTokens);
-            testResultTokens.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            testResultTokens.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            testResultTokens.CombinedFieldAccessTokens.ShouldBe(expected.CombinedFieldAccessTokens, ignoreOrder: true);
+            testResultTokens.CombinedMetadataAccessTokens.ShouldBe(expected.CombinedMetadataAccessTokens, ignoreOrder: true);
+            testResultTokens.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(expected.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            testResultTokens.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(expected.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
 
@@ -616,11 +616,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = roles.Union(indivRoles).Union(indivRolesScope).ToArray()
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
         [Test]
@@ -670,11 +670,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = roles.Union(indivRoles).ToArray() // Not .Union(indivRolesScope)
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
         }
 
         /// <summary>

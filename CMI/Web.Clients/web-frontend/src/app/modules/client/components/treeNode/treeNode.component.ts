@@ -13,10 +13,11 @@ import {Router} from '@angular/router';
 import {UrlService} from '../../services/url.service';
 
 @Component({
-	selector: 'cmi-viaduc-tree-node',
-	templateUrl: 'treeNode.component.html',
-	styleUrls: ['./treeNode.component.less'],
-	encapsulation: ViewEncapsulation.None
+    selector: 'cmi-viaduc-tree-node',
+    templateUrl: 'treeNode.component.html',
+    styleUrls: ['./treeNode.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class TreeNodeComponent implements OnInit, AfterViewInit {
 	@Input()

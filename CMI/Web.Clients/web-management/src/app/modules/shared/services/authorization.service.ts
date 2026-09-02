@@ -39,25 +39,25 @@ export class AuthorizationService {
 		}
 
 		if (_util.isArray(identity.roles)) {
-			_util.forEach(identity.roles, t => {
+			_util.forEach(identity.roles, (t: any) => {
 				session.roles[t] = true;
 			});
 		}
 
 		if (_util.isArray(identity.issuedAccessTokens)) {
-			_util.forEach(identity.issuedAccessTokens, t => {
+			_util.forEach(identity.issuedAccessTokens, (t: any) => {
 				session.accessTokens[t] = true;
 			});
 		}
 
 		if (_util.isArray(identity.applicationRoles)) {
-			_util.forEach(identity.applicationRoles, r => {
+			_util.forEach(identity.applicationRoles, (r: any) => {
 				session.applicationRoles[r.identifier] = true;
 			});
 		}
 
 		if (_util.isArray(identity.applicationFeatures)) {
-			_util.forEach(identity.applicationFeatures, f => {
+			_util.forEach(identity.applicationFeatures, (f: any) => {
 				session.applicationFeatures[f.identifier] = true;
 			});
 		}

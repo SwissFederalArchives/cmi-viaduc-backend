@@ -1,6 +1,5 @@
 ﻿using CMI.Access.Harvest.ActaPro.Security;
 using CMI.Contract.Common;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -216,6 +215,16 @@ public class ArchiveRecordMapper
             data.Add(MappingFunctions.CreateTextElement(MappingFunctions.GetFieldValue(document, "IdentDigiMagazin"), "AIP_ID"));
         }
 
+        if (document.Block.Fields.Any(f => f.Type.Equals("Vz_Entstehung_digitaleInhalte")))
+        {
+            data.Add(MappingFunctions.CreateTextElement(MappingFunctions.GetFieldValue(document, "Vz_Entstehung_digitaleInhalte"), "SIP_ERSCHEINUNGSFORM"));
+        }
+
+        if (document.Block.Fields.Any(f => f.Type.Equals("Errechnete_Groesse_GB")))
+        {
+            data.Add(MappingFunctions.CreateFloatElement(MappingFunctions.GetFieldValue(document, "Errechnete_Groesse_GB"), "ErrechneteGroesseMB", 1024));
+        }
+
         if (document.Block.Fields.Any(f => f.Type.Equals("Laufzeit_Anm")))
         {
             data.Add(MappingFunctions.CreateTextElement(MappingFunctions.GetFieldValue(document, "Laufzeit_Anm"), "ENTSTEHUNGSZEITRAUM__ANM"));
@@ -321,6 +330,9 @@ public class ArchiveRecordMapper
             case "arch": //Archiv
                 fieldValue = ActaProClientValues.StufeArchiv;
                 break;
+            case "datei":
+                fieldValue = ActaProClientValues.StufeDatei;
+                break;
             default:
                 throw new ArgumentException($"MapStufe do not work. Level: {value}");
         }
@@ -355,6 +367,9 @@ public class ArchiveRecordMapper
                 break;
             case "arch": //Archiv
                 fieldValue = fields.FirstOrDefault(f => f.Type.Equals("Ar_Name", StringComparison.InvariantCultureIgnoreCase))?.Value.ToString();
+                break;
+            case "datei": //Archiv
+                fieldValue = fields.FirstOrDefault(f => f.Type.Equals("Datei_Name", StringComparison.InvariantCultureIgnoreCase))?.Value.ToString();
                 break;
         }
 
@@ -391,6 +406,9 @@ public class ArchiveRecordMapper
             //Archiv
             case "arch":
                 fieldValue = fieldValues.ContainsKey("Ar_Name") ? fieldValues["Ar_Name"].ToString() : "";
+                break;
+            case "datei":
+                fieldValue = fieldValues.ContainsKey("Datei_Name") ? fieldValues["Datei_Name"].ToString() : "";
                 break;
             default:
                 throw new ArgumentException($"Level is not supported {levelType}");
@@ -431,6 +449,9 @@ public class ArchiveRecordMapper
             case "arch":
                 fieldValue = fields.FirstOrDefault(f => f.Type.Equals("Ar_Darin", StringComparison.InvariantCultureIgnoreCase))?.Value.ToString();
                 break;
+            case "datei":
+                fieldValue = null;
+                break;
             default:
                 throw new ArgumentException($"Level is not supported {levelValue}");
         }
@@ -469,6 +490,9 @@ public class ArchiveRecordMapper
             //Archiv
             case "arch":
                 fieldValue = fields.FirstOrDefault(f => f.Type.Equals("Ar_ZusatzInfo", StringComparison.InvariantCultureIgnoreCase))?.Value.ToString();
+                break;
+            case "datei":
+                fieldValue = null;
                 break;
             default:
                 throw new ArgumentException($"Level is not supported {levelValue}");
@@ -509,6 +533,9 @@ public class ArchiveRecordMapper
             case "arch":
                 fieldValue = fields.FirstOrDefault(f => f.Type.Equals("Ar_Kuerz", StringComparison.InvariantCultureIgnoreCase))?.Value.ToString();
                 break;
+            case "datei":
+                fieldValue = null;
+                break;
             default:
                 throw new ArgumentException($"Level is not supported {levelValue}");
         }
@@ -546,6 +573,9 @@ public class ArchiveRecordMapper
             case "arch":
                 fieldValue = fieldValues.ContainsKey("Ar_Kuerz") ? fieldValues["Ar_Kuerz"].ToString() : string.Empty;
                 break;
+            case "datei":
+                fieldValue = null;
+                break;
             default:
                 throw new ArgumentException($"Level is not supported {levelType}");
         }
@@ -578,13 +608,17 @@ public class ArchiveRecordMapper
                 return 4;
             case "klas":
                 return 5;
+            // Dossier
             case "vz":
                 return 6;
+            // Subdossier
             case "vor":
                 return 7;
-            // Dossier, Subdossier, Dokument
+            // Dokument
             case "dokum":
                 return 8;
+            case "datei":
+                return 9;   // Should never be synced.
             default:
                 throw new ArgumentException($"Level is not supported {levelType}");
         }
@@ -667,6 +701,7 @@ public class ArchiveRecordMapper
             retVal.Schutzfristkategorie = MappingFunctions.GetFieldValue(document, "Vz_Schutzfristkategorie");
             retVal.Zugaenglichkeit = MappingFunctions.GetFieldValue(document, "Zugaenglichkeit");
             retVal.ZugaenglichkeitGemaessBga = MappingFunctions.GetFieldValue(document, "Vz_ZugaenglichkeitBGA");
+            retVal.SynchronisationOnlineZugang = MappingFunctions.GetFieldValue(document.Block.Fields, "Vz_Synchronisierung_OnlineZugang");
 
             var zustaendigeStellenDictionary = ExtractZustaendigeStellen(document);
             if (zustaendigeStellenDictionary.Any())
@@ -689,7 +724,8 @@ public class ArchiveRecordMapper
                 return Convert.ToBoolean(MappingFunctions.GetFieldValue(
                     document.Block.Fields, "Ablieferung_Gp",
                     "Ablieferung_InQuerySichtbar")?.Equals("1", StringComparison.InvariantCultureIgnoreCase));
-
+            case "datei":
+                return false;  // Dateien never should get synced
 
             case "klas":  // Serie 
             case "best":  // Bestand, Teilbestand
@@ -745,6 +781,7 @@ public class ArchiveRecordMapper
             // Schutzfristkategorie
             // Entstehungszeitraum
             // Zugänglichkeit gemäss BGA
+            // Bearbeitungsstatus
             var securityDetail = new SecurityCalculationInputData();
 
             if (ancestor.TryGetValue("id", out var docKey))
@@ -779,6 +816,11 @@ public class ArchiveRecordMapper
             if (ancestor.TryGetValue("doctype", out var levelType))
             {
                 securityDetail.Stufe = MapStufeText(levelType.ToString());
+            }
+
+            if (ancestor.TryGetValue("Status", out var status))
+            {
+                securityDetail.BearbeitungsStatus = status.ToString();
             }
 
             retVal.Add(securityDetail);

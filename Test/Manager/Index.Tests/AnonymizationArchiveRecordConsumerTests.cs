@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Index.Consumer;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -133,9 +133,9 @@ namespace CMI.Manager.Index.Tests
                 var message = harness.Published.Select<IArchiveRecordUpdated>().FirstOrDefault();
 
                 Assert.That(message != null);
-                message.Context.Message.ActionSuccessful.Should().Be(false);
-                message.Context.Message.MutationId.Should().Be(mutationId);
-                message.Context.Message.ErrorMessage.Should().NotBeNull();
+                message.Context.Message.ActionSuccessful.ShouldBe(false);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
+                message.Context.Message.ErrorMessage.ShouldNotBeNull();
             }
             finally
             {

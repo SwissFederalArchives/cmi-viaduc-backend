@@ -3,9 +3,10 @@ import {ClientContext, ApplicationFeatureEnum} from '@cmi/viaduc-web-core';
 import {AuthorizationService} from '../../services';
 
 @Component({
-	selector: 'cmi-viaduc-left-navigation',
-	templateUrl: 'leftNavigation.component.html',
-	styleUrls: ['./leftNavigation.component.less']
+    selector: 'cmi-viaduc-left-navigation',
+    templateUrl: 'leftNavigation.component.html',
+    styleUrls: ['./leftNavigation.component.less'],
+    standalone: false
 })
 export class LeftNavigationComponent{
 

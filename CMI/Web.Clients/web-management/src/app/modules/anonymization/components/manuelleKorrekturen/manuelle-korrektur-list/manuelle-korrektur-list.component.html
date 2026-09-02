@@ -1,210 +1,229 @@
 <div class="page page-order-overview col-sm-12">
-		<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
 
-		<div content>
-			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
-			<div class="page-header">
-				<h2 class="page-content-title">
-					<span>Manuelle Korrekturen</span>
-				</h2>
-			</div>
-			<div class="tablecontainer">
-				<div class="action-container">
-					<div class="row action-buttons">
-						<div class="col-xs-12">
-							<span class="orders-menu-actions">
-							<wj-menu #preFilterMenu
-								 [header]="'Manuelle Korrekturen'"
-								 class="prefilterMenu"
-								 [isButton]="true"
-								 [value]="preFilter"
-								 [(selectedValue)]="preFilter"
-								 (itemClicked)="preFilterItemClicked(preFilterMenu)">
-								<wj-menu-item [value]="1" >
-									<span class="glyphicon glyphicon-filter"></span>
-									{{'Pendente' | translate:'ordersListPage.nurPendente'}}
-								</wj-menu-item>
-								<wj-menu-item [value]="2">
-									<span class="glyphicon glyphicon-eye-open"></span>
-									{{'Alle' | translate:'ordersListPage.alle'}}
-								</wj-menu-item>
-							</wj-menu>
-							<wj-menu #listMenu [header]="'Listenansicht'"
-									 (itemClicked)="listMenuItemClicked(listMenu)">
-								<wj-menu-item>
-									<span class="glyphicon glyphicon-floppy-save"></span>
-									<b>{{'Speichern' |translate:'ordersListPage.save'}}</b>
-									<br>
-									<small>
-										<i>{{'Speichert die aktuelle Spaltenansicht' |translate:'ordersListPage.saveText'}}</i>
-									</small>
-								</wj-menu-item>
-								<wj-menu-item>
-									<span class="icon icon--excel"></span>
-									<b>{{'Datenexport' | translate:'ordersListPage.export'}}</b>
-									<br>
-									<small>
-										<i>{{'Speichert die aktuelle Selektion als Excel Datei ab' | translate:'ordersListPage.exportText'}}</i>
-									</small>
-								</wj-menu-item>
-								<wj-menu-item>
-									<span class="icon icon--tools"></span>
-									<b>{{'Spaltenauswahl' |translate:'ordersListPage.columnsPicker'}}</b>
-									<br>
-									<small>
-										<i>{{'Ermöglicht das Ein/Ausblenden von Spalten' |translate:'ordersListPage.columsPickerText'}}</i>
-									</small>
-								</wj-menu-item>
-								<wj-menu-item>
-									<span class="icon icon--list-alt"></span>
-									<b>{{'Ansicht zurücksetzen' |translate:'ordersListPage.reset'}}</b>
-									<br>
-									<small>
-										<i>{{'Setzt die Liste auf die Standardansicht zurück' |translate:'ordersListPage.resetText'}}</i>
-									</small>
-								</wj-menu-item>
-							</wj-menu>
-							<button (click)="resetSortsAndFilters()" class="btn btn-link">
-								<span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{'Sortierung und Filter zurücksetzen' |translate:'digipoolList.resetSort'}}</span>
-							</button>
-							<button (click)="refreshTable()" class="btn btn-link">
-								<span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'orderOverviewPage.refresh' }}</span>
-							</button>
-						</span>
-						</div>
-					</div>
-					<hr />
-					<div class="row action-buttons">
-						<div class="col-xs-12">
-								<span class="orders-menu-actions">
-									<button type="button" class="btn btn-link" *ngIf="allowManuelleKorrekturenBearbeiten" (click)="toggleAddModal()">
-										<span><span class="glyphicon glyphicon-plus-sign"></span> {{'Hinzufügen' | translate:'manuelleKorrekturen.add'}}</span>
-									</button>
-									<button type="button" *ngIf="allowManuelleKorrekturenBearbeiten" [disabled]="deleteButtonDisabled()"
-											class="btn btn-link" (click)="toggleDeleteModal()">
-										<span><span class="icon icon--trash"></span> {{'Markierte entfernen' | translate:'manuelleKorrekturen.buttondelete'}}</span>
-									</button>
-								</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row top-pagination">
-				<div class="col-xs-12">
-					<cmi-viaduc-odata-pagination [(collectionView)]="manuelleKorrekturItems"></cmi-viaduc-odata-pagination>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<cmi-viaduc-grid #flexGrid
-									 class="wijmo-manuelle-korrektur-list"
-									 [itemsSource]="manuelleKorrekturItems"
-									 [dataMaps]="valueFilters"
-									 [name]="'manuelleKorrekturen'"
-									 (onFilterApplied)="onFilterApplied($event)"
-									 [displaySelectionColumn]="true"
-									 [defaultSortColumnKey]="'manuelleKorrekturId'"
-									 [enableMultiSort]="true">
+    <div content>
+      @if (loading) {
+        <cmi-loader class="cmi-visible"></cmi-loader>
+      }
+      <div class="page-header">
+        <h2 class="page-content-title">
+          <span>Manuelle Korrekturen</span>
+        </h2>
+      </div>
+      <div class="tablecontainer">
+        <div class="action-container">
+          <div class="row action-buttons">
+            <div class="col-xs-12">
+              <span class="orders-menu-actions">
+                <wj-menu #preFilterMenu
+                  [header]="'Manuelle Korrekturen'"
+                  class="prefilterMenu"
+                  [isButton]="true"
+                  [value]="preFilter"
+                  [(selectedValue)]="preFilter"
+                  (itemClicked)="preFilterItemClicked(preFilterMenu)">
+                  <wj-menu-item [value]="1" >
+                    <span class="glyphicon glyphicon-filter"></span>
+                    {{'Pendente' | translate:'ordersListPage.nurPendente'}}
+                  </wj-menu-item>
+                  <wj-menu-item [value]="2">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    {{'Alle' | translate:'ordersListPage.alle'}}
+                  </wj-menu-item>
+                </wj-menu>
+                <wj-menu #listMenu [header]="'Listenansicht'"
+                  (itemClicked)="listMenuItemClicked(listMenu)">
+                  <wj-menu-item>
+                    <span class="glyphicon glyphicon-floppy-save"></span>
+                    <b>{{'Speichern' |translate:'ordersListPage.save'}}</b>
+                    <br>
+                      <small>
+                        <i>{{'Speichert die aktuelle Spaltenansicht' |translate:'ordersListPage.saveText'}}</i>
+                      </small>
+                    </wj-menu-item>
+                    <wj-menu-item>
+                      <span class="icon icon--excel"></span>
+                      <b>{{'Datenexport' | translate:'ordersListPage.export'}}</b>
+                      <br>
+                        <small>
+                          <i>{{'Speichert die aktuelle Selektion als Excel Datei ab' | translate:'ordersListPage.exportText'}}</i>
+                        </small>
+                      </wj-menu-item>
+                      <wj-menu-item>
+                        <span class="icon icon--tools"></span>
+                        <b>{{'Spaltenauswahl' |translate:'ordersListPage.columnsPicker'}}</b>
+                        <br>
+                          <small>
+                            <i>{{'Ermöglicht das Ein/Ausblenden von Spalten' |translate:'ordersListPage.columsPickerText'}}</i>
+                          </small>
+                        </wj-menu-item>
+                        <wj-menu-item>
+                          <span class="icon icon--list-alt"></span>
+                          <b>{{'Ansicht zurücksetzen' |translate:'ordersListPage.reset'}}</b>
+                          <br>
+                            <small>
+                              <i>{{'Setzt die Liste auf die Standardansicht zurück' |translate:'ordersListPage.resetText'}}</i>
+                            </small>
+                          </wj-menu-item>
+                        </wj-menu>
+                        <button (click)="resetSortsAndFilters()" class="btn btn-link">
+                          <span><span class="glyphicon glyphicon-sort-by-order-alt"></span>&nbsp;{{'Sortierung und Filter zurücksetzen' |translate:'digipoolList.resetSort'}}</span>
+                        </button>
+                        <button (click)="refreshTable()" class="btn btn-link">
+                          <span><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{ 'Aktualisieren' | translate:'orderOverviewPage.refresh' }}</span>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row action-buttons">
+                    <div class="col-xs-12">
+                      <span class="orders-menu-actions">
+                        @if (allowManuelleKorrekturenBearbeiten) {
+                          <button type="button" class="btn btn-link" (click)="toggleAddModal()">
+                            <span><span class="glyphicon glyphicon-plus-sign"></span> {{'Hinzufügen' | translate:'manuelleKorrekturen.add'}}</span>
+                          </button>
+                        }
+                        @if (allowManuelleKorrekturenBearbeiten) {
+                          <button type="button" [disabled]="deleteButtonDisabled()"
+                            class="btn btn-link" (click)="toggleDeleteModal()">
+                            <span><span class="icon icon--trash"></span> {{'Markierte entfernen' | translate:'manuelleKorrekturen.buttondelete'}}</span>
+                          </button>
+                        }
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row top-pagination">
+                <div class="col-xs-12">
+                  <cmi-viaduc-odata-pagination [(collectionView)]="manuelleKorrekturItems"></cmi-viaduc-odata-pagination>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <cmi-viaduc-grid #flexGrid
+                    class="wijmo-manuelle-korrektur-list"
+                    [itemsSource]="manuelleKorrekturItems"
+                    [dataMaps]="valueFilters"
+                    [name]="'manuelleKorrekturen'"
+                    (onFilterApplied)="onFilterApplied($event)"
+                    [displaySelectionColumn]="true"
+                    [defaultSortColumnKey]="'manuelleKorrekturId'"
+                    [enableMultiSort]="true">
 
-						<ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
-							<a (click)="openDetail(cell.item)">
-								<i class="glyphicon glyphicon-eye-open"></i>
-							</a>
-						</ng-template>
+                    <ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+                      <a (click)="openDetail(cell.item)">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                      </a>
+                    </ng-template>
 
-						<wj-flex-grid-column *ngFor="let col of visibleColumns" [visible]="col.visible"
-											 [binding]="col.key"
-											 [width]="col.width"
-											 [minWidth]="col.minWidth ? col.minWidth : 25"
-											 [format]="col.format"
-											 [dataType]="col.dataType ? col.dataType : 1"
-											 [header]="col.defaultLabel | translate:'shoppingCartItemList.columns.' + col.key">
-							<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'signatur'">
-								<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" *ngIf="item.veId && item.veId !== '';else emptyVeId" >
-									{{item.signatur}}</a>
-								<ng-template #emptyVeId>
-									{{item.signatur}}
-								</ng-template>
-							</ng-template>
-							<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'manuelleKorrekturId'">
-								{{item.manuelleKorrekturId}}
-							</ng-template>
-						</wj-flex-grid-column>
-					</cmi-viaduc-grid>
-				</div>
-			</div>
+                    @for (col of visibleColumns; track col) {
+                      <wj-flex-grid-column [visible]="col.visible"
+                        [binding]="col.key"
+                        [width]="col.width"
+                        [minWidth]="col.minWidth ? col.minWidth : 25"
+                        [format]="col.format"
+                        [dataType]="col.dataType ? col.dataType : 1"
+                        [header]="col.defaultLabel | translate:'shoppingCartItemList.columns.' + col.key">
+                        @if (col.key === 'signatur'; as item) {
+                          <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+                            @if (item.veId && item.veId !== '') {
+                              <a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" >
+                              {{item.signatur}}</a>
+                            } @else {
+                              {{item.signatur}}
+                            }
+                          </ng-template>
+                        }
+                        @if (col.key === 'manuelleKorrekturId'; as item) {
+                          <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+                            {{item.manuelleKorrekturId}}
+                          </ng-template>
+                        }
+                      </wj-flex-grid-column>
+                    }
+                  </cmi-viaduc-grid>
+                </div>
+              </div>
 
-			<div class="row bottom-pagination">
-				<div class="col-xs-12">
-					<cmi-viaduc-odata-pagination [(collectionView)]="manuelleKorrekturItems"></cmi-viaduc-odata-pagination>
-				</div>
-			</div>
-		</div>
-	</cmi-viaduc-layout-left-content>
-</div>
+              <div class="row bottom-pagination">
+                <div class="col-xs-12">
+                  <cmi-viaduc-odata-pagination [(collectionView)]="manuelleKorrekturItems"></cmi-viaduc-odata-pagination>
+                </div>
+              </div>
+            </div>
+          </cmi-viaduc-layout-left-content>
+        </div>
 
-<cmi-viaduc-modal [(opened)]="showAddModal"
-				  [formGroup]="myForm"	  [modalTitle]="'Verzeichnungseinheiten hinzufügen' | translate:'manuelleKorrekturen.addVE'">
-	<cmi-viaduc-modal-body>
-		<div class="row">
-			<div class="col-xs-12">
-				<h3>Signatur(en) oder VE-ID(s):</h3>
-				<div>
-					<textarea formControlName="veIds"  #addModal  style="width: 100%"></textarea>
-					<p>{{'Erfassen Sie pro Zeile eine Signatur oder VE-ID, um mehrere VE auf einmal hinzuzufügen.' |
-						translate:'manuelleKorrekturen.addVEText'}}</p>
-				</div>
-			</div>
-		</div>
-	</cmi-viaduc-modal-body>
-	<cmi-viaduc-modal-footer *ngIf="myForm">
-		<div class="row">
-			<div class="col-xs-12">
+        <cmi-viaduc-modal [(opened)]="showAddModal"
+          [formGroup]="myForm"	  [modalTitle]="'Verzeichnungseinheiten hinzufügen' | translate:'manuelleKorrekturen.addVE'">
+          <cmi-viaduc-modal-body>
+            <div class="row">
+              <div class="col-xs-12">
+                <h3>Signatur(en) oder VE-ID(s):</h3>
+                <div>
+                  <textarea formControlName="veIds"  #addModal  style="width: 100%"></textarea>
+                  <p>{{'Erfassen Sie pro Zeile eine Signatur oder VE-ID, um mehrere VE auf einmal hinzuzufügen.' |
+                  translate:'manuelleKorrekturen.addVEText'}}</p>
+                </div>
+              </div>
+            </div>
+          </cmi-viaduc-modal-body>
+          @if (myForm) {
+            <cmi-viaduc-modal-footer>
+              <div class="row">
+                <div class="col-xs-12">
 				<button type="button" class="btn btn-primary"  [disabled]="!myForm.dirty || myForm.controls['veIds'].value
 				.toString().trim().length === 0" (click)="addNewManuelleKorrekturenConfirm()">
-					{{'Hinzufügen' | translate:'manuelleKorrekturen.add'}}
-				</button>
-				<button type="button" class="btn btn-secondary" (click)="toggleAddModal()">
-					{{'Abbrechen' | translate:'behoerdenZugriff.cancel'}}
-				</button>
-			</div>
-		</div>
-	</cmi-viaduc-modal-footer>
-</cmi-viaduc-modal>
+                    {{'Hinzufügen' | translate:'manuelleKorrekturen.add'}}
+                  </button>
+                  <button type="button" class="btn btn-secondary" (click)="toggleAddModal()">
+                    {{'Abbrechen' | translate:'behoerdenZugriff.cancel'}}
+                  </button>
+                </div>
+              </div>
+            </cmi-viaduc-modal-footer>
+          }
+        </cmi-viaduc-modal>
 
-<cmi-viaduc-modal [(opened)]="showDeleteModal"
-				  [modalTitle]="'Löschen' | translate:'behoerdenZugriff.loeschentitle'">
-	<cmi-viaduc-modal-body>
-		<p *ngIf="getQuantityOfCheckedItmesToDelete() == 1">{{'Wollen Sie den gewählten Eintrag "{0}" definitiv löschen? Manuelle Korrekturen gehen verloren' |
-			translate:'behoerdenZugriff.confirmDeleteOne': getElementToDelete()}}</p>
-		<p *ngIf="getQuantityOfCheckedItmesToDelete() > 1">{{'Wollen Sie die {0} gewählten Einträge definitiv löschen? Manuelle Korrekturen gehen verloren' |
-			translate:'behoerdenZugriff.confirmDelete': getQuantityOfCheckedItmesToDelete()}}</p>
-	</cmi-viaduc-modal-body>
-	<cmi-viaduc-modal-footer>
-		<div class="row">
-			<div class="col-xs-12">
-				<button type="button" class="btn btn-secondary" (click)="toggleDeleteModal()">
-					{{'Abbrechen' | translate:'behoerdenZugriff.cancel'}}
-				</button>
-				<button type="button" class="btn btn-primary" (click)="deleteModal()">
-					{{'Löschen' | translate:'behoerdenZugriff.loeschen'}}
-				</button>
-			</div>
-		</div>
-	</cmi-viaduc-modal-footer>
-</cmi-viaduc-modal>
+        <cmi-viaduc-modal [(opened)]="showDeleteModal"
+          [modalTitle]="'Löschen' | translate:'behoerdenZugriff.loeschentitle'">
+          <cmi-viaduc-modal-body>
+            @if (getQuantityOfCheckedItmesToDelete() == 1) {
+              <p>{{'Wollen Sie den gewählten Eintrag "{0}" definitiv löschen? Manuelle Korrekturen gehen verloren' |
+              translate:'behoerdenZugriff.confirmDeleteOne': getElementToDelete()}}</p>
+            }
+            @if (getQuantityOfCheckedItmesToDelete() > 1) {
+              <p>{{'Wollen Sie die {0} gewählten Einträge definitiv löschen? Manuelle Korrekturen gehen verloren' |
+              translate:'behoerdenZugriff.confirmDelete': getQuantityOfCheckedItmesToDelete()}}</p>
+            }
+          </cmi-viaduc-modal-body>
+          <cmi-viaduc-modal-footer>
+            <div class="row">
+              <div class="col-xs-12">
+                <button type="button" class="btn btn-secondary" (click)="toggleDeleteModal()">
+                  {{'Abbrechen' | translate:'behoerdenZugriff.cancel'}}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="deleteModal()">
+                  {{'Löschen' | translate:'behoerdenZugriff.loeschen'}}
+                </button>
+              </div>
+            </div>
+          </cmi-viaduc-modal-footer>
+        </cmi-viaduc-modal>
 
-<cmi-viaduc-column-picker
-	[controlId]="'userColumnPicker'"
-	[(showColumnPickerModal)]="showColumnPicker"
-	[visibleColumns]='visibleColumnsSelector'
-	[hiddenColumns]='hiddenColumns'
-	(showColumnClicked)="showColumn($event)"
-	(hideColumnClicked)="hideColumn($event)">
-</cmi-viaduc-column-picker>
+        <cmi-viaduc-column-picker
+          [controlId]="'userColumnPicker'"
+          [(showColumnPickerModal)]="showColumnPicker"
+          [visibleColumns]='visibleColumnsSelector'
+          [hiddenColumns]='hiddenColumns'
+          (showColumnClicked)="showColumn($event)"
+          (hideColumnClicked)="hideColumn($event)">
+        </cmi-viaduc-column-picker>

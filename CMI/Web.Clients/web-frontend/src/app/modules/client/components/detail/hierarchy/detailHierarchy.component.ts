@@ -4,9 +4,10 @@ import {UrlService} from '../../../services/url.service';
 import {Entity, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-detail-hierarchy',
-	templateUrl: 'detailHierarchy.component.html',
-	styleUrls: ['./detailHierarchy.component.less']
+    selector: 'cmi-viaduc-detail-hierarchy',
+    templateUrl: 'detailHierarchy.component.html',
+    styleUrls: ['./detailHierarchy.component.less'],
+    standalone: false
 })
 export class DetailHierarchyComponent implements AfterViewInit {
 	@Input()

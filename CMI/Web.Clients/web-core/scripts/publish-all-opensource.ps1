@@ -4,7 +4,7 @@
     Script um einen Import in GitHub Repositories der zuvor exportierten Viaduc-Repositories zu machen.
 .DESCRIPTION
     .
-.PARAMETER GitPesonalAccessToken
+.PARAMETER GitPersonalAccessToken
     GitHub Personal Access Token mit Repository-Rechten auf das gewünschte Ziel-Repository (BAR Repository)
 .PARAMETER TargetDirectory
     Zielverzeichnis, z.B. C:\Temp\dest
@@ -13,7 +13,7 @@
 #>
 param (
     [Parameter(Mandatory = $true)]
-    [string]$GitPesonalAccessToken, #GitHub-Access-Token mit Berechtigung auf CMI GitHub-Account
+    [string]$GitPersonalAccessToken, #GitHub-Access-Token mit Berechtigung auf CMI GitHub-Account
     [Parameter(Mandatory = $true)]
     [string]$TargetDirectory, #z.B. C:\Temp\dest
     [Parameter(Mandatory = $true)]
@@ -77,7 +77,9 @@ Function Import-OpenSource($ProjectName, $FilesOrDirsToExclude, $ResultName) {
     if (Test-Path $ClonePath) {
         Remove-Item $ClonePath -Recurse -Force
     }
-    Get-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath
+	
+	git clone "https://$GitPersonalAccessToken@github.com/$GitHubCompanyName/$ProjectName.git" $ClonePath
+    # Get-Git-Repository -GitRepoUrl "https://$GitPersonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath
 
     # Löschen des Inhalts des geklonten Repositories
     # Option -force nicht verwenden, ansonsten auch das .git Verzeichnis gelöscht wird
@@ -87,16 +89,16 @@ Function Import-OpenSource($ProjectName, $FilesOrDirsToExclude, $ResultName) {
     Copy-Item $UnzipPath/* $ClonePath -Recurse
 
     # Publizieren des Repositories
-   # Publish-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+    # Publish-Git-Repository -GitRepoUrl "https://$GitPersonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
 
-   if (-not (git -C $ClonePath rev-parse --quiet --verify HEAD)) {
+    if (-not (git -C $ClonePath rev-parse --quiet --verify HEAD)) {
     # Repo is empty → call empty repo version
-    Publish-Git-Repository-EmptyRepo -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
-}
-else {
-    # Normal case → use original
-    Publish-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
-}
+    Publish-Git-Repository-EmptyRepo -GitRepoUrl "https://$GitPersonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+	}
+	else {
+		# Normal case → use original
+		Publish-Git-Repository -GitRepoUrl "https://$GitPersonalAccessToken@github.com/$GitHubCompanyName/$ProjectName" -CloneFolder $ClonePath -VersionTag $VersionTag
+	}
 
 
 }

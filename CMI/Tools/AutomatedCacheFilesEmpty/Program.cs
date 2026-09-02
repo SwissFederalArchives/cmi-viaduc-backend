@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Autofac;
 using CMI.Access.Common;
 using CMI.Tools.AutomatedCacheFilesEmpty.Properties;
@@ -40,6 +41,11 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty
                 mode = "test";
             }
 
+            StartProgram(mode, directoryPath, xDays);
+        }
+
+        private static async Task StartProgram(string mode, string directoryPath, int xDays)
+        {
             Console.WriteLine("Checking all files in mode: {0}", mode);
             if (mode != "prod")
             {
@@ -67,7 +73,7 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty
                 using (var scope = container.BeginLifetimeScope())
                 {
                     var fileProcessor = scope.Resolve<FileProcessor>();
-                   var results = fileProcessor.ProcessFiles(directoryPath, xDays);
+                    var results = await fileProcessor.ProcessFiles(directoryPath, xDays);
 
                     var reportGenerator = scope.Resolve<ExcelReportGenerator>();
                     string outputFile = Path.Combine(directoryPath, "CacheFilesReport.xlsx");
@@ -91,6 +97,5 @@ namespace CMI.Tools.AutomatedCacheFilesEmpty
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-    
     }
 }

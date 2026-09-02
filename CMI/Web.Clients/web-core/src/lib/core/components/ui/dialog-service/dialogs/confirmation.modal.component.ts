@@ -3,8 +3,8 @@ import { ModalBase } from '../modal/modal.base';
 import {CanDeactivateData} from '../../../../model';
 
 @Component({
-	selector: 'cmi-viaduc-confirmation-modal',
-	template: `
+    selector: 'cmi-viaduc-confirmation-modal',
+    template: `
 		<cmi-viaduc-modal-service>
 			<cmi-viaduc-modal [modalTitle]="title" (closeClicked)="onCancelInternal()" opened="true">
 				<cmi-viaduc-modal-body>
@@ -23,7 +23,8 @@ import {CanDeactivateData} from '../../../../model';
 					</div>
 				</cmi-viaduc-modal-footer>
 			</cmi-viaduc-modal>
-		</cmi-viaduc-modal-service>`
+		</cmi-viaduc-modal-service>`,
+    standalone: false
 })
 
 export class ConfirmationModalComponent extends ModalBase {

@@ -10,38 +10,39 @@ import {AuthorizationService, DetailPagingService, ErrorService, UrlService} fro
 import {Bestellhistorie, OrderingFlatDetailItem, OrderingFlatItem, StatusHistory} from '../../model';
 import {OrderService} from '../../services';
 import {ActivatedRoute} from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import {ToastrService} from 'ngx-toastr';
 import {NgForm} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-orders-einsichtsgesuche-detail-page',
-	templateUrl: 'ordersEinsichtDetailPage.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./ordersEinsichtDetailPage.component.less']
+    selector: 'cmi-viaduc-orders-einsichtsgesuche-detail-page',
+    templateUrl: 'ordersEinsichtDetailPage.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./ordersEinsichtDetailPage.component.less'],
+    standalone: false
 })
 export class OrdersEinsichtDetailPageComponent  extends ComponentCanDeactivate {
 	@ViewChild('formEinsichtDetail', {static: false})
-	public formEinsichtDetail: NgForm;
+	public formEinsichtDetail!: NgForm;
 
-	public loading: boolean;
+	public loading!: boolean;
 	public crumbs: any[] = [];
-	public detailRecord: OrderingFlatDetailItem;
+	public detailRecord!: OrderingFlatDetailItem;
 
 	public artDerArbeiten: ArtDerArbeit[] = [];
-	public fieldInfos: any[];
-	public showEntscheidHinterlegen: boolean;
-	public showEinsichtsgesucheAbbrechen: boolean;
-	public showAuftraegeZuruecksetzen: boolean;
-	public showInVorlageExportieren: boolean;
-	public showDigitalisierungAusloesen: boolean;
+	public fieldInfos!: any[];
+	public showEntscheidHinterlegen!: boolean;
+	public showEinsichtsgesucheAbbrechen!: boolean;
+	public showAuftraegeZuruecksetzen!: boolean;
+	public showInVorlageExportieren!: boolean;
+	public showDigitalisierungAusloesen!: boolean;
 	public showOrderHistoryModal = false;
 
-	public historyItems: Bestellhistorie[];
-	public detailPagingEnabled: boolean;
+	public historyItems!: Bestellhistorie[];
+	public detailPagingEnabled!: boolean;
 	public isNavFixed = false;
 
-	private _recordId: number;
+	private _recordId!: number;
 
 	constructor(private _aut: AuthorizationService,
 				private _dec: EntityDecoratorService,
@@ -68,7 +69,7 @@ export class OrdersEinsichtDetailPageComponent  extends ComponentCanDeactivate {
 
 	/* eslint-disable */
 	@HostListener('window:scroll', ['$event'])
-	public onScroll(event) {
+	public onScroll(event: any) {
 		const verticalOffset = window.pageYOffset
 			|| document.documentElement.scrollTop
 			|| document.body.scrollTop || 0;
@@ -187,9 +188,9 @@ export class OrdersEinsichtDetailPageComponent  extends ComponentCanDeactivate {
 	public getDateAsString(field: any): string {
 		if (field) {
 			const val = moment.utc(field).format('DD.MM.YYYY');
-			return (val === '01.01.0001') ? null : val;
+			return (val === '01.01.0001') ? '' : val;
 		}
-		return null;
+		return '';
 	}
 
 	public getDetailBaseUrl(): string {
@@ -272,8 +273,8 @@ export class OrdersEinsichtDetailPageComponent  extends ComponentCanDeactivate {
 	}
 
 	public getFormIsDirty():boolean {
-		if (this.formEinsichtDetail) {
-			return this.formEinsichtDetail.dirty;
+		if (this.formEinsichtDetail &&  this.formEinsichtDetail.dirty) {
+			return true ;
 		}
 		return false;
 	}

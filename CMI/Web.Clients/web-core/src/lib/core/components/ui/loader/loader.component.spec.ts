@@ -30,14 +30,14 @@ describe('LoaderComponent', function () {
 
 	it('should hide hint element', () => {
 		fixture.detectChanges();
-
-		expect(debugElement.query(By.css('p'))).toBe(null);
+		expect(debugElement.query(By.css('p'))).toBeNull();
 	});
 
 	it('should show hint element with hint', () => {
+		component.options = component.options || {};
 		component.options.hint = 'Do or do not, there is no try.';
 
 		fixture.detectChanges();
-		expect(debugElement.query(By.css('p'))).toBeDefined();
+		expect(debugElement.query(By.css('p'))).toBeTruthy();
 	});
 });

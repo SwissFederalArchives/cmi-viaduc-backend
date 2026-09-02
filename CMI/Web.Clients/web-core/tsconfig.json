@@ -1,29 +1,33 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-		"esModuleInterop":  true,
+	"compileOnSave": false,
+	"compilerOptions": {
+		"outDir": "./dist/out-tsc",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "bundler",
+		"module": "ES2020",
+		"target": "ES2020",
+		"lib": ["ES2020", "DOM"],
+		"importHelpers": true,
+		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-    "target": "ES2020",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "strictNullChecks": false,
-    "baseUrl": ".",
-    "module": "es2020"
-  },
+		"experimentalDecorators": true,
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
+		"skipLibCheck": true,
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"allowJs": false
+	},
 	"angularCompilerOptions": {
 		"preserveWhitespaces": true
 	}

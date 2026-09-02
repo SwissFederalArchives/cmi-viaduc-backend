@@ -16,6 +16,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace CMI.Web.Frontend.api.Providers
 {
@@ -34,28 +35,29 @@ namespace CMI.Web.Frontend.api.Providers
             this.modelData = modelData;
         }
 
-        public string[] GetArchivplanRootNodes(UserAccess access, string role, string language)
+        public async Task<string[]> GetArchivplanRootNodes(UserAccess access, string role, string language)
         {
-            var entities = elasticService.QueryForRootNodes<TreeRecord>(access);
+            var entities = await elasticService.QueryForRootNodes<TreeRecord>(access);
             return entities.Entries.Select(e => e.Data.ArchiveRecordId).ToArray();
         }
 
-        public string GetArchivplanHtml(string id, UserAccess access, string role, string language)
+
+        public async Task<string> GetArchivplanHtml(string id, UserAccess access, string role, string language)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var entities = elasticService.QueryForId<TreeRecord>(id, access);
-            var result= CreateHtml(entities?.Entries.Select(e => e.Data), role, language);
+            var entities = await elasticService.QueryForId<TreeRecord>(id, access);
+            var result = CreateHtml(entities?.Entries.Select(e => e.Data), role, language);
             Debug.WriteLine($"Get ArchivplanHtml for {id} {stopwatch.ElapsedMilliseconds}ms");
             return result;
         }
 
-        public string GetArchivplanChildrenHtml(string id, UserAccess access, string role, string language)
+        public async Task<string> GetArchivplanChildrenHtml(string id, UserAccess access, string role, string language)
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-         
-            var entities = elasticService.QueryForParentId(id, access);
+
+            var entities = await elasticService.QueryForParentId(id, access);
             Debug.WriteLine($"Fetching child records took {stopwatch.ElapsedMilliseconds}ms");
             stopwatch.Start();
             var html = CreateHtml(entities, role, language);
@@ -63,7 +65,7 @@ namespace CMI.Web.Frontend.api.Providers
             return html;
         }
 
-        public Entity<T> GetEntity<T>(string id, UserAccess access, Paging paging = null) where T : TreeRecord, new()
+        public async Task<Entity<T>> GetEntity<T>(string id, UserAccess access, Paging paging = null) where T : TreeRecord, new()
         {
             var metaOptions = new EntityMetaOptions
             {
@@ -72,15 +74,16 @@ namespace CMI.Web.Frontend.api.Providers
                 ChildrenPaging = paging
             };
 
-            var found = elasticService.QueryForId<T>(id, access);
+            var found = await elasticService.QueryForId<T>(id, access);
             var result = found != null && found.Exception == null
-                ? CreateEntityResult(access, found, metaOptions)
+                ? await CreateEntityResult(access, found, metaOptions)
                 : null;
 
             return result;
         }
 
-        public EntityResult<T> GetEntities<T>(List<string> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new()
+
+        public async Task<EntityResult<T>> GetEntities<T>(List<string> ids, UserAccess access, Paging paging = null) where T : TreeRecord, new()
         {
             var metaOptions = new EntityMetaOptions
             {
@@ -89,20 +92,21 @@ namespace CMI.Web.Frontend.api.Providers
                 ChildrenPaging = paging
             };
 
-            var found = elasticService.QueryForIds<T>(ids, access, new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0});
-            var result = CreateEntitiesResult(access, null, found, metaOptions);
+            var found = await elasticService.QueryForIds<T>(ids, access, new Paging { Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0 });
+            var result = await CreateEntitiesResult(access, null, found, metaOptions);
 
             return result;
         }
 
-        public ISearchResult Search<T>(SearchParameters search, UserAccess access)
+
+        public async Task<ISearchResult> Search<T>(SearchParameters search, UserAccess access)
             where T : TreeRecord
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             if (search.Paging == null)
             {
-                search.Paging = new Paging {Skip = 0, Take = 10};
+                search.Paging = new Paging { Skip = 0, Take = 10 };
             }
 
 
@@ -111,7 +115,7 @@ namespace CMI.Web.Frontend.api.Providers
                 JsonConvert.SerializeObject(search.Query));
 
             var query = ElasticQueryBuilder.BuildElasticQuery(search, access);
-            var found = elasticService.RunQuery<T>(query, access);
+            var found = await elasticService.RunQuery<T>(query, access);
 
             Log.Debug("Search.Entities: {0} ({1}ms)",
                 found?.RequestInfo,
@@ -130,7 +134,8 @@ namespace CMI.Web.Frontend.api.Providers
             return CreateErrorResult(found);
         }
 
-        public ISearchResult SearchByReferenceCodeWithoutSecurity<T>(string signatur)
+
+        public async Task<ISearchResult> SearchByReferenceCodeWithoutSecurity<T>(string signatur)
             where T : TreeRecord
         {
             Log.Debug($"CheckIsValidSignatur: Signatur:={signatur}");
@@ -144,7 +149,7 @@ namespace CMI.Web.Frontend.api.Providers
             var query = ElasticQueryBuilder.CreateQueryForSignatur(searchSignatur);
             elasticQuery.Query = query;
 
-            var found = elasticService.RunQueryWithoutSecurityFilters<T>(elasticQuery);
+            var found = await elasticService.RunQueryWithoutSecurityFilters<T>(elasticQuery);
 
             Log.Debug("Search.Entities: {0} ({1}ms)",
                 found?.RequestInfo,
@@ -158,24 +163,25 @@ namespace CMI.Web.Frontend.api.Providers
             return CreateErrorResult(found);
         }
 
-        public List<Entity<T>> GetResultAsEntities<T>(UserAccess access, ElasticQueryResult<T> result, EntityMetaOptions options = null)
+
+        public async Task<List<Entity<T>>> GetResultAsEntities<T>(UserAccess access, ElasticQueryResult<T> result, EntityMetaOptions options = null)
             where T : TreeRecord, new()
         {
             var entities = result?.Entries ?? new List<Entity<T>>();
             var decorator = new EntityDecorator<T>(elasticService, elasticSettings, this, modelData);
             foreach (var entity in entities)
             {
-                entity.Context = decorator.GetAsDecoratedContext(entity, access, options);
+                entity.Context = await decorator.GetAsDecoratedContext(entity, access, options);
             }
 
             return entities;
         }
 
-        public string[] GetCountriesFromElastic()
+        public async Task<string[]> GetCountriesFromElastic()
         {
             try
             {
-                var result = elasticService.GetLaender();
+                var result = await elasticService.GetLaender();
                 return result;
             }
             catch (Exception e)
@@ -373,14 +379,14 @@ namespace CMI.Web.Frontend.api.Providers
             return result;
         }
 
-        public Entity<T> CreateEntityResult<T>(UserAccess access, ElasticQueryResult<T> found, EntityMetaOptions metaOptions)
+        public async Task<Entity<T>> CreateEntityResult<T>(UserAccess access, ElasticQueryResult<T> found, EntityMetaOptions metaOptions)
             where T : TreeRecord, new()
         {
-            var entity = GetResultAsEntities(access, found, metaOptions);
+            var entity = await GetResultAsEntities(access, found, metaOptions);
             return entity?.FirstOrDefault();
         }
 
-        public EntityResult<T> CreateEntitiesResult<T>(UserAccess access, Paging paging, ElasticQueryResult<T> found, EntityMetaOptions metaOptions)
+        public async Task<EntityResult<T>> CreateEntitiesResult<T>(UserAccess access, Paging paging, ElasticQueryResult<T> found, EntityMetaOptions metaOptions)
             where T : TreeRecord, new()
         {
             var result = new EntityResult<T>();
@@ -389,7 +395,7 @@ namespace CMI.Web.Frontend.api.Providers
                 return result;
             }
 
-            var entities = GetResultAsEntities(access, found, metaOptions);
+            var entities = await GetResultAsEntities(access, found, metaOptions);
             result.Items = entities;
 
             if (paging != null)

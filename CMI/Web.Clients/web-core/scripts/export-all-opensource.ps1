@@ -62,7 +62,8 @@ Function Export-OpenSource([string] $ProjectName, [string[]] $FilesOrDirsToExclu
         Remove-Item $ClonePath -Recurse -Force
     }
 
-	Get-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/AkrosAG/$ProjectName" -CloneFolder $ClonePath -BranchName $Version
+	# Get-Git-Repository -GitRepoUrl "https://$GitPesonalAccessToken@github.com/AkrosAG/$ProjectName" -CloneFolder $ClonePath -BranchName $Version
+	git clone --branch $Version --single-branch "https://$GitPersonalAccessToken@github.com/AkrosAG/$ProjectName.git" $ClonePath
     Write-Replacements
 
     if ([System.String]::IsNullOrWhiteSpace($ResultName)) {
@@ -116,8 +117,6 @@ Function Write-IIIF-Backend-Replacements {
 }
 
 Function Write-Viaduc-Replacements {
-    $sql = Get-SqlReplacement
-    Write-Replacement -FilePath "$WorkingDirectory\$ProjectName\CMI\Access\Harvest\ScopeArchiv\SqlStatements.cs" -Replacement $sql
     Write-Replacement -FilePath "$WorkingDirectory\$ProjectName\CMI\Engine\Asset\Aspose.Total.NET.lic" -Replacement "Buy license"
     Write-Replacement -FilePath "$WorkingDirectory\$ProjectName\CMI\Manager\DocumentConverter\Extraction\Aspose.Total.NET.lic" -Replacement "Buy license"
     Write-Replacement -FilePath "$WorkingDirectory\$ProjectName\CMI\Web\CMI.Web.Common\Aspose.Total.NET.lic" -Replacement "Buy license"
@@ -288,64 +287,7 @@ Function Write-PartReplacement {
     Set-Content -Path $FilePath -Force -Value $content
 }
 
-Function Get-SqlReplacement {
-
-    $sql=@'
-    namespace CMI.Access.Harvest.ScopeArchiv
-    {
-        internal class SqlStatements
-        {
-            public const string SqlDataElementsSelect = "";
-    
-            public const string SqlArchiveRecordSelect = "";
-    
-            public const string SqlNodeContext = "";
-    
-            public const string SqlArchiveRecordContainers = "";
-    
-            public const string SqlArchiveRecordDescriptors = "";
-            
-            // We order the mutation records according to the archive plan.
-            // Thus parenting nodes are inserted before their children
-            // and population starts in a "top down" manner
-            public const string SqlMutationsRecords = "";
-    
-            public const string SqlArchiveRecordReferences = "";
-    
-            public const string SqlArchiveRecordNodeInfo= "";
-    
-            public const string SqlArchivePlanInfo = "";
-    
-            public const string SqlUpdateMutationActionLog = "";
-    
-            public const string ResetFailedOrLostOperations = "";
-            public const string GetArchiveRecordSecurityInfo = "";
-            public const string GetArchiveRecordPrimaryDataSecurityInfo = "";
-    
-            public const string InitiateFullResync = "";
-    
-            public const string HarvestStatusInfo = "";
-    
-            public const string HarvestLogInfo = "";
-    
-            public const string HarvestLogInfoDetail = "";
-            public const string FondsOverviewList = "";
-    
-            public const string GetAccession = "";
-            public const string GetDetailDataForDataElement = "";
-    
-            public const string SqlArchiveRecordForContainer = "";
-            public const string OrderDetailDataSelect = "";
-            public const string OrderDetailDataSelectForContainer = "";
-            public const string OrderDetailDataSelectForChildRecords = "";
-    
-        }
-    }
-'@
-    return $sql;
-}
-
- Function Compress-Directory {
+Function Compress-Directory {
     param (
         [Parameter(Mandatory = $true)]
         [string]$DirectoryToZip,

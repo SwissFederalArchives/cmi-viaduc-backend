@@ -1,4 +1,5 @@
 @import "styles/variables";
+@import (css) "../node_modules/ngx-toastr/toastr.css";
 
 
 body,
@@ -1362,4 +1363,11 @@ span.text-anonymized {
 
 .ml-n5,.mx-n5 {
 	margin-left: -3rem!important
+}
+
+/* Resizes the large chat button. Default is 6rem */
+:root {
+	--fab-size: @fab-size;
+	--fab-width: @fab-size;
+	--fab-height: @fab-size;
 }

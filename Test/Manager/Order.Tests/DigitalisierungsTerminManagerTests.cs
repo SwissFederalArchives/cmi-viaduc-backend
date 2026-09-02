@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Order;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -36,7 +36,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
 
@@ -92,7 +92,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -118,7 +118,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -145,7 +145,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -172,7 +172,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -200,7 +200,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -229,7 +229,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -256,7 +256,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -284,7 +284,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -312,7 +312,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -338,7 +338,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -366,7 +366,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -395,7 +395,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -425,7 +425,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -448,7 +448,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -474,7 +474,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -500,7 +500,7 @@ namespace CMI.Manager.Order.Tests
             var result = sut.GetNextPossibleTermin(orderDate1, nextTermine, kontingent);
 
             // assert
-            result.Should().Be(expected);
+            result.ShouldBe(expected);
         }
 
         [Test]
@@ -552,8 +552,8 @@ namespace CMI.Manager.Order.Tests
 
             // assert
             var digipool = await digipoolAccess.GetDigipool();
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("13.12.2019 16:25:36"));
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("27.12.2019 16:25:36"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("13.12.2019 16:25:36"));
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("27.12.2019 16:25:36"));
         }
 
 
@@ -599,7 +599,7 @@ namespace CMI.Manager.Order.Tests
 
             // assert
             var digipool = await digipoolAccess.GetDigipool();
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("29.11.2019 00:00:00"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("29.11.2019 00:00:00"));
         }
 
 
@@ -659,10 +659,10 @@ namespace CMI.Manager.Order.Tests
 
             // assert
             var digipool = await digipoolAccess.GetDigipool();
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("13.11.2019 13:47:10"));
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("13.11.2019 13:47:10"));
-            digipool[2].TerminDigitalisierung.Should().Be(CreateDate("14.11.2019 13:47:10"));
-            digipool[3].TerminDigitalisierung.Should().Be(CreateDate("14.11.2019 13:47:10"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("13.11.2019 13:47:10"));
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("13.11.2019 13:47:10"));
+            digipool[2].TerminDigitalisierung.ShouldBe(CreateDate("14.11.2019 13:47:10"));
+            digipool[3].TerminDigitalisierung.ShouldBe(CreateDate("14.11.2019 13:47:10"));
         }
 
         [Test]
@@ -700,8 +700,8 @@ namespace CMI.Manager.Order.Tests
 
             // assert
             var items = await digipoolAccess.GetLatestDigitalisierungsTermine(null, DateTime.MinValue, DigitalisierungsKategorie.Amt);
-            items[0].Termin.Should().Be(CreateDate("17.11.2019 09:19:58"), "Keine Anpassung, da kein Auftrag im Status 'für digitalisierung bereit'");
-            items[1].Termin.Should().Be(CreateDate("17.12.2019 13:25:36"), "Keine Anpassung, da kein Auftrag im Status 'für digitalisierung bereit'");
+            items[0].Termin.ShouldBe(CreateDate("17.11.2019 09:19:58"), "Keine Anpassung, da kein Auftrag im Status 'für digitalisierung bereit'");
+            items[1].Termin.ShouldBe(CreateDate("17.12.2019 13:25:36"), "Keine Anpassung, da kein Auftrag im Status 'für digitalisierung bereit'");
         }
 
 
@@ -754,8 +754,8 @@ namespace CMI.Manager.Order.Tests
 
             // assert
             var digipool = await digipoolAccess.GetDigipool();
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("09.12.2019 11:28:36"));
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("09.12.2019 11:28:36"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("09.12.2019 11:28:36"));
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("09.12.2019 11:28:36"));
         }
 
         [Test]
@@ -830,10 +830,10 @@ namespace CMI.Manager.Order.Tests
             var digipool = await digipoolAccess.GetDigipool();
             var json = JsonConvert.SerializeObject(digipool);
 
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[2].TerminDigitalisierung.Should().Be(CreateDate("17.01.2020 09:59:27"));
-            digipool[3].TerminDigitalisierung.Should().Be(CreateDate("17.01.2020 09:59:27"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[2].TerminDigitalisierung.ShouldBe(CreateDate("17.01.2020 09:59:27"));
+            digipool[3].TerminDigitalisierung.ShouldBe(CreateDate("17.01.2020 09:59:27"));
         }
 
         [Test]
@@ -908,13 +908,13 @@ namespace CMI.Manager.Order.Tests
             var digipool = await digipoolAccess.GetDigipool();
             var json = JsonConvert.SerializeObject(digipool);
 
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("11.02.2019 00:00:00"));
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("11.02.2019 00:00:00"));
-            digipool[2].TerminDigitalisierung.Should().Be(CreateDate("12.02.2019 00:00:00"));
-            digipool[3].TerminDigitalisierung.Should().Be(CreateDate("12.02.2019 00:00:00"));
-            digipool[4].TerminDigitalisierung.Should().Be(CreateDate("13.02.2019 00:00:00"));
-            digipool[5].TerminDigitalisierung.Should().Be(CreateDate("13.02.2019 00:00:00"));
-            digipool[6].TerminDigitalisierung.Should().Be(CreateDate("14.02.2019 00:00:00"));
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("11.02.2019 00:00:00"));
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("11.02.2019 00:00:00"));
+            digipool[2].TerminDigitalisierung.ShouldBe(CreateDate("12.02.2019 00:00:00"));
+            digipool[3].TerminDigitalisierung.ShouldBe(CreateDate("12.02.2019 00:00:00"));
+            digipool[4].TerminDigitalisierung.ShouldBe(CreateDate("13.02.2019 00:00:00"));
+            digipool[5].TerminDigitalisierung.ShouldBe(CreateDate("13.02.2019 00:00:00"));
+            digipool[6].TerminDigitalisierung.ShouldBe(CreateDate("14.02.2019 00:00:00"));
         }
 
         [Test]
@@ -1013,19 +1013,19 @@ namespace CMI.Manager.Order.Tests
             var digipool = await digipoolAccess.GetDigipool();
             var json = JsonConvert.SerializeObject(digipool);
 
-            digipool[0].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[0].UserId.Should().Be("1");
-            digipool[1].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[1].UserId.Should().Be("1");
-            digipool[2].TerminDigitalisierung.Should().Be(CreateDate("17.01.2020 09:59:27"));
-            digipool[2].UserId.Should().Be("1");
+            digipool[0].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[0].UserId.ShouldBe("1");
+            digipool[1].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[1].UserId.ShouldBe("1");
+            digipool[2].TerminDigitalisierung.ShouldBe(CreateDate("17.01.2020 09:59:27"));
+            digipool[2].UserId.ShouldBe("1");
 
-            digipool[3].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[3].UserId.Should().Be("2");
-            digipool[4].TerminDigitalisierung.Should().Be(CreateDate("16.01.2020 09:59:27"));
-            digipool[4].UserId.Should().Be("2");
-            digipool[5].TerminDigitalisierung.Should().Be(CreateDate("17.01.2020 09:59:27"));
-            digipool[5].UserId.Should().Be("2");
+            digipool[3].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[3].UserId.ShouldBe("2");
+            digipool[4].TerminDigitalisierung.ShouldBe(CreateDate("16.01.2020 09:59:27"));
+            digipool[4].UserId.ShouldBe("2");
+            digipool[5].TerminDigitalisierung.ShouldBe(CreateDate("17.01.2020 09:59:27"));
+            digipool[5].UserId.ShouldBe("2");
         }
 
         internal DateTime CreateDate(string date)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.api;
@@ -9,9 +6,14 @@ using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.api.Search;
-using Nest;
 using Newtonsoft.Json.Linq;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace CMI.Web.Frontend.api.Entities
 {
@@ -39,12 +41,18 @@ namespace CMI.Web.Frontend.api.Entities
             this.modelData = modelData;
         }
 
-        public List<Entity<T>> GetAncestors(Entity<T> entity, UserAccess access, out int maxDepth)
+        public class GetAncestorsResult
+        {
+            public List<Entity<T>> Entities { get; set; }
+            public int Depth { get; set; }
+        }
+
+        public async Task<GetAncestorsResult> GetAncestors(Entity<T> entity, UserAccess access)
         {
             var ancestors = new List<Entity<T>>();
             var entityId = entity.Data.ArchiveRecordId;
 
-            maxDepth = 0;
+            var maxDepth = 0;
             var items = entity.Data.ArchiveplanContext;
 
             if (items != null)
@@ -52,17 +60,25 @@ namespace CMI.Web.Frontend.api.Entities
                 var depth = 0;
                 foreach (var contextItem in items)
                 {
-                    var id = contextItem.ArchiveRecordId;
-                    if (entityId.Equals(id))
+                    var id = int.TryParse(contextItem.ArchiveRecordId, out _) ? elasticService.ActaProMappingProvider.GetActaProId(contextItem.ArchiveRecordId) : contextItem.ArchiveRecordId;
+
+                    if (entityId.Equals(contextItem.ArchiveRecordId))
                     {
                         continue;
                     }
+
+                    // Falls keine ActaProId für die ScopeId gibt
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        id = contextItem.ArchiveRecordId;
+                    }
+
                     Entity<T> item;
                     var isAnonymized = false;
                     // Aus Performance Gründen holen wir das Detailitem nur, wenn das Items grundsätzlich anonymisiert sein könnte
                     if (contextItem.Protected)
                     {
-                        var record = elasticService.QueryForId<TreeRecord>(id, access).Data.Items.FirstOrDefault()?.Data;
+                        var record = (await elasticService.QueryForId<TreeRecord>(id, access)).Data.Items.FirstOrDefault()?.Data;
                         contextItem.Title = record?.Title;
                         isAnonymized = true;
                     }
@@ -83,7 +99,7 @@ namespace CMI.Web.Frontend.api.Entities
                         SetDepth = depth
                     };
 
-                    var context = GetAsDecoratedContext(item, access, ancestorOptions);
+                    var context = await GetAsDecoratedContext(item, access, ancestorOptions);
                     item.Context = context;
 
                     ancestors.Add(item);
@@ -97,11 +113,11 @@ namespace CMI.Web.Frontend.api.Entities
                 ancestors = ancestors.OrderBy(anc => anc.Depth).ToList();
             }
 
-            return ancestors;
+            return new GetAncestorsResult { Entities = ancestors, Depth = maxDepth };
         }
 
 
-        public JObject GetAsDecoratedContext(Entity<T> entity, UserAccess access, EntityMetaOptions options = null)
+        public async Task<JObject> GetAsDecoratedContext(Entity<T> entity, UserAccess access, EntityMetaOptions options = null)
         {
             var hasContext = false;
 
@@ -114,7 +130,9 @@ namespace CMI.Web.Frontend.api.Entities
             // ancestors
             if (options.FetchAncestors)
             {
-                var ancestors = GetAncestors(entity, access, out depth);
+                var result = await GetAncestors(entity, access);
+                var ancestors = result.Entities;
+                depth = result.Depth;
                 if (ancestors.Count > 0)
                 {
                     hasContext = true;
@@ -130,7 +148,7 @@ namespace CMI.Web.Frontend.api.Entities
             // children
             if (options.FetchChildren)
             {
-                var result = GetChildren(entity.Data, depth, access, options?.ChildrenPaging);
+                var result = await GetChildren(entity.Data, depth, access, options?.ChildrenPaging);
                 if (result.Items.Count > 0)
                 {
                     hasContext = true;
@@ -145,10 +163,11 @@ namespace CMI.Web.Frontend.api.Entities
             return hasContext ? context : null;
         }
 
-        public EntityResult<T> GetChildren(T entity, int setDepth, UserAccess access, Paging paging)
+
+        public async Task<EntityResult<T>> GetChildren(T entity, int setDepth, UserAccess access, Paging paging)
         {
-            paging ??= new Paging {OrderBy = "treeSequence", SortOrder = "Ascending"};
-            
+            paging ??= new Paging { OrderBy = "treeSequence", SortOrder = "Ascending" };
+
             var result = new EntityResult<T>
             {
                 Items = new List<Entity<T>>(),
@@ -170,39 +189,27 @@ namespace CMI.Web.Frontend.api.Entities
             {
                 scopeId = elasticService.ActaProMappingProvider.GetScopeId(entity.ArchiveRecordId);
             }
-
+            
             query.Query = new BoolQuery
             {
-                Should = new QueryContainer[]
+                Should = new List<Query>
                 {
-                    new TermQuery
-                    {
-                        Field = elasticSettings.ParentIdField,
-                        Value = scopeId
-                    },
-                    new TermQuery
-                    {
-                        Field = elasticSettings.ParentIdField,
-                        Value = actaProId
-                    }
+                    new TermsQuery(new Field(elasticSettings.ParentIdField.ToLowerCamelCase()), new TermsQueryField(new List<FieldValue>{actaProId})),
+                    new TermsQuery(new Field(elasticSettings.ParentIdField.ToLowerCamelCase()), new TermsQueryField(new List<FieldValue>{scopeId}))
                 },
-                MustNot = new QueryContainer[]
+                MustNot = new List<Query>()
                 {
-                    new TermQuery
-                    {
-                        Field = elasticSettings.IdField,
-                        Value = entity.ArchiveRecordId
-                    }
+                    new TermsQuery(new Field(elasticSettings.IdField.ToLowerCamelCase()), new TermsQueryField(new List<FieldValue>{entity.ArchiveRecordId}))
                 }
             };
 
             query.SearchParameters.Paging = paging;
-            query.SearchParameters.Options = new SearchOptions {EnableAggregations = false, EnableExplanations = false, EnableHighlighting = false};
+            query.SearchParameters.Options = new SearchOptions { EnableAggregations = false, EnableExplanations = false, EnableHighlighting = false };
 
-            var queryResult = elasticService.RunQuery<T>(query, access);
+            var queryResult = await elasticService.RunQuery<T>(query, access);
             if (queryResult.Entries != null)
             {
-                result.Items = entityProvider.GetResultAsEntities(access, queryResult, new EntityMetaOptions
+                result.Items = await entityProvider.GetResultAsEntities(access, queryResult, new EntityMetaOptions
                 {
                     SetDepth = setDepth
                 });
@@ -216,6 +223,7 @@ namespace CMI.Web.Frontend.api.Entities
 
             return result;
         }
+
 
 
         private JObject GetMetadata(TreeRecord entity, UserAccess access)

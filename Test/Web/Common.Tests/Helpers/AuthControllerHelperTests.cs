@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,7 +10,7 @@ using CMI.Contract.Common;
 using CMI.Web.Common.api;
 using CMI.Web.Common.Auth;
 using CMI.Web.Common.Helpers;
-using FluentAssertions;
+using Shouldly;
 using Microsoft.Owin;
 using Moq;
 using NUnit.Framework;
@@ -36,7 +36,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.GetIdentity(null, null, false); });
 
             // assert
-            action.Should().Throw<AuthenticationException>().WithMessage("User hat noch keinen Antrag gestellt");
+            action.ShouldThrow<AuthenticationException>().Message.ShouldBe("User hat noch keinen Antrag gestellt");
         }
 
         [Test]
@@ -72,10 +72,10 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetIdentity(null, null, true);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.NeuerBenutzer);
-            result.Roles.Should().ContainInOrder(roleResult);
-            result.IssuedAccessTokens.Length.Should().Be(0);
-            result.RedirectUrl.Should().BeEmpty();
+            result.AuthStatus.ShouldBe(AuthStatus.NeuerBenutzer);
+            result.Roles.ShouldBe([roleResult]);
+            result.IssuedAccessTokens.Length.ShouldBe(0);
+            result.RedirectUrl.ShouldBeEmpty();
         }
 
        
@@ -111,10 +111,10 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetIdentity(null, null, false);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.NeuerBenutzer);
-            result.Roles.Should().ContainInOrder("ALLOW");
-            result.IssuedAccessTokens.Length.Should().Be(0);
-            result.RedirectUrl.Should().Be("www.recherche.bar.admin.ch/recherche");
+            result.AuthStatus.ShouldBe(AuthStatus.NeuerBenutzer);
+            result.Roles.ShouldBe(["ALLOW"], ignoreOrder:false);
+            result.IssuedAccessTokens.Length.ShouldBe(0);
+            result.RedirectUrl.ShouldBe("www.recherche.bar.admin.ch/recherche");
         }
 
 
@@ -153,9 +153,8 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.GetIdentity(null, null, false); });
 
             // assert
-            action.Should().Throw<AuthenticationException>()
-                .Where(ex => ex.Message.Contains(
-                    "Es wurde für den Benutzer keine Rolle definiert in der Datenbank oder Authentifikation hat fehlgeschlagen"));
+            action.ShouldThrow<AuthenticationException>()
+                .Message.ShouldStartWith("Es wurde für den Benutzer keine Rolle definiert in der Datenbank oder Authentifikation hat fehlgeschlagen");
         }
 
         [Test]
@@ -194,10 +193,10 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetIdentity(null, null, true);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.Ok);
-            result.Roles.Should().ContainInOrder("Ö2");
-            result.IssuedAccessTokens.Length.Should().Be(0);
-            result.RedirectUrl.Should().BeEmpty();
+            result.AuthStatus.ShouldBe(AuthStatus.Ok);
+            result.Roles.ShouldBe(["Ö2"], ignoreOrder: false);
+            result.IssuedAccessTokens.Length.ShouldBe(0);
+            result.RedirectUrl.ShouldBeEmpty();
         }
 
         
@@ -237,9 +236,9 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetIdentity(null, null, true);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.Ok);
-            result.Roles.Should().ContainInOrder("Ö3");
-            result.RedirectUrl.Should().Be("");
+            result.AuthStatus.ShouldBe(AuthStatus.Ok);
+            result.Roles.ShouldBe(["Ö3"], ignoreOrder: false);
+            result.RedirectUrl.ShouldBe("");
         }
 
         [Test]
@@ -281,9 +280,9 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetIdentity(request.Object, null, true);
 
             // assert
-            result.AuthStatus.Should().Be(AuthStatus.KeineMTanAuthentication);
-            result.Roles.Should().BeEmpty();
-            result.RedirectUrl.Should().Be("https://www.myaccount.eiam.admin.ch");
+            result.AuthStatus.ShouldBe(AuthStatus.KeineMTanAuthentication);
+            result.Roles.ShouldBeEmpty();
+            result.RedirectUrl.ShouldBe("https://www.myaccount.eiam.admin.ch");
         }
 
         [Test]
@@ -322,7 +321,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.IsValidAuthRole(role, isPublicClient);
 
             // assert
-            result.Should().Be(AuthStatus.KeineRolleDefiniert);
+            result.ShouldBe(AuthStatus.KeineRolleDefiniert);
         }
         
         [Test]
@@ -363,7 +362,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.IsValidAuthRole(role, true, isElevatedLogin); 
 
             // assert
-            result.Should().Be(expectedResult);
+            result.ShouldBe(expectedResult);
         }
 
         [Test]
@@ -396,8 +395,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.IsValidAuthRole("BAR", true); });
 
             // assert
-            action.Should().Throw<AuthenticationException>()
-                .WithMessage("Die BAR-Rolle verlangt zwingend ein FED-Login");
+            action.ShouldThrow<AuthenticationException>().Message.ShouldBe("Die BAR-Rolle verlangt zwingend ein FED-Login");
         }
 
         
@@ -434,8 +432,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.IsValidAuthRole("Ö1", true); });
 
             // assert
-            action.Should().Throw<InvalidOperationException>("Ö1 are not registered users, so they don't have a real session")
-                .WithMessage("Nicht definiertes Rollen handling");
+            action.ShouldThrow<InvalidOperationException>().Message.ShouldBe("Nicht definiertes Rollen handling");
         }
         
         [Test]
@@ -470,7 +467,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.IsValidAuthRole(role, false);
 
             // assert
-            result.Should().Be(AuthStatus.Ok);
+            result.ShouldBe(AuthStatus.Ok);
         }
 
         [Test]
@@ -509,7 +506,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.IsValidAuthRole(role, false, isElevatedLogin);
 
             // assert
-            result.Should().Be(expectedResult);
+            result.ShouldBe(expectedResult);
         }
         
         [Test]
@@ -542,7 +539,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.IsValidAuthRole("X-UNKNOWN", false); });
 
             // assert
-            action.Should().Throw<ArgumentOutOfRangeException>().WithMessage("*Nicht definiertes Rollen handling*");
+            action.ShouldThrow<ArgumentOutOfRangeException>().Message.ShouldStartWith("Nicht definiertes Rollen handling");
         }
 
         
@@ -559,7 +556,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.TryUpdateUser("1", null);
 
             // assert
-            result.Should().BeFalse();
+            result.ShouldBeFalse();
         }
 
         [Test]
@@ -839,9 +836,8 @@ namespace CMI.Web.Common.Tests.Helpers
 
             // asset
             identity.ApplicationRoles.First().Identifier = "APPO";
-            identity.ApplicationFeatures.First().Identifier.Should().Be(ApplicationFeature.AdministrationEinstellungenBearbeiten.ToString());
-            identity.ApplicationFeatures.Last().Identifier.Should()
-                .Be(ApplicationFeature.AuftragsuebersichtAuftraegeBegruendungVerwaltungsausleiheEdit.ToString());
+            identity.ApplicationFeatures.First().Identifier.ShouldBe(ApplicationFeature.AdministrationEinstellungenBearbeiten.ToString());
+            identity.ApplicationFeatures.Last().Identifier.ShouldBe(ApplicationFeature.AuftragsuebersichtAuftraegeBegruendungVerwaltungsausleiheEdit.ToString());
         }
 
         [Test]
@@ -858,7 +854,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var action = (Action) (() => { sut.AddAppRolesAndFeatures("1", new Identity()); });
 
             // asset
-            action.Should().NotThrow();
+            action.ShouldNotThrow();
         }
 
         [Test]
@@ -886,7 +882,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = sut.GetInitialRoleFromClaim(); 
 
             // assert
-            result.Should().Be(expectedResult);
+            result.ShouldBe(expectedResult);
         }
     }
 }

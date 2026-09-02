@@ -131,7 +131,7 @@ namespace CMI.Manager.Order
                     if (!string.IsNullOrEmpty(orderItem.VeId))
                     {
                         originalOrderItem =
-                            searchIndexDataAccess.FindDbDocument(orderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+                            await searchIndexDataAccess.FindDbDocument(orderItem.VeId, MetadataToExclude.OCRContentAndFiles);
                     }
 
                     // A VE could be deleted after the order was made. So we need to check

@@ -4,17 +4,18 @@ import {
 	EntityDecoratorService, EntscheidGesuchStatus, ShippingType,
 } from '@cmi/viaduc-web-core';
 import {Bestellhistorie, StatusHistory} from '../../model';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
-	selector: 'cmi-viaduc-bestell-historie',
-	templateUrl: 'bestellHistorie.component.html',
-	styleUrls: ['./bestellHistorie.component.less']
+    selector: 'cmi-viaduc-bestell-historie',
+    templateUrl: 'bestellHistorie.component.html',
+    styleUrls: ['./bestellHistorie.component.less'],
+    standalone: false
 })
 export class BestellHistorieComponent {
 
 	@Input()
-	public historyItems: Bestellhistorie[];
+	public historyItems!: Bestellhistorie[];
 
 	constructor(private _dec: EntityDecoratorService) {
 
@@ -39,9 +40,9 @@ export class BestellHistorieComponent {
 	public getDateAsString(field: any): string {
 		if (field) {
 			const val = moment.utc(field).format('DD.MM.YYYY');
-			return (val === '01.01.0001') ? null : val;
+			return (val === '01.01.0001') ? '' : val;
 		}
-		return null;
+		return '';
 	}
 
 	public getEntscheidGesuch(entscheid: EntscheidGesuchStatus) {

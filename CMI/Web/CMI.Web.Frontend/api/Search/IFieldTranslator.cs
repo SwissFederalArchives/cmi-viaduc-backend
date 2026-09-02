@@ -1,10 +1,10 @@
 using CMI.Access.Sql.Viaduc;
-using Nest;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace CMI.Web.Frontend.api.Search
 {
     public interface IFieldTranslator
     {
-        QueryContainer CreateQueryForField(SearchField field, UserAccess access);
+        Query CreateQueryForField(SearchField field, UserAccess access);
     }
 }

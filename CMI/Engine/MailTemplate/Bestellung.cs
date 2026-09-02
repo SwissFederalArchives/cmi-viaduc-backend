@@ -46,6 +46,7 @@ namespace CMI.Engine.MailTemplate
             }
         }
 
+
         public string Bemerkungen => Ordering.Comment;
         public bool IstVerwaltungsausleihe => Ordering.Type == OrderType.Verwaltungsausleihe;
         public bool IstDigitalisierungsauftrag => Ordering.Type == OrderType.Digitalisierungsauftrag;
@@ -54,6 +55,7 @@ namespace CMI.Engine.MailTemplate
         public bool IstBarInterneKonsultation => Ordering.Type == OrderType.Lesesaalausleihen && Besteller.HatFlagBarInterneKonsultation;
         public int? ArtDerArbeitId => Ordering.ArtDerArbeit;
         public DateTime? OrderDate => Ordering.OrderDate;
+        public string Aushebungstyp { get; internal set; }
 
         public bool IstPersonenbezogeneNachforschung => Ordering.PersonenbezogeneNachforschung;
         public bool HatUnterlagenDieNutzerSelberBetreffen => Ordering.HasEigenePersonendaten;

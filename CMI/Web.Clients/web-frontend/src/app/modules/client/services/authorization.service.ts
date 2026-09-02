@@ -15,14 +15,13 @@ export class AuthorizationService {
 		BAR: 'BAR'
 	};
 
-	private _getApplicationFeatures(): { [key: string]: string; } {
-		const dict: { [key: string]: string; } = { };
-		const keys = Object.keys(ApplicationFeatureEnum).map((e) => {
-			if (typeof ApplicationFeatureEnum[e] === 'string') {
-				return ApplicationFeatureEnum[e];
-			}
-		});
-		keys.forEach(k => dict[k] = k);
+	private _getApplicationFeatures(): { [key: string]: string } {
+		const dict: { [key: string]: string } = {};
+		Object.keys(ApplicationFeatureEnum)
+			.filter(key => isNaN(Number(key)))
+			.forEach(key => {
+				dict[key] = key;
+			});
 		return dict;
 	}
 
@@ -43,25 +42,25 @@ export class AuthorizationService {
 		}
 
 		if (_util.isArray(identity.roles)) {
-			_util.forEach(identity.roles, t => {
+			_util.forEach(identity.roles, (t: any) => {
 				session.roles[t] = true;
 			});
 		}
 
 		if (_util.isArray(identity.issuedAccessTokens)) {
-			_util.forEach(identity.issuedAccessTokens, t => {
+			_util.forEach(identity.issuedAccessTokens, (t: any) => {
 				session.accessTokens[t] = true;
 			});
 		}
 
 		if (_util.isArray(identity.applicationRoles)) {
-			_util.forEach(identity.applicationRoles, r => {
+			_util.forEach(identity.applicationRoles, (r: any) => {
 				session.applicationRoles[r.identifier] = true;
 			});
 		}
 
 		if (_util.isArray(identity.applicationFeatures)) {
-			_util.forEach(identity.applicationFeatures, f => {
+			_util.forEach(identity.applicationFeatures, (f: any) => {
 				session.applicationFeatures[f.identifier] = true;
 			});
 		}
@@ -89,7 +88,7 @@ export class AuthorizationService {
 
 	public hasAnyAccessToken(accessTokens: string[]): boolean {
 		let retVal = false;
-		_util.forEach(accessTokens, t => {
+		_util.forEach(accessTokens, (t: string) => {
 			if (this.hasAccessToken(t)) {
 				retVal = true;
 			}

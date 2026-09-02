@@ -1,5 +1,5 @@
-﻿using System;
-using CMI.Contract.Order;
+﻿using CMI.Contract.Order;
+using System;
 
 namespace CMI.Manager.Order.Status
 {

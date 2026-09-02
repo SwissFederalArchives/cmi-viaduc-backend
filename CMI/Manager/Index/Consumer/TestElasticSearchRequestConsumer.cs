@@ -58,7 +58,7 @@ namespace CMI.Manager.Index.Consumer
             {
                 result.Status = HeartbeatStatus.Nok.ToString();
                 Log.Error(ex, "Error when getting Index-Health-Status");
-                result.Message = "Error: Unknown Error when accessing Elastic (see Log)";
+                result.Message = $"Error: Unknown Error when accessing Elastic: {ex.Message}";
             }
             finally
             {

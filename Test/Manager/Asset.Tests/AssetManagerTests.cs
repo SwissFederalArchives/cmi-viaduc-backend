@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ using CMI.Contract.Parameter;
 using CMI.Engine.Asset;
 using CMI.Engine.Security;
 using CMI.Manager.Asset.ParameterSettings;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using Moq;
 using NUnit.Framework;
@@ -42,12 +42,12 @@ namespace CMI.Manager.Asset.Tests
             await assetManager.RegisterJobInPreparationQueue("1", "1", AufbereitungsArtEnum.Download, AufbereitungsServices.AssetService,
                 new List<ElasticArchiveRecordPackage>(), null);
             var result = await assetManager.CheckPreparationStatus("1");
-            result.PackageIsInPreparationQueue.Should().BeTrue();
+            result.PackageIsInPreparationQueue.ShouldBeTrue();
 
             // Act and Assert 2
             await assetManager.UnregisterJobFromPreparationQueue(2);
             result = await assetManager.CheckPreparationStatus("2");
-            result.PackageIsInPreparationQueue.Should().BeFalse();
+            result.PackageIsInPreparationQueue.ShouldBeFalse();
 
 
             // Assert

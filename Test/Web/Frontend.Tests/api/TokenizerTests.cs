@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using CMI.Web.Frontend.api;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -18,11 +18,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(1);
-            result.First().Text.Should().Be(eingabe);
-            result.First().Index.Should().Be(0);
-            result.First().Length.Should().Be(eingabe.Length);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(1);
+            result.First().Text.ShouldBe(eingabe);
+            result.First().Index.ShouldBe(0);
+            result.First().Length.ShouldBe(eingabe.Length);
         }
 
         [Test]
@@ -35,11 +35,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Count.Should().Be(1);
+            result.Count.ShouldBe(1);
 
-            result[0].Index.Should().Be(1);
-            result[0].Length.Should().Be(4);
-            result[0].Text.Should().Be("Haus");
+            result[0].Index.ShouldBe(1);
+            result[0].Length.ShouldBe(4);
+            result[0].Text.ShouldBe("Haus");
         }
 
         [Test]
@@ -51,13 +51,13 @@ namespace CMI.Web.Frontend.API.Tests.api
             const string eingabe = "ein Text";
             var tokenList = new Tokenizer().GetTokens(eingabe).ToList();
 
-            tokenList[0].Index.Should().Be(0);
-            tokenList[0].Text.Should().Be("ein");
-            tokenList[0].Length.Should().Be(3);
+            tokenList[0].Index.ShouldBe(0);
+            tokenList[0].Text.ShouldBe("ein");
+            tokenList[0].Length.ShouldBe(3);
 
-            tokenList[1].Index.Should().Be(4);
-            tokenList[1].Text.Should().Be("Text");
-            tokenList[1].Length.Should().Be(4);
+            tokenList[1].Index.ShouldBe(4);
+            tokenList[1].Text.ShouldBe("Text");
+            tokenList[1].Length.ShouldBe(4);
             // ASSERT
         }
 
@@ -70,13 +70,13 @@ namespace CMI.Web.Frontend.API.Tests.api
             const string eingabe = " ein  Text   ";
             var tokenList = new Tokenizer().GetTokens(eingabe).ToList();
 
-            tokenList[0].Index.Should().Be(1);
-            tokenList[0].Text.Should().Be("ein");
-            tokenList[0].Length.Should().Be(3);
+            tokenList[0].Index.ShouldBe(1);
+            tokenList[0].Text.ShouldBe("ein");
+            tokenList[0].Length.ShouldBe(3);
 
-            tokenList[1].Index.Should().Be(6);
-            tokenList[1].Text.Should().Be("Text");
-            tokenList[1].Length.Should().Be(4);
+            tokenList[1].Index.ShouldBe(6);
+            tokenList[1].Text.ShouldBe("Text");
+            tokenList[1].Length.ShouldBe(4);
             // ASSERT
         }
 
@@ -94,10 +94,10 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = Token.MergeToToken(tokenList);
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Index.Should().Be(3);
-            result.Text.Should().Be("Habe nur Text");
-            result.Length.Should().Be(17);
+            result.ShouldNotBeNull();
+            result.Index.ShouldBe(3);
+            result.Text.ShouldBe("Habe nur Text");
+            result.Length.ShouldBe(17);
         }
 
         [Test]
@@ -113,10 +113,10 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = Token.MergeToToken(tokenList);
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Index.Should().Be(3);
-            result.Text.Should().Be("Habe nur Text Wort");
-            result.Length.Should().Be(26);
+            result.ShouldNotBeNull();
+            result.Index.ShouldBe(3);
+            result.Text.ShouldBe("Habe nur Text Wort");
+            result.Length.ShouldBe(26);
         }
 
         [Test]
@@ -130,11 +130,11 @@ namespace CMI.Web.Frontend.API.Tests.api
 
 
             // ASSERT
-            result.Count.Should().Be(1);
-            result.First().Should().NotBeNull();
-            result.First().Index.Should().Be(3);
-            result.First().Text.Should().Be("Habe nur Text");
-            result.First().Length.Should().Be(19);
+            result.Count.ShouldBe(1);
+            result.First().ShouldNotBeNull();
+            result.First().Index.ShouldBe(3);
+            result.First().Text.ShouldBe("Habe nur Text");
+            result.First().Length.ShouldBe(19);
         }
 
         [Test]
@@ -148,24 +148,24 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(4);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(4);
 
-            result[0].Text.Should().Be("Ich bin");
-            result[0].Index.Should().Be(1);
-            result[0].Length.Should().Be(11);
+            result[0].Text.ShouldBe("Ich bin");
+            result[0].Index.ShouldBe(1);
+            result[0].Length.ShouldBe(11);
 
-            result[1].Text.Should().Be("ein");
-            result[1].Index.Should().Be(13);
-            result[1].Length.Should().Be(3);
+            result[1].Text.ShouldBe("ein");
+            result[1].Index.ShouldBe(13);
+            result[1].Length.ShouldBe(3);
 
-            result[2].Text.Should().Be("Text mit");
-            result[2].Index.Should().Be(19);
-            result[2].Length.Should().Be(11);
+            result[2].Text.ShouldBe("Text mit");
+            result[2].Index.ShouldBe(19);
+            result[2].Length.ShouldBe(11);
 
-            result[3].Text.Should().Be("anführungszeichen");
-            result[3].Index.Should().Be(31);
-            result[3].Length.Should().Be(17);
+            result[3].Text.ShouldBe("anführungszeichen");
+            result[3].Index.ShouldBe(31);
+            result[3].Length.ShouldBe(17);
         }
 
         [Test]
@@ -177,8 +177,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(0);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(0);
         }
 
         [Test]
@@ -190,8 +190,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(0);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(0);
         }
 
         [Test]
@@ -203,8 +203,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(0);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(0);
         }
 
         [Test]
@@ -216,11 +216,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = new Tokenizer().GetTokens(eingabe).ToList();
 
             // ASSERT
-            result.Should().NotBeNull();
-            result.Count.Should().Be(1);
-            result.First().Text.Should().Be("hello");
-            result.First().Index.Should().Be(0);
-            result.First().Length.Should().Be(6);
+            result.ShouldNotBeNull();
+            result.Count.ShouldBe(1);
+            result.First().Text.ShouldBe("hello");
+            result.First().Index.ShouldBe(0);
+            result.First().Length.ShouldBe(6);
         }
     }
 }

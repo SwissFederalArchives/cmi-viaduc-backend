@@ -113,8 +113,11 @@ namespace CMI.Access.Sql.Viaduc.EF
                         ActionStatusHistory = info.NewStatus.ToString(),
                         LogDate = DateTime.Now
                     };
+
+                    await CancelExistingSyncActions(newAction.ArchiveRecordId);
                     newAction.SyncActionLogs.Add(logEntry);
                     dbContext.SyncActions.AddObject(newAction);
+                   
                 }
                 else
                 {
@@ -180,6 +183,7 @@ namespace CMI.Access.Sql.Viaduc.EF
                 }
             }
 
+            await CancelExistingSyncActions(entity.ArchiveRecordId);
             dbContext.SyncActions.AddObject(entity);
             await dbContext.SaveChangesAsync();
         }
@@ -188,6 +192,19 @@ namespace CMI.Access.Sql.Viaduc.EF
         {
             var deleteDay = DateTime.Today.AddDays(-daysAgo);
             await dbContext.ExecuteStoreCommandAsync("DELETE FROM SyncAction WHERE ISNULL(ModifiedOn, CreatedOn) < @p0", deleteDay);
+        }
+
+        /// <summary>
+        ///  Before inserting a new sync action, we need to set any existing "WaitingForSync" actions for the same ArchiveRecordId to "SyncAborted"
+        /// </summary>
+        /// <param name="archiveRecordId"></param>
+        /// <returns></returns>
+        private async Task CancelExistingSyncActions(string archiveRecordId)
+        {
+            await dbContext.ExecuteStoreCommandAsync("UPDATE SyncAction SET ActionStatus = @p0  WHERE ActionStatus = @p1 and archiveRecordId = @p2",
+                (int) ActionStatus.SyncAborted,
+                (int) ActionStatus.WaitingForSync,
+                archiveRecordId);
         }
     }
 }

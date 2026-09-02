@@ -1,577 +1,664 @@
 <div class="page page-user-detail col-sm-12">
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
 
-	<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
+	  <div class="page-breadcrumb">
+		  <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+	  </div>
 
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
+      <div content>
+        <div class="page-header">
+          <h2 class="page-content-title">
+            <span>{{'Benutzer' | translate:'user.user'}}</span>
+            <span>:&nbsp;{{ detail?.item?.firstName }} {{ detail?.item?.familyName }}</span>
+          </h2>
+        </div>
+        @if (detailPagingEnabled()) {
+          <div class="action-container">
+            <div class="row action-buttons">
+              <div class="col-md-4 col-xs-12 pull-right">
+                <cmi-viaduc-detail-paging [detailUrl]="getDetailBaseUrl()" [idProperty]="'id'" [disableNavigation]="getFormIsDirty()"></cmi-viaduc-detail-paging>
+              </div>
+            </div>
+          </div>
+        }
+        @if (myForm) {
+          <form class="row" [formGroup]="myForm">
+            <div class="col-md-12">
+              <div class="with-border">
+                <h3 class="title">
+                  <span>{{'Benutzerdaten' | translate:'user.userdata'}}</span>
+                </h3>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row" [ngClass]="{'has-warning': (errors.familyName)}">
+                      <label tooltip="{{'Name' | translate:'user.familyName'}}*" class="col-md-4 control-label">{{'Name' | translate:'user.familyName'}}*</label>
+                      <div class="col-md-8">
+                        <input class="form-control" formControlName="familyName" [autoFocus]="true"
+                          placeholder="{{'name' | translate: 'user.placeholder.familyName'}}"
+                          name="familyName"/>
+                          @if (errors.familyName) {
+                            <div class="help-block">
+                              {{ errors.familyName }}
+                            </div>
+                          }
+                        </div>
+                      </div>
+                      <div class="row" [ngClass]="{'has-warning': (errors.firstName)}">
+                        <label tooltip="{{'Vorname(n)' | translate:'user.firstName'}}*" class="col-md-4 control-label">{{'Vorname(n)' | translate:'user.firstName'}}*</label>
+                        <div class="col-md-8">
+                          <input class="form-control" formControlName="firstName"
+                            placeholder="{{'Vorname(n)' | translate: 'user.placeholder.firstName'}}"
+                            name="firstName"/>
+                            @if (errors.firstName) {
+                              <div class="help-block">
+                                {{ errors.firstName }}
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="row" [ngClass]="{'has-warning': (errors.organization)}">
+                          @if (!isInternalUser) {
+                            <label tooltip="{{'Organisation' | translate:'user.organization'}}" class="col-md-4 control-label">{{'Organisation' | translate:'user.organization'}}</label>
+                          }
+                          @if (isInternalUser) {
+                            <label tooltip="{{'Organisation' | translate:'user.organization'}}*" class="col-md-4 control-label">{{'Organisation' | translate:'user.organization'}}*</label>
+                          }
+                          <div class="col-md-8">
+                            <input class="form-control"
+                              formControlName="organization"
+                              placeholder="{{'Organisation' | translate: 'user.placeholder.organization'}}">
+                              @if (errors.organization) {
+                                <div class="help-block">
+                                  {{ errors.organization }}
+                                </div>
+                              }
+                            </div>
+                          </div>
+                          <div class="row" [ngClass]="{'has-warning': (errors.street)}">
+                            <label tooltip="{{'Strasse / Nr.' | translate:'user.street'}}*" class="col-md-4 control-label">{{'Strasse / Nr.' | translate:'user.street'}}*</label>
+                            <div class="col-md-8">
+                              <input id="street" formControlName="street"
+                                class="form-control"/>
+                                @if (errors.street) {
+                                  <div class="help-block">
+                                    {{ errors.street }}
+                                  </div>
+                                }
+                              </div>
+                            </div>
+                            <div class="row">
+                              <label tooltip="{{'Zusatz' | translate:'user.streetAttachment'}}" class="col-md-4 control-label">{{'Zusatz' | translate:'user.streetAttachment'}}</label>
+                              <div class="col-md-8">
+                                <input id="streetAttachment" formControlName="streetAttachment"
+                                  class="form-control"/>
+                                </div>
+                              </div>
+                              <div class="row" [ngClass]="{'has-warning': (errors.zipCode)}">
+                                <label tooltip="{{'PLZ' | translate:'user.zipCode'}}*" class="col-md-4 control-label">{{'PLZ' | translate:'user.zipCode'}}*</label>
+                                <div class="col-md-8">
+                                  <input id="zipCode" formControlName="zipCode"
+                                    class="form-control"/>
+                                    @if (errors.zipCode) {
+                                      <div class="help-block">
+                                        {{ errors.zipCode }}
+                                      </div>
+                                    }
+                                  </div>
+                                </div>
+                                <div class="row" [ngClass]="{'has-warning': (errors.town)}">
+                                  <label tooltip="{{'Ort' | translate:'user.town'}}*" class="col-md-4 control-label">{{'Ort' | translate:'user.town'}}*</label>
+                                  <div class="col-md-8">
+                                    <input id="town" formControlName="town"
+                                      class="form-control"/>
+                                      @if (errors.town) {
+                                        <div class="help-block">
+                                          {{ errors.town }}
+                                        </div>
+                                      }
+                                    </div>
+                                  </div>
+                                  <div class="row" [ngClass]="{'has-warning': (errors.countryCode)}">
+                                    <label tooltip="{{'Land' | translate:'user.countryCode'}}*" class="col-md-4 control-label">{{'Land' | translate:'user.countryCode'}}*</label>
+                                    <div class="col-md-8">
+                                      <select class="form-control" formControlName="countryCode"
+                                        name="countryCode">
+                                        @for (c of languageDependantCountries; track c) {
+                                          <option value="{{c.code}}"
+                                            title="{{c.name}}">{{c.name}}
+                                          </option>
+                                        }
+                                      </select>
+                                      @if (errors.countryCode) {
+                                        <div class="help-block">
+                                          {{ errors.countryCode }}
+                                        </div>
+                                      }
+                                    </div>
+                                  </div>
+                                  <div class="row" [ngClass]="{'has-warning': (errors.phoneNumber)}">
+                                    <label tooltip="{{'Telefon (Festnetz)' | translate:'user.phoneNumber'}}"
+                                    class="col-md-4 control-label">{{'Telefon (Festnetz)' | translate:'user.phoneNumber'}}</label>
+                                    <div class="col-md-8">
+                                      <input id="phoneNumber" formControlName="phoneNumber"
+                                        class="form-control"/>
+                                        @if (errors.phoneNumber) {
+                                          <div class="help-block">
+                                            {{ errors.phoneNumber }}
+                                          </div>
+                                        }
+                                      </div>
+                                    </div>
+                                    <div class="row" [ngClass]="{'has-warning': (errors.mobileNumber)}">
+                                      <label tooltip="{{'Mobiltelefon' | translate:'user.mobileNumber'}}" class="col-md-4 control-label">{{'Mobiltelefon' | translate:'user.mobileNumber'}}</label>
+                                      <div class="col-md-8">
+                                        <input id="mobileNumber" formControlName="mobileNumber"
+                                          class="form-control"/>
+                                          @if (errors.mobileNumber) {
+                                            <div class="help-block">
+                                              {{ errors.mobileNumber }}
+                                            </div>
+                                          }
+                                        </div>
+                                      </div>
+                                      <div class="row" [ngClass]="{'has-warning': (errors.birthday)}">
+                                        <label tooltip="{{'Geburtsdatum' | translate:'user.birthday'}}" class="col-md-4 control-label">{{'Geburtsdatum' | translate:'user.birthday'}}</label>
+                                        <div class="col-md-8">
+                                          <input class="form-control"
+                                            type="date"
+                                            autocomplete="off"
+                                            mwlFlatpickr
+                                            formControlName="birthday"
+                                            [maxDate]="today"
+                                            (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'birthday')"
+                                            [convertModelValue]="true"
+                                            [allowInput]="true"
+                                            dateFormat="d.m.Y"
+                                            placeholder="{{'Geburtsdatum (dd.mm.jjjj)' | translate: 'user.placeholder.birthday'}}"
+                                            name="birthday">
+                                            @if (errors.birthday) {
+                                              <div class="help-block">
+                                                {{ errors.birthday }}
+                                              </div>
+                                            }
+                                          </div>
+                                        </div>
+                                        <div class="row" [ngClass]="{'has-warning': (errors.emailAddress)}">
+                                          <label tooltip="{{'E-Mail' | translate:'user.emailAddress'}}*" class="col-md-4 control-label ">{{'E-Mail' | translate:'user.emailAddress'}}*</label>
+                                          <div class="col-md-8">
+                                            <input class="form-control" type="email"
+                                              formControlName="emailAddress"
+                                              placeholder="{{'E-Mail' | translate: 'user.placeholder.emailAddress'}}"
+                                              (change)="recalculateResearcherGroup()"
+                                              name="emailAddress">
+                                              @if (errors.emailAddress) {
+                                                <div class="help-block">
+                                                  {{ errors.emailAddress }}
+                                                </div>
+                                              }
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="row">
+                                            <label tooltip="{{'Fabasoft-Dossier 622' | translate:'user.fabasoftDossier'}}"
+                                            class="col-md-4 control-label">{{'Fabasoft-Dossier 622' | translate:'user.fabasoftDossier'}}</label>
+                                            <div class="col-md-8">
+                                              <input class="form-control" formControlName="fabasoftDossier"
+                                                placeholder="{{'Fabasoft-Dossier 622' | translate: 'user.placeholder.fabasoftDossier'}}"
+                                                name="fabasoftDossier"/>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <label tooltip="{{'Bevorzugte Sprache' | translate:'user.language'}}"
+                                              class="col-md-4 control-label">{{'Bevorzugte Sprache' | translate:'user.language'}}</label>
+                                              <div class="col-md-8">
+                                                <select class="form-control" formControlName="language"
+                                                  name="language">
+                                                  @for (c of language; track c) {
+                                                    <option [ngValue]="c.code"
+                                                      title="{{c.name}}">{{c.name}}
+                                                    </option>
+                                                  }
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <label tooltip="{{'Benutzer-ID' | translate:'user.id'}}" class="col-md-4 control-label">{{'Benutzer-ID' | translate:'user.id'}}</label>
+                                              <div class="col-md-8">
+                                                <input class="form-control"
+                                                  formControlName="id"
+                                                  disabled
+                                                  name="id">
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <label tooltip="{{'UserExt-ID' | translate:'user.extid'}}" class="col-md-4 control-label">{{'UserExt-ID' | translate:'user.extid'}}</label>
+                                                <div class="col-md-8">
+                                                  <input class="form-control"
+                                                    formControlName="userExtId"
+                                                    disabled
+                                                    name="userExtId">
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                  <label tooltip="{{'Datensatz-Log' | translate:'user.createModifiyData'}}"
+                                                  class="col-md-4 control-label">{{'Datensatz-Log' | translate:'user.createModifiyData'}}</label>
+                                                  <div class="col-md-8">
+                                                    <textarea class="form-control"
+                                                      [rows]="6"
+                                                      formControlName="createModifiyData"
+                                                      disabled
+                                                    name="createModifiyData"> </textarea>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="with-border">
+                                            <div class="row">
+                                              <div class="col-md-12">
+                                                <h3 class="title">
+                                                  {{'Rollenverwaltung Public-Client' | translate:'usersAndRoles.roleadmin'}}
+                                                </h3>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-6 col-xs-12">
+                                                <div class="row">
+                                                  <label tooltip="{{'Benutzerrolle Public-Client' | translate:'user.rolepublicclient'}}"
+                                                  class="col-md-4 control-label">{{'Benutzerrolle Public-Client' | translate:'user.rolepublicclient'}}</label>
+                                                  <fieldset class="col-md-8" >
+                                                    <legend class="sr-only">Benutzerrolle Public-Client </legend>
+                                                    @for (role of this.clientRoles; track role) {
+                                                      <div>
+                                                        <fieldset  [attr.disabled]=this.isRoleOptionDisabled(role)>
+                                                          <label>
+                                                            <input type="radio" [formControlName]="'rolePublicClient'"
+                                                              (change)="rolePublicClientChange()"
+                                                              [value]="role">
+                                                              {{ role }}
+                                                            </label>
+                                                          </fieldset>
+                                                        </div>
+                                                      }
+                                                    </fieldset>
+                                                  </div>
+                                                  <div class="row" [ngClass]="{'has-warning': (errors.QoAValue)}">
+                                                    <label tooltip="{{'Qualität der Authentifizierung (QoA) bei der letzten Anmeldung' | translate:'user.qoAValue'}}" class="col-md-4 control-label">{{'Qualität der Authentifizierung (QoA) bei der letzten Anmeldung' | translate:'user.zipCode'}}</label>
+                                                    <div class="col-md-8">
+                                                      <input id="2" formControlName="qoAValue"
+                                                        class="form-control"/>
+                                                        @if (errors.QoAValue) {
+                                                          <div class="help-block">
+                                                            {{ errors.zipCode }}
+                                                          </div>
+                                                        }
+                                                      </div>
+                                                    </div>
+                                                    <div class="row" [ngClass]="{'has-warning': (errors.homeName)}">
+                                                      <label tooltip="{{'HomeName' | translate:'user.homeName'}}" class="col-md-4 control-label">{{'HomeName' | translate:'user.homeName'}}</label>
+                                                      <div class="col-md-8">
+                                                        <input id="homeName" formControlName="homeName"
+                                                          class="form-control"/>
+                                                          @if (errors.homeName) {
+                                                            <div class="help-block">
+                                                              {{ errors.homeName }}
+                                                            </div>
+                                                          }
+                                                        </div>
+                                                      </div>
+                                                      <div class="row" [ngClass]="{'has-warning': (errors.downloadLimitDisabledUntil)}">
+                                                        <label tooltip="{{'Downloadbeschränkung aufheben bis' | translate:'user.downloadLimit'}}"
+                                                        class="col-md-4 control-label">{{'Downloadbeschränkung aufheben bis' | translate:'user.downloadLimit'}}</label>
+                                                        <div class="col-md-8">
+                                                          <input class="form-control"
+                                                            type="date"
+                                                            autocomplete="off"
+                                                            mwlFlatpickr
+                                                            [minDate]="today"
+                                                            [maxDate]="maxDate"
+                                                            (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'downloadLimitDisabledUntil')"
+                                                            [convertModelValue]="true"
+                                                            [allowInput]="true"
+                                                            dateFormat="d.m.Y"
+                                                            placeholder="{{'Downloadbeschränkung aufheben bis (dd.mm.jjjj)' | translate: 'user.placeholder.downloadLimitDisabledUntil'}}"
+                                                            name="downloadLimitDisabledUntil"
+                                                            formControlName="downloadLimitDisabledUntil">
+                                                            @if (errors.downloadLimitDisabledUntil) {
+                                                              <div class="help-block">
+                                                                {{ errors.downloadLimitDisabledUntil }}
+                                                              </div>
+                                                            }
+                                                          </div>
+                                                        </div>
+                                                        <div class="row" [ngClass]="{'has-warning': (errors.digitalisierungsbeschraenkungAufgehobenBis)}">
+                                                          <label tooltip="{{'Digitalisierungsbeschränkung aufheben bis' | translate:'user.digitalisierungsbeschraenkungAufgehobenBis'}}"
+                                                          class="col-md-4 control-label">{{'Digitalisierungsbeschränkung aufheben bis' | translate:'user.digitalisierungsLimit'}}</label>
+                                                          <div class="col-md-8">
+                                                            <input class="form-control"
+                                                              type="date"
+                                                              autocomplete="off"
+                                                              mwlFlatpickr
+                                                              [minDate]="today"
+                                                              [maxDate]="maxDate"
+                                                              (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'digitalisierungsbeschraenkungAufgehobenBis')"
+                                                              [convertModelValue]="true"
+                                                              [allowInput]="true"
+                                                              dateFormat="d.m.Y"
+                                                              placeholder="{{'Digitalisierungsbeschränkung aufheben bis (dd.mm.jjjj)' | translate: 'user.placeholder.digitalisierungsbeschraenkungAufgehobenBis'}}"
+                                                              name="digitalisierungsbeschraenkungAufgehobenBis"
+                                                              formControlName="digitalisierungsbeschraenkungAufgehobenBis"
+                                                              >
+                                                              @if (errors.digitalisierungsbeschraenkungAufgehobenBis) {
+                                                                <div class="help-block">
+                                                                  {{ errors.digitalisierungsbeschraenkungAufgehobenBis }}
+                                                                </div>
+                                                              }
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-xs-12">
+                                                          <div class="row" >
+                                                            <label tooltip="{{'BAR-interne Konsultation'}}"
+                                                            class="col-md-4 control-label">{{'BAR-interne Konsultation' }}</label>
+                                                            <div class="col-md-8">
+                                                              <input class="checkbox" type="checkbox"
+                                                                formControlName="barInternalConsultation">
+                                                              </div>
+                                                            </div>
+                                                            <div class="row" >
+                                                              <label tooltip="{{'Forschungsgruppe DDS' | translate:'user.researcherGroup'}}"
+                                                              class="col-md-4 control-label ">{{'Forschungsgruppe DDS' | translate:'user.researcherGroup'}}</label>
+                                                              <div class="col-md-8">
+                                                                <input class="checkbox" type="checkbox"
+                                                                  (click)="toggelSelectedResearcherGroup($event)"
+                                                                  formControlName="researcherGroup">
+                                                                </div>
+                                                                <cmi-viaduc-verify-modal (onSubmitted)="researcherGroupDdsModalAnswer($event)" [(open)]="showVerifyModal"></cmi-viaduc-verify-modal>
+                                                              </div>
+                                                              <div class="row">
+                                                                <label tooltip="{{'Ablehnungsgrund' | translate:'user.ablehnungsgrund'}}"
+                                                                class="col-md-4 control-label">{{'Ablehnungsgrund' | translate:'user.ablehnungsgrund'}}</label>
+                                                                <div class="col-md-8">
+                                                                  <input class="form-control"
+                                                                    disabled
+                                                                    name="reasonForRejection">
+                                                                  </div>
+                                                                </div>
+                                                                @if ((allowUploadAusfuehren || allowHerunterladenAusfuehren)) {
+                                                                  <div class="row" >
+                                                                    <label tooltip="{{'Identifizierungsmittel' | translate:'user.Identifizierungsmittel'}}"
+                                                                    class="col-md-4 control-label ">{{'Identifizierungsmittel' | translate:'user.Identifizierungsmittel'}}</label>
+                                                                    @if (allowHerunterladenAusfuehren) {
+                                                                      <div class="col-md-8">
+                                                                        <button id="buttonDownloadIdentifizierungsmittel" type="button" class="btn btn-link" (click)="downloadIdentifierungsmittel()"
+                                                                          [disabled]="!detail?.item?.hasIdentifizierungsmittel " >
+                                                                          @if (detail?.item?.hasIdentifizierungsmittel) {
+                                                                            <span><span
+                                                                            class="icon icon&#45;&#45;pdf"></span>&nbsp;{{ 'Herunterladen' | translate:'user.download' }}</span>
+                                                                          }
+                                                                          @if (!detail?.item?.hasIdentifizierungsmittel) {
+                                                                            <span><span
+                                                                            class="glyphicon glyphicon-remove"></span>&nbsp;{{ 'Kein Dokument vorhanden' | translate:'user.datei' }}</span>
+                                                                          }
+                                                                        </button>
+                                                                      </div>
+                                                                    }
+                                                                    <div class="col-md-4"></div>
+                                                                    @if (allowUploadAusfuehren) {
+                                                                      <div class="col-md-8">
+                                                                        <div class="upload-btn-wrapper">
+                                                                          <button class="btn btn-default" [disabled]="detail?.item?.hasIdentifizierungsmittel || isInternalUser">
+                                                                            <span><span class="glyphicon glyphicon-open-file"></span>&nbsp;{{ 'Datei wählen' | translate:'user.datei' }}</span>
+                                                                          </button>
+                                                                          <input type="file" class="form-control" accept="application/pdf" [disabled]="detail?.item?.hasIdentifizierungsmittel || isInternalUser" (change)="onChangedentIfierungsmittel($event)">
+                                                                        </div>
+                                                                        @if (getCheckedStatusForRolePublic(_authorization.roles.Oe2)) {
+                                                                          <button id="buttonUploadIdentifierungsmittel" type="button" class="button btn btn-primary"
+                                                                            (click)="rolePublicClientChangeOe3()"
+                                                                            [disabled]="!selectedIdentifizierungsmittel">
+                                                                            {{'Upload' |translate:'user.upload.identifierungsmittel' }}
+                                                                          </button>
+                                                                        }
+                                                                        @if (getCheckedStatusForRolePublic(_authorization.roles.Oe3)) {
+                                                                          <button type="button" class="button btn btn-primary" (click)="uploadIdentifierungsmittel()"
+                                                                            [disabled]="!selectedIdentifizierungsmittel || isInternalUser">
+                                                                            {{'Upload' |translate:'user.upload.identifierungsmittel' }}
+                                                                          </button>
+                                                                        }
+                                                                      </div>
+                                                                    }
+                                                                  </div>
+                                                                }
+                                                                <cmi-viaduc-modal [modalTitle]="GetModalTitel()" [(opened)]="showModal">
+                                                                  <cmi-viaduc-modal-body>
+                                                                    <span class="col-sm-12 col-md-12">{{GetModalMessage()}}</span>
+                                                                  </cmi-viaduc-modal-body>
+                                                                  <cmi-viaduc-modal-footer>
+                                                                    <div class="row">
+                                                                      <div class="col-xs-12">
+                                                                        <button type="button" class="btn btn-secondary" (click)="onCancelClick($event)">
+                                                                          {{'Nein' | translate:'user.no'}}
+                                                                        </button>
+                                                                        <button type="button" class="button btn btn-primary" (click)="onOkClick($event)">
+                                                                          {{'Ja' | translate:'user.yes'}}
+                                                                        </button>
+                                                                      </div>
+                                                                    </div>
+                                                                  </cmi-viaduc-modal-footer>
+                                                                </cmi-viaduc-modal>
+                                                              </div>
+                                                            </div>
+                                                            <div class="row">
+                                                              <div class="col-md-12">
+                                                                @if (allowBereichBenutzerdatenBearbeiten || allowDownloadbeschraenkungBearbeiten || allowBenutzerrollePublicClientBearbeiten ||
+                                                                  (isInternalUser && allowBarInterneKonsultationBearbeiten) || (!isInternalUser && allowForschungsgruppeDdsBearbeiten)) {
+                                                                  <button id="buttonSaveUser"
+                                                                    type="button" class="btn btn-primary"
+                                                                    (click)="saveUser()" name="buttonSaveUser" [disabled]="allowBereichBenutzerdatenBearbeiten && (!myForm.valid || myForm.pristine)">
+                                                                    {{'Speichern' |translate:'save' }}
+                                                                  </button>
+                                                                }
+                                                                @if (allowBereichBenutzerdatenBearbeiten || allowDownloadbeschraenkungBearbeiten || allowBenutzerrollePublicClientBearbeiten ||
+                                                                  (isInternalUser && allowBarInterneKonsultationBearbeiten) || (!isInternalUser && allowForschungsgruppeDdsBearbeiten)) {
+                                                                  <button
+                                                                    class="btn btn-default"
+                                                                    (click)="resetUserData()" name="buttonReset">{{'Zurücksetzen' | translate:'reset'}}
+                                                                  </button>
+                                                                }
+                                                                <button class="btn btn-secondary" type="button" (click)="goToBenutzerList()"
+                                                                  name="buttonCancel">{{'Abbrechen' | translate:'cancel'}}
+                                                                </button>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </form>
+                                                    }
+                                                    <div class="row">
+                                                      <div  class="col-md-6 col-xs-12">
+                                                        <div class="with-border">
+                                                          <div class="row">
+                                                            <h3 class="col-md-12 title">
+                                                              {{'Access-Tokens für AS-Benutzer' | translate:'usersAndRoles.accesstokens.title'}}
+                                                            </h3>
+                                                          </div>
+                                                          <div class="row">
+                                                            <div class="col-md-12">
+                                                              <div class="left">
+                                                                <h4>
+                                                                  {{ 'Zugewiesene zuständige Stellen' | translate:'user.assignedAblieferndeStellen' }}
+                                                                </h4>
+                                                              </div>
+                                                              <div class="left form-control">
+                                                                @if (allowZustaendigeStelleBearbeiten && detail && detail.item) {
+                                                                  <wj-multi-auto-complete #mac1
+                                                                    [itemsSource]="ablieferndeStelleAllList"
+                                                                    [displayMemberPath]="'bezeichnung'"
+                                                                    [selectedValuePath]="'bezeichnung'"
+                                                                    [(ngModel)]="detail.item.ablieferndeStelleList"
+                                                                    placeholder="{{'Zuständige Stellen' | translate: 'user.ablieferndeStelle'}}"
+                                                                    [disabled]="asTokenManageDisabled()">
+                                                                  </wj-multi-auto-complete>
+                                                                }
+                                                                @if (!allowZustaendigeStelleBearbeiten) {
+                                                                  <div class="left">
+                                                                    <wj-list-box [itemsSource]="detail?.item?.ablieferndeStelleList"
+                                                                      displayMemberPath="kuerzel"  [disabled]="asTokenManageDisabled()"
+                                                                      [selectedItem]="null">
+                                                                    </wj-list-box>
+                                                                  </div>
+                                                                }
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div class="row">
+                                                            <div class="col-md-12">
+                                                              <div class="left">
+                                                                <h4>
+                                                                  {{ 'Zugewiesene Access-Tokens' | translate:'user.assignedAblieferndeStellenToken' }}
+                                                                </h4>
+                                                              </div>
+                                                              <div class="left form-control">
+                                                                <wj-list-box [itemsSource]="detail?.item?.tokens"
 
-		<div content *ngIf="detail">
-			<div class="page-header">
-				<h2 class="page-content-title">
-					<span>{{'Benutzer' | translate:'user.user'}}</span>
-					<span>:&nbsp;{{ detail.item.firstName }} {{ detail.item.familyName }}</span>
-				</h2>
-			</div>
-			<div class="action-container" *ngIf="detailPagingEnabled()">
-				<div class="row action-buttons">
-					<div class="col-md-4 col-xs-12 pull-right">
-						<cmi-viaduc-detail-paging [detailUrl]="getDetailBaseUrl()" [idProperty]="'id'" [disableNavigation]="getFormIsDirty()"></cmi-viaduc-detail-paging>
-					</div>
-				</div>
-			</div>
-
-			<form class="row" [formGroup]="myForm" *ngIf="myForm">
-				<div class="col-md-12">
-					<div class="with-border">
-						<h3 class="title">
-							<span>{{'Benutzerdaten' | translate:'user.userdata'}}</span>
-						</h3>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="row" [ngClass]="{'has-warning': (errors.familyName)}">
-									<label tooltip="{{'Name' | translate:'user.familyName'}}*" class="col-md-4 control-label">{{'Name' | translate:'user.familyName'}}*</label>
-									<div class="col-md-8">
-										<input class="form-control" formControlName="familyName" [autoFocus]="true"
-											   placeholder="{{'name' | translate: 'user.placeholder.familyName'}}"
-											   name="familyName"/>
-										<div *ngIf="errors.familyName" class="help-block">
-											{{ errors.familyName }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.firstName)}">
-									<label tooltip="{{'Vorname(n)' | translate:'user.firstName'}}*" class="col-md-4 control-label">{{'Vorname(n)' | translate:'user.firstName'}}*</label>
-									<div class="col-md-8">
-										<input class="form-control" formControlName="firstName"
-											   placeholder="{{'Vorname(n)' | translate: 'user.placeholder.firstName'}}"
-											   name="firstName"/>
-										<div *ngIf="errors.firstName" class="help-block">
-											{{ errors.firstName }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.organization)}">
-									<label *ngIf="!isInternalUser" tooltip="{{'Organisation' | translate:'user.organization'}}" class="col-md-4 control-label">{{'Organisation' | translate:'user.organization'}}</label>
-									<label *ngIf="isInternalUser" tooltip="{{'Organisation' | translate:'user.organization'}}*" class="col-md-4 control-label">{{'Organisation' | translate:'user.organization'}}*</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   formControlName="organization"
-											   placeholder="{{'Organisation' | translate: 'user.placeholder.organization'}}">
-										<div *ngIf="errors.organization" class="help-block">
-											{{ errors.organization }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.street)}">
-									<label tooltip="{{'Strasse / Nr.' | translate:'user.street'}}*" class="col-md-4 control-label">{{'Strasse / Nr.' | translate:'user.street'}}*</label>
-									<div class="col-md-8">
-										<input id="street" formControlName="street"
-											   class="form-control"/>
-										<div *ngIf="errors.street" class="help-block">
-											{{ errors.street }}
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<label tooltip="{{'Zusatz' | translate:'user.streetAttachment'}}" class="col-md-4 control-label">{{'Zusatz' | translate:'user.streetAttachment'}}</label>
-									<div class="col-md-8">
-										<input id="streetAttachment" formControlName="streetAttachment"
-											   class="form-control"/>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.zipCode)}">
-									<label tooltip="{{'PLZ' | translate:'user.zipCode'}}*" class="col-md-4 control-label">{{'PLZ' | translate:'user.zipCode'}}*</label>
-									<div class="col-md-8">
-										<input id="zipCode" formControlName="zipCode"
-											   class="form-control"/>
-										<div *ngIf="errors.zipCode" class="help-block">
-											{{ errors.zipCode }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.town)}">
-									<label tooltip="{{'Ort' | translate:'user.town'}}*" class="col-md-4 control-label">{{'Ort' | translate:'user.town'}}*</label>
-									<div class="col-md-8">
-										<input id="town" formControlName="town"
-											   class="form-control"/>
-										<div *ngIf="errors.town" class="help-block">
-											{{ errors.town }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.countryCode)}">
-									<label tooltip="{{'Land' | translate:'user.countryCode'}}*" class="col-md-4 control-label">{{'Land' | translate:'user.countryCode'}}*</label>
-									<div class="col-md-8">
-										<select class="form-control" formControlName="countryCode"
-												name="countryCode">
-											<option *ngFor="let c of languageDependantCountries" value="{{c.code}}"
-													title="{{c.name}}">{{c.name}}
-											</option>
-										</select>
-										<div *ngIf="errors.countryCode" class="help-block">
-											{{ errors.countryCode }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.phoneNumber)}">
-									<label tooltip="{{'Telefon (Festnetz)' | translate:'user.phoneNumber'}}"
-										   class="col-md-4 control-label">{{'Telefon (Festnetz)' | translate:'user.phoneNumber'}}</label>
-									<div class="col-md-8">
-										<input id="phoneNumber" formControlName="phoneNumber"
-											   class="form-control"/>
-										<div *ngIf="errors.phoneNumber" class="help-block">
-											{{ errors.phoneNumber }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.mobileNumber)}">
-									<label tooltip="{{'Mobiltelefon' | translate:'user.mobileNumber'}}" class="col-md-4 control-label">{{'Mobiltelefon' | translate:'user.mobileNumber'}}</label>
-									<div class="col-md-8">
-										<input id="mobileNumber" formControlName="mobileNumber"
-											   class="form-control"/>
-										<div *ngIf="errors.mobileNumber" class="help-block">
-											{{ errors.mobileNumber }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.birthday)}">
-									<label tooltip="{{'Geburtsdatum' | translate:'user.birthday'}}" class="col-md-4 control-label">{{'Geburtsdatum' | translate:'user.birthday'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   type="date"
-											   autocomplete="off"
-											   mwlFlatpickr
-											   formControlName="birthday"
-											   [maxDate]="today"
-											   (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'birthday')"
-											   [convertModelValue]="true"
-											   [allowInput]="true"
-											   dateFormat="d.m.Y"
-											   placeholder="{{'Geburtsdatum (dd.mm.jjjj)' | translate: 'user.placeholder.birthday'}}"
-											   name="birthday">
-										<div *ngIf="errors.birthday" class="help-block">
-											{{ errors.birthday }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.emailAddress)}">
-									<label tooltip="{{'E-Mail' | translate:'user.emailAddress'}}*" class="col-md-4 control-label ">{{'E-Mail' | translate:'user.emailAddress'}}*</label>
-									<div class="col-md-8">
-										<input class="form-control" type="email"
-											   formControlName="emailAddress"
-											   placeholder="{{'E-Mail' | translate: 'user.placeholder.emailAddress'}}"
-											   (change)="recalculateResearcherGroup()"
-											   name="emailAddress">
-										<div *ngIf="errors.emailAddress" class="help-block">
-											{{ errors.emailAddress }}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="row">
-									<label tooltip="{{'Fabasoft-Dossier 622' | translate:'user.fabasoftDossier'}}"
-										   class="col-md-4 control-label">{{'Fabasoft-Dossier 622' | translate:'user.fabasoftDossier'}}</label>
-									<div class="col-md-8">
-										<input class="form-control" formControlName="fabasoftDossier"
-											   placeholder="{{'Fabasoft-Dossier 622' | translate: 'user.placeholder.fabasoftDossier'}}"
-											   name="fabasoftDossier"/>
-									</div>
-								</div>
-								<div class="row">
-									<label tooltip="{{'Bevorzugte Sprache' | translate:'user.language'}}"
-										   class="col-md-4 control-label">{{'Bevorzugte Sprache' | translate:'user.language'}}</label>
-									<div class="col-md-8">
-										<select class="form-control" formControlName="language"
-												name="language">
-											<option *ngFor="let c of language" [ngValue]="c.code"
-													title="{{c.name}}">{{c.name}}
-											</option>
-										</select>
-									</div>
-								</div>
-								<div class="row">
-									<label tooltip="{{'Benutzer-ID' | translate:'user.id'}}" class="col-md-4 control-label">{{'Benutzer-ID' | translate:'user.id'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   formControlName="id"
-											   disabled
-											   name="id">
-									</div>
-								</div>
-								<div class="row">
-									<label tooltip="{{'UserExt-ID' | translate:'user.extid'}}" class="col-md-4 control-label">{{'UserExt-ID' | translate:'user.extid'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   formControlName="userExtId"
-											   disabled
-											   name="userExtId">
-									</div>
-								</div>
-								<div class="row">
-									<label tooltip="{{'Datensatz-Log' | translate:'user.createModifiyData'}}"
-										   class="col-md-4 control-label">{{'Datensatz-Log' | translate:'user.createModifiyData'}}</label>
-									<div class="col-md-8">
-								 		<textarea class="form-control"
-												  [rows]="6"
-												  formControlName="createModifiyData"
-												  disabled
-												  name="createModifiyData"> </textarea>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="with-border">
-						<div class="row">
-							<div class="col-md-12">
-								<h3 class="title">
-									{{'Rollenverwaltung Public-Client' | translate:'usersAndRoles.roleadmin'}}
-								</h3>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-6 col-xs-12">
-								<div class="row">
-									<label tooltip="{{'Benutzerrolle Public-Client' | translate:'user.rolepublicclient'}}"
-										   class="col-md-4 control-label">{{'Benutzerrolle Public-Client' | translate:'user.rolepublicclient'}}</label>
-									<fieldset class="col-md-8" >
-										<legend class="sr-only">Benutzerrolle Public-Client </legend>
-										<div *ngFor="let role of this.clientRoles">
-											<fieldset  [attr.disabled]=this.isRoleOptionDisabled(role)>
-												<label>
-													<input type="radio" [formControlName]="'rolePublicClient'"
-														   (change)="rolePublicClientChange()"
-														   [value]="role">
-													{{ role }}
-												</label>
-											</fieldset>
-										</div>
-									</fieldset>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.QoAValue)}">
-									<label tooltip="{{'Qualität der Authentifizierung (QoA) bei der letzten Anmeldung' | translate:'user.qoAValue'}}" class="col-md-4 control-label">{{'Qualität der Authentifizierung (QoA) bei der letzten Anmeldung' | translate:'user.zipCode'}}</label>
-									<div class="col-md-8">
-										<input id="2" formControlName="qoAValue"
-											   class="form-control"/>
-										<div *ngIf="errors.QoAValue" class="help-block">
-											{{ errors.zipCode }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.homeName)}">
-									<label tooltip="{{'HomeName' | translate:'user.homeName'}}" class="col-md-4 control-label">{{'HomeName' | translate:'user.homeName'}}</label>
-									<div class="col-md-8">
-										<input id="homeName" formControlName="homeName"
-											   class="form-control"/>
-										<div *ngIf="errors.homeName" class="help-block">
-											{{ errors.homeName }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.downloadLimitDisabledUntil || errors.downloadLimitDisabledUntil)}">
-									<label tooltip="{{'Downloadbeschränkung aufheben bis' | translate:'user.downloadLimit'}}"
-										   class="col-md-4 control-label">{{'Downloadbeschränkung aufheben bis' | translate:'user.downloadLimit'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   type="date"
-											   autocomplete="off"
-											   mwlFlatpickr
-											   [minDate]="today"
-											   [maxDate]="maxDate"
-											   (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'downloadLimitDisabledUntil')"
-											   [convertModelValue]="true"
-											   [allowInput]="true"
-											   dateFormat="d.m.Y"
-											   placeholder="{{'Downloadbeschränkung aufheben bis (dd.mm.jjjj)' | translate: 'user.placeholder.downloadLimitDisabledUntil'}}"
-											   name="downloadLimitDisabledUntil"
-											   formControlName="downloadLimitDisabledUntil">
-										<div *ngIf="errors.downloadLimitDisabledUntil" class="help-block">
-											{{ errors.downloadLimitDisabledUntil }}
-										</div>
-									</div>
-								</div>
-								<div class="row" [ngClass]="{'has-warning': (errors.digitalisierungsbeschraenkungAufgehobenBis)}">
-									<label tooltip="{{'Digitalisierungsbeschränkung aufheben bis' | translate:'user.digitalisierungsbeschraenkungAufgehobenBis'}}"
-										   class="col-md-4 control-label">{{'Digitalisierungsbeschränkung aufheben bis' | translate:'user.digitalisierungsLimit'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   type="date"
-											   autocomplete="off"
-											   mwlFlatpickr
-											   [minDate]="today"
-											   [maxDate]="maxDate"
-											   (flatpickrValueUpdate)="dataPickerValueUpdate($event, 'digitalisierungsbeschraenkungAufgehobenBis')"
-											   [convertModelValue]="true"
-											   [allowInput]="true"
-											   dateFormat="d.m.Y"
-											   placeholder="{{'Digitalisierungsbeschränkung aufheben bis (dd.mm.jjjj)' | translate: 'user.placeholder.digitalisierungsbeschraenkungAufgehobenBis'}}"
-											   name="digitalisierungsbeschraenkungAufgehobenBis"
-											   formControlName="digitalisierungsbeschraenkungAufgehobenBis"
-											   >
-										<div *ngIf="errors.digitalisierungsbeschraenkungAufgehobenBis" class="help-block">
-											{{ errors.digitalisierungsbeschraenkungAufgehobenBis }}
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6 col-xs-12">
-								<div class="row" >
-									<label tooltip="{{'BAR-interne Konsultation'}}"
-										   class="col-md-4 control-label">{{'BAR-interne Konsultation' }}</label>
-									<div class="col-md-8">
-										<input class="checkbox" type="checkbox"
-											   formControlName="barInternalConsultation">
-									</div>
-								</div>
-								<div class="row" >
-									<label tooltip="{{'Forschungsgruppe DDS' | translate:'user.researcherGroup'}}"
-										   class="col-md-4 control-label ">{{'Forschungsgruppe DDS' | translate:'user.researcherGroup'}}</label>
-									<div class="col-md-8">
-										<input class="checkbox" type="checkbox"
-											   (click)="toggelSelectedResearcherGroup($event)"
-											   formControlName="researcherGroup">
-									</div>
-									<cmi-viaduc-verify-modal (onSubmitted)="researcherGroupDdsModalAnswer($event)" [(open)]="showVerifyModal"></cmi-viaduc-verify-modal>
-								</div>
-								<div class="row">
-									<label tooltip="{{'Ablehnungsgrund' | translate:'user.ablehnungsgrund'}}"
-										   class="col-md-4 control-label">{{'Ablehnungsgrund' | translate:'user.ablehnungsgrund'}}</label>
-									<div class="col-md-8">
-										<input class="form-control"
-											   disabled
-											   name="reasonForRejection">
-									</div>
-								</div>
-								<div class="row" *ngIf="(allowUploadAusfuehren || allowHerunterladenAusfuehren)" >
-									<label tooltip="{{'Identifizierungsmittel' | translate:'user.Identifizierungsmittel'}}"
-										   class="col-md-4 control-label ">{{'Identifizierungsmittel' | translate:'user.Identifizierungsmittel'}}</label>
-									<div class="col-md-8" *ngIf="allowHerunterladenAusfuehren">
-										<button id="buttonDownloadIdentifizierungsmittel" type="button" class="btn btn-link" (click)="downloadIdentifierungsmittel()"
-												[disabled]="!detail.item.hasIdentifizierungsmittel " >
-												<span *ngIf="detail.item.hasIdentifizierungsmittel"><span
-													class="icon icon&#45;&#45;pdf"></span>&nbsp;{{ 'Herunterladen' | translate:'user.download' }}</span>
-											<span *ngIf="!detail.item.hasIdentifizierungsmittel"><span
-												class="glyphicon glyphicon-remove"></span>&nbsp;{{ 'Kein Dokument vorhanden' | translate:'user.datei' }}</span>
-										</button>
-									</div>
-									<div class="col-md-4"></div>
-									<div class="col-md-8" *ngIf="allowUploadAusfuehren">
-										<div class="upload-btn-wrapper">
-											<button class="btn btn-default" [disabled]="detail.item.hasIdentifizierungsmittel || isInternalUser">
-												<span><span class="glyphicon glyphicon-open-file"></span>&nbsp;{{ 'Datei wählen' | translate:'user.datei' }}</span>
-											</button>
-											<input type="file" class="form-control" accept="application/pdf" [disabled]="detail.item.hasIdentifizierungsmittel || isInternalUser" (change)="onChangedentIfierungsmittel($event)">
-										</div>
-										<button *ngIf="getCheckedStatusForRolePublic(_authorization.roles.Oe2)" id="buttonUploadIdentifierungsmittel" type="button" class="button btn btn-primary"
-												(click)="rolePublicClientChangeOe3()"
-												[disabled]="!selectedIdentifizierungsmittel">
-											{{'Upload' |translate:'user.upload.identifierungsmittel' }}
-										</button>
-										<button *ngIf="getCheckedStatusForRolePublic(_authorization.roles.Oe3)" type="button" class="button btn btn-primary" (click)="uploadIdentifierungsmittel()"
-												[disabled]="!selectedIdentifizierungsmittel || isInternalUser">
-											{{'Upload' |translate:'user.upload.identifierungsmittel' }}
-										</button>
-									</div>
-								</div>
-								<cmi-viaduc-modal [modalTitle]="GetModalTitel()" [(opened)]="showModal">
-									<cmi-viaduc-modal-body>
-										<span class="col-sm-12 col-md-12">{{GetModalMessage()}}</span>
-									</cmi-viaduc-modal-body>
-									<cmi-viaduc-modal-footer>
-										<div class="row">
-											<div class="col-xs-12">
-												<button type="button" class="btn btn-secondary" (click)="onCancelClick($event)">
-													{{'Nein' | translate:'user.no'}}
-												</button>
-												<button type="button" class="button btn btn-primary" (click)="onOkClick($event)">
-													{{'Ja' | translate:'user.yes'}}
-												</button>
-											</div>
-										</div>
-									</cmi-viaduc-modal-footer>
-								</cmi-viaduc-modal>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<button id="buttonSaveUser" *ngIf="allowBereichBenutzerdatenBearbeiten || allowDownloadbeschraenkungBearbeiten || allowBenutzerrollePublicClientBearbeiten ||
-										(isInternalUser && allowBarInterneKonsultationBearbeiten) || (!isInternalUser && allowForschungsgruppeDdsBearbeiten)"
-										type="button" class="btn btn-primary"
-										(click)="saveUser()" name="buttonSaveUser" [disabled]="allowBereichBenutzerdatenBearbeiten && (!myForm.valid || myForm.pristine)">
-									{{'Speichern' |translate:'save' }}
-								</button>
-								<button *ngIf="allowBereichBenutzerdatenBearbeiten || allowDownloadbeschraenkungBearbeiten || allowBenutzerrollePublicClientBearbeiten ||
-										(isInternalUser && allowBarInterneKonsultationBearbeiten) || (!isInternalUser && allowForschungsgruppeDdsBearbeiten)"
-										class="btn btn-default"
-										(click)="resetUserData()" name="buttonReset">{{'Zurücksetzen' | translate:'reset'}}
-								</button>
-								<button class="btn btn-secondary" type="button" (click)="goToBenutzerList()"
-										name="buttonCancel">{{'Abbrechen' | translate:'cancel'}}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-
-			<div class="row">
-				<div  class="col-md-6 col-xs-12">
-					<div class="with-border">
-						<div class="row">
-							<h3 class="col-md-12 title">
-								{{'Access-Tokens für AS-Benutzer' | translate:'usersAndRoles.accesstokens.title'}}
-							</h3>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="left">
-									<h4>
-										{{ 'Zugewiesene zuständige Stellen' | translate:'user.assignedAblieferndeStellen' }}
-									</h4>
-								</div>
-								<div class="left form-control">
-									<wj-multi-auto-complete *ngIf="allowZustaendigeStelleBearbeiten" #mac1
-															[itemsSource]="ablieferndeStelleAllList"
-															[displayMemberPath]="'bezeichnung'"
-															[selectedValuePath]="'bezeichnung'"
-															[(ngModel)]="detail.item.ablieferndeStelleList"
-															placeholder="{{'Zuständige Stellen' | translate: 'user.ablieferndeStelle'}}"
-															[disabled]="asTokenManageDisabled()">
-									</wj-multi-auto-complete>
-
-									<div *ngIf="!allowZustaendigeStelleBearbeiten" class="left">
-										<wj-list-box [itemsSource]="detail.item.ablieferndeStelleList"
-													 displayMemberPath="kuerzel"  [disabled]="asTokenManageDisabled()"
-													 [selectedItem]="null">
-										</wj-list-box>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="left">
-									<h4>
-										{{ 'Zugewiesene Access-Tokens' | translate:'user.assignedAblieferndeStellenToken' }}
-									</h4>
-								</div>
-								<div class="left form-control">
-									<wj-list-box [itemsSource]="detail.item.tokens"
-												 [disabled]="asTokenManageDisabled()"
-												 [selectedItem]="null"></wj-list-box>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<button id="buttonSaveAblieferndeStellen" *ngIf="allowZustaendigeStelleBearbeiten"
-										[disabled]="asTokenManageDisabled()" type="button" class="btn btn-primary"
-										(click)="saveAblieferndeStellen()">{{
-									'Speichern' |
-											translate:'save' }}
-								</button>
-								<button *ngIf="allowZustaendigeStelleBearbeiten" type="button" class="btn btn-default"
-										[disabled]="asTokenManageDisabled()" (click)="resetAccessTokens()">{{
-									'Zurücksetzen' |
-											translate:'reset' }}
-								</button>
-								<button class="btn btn-secondary" (click)="goToBenutzerList()">{{'Abbrechen' |
-										translate:'cancel'}}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" class="col-md-6 col-xs-12">
-					<div class="with-border">
-						<div class="row">
-							<h3 class="col-md-12 col-xs-12 title">
-								<span>{{'Rollenverwaltung Management-Client' | translate:'usersAndRoles.roleadmin.management'}}</span>
-							</h3>
-						</div>
-						<div class="row">
-							<div class="col-md-12 col-xs-12 tablecontainer">
-								<div class="row">
-									<label tooltip="{{'eIAM-Rolle Management-Client' | translate:'user.eiamRoles'}}"
-										   class="col-md-3 control-label">{{'eIAM-Rolle Management-Client' | translate:'user.eiamRoles'}}</label>
-									<div class="col-md-9">
-										<input class="form-control"
-											   [value]="detail.item.eiamRoles"
-											   disabled
-											   name="eiamRoles">
-									</div>
-								</div>
-								<div class="tablerowcontainer">
-									<div class="left">
-										<h4>{{ 'Zugewiesene Rollen' | translate:'user.assignedRoles' }}</h4>
-									</div>
-									<div *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" class="middle">
-									</div>
-									<div *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" class="right">
-										<h4>{{ 'Verfügbare Rollen' | translate:'user.availableRoles' }}</h4>
-									</div>
-								</div>
-								<div *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" class="tablerowcontainer">
-									<div class="left with-border nopadding-left nopadding-right">
-										<wj-list-box #listIncluded [itemsSource]="detail.item.roles" displayMemberPath="name"
-													 [selectedItem]="null"></wj-list-box>
-									</div>
-									<div class="middle">
-										<button type="button" class="btn btn-default"
-												[disabled]="!listExcluded || !listExcluded.selectedItem"
-												(click)="include()">
-											<i class="glyphicon glyphicon-chevron-left"></i>
-										</button>
-										<br/>
-										<br/>
-										<button type="button" class="btn btn-default" [disabled]="!listIncluded.selectedItem"
-												(click)="exclude()">
-											<i class="glyphicon glyphicon-chevron-right"></i>
-										</button>
-									</div>
-									<div class="right with-border nopadding-left nopadding-right">
-										<wj-list-box class="wj-listbox" #listExcluded [itemsSource]="stillAvailableRoles"
-													 displayMemberPath="name"></wj-list-box>
-									</div>
-								</div>
-								<div *ngIf="!canManageManagementClientRole(detail.item.eiamRoles)">
-									<div class="tablerowcontainer">
-										<div class="left with-border nopadding-left nopadding-right">
-											<wj-list-box #listIncluded [itemsSource]="detail.item.roles"
-														 displayMemberPath="name"
-														 [selectedItem]="null"></wj-list-box>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 col-xs-12">
-								<button id="buttonSaveRoles" *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" type="button" class="btn btn-primary"
-										(click)="saveRoles()">{{
-									'Speichern' |
-											translate:'save' }}
-								</button>
-								<button *ngIf="canManageManagementClientRole(detail.item.eiamRoles)" type="button" class="btn btn-default"
-										(click)="resetRoleManagement()">{{
-									'Zurücksetzen' |
-											translate:'reset' }}
-								</button>
-								<button class="btn btn-secondary" (click)="goToBenutzerList()">{{'Abbrechen' |
-										translate:'cancel'}}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</cmi-viaduc-layout-left-content>
-	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
-</div>
-<cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>
+                                                                [selectedItem]="null"></wj-list-box>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                          <div class="row">
+                                                            <div class="col-md-12">
+                                                              @if (allowZustaendigeStelleBearbeiten) {
+                                                                <button id="buttonSaveAblieferndeStellen"
+                                                                  [disabled]="!this.hasAblieferndeStelleListChanged() || asTokenManageDisabled()"
+																		type="button" class="btn btn-primary"
+                                                                  (click)="saveAblieferndeStellen()">{{
+                                                                  'Speichern' |
+                                                                  translate:'save' }}
+                                                                </button>
+                                                              }
+                                                              @if (allowZustaendigeStelleBearbeiten) {
+                                                                <button type="button" class="btn btn-default"
+                                                                  [disabled]="!hasAblieferndeStelleListChanged() || asTokenManageDisabled()"
+																		(click)="resetAccessTokens()">{{
+                                                                  'Zurücksetzen' |
+                                                                  translate:'reset' }}
+                                                                </button>
+                                                              }
+                                                              <button class="btn btn-secondary" (click)="goToBenutzerList()">{{'Abbrechen' |
+                                                                translate:'cancel'}}
+                                                              </button>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                      @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                        <div class="col-md-6 col-xs-12">
+                                                          <div class="with-border">
+                                                            <div class="row">
+                                                              <h3 class="col-md-12 col-xs-12 title">
+                                                                <span>{{'Rollenverwaltung Management-Client' | translate:'usersAndRoles.roleadmin.management'}}</span>
+                                                              </h3>
+                                                            </div>
+                                                            <div class="row">
+                                                              <div class="col-md-12 col-xs-12 tablecontainer">
+                                                                <div class="row">
+                                                                  <label tooltip="{{'eIAM-Rolle Management-Client' | translate:'user.eiamRoles'}}"
+                                                                  class="col-md-3 control-label">{{'eIAM-Rolle Management-Client' | translate:'user.eiamRoles'}}</label>
+                                                                  <div class="col-md-9">
+                                                                    <input class="form-control"
+                                                                      [value]="detail?.item?.eiamRoles"
+                                                                      disabled
+                                                                      name="eiamRoles">
+                                                                    </div>
+                                                                  </div>
+                                                                  <div class="tablerowcontainer">
+                                                                    <div class="left">
+                                                                      <h4>{{ 'Zugewiesene Rollen' | translate:'user.assignedRoles' }}</h4>
+                                                                    </div>
+                                                                    @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                      <div class="middle">
+                                                                      </div>
+                                                                    }
+                                                                    @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                      <div class="right">
+                                                                        <h4>{{ 'Verfügbare Rollen' | translate:'user.availableRoles' }}</h4>
+                                                                      </div>
+                                                                    }
+                                                                  </div>
+                                                                  @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                    <div class="tablerowcontainer">
+                                                                      <div class="left with-border nopadding-left nopadding-right">
+                                                                        <wj-list-box #listIncluded [itemsSource]="detail?.item?.roles" displayMemberPath="name"
+                                                                        [selectedItem]="null"></wj-list-box>
+                                                                      </div>
+                                                                      <div class="middle">
+                                                                        <button type="button" class="btn btn-default"
+                                                                          [disabled]="!listExcluded || !listExcluded.selectedItem"
+                                                                          (click)="include()">
+                                                                          <i class="glyphicon glyphicon-chevron-left"></i>
+                                                                        </button>
+                                                                        <br/>
+                                                                        <br/>
+                                                                        <button type="button" class="btn btn-default" [disabled]="!listIncluded.selectedItem"
+                                                                          (click)="exclude()">
+                                                                          <i class="glyphicon glyphicon-chevron-right"></i>
+                                                                        </button>
+                                                                      </div>
+                                                                      <div class="right with-border nopadding-left nopadding-right">
+                                                                        <wj-list-box class="wj-listbox" #listExcluded [itemsSource]="stillAvailableRoles"
+                                                                        displayMemberPath="name"></wj-list-box>
+                                                                      </div>
+                                                                    </div>
+                                                                  }
+                                                                  @if (!canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                    <div>
+                                                                      <div class="tablerowcontainer">
+                                                                        <div class="left with-border nopadding-left nopadding-right">
+                                                                          <wj-list-box #listIncluded [itemsSource]="detail?.item?.roles"
+                                                                            displayMemberPath="name"
+                                                                          [selectedItem]="null"></wj-list-box>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                  }
+                                                                </div>
+                                                              </div>
+                                                              <div class="row">
+                                                                <div class="col-md-12 col-xs-12">
+                                                                  @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                    <button id="buttonSaveRoles" type="button" class="btn btn-primary"
+                                                                      (click)="saveRoles()">{{
+                                                                      'Speichern' |
+                                                                      translate:'save' }}
+                                                                    </button>
+                                                                  }
+                                                                  @if (canManageManagementClientRole(detail?.item?.eiamRoles)) {
+                                                                    <button type="button" class="btn btn-default"
+                                                                      (click)="resetRoleManagement()">{{
+                                                                      'Zurücksetzen' |
+                                                                      translate:'reset' }}
+                                                                    </button>
+                                                                  }
+                                                                  <button class="btn btn-secondary" (click)="goToBenutzerList()">{{'Abbrechen' |
+                                                                    translate:'cancel'}}
+                                                                  </button>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        }
+                                                      </div>
+                                                    </div>
+                                                </cmi-viaduc-layout-left-content>
+                                                @if (loading) {
+                                                  <cmi-loader class="cmi-visible"></cmi-loader>
+                                                }
+                                              </div>
+                                              <cmi-viaduc-modal-service-container></cmi-viaduc-modal-service-container>

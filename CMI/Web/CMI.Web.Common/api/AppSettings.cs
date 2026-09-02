@@ -113,8 +113,7 @@ namespace CMI.Web.Common.api
         {
             if (SettingsHelper.FindAttributeValue<JToken>(settingsObj, "chatbot") == null)
             {
-                SettingsHelper.InjectInfo(settingsObj, "chatbot", "supportedLanguagesForChatBot", WebHelper.SupportedLanguagesForChatBot);
-                SettingsHelper.InjectInfo(settingsObj, "chatbot", "urlForChatBot", WebHelper.UrlForChatBot);
+                SettingsHelper.InjectInfo(settingsObj, "chatbot", "enableChatbot", WebHelper.EnableChatbot);
                 SettingsHelper.InjectInfo(settingsObj, "reservation", "urlReservation", WebHelper.URLReservation);
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "url", WebHelper.MatomoUrl);
                 SettingsHelper.InjectInfo(settingsObj, "matomo", "siteId", WebHelper.MatomoSiteId);

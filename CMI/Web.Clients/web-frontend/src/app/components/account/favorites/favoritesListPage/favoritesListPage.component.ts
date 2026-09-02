@@ -4,9 +4,10 @@ import { FavoriteListsComponent } from '../../../../modules/client/components';
 import { FavoriteService, SeoService, UrlService } from '../../../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-account-favorites-page',
-	templateUrl: 'favoritesListPage.component.html',
-	styleUrls: ['./favoritesListPage.component.less']
+    selector: 'cmi-viaduc-account-favorites-page',
+    templateUrl: 'favoritesListPage.component.html',
+    styleUrls: ['./favoritesListPage.component.less'],
+    standalone: false
 })
 export class AccountFavoritesListPageComponent implements OnInit {
 	public crumbs: any[] = [];

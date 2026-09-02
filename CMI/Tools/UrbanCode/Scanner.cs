@@ -17,6 +17,8 @@ namespace CMI.Tools.UrbanCode
 
         public Dictionary<Type, List<string>> ServicesByType { get; } = new Dictionary<Type, List<string>>();
 
+        private readonly Dictionary<string, Assembly> loadedAssembliesByPath = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+
         public void Scan(string directory)
         {
             var exeFiles = FindExeFiles(directory);
@@ -45,15 +47,26 @@ namespace CMI.Tools.UrbanCode
 
         private void FindParamsForExe(string path)
         {
-            var exeAssembly = Assembly.LoadFrom(path);
             var dir = Path.GetDirectoryName(path);
-            Add(dir, exeAssembly, path.ExtractServiceName());
+
+            ResolveEventHandler assemblyResolver = (sender, args) => ResolveAssembly(dir, args);
+            AppDomain.CurrentDomain.AssemblyResolve += assemblyResolver;
+
+            try
+            {
+                var exeAssembly = LoadAssembly(path);
+                Add(dir, exeAssembly, path.ExtractServiceName());
+            }
+            finally
+            {
+                AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolver;
+            }
         }
 
 
         private void Add(string baseDir, Assembly asm, string servicename)
         {
-            foreach (var t in asm.GetTypes().Where(t => t.IsSubclassOf(typeof(ApplicationSettingsBase))))
+            foreach (var t in GetLoadableTypes(asm, Console.Out).Where(t => t.IsSubclassOf(typeof(ApplicationSettingsBase))))
             {
                 if (!ServicesByType.ContainsKey(t))
                 {
@@ -75,7 +88,7 @@ namespace CMI.Tools.UrbanCode
                     Assembly referencedAssembly = null;
                     try
                     {
-                        referencedAssembly = Assembly.LoadFrom(assemblyPath);
+                        referencedAssembly = LoadAssembly(assemblyPath);
                     }
                     catch (FileNotFoundException e)
                     {
@@ -90,6 +103,64 @@ namespace CMI.Tools.UrbanCode
 
                     Add(baseDir, referencedAssembly, servicename);
                 }
+            }
+        }
+
+        private Assembly LoadAssembly(string assemblyPath)
+        {
+            if (loadedAssembliesByPath.TryGetValue(assemblyPath, out var assembly))
+            {
+                return assembly;
+            }
+
+            assembly = Assembly.LoadFrom(assemblyPath);
+            loadedAssembliesByPath[assemblyPath] = assembly;
+            return assembly;
+        }
+
+        private Assembly ResolveAssembly(string baseDir, ResolveEventArgs args)
+        {
+            var requestedAssemblyName = new AssemblyName(args.Name);
+
+            var loadedAssembly = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .FirstOrDefault(a => AssemblyName.ReferenceMatchesDefinition(a.GetName(), requestedAssemblyName));
+
+            if (loadedAssembly != null)
+            {
+                return loadedAssembly;
+            }
+
+            var candidatePaths = new[]
+            {
+                Path.Combine(baseDir, requestedAssemblyName.Name + ".dll"),
+                Path.Combine(baseDir, requestedAssemblyName.Name + ".exe")
+            };
+
+            foreach (var candidatePath in candidatePaths.Where(File.Exists))
+            {
+                return LoadAssembly(candidatePath);
+            }
+
+            return null;
+        }
+
+        private static IEnumerable<Type> GetLoadableTypes(Assembly assembly, TextWriter log = null)
+        {
+            try
+            {
+                return assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException ex)
+            {
+                log?.WriteLine($"Warning: Could not fully load assembly '{assembly.FullName}'.");
+
+                foreach (var loaderEx in ex.LoaderExceptions.Where(e => e != null))
+                {
+                    log?.WriteLine($"  LoaderException: {loaderEx.Message}");
+                }
+
+                return ex.Types.Where(t => t != null);
             }
         }
     }

@@ -17,8 +17,9 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 
 export const toastrOptions = {
 	timeOut: 3000,
-	positionClass: 'toast-top-center', // PVW-92
-	preventDuplicates: true
+	positionClass: 'toast-top-center',
+	preventDuplicates: true,
+	onActivateTick: true
 };
 
 initRoutes(ROUTES);
@@ -47,14 +48,14 @@ export function tryActivateExistingSession(authentication: AuthenticationService
 	],
 	providers: [
 		{
-		provide: HTTP_INTERCEPTORS,
-		useFactory: function(auth: AuthenticationService, context: ClientContext) {
-			return new AuthInterceptor(auth, context);
-		},
-		multi: true,
-		deps: [AuthenticationService, ClientContext]
+			provide: HTTP_INTERCEPTORS,
+			useFactory: function(auth: AuthenticationService, context: ClientContext) {
+				return new AuthInterceptor(auth, context);
+			},
+			multi: true,
+			deps: [AuthenticationService, ClientContext]
 		}
-		],
+	],
 	bootstrap: [RootComponent],
 	declarations: [
 		...ALL_COMPONENTS

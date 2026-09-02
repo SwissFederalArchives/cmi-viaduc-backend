@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
 using CMI.Access.Common;
 using CMI.Contract.Common;
 using CMI.Engine.Anonymization;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Index.Tests;
 
@@ -143,9 +145,9 @@ public class AnonymizationReferenceEngineTests
 
         var elasticRecord = id1;
 
-        dbAccess.Setup(f => f.FindDbDocument("2", It.IsAny<MetadataToExclude>())).Returns(id2);
-        dbAccess.Setup(f => f.FindDbDocument("3", It.IsAny<MetadataToExclude>())).Returns(id3);
-        dbAccess.Setup(f => f.GetChildren("1", "1", true)).Returns(() => new List<ElasticArchiveRecord> { id2, id3 });
+        dbAccess.Setup(f => f.FindDbDocument("2", It.IsAny<MetadataToExclude>())).ReturnsAsync(id2);
+        dbAccess.Setup(f => f.FindDbDocument("3", It.IsAny<MetadataToExclude>())).ReturnsAsync(id3);
+        dbAccess.Setup(f => f.GetChildren("1", "1", true)).Returns(() =>Task.FromResult((IEnumerable<ElasticArchiveRecord>) new List<ElasticArchiveRecord> { id2, id3 }));
         dbAccess.Setup(f => f.UpdateDocument(It.IsAny<ElasticArchiveDbRecord>())).Callback(updateAction);
 
         // Act
@@ -154,21 +156,21 @@ public class AnonymizationReferenceEngineTests
         // Assert
 
         // There should be 4 updates. Two for the two references, and two updated child records
-        updateRecordList.Count.Should().Be(4);
+        updateRecordList.Count.ShouldBe(4);
 
         // The first updates are the children
         // The title of the updated children must match the current title attribute
-        updateRecordList[0].ArchiveRecordId.Should().Be("2");
-        updateRecordList[0].ArchiveplanContext.Find(i => i.ArchiveRecordId == "1").Title.Should().Be(id1.Title);
-        updateRecordList[0].ParentContentInfos[2].Title.Should().Be(id1.Title);
-        updateRecordList[1].ArchiveRecordId.Should().Be("3");
-        updateRecordList[1].ArchiveplanContext.Find(i => i.ArchiveRecordId == "1").Title.Should().Be(id1.Title);
-        updateRecordList[1].ParentContentInfos[2].Title.Should().Be(id1.Title);
+        updateRecordList[0].ArchiveRecordId.ShouldBe("2");
+        updateRecordList[0].ArchiveplanContext.Find(i => i.ArchiveRecordId == "1").Title.ShouldBe(id1.Title);
+        updateRecordList[0].ParentContentInfos[2].Title.ShouldBe(id1.Title);
+        updateRecordList[1].ArchiveRecordId.ShouldBe("3");
+        updateRecordList[1].ArchiveplanContext.Find(i => i.ArchiveRecordId == "1").Title.ShouldBe(id1.Title);
+        updateRecordList[1].ParentContentInfos[2].Title.ShouldBe(id1.Title);
 
         // The last two updates are the references
-        updateRecordList[2].ArchiveRecordId.Should().Be("2");
-        updateRecordList[2].References.Find(i => i.ArchiveRecordId == "1").ReferenceName.Should().Be("Signatur1 Ein ███ Titel1, 1990-1995 (Dossier)");
-        updateRecordList[3].ArchiveRecordId.Should().Be("3");
-        updateRecordList[3].References.Find(i => i.ArchiveRecordId == "1").ReferenceName.Should().Be("Signatur1 Ein ███ Titel1, 1990-1995 (Dossier)");
+        updateRecordList[2].ArchiveRecordId.ShouldBe("2");
+        updateRecordList[2].References.Find(i => i.ArchiveRecordId == "1").ReferenceName.ShouldBe("Signatur1 Ein ███ Titel1, 1990-1995 (Dossier)");
+        updateRecordList[3].ArchiveRecordId.ShouldBe("3");
+        updateRecordList[3].References.Find(i => i.ArchiveRecordId == "1").ReferenceName.ShouldBe("Signatur1 Ein ███ Titel1, 1990-1995 (Dossier)");
     }
 }

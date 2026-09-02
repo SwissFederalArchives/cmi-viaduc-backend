@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CMI.Contract.Common.Entities;
+using CMI.Contract.Common.Properties;
+using Newtonsoft.Json;
+using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
-using CMI.Contract.Common.Entities;
-using CMI.Contract.Common.Properties;
-using Newtonsoft.Json;
-using Serilog;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace CMI.Contract.Common
 {
@@ -56,6 +59,7 @@ namespace CMI.Contract.Common
             var sr = entity as SearchRecord;
             return sr.HasCustomProperty(key);
         }
+
 
         public static bool HasCustomProperty<T>(this T entity, string key) where T : SearchRecord
         {
@@ -116,6 +120,26 @@ namespace CMI.Contract.Common
             return null;
         }
 
+        public static string EntstehungDigitaleInhalte(this ElasticArchiveRecord record)
+        {
+            Log.Verbose("Getting property entstehungDigitaleInhalte.");
+            if (record.HasCustomProperty("entstehungDigitaleInhalte"))
+            {
+                Log.Verbose("Property entstehungDigitaleInhalte: {entstehungDigitaleInhalte}", JsonConvert.SerializeObject(record.CustomFields.entstehungDigitaleInhalte));
+                if (record.CustomFields.entstehungDigitaleInhalte is string)
+                {
+                    return record.CustomFields.entstehungDigitaleInhalte;
+                }
+
+                if (record.CustomFields.entstehungDigitaleInhalte is List<object>)
+                {
+                    return string.Join(", ", record.CustomFields.entstehungDigitaleInhalte);
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Feld verweist auf das CustomField "ZusatzkomponenteZac1"
         /// </summary>
@@ -134,6 +158,30 @@ namespace CMI.Contract.Common
                 if (record.CustomFields.zusatzkomponenteZac1 is List<object>)
                 {
                     return string.Join(", ", record.CustomFields.zusatzkomponenteZac1);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Feld verweist auf das CustomField "ZugaenglichkeitGemaessBga"
+        /// </summary>
+        public static string ZugaenglichkeitGemaessBga(this ElasticArchiveRecord record)
+        {
+            Log.Verbose("Getting property zugänglichkeitGemässBga.");
+            if (record.HasCustomProperty("zugänglichkeitGemässBga"))
+            {
+                Log.Verbose("Property zugänglichkeitGemässBga: {zugänglichkeitGemässBga}",
+                    JsonConvert.SerializeObject(record.CustomFields.zugänglichkeitGemässBga));
+                if (record.CustomFields.zugänglichkeitGemässBga is string)
+                {
+                    return record.CustomFields.zugänglichkeitGemässBga;
+                }
+
+                if (record.CustomFields.zugänglichkeitGemässBga is List<object>)
+                {
+                    return string.Join(", ", record.CustomFields.zugänglichkeitGemässBga);
                 }
             }
 
@@ -588,16 +636,17 @@ namespace CMI.Contract.Common
         private static void TranslateCustomFieldZugaenglichkeitGemässBga(this SearchRecord record, CultureInfo cultureInfo)
         {
             dynamic customFields = record.CustomFields;
-            var fields = (IDictionary<string, object>)customFields;
+            var fields = (IDictionary<string, object>) customFields;
 
             if (fields.ContainsKey("zugänglichkeitGemässBga"))
             {
                 var value = fields["zugänglichkeitGemässBga"].ToString();
                 fields.Remove("zugänglichkeitGemässBga");
-                var result = ResourceManager.GetString(value, cultureInfo); 
-                ((IDictionary<string, object>)customFields).Add("zugänglichkeitGemässBga", result != string.Empty ? result : value);
+                var result = ResourceManager.GetString(value, cultureInfo);
+                ((IDictionary<string, object>) customFields).Add("zugänglichkeitGemässBga", result != string.Empty ? result : value);
             }
         }
+
 
         private static bool HasProperty(dynamic expandoObject, string propertyName)
         {

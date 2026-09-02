@@ -17,10 +17,6 @@
     "schliessen": "Close",
     "und": "and"
   },
-  "engagementbubbles": {
-    "chat": "Chat",
-    "chatbot": "Chatbot"
-  },
   "account": {
     "backToPage": "Back to start page",
     "birthday": "Date of birth",
@@ -213,10 +209,6 @@
     "months": "January;February;March;April;May;June;July;August;September;October;November;December",
     "placeHolder": "Please select a date"
   },
-  "chatbotDialog": {
-    "minimize": "Minimise chatbot (beta)",
-    "title": "Chatbot (beta)"
-  },
   "checkoutOrderDetailsStep": {
     "artDerArbeit": "Nature of work",
     "commentTitle": "Comment on order",
@@ -321,7 +313,15 @@
     "registerAndIdentify": "Registration and identification",
     "unknown": "unknown",
     "xSecondsOverdue": "overdue",
-    "downloadNow": "Download the documents now. In the index.html file you will find an overview of all the documents."
+    "downloadNow": "Download the documents now. In the index.html file you will find an overview of all the documents.",
+    "s": "a few seconds",
+    "ss": "%d seconds",
+    "m": "a minute",
+    "mm": "%d minutes",
+    "h": "an hour",
+    "hh": "%d hours",
+    "d": "a day",
+    "dd": "%d days"
   },
   "einsichtCheckoutOrderDetailsStep": {
     "artDerArbeit": "Nature of work",
@@ -344,8 +344,7 @@
     "yes": "Yes"
   },
   "engagement": {
-    "chatbotInfo": "To use the chatbot (beta) switch to German",
-    "chatInfo": "Chat with the Federal Archives Tuesdays to Thursdays from 9 a.m. to 12 midday and 1 p.m. to 4 p.m. – we’ll be happy to help.",
+    "chatInfo":	"Our chatbot is available to help around the clock. The live chat is open from Tue to Thu from 9 am to noon and from 1 pm to 4 pm.",
     "headerTitle": "How may we assist you?"
   },
   "enums": {
@@ -791,7 +790,7 @@
       "chat": "Chat",
       "chatbot": "Chatbot",
       "chatbotTeaserText": "Ask the chatbot (beta) – it is available around the clock.",
-      "chatTeaserText": "Chat with the Federal Archives Tuesdays to Thursdays from 9 a.m. to 12 midday and 1 p.m. to 4 p.m. – we’ll be happy to help.",
+      "chatTeaserText": "Our chatbot is available to help around the clock. The live chat is open from Tue to Thu from 9 am to noon and from 1 pm to 4 pm.",
       "email": "E-mail",
       "emailTeaserText": "For more complex enquiries, send us an e-mail.",
       "forum": "Forum",
@@ -946,10 +945,10 @@
     "titleSr": "Page numbering of results list"
   },
   "registerInfo": {
+    "agovLoginAltText": "AGOV-Login logo",
+    "agovLoginException": "Exception: Federal Administration staff must register via “FED-LOGIN“.",
     "cancelRegister": "Cancel",
-    "chLoginAltText": "CH-Login logo",
-    "chLoginException": "Exception: Federal Administration staff must register via “FED-LOGIN“.",
-    "chooseCHLogin": "Please select the “CH-LOGIN & AGOV (eGovernment)” option in the next step.",
+    "chooseAGOVLogin": "Please select the “AGOV” option in the next step.",
     "info1": "You can use the online access service anonymously or as a registered or identified person. Depending on your user status, the functions available to you will vary.",
     "infoBox": "Info box",
     "infoTitle": "Note",

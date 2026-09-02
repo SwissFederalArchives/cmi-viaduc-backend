@@ -184,8 +184,8 @@ export class AdvancedSearchService {
 
 	public getModelForQuery(viewModel: SearchModel): SearchModel {
 		const queryModel: SearchModel = <SearchModel>_util.clone(viewModel);
-		delete queryModel['possibleFields'];
-		delete queryModel['_config'];
+		// delete queryModel['possibleFields'];
+		// delete queryModel['_config'];
 
 		for (const grp of queryModel.searchGroups) {
 			for (let i = 0; i < grp.searchFields.length; i += 1) {

@@ -8,9 +8,10 @@ import {DateRangeFieldComponent} from '../../modules/client';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
-	selector: 'cmi-viaduc-shopping-cart-page',
-	templateUrl: 'shoppingCartPage.component.html',
-	styleUrls: ['./shoppingCartPage.component.less']
+    selector: 'cmi-viaduc-shopping-cart-page',
+    templateUrl: 'shoppingCartPage.component.html',
+    styleUrls: ['./shoppingCartPage.component.less'],
+    standalone: false
 })
 export class ShoppingCartPageComponent implements OnInit {
 

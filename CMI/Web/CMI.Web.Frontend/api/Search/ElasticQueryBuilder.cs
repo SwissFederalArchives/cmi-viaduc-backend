@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Elastic;
-using Nest;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Clients.Elasticsearch;
 
 namespace CMI.Web.Frontend.api.Search
 {
@@ -33,10 +34,11 @@ namespace CMI.Web.Frontend.api.Search
             return query;
         }
 
-        public static QueryBase CreateQueryForSearchModel(SearchModel model, UserAccess access)
+        public static Query CreateQueryForSearchModel(SearchModel model, UserAccess access)
         {
             var boolQuery = new BoolQuery();
-            Func<SearchGroup, QueryContainer> createForGroup = group => CreateQueryForGroup(group, access);
+
+            Func<SearchGroup, Query> createForGroup = group => CreateQueryForGroup(group, access);
             var groupQueries = model.SearchGroups.Where(g => g.SearchFields.Any()).Select(createForGroup).ToList();
 
             switch (model.GroupOperator)
@@ -55,7 +57,7 @@ namespace CMI.Web.Frontend.api.Search
             return boolQuery;
         }
 
-        private static QueryContainer CreateForField(SearchField field, UserAccess access)
+        private static Query CreateForField(SearchField field, UserAccess access)
         {
             if (!translatorsByKey.ContainsKey(field.Key))
             {
@@ -66,7 +68,7 @@ namespace CMI.Web.Frontend.api.Search
             return translator.CreateQueryForField(field, access);
         }
 
-        public static QueryContainer CreateQueryForGroup(SearchGroup group, UserAccess access)
+        public static Query CreateQueryForGroup(SearchGroup group, UserAccess access)
         {
             var boolQuery = new BoolQuery();
             var fieldQueries = group.SearchFields.Where(f => !string.IsNullOrEmpty(f.Value)).Select(fld => CreateForField(fld, access)).ToList();
@@ -88,17 +90,13 @@ namespace CMI.Web.Frontend.api.Search
             return boolQuery;
         }
 
-        public static QueryContainer CreateQueryForSignatur(string signatur)
+        public static Query CreateQueryForSignatur(string signatur)
         {
             var boolQuery = new BoolQuery
             {
-                Must = new QueryContainer[]
+                Must = new List<Query>
                 {
-                    new TermQuery
-                    {
-                        Field = "referenceCode",
-                        Value = signatur
-                    }
+                    new TermsQuery(new Field("referenceCode"), new TermsQueryField(new List<FieldValue>{signatur}))
                 }
             };
             return boolQuery;

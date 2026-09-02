@@ -17,10 +17,6 @@
     "schliessen": "Schliessen",
     "und": "und"
   },
-  "engagementbubbles": {
-    "chat": "Chat",
-    "chatbot": "Chatbot"
-  },
   "account": {
     "backToPage": "Zurück zur Ausgangsseite",
     "birthday": "Geburtsdatum",
@@ -210,10 +206,6 @@
     "months": "Januar;Februar;März;April;Mai;Juni;Juli;August;September;Oktober;November;Dezember",
     "placeHolder": "Bitte wählen Sie ein Datum aus"
   },
-  "chatbotDialog": {
-    "minimize": "Chatbot (Beta) minimieren",
-    "title": "Chatbot (Beta)"
-  },
   "checkoutOrderDetailsStep": {
     "artDerArbeit": "Art der Arbeit",
     "commentTitle": "Bemerkung zur Bestellung",
@@ -316,7 +308,15 @@
     "registerAndIdentify": "Registrieren und Identifizieren",
     "unknown": "unbekannt",
     "xSecondsOverdue": "überfällig",
-    "downloadNow": "Laden Sie die Unterlagen jetzt herunter. In der Datei index.html erhalten Sie einen Überblick über sämtliche Dokumente."
+    "downloadNow": "Laden Sie die Unterlagen jetzt herunter. In der Datei index.html erhalten Sie einen Überblick über sämtliche Dokumente.",
+    "s": "ein paar Sekunden",
+    "ss": "%d Sekunden",
+    "m": "eine Minute",
+    "mm": "%d Minuten",
+    "h": "eine Stunde",
+    "hh": "%d Stunden",
+    "d": "ein Tag",
+    "dd": "%d Tage"
   },
   "einsichtCheckoutOrderDetailsStep": {
     "artDerArbeit": "Art der Arbeit",
@@ -339,8 +339,7 @@
     "yes": "Ja"
   },
   "engagement": {
-    "chatbotInfo": "Nutzen Sie den Chatbot (Beta) – er steht rund um die Uhr zur Verfügung.",
-    "chatInfo": "Chatten Sie von Dienstag bis Donnerstag von 9-12 und 13-16 Uhr mit dem Bundesarchiv - wir helfen Ihnen gerne weiter.",
+    "chatInfo": "Hilfe erhalten Sie rund um die Uhr vom Chatbot oder Di-Do 9-12 und 13-16 Uhr im Live-Chat.",
     "headerTitle": "Wie können wir Ihnen helfen?"
   },
   "enums": {
@@ -781,7 +780,7 @@
       "chat": "Chat",
       "chatbot": "Chatbot",
       "chatbotTeaserText": "Fragen Sie den Chatbot (Beta) – er steht rund um die Uhr zur Verfügung.",
-      "chatTeaserText": "Chatten Sie von Dienstag bis Donnerstag von 9–12 und 13–16 Uhr mit dem Bundesarchiv – wir helfen Ihnen gerne weiter.",
+      "chatTeaserText": "Hilfe erhalten Sie rund um die Uhr vom Chatbot oder Di-Do 9-12 und 13-16 Uhr im Live-Chat.",
       "email": "E-Mail",
       "emailTeaserText": "Senden Sie uns eine E-Mail für komplexere Anfragen.",
       "forum": "Forum",
@@ -936,10 +935,10 @@
     "titleSr": "Seitennummerierung der Trefferliste"
   },
   "registerInfo": {
+    "agovLoginAltText": "Logo des AGOV-Logins",
+    "agovLoginException": "Ausnahme: Mitarbeitende der Bundesverwaltung müssen sich via «FED-LOGIN» registrieren.",
     "cancelRegister": "Abbrechen",
-    "chLoginAltText": "Logo des CH-Logins",
-    "chLoginException": "Ausnahme: Mitarbeitende der Bundesverwaltung müssen sich via «FED-LOGIN» registrieren.",
-    "chooseCHLogin": "Wählen Sie bitte im nächsten Schritt die Option «CH-LOGIN & AGOV (eGovernment)».",
+    "chooseAGOVLogin": "Wählen Sie bitte im nächsten Schritt die Option «AGOV».",
     "info1": "Sie können den Online-Zugang anonym, als registrierte oder als identifizierte Person nutzen. Je nach Benutzerstatus stehen Ihnen unterschiedliche Funktionen zur Verfügung.",
     "infoBox": "Info-Box",
     "infoTitle": "Hinweis",

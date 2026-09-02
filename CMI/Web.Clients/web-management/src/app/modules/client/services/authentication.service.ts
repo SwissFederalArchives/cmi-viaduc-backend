@@ -38,7 +38,7 @@ export class AuthenticationService {
 				private _urlService: UrlService) {
 	}
 
-	public login(idp: string = null): void {
+	public login(idp: string = ''): void {
 
 		const callbackUrl = `${window.location.pathname}Auth/ExternalSignIn`; // relative url
 
@@ -101,32 +101,32 @@ export class AuthenticationService {
 
 		if (_util.isArray(claims)) {
 			session.authenticated = true;
-			let matches = claims.filter(c => c.type.indexOf('/identity/claims/e-id/userExtId') >= 0);
+			let matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/e-id/userExtId') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.userid = matches[0].value;
 			}
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/displayName') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/displayName') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.username = matches[0].value;
 			}
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/surname') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/surname') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.lastname = matches[0].value;
 			}
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/givenname') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/givenname') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.firstname = matches[0].value;
 			}
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/emailaddress') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/emailaddress') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.emailaddress = matches[0].value;
 			}
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/e-id/userExtId') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/e-id/userExtId') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.userExtId = matches[0].value;
 			}
 
-			matches = claims.filter(c => c.type.indexOf('/identity/claims/authenticationmethod') >= 0);
+			matches = claims.filter((c: any) => c.type.indexOf('/identity/claims/authenticationmethod') >= 0);
 			if (!_util.isEmpty(matches)) {
 				session.isKerberosAuthentication = matches[0].value.toLowerCase().indexOf('kerberos') >= 0;
 			}

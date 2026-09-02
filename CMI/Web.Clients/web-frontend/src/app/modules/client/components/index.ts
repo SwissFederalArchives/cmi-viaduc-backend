@@ -15,6 +15,7 @@ export * from './detail/hierarchy/detailHierarchy.component';
 export * from './detail/images/detailImages.component';
 export * from './search/browser/searchBrowser.component';
 export * from './search/searchFacetteList/searchFacetteList.component';
+export {default as SearchFacetteListComponent} from './search/searchFacetteList/searchFacetteList.component'
 export * from './search/simpleHitList/simpleHitList.component';
 export * from './search/simpleHit/simpleHit.component';
 export * from './favorite/menu/favoriteMenu.component';
@@ -45,7 +46,6 @@ export * from './search/searchSynonyme/searchSynonyme.component';
 export * from './search/searchSynonyme/searchSynonymeQuelleList/searchSynonymeQuelleList.component';
 export * from './search/searchSynonyme/searchSynonymeIcon/searchSynonymeIcon.component';
 export * from './order/einsichtCheckoutOrderDetailStep/einsichtCheckoutOrderDetailStep.component';
-export * from './engagementBubbles/engagementBubbles.component';
 export * from './detail/usageSection/usageSection.component';
-export * from './chatbotDialog/chatbotDialog.component';
 export * from './search/searchFacetteShowAll/searchFacetteShowAll.component';
+export * from './chatbot/chatbot.component';

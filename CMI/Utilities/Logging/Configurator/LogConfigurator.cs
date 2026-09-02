@@ -6,8 +6,6 @@ using CMI.Utilities.Logging.Configurator.Properties;
 using RabbitMQ.Client;
 using Serilog;
 using Serilog.Formatting.Json;
-using Serilog.Sinks.RabbitMQ;
-using Serilog.Sinks.RabbitMQ.Sinks.RabbitMQ;
 
 namespace CMI.Utilities.Logging.Configurator
 {
@@ -19,7 +17,7 @@ namespace CMI.Utilities.Logging.Configurator
 
             Log.Logger = GetBasicLoggerConfiguration()
                 .Enrich.WithProperty("MainAssembly", mainAssembly)
-                .WriteTo.RabbitMQ(RabbitMqClientConfiguration(), RabbitMQSinkConfiguration(), new JsonFormatter())
+                .WriteTo.RabbitMQ(RabbitMqClientConfiguration(), RabbitMQSinkConfiguration())
                 .WriteTo.MailError()
                 .CreateLogger();
         }
@@ -66,7 +64,7 @@ namespace CMI.Utilities.Logging.Configurator
                 .Enrich.WithProperty("MainAssembly", exeName)
                 .WriteTo.File(pathFormat,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}{Properties:j}{NewLine}", rollingInterval: RollingInterval.Day)
-                .WriteTo.RabbitMQ(RabbitMqClientConfiguration(), RabbitMQSinkConfiguration(), new JsonFormatter())
+                .WriteTo.RabbitMQ(RabbitMqClientConfiguration(), RabbitMQSinkConfiguration())
                 .WriteTo.MailError()
                 .CreateLogger();
         }
@@ -104,7 +102,10 @@ namespace CMI.Utilities.Logging.Configurator
 
         private static RabbitMQSinkConfiguration RabbitMQSinkConfiguration()
         {
-            var rabbitConfiguration = new RabbitMQSinkConfiguration();
+            var rabbitConfiguration = new RabbitMQSinkConfiguration
+            {
+                TextFormatter = new JsonFormatter()
+            };
             return rabbitConfiguration;
         }
 
@@ -126,12 +127,12 @@ namespace CMI.Utilities.Logging.Configurator
                     Port = uri.IsDefaultPort ? 5672 : uri.Port
                 };
 
-                using (var connection = factory.CreateConnection())
-                using (var channel = connection.CreateModel())
+                using (var connection = factory.CreateConnectionAsync().GetAwaiter().GetResult())
+                using (var channel = connection.CreateChannelAsync().GetAwaiter().GetResult())
                 {
-                    channel.QueueDeclare("CMI.Logging", true, false, false);
-                    channel.ExchangeDeclare("CMI.Logging", ExchangeType.Fanout, true);
-                    channel.QueueBind("CMI.Logging", "CMI.Logging", string.Empty);
+                    channel.QueueDeclareAsync("CMI.Logging", true, false, false).GetAwaiter().GetResult();
+                    channel.ExchangeDeclareAsync("CMI.Logging", ExchangeType.Fanout, true, false).GetAwaiter().GetResult();
+                    channel.QueueBindAsync("CMI.Logging", "CMI.Logging", string.Empty).GetAwaiter().GetResult();
                 }
             }
             catch (Exception ex)

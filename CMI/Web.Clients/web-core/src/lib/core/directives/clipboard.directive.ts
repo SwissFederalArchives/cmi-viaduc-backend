@@ -2,7 +2,10 @@ import { Directive, Input, Output, EventEmitter, HostListener } from '@angular/c
 import {ToastrService} from 'ngx-toastr';
 import {TranslationService} from '../services/translation.service';
 
-@Directive({ selector: '[copy-clipboard]' })
+@Directive({
+    selector: '[copy-clipboard]',
+    standalone: false
+})
 export class CopyClipboardDirective {
 
 	constructor(private _toastr: ToastrService,
@@ -24,7 +27,7 @@ export class CopyClipboardDirective {
 		}
 
 		const listener = (e: ClipboardEvent) => {
-			const clipboard = e.clipboardData || window['clipboardData'];
+			const clipboard = e.clipboardData || (window as any)['clipboardData'];
 			clipboard.setData('text', this.payload.toString());
 			e.preventDefault();
 

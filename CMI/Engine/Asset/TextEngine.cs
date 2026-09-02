@@ -47,6 +47,18 @@ namespace CMI.Engine.Asset
                 var stopWatch = new Stopwatch();
                 stopWatch.Start();
 
+                // Convert JP2 to JPG before sending to Abbyy, as Abbyy does have its problems with JP2 files
+                // Especially with DPIs, which might result in higher page consumation.
+                if (fi.Exists && fi.Extension.ToLower() == ".jp2")
+                {
+                    var resolution = imageHelper.GetResolution(fi.FullName);
+                    var jpegFile = imageHelper.ConvertToJpeg(fi.FullName, 100, 60, resolution);
+                    if (File.Exists(jpegFile))
+                    {
+                        fi = new FileInfo(jpegFile);
+                    }
+                }
+
                 var conversionSettings = new JobInitRequest
                 {
                     FileNameWithExtension = fi.Name,
@@ -98,6 +110,8 @@ namespace CMI.Engine.Asset
             }
             catch (Exception ex)
             {
+                // This shouldn't happen now, as we convert to JPG before sending to Abbyy, but we leave the code here in case
+                // we ever change the logic to send JP2 files to Abbyy again.
                 if (fi.Exists && fi.Extension.ToLower() == ".jp2")
                 {
                     Log.Warning(ex, "Unexpected error while extracting text for file {FullName}", fi.FullName);

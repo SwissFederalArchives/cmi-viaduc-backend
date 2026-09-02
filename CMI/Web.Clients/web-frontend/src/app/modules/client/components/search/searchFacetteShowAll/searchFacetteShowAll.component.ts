@@ -4,9 +4,10 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {SearchFacetteComponent} from '../searchFacette/searchFacette.component';
 
 @Component({
-	selector: 'cmi-search-facette-show-all',
-	templateUrl: './searchFacetteShowAll.component.html',
-	styleUrls: ['./searchFacetteShowAll.component.less']
+    selector: 'cmi-search-facette-show-all',
+    templateUrl: './searchFacetteShowAll.component.html',
+    styleUrls: ['./searchFacetteShowAll.component.less'],
+    standalone: false
 })
 export class SearchFacetteShowAllComponent implements OnInit {
 	@Input()

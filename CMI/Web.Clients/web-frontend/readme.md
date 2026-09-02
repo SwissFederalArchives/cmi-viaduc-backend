@@ -54,7 +54,8 @@ The application contains the GUI for the main application, the public area of th
 - Use the command line to change to the `web-frontend` directory
   - Run: `npm run link` to link `web-core` as a component
   - Run: `npm i` to install the dependencies
-  - Run: `npm run build` build the project to a `dist` folder inside `web-frontend`.
+  - Run: `npm run build` to build the project to the `dist` folder inside `web-frontend`
+  - Run: `npm run build-local` to build the project directly into `..\..\Web\CMI.Web.Frontend\client`
 
 # Customization
 
@@ -73,7 +74,7 @@ The application contains the GUI for the main application, the public area of th
 - Variant a.)
   - build using `npm run build` and start ASP.NET (`CMI.Viaduc.Web.Frontend`)
 - Variant b.)
-  - Start running build (file-watch) using `npm run start` and ASP.NET (`CMI.Viaduc.Web.Frontend`)
+  - Start running build (file-watch) using `npm run start` and ASP.NET (`CMI.Viaduc.Web.Frontend`); the watcher writes directly into `..\..\Web\CMI.Web.Frontend\client`
 
 # Authors
 

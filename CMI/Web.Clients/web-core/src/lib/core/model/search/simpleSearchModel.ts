@@ -5,6 +5,6 @@ export class SimpleSearchModel {
 	public dateRange: SearchField;
 
 	constructor() {
-		this.dateRange = <SearchField>{key: 'creationPeriod', value: null};
+		this.dateRange = <SearchField>{key: 'creationPeriod', value: ''};
 	}
 }

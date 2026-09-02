@@ -2,7 +2,6 @@
 using CMI.Utilities.Common.Helpers;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Templates;
-using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;

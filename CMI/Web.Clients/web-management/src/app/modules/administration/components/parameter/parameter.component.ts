@@ -6,22 +6,23 @@ import {ApplicationFeatureEnum} from '@cmi/viaduc-web-core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-parameter',
-	templateUrl: './parameter.component.html',
-	styleUrls: ['./parameter.component.less']
+    selector: 'cmi-viaduc-parameter',
+    templateUrl: './parameter.component.html',
+    styleUrls: ['./parameter.component.less'],
+    standalone: false
 })
 export class ParameterComponent implements OnInit {
 	@Input()
-	public parameter: Parameter;
+	public parameter!: Parameter;
 	@Input()
 	public validationEvent: EventEmitter<void> = new EventEmitter<void>();
 	@Input()
-	public searchString: string;
+	public searchString!: string;
 
-	public validationError: boolean;
-	public myForm: FormGroup;
+	public validationError!: boolean;
+	public myForm!: FormGroup;
 
-	get name(): string {
+	get name(): string | undefined {
 		return this.parameter.name.split('.').pop();
 	}
 
@@ -72,7 +73,7 @@ export class ParameterComponent implements OnInit {
 	}
 
 	private _isValid(): boolean {
-		return this._validateString(this.parameter.value) === true ? true : undefined;
+		return this._validateString(this.parameter.value) === true ? true : false;
 	}
 
 	private _validateString(value: string): boolean {
@@ -81,7 +82,7 @@ export class ParameterComponent implements OnInit {
 		}
 		if (this.parameter && this.parameter.regexValidation && value && typeof(value) === 'string') {
 			const matches = value.match(this.parameter.regexValidation);
-			return matches && matches[0] !== null;
+			return matches !== null && matches[0] !== null;
 		} else {
 			return true;
 		}

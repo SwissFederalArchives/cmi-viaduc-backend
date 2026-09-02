@@ -1,13 +1,14 @@
-﻿using CMI.Access.Common;
+using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
 using CMI.Engine.Anonymization;
 using CMI.Manager.Index.Config;
-using FluentAssertions;
+using Shouldly;
 using Microsoft.CSharp.RuntimeBinder;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -27,7 +28,7 @@ namespace CMI.Manager.Index.Tests
             // Act
 
             // Assert
-            config.Fields.Count.Should().BeGreaterThan(1);
+            config.Fields.Count.ShouldBeGreaterThan(1);
         }
 
 
@@ -62,33 +63,33 @@ namespace CMI.Manager.Index.Tests
             indexmanager.TransferDataFromPropertyBag(archiveRecord, dataElements);
 
             // Assert
-            Assert.IsNotNull(archiveRecord.CustomFields, "CustomField Property should be filled correctly");
+            ClassicAssert.IsNotNull(archiveRecord.CustomFields, "CustomField Property should be filled correctly");
 
-            Assert.Throws<RuntimeBinderException>(() =>
+            ClassicAssert.Throws<RuntimeBinderException>(() =>
                 {
                     var test = archiveRecord.CustomFields.title;
                 },
                 "Title is not a custom field, so it should not be in the dynamic property");
 
-            Assert.DoesNotThrow(() =>
+            ClassicAssert.DoesNotThrow(() =>
                 {
                     var test = archiveRecord.CustomFields.zugänglichkeitGemässBga;
                 },
                 "zugänglichkeitGemässBga is a custom field (with special chars), and so it should not throw on access");
 
-            Assert.Throws<RuntimeBinderException>(() =>
+            ClassicAssert.Throws<RuntimeBinderException>(() =>
                 {
                     var testYear = archiveRecord.CustomFields.dummyElasticdatewithyear;
                 },
                 "DummyElasticDateWithYear is not available, as there is no data for it.");
 
-            Assert.IsNotNull(archiveRecord.CustomFields.form);
-            Assert.AreEqual("Fotografie", archiveRecord.CustomFields.form);
+            ClassicAssert.IsNotNull(archiveRecord.CustomFields.form);
+            ClassicAssert.AreEqual("Fotografie", archiveRecord.CustomFields.form);
 
-            Assert.IsAssignableFrom<List<ElasticHyperlink>>(archiveRecord.CustomFields.digitaleVersion);
-            Assert.AreEqual("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif",
+            ClassicAssert.IsAssignableFrom<List<ElasticHyperlink>>(archiveRecord.CustomFields.digitaleVersion);
+            ClassicAssert.AreEqual("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif",
                 archiveRecord.CustomFields.digitaleVersion[0].Url);
-            Assert.AreEqual("E27#1000/721#14093#5489* (Wikimedia Commons)",
+            ClassicAssert.AreEqual("E27#1000/721#14093#5489* (Wikimedia Commons)",
                 archiveRecord.CustomFields.digitaleVersion[0].Text);
         }
 
@@ -125,12 +126,12 @@ namespace CMI.Manager.Index.Tests
             var record = JsonConvert.DeserializeObject<ElasticArchiveRecord>(jsonString);
 
             // Assert
-            Assert.IsNotNull(record);
+            ClassicAssert.IsNotNull(record);
             //  Beim deserialisieren via Elastic hat das dynamic Property ein ExpandoObject
-            Assert.IsAssignableFrom<ExpandoObject>(record.CustomFields);
+            ClassicAssert.IsAssignableFrom<ExpandoObject>(record.CustomFields);
 
             // - nicht weiter schlimm, wir können es weiterhin als dynamic ansprechen
-            Assert.DoesNotThrow(() =>
+            ClassicAssert.DoesNotThrow(() =>
             {
                 var test = record.CustomFields.form;
                 Console.WriteLine(test);
@@ -138,15 +139,15 @@ namespace CMI.Manager.Index.Tests
 
             // - und die properties auslesen
             var form = record.CustomFields.form;
-            Assert.IsNotNull(form);
-            Assert.AreEqual("Fotografie", form);
+            ClassicAssert.IsNotNull(form);
+            ClassicAssert.AreEqual("Fotografie", form);
 
-            Assert.IsAssignableFrom<List<dynamic>>(record.CustomFields.digitaleVersion);
+            ClassicAssert.IsAssignableFrom<List<dynamic>>(record.CustomFields.digitaleVersion);
             var hyperlink = record.CustomFields.digitaleVersion[0];
 
-            Assert.AreEqual("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif",
+            ClassicAssert.AreEqual("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif",
                 hyperlink.Url);
-            Assert.AreEqual("E27#1000/721#14093#5489* (Wikimedia Commons)",
+            ClassicAssert.AreEqual("E27#1000/721#14093#5489* (Wikimedia Commons)",
                 hyperlink.Text);
         }
 
@@ -163,7 +164,7 @@ namespace CMI.Manager.Index.Tests
             // Act
 
             // Assert
-            action.Should().Throw<FileNotFoundException>();
+            Should.Throw<FileNotFoundException>(action);
         }
 
         [Test]
@@ -195,10 +196,10 @@ namespace CMI.Manager.Index.Tests
             var elasticArchiveRecord = indexmanager.ConvertArchiveRecord(archiveRecord);
 
             // Assert
-            elasticArchiveRecord.ExternalKeys.Should().NotBeNull("ExternalKeys Property should be filled correctly");
-            elasticArchiveRecord.ExternalKeys.Should().HaveCount(2, "ExternalKeys should have 2 elements");
-            elasticArchiveRecord.ExternalKeys.Should().Contain(x => x.Key == "ActaPro" && x.Value == "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020");
-            elasticArchiveRecord.ExternalKeys.Should().Contain(x => x.Key == "scopeArchiv" && x.Value == "21687162");
+            elasticArchiveRecord.ExternalKeys.ShouldNotBeNull("ExternalKeys Property should be filled correctly");
+            elasticArchiveRecord.ExternalKeys.Count.ShouldBe(2, "ExternalKeys should have 2 elements");
+            elasticArchiveRecord.ExternalKeys.ShouldContain(x => x.Key == "ActaPro" && x.Value == "Vz    010efc87-3f8c-5fb5-947f-ee9ba4693020");
+            elasticArchiveRecord.ExternalKeys.ShouldContain(x => x.Key == "scopeArchiv" && x.Value == "21687162");
         }
     }
 }

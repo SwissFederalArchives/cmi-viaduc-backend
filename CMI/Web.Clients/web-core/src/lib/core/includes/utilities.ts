@@ -1,8 +1,12 @@
 const defaultIdentifierToBlankRegex = /([:,;\-\/\?\!<>\\\*\|()\[\]{}"\x00-\x1f\x80-\x9f]|\.+)/g;
 const defaultIdentifierCleanupRegex = /[ ]/g;
 const condenseMultipleDelimiterRegex = /(\-{2,3})/g;
+type DiacriticsReplacement = {
+	base: string;
+	repl: RegExp;
+};
 
-const diacriticsReplacements = [];
+const diacriticsReplacements: DiacriticsReplacement[] = [];
 (function () {
 	let repl = '', base = '', i;
 
@@ -99,28 +103,28 @@ export class Utilities {
 
 	public static clone(obj: any): any {
 		if (Utilities.isArray(obj)) {
-			const arr = [];
-			obj.forEach((x) => {
+			const arr: typeof obj = [];
+			obj.forEach((x: any) => {
 				arr.push(Utilities.clone(x));
 			});
 			return arr;
 		} else {
-			return Object.keys(obj).reduce(function (newObj, key) {
+			return Object.keys(obj).reduce((newObj: Record<string, any>, key) => {
 				const val = obj[key];
 				const newVal = (typeof val === 'object' && val) ? Utilities.clone(val) : val;
 				newObj[key] = newVal;
 				return newObj;
-			}, {});
+			}, {} as Record<string, any>);
 		}
 	}
 
 	public static cloneWithLowerCasedKeys(obj: any): any {
-		return Object.keys(obj).reduce(function (newObj, key) {
+		return Object.keys(obj).reduce(function (newObj: Record<string, any>, key) {
 			const val = obj[key];
 			const newVal = (typeof val === 'object') ? Utilities.cloneWithLowerCasedKeys(val) : val;
 			newObj[key.toLowerCase()] = newVal;
-			return newObj;
-		}, {});
+			return newObj ;
+		}, {} as Record<string, any>);
 	}
 
 	public static forEach(obj: any, fn: any) {
@@ -233,16 +237,16 @@ export class Utilities {
 
 	public static format(/*input,value0,value1,...]*/) {
 		let args = arguments, input = args[0], reSeq = 0;
-		return input.replace(/\{(\d+)\}/g, function (match, capture) {
+		return input.replace(/\{(\d+)\}/g, function (match: any, capture: any) {
 			const seq = (1 * capture + 1);
 			return (seq < args.length) ? args[seq] : '{' + (reSeq++) + '}';
 		});
 	}
 
-	public static formatByKey(input: string, values: any) { /* values: keyValueCollection */
-		return input.replace(/\{(\w+)\}/g, function (match, capture) {
-			return !this.isUndefined(values[capture]) ? values[capture] : '{' + capture + '}';
-		});
+	public static formatByKey(input: string, values: Record<string, string | number | boolean>) {
+		return input.replace(/\{(\w+)\}/g, (_, key) =>
+			values[key] !== undefined ? String(values[key]) : `{${key}}`
+		);
 	}
 
 	public static toLowerCamelCase(s: string): string {
@@ -333,7 +337,7 @@ export class Utilities {
 
 		return (function derez(value, path) {
 			let oldPath;
-			let nu;
+			let nu: Record<string, any> = {};
 			if (replacer !== undefined) {
 				value = replacer(value);
 			}
@@ -372,8 +376,9 @@ export class Utilities {
 	// region Jq functions
 
 	public static initJQForElement(elem: any, services?: any): void {
-		if (window && window['cmi'] && window['cmi']['initJQForElement']) {
-			window['cmi']['initJQForElement'](elem, services);
+		if (window && (window as any)['cmi'] &&
+			(window as any)['cmi']['initJQForElement']) {
+			(window as any)['cmi']['initJQForElement'](elem, services);
 		}
 	}
 
@@ -381,8 +386,8 @@ export class Utilities {
 
 	// region Browser
 
-	public static getQueryParams(query: string = null): any {
-		const params = {};
+	public static getQueryParams(query: string = ''): any {
+		const params: Record<string, string | undefined> = {};
 		let qs = this.isEmpty(query) ? window.location.search : query;
 		if (this.isEmpty(qs)) {
 			return params;
@@ -397,11 +402,11 @@ export class Utilities {
 		return params;
 	}
 
-	public static appendQueryParam(query, param): string {
+	public static appendQueryParam(query: any, param: any): string {
 		return this.addToString(query, '&', param);
 	}
 
-	public static appendUrlParam(url, param): string {
+	public static appendUrlParam(url: any, param: any): string {
 		return this.addToString(url, (url.indexOf('?') < 0) ? '?' : '&', param);
 	}
 

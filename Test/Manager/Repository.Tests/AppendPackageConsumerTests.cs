@@ -1,9 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Repository.Consumer;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -62,9 +62,9 @@ namespace CMI.Manager.Repository.Tests
                 var context = harness.Published.Select<IArchiveRecordUpdated>().First().Context;
 
                 // Assert
-                context.Message.ActionSuccessful.Should().Be(false);
-                context.Message.MutationId.Should().Be(mutationId);
-                context.Message.ErrorMessage.Should().Be(errMsg);
+                context.Message.ActionSuccessful.ShouldBe(false);
+                context.Message.MutationId.ShouldBe(mutationId);
+                context.Message.ErrorMessage.ShouldBe(errMsg);
             }
             finally
             {
@@ -107,9 +107,9 @@ namespace CMI.Manager.Repository.Tests
                 var context = harness.Published.Select<IArchiveRecordUpdated>().First().Context;
 
                 // Assert
-                context.Message.ActionSuccessful.Should().Be(false);
-                context.Message.MutationId.Should().Be(mutationId);
-                context.Message.ErrorMessage.Should().Be(errMsg);
+                context.Message.ActionSuccessful.ShouldBe(false);
+                context.Message.MutationId.ShouldBe(mutationId);
+                context.Message.ErrorMessage.ShouldBe(errMsg);
 
             }
             finally
@@ -158,8 +158,8 @@ namespace CMI.Manager.Repository.Tests
                 var context = harness.Sent.Select<PrepareForRecognitionMessage>().First().Context;
 
                 // Assert
-                context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(ar.ArchiveRecordId);
-                context.Message.MutationId.Should().Be(mutationId);
+                context.Message.ArchiveRecord.ArchiveRecordId.ShouldBe(ar.ArchiveRecordId);
+                context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {

@@ -5,30 +5,29 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {combineLatest, Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {CollectionService} from '../../services';
-import * as moment from 'moment';
+import moment from 'moment';
 import {formatDate} from '@angular/common';
 import {ErrorService, UrlService} from '../../../shared';
 import {CollectionDetailPageErrorMessages} from './collection-detail-page-error-messages';
 import {ToastrService} from 'ngx-toastr';
 import flatpickr from 'flatpickr';
-
-import {FlatPickrOutputOptions} from 'angularx-flatpickr/lib/flatpickr.directive';
 import {German} from 'flatpickr/dist/l10n/de';
 
 @Component({
-	selector: 'cmi-collection-detail-page',
-	templateUrl: './collection-detail-page.component.html',
-	styleUrls: ['./collection-detail-page.component.less']
+    selector: 'cmi-collection-detail-page',
+    templateUrl: './collection-detail-page.component.html',
+    styleUrls: ['./collection-detail-page.component.less'],
+    standalone: false
 })
-export class CollectionDetailPageComponent extends ComponentCanDeactivate implements OnInit {
+class CollectionDetailPageComponent extends ComponentCanDeactivate implements OnInit {
 	public errors: { [key: string]: string } = {};
-	public detailItem: CollectionDto;
-	public myForm: FormGroup;
+	public detailItem!: CollectionDto;
+	public myForm!: FormGroup;
 	public crumbs: any;
 	public collectionTypes: Array<any> = [{collectionTypeId: 0, name: 'Sammlung'}, {collectionTypeId: 1, name: 'Themenblock'}];
 	public languages: Array<any> = [{name: 'de'}, {name: 'fr'}, {name: 'it'}, {name: 'en'}];
-	public allowedParents: Observable<any[]>;
-	private isNew: boolean;
+	public allowedParents!: Observable<any[]>;
+	private isNew!: boolean;
 	private id: any;
 	public pictureToBig = false;
 	public reader = new FileReader();
@@ -67,14 +66,20 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 
 		combineLatest([collection$])
 			.subscribe(([collection]) => {
-				this.detailItem = collection;
+				if (collection !== null) {
+					this.detailItem = collection;
+				}
 				this.buildCrumbs();
 				this.initForm();
 			});
 	}
 
 	public canDeactivate(): boolean {
-		return !this.myForm.dirty;
+		console.log('canDeactivate', this.myForm,  this.myForm?.dirty);
+		if (this.myForm) {
+			return !this.myForm.dirty;
+		}
+		return true;
 	}
 
 	public promptForMessage(): false | 'question' | 'message' {
@@ -85,22 +90,25 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 		return this._txt.get('hints.unsavedChanges', 'Sie haben ungespeicherte Änderungen. Wollen Sie die Seite tatsächlich verlassen?');
 	}
 
-	public loadImageFromFile(event) {
-		const file = (event.target as HTMLInputElement).files[0];
-		if (file && file.size < (1024 * 1024)) {
-			this.pictureToBig = false;
+	public loadImageFromFile(event: any) {
+		const hTMLInputElement =event.target as HTMLInputElement
+		if (hTMLInputElement !== null && hTMLInputElement?.files  !== null && hTMLInputElement?.files?.length > 0 ) {
+			const file = hTMLInputElement.files[0];
+			if (file && file.size < (1024 * 1024)) {
+				this.pictureToBig = false;
 
-			this.reader.onload = () => {
-				const imageAsBase64 = this.reader.result as string;
-				const parts = imageAsBase64.split(',');
-				const imagePart = parts[1];
-				const mimeType = parts[0].match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
-				this.myForm.controls['image'].setValue(imagePart);
-				this.myForm.controls['imageMimeType'].setValue(mimeType);
-			};
-			this.reader.readAsDataURL(file);
-		} else {
-			this.pictureToBig = true;
+				this.reader.onload = () => {
+					const imageAsBase64 = this.reader.result as string;
+					const parts = imageAsBase64.split(',');
+					const imagePart = parts[1];
+					const mimeType = parts[0].match(/[^:]\w+\/[\w-+\d.]+(?=;|,)/)[0];
+					this.myForm.controls['image'].setValue(imagePart);
+					this.myForm.controls['imageMimeType'].setValue(mimeType);
+				};
+				this.reader.readAsDataURL(file);
+			} else {
+				this.pictureToBig = true;
+			}
 		}
 	}
 
@@ -160,7 +168,9 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 	private reloadData(detailItem: CollectionDto): void {
 		// fetch latest data
 		this._collectionService.get(detailItem.collectionId).subscribe(r => {
-			this.detailItem = r;
+			if (r !== null) {
+				this.detailItem = r;
+			}
 			this.initForm();
 		});
 	}
@@ -175,7 +185,7 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 			collectionId: [this.detailItem.collectionId, Validators.required],
 			language: [this.detailItem.language, Validators.required],
 			title: [this.detailItem.title, [Validators.required, Validators.maxLength(255)]],
-			collectionTypeId: [{value: this.detailItem.collectionTypeId, disabled: this.detailItem.childCollections?.length > 0}, [Validators.required, Validators.min(0), Validators.max(1)]],
+			collectionTypeId: [{value: this.detailItem.collectionTypeId, disabled: this.detailItem?.childCollections?.length > 0}, [Validators.required, Validators.min(0), Validators.max(1)]],
 			validFrom: [this.detailItem.validFrom, Validators.required],
 			validTo: [this.detailItem.validTo, Validators.required],
 			createdOn: [formatDate(this.detailItem.createdOn, 'yyyy-MM-ddTHH:mm', 'en')],
@@ -227,15 +237,17 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 		}
 	}
 
-	private updateErrorMessages() {
+	private updateErrorMessages(): void {
 		this.errors = {};
+
 		for (const message of CollectionDetailPageErrorMessages) {
 			const control = this.myForm.get(message.forControl);
 			if (control &&
 				control.dirty &&
 				control.invalid &&
-				control.errors[message.forValidator] &&
-				!this.errors[message.forControl]) {
+				control.errors?.[message.forValidator] &&
+				!this.errors[message.forControl]
+			) {
 				this.errors[message.forControl] = message.text;
 			}
 		}
@@ -248,20 +260,22 @@ export class CollectionDetailPageComponent extends ComponentCanDeactivate implem
 	}
 
 
-	public dataPickerValueUpdateVon($event: FlatPickrOutputOptions) {
+	public dataPickerValueUpdateVon($event: any) {
 		if ($event.dateString === ''){
-			this.detailItem.validFrom = null;
+			this.detailItem.validFrom = null as any;
 		} else {
 			this.detailItem.validFrom = $event.selectedDates[0];
 		}
 	}
 
 
-	public dataPickerValueUpdateBis($event: FlatPickrOutputOptions) {
+	public dataPickerValueUpdateBis($event: any) {
 		if ($event.dateString === ''){
-			this.detailItem.validTo = null;
+			this.detailItem.validTo = null as any;
 		} else {
 			this.detailItem.validTo = $event.selectedDates[0];
 		}
 	}
 }
+
+export default CollectionDetailPageComponent

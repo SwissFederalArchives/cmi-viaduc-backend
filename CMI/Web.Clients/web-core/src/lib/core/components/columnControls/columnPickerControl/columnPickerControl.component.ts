@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-	selector: 'cmi-viaduc-column-picker',
-	templateUrl: 'columnPickerControl.component.html',
-	styleUrls: ['./columnPickerControl.component.less'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'cmi-viaduc-column-picker',
+    templateUrl: 'columnPickerControl.component.html',
+    styleUrls: ['./columnPickerControl.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class ColumnPickerControlComponent {
@@ -56,12 +57,12 @@ export class ColumnPickerControlComponent {
 	private _showColumnPickerModal: boolean;
 	private _hiddenColumns: any[];
 
-	public onShowColumnClick(event, column: any): void {
+	public onShowColumnClick(event: any, column: any): void {
 		this.showColumnClicked.emit(column);
 		this.selectedVisible = column;
 	}
 
-	public onHideColumnClick(event, column: any): void {
+	public onHideColumnClick(event: any, column: any): void {
 		this.hideColumnClicked.emit(column);
 		this.selectedHidden = column;
 	}

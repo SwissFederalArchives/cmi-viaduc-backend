@@ -4,8 +4,9 @@ import {ErrorInfo, TranslationService, Utilities as _util} from '@cmi/viaduc-web
 import {AuthenticationService} from '../../modules/client/services/authentication.service';
 
 @Component({
-	selector: 'cmi-viaduc-smartcard-error-page',
-	templateUrl: 'errorPage.component.html'
+    selector: 'cmi-viaduc-smartcard-error-page',
+    templateUrl: 'errorPage.component.html',
+    standalone: false
 })
 export class ErrorSmartcardPageComponent implements OnInit {
 

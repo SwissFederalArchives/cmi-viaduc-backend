@@ -2,12 +2,13 @@ import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core
 import {Utilities as _util} from '../../../includes';
 
 @Component({
-	selector: 'cmi-viaduc-layout-left-content',
-	templateUrl: 'leftContent.component.html'
+    selector: 'cmi-viaduc-layout-left-content',
+    templateUrl: 'leftContent.component.html',
+    standalone: false
 })
 export class LayoutLeftContentComponent implements OnInit {
 	private _elem: any;
-	public collapsed: boolean;
+	public collapsed: boolean = false;
 
 	@Output()
 	public onToggle = new EventEmitter<boolean>();

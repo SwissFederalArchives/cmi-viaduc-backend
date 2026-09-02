@@ -10,9 +10,10 @@ import {
 } from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-simple-search',
-	templateUrl: 'simpleSearchBox.component.html',
-	styleUrls: ['./simpleSearchBox.component.less']
+    selector: 'cmi-viaduc-simple-search',
+    templateUrl: 'simpleSearchBox.component.html',
+    styleUrls: ['./simpleSearchBox.component.less'],
+    standalone: false
 })
 export class SimpleSearchComponent implements OnInit {
 	public search: SimpleSearchModel = new SimpleSearchModel();
@@ -78,7 +79,7 @@ export class SimpleSearchComponent implements OnInit {
 		this._search();
 	}
 
-	public onClick(event) {
+	public onClick(event: any) {
 		this._shiftKeyPressed = event.shiftKey;
 		this.submit();
 	}

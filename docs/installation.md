@@ -11,27 +11,30 @@ Clone all necessary projects:
 
 Build the Angular projects according to their respective read-me.
 
-### Link the Angular dist directories
+### Build the Angular clients into the web applications
 
-In order for the Viaduc application to deliver the web sources, these directories must be included.
-To do this, link the output directories of both Angular applications to the correct directory of the web applications in the cmi-viaduc-backend project.
+In order for the Viaduc application to deliver the web sources, both Angular applications must write their local build output into the `client` folder of the matching web application.
 
 1. Clone the current master branch with your Git client into a local folder (ex. C:\Viaduc).
 
-2. Open the command line (cmd) as administrator, change the directory to your local "backend" clone.
+2. Start the public client from `CMI\Web.Clients\web-frontend`.
 Type the following:
-    * cd "CMI\Web\CMI.Web.Frontend"
-    * mklink /J client "{INSERT-PATH-TO-cmi-viaduc-web-frontend}\dist".
+    * npm install
+    * npm run start
 
-3. Change the directory to your local "backend" clone.
+3. Start the management client from `CMI\Web.Clients\web-management`.
 Type the following:
-    * cd "CMI\Web\CMI.Web.Management"
-    * mklink /J client "{INSERT-PATH-TO-cmi-viaduc-web-management}\dist"
+    * npm install
+    * npm run start
 
-4. Create a database in your SQL server. Customize the connection string and passwords.
+4. The build output is written automatically to these folders:
+    * `CMI\Web\CMI.Web.Frontend\client`
+    * `CMI\Web\CMI.Web.Management\client`
+
+5. Create a database in your SQL server. Customize the connection string and passwords.
     * Create an empty database with the name 'Viaduc'.
 
-5. Authentication<br/>
+6. Authentication<br/>
 For the Federal Archive, EIAM is used as the authentication provider.
 For running the frontends (especially the management client) a connection to an authentication provider is absolutely necessary. The connection is done via `SAML2` or former `Kentor` [Library](https://github.com/Sustainsys/Saml2).
 
@@ -39,7 +42,7 @@ The EIAM-team provided us with a test system for this purpose for a short time, 
 
 If such a SAML2-IDP is in use, it is important that the associated certificate is installed on the host machine of the API projects.
 
-6. Secrets file<br/>
+7. Secrets file<br/>
   In the directory above (outside) the solution, a file named `Credentials for develop.json` has to be created.
   This file contains passwords, serial numbers and other sensitive data. Placeholders are defined in the configuration files of the services and applications of the solutions. Via a post-build event, these placeholders are replaced with the respective value of the placeholder.
   This file must contain the following entries.
@@ -150,4 +153,3 @@ The folder structure you use corresponds to the namespace. At each point in the 
 ## Folders in the Solutions
 
 Use folders within the Visual Studio Solution to structure your project. This helps you keep track of the various projects.
-

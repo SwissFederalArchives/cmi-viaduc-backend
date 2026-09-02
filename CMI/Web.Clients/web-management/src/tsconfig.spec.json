@@ -4,6 +4,9 @@
     "experimentalDecorators": true,
 		"outDir": "../out-tsc/spec",
 		"baseUrl": "./",
+		"strict": false,
+		"strictFunctionTypes": false,
+		"noEmitOnError": false,
 		"types": [
 			"jasmine",
 			"node"

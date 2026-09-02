@@ -6,9 +6,10 @@ import {FavoriteListsComponent} from '../../../../modules/client/components';
 import {FavoriteService, SeoService, UrlService} from '../../../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-account-favorites-detail-page',
-	templateUrl: 'favoritesDetailPage.component.html',
-	styleUrls: ['./favoritesDetailPage.component.less']
+    selector: 'cmi-viaduc-account-favorites-detail-page',
+    templateUrl: 'favoritesDetailPage.component.html',
+    styleUrls: ['./favoritesDetailPage.component.less'],
+    standalone: false
 })
 export class AccountFavoritesDetailPageComponent implements OnInit {
 	public loading: boolean;
@@ -125,10 +126,10 @@ export class AccountFavoritesDetailPageComponent implements OnInit {
 
 	public exportList(): void {
 		this._favoriteService.exportFavoriteList(this.list.id).subscribe(
-			event => {
+			(event: any) => {
 				this._fileSaver.saveDownloadResponseToFile(event);
 			},
-			(e) => {
+			(e: any) => {
 				this.loading = false;
 				this.error = e;
 			},

@@ -4,9 +4,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
 
 @Component({
-	selector: 'cmi-viaduc-digitalisierung-ausloesen-modal',
-	templateUrl: 'digitalisierungAusloesenModal.component.html',
-	styleUrls: ['./digitalisierungAusloesenModal.component.less']
+    selector: 'cmi-viaduc-digitalisierung-ausloesen-modal',
+    templateUrl: 'digitalisierungAusloesenModal.component.html',
+    styleUrls: ['./digitalisierungAusloesenModal.component.less'],
+    standalone: false
 })
 export class DigitalisierungAusloesenModalComponent {
 

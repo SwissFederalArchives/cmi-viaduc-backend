@@ -6,9 +6,10 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ReasonValidator} from '../../../model/reasonValidator';
 
 @Component({
-	selector: 'cmi-viaduc-reasons-step',
-	templateUrl: 'checkoutReasonsStep.component.html',
-	styleUrls: ['./checkoutReasonsStep.component.less']
+    selector: 'cmi-viaduc-reasons-step',
+    templateUrl: 'checkoutReasonsStep.component.html',
+    styleUrls: ['./checkoutReasonsStep.component.less'],
+    standalone: false
 })
 export class CheckoutReasonsStepComponent implements OnInit {
 
@@ -90,7 +91,7 @@ export class CheckoutReasonsStepComponent implements OnInit {
 		if (!this.form || !this.form.get('items')) {
 			return [];
 		}
-		return this.form.get('items').value.map(ctrl => <OrderItem> {
+		return this.form.get('items').value.map((ctrl: OrderItem) => <OrderItem> {
 			id: ctrl.id,
 			hasPersonendaten: ctrl.hasPersonendaten,
 			reason: ctrl.reason,

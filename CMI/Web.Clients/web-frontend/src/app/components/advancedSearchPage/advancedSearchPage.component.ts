@@ -15,9 +15,10 @@ import {
 import {AdvancedSearchService, SeoService, UrlService} from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-advanced-search-page',
-	templateUrl: 'advancedSearchPage.component.html',
-	styleUrls: ['./advancedSearchPage.component.less']
+    selector: 'cmi-viaduc-advanced-search-page',
+    templateUrl: 'advancedSearchPage.component.html',
+    styleUrls: ['./advancedSearchPage.component.less'],
+    standalone: false
 })
 export class AdvancedSearchPageComponent implements OnInit {
 
@@ -26,7 +27,7 @@ export class AdvancedSearchPageComponent implements OnInit {
 
 	public groupOperators: GroupOperator[] = [GroupOperator.AND, GroupOperator.OR];
 	public queryString = '';
-	public pagingSize;
+	public pagingSize: number;
 
 	public constructor (private _config: ConfigService,
 						private _context: ClientContext,
@@ -80,7 +81,7 @@ export class AdvancedSearchPageComponent implements OnInit {
 		];
 	}
 
-	public search(event): void {
+	public search(event: any): void {
 		this.queryString = '';
 
 		for (const g of this.viewModel.searchGroups) {

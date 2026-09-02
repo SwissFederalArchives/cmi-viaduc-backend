@@ -1,15 +1,14 @@
 import {Component, ElementRef, AfterViewInit, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
-import {ClientContext, ConfigService, PreloadService, Utilities as _util} from '@cmi/viaduc-web-core';
+import {ClientContext,  ConfigService, PreloadService, Utilities as _util} from '@cmi/viaduc-web-core';
 import {NavigationStart, Router} from '@angular/router';
-import {ShoppingCartService, UrlService, AuthenticationService} from '../../../services';
-import {UnbluService} from '../../../services/unblu.service';
-import {ChatBotService} from '../../../services';
+import {ShoppingCartService, UrlService, AuthenticationService, ChatbotService} from '../../../services';
 
 @Component({
-	selector: 'cmi-viaduc-nav-content',
-	templateUrl: 'navigationContent.component.html',
-	styleUrls: ['./navigationContent.component.less'],
-	encapsulation: ViewEncapsulation.None
+    selector: 'cmi-viaduc-nav-content',
+    templateUrl: 'navigationContent.component.html',
+    styleUrls: ['./navigationContent.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class NavigationContentComponent implements AfterViewInit {
 	private _elem: any;
@@ -19,11 +18,10 @@ export class NavigationContentComponent implements AfterViewInit {
 	constructor(private _context: ClientContext,
 				private _elemRef: ElementRef,
 				private _url: UrlService,
-				private _bot: ChatBotService,
 				private _cfg: ConfigService,
-				private _unblu: UnbluService,
 				private _pre: PreloadService,
 				private _scs: ShoppingCartService,
+				private _chatbot: ChatbotService,
 				private _authentication: AuthenticationService,
 				private _router: Router) {
 		this._elem = this._elemRef.nativeElement;
@@ -47,30 +45,16 @@ export class NavigationContentComponent implements AfterViewInit {
 		_util.initJQForElement(this._elem);
 	}
 
+	public get lastSearchResult(): string {
+		return this._context.lastSearchLink;
+	}
+
 	public get chatBotEnabled(): boolean {
 		if (!this._pre.isPreloaded) {
 			return false;
 		}
 
-		const supportedLanguages = this._cfg.getSetting('chatbot.supportedLanguagesForChatBot', 'de').split(';');
-		return supportedLanguages.filter(l => l === this._context.language).length > 0;
-	}
-
-	public get chatBotConfigured(): boolean {
-		if (!this._pre.isPreloaded) {
-			return false;
-		}
-
-		const url = this._cfg.getSetting('chatbot.urlForChatBot', '');
-		return url != '';
-	}
-
-	public get lastSearchResult(): string {
-		return this._context.lastSearchLink;
-	}
-
-	public get language(): string {
-		return this._context.language;
+		return this._cfg.getSetting('chatbot.enableChatbot', false);
 	}
 
 	public get cartItemsCount(): number {
@@ -155,13 +139,8 @@ export class NavigationContentComponent implements AfterViewInit {
 	}
 
 	public openChat() {
-		this._unblu.openChat();
-		this.toggleMainMobileNav();
-	}
-
-	public openBot() {
 		if (this.chatBotEnabled) {
-			this._bot.openChatBot();
+			this._chatbot.toggle();
 			this.toggleMainMobileNav();
 		}
 	}
@@ -170,9 +149,6 @@ export class NavigationContentComponent implements AfterViewInit {
 		switch (id) {
 			case 'openchat':
 				this.openChat();
-				break;
-			case 'openchatbot':
-				this.openBot();
 				break;
 			case 'closeNav':
 				this.toggleMainMobileNav();

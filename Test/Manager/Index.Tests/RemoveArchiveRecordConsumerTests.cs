@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Index.Consumer;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -60,9 +60,9 @@ namespace CMI.Manager.Index.Tests
                 // Assert
                 Assert.That(message != null);
                 // Assert
-                message.Context.Message.ActionSuccessful.Should().Be(false);
-                message.Context.Message.MutationId.Should().Be(mutationId);
-                message.Context.Message.ErrorMessage.Should().Be(errMsg);
+                message.Context.Message.ActionSuccessful.ShouldBe(false);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
+                message.Context.Message.ErrorMessage.ShouldBe(errMsg);
             }
             finally
             {
@@ -104,9 +104,9 @@ namespace CMI.Manager.Index.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ActionSuccessful.Should().Be(true);
-                message.Context.Message.MutationId.Should().Be(mutationId);
-                message.Context.Message.ErrorMessage.Should().Be(null);
+                message.Context.Message.ActionSuccessful.ShouldBe(true);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
+                message.Context.Message.ErrorMessage.ShouldBe(null);
             }
             finally
             {

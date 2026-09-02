@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using CMI.Contract.Common;
 using CMI.Web.Frontend.api.Search;
-using Nest;
+using Elastic.Clients.Elasticsearch;
 using Newtonsoft.Json.Linq;
 
 namespace CMI.Web.Frontend.api.Elastic
 {
     public class ElasticQueryResult<T> where T : TreeRecord
     {
-        public ISearchResponse<T> Response { get; set; }
+        public SearchResponse<T> Response { get; set; }
         public Exception Exception { get; set; }
 
         public int Status { get; set; }

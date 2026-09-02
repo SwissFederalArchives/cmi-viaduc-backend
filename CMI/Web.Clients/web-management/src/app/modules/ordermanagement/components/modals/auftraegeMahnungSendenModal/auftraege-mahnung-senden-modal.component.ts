@@ -5,9 +5,10 @@ import {ToastrService} from 'ngx-toastr';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-mahnung-senden-modal',
-	templateUrl: './auftraege-mahnung-senden-modal.component.html',
-	styleUrls: ['./auftraege-mahnung-senden-modal.component.less']
+    selector: 'cmi-viaduc-auftraege-mahnung-senden-modal',
+    templateUrl: './auftraege-mahnung-senden-modal.component.html',
+    styleUrls: ['./auftraege-mahnung-senden-modal.component.less'],
+    standalone: false
 })
 export class AuftraegeMahnungSendenModalComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class AuftraegeMahnungSendenModalComponent implements OnInit {
 	public onSubmitted: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	public isLoading = false;
-	public myForm: FormGroup;
+	public myForm!: FormGroup;
 
 	private _open = true;
 
@@ -53,7 +54,7 @@ export class AuftraegeMahnungSendenModalComponent implements OnInit {
 
 	public ok() {
 		this.isLoading = true;
-		this._ord.auftraegeMahnungVersenden(this.ids, this.myForm.get('vorlage').value, this.myForm.get('sprache').value).subscribe(() => {
+		this._ord.auftraegeMahnungVersenden(this.ids, this.myForm.get('vorlage')?.value, this.myForm.get('sprache')?.value).subscribe(() => {
 			this._toastr.success('Mahnungen erfolgreich verschickt', 'Erfolgreich');
 			this.open = false;
 			this.onSubmitted.emit(true);

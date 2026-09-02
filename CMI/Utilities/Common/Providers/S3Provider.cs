@@ -32,7 +32,9 @@ namespace CMI.Utilities.Common.Providers
                     var option = new AmazonS3Config
                     {
                         ServiceURL = storageProviderSettings.ServiceUrl,
-                        ForcePathStyle = true
+                        ForcePathStyle = true,
+                        RequestChecksumCalculation = RequestChecksumCalculation.WHEN_REQUIRED,
+                        ResponseChecksumValidation = ResponseChecksumValidation.WHEN_REQUIRED
                     };
                     s3Client = new AmazonS3Client(new BasicAWSCredentials(storageProviderSettings.AccessKey, storageProviderSettings.SecretAccessKey), option);
                 }

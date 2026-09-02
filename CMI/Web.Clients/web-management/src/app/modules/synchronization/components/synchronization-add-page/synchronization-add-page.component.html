@@ -1,142 +1,153 @@
 <div class="page col-sm-12">
-	<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
-	<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
-		<div content>
-			<div class="page-content">
-				<div class="page-header"></div>
-				<h2 class="page-content-title">
-					<span>{{ 'Hinzufügen zu Synchronisation' | translate:'SynchronisationDetailPage.title' }}</span>
-				</h2>
-				<form [formGroup]="myForm" *ngIf="myForm" id="myForm">
-					<div class="row">
-						<div class="col-xs-8 col-md-6">
-							<label for="newIds" class="control-label"
-								   tooltip="Hinzufügen zu Synchronisation">
-								Verz.Einheiten (Eine ID-Nr pro Zeile)</label>
-							<textarea name="newIds" class="form-control" formControlName="newIds"
-									  id="newIds" rows="10"> </textarea>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-8 col-md-6">
-							<div class="row">
-								<div class="col-xs-4 col-md-3">
-									<fieldset>
-										<legend class="w-auto">Aktion</legend>
-										<div *ngFor="let action of this.actions">
-											<label class="control-label">
-												<input type="radio" formControlName="actions"
-													   [value]="action.code">
-												{{ action.name }}
-											</label>
-										</div>
-									</fieldset>
-								</div>
-								<div class="col-xs-8 col-md-9 text-right">
-									<button type="button" [disabled]="!myForm.valid" class="btn btn-primary"
-											(click)="addSyncOrders()">
-										{{ 'Hinzufügen' | translate:'orderCheckoutPage.nextPage' }}
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-12 mb-2">
-								<span class="h3">Aktuelle Synchronisationen</span>&nbsp; <button class="btn btn-link" (click)="updateTable()"><i class="glyphicon glyphicon-refresh"></i></button>
-							</div>
-						</div>
-						<cmi-viaduc-grid #flexGrid
-										 class="wijmo-orders-list"
-										 [name]="'syncActionAdd'"
-										 [displaySelectionColumn]="false"
-										 [enableMultiSort]="false">
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'syncActionId'"
-												 [width]="200"
-												 [dataType]="2"
-												 [header]="'ID'">
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'archiveRecordId'"
-												 [width]="300"
-												 [dataType]="1"
-												 [header]="'Ve-Id'">
-								<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
-									<a href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.archiveRecordId}}"
-									   target="_blank"
-									   *ngIf="item.archiveRecordId && item.archiveRecordId !==0;else emptyVeId">
-										{{ item.archiveRecordId }}</a>
-									<ng-template #emptyVeId>
-										{{ 'Fehler' }}
-									</ng-template>
-								</ng-template>
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'actionType'"
-												 [width]="200"
-												 [dataType]="1"
-												 [header]="'Aktion'">
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'actionStatus'"
-												 [width]="200"
-												 [dataType]="2"
-												 [header]="'Status'">
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'numberOfTries'"
-												 [width]="200"
-												 [dataType]="2"
-												 [header]="'Anzahl Versuche'">
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'createdOn'"
-												 [width]="300"
-												 [format]="'dd.MM.yyyy HH:mm:ss'"
-												 [dataType]="4"
-												 [header]="'Erfasst am'">
-							</wj-flex-grid-column>
-							<wj-flex-grid-column [visible]="true"
-												 [binding]="'modifiedOn'"
-												 [width]="300"
-												 [format]="'dd.MM.yyyy HH:mm:ss'"
-												 [dataType]="4"
-												 [header]="'Geändert am'">
-							</wj-flex-grid-column>
-						</cmi-viaduc-grid>
-					</div>
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
+  @if (loading) {
+    <cmi-loader class="cmi-visible"></cmi-loader>
+  }
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
+    <div content>
+      <div class="page-content">
+        <div class="page-header"></div>
+        <h2 class="page-content-title">
+          <span>{{ 'Hinzufügen zu Synchronisation' | translate:'SynchronisationDetailPage.title' }}</span>
+        </h2>
+        @if (myForm) {
+          <form [formGroup]="myForm" id="myForm">
+            <div class="row">
+              <div class="col-xs-8 col-md-6">
+                <label for="newIds" class="control-label"
+                  tooltip="Hinzufügen zu Synchronisation">
+                Verz.Einheiten (Eine ID-Nr pro Zeile)</label>
+                <textarea name="newIds" class="form-control" formControlName="newIds"
+                id="newIds" rows="10"> </textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8 col-md-6">
+                <div class="row">
+                  <div class="col-xs-4 col-md-3">
+                    <fieldset>
+                      <legend class="w-auto">Aktion</legend>
+                      @for (action of this.actions; track action) {
+                        <div>
+                          <label class="control-label">
+                            <input type="radio" formControlName="actions"
+                              [value]="action.code">
+                              {{ action.name }}
+                            </label>
+                          </div>
+                        }
+                      </fieldset>
+                    </div>
+                    <div class="col-xs-8 col-md-9 text-right">
+                      <button type="button" [disabled]="!myForm.valid" class="btn btn-primary"
+                        (click)="addSyncOrders()">
+                        {{ 'Hinzufügen' | translate:'orderCheckoutPage.nextPage' }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          }
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-12 mb-2">
+                  <span class="h3">Aktuelle Synchronisationen</span>&nbsp; <button class="btn btn-link" (click)="updateTable()"><i class="glyphicon glyphicon-refresh"></i></button>
+                </div>
+              </div>
+              <cmi-viaduc-grid #flexGrid
+                class="wijmo-orders-list"
+                [name]="'syncActionAdd'"
+                [displaySelectionColumn]="false"
+                [enableMultiSort]="false">
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'syncActionId'"
+                  [width]="200"
+                  [dataType]="2"
+                  [header]="'ID'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'archiveRecordId'"
+                  [width]="300"
+                  [dataType]="1"
+                  [header]="'Ve-Id'">
+                  <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+                    @if (item.archiveRecordId && item.archiveRecordId !==0) {
+                      <a href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.archiveRecordId}}"
+                        target="_blank"
+                        >
+                      {{ item.archiveRecordId }}</a>
+                    } @else {
+                      {{ 'Fehler' }}
+                    }
+                  </ng-template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'actionType'"
+                  [width]="200"
+                  [dataType]="1"
+                  [header]="'Aktion'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'actionStatus'"
+                  [width]="200"
+                  [dataType]="2"
+                  [header]="'Status'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'numberOfTries'"
+                  [width]="200"
+                  [dataType]="2"
+                  [header]="'Anzahl Versuche'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'createdOn'"
+                  [width]="300"
+                  [format]="'dd.MM.yyyy HH:mm:ss'"
+                  [dataType]="4"
+                  [header]="'Erfasst am'">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column [visible]="true"
+                  [binding]="'modifiedOn'"
+                  [width]="300"
+                  [format]="'dd.MM.yyyy HH:mm:ss'"
+                  [dataType]="4"
+                  [header]="'Geändert am'">
+                </wj-flex-grid-column>
+              </cmi-viaduc-grid>
+            </div>
 
-				</div>
-				<form [formGroup]="myForm2" *ngIf="myForm2" id="myForm2">
-					<div class="row">
-						<div class="col-xs-12 col-md-8 col-lg-6">
-							<div class="row">
-								<label class="col-md-3 col-xs-3 control-label"
-									   for="beforeSync">
-									{{ 'Hinzugefügt vor' | translate:'' }}
-								</label>
-								<div class="col-md-9 col-xs-9">
-									<select style="width: 100%;" formControlName="beforeSync"
-											(change)="updateTable()" name="beforeSync"
-											id="beforeSync" class="form-control">
-										<option *ngFor="let a of beforeSyncs" [ngValue]="a.code">{{ a.name }}</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</cmi-viaduc-layout-left-content>
-</div>
+          </div>
+          @if (myForm2) {
+            <form [formGroup]="myForm2" id="myForm2">
+              <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+                  <div class="row">
+                    <label class="col-md-3 col-xs-3 control-label"
+                      for="beforeSync">
+                      {{ 'Hinzugefügt vor' | translate:'' }}
+                    </label>
+                    <div class="col-md-9 col-xs-9">
+                      <select style="width: 100%;" formControlName="beforeSync"
+                        (change)="updateTable()" name="beforeSync"
+                        id="beforeSync" class="form-control">
+                        @for (a of beforeSyncs; track a) {
+                          <option [ngValue]="a.code">{{ a.name }}</option>
+                        }
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          }
+        </div>
+      </div>
+    </cmi-viaduc-layout-left-content>
+  </div>

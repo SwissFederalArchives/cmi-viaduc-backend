@@ -5,9 +5,13 @@
 		"outDir": "../out-tsc/spec",
 		"baseUrl": "./",
 		"module": "es2020",
+		"strict": false,
+		"strictFunctionTypes": false,
 		"target": "ES2022",
 		"esModuleInterop":  true,
 		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": false,
+		"strictNullChecks": false,
 		"types": [
 			"jasmine",
 			"node"

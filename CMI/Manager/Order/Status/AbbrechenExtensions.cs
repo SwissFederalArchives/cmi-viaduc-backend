@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using CMI.Contract.Common.Extensions;
+﻿using CMI.Contract.Common.Extensions;
 using CMI.Contract.Order;
 using CMI.Engine.MailTemplate;
 using CMI.Manager.Order.Consumers;
 using CMI.Manager.Order.Mails;
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
 
 namespace CMI.Manager.Order.Status
 {
@@ -65,8 +65,7 @@ namespace CMI.Manager.Order.Status
                 builder.AddValue("Auftragsdaten", string.Join(" / ", daten));
             }
 
-
-            UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);
+            UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus); 
         }
 
         private static ExpandoObject CreateEmailData(AuftragStatus auftragStatus)

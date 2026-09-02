@@ -1,10 +1,11 @@
 import {Component, ViewEncapsulation, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild} from '@angular/core';
 import {UiService} from '../../services/ui.service';
 @Component({
-	selector: 'cmi-viaduc-modal',
-	templateUrl: 'modal.component.html',
-	styleUrls: ['modal.component.less'],
-	encapsulation: ViewEncapsulation.None,
+    selector: 'cmi-viaduc-modal',
+    templateUrl: 'modal.component.html',
+    styleUrls: ['modal.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class ModalComponent {
 

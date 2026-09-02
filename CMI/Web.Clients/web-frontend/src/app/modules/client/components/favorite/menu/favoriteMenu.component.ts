@@ -7,9 +7,10 @@ import {VeFavorite} from '../../../model';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-	selector: 'cmi-viaduc-favorite-menu',
-	templateUrl: 'favoriteMenu.component.html',
-	styleUrls: ['./favoriteMenu.component.less']
+    selector: 'cmi-viaduc-favorite-menu',
+    templateUrl: 'favoriteMenu.component.html',
+    styleUrls: ['./favoriteMenu.component.less'],
+    standalone: false
 })
 export class FavoriteMenuComponent {
 
@@ -91,7 +92,7 @@ export class FavoriteMenuComponent {
 		if (this._changes.findIndex(c => c.id === list.id) < 0) {
 			this._changes.push(change);
 		} else {
-			_util.remove(this._changes, (c  => c.id === list.id));
+		_util.remove(this._changes, 	((c: any)  => c.id === list.id));
 			this._changes.push(change);
 		}
 
@@ -111,7 +112,7 @@ export class FavoriteMenuComponent {
 		this.addingNew = state;
 	}
 
-	public async addNew(event): Promise<void> {
+	public async addNew(event: any): Promise<void> {
 		if (event) {
 			event.stopPropagation();
 		}

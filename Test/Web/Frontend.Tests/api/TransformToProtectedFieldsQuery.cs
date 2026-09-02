@@ -6,8 +6,8 @@ using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Configuration;
 using CMI.Web.Frontend.api.Elastic;
 using CMI.Web.Frontend.api.Search;
-using FluentAssertions;
-using Nest;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Shouldly;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
@@ -26,9 +26,8 @@ namespace CMI.Web.Frontend.API.Tests.api
                 Value = "Zusatz"
             };
 
-            var result = transformQueryToProtectedFields.TransformQuery(new QueryStringQuery
+            var result = transformQueryToProtectedFields.TransformQuery(new QueryStringQuery(searchField.Value.Escape(searchField.Key))
             {
-                Query = searchField.Value.Escape(searchField.Key),
                 DefaultField = searchField.Key,
                 DefaultOperator = Operator.And,
                 AllowLeadingWildcard = false
@@ -36,8 +35,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var serializer = new QueryContainerJsonConverter();
             var resultQueryText = serializer.Serialize(result);
 
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
-            resultQueryText.Should().Contain("\"query\":\"Zusatz\"");
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
+            resultQueryText.ShouldContain("\"query\":\"Zusatz\"");
         }
 
         [Test]
@@ -50,18 +49,17 @@ namespace CMI.Web.Frontend.API.Tests.api
                 Value = "Oberzolldirektion Zentrale Ablage"
             };
 
-            var result = transformQueryToProtectedFields.TransformQuery(new QueryStringQuery
+            var result = new QueryStringQuery(searchField.Value.Escape(searchField.Key))
             {
-                Query = searchField.Value.Escape(searchField.Key),
                 DefaultField = searchField.Key,
                 DefaultOperator = Operator.And,
                 AllowLeadingWildcard = false
-            });
+            };
             var serializer = new QueryContainerJsonConverter();
             var resultQueryText = serializer.Serialize(result);
-
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.title\"");
-            resultQueryText.Should().Contain("\"query\":\"Oberzolldirektion Zentrale Ablage\"");
+            resultQueryText = transformQueryToProtectedFields.TransformQuery(resultQueryText);
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.title\"");
+            resultQueryText.ShouldContain("\"query\":\"Oberzolldirektion Zentrale Ablage\"");
         }
 
         [Test]
@@ -73,9 +71,9 @@ namespace CMI.Web.Frontend.API.Tests.api
                 Key = "Feld",
                 Value = "Dezentrale Ablage"
             };
-            Assert.Throws<ArgumentException>(() => transformQueryToProtectedFields.TransformQuery(new QueryStringQuery
+
+            Assert.Throws<ArgumentException>(() => transformQueryToProtectedFields.TransformQuery(new QueryStringQuery(searchField.Value.Escape(searchField.Key))
             {
-                Query = searchField.Value.Escape(searchField.Key),
                 DefaultField = searchField.Key,
                 DefaultOperator = Operator.And,
                 AllowLeadingWildcard = false
@@ -87,18 +85,16 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var transformQueryToProtectedFields = new QueryTransformationService(ReadSearchSettings());
             var boolQuery = new BoolQuery();
-            var queries = new List<QueryContainer>
+            var queries = new List<Query>
             {
-                new QueryStringQuery
+                new QueryStringQuery("Oberzolldirektion Zentrale Ablage".Escape("title"))
                 {
-                    Query = "Oberzolldirektion Zentrale Ablage".Escape("title"),
                     DefaultField = "title",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery("Klaus Dieter".Escape("customFields.zusatzkomponenteZac1"))
                 {
-                    Query = "Klaus Dieter".Escape("customFields.zusatzkomponenteZac1"),
                     DefaultField = "customFields.zusatzkomponenteZac1",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
@@ -106,15 +102,16 @@ namespace CMI.Web.Frontend.API.Tests.api
             };
 
             boolQuery.Must = queries;
-            var result = transformQueryToProtectedFields.TransformQuery(boolQuery);
+            var result =boolQuery;
             var serializer = new QueryContainerJsonConverter();
             var resultQueryText = serializer.Serialize(result);
+            resultQueryText = transformQueryToProtectedFields.TransformQuery(resultQueryText);
 
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.title\"");
-            resultQueryText.Should().Contain("\"query\":\"Oberzolldirektion Zentrale Ablage\"");
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.title\"");
+            resultQueryText.ShouldContain("\"query\":\"Oberzolldirektion Zentrale Ablage\"");
 
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
-            resultQueryText.Should().Contain("\"query\":\"Klaus Dieter\"");
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
+            resultQueryText.ShouldContain("\"query\":\"Klaus Dieter\"");
         }
 
         [Test]
@@ -122,25 +119,22 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var transformQueryToProtectedFields = new QueryTransformationService(ReadSearchSettings());
             var boolQuery = new BoolQuery();
-            var queries = new List<QueryContainer>
+            var queries = new List<Query>
             {
-                new QueryStringQuery
+                new QueryStringQuery("Geheime Sache".Escape("title"))
                 {
-                    Query = "Geheime Sache".Escape("title"),
                     DefaultField = "title",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery("XY0815".Escape("referenceCode"))
                 {
-                    Query = "XY0815".Escape("referenceCode"),
                     DefaultField = "referenceCode",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery("Ich bin der Test Text".Escape("customFields.zusatzkomponenteZac1"))
                 {
-                    Query = "Ich bin der Test Text".Escape("customFields.zusatzkomponenteZac1"),
                     DefaultField = "customFields.zusatzkomponenteZac1",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
@@ -148,19 +142,20 @@ namespace CMI.Web.Frontend.API.Tests.api
             };
 
             boolQuery.Must = queries;
-            var result = transformQueryToProtectedFields.TransformQuery(boolQuery);
+            var result = boolQuery;
             var serializer = new QueryContainerJsonConverter();
             var resultQueryText = serializer.Serialize(result);
+            resultQueryText = transformQueryToProtectedFields.TransformQuery(resultQueryText);
 
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.title\"");
-            resultQueryText.Should().Contain("\"query\":\"Geheime Sache\"");
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.title\"");
+            resultQueryText.ShouldContain("\"query\":\"Geheime Sache\"");
 
-            resultQueryText.Should().Contain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
-            resultQueryText.Should().Contain("\"query\":\"Ich bin der Test Text\"");
+            resultQueryText.ShouldContain("default_field\":\"unanonymizedFields.zusatzkomponenteZac1\"");
+            resultQueryText.ShouldContain("\"query\":\"Ich bin der Test Text\"");
 
-            resultQueryText.Should().NotContain("default_field\":\"unanonymizedFields.referenceCode\"");
-            resultQueryText.Should().Contain("default_field\":\"referenceCode\"");
-            resultQueryText.Should().Contain("\"query\":\"XY0815\"");
+            resultQueryText.ShouldNotContain("default_field\":\"unanonymizedFields.referenceCode\"");
+            resultQueryText.ShouldContain("default_field\":\"referenceCode\"");
+            resultQueryText.ShouldContain("\"query\":\"XY0815\"");
         }
 
         [Test]
@@ -168,25 +163,22 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var transformQueryToProtectedFields = new QueryTransformationService(ReadSearchSettings());
             var boolQuery = new BoolQuery();
-            var queries = new List<QueryContainer>
+            var queries = new List<Query>
             {
-                new QueryStringQuery
+                new QueryStringQuery("Geheime Sache".Escape("formerReferenceCode"))
                 {
-                    Query = "Geheime Sache".Escape("formerReferenceCode"),
                     DefaultField = "formerReferenceCode",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery("XY0815".Escape("referenceCode"))
                 {
-                    Query = "XY0815".Escape("referenceCode"),
                     DefaultField = "referenceCode",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery("Ich bin der Test Text".Escape("customFields.aktenzeichen"))
                 {
-                    Query = "Ich bin der Test Text".Escape("customFields.aktenzeichen"),
                     DefaultField = "customFields.aktenzeichen",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
@@ -195,7 +187,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             boolQuery.Must = queries;
             var result = transformQueryToProtectedFields.TransformQuery(boolQuery);
-            result.Should().BeNull();
+            result.ShouldBeNull();
         }
 
         [Test]
@@ -203,28 +195,28 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var transformQueryToProtectedFields = new QueryTransformationService(ReadSearchSettings());
             var boolQuery = new BoolQuery();
-            var queries = new List<QueryContainer>
+            var queries = new List<Query>
             {
-                new QueryStringQuery
+                new QueryStringQuery(@"all_\*:Ball")
                 {
-                    Query = @"all_\*:Ball",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 },
-                new QueryStringQuery
+                new QueryStringQuery( @"all_Metadata_\*:Hund")
                 {
-                    Query = @"all_Metadata_\*:Hund",
                     DefaultOperator = Operator.And,
                     AllowLeadingWildcard = false
                 }
             };
 
             boolQuery.Must = queries;
-            var result = transformQueryToProtectedFields.TransformQuery(boolQuery);
+            var result = boolQuery;
             var serializer = new QueryContainerJsonConverter();
+            
             var resultQueryText = serializer.Serialize(result);
-            resultQueryText.Should().Contain("protected_Metadata_Text\\\\*:Hund");
-            resultQueryText.Should().Contain("protected_Metadata_Text\\\\*:Ball");
+            resultQueryText = transformQueryToProtectedFields.TransformQuery(resultQueryText);
+            resultQueryText.ShouldContain(@"protected_Metadata_Text\\*:Hund");
+            resultQueryText.ShouldContain(@"protected_Metadata_Text\\*:Ball");
         }
 
         private static SearchSetting ReadSearchSettings()

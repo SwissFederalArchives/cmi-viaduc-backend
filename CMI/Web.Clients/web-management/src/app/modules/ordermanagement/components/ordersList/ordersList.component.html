@@ -1,65 +1,78 @@
-<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
+@if (loading) {
+  <cmi-loader class="cmi-visible"></cmi-loader>
+}
 <div class="row top-pagination">
-	<div class="col-xs-12">
-		<cmi-viaduc-odata-pagination [(collectionView)]="orderFlatItems"></cmi-viaduc-odata-pagination>
-	</div>
+  <div class="col-xs-12">
+    <cmi-viaduc-odata-pagination [(collectionView)]="orderFlatItems"></cmi-viaduc-odata-pagination>
+  </div>
 </div>
 <div class="row">
-	<div class="col-xs-12">
-		<cmi-viaduc-grid #flexGrid
-					  class="wijmo-orders-list"
-					  [itemsSource]="orderFlatItems"
-					  [dataMaps]="valueFilters"
-					  [name]="isEinsichtsGesuchListe ? 'einsichtsgesuche' : 'auftraege'"
-					  [displaySelectionColumn]="true"
-					  (onFilterApplied)="onFilterApplied($event)"
-					  [defaultSortColumnKey]="'itemId'"
-					  [enableMultiSort]="true">
+  <div class="col-xs-12">
+    <cmi-viaduc-grid #flexGrid
+      class="wijmo-orders-list"
+      [itemsSource]="orderFlatItems"
+      [dataMaps]="valueFilters"
+      [name]="isEinsichtsGesuchListe ? 'einsichtsgesuche' : 'auftraege'"
+      [displaySelectionColumn]="true"
+      (onFilterApplied)="onFilterApplied($event)"
+      [defaultSortColumnKey]="'itemId'"
+      [enableMultiSort]="true">
 
-			<ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
-				<a (click)="openDetail(cell.item.itemId)">
-					<i class="glyphicon glyphicon-eye-open"></i>
-				</a>
-			</ng-template>
+      <ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+        <a (click)="openDetail(cell.item.itemId)">
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </a>
+      </ng-template>
 
-			<wj-flex-grid-column *ngFor="let col of visibleColumns" [visible]="col.visible"
-								 [binding]="col.key"
-								 [width]="col.width"
-								 [minWidth]="col.minWidth ? col.minWidth : 25"
-								 [format]="col.format"
-								 [dataType]="col.dataType ? col.dataType : 1"
-								 [header]="col.defaultLabel | translate:'shoppingCartItemList.columns.' + col.key">
+      @for (col of visibleColumns; track col) {
+        <wj-flex-grid-column [visible]="col.visible"
+          [binding]="col.key"
+          [width]="col.width"
+          [minWidth]="col.minWidth ? col.minWidth : 25"
+          [format]="col.format"
+          [dataType]="col.dataType ? col.dataType : 1"
+          [header]="col.defaultLabel | translate:'shoppingCartItemList.columns.' + col.key">
+          @if (col.key === 'user'; as item) {
+            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+              <a [routerLink]="_url.getNormalizedUrl('/benutzerundrollen/benutzer') + '/' + item.userId">
+              {{item.user}}</a>
+            </ng-template>
+          }
+          @if (col.key === 'signatur'; as item) {
+            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+              @if (item.veId && item.veId !==0) {
+                <a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" >
+                {{item.signatur}}</a>
+              } @else {
+                {{item.signatur}}
+              }
+            </ng-template>
+          }
+          @if (col.key === 'itemId'; as item) {
+            <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item">
+              @if (item.orderingType && item.status === 6 && item.orderingType === 2) {
+                <a [routerLink]="_url.getNormalizedUrl('/auftragsuebersicht/digitalisierungsauftraege')" [queryParams]="{ itemId: item.itemId}"  >
+                  <u>{{item.itemId}}</u></a>
+                } @else {
+                  {{item.itemId}}
+                }
+              </ng-template>
+            }
+            @if (col.dataType === 4; as cell) {
+              <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell" >
+                <span>
+                  {{ formatDate(cell.item[cell.col.binding], cell.col.format) }}
+                </span>
+              </ng-template>
+            }
+          </wj-flex-grid-column>
+        }
+      </cmi-viaduc-grid>
+    </div>
+  </div>
 
-				<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'user'">
-					<a [routerLink]="_url.getNormalizedUrl('/benutzerundrollen/benutzer') + '/' + item.userId">
-						{{item.user}}</a>
-				</ng-template>
-				<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'signatur'">
-					<a  href="{{_url.getPublicClientBaseURL() + _url.getNormalizedUrl('/archiv/einheit/') + item.veId}}" target="_blank" *ngIf="item.veId && item.veId !==0;else emptyVeId" >
-					{{item.signatur}}</a>
-					<ng-template #emptyVeId>
-						{{item.signatur}}
-					</ng-template>
-				</ng-template>
-				<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-item="item" *ngIf="col.key === 'itemId'">
-					<a [routerLink]="_url.getNormalizedUrl('/auftragsuebersicht/digitalisierungsauftraege')" [queryParams]="{ itemId: item.itemId}"  *ngIf="item.orderingType && item.status === 6 && item.orderingType === 2;else nonDigiOrder" >
-					<u>{{item.itemId}}</u></a>
-					<ng-template #nonDigiOrder>
-						{{item.itemId}}
-					</ng-template>
-				</ng-template>
-				<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell"  *ngIf="col.dataType === 4">
-					<span>
-						{{ formatDate(cell.item[cell.col.binding], cell.col.format) }}
-					</span>
-				</ng-template>
-			</wj-flex-grid-column>
-		</cmi-viaduc-grid>
-	</div>
-</div>
-
-<div class="row bottom-pagination">
-	<div class="col-xs-12">
-		<cmi-viaduc-odata-pagination [(collectionView)]="orderFlatItems"></cmi-viaduc-odata-pagination>
-	</div>
-</div>
+  <div class="row bottom-pagination">
+    <div class="col-xs-12">
+      <cmi-viaduc-odata-pagination [(collectionView)]="orderFlatItems"></cmi-viaduc-odata-pagination>
+    </div>
+  </div>

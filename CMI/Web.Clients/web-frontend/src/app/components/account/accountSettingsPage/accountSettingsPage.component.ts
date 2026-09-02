@@ -3,8 +3,9 @@ import {ConfigService, TranslationService, UserUiSettings} from '@cmi/viaduc-web
 import {SeoService, UrlService, UserService} from '../../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-settings-detail-page',
-	templateUrl: 'accountSettingsPage.component.html'
+    selector: 'cmi-viaduc-settings-detail-page',
+    templateUrl: 'accountSettingsPage.component.html',
+    standalone: false
 })
 export class AccountSettingsPageComponent implements OnInit {
 	public loading: boolean;

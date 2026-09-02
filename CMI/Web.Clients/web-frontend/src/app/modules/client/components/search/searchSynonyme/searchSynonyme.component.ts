@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SynonymGruppe} from '../../../model/SynonymGruppe/SynonymGruppe';
 
 @Component({
-	selector: 'cmi-viaduc-synonyme',
-	templateUrl: 'searchSynonyme.component.html',
-	styleUrls: ['searchSynonyme.component.less']
+    selector: 'cmi-viaduc-synonyme',
+    templateUrl: 'searchSynonyme.component.html',
+    styleUrls: ['searchSynonyme.component.less'],
+    standalone: false
 })
 export class SearchSynonymeComponent {
 
@@ -113,7 +114,7 @@ export class SearchSynonymeComponent {
 		return searchValueWithSynonymes.trim();
 	}
 
-	private _concatText(str: string, word) {
+	private _concatText(str: string, word: string) {
 		if (str.length > 0) {
 			if (str.endsWith('")') && this._reservedWords.indexOf(word.toLowerCase()) < 0) {
 				str += ` AND ${word}`;

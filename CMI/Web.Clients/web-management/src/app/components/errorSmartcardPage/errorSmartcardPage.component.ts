@@ -4,12 +4,13 @@ import {ErrorInfo, TranslationService, Utilities as _util} from '@cmi/viaduc-web
 import {AuthenticationService} from '../../modules/client/services/authentication.service';
 
 @Component({
-	selector: 'cmi-viaduc-smartcarterror-page',
-	templateUrl: 'errorSmartcardPage.component.html'
+    selector: 'cmi-viaduc-smartcarterror-page',
+    templateUrl: 'errorSmartcardPage.component.html',
+    standalone: false
 })
 export class ErrorSmartcardPageComponent implements OnInit {
 
-	public error: ErrorInfo;
+	public error!: ErrorInfo;
 
 	constructor(private _txt: TranslationService, private _route: ActivatedRoute, private _authentication: AuthenticationService) {
 	}

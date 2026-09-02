@@ -51,7 +51,9 @@ namespace CMI.Manager.Order.Status
             // Benutzer ein passendes AS_XXX Token hat. Alle anderen Token werden nicht beachtet!
             if (Context.Besteller.Access.RolePublicClient == AccessRoles.RoleAS && !string.IsNullOrWhiteSpace(Context.OrderItem.VeId))
             {
-                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+                var veRecord = Context.IndexAccess.FindDocument(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles).ConfigureAwait(false)
+                    .GetAwaiter()
+                    .GetResult();
                 if (veRecord != null)
                 {
                     if (Context.Besteller.Access.HasAsTokenFor(veRecord.PrimaryDataDownloadAccessTokens)) // nur AS_XXX Tokens sind hier gültig
@@ -72,10 +74,7 @@ namespace CMI.Manager.Order.Status
         {
             // https://devblogs.microsoft.com/pfxteam/should-i-expose-synchronous-wrappers-for-asynchronous-methods/
             // ToDo: await correctly, when state-machine is async
-            var kannAutomatischFreigeben = KannAutomatischFreigeben(Context.OrderItem, Context.Besteller)
-                .ConfigureAwait(false)
-                .GetAwaiter()
-                .GetResult(); 
+            var kannAutomatischFreigeben = KannAutomatischFreigeben(Context.OrderItem, Context.Besteller); 
 
             if (kannAutomatischFreigeben)
             {
@@ -129,7 +128,7 @@ namespace CMI.Manager.Order.Status
             }
         }
 
-        private async Task<bool> KannAutomatischFreigeben(OrderItem currentOrderItem, User besteller)
+        private bool KannAutomatischFreigeben(OrderItem currentOrderItem, User besteller)
         {
             // Nur Bestellungen die mit einer VE in der Datenbank verknüpft sind, könn(t)en automatsich 
             // freigegeben werden.
@@ -139,8 +138,13 @@ namespace CMI.Manager.Order.Status
             }
 
             // Prüfen ob gültiger Record von Elasic geliefert wurde.
-            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
-            if (veRecord == null || veRecord.ArchiveRecordId != currentOrderItem.VeId)
+            // ACHTUNG:
+            // Hier kann nicht mit await gearbeitet werden. Wenn man diese Methode async macht, dann ist der
+            // 'Context' NULL. Mit dieser Variante behält der Context seinen Wert.
+            var veRecord = Context.IndexAccess.FindDocument(currentOrderItem.VeId, MetadataToExclude.OCRContentAndFiles).ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+            if (veRecord == null)
             {
                 return false;
             }
@@ -150,7 +154,9 @@ namespace CMI.Manager.Order.Status
                 return true;
             }
 
-            var indivTokens = await Context.OrderDataAccess.GetIndividualAccessTokens(currentOrderItem.VeId, currentOrderItem.Id);
+            var indivTokens = Context.OrderDataAccess.GetIndividualAccessTokens(currentOrderItem.VeId, currentOrderItem.Id).ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
             return besteller.Access.HasAnyTokenFor(indivTokens.PrimaryDataDownloadAccessTokens);
         }
     }

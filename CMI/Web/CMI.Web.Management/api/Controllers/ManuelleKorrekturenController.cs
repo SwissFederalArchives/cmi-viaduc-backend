@@ -21,20 +21,20 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         [HttpGet]
-        public Task<ManuelleKorrekturDetailItem> GetManuelleKorrektur(int id)
+        public async Task<ManuelleKorrekturDetailItem> GetManuelleKorrektur(int id)
         {
             var access = ManagementControllerHelper.GetUserAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AnonymisierungManuelleKorrekturenBearbeiten);
-            return manuelleKorrekturManagerClient.GetManuelleKorrektur(id);
+            return await manuelleKorrekturManagerClient.GetManuelleKorrektur(id);
         }
 
         [HttpPost]
-        public Task<ManuelleKorrekturDto> InsertOrUpdateManuelleKorrektur(ManuelleKorrekturDto manuelleKorrektur)
+        public async Task<ManuelleKorrekturDto> InsertOrUpdateManuelleKorrektur(ManuelleKorrekturDto manuelleKorrektur)
         {
             var access = ManagementControllerHelper.GetUserAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AnonymisierungManuelleKorrekturenBearbeiten);
 
-            return manuelleKorrekturManagerClient.InsertOrUpdateManuelleKorrektur(manuelleKorrektur, access.UserId);
+            return await manuelleKorrekturManagerClient.InsertOrUpdateManuelleKorrektur(manuelleKorrektur, access.UserId);
         }
 
         [HttpDelete]
@@ -65,11 +65,11 @@ namespace CMI.Web.Management.api.Controllers
         }
 
         [HttpGet]
-        public Task<ManuelleKorrekturDto> Publizieren(int id)
+        public async Task<ManuelleKorrekturDto> Publizieren(int id)
         {
             var access = ManagementControllerHelper.GetUserAccess();
             access.AssertFeatureOrThrow(ApplicationFeature.AnonymisierungManuelleKorrekturenBearbeiten);
-            return manuelleKorrekturManagerClient.PublizierenManuelleKorrektur(id, access.UserId);
+            return await manuelleKorrekturManagerClient.PublizierenManuelleKorrektur(id, access.UserId);
         }
 
     }

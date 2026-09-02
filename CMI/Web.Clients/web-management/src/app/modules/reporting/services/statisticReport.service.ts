@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CoreOptions, HttpService} from '@cmi/viaduc-web-core';
 
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Injectable()
 export class StatisticReportService {

@@ -3,8 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {ErrorInfo, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-error-page',
-	templateUrl: 'errorPage.component.html'
+    selector: 'cmi-viaduc-error-page',
+    templateUrl: 'errorPage.component.html',
+    standalone: false
 })
 export class ErrorPageComponent implements OnInit {
 

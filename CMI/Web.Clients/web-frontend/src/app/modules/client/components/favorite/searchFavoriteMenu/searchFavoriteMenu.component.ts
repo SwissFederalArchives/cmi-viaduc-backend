@@ -6,9 +6,10 @@ import {ToastrService} from 'ngx-toastr';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-search-favorite-menu',
-	templateUrl: 'searchFavoriteMenu.component.html',
-	styleUrls: ['./searchFavoriteMenu.component.less']
+    selector: 'cmi-viaduc-search-favorite-menu',
+    templateUrl: 'searchFavoriteMenu.component.html',
+    styleUrls: ['./searchFavoriteMenu.component.less'],
+    standalone: false
 })
 export class SearchFavoriteMenuComponent implements AfterViewInit {
 
@@ -89,7 +90,9 @@ export class SearchFavoriteMenuComponent implements AfterViewInit {
 				const includedOnList = (this.lists.find(l => l.included));
 				if (includedOnList) {
 					const listDetail = await this._favoriteService.getFavoriteList(includedOnList.id);
-					const item = listDetail.items.find((i: SearchFavorite) => i.url === this.deepLinkUrl) as SearchFavorite || <SearchFavorite>{};
+					const item = listDetail.items.find(
+						(i): i is SearchFavorite => 'url' in i && 'searchId' in i && i.url === this.deepLinkUrl
+					);
 					this.searchTitle = item.title;
 					this.isExistingFavorite = true;
 				}

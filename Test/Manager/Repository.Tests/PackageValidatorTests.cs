@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using CMI.Contract.Common;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -93,7 +93,7 @@ namespace CMI.Manager.Repository.Tests
             validator.CreateValidNames(package);
 
             // Assert
-            package.Folders.First(f => f.Id == "Dir00000001").PhysicalName.Should().Be("Das ist ein Ordner_name mit _ ungültigen _ Zeichen _");
+            package.Folders.First(f => f.Id == "Dir00000001").PhysicalName.ShouldBe("Das ist ein Ordner_name mit _ ungültigen _ Zeichen _");
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace CMI.Manager.Repository.Tests
             validator.CreateValidNames(package);
 
             // Assert
-            package.Folders.First(f => f.Id == "Dir00000001").Folders.First(f => f.Id == "Dir00000002").PhysicalName.Should().Be(
+            package.Folders.First(f => f.Id == "Dir00000001").Folders.First(f => f.Id == "Dir00000002").PhysicalName.ShouldBe(
                 "Das ist ein Ordner_name mit _ ungültigen _ Zeichen _ und der dann noch überaus lang ist und viele Zeichen enthält bis er dann irgend wann");
         }
 
@@ -122,7 +122,7 @@ namespace CMI.Manager.Repository.Tests
             validator.CreateValidNames(package);
 
             // Assert
-            package.Files.First(f => f.Id == "F00000001").PhysicalName.Should().Be("Und _ ein Datei_Name mit _ _ Sonderzeichen.pdf");
+            package.Files.First(f => f.Id == "F00000001").PhysicalName.ShouldBe("Und _ ein Datei_Name mit _ _ Sonderzeichen.pdf");
         }
 
         [Test]
@@ -136,7 +136,7 @@ namespace CMI.Manager.Repository.Tests
             validator.CreateValidNames(package);
 
             // Assert
-            package.Files.First(f => f.Id == "F00000002").PhysicalName.Should().Be(
+            package.Files.First(f => f.Id == "F00000002").PhysicalName.ShouldBe(
                 "Und _ ein Datei_Name mit _ _ Sonderzeichen und deren Name dann noch überaus lang ist und viele Zeichen enthält bis er dann irgend wann einfach zu lang ist.pdf");
         }
 
@@ -155,10 +155,10 @@ namespace CMI.Manager.Repository.Tests
             var numFolders = 2 + 2 * 2 + 4 * 2 + 8 * 2 + 16 * 2;
             var numFiles = 2 + 2 * 2 + 4 * 2 + 8 * 2 + 16 * 2 + 32 * 2;
 
-            list.Count.Should().Be(numFolders + numFiles);
-            list.Count(f => f.Type == TempValidationObjectType.File).Should().Be(numFiles);
-            list.Count(f => f.Type == TempValidationObjectType.Folder).Should().Be(numFolders);
-            list.Max(l => l.HierachyLevel).Should().Be(maxLevel + 1); // 5 Folder levels + 1 File Level
+            list.Count.ShouldBe(numFolders + numFiles);
+            list.Count(f => f.Type == TempValidationObjectType.File).ShouldBe(numFiles);
+            list.Count(f => f.Type == TempValidationObjectType.Folder).ShouldBe(numFolders);
+            list.Max(l => l.HierachyLevel).ShouldBe(maxLevel + 1); // 5 Folder levels + 1 File Level
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace CMI.Manager.Repository.Tests
             var list = validator.ConvertToRepositoryObject(package);
 
             // Assert
-            (list.Max(l => l.FullName.Length) > validator.MaxPathLength).Should().BeTrue();
+            (list.Max(l => l.FullName.Length) > validator.MaxPathLength).ShouldBeTrue();
         }
 
         [Test]
@@ -188,7 +188,7 @@ namespace CMI.Manager.Repository.Tests
             var list = validator.ConvertToRepositoryObject(package);
 
             // Assert
-            (list.Max(l => l.FullName.Length) > validator.MaxPathLength).Should().BeFalse();
+            (list.Max(l => l.FullName.Length) > validator.MaxPathLength).ShouldBeFalse();
         }
 
         [Test]
@@ -204,7 +204,7 @@ namespace CMI.Manager.Repository.Tests
             var list = validator.ConvertToRepositoryObject(package);
 
             // Assert
-            validator.MaxPathLength.Should().BeLessThan(200);
+            validator.MaxPathLength.ShouldBeLessThan(200);
         }
 
         [Test]
@@ -219,7 +219,7 @@ namespace CMI.Manager.Repository.Tests
             var list = validator.ConvertToRepositoryObject(package);
 
             // Assert
-            validator.MaxPathLength.Should().Be(150);
+            validator.MaxPathLength.ShouldBe(150);
         }
 
         [Test]
@@ -244,7 +244,7 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().BeNullOrEmpty();
+            result.Key.ShouldBeNullOrEmpty();
         }
 
         [Test]
@@ -274,9 +274,9 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().Be("id1");
+            result.Key.ShouldBe("id1");
             // Ester Eintrag um 67 Zeichen gekürzt (und getrimmt)
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 67).Trim());
+            result.Value.ShouldBe(longEntry.Substring(0, longEntry.Length - 67).Trim());
         }
 
         [Test]
@@ -306,9 +306,9 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().Be("id2");
+            result.Key.ShouldBe("id2");
             // zweiter Eintrag um 181 Zeichen gekürzt
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 181));
+            result.Value.ShouldBe(longEntry.Substring(0, longEntry.Length - 181));
         }
 
         [Test]
@@ -338,10 +338,10 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().Be("id1"); // The first found entry
+            result.Key.ShouldBe("id1"); // The first found entry
             // we just cut off one char from the longest entry, as we don't want to cut off
             // too much chars from one entry, if the distribution of length is similar
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length));
+            result.Value.ShouldBe(longEntry.Substring(0, longEntry.Length));
         }
 
         [Test]
@@ -371,11 +371,11 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().Be("id2");
+            result.Key.ShouldBe("id2");
             // Ester Eintrag um 8 + 4 Zeichen gekürzt
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - (8 + 4)) + ".pdf");
+            result.Value.ShouldBe(longEntry.Substring(0, longEntry.Length - (8 + 4)) + ".pdf");
             // aber extension immer noch vorhanden
-            result.Value.Should().EndWith(".pdf");
+            result.Value.ShouldEndWith(".pdf");
         }
 
         [Test]
@@ -405,11 +405,11 @@ namespace CMI.Manager.Repository.Tests
             var result = validator.GetNewShorterNameForLongestElement(packageItems);
 
             // Assert
-            result.Key.Should().Be("id2");
+            result.Key.ShouldBe("id2");
             // Ester Eintrag um 5 gekürzt
-            result.Value.Should().Be(longEntry.Substring(0, longEntry.Length - 5));
+            result.Value.ShouldBe(longEntry.Substring(0, longEntry.Length - 5));
             // Make sure not dot in filename
-            result.Value.Should().NotContain(".");
+            result.Value.ShouldNotContain(".");
         }
 
         [Test]
@@ -425,7 +425,7 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "Dir00000010").Name.Should().Be("Happy");
+            flatList.First(f => f.RepositoryId == "Dir00000010").Name.ShouldBe("Happy");
         }
 
 
@@ -442,7 +442,7 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "F00000119").Name.Should().Be("Happy");
+            flatList.First(f => f.RepositoryId == "F00000119").Name.ShouldBe("Happy");
         }
 
 
@@ -459,8 +459,8 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "F00000119").Name.Should().Be("TABLE BROWN.pdf");
-            flatList.First(f => f.RepositoryId == "Dir00000005").Name.Should().Be("Zjing Oil");
+            flatList.First(f => f.RepositoryId == "F00000119").Name.ShouldBe("TABLE BROWN.pdf");
+            flatList.First(f => f.RepositoryId == "Dir00000005").Name.ShouldBe("Zjing Oil");
         }
 
         [Test]
@@ -483,9 +483,9 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "T1").Name.Should().Be("p1.pdf");
-            flatList.First(f => f.RepositoryId == "T2").Name.Should().Be("p1_1.pdf");
-            flatList.First(f => f.RepositoryId == "T3").Name.Should().Be("p1_2.pdf");
+            flatList.First(f => f.RepositoryId == "T1").Name.ShouldBe("p1.pdf");
+            flatList.First(f => f.RepositoryId == "T2").Name.ShouldBe("p1_1.pdf");
+            flatList.First(f => f.RepositoryId == "T3").Name.ShouldBe("p1_2.pdf");
         }
 
         [Test]
@@ -503,7 +503,7 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "sdb:digitalFile|685fbf49-d67c-4f60-9842-96c35d009210").Name.Should().Be("P0_1.pdf");
+            flatList.First(f => f.RepositoryId == "sdb:digitalFile|685fbf49-d67c-4f60-9842-96c35d009210").Name.ShouldBe("P0_1.pdf");
         }
 
         [Test]
@@ -533,9 +533,9 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "T1").Name.Should().Be("p__1.pdf");
-            flatList.First(f => f.RepositoryId == "T2").Name.Should().Be("p__1_1.pdf");
-            flatList.First(f => f.RepositoryId == "T3").Name.Should().Be("p__1_2.pdf");
+            flatList.First(f => f.RepositoryId == "T1").Name.ShouldBe("p__1.pdf");
+            flatList.First(f => f.RepositoryId == "T2").Name.ShouldBe("p__1_1.pdf");
+            flatList.First(f => f.RepositoryId == "T3").Name.ShouldBe("p__1_2.pdf");
         }
 
         [Test]
@@ -586,9 +586,9 @@ namespace CMI.Manager.Repository.Tests
 
             // Assert
             var flatList = validator.ConvertToRepositoryObject(package);
-            flatList.First(f => f.RepositoryId == "T1").Name.Should().Be("this is a very long n.pdf");
-            flatList.First(f => f.RepositoryId == "T2").Name.Should().Be("this is a very long n_1.pdf");
-            flatList.First(f => f.RepositoryId == "T3").Name.Should().Be("this is a very long n_2.pdf");
+            flatList.First(f => f.RepositoryId == "T1").Name.ShouldBe("this is a very long n.pdf");
+            flatList.First(f => f.RepositoryId == "T2").Name.ShouldBe("this is a very long n_1.pdf");
+            flatList.First(f => f.RepositoryId == "T3").Name.ShouldBe("this is a very long n_2.pdf");
         }
     }
 }

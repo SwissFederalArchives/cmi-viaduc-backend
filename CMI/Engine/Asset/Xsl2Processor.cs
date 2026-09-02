@@ -18,7 +18,6 @@ namespace CMI.Engine.Asset
             // Create a Processor instance.
             processor = new Processor();
             compiler = processor.NewXsltCompiler();
-            compiler.ErrorList = new List<StaticError>();
         }
 
         public void Load(string xslPath, Dictionary<string, string> paramCollection)

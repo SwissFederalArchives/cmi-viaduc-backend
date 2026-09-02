@@ -179,6 +179,12 @@ namespace CMI.Access.Sql.Viaduc
         [Origin(Table = nameof(OrderItem), Column = nameof(OrderItem.GebrauchskopieStatus))]
         [Column(CanBeNull = false)]
         public int GebrauchskopieStatus { get; set; }
+
+        [Column(CanBeNull = true)]
+        public int? Aushebungstyp { get; set; }
+
+        [Column(CanBeNull = true)]
+        public string EntstehungDigitaleInhalte { get; set; }
     }
 
     public class OriginAttribute : Attribute

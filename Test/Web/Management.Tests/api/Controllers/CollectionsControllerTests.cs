@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
@@ -7,7 +7,7 @@ using CMI.Contract.Common.Entities;
 using CMI.Utilities.Logging.Configurator;
 using CMI.Web.Management.api.Controllers;
 using CMI.Web.Management.Auth;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
 
@@ -72,7 +72,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = await controller.Update(12, collection);
 
             // Assert
-            result.Should().BeOfType(typeof(BadRequestResult));
+            result.ShouldBeOfType<BadRequestResult>();
             collectionClientMock.Verify(c => c.GetCollection(10), Times.Never);
             collectionClientMock.Verify(c => c.GetAllCollections(false), Times.Never);
             collectionClientMock.Verify(c => c.InsertOrUpdateCollection(collection, null), Times.Never);
@@ -91,8 +91,8 @@ namespace CMI.Web.Management.Tests.api.Controllers
             }
             catch (Exception e)
             {
-                e.Should().BeOfType(typeof(ForbiddenException));
-                e.Message.Should().BeEquivalentTo("Die von Ihnen gewünschte Operation kann nicht ausgeführt werden. Ihnen fehlt das Recht 'CMI.Contract.Common.ApplicationFeature[]' um die Operation durchzuführen.");
+                e.ShouldBeOfType<ForbiddenException>();
+                e.Message.ShouldBe("Die von Ihnen gewünschte Operation kann nicht ausgeführt werden. Ihnen fehlt das Recht 'CMI.Contract.Common.ApplicationFeature[]' um die Operation durchzuführen.");
             }
         }
 
@@ -109,7 +109,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
             collectionClientMock.Verify(c => c.GetCollection(10), Times.Never);
             collectionClientMock.Verify(c => c.GetAllCollections(false), Times.Never);
             collectionClientMock.Verify(c => c.InsertOrUpdateCollection(collection, null), Times.Once);
-            result.Should().BeOfType(typeof(OkNegotiatedContentResult<CollectionDto>));
+            result.ShouldBeOfType<OkNegotiatedContentResult<CollectionDto>>();
         }
         
         private CollectionsController InitializeMocks()

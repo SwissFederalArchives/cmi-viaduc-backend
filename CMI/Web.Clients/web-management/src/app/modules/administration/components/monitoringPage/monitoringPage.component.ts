@@ -5,14 +5,15 @@ import {MonitoringService} from '../../services';
 import {MonitoringResult} from '../../model/monitoringResult';
 
 @Component({
-	selector: 'cmi-viaduc-monitoringPage',
-	templateUrl: './monitoringPage.component.html',
-	styleUrls: ['./monitoringPage.component.less']
+    selector: 'cmi-viaduc-monitoringPage',
+    templateUrl: './monitoringPage.component.html',
+    styleUrls: ['./monitoringPage.component.less'],
+    standalone: false
 })
 export class MonitoringPageComponent implements  OnInit {
 	public crumbs: any[] = [];
-	public loadingWindowsServices: boolean = undefined;
-	public loadingTests: boolean = undefined;
+	public loadingWindowsServices: boolean = true;
+	public loadingTests: boolean = true;
 	public statuses: MonitoringResult[] = [];
 	public testResults: MonitoringResult[] = [];
 

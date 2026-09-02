@@ -3,12 +3,13 @@ import {ShoppingCartService} from '../../../services/shoppingCart.service';
 import {Entity, UiService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-detail-utilities',
-	templateUrl: 'detailUtilities.component.html',
-	styleUrls: ['./detailUtilities.component.less'],
-	host: {
-		'(document:click)': 'checkOutsideClick($event)'
-	}
+    selector: 'cmi-viaduc-detail-utilities',
+    templateUrl: 'detailUtilities.component.html',
+    styleUrls: ['./detailUtilities.component.less'],
+    host: {
+        '(document:click)': 'checkOutsideClick($event)'
+    },
+    standalone: false
 })
 export class DetailUtilitiesComponent {
 

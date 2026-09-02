@@ -75,7 +75,7 @@ describe('ShoppingCartService', () => {
 
 		};
 		let txt: any = <any>{
-			translate: (text, key) => {
+			translate: (text:any, key: any) => {
 				return text;
 			}
 		};

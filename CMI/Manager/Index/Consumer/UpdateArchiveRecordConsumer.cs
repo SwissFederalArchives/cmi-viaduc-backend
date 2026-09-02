@@ -74,7 +74,7 @@ namespace CMI.Manager.Index.Consumer
                         {
                             // Back from anonymize service: Update the record
                             Log.Debug("Updating record {archiveRecordId} after anonymization: {value}", context.Message.ElasticArchiveDbRecord.ArchiveRecordId, JsonConvert.SerializeObject(context.Message.ElasticArchiveDbRecord));
-                            indexManager.UpdateArchiveRecord(context.Message.ElasticArchiveDbRecord);
+                            await indexManager.UpdateArchiveRecord(context.Message.ElasticArchiveDbRecord);
                         }
                         else
                         {
@@ -84,14 +84,14 @@ namespace CMI.Manager.Index.Consumer
 
                             // Delete any existing manual corrections that may exist
                             indexManager.DeletePossiblyExistingManuelleKorrektur(elasticArchiveRecord);
-                            indexManager.UpdateArchiveRecord(elasticArchiveRecord);
+                            await indexManager.UpdateArchiveRecord(elasticArchiveRecord);
                         }
 
                         var scopeId = elasticArchiveRecord.ExternalKeys.Any(e => e.Key == "scopeArchiv") ?
                             elasticArchiveRecord.ExternalKeys?.First(e => e.Key == "scopeArchiv").Value : string.Empty;
                         if (context.Message.RecordIdToBeDeleted)
                         {
-                            indexManager.RemoveArchiveRecord(scopeId);
+                            await indexManager.RemoveArchiveRecord(scopeId);
                         }
 
                         // In the archiveplan or the references we could have protected records that have changed

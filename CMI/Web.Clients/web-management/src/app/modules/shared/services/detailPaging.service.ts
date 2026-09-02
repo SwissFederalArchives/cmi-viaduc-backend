@@ -5,7 +5,7 @@ import {CollectionView} from '@mescius/wijmo';
 
 @Injectable()
 export class DetailPagingService {
-	private _collectionView: CollectionView;
+	private _collectionView!: CollectionView;
 
 	public setCurrent(view: CollectionView, currentPosition: number) {
 		this._collectionView = view;

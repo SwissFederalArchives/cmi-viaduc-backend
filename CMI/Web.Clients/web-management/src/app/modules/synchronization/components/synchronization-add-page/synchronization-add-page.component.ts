@@ -5,9 +5,10 @@ import {SynchronizationService} from "../../services";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'cmi-synchronization-add-page',
-  templateUrl: './synchronization-add-page.component.html',
-  styleUrls: ['./synchronization-add-page.component.less']
+    selector: 'cmi-synchronization-add-page',
+    templateUrl: './synchronization-add-page.component.html',
+    styleUrls: ['./synchronization-add-page.component.less'],
+    standalone: false
 })
 export class SynchronizationAddPageComponent extends ComponentCanDeactivate implements OnInit {
 
@@ -15,12 +16,12 @@ export class SynchronizationAddPageComponent extends ComponentCanDeactivate impl
 	public flexGrid: CmiGridComponent;
 
 	public crumbs: any[] = [];
-	public loading: boolean;
-	public syncActionItems: SyncAction[];
+	public loading: boolean = true;
+	public syncActionItems!: SyncAction[];
 
 	public beforeSyncs: any = [{name:'1 Stunde', code:'1'}, {name:'2 Stunden', code:'2'}, {name:'12 Stunden', code:'3'}, {name:'1 Tag', code:'4'}];
-	public myForm: FormGroup;
-	public myForm2: FormGroup;
+	public myForm!: FormGroup;
+	public myForm2!: FormGroup;
 	public actions: any = [{name:'Update', code:'1'}, {name:'Delete', code:'2'}];
 
 	constructor(public _url: UrlService,
@@ -34,7 +35,9 @@ export class SynchronizationAddPageComponent extends ComponentCanDeactivate impl
 		this.buildCrumbs();
 		this.loading = true;
 		this._sys.getSyncData(1).subscribe(r => {
-			this.syncActionItems = r;
+			if (r !== null) {
+				this.syncActionItems = r;
+			}
 			this.loading = false;
 			this.initForm();
 			if (this.syncActionItems?.length > 0 && this.flexGrid) {
@@ -45,7 +48,9 @@ export class SynchronizationAddPageComponent extends ComponentCanDeactivate impl
 	}
 	public updateTable() {
 		this._sys.getSyncData(this.myForm2.controls.beforeSync.value).subscribe(r => {
-			this.syncActionItems = r;
+			if (r !== null) {
+				this.syncActionItems = r;
+			}
 			this.flexGrid.itemsSource = this.syncActionItems;
 			this.flexGrid.refresh();
 		});

@@ -6,11 +6,12 @@ import {EntityService} from '../../../services/entity.service';
 import {ShoppingCartService} from '../../../services/shoppingCart.service';
 
 @Component({
-	selector: 'cmi-viaduc-simple-hit',
-	templateUrl: 'simpleHit.component.html',
-	styleUrls: ['./simpleHit.component.less'],
-	encapsulation: ViewEncapsulation.None,
-	changeDetection: ChangeDetectionStrategy.Default
+    selector: 'cmi-viaduc-simple-hit',
+    templateUrl: 'simpleHit.component.html',
+    styleUrls: ['./simpleHit.component.less'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.Default,
+    standalone: false
 })
 export class SimpleHitComponent implements AfterViewInit, OnInit {
 	@Input()
@@ -56,7 +57,7 @@ export class SimpleHitComponent implements AfterViewInit, OnInit {
 			: '';
 
 		this._replaceHighlightHtml();
-		const aktenzeichen = this.entity.customFields['aktenzeichen'] ;
+		const aktenzeichen =   (this.entity?.customFields as any).aktenzeichen;
 		if (aktenzeichen && aktenzeichen.length > 0){
 			this.aktenzeichen = aktenzeichen[0];
 		}
@@ -124,7 +125,7 @@ export class SimpleHitComponent implements AfterViewInit, OnInit {
 	private _replaceHighlightHtml() {
 		if (this.entity) {
 
-			if (this.entity.highlight) {
+			if (this.entity.highlight && this.entity.highlight.title && this.entity.highlight.title[0]) {
 				this.htmlForTitle = this.entity.highlight.title[0]
 					/* eslint-disable  no-useless-escape */
 					.replace(new RegExp('<h1l1ght>', 'g'), '<span class=\"highlight\">')
@@ -144,10 +145,10 @@ export class SimpleHitComponent implements AfterViewInit, OnInit {
 	}
 
 	public getPictureAsBase64(): string {
-		if (!this.entity || !this.entity.customFields['bildAnsicht']) {
-			return null;
+		if (!this.entity || !this.entity?.customFields || !(((this.entity?.customFields as any).bildAnsicht))) {
+			return '';
 		}
-		const img = this.entity.customFields['bildAnsicht'];
+		const img =(this.entity?.customFields as any).bildAnsicht;
 		return `data:${img['mimeType']};base64,${img['value']}`;
 	}
 }

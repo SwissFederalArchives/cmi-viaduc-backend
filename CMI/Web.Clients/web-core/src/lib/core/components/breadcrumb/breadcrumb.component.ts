@@ -4,9 +4,10 @@ import {TranslationService} from '../../services/translation.service';
 import {Utilities} from '../../includes';
 
 @Component({
-	selector: 'cmi-viaduc-breadcrumb',
-	templateUrl: 'breadcrumb.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'cmi-viaduc-breadcrumb',
+    templateUrl: 'breadcrumb.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BreadcrumbComponent implements AfterViewInit {
 	@Input()

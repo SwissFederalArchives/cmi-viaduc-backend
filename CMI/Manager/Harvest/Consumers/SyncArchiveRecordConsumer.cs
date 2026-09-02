@@ -1,4 +1,5 @@
-﻿using CMI.Contract.Common;
+﻿using CMI.Access.Harvest.ActaPro;
+using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Harvest.Infrastructure;
 using MassTransit;
@@ -50,10 +51,23 @@ namespace CMI.Manager.Harvest.Consumers
                 switch (message.Action.ToLowerInvariant())
                 {
                     case "update":
-                        ArchiveRecord archiveRecord = null;
+                        ArchiveRecord archiveRecord;
                         try
                         {
                             archiveRecord = await harvestManager.BuildArchiveRecord(message.ArchiveRecordId);
+                        }
+                        catch (ApiException apiException)
+                        {
+                            Log.Error(apiException.Message, "ApiException while building the archive record for id {archiveRecordId}", message.ArchiveRecordId);
+                            await harvestManager.UpdateMutationStatus(new MutationStatusInfo
+                            {
+                                MutationId = context.Message.MutationId,
+                                NewStatus = ActionStatus.SyncFailed,
+                                ArchiveRecordId = message.ArchiveRecordId,
+                                ChangeFromStatus = ActionStatus.SyncInProgress,
+                                ErrorMessage = "Record was not found in the database anymore. Might have been deleted in the meantime."
+                            });
+                            return;
                         }
                         catch(Exception ex)
                         {

@@ -51,8 +51,8 @@ namespace CMI.Manager.ExternalContent.WinFormsTestClient
             {
                 Cursor = Cursors.WaitCursor;
                 var text = txtArchiveRecordId.Text;
-                var archiveRecordId = Convert.ToInt32(text.Contains("(") ? text.Substring(0, text.IndexOf("(", StringComparison.Ordinal)) : text);
-                var result = (await orderClient.GetResponse<GetDigitizationOrderDataResponse>(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId.ToString()})).Message;
+                var archiveRecordId = text.Contains("(") ? text.Substring(0, text.IndexOf("(", StringComparison.Ordinal)) : text;
+                var result = (await orderClient.GetResponse<GetDigitizationOrderDataResponse>(new GetDigitizationOrderData {ArchiveRecordId = archiveRecordId})).Message;
                 if (result.Result.Success)
                 {
                     txtResult.Text = JsonConvert.SerializeObject(result.Result.DigitizationOrder, Formatting.Indented);

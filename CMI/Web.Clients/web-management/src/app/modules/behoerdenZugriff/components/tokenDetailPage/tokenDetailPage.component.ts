@@ -9,24 +9,25 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-token-page-edit',
-	templateUrl: 'tokenDetailPage.component.html'
+    selector: 'cmi-viaduc-token-page-edit',
+    templateUrl: 'tokenDetailPage.component.html',
+    standalone: false
 })
 
 export class TokenDetailPageComponent extends ComponentCanDeactivate implements OnInit {
 
 	@ViewChild('formToken', {static: false})
-	public formToken: NgForm;
+	public formToken!: NgForm;
 
 	public crumbs: any[] = [];
-	public tokenHeaderName: string;
+	public tokenHeaderName!: string;
 	public id: any;
-	public errors: string[];
-	public ablieferndeStelleToken: AblieferndeStelleToken;
-	public loading: boolean;
+	public errors!: string[];
+	public ablieferndeStelleToken!: AblieferndeStelleToken;
+	public loading: boolean = true;
 
-	private _allTokens: string[];
-	private _mode: Mode;
+	private _allTokens!: string[];
+	private _mode!: Mode;
 
 	constructor(private tokenService: TokenService, private _txt: TranslationService, private _url: UrlService, private _ui: UiServiceMC, private _route: ActivatedRoute, private _router: Router) {
 		super();
@@ -104,7 +105,11 @@ export class TokenDetailPageComponent extends ComponentCanDeactivate implements 
 	}
 
 	public canDeactivate(): boolean {
-		return !this.formToken.dirty;
+		if (this.formToken) {
+			return !this.formToken.dirty;
+		}
+
+		return true;
 	}
 
 	public promptForMessage(): false | 'question' | 'message' {

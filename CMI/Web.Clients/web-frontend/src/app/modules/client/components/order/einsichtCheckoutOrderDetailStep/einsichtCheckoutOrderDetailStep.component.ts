@@ -4,9 +4,10 @@ import {ArtDerArbeit, Ordering, ShippingType, StammdatenService, TranslationServ
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-einsicht-order-details-step',
-	templateUrl: 'einsichtCheckoutOrderDetailStep.component.html',
-	styleUrls: ['einsichtCheckoutOrderDetailStep.component.less']
+    selector: 'cmi-viaduc-einsicht-order-details-step',
+    templateUrl: 'einsichtCheckoutOrderDetailStep.component.html',
+    styleUrls: ['einsichtCheckoutOrderDetailStep.component.less'],
+    standalone: false
 })
 export class EisichtCheckoutOrderDetailsStepComponent implements OnInit {
 	public artDerArbeiten: ArtDerArbeit[] = [];

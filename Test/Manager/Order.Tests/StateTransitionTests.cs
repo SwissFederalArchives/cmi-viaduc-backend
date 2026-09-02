@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +8,7 @@ using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Manager.Order.Status;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -45,13 +45,14 @@ namespace CMI.Manager.Order.Tests
             userDataAccessMock.Setup(foo => foo.GetUser("besteller")).Returns(besteller);
 
             var idxSearchMock = new Mock<ISearchIndexDataAccess>();
-            idxSearchMock.Setup(foo => foo.FindDocument(item.VeId.ToString(), MetadataToExclude.OCRContentAndFiles)).Returns(elasticArchiveRecord);
-            idxSearchMock.Setup(foo => foo.FindDbDocument(item.VeId.ToString(), MetadataToExclude.OCRContentAndFiles)).Returns(elasticArchiveDbRecord ?? new ElasticArchiveDbRecord
+            idxSearchMock.Setup(foo => foo.FindDocument(item.VeId, MetadataToExclude.OCRContentAndFiles)).Returns(Task.FromResult(elasticArchiveRecord));
+            elasticArchiveRecord = elasticArchiveRecord as ElasticArchiveDbRecord ?? new ElasticArchiveDbRecord
             {
                 PrimaryDataDownloadAccessTokens = elasticArchiveRecord.PrimaryDataDownloadAccessTokens,
                 ArchiveRecordId = elasticArchiveRecord.ArchiveRecordId,
                 IsAnonymized = elasticArchiveRecord.IsAnonymized
-            });
+            };
+            idxSearchMock.Setup(foo => foo.FindDbDocument(item.VeId, MetadataToExclude.OCRContentAndFiles)).Returns(Task.FromResult(elasticArchiveDbRecord ?? elasticArchiveRecord as ElasticArchiveDbRecord));
 
             var statusWechsler = new StatusWechsler(orderDataAccessMock.Object, userDataAccessMock.Object, idxSearchMock.Object, bus);
             await statusWechsler.Execute(aktion, new[] {item}, currentUser, new DateTime(2019, 1, 12));
@@ -75,7 +76,7 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Intern);
+            item.DigitalisierungsKategorie.ShouldBe(DigitalisierungsKategorie.Intern);
         }
 
         [Test]
@@ -96,8 +97,8 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.Status.Should().Be(OrderStatesInternal.FuerDigitalisierungBereit);
-            item.ApproveStatus.Should().Be(ApproveStatus.FreigegebenDurchSystem);
+            item.Status.ShouldBe(OrderStatesInternal.FuerDigitalisierungBereit);
+            item.ApproveStatus.ShouldBe(ApproveStatus.FreigegebenDurchSystem);
             orderDataAccessMock.Verify(
                 i => i.AddStatusHistoryRecord(It.IsAny<int>(), It.IsAny<OrderStatesInternal>(), It.IsAny<OrderStatesInternal>(), It.IsAny<string>()),
                 Times.Exactly(2));
@@ -129,8 +130,8 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.Status.Should().Be(OrderStatesInternal.FreigabePruefen);
-            item.ApproveStatus.Should().Be(ApproveStatus.NichtGeprueft);
+            item.Status.ShouldBe(OrderStatesInternal.FreigabePruefen);
+            item.ApproveStatus.ShouldBe(ApproveStatus.NichtGeprueft);
         }
 
         [Test]
@@ -151,7 +152,7 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Oeffentlichkeit);
+            item.DigitalisierungsKategorie.ShouldBe(DigitalisierungsKategorie.Oeffentlichkeit);
         }
 
 
@@ -173,8 +174,8 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.Status.Should().Be(OrderStatesInternal.FuerAushebungBereit);
-            item.ApproveStatus.Should().Be(ApproveStatus.FreigegebenDurchSystem);
+            item.Status.ShouldBe(OrderStatesInternal.FuerAushebungBereit);
+            item.ApproveStatus.ShouldBe(ApproveStatus.FreigegebenDurchSystem);
         }
 
         [Test]
@@ -195,8 +196,8 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen());
-            item.Status.Should().Be(OrderStatesInternal.FreigabePruefen);
-            item.ApproveStatus.Should().Be(ApproveStatus.NichtGeprueft);
+            item.Status.ShouldBe(OrderStatesInternal.FreigabePruefen);
+            item.ApproveStatus.ShouldBe(ApproveStatus.NichtGeprueft);
         }
 
         [Test]
@@ -229,10 +230,10 @@ namespace CMI.Manager.Order.Tests
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.SetStatusZumReponierenBereit(), harness.Bus);
 
-            item.Status.Should().Be(OrderStatesInternal.ZumReponierenBereit);
-            auftragConsumer.Consumed.Select<IDigitalisierungsAuftragErledigt>().Any().Should().BeFalse();
+            item.Status.ShouldBe(OrderStatesInternal.ZumReponierenBereit);
+            auftragConsumer.Consumed.Select<IDigitalisierungsAuftragErledigt>().Any().ShouldBeFalse();
             auftragErledigtMock.Verify(e => e.Consume(It.IsAny<ConsumeContext<IDigitalisierungsAuftragErledigt>>()), Times.Never);
-            benutzungConsumer.Consumed.Select<IBenutzungskopieAuftragErledigt>().Any().Should().BeTrue();
+            benutzungConsumer.Consumed.Select<IBenutzungskopieAuftragErledigt>().Any().ShouldBeTrue();
             benutzungskopieErledigtMock.Verify(e => e.Consume(It.IsAny<ConsumeContext<IBenutzungskopieAuftragErledigt>>()), Times.Once);
             await harness.Stop();
         }
@@ -269,10 +270,10 @@ namespace CMI.Manager.Order.Tests
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.SetStatusZumReponierenBereit(), harness.Bus);
 
-            item.Status.Should().Be(OrderStatesInternal.ZumReponierenBereit);
-            auftragConsumer.Consumed.Select<IDigitalisierungsAuftragErledigt>().Any().Should().BeTrue();
+            item.Status.ShouldBe(OrderStatesInternal.ZumReponierenBereit);
+            auftragConsumer.Consumed.Select<IDigitalisierungsAuftragErledigt>().Any().ShouldBeTrue();
             auftragErledigtMock.Verify(e => e.Consume(It.IsAny<ConsumeContext<IDigitalisierungsAuftragErledigt>>()), Times.Once);
-            benutzungConsumer.Consumed.Select<IBenutzungskopieAuftragErledigt>().Any().Should().BeFalse();
+            benutzungConsumer.Consumed.Select<IBenutzungskopieAuftragErledigt>().Any().ShouldBeFalse();
             benutzungskopieErledigtMock.Verify(e => e.Consume(It.IsAny<ConsumeContext<IBenutzungskopieAuftragErledigt>>()), Times.Never);
             await harness.Stop();
         }
@@ -308,8 +309,8 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen(), null, eardb);
-            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Oeffentlichkeit);
-            item.Dossiertitel.Should().Be("Anonymisierter Titel");
+            item.DigitalisierungsKategorie.ShouldBe(DigitalisierungsKategorie.Oeffentlichkeit);
+            item.Dossiertitel.ShouldBe("Anonymisierter Titel");
         }
 
         [Test]
@@ -343,8 +344,9 @@ namespace CMI.Manager.Order.Tests
             };
 
             await PerformTest(currentUser, besteller, ordering, item, ear, p => p.Bestellen(), null, eardb);
-            item.DigitalisierungsKategorie.Should().Be(DigitalisierungsKategorie.Oeffentlichkeit);
-            item.Dossiertitel.Should().Be("Titel im Klartext");
+
+            item.DigitalisierungsKategorie.ShouldBe(DigitalisierungsKategorie.Oeffentlichkeit);
+            item.Dossiertitel.ShouldBe("Titel im Klartext");
         }
     }
 }

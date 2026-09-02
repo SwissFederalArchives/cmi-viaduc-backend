@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using CMI.Web.Frontend.api.Elastic;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -13,7 +13,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var action = new Action(() => { SearchRequestBuilder.GetSecuredFacetFilters(new[] {"all_Primarydata:\"Dossier\"", "level:\"Dossier\""}); });
 
-            action.Should().Throw<Exception>();
+            action.ShouldThrow<Exception>();
         }
 
         [Test]
@@ -21,7 +21,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var action = new Action(() => { SearchRequestBuilder.GetSecuredFacetFilters(new[] {"level:\"Dossier\"", "evil:\"Dossier\""}); });
 
-            action.Should().Throw<Exception>();
+            action.ShouldThrow<Exception>();
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var action = new Action(() => { SearchRequestBuilder.GetSecuredFacetFilters(new[] {"(_exists_:evil)"}); });
 
-            action.Should().Throw<Exception>();
+            action.ShouldThrow<Exception>();
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var action = new Action(() => { SearchRequestBuilder.GetSecuredFacetFilters(new[] {"(!_exists_:evil)"}); });
 
-            action.Should().Throw<Exception>();
+            action.ShouldThrow<Exception>();
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var secured = SearchRequestBuilder.GetSecuredFacetFilters(new[] {"level:Dossier:123"});
 
-            secured.Should().BeEquivalentTo("level:Dossier\\:123");
+            secured[0].ShouldBe("level:Dossier\\:123");
         }
     }
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ApplicationFeatureEnum, ConfigService, TranslationService} from '@cmi/viaduc-web-core';
 import {AuthorizationService, ErrorService, UrlService, UserService} from '../../../shared/services';
 import {OrderingFlatItem, SelectionPreFilter} from '../../model';
@@ -10,12 +10,13 @@ import {SessionStorageService} from '../../../client/services';
 import {NgForm} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-orders-einsichtsgesuche-list-page',
-	templateUrl: 'ordersEinsichtListPage.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./ordersEinsichtListPage.component.less']
+    selector: 'cmi-viaduc-orders-einsichtsgesuche-list-page',
+    templateUrl: 'ordersEinsichtListPage.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./ordersEinsichtListPage.component.less'],
+    standalone: false
 })
-export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
+export class OrdersEinsichtListPageComponent implements OnInit {
 	@ViewChild('listMenu', { static: true })
 	public listMenu: WjMenu;
 
@@ -23,12 +24,12 @@ export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
 	public preFilterMenu: WjMenu;
 
 	@ViewChild(OrdersListComponent, { static: false })
-	public ordersList: OrdersListComponent;
+	public ordersList!: OrdersListComponent;
 
 	@ViewChild(NgForm, { static: false })
 	public formOrderEinsichtlist: NgForm;
 
-	public detailRecords: OrderingFlatItem[];
+	public detailRecords!: OrderingFlatItem[];
 
 	public crumbs: any[] = [];
 	public columns: any[] = [];
@@ -38,14 +39,14 @@ export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
 	public SelectionPreFilter = SelectionPreFilter;
 	public showColumnPicker = false;
 	public showEntscheidHinterlegen = false;
-	public selectedUser: string;
+	public selectedUser!: string;
 	public showEinsichtsgesucheAbbrechen = false;
 	public showAuftraegeZuruecksetzen = false;
 	public showDigitalisierungAusloesen = false;
 	public showInVorlageExportieren = false;
 	public hasRight = false;
 
-	private _previousPreFilter: SelectionPreFilter = null;
+	private _previousPreFilter!: SelectionPreFilter;
 
 	constructor(private _txt: TranslationService,
 				private _url: UrlService,
@@ -62,11 +63,13 @@ export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
 		this._buildCrumbs();
 		this._loadColumns();
 		this.refreshHiddenVisibleColumns();
+		this._restorePreFilterButtonState();
 	}
 
-	public ngAfterViewInit(): void {
+	private _restorePreFilterButtonState() {
 		setTimeout(() => {
 			const filter = this._storage.getItem('OrderEinsichtList_preFilter') as SelectionPreFilter;
+
 			if (filter !== null && filter !== undefined) {
 				this._previousPreFilter = filter;
 				this.preFilter = filter;
@@ -78,7 +81,7 @@ export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
 	}
 
 	private _resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('orders.ordersEinsichtListColumns', {}).map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('orders.ordersEinsichtListColumns', {}).map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 	}
 
@@ -190,7 +193,7 @@ export class OrdersEinsichtListPageComponent implements OnInit, AfterViewInit {
 		this._saveColumnsAsUserSettings(cols);
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.einsichtsGesuchSettings = <EinsichtsgesuchUserSettings> {
 			columns: cols

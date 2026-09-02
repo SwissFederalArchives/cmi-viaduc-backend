@@ -1,9 +1,9 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Repository.Consumer;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -67,9 +67,9 @@ namespace CMI.Manager.Repository.Tests
                 var message = harness.Published.Select<IArchiveRecordUpdated>().First().Context.Message;
 
                 Assert.That(message != null);
-                message.ActionSuccessful.Should().Be(false);
-                message.MutationId.Should().Be(mutationId);
-                message.ErrorMessage.Should().Be(errMsg);
+                message.ActionSuccessful.ShouldBe(false);
+                message.MutationId.ShouldBe(mutationId);
+                message.ErrorMessage.ShouldBe(errMsg);
             }
             finally
             {
@@ -121,9 +121,9 @@ namespace CMI.Manager.Repository.Tests
                 var message = harness.Published.Select<IArchiveRecordUpdated>().First().Context.Message;
 
                 // Assert
-                message.ActionSuccessful.Should().Be(false);
-                message.MutationId.Should().Be(mutationId);
-                message.ErrorMessage.Should().Be(errMsg);
+                message.ActionSuccessful.ShouldBe(false);
+                message.MutationId.ShouldBe(mutationId);
+                message.ErrorMessage.ShouldBe(errMsg);
             }
             finally
             {
@@ -169,8 +169,8 @@ namespace CMI.Manager.Repository.Tests
                 var message = harness.Sent.Select<IScheduleForPackageSync>().First().Context.Message;
 
                 // Assert
-                message.Workload.ArchiveRecord.ArchiveRecordId.Should().Be(ar.ArchiveRecordId);
-                message.Workload.MutationId.Should().Be(mutationId);
+                message.Workload.ArchiveRecord.ArchiveRecordId.ShouldBe(ar.ArchiveRecordId);
+                message.Workload.MutationId.ShouldBe(mutationId);
             }
             finally
             {

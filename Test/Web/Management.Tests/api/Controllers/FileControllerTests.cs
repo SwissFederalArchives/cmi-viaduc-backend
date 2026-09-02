@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +12,7 @@ using CMI.Contract.Order;
 using CMI.Utilities.Cache.Access;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Management.api.Controllers;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using Moq;
 using NUnit.Framework;
@@ -79,8 +79,8 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
             // Assert
-            result.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) result).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+            result.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) result).StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
             // Assert
-            result.Should().BeOfType<BadRequestErrorMessageResult>();
+            result.ShouldBeOfType<BadRequestErrorMessageResult>();
         }
 
         [Test]
@@ -113,8 +113,8 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
             // Assert
-            result.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) result).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+            result.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) result).StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
             // Assert
-            result.Should().BeOfType<BadRequestErrorMessageResult>();
+            result.ShouldBeOfType<BadRequestErrorMessageResult>();
         }
 
         [Test]
@@ -149,8 +149,8 @@ namespace CMI.Web.Management.Tests.api.Controllers
             var result = fileController.DownloadFile(recordId, token).GetAwaiter().GetResult();
 
             // Assert
-            result.Should().BeOfType<ResponseMessageResult>();
-            ((ResponseMessageResult) result).Response.StatusCode.Should().Be(HttpStatusCode.Gone);
+            result.ShouldBeOfType<ResponseMessageResult>();
+            ((ResponseMessageResult) result).Response.StatusCode.ShouldBe(HttpStatusCode.Gone);
         }
 
         [Test]
@@ -169,10 +169,10 @@ namespace CMI.Web.Management.Tests.api.Controllers
 
             // Assert
             Mock.Get(dtm).Verify(m => m.CleanUpOldToken(It.IsAny<string>(), It.IsAny<string>(), DownloadTokenType.OrderItem), Times.Once);
-            result.Should().BeOfType<ResponseMessageResult>();
+            result.ShouldBeOfType<ResponseMessageResult>();
             var response = result.ExecuteAsync(CancellationToken.None).GetAwaiter().GetResult();
-            response.Content.Headers.ContentType.Should().Be(MediaTypeHeaderValue.Parse("application/octet-stream"));
-            response.Content.Headers.ContentDisposition.FileName.Should().Be($"{recordId}.zip");
+            response.Content.Headers.ContentType.ShouldBe(MediaTypeHeaderValue.Parse("application/octet-stream"));
+            response.Content.Headers.ContentDisposition.FileName.ShouldBe($"{recordId}.zip");
         }
     }
 }

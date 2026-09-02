@@ -3,8 +3,9 @@ import {TranslationService} from '@cmi/viaduc-web-core';
 import {SeoService, UrlService} from '../../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-contact-detail-page',
-	templateUrl: 'contactDetailPage.component.html'
+    selector: 'cmi-viaduc-contact-detail-page',
+    templateUrl: 'contactDetailPage.component.html',
+    standalone: false
 })
 export class ContactDetailPageComponent implements OnInit {
 	public loading: boolean;

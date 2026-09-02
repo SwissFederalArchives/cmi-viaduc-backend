@@ -1,8 +1,8 @@
-﻿using System.IO;
+using System.IO;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset;
 using CMI.Engine.Asset.PreProcess;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests
@@ -24,11 +24,11 @@ namespace CMI.Manager.Asset.Tests
             var file = MetadataXmlUpdater.GetDatei(testFile, paket, tempFolder, out var ordner);
 
             // Assert
-            file.Should().NotBeNull();
-            file.Name.Should().Be(testFile.Name);
+            file.ShouldNotBeNull();
+            file.Name.ShouldBe(testFile.Name);
 
-            ordner.Should().BeOfType<OrdnerDIP>();
-            ((OrdnerDIP) ordner).Id.Should().Be("COO.2080.100.2.2142784_D");
+            ordner.ShouldBeOfType<OrdnerDIP>();
+            ((OrdnerDIP) ordner).Id.ShouldBe("COO.2080.100.2.2142784_D");
         }
 
         [Test]
@@ -44,10 +44,10 @@ namespace CMI.Manager.Asset.Tests
             var file = MetadataXmlUpdater.GetDatei(testFile, paket, tempFolder, out var ordner);
 
             // Assert
-            file.Should().NotBeNull();
-            file.Name.Should().Be(testFile.Name);
+            file.ShouldNotBeNull();
+            file.Name.ShouldBe(testFile.Name);
 
-            ordner.Should().BeOfType<InhaltsverzeichnisDIP>();
+            ordner.ShouldBeOfType<InhaltsverzeichnisDIP>();
         }
 
         [Test]
@@ -64,8 +64,8 @@ namespace CMI.Manager.Asset.Tests
             var file = MetadataXmlUpdater.GetDatei(testFile, paket, tempFolder, out var ordner);
 
             // Assert
-            file.Should().BeNull();
-            ordner.Should().BeNull();
+            file.ShouldBeNull();
+            ordner.ShouldBeNull();
         }
     }
 }

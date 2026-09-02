@@ -2,9 +2,10 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ContextService} from '../../services/context.service';
 
 @Component({
-	selector: 'cmi-viaduc-nav',
-	templateUrl: 'navigation.component.html',
-	styleUrls: ['./navigation.component.less']
+    selector: 'cmi-viaduc-nav',
+    templateUrl: 'navigation.component.html',
+    styleUrls: ['./navigation.component.less'],
+    standalone: false
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 

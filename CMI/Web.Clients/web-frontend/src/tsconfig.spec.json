@@ -5,8 +5,11 @@
 		"outDir": "../out-tsc/spec",
     "baseUrl": "./",
 		"module": "es2022",
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,		"allowSyntheticDefaultImports": true,
+		"noEmitOnError": false,
+		"strict": false,
+		"strictFunctionTypes": false,
 		"types": [
 			"jasmine",
 			"node"

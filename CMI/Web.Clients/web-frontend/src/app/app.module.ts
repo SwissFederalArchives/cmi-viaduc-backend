@@ -1,4 +1,4 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule, inject, provideAppInitializer } from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {Router, RouterModule} from '@angular/router';
 import {RootComponent} from './components/root/root.component';
@@ -47,12 +47,10 @@ export const toastrOptions = {
 		...ALL_COMPONENTS
 	],
 	providers: [
-		{
-			provide: APP_INITIALIZER,
-			useFactory: preloadServiceFactory,
-			deps: [PreloadService, ContextService],
-			multi: true
-		},
+		provideAppInitializer(() => {
+        const initializerFn = (preloadServiceFactory)(inject(PreloadService), inject(ContextService));
+        return initializerFn();
+      }),
 		{
 			provide: HTTP_INTERCEPTORS,
 			useFactory: function(auth: AuthenticationService, context: ClientContext) {

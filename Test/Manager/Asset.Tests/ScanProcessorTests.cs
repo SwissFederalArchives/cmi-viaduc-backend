@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.ParameterSettings;
 using CMI.Engine.Asset.PreProcess;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests
@@ -71,7 +71,7 @@ namespace CMI.Manager.Asset.Tests
             Action action = () => processor.ConvertSingleJpeg2000ScansToPdfDocuments(paket, rootFolder);
 
             // Asert
-            action.Should().Throw<InvalidOperationException>();
+            Should.Throw<InvalidOperationException>(action);
         }
 
         [Test]
@@ -94,20 +94,20 @@ namespace CMI.Manager.Asset.Tests
             // Assert
             // Nothing should be changed
             var contentFolder = paket.Inhaltsverzeichnis.Ordner[0];
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.Should().Be(9);
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.Should().Be(9);
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.Should().Be(5);
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.ShouldBe(9);
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.ShouldBe(9);
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.ShouldBe(5);
 
             // Alle Dateien vorhanden?
             var dokument1 = new DirectoryInfo(Path.Combine(rootFolder, "content", "D_o_k_u_m_e_n_t_0000001"));
             var dokument2 = new DirectoryInfo(Path.Combine(rootFolder, "content", "D_o_k_u_m_e_n_t_0000002"));
             var umschlagDirectory = new DirectoryInfo(Path.Combine(rootFolder, "content", "U_m_s_c_h_l_a_g_0000001"));
-            umschlagDirectory.GetFiles("*.xml").Length.Should().Be(2);
-            umschlagDirectory.GetFiles("*.jp2").Length.Should().Be(2);
-            dokument1.GetFiles("*.xml").Length.Should().Be(4);
-            dokument1.GetFiles("*.jp2").Length.Should().Be(4);
-            dokument2.GetFiles("*.xml").Length.Should().Be(4);
-            dokument2.GetFiles("*.jp2").Length.Should().Be(4);
+            umschlagDirectory.GetFiles("*.xml").Length.ShouldBe(2);
+            umschlagDirectory.GetFiles("*.jp2").Length.ShouldBe(2);
+            dokument1.GetFiles("*.xml").Length.ShouldBe(4);
+            dokument1.GetFiles("*.jp2").Length.ShouldBe(4);
+            dokument2.GetFiles("*.xml").Length.ShouldBe(4);
+            dokument2.GetFiles("*.jp2").Length.ShouldBe(4);
         }
 
         [Test]
@@ -127,13 +127,13 @@ namespace CMI.Manager.Asset.Tests
             // Document 1 and 2 are the same
             // Umschlag 1 got converted to pdf
             var contentFolder = paket.Inhaltsverzeichnis.Ordner[0];
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.Should().Be(8); // The original jp2 and premis
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.Should().Be(8); // The original jp2 and premis
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.Should().Be(1); // Just the pdf
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.ShouldBe(8); // The original jp2 and premis
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.ShouldBe(8); // The original jp2 and premis
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.ShouldBe(1); // Just the pdf
 
             // Premis Dateien gelöscht?
             var umschlagDirectory = new DirectoryInfo(Path.Combine(rootFolder, "content", "U_m_s_c_h_l_a_g_0000001"));
-            umschlagDirectory.GetFiles("*.xml").Length.Should().Be(0);
+            umschlagDirectory.GetFiles("*.xml").Length.ShouldBe(0);
         }
 
 
@@ -152,17 +152,17 @@ namespace CMI.Manager.Asset.Tests
             // Assert
             // Every Dokument and Umschlag got converted
             var contentFolder = paket.Inhaltsverzeichnis.Ordner[0];
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.Should().Be(1); // Just the pdf
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.Should().Be(1); // Just the pdf
-            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.Should().Be(1); // Just the pdf
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000001")?.Datei.Count.ShouldBe(1); // Just the pdf
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "D_o_k_u_m_e_n_t_0000002")?.Datei.Count.ShouldBe(1); // Just the pdf
+            contentFolder.Ordner.FirstOrDefault(o => o.Name == "U_m_s_c_h_l_a_g_0000001")?.Datei.Count.ShouldBe(1); // Just the pdf
 
             // Premis Dateien gelöscht?
             var dokument1 = new DirectoryInfo(Path.Combine(rootFolder, "content", "D_o_k_u_m_e_n_t_0000001"));
             var dokument2 = new DirectoryInfo(Path.Combine(rootFolder, "content", "D_o_k_u_m_e_n_t_0000002"));
             var umschlagDirectory = new DirectoryInfo(Path.Combine(rootFolder, "content", "U_m_s_c_h_l_a_g_0000001"));
-            umschlagDirectory.GetFiles("*.xml").Length.Should().Be(0);
-            dokument1.GetFiles("*.xml").Length.Should().Be(0);
-            dokument2.GetFiles("*.xml").Length.Should().Be(0);
+            umschlagDirectory.GetFiles("*.xml").Length.ShouldBe(0);
+            dokument1.GetFiles("*.xml").Length.ShouldBe(0);
+            dokument2.GetFiles("*.xml").Length.ShouldBe(0);
         }
 
         private void AddFileToPackage(string sampleFileName, string targetFolderInsideContent, PaketDIP paket, string rootFolder)

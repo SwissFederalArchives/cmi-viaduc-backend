@@ -19,12 +19,13 @@ import {FlexGridXlsxConverter} from '@mescius/wijmo.grid.xlsx';
 import {Observable} from 'rxjs';
 
 @Component ({
-	selector: 'cmi-viaduc-grid',
-	templateUrl: './cmiGrid.component.html',
-	providers: [
-		{ provide: 'WjComponent', useExisting: forwardRef(() => CmiGridComponent) },
-		...wjFlexGridMeta.providers
-	]
+    selector: 'cmi-viaduc-grid',
+    templateUrl: './cmiGrid.component.html',
+    providers: [
+        { provide: 'WjComponent', useExisting: forwardRef(() => CmiGridComponent) },
+        ...wjFlexGridMeta.providers
+    ],
+    standalone: false
 })
 export class CmiGridComponent extends WjFlexGrid {
 
@@ -107,6 +108,7 @@ export class CmiGridComponent extends WjFlexGrid {
 	/*  is called in the last line of any Wijmo component's constructor, and perform necessary initializations here. */
 	public created() {
 		this._isInitializing = true;
+		this.fixWijmoEmptyFilterIssue();
 		setTimeout(() => {
 			this._setDefaults();
 			this._registerTooltips();
@@ -119,8 +121,67 @@ export class CmiGridComponent extends WjFlexGrid {
 			this.itemFormatter = this._itemFormatterFunc.bind(this);
 			this.loadedRows.addHandler(this._resetSelection.bind(this));
 			this.updatedView.addHandler(this._onViewUpdated.bind(this));
-
 		}, 0);
+	}
+
+	// Nach Wijmo Update testen ob es das noch braucht. PVW-2396 [BUG] Verhalten bei Filterungen in Listenansichten
+	private fixWijmoEmptyFilterIssue() {
+		const gridHost = this.hostElement;
+		if (gridHost) {
+			// 1. Mousedown abfangen (öffnet das Popup zuverlässig)
+			gridHost.addEventListener('mousedown', (e: MouseEvent) => {
+				const target = e.target as HTMLElement;
+
+				if (target && (target.classList.contains('wj-elem-filter') || target.closest('.wj-elem-filter'))) {
+					const hitTest = this.hitTest(e);
+
+					if (hitTest.cellType === CellType.ColumnHeader) {
+						const column = this.columns[hitTest.col];
+
+						if (column && !column.dataMap) {
+							e.preventDefault();
+							e.stopPropagation();
+
+							// Popup erzwingen
+							setTimeout(() => {
+								this.filter.editColumnFilter(column);
+							}, 0);
+						}
+					}
+				}
+			}, true);
+
+			// 2. Das nachfolgende Loslassen der Maus (mouseup) auf dem Filtersymbol blockieren
+			gridHost.addEventListener('mouseup', (e: MouseEvent) => {
+				const target = e.target as HTMLElement;
+				if (target && (target.classList.contains('wj-elem-filter') || target.closest('.wj-elem-filter'))) {
+					const hitTest = this.hitTest(e);
+					if (hitTest.cellType === CellType.ColumnHeader) {
+						const column = this.columns[hitTest.col];
+						if (column && !column.dataMap) {
+							// Verhindert, dass das darauffolgende Event das Popup schließt
+							e.preventDefault();
+							e.stopPropagation();
+						}
+					}
+				}
+			}, true);
+
+			// 3. Das finale 'click'-Event ebenfalls abfangen, damit kein Ghost-Click durchschlägt
+			gridHost.addEventListener('click', (e: MouseEvent) => {
+				const target = e.target as HTMLElement;
+				if (target && (target.classList.contains('wj-elem-filter') || target.closest('.wj-elem-filter'))) {
+					const hitTest = this.hitTest(e);
+					if (hitTest.cellType === CellType.ColumnHeader) {
+						const column = this.columns[hitTest.col];
+						if (column && !column.dataMap) {
+							e.preventDefault();
+							e.stopPropagation();
+						}
+					}
+				}
+			}, true);
+		}
 	}
 
 	public dispose() {
@@ -161,7 +222,7 @@ export class CmiGridComponent extends WjFlexGrid {
 	public exportToExcelOData(fileName: string): Observable<void> {
 		// Save current state
 		this._byPassSessionSaveHandler = true;
-		const oDataCol = this._getSourceAsODataCollectionView();
+		const oDataCol: ODataCollectionView = this._getSourceAsODataCollectionView();
 		const originPageSize = oDataCol.pageSize;
 		const originPageIndex = oDataCol.pageIndex;
 
@@ -304,8 +365,8 @@ export class CmiGridComponent extends WjFlexGrid {
 
 	}
 
-	private _getNameSelectedElement(dataSet: CollectionView, index?: number) {
-		if (!dataSet || index === undefined || index == null) {
+	private _getNameSelectedElement(dataSet: CollectionView | null, index?: number) {
+		if (!dataSet || index === undefined || index === null) {
 			return this.name + this._selectedElementSuffix;
 		}
 
@@ -419,7 +480,7 @@ export class CmiGridComponent extends WjFlexGrid {
 		this.onFilterApplied.next(filterWerte);
 	}
 
-	private _restoreOdataFilter(oDataView) {
+	private _restoreOdataFilter(oDataView: any) {
 		oDataView.oDataVersion = 4;
 
 		const updatedViewHandler = () => {
@@ -427,11 +488,15 @@ export class CmiGridComponent extends WjFlexGrid {
 				this._setContainsOnConditionFilterColumns();
 			});
 
-			this.loadedRows.removeHandler(updatedViewHandler);
+			if (this.loadedRows) {
+				this.loadedRows.removeHandler(updatedViewHandler);
+			}
 		};
 
-		oDataView.loaded.addHandler(updatedViewHandler);
-		oDataView.onLoaded();
+		if (oDataView.loaded) {
+			oDataView.loaded.addHandler(updatedViewHandler);
+			oDataView.onLoaded();
+		}
 
 		// Restoring ODataFilter
 		const filter = this._getItem<string>(this.name + this._filterGridSuffix);
@@ -440,20 +505,22 @@ export class CmiGridComponent extends WjFlexGrid {
 		}
 	}
 
-	private _restoreSortExpressions(colView) {
+	private _restoreSortExpressions(colView: any) {
 		const sorts = this._getItem<any[]>(this.name + this._sortGridSuffix);
 		if (sorts) {
 			for (const sort of sorts) {
-				if (sort.key) {
+				if (sort.key && colView) {
 					colView.sortDescriptions.push(new SortDescription(sort.key, sort.asc));
 				}
 			}
 		} else {
 			if (this.defaultSortColumnKey && this.defaultSortColumnKey.trim().length > 0) {
 				// Standardmässig nach der Ersten Spalte (ohne Checkbox) sortieren
-				const defaultSortCol = this.columns.filter(c => c.binding === this.defaultSortColumnKey)[0];
+				const defaultSortCol = this.columns?.filter(c => c.binding === this.defaultSortColumnKey)[0];
 				if (defaultSortCol && defaultSortCol.binding) {
-					colView.sortDescriptions.push(new SortDescription(defaultSortCol.binding, false));
+					if (colView?.sortDescriptions) {
+						colView?.sortDescriptions?.push(new SortDescription(defaultSortCol.binding, false));
+					}
 				}
 			}
 		}
@@ -479,13 +546,14 @@ export class CmiGridComponent extends WjFlexGrid {
 		}
 	}
 
-	private _getItem<T>(key: string): T {
+	private _getItem<T>(key: string): T | null {
 		const result = window.sessionStorage.getItem(key);
-		if (result === 'undefined') {
+
+		if (!result || result === "undefined") {
 			return null;
 		}
 
-		return <T>JSON.parse(result || null);
+		return JSON.parse(result) as T;
 	}
 
 	private _setItem(key: string, item: any): void {
@@ -498,7 +566,7 @@ export class CmiGridComponent extends WjFlexGrid {
 
 	/* Displays a tooltip for every cell which has been clipped off */
 	private _registerTooltips() {
-		let range = null;
+		let range: any = null;
 		const tooltip = new Tooltip();
 		/* eslint-disable @typescript-eslint/no-this-alias */
 		const flexGrid = this;
@@ -508,12 +576,12 @@ export class CmiGridComponent extends WjFlexGrid {
 			if (!ht.range.equals(range)) {
 				if (ht.cellType === CellType.Cell) {
 					range = ht.range;
-					const cellElement = document.elementFromPoint(e.clientX, e.clientY);
+					const cellElement: Element | null  = document.elementFromPoint(e.clientX, e.clientY);
 
 					const cellBounds = flexGrid.getCellBoundingRect(ht.row, ht.col);
 					const data = escapeHtml(flexGrid.getCellData(range.row, range.col, true));
 
-					if (cellElement.clientWidth !== cellElement.scrollWidth) {
+					if (cellElement instanceof Element && cellElement.clientWidth !== cellElement.scrollWidth) {
 						tooltip.show(flexGrid.hostElement, data, cellBounds);
 					}
 				} else if (ht.cellType === CellType.ColumnHeader) {
@@ -521,11 +589,15 @@ export class CmiGridComponent extends WjFlexGrid {
 					const cellElement = document.elementFromPoint(e.clientX, e.clientY);
 					const column = flexGrid.columns[ht.col] as Column;
 					const data = column.header;
-					if (cellElement.clientWidth !== cellElement.scrollWidth) {
+					if (cellElement instanceof Element && cellElement.clientWidth !== cellElement.scrollWidth) {
 
 						const cellBounds = cellElement.getBoundingClientRect();
 						const rect = new Rect(cellBounds.left, cellBounds.top, cellBounds.width, cellBounds.height);
-						tooltip.show(flexGrid.hostElement, data, rect);
+						if (typeof data === "string") {
+							tooltip.show(flexGrid.hostElement, data, rect);
+						} else {
+							tooltip.show(flexGrid.hostElement, '', rect);
+						}
 					}
 				}
 
@@ -547,7 +619,7 @@ export class CmiGridComponent extends WjFlexGrid {
 		return !this.disableInput;
 	}
 
-	private _onFilterAppliedInternal(s, ev) {
+	private _onFilterAppliedInternal(s: any, ev: any) {
 		this.onFilterApplied.emit(ev);
 	}
 
@@ -582,13 +654,14 @@ export class CmiGridComponent extends WjFlexGrid {
 		if (asc && existingSort) {
 			return; // allow tripple state, clear filter on third click
 		}
-
-		const sd = new SortDescription(col.binding, asc);
-		collection.sortDescriptions.push(sd);
+		if (typeof col.binding === "string") {
+			const sd = new SortDescription(col.binding, asc);
+			collection.sortDescriptions.push(sd);
+		}
 	}
 
-	private _getSourceAsODataCollectionView() {
-		return (this.itemsSource instanceof ODataCollectionView) ? this.itemsSource as ODataCollectionView : null;
+	private _getSourceAsODataCollectionView() : ODataCollectionView {
+		return this.itemsSource as ODataCollectionView;
 	}
 
 	private _getSourceAsCollectionView() {
@@ -606,13 +679,15 @@ export class CmiGridComponent extends WjFlexGrid {
 				continue;
 			}
 
-			const key = cf.column.binding;
-			if (!this._dataMaps.hasOwnProperty(key)) {
-				continue;
-			}
+			const key = cf.column?.binding;
+			if (key !== null && typeof key === "string") {
+				if (!this._dataMaps.hasOwnProperty(key)) {
+					continue;
+				}
 
-			const dm = this._dataMaps[key];
-			this._wjs.setUpListColumn(this as any, this.filter, key, dm);
+				const dm = this._dataMaps[key];
+				this._wjs.setUpListColumn(this as any, this.filter, key, dm);
+			}
 		}
 	}
 
@@ -621,14 +696,13 @@ export class CmiGridComponent extends WjFlexGrid {
 	}
 
 	/* Formats the checkbox column */
-	private _itemFormatterFunc = (panel, r, c, cell) => {
+	private _itemFormatterFunc = (panel: any, r: any, c: any, cell: any) => {
 		if (panel.cellType === CellType.ColumnHeader) {
 			const flex = panel.grid;
 			const col = flex.columns[c] as Column;
 
 			// check that this is a boolean column
-			if (col.dataType === DataType.Boolean && col.header.trim().length === 0) {
-
+			if (typeof col.header === "string" && col.dataType === DataType.Boolean && col.header.trim().length === 0) {
 				// prevent sorting on click
 				col.allowSorting = false;
 

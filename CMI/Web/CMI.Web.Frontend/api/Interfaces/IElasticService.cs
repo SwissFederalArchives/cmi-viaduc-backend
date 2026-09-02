@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Utilities.ActaPro;
@@ -9,15 +10,16 @@ namespace CMI.Web.Frontend.api.Interfaces
 {
     public interface IElasticService
     {
-        ElasticQueryResult<T> QueryForId<T>(string id, UserAccess access, bool translated = true) where T : TreeRecord;
-        List<TreeRecord> QueryForParentId(string id, UserAccess access);
-        ElasticQueryResult<T> QueryForIds<T>(IList<string> ids, UserAccess access, Paging p = null) where T : TreeRecord;
-        ElasticQueryResult<T> QueryForIdsWithoutSecurityFilter<T>(IList<string> ids, Paging p = null) where T : TreeRecord;
-        ElasticQueryResult<T> RunQuery<T>(ElasticQuery query, UserAccess access, bool translated = true) where T : TreeRecord;
-        string[] GetLaender();
-        ElasticQueryResult<T> RunQueryWithoutSecurityFilters<T>(ElasticQuery query) where T : TreeRecord;
-        ElasticQueryResult<T> QueryForRootNodes<T>(UserAccess access) where T : TreeRecord;
-        ActaProMappingProvider ActaProMappingProvider { get; }
-         AccessTokens QueryTokensForId(string archiveRecordId);
+         Task<ElasticQueryResult<T>> QueryForId<T>(string id, UserAccess access, bool translated = true) where T : TreeRecord;
+         Task<List<TreeRecord>> QueryForParentId(UserAccess access, long scopeId, string actaProId);
+         Task<List<TreeRecord>> QueryForParentId(string id, UserAccess access);
+         Task<ElasticQueryResult<T>> QueryForIds<T>(IList<string> ids, UserAccess access, Paging p = null) where T : TreeRecord;
+         Task<ElasticQueryResult<T>> QueryForIdsWithoutSecurityFilter<T>(IList<string> ids, Paging p = null) where T : TreeRecord;
+         Task<ElasticQueryResult<T>> RunQuery<T>(ElasticQuery query, UserAccess access, bool translated = true) where T : TreeRecord;
+         Task<string[]> GetLaender();
+         Task<ElasticQueryResult<T>> RunQueryWithoutSecurityFilters<T>(ElasticQuery query) where T : TreeRecord;
+         Task<ElasticQueryResult<T>> QueryForRootNodes<T>(UserAccess access) where T : TreeRecord;
+         ActaProMappingProvider ActaProMappingProvider { get; }
+         Task<AccessTokens> QueryTokensForId(string archiveRecordId);
     }
 }

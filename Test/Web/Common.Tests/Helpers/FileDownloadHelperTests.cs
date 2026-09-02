@@ -1,5 +1,5 @@
-﻿using CMI.Web.Common.Helpers;
-using FluentAssertions;
+using CMI.Web.Common.Helpers;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Common.Tests.Helpers
@@ -18,7 +18,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var t2 = helper.CreateLogToken();
 
             // Assert
-            t1.Should().NotBe(t2);
+            t1.ShouldNotBe(t2);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = helper.GetConfigValueTokenValidTime();
 
             // Assert
-            result.Should().Be(123);
+            result.ShouldBe(123);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace CMI.Web.Common.Tests.Helpers
             var result = helper.GetConfigValueTokenValidTime();
 
             // Assert
-            result.Should().Be(defaultExpiryTime);
+            result.ShouldBe(defaultExpiryTime);
         }
     }
 }

@@ -3,8 +3,8 @@ using System.Dynamic;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Extensions;
 using CMI.Web.Frontend.api.Elastic;
-using FluentAssertions;
 using NUnit.Framework;
+using Shouldly;
 
 namespace CMI.Web.Frontend.API.Tests.api
 {
@@ -43,11 +43,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             record.SetUnanonymizedValuesForAuthorizedUser(elasticDbRecord);
 
             // Assert
-            record.Title.Should().Be("Nur fuer Berechtigete");
-            record.WithinInfo.Should().Be("Nicht  mehr anonymiziert");
-            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].Should().Be("Geheim VerwandteVe");
-            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].Should().Be("Geheim Zusatzmerkmal");
-            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].Should().Be("Geheim ZusätzlicheInformationen");
+            record.Title.ShouldBe("Nur fuer Berechtigete");
+            record.WithinInfo.ShouldBe("Nicht  mehr anonymiziert");
+            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].ShouldBe("Geheim VerwandteVe");
+            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].ShouldBe("Geheim Zusatzmerkmal");
+            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].ShouldBe("Geheim ZusätzlicheInformationen");
         }
 
         [Test]
@@ -81,11 +81,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             record.SetUnanonymizedValuesForAuthorizedUser(elasticDbRecord);
 
             // Assert
-            record.Title.Should().Be("Original");
-            record.WithinInfo.Should().Be("Bin drin");
-            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].Should().Be("verwandteVe");
-            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].Should().Be("zusatzkomponenteZac1");
-            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].Should().Be("bemerkungZurVe");
+            record.Title.ShouldBe("Original");
+            record.WithinInfo.ShouldBe("Bin drin");
+            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].ShouldBe("verwandteVe");
+            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].ShouldBe("zusatzkomponenteZac1");
+            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].ShouldBe("bemerkungZurVe");
         }
 
         [Test]
@@ -119,11 +119,11 @@ namespace CMI.Web.Frontend.API.Tests.api
             record.SetUnanonymizedValuesForAuthorizedUser(elasticDbRecord);
 
             // Assert
-            record.Title.Should().Be("Original");
-            record.WithinInfo.Should().Be("Bin drin");
-            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].Should().Be("verwandteVe");
-            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].Should().Be("zusatzkomponenteZac1");
-            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].Should().Be("bemerkungZurVe");
+            record.Title.ShouldBe("Original");
+            record.WithinInfo.ShouldBe("Bin drin");
+            ((IDictionary<string, object>) record.CustomFields)["verwandteVe"].ShouldBe("verwandteVe");
+            ((IDictionary<string, object>) record.CustomFields)["zusatzkomponenteZac1"].ShouldBe("zusatzkomponenteZac1");
+            ((IDictionary<string, object>) record.CustomFields)["bemerkungZurVe"].ShouldBe("bemerkungZurVe");
         }
     }
 }

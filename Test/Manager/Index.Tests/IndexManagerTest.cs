@@ -1,7 +1,7 @@
-﻿
+
 using System.Collections.Generic;
 using CMI.Contract.Common;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Index.Tests
@@ -20,11 +20,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> {1975, 1980} );
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1970, 1980 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1975 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> {1975, 1980} );
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1970, 1980 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1975 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900 });
         }
 
         [Test]
@@ -38,11 +38,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1965, 1970, 1975, 1980, 1985 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1960, 1970, 1980 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1950, 1975 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1965, 1970, 1975, 1980, 1985 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1960, 1970, 1980 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1950, 1975 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900 });
         }
 
         [Test]
@@ -56,11 +56,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1975, 1980, 1985, 1990, 1995, 2000 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1970, 1980, 1990, 2000 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1975, 2000 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1975, 1980, 1985, 1990, 1995, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1970, 1980, 1990, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1975, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900, 2000 });
         }
 
         [Test]
@@ -96,11 +96,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1975, 1980, 1985, 1990, 1995 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1970, 1980, 1990 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1975 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1975, 1980, 1985, 1990, 1995 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1970, 1980, 1990 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1975 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900 });
         }
 
 
@@ -115,11 +115,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1970, 1975});
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1970});
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1950,  1975});
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900});
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1970, 1975});
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1970});
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1950,  1975});
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900});
         }
 
         [Test]
@@ -133,11 +133,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1895, 1900 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1890, 1900 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1875, 1900 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1800, 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1895, 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1890, 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1875, 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1800, 1900 });
         }
 
         [Test]
@@ -151,11 +151,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1985, 1990 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1980, 1990 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1975 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1985, 1990 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1980, 1990 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1975 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900 });
 
         }
 
@@ -172,11 +172,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1785, 1980 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1780, 1980 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1775, 1975 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1700, 1900 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1785, 1980 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1780, 1980 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1775, 1975 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1700, 1900 });
         }
 
         [Test]
@@ -190,11 +190,11 @@ namespace CMI.Manager.Index.Tests
             IndexManager.CalculateCreationPeriodBuckets(elasticArchiveRecord);
 
             // Assert
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.Should().BeEquivalentTo(list);
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.Should().BeEquivalentTo(new List<int> { 1945, 1955, 1965, 1970, 1980, 1985, 1995, 2005, 2010, 2020});
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.Should().BeEquivalentTo(new List<int> { 1940, 1950, 1960, 1970, 1980, 1990,2000, 2010, 2020 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.Should().BeEquivalentTo(new List<int> { 1925, 1950, 1975, 2000 });
-            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.Should().BeEquivalentTo(new List<int> { 1900, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears001.ShouldBe(list);
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears005.ShouldBe(new List<int> { 1945, 1955, 1965, 1970, 1980, 1985, 1995, 2005, 2010, 2020});
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears010.ShouldBe(new List<int> { 1940, 1950, 1960, 1970, 1980, 1990,2000, 2010, 2020 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears025.ShouldBe(new List<int> { 1925, 1950, 1975, 2000 });
+            elasticArchiveRecord.AggregationFields.CreationPeriodYears100.ShouldBe(new List<int> { 1900, 2000 });
         }
 
         private static ElasticArchiveRecord CreateElasticArchiveRecord(List<int> list)

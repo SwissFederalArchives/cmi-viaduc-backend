@@ -54,7 +54,7 @@ namespace CMI.Manager.Harvest
                         // 00:05:00
                         // 00:05:00
                         // 00:05:00
-                        ec.UseRetry(retryPolicy =>
+                        ec.UseMessageRetry(retryPolicy =>
                             retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                         BusConfigurator.SetPrefetchCountForEndpoint(ec);
                     });
@@ -62,19 +62,19 @@ namespace CMI.Manager.Harvest
                 cfg.ReceiveEndpoint(BusConstants.HarvestManagerArchiveRecordUpdatedEventQueue, ec =>
                 {
                     ec.ConfigureConsumer<ArchiveRecordUpdatedConsumer>(context);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.HarvestManagerArchiveRecordRemovedEventQueue, ec =>
                 {
                     ec.ConfigureConsumer<ArchiveRecordRemovedConsumer>(context);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.HarvestManagerResyncArchiveDatabaseMessageQueue, ec =>
                 {
                     ec.ConfigureConsumer<ArchiveDatabaseResyncConsumer>(context);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
 
@@ -85,7 +85,7 @@ namespace CMI.Manager.Harvest
                 cfg.ReceiveEndpoint(BusConstants.AisAccessTokensRequestQueue, ec =>
                 {
                     ec.ConfigureConsumer<GetAisAccessTokensConsumer>(context);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 

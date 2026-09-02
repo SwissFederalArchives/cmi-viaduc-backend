@@ -18,25 +18,26 @@ import {Router} from '@angular/router';
 import {CollectionView} from '@mescius/wijmo';
 import {AblieferndeStelleSettings, ManagementUserSettings} from '../../../shared/model';
 import {Column} from '@mescius/wijmo.grid';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
-	selector: 'cmi-viaduc-ablieferndestelle-page',
-	templateUrl: 'ablieferndeStelleListPage.component.html',
-	styleUrls: ['./ablieferndeStelleListPage.component.less']
+    selector: 'cmi-viaduc-ablieferndestelle-page',
+    templateUrl: 'ablieferndeStelleListPage.component.html',
+    styleUrls: ['./ablieferndeStelleListPage.component.less'],
+    standalone: false
 })
 export class AblieferndeStellePageComponent implements OnInit {
 	@ViewChild('flexGrid', { static: true })
 	public flexGrid: CmiGridComponent;
 
-	public loading: boolean;
+	public loading: boolean = true;
 	public crumbs: any[] = [];
 	public ablieferndeStellen: CollectionView = new CollectionView();
-	public showDeleteModal: boolean;
+	public showDeleteModal!: boolean;
 	public hiddenColumns: any[] = [];
 	public visibleColumns: any[] = [];
 	public showColumnPicker = false;
-	public columns: any[];
+	public columns!: any[];
 
 	constructor(private _ablieferndeStelleService: AblieferndeStelleService,
 				private _txt: TranslationService,
@@ -54,18 +55,19 @@ export class AblieferndeStellePageComponent implements OnInit {
 		this.loadAblieferndeStelleList();
 	}
 
+
 	public getUserAsString(item: any): string {
 		if (item == null) {
 			return '';
 		}
-		return item.applicationUserList.map(u => u.firstName + ' ' + u.familyName).join(', ');
+		return item.applicationUserList.map((u: any) => u.firstName + ' ' + u.familyName).join(', ');
 	}
 
 	public getTokenAsString(item: any): string {
 		if (item == null) {
 			return '';
 		}
-		return item.ablieferndeStelleTokenList.map(t => `${t.token} (${t.bezeichnung})`).join(', ');
+		return item.ablieferndeStelleTokenList.map((t: any) => `${t.token} (${t.bezeichnung})`).join(', ');
 	}
 
 	public deleteCheckedAblieferndeStelle(): void {
@@ -73,7 +75,7 @@ export class AblieferndeStellePageComponent implements OnInit {
 			return;
 		}
 
-		const toDelete: number[] = this.flexGrid.checkedItems.map(s => s.ablieferndeStelleId);
+		const toDelete: number[] = this.flexGrid.checkedItems.map((s: any) => s.ablieferndeStelleId);
 
 		if (toDelete.length === 0) {
 			return;
@@ -174,9 +176,13 @@ export class AblieferndeStellePageComponent implements OnInit {
 		}
 		this.ablieferndeStellen = new CollectionView(result);
 		this.ablieferndeStellen.pageSize = 10;
+		if (this.flexGrid) {
+			this.flexGrid.itemsSource = this.ablieferndeStellen;
+		}
+		this.flexGrid?.refresh();
 	}
 
-	private _fixDate(dt): Date {
+	private _fixDate(dt: Date): Date {
 		return dt ? moment(dt).toDate() : null;
 	}
 
@@ -196,7 +202,7 @@ export class AblieferndeStellePageComponent implements OnInit {
 		});
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.ablieferndeStelleSettings = <AblieferndeStelleSettings> {
 			columns: cols
@@ -205,7 +211,7 @@ export class AblieferndeStellePageComponent implements OnInit {
 	}
 
 	public resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('ablieferndeStellen.listColumns', {}).map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('ablieferndeStellen.listColumns', {}).map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 		this.loadAblieferndeStelleList();
 		this.refreshHiddenVisibleColumns();

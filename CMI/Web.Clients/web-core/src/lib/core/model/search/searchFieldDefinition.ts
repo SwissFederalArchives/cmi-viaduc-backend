@@ -7,7 +7,7 @@ export class SearchFieldDefinition {
 
 	public constructor(type: FieldType, key?: string, displayName?: string) {
 		this.type = type;
-		this.key = key;
-		this.displayName = displayName;
+		this.key = typeof key === 'string' ? key : '';
+		this.displayName = typeof displayName === 'string' ? displayName : '';
 	}
 }

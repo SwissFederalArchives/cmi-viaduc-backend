@@ -2,9 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ClientContext} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-synonyme-quelle',
-	templateUrl: 'searchSynonymeQuelleList.component.html',
-	styleUrls: ['searchSynonymeQuelleList.component.less']
+    selector: 'cmi-viaduc-synonyme-quelle',
+    templateUrl: 'searchSynonymeQuelleList.component.html',
+    styleUrls: ['searchSynonymeQuelleList.component.less'],
+    standalone: false
 })
 
 export class SearchSynonymeQuelleListComponent implements OnInit {

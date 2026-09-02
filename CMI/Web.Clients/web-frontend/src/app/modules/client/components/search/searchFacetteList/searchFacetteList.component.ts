@@ -9,13 +9,14 @@ import {
 } from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-facette-list',
-	templateUrl: 'searchFacetteList.component.html',
-	styleUrls: ['./searchFacetteList.component.less'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'cmi-viaduc-facette-list',
+    templateUrl: 'searchFacetteList.component.html',
+    styleUrls: ['./searchFacetteList.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
-export class SearchFacetteListComponent implements OnInit, OnChanges {
+class SearchFacetteListComponent implements OnInit, OnChanges {
 	get collapsed(): boolean {
 		return this._collapsed;
 	}
@@ -29,7 +30,12 @@ export class SearchFacetteListComponent implements OnInit, OnChanges {
 	public collapsedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 	@Input()
-	public facetts: Facet[] = [];
+	public facetts: {
+	[key: string]: {
+		docCount: number;
+		items: any[];
+	};
+};
 
 	@Output()
 	public onToggle = new EventEmitter<boolean>();
@@ -178,7 +184,7 @@ export class SearchFacetteListComponent implements OnInit, OnChanges {
 
 	public RemoveOutdatedFacetts() {
 		for (const activeFacette of this.activeFacets) {
-			const matchedFacette = this.facetts[activeFacette.facet];
+			const matchedFacette = this.facetts?.[activeFacette.facet];
 			if (matchedFacette == null) {
 				for (const originalFilterName of activeFacette.filters) {
 					activeFacette.filters.splice(activeFacette.filters.findIndex(value => value === originalFilterName), 1);
@@ -206,3 +212,5 @@ export class SearchFacetteListComponent implements OnInit, OnChanges {
 		this.onFilter.emit(this.activeFacets);
 	}
 }
+
+export default SearchFacetteListComponent

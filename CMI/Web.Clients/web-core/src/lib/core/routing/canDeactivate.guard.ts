@@ -41,7 +41,7 @@ export class CanDeactivateGuard  {
 		return true;
 	}
 
-	private async sleep (ms) {
+	private async sleep (ms: any) {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 

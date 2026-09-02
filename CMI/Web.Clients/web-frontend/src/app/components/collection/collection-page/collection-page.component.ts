@@ -7,16 +7,17 @@ import {CollectionDto, TranslationService} from '@cmi/viaduc-web-core';
 import {SeoService, UrlService} from '../../../modules/client';
 
 @Component({
-	selector: 'cmi-collection-page',
-	templateUrl: './collection-page.component.html',
-	styleUrls: ['./collection-page.component.less']
+    selector: 'cmi-collection-page',
+    templateUrl: './collection-page.component.html',
+    styleUrls: ['./collection-page.component.less'],
+    standalone: false
 })
 export class CollectionPageComponent implements OnInit {
 	public detailItem: CollectionDto;
 	public isValid: boolean;
 	public breadCrumb: { [p: number]: string };
 	public showImageModal: boolean;
-	private isInternalLink: boolean;
+	public isInternalLink: boolean;
 	public loading: boolean;
 	public internalLink: string;
 

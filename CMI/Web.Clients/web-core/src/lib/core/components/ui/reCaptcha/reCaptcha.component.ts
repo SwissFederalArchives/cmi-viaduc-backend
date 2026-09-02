@@ -8,13 +8,14 @@ import {ReCaptchaService} from '../../../services/reCaptcha.service';
  * https://github.com/xmaestro/angular2-recaptcha
  */
 @Component({
-	selector: 're-captcha',
-	template: '<div #target></div>',
+    selector: 're-captcha',
+    template: '<div #target></div>',
+    standalone: false
 })
 export class ReCaptchaComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
 	@Input()
-	public site_key: string = null;
+	public site_key: string | null = null;
 	@Input()
 	public theme = 'light';
 	@Input()
@@ -95,7 +96,7 @@ export class ReCaptchaComponent implements OnInit, OnDestroy, ControlValueAccess
 
 	public getResponse(): string {
 		if (this.widgetId === null) {
-			return;
+			return '';
 		}
 		// noinspection TypeScriptUnresolvedVariable
 		return (<any>window).grecaptcha.getResponse(this.widgetId);

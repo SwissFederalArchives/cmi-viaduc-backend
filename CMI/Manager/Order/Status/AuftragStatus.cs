@@ -158,7 +158,7 @@ namespace CMI.Manager.Order.Status
             }
 
             dataBuilder.SetDataProtectionLevel(protectionStatus);
-            dataBuilder.AddAuftraege(new[] {Context.OrderItem.Id});
+            dataBuilder.AddAuftraege(new[] { Context.OrderItem.Id });
 
             var auftragsliste = (List<Auftrag>) emailExpando.Aufträge;
 

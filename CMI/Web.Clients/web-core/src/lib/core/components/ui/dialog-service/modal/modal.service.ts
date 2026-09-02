@@ -1,5 +1,5 @@
 import { ViewContainerRef, Injectable, ComponentRef, Injector } from '@angular/core';
-import { Observable, Subject, ReplaySubject } from 'rxjs';
+import {Observable, Subject, ReplaySubject, throwError, of} from 'rxjs';
 import {ConfirmationModalComponent} from '../dialogs/confirmation.modal.component';
 import {BasicModalComponent} from '../dialogs/basic.modal.component';
 import {CanDeactivateData} from '../../../../model';
@@ -20,32 +20,41 @@ export class ModalService {
 		this.viewContainerRef = vcRef;
 	}
 
-	public openDialog( parameters?: CanDeactivateData): Observable<ComponentRef<ConfirmationModalComponent>> {
+	public openDialog(parameters?: CanDeactivateData): Observable<ComponentRef<ConfirmationModalComponent>> {
 		if (!this.viewContainerRef) {
 			alert('CanDeactivateGuard benötigt cmi-viaduc-modal-service-container Control');
-			return null;
+			return throwError(() => new Error('Missing ViewContainerRef'));
 		}
 
-		const componentRef = this.viewContainerRef.createComponent(ConfirmationModalComponent, {injector: this.injector});
-		componentRef.instance.candeactive = parameters;
-		componentRef.instance.content = parameters.content;
-		componentRef.instance.noButtonText = parameters.noButtonText;
-		componentRef.instance.yesButtonText = parameters.yesButtonText;
+		const componentRef =
+			this.viewContainerRef.createComponent(ConfirmationModalComponent, {
+				injector: this.injector
+			});
+
+		const instance = componentRef.instance;
+
+		instance.candeactive = parameters as CanDeactivateData;
+		instance.content = parameters?.content ?? '';
+		instance.noButtonText = parameters?.noButtonText ?? '';
+		instance.yesButtonText = parameters?.yesButtonText ?? '';
+
 		this.open(componentRef);
+		return of(componentRef);
 	}
 
-	public openMessage( parameters?: CanDeactivateData) : Observable<ComponentRef<ConfirmationModalComponent>> {
+	public openMessage( parameters?: CanDeactivateData) : Observable<ComponentRef<BasicModalComponent>> {
 		if (!this.viewContainerRef) {
 			alert('CanDeactivateGuard benötigt cmi-viaduc-modal-service-container Control');
-			return null;
+			return throwError(() => new Error('Missing ViewContainerRef'));
 		}
 
 		const componentRef = this.viewContainerRef.createComponent(BasicModalComponent, {injector: this.injector});
-		componentRef.instance.candeactive = parameters;
-		componentRef.instance.content = parameters.content;
-		componentRef.instance.closeButtonText = parameters.closeButtonText;
+		componentRef.instance.candeactive = parameters  as CanDeactivateData;
+		componentRef.instance.content =  (parameters  as CanDeactivateData).content;
+		componentRef.instance.closeButtonText = (parameters  as CanDeactivateData).closeButtonText;
 
 		this.open(componentRef);
+		return of(componentRef);
 	}
 
 	private open<T>(componentRef: ComponentRef<T>)  {
@@ -54,8 +63,8 @@ export class ModalService {
 		this.viewContainerRef.insert(componentRef.hostView);
 		this.activeInstances++;
 		this.activeInstances$.next(this.activeInstances);
-		componentRef.instance['componentIndex'] = this.activeInstances;
-		componentRef.instance['destroy'] = () => {
+		(componentRef.instance as any)['componentIndex'] = this.activeInstances;
+		(componentRef.instance as any)['destroy'] = () => {
 			this.activeInstances--;
 			this.activeInstances = Math.max(this.activeInstances, 0);
 

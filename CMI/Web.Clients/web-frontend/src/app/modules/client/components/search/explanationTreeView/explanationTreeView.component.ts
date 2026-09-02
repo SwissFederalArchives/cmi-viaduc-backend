@@ -1,9 +1,10 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-	selector: 'cmi-viaduc-explanation-treeview',
-	templateUrl: 'explanationTreeView.component.html',
-	styleUrls: ['./explanationTreeView.component.less']
+    selector: 'cmi-viaduc-explanation-treeview',
+    templateUrl: 'explanationTreeView.component.html',
+    styleUrls: ['./explanationTreeView.component.less'],
+    standalone: false
 })
 
 export class ExplanationTreeViewComponent {

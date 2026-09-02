@@ -1,15 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "downlevelIteration": true,
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "target": "ES2022",
     "types": [
       "file-saver"
@@ -18,14 +16,12 @@
       "node_modules/@types",
       "node_modules"
     ],
-    "lib": [
-      "es2020",
-      "dom"
-    ],
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "strictNullChecks": false,
-    "baseUrl": "./",
+		"skipLibCheck": true,
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
     "module": "es2020",
     "useDefineForClassFields": false
   }

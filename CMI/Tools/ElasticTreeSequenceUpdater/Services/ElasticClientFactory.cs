@@ -1,12 +1,13 @@
-﻿using System;
-using CMI.Tools.ElasticTreeSequenceUpdater.Properties;
-using Nest;
+﻿using CMI.Tools.ElasticTreeSequenceUpdater.Properties;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
+using System;
 
 namespace CMI.Tools.ElasticTreeSequenceUpdater.Services
 {
     internal static class ElasticClientFactory
     {
-        public static IElasticClient Create()
+        public static ElasticsearchClient Create()
         {
             var url = Settings.Default.ElasticSearchUrl;
             var user = Settings.Default.ElasticSearchUsername;
@@ -17,18 +18,17 @@ namespace CMI.Tools.ElasticTreeSequenceUpdater.Services
 
             var uri = new Uri(url);
 
-            // ✅ Nest v7 ConnectionSettings
-            var settings = new ConnectionSettings(uri)
-                .DefaultIndex("archive") // default index
-                .ThrowExceptions()       // throw on error
-                .DisableDirectStreaming(); // easier debugging/logging
+            var settings = new ElasticsearchClientSettings(uri);
+
+            var indexName = "archive";
 
             if (!string.IsNullOrEmpty(user))
             {
-                settings = settings.BasicAuthentication(user, pwd ?? "");
+                settings.Authentication(new BasicAuthentication(user, pwd));
             }
-
-            return new ElasticClient(settings);
+            settings.DefaultIndex(indexName);
+            settings.ThrowExceptions();
+            return new ElasticsearchClient(settings);
         }
     }
 }

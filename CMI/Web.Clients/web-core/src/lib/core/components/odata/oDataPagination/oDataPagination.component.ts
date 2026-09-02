@@ -4,9 +4,10 @@ import {Utilities as _util} from '../../../includes';
 import {CollectionView} from '@mescius/wijmo';
 
 @Component({
-	selector: 'cmi-viaduc-odata-pagination',
-	templateUrl: 'oDataPagination.component.html',
-	styleUrls: ['./oDataPagination.component.less']
+    selector: 'cmi-viaduc-odata-pagination',
+    templateUrl: 'oDataPagination.component.html',
+    styleUrls: ['./oDataPagination.component.less'],
+    standalone: false
 })
 export class ODataPaginationComponent {
 

@@ -1,12 +1,10 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http.Results;
-using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Web.Frontend.api.Controllers;
 using CMI.Web.Frontend.api.Dto;
-using FluentAssertions;
-using MassTransit;
+using Shouldly;
 using MassTransit.Testing;
 using Moq;
 using NUnit.Framework;
@@ -33,7 +31,7 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var orderManager = new Mock<IPublicOrder>();
             orderManager.Setup(o => o.AddToBasketCustom(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                 It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns(AddToBasketCustom);
-            
+
             var controller = new OrderController(orderManager.Object, null, null, null, null, null, null, null);
 
             // Act
@@ -46,8 +44,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var contentResult = result as NegotiatedContentResult<OrderItemDto>;
 
             // Assert
-            contentResult.Should().NotBeNull();
-            contentResult.Content.Period.Should().Be("keine Angabe");
+            contentResult.ShouldNotBeNull();
+            contentResult.Content.ShouldNotBeNull();
+            contentResult.Content.Period.ShouldBe("keine Angabe");
         }
 
 
@@ -67,12 +66,14 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 Title = "Test",
                 Period = "1950"
             });
+            
 
             var contentResult = result as NegotiatedContentResult<OrderItemDto>;
 
             // Assert
-            contentResult.Should().NotBeNull();
-            contentResult.Content.Period.Should().Be("1950-1950");
+            contentResult.ShouldNotBeNull();
+            contentResult.Content.ShouldNotBeNull();
+            contentResult.Content.Period.ShouldBe("1950-1950");
         }
 
         [Test]
@@ -95,8 +96,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var contentResult = result as NegotiatedContentResult<OrderItemDto>;
 
             // Assert
-            contentResult.Should().NotBeNull();
-            contentResult.Content.Period.Should().Be("24.12.1950-24.12.1950");
+            contentResult.ShouldNotBeNull();
+            contentResult.Content.ShouldNotBeNull();
+            contentResult.Content.Period.ShouldBe("24.12.1950-24.12.1950");
         }
 
         [Test]
@@ -119,8 +121,9 @@ namespace CMI.Web.Frontend.API.Tests.Controller
             var contentResult = result as NegotiatedContentResult<OrderItemDto>;
 
             // Assert
-            contentResult.Should().NotBeNull();
-            contentResult.Content.Period.Should().Be("24.12.1950-14.01.1960");
+            contentResult.ShouldNotBeNull();
+            contentResult.Content.ShouldNotBeNull();
+            contentResult.Content.Period.ShouldBe("24.12.1950-14.01.1960");
         }
 
 

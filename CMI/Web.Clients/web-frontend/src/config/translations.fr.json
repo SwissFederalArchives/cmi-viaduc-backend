@@ -17,10 +17,6 @@
     "schliessen": "Fermer",
     "und": "et"
   },
-  "engagementbubbles": {
-    "chat": "Chat",
-    "chatbot": "Chatbot"
-  },
   "account": {
     "backToPage": "Retour à la page d'accueil",
     "birthday": "Date de naissance",
@@ -213,10 +209,6 @@
     "months": "janvier;février;mars;avril;mai;juin;juillet;août;septembre;octobre;novembre;décembre",
     "placeHolder": "Veuillez choisir une date"
   },
-  "chatbotDialog": {
-    "minimize": "Réduire le chatbot (version bêta)",
-    "title": "chatbot (version bêta)"
-  },
   "checkoutOrderDetailsStep": {
     "artDerArbeit": "Nature du travail",
     "commentTitle": "Remarque sur la commande",
@@ -321,7 +313,15 @@
     "registerAndIdentify": "Enregistrement et identification",
     "unknown": "inconnu",
     "xSecondsOverdue": "temps dépassé",
-    "downloadNow": "Téléchargez les documents dès maintenant. Le fichier index.html vous donne un aperçu de tous les documents."
+    "downloadNow": "Téléchargez les documents dès maintenant. Le fichier index.html vous donne un aperçu de tous les documents.",
+    "s": "quelques secondes",
+    "ss": "%d secondes",
+    "m": "une minute",
+    "mm": "%d minutes",
+    "h": "une heure",
+    "hh": "%d heures",
+    "d": "un jour",
+    "dd": "%d jours"
   },
   "einsichtCheckoutOrderDetailsStep": {
     "artDerArbeit": "Nature du travail",
@@ -344,8 +344,7 @@
     "yes": "Oui"
   },
   "engagement": {
-    "chatbotInfo": "Pour utiliser le chatbot, veuillez passer au site en allemand.",
-    "chatInfo": "Nous sommes là pour vous aider! Chattez en direct avec les Archives fédérales, du mardi au jeudi de 9h à 12h et de 13h à 16h.",
+    "chatInfo": "Vous pouvez obtenir de l'aide 24 h / 24 via le chatbot ou, du mardi au jeudi, de 9 h à 12 h et de 13 h à 16 h, via le chat en direct.",
     "headerTitle": "Comment pouvons-nous vous aider?"
   },
   "enums": {
@@ -790,7 +789,7 @@
       "chat": "Chat",
       "chatbot": "Chatbot",
       "chatbotTeaserText": "Posez vos questions à notre chatbot – 24h sur 24!",
-      "chatTeaserText": "Nous sommes là pour vous aider! Chattez en direct avec les Archives fédérales, du mardi au jeudi de 9h à 12h et de 13h à 16h.",
+      "chatTeaserText": "Vous pouvez obtenir de l'aide 24 h / 24 via le chatbot ou, du mardi au jeudi, de 9 h à 12 h et de 13 h à 16 h, via le chat en direct.",
       "email": "E-mail",
       "emailTeaserText": "Pour des demandes plus complexes, n'hésitez pas à nous contacter par e-mail.",
       "forum": "Forum",
@@ -945,10 +944,10 @@
     "titleSr": "Numérotation de la liste des résultats"
   },
   "registerInfo": {
+    "agovLoginAltText": "Logo de AGOV-Login",
+    "agovLoginException": "Exception: les collaborateurs de l’administration fédérale doivent s’enregistrer via l’option FED-LOGIN.",
     "cancelRegister": "Interrompre",
-    "chLoginAltText": "Logo de CH-Login",
-    "chLoginException": "Exception: les collaborateurs de l’administration fédérale doivent s’enregistrer via l’option FED-LOGIN.",
-    "chooseCHLogin": "À la prochaine étape, veuillez sélectionner l’option «CH-LOGIN & AGOV (eGovernment)».",
+    "chooseAGOVLogin": "À la prochaine étape, veuillez sélectionner l’option «AGOV».",
     "info1": "Vous pouvez utiliser l’accès en ligne comme utilisateur anonyme, enregistré ou identifié. Les fonctionnalités de recherche à votre disposition diffèrent selon le statut choisi.",
     "infoBox": "InfoBox",
     "infoTitle": "Important",

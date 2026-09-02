@@ -1,4 +1,4 @@
-﻿
+
 using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
@@ -7,7 +7,7 @@ using CMI.Contract.Messaging;
 using CMI.Engine.Asset;
 using CMI.Engine.Asset.PreProcess;
 using CMI.Manager.Asset.Consumers;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -86,9 +86,9 @@ namespace CMI.Manager.Asset.Tests
                 var context = harness.Published.Select<IAssetReady>().First().Context;
 
                 // Assert
-                context.Message.ArchiveRecordId.Should().Be(ar.ArchiveRecordId);
-                context.Message.OrderItemId.Should().Be(orderId);
-                context.Message.Valid.Should().BeFalse();
+                context.Message.ArchiveRecordId.ShouldBe(ar.ArchiveRecordId);
+                context.Message.OrderItemId.ShouldBe(orderId);
+                context.Message.Valid.ShouldBeFalse();
             }
             finally
             {
@@ -128,8 +128,8 @@ namespace CMI.Manager.Asset.Tests
                 var context = harness.Published.Select<ITransformAsset>().First().Context;
 
                 // Assert
-                context.Message.RepositoryPackage.ArchiveRecordId.Should().Be("112");
-                context.Message.OrderItemId.Should().Be(orderId);
+                context.Message.RepositoryPackage.ArchiveRecordId.ShouldBe("112");
+                context.Message.OrderItemId.ShouldBe(orderId);
                 context.Message.PrimaerdatenAuftragId = 458;
             }
             finally

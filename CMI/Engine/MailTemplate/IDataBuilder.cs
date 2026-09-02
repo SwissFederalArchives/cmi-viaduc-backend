@@ -36,5 +36,7 @@ namespace CMI.Engine.MailTemplate
         /// This method in general should be called before values are added.
         /// </summary>
         IDataBuilder SetDataProtectionLevel(DataBuilderProtectionStatus protectionStatus);
+
+        IDataBuilder AddVesWithSameContainer(string[] containerCodes);
     }
 }

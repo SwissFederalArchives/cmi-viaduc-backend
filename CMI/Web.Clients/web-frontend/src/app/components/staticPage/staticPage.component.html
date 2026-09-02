@@ -1,1 +1,3 @@
-<cmi-static-content *ngIf="contentUrl" [url]="contentUrl"></cmi-static-content>
+@if (contentUrl) {
+  <cmi-static-content [url]="contentUrl"></cmi-static-content>
+}

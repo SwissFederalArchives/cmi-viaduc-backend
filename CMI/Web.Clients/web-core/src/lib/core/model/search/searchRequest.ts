@@ -70,7 +70,7 @@ export class SearchRequest {
 		return qs;
 	}
 
-	public static fromQueryString(qs: string): SearchRequest {
+	public static fromQueryString(qs: string): SearchRequest | undefined {
 		let request = new SearchRequest();
 		const params = _util.getQueryParams(qs);
 		if (_util.isObject(params) && params.hasOwnProperty(END_OF_QUERY_MARKER)) {

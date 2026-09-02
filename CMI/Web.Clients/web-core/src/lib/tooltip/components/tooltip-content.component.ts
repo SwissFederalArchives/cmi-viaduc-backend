@@ -1,8 +1,8 @@
 import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef} from '@angular/core';
 
 @Component({
-	selector: 'tooltip-content',
-	template: `
+    selector: 'tooltip-content',
+    template: `
 <div class="tooltip {{ placement }}"
      [style.top]="top + 'px'"
      [style.left]="left + 'px'"
@@ -15,7 +15,8 @@ import {Component, Input, AfterViewInit, ElementRef, ChangeDetectorRef} from '@a
         {{ content }}
     </div> 
 </div>
-`
+`,
+    standalone: false
 })
 export class TooltipContentComponent implements AfterViewInit {
 	@Input()

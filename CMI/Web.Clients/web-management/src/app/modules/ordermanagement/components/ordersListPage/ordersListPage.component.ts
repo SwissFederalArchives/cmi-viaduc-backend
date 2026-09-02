@@ -6,14 +6,15 @@ import {WjMenu} from '@mescius/wijmo.angular2.input';
 import {ManagementUserSettings, OrderUserSettings, User} from '../../../shared/model';
 import {OrderService} from '../../services';
 import {OrdersListComponent} from '../ordersList/ordersList.component';
-import * as moment from 'moment';
+import moment from 'moment';
 import {SessionStorageService} from '../../../client/services';
 
 @Component({
-	selector: 'cmi-viaduc-orders-list-page',
-	templateUrl: 'ordersListPage.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./ordersListPage.component.less']
+    selector: 'cmi-viaduc-orders-list-page',
+    templateUrl: 'ordersListPage.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./ordersListPage.component.less'],
+    standalone: false
 })
 export class OrdersListPageComponent implements OnInit {
 	@ViewChild('listMenu', { static: false })
@@ -29,14 +30,14 @@ export class OrdersListPageComponent implements OnInit {
 	public columns: any[] = [];
 	public hiddenColumns: any[] = [];
 	public visibleColumns: any[] = [];
-	public preFilter: SelectionPreFilter = null;
+	public preFilter!: SelectionPreFilter;
 	public SelectionPreFilter = SelectionPreFilter;
 	public showColumnPicker = false;
 	public showEntscheidHinterlegen = false;
 	public showAuftraegeAbschliessen = false;
-	public selectedInternalComment: string;
-	public selectedrolePublicClient: string;
-	public selectedBewilligungsDate: Date;
+	public selectedInternalComment!: string;
+	public selectedrolePublicClient!: string;
+	public selectedBewilligungsDate?: Date;
 	public showAuftraegeAbbrechen = false;
 	public showAuftraegeZuruecksetzen = false;
 	public showAuftraegeAusleihen = false;
@@ -45,9 +46,9 @@ export class OrdersListPageComponent implements OnInit {
 	public showAuftraegeErinnerungVersenden = false;
 	public showBarCode = false;
 	public hasRight = false;
-	public barcodeSet: boolean;
+	public barcodeSet: boolean = false;
 
-	private _previousPreFilter: SelectionPreFilter = null;
+	private _previousPreFilter!: SelectionPreFilter;
 	private _isInitializing = true;
 	public isBusy = false;
 
@@ -71,7 +72,7 @@ export class OrdersListPageComponent implements OnInit {
 	}
 
 	private _resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('orders.ordersListColumns', {}).map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('orders.ordersListColumns', {}).map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 	}
 
@@ -103,9 +104,8 @@ export class OrdersListPageComponent implements OnInit {
 					this._isInitializing = false;
 				}, 50);
 			} else {
-				this.preFilter = filter;
-				this._previousPreFilter = SelectionPreFilter.NurPendente;
 				this._isInitializing = false;
+				this.preFilterItemClicked(SelectionPreFilter.NurPendente );
 			}
 		}, 0);
 	}
@@ -212,7 +212,7 @@ export class OrdersListPageComponent implements OnInit {
 		this._saveColumnsAsUserSettings(cols);
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.orderSettings = <OrderUserSettings> {
 			columns: cols
@@ -285,8 +285,8 @@ export class OrdersListPageComponent implements OnInit {
 			return;
 		}
 
-		this.selectedBewilligungsDate = null;
-		this.selectedInternalComment = null;
+		this.selectedBewilligungsDate = undefined;
+		this.selectedInternalComment = '';
 
 		if (this.ordersList.checkedRowsCount > 0) {
 			const checkedItems = Array.from(this.ordersList.currentChecked.values());
@@ -335,7 +335,7 @@ export class OrdersListPageComponent implements OnInit {
 					const rolePublicClients = users.map((u: User) => u.rolePublicClient);
 					if (rolePublicClients && rolePublicClients.length > 0) {
 						if (rolePublicClients.length > 1) {
-							const oe2Count = rolePublicClients.filter(r => r === 'Ö2').length;
+							const oe2Count = rolePublicClients.filter((r: any) => r === 'Ö2').length;
 							if (oe2Count !== 0 && oe2Count !== rolePublicClients.length) {
 								this._ui.showError('Registrierte und identifizierte BenutzerInnen vorhanden.', 'Freigabekontrolle');
 								return;
@@ -461,5 +461,23 @@ export class OrdersListPageComponent implements OnInit {
 			this.preFilterItemClicked(SelectionPreFilter.Barcode);
 			this._ui.showSuccess('Die Aufträge wurden erfolgreich anhand der Barcodes gefiltert');
 		}, 50);
+	}
+
+	protected showBehaeltnisInhalt() {
+		if (!this._err.verifyApplicationFeatureOrShowError(ApplicationFeatureEnum.AuftragsuebersichtAuftraegeKannBehaeltnisInhaltDrucken)) {
+			return;
+		}
+		this.isBusy = true;
+		const checkedItemIds = this.ordersList.currentChecked;
+		const behaeltnisNummern = checkedItemIds.map(
+			(item: OrderingFlatItem) => item.behaeltnisNummer
+		);
+		this._ord.getBehaeltnisInhaltHtml(behaeltnisNummern).subscribe(html => {
+			this.isBusy = false;
+			this._ui.showHtmlInNewTab(html, this._txt.get('behaeltnisInhalt', 'BehaeltnisInhalt'));
+		}, (error) => {
+			this.isBusy = false;
+			this._err.showError(error);
+		});
 	}
 }

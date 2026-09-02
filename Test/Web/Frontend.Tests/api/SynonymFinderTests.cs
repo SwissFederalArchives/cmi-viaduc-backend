@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using CMI.Web.Frontend.api;
-using FluentAssertions;
 using NUnit.Framework;
+using Shouldly;
 
 namespace CMI.Web.Frontend.API.Tests.api
 {
@@ -18,10 +18,10 @@ namespace CMI.Web.Frontend.API.Tests.api
             var finder = new SynonymFinder(mock.Object, 15);
             var result = finder.GetSynonyme("aaa", "de");
 
-            result.Should().HaveCount(1);
-            result.First().Length.Should().Be(3);
-            result.First().Index.Should().Be(0);
-            result.First().Treffer.Should().Be("aaa");
+            result.Count().ShouldBe(1);
+            result.First().Length.ShouldBe(3);
+            result.First().Index.ShouldBe(0);
+            result.First().Treffer.ShouldBe("aaa");
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using CMI.Contract.Common;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
-using CMI.Contract.Common;
 
 namespace CMI.Engine.MailTemplate
 {
@@ -55,7 +54,6 @@ namespace CMI.Engine.MailTemplate
         public override string Entstehungszeitraum => elasticArchiveRecord.CreationPeriod.Text;
 
         public override string Aktenzeichen => elasticArchiveRecord.Aktenzeichen() ?? "";
-
         public override string Schutzfristkategorie => elasticArchiveRecord?.ProtectionCategory;
         public override int? Schutzfristdauer => elasticArchiveRecord?.ProtectionDuration;
         public override string Schutzfristende => elasticArchiveRecord?.ProtectionEndDate?.Date.ToString("dd.MM.yyyy");
@@ -68,7 +66,9 @@ namespace CMI.Engine.MailTemplate
         public override string UnprotectedTitel => unprotectedElasticArchiveRecord.Title;
         public override string UnprotectedDarin => unprotectedElasticArchiveRecord.WithinInfo;
         public override string UnprotectedZusaetzlicheInformationen => unprotectedElasticArchiveRecord.ZusätzlicheInformationen() ?? "";
-
+        public string FrüheresAktenzeichen => elasticArchiveRecord.FrüheresAktenzeichen() ?? "";
+        public string ZugaenglichkeitGemaessBga => elasticArchiveRecord?.ZugaenglichkeitGemaessBga() ?? "";
+        public string Zusatzmerkmal => elasticArchiveRecord.Zusatzmerkmal() ?? "";
 
         public override Behältnis[] Behältnisse
         {

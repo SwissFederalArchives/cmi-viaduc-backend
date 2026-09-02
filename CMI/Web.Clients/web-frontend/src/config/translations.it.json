@@ -17,11 +17,7 @@
     "schliessen": "Chiudi",
     "und": "e"
   },
-  "engagementbubbles": {
-    "chat": "Chat",
-    "chatbot": "Chatbot"
-  },
-  "account": {
+   "account": {
     "backToPage": "Torna alla pagina iniziale",
     "birthday": "Data di nascita",
     "clickIfNotRedirected": "Se non vieni reindirizzato, clicca sul link riportato sopra.",
@@ -213,10 +209,6 @@
     "months": "Gennaio;Febbraio;Marzo;Aprile;Maggio;Giugno;Luglio;Agosto;Settembre;Ottobre;Novembre;Dicembre",
     "placeHolder": "Seleziona una data"
   },
-  "chatbotDialog": {
-    "minimize": "Minimizza il chatbot (beta)",
-    "title": "Chatbot (beta)"
-  },
   "checkoutOrderDetailsStep": {
     "artDerArbeit": "Genere di lavoro",
     "commentTitle": "Commento sull'ordinazione",
@@ -321,8 +313,16 @@
     "registerAndIdentify": "Registrazione e identificazione",
     "unknown": "sconosciuto",
     "xSecondsOverdue": "più del previsto",
-    "downloadNow": "Scarica i documenti. Nel file index.html trovi l’elenco dei documenti."
-  },
+    "downloadNow": "Scarica i documenti. Nel file index.html trovi l’elenco dei documenti.",
+    "s": "alcuni secondi",
+    "ss": "%d secondi",
+    "m": "un minuto",
+    "mm": "%d minuti",
+    "h": "un'ora",
+    "hh": "%d ore",
+    "d": "un giorno",
+    "dd": "%d giorni"
+	},
   "einsichtCheckoutOrderDetailsStep": {
     "artDerArbeit": "Genere di lavoro",
     "begruendungAngegebenTitel": "Motivo della domanda di consultazione (max. 2000 battute)",
@@ -344,8 +344,7 @@
     "yes": "Sì"
   },
   "engagement": {
-    "chatbotInfo": "Passa al tedesco per utilizzare il chatbot (beta).",
-    "chatInfo": "Puoi chattare con l'Archivio federale dal martedì al giovedì, dalle 9 alle 12 e dalle 13 alle 16 - saremo lieti di poterti aiutare.",
+    "chatInfo": "È possibile ricevere assistenza 24 ore su 24 tramite il chatbot oppure, dal martedì al giovedì, dalle 9 alle 12 e dalle 13 alle 16 tramite la chat live.",
     "headerTitle": "Come possiamo aiutarti?"
   },
   "enums": {
@@ -790,7 +789,7 @@
       "chat": "Chat",
       "chatbot": "Chatbot",
       "chatbotTeaserText": "Chiedi al chatbot (beta) a disposizione 24 ore su 24.",
-      "chatTeaserText": "Puoi chattare con l'Archivio federale dal martedì al giovedì, dalle 9 alle 12 e dalle 13 alle 16 - saremo lieti di poterti aiutare.",
+      "chatTeaserText": "È possibile ricevere assistenza 24 ore su 24 tramite il chatbot oppure, dal martedì al giovedì, dalle 9 alle 12 e dalle 13 alle 16 tramite la chat live.",
       "email": "E-mail",
       "emailTeaserText": "Per richieste più complesse mandaci una mail.",
       "forum": "Forum",
@@ -945,10 +944,10 @@
     "titleSr": "Numerazione delle pagine dell'elenco dei risultati"
   },
   "registerInfo": {
+    "agovLoginAltText": "Logo di AGOV-Login",
+    "agovLoginException": "Eccezione: i dipendenti dell'Amministrazione federale devono registrarsi mediante «FED-LOGIN».",
     "cancelRegister": "Interrompi",
-    "chLoginAltText": "Logo di CH-Login",
-    "chLoginException": "Eccezione: i dipendenti dell'Amministrazione federale devono registrarsi mediante «FED-LOGIN».",
-    "chooseCHLogin": "Seleziona in seguito l'opzione «CH-LOGIN & AGOV (eGovernment)».",
+    "chooseAGOVLogin": "Seleziona in seguito l'opzione «AGOV».",
     "info1": "Puoi utilizzare l'accesso on-line come utente anonimo, registrato o identificato. A seconda dello statuto di utente sono disponibili altre funzioni.",
     "infoBox": "Infobox",
     "infoTitle": "Indicazione",

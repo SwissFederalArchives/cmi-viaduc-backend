@@ -49,8 +49,7 @@ namespace CMI.Web.Common.Helpers
         public static bool InjectTranslations => GetBooleanSetting("injectTranslations", true);
         public static bool InjectSettings => GetBooleanSetting("injectSettings");
 
-        public static string SupportedLanguagesForChatBot => GetStringSetting("supportedLanguagesForChatBot", "de");
-        public static string UrlForChatBot => GetStringSetting("urlForChatBot", "https://chatbot.bar.smartive.cloud/");
+        public static bool EnableChatbot => GetBooleanSetting("enableChatbot", true);
 
         public static string URLReservation => GetStringSetting("urlReservation", "https://app.cituro.com/booking/3637098");
 

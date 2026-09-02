@@ -4,9 +4,10 @@ import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-zuruecksetzen-modal',
-	templateUrl: 'auftraegeZuruecksetzenModal.component.html',
-	styleUrls: ['./auftraegeZuruecksetzenModal.component.less']
+    selector: 'cmi-viaduc-auftraege-zuruecksetzen-modal',
+    templateUrl: 'auftraegeZuruecksetzenModal.component.html',
+    styleUrls: ['./auftraegeZuruecksetzenModal.component.less'],
+    standalone: false
 })
 export class AuftraegeZuruecksetzenModalComponent {
 

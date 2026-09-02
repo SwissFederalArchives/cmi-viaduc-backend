@@ -1,10 +1,11 @@
 import {Directive, ElementRef, Input} from '@angular/core';
 
 @Directive({
-	selector: '[autoFocus]'
+    selector: '[autoFocus]',
+    standalone: false
 })
 export class AutoFocusDirective {
-	private _autoFocus;
+	private _autoFocus: boolean;
 
 	constructor(private _elementRef: ElementRef) {
 	}

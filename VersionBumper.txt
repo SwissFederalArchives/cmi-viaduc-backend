@@ -37,3 +37,5 @@ For
 	2024-08-20: PVW-1765-BUG-Viewer-Suchbegriffe-passen-sich-im-Viewer-teilweise-nicht-an eye icon
 	2024-08-21: PVW-1765-BUG-Viewer: Suchbegriffe passen sich im Viewer teilweise nicht an Resultseite
 	2024-08-22: PVW-1656 BUG Diskrepanz zwischen Detail- und Listenansicht gewisser Datumsfelder im M-C Enumwerte
+	2026-03-12: PVW-2227 Update Elasticsearch 
+	2026-05-16: Test automatischer Build

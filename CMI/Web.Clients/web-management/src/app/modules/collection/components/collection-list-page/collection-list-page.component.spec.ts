@@ -1,18 +1,18 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {CollectionListPageComponent} from './collection-list-page.component';
-import {ClientContext, ClientModel, CollectionListItemDto, ConfigService, CoreModule,
+import {ClientContext, ClientModel, CollectionListItemDto, ConfigService,
 	TranslationService, UiService, UserUiSettings} from '@cmi/viaduc-web-core';
 import {
-	AuthorizationService, ErrorService, SharedModule, UiServiceMC, UrlService, User,
+	AuthorizationService, ErrorService,  UiServiceMC, UrlService, User,
 	UserService
 } from '../../../shared';
 import {CollectionService} from '../../services';
 import {Router} from '@angular/router';
 import {MockUserSettings} from './mocks';
 import {Observable} from 'rxjs';
-import * as moment from 'moment';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
-import { IndividualConfig, provideToastr, ToastrModule, ToastrService} from "ngx-toastr";
+import moment from 'moment';
+import {NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core';
+import { IndividualConfig, provideToastr, ToastrService} from "ngx-toastr";
 import {provideAnimations} from "@angular/platform-browser/animations";
 
 describe('CollectionListPageComponent', () => {
@@ -89,6 +89,17 @@ describe('CollectionListPageComponent', () => {
 		let clientContext = <ClientContext>{defaultLanguage: defaultLanguage, language: 'de'};
 
 		let uiService: UiService;
+
+		@Pipe({
+			name: 'translate',
+			standalone: false
+		})
+		class MockTranslatePipe implements PipeTransform {
+			transform(value: string): string {
+				return value;
+			}
+		}
+
 		let txt =  <TranslationService>{
 			get(key: string, defaultValue?: string, ...args): string {
 				return key;
@@ -133,8 +144,8 @@ describe('CollectionListPageComponent', () => {
 		let router = <Router>{};
 
 		await TestBed.configureTestingModule({
-			imports:[SharedModule.forRoot(),ToastrModule.forRoot(), CoreModule.forRoot()],
-			declarations: [CollectionListPageComponent],
+
+			declarations: [CollectionListPageComponent, MockTranslatePipe],
 			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
 				provideAnimations(), // required animations providers
@@ -157,10 +168,13 @@ describe('CollectionListPageComponent', () => {
 	}));
 
 	beforeEach(waitForAsync(async() => {
-		fixture = TestBed.createComponent(CollectionListPageComponent);
+		fixture  = TestBed.createComponent(CollectionListPageComponent);
 		sut = fixture.componentInstance;
 		sut.ngOnInit();
 		sut.showDeleteModal = false;
+		sut.flexGrid = {
+			addOrRemoveItemFromSelection: jasmine.createSpy('addOrRemoveItemFromSelection')
+		} as any;
 		await fixture.whenStable();
 	}));
 

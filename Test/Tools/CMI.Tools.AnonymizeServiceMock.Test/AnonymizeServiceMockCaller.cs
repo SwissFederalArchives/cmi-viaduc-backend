@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http.Results;
 using CMI.Tools.AnonymizeServiceMock.Properties;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Tools.AnonymizeServiceMock.Test
@@ -27,7 +27,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
 
             var result = mockController.AnonymizeText(request);
             var returnValue = (OkNegotiatedContentResult<AnonymizationResponse>)result;
-            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.Should().BeEquivalentTo("Test");
+            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.ShouldBe("Test");
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
             };
             var result = mockController.AnonymizeText(request);
             var returnValue = (OkNegotiatedContentResult<AnonymizationResponse>)result;
-            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.Should().BeEquivalentTo($@"<anonym type=""n"">Sommer Hans</anonym> und Peter Ettwein");
+            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.ShouldBe($@"<anonym type=""n"">Sommer Hans</anonym> und Peter Ettwein");
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
             };
             var result = mockController.AnonymizeText(request);
             var returnValue = (OkNegotiatedContentResult<AnonymizationResponse>)result;
-            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.Should().BeEquivalentTo(
+            returnValue.Content.AnonymizedValues.FirstOrDefault(a => a.Key == "Test").Value.ShouldBe(
                 $@"<anonym type=""n"">Laubscher Berta</anonym> und <anonym type=""n"">Andreas Bellwald</anonym> in Bern" + Environment.NewLine +
                 $@"Basel Basel <anonym type=""n"">Laubscher Berta</anonym> und <anonym type=""n"">Andreas Bellwald</anonym>");
         }
@@ -75,7 +75,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
             };
             var result = mockController.AnonymizeText(request);
             var returnValue = (NegotiatedContentResult<string>)result;
-            returnValue.StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            returnValue.StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
 
             var result = mockController.AnonymizeText(null);
             var returnValue = (BadRequestErrorMessageResult)result;
-            returnValue.Should().NotBeNull();
-            returnValue.Message.Should().BeEquivalentTo("At least one value must be passed that is not empty.");
+            returnValue.ShouldNotBeNull();
+            returnValue.Message.ShouldBe("At least one value must be passed that is not empty.");
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
             var request = new AnonymizationRequest();
             var result = mockController.AnonymizeText(request);
             var returnValue = (UnauthorizedResult)result;
-            returnValue.Should().NotBeNull();
+            returnValue.ShouldNotBeNull();
         }
 
         [Test]
@@ -114,7 +114,7 @@ namespace CMI.Tools.AnonymizeServiceMock.Test
 
             var result = mockController.AnonymizeText(new AnonymizationRequest());
             var returnValue = (UnauthorizedResult)result;
-            returnValue.Should().NotBeNull();
+            returnValue.ShouldNotBeNull();
         }
 
         private static AnonymisierungController AnonymisierungControllerInitialize()

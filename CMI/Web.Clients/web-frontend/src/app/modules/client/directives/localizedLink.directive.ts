@@ -4,7 +4,8 @@ import {UrlService} from '../services/url.service';
 import {ClientContext} from '@cmi/viaduc-web-core';
 
 @Directive({
-	selector: '[localizedLink]'
+    selector: '[localizedLink]',
+    standalone: false
 })
 export class LocalizedLinkDirective {
 

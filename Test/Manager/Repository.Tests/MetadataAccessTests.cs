@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using CMI.Access.Repository;
 using DotCMIS.Data.Extensions;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -31,7 +31,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "Fixity Value");
 
             // Assert
-            value.Should().Be("83ede739c7a1560b56b18d21db72b2fa");
+            value.ShouldBe("83ede739c7a1560b56b18d21db72b2fa");
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "ARELDA:datei/datei/originalName");
 
             // Assert
-            value.Should().Be("README.txt");
+            value.ShouldBe("README.txt");
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "ARELDA:datei/datei@id");
 
             // Assert
-            value.Should().Be("_9ddrsOngEeW0aqy2QDXP4A");
+            value.ShouldBe("_9ddrsOngEeW0aqy2QDXP4A");
         }
 
 
@@ -98,7 +98,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "Inexisting property");
 
             // Assert
-            value.Should().BeNullOrEmpty();
+            value.ShouldBeNullOrEmpty();
         }
 
         [Test]
@@ -120,7 +120,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "ARELDA:datei/datei@InexistingAttribute");
 
             // Assert
-            value.Should().BeNullOrEmpty();
+            value.ShouldBeNullOrEmpty();
         }
 
         [Test]
@@ -142,7 +142,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValue(data, "ARELDA:datei/datei/Inexisting property");
 
             // Assert
-            value.Should().BeNullOrEmpty();
+            value.ShouldBeNullOrEmpty();
         }
 
         [Test]
@@ -165,8 +165,8 @@ namespace CMI.Manager.Repository.Tests
             var value2 = sut.GetExtendedPropertyValue(data, "ArElDa:daTei/dAtei/ORIGINALNAME");
 
             // Assert
-            value.Should().Be("README.txt");
-            value.Should().Be(value2);
+            value.ShouldBe("README.txt");
+            value.ShouldBe(value2);
         }
 
 
@@ -189,9 +189,9 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetExtendedPropertyValues(data, "ARELDA:dossier/dossier/dateiRef");
 
             // Assert
-            value.Count.Should().Be(2);
-            value[0].Should().Be("p00000003");
-            value[1].Should().Be("p00000004");
+            value.Count.ShouldBe(2);
+            value[0].ShouldBe("p00000003");
+            value[1].ShouldBe("p00000004");
         }
 
         [Test]
@@ -213,7 +213,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetHistorischerZeitpunkt(data, "ARELDA:Dossier/Dossier/Eroeffnungsdatum");
 
             // Assert
-            value.Should().BeNull();
+            value.ShouldBeNull();
         }
 
 
@@ -236,8 +236,8 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetHistorischerZeitpunkt(data, "ARELDA:Dossier/Dossier/Entstehungszeitraum/von");
 
             // Assert
-            value.Datum.Should().Be("2009-03-18");
-            value.Ca.Should().BeFalse();
+            value.Datum.ShouldBe("2009-03-18");
+            value.Ca.ShouldBeFalse();
         }
 
         [Test]
@@ -259,10 +259,10 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.GetHistorischerZeitraum(data, "ARELDA:Dossier/Dossier/Entstehungszeitraum");
 
             // Assert
-            value.Von.Datum.Should().Be("2009-03-18");
-            value.Von.Ca.Should().BeFalse();
-            value.Bis.Datum.Should().Be("2009-03-18");
-            value.Bis.Ca.Should().BeTrue();
+            value.Von.Datum.ShouldBe("2009-03-18");
+            value.Von.Ca.ShouldBeFalse();
+            value.Bis.Datum.ShouldBe("2009-03-18");
+            value.Bis.Ca.ShouldBeTrue();
         }
     }
 }

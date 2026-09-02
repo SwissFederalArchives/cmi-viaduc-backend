@@ -681,10 +681,10 @@ export interface IManuelleKorrekturDto {
 export class ManuelleKorrekturFeldDto implements IManuelleKorrekturFeldDto {
 	manuelleKorrekturFelderId!: number;
 	manuelleKorrekturId!: number;
-	feldname?: string | undefined;
-	original?: string | undefined;
-	automatisch?: string | undefined;
-	manuell?: string | undefined;
+	feldname!: string;
+	original!: string;
+	automatisch!: string;
+	manuell!: string;
 	manuelleKorrektur?: ManuelleKorrekturDto | undefined;
 
 	constructor(data?: IManuelleKorrekturFeldDto) {
@@ -743,7 +743,7 @@ export class ManuelleKorrekturStatusHistoryDto implements IManuelleKorrekturStat
 	manuelleKorrekturId!: number;
 	anonymisierungsstatus!: number;
 	erzeugtAm!: Date;
-	erzeugtVon?: string | undefined;
+	erzeugtVon!: string;
 	manuelleKorrektur?: ManuelleKorrekturDto | undefined;
 
 	constructor(data?: IManuelleKorrekturStatusHistoryDto) {
@@ -796,16 +796,16 @@ export interface IManuelleKorrekturStatusHistoryDto {
 
 export class VSyncAction implements IVSyncAction {
 	syncActionId!: number;
-	archiveRecordId?: string | undefined;
-	actionType?: string | undefined;
+	archiveRecordId!: string;
+	actionType!: string;
 	actionStatus?: number | undefined;
 	numberOfTries?: number | undefined;
 	createdOn?: Date | undefined;
 	modifiedOn?: Date | undefined;
 	syncActionLogId?: number | undefined;
 	logDate?: Date | undefined;
-	errorReason?: string | undefined;
-	actionStatusHistory?: string | undefined;
+	errorReason!: string;
+	actionStatusHistory!: string;
 
 	constructor(data?: IVSyncAction) {
 	}
@@ -921,8 +921,8 @@ export class SyncActionLogDto implements ISyncActionLogDto {
 	syncActionLogId: number;
 	syncActionId: number;
 	logDate?: Date | undefined;
-	errorReason?: string | undefined;
-	actionStatusHistory?: string | undefined;
+	errorReason!: string;
+	actionStatusHistory!: string;
 
 	constructor(data?: ISyncActionLogDto) {
 	}

@@ -3,9 +3,10 @@ import { ClientContext, TranslationService } from '@cmi/viaduc-web-core';
 import { FavoriteService } from '../../../services/favorite.service';
 
 @Component({
-	selector: 'cmi-viaduc-favorites-migration',
-	templateUrl: 'favoritesMigration.component.html',
-	styleUrls: ['./favoritesMigration.component.less']
+    selector: 'cmi-viaduc-favorites-migration',
+    templateUrl: 'favoritesMigration.component.html',
+    styleUrls: ['./favoritesMigration.component.less'],
+    standalone: false
 })
 export class FavoritesMigrationComponent implements OnInit {
 	@Output() public migrationFinished = new EventEmitter();

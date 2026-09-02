@@ -15,7 +15,7 @@ export class ClientContext {
 
 	private _defaultLanguage: string = DEFAULT_LANGUAGE;
 	private _currentLanguage: string = DEFAULT_LANGUAGE;
-	private _loadingLanguage: string = undefined;
+	private _loadingLanguage: string;
 
 	private _currentSession: Session = <Session>{};
 	private _searchState: SearchState = <SearchState>{};
@@ -50,18 +50,16 @@ export class ClientContext {
 			language = 'de-CH';
 		}
 
+		document
+			.querySelectorAll<HTMLScriptElement>('script[src*="wijmo.culture"]')
+			.forEach((el) => el.remove());
+
 		const node = document.createElement('script');
 		node.src = `client/wijmo.culture.${language}.js`;
 		node.type = 'text/javascript';
 		node.async = true;
 
-		const children = document.getElementsByTagName('head')[0].childNodes;
-		for (let i = 0; i < children.length; i++) {
-			if (children[i] && children[i]['src'] && children[i]['src'].indexOf('wijmo.culture') > 0) {
-				document.getElementsByTagName('head')[0].removeChild(children[i]);
-			}
-		}
-		document.getElementsByTagName('head')[0].appendChild(node);
+		document.head.appendChild(node);
 	}
 
 	public get loadingLanguage(): string {

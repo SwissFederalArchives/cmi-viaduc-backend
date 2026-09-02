@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'cmi-viaduc-account-type-info-list',
-	templateUrl: 'accountTypeInfoList.component.html',
-	styleUrls: ['accountTypeInfoList.component.less']
+    selector: 'cmi-viaduc-account-type-info-list',
+    templateUrl: 'accountTypeInfoList.component.html',
+    styleUrls: ['accountTypeInfoList.component.less'],
+    standalone: false
 })
 export class AccountTypeInfoListComponent {
 	@Input()

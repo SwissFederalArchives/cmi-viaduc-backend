@@ -4,9 +4,10 @@ import {AuthorizationService, SeoService, ShoppingCartService, UrlService} from 
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-	selector: 'cmi-viaduc-order-checkout-page',
-	templateUrl: 'orderCheckoutPage.component.html',
-	styleUrls: ['./orderCheckoutPage.component.less']
+    selector: 'cmi-viaduc-order-checkout-page',
+    templateUrl: 'orderCheckoutPage.component.html',
+    styleUrls: ['./orderCheckoutPage.component.less'],
+    standalone: false
 })
 export class OrderCheckoutPageComponent extends ComponentCanDeactivate  implements OnInit {
 

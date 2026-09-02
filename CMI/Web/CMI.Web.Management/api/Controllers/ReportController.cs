@@ -214,7 +214,8 @@ namespace CMI.Web.Management.api.Controllers
                 new() {ColumnName = nameof(DownloadLogItem.DatumVorgang), ColumnHeader = "DatumVorgang",
                     FormatSpecification = format.FormatString, MakeAutoWidth = true},
                 new() {ColumnName = nameof(DownloadLogItem.DatumErstellungToken), ColumnHeader = "DatumErstellungToken",
-                    FormatSpecification = format.FormatString,  MakeAutoWidth = true}
+                    FormatSpecification = format.FormatString,  MakeAutoWidth = true},
+                new() {ColumnName = nameof(DownloadLogItem.EntstehungDigitaleInhalte), ColumnHeader = "EntstehungDigitaleInhalte", MakeAutoWidth = true}
             };
         }
         

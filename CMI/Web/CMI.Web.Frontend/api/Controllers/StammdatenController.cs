@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Messaging;
@@ -43,9 +44,9 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public string[] GetCountriesElastic()
+        public async Task<string[]> GetCountriesElastic()
         {
-            return entityProvider.GetCountriesFromElastic();
+            return await entityProvider.GetCountriesFromElastic();
         }
     }
 }

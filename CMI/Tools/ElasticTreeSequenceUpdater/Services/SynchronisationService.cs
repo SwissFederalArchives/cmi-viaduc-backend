@@ -1,9 +1,5 @@
 ﻿using CMI.Tools.ElasticTreeSequenceUpdater.Models;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
-using Nest;
 using Serilog;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;

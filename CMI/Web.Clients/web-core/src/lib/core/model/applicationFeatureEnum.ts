@@ -62,5 +62,6 @@ export enum ApplicationFeatureEnum {
 	AnonymisierungManuelleKorrekturenBearbeiten = 10000101,
 	SynchronizationHinzufuegenEinsehen = 10000102,
 	SynchronizationUeberwachenEinsehen = 10000103,
-	SynchronizationHinzufuegenBearbeiten = 10000104
+	SynchronizationHinzufuegenBearbeiten = 10000104,
+	AuftragsuebersichtAuftraegeKannBehaeltnisInhaltDrucken = 10000105
 }

@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -41,7 +42,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetPermissions(string entityId)
+        public async Task<IHttpActionResult> GetPermissions(string entityId)
         {
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
 
@@ -52,7 +53,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 return StatusCode(HttpStatusCode.Forbidden);
             }
 
-            var ear = entityProvider.GetEntity<ElasticArchiveRecord>(entityId, access);
+            var ear = await entityProvider.GetEntity<ElasticArchiveRecord>(entityId, access);
             if (ear?.Data == null)
             {
                 return StatusCode(HttpStatusCode.NotFound);
@@ -69,36 +70,36 @@ namespace CMI.Web.Frontend.api.Controllers
             return Ok(permissionInfo);
         }
         [HttpGet]
-        public string GetArchivplanHtml(string id)
+        public async Task<string> GetArchivplanHtml(string id)
         {
             var role = GetUserPublicClientRole();
             var language = WebHelper.GetClientLanguage(Request);
             var access = GetUserAccess(language);
 
-            return entityProvider.GetArchivplanHtml(id, access, role, language);
+            return await entityProvider.GetArchivplanHtml(id, access, role, language);
         }
 
         [HttpGet]
-        public string[] GetArchivplanRootNodes()
+        public async Task<string[]> GetArchivplanRootNodes()
         {
             var role = GetUserPublicClientRole();
             var language = WebHelper.GetClientLanguage(Request);
             var access = GetUserAccess(language);
 
-            return entityProvider.GetArchivplanRootNodes(access, role, language);
+            return await entityProvider.GetArchivplanRootNodes(access, role, language);
         }
 
         [HttpGet]
-        public string GetArchivplanChildrenHtml(string id)
+        public async Task<string> GetArchivplanChildrenHtml(string id)
         {
             var role = GetUserPublicClientRole();
             var language = WebHelper.GetClientLanguage(Request);
             var access = GetUserAccess(language);
-            return entityProvider.GetArchivplanChildrenHtml(id, access, role, language);
+            return await entityProvider.GetArchivplanChildrenHtml(id, access, role, language);
         }
 
         [HttpGet]
-        public Entity<DetailRecord> GetEntity(string id, string language = null, [FromUri] string paging = null)
+        public async Task<Entity<DetailRecord>> GetEntity(string id, string language = null, [FromUri] string paging = null)
         {
             var access = GetUserAccess(language ?? WebHelper.GetClientLanguage(Request));
 
@@ -109,12 +110,12 @@ namespace CMI.Web.Frontend.api.Controllers
                 p = JsonConvert.DeserializeObject<Paging>(paging);
             }
 
-            return entityProvider.GetEntity<DetailRecord>(id, access, p);
+            return await entityProvider.GetEntity<DetailRecord>(id, access, p);
         }
 
 
         [HttpGet]
-        public IHttpActionResult GetAnonymized(string id)
+        public async Task<IHttpActionResult> GetAnonymized(string id)
         {
             if (AccessRoles.RoleBAR != GetUserPublicClientRole())
             {
@@ -123,7 +124,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
             // O3 Role necessary for correct access
             var anonymAccess = GetAnonymizedAccess(AccessRoles.RoleOe3, WebHelper.GetClientLanguage(Request));
-            var entity = entityProvider.GetEntity<ElasticArchiveRecord>(id, anonymAccess);
+            var entity = await entityProvider.GetEntity<ElasticArchiveRecord>(id, anonymAccess);
             if (entity == null)
             {
                 // Handling for VEs with no access for OE3 User
@@ -139,33 +140,34 @@ namespace CMI.Web.Frontend.api.Controllers
                 });
             }
 
-            return Json(new { 
-                                isAnonymized = entity.Data.IsAnonymized,
-                                title = entity.Data.Title,
-                                withinInfo = entity.Data.WithinInfo,
-                                verwandteVe = entity.Data.VerwandteVe(),
-                                zusatzkomponenteZac1 = entity.Data.Zusatzmerkmal(),
-                                bemerkungZurVe = entity.Data.ZusätzlicheInformationen()
+            return Json(new
+            {
+                isAnonymized = entity.Data.IsAnonymized,
+                title = entity.Data.Title,
+                withinInfo = entity.Data.WithinInfo,
+                verwandteVe = entity.Data.VerwandteVe(),
+                zusatzkomponenteZac1 = entity.Data.Zusatzmerkmal(),
+                bemerkungZurVe = entity.Data.ZusätzlicheInformationen()
             });
         }
 
         [HttpGet]
-        public EntityResult<TreeRecord> GetEntities(string ids, string language = null, [FromUri] Paging paging = null)
+        public async Task<EntityResult<TreeRecord>> GetEntities(string ids, string language = null, [FromUri] Paging paging = null)
         {
             var access = GetUserAccess(language ?? WebHelper.GetClientLanguage(Request));
 
             var idList = !string.IsNullOrEmpty(ids)
-                ? ids.Split(new[] {","}, StringSplitOptions.RemoveEmptyEntries).Select(i => i).ToList()
+                ? ids.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(i => i).ToList()
                 : new List<string>();
 
-            return entityProvider.GetEntities<TreeRecord>(idList, access, paging);
+            return await entityProvider.GetEntities<TreeRecord>(idList, access, paging);
         }
 
 
         [HttpGet]
-        public IHttpActionResult ExportSearchResultToExcel(string searchText)
+        public async Task<IHttpActionResult> ExportSearchResultToExcel(string searchText)
         {
-            Log.Information($"Starting to export search result to Excel for search text: { searchText}");
+            Log.Information($"Starting to export search result to Excel for search text: {searchText}");
             var search = JsonConvert.DeserializeObject<SearchParameters>(searchText);
 
             try
@@ -179,7 +181,7 @@ namespace CMI.Web.Frontend.api.Controllers
                 var access = GetUserAccess(language);
                 search.Paging.Skip = 0;
                 search.Paging.Take = 10000;
-                var searchResult = entityProvider.Search<SearchRecord>(search, access);
+                var searchResult = await entityProvider.Search<SearchRecord>(search, access);
 
                 if (searchResult is SearchResult<SearchRecord> searchRecords)
                 {
@@ -201,7 +203,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpPost]
-        public ISearchResult Search([FromBody] SearchParameters search, string language = null)
+        public async Task<ISearchResult> Search([FromBody] SearchParameters search, string language = null)
         {
             ISearchResult result;
 
@@ -241,7 +243,7 @@ namespace CMI.Web.Frontend.api.Controllers
                     usageAnalyzer.Reset(userId, Request);
                 }
 
-                result = entityProvider.Search<SearchRecord>(search, access);
+                result = await entityProvider.Search<SearchRecord>(search, access);
 
                 if (result is SearchResult<SearchRecord> searchResult)
                 {
@@ -270,13 +272,13 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult SearchBySignatur(string signatur)
+        public async Task<IHttpActionResult> SearchBySignatur(string signatur)
         {
             var result = string.Empty;
 
             try
             {
-                var records = SearchByReferenceCodeWithoutSecurity(signatur);
+                var records = await SearchByReferenceCodeWithoutSecurity(signatur);
                 if (records.Count > 1)
                 {
                     ThrowBadRequestMessageForNonUniqueRefCodeSearch();
@@ -298,13 +300,13 @@ namespace CMI.Web.Frontend.api.Controllers
 
         [HttpGet]
         // Returns true if the current user is Ö2 user and has a Einsichtsgesucht for the given signatur.
-        public IHttpActionResult HasCurrentOe2UserEinsichtsgesuchForSignatur(string signatur)
+        public async Task<IHttpActionResult> HasCurrentOe2UserEinsichtsgesuchForSignatur(string signatur)
         {
             var result = false;
 
             try
             {
-                var records = SearchByReferenceCodeWithoutSecurity(signatur);
+                var records = await SearchByReferenceCodeWithoutSecurity(signatur);
                 if (records.Count > 1)
                 {
                     ThrowBadRequestMessageForNonUniqueRefCodeSearch();
@@ -327,7 +329,7 @@ namespace CMI.Web.Frontend.api.Controllers
             }
 
             // Need to convert to Json, because Frontent client cannot parse direct value
-            return Ok(new BooleanResponseDto {Value = result});
+            return Ok(new BooleanResponseDto { Value = result });
         }
 
 
@@ -341,9 +343,9 @@ namespace CMI.Web.Frontend.api.Controllers
             throw new BadRequestException(msg);
         }
 
-        private List<Entity<SearchRecord>> SearchByReferenceCodeWithoutSecurity(string signatur)
+        private async Task<List<Entity<SearchRecord>>> SearchByReferenceCodeWithoutSecurity(string signatur)
         {
-            var searchResult = entityProvider.SearchByReferenceCodeWithoutSecurity<SearchRecord>(signatur);
+            var searchResult = await entityProvider.SearchByReferenceCodeWithoutSecurity<SearchRecord>(signatur);
 
             var searchRecordResult = searchResult as SearchResult<SearchRecord>;
             return searchRecordResult?.Entities?.Items;
@@ -400,7 +402,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
         private List<VeExportRecord> ConvertExportData(List<SearchRecord> searchResults)
         {
-            Log.Information($"Starting to convert { searchResults.Count} records into Excel export format");
+            Log.Information($"Starting to convert {searchResults.Count} records into Excel export format");
             return searchResults.Select(item => new VeExportRecord
             {
                 ReferenceCode = item.ReferenceCode,

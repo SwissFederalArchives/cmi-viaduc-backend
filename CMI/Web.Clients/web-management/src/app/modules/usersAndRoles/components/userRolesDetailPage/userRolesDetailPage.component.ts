@@ -10,43 +10,44 @@ import {AblieferndeStelle, DetailResult} from '../../../shared/model';
 import {RoleService} from '../../services';
 import * as fileSaver from 'file-saver';
 import {HttpEventType} from '@angular/common/http';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserRolesDetailPageErrorMessages} from './userRolesDetailPageErrorMessages';
+
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import flatpickr from 'flatpickr';
 import {German} from 'flatpickr/dist/l10n/de';
-import {FlatPickrOutputOptions} from 'angularx-flatpickr/lib/flatpickr.directive';
+import {UserRolesDetailPageErrorMessages} from './userRolesDetailPageErrorMessages';
 
 @Component({
-	selector: 'cmi-viaduc-user-roles-detail-page',
-	templateUrl: 'userRolesDetailPage.component.html',
-	styleUrls: ['./userRolesDetailPage.component.less']
+    selector: 'cmi-viaduc-user-roles-detail-page',
+    templateUrl: 'userRolesDetailPage.component.html',
+    styleUrls: ['./userRolesDetailPage.component.less'],
+    standalone: false
 })
 export class UserRolesDetailPageComponent extends ComponentCanDeactivate implements OnInit, AfterViewChecked {
 	public errors: { [key: string]: string } = {};
-	public loading: boolean;
-	public crumbs: any[];
+	public loading: boolean = true;
+	public crumbs!: any[];
 	public stillSelectedRoles: any;
 	public stillAvailableRoles: any;
 	private allRoles: any;
 	private initialeRoles: any;
-	public detail: DetailResult<any>;
+	public detail!: DetailResult<any>;
 	public selectedIdentifizierungsmittel: any;
 
 	public language: any = [{name:'Deutsch', code:'de'}, {name:'Französisch', code:'fr'}, {name:'Italienisch', code:'it'}, {name:'Englisch', code:'en'}];
 	private countries: any;
 
-	public showModal: boolean;
-	public showVerifyModal:boolean;
+	public showModal!: boolean;
+	public showVerifyModal!: boolean;
 
 	@ViewChild('listExcluded', { static: false })
-	public listExcluded: WjListBox;
+	public listExcluded!: WjListBox;
 	@ViewChild('listIncluded', { static: false })
-	public listIncluded: WjListBox;
-	public myForm: FormGroup;
-	public ablieferndeStelleAllList: AblieferndeStelle[];
-	private stillSelectedAblieferndeStelleList: any;
-	private initialeAblieferndeStelleList: any;
-	private rolesIsDirty: boolean;
+	public listIncluded!: WjListBox;
+	public myForm!: FormGroup;
+	public ablieferndeStelleAllList!: AblieferndeStelle[];
+	private stillSelectedAblieferndeStelleList: AblieferndeStelle[];
+	private initialeAblieferndeStelleList: AblieferndeStelle[];
+	private rolesIsDirty!: boolean;
 	public today = new Date();
 	public maxDate = new Date();
 
@@ -112,7 +113,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	public async saveUser(): Promise<void> {
 		this.loading = true;
 		this.reassembleDatatype();
-		this._userService.updateAllUserData(this.detail.item).subscribe(
+		this._userService.updateAllUserData(this.detail?.item).subscribe(
 			async () => {
 				this._ui.showSuccess(this._txt.get('userAndRoles.userSuccessfullySaved', 'Benutzerdaten erfolgreich gespeichert'));
 				await this._reload();
@@ -131,11 +132,11 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		this.loading = true;
 
 		const roleIds = [];
-		for (let i = 0; i < this.detail.item.roles.length; i += 1) {
-			roleIds.push(this.detail.item.roles[i].id);
+		for (let i = 0; i < this.detail?.item?.roles.length; i += 1) {
+			roleIds.push(this.detail?.item?.roles[i].id);
 		}
 
-		this._roleService.setUserRoles(this.detail.item.id, roleIds).then(
+		this._roleService.setUserRoles(this.detail?.item?.id, roleIds).then(
 			async () => {
 				this.loading = false;
 				this._ui.showSuccess(this._txt.get('userAndRoles.userroleSuccessfullySaved', 'Benutzerrollen erfolgreich gespeichert'));
@@ -154,10 +155,10 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	public async saveAblieferndeStellen(): Promise<void> {
 		this.loading = true;
 		this.stillSelectedAblieferndeStelleList = null;
-		const ablieferndeStelleIds = this.detail.item.ablieferndeStelleList != null ? this.detail.item.ablieferndeStelleList.map(as => as.ablieferndeStelleId) : [];
-		this._userService.cleanAndAddAblieferndeStelle(this.detail.item.id, ablieferndeStelleIds).subscribe(
+		const ablieferndeStelleIds = this.detail?.item?.ablieferndeStelleList != null ? this.detail?.item?.ablieferndeStelleList.map((as: any) => as.ablieferndeStelleId) : [];
+		this._userService.cleanAndAddAblieferndeStelle(this.detail?.item?.id, ablieferndeStelleIds).subscribe(
 			async () => {
-			const access = this.detail.item.access || {};
+			const access = this.detail?.item?.access || {};
 				this.detail.item.tokens = access.asTokens || [];
 				this._ui.showSuccess(this._txt.get('userAndRoles.assignedAblieferndeStellenSuccessfullySaved', 'Zuständige Stellen erfolgreich gespeichert'));
 				this.rememberSelectedRoles();
@@ -211,7 +212,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		this.rolesIsDirty = false;
 		this.detail.item.roles = [];
 		this.stillAvailableRoles = [];
-		this.distributeAssignedRoles(this.initialeRoles, this.detail.item.roles );
+		this.distributeAssignedRoles(this.initialeRoles, this.detail?.item?.roles );
 		this.listIncluded.refresh();
 		this.listExcluded.refresh();
 	}
@@ -219,7 +220,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	public resetAccessTokens(): void {
 		this.detail.item.ablieferndeStelleList = [];
 		if (this.initialeAblieferndeStelleList) {
-			this.initialeAblieferndeStelleList.forEach(ablieferndeStelle => {
+			this.initialeAblieferndeStelleList.forEach((ablieferndeStelle: any) => {
 				this.detail.item.ablieferndeStelleList.push(ablieferndeStelle);
 			});
 		}
@@ -235,7 +236,10 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public canManageManagementClientRole(eiamRoles: string): boolean {
-		return this._authorization.hasRole(this._authorization.roles.APPO) && eiamRoles &&
+		if (eiamRoles === null || eiamRoles === undefined) {
+			return false;
+		}
+		return this._authorization.hasRole(this._authorization.roles.APPO) &&
 			(eiamRoles.indexOf(this._authorization.roles.APPO) >= 0 || eiamRoles.indexOf(this._authorization.roles.ALLOW) >= 0 );
 	}
 
@@ -256,7 +260,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public asTokenManageDisabled(): boolean {
-		return !this.detail.item.rolePublicClient || this.detail.item.rolePublicClient.indexOf(this._authorization.roles.AS) === -1;
+		return !this.detail?.item?.rolePublicClient || this.detail?.item?.rolePublicClient.indexOf(this._authorization.roles.AS) === -1;
 	}
 
 	public isRoleOptionDisabled(role: string): boolean | null {
@@ -278,13 +282,13 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 					return true;
 				}
 			case this._authorization.roles.AS:
-				if (this.allowBenutzerrollePublicClientBearbeiten && (this.qoaValue() > 49 || (this.detail.item.rolePublicClient == this._authorization.roles.BVW && this.qoaValue() > 39))) {
+				if (this.allowBenutzerrollePublicClientBearbeiten && (this.qoaValue() > 49 || (this.detail?.item?.rolePublicClient == this._authorization.roles.BVW && this.qoaValue() > 39))) {
 					return null;
 				} else {
 					return true;
 				}
 			case this._authorization.roles.BAR:
-				if (this.allowBenutzerrollePublicClientBearbeiten && this.isFEDLogin() && ((this.qoaValue() > 59 ) || (this.detail.item.rolePublicClient == this._authorization.roles.BVW && this.qoaValue() > 39))) {
+				if (this.allowBenutzerrollePublicClientBearbeiten && this.isFEDLogin() && ((this.qoaValue() > 59 ) || (this.detail?.item?.rolePublicClient == this._authorization.roles.BVW && this.qoaValue() > 39))) {
 					return null;
 				} else {
 					return true;
@@ -295,7 +299,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public getCheckedStatusForRolePublic(value: string): boolean {
-		return value && value.indexOf(this.myForm.controls['rolePublicClient'].value ) === 0;
+		return value.indexOf(this.myForm.controls['rolePublicClient'].value ) === 0;
 	}
 
 
@@ -306,7 +310,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		}
 	}
 
-	public onChangedentIfierungsmittel(event) {
+	public onChangedentIfierungsmittel(event: any) {
 		if (event.target.files.length === 0) {
 			return;
 		}
@@ -343,7 +347,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	public uploadIdentifierungsmittel() {
 		this.loading = true;
-		this._userService.setIdentifizierungsmittelPdf(this.detail.item.id, this._authorization.roles.Oe3, this.selectedIdentifizierungsmittel).subscribe(
+		this._userService.setIdentifizierungsmittelPdf(this.detail?.item?.id, this._authorization.roles.Oe3, this.selectedIdentifizierungsmittel).subscribe(
 			() => {
 				this._ui.showSuccess(this._txt.get('userAndRoles.uploadsuccess', 'Identifizierungsmittel erfolgreich gespeichert'));
 			},
@@ -368,7 +372,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	public removeIdentifizierungsmittel() {
 		this.loading = true;
-		this._userService.setIdentifizierungsmittelPdf(this.detail.item.id, this._authorization.roles.Oe2, null).subscribe(
+		this._userService.setIdentifizierungsmittelPdf(this.detail?.item?.id, this._authorization.roles.Oe2, null).subscribe(
 			() => {
 				this._ui.showSuccess(this._txt.get('userAndRoles.downgradsuccess', 'Identifizierungsmittel erfolgreich gelöscht'));
 				this.detail.item.hasIdentifizierungsmittel = null;
@@ -391,12 +395,12 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	public onCancelClick(): void {
 		this.myForm.controls.rolePublicClient.reset();
-		this.myForm.controls.rolePublicClient.setValue(this.detail.item.rolePublicClient);
+		this.myForm.controls.rolePublicClient.setValue(this.detail?.item?.rolePublicClient);
 		this.showModal = false;
 	}
 
 	// eslint-disable-next-line
-	public onOkClick(event): void {
+	public onOkClick(event: any): void {
 		this.showModal = false;
 
 		// Forschungsgruppe DDS darf nicht für Ö2 gewählt werden
@@ -406,7 +410,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 		switch (this.myForm.controls.rolePublicClient.value) {
 			case this._authorization.roles.Oe2:
-				if (this.detail.item.hasIdentifizierungsmittel) {
+				if (this.detail?.item?.hasIdentifizierungsmittel) {
 					this.removeIdentifizierungsmittel();
 					this.downgradeToOe2();
 				} else {
@@ -414,7 +418,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 				}
 				break;
 			case this._authorization.roles.Oe3:
-				if (this.detail.item.rolePublicClient === this._authorization.roles.Oe2){
+				if (this.detail?.item?.rolePublicClient === this._authorization.roles.Oe2){
 					// Es kann nicht von Oe2 zu Oe3 gewechselt werden. Dies muss ueber ein PDF upload gemacht werden.
 					this.uploadIdentifierungsmittel();
 				}
@@ -426,7 +430,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public GetModalMessage(): string {
-		switch (this.detail.item.rolePublicClient) {
+		switch (this.detail?.item?.rolePublicClient) {
 			case this._authorization.roles.BAR:
 				return this._txt.get('user.upload.lessRightMessage', 'Der Benutzer verliert dadurch seine erweiterten Rechte. Möchten Sie fortfahren?');
 			case this._authorization.roles.AS:
@@ -463,7 +467,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public GetModalTitel(): string {
-		switch (this.detail.item.rolePublicClient) {
+		switch (this.detail?.item?.rolePublicClient) {
 			case this._authorization.roles.BAR:
 				return this._txt.get('user.upload.lessRightTitel', 'Rolle zu {0} zurückstufen', this.myForm.controls.rolePublicClient.value);
 			case this._authorization.roles.AS:
@@ -530,11 +534,11 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	private async _reload(): Promise<void> {
-		await this._load(this.detail.item.id);
+		await this._load(this.detail?.item?.id);
 	}
 
 	private _remove(items: any[], item: any): void {
-		_util.remove(items, i => i.id === item.id);
+		_util.remove(items, (i: any) => i.id === item.id);
 	}
 
 	private _buildCrumbs(): void {
@@ -548,7 +552,7 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 			url: this._url.getNormalizedUrl('/benutzerundrollen/benutzer'),
 			label: this._txt.get('breadcrumb.usersRoles', 'Benutzerverwaltung')
 		});
-		if (this.detail.item) {
+		if (this.detail?.item) {
 			this.crumbs.push({label: this.detail.item.emailAddress});
 		}
 	}
@@ -559,28 +563,28 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		/// User was saved without roles and roles were already changed
 		if (this.stillSelectedRoles && this.initialeRoles) {
 			this.detail.item.roles = [];
-			this.distributeAssignedRoles(this.stillSelectedRoles, this.detail.item.roles);
+			this.distributeAssignedRoles(this.stillSelectedRoles, this.detail?.item?.roles);
 		} else {
 			this.initialeRoles = [];
-			this.allRoles  = this.detail['roles'];
-			this.distributeAssignedRoles(this.detail.item.roles, this.initialeRoles);
+			this.allRoles  = (this.detail as any).roles;
+			this.distributeAssignedRoles(this.detail?.item?.roles, this.initialeRoles);
 		}
 		const access = result.item.access || {};
 		result.item.tokens = access.asTokens || [];
 		if (this.stillSelectedAblieferndeStelleList) {
 			this.detail.item.ablieferndeStelleList = [];
-			_util.forEach(this.stillSelectedAblieferndeStelleList, (ablieferndeStelleList) => {
-				this.detail.item.ablieferndeStelleList.push(ablieferndeStelleList);
+			_util.forEach(this.stillSelectedAblieferndeStelleList, (ablieferndeStelleList: AblieferndeStelle) => {
+				this.detail?.item?.ablieferndeStelleList.push(ablieferndeStelleList);
 			});
 		} else {
 			this.initialeAblieferndeStelleList = [];
-			_util.forEach(this.detail.item.ablieferndeStelleList, (ablieferndeStelleList) => {
+			_util.forEach(this.detail?.item?.ablieferndeStelleList, (ablieferndeStelleList: AblieferndeStelle) => {
 				this.initialeAblieferndeStelleList.push(ablieferndeStelleList);
 			});
 		}
 		this.detail.item.birthday = result.item.birthday ? new Date(result.item.birthday) : null;
-		this.detail.item.downloadLimitDisabledUntil = result.item.downloadLimitDisabledUntil && this.isInDateRange(new Date(this.detail.item.downloadLimitDisabledUntil))
-			? new Date(this.detail.item.downloadLimitDisabledUntil)	: null;
+		this.detail.item.downloadLimitDisabledUntil = result.item.downloadLimitDisabledUntil && this.isInDateRange(new Date(this.detail?.item?.downloadLimitDisabledUntil))
+			? new Date(this.detail?.item?.downloadLimitDisabledUntil)	: null;
 		this.detail.item.digitalisierungsbeschraenkungAufgehobenBis  = result.item.digitalisierungsbeschraenkungAufgehobenBis  &&
 		this.isInDateRange(new Date(this.detail.item.digitalisierungsbeschraenkungAufgehobenBis))
 			? new Date(this.detail.item.digitalisierungsbeschraenkungAufgehobenBis) : null;
@@ -591,34 +595,34 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	private distributeAssignedRoles(source: any, target: any) {
 		if (source) {
-			_util.forEach(source, (role) => {
+			_util.forEach(source, (role: any) => {
 				target.push(role);
 			});
 		}
 		if (this.allRoles) {
-			_util.forEach(this.allRoles, (role) => {
+			_util.forEach(this.allRoles, (role: any) => {
 				this.stillAvailableRoles.push(role);
 			});
 		}
 		if (source) {
-			_util.forEach(source, (role) => {
+			_util.forEach(source, (role: any) => {
 				this._remove(this.stillAvailableRoles, role);
 			});
 		}
 	}
 
-	private updateErrorMessages() {
+	private updateErrorMessages(): void {
 		this.errors = {};
-		if ( this.myForm) {
-			for (const message of UserRolesDetailPageErrorMessages) {
-				const control = this.myForm.get(message.forControl);
-				if (control &&
-					control.dirty &&
-					control.invalid &&
-					control.errors[message.forValidator] &&
-					!this.errors[message.forControl]) {
-					this.errors[message.forControl] = this._txt.get(message.text, message.text);
-				}
+
+		for (const message of UserRolesDetailPageErrorMessages) {
+			const control = this.myForm.get(message.forControl);
+			if (control &&
+				control.dirty &&
+				control.invalid &&
+				control.errors?.[message.forValidator] &&
+				!this.errors[message.forControl]
+			) {
+				this.errors[message.forControl] = message.text;
 			}
 		}
 	}
@@ -730,14 +734,14 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	private rememberSelectedRoles() {
 		this.stillSelectedRoles = [];
-		_util.forEach(this.detail.item.roles, (role) => {
+		_util.forEach(this.detail.item.roles, (role: any) => {
 			this.stillSelectedRoles.push(role);
 		});
 	}
 
 	private rememberSelectedAblieferndeStelle() {
 		this.stillSelectedAblieferndeStelleList = [];
-		_util.forEach(this.detail.item.ablieferndeStelleList, (ablieferndeStelleList) => {
+		_util.forEach(this.detail.item.ablieferndeStelleList, (ablieferndeStelleList: any) => {
 			this.stillSelectedAblieferndeStelleList.push(ablieferndeStelleList);
 		});
 	}
@@ -745,10 +749,10 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	private async _load(id: string): Promise<void> {
 		this.loading = true;
 		try {
-			await this._roleService.getUserInfo(id).then((res) => {
+			await this._roleService.getUserInfo(id).then((res: any) => {
 					this._prepareResult(res);
 				});
-		} catch (err) {
+		} catch (err: any) {
 			this._ui.showError(err);
 		}
 
@@ -757,14 +761,14 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 
 	private _eiamRoleHandlingWarnungen(roleIdentifier:any) {
 		// Falls ApplicationOwner oder Standard Rolle entfernt wird muss eine Meldung gezeigt werden, denn die werden beim Login automatisch wieder ergänzt
-		if (roleIdentifier === 'Standard' && this.detail.item.eiamRoles === this._authorization.roles.ALLOW) {
+		if (roleIdentifier === 'Standard' && this.detail?.item?.eiamRoles === this._authorization.roles.ALLOW) {
 			this._ui.showWarning(this._txt.get('usersAndRoles.warning.remove.standard', 'Achtung! Die «Standardrolle» wird dem Benutzer der Applikation automatisch wieder zugewiesen, ' +
 				'solange in eIAM für den Management-Client die Rolle «ALLOW» hinterlegt ist. ' +
 				'Falls Sie dem Benutzer die «Standardrolle» entziehen möchten, entfernen Sie bitte in der eIAM-Rollenverwaltung die Rolle «ALLOW»'));
 		}
 	}
 
-	public dateRangeValidator(control: FormControl): any | null {
+	public dateRangeValidator(control: AbstractControl): any | null {
 		if (!control.value || control.value === '' )  {
 			if (control.invalid) {
 				control.setErrors(null);
@@ -822,25 +826,24 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 	}
 
 	public qoaValue(): number {
-		return this.detail.item.qoAValue
+		return this.detail?.item?.qoAValue
 	}
 
 	public isFEDLogin(): boolean {
 		return 'E-ID FED-LOGIN' === this.myForm?.controls.homeName.value
 	}
 
-	private hasAblieferndeStelleListChanged(): boolean {
-
-		const ablieferndeStelleIds = this.detail.item.ablieferndeStelleList != null ? this.detail.item.ablieferndeStelleList.map(as => as.ablieferndeStelleId) : [];
-		if (this.initialeAblieferndeStelleList.length === this.detail.item.ablieferndeStelleList.length) {
+	protected hasAblieferndeStelleListChanged(): boolean {
+		const ablieferndeStelleIds = this.detail?.item?.ablieferndeStelleList != null ? this.detail?.item?.ablieferndeStelleList.map((as: AblieferndeStelle) => as.ablieferndeStelleId) : [];
+		if (this.initialeAblieferndeStelleList?.length > 0 && this.initialeAblieferndeStelleList?.length === this.detail?.item?.ablieferndeStelleList?.length) {
 			const length = this.initialeAblieferndeStelleList.length;
 			for (let i = 0; i < length; i++) {
 				if (ablieferndeStelleIds.indexOf(this.initialeAblieferndeStelleList[i].ablieferndeStelleId) < 0) {
 					return true;
 				}
 			}
-		} else {
-			return true;
+ 		} else {
+			return this.initialeAblieferndeStelleList?.length !== this.detail?.item?.ablieferndeStelleList?.length;
 		}
 		return false;
 	}
@@ -857,14 +860,14 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		}
 	}
 
-	public dataPickerValueUpdate($event: FlatPickrOutputOptions, controlName: string) {
+	public dataPickerValueUpdate($event: any, controlName: string) {
 		if ($event.dateString === '') {
 			this.myForm.controls[controlName].setValue(null);
 		}
 	}
 
 	public get isInternalUser() {
-		if (this._authorization.roles.Oe3 ===  this.detail.item.rolePublicClient  || this._authorization.roles.Oe2 === this.detail.item.rolePublicClient )  {
+		if (this._authorization.roles.Oe3 ===  this.detail?.item?.rolePublicClient  || this._authorization.roles.Oe2 === this.detail?.item?.rolePublicClient )  {
 			return false;
 		}
 
@@ -908,8 +911,8 @@ export class UserRolesDetailPageComponent extends ComponentCanDeactivate impleme
 		}
 
 		this.myForm.controls.birthday.updateValueAndValidity();
-		this.myForm.controls.organization.updateValueAndValidity();
 		this.myForm.controls.familyName.updateValueAndValidity();
+		this.myForm.controls.organization.updateValueAndValidity();
 		this.myForm.controls.firstName.updateValueAndValidity();
 	}
 }

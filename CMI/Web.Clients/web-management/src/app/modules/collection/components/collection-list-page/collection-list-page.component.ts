@@ -14,9 +14,10 @@ import {Observable} from 'rxjs';
 import {DataMap, Column} from '@mescius/wijmo.grid';
 
 @Component({
-	selector: 'cmi-collection-list-page',
-	templateUrl: './collection-list-page.component.html',
-	styleUrls: ['./collection-list-page.component.less']
+    selector: 'cmi-collection-list-page',
+    templateUrl: './collection-list-page.component.html',
+    styleUrls: ['./collection-list-page.component.less'],
+    standalone: false
 })
 export class CollectionListPageComponent implements OnInit {
 	@ViewChild('flexGrid', {static: true})
@@ -24,13 +25,13 @@ export class CollectionListPageComponent implements OnInit {
 	public showColumnPicker = false;
 	public valueFilters: any;
 	public collectionTypes = [{collectionTypeId: 0, name: 'Sammlung'}, {collectionTypeId: 1, name: 'Themenblock'}];
-	public showDeleteModal: boolean;
-	public loading: boolean;
+	public showDeleteModal!: boolean;
+	public loading: boolean = true;
 	public collections: CollectionView = new CollectionView();
 	public hiddenColumns: any[] = [];
 	public visibleColumns: any[] = [];
 	public visibleColumnsSelector: any[] = [];
-	public columns: any[];
+	public columns!: any[];
 	public crumbs: any[] = [];
 
 	constructor(private _collectionService: CollectionService,
@@ -45,9 +46,6 @@ export class CollectionListPageComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		// To prevent filtering icon on image column
-		this.flexGrid.filter.filterColumns = ['title', 'description', 'descriptionShort', 'validFrom', 'validTo', 'imageAltText', 'createdOn',
-			'createdBy', 'modifiedOn', 'modifiedBy', 'link', 'parent', 'childCollections', 'language'];
 		this.buildCrumbs();
 		this.loadColumns();
 		this.loadCollectionList();
@@ -55,6 +53,31 @@ export class CollectionListPageComponent implements OnInit {
 		maps['collectionTypeId'] = new DataMap(this.collectionTypes, 'collectionTypeId', 'name');
 
 		this.valueFilters = maps;
+	}
+
+	public ngAfterViewInit(): void {
+		this.initFlexGrid(0);
+	}
+
+	private initFlexGrid(attempt: number): void {
+		const maxAttempts = 10;
+
+		setTimeout(() => {
+			// To prevent filtering icon on image column
+			if (this.loading || !this.flexGrid) {
+				if (attempt < maxAttempts) {
+					this.initFlexGrid(attempt + 1);
+				} else {
+					console.error('FlexGrid konnte nicht initialisiert werden');
+				}
+				return;
+			}
+			this.flexGrid.itemsSource = this.collections;
+			this.flexGrid.dataMaps = this.valueFilters;
+			this.flexGrid.filter.filterColumns = ['title', 'description', 'descriptionShort', 'validFrom', 'validTo', 'imageAltText', 'createdOn',
+				'createdBy', 'modifiedOn', 'modifiedBy', 'link', 'parent', 'childCollections', 'language'];
+			this.flexGrid.refresh();
+		}, 75);
 	}
 
 	public get allowCollectionBearbeiten(): boolean {
@@ -85,8 +108,8 @@ export class CollectionListPageComponent implements OnInit {
 	}
 
 	public toggleDeleteModal(): void {
-		const hasItemsWithChildren = this.flexGrid.checkedItems.map(s => s.childCollections).filter(children => children !== null);
-		if (hasItemsWithChildren.length !== 0) {
+		const hasItemsWithChildren = this.flexGrid?.checkedItems?.map(s => s.childCollections).filter(children => children !== null);
+		if (hasItemsWithChildren?.length !== 0) {
 			this._ui.showInfo('Bitte zuerst die enthaltenen Sammlungen und Themenblöcke löschen');
 		} else {
 			this.showDeleteModal = !this.showDeleteModal;
@@ -98,7 +121,7 @@ export class CollectionListPageComponent implements OnInit {
 			return;
 		}
 
-		const itemsToDelete: number[] = this.flexGrid.checkedItems.map(s => s.collectionId);
+		const itemsToDelete: number[] = this.flexGrid?.checkedItems.map(s => s.collectionId);
 
 		let result: Observable<any>;
 		if (itemsToDelete.length === 1) {
@@ -157,7 +180,7 @@ export class CollectionListPageComponent implements OnInit {
 	}
 
 	public resetSortsAndFilters() {
-		this.flexGrid.filter.clear();
+		this.flexGrid?.filter.clear();
 		this.resetColumnsToDefault();
 	}
 
@@ -166,7 +189,7 @@ export class CollectionListPageComponent implements OnInit {
 		this.saveColumnsAsUserSettings(this.columns);
 		this.loadCollectionList();
 		this.refreshHiddenVisibleColumns();
-		this.flexGrid.resetGridState();
+		this.flexGrid?.resetGridState();
 	}
 
 	public saveColumns() {
@@ -201,7 +224,7 @@ export class CollectionListPageComponent implements OnInit {
 	}
 
 	public onImageLoaded() {
-		this.flexGrid.invalidate();
+		this.flexGrid?.invalidate();
 	}
 
 	private buildCrumbs(): void {
@@ -232,11 +255,15 @@ export class CollectionListPageComponent implements OnInit {
 	private loadCollectionList(): void {
 		this.loading = true;
 		this._collectionService.getAll().subscribe(
-			res => this.prepareResult(res),
+			(res: CollectionListItemDto[] | null) => {
+				if (res !== null) {
+					this.prepareResult(res)
+				}
+			},
 			err => this._err.showError(err));
 	}
 
-	private saveColumnsAsUserSettings(cols) {
+	private saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.collectionSettings = <CollectionSettings>{
 			columns: cols

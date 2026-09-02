@@ -18,46 +18,47 @@ import {AuthorizationService, DetailPagingService, ErrorService, FileDownloadSer
 import {Bestellhistorie, OrderingFlatDetailItem, OrderingFlatItem, StatusHistory} from '../../model';
 import {OrderService} from '../../services';
 import {ActivatedRoute} from '@angular/router';
-import * as moment from 'moment';
+import moment from 'moment';
 import {ToastrService} from 'ngx-toastr';
 import {NgForm} from '@angular/forms';
 import flatpickr from 'flatpickr';
 import {German} from 'flatpickr/dist/l10n/de';
-import {FlatPickrOutputOptions} from 'angularx-flatpickr/lib/flatpickr.directive';
 
 @Component({
-	selector: 'cmi-viaduc-orders-list-page',
-	templateUrl: 'ordersDetailPage.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./ordersDetailPage.component.less']
+    selector: 'cmi-viaduc-orders-list-page',
+    templateUrl: 'ordersDetailPage.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./ordersDetailPage.component.less'],
+    standalone: false
 })
 export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 
-	public loading: boolean;
+	public loading!: boolean;
 	public crumbs: any[] = [];
-	public detailRecord: OrderingFlatDetailItem;
-	public historyItems: Bestellhistorie[];
+	public detailRecord!: OrderingFlatDetailItem;
+	public historyItems!: Bestellhistorie[];
 
-	public fieldInfos: any[];
+	public fieldInfos!: any[];
 	public showEntscheidHinterlegen = false;
 	public showOrderHistoryModal = false;
 	public showAuftraegeAbschliessen = false;
 	public showAuftraegeZuruecksetzen = false;
-	public showAuftraegeAbbrechen: boolean;
-	public showAuftraegeReponieren: boolean;
+	public showAuftraegeAbbrechen!: boolean;
+	public showAuftraegeReponieren!: boolean;
 	public showAuftraegeAusleihen = false;
-	public artDerArbeiten: ArtDerArbeit[];
-	public detailPagingEnabled: boolean;
+	public artDerArbeiten!: ArtDerArbeit[];
+	public detailPagingEnabled!: boolean;
 	public reasons: Reason[] = [];
 	public gebrauchskopieStatus: any[] = [];
 
 	public isNavFixed = false;
 
-	private _recordId: number;
+	private _recordId!: number;
+	protected minDateErwarteteRueckgabe?: Date;
 
 	@ViewChild('formOrderDetail', {static: false})
-	public formOrderDetail: NgForm;
-	public currentUserRole: string;
+	public formOrderDetail!: NgForm;
+	public currentUserRole!: string;
 	public isValidRueckgabeNumber = true;
 	public isBusy = false;
 
@@ -102,13 +103,13 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 		this._ord.getOrderingDetail(this._recordId).subscribe(r => {
 			this.loading = false;
 			this.detailRecord = r;
+			this.updateMinDateErwarteteRueckgabe();
 			this.formOrderDetail.resetForm();
 			this._buildCrumbs();
 			this._ord.getAuftragOrderingDetailFields().subscribe(fields => {
 				this.fieldInfos = fields;
 			});
 		});
-
 	}
 
 	private _buildCrumbs(): void {
@@ -207,8 +208,10 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 
 	public updateReason(val: number) {
 		// nach this.formOrderDetail.resetForm(); kommt ein nuller Wert
-		if (val !== null) {
-			this.detailRecord.reason = this.reasons.find(r => r.id === val).name;
+		const reason = this.reasons.find((r: Reason) => r.id === val);
+
+		if (reason) {
+			this.detailRecord.reason = reason.name;
 			this.detailRecord.reasonId = val;
 		}
 	}
@@ -220,43 +223,17 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 	public getDateAsString(field: any): string {
 		if (field) {
 			const val = moment.utc(field).format('DD.MM.YYYY');
-			return (val === '01.01.0001') ? null : val;
+			return (val === '01.01.0001') ? '' : val;
 		}
-		return null;
-	}
-
-	public setStringAsDate(str: string, key: string): void {
-		// Required for adding a date by hand
-		if (!moment(str, 'DD.MM.YYYY', true).isValid()) {
-			return;
-		}
-		const oldValue = moment(this.detailRecord[key]).format('DD.MM.YYYY');
-		this.detailRecord[key] = (str && str.length > 0) ? moment.utc(str, 'DD.MM.YYYY').toDate() : null;
-		// Required to check old/new values as loading the form also calls this method
-		if (str !== oldValue) {
-			this.formOrderDetail.form.markAsDirty();
-		}
-	}
-
-	public setStringAsDateTime(str: string, key: string): void {
-		// Required for adding a date by hand
-		if (!moment(str, 'DD.MM.YYYY', true).isValid()) {
-			return;
-		}
-		const oldValue = moment(this.detailRecord[key]).format('DD.MM.YYYY, HH:mm:ss');
-		this.detailRecord[key] = (str && str.length > 0) ? moment.utc(str, 'DD.MM.YYYY, HH:mm:ss').toDate() : null;
-		// Required to check old/new values as loading the form also calls this method
-		if (str !== oldValue) {
-			this.formOrderDetail.form.markAsDirty();
-		}
+		return '';
 	}
 
 	public getDateTimeAsString(field: any): string {
 		if (field) {
 			const val = moment.utc(field).format('DD.MM.YYYY, HH:mm:ss');
-			return (val === '01.01.0001, 00:00:00') ? null : val;
+			return (val === '01.01.0001, 00:00:00') ? '' : val;
 		}
-		return null;
+		return '';
 	}
 
 	public getDetailBaseUrl(): string {
@@ -402,6 +379,23 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 		return this._txt.get('hints.unsavedChanges', 'Sie haben ungespeicherte Änderungen. Wollen Sie die Seite tatsächlich verlassen?');
 	}
 
+	protected updateMinDateErwarteteRueckgabe(): void {
+		if (!this.detailRecord?.ausgabedatum) {
+			this.minDateErwarteteRueckgabe = undefined;
+			return;
+		}
+
+		if ( typeof this.detailRecord.ausgabedatum === 'string' &&  this.detailRecord.ausgabedatum){
+			// 2026-02-05T17:14:27.257 Uhrzeit abschneiden
+			this.minDateErwarteteRueckgabe = new Date((this.detailRecord.ausgabedatum as string).substring(0,10));
+		}
+		else {
+			this.minDateErwarteteRueckgabe = new Date(this.detailRecord.ausgabedatum.getFullYear(),
+				this.detailRecord.ausgabedatum.getMonth(), this.detailRecord.ausgabedatum.getDate());
+		}
+	}
+
+
 	private verifyGebrauchskopieStatus(): boolean {
 		if (this.detailRecord && (this.detailRecord.gebrauchskopieStatus === GebrauchskopieStatus.NichtErstellt ||
 			this.detailRecord.gebrauchskopieStatus === GebrauchskopieStatus.Versendet)) {
@@ -425,7 +419,7 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 
 	/* eslint-disable */
 	@HostListener('window:scroll', ['$event'])
-	public onScroll(event) {
+	public onScroll(event: any) {
 		const verticalOffset = window.pageYOffset
 			|| document.documentElement.scrollTop
 			|| document.body.scrollTop || 0;
@@ -442,8 +436,8 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 	}
 
 	public getFormIsDirty():boolean {
-		if (this.formOrderDetail) {
-			return this.formOrderDetail.dirty;
+		if (this.formOrderDetail && this.formOrderDetail.dirty) {
+			return true;
 		}
 		return false;
 	}
@@ -472,24 +466,48 @@ export class OrdersDetailPageComponent extends ComponentCanDeactivate {
 		}
 	}
 
-	public dataPickerValueUpdate($event: FlatPickrOutputOptions) {
+	public dataPickerValueUpdate($event: any) {
 		if ($event.dateString === ''){
-			this.detailRecord.erwartetesRueckgabeDatum = null;
+			this.detailRecord.erwartetesRueckgabeDatum = undefined;
 			this.isValidRueckgabeNumber = false;
 		} else {
 			this.isValidRueckgabeNumber = true;
 			this.detailRecord.erwartetesRueckgabeDatum = $event.selectedDates[0];
-			this.detailRecord.erwartetesRueckgabeDatum.setDate(this.detailRecord.erwartetesRueckgabeDatum.getDate() + 1);
+			if (this.detailRecord.erwartetesRueckgabeDatum !== undefined) {
+				this.detailRecord.erwartetesRueckgabeDatum.setDate(this.detailRecord.erwartetesRueckgabeDatum.getDate() + 1);
+			}
 		}
 	}
 
-	public dataPickerValueUpdateGeplanteAusgabe($event: FlatPickrOutputOptions) {
+	public dataPickerValueUpdateGeplanteAusgabe($event: any) {
 		if ($event.dateString === ''){
-			this.detailRecord.orderingLesesaalDate= null;
+			this.detailRecord.orderingLesesaalDate= undefined;
 		}
 		else {
 			this.detailRecord.orderingLesesaalDate = $event.selectedDates[0];
-			this.detailRecord.orderingLesesaalDate.setDate(this.detailRecord.orderingLesesaalDate.getDate() + 1);
+			if (this.detailRecord.orderingLesesaalDate !== undefined){
+				this.detailRecord.orderingLesesaalDate.setDate(this.detailRecord.orderingLesesaalDate.getDate() + 1);
+			}
 		}
+	}
+
+	protected getAushepungstyp(): string {
+		if (this.detailRecord?.aushebungstyp == 0) {
+			return this._txt.get('enums.aushebungstyp.dossier', 'Dossier');
+		} else if 	(this.detailRecord?.aushebungstyp == 1) {
+			return this._txt.get('enums.aushebungstyp.behältnis', 'Behältnis');
+		}else {
+			return '';
+		}
+	}
+	protected showBehaeltnisInhalt() {
+		this.isBusy = true;
+		this._ord.getBehaeltnisInhaltHtml([ this.detailRecord.behaeltnisNummer]).subscribe(html => {
+			this.isBusy = false;
+			this._ui.showHtmlInNewTab(html, this._txt.get('behaeltnisInhalt', 'BehaeltnisInhalt'));
+		}, (error) => {
+			this.isBusy = false;
+			this._err.showError(error);
+		});
 	}
 }

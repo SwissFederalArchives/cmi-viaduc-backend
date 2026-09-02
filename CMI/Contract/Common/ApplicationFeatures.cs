@@ -197,7 +197,10 @@ namespace CMI.Contract.Common
         SynchronizationUeberwachenEinsehen = 10000103,
 
         [Description("Synchronization-Hinzufügen-Bearbeiten")]
-        SynchronizationHinzufuegenBearbeiten = 10000104
+        SynchronizationHinzufuegenBearbeiten = 10000104,
+
+        [Description("Auftragsübersicht-Aufträge-BehaeltnisInhalt ausführen")]
+        AuftragsuebersichtAuftraegeKannBehaeltnisInhaltDrucken = 10000105
     }
 
     public class ApplicationFeatureInfo

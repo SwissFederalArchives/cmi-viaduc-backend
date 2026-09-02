@@ -2,15 +2,16 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ContextService} from '../../services/context.service';
 
 @Component({
-	selector: 'cmi-viaduc-footer',
-	templateUrl: 'footer.component.html'
+    selector: 'cmi-viaduc-footer',
+    templateUrl: 'footer.component.html',
+    standalone: false
 })
 export class FooterComponent implements OnInit, OnDestroy {
 
 	private _contextSubscription: any = null;
 	public reload = false;
 
-	private _language: string = null;
+	private _language: string = '';
 
 	constructor(private _contextService: ContextService) {
 

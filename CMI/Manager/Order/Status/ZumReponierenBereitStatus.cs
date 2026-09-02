@@ -1,7 +1,7 @@
-﻿using System;
-using CMI.Contract.Messaging;
+﻿using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using Serilog;
+using System;
 
 namespace CMI.Manager.Order.Status
 {

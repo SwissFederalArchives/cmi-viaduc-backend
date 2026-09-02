@@ -27,7 +27,7 @@ export class WijmoService {
 		cf.valueFilter.uniqueValues = dataMap.getDisplayValues();
 	}
 
-	public getDataMap(enumClass, translateFn: (val) => string) {
+	public getDataMap(enumClass: any, translateFn: (val: any) => string) {
 		const pairs = [];
 		for (const key of Object.keys(enumClass)) {
 			const val: number = parseInt(key, 10);

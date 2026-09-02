@@ -3,9 +3,10 @@ import {ClientContext, ConfigService, PreloadService} from '@cmi/viaduc-web-core
 import {ContextService} from '../../modules/client/services/context.service';
 
 @Component({
-	selector: 'cmi-viaduc-root',
-	templateUrl: 'root.component.html',
-	styleUrls: ['./root.component.less']
+    selector: 'cmi-viaduc-root',
+    templateUrl: 'root.component.html',
+    styleUrls: ['./root.component.less'],
+    standalone: false
 })
 export class RootComponent implements OnInit, AfterViewInit {
 

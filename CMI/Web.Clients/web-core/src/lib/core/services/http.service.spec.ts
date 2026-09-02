@@ -19,7 +19,7 @@ describe('HttpService', () => {
 		http = <any>{
 			get: u => of(response),
 			post: (u, b) => of(response),
-			request: (u, p) => of(httpEvent)
+			request: (u,p) => of(httpEvent)
 		};
 
 		url = 'http://localhost/';

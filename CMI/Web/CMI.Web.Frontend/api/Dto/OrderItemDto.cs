@@ -1,5 +1,5 @@
-﻿using System;
-using CMI.Contract.Order;
+﻿using CMI.Contract.Order;
+using System;
 
 namespace CMI.Web.Frontend.api.Dto
 {
@@ -67,5 +67,7 @@ namespace CMI.Web.Frontend.api.Dto
         public string MahndatumInfo { get; set; }
         public string SachbearbeiterId { get; set; }
         public OrderStatesInternal Status { get; set; }
+        public Aushebungstyp Aushebungstyp { get; set; }
+        public string EntstehungDigitaleInhalte { get; set; }
     }
 }

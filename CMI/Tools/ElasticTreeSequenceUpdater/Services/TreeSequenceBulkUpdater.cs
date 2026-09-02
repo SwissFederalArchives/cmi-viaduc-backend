@@ -1,20 +1,21 @@
-﻿using System;
+﻿using CMI.Tools.ElasticTreeSequenceUpdater.Models;
+using Elastic.Clients.Elasticsearch;
+using Serilog;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nest;
-using CMI.Tools.ElasticTreeSequenceUpdater.Models;
-using Serilog;
+using Elastic.Clients.Elasticsearch.Core.Bulk;
 
 namespace CMI.Tools.ElasticTreeSequenceUpdater.Services
 {
     public class TreeSequenceBulkUpdater
     {
-        private readonly IElasticClient client;
+        private readonly ElasticsearchClient client;
         private readonly string indexName;
 
-        public TreeSequenceBulkUpdater(IElasticClient client, string indexName)
+        public TreeSequenceBulkUpdater(ElasticsearchClient client, string indexName)
         {
             this.client = client;
             this.indexName = indexName;

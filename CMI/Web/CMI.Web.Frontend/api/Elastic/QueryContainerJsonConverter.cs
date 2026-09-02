@@ -1,23 +1,23 @@
-﻿using System;
+﻿using Elastic.Clients.Elasticsearch;
+using System;
 using System.IO;
-using Elasticsearch.Net;
-using Nest;
-using Nest.JsonNetSerializer;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Transport.Extensions;
 
 namespace CMI.Web.Frontend.api.Elastic;
 
 public class QueryContainerJsonConverter
 {
-    private static readonly ElasticClient client = new ElasticClient(new ConnectionSettings(
-        new SingleNodeConnectionPool(new Uri("http://localhost:9200")), new InMemoryConnection(), sourceSerializer: JsonNetSerializer.Default));
+    private static readonly ElasticsearchClient client = new(new ElasticsearchClientSettings(new Uri("http://localhost:9200")));
 
-    public string Serialize(IQueryContainer container)
+    public string Serialize(Query container)
     {
         return client.RequestResponseSerializer.SerializeToString(container);
     }
 
-    public QueryContainer Deserialize(Stream text)
+    public Query Deserialize(Stream text)
     {
-        return client.RequestResponseSerializer.Deserialize<QueryContainer>(text);
+        return client.RequestResponseSerializer.Deserialize<Query>(text);
     }
+
 }

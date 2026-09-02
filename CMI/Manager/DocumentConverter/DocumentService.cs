@@ -36,33 +36,33 @@ namespace CMI.Manager.DocumentConverter
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterJobInitRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<JobInitConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterJobEndRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<JobEndConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterConversionStartRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ConversionStartConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterExtractionStartRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ExtractionStartConsumer>);
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.DocumentConverterSupportedFileTypesRequestQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<SupportedFileTypesConsumer>);
-                    ec.UseRetry(retry => retry.Incremental(3, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0)));
+                    ec.UseMessageRetry(retry => retry.Incremental(3, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(0)));
                 });
 
                 cfg.ReceiveEndpoint(BusConstants.MonitoringDocumentConverterInfoQueue, ec =>

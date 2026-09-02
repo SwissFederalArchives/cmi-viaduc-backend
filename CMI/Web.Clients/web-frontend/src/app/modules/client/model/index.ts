@@ -15,3 +15,4 @@ export * from './auth/authStatus';
 export * from './reasonValidator';
 export * from './order/kontingentResult';
 export * from './order/orderCreationRequest';
+export * from './chat/chatbot.types';

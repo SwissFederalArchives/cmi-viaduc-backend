@@ -2,9 +2,10 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core
 import {EntityImage, Paging, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-detail-images',
-	templateUrl: 'detailImages.component.html',
-	styleUrls: ['./detailImages.component.less']
+    selector: 'cmi-viaduc-detail-images',
+    templateUrl: 'detailImages.component.html',
+    styleUrls: ['./detailImages.component.less'],
+    standalone: false
 })
 export class DetailImagesComponent implements OnInit, AfterViewInit {
 	private _elem: any;

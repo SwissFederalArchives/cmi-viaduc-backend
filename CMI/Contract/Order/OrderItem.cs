@@ -48,6 +48,8 @@ namespace CMI.Contract.Order
         public string SachbearbeiterId { get; set; }
         public bool HasAufbereitungsfehler { get; set; }
         public GebrauchskopieStatus GebrauchskopieStatus { get; set; }
+        public Aushebungstyp? Aushebungstyp { get; set; }
+        public string EntstehungDigitaleInhalte { get; set; }
     }
 
     public enum DigitalisierungsKategorie
@@ -68,5 +70,11 @@ namespace CMI.Contract.Order
         ErfolgreichErstellt = 1,
         Fehlgeschlagen = 2,
         Versendet = 3
+    }
+
+    public enum Aushebungstyp
+    {
+        Dossier = 0,
+        Behältnis = 1
     }
 }

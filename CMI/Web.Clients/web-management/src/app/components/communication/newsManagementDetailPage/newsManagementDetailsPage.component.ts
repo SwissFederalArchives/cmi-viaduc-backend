@@ -8,9 +8,10 @@ import {UrlService} from '../../../modules/shared/services';
 import {NgForm} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-news-management-details-page',
-	templateUrl: 'newsManagementDetailsPage.component.html',
-	styleUrls: ['./newsManagementDetailsPage.component.less']
+    selector: 'cmi-news-management-details-page',
+    templateUrl: 'newsManagementDetailsPage.component.html',
+    styleUrls: ['./newsManagementDetailsPage.component.less'],
+    standalone: false
 })
 
 export class NewsManagementDetailsPageComponent extends ComponentCanDeactivate implements OnInit {
@@ -19,12 +20,12 @@ export class NewsManagementDetailsPageComponent extends ComponentCanDeactivate i
 	public formNews: NgForm;
 
 	public crumbs: any[] = [];
-	public id: string;
-	public pageHeader: string;
-	public news: News;
-	public errors: string[];
-	private _mode: Mode;
-	private _newsHasBeenChanged: boolean;
+	public id!: string;
+	public pageHeader!: string;
+	public news!: News;
+	public errors!: string[];
+	private _mode!: Mode;
+	private _newsHasBeenChanged!: boolean;
 
 	constructor(private _newsService: NewsService,
 				private _txt: TranslationService,
@@ -72,7 +73,10 @@ export class NewsManagementDetailsPageComponent extends ComponentCanDeactivate i
 	}
 
 	public canDeactivate(): boolean {
-		return !this.formNews.dirty;
+		if (this.formNews) {
+			return !this.formNews.dirty;
+		}
+		return true;
 	}
 
 	public promptForMessage(): false | 'question' | 'message' {

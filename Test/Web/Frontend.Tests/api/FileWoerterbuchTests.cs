@@ -1,6 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 using CMI.Web.Frontend.api;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -24,8 +24,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var wb = new FileWoerterbuch(fs, "c:\\synonyme");
 
             var synonymGroups = wb.FindGroups("a");
-            synonymGroups.Should().HaveCount(1);
-            synonymGroups.First().Sources.Count.Should().Be(1);
+            synonymGroups.Count.ShouldBe(1);
+            synonymGroups.First().Sources.Count.ShouldBe(1);
         }
 
         [Test]
@@ -44,8 +44,8 @@ namespace CMI.Web.Frontend.API.Tests.api
             var wb = new FileWoerterbuch(fs, "c:\\synonyme");
 
             var synonymGroups = wb.FindGroups("c");
-            synonymGroups.Should().HaveCount(1);
-            synonymGroups.First().Sources.Count.Should().Be(1);
+            synonymGroups.Count.ShouldBe(1);
+            synonymGroups.First().Sources.Count.ShouldBe(1);
         }
     }
 }

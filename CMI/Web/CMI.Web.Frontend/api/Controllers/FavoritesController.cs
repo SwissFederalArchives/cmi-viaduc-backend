@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
@@ -28,7 +29,7 @@ namespace CMI.Web.Frontend.api.Controllers
         public FavoritesController(IElasticService elasticService, VeExportRecordHelper veExportRecordHelper)
         {
             this.elasticService = elasticService;
-            this.veExportRecordHelper  = veExportRecordHelper;
+            this.veExportRecordHelper = veExportRecordHelper;
         }
 
         [HttpGet]
@@ -89,10 +90,10 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public FavoriteList GetList(int listId)
+        public async Task<FavoriteList> GetList(int listId)
         {
             var list = sqlDataAccess.GetList(ControllerHelper.GetCurrentUserId(), listId);
-            list.Items = GetFavoritesContainedOnList(listId);
+            list.Items = await GetFavoritesContainedOnList(listId);
             return list;
         }
 
@@ -120,10 +121,10 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult ExportList(int listId)
+        public async Task<IHttpActionResult> ExportList(int listId)
         {
             var list = sqlDataAccess.GetList(ControllerHelper.GetCurrentUserId(), listId);
-            list.Items = GetFavoritesContainedOnList(listId);
+            list.Items = await GetFavoritesContainedOnList(listId);
             var language = GetUserAccess(WebHelper.GetClientLanguage(Request)).Language;
             return ResponseMessage(veExportRecordHelper.CreateExcelFile(ConvertExportData(list.Items.Where(i => i is VeFavorite).ToList()), language,
                     FrontendSettingsViaduc.Instance.GetTranslation(language, "accountFavoritesDetailPageComponent.fileName") + $"{list.Name}.xlsx",
@@ -167,18 +168,18 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<IFavorite> GetFavoritesContainedOnList(int listId)
+        public async Task<IEnumerable<IFavorite>> GetFavoritesContainedOnList(int listId)
         {
+            var retVal = new List<IFavorite>();
             var uid = ControllerHelper.GetCurrentUserId();
-            
+
             var favorites = sqlDataAccess.GetFavoritesContainedOnList(uid, listId).ToList();
 
             var veIds = favorites.OfType<VeFavorite>().Select(f => f.VeId).ToList();
             var access = GetUserAccess(WebHelper.GetClientLanguage(Request));
 
-            var found = elasticService
-                .QueryForIds<ElasticArchiveRecord>(veIds, access, new Paging { Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0 }).Entries;
-
+            var found = (await elasticService
+                .QueryForIds<ElasticArchiveRecord>(veIds, access, new Paging { Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0 })).Entries;
 
             foreach (var f in favorites)
             {
@@ -191,28 +192,30 @@ namespace CMI.Web.Frontend.api.Controllers
                         continue;
                     }
 
-                    veFavorite.CustomFields = elasticHit.Data?.CustomFields; 
+                    veFavorite.CustomFields = elasticHit.Data?.CustomFields;
                     veFavorite.WithinInfo = elasticHit.Data?.WithinInfo;
                     veFavorite.Title = elasticHit.Data?.Title;
                     veFavorite.Level = elasticHit.Data?.Level;
                     veFavorite.CreationPeriod = elasticHit.Data?.CreationPeriod?.Text;
                     veFavorite.ReferenceCode = elasticHit.Data?.ReferenceCode;
-                    veFavorite.CanBeOrdered = elasticHit.Data.CanBeOrdered;
+                    veFavorite.CanBeOrdered = elasticHit.Data?.CanBeOrdered ?? false;
                     veFavorite.HasPrimaryLink = !string.IsNullOrWhiteSpace(elasticHit.Data?.PrimaryDataLink);
                     veFavorite.CanBeDownloaded = veFavorite.HasPrimaryLink &&
                                                  access.HasAnyTokenFor(elasticHit.Data?.PrimaryDataDownloadAccessTokens);
                     veFavorite.ManifestLink = elasticHit.Data?.ManifestLink;
                     // IT, FR and DE: Dossier & EN: Dossiers
-                    veFavorite.SchutzfristendeDossier = elasticHit.Data.Level.StartsWith("Dossier") && elasticHit.Data?.ProtectionEndDate?.Year != null
+                    veFavorite.SchutzfristendeDossier = elasticHit.Data != null && elasticHit.Data.Level.StartsWith("Dossier") && elasticHit.Data?.ProtectionEndDate?.Year != null
                         ? elasticHit.Data?.ProtectionEndDate?.Year.ToString()
                         : string.Empty;
-                    yield return veFavorite;
+                    retVal.Add(veFavorite);
                 }
                 else
                 {
-                    yield return f;
+                    retVal.Add(f);
                 }
             }
+
+            return retVal;
         }
 
         [HttpGet]

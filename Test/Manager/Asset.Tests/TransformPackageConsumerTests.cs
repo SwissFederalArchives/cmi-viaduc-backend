@@ -1,11 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Asset.Consumers;
 using CMI.Utilities.Cache.Access;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -84,9 +84,9 @@ namespace CMI.Manager.Asset.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be("112");
+                message.Context.Message.ArchiveRecordId.ShouldBe("112");
                 message.Context.Message.CallerId = "2222";
-                message.Context.Message.Valid.Should().Be(false);
+                message.Context.Message.Valid.ShouldBe(false);
 
             }
             finally
@@ -140,9 +140,9 @@ namespace CMI.Manager.Asset.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be("113");
+                message.Context.Message.ArchiveRecordId.ShouldBe("113");
                 message.Context.Message.CallerId = "2223";
-                message.Context.Message.Valid.Should().Be(true);
+                message.Context.Message.Valid.ShouldBe(true);
             }
             finally
             {
@@ -195,9 +195,9 @@ namespace CMI.Manager.Asset.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be("114");
+                message.Context.Message.ArchiveRecordId.ShouldBe("114");
                 message.Context.Message.CallerId = "2224";
-                message.Context.Message.Valid.Should().Be(false);
+                message.Context.Message.Valid.ShouldBe(false);
             }
             finally
             {
@@ -250,9 +250,9 @@ namespace CMI.Manager.Asset.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.OrderItemId.Should().Be(115);
+                message.Context.Message.OrderItemId.ShouldBe(115);
                 message.Context.Message.CallerId = "2225";
-                message.Context.Message.Valid.Should().Be(false);
+                message.Context.Message.Valid.ShouldBe(false);
                 assetManager.Verify(a => a.CreateZipFileWithPasswordFromFile(It.IsAny<string>(), "115", AssetType.Benutzungskopie), Times.Once);
                 cacheHelper.Verify(c => c.SaveToCache(It.IsAny<IBus>(), CacheRetentionCategory.UsageCopyBenutzungskopie, "myZippedFile"), Times.Once);
             }

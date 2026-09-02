@@ -1,22 +1,21 @@
 using System;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CMI.Contract.Common.JsonConverters
 {
     public class LongToTimeSpanConverter : JsonConverter<TimeSpan?>
     {
-        public override void WriteJson(JsonWriter writer, TimeSpan? value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, TimeSpan? value, JsonSerializerOptions options)
         {
-            writer.WriteValue(value?.Ticks ?? 0);
+            writer.WriteNumberValue(value?.Ticks ?? 0);
         }
 
-        public override TimeSpan? ReadJson(JsonReader reader, Type objectType, TimeSpan? existingValue, bool hasExistingValue,
-            JsonSerializer serializer)
+        public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            var ticks = reader.Value != null ? (long?) Convert.ToInt64(reader.Value) : null;
-            if (ticks.HasValue && ticks.Value > 0)
+            if (reader.TryGetInt64(out var ticks))
             {
-                return TimeSpan.FromTicks(ticks.Value);
+                return TimeSpan.FromTicks(ticks);
             }
 
             return null;

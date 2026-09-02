@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Web.Frontend.api;
 using CMI.Web.Frontend.ParameterSettings;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -33,7 +33,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             });
 
             // assert
-            action.Should().Throw<ArgumentOutOfRangeException>();
+            Should.Throw<ArgumentOutOfRangeException>(action);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
+            result.Digitalisierungesbeschraenkung.ShouldBe(setting.DigitalisierungsbeschraenkungOe2);
         }
 
 
@@ -102,7 +102,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings,CreateOe2User());
 
             // assert
-            result.AktiveDigitalisierungsauftraege.Should().Be(2);
+            result.AktiveDigitalisierungsauftraege.ShouldBe(2);
         }
 
         [TestCase(OrderType.Bestellkorb)]
@@ -141,7 +141,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
-            result.AktiveDigitalisierungsauftraege.Should().Be(0);
+            result.AktiveDigitalisierungsauftraege.ShouldBe(0);
         }
 
 
@@ -198,9 +198,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
-            result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
-            result.Bestellkontingent.Should().Be(setting.DigitalisierungsbeschraenkungOe2 - result.AktiveDigitalisierungsauftraege);
+            result.AktiveDigitalisierungsauftraege.ShouldBe(2);
+            result.Digitalisierungesbeschraenkung.ShouldBe(setting.DigitalisierungsbeschraenkungOe2);
+            result.Bestellkontingent.ShouldBe(setting.DigitalisierungsbeschraenkungOe2 - result.AktiveDigitalisierungsauftraege);
         }
 
         [Test]
@@ -256,9 +256,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
-            result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
-            result.Bestellkontingent.Should().Be(0);
+            result.AktiveDigitalisierungsauftraege.ShouldBe(2);
+            result.Digitalisierungesbeschraenkung.ShouldBe(setting.DigitalisierungsbeschraenkungOe2);
+            result.Bestellkontingent.ShouldBe(0);
         }
 
         [Test]
@@ -314,9 +314,9 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, CreateOe2User());
 
             // assert
-            result.AktiveDigitalisierungsauftraege.Should().Be(2);
-            result.Digitalisierungesbeschraenkung.Should().Be(setting.DigitalisierungsbeschraenkungOe2);
-            result.Bestellkontingent.Should().Be(0);
+            result.AktiveDigitalisierungsauftraege.ShouldBe(2);
+            result.Digitalisierungesbeschraenkung.ShouldBe(setting.DigitalisierungsbeschraenkungOe2);
+            result.Bestellkontingent.ShouldBe(0);
         }
 
         [Test]
@@ -356,7 +356,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
-            result.Bestellkontingent.Should().Be(int.MaxValue);
+            result.Bestellkontingent.ShouldBe(int.MaxValue);
         }
 
 
@@ -397,7 +397,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
-            result.Bestellkontingent.Should().Be(int.MaxValue);
+            result.Bestellkontingent.ShouldBe(int.MaxValue);
         }
 
         [Test]
@@ -434,7 +434,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var result = sut.BestimmeKontingent(orderings, user);
 
             // assert
-            result.Bestellkontingent.Should().Be(0);
+            result.Bestellkontingent.ShouldBe(0);
         }
 
         private static User CreateOe2User()

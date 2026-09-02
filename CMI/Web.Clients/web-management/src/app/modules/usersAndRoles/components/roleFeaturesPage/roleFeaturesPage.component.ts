@@ -7,21 +7,22 @@ import {RoleService} from '../../services/role.service';
 import {FlexGridFilter} from '@mescius//wijmo.grid.filter';
 
 @Component({
-	selector: 'cmi-viaduc-roles-features-page',
-	templateUrl: 'roleFeaturesPage.component.html',
-	styleUrls: ['./roleFeaturesPage.component.less']
+    selector: 'cmi-viaduc-roles-features-page',
+    templateUrl: 'roleFeaturesPage.component.html',
+    styleUrls: ['./roleFeaturesPage.component.less'],
+    standalone: false
 })
 export class RoleFeaturesPageComponent extends ComponentCanDeactivate implements OnInit {
-	@ViewChild('flexGrid', { static: false })
-	public flexGrid: CmiGridComponent;
-	@ViewChild('filter', { static: false })
 
-	public filter: FlexGridFilter;
-	public loading: boolean;
+	@ViewChild('flexGrid', { static: true })
+	public flexGrid: CmiGridComponent;
+	@ViewChild('filter', { static: true })
+	public filter!: FlexGridFilter;
+	public loading: boolean = true;
 	public crumbs: any[] = [];
 	public list: PagedResult<any>;
-	public allowEdit: boolean;
-	public isDirty: boolean;
+	public allowEdit!: boolean;
+	public isDirty!: boolean;
 	public roleFeaturesList: Map<string, string[]> = new Map<string, string[]>();
 	public roleFeaturesForSaveList: Map<string, string[]> = new Map<string, string[]>();
 
@@ -51,7 +52,7 @@ export class RoleFeaturesPageComponent extends ComponentCanDeactivate implements
 	}
 
 	private _prepareResult(result: PagedResult<any>) {
-		const columns = [];
+		const columns: any[] = [];
 		// Alle selektierten Features ermitteln
 		for (const item of result.items) {
 			const featureList = [];
@@ -62,21 +63,33 @@ export class RoleFeaturesPageComponent extends ComponentCanDeactivate implements
 			this.roleFeaturesForSaveList = this.roleFeaturesList;
 		}
 
+
 		// Alle Rollen Mappen
-		_util.forEach(result.items, (applicationrole) => {
+		_util.forEach(result.items, (applicationrole: any) => {
 			columns.push({key: applicationrole.id.toString(), label: applicationrole.name, id: applicationrole.id});
 		});
 
 		// Rollen zu Benutzer-Rollen Mappen
-		result['features'].forEach(feature => {
-			_util.forEach(result.items, (applicationrole) => {
-				feature[applicationrole.id.toString()] = (this.roleFeaturesList.get(applicationrole.id.toString()).indexOf(feature.id) >= 0);
+		(result as any)['features'].forEach((feature: any) => {
+			_util.forEach(result.items, (applicationrole: any) => {
+				if (!applicationrole.id) {
+					return;
+				}
+
+				const key = applicationrole.id.toString();
+				const featureList = this.roleFeaturesList.get(key);
+
+				feature[key] = featureList
+					? featureList.indexOf(feature.id) >= 0
+					: false;
 			});
 		});
 
 		result.dynamicColumns = columns;
-
 		this.list = result;
+
+		this.flexGrid.itemsSource = (result as any).features;
+		this.flexGrid.refresh();
 		this._buildCrumbs();
 	}
 
@@ -102,17 +115,22 @@ export class RoleFeaturesPageComponent extends ComponentCanDeactivate implements
 		if (!this.list || !this.roleFeaturesList) {
 			return false;
 		}
-
-		return this.roleFeaturesList.get(roleId).indexOf(featureId) >= 0;
+		const role = this.roleFeaturesList.get(roleId);
+		if (!role) {
+			return false;
+		}
+		return role.indexOf(featureId) >= 0;
 	}
 	public onCheckboxClick(featureId: string, roleId: string): void {
 		if (this.roleFeaturesForSaveList.has(roleId)) {
-			const a = this.roleFeaturesForSaveList.get(roleId);
-			const index = a.indexOf(featureId);
-			if (index >= 0) {
-				a.splice(index, 1);
-			} else {
-				a.push(featureId);
+			const a: string[] | undefined = this.roleFeaturesForSaveList.get(roleId);
+			if (a) {
+				const index = a.indexOf(featureId);
+				if (index >= 0) {
+					a.splice(index, 1);
+				} else {
+					a.push(featureId);
+				}
 			}
 			this.isDirty = this.allowEdit;
 		}

@@ -152,11 +152,5 @@ namespace CMI.Web.Frontend.api.Controllers
 
             return StaticContentHelper.UpdateStaticContent(FrontendSettingsViaduc.Instance, ControllerContext.RequestContext, update);
         }
-
-        [HttpGet]
-        public HttpResponseMessage GenerateTranslations(string language = null)
-        {
-            return new FrontendTranslationHelper().RunGeneration(language, Request);
-        }
     }
 }

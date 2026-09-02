@@ -80,7 +80,7 @@ export class TranslationService {
 		const ts = this._texts;
 		let t = null,
 			ks = [],
-			k = '',
+			k: string | undefined = '',
 			tt = ts;
 
 		if (!_util.isEmpty(key) && ts) {
@@ -95,7 +95,10 @@ export class TranslationService {
 			// search by name space
 			while (!t && tt && ks.length > 0) {
 				k = ks.shift();
-				tt = tt[k];
+				if (typeof k === 'string') {
+					tt = tt[k];
+				}
+
 				t = tt ? tt[ks.join('.')] : null;
 			}
 			// search by full (multi-part) key
@@ -129,8 +132,8 @@ export class TranslationService {
 		}
 
 		if (t && t.indexOf('{') >= 0) {
-			let ps = [t],
-				ar = _util.isArray(args) ? args : [];
+			let ps: any = [t],
+				ar: any [] = _util.isArray(args) ? args : [];
 			while (ar.length === 1 && _util.isArray(ar[0])) {
 				ar = ar[0];
 			}
@@ -145,7 +148,7 @@ export class TranslationService {
 		const vs = container;
 		let	v,
 			ks = [],
-			k = '',
+			k: string | undefined = '',
 			vt = vs;
 
 		if (vs) {
@@ -155,7 +158,9 @@ export class TranslationService {
 			// search by name space
 			while ((v === undefined) && vt && ks.length > 0) {
 				k = ks.shift();
-				vt = vt[k];
+				if (typeof k === 'string') {
+					vt = vt[k];
+				}
 				v = vt ? vt[ks.join('.')] : undefined;
 			}
 			// search by full (multi-part) key
@@ -192,8 +197,8 @@ export class TranslationService {
 	}
 
 	private normalizeKey(key?: string): string {
-		if (!key) {
-			return key;
+		if (typeof key === 'undefined') {
+			return '';
 		}
 
 		return key.replace(/ä/g, 'ae' )

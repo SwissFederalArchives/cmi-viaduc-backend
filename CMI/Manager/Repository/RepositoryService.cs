@@ -40,21 +40,21 @@ namespace CMI.Manager.Repository
                 cfg.ReceiveEndpoint(BusConstants.RepositoryManagerDownloadPackageMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<DownloadPackageConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
                 cfg.ReceiveEndpoint(BusConstants.RepositoryManagerArchiveRecordAppendPackageMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<AppendPackageConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                     BusConfigurator.SetPrefetchCountForEndpoint(ec);
                 });
                 cfg.ReceiveEndpoint(BusConstants.RepositoryManagerReadPackageMetadataMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<ReadPackageMetadataConsumer>);
-                    ec.UseRetry(retryPolicy => retryPolicy.Exponential(3, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
+                    ec.UseMessageRetry(retryPolicy => retryPolicy.Exponential(3, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.ReceiveEndpoint(BusConstants.MonitoringDirCheckQueue, ec => { ec.Consumer(ctx.Resolve<CheckDirConsumer>); });
                 cfg.UseNewtonsoftJsonSerializer();

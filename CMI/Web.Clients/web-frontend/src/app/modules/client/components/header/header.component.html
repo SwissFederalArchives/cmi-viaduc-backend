@@ -1,3 +1,5 @@
 <header>
-	<cmi-viaduc-header-content *ngIf="!reload"></cmi-viaduc-header-content>
+  @if (!reload) {
+    <cmi-viaduc-header-content></cmi-viaduc-header-content>
+  }
 </header>

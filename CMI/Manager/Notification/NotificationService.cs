@@ -32,7 +32,7 @@ namespace CMI.Manager.Notification
                 cfg.ReceiveEndpoint(BusConstants.NotificationManagerMessageQueue, ec =>
                 {
                     ec.Consumer(ctx.Resolve<EmailMessageConsumer>);
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
                 cfg.UseNewtonsoftJsonSerializer();

@@ -3,9 +3,10 @@ import { ConfigService, TranslationService } from '@cmi/viaduc-web-core';
 import { SeoService, UrlService, AuthorizationService } from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-account-page',
-	templateUrl: 'accountPage.component.html',
-	styleUrls: ['./accountPage.component.less']
+    selector: 'cmi-viaduc-account-page',
+    templateUrl: 'accountPage.component.html',
+    styleUrls: ['./accountPage.component.less'],
+    standalone: false
 })
 export class AccountPageComponent implements OnInit {
 

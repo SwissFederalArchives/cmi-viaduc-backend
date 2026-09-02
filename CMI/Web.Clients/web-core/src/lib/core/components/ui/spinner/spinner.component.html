@@ -1,5 +1,7 @@
-<p *ngIf="hint" class="cmi-hint">{{ hint }}</p>
+@if (hint) {
+  <p class="cmi-hint">{{ hint }}</p>
+}
 <div role="alert" aria-live="assertive" class="sr-only">{{ 'Seite wird geladen' | translate:'spinner.loading'}}</div>
 <div class="cmi-three-dots">
-	<span></span><span></span><span></span>
+  <span></span><span></span><span></span>
 </div>

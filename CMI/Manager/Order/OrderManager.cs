@@ -249,6 +249,10 @@ namespace CMI.Manager.Order
         public async Task Zuruecksetzen(string currentUserId, List<int> orderItemIds)
         {
             var orderList = await GetOrderItems(orderItemIds);
+            foreach (var item in orderList)
+            {
+                item.Aushebungstyp = null;
+            }
             await statusWechsler.Execute(oi => oi.Zuruecksetzen(), orderList, GetUser(currentUserId), DateTime.Now);
         }
 

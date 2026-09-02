@@ -10,7 +10,6 @@ import {ALL_SERVICES} from './services/_all';
 import {GlobalErrorHandler} from './services/globalErrorHandler';
 import {ALL_RESOLVERS} from './routing/_all';
 import {WijmoModule} from '../wijmo/index';
-import JSZip from 'jszip';
 import {TooltipModule} from '../tooltip/tooltip.module';
 import { ArchiveModel } from './services/archiveModel';
 import { ClientModel } from './services/clientModel';
@@ -19,7 +18,6 @@ import {ClientContext} from './services/clientContext';
 import { AuthenticationInterceptor } from './interceptors/authentication.interceptor';
 import {FlatpickrModule} from 'angularx-flatpickr';
 
-window['JSZip'] = JSZip;
 
 @NgModule({
 	declarations: [

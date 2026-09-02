@@ -8,9 +8,10 @@ import {French} from 'flatpickr/dist/l10n/fr';
 import {Italian} from 'flatpickr/dist/l10n/it';
 
 @Component({
-	selector: 'cmi-viaduc-shoppingcart-list',
-	templateUrl: 'shoppingCartItemList.component.html',
-	styleUrls: ['./shoppingCartItemList.component.less']
+    selector: 'cmi-viaduc-shoppingcart-list',
+    templateUrl: 'shoppingCartItemList.component.html',
+    styleUrls: ['./shoppingCartItemList.component.less'],
+    standalone: false
 })
 export class ShoppingCartItemList {
 

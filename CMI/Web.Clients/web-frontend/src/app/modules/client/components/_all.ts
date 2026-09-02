@@ -14,7 +14,7 @@ import {DetailUtilitiesComponent} from './detail/utilities/detailUtilities.compo
 import {DetailHierarchyComponent} from './detail/hierarchy/detailHierarchy.component';
 import {DetailImagesComponent} from './detail/images/detailImages.component';
 import {SearchBrowserComponent} from './search/browser/searchBrowser.component';
-import {SearchFacetteListComponent} from './search/searchFacetteList/searchFacetteList.component';
+import SearchFacetteListComponent from './search/searchFacetteList/searchFacetteList.component';
 import {SimpleHitListComponent} from './search/simpleHitList/simpleHitList.component';
 import {SimpleHitComponent} from './search/simpleHit/simpleHit.component';
 import {FavoriteMenuComponent} from './favorite/menu/favoriteMenu.component';
@@ -47,13 +47,12 @@ import {SearchSynonymeQuelleListComponent} from './search/searchSynonyme/searchS
 import {SearchSynonymeIconComponent} from './search/searchSynonyme/searchSynonymeIcon/searchSynonymeIcon.component';
 import {CheckoutUserSelectStepComponent} from './order/checkOutUserSelectStep/checkOutUserSelectStep.component';
 import {EisichtCheckoutOrderDetailsStepComponent} from './order/einsichtCheckoutOrderDetailStep/einsichtCheckoutOrderDetailStep.component';
-import {EngagementBubblesComponent} from './engagementBubbles/engagementBubbles.component';
 import {UsageSectionComponent} from './detail/usageSection/usageSection.component';
-import {ChatbotDialogComponent} from './chatbotDialog/chatbotDialog.component';
 import { SearchFacetteShowAllComponent } from './search/searchFacetteShowAll/searchFacetteShowAll.component';
 import {ViewerSectionComponent} from './detail/viewerSection/viewerSection.component';
 import {CituroFloatingButtonComponent} from './cituroFloatingButton/cituro-floating-button.component';
 import {CheckoutWorkplaceReservationStepComponent} from './order/checkoutWorkplaceReservationStep/checkout-workplace-reservation-step.component';
+import {ChatbotComponent} from './chatbot/chatbot.component';
 
 export const ALL_COMPONENTS = [
 	StaticContentComponent,
@@ -101,15 +100,14 @@ export const ALL_COMPONENTS = [
 	CheckoutReasonsStepComponent,
 	CheckoutSubmittedStepComponent,
 	EntityMenuComponent,
-	ChatbotDialogComponent,
 	SimpleHitMenuComponent,
 	SearchSynonymeComponent,
 	SearchSynonymeQuelleListComponent,
 	SearchSynonymeIconComponent,
 	EisichtCheckoutOrderDetailsStepComponent,
-	EngagementBubblesComponent,
 	UsageSectionComponent,
 	InfoSectionComponent,
 	ViewerSectionComponent,
-	CituroFloatingButtonComponent
+	CituroFloatingButtonComponent,
+	ChatbotComponent
 ];

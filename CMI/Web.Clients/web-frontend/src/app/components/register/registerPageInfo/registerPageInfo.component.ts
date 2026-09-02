@@ -4,9 +4,10 @@ import {AuthenticationService, UrlService} from '../../../modules/client/service
 import {TranslationService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-register-info-page',
-	templateUrl: 'registerPageInfo.component.html',
-	styleUrls: ['registerPageInfo.component.less']
+    selector: 'cmi-viaduc-register-info-page',
+    templateUrl: 'registerPageInfo.component.html',
+    styleUrls: ['registerPageInfo.component.less'],
+    standalone: false
 })
 export class RegisterPageInfoComponent implements OnInit {
 

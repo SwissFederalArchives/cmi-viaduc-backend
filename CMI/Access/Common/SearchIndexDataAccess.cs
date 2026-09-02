@@ -1,30 +1,31 @@
 ﻿using CMI.Access.Common.Properties;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Extensions;
+using CMI.Utilities.ActaPro;
 using CMI.Utilities.Common.Helpers;
-using Elasticsearch.Net;
-using Nest;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Core.Search;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using Elastic.Transport.Extensions;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CMI.Utilities.ActaPro;
-using Newtonsoft.Json;
 
 namespace CMI.Access.Common
 {
     public class SearchIndexDataAccess : ISearchIndexDataAccess, ITestSearchIndexDataAccess
     {
         private readonly ElasticIndexHelper helper;
-        public const int  ElasticSearchHitLimit = 10000;
+        public const int ElasticSearchHitLimit = 10000;
         public ActaProMappingProvider ActaProMappingProvider { get; }
 
         public SearchIndexDataAccess()
         {
             var uri = Settings.Default.ElasticSearchUrl;
-            string username = Settings.Default.ElasticSearchUsername;
-            string pwd = Settings.Default.ElasticSearchPWD;
+            var username = Settings.Default.ElasticSearchUsername;
+            var pwd = Settings.Default.ElasticSearchPWD;
             var node = new Uri(uri);
             helper = new ElasticIndexHelper(node, username, pwd);
             ActaProMappingProvider = new ActaProMappingProvider();
@@ -35,25 +36,25 @@ namespace CMI.Access.Common
             helper = new ElasticIndexHelper(address, username, password);
         }
 
-        public void UpdateDocument(ElasticArchiveRecord elasticArchiveRecord)
+        public async Task UpdateDocument(ElasticArchiveRecord elasticArchiveRecord)
         {
-            helper.Index(elasticArchiveRecord);
+            await helper.Index(elasticArchiveRecord);
         }
 
-        public void RemoveDocument(string archiveRecordId)
+        public async Task RemoveDocument(string archiveRecordId)
         {
-            helper.Remove(archiveRecordId);
+            await helper.Remove(archiveRecordId);
         }
 
-        public ElasticArchiveRecord FindDocument(string archiveRecordId, MetadataToExclude metadataToExclude)
+        public async Task<ElasticArchiveRecord> FindDocument(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
-            return helper.GetRecord(archiveRecordId, metadataToExclude);
+            return await helper.GetRecord(archiveRecordId, metadataToExclude);
         }
 
-        public ElasticArchiveRecord FindDocumentWithoutSecurity(string archiveRecordId, MetadataToExclude metadataToExclude)
+        public async Task<ElasticArchiveRecord> FindDocumentWithoutSecurity(string archiveRecordId, MetadataToExclude metadataToExclude)
         {
-            var record = FindDocument(archiveRecordId, metadataToExclude);
-            var dbRecord = FindDbDocument(archiveRecordId, metadataToExclude);
+            var record = await FindDocument(archiveRecordId, metadataToExclude);
+            var dbRecord = await FindDbDocument(archiveRecordId, metadataToExclude);
 
             record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
 
@@ -61,23 +62,20 @@ namespace CMI.Access.Common
 
         }
 
-        public ElasticArchiveDbRecord FindDbDocument(string archiveRecordIdOrSignature, MetadataToExclude metadataToExclude)
+        public async Task<ElasticArchiveDbRecord> FindDbDocument(string archiveRecordIdOrSignature, MetadataToExclude metadataToExclude)
         {
-            return helper.GetDbRecord(archiveRecordIdOrSignature, metadataToExclude);
+            return await helper.GetDbRecord(archiveRecordIdOrSignature, metadataToExclude);
         }
 
-        public ElasticArchiveRecord FindDocumentByPackageId(string packageId)
+        public async Task<ElasticArchiveRecord> FindDocumentByPackageId(string packageId)
         {
-            var query = new TermQuery
-            {
-                Field = (nameof(ElasticArchiveRecord.PrimaryDataLink) + ".keyword").ToLowerCamelCase(),
-                Value = packageId
-            };
+            var query = new TermsQuery(new Field((nameof(ElasticArchiveRecord.PrimaryDataLink) + ".keyword").ToLowerCamelCase()),
+                new TermsQueryField(new List<FieldValue> { packageId }));
 
             // Required to use typed search request, or else the default index setting is ignored.
             // See https://github.com/elastic/elasticsearch-net/issues/1906
-            var searchRequest = new SearchRequest<ElasticArchiveRecord> {Query = query};
-            var result = helper.Client.Search<ElasticArchiveRecord>(searchRequest);
+            var searchRequest = new SearchRequest<ElasticArchiveRecord> { Query = query };
+            var result = await helper.Client.SearchAsync<ElasticArchiveRecord>(searchRequest);
             if (result.Total > 1)
             {
                 throw new InvalidOperationException(
@@ -89,25 +87,57 @@ namespace CMI.Access.Common
                 Log.Warning(
                     $"Did not find archive record when searching for packageId {packageId}. Query sent was {helper.Client.SourceSerializer.SerializeToString(searchRequest)}");
             }
-            
+
             var record = result.Documents.FirstOrDefault();
             if (record != null && record.IsAnonymized)
             {
-                var dbRecord = FindDbDocument(record.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                var dbRecord = await FindDbDocument(record.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                 record.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
             }
+
             return record;
         }
 
-        public IEnumerable<ElasticArchiveRecord> GetChildren(string archiveRecordId, string externalKeyId, bool allLevels)
+        public async Task<List<ElasticArchiveRecord>> FindDocument(Dictionary<string, string> queryTerms, int pageSize)
         {
-            return GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, externalKeyId, allLevels);
+
+            var query = new Query
+            {
+                Bool = new BoolQuery
+                {
+                    Should = queryTerms
+                        .Select(qt => new Query
+                        {
+                            Term = new TermQuery(new Field(qt.Key), FieldValue.String(qt.Value))
+                        })
+                        .ToList()
+                }
+            };
+
+            var searchRequest = new SearchRequest<ElasticArchiveRecord> { Query = query };
+            if (pageSize > 0)
+            {
+                searchRequest.Size = pageSize;
+            }
+
+            var result = await helper.Client.SearchAsync<ElasticArchiveRecord>(searchRequest);
+
+            var list = new List<ElasticArchiveRecord>(result.Documents);
+
+            return list;
+
         }
 
-        public IEnumerable<ElasticArchiveRecord> GetChildrenWithoutSecurity(string archiveRecordId, string externalKeyId, bool allLevels)
+        public async Task<IEnumerable<ElasticArchiveRecord>> GetChildren(string archiveRecordId, string scopeId, bool allLevels)
         {
-            var children = GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, externalKeyId, allLevels).ToList();
-            var childrenDbRecord = GetChildrenInternal<ElasticArchiveDbRecord>(archiveRecordId, externalKeyId, allLevels).ToList();
+            return await GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, scopeId, allLevels);
+        }
+
+
+        public async Task<IEnumerable<ElasticArchiveRecord>> GetChildrenWithoutSecurity(string archiveRecordId, string scopeId, bool allLevels)
+        {
+            var children = (await GetChildrenInternal<ElasticArchiveRecord>(archiveRecordId, scopeId, allLevels)).ToList();
+            var childrenDbRecord = (await GetChildrenInternal<ElasticArchiveDbRecord>(archiveRecordId, scopeId, allLevels)).ToList();
 
             // Now overwrite potentially anonymized fields with the clear values
             foreach (var child in children)
@@ -118,11 +148,12 @@ namespace CMI.Access.Common
             return children;
         }
 
-        public void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
+        public async Task UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
             string[] metadataAccessTokens, string[] fieldAccessTokens)
         {
-            helper.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens, fieldAccessTokens);
+            await helper.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens, fieldAccessTokens);
         }
+
 
         public async Task<ElasticTestResponse> GetElasticIndexHealth()
         {
@@ -130,49 +161,47 @@ namespace CMI.Access.Common
         }
 
 
-        private IEnumerable<T> GetChildrenInternal<T>(string archiveRecordId, string externalKeyId, bool allLevels) where T : class
+        private async Task<IEnumerable<T>> GetChildrenInternal<T>(string archiveRecordId, string scopeId, bool allLevels) where T : class
         {
             // Required to use typed search request, or else the default index setting is ignored.
             // See https://github.com/elastic/elasticsearch-net/issues/1906
             var searchRequest = new SearchRequest<T>();
-            QueryContainer query;
+            Query query;
 
-            if(!allLevels && int.TryParse(externalKeyId, out _))
+            if (!allLevels && int.TryParse(scopeId, out _))
             {
-                Log.Debug("GetChildrenInternal with externalKeyId from scope: {externalKeyId}", externalKeyId);
+                // We search for both the docKey and the scopeId
                 query = new BoolQuery
                 {
-                    Should = new List<QueryContainer>
+                    Should = new List<Query>
                     {
-                        new TermQuery
-                        {
-                            Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                            Value = externalKeyId
-                        },
-                        new TermQuery
-                        {
-                            Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                            Value = archiveRecordId
-                        }
+                        new TermsQuery(
+                            new Field(nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()),
+                            new TermsQueryField(new List<FieldValue> {scopeId})
+                        ),
+                        new TermsQuery(
+                            new Field(nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()),
+                            new TermsQueryField(new List<FieldValue> {archiveRecordId})
+                        )
                     }
                 };
             }
             else if (!allLevels)
             {
+                // As there was numeric scopeId provided, we only search for the docKey/archiveRecordId.
                 Log.Debug("GetChildrenInternal with docKey: {archiveRecordId}", archiveRecordId);
-                query = new TermQuery
-                {
-                    Field = nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase(),
-                    Value = archiveRecordId
-                };
+                query = new TermsQuery(
+                    new Field(nameof(ElasticArchiveRecord.ParentArchiveRecordId).ToLowerCamelCase()),
+                    new TermsQueryField(new List<FieldValue> { archiveRecordId })
+                );
             }
             else
             {
-                Log.Debug("GetChildrenInternal with all levels: {archiveRecordId} and externalKey {externalKeyId}", archiveRecordId, externalKeyId);
+                Log.Debug("GetChildrenInternal with all levels: {archiveRecordId} and externalKey {scopeId}", archiveRecordId, scopeId);
 
-                // This is the case if a record was not yet synced. It containts the treePath with the concatenated scope Ids
-                // To make sure we get all child records, we must also search the treepath with the mapped ids.
-                var current = FindDocument(externalKeyId, MetadataToExclude.OCRContentAndFiles);
+                // This is the case if a record was not yet synced. It contains the treePath with the concatenated scope Ids
+                // To make sure we get all child records, we must also search the tree path with the mapped ids.
+                var current = await FindDocument(scopeId, MetadataToExclude.OCRContentAndFiles);
                 // It is also possible that an ActaPro record is associated with the ScopeId.
                 if (int.TryParse(current?.ArchiveRecordId, out _))
                 {
@@ -187,47 +216,49 @@ namespace CMI.Access.Common
 
                     query = new BoolQuery
                     {
-                        Must = new List<QueryContainer>
+                        Must = new List<Query>
                         {
-                            new NumericRangeQuery
-                                {Field = nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase(), GreaterThan = current?.TreeLevel ?? 999},
-                            new BoolQuery()
+                            new NumberRangeQuery(nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase())
                             {
-                                Should = new List<QueryContainer>
+                                Gt = current?.TreeLevel ?? 999
+                            },
+                            new BoolQuery
+                            {
+                                Should = new List<Query>
                                 {
-                                    new WildcardQuery
+                                    new WildcardQuery(nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase())
                                     {
-                                        Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
                                         Value = current.TreePath + "*"
                                     },
-                                    new WildcardQuery
+                                    new WildcardQuery(nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase())
                                     {
-                                        Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
                                         Value = !string.IsNullOrEmpty(actaProTreePath) ? actaProTreePath + "*" : ""
-                                    },
+                                    }
                                 }
                             }
-                        },
+                        }
                     };
                 }
                 else
                 {
                     query = new BoolQuery
                     {
-                        Must = new List<QueryContainer>
+                        Must = new List<Query>
                         {
-                            new WildcardQuery
+                            new NumberRangeQuery(nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase())
                             {
-                                Field = nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase(),
+                                Gt = current?.TreeLevel ?? 999
+                            },
+                            new WildcardQuery(nameof(ElasticArchiveRecord.TreePath).ToLowerCamelCase())
+                            {
                                 Value = current != null ? current.TreePath + "*" : ""
                             },
-                            new NumericRangeQuery
-                                {Field = nameof(ElasticArchiveRecord.TreeLevel).ToLowerCamelCase(), GreaterThan = current?.TreeLevel ?? 999}
                         }
                     };
                 }
             }
-
+            
+            // Execute the query
             searchRequest.Query = query;
             searchRequest.From = 0;
             searchRequest.Size = ElasticSearchHitLimit;
@@ -235,13 +266,10 @@ namespace CMI.Access.Common
             {
                 Excludes = Infer.Fields("primaryData.items", "thumbnail", "customFields.bildVorschau", "customFields.bildAnsicht")
             };
-            searchRequest.Source = sourceFilter;
+            searchRequest.Source = new SourceConfig(sourceFilter);
 
-            var result = helper.Client.Search<T>(searchRequest);
-            
-            Log.Debug("Found the following child documents: {documents}", JsonConvert.SerializeObject(result.Documents));
+            var result = await helper.Client.SearchAsync<T>(searchRequest);
             return result.Documents;
         }
-
     }
 }

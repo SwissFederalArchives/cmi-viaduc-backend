@@ -84,7 +84,7 @@ namespace CMI.Manager.Asset
                 {
                     ec.Consumer(ctx.Resolve<AssetReadyConsumer>);
                     // Retry or we have the situation where the job is not marked as terminated in the DB.
-                    ec.UseRetry(retryPolicy =>
+                    ec.UseMessageRetry(retryPolicy =>
                         retryPolicy.Exponential(10, TimeSpan.FromSeconds(1), TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5)));
                 });
 

@@ -1,62 +1,64 @@
 <div class="page page-home col-sm-12">
 
-	<div class="page-breadcrumb">
-		<cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
-	</div>
+  <div class="page-breadcrumb">
+    <cmi-viaduc-breadcrumb [items]="crumbs"></cmi-viaduc-breadcrumb>
+  </div>
 
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
+
+    <div content>
+      <div class="page-header">
+        <h2 class="page-content-title">
+          <span>{{'Rollen-Funktionen-Matrix' | translate:'usersAndRoles.rolesFeatures'}}</span>
+        </h2>
+      </div>
+      <div class="action-container">
+        <div class="row action-buttons">
+          <div class="col-xs-12">
+            <span class="orders-menu-actions">
+              <button (click)="editMode()" class="btn btn-link" [disabled]="allowEdit">
+                <span><span class="icon icon--tools"></span>&nbsp;{{ 'Werte bearbeiten' | translate:'role.edit' }}</span>
+              </button>
+              <button (click)="saveGridChanges()" class="btn btn-link" [disabled]="!allowEdit">
+                <span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Speichern' | translate:'role.save' }}</span>
+              </button>
+              <button (click)="cancelGridChanges()" class="btn btn-link" [disabled]="!allowEdit">
+                <span><span class="glyphicon glyphicon-undo"></span>&nbsp;{{ 'Abbrechen (Änderungen verwerfen)' | translate:'role.cancel' }}</span>
+              </button>
+              <button (click)="exportGrid()" class="btn btn-link">
+                <span><span class="icon icon--excel"></span>&nbsp;{{ 'Ansicht exportieren' | translate:'role.cancel' }}</span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+		<div class="list-roles">
+			<cmi-viaduc-grid #flexGrid [isReadOnly]="!allowEdit" [name]="'roleFeaturesPage'">
+				<wj-flex-grid-column width="*"
+			                         [header]="txt.get('role.benutzer.rolle','Feature')"
+			                         [binding]="'name'">
+				</wj-flex-grid-column>
+				@if (list) {
+					@for (col of list.dynamicColumns; track col) {
+						<wj-flex-grid-column [binding]="col.key"
+											 [header]="col.label" [minWidth]="col.minWidth ? col.minWidth : 25"
+											 width="0.2*">
+							<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+								<input type="checkbox" class="wijmo-grid-checkbox" [checked]="isChecked(cell.item.id, cell.col.binding)" [title]="col.label" (click)="onCheckboxClick(cell.item.id, cell.col.binding)" [disabled]="!allowEdit">
+							</ng-template>
+						</wj-flex-grid-column>
+					}
+				}
+			</cmi-viaduc-grid>
 		</div>
-
-		<div content>
-			<div class="page-header">
-				<h2 class="page-content-title">
-					<span>{{'Rollen-Funktionen-Matrix' | translate:'usersAndRoles.rolesFeatures'}}</span>
-				</h2>
-			</div>
-			<div class="action-container">
-				<div class="row action-buttons">
-					<div class="col-xs-12">
-							<span class="orders-menu-actions">
-								<button (click)="editMode()" class="btn btn-link" [disabled]="allowEdit">
-									<span><span class="icon icon--tools"></span>&nbsp;{{ 'Werte bearbeiten' | translate:'role.edit' }}</span>
-								</button>
-								<button (click)="saveGridChanges()" class="btn btn-link" [disabled]="!allowEdit">
-									<span><span class="glyphicon glyphicon-floppy-save"></span>&nbsp;{{ 'Speichern' | translate:'role.save' }}</span>
-								</button>
-								<button (click)="cancelGridChanges()" class="btn btn-link" [disabled]="!allowEdit">
-									<span><span class="glyphicon glyphicon-undo"></span>&nbsp;{{ 'Abbrechen (Änderungen verwerfen)' | translate:'role.cancel' }}</span>
-								</button>
-								<button (click)="exportGrid()" class="btn btn-link">
-									<span><span class="icon icon--excel"></span>&nbsp;{{ 'Ansicht exportieren' | translate:'role.cancel' }}</span>
-								</button>
-							</span>
-					</div>
-				</div>
-			</div>
-			<div *ngIf="list" class="list-roles">
-				<cmi-viaduc-grid #flexGrid [itemsSource]="list.features" [isReadOnly]="!allowEdit" [name]="'roleFeaturesPage'">
-
-					<wj-flex-grid-column width="*"
-										 [header]="txt.get('role.benutzer.rolle','Feature')"
-										 [binding]="'name'">
-
-					</wj-flex-grid-column>
-
-					<wj-flex-grid-column *ngFor="let col of list.dynamicColumns" [binding]="col.key"
-										 [header]="col.label" [minWidth]="col.minWidth ? col.minWidth : 25"
-										 width="0.2*">
-						<ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
-							<input type="checkbox" class="wijmo-grid-checkbox" [checked]="isChecked(cell.item.id, cell.col.binding)" [title]="col.label" (click)="onCheckboxClick(cell.item.id, cell.col.binding)" [disabled]="!allowEdit">
-						</ng-template>
-					</wj-flex-grid-column>
-				</cmi-viaduc-grid>
-			</div>
-
-			<cmi-loader *ngIf="loading" class="cmi-visible"></cmi-loader>
-		</div>
-	</cmi-viaduc-layout-left-content>
+      @if (loading) {
+        <cmi-loader class="cmi-visible"></cmi-loader>
+      }
+    </div>
+  </cmi-viaduc-layout-left-content>
 
 </div>
 

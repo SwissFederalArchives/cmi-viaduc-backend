@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,7 +10,7 @@ using CMI.Contract.Harvest;
 using CMI.Contract.Messaging;
 using CMI.Manager.Harvest.Consumers;
 using CMI.Manager.Harvest.Infrastructure;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -91,8 +91,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             catch (Exception ex)
             {
@@ -159,8 +159,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {
@@ -224,8 +224,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {
@@ -287,8 +287,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {
@@ -355,10 +355,10 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].FileCount.Should().Be(5);
-                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].PackageId.Should().Be("controlPackageId");
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].FileCount.ShouldBe(5);
+                message.Context.Message.ArchiveRecord.ElasticPrimaryData[0].PackageId.ShouldBe("controlPackageId");
+                message.Context.Message.MutationId.ShouldBe(mutationId);
 
             }
             finally
@@ -426,8 +426,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {
@@ -535,12 +535,12 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
 
                 // Verify the delete cache method was called
                 Assert.That(message2 != null);
-                message2.Context.Message.ArchiveRecordId.Should().Be(archvieRecordId);
+                message2.Context.Message.ArchiveRecordId.ShouldBe(archvieRecordId);
             }
             finally
             {
@@ -595,8 +595,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.ArchiveRecordId.Should().Be(archvieRecordId);
-                message.Context.Message.MutationId.Should().Be(mutationId);
+                message.Context.Message.ArchiveRecord.ArchiveRecordId.ShouldBe(archvieRecordId);
+                message.Context.Message.MutationId.ShouldBe(mutationId);
             }
             finally
             {
@@ -795,8 +795,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.Should().Be(ar);
-                message.Context.Message.RecordIdToBeDeleted.Should().BeFalse();
+                message.Context.Message.ArchiveRecord.ShouldBe(ar);
+                message.Context.Message.RecordIdToBeDeleted.ShouldBeFalse();
 
             }
             finally
@@ -861,8 +861,8 @@ namespace CMI.Manager.Harvest.Tests
 
                 // Assert
                 Assert.That(message != null);
-                message.Context.Message.ArchiveRecord.Should().Be(ar);
-                message.Context.Message.RecordIdToBeDeleted.Should().BeTrue();
+                message.Context.Message.ArchiveRecord.ShouldBe(ar);
+                message.Context.Message.RecordIdToBeDeleted.ShouldBeTrue();
 
             }
             finally

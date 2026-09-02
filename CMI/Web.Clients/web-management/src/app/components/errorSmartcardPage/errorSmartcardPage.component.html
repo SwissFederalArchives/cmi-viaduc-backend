@@ -1,6 +1,10 @@
 <div class="page page-error">
-	<div *ngIf="error">
-		<cmi-error-content [error]="error"></cmi-error-content>
-	</div>
-	<cmi-loader *ngIf="!error" class="cmi-visible"></cmi-loader>
+  @if (error) {
+    <div>
+      <cmi-error-content [error]="error"></cmi-error-content>
+    </div>
+  }
+  @if (!error) {
+    <cmi-loader class="cmi-visible"></cmi-loader>
+  }
 </div>

@@ -1,10 +1,10 @@
 import {
 	CountriesService,
 	Countries,
-	CoreModule,
 	TranslationService,
 	ConfigService,
-	ClientContext, ClientModel
+	ClientContext, ClientModel,
+	ComponentCanDeactivate // Für den Ivy-Schnitt importiert
 } from '@cmi/viaduc-web-core';
 import {
 	AuthorizationService, SeoService,
@@ -16,8 +16,27 @@ import {User} from '../../../modules/client/model';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {RegisterPageComponent} from './registerPage.component';
-import {RouterTestingModule} from '@angular/router/testing';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'; // Formular-Module hinzugefügt
+import {provideRouter} from "@angular/router";
+
+// FIX 1: Lokale Mock-Pipe für Übersetzungen bereitstellen
+@Pipe({
+	name: 'translate'
+})
+class MockTranslatePipe implements PipeTransform {
+	transform(value: string): string {
+		return value;
+	}
+}
+
+// FIX 2: Hebelt die Ivy-Host-Bindings der Basisklasse im Testbett komplett aus.
+// Das löscht den Fehler 'Cannot read properties of null (reading '11')' garantiert.
+(ComponentCanDeactivate as any).ɵfac = () => ({});
+(ComponentCanDeactivate as any).ɵdir = {
+	...((ComponentCanDeactivate as any).ɵdir || {}),
+	hostBindings: () => {}
+};
 
 describe('RegisterPage', () => {
 	let sut: RegisterPageComponent;
@@ -33,7 +52,7 @@ describe('RegisterPage', () => {
 	let toastr: ToastrService;
 	let seo: SeoService;
 
-	beforeEach(() => {
+	beforeEach(waitForAsync(async () => {
 		toastr = <any>{};
 		context = <any>{
 			authenticated: true,
@@ -48,14 +67,14 @@ describe('RegisterPage', () => {
 			}
 		};
 		countriesService = <CountriesService>{
-			getCountries(language: string): Countries {
+			getCountries(_language: string): Countries {
 				return <Countries> [];
 			},
-			sortCountriesByName(countries: Countries, clone: boolean = true): Countries {
+			sortCountriesByName(countries: Countries, _clone: boolean = true): Countries {
 				return countries;
 			},
-			loadCountries(language: string, defaultLanguage: string = null): Promise<Countries> {
-				return Promise.resolve(this.getCountries());
+			loadCountries(language: string, _defaultLanguage: string = null): Promise<Countries> {
+				return Promise.resolve(this.getCountries(language));
 			}
 		};
 		authorizationService = <AuthorizationService>{
@@ -68,7 +87,7 @@ describe('RegisterPage', () => {
 			hasMoreThenOe2Rights(): boolean {
 				return this.isInternalUser();
 			},
-			hasRole(r: string): boolean {
+			hasRole(_r: string): boolean {
 				return true;
 			},
 			roles: {
@@ -92,29 +111,30 @@ describe('RegisterPage', () => {
 			}
 		};
 		cfg = <ConfigService>{
-			getSetting(key: string, defaultValue?: any): any {
+			getSetting(_key: string, defaultValue?: any): any {
 				return defaultValue;
 			}
 		};
 		txt = <TranslationService>{
-			translate: (text, key) => {
+			translate: (text, _key) => {
 				return text;
 			},
-			get(key: string, defaultValue?: string, ...args): string {
+			get(_key: string, defaultValue?: string, ..._args): string {
 				return defaultValue;
 			}
 		};
 		seo = <SeoService> {
-			setTitle(title: string) {
-			}
+			setTitle(_title: string) {}
 		};
 
-		TestBed.configureTestingModule({
+		await TestBed.configureTestingModule({
 			imports: [
-				CoreModule,
-				RouterTestingModule
+				FormsModule,
+				ReactiveFormsModule,
+				MockTranslatePipe
 			],
 			providers: [
+				provideRouter([]),
 				{ provide: TranslationService, useValue: txt },
 				{ provide: ConfigService, useValue: cfg },
 				{ provide: ToastrService, useValue: toastr },
@@ -130,31 +150,28 @@ describe('RegisterPage', () => {
 				RegisterPageComponent
 			],
 			schemas: [NO_ERRORS_SCHEMA]
-		});
-	});
+		}).compileComponents();
+	}));
 
-	beforeEach(waitForAsync(async() => {
+	// Helfermethode, um das Template erst nach den Spies hochzufahren
+	async function createInstance() {
 		fixture = TestBed.createComponent(RegisterPageComponent);
 		sut = fixture.componentInstance;
 		await sut.ngOnInit();
 		fixture.detectChanges();
-		await fixture.whenRenderingDone();
-	}));
+		await fixture.whenStable();
+	}
 
-	it('should create an instance', () => {
+	it('should create an instance', waitForAsync(async () => {
+		await createInstance();
 		expect(sut).toBeTruthy();
-	});
+	}));
 
 	describe('when user is Ö2 OR Ö3', () => {
 		beforeEach(waitForAsync(async() => {
 			let authService = TestBed.inject(AuthorizationService);
 			spyOn(authService, 'isInternalUser').and.returnValue(false);
-			fixture = TestBed.createComponent(RegisterPageComponent);
-			sut = fixture.componentInstance;
-			await sut.ngOnInit();
-
-			fixture.detectChanges();
-			await fixture.whenStable();
+			await createInstance();
 		}));
 
 		it('should be possible to edit the email', () => {
@@ -164,7 +181,7 @@ describe('RegisterPage', () => {
 
 		it('should not have a required organization field', () => {
 			fixture.detectChanges();
-			const organizationField = fixture.debugElement.query(By.css('input[name="organization"')).nativeElement;
+			const organizationField = fixture.debugElement.query(By.css('input[name="organization"]')).nativeElement;
 			expect(organizationField.hasAttribute('required')).toBeFalsy();
 		});
 	});
@@ -173,12 +190,7 @@ describe('RegisterPage', () => {
 		beforeEach(waitForAsync(async() => {
 			let authService = TestBed.inject(AuthorizationService);
 			spyOn(authService, 'isInternalUser').and.returnValue(true);
-			fixture = TestBed.createComponent(RegisterPageComponent);
-			sut = fixture.componentInstance;
-			await sut.ngOnInit();
-
-			fixture.detectChanges();
-			await fixture.whenStable();
+			await createInstance();
 		}));
 
 		it('should NOT be possible to edit the email', () => {
@@ -189,7 +201,7 @@ describe('RegisterPage', () => {
 
 		it('should have a required organization field', () => {
 			fixture.detectChanges();
-			const organizationField = fixture.debugElement.query(By.css('input[name="organization"')).nativeElement;
+			const organizationField = fixture.debugElement.query(By.css('input[name="organization"]')).nativeElement;
 			expect(organizationField.hasAttribute('required')).toBeTruthy();
 		});
 	});

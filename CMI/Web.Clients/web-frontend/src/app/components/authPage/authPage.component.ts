@@ -3,8 +3,9 @@ import {AuthenticationService, SeoService} from '../../modules/client/services';
 import {TranslationService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-auth-page',
-	templateUrl: 'authPage.component.html'
+    selector: 'cmi-viaduc-auth-page',
+    templateUrl: 'authPage.component.html',
+    standalone: false
 })
 export class AuthPageComponent implements OnInit {
 

@@ -313,6 +313,12 @@
           "entstehungszeitraumAnmerkung": {
             "type": "text"
           },
+          "entstehungDigitaleInhalte": {
+            "type": "text"
+          },
+          "errechneteGroesseMB": {
+            "type": "float"
+          },
           "form": {
             "copy_to": [
               "all_Metadata_Text"
@@ -902,7 +908,7 @@
             ],
             "type": "text"
           },
-          "verwandteVE ": {
+          "verwandteVe": {
             "type": "text"
           }
         }

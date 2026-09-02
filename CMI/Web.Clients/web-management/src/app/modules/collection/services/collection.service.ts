@@ -33,9 +33,11 @@ export class CollectionService {
 
 	public create(value: CollectionDto | null): Observable<any> {
 		const url = this._createBaseUrl + 'Create';
-
-		const content = value.toJSON();
-		return this.http.post(url, content, this.http.noCaching);
+		if (value !== undefined && value !== null) {
+			const content = value.toJSON();
+			return this.http.post(url, content, this.http.noCaching);
+		}
+		return this.http.post(url, null, this.http.noCaching);
 	}
 
 	public update(id: number, value: CollectionDto | null): Observable<any> {

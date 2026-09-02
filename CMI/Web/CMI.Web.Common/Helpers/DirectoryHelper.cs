@@ -122,7 +122,7 @@ namespace CMI.Web.Common.Helpers
                 {
                     var configDir = ServiceHelper.Settings != null && !string.IsNullOrWhiteSpace(ServiceHelper.Settings["clientConfigDirectory"])
                         ? ServiceHelper.Settings["clientConfigDirectory"]
-                        : "~/client/config";
+                        : "~/client/browser/config";
                     configDir = configDir.Replace("/client/", ClientDefaultPath);
                     clientConfigDirectory = WebHelper.MapPathIfNeeded(configDir).TrimEnd('\\') + @"\";
                     Log.Information("Setting ClientConfigDirectory to {clientConfigDirectory}", clientConfigDirectory);

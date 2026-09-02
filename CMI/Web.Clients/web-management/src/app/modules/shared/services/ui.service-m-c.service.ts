@@ -20,15 +20,15 @@ export class UiServiceMC extends UiService{
 		return inside;
 	}
 
-	public showSuccess(message: string, title: string = null) {
+	public showSuccess(message: string, title: string = '') {
 		this._toastr.success(message, title);
 	}
 
-	public showWarning(message: string, title: string = null, options?: any) {
+	public showWarning(message: string, title: string = '', options?: any) {
 		this._toastr.warning(message, title, options);
 	}
 
-	public showInfo(message: string, title: string = null) {
+	public showInfo(message: string, title: string = '') {
 		this._toastr.info(message, title);
 	}
 

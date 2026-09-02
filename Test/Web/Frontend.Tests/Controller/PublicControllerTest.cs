@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
@@ -11,7 +11,7 @@ using CMI.Web.Frontend.api.Controllers;
 using CMI.Web.Frontend.api.Entities;
 using CMI.Web.Frontend.api.Interfaces;
 using CMI.Web.Frontend.ParameterSettings;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -87,14 +87,14 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 .ThrowsAsync(new Exception("Simulated failure"));
 
             elasticMock.Setup(x => x.QueryTokensForId(It.IsAny<string>()))
-                       .Returns((AccessTokens) null);
+                       .Returns(Task.FromResult((AccessTokens)null));
 
             var result = await controller.GetAccessTokens("invalid-id") as JsonResult<JObject>;
             var response = result.Content.ToObject<AccessTokenCheckResult>();
 
-            response.Calculated.Should().NotBeNull();
-            response.Elastic.Should().NotBeNull();
-            response.CheckError.Should().BeFalse();
+            response.Calculated.ShouldNotBeNull();
+            response.Elastic.ShouldNotBeNull();
+            response.CheckError.ShouldBeFalse();
         }
 
         [Test]
@@ -116,12 +116,12 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 .ReturnsAsync(mockResponse);
 
             elasticMock.Setup(x => x.QueryTokensForId(It.IsAny<string>()))
-                       .Returns(tokens);
+                       .Returns(Task.FromResult(tokens));
 
             var result = await controller.GetAccessTokens("valid-id") as JsonResult<JObject>;
             var response = result.Content.ToObject<AccessTokenCheckResult>();
 
-            response.CheckError.Should().BeFalse();
+            response.CheckError.ShouldBeFalse();
         }
 
         [Test]
@@ -151,12 +151,12 @@ namespace CMI.Web.Frontend.API.Tests.Controller
                 .ReturnsAsync(mockResponse);
 
             elasticMock.Setup(x => x.QueryTokensForId(It.IsAny<string>()))
-                       .Returns(elastic);
+                       .Returns(Task.FromResult(elastic));
 
             var result = await controller.GetAccessTokens("mismatch-id") as JsonResult<JObject>;
             var response = result.Content.ToObject<AccessTokenCheckResult>();
 
-            response.CheckError.Should().BeTrue();
+            response.CheckError.ShouldBeTrue();
         }
     }
 }

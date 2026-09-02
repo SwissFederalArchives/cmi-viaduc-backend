@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CMI.Web.Common.api;
 using CMI.Web.Common.Helpers;
 using CMI.Web.Frontend.api.Providers;
 using CMI.Web.Frontend.api.Search;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
 
@@ -36,7 +36,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(null, "de");
 
-            result.Should().NotBeNullOrEmpty();
+            result.ShouldNotBeNullOrEmpty();
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(new SearchParameters(), "de");
 
-            result.Should().NotBeNullOrEmpty();
+            result.ShouldNotBeNullOrEmpty();
         }
 
 
@@ -53,7 +53,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetValidParameters(), "de");
 
-            result.Should().BeEmpty();
+            result.ShouldBeEmpty();
         }
 
 
@@ -65,7 +65,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = entityProvider.CheckSearchParameters(searchParameter, "de");
 
-            result.Should().NotBeNullOrEmpty();
+            result.ShouldNotBeNullOrEmpty();
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = entityProvider.CheckSearchParameters(searchParameter, "de");
 
-            result.Should().BeEmpty();
+            result.ShouldBeEmpty();
         }
 
 
@@ -85,7 +85,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetParameters("xy", "*"), "de");
 
-            result.Should().Be("search.termToShort");
+            result.ShouldBe("search.termToShort");
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetParameters("xy", "?"), "de");
 
-            result.Should().Be("search.termToShort");
+            result.ShouldBe("search.termToShort");
         }
 
         [Test]
@@ -101,7 +101,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetParameters("xy", null), "de");
 
-            result.Should().Be("search.termToShort");
+            result.ShouldBe("search.termToShort");
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetParameters("allData", "A*"), "de");
 
-            result.Should().Be("search.termToShortForAll");
+            result.ShouldBe("search.termToShortForAll");
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             var result = entityProvider.CheckSearchParameters(GetParameters("allData", ""), "de");
 
-            result.Should().Be("search.termToShortForAll");
+            result.ShouldBe("search.termToShortForAll");
         }
 
 
@@ -139,7 +139,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = entityProvider.CheckSearchParameters(searchParameter, "de");
 
-            result.Should().NotBeNullOrEmpty();
+            result.ShouldNotBeNullOrEmpty();
         }
 
         [Test]
@@ -164,7 +164,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = entityProvider.CheckSearchParameters(searchParameter, "de");
 
-            result.Should().Be("search.termToShort");
+            result.ShouldBe("search.termToShort");
         }
 
         [Test]
@@ -189,7 +189,7 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = entityProvider.CheckSearchParameters(searchParameter, "de");
 
-            result.Should().BeEmpty();
+            result.ShouldBeEmpty();
         }
 
 

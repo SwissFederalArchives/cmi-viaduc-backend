@@ -1,9 +1,9 @@
-﻿using CMI.Contract.Asset;
+using CMI.Contract.Asset;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Index;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Moq;
@@ -62,7 +62,7 @@ namespace CMI.Manager.Asset.Tests
             });
           
             // Assert
-            result.Message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
+            result.Message.Status.ShouldBe(AssetDownloadStatus.InPreparationQueue);
         }
         [Test]
         public async Task Register_in_job_database_called_when_not_in_preperation_queue()
@@ -73,7 +73,7 @@ namespace CMI.Manager.Asset.Tests
             assetManager.Setup(e => e.RegisterJobInPreparationQueue("999", "usuallySomeGuid", AufbereitungsArtEnum.Download,
                 AufbereitungsServices.AssetService,
                 It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>())).Returns(() => Task.FromResult(1));
-            indexManager.Setup(i => i.FindArchiveRecord("999", MetadataToExclude.OCRContentAndFiles, UseUnanonymizedData.No)).Returns(() => new ElasticArchiveRecord());
+            indexManager.Setup(i => i.FindArchiveRecord("999", MetadataToExclude.OCRContentAndFiles, UseUnanonymizedData.No)).Returns(() => Task.FromResult(new ElasticArchiveRecord()));
 
             var findArchiveRecordResponseMock = new Mock<Response<FindArchiveRecordResponse>>();
 
@@ -100,7 +100,7 @@ namespace CMI.Manager.Asset.Tests
             });
             
             // Assert
-            result.Message.Status.Should().Be(AssetDownloadStatus.InPreparationQueue);
+            result.Message.Status.ShouldBe(AssetDownloadStatus.InPreparationQueue);
             assetManager.Verify(a => a.RegisterJobInPreparationQueue("999", "usuallySomeGuid", AufbereitungsArtEnum.Download,
                 AufbereitungsServices.AssetService,
                 It.IsAny<List<ElasticArchiveRecordPackage>>(), It.IsAny<object>()), Times.Once);

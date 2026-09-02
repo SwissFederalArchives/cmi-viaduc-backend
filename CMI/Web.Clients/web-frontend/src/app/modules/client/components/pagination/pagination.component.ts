@@ -3,10 +3,11 @@ import {SearchService} from '../../services/search.service';
 import {ConfigService, Paging, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-pagination',
-	templateUrl: 'pagination.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush,
-	styleUrls: ['./pagination.component.less']
+    selector: 'cmi-viaduc-pagination',
+    templateUrl: 'pagination.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: ['./pagination.component.less'],
+    standalone: false
 })
 export class PaginationComponent implements OnInit, OnChanges {
 
@@ -16,7 +17,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 	@Output()
 	public onPaged: EventEmitter<Paging> = new EventEmitter<Paging>();
 
-	private _elasticHitLimit;
+	private _elasticHitLimit: number;
 
 	public pagingSize: number;
 	public possiblePagingSizes: number[];

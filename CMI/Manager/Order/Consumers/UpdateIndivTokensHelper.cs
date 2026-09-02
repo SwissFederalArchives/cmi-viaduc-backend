@@ -1,11 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Manager.Order.Status;
 using MassTransit;
+using Serilog;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CMI.Manager.Order.Consumers
 {
@@ -13,53 +14,63 @@ namespace CMI.Manager.Order.Consumers
     {
         public static async Task SendToIndexManager(RecalcIndivTokens recalcTokens, IOrderDataAccess dataAccess, ISendEndpointProvider sendEndpointProvider, Uri uri)
         {
-            var indivTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ArchiveRecordId);
-
-            if (!string.IsNullOrWhiteSpace(recalcTokens.ScopeArchiveRecordId) && recalcTokens.ArchiveRecordId != recalcTokens.ScopeArchiveRecordId)
+            try
             {
-                var indivScopeTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ScopeArchiveRecordId);
-                if(indivScopeTokens != null)
+                var indivTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ArchiveRecordId);
+
+                if (!string.IsNullOrWhiteSpace(recalcTokens.ScopeArchiveRecordId) && recalcTokens.ArchiveRecordId != recalcTokens.ScopeArchiveRecordId)
                 {
-                    indivTokens = new IndivTokens(indivTokens.PrimaryDataFulltextAccessTokens.Union(indivScopeTokens.PrimaryDataFulltextAccessTokens).ToArray(),
-                        indivTokens.PrimaryDataDownloadAccessTokens.Union(indivScopeTokens.PrimaryDataDownloadAccessTokens).ToArray(),
-                        indivTokens.FieldDataAccessTokens.Union(indivScopeTokens.FieldDataAccessTokens).ToArray());
+                    var indivScopeTokens = await dataAccess.GetIndividualAccessTokens(recalcTokens.ScopeArchiveRecordId);
+                    if (indivScopeTokens != null)
+                    {
+                        indivTokens = new IndivTokens(indivTokens.PrimaryDataFulltextAccessTokens.Union(indivScopeTokens.PrimaryDataFulltextAccessTokens).ToArray(),
+                            indivTokens.PrimaryDataDownloadAccessTokens.Union(indivScopeTokens.PrimaryDataDownloadAccessTokens).ToArray(),
+                            indivTokens.FieldDataAccessTokens.Union(indivScopeTokens.FieldDataAccessTokens).ToArray());
+                    }
                 }
-            }
 
-            // es benötigt keine individuellen MetadatenAccessTokens  
-            var metadata = recalcTokens.ExistingMetadataAccessTokens;
+                // es benötigt keine individuellen MetadatenAccessTokens  
+                var metadata = recalcTokens.ExistingMetadataAccessTokens;
 
-            var fieldData = recalcTokens.ExistingFieldAccessTokens;
-            // Nur individuelle Access Tokens hinzufügen, wenn von der DB überhaupt FieldAccessTokens geliefert werden
-            if (fieldData != null && fieldData.Length > 0)
-            {
-                // Mix the existing tokens with the indiv tokens
-                fieldData = recalcTokens.ExistingFieldAccessTokens == null ? indivTokens.FieldDataAccessTokens
-                    : recalcTokens.ExistingFieldAccessTokens.Where(IsNotIndivToken).Union(indivTokens.FieldDataAccessTokens).Distinct().ToArray();
-            }
+                var fieldData = recalcTokens.ExistingFieldAccessTokens;
+                // Nur individuelle Access Tokens hinzufügen, wenn von der DB überhaupt FieldAccessTokens geliefert werden
+                if (fieldData != null && fieldData.Length > 0)
+                {
+                    // Mix the existing tokens with the indiv tokens
+                    fieldData = recalcTokens.ExistingFieldAccessTokens == null ? indivTokens.FieldDataAccessTokens
+                        : recalcTokens.ExistingFieldAccessTokens.Where(IsNotIndivToken).Union(indivTokens.FieldDataAccessTokens).Distinct().ToArray();
+                }
 
-            var download = recalcTokens.ExistingPrimaryDataDownloadAccessTokens.Where(IsNotIndivToken).ToArray();
-            // Besitzt die VE ein Ö2 PrimaryDataDownloadAccessToken, so benötigt es keine Individuellen Token
-            if (!download.Contains(AccessRoles.RoleOe2))
-            {
-                download = download.Union(indivTokens.PrimaryDataDownloadAccessTokens).Distinct().ToArray();
-            }
-            var fulltext = recalcTokens.ExistingPrimaryDataFulltextAccessTokens.Where(IsNotIndivToken).ToArray();
-            // Besitzt die VE ein Ö2 PrimaryDataFulltextAccessTokens, so benötigt es keine Individuellen Token
-            if (!fulltext.Contains(AccessRoles.RoleOe2))
-            {
-                fulltext = fulltext.Union(indivTokens.PrimaryDataFulltextAccessTokens).Distinct().ToArray();
-            }
+                var download = recalcTokens.ExistingPrimaryDataDownloadAccessTokens.Where(IsNotIndivToken).ToArray();
+                // Besitzt die VE ein Ö2 PrimaryDataDownloadAccessToken, so benötigt es keine Individuellen Token
+                if (!download.Contains(AccessRoles.RoleOe2))
+                {
+                    download = download.Union(indivTokens.PrimaryDataDownloadAccessTokens).Distinct().ToArray();
+                }
+                var fulltext = recalcTokens.ExistingPrimaryDataFulltextAccessTokens.Where(IsNotIndivToken).ToArray();
+                // Besitzt die VE ein Ö2 PrimaryDataFulltextAccessTokens, so benötigt es keine Individuellen Token
+                if (!fulltext.Contains(AccessRoles.RoleOe2))
+                {
+                    fulltext = fulltext.Union(indivTokens.PrimaryDataFulltextAccessTokens).Distinct().ToArray();
+                }
 
-            var ep = await sendEndpointProvider.GetSendEndpoint(new Uri(uri, BusConstants.IndexManagerUpdateIndivTokensMessageQueue));
-            await ep.Send(new UpdateIndivTokens
+                var ep = await sendEndpointProvider.GetSendEndpoint(new Uri(uri, BusConstants.IndexManagerUpdateIndivTokensMessageQueue));
+                await ep.Send(new UpdateIndivTokens
+                {
+                    ArchiveRecordId = recalcTokens.ArchiveRecordId,
+                    CombinedPrimaryDataFulltextAccessTokens = fulltext,
+                    CombinedPrimaryDataDownloadAccessTokens = download,
+                    CombinedMetadataAccessTokens = metadata,
+                    CombinedFieldAccessTokens = fieldData
+                });
+            }
+            catch (Exception e)
             {
-                ArchiveRecordId = recalcTokens.ArchiveRecordId,
-                CombinedPrimaryDataFulltextAccessTokens = fulltext,
-                CombinedPrimaryDataDownloadAccessTokens = download,
-                CombinedMetadataAccessTokens = metadata,
-                CombinedFieldAccessTokens = fieldData
-            });
+                Log.Warning(e, "Methode {CommandName} has an error for record with ArchiveRecordId: {ArchiveRecordId}", nameof(SendToIndexManager),
+                    recalcTokens.ArchiveRecordId);
+                throw;
+            }
+            
         }
 
         /// <summary>
@@ -85,8 +96,15 @@ namespace CMI.Manager.Order.Consumers
             var contextOrderDataAccess = auftragStatus.Context.OrderDataAccess;
             var sendEndpointProvider = auftragStatus.Context.Bus;
 
-            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
-            
+            // ACHTUNG:
+            // Hier kann nicht mit await gearbeitet werden. Wenn man diese statische Methode async macht, dann ist der
+            // 'Context' NULL. Mit dieser Variante behält der Context seinen Wert.
+            var archiveRecord = auftragStatus.Context.IndexAccess.FindDocument(archiveRecordId, MetadataToExclude.OCRContentAndFiles)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult(); 
+
+
             // It is possible, that a VE record was delete while the order item is still in progress
             // So if the archiveRecord does not exist anymore, no need to update the Indiv Tokens
             if (archiveRecord != null)
@@ -105,9 +123,12 @@ namespace CMI.Manager.Order.Consumers
                 };
 
 
-                auftragStatus.Context.PostCommitActionsRegistry.RegisterPostCommitAction(async () =>
+                auftragStatus.Context.PostCommitActionsRegistry.RegisterPostCommitAction(() =>
                 {
-                    await SendToIndexManager(recalcTokens, contextOrderDataAccess, sendEndpointProvider, busAddress);
+                    SendToIndexManager(recalcTokens, contextOrderDataAccess, sendEndpointProvider, busAddress)
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult();  
                 });
             }
         }

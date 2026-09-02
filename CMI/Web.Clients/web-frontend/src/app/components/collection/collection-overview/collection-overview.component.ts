@@ -3,9 +3,10 @@ import {CollectionService} from '../../../modules/client/services/collection.ser
 import {CollectionListItemDto, ICollectionListItemDto, UiService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-collection-overview',
-	templateUrl: './collection-overview.component.html',
-	styleUrls: ['./collection-overview.component.less']
+    selector: 'cmi-collection-overview',
+    templateUrl: './collection-overview.component.html',
+    styleUrls: ['./collection-overview.component.less'],
+    standalone: false
 })
 export class CollectionOverviewComponent implements OnInit {
 	private _parentId: number;

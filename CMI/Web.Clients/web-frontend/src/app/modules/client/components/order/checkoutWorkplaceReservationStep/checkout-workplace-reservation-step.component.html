@@ -1,69 +1,71 @@
-<form [formGroup]="form" *ngIf="!loading">
-	<br/>
-	<div class="row">
-		<div class="col-md-12">
-			<span [innerHtml]=workplacealReadyReserved ></span>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<iframe id="cituroIFrame" class="e2e-iframe-trusted-src" [src]="safeURL" width="100%" height="600px" (load)="loadDone()" >
-			</iframe>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 checkbox checkbox--left">
-			<label for="hasReservation">
-				<input id="hasReservation" type="checkbox"
-					   tabindex="0" formControlName="hasReservation"  [value]="false">
-				<span >{{'Ich habe schon einen Arbeitsplatz reserviert bzw. ich brauche keine Reservation.' | translate:'orderCheckoutPage.hasReservation'}}</span>
-			</label>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<button (click)="showDialog()" type="button" class="btn btn-secondary">
-				{{'Zurück' | translate:'orderCheckoutPage.previousPage'}}
-			</button>
-			<button (click)="nextStep()" type="button" class="btn btn-primary" [disabled]="isNextButtonDisabled">
-				{{'Bestellung abschliessen' | translate:'orderCheckoutPage.finishOrder'}}
-			</button>
-		</div>
-	</div>
-</form>
+@if (!loading) {
+  <form [formGroup]="form">
+    <br/>
+    <div class="row">
+      <div class="col-md-12">
+        <span [innerHtml]=workplacealReadyReserved ></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <iframe id="cituroIFrame" class="e2e-iframe-trusted-src" [src]="safeURL" width="100%" height="600px" (load)="loadDone()" >
+        </iframe>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 checkbox checkbox--left">
+        <label for="hasReservation">
+          <input id="hasReservation" type="checkbox"
+            tabindex="0" formControlName="hasReservation"  [value]="false">
+            <span >{{'Ich habe schon einen Arbeitsplatz reserviert bzw. ich brauche keine Reservation.' | translate:'orderCheckoutPage.hasReservation'}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button (click)="showDialog()" type="button" class="btn btn-secondary">
+            {{'Zurück' | translate:'orderCheckoutPage.previousPage'}}
+          </button>
+          <button (click)="nextStep()" type="button" class="btn btn-primary" [disabled]="isNextButtonDisabled">
+            {{'Bestellung abschliessen' | translate:'orderCheckoutPage.finishOrder'}}
+          </button>
+        </div>
+      </div>
+    </form>
+  }
 
-<cmi-viaduc-modal class="test" [(opened)]="showModalDialog" modalTitle="{{'Hinweis' | translate: 'registerInfo.infoTitle'}}" >
-	<cmi-viaduc-modal-body>
-					<span> {{'Achtung! Ihre Bestellung ist noch nicht abgeschlossen.' |	translate: 'orderCheckoutPage.waringOrderNotFinalised'}}
-					</span>
-	</cmi-viaduc-modal-body>
-	<cmi-viaduc-modal-footer>
-		<div class="row">
-			<div class="col-xs-12">
-				<button type="button" (click)="nextStep()" class="btn btn-default">
-					{{'Bestellung abschliesen' | translate: 'orderCheckoutPage.finishOrder'}}
-				</button>
-				<button type="button" (click)="goBack()" class="btn btn-primary">
-					{{'Zurück' | translate: 'orderCheckoutPage.back'}}
-				</button>
-			</div>
-		</div>
-	</cmi-viaduc-modal-footer>
-</cmi-viaduc-modal>
+  <cmi-viaduc-modal class="test" [(opened)]="showModalDialog" modalTitle="{{'Hinweis' | translate: 'registerInfo.infoTitle'}}" >
+    <cmi-viaduc-modal-body>
+      <span> {{'Achtung! Ihre Bestellung ist noch nicht abgeschlossen.' |	translate: 'orderCheckoutPage.waringOrderNotFinalised'}}
+      </span>
+    </cmi-viaduc-modal-body>
+    <cmi-viaduc-modal-footer>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="button" (click)="nextStep()" class="btn btn-default">
+            {{'Bestellung abschliesen' | translate: 'orderCheckoutPage.finishOrder'}}
+          </button>
+          <button type="button" (click)="goBack()" class="btn btn-primary">
+            {{'Zurück' | translate: 'orderCheckoutPage.back'}}
+          </button>
+        </div>
+      </div>
+    </cmi-viaduc-modal-footer>
+  </cmi-viaduc-modal>
 
-<cmi-viaduc-modal [(opened)]="showModalHit" modalTitle="{{'Hinweis' | translate: 'registerInfo.infoTitle'}}" >
-	<cmi-viaduc-modal-body>
-		<span> {{'Achtung! Ihre Bestellung ist noch nicht abgeschlossen.' |	translate: 'orderCheckoutPage.waringOrderNotFinalised'}}
-		</span>
-	</cmi-viaduc-modal-body>
-	<cmi-viaduc-modal-footer>
-		<div class="row">
-			<div class="col-xs-12">
-				<button type="button" (click)="nextStep()" class="btn btn-primary">
-					{{'Bestellung abschliesen' | translate: 'orderCheckoutPage.finishOrder'}}
-				</button>
+  <cmi-viaduc-modal [(opened)]="showModalHit" modalTitle="{{'Hinweis' | translate: 'registerInfo.infoTitle'}}" >
+    <cmi-viaduc-modal-body>
+      <span> {{'Achtung! Ihre Bestellung ist noch nicht abgeschlossen.' |	translate: 'orderCheckoutPage.waringOrderNotFinalised'}}
+      </span>
+    </cmi-viaduc-modal-body>
+    <cmi-viaduc-modal-footer>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="button" (click)="nextStep()" class="btn btn-primary">
+            {{'Bestellung abschliesen' | translate: 'orderCheckoutPage.finishOrder'}}
+          </button>
 
-			</div>
-		</div>
-	</cmi-viaduc-modal-footer>
-</cmi-viaduc-modal>
+        </div>
+      </div>
+    </cmi-viaduc-modal-footer>
+  </cmi-viaduc-modal>

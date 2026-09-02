@@ -3,8 +3,9 @@ import {Utilities as _util} from '@cmi/viaduc-web-core';
 import {ClientContext} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-footer-content',
-	templateUrl: 'footerContent.component.html'
+    selector: 'cmi-viaduc-footer-content',
+    templateUrl: 'footerContent.component.html',
+    standalone: false
 })
 export class FooterContentComponent implements AfterViewInit {
 	private _elem: any;

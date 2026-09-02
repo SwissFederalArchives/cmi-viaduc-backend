@@ -13,9 +13,10 @@ import MatomoTracker from '@jonkoops/matomo-tracker';
 import {TrackPageViewParams} from '@jonkoops/matomo-tracker/src/types';
 
 @Component({
-	selector: 'cmi-viaduc-root',
-	templateUrl: 'root.component.html',
-	styleUrls: ['./root.component.less']
+    selector: 'cmi-viaduc-root',
+    templateUrl: 'root.component.html',
+    styleUrls: ['./root.component.less'],
+    standalone: false
 })
 export class RootComponent implements OnInit, AfterViewInit{
 	@ViewChild(ToastContainerDirective)
@@ -86,11 +87,14 @@ export class RootComponent implements OnInit, AfterViewInit{
 			if (!translations) {
 				return;
 			}
+			const enableChatbot = this._config.getSetting('chatbot.enableChatbot', false);
 
-			setTimeout(() => {
-				// Komponenten ausserhalb router-outlet müssen neu gerendert werden für die übersetzungen
-				this.showEngagement = true;
-			}, 50);
+			if (enableChatbot) {
+				setTimeout(() => {
+					// Komponenten ausserhalb router-outlet müssen neu gerendert werden für die übersetzungen
+					this.showEngagement = true;
+				}, 50);
+			}
 		});
 
 		const version = this._config.getSetting('service.version');

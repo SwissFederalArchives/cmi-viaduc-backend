@@ -8,9 +8,10 @@ import {
 } from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-abbrechen-modal',
-	templateUrl: 'auftraegeAbbrechenModal.component.html',
-	styleUrls: ['./auftraegeAbbrechenModal.component.less']
+    selector: 'cmi-viaduc-auftraege-abbrechen-modal',
+    templateUrl: 'auftraegeAbbrechenModal.component.html',
+    styleUrls: ['./auftraegeAbbrechenModal.component.less'],
+    standalone: false
 })
 export class AuftraegeAbbrechenModalComponent {
 
@@ -38,29 +39,31 @@ export class AuftraegeAbbrechenModalComponent {
 		this._selectedAbbruchgrund = val;
 	}
 
-	public bemerkungDossier: string;
-	public interneBemerkung: string;
+	public bemerkungDossier!: string;
+	public interneBemerkung!: string;
 	public loading = false;
-	public gruende = [];
+	public gruende!:  Abbruchgrund[];
 	public isLoading = false;
 
 	private _open = true;
-	private _selectedAbbruchgrund: Abbruchgrund = null;
+	private _selectedAbbruchgrund!: Abbruchgrund;
 
 	constructor(private _dec: EntityDecoratorService,
 				private _ord: OrderService,
 				private _err: ErrorService,
 				private _toastr: ToastrService) {
-		this.gruende = Object.keys(Abbruchgrund)
-			.filter(k => isNaN(parseInt(k, 10)))
-			.map(k => Abbruchgrund[k])
-			.filter(k => k !== Abbruchgrund.NichtGesetzt &&
+
+		this.gruende = Object.values(Abbruchgrund)
+			.filter(k =>
+				typeof k === 'number' &&
+				k !== Abbruchgrund.NichtGesetzt &&
 				k !== Abbruchgrund.ZurueckgewiesenEinsichtsbewilligungNoetig &&
 				k !== Abbruchgrund.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenInSchutzfrist &&
 				k !== Abbruchgrund.ZurueckgewiesenNichtFuerVerwaltungsausleiheBerechtigtUnterlagenFreiBewilligung &&
 				k !== Abbruchgrund.ZurueckgewiesenFormularbestellungNichtErlaubt &&
 				k !== Abbruchgrund.ZurueckgewiesenDossierangabenUnzureichend &&
-				k !== Abbruchgrund.ZurueckgewiesenTeilbewilligungVorhanden);
+				k !== Abbruchgrund.ZurueckgewiesenTeilbewilligungVorhanden
+			) as Abbruchgrund[];
 	}
 	public translateStatus(a: Abbruchgrund) {
 		return this._dec.translateAbbruchgrund(a);

@@ -11,12 +11,12 @@ export class MonitoringService {
 		this._apiUrl = this._options.serverUrl + this._options.privatePort + '/api/Monitoring';
 	}
 
-	public getServicesStatus(): Promise<MonitoringResult[]> {
+	public getServicesStatus(): Promise<MonitoringResult[] | undefined> {
 		const url = this._apiUrl + '/GetServicesStatus';
 		return this._http.get<MonitoringResult[]>(url, this._http.noCaching).toPromise();
 	}
 
-	public getTestStatus(): Promise<MonitoringResult[]> {
+	public getTestStatus(): Promise<MonitoringResult[] | any> {
 		const url = this._apiUrl + '/GetTestStatus';
 		return this._http.get<MonitoringResult[]>(url, this._http.noCaching).toPromise();
 	}

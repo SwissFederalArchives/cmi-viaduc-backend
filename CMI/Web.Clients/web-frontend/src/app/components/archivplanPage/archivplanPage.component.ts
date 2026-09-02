@@ -4,9 +4,10 @@ import { ClientContext, ConfigService, Entity, TranslationService } from '@cmi/v
 import { EntityService, SeoService, UrlService } from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-archivplane-page',
-	templateUrl: 'archivplanPage.component.html',
-	styleUrls: ['./archivplanPage.component.less']
+    selector: 'cmi-viaduc-archivplane-page',
+    templateUrl: 'archivplanPage.component.html',
+    styleUrls: ['./archivplanPage.component.less'],
+    standalone: false
 })
 export class ArchivplanPageComponent implements OnInit {
 
@@ -68,7 +69,7 @@ export class ArchivplanPageComponent implements OnInit {
 	private _getNodesToOpen(e: Entity): string[] {
 		const ids: string[] = [];
 		if (e._context && e._context.ancestors) {
-			e._context.ancestors.forEach(function (i) {
+			e._context.ancestors.forEach(function (i: any) {
 				ids.push(i.archiveRecordId);
 			});
 		}

@@ -1,7 +1,7 @@
 import {RoleFeaturesPageComponent} from './components/roleFeaturesPage/roleFeaturesPage.component';
 import {UserSettingsResolver} from '../client/routing/userSettingsResolver';
 import {UserRolesDetailPageComponent} from './components/userRolesDetailPage/userRolesDetailPage.component';
-import {UserRolesPageComponent} from './components/userRolesPage/userRolesPage.component';
+import UserRolesPageComponent from './components/userRolesPage/userRolesPage.component';
 import {CanDeactivateGuard} from '@cmi/viaduc-web-core';
 
 export const ROUTES: any = [

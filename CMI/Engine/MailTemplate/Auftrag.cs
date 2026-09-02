@@ -10,7 +10,12 @@ namespace CMI.Engine.MailTemplate
         {
             this.orderItem = orderItem;
             BestellteVe = bestellteVe;
-            Bestellung = new Bestellung(ordering, besteller);
+            Bestellung = new Bestellung(ordering, besteller)
+            {
+                Aushebungstyp = orderItem.Aushebungstyp.HasValue
+                    ? orderItem.Aushebungstyp.Value == Aushebungstyp.Behältnis ? nameof(Aushebungstyp.Behältnis) : nameof(Aushebungstyp.Dossier)
+                    : string.Empty
+            };
             AuszuhebendeVe = auszuhebendeVe;
         }
 

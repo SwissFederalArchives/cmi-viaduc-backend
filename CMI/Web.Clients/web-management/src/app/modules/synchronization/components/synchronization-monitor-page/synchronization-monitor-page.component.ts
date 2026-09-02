@@ -1,31 +1,32 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CmiGridComponent, ConfigService, CoreOptions, SyncActionLogDto, SyncNumberPerHourDto, TranslationService} from '@cmi/viaduc-web-core';
 import {SortDescription, DataType} from '@mescius/wijmo';
 import {WjMenu} from '@mescius/wijmo.angular2.input';
 import {ODataCollectionView} from '@mescius/wijmo.odata';
 import {ErrorService, ManagementUserSettings, UrlService, UserService} from "../../../shared";
 import {SynchronizationService} from "../../services";
-import {FlatPickrOutputOptions} from "angularx-flatpickr/lib/flatpickr.directive";
 import flatpickr from "flatpickr";
 import {German} from "flatpickr/dist/l10n/de";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import * as moment from "moment/moment";
+import moment from 'moment';
 import { CellRange } from '@mescius/wijmo.grid';
 
 
 @Component({
-	selector: 'cmi-synchronization-monitor-page',
-	templateUrl: './synchronization-monitor-page.component.html',
-	styleUrls: ['./synchronization-monitor-page.component.less']
+    selector: 'cmi-synchronization-monitor-page',
+    templateUrl: './synchronization-monitor-page.component.html',
+    styleUrls: ['./synchronization-monitor-page.component.less'],
+    standalone: false
 })
-export class SynchronizationMonitorPageComponent implements OnInit {
+export class SynchronizationMonitorPageComponent implements OnInit, OnDestroy {
 
-	@ViewChild('flexGrid', {static: true})
+	private _destroyed = false;
+
+	@ViewChild('flexGrid', {static: true })
 	public flexGrid: CmiGridComponent;
 
 	@ViewChild('flexGridLog', {static: true})
 	public flexGridLog: CmiGridComponent;
-
 
 	@ViewChild('flexGridSyncPerHour', {static: true})
 	public flexGridSyncPerHour: CmiGridComponent;
@@ -33,7 +34,7 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 
 	@ViewChild('preFilterMenu', {static: true})
 	public preFilterMenu: WjMenu;
-	public synchronisationItems: ODataCollectionView;
+	public synchronisationItems!: ODataCollectionView;
 	public columns: any[] = [];
 	public hiddenColumns: any[] = [];
 	public visibleColumns: any[] = [];
@@ -41,10 +42,10 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 	public crumbs: any[] = [];
 	public valueFilters: any;
 	public gridFilters: any;
-	public loading: boolean;
-	public syncActionLogItems: SyncActionLogDto[];
-	public syncNumberPerHourItems: SyncNumberPerHourDto[];
-	public myForm: FormGroup;
+	public loading!: boolean;
+	public syncActionLogItems!: SyncActionLogDto[];
+	public syncNumberPerHourItems!: SyncNumberPerHourDto[];
+	public myForm?: FormGroup = undefined;
 
 	public countDays = 5;
 
@@ -64,6 +65,11 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 		this._initTableView();
 	}
 
+	public ngOnDestroy(): void {
+		this._destroyed = true;
+	}
+
+
 	public refreshHiddenVisibleColumns() {
 		this.visibleColumns = this.getVisibleColumns();
 		this.visibleColumnsSelector = this.visibleColumns.filter(c => c.visible && !c.loadPerDefault);
@@ -75,8 +81,9 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 	}
 
 	public exportExcel() {
+		const formated  = moment(Date.now()).format('DD.MM.YYYY_HH:mm:ss');
 		const fileName = this._txt.get('synchronizationMonitor.synchronizationExcelFilename', 'Synchronisation_')
-		+ moment(new Date()).format('DD.MM.YYYY_HH:mm:ss') + '.xlsx';
+		+ formated  + '.xlsx';
 
 		this.flexGrid.exportToExcelOData(fileName).subscribe(() => {
 			// nothing
@@ -85,7 +92,7 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 		});
 	}
 
-	private buildCrumbs(): void {
+	private buildCrumbs() : void {
 		const crumbs: any[] = this.crumbs = [];
 		crumbs.push({iconClasses: 'glyphicon glyphicon-home', url: this._url.getHomeUrl()});
 		crumbs.push({label: this._txt.get('breadcrumb.synchronization', 'Synchronisation')});
@@ -103,14 +110,15 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 
 	private restorePreFilterButtonState() {
 		this.myForm = this.formBuilder.group({
-			veIds: {
-				value: '',
-				disabled: false
+			veIds:{
+				value:'',
+				disabled:false
 			},
-			vonDatumFilter: new FormControl(moment.utc(Date.now()).add(-2, 'd').toDate()),
-			bisDatumFilter: new FormControl(moment.utc(Date.now()).toDate())
+			vonDatumFilter:new FormControl(moment.utc(Date.now()).add(-2, 'd').toDate()),
+			bisDatumFilter:new FormControl(moment.utc(Date.now()).toDate())
 		});
 		setTimeout(() => {
+				if (this._destroyed) { return; }
 				this.refreshTable();
 			},
 			50);
@@ -157,13 +165,16 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 			this._err.showOdataErrorIfNecessary(error);
 		});
 		this.synchronisationItems.loading.addHandler(() => {
+			if (this._destroyed) { return; }
 			this.loading = true;
 		});
 		this.synchronisationItems.loaded.addHandler(() => {
+			if (this._destroyed) { return; }
 			this.loading = false;
+			const cell: number | CellRange = new CellRange(0, 0);
 			// Beim Neuladen erste Zeile auswählen (wenn vorhanden)
-			if (this.synchronisationItems.items.length > 0) {
-					this.flexGrid.select(new CellRange(0, 0), true); // ✅ works now // Zeile 0 auswählen
+			if (this.synchronisationItems.items.length > 0 && this.flexGrid.itemsSource) {
+					this.flexGrid.select(cell, true);
 				this.updateLogViewForSelectedItem(); // Log dazu anzeigen
 			} else {
 				this.updateLogViewForSelectedItem(); // Leert Log wenn nichts da
@@ -173,45 +184,61 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 	}
 
 	private updateLogViewForSelectedItem(): void {
-		const selected = this.flexGrid.selectedItems?.[0];
+		if (this._destroyed) { return; }
+		const selected = this.flexGrid?.selectedItems?.[0];
+		if (selected) {
+			// Logs zurücksetzen
+			this.syncActionLogItems = [];
+			if (this.flexGridLog) {
+				this.flexGridLog.itemsSource = [];
+			}
 
-		// Logs zurücksetzen
-		this.syncActionLogItems = [];
-		this.flexGridLog.itemsSource = [];
+			if (selected?.syncActionId) {
 
-		if (selected?.syncActionId) {
-
-			const cleanedId = selected.syncActionId?.replace(/[’']/g, '').trim();
-			// Sofort versuchen
-			this._sys.getLogData(cleanedId).subscribe({
-				next: r => {
-					this.syncActionLogItems = r;
-					this.flexGridLog.itemsSource = this.syncActionLogItems;
-					this.flexGridLog.refresh();
-				},
-				error: () => {
-					// Nach 1 Sekunde erneut versuchen
-					setTimeout(() => {
-						this._sys.getLogData(cleanedId).subscribe({
-							next: retryData => {
-								this.syncActionLogItems = retryData;
-								this.flexGridLog.itemsSource = this.syncActionLogItems;
-								this.flexGridLog.refresh();
-							},
-							error: secondError => {
-								console.error('Retry for getLogData failed', secondError);
-								this._err.showOdataErrorIfNecessary(secondError);
-							}
-						});
-					}, 1000);
+				const cleanedId = selected.syncActionId?.replace(/[’']/g, '').trim();
+				this._sys.getLogData(cleanedId).subscribe({
+					next: r => {
+						if (this._destroyed) { return; }
+						if (r !== null) {
+							this.syncActionLogItems = r;
+						}
+						if (this.flexGridLog) {
+							this.flexGridLog.itemsSource = this.syncActionLogItems;
+							this.flexGridLog.refresh();
+						}
+					},
+					error: () => {
+						// Nach 0.95 Sekunde erneut versuchen
+						setTimeout(() => {
+							if (this._destroyed) { return; }
+							this._sys.getLogData(cleanedId).subscribe({
+								next: retryData => {
+									if (this._destroyed) { return; }
+									if (retryData !== null) {
+										this.syncActionLogItems = retryData;
+									}
+									if (this.flexGridLog) {
+										this.flexGridLog.itemsSource = this.syncActionLogItems;
+										this.flexGridLog.refresh();
+									}
+								},
+								error: secondError => {
+									console.error('Retry for getLogData failed', secondError);
+									this._err.showOdataErrorIfNecessary(secondError);
+								}
+							});
+						}, 950);
+					}
+				});
+			} else {
+					if (this.flexGridLog) {
+						this.flexGridLog.refresh();
+					}
 				}
-			});
-		} else {
-			this.flexGridLog.refresh();
 		}
 	}
 
-	public flexInitialized(flexgrid) {
+	public flexInitialized(flexgrid: any) {
 		flexgrid.selectionChanged.addHandler(() => {
 			this.updateLogViewForSelectedItem();
 		});
@@ -221,12 +248,12 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 	public refreshTable() {
 		const formFilter = this.setFilter(); // ✅ Base form filter
 
-		if(this.flexGrid.filter.filterDefinition !== this.gridFilters){
+		if(this.flexGrid?.filter?.filterDefinition !== this.gridFilters){
 			this.flexGrid.filter.clear();
 			this.flexGrid.filter.filterDefinition = this.gridFilters;
 		}
 
-		if (this.synchronisationItems.sortDescriptions?.length === 0){
+		if (this.synchronisationItems?.sortDescriptions?.length === 0){
 			this.synchronisationItems.sortDescriptions.push(new SortDescription('syncActionId', false));
 		}
 
@@ -256,7 +283,7 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 		return combinedFilter;
 	}
 
-	public dataPickerValueUpdate($event: FlatPickrOutputOptions) {
+	public dataPickerValueUpdate($event: any) {
 		const isValid = $event.dateString !== '' && $event.dateString;
 		if (isValid) {
 			this.refreshTable();
@@ -279,16 +306,16 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 	private convertWijmoFilterToOData(filterDefinition: any): string {
 		if (!filterDefinition?.filters?.length) return '';
 
-		const operatorMap = {
+		const operatorMap: Record<number, string>  = {
 			0: 'eq', 1: 'ne', 2: 'gt', 3: 'ge',
 			4: 'lt', 5: 'le', 6: 'startswith',
 			7: 'endswith', 8: 'contains'
 		};
 
 		return filterDefinition.filters
-			.map(f => {
+			.map((f: any) => {
 				const col = f.binding;
-				const op = operatorMap[f.condition1?.operator];
+				const op: string = operatorMap[f.condition1?.operator];
 				const val = f.condition1?.value;
 
 				if (!col || op == null || val === undefined || val === '') return '';
@@ -316,7 +343,7 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 
 				return `${col} ${op} ${value}`;
 			})
-			.filter(p => p !== '')
+			.filter((p: any) => p !== '')
 			.join(' and ');
 	}
 
@@ -352,7 +379,7 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 			if (veIdsRaw.includes(';')) {
 				const ids = veIdsRaw.split(';');
 				let archiveRecordIdFilter = ''
-				ids.forEach(id => {
+				ids.forEach((id: any)=> {
 					if (archiveRecordIdFilter === '') {
 						archiveRecordIdFilter = '(archiveRecordId eq \'' + decodeURI(id) + '\')';
 					} else {
@@ -387,9 +414,16 @@ export class SynchronizationMonitorPageComponent implements OnInit {
 
 	public updateSyncNumberPerHourTable() {
 		this._sys.syncNumberPerHour(this.countDays).subscribe(r => {
-			this.syncNumberPerHourItems = r;
-			this.flexGridSyncPerHour.itemsSource = this.syncNumberPerHourItems;
-			this.flexGridLog.refresh();
+			if (this._destroyed) { return; }
+			if (r !== null) {
+				this.syncNumberPerHourItems = r;
+				if (this.flexGridSyncPerHour) {
+					this.flexGridSyncPerHour.itemsSource = this.syncNumberPerHourItems;
+				}
+				if (this.flexGridLog) {
+					this.flexGridLog.refresh();
+				}
+			}
 		});
 	}
 

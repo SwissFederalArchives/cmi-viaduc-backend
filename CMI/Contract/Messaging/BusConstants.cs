@@ -56,6 +56,7 @@
         public const string IndexManagerAnonymizeTestMessageQueue = "m.index.manager.anonymizeTest";
         public const string IndexManagerRemoveArchiveRecordMessageQueue = "m.index.manager.removeArchiveRecord";
         public const string IndexManagerFindArchiveRecordMessageQueue = "m.index.manager.findArchiveRecord";
+        public const string IndexManagerFindArchiveRecordsWithContainerCodeMessageQueue = "m.index.manager.findArchiveRecordsWithContainerCode";
         public const string IndexManagagerRequestBase = "r.index.manager.{0}";
         public const string IndexManagerUpdateIndivTokensMessageQueue = "m.index.manager.updateIndivTokens";
         public const string IndexManagerGetElasticLogRecordsRequestQueue = "m.index.manager.getElasticLogRecords";

@@ -39,7 +39,8 @@ namespace CMI.Engine.Asset.PostProcess
                 case ".tif":
                 case ".tiff":
                     Log.Debug("Convert file {FullName} to jpg", sourceFile.FullName);
-                    imageHelper.ConvertToJpeg(sourceFile.FullName, 100, this.viewerSettings.JpegQualitaetInProzent);
+                    var resolution = imageHelper.GetResolution(sourceFile.FullName);
+                    imageHelper.ConvertToJpeg(sourceFile.FullName, 100, this.viewerSettings.JpegQualitaetInProzent, resolution);
                     break;
             }
         }

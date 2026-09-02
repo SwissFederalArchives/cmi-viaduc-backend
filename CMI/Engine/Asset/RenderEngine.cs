@@ -123,7 +123,8 @@ namespace CMI.Engine.Asset
         {
             if (File.Exists(file))
             {
-                return Task.FromResult(imageHelper.ConvertToPdf(file, 100, viewerConversionSettings.JpegQualitaetInProzent));
+                var dpi = imageHelper.GetResolution(file);
+                return Task.FromResult(imageHelper.ConvertToPdf(file, 100, viewerConversionSettings.JpegQualitaetInProzent, dpi));
             }
 
             return Task.FromResult(file);

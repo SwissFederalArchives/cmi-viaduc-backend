@@ -3,7 +3,8 @@ import {UrlService} from '../services/url.service';
 import {ClientContext, Routing, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Pipe({
-	name: 'localizeLink'
+    name: 'localizeLink',
+    standalone: false
 })
 export class LocalizeLinkPipe implements PipeTransform {
 	constructor(private _context: ClientContext, private _url: UrlService) {

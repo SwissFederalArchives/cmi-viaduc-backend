@@ -1,4 +1,6 @@
-<p *ngIf="options.hint" class="cmi-hint">{{ options.hint }}</p>
+@if (options.hint) {
+  <p class="cmi-hint">{{ options.hint }}</p>
+}
 <div class="cmi-three-dots">
-	<span></span><span></span><span></span>
+  <span></span><span></span><span></span>
 </div>

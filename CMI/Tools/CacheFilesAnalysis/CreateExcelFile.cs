@@ -66,18 +66,18 @@ namespace CMI.Tools.CacheFilesAnalysis
             Row tRow = new Row();
             tRow.AppendChild(CreateCell(cacheFile.Name, CellValues.String));
             tRow.AppendChild(CreateCell(cacheFile.DirectoryName, CellValues.String));
-            tRow.AppendChild(CreateCell(cacheFile.Depth.ToString()));
-            tRow.AppendChild(CreateCell(cacheFile.NumberOfFiles.ToString()));
-            tRow.AppendChild(CreateCell(cacheFile.SizeOfZipOutput.ToString("0.000")));
-            tRow.AppendChild(CreateCell(cacheFile.SmallestFileOutput.ToString("0.000")));
-            tRow.AppendChild(CreateCell(cacheFile.BiggestFileOutput.ToString("0.000")));
-            tRow.AppendChild(CreateCell(cacheFile.AverageSizeFileOutput.ToString("0.000")));
+            tRow.AppendChild(CreateCell(cacheFile.Depth.ToString(), CellValues.Number));
+            tRow.AppendChild(CreateCell(cacheFile.NumberOfFiles.ToString(), CellValues.Number));
+            tRow.AppendChild(CreateCell(cacheFile.SizeOfZipOutput.ToString("0.000"), CellValues.Number));
+            tRow.AppendChild(CreateCell(cacheFile.SmallestFileOutput.ToString("0.000"), CellValues.Number));
+            tRow.AppendChild(CreateCell(cacheFile.BiggestFileOutput.ToString("0.000"), CellValues.Number));
+            tRow.AppendChild(CreateCell(cacheFile.AverageSizeFileOutput.ToString("0.000"), CellValues.Number));
 
             foreach (var key in extenstion)
             {
                 tRow.AppendChild(cacheFile.Extension.ContainsKey(key)
-                    ? CreateCell(cacheFile.Extension[key].ToString())
-                    : CreateCell("0"));
+                    ? CreateCell(cacheFile.Extension[key].ToString(), CellValues.Number)
+                    : CreateCell("0", CellValues.Number));
             }
 
             return tRow;
@@ -88,7 +88,7 @@ namespace CMI.Tools.CacheFilesAnalysis
             Row tRow = new Row();
             tRow.AppendChild(CreateCell(cacheFileEntry.Name, CellValues.String));
             tRow.AppendChild(CreateCell(cacheFileEntry.Extension, CellValues.String));
-            tRow.AppendChild(CreateCell(cacheFileEntry.Size.ToString("0.000")));
+            tRow.AppendChild(CreateCell(cacheFileEntry.Size.ToString("0.000"), CellValues.Number));
 
             return tRow;
         }
@@ -158,7 +158,7 @@ namespace CMI.Tools.CacheFilesAnalysis
             return workRow;
         }
         
-        private Cell CreateCell(string text, CellValues cellValues = CellValues.Number, uint styleIndex = 1U)
+        private Cell CreateCell(string text, CellValues cellValues, uint styleIndex = 1U)
         {
             return new Cell()
             {

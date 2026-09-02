@@ -2,15 +2,16 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ContextService} from '../../services';
 
 @Component({
-	selector: 'cmi-viaduc-header',
-	templateUrl: 'header.component.html'
+    selector: 'cmi-viaduc-header',
+    templateUrl: 'header.component.html',
+    standalone: false
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
 	private _contextSubscription: any = null;
 	public reload = false;
 
-	private _language: string = null;
+	private _language: string = '';
 
 	constructor(private _contextService: ContextService) {
 

@@ -83,7 +83,7 @@ export class EntityDecoratorService {
 			return entity;
 		}
 
-		entity.iconClasses = this.getIconForType(entity.level);
+		entity.iconClasses = this.getIconForType(entity.level as string);
 
 		if (!entity._metadata) {
 			entity._metadata = <EntityMetadata>{};
@@ -115,14 +115,17 @@ export class EntityDecoratorService {
 		return result;
 	}
 
-	public decorateSearchResponse(response: SearchResponse, options?: any): SearchResponse {
+	public decorateSearchResponse(response: SearchResponse,	options?: any): SearchResponse {
 		if (!response) {
 			return response;
 		}
+
 		for (const key in response) {
 			if (response.hasOwnProperty(key)) {
-				const result = <EntityResult>response[key];
-				this.decorateEntities(result.items, options);
+				const result = response[key as keyof typeof response] as EntityResult;
+				if (result?.items) {
+					this.decorateEntities(result.items, options);
+				}
 			}
 		}
 		return response;

@@ -1,33 +1,47 @@
-import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	ElementRef,
+	EventEmitter,
+	Input,
+	OnInit,
+	Output
+} from '@angular/core';
 import {AggregationEntry, Facet, FacetteAction, FacetteFilterItem, Utilities as _util} from '@cmi/viaduc-web-core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-	selector: 'cmi-viaduc-facette',
-	templateUrl: 'searchFacette.component.html',
-	styleUrls: ['./searchFacette.component.less'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cmi-viaduc-facette',
+    templateUrl: 'searchFacette.component.html',
+    styleUrls: ['./searchFacette.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 	animations: [
 		trigger('collapsedState', [
-			state('collapsed', style({ height: 0 })),
-			state('expanded', style({ height: '*' })),
-			transition('void => expanded', [
-				style({ height: 0 }),
-				animate('250ms ease-in-out', style({ height: '*' }))
-			]),
-			transition('* => expanded', [
-				style({ height: 0 }),
-				animate('250ms ease-in-out', style({ height: '*' }))
+			state(
+				'collapsed',
+				style({
+					height: '0px',
+					overflow: 'hidden'
+				})
+			),
+			state(
+				'expanded',
+				style({
+					height: 'var(--facette-height)',
+					overflow: 'auto'
+				})
+			),
+			transition('collapsed => expanded', [
+				animate('250ms ease-in-out')
 			]),
 			transition('expanded => collapsed', [
-				style({ height: '*' }),
-				animate('250ms ease-in-out', style({ height: 0 }))]),
+				animate('250ms ease-in-out')
+			])
 		])
-	]
+	],
+    standalone: false
 })
 export class SearchFacetteComponent implements OnInit {
-	private _elem: any;
-
 	@Input()
 	public facette: Facet;
 
@@ -37,8 +51,16 @@ export class SearchFacetteComponent implements OnInit {
 	@Input()
 	public facetteTitle = '';
 
+	private _collapsed = true;
+
 	@Input()
-	public collapsed = true;
+	public set collapsed(value: boolean) {
+		this._collapsed = value;
+	}
+
+	public get collapsed(): boolean {
+		return this._collapsed;
+	}
 
 	@Output()
 	public onFilter = new EventEmitter<FacetteFilterItem>();
@@ -51,13 +73,12 @@ export class SearchFacetteComponent implements OnInit {
 
 	public buttonCss: string;
 	public ulCss: string;
+	public facetteHeight: number = 0;
 
 	constructor(private _elemRef: ElementRef) {
-		this._elem = this._elemRef.nativeElement;
 	}
 
 	public ngOnInit(): void {
-		_util.initJQForElement(this._elem);
 		this._setCssClasses();
 	}
 
@@ -87,8 +108,16 @@ export class SearchFacetteComponent implements OnInit {
 	}
 
 	public toggle() {
-		this.collapsed = !this.collapsed;
+		this._collapsed = !this._collapsed;
 		this._setCssClasses();
+		if (!this._collapsed) {
+			requestAnimationFrame(() => {
+				const ul = this._elemRef.nativeElement.querySelector('ul') as HTMLElement;
+				if (ul) {
+					this.facetteHeight = ul.scrollHeight;
+				}
+			});
+		}
 	}
 
 	private _setCssClasses(): void {

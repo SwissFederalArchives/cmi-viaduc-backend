@@ -15,7 +15,7 @@ export interface Entity {
 	isWithinProtectionRange?: boolean;
 	canBeOrdered?: boolean;
 	isPhysicalyUsable?: boolean;
-	customFields: any[];
+	customFields: Record<string, any>[];
 	primaryDataLink?: any[];
 	itemClasses?: string;
 	iconClasses?: string;

@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import {Route, Routes} from '@angular/router';
 import {Utilities as _util} from '../../includes';
 // @dynamic
 export class Routing {
@@ -10,8 +10,8 @@ export class Routing {
 	public static get languagePrefixMatcher() { return /^\/(de|fr|it|en)/; }
 	public static readonly languagePrefixLength = 3;
 
-	public static localizations = {};
-	public static normalizations = {};
+	public static localizations: any[string] = {};
+	public static normalizations: any[string] = {};
 
 	private static assertPath(path: string): string {
 		if (_util.isEmpty(path)) {
@@ -35,13 +35,13 @@ export class Routing {
 			}
 
 			if (!_util.isEmpty(route['path'])) {
-				route.path = this.assertPath(route.path);
+				route.path = this.assertPath(route.path as string);
 			}
 			if (!_util.isEmpty(route['redirectTo'])) {
-				route.redirectTo = this.assertPath(route.redirectTo.toString());
+				route.redirectTo = this.assertPath(route.redirectTo as string);
 			}
 			if (_util.isArray(route['children'])) {
-				this.assertRoutes(route.children, options, depth + 1);
+				this.assertRoutes(route.children as Routes, options, depth + 1);
 			}
 		}
 	}
@@ -63,17 +63,17 @@ export class Routing {
 	}
 
 	private static collectLanguageLocalizations(language: string, routes: Routes, depth = 0): void {
-		const localizations = this.localizations[language] = (this.localizations[language] || {});
-		const normalizations = this.normalizations[language] = (this.normalizations[language] || {});
+		const localizations: any = this.localizations[language] = (this.localizations[language] || {});
+		const normalizations: any = this.normalizations[language] = (this.normalizations[language] || {});
 		for (let i = 0; i < routes.length; i += 1) {
-			const route = routes[i];
+			const route: Route = routes[i];
 			if (!_util.isEmpty(route.path)) {
-				const path = this.assertPath(route.path);
-				const localized = this.assertPath((route['_localize'] || {})[language]) || path;
+				const path = this.assertPath(route.path as string);
+				const localized = this.assertPath(((route as any)['_localize'] || {})[language]) || path;
 				this.addLocalizations(localizations, path, localized);
 				this.addLocalizations(normalizations, localized, path);
 				if (_util.isArray(route['children'])) {
-					this.collectLanguageLocalizations(language, route.children, depth + 1);
+					this.collectLanguageLocalizations(language, route.children as Routes, depth + 1);
 				}
 			}
 		}
@@ -137,13 +137,13 @@ export class Routing {
 			const route = routes[i];
 			const local = Object.assign({}, route);
 			if (!_util.isEmpty(route['path'])) {
-				local.path = this.localizePath(language, route.path);
+				local.path = this.localizePath(language, route.path as string);
 			}
 			if (!_util.isEmpty(route['redirectTo'])) {
-				local.redirectTo = this.localizePath(language, route.redirectTo.toString());
+				local.redirectTo = this.localizePath(language, route.redirectTo as string);
 			}
 			if (_util.isArray(route['children'])) {
-				local.children = this.localizeRoutes(language, route.children, depth + 1);
+				local.children = this.localizeRoutes(language, route.children as Routes, depth + 1);
 			}
 			locals.push(local);
 		}

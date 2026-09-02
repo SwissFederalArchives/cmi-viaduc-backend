@@ -1,11 +1,12 @@
 import {FreigabeKontrolleModalComponent} from './freigabeKontrolleModal.component';
 import { ComponentFixture, TestBed,  waitForAsync } from '@angular/core/testing';
-import {ApproveStatus, EntityDecoratorService, TranslationService, CoreModule, UiService} from '@cmi/viaduc-web-core';
+import {ApproveStatus, EntityDecoratorService, TranslationService, UiService} from '@cmi/viaduc-web-core';
 import {OrderService} from '../../../services';
-import {ErrorService, SharedModule} from '../../../../shared';
+import {ErrorService} from '../../../../shared';
 import {ToastrService} from 'ngx-toastr';
 import {By} from '@angular/platform-browser';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {NO_ERRORS_SCHEMA, Pipe, PipeTransform} from '@angular/core';
+import {FormsModule} from "@angular/forms";
 
 describe('FreigabeKontrolleModalPage', () => {
 	let fixture: ComponentFixture<FreigabeKontrolleModalComponent>;
@@ -16,6 +17,17 @@ describe('FreigabeKontrolleModalPage', () => {
 	let errorService: ErrorService;
 	let entityDecoratorService: EntityDecoratorService;
 	let uiService: UiService;
+
+
+	@Pipe({
+		name: 'translate',
+		standalone: false
+	})
+	class MockTranslatePipe implements PipeTransform {
+		transform(value: string): string {
+			return value;
+		}
+	}
 
 	txt = <TranslationService>{
 		translate(text: string, key?: string, ...args): string {
@@ -44,8 +56,8 @@ describe('FreigabeKontrolleModalPage', () => {
 
 	beforeEach( waitForAsync(async() => {
 		TestBed.configureTestingModule({
-			imports:[CoreModule, SharedModule],
-			declarations: [FreigabeKontrolleModalComponent],
+			imports:[ FormsModule ],
+			declarations: [FreigabeKontrolleModalComponent, MockTranslatePipe ],
 			schemas: [NO_ERRORS_SCHEMA],
 			providers: [
 				{provide: EntityDecoratorService, useValue: entityDecoratorService},
@@ -61,6 +73,7 @@ describe('FreigabeKontrolleModalPage', () => {
 	beforeEach(waitForAsync(async() => {
 		fixture = TestBed.createComponent(FreigabeKontrolleModalComponent);
 		sut = fixture.componentInstance;
+		fixture.detectChanges();
 		sut.ngOnInit();
 		await fixture.whenStable();
 	}));

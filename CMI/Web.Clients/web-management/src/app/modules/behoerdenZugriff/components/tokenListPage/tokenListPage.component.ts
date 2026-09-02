@@ -3,23 +3,24 @@ import {TokenService} from '../../services';
 import {ApplicationFeatureEnum, CmiGridComponent, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 import {UrlService, ErrorService, AuthorizationService} from '../../../shared/services';
 import {AsToken} from '../../model/asToken';
-import {AblieferndeStelleToken} from '../../../shared/model/ablieferndeStelleToken';
 import {Router} from '@angular/router';
 import {CollectionView} from '@mescius/wijmo';
+import {AblieferndeStelleToken} from "../../../shared";
 
 @Component({
-	selector: 'cmi-viaduc-token-page',
-	templateUrl: 'tokenListPage.component.html',
+    selector: 'cmi-viaduc-token-page',
+    templateUrl: 'tokenListPage.component.html',
+    standalone: false
 })
 export class TokenListPageComponent implements OnInit {
-	public loading: boolean;
+	public loading: boolean =true;
 	public crumbs: any[] = [];
-	public tokenList: CollectionView;
-	public showDeleteModal: boolean;
+	public tokenList!: CollectionView;
+	public showDeleteModal!: boolean;
 
 	public items: any[] = [];
 
-	@ViewChild('flexGrid', { static: false })
+	@ViewChild('flexGrid', { static: true })
 	public flexGrid: CmiGridComponent;
 
 	constructor(private _tokenService: TokenService,
@@ -36,10 +37,12 @@ export class TokenListPageComponent implements OnInit {
 		this.loadTokenList();
 	}
 
+
 	private loadTokenList(): void {
 		this.loading = true;
 		this._tokenService.getAllTokens().subscribe(
-			res => this.prepareResult(res),
+			(res: AsToken) => this.prepareResult(res),
+
 			err => this._err.showError(err),
 			() => {
 				this.loading = false;
@@ -50,14 +53,14 @@ export class TokenListPageComponent implements OnInit {
 		if (item == null) {
 			return '';
 		}
-		return item.ablieferndeStelleList.map(a => a.bezeichnung).join(', ');
+		return item.ablieferndeStelleList.map((a: any) => a.bezeichnung).join(', ');
 	}
 
 	public getBehoerdenKuerzel(item: any): string {
 		if (item == null) {
 			return '';
 		}
-		return item.ablieferndeStelleList.map(a => a.kuerzel).join(', ');
+		return item.ablieferndeStelleList.map((a: any) => a.kuerzel).join(', ');
 	}
 
 	public deleteCheckedToken(): void {
@@ -152,6 +155,12 @@ export class TokenListPageComponent implements OnInit {
 		}
 		this.tokenList = new CollectionView(result.tokens);
 		this.tokenList.pageSize = 10;
+
+		// To prevent filtering icon on image column
+		if (this.flexGrid) {
+			this.flexGrid.itemsSource = this.tokenList;
+		}
+		this.flexGrid?.refresh();
 	}
 
 	public get allowAccessTokensBearbeiten(): boolean {

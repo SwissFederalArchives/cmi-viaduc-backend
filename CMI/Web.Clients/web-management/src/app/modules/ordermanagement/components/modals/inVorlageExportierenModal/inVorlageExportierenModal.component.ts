@@ -6,9 +6,10 @@ import {EinsichtsGesuchEmailVorlage} from '../../../model';
 import {ClientContext, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-in-vorlage-exportieren-modal',
-	templateUrl: 'inVorlageExportierenModal.component.html',
-	styleUrls: ['./inVorlageExportierenModal.component.less']
+    selector: 'cmi-viaduc-in-vorlage-exportieren-modal',
+    templateUrl: 'inVorlageExportierenModal.component.html',
+    styleUrls: ['./inVorlageExportierenModal.component.less'],
+    standalone: false
 })
 export class InVorlageExportierenModalComponent {
 
@@ -43,16 +44,14 @@ export class InVorlageExportierenModalComponent {
 	public sprachen: string[] = ['de', 'fr', 'it', 'en'];
 
 	private _open = true;
-	private _selectedVorlage: EinsichtsGesuchEmailVorlage = null;
+	private _selectedVorlage!: EinsichtsGesuchEmailVorlage;
 
 	constructor(private _ord: OrderService,
 				private _err: ErrorService,
 				private _ctx: ClientContext,
 				private _toastr: ToastrService) {
-		this.vorlagen = Object.keys(EinsichtsGesuchEmailVorlage)
-			.filter(k => isNaN(parseInt(k, 10)))
-			.map(k => EinsichtsGesuchEmailVorlage[k]);
-
+		this.vorlagen = Object.values(EinsichtsGesuchEmailVorlage)
+			.filter(v => typeof v === 'number');
 		this.sprache = this._ctx.language;
 	}
 

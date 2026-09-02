@@ -1,24 +1,24 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "downlevelIteration": true,
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
+		"skipLibCheck": true,
+		"strictNullChecks": false,
     "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
-		"lib": [
-			"dom",
-			"es2020"
-		],
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "baseUrl": "./",
+
+		"baseUrl": ".",
+		"ignoreDeprecations": "6.0",
     "module": "ES2020"
   },
 	"angularCompilerOptions": {

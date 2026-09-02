@@ -16,13 +16,6 @@ Function Main
 		Write-Error "Kein StageParameterFile angegeben."
 		return
 	}
-
-    if([System.String]::IsNullOrWhiteSpace($BackupDir))
-    {
-        $tempDir   = [System.IO.Path]::GetTempPath()        
-        $BackupDir = [System.IO.Path]::Combine($tempDir, "Backup")
-        Write-Output "Kein Backup-Verzeichnis angegeben. Es wird das Verzeichnis $BackupDir verwendet"
-    }
     Write-Output "Deployment wird gestartet..."
 
     if($ServicesToInstall.Length -gt 0)
@@ -85,8 +78,6 @@ Function Install-Service
 
         
     }
-
-    Backup-Service -ServiceToBackup $ServiceToInstall
     $destDir = GetServiceInstallDir -service $ServiceToInstall
     DeleteContentsExcept -dir $destDir -except @("Parameters")
     Copy-ServiceFiles $ServiceToInstall
@@ -139,28 +130,6 @@ Function GetServiceInstallDir
 }
 
 
-Function Backup-Service
-{
-    param(
-        [String]$ServiceToBackup
-    )
-
-    $source = GetServiceInstallDir -service  $ServiceToBackup
-
-    if ([System.IO.Directory]::Exists($source))
-    {
-        $date = Get-Date -Format "yyyy-MM-dd HH.mm.ss"
-        
-        $destination = [System.Io.Path]::Combine($BackupDir, "$ServiceToBackup", $date)
-        Write-Output "Erstelle Backup von $source -> $destination"
-        Copy-Item -Path $source -Destination $destination -Recurse -Container
-        Write-Output "Backup Beendet"
-    }
-    else{
-    
-        Write-Output "Kein Backup wird erstellt, weil das Verzeichnis $source nicht existiert."
-    }
-}
 
 Function Copy-ServiceFiles
 {
@@ -244,35 +213,11 @@ Function Install-WebApplication
 
     Write-Output ""
     Write-Output "Webapplikation ${Web} wird installiert..."
-    
-    Backup-Web -Web $Web
 
     $destDir = GetWebInstallDir -Web $Web
     
     DeleteContentsExcept -dir $destDir -except @("App_Data")
     Copy-WebFiles -Web $Web
-}
-
-Function Backup-Web
-{
-    param(
-        [String]$Web
-    )
-
-    $source = GetWebInstallDir -Web $Web
-
-    if ([System.IO.Directory]::Exists($source))
-    {
-        $date = Get-Date -Format "yyyy-MM-dd HH.mm.ss"
-        $destination = [System.Io.Path]::Combine($BackupDir, "$web", $date)
-        Write-Output "Erstelle Backup von $source -> $destination"
-        Copy-Item -Path $source -Destination $destination -Recurse -Container
-        Write-Output "Backup Beendet"
-    }
-    else{
-    
-        Write-Output "Kein Backup wird erstellt, weil das Verzeichnis $source nicht existiert."
-    }
 }
 
 Function GetWebInstallDir

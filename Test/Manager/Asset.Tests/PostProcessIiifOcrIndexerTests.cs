@@ -1,9 +1,9 @@
-﻿using System.IO;
+using System.IO;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.Asset.PostProcess;
 using CMI.Engine.Asset.Solr;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Asset.Tests
@@ -59,7 +59,7 @@ namespace CMI.Manager.Asset.Tests
             
 
             var file = Directory.GetFiles(destTempDir, "*.hOcr", SearchOption.AllDirectories);
-            file[0].Should().Be(Path.Combine(destTempDir, ordner, "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.hOCR"));
+            file[0].ShouldBe(Path.Combine(destTempDir, ordner, "This_is_a_very_long_path_name_tha_0E79E0\\This_is_another_very_long_path_na_0FC993\\Yet_another_very_long_file_name_t_47074F.hOCR"));
         }
     }
 }

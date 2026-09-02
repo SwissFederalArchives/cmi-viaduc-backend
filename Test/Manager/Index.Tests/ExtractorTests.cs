@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using CMI.Contract.Common;
 using CMI.Manager.Index.Config;
 using CMI.Manager.Index.ValueExtractors;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -33,8 +33,8 @@ namespace CMI.Manager.Index.Tests
             var extractor = new TextExtractor();
             var actual = extractor.GetValue(dataElements, "TITEL");
 
-            actual.Length.Should().BeGreaterOrEqualTo(1);
-            actual.Should().Contain("Flugzeug");
+            actual.Length.ShouldBeGreaterThanOrEqualTo(1);
+            actual.ShouldContain("Flugzeug");
         }
 
         [Test]
@@ -43,8 +43,8 @@ namespace CMI.Manager.Index.Tests
             var extractor = new TextExtractor();
             var actual = extractor.GetListValues(dataElements, "RepeatedFieldTest"); // 999 == Custom Test field
 
-            actual.GetType().Should().Be<List<string>>();
-            actual.Count.Should().Be(2);
+            actual.ShouldBeOfType<List<string>>();
+            actual.Count.ShouldBe(2);
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace CMI.Manager.Index.Tests
             var extractor = new TextExtractor();
             var actual = extractor.GetValue(dataElements, "RepeatedFieldTest"); // 999 == Custom Test field
 
-            actual.Should().Be("Text 1Text 2");
+            actual.ShouldBe("Text 1Text 2");
         }
 
         [Test]
@@ -62,10 +62,10 @@ namespace CMI.Manager.Index.Tests
             var extractor = new TimePeriodExtractor();
             var actual = extractor.GetValue(dataElements, "Entstehungszeitraum"); // 7 == 
 
-            actual.Text.Should().Be("01.01.1914 - 31.12.1918");
-            actual.EndDate.Year.Should().Be(1918);
-            actual.StartDate.Year.Should().Be(1914);
-            actual.Years.Count.Should().Be(5);
+            actual.Text.ShouldBe("01.01.1914 - 31.12.1918");
+            actual.EndDate.Year.ShouldBe(1918);
+            actual.StartDate.Year.ShouldBe(1914);
+            actual.Years.Count.ShouldBe(5);
         }
 
         [Test]
@@ -92,9 +92,9 @@ namespace CMI.Manager.Index.Tests
             ];
             var actual = extractor.GetValue(dataElements, "Entstehungszeitraum"); // 7 == 
 
-            actual.StartDate.Should().Be(new DateTime(2000, 1,1, 0, 0, 0));
-            actual.EndDate.Should().Be(new DateTime(2000, 1, 1, 23, 59, 59));
-            actual.Years.Count.Should().Be(1);
+            actual.StartDate.ShouldBe(new DateTime(2000, 1,1, 0, 0, 0));
+            actual.EndDate.ShouldBe(new DateTime(2000, 1, 1, 23, 59, 59));
+            actual.Years.Count.ShouldBe(1);
         }
 
         [Test]
@@ -121,9 +121,9 @@ namespace CMI.Manager.Index.Tests
             ];
             var actual = extractor.GetValue(dataElements, "Entstehungszeitraum"); // 7 == 
 
-            actual.StartDate.Should().Be(new DateTime(2000, 1, 1, 0, 0, 0));
-            actual.EndDate.Should().Be(new DateTime(2000, 1, 2, 23, 59, 59));
-            actual.Years.Count.Should().Be(1);
+            actual.StartDate.ShouldBe(new DateTime(2000, 1, 1, 0, 0, 0));
+            actual.EndDate.ShouldBe(new DateTime(2000, 1, 2, 23, 59, 59));
+            actual.Years.Count.ShouldBe(1);
         }
 
         [Test]
@@ -150,9 +150,9 @@ namespace CMI.Manager.Index.Tests
             ];
             var actual = extractor.GetValue(dataElements, "Entstehungszeitraum"); // 7 == 
 
-            actual.StartDate.Should().Be(new DateTime(2000, 1, 1, 12, 15, 45));
-            actual.EndDate.Should().Be(new DateTime(2000, 1, 2, 14, 15, 30));
-            actual.Years.Count.Should().Be(1);
+            actual.StartDate.ShouldBe(new DateTime(2000, 1, 1, 12, 15, 45));
+            actual.EndDate.ShouldBe(new DateTime(2000, 1, 2, 14, 15, 30));
+            actual.Years.Count.ShouldBe(1);
         }
 
         [Test]
@@ -161,7 +161,7 @@ namespace CMI.Manager.Index.Tests
             var extractor = new IntExtractor();
             var actual = extractor.GetValue(dataElements, "IntFieldTest");
 
-            actual.Should().Be(1234);
+            actual.ShouldBe(1234);
         }
 
         [Test]
@@ -170,7 +170,7 @@ namespace CMI.Manager.Index.Tests
             var extractor = new IntExtractor();
             var actual = extractor.GetValue(dataElements, "TimespanFieldTest");
 
-            actual.Should().Be(1234);
+            actual.ShouldBe(1234);
         }
 
         [Test]
@@ -179,9 +179,9 @@ namespace CMI.Manager.Index.Tests
             var extractor = new FloatExtractor();
             var actual = extractor.GetValue(dataElements, "FloatFieldTest");
 
-            actual.DecimalPositions.Should().Be(2);
-            actual.Value.Should().Be(12.5f);
-            actual.Text.Should().Be("12.50");
+            actual.DecimalPositions.ShouldBe(2);
+            actual.Value.ShouldBe(12.5f);
+            actual.Text.ShouldBe("12.50");
         }
 
         [Test]
@@ -190,7 +190,7 @@ namespace CMI.Manager.Index.Tests
             var extractor = new BoolExtractor();
             var actual = extractor.GetValue(dataElements, "BoolFieldTest");
 
-            actual.Should().Be(true);
+            actual.ShouldBe(true);
         }
 
         [Test]
@@ -200,7 +200,7 @@ namespace CMI.Manager.Index.Tests
             var actual = extractor.GetValue(dataElements, "BILD_ANSICHT");
 
             actual.Value.StartsWith("/9j/4AAQSkZJRgABA");
-            actual.MimeType.Should().Be("image/jpeg");
+            actual.MimeType.ShouldBe("image/jpeg");
         }
 
         [Test]
@@ -209,8 +209,8 @@ namespace CMI.Manager.Index.Tests
             var extractor = new HyperlinkExtractor();
             var actual = extractor.GetValue(dataElements, "DIGITALE_VERSION");
 
-            actual.Text.Should().Be("E27#1000/721#14093#5489* (Wikimedia Commons)");
-            actual.Url.Should().Be("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif");
+            actual.Text.ShouldBe("E27#1000/721#14093#5489* (Wikimedia Commons)");
+            actual.Url.ShouldBe("https://commons.wikimedia.org/wiki/File:Flugzeug_Grandjean_vor_dem_Aufstieg_-_CH-BAR_-_3236769.tif");
         }
 
         [Test]
@@ -219,9 +219,9 @@ namespace CMI.Manager.Index.Tests
             var extractor = new EntityLinkExtractor();
             var actual = extractor.GetValue(dataElements, "EntityLink");
 
-            actual.Value.Should().Be("Test");
-            actual.EntityRecordId.Should().Be("100");
-            actual.EntityType.Should().Be("type");
+            actual.Value.ShouldBe("Test");
+            actual.EntityRecordId.ShouldBe("100");
+            actual.EntityType.ShouldBe("type");
         }
 
         [Test]
@@ -230,8 +230,8 @@ namespace CMI.Manager.Index.Tests
             var extractor = new DateWithYearExtractor();
             var actual = extractor.GetValue(dataElements, "DateWithYear");
 
-            actual.Date.Should().Be(new DateTime(2017, 7, 13));
-            actual.Year.Should().Be(2017);
+            actual.Date.ShouldBe(new DateTime(2017, 7, 13));
+            actual.Year.ShouldBe(2017);
         }
     }
 }

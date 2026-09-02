@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using CMI.Contract.Asset;
 using CMI.Contract.Common;
@@ -10,7 +10,7 @@ using CMI.Manager.Asset.Consumers;
 using CMI.Manager.Cache;
 using CMI.Utilities.Cache.Access;
 using CMI.Utilities.Template;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -74,7 +74,7 @@ public class DownloadAssetConsumerTests
         });
 
         // Assert
-        result.Message.AssetDownloadLink.Should().BeNullOrEmpty();
+        result.Message.AssetDownloadLink.ShouldBeNullOrEmpty();
         await harness.Stop();
     }
 
@@ -100,7 +100,7 @@ public class DownloadAssetConsumerTests
 
 
         // Assert
-        result.Message.AssetDownloadLink.Should().Be("sft://mockup");
+        result.Message.AssetDownloadLink.ShouldBe("sft://mockup");
         await harness.Stop();
     }
 }

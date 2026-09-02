@@ -1,11 +1,11 @@
-﻿using CMI.Access.Common;
+using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Messaging;
 using CMI.Contract.Order;
 using CMI.Manager.Order.Consumers;
 using CMI.Manager.Order.Status;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using Moq;
 using NUnit.Framework;
@@ -68,7 +68,7 @@ namespace CMI.Manager.Order.Tests
             };
             CreatingMocksWithCallbackData(newTokens, existingIndivTokens);
 
-           
+
             // act
             UpdateIndivTokensHelper.RegisterActionForIndivTokensRefresh(auftragStatus);
             await((IRunAll) postCommitActionsRegistry).RunAll();
@@ -83,11 +83,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = ["EB_123456789", AccessRoles.RoleBAR]
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
 
@@ -144,11 +144,11 @@ namespace CMI.Manager.Order.Tests
                 CombinedPrimaryDataFulltextAccessTokens = newTokens.PrimaryDataFulltextAccessTokens.Union(existingIndivTokens.PrimaryDataFulltextAccessTokens).ToArray()
             };
             sendEndpoint.Verify(ep => ep.Send(It.IsAny<UpdateIndivTokens>(), It.IsAny<CancellationToken>()), Times.Once());
-            expected.ArchiveRecordId.Should().Be(testResultTokens.ArchiveRecordId);
-            expected.CombinedFieldAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedFieldAccessTokens);
-            expected.CombinedMetadataAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedMetadataAccessTokens);
-            expected.CombinedPrimaryDataDownloadAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataDownloadAccessTokens);
-            expected.CombinedPrimaryDataFulltextAccessTokens.Should().BeEquivalentTo(testResultTokens.CombinedPrimaryDataFulltextAccessTokens);
+            expected.ArchiveRecordId.ShouldBe(testResultTokens.ArchiveRecordId);
+            expected.CombinedFieldAccessTokens.ShouldBe(testResultTokens.CombinedFieldAccessTokens, ignoreOrder: true);
+            expected.CombinedMetadataAccessTokens.ShouldBe(testResultTokens.CombinedMetadataAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataDownloadAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataDownloadAccessTokens, ignoreOrder: true);
+            expected.CombinedPrimaryDataFulltextAccessTokens.ShouldBe(testResultTokens.CombinedPrimaryDataFulltextAccessTokens, ignoreOrder: true);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace CMI.Manager.Order.Tests
             postCommitActionsRegistry = new PostCommitActionsRegistry();
 
             searchIndexAccess = new Mock<ISearchIndexDataAccess>();
-            searchIndexAccess.Setup(x => x.FindDocument(orderItem.VeId, MetadataToExclude.OCRContentAndFiles)).Returns(record);
+            searchIndexAccess.Setup(x => x.FindDocument(orderItem.VeId, MetadataToExclude.OCRContentAndFiles)).Returns(Task.FromResult(record));
 
             auftragStatusContext = new StatuswechselContext(orderItem, null, null, new User(), new User(), new List<StatusHistory>(),
                 DateTime.Now, searchIndexAccess.Object, busMock.Object, orderDataAccess.Object, postCommitActionsRegistry);

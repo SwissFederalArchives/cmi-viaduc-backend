@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 using CMI.Contract.Common.JsonConverters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace CMI.Contract.Common
 {
@@ -277,6 +276,7 @@ namespace CMI.Contract.Common
     {
         public string Name { get; set; }
         public string Path { get; set; }
+        [JsonConverter(typeof(EnumAsIntegerConverter<ElasticRepositoryObjectType>))]
         public ElasticRepositoryObjectType Type { get; set; }
         public string RepositoryId { get; set; }
         public string Content { get; set; }

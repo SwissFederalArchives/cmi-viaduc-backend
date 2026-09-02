@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web.Http;
-using CMI.Access.Sql.Viaduc;
+﻿using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Extensions;
 using CMI.Contract.Messaging;
@@ -21,6 +15,12 @@ using CMI.Web.Management.Auth;
 using CMI.Web.Management.ParameterSettings;
 using MassTransit;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace CMI.Web.Management.api.Controllers
 {
@@ -95,6 +95,29 @@ namespace CMI.Web.Management.api.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public IHttpActionResult GetBehaeltnisInhaltHtml([FromUri] string[] behaeltnisNummern)
+        {
+            var access = ManagementControllerHelper.GetUserAccess();
+
+            if (!access.HasFeature(ApplicationFeature.AuftragsuebersichtAuftraegeKannBehaeltnisInhaltDrucken))
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+
+            behaeltnisNummern = behaeltnisNummern
+               .SelectMany(x => x.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+               .Select(x => x.Trim())
+               .Distinct(StringComparer.OrdinalIgnoreCase)
+               .ToArray();
+
+            var builder = new DataBuilder(bus);
+            var expando = builder.SetDataProtectionLevel(DataBuilderProtectionStatus.AllUnanonymized)
+                   .AddVesWithSameContainer(behaeltnisNummern).Create();
+            var template = parameterHelper.GetSetting<BehaeltnisInhaltTemplate>();
+            var html = mailHelper.TransformToHtml(template.HtmlTemplate, expando);
+            return Ok(html);
+        }       
 
 
         [HttpGet]

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Gebrauchskopie;
 using CMI.Engine.PackageMetadata;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Repository.Tests
@@ -24,7 +24,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.FindOrdnungssystemPositionInPackage(new FolderInfo {Id = "I1509"}, dip);
 
             // Assert
-            value.Id.Should().Be("I1509");
+            value.Id.ShouldBe("I1509");
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace CMI.Manager.Repository.Tests
             var value = sut.FindDossierInPackage(new FolderInfo {Id = "EkYg"}, dip);
 
             // Assert
-            value.Id.Should().Be("EkYg");
+            value.Id.ShouldBe("EkYg");
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace CMI.Manager.Repository.Tests
             var value2 = sut?.CreationPeriod;
 
             // Assert
-            value.Should().BeNullOrEmpty();
-            value2.Should().BeNull();
+            value.ShouldBeNullOrEmpty();
+            value2.ShouldBeNull();
         }
 
         [Test]
@@ -69,9 +69,9 @@ namespace CMI.Manager.Repository.Tests
             var value3 = sut.CreationPeriod;
 
             // Assert
-            value.Should().Be("Ein Beispiel");
-            value2.Should().BeNullOrEmpty();
-            value3.StartDate.Should().Be(DateTime.Today);
+            value.ShouldBe("Ein Beispiel");
+            value2.ShouldBeNullOrEmpty();
+            value3.StartDate.ShouldBe(DateTime.Today);
         }
 
         [Test]
@@ -88,8 +88,8 @@ namespace CMI.Manager.Repository.Tests
             var serialized = sut.Serialize();
 
             // Assert
-            serialized.Should().Contain("schemaVersion=\"4.1\"");
-            serialized.Should().Contain("schemaLocation=\"http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd\"");
+            serialized.ShouldContain("schemaVersion=\"4.1\"");
+            serialized.ShouldContain("schemaLocation=\"http://bar.admin.ch/gebrauchskopie/v1 gebrauchskopie.xsd\"");
         }
 
         [Test]
@@ -131,8 +131,8 @@ namespace CMI.Manager.Repository.Tests
             var serialized = sut.Serialize();
 
             // Assert
-            serialized.Should().Contain("<zusatzDaten>");
-            serialized.Should().Contain("<merkmal name=\"");
+            serialized.ShouldContain("<zusatzDaten>");
+            serialized.ShouldContain("<merkmal name=\"");
         }
 
         [Test]
@@ -169,7 +169,7 @@ namespace CMI.Manager.Repository.Tests
             var serialized = sut.Serialize();
 
             // Assert
-            serialized.Should().NotContain("<zusatzDaten");
+            serialized.ShouldNotContain("<zusatzDaten");
         }
 
         private ElasticArchiveRecord GetNullArchiveRecord()

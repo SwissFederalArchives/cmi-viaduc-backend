@@ -10,9 +10,8 @@ import { WjInputModule, WjAutoComplete } from '@mescius/wijmo.angular2.input';
 import {WjCoreModule} from '@mescius/wijmo.angular2.core';
 import {ALL_SERVICES} from './services/_all';
 import {ALL_COMPONENTS} from './components/_all';
-import JSZip from 'jszip';
+
 import {CommonModule} from '@angular/common';
-window['JSZip'] = JSZip;
 import {WIJMO_LICENSEKEY} from './wijmo.licensekey';
 
 @NgModule({

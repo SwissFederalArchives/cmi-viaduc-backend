@@ -12,9 +12,10 @@ import {
 import {AnonymizedResult} from './anonymizedResult';
 
 @Component({
-	selector: 'cmi-viaduc-detail-page',
-	templateUrl: 'detailPage.component.html',
-	styleUrls: ['./detailPage.component.less']
+    selector: 'cmi-viaduc-detail-page',
+    templateUrl: 'detailPage.component.html',
+    styleUrls: ['./detailPage.component.less'],
+    standalone: false
 })
 export class DetailPageComponent implements OnInit, AfterViewInit {
 	public loading: boolean;
@@ -143,7 +144,7 @@ export class DetailPageComponent implements OnInit, AfterViewInit {
 					this.sections = [];
 					if (this.entity._context) {
 						const ctx = this.entity._context;
-						const items = [];
+						const items: any [] = [];
 						if (ctx.ancestors) {
 							Array.prototype.push.apply(items, ctx.ancestors);
 						}

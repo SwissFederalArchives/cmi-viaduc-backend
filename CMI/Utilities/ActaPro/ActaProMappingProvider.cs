@@ -53,8 +53,9 @@ public class ActaProMappingProvider
     }
     public long GetScopeId(string id)
     {
-        using var connection =  new SqliteConnection($"Data Source={connectionString};");
         SQLitePCL.Batteries.Init();
+        using var connection =  new SqliteConnection($"Data Source={connectionString};");
+        
         connection.Open();
         var sql = "SELECT ScopeID FROM MappingTable WHERE ActaProId = $id";
         
@@ -76,8 +77,8 @@ public class ActaProMappingProvider
 
         if (long.TryParse(scopeId, out _))
         {
-            using var connection = new SqliteConnection($"Data Source={connectionString};");
             SQLitePCL.Batteries.Init();
+            using var connection = new SqliteConnection($"Data Source={connectionString};");
             connection.Open();
             var sql = "SELECT ActaProId FROM MappingTable WHERE ScopeID = $scopeId";
             using var cmd = new SqliteCommand(sql, connection);

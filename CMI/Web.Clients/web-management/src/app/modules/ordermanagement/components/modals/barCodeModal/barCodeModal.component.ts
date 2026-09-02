@@ -2,9 +2,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-barcode-modal',
-	templateUrl: 'barCodeModal.component.html',
-	styleUrls: ['./barCodeModal.component.less']
+    selector: 'cmi-viaduc-barcode-modal',
+    templateUrl: 'barCodeModal.component.html',
+    styleUrls: ['./barCodeModal.component.less'],
+    standalone: false
 })
 export class BarCodeModalComponent {
 
@@ -13,7 +14,7 @@ export class BarCodeModalComponent {
 	@Output()
 	public openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-	private _open: boolean;
+	private _open!: boolean;
 	public get open(): boolean {
 		return this._open;
 	}
@@ -23,7 +24,7 @@ export class BarCodeModalComponent {
 		this.openChange.emit(val);
 	}
 
-	public barcodes: string;
+	public barcodes: string = '';
 
 	public expandTextarea(event: any) {
 		if (event && event.target) {
@@ -53,7 +54,7 @@ export class BarCodeModalComponent {
 		if (this.barcodes) {
 			this.onSubmitted.emit(this._distinctSplit(this.barcodes));
 		} else {
-			this.onSubmitted.emit(null);
+			this.onSubmitted.emit(undefined);
 		}
 	}
 }

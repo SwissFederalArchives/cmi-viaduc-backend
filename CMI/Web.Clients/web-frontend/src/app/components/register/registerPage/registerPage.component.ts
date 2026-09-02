@@ -11,9 +11,10 @@ import {French} from 'flatpickr/dist/l10n/fr';
 import {Italian} from 'flatpickr/dist/l10n/it';
 
 @Component({
-	selector: 'cmi-viaduc-register-page',
-	templateUrl: 'registerPage.component.html',
-	styleUrls: ['registerPage.component.less']
+    selector: 'cmi-viaduc-register-page',
+    templateUrl: 'registerPage.component.html',
+    styleUrls: ['registerPage.component.less'],
+    standalone: false
 })
 export class RegisterPageComponent extends ComponentCanDeactivate implements OnInit  {
 

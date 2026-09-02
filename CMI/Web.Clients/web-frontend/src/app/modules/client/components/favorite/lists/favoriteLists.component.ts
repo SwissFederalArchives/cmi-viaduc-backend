@@ -5,9 +5,10 @@ import {FavoriteService} from '../../../services/favorite.service';
 import {UrlService} from '../../../services/url.service';
 
 @Component({
-	selector: 'cmi-viaduc-favorite-lists',
-	templateUrl: 'favoriteLists.component.html',
-	styleUrls: ['./favoriteLists.component.less']
+    selector: 'cmi-viaduc-favorite-lists',
+    templateUrl: 'favoriteLists.component.html',
+    styleUrls: ['./favoriteLists.component.less'],
+    standalone: false
 })
 export class FavoriteListsComponent implements OnInit {
 	public loading: boolean;

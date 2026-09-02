@@ -215,7 +215,6 @@ namespace CMI.Contract.Messaging
     {
     }
 
-
     public class RecalcIndivTokens
     {
         public string ArchiveRecordId { get; set; }

@@ -1,11 +1,11 @@
-﻿using Castle.Components.DictionaryAdapter;
+using Castle.Components.DictionaryAdapter;
 using CMI.Access.Common;
 using CMI.Access.Sql.Viaduc.EF;
 using CMI.Contract.Common;
 using CMI.Contract.Common.Entities;
 using CMI.Engine.Anonymization;
 using CMI.Manager.Index.Config;
-using FluentAssertions;
+using Shouldly;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -54,7 +54,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         // Assert
         anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Once);
         dbManuelleKorrekturAccessMock.Verify(db => db.GetManuelleKorrektur(It.IsAny<Func<ManuelleKorrektur, bool>>()), Times.Exactly(2));
-        result.Should().Be(elasticRecord);
+        result.ShouldBe(elasticRecord);
     }
 
     [Test]
@@ -107,8 +107,8 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
         
         // Assert
-        result.Title.Should().Be(manuelleKorrektur.ManuelleKorrekturFelder[0].Manuell, "Das manuelle Feld muss verwendet worden sein");
-        syncManuelleKorrekturResult.Should().BeNull("Update Manuelle Korrektur was not called --> result is null");
+        result.Title.ShouldBe(manuelleKorrektur.ManuelleKorrekturFelder[0].Manuell, "Das manuelle Feld muss verwendet worden sein");
+        syncManuelleKorrekturResult.ShouldBeNull("Update Manuelle Korrektur was not called --> result is null");
         anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Once);
     }
 
@@ -161,14 +161,14 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
         
         // Assert
-        result.Title.Should().Be(elasticRecord.Title, "Title was not updated");
+        result.Title.ShouldBe(elasticRecord.Title, "Title was not updated");
         syncManuelleKorrekturResult.ManuelleKorrekturFelder.FirstOrDefault(
                 feld => feld.Feldname == ManuelleKorrekturFelder.Titel)
-            ?.Manuell.StartsWith("=== Überprüfung erforderlich ===").Should().BeTrue("Hinweis muss gesetzt sein");
+            ?.Manuell.StartsWith("=== Überprüfung erforderlich ===").ShouldBeTrue("Hinweis muss gesetzt sein");
         syncManuelleKorrekturResult.ManuelleKorrekturFelder.FirstOrDefault(
                 feld => feld.Feldname == ManuelleKorrekturFelder.Titel)
-            ?.Original.Equals(elasticRecord.UnanonymizedFields.Title).Should().BeTrue("Der gelieferte Titel muss neu vorhanden sein.");
-        syncManuelleKorrekturResult.Anonymisierungsstatus.Should().Be((int) AnonymisierungsStatusEnum.CheckRequired);
+            ?.Original.Equals(elasticRecord.UnanonymizedFields.Title).ShouldBeTrue("Der gelieferte Titel muss neu vorhanden sein.");
+        syncManuelleKorrekturResult.Anonymisierungsstatus.ShouldBe((int) AnonymisierungsStatusEnum.CheckRequired);
         anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Never);
     }
 
@@ -221,14 +221,14 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
 
         // Assert
-        result.Title.Should().Be(elasticRecord.Title, "Title was not updated");
+        result.Title.ShouldBe(elasticRecord.Title, "Title was not updated");
         syncManuelleKorrekturResult.ManuelleKorrekturFelder.FirstOrDefault(feld => feld.Feldname == ManuelleKorrekturFelder.Titel)
-            ?.Manuell.StartsWith("=== Überprüfung erforderlich ===").Should().BeTrue("Hinweis muss gesetzt sein");
+            ?.Manuell.StartsWith("=== Überprüfung erforderlich ===").ShouldBeTrue("Hinweis muss gesetzt sein");
         syncManuelleKorrekturResult.ManuelleKorrekturFelder.FirstOrDefault(feld => feld.Feldname == ManuelleKorrekturFelder.Titel)
-            ?.Original.Equals(elasticRecord.UnanonymizedFields.Title).Should().BeTrue("Der gelieferte Titel muss neu vorhanden sein.");
+            ?.Original.Equals(elasticRecord.UnanonymizedFields.Title).ShouldBeTrue("Der gelieferte Titel muss neu vorhanden sein.");
         syncManuelleKorrekturResult.ManuelleKorrekturFelder.FirstOrDefault(feld => feld.Feldname == ManuelleKorrekturFelder.Titel)
-            ?.Automatisch.Equals(elasticRecord.Title).Should().BeTrue("Der gelieferte anonymisierte Titel muss neu vorhanden sein.");
-        syncManuelleKorrekturResult.Anonymisierungsstatus.Should().Be((int) AnonymisierungsStatusEnum.CheckRequired);
+            ?.Automatisch.Equals(elasticRecord.Title).ShouldBeTrue("Der gelieferte anonymisierte Titel muss neu vorhanden sein.");
+        syncManuelleKorrekturResult.Anonymisierungsstatus.ShouldBe((int) AnonymisierungsStatusEnum.CheckRequired);
         anonymizationWithManuelleKorrekturEngine.Verify(f => f.UpdateDependentRecords(It.IsAny<ElasticArchiveDbRecord>()), Times.Never);
     }
 
@@ -286,9 +286,9 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
 
         // Assert
-        result.ZusätzlicheInformationen().Should().Be(manuelleKorrektur.ManuelleKorrekturFelder.First().Manuell);
-        syncManuelleKorrekturResult.Should().BeNull("Manuelle Korrektur was not changed, thus insert/update was not called");
-        result.IsAnonymized.Should().BeTrue();
+        result.ZusätzlicheInformationen().ShouldBe(manuelleKorrektur.ManuelleKorrekturFelder.First().Manuell);
+        syncManuelleKorrekturResult.ShouldBeNull("Manuelle Korrektur was not changed, thus insert/update was not called");
+        result.IsAnonymized.ShouldBeTrue();
     }
 
     [Test]
@@ -342,9 +342,9 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
 
         // Assert
-        result.WithinInfo.Should().Be(manuelleKorrektur.ManuelleKorrekturFelder.First().Manuell);
-        syncManuelleKorrekturResult.Should().BeNull("Manuelle Korrektur was not changed, thus insert/update was not called");
-        result.IsAnonymized.Should().BeFalse();
+        result.WithinInfo.ShouldBe(manuelleKorrektur.ManuelleKorrekturFelder.First().Manuell);
+        syncManuelleKorrekturResult.ShouldBeNull("Manuelle Korrektur was not changed, thus insert/update was not called");
+        result.IsAnonymized.ShouldBeFalse();
     }
 
     private IIndexManager SetupIndexManager(Mock<ISearchIndexDataAccess> dbAccessMock,
@@ -360,8 +360,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
             .Returns<ManuelleKorrekturDto, string>((x, _) => Task.FromResult(partialResultFunction.Invoke(x)));
 
         dbAccessMock.Setup(db =>
-            db.FindDbDocument(It.IsAny<string>(), It.IsAny<MetadataToExclude>())).Returns
-            <string, bool>(GetElasticArchiveDbRecordMoq);
+            db.FindDbDocument(It.IsAny<string>(), It.IsAny<MetadataToExclude>())).Returns<string, bool>(GetElasticArchiveDbRecordMoq); 
         return indexManager;
     }
 
@@ -398,7 +397,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
         var result = indexManager.SyncAnonymizedTextsWithRelatedRecords(elasticRecord);
 
         // Assert
-        result.ArchiveRecordId.Should().Be(dbManuelleKorrekturAccessMock.ManuelleKorrektur.VeId, "ArchiveRecordId was not updated");
+        result.ArchiveRecordId.ShouldBe(dbManuelleKorrekturAccessMock.ManuelleKorrektur.VeId, "ArchiveRecordId was not updated");
     }
 
     [Test]
@@ -428,14 +427,14 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
        indexManager.DeletePossiblyExistingManuelleKorrektur(elasticRecord);
 
         // Assert
-        dbManuelleKorrekturAccessMock.ManuelleKorrektur.Should().BeNull("DeletePossiblyExistingManuelleKorrektur was not work");
+        dbManuelleKorrekturAccessMock.ManuelleKorrektur.ShouldBeNull("DeletePossiblyExistingManuelleKorrektur was not work");
     }
 
-    private ElasticArchiveDbRecord GetElasticArchiveDbRecordMoq(string archiveRecordIdOrSignature, bool includeFulltextContent)
+    private Task<ElasticArchiveDbRecord> GetElasticArchiveDbRecordMoq(string archiveRecordIdOrSignature, bool includeFulltextContent)
     {
         if (archiveRecordIdOrSignature == "12")
         {
-            return new ElasticArchiveDbRecord
+            return Task.FromResult(new ElasticArchiveDbRecord
             {
                 ArchiveRecordId = "12",
                 ParentArchiveRecordId = "80012345",
@@ -460,12 +459,12 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
                         Title = "Korregiere mich"
                     }
                 }
-            };
+            });
         }
 
         if (archiveRecordIdOrSignature == "21")
         {
-            return new ElasticArchiveDbRecord
+            return Task.FromResult(new ElasticArchiveDbRecord
             {
                 ArchiveRecordId = "21",
                 ParentArchiveRecordId = "12",
@@ -496,7 +495,7 @@ public class SyncAnonymizedTextsWithRelatedRecordsTests
                         Title = "Korregiere mich 84"
                     }
                 }
-            };
+            });
         }
 
         return null;

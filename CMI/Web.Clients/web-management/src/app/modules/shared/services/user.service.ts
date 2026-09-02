@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../model/user';
 import {Subject, Observable} from 'rxjs';
 import {ConfigService, CoreOptions, HttpService} from '@cmi/viaduc-web-core';
-import * as moment from 'moment/moment';
+import moment from 'moment';
 
 @Injectable()
 export class UserService {
@@ -17,12 +17,12 @@ export class UserService {
 		this.userSettingsLoaded = new Subject<boolean>();
 	}
 
-	public async getUser(): Promise<User> {
+	public async getUser(): Promise<User | any> {
 		const url = this._createBaseUrl() + 'GetUser';
 		return this._http.get<User>(url, this._http.noCaching).toPromise();
 	}
 
-	public async getUsers(userIds: string[]): Promise<User[]> {
+	public async getUsers(userIds: string[]): Promise<User[] | any> {
 		const queryParams = userIds.map(i => i).join('&userIds=');
 		const url = this._createBaseUrl() + 'GetUsers?userIds=' + queryParams;
 		return this._http.get<User[]>(url, this._http.noCaching).toPromise();
@@ -80,7 +80,8 @@ export class UserService {
 		return url;
 	}
 
-	public setIdentifizierungsmittelPdf(userId: string, rolePublicClient: string, identifizierungsmittel: FormData): Observable<any> {
+	public setIdentifizierungsmittelPdf(userId: string, rolePublicClient: string, identifizierungsmittel: FormData | null)
+		: Observable<any> {
 		const urlParameter = `?userId=${userId}&rolePublicClient=${rolePublicClient}`;
 		const url = this._createUrl('SetIdentifizierungsmittelPdf' + urlParameter);
 		return this._http.post<string>(url, identifizierungsmittel, this._http.noCaching);
@@ -102,7 +103,8 @@ export class UserService {
 	}
 
 	private getFormattedDateWithoutTime(dt: Date | string) {
-		return dt ? moment(dt).format('DD.MM.YYYY') : '';
+		const formated  = moment(dt).format('DD.MM.YYYY');
+		return dt ? formated : '';
 	}
 
 }

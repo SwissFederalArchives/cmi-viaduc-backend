@@ -9,16 +9,17 @@ import {ToastrService} from 'ngx-toastr';
 import {formatDate} from '@angular/common';
 
 @Component({
-	selector: 'cmi-converter-progress',
-	templateUrl: './converterProgress.component.html',
-	styleUrls: ['./converterProgress.component.less']
+    selector: 'cmi-converter-progress',
+    templateUrl: './converterProgress.component.html',
+    styleUrls: ['./converterProgress.component.less'],
+    standalone: false
 })
 export class ConverterProgressComponent implements OnInit {
 	public crumbs: any[] = [];
-	public loading: boolean;
-	public progressTextExtraction: ProgressDetail[];
-	public progressTransform: ProgressDetail[];
-	public showDetails: boolean;
+	public loading: boolean = true;
+	public progressTextExtraction!: ProgressDetail[];
+	public progressTransform!: ProgressDetail[];
+	public showDetails!: boolean;
 
 	constructor(private progressService: ConverterProgressService,
 				private _txt: TranslationService,

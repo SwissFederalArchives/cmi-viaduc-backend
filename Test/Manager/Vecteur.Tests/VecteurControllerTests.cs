@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -11,7 +11,7 @@ using CMI.Contract.Order;
 using CMI.Contract.Parameter;
 using CMI.Engine.MailTemplate;
 using CMI.Utilities.Template;
-using FluentAssertions;
+using Shouldly;
 using MassTransit;
 using MassTransit.Events;
 using Moq;
@@ -35,7 +35,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeTrue();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeTrue();
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeFalse();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeFalse();
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeTrue();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeTrue();
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeFalse();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeFalse();
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeFalse();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeFalse();
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeTrue();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeTrue();
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeTrue();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeTrue();
         }
 
         [Test]
@@ -147,7 +147,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeFalse();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeFalse();
         }
 
         [Test]
@@ -163,7 +163,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = (OkNegotiatedContentResult<DigitalisierungsAuftrag>) await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Content.Dossier.InSchutzfrist.Should().BeTrue();
+            auftrag.Content.Dossier.InSchutzfrist.ShouldBeTrue();
         }
 
         [Test]
@@ -181,7 +181,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<UnauthorizedResult>();
+            auftrag.ShouldBeOfType<UnauthorizedResult>();
         }
 
         [Test]
@@ -196,8 +196,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<StatusCodeResult>();
-            ((StatusCodeResult) auftrag).StatusCode.Should().Be(HttpStatusCode.NoContent);
+            auftrag.ShouldBeOfType<StatusCodeResult>();
+            ((StatusCodeResult) auftrag).StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Test]
@@ -211,8 +211,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
         }
 
         [Test]
@@ -228,8 +228,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
         }
 
 
@@ -243,7 +243,7 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<ExceptionResult>();
+            auftrag.ShouldBeOfType<ExceptionResult>();
         }
 
 
@@ -264,8 +264,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
             // Verify that the order was marked a s faulted
             orderManagerMock.Verify(x => x.MarkOrderAsFaulted(999), Times.Once);
             mailHelperMock.Verify(
@@ -285,8 +285,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = controller.GetNextDigitalisierungsauftrag().GetAwaiter().GetResult();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
 
         [Test]
@@ -301,8 +301,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = controller.GetNextDigitalisierungsauftrag().GetAwaiter().GetResult();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.ServiceUnavailable);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.ServiceUnavailable);
         }
 
         [Test]
@@ -317,8 +317,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = controller.GetNextDigitalisierungsauftrag().GetAwaiter().GetResult();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.ServiceUnavailable);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.ServiceUnavailable);
         }
 
         [Test]
@@ -338,8 +338,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = controller.GetNextDigitalisierungsauftrag().GetAwaiter().GetResult();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.ServiceUnavailable);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.ServiceUnavailable);
         }
 
         [Test]
@@ -355,8 +355,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = controller.GetNextDigitalisierungsauftrag().GetAwaiter().GetResult();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
         }
 
         [Test]
@@ -372,8 +372,8 @@ namespace CMI.Manager.Vecteur.Tests
             var auftrag = await controller.GetNextDigitalisierungsauftrag();
 
             // Assert
-            auftrag.Should().BeOfType<NegotiatedContentResult<string>>();
-            ((NegotiatedContentResult<string>) auftrag).StatusCode.Should().Be(HttpStatusCode.RequestEntityTooLarge);
+            auftrag.ShouldBeOfType<NegotiatedContentResult<string>>();
+            ((NegotiatedContentResult<string>) auftrag).StatusCode.ShouldBe(HttpStatusCode.RequestEntityTooLarge);
         }
 
         [Test]
@@ -386,7 +386,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.GetStatus(1);
 
             // Assert
-            result.Should().BeOfType<ExceptionResult>();
+            result.ShouldBeOfType<ExceptionResult>();
         }
 
         [Test]
@@ -399,8 +399,8 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.GetStatus(1);
 
             // Assert
-            result.Should().BeOfType<StatusCodeResult>();
-            ((StatusCodeResult) result).StatusCode.Should().Be(HttpStatusCode.NotFound);
+            result.ShouldBeOfType<StatusCodeResult>();
+            ((StatusCodeResult) result).StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
         [Test]
@@ -415,7 +415,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.GetStatus(1);
 
             // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.ShouldBeOfType<UnauthorizedResult>();
         }
 
         [Test]
@@ -429,8 +429,8 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.GetStatus(1);
 
             // Assert
-            result.Should().BeOfType<OkNegotiatedContentResult<string>>();
-            ((OkNegotiatedContentResult<string>) result).Content.Should().Be(OrderStatesInternal.Ausgeliehen.ToString());
+            result.ShouldBeOfType<OkNegotiatedContentResult<string>>();
+            ((OkNegotiatedContentResult<string>) result).Content.ShouldBe(OrderStatesInternal.Ausgeliehen.ToString());
         }
 
 
@@ -446,7 +446,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.SetStatusAushebungBereit(1);
 
             // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.ShouldBeOfType<UnauthorizedResult>();
         }
 
         [Test]
@@ -461,7 +461,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.SetStatusDigitalisierungAbgebrochen(1, string.Empty);
 
             // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.ShouldBeOfType<UnauthorizedResult>();
         }
 
 
@@ -477,7 +477,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.SetStatusDigitalisierungExtern(1);
 
             // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.ShouldBeOfType<UnauthorizedResult>();
         }
 
         [Test]
@@ -492,7 +492,7 @@ namespace CMI.Manager.Vecteur.Tests
             var result = await controller.SetStatusZumReponierenBereit(1);
 
             // Assert
-            result.Should().BeOfType<UnauthorizedResult>();
+            result.ShouldBeOfType<UnauthorizedResult>();
         }
 
 

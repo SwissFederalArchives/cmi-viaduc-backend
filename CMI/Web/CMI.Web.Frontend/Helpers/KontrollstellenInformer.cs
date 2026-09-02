@@ -45,7 +45,7 @@ namespace CMI.Web.Frontend.Helpers
             }
 
             var archiveRecordIdList = veInfoList.Select(ve => ve.VeId).ToList();
-            var entityResult = elasticService.QueryForIdsWithoutSecurityFilter<ElasticArchiveDbRecord>(archiveRecordIdList, new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0});
+            var entityResult = await elasticService.QueryForIdsWithoutSecurityFilter<ElasticArchiveDbRecord>(archiveRecordIdList, new Paging {Take = ElasticService.ELASTIC_SEARCH_HIT_LIMIT, Skip = 0});
 
             if (entityResult.Status != (int) HttpStatusCode.OK)
             {

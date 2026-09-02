@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using CMI.Contract.Common;
 using CMI.Engine.Anonymization.Tests.Mocks;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -18,7 +18,7 @@ namespace CMI.Engine.Anonymization.Tests
         {
             var engine = new AnonymizationEngineMock(null);
             var result = engine.AnonymizeArchiveRecordAsync(new ElasticArchiveDbRecord());
-            result.Result.IsAnonymized.Should().Be(false);
+            result.Result.IsAnonymized.ShouldBe(false);
         }
 
         [Test]
@@ -75,28 +75,28 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.UnanonymizedFields.ParentContentInfos.Count.Should().Be(5);
-            result.Result.UnanonymizedFields.ArchiveplanContext.Count.Should().Be(5);
-            result.Result.UnanonymizedFields.References.Count.Should().Be(6);
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.Title.Should().Be("Klaus Reiner Ichzerts");
-            result.Result.WithinInfo.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.WithinInfo.Should().Be("Ist drin");
+            result.Result.UnanonymizedFields.ParentContentInfos.Count.ShouldBe(5);
+            result.Result.UnanonymizedFields.ArchiveplanContext.Count.ShouldBe(5);
+            result.Result.UnanonymizedFields.References.Count.ShouldBe(6);
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.Title.ShouldBe("Klaus Reiner Ichzerts");
+            result.Result.WithinInfo.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.WithinInfo.ShouldBe("Ist drin");
             for (int index = 0; index < 5; index++)
             {
-                result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.Should().Be("Der schnelle Hans " + (index + 1));
-                result.Result.UnanonymizedFields.References[index].ReferenceName.Should().Be("Test Text");
-                result.Result.UnanonymizedFields.ParentContentInfos[index].Title.Should().NotContain("███");
+                result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.ShouldBe("Der schnelle Hans " + (index + 1));
+                result.Result.UnanonymizedFields.References[index].ReferenceName.ShouldBe("Test Text");
+                result.Result.UnanonymizedFields.ParentContentInfos[index].Title.ShouldNotContain("███");
 
-                result.Result.ArchiveplanContext[index].Title.Should().Be(engine.AnonymTagWithBlockqute);
-                result.Result.References[index].ReferenceName.Should().Be(engine.AnonymTagWithBlockqute);
+                result.Result.ArchiveplanContext[index].Title.ShouldBe(engine.AnonymTagWithBlockqute);
+                result.Result.References[index].ReferenceName.ShouldBe(engine.AnonymTagWithBlockqute);
                 // Must be the same title like archiveplanContext
-                result.Result.ParentContentInfos[index].Title.Should().Be(result.Result.ArchiveplanContext[index].Title);
+                result.Result.ParentContentInfos[index].Title.ShouldBe(result.Result.ArchiveplanContext[index].Title);
             }
 
-            result.Result.References[5].ReferenceName.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.References[5].ReferenceName.Should().Be("Weiterer Text");
-            result.Result.IsAnonymized.Should().Be(true);
+            result.Result.References[5].ReferenceName.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.References[5].ReferenceName.ShouldBe("Weiterer Text");
+            result.Result.IsAnonymized.ShouldBe(true);
         }
 
 
@@ -155,28 +155,28 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.UnanonymizedFields.ParentContentInfos.Count.Should().Be(5);
-            result.Result.UnanonymizedFields.ArchiveplanContext.Count.Should().Be(5);
-            result.Result.UnanonymizedFields.References.Count.Should().Be(6);
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.Title.Should().Be("Klaus Reiner Ichzerts");
-            result.Result.WithinInfo.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.WithinInfo.Should().Be("Ist drin");
+            result.Result.UnanonymizedFields.ParentContentInfos.Count.ShouldBe(5);
+            result.Result.UnanonymizedFields.ArchiveplanContext.Count.ShouldBe(5);
+            result.Result.UnanonymizedFields.References.Count.ShouldBe(6);
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.Title.ShouldBe("Klaus Reiner Ichzerts");
+            result.Result.WithinInfo.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.WithinInfo.ShouldBe("Ist drin");
             for (int index = 0; index < 5; index++)
             {
-                result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.Should().Be("Der schnelle Hans " + (index + 1));
-                result.Result.UnanonymizedFields.References[index].ReferenceName.Should().Be("Test Text");
-                result.Result.UnanonymizedFields.ParentContentInfos[index].Title.Should().NotContain("███");
+                result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.ShouldBe("Der schnelle Hans " + (index + 1));
+                result.Result.UnanonymizedFields.References[index].ReferenceName.ShouldBe("Test Text");
+                result.Result.UnanonymizedFields.ParentContentInfos[index].Title.ShouldNotContain("███");
 
-                result.Result.ArchiveplanContext[index].Title.Should().Be(engine.AnonymTagWithBlockqute);
-                result.Result.References[index].ReferenceName.Should().Be(engine.AnonymTagWithBlockqute);
+                result.Result.ArchiveplanContext[index].Title.ShouldBe(engine.AnonymTagWithBlockqute);
+                result.Result.References[index].ReferenceName.ShouldBe(engine.AnonymTagWithBlockqute);
                 // Must be the same title like archiveplanContext
-                result.Result.ParentContentInfos[index].Title.Should().Be(result.Result.ArchiveplanContext[index].Title);
+                result.Result.ParentContentInfos[index].Title.ShouldBe(result.Result.ArchiveplanContext[index].Title);
             }
 
-            result.Result.References[5].ReferenceName.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.UnanonymizedFields.References[5].ReferenceName.Should().Be("Weiterer Text");
-            result.Result.IsAnonymized.Should().Be(false);
+            result.Result.References[5].ReferenceName.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.UnanonymizedFields.References[5].ReferenceName.ShouldBe("Weiterer Text");
+            result.Result.IsAnonymized.ShouldBe(false);
         }
 
         [Test]
@@ -218,43 +218,43 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.UnanonymizedFields.ArchiveplanContext.Count.Should().Be(6);
-            result.Result.UnanonymizedFields.References.Count.Should().Be(6);
-            result.Result.UnanonymizedFields.ParentContentInfos.Count.Should().Be(6);
-            result.Result.ArchiveplanContext.Count.Should().Be(6);
-            result.Result.References.Count.Should().Be(6);
-            result.Result.ParentContentInfos.Count.Should().Be(6);
+            result.Result.UnanonymizedFields.ArchiveplanContext.Count.ShouldBe(6);
+            result.Result.UnanonymizedFields.References.Count.ShouldBe(6);
+            result.Result.UnanonymizedFields.ParentContentInfos.Count.ShouldBe(6);
+            result.Result.ArchiveplanContext.Count.ShouldBe(6);
+            result.Result.References.Count.ShouldBe(6);
+            result.Result.ParentContentInfos.Count.ShouldBe(6);
 
             for (int index = 0; index < 6; index++)
             {
                 if (result.Result.ArchiveplanContext[index].Protected)
                 {
-                    result.Result.ArchiveplanContext[index].Title.Should().Contain("███");
-                    result.Result.ArchiveplanContext[index].Title.Should().Be(engine.AnonymTagWithBlockqute);
-                    result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.Should().Be("Der schnelle Hans " + (index + 1));
+                    result.Result.ArchiveplanContext[index].Title.ShouldContain("███");
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe(engine.AnonymTagWithBlockqute);
+                    result.Result.UnanonymizedFields.ArchiveplanContext[index].Title.ShouldBe("Der schnelle Hans " + (index + 1));
                 }
                 else
                 {
-                    result.Result.ArchiveplanContext[index].Title.Should().Be("Der schnelle Hans " + (index + 1));
-                    result.Result.ArchiveplanContext[index].Title.Should().Be(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe("Der schnelle Hans " + (index + 1));
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
                 }
 
                 if (result.Result.References[index].Protected)
                 {
-                    result.Result.References[index].ReferenceName.Should().Be(engine.AnonymTagWithBlockqute);
-                    result.Result.UnanonymizedFields.References[index].ReferenceName.Should().Be("Test Text");
+                    result.Result.References[index].ReferenceName.ShouldBe(engine.AnonymTagWithBlockqute);
+                    result.Result.UnanonymizedFields.References[index].ReferenceName.ShouldBe("Test Text");
                 }
                 else
                 {
-                    result.Result.References[index].ReferenceName.Should().Be(result.Result.UnanonymizedFields.References[index].ReferenceName);
-                    result.Result.References[index].ReferenceName.Should().Be("Test Text");
+                    result.Result.References[index].ReferenceName.ShouldBe(result.Result.UnanonymizedFields.References[index].ReferenceName);
+                    result.Result.References[index].ReferenceName.ShouldBe("Test Text");
                 }
 
                 // Must be the same title like archiveplanContext
-                result.Result.ParentContentInfos[index].Title.Should().Be(result.Result.ArchiveplanContext[index].Title);
+                result.Result.ParentContentInfos[index].Title.ShouldBe(result.Result.ArchiveplanContext[index].Title);
             }
 
-            result.Result.IsAnonymized.Should().Be(true);
+            result.Result.IsAnonymized.ShouldBe(true);
         }
 
         [Test]
@@ -279,22 +279,22 @@ namespace CMI.Engine.Anonymization.Tests
             var zusätzlicheInformationen = result.Result.ZusätzlicheInformationen();
             if (!string.IsNullOrWhiteSpace(zusätzlicheInformationen))
             {
-                zusätzlicheInformationen.Should().Be(engine.AnonymTagWithBlockqute);
+                zusätzlicheInformationen.ShouldBe(engine.AnonymTagWithBlockqute);
             }
 
             var zusatzmerkmal = result.Result.Zusatzmerkmal();
             if (!string.IsNullOrWhiteSpace(zusatzmerkmal))
             {
-                zusätzlicheInformationen.Should().Be(engine.AnonymTagWithBlockqute);
+                zusätzlicheInformationen.ShouldBe(engine.AnonymTagWithBlockqute);
             }
 
             var verwandteVe = result.Result.VerwandteVe();
             if (!string.IsNullOrWhiteSpace(verwandteVe))
             {
-                verwandteVe.Should().Be(engine.AnonymTagWithBlockqute);
+                verwandteVe.ShouldBe(engine.AnonymTagWithBlockqute);
             }
 
-            result.Result.IsAnonymized.Should().Be(true);
+            result.Result.IsAnonymized.ShouldBe(true);
         }
 
         [Test]
@@ -323,28 +323,28 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.UnanonymizedFields.ArchiveplanContext.Count.Should().Be(7);
+            result.Result.UnanonymizedFields.ArchiveplanContext.Count.ShouldBe(7);
             for (int index = 0; index < 7; index++)
             {
                 if (result.Result.ArchiveplanContext[index].Protected)
                 {
-                    result.Result.ArchiveplanContext[index].Title.Should().Contain("███");
-                    result.Result.ArchiveplanContext[index].Title.Should().Be(engine.AnonymTagWithBlockqute);
-                    result.Result.ArchiveplanContext[index].Title.Should().NotBe(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
+                    result.Result.ArchiveplanContext[index].Title.ShouldContain("███");
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe(engine.AnonymTagWithBlockqute);
+                    result.Result.ArchiveplanContext[index].Title.ShouldNotBe(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
                 }
                 else
                 {
-                    result.Result.ArchiveplanContext[index].Title.Should().Be("Der schnelle Hans " + (index + 1));
-                    result.Result.ArchiveplanContext[index].Title.Should().NotBe(engine.AnonymTagWithBlockqute);
-                    result.Result.ArchiveplanContext[index].Title.Should().NotContain("███");
-                    result.Result.ArchiveplanContext[index].Title.Should().Be(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe("Der schnelle Hans " + (index + 1));
+                    result.Result.ArchiveplanContext[index].Title.ShouldNotBe(engine.AnonymTagWithBlockqute);
+                    result.Result.ArchiveplanContext[index].Title.ShouldNotContain("███");
+                    result.Result.ArchiveplanContext[index].Title.ShouldBe(result.Result.UnanonymizedFields.ArchiveplanContext[index].Title);
                 }
 
                 // Must be the same title like archiveplanContext
-                result.Result.ParentContentInfos[index].Title.Should().Be(result.Result.ArchiveplanContext[index].Title);
+                result.Result.ParentContentInfos[index].Title.ShouldBe(result.Result.ArchiveplanContext[index].Title);
             }
 
-            result.Result.IsAnonymized.Should().Be(true);
+            result.Result.IsAnonymized.ShouldBe(true);
         }
 
         [Test]
@@ -368,8 +368,8 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.Title.Should().Contain("███");
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.Title.ShouldContain("███");
             result.Result.CustomFields.bemerkungZurVe.Equals(engine.AnonymTagWithBlockqute);
             result.Result.CustomFields.zusatzkomponenteZac1.Equals(engine.AnonymTagWithBlockqute);
             result.Result.CustomFields.zuständigeStelle.Equals(engine.AnonymTagWithBlockqute);
@@ -392,9 +392,9 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.Title.Should().Contain("███");
-            result.Result.Title.Should().Contain(Environment.NewLine);
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.Title.ShouldContain("███");
+            result.Result.Title.ShouldContain(Environment.NewLine);
         }
 
         [Test]
@@ -414,9 +414,9 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.Title.Should().Contain("███");
-            result.Result.Title.Should().Contain(Environment.NewLine);
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.Title.ShouldContain("███");
+            result.Result.Title.ShouldContain(Environment.NewLine);
         }
 
         [Test]
@@ -440,8 +440,8 @@ namespace CMI.Engine.Anonymization.Tests
             var result = engine.AnonymizeArchiveRecordAsync(elasticArchiveRecord);
 
             // assert
-            result.Result.Title.Should().Be(engine.AnonymTagWithBlockqute);
-            result.Result.Title.Should().Contain("███");
+            result.Result.Title.ShouldBe(engine.AnonymTagWithBlockqute);
+            result.Result.Title.ShouldContain("███");
             result.Result.CustomFields.bemerkungZurVe.Equals(engine.AnonymTagWithBlockqute);
             result.Result.CustomFields.zusatzkomponenteZac1.Equals(engine.AnonymTagWithBlockqute);
             result.Result.CustomFields.zuständigeStelle.Equals(engine.AnonymTagWithBlockqute);

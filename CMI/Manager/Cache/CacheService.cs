@@ -89,7 +89,7 @@ Vom AppO ist folgende Massnahme zu ergreifen:<br>
                 cfg.ReceiveEndpoint(BusConstants.CacheDeleteFile, ec =>
                 {
                     ec.Consumer(() => new DeleteFileFromCacheConsumer());
-                    ec.UseRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
+                    ec.UseMessageRetry(BusConfigurator.ConfigureDefaultRetryPolicy);
                 });
 
                 cfg.UseNewtonsoftJsonSerializer();

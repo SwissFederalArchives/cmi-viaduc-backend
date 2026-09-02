@@ -1,3 +1,5 @@
 <footer>
-	<cmi-viaduc-footer-content *ngIf="!reload"></cmi-viaduc-footer-content>
+  @if (!reload) {
+    <cmi-viaduc-footer-content></cmi-viaduc-footer-content>
+  }
 </footer>

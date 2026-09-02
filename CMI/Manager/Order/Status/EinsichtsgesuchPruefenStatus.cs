@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Engine.MailTemplate;
@@ -100,7 +101,9 @@ namespace CMI.Manager.Order.Status
             }
             else
             {
-                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles);
+                var veRecord = Context.IndexAccess.FindDocumentWithoutSecurity(Context.OrderItem.VeId, MetadataToExclude.OCRContentAndFiles).ConfigureAwait(false)
+                    .GetAwaiter()
+                    .GetResult(); 
                 ((List<InElasticIndexierteVe>) emailExpando.VeList).Add(InElasticIndexierteVe.FromElasticArchiveRecord(veRecord, veRecord));
             }
         }

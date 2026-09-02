@@ -3,9 +3,10 @@ import {AdvancedSearchGroup, TranslationService, Utilities as _util} from '@cmi/
 import {AdvancedSearchService} from '../../../../services/advancedSearch.service';
 
 @Component({
-	selector: 'cmi-viaduc-advanced-search-group',
-	templateUrl: 'advancedSearchGroup.component.html',
-	styleUrls: ['./advancedSearchGroup.component.less']
+    selector: 'cmi-viaduc-advanced-search-group',
+    templateUrl: 'advancedSearchGroup.component.html',
+    styleUrls: ['./advancedSearchGroup.component.less'],
+    standalone: false
 })
 export class AdvancedSearchGroupComponent implements AfterViewInit {
 

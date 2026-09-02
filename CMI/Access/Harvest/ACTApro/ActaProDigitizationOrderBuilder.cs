@@ -42,45 +42,60 @@ public class ActaProDigitizationOrderBuilder : IDigitizationOrderBuilder
         // clear cache 
         containerContentCache.Clear();
 
-        // Get lots of metadata we need for processing
-        var archiveRecord = await recordBuilder.Build(recordId);
-
-        if (archiveRecord != null)
+        try
         {
-            // Accession Data
-            var t1 = Task.Factory.StartNew(async () => { result.Ablieferung = await GetAccessionData(recordId, archiveRecord.Display.ArchiveplanContext); }).Result;
+            // Get lots of metadata we need for processing
+            var archiveRecord = await recordBuilder.Build(recordId);
 
-            var t2 = Task.Factory.StartNew(() =>
+            if (archiveRecord != null)
             {
-                // Ordering position Data
-                result.OrdnungsSystem = GetOrderingPositionData(archiveRecord);
-            });
+                // Accession Data
+                var t1 = Task.Factory.StartNew(async () => { result.Ablieferung = await GetAccessionData(recordId, archiveRecord.Display.ArchiveplanContext); }).Result;
 
-            var t3 = Task.Factory.StartNew(async () =>
+                var t2 = Task.Factory.StartNew(() =>
+                {
+                    // Ordering position Data
+                    result.OrdnungsSystem = GetOrderingPositionData(archiveRecord);
+                });
+
+                var t3 = Task.Factory.StartNew(async () =>
+                {
+                    // Archive record data
+                    result.Dossier = await GetDossierData(archiveRecord);
+                }).Result;
+
+                Task.WaitAll(t1, t2, t3);
+
+                // The basic order data
+                result.Auftragsdaten = GetOrderData(recordId, result);
+            }
+            else
             {
-                // Archive record data
-                result.Dossier = await GetDossierData(archiveRecord);
-            }).Result;
-
-            Task.WaitAll(t1, t2, t3);
-
-            // The basic order data
-            result.Auftragsdaten = GetOrderData(recordId, result);
+                GenerateDefaultData(recordId, result);
+            }
         }
-        else
+        catch (Exception e)
         {
-            result.Ablieferung = new AblieferungType
-            { AblieferndeStelle = NoDataAvailable, Ablieferungsnummer = NoDataAvailable, AktenbildnerName = NoDataAvailable };
-            result.OrdnungsSystem = new OrdnungsSystemType { Name = NoDataAvailable, Signatur = NoDataAvailable, Stufe = NoDataAvailable };
-            result.Dossier = new VerzEinheitType
-            {
-                Titel = NoDataAvailable, Signatur = NoDataAvailable, Entstehungszeitraum = NoDataAvailable, Stufe = NoDataAvailable,
-                VerzEinheitId = recordId
-            };
-            result.Auftragsdaten = GetOrderData(recordId, result);
+            // Es kommt vor, dass eine ApiException ausgelöst wird (z. B wenn nach einer ScopeId gesucht wird die in den Daten nicht vorhanden sind oder Metadaten null sind),
+            // dann muss der Fehler geloggt und mit einem leeren Archivdatensatz weitergearbeitet werden, damit die Digitalisierung trotzdem angelegt und mit Priorität 9  gespeichert wird.
+            Log.Error(e, "Error build ArchiveRecord for digitization: {message} archiveRecordId: {archiveRecordId}",  e.Message, recordId);
+            throw;
         }
 
         return result;
+    }
+
+    private void GenerateDefaultData(string recordId, DigitalisierungsAuftrag result)
+    {
+        result.Ablieferung = new AblieferungType
+            { AblieferndeStelle = NoDataAvailable, Ablieferungsnummer = NoDataAvailable, AktenbildnerName = NoDataAvailable };
+        result.OrdnungsSystem = new OrdnungsSystemType { Name = NoDataAvailable, Signatur = NoDataAvailable, Stufe = NoDataAvailable };
+        result.Dossier = new VerzEinheitType
+        {
+            Titel = NoDataAvailable, Signatur = NoDataAvailable, Entstehungszeitraum = NoDataAvailable, Stufe = NoDataAvailable,
+            VerzEinheitId = recordId
+        };
+        result.Auftragsdaten = GetOrderData(recordId, result);
     }
 
     /// <summary>

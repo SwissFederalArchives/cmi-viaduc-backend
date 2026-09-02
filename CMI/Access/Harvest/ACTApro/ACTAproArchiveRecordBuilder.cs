@@ -82,6 +82,7 @@ public class ActaProArchiveRecordBuilder : IArchiveRecordBuilder
         catch (Exception ex)
         {
             Log.Error(ex, "{source} - HTTP request failed: {message} archiveRecordId: {archiveRecordId}", this, ex.Message, archiveRecordId);
+            throw;
         }
         finally
         {

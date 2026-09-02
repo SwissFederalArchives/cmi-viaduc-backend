@@ -10,9 +10,10 @@ import {WjListBox} from '@mescius/wijmo.angular2.input';
 import {FormControl, NgForm, NgModel} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-ablieferndestelle-page-edit',
-	templateUrl: 'ablieferndeStelleDetailPage.component.html',
-	styleUrls: ['ablieferndeStelleDetailPage.component.less']
+    selector: 'cmi-viaduc-ablieferndestelle-page-edit',
+    templateUrl: 'ablieferndeStelleDetailPage.component.html',
+    styleUrls: ['ablieferndeStelleDetailPage.component.less'],
+    standalone: false
 })
 
 export class AblieferndeStelleDetailPageComponent extends ComponentCanDeactivate implements OnInit {
@@ -27,29 +28,29 @@ export class AblieferndeStelleDetailPageComponent extends ComponentCanDeactivate
 	public modelBezeichnung: NgModel;
 
 	@ViewChild('kuerzel', { static: false })
-	public modelKuerzel: NgModel;
+	public modelKuerzel!: NgModel;
 
 	@ViewChild('tokens', { static: false })
-	public modelTokens: NgModel;
+	public modelTokens!: NgModel;
 
 	@ViewChild('formStelleDetail', { static: false })
-	public formStelleDetail: NgForm;
+	public formStelleDetail!: NgForm;
 
 	public hasKontrollstelle = true;
 	public showDeleteModal = false;
-	public emailToDelete: string;
+	public emailToDelete!: string;
 	public saveClicked = false;
 	public showConfirmModal = false;
 	public crumbs: any[] = [];
-	public ablieferndeStelleHeaderName: string;
-	public id: any;
-	public errors: string[];
-	public ablieferndeStelle: AblieferndeStelle;
-	public tokenList: AsToken;
-	public loading: boolean;
+	public ablieferndeStelleHeaderName!: string;
+	public id!: any;
+	public errors!: string[];
+	public ablieferndeStelle!: AblieferndeStelle;
+	public tokenList!: AsToken;
+	public loading: boolean = false;
 	public selectedKontrollstelle = '';
 
-	private _mode: ModeD;
+	private _mode!: ModeD;
 
 	constructor(private _ablieferndeStelleService: AblieferndeStelleService,
 				private _tokenService: TokenService,
@@ -106,7 +107,7 @@ export class AblieferndeStelleDetailPageComponent extends ComponentCanDeactivate
 
 			this.errors = [];
 			this._reload();
-		} catch (error) {
+		} catch (error: any) {
 			if (error.error instanceof Error) {
 				this._clearAndAddError(error.error.message);
 			} else {
@@ -257,7 +258,7 @@ export class AblieferndeStelleDetailPageComponent extends ComponentCanDeactivate
 
 	private _sortTokens(tokens: AblieferndeStelleToken[]): AblieferndeStelleToken[] {
 		const sortedTokenNames = tokens.map(t => t.displayName).sort();
-		const resultTokens = [];
+		const resultTokens: any[] = [];
 		sortedTokenNames.forEach(tokenDisplayName =>
 			resultTokens.push(tokens.find(token =>
 				token.displayName === tokenDisplayName)

@@ -2,21 +2,22 @@ import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {DetailPagingService} from '../../services';
 @Component({
-	selector: 'cmi-viaduc-detail-paging',
-	templateUrl: 'detailPaging.component.html',
-	styleUrls: ['./detailPaging.component.less']
+    selector: 'cmi-viaduc-detail-paging',
+    templateUrl: 'detailPaging.component.html',
+    styleUrls: ['./detailPaging.component.less'],
+    standalone: false
 })
 export class DetailPagingComponent {
 	public loading = false;
 
 	@Input()
-	public detailUrl: string;
+	public detailUrl!: string;
 
 	@Input()
-	public idProperty: string;
+	public idProperty!: string;
 
 	@Input()
-	public disableNavigation: boolean;
+	public disableNavigation!: boolean;
 
 	constructor(private _detailPaging: DetailPagingService,
 				private _router: Router) {

@@ -500,6 +500,16 @@
 				"defaultLabel": "Gebrauchskopie",
 				"key": "gebrauchskopieStatus",
 				"visible": false
+			},
+			{
+				"defaultLabel": "Aushebungstyp",
+				"key": "aushebungstyp",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entstehung digitale Inhalte",
+				"key": "entstehungDigitaleInhalte",
+				"visible": false
 			}
 		],
 		"ordersEinsichtListColumns": [
@@ -693,6 +703,11 @@
 			{
 				"defaultLabel": "Benutzerrolle Public-Client zum Bestell-Zeitpunkt",
 				"key": "rolePublicClient",
+				"visible": false
+			},
+			{
+				"defaultLabel": "Entstehung digitale Inhalte",
+				"key": "entstehungDigitaleInhalte",
 				"visible": false
 			}
 		]

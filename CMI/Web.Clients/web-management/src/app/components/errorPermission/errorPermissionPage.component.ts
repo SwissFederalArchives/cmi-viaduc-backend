@@ -3,12 +3,13 @@ import {ActivatedRoute} from '@angular/router';
 import {ErrorInfo, TranslationService, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-errorpermission-page',
-	templateUrl: 'errorPermissionPage.component.html'
+    selector: 'cmi-viaduc-errorpermission-page',
+    templateUrl: 'errorPermissionPage.component.html',
+    standalone: false
 })
 export class ErrorPermissionPageComponent implements OnInit {
 
-	public error: ErrorInfo;
+	public error!: ErrorInfo;
 
 	constructor(private _txt: TranslationService, private _route: ActivatedRoute) {
 	}

@@ -250,6 +250,26 @@
     "IsRepeatable": 1
   },
   {
+    "ElementId": 10369,
+    "ElementName": "SIP_ERSCHEINUNGSFORM",
+    "SourceType": "Text (max. 4000 Z.)",
+    "Label": "Entstehung digitale Inhalte",
+    "TargetField": "EntstehungDigitaleInhalte",
+    "IsDefaultField": 0,
+    "Type": "string",
+    "IsRepeatable": 0
+  },
+  {
+    "ElementId": 10371,
+    "ElementName": "ErrechneteGroesseMB",
+    "SourceType": "Zahl",
+    "Label": "Errechnete Grösse in MB",
+    "TargetField": "ErrechneteGroesseMB",
+    "IsDefaultField": 0,
+    "Type": "float",
+    "IsRepeatable": 0
+  },
+  {
     "ElementId": 10376,
     "ElementName": "URHEBER",
     "SourceType": "Text (max. 4000 Z.)",

@@ -17,13 +17,14 @@ import {Router} from '@angular/router';
 import {SessionStorageService} from '../../../../client';
 
 @Component({
-	selector: 'cmi-manuelle-korrektur-list',
-	templateUrl: './manuelle-korrektur-list.component.html',
-	styleUrls: ['./manuelle-korrektur-list.component.less']
+    selector: 'cmi-manuelle-korrektur-list',
+    templateUrl: './manuelle-korrektur-list.component.html',
+    styleUrls: ['./manuelle-korrektur-list.component.less'],
+    standalone: false
 })
 export class ManuelleKorrekturListComponent implements OnInit {
 
-	public manuelleKorrekturItems: ODataCollectionView;
+	public manuelleKorrekturItems!: ODataCollectionView;
 	@ViewChild('flexGrid', { static: true })
 	public flexGrid: CmiGridComponent;
 	@ViewChild('preFilterMenu', { static: true })
@@ -39,16 +40,16 @@ export class ManuelleKorrekturListComponent implements OnInit {
 	public veIds = '';
 	public baseFilterString = '';
 
-	public loading: boolean;
+	public loading: boolean = true;
 	public allowManuelleKorrekturenBearbeiten = true;
-	public showColumnPicker: boolean;
-	public myForm: FormGroup;
+	public showColumnPicker: boolean = false;
+	public myForm!: FormGroup;
 	public showAddModal = false;
 	public showDeleteModal = false;
 	public valueFilters: any;
 	private isInitializing = true;
-	public preFilter: number = null;
-	private previousPreFilter: number = null;
+	public preFilter: number = -1;
+	private previousPreFilter: number = -1;
 
 	constructor(private _opt: CoreOptions,
 				private _txt: TranslationService,
@@ -133,7 +134,7 @@ export class ManuelleKorrekturListComponent implements OnInit {
 	}
 
 	private _resetColumnsToDefault() {
-		this.columns = this._cfg.getSetting('manuellekorrektur.listColumns').map(x => Object.assign({}, x));
+		this.columns = this._cfg.getSetting('manuellekorrektur.listColumns').map((x: any) => Object.assign({}, x));
 		this._saveColumnsAsUserSettings(this.columns);
 	}
 
@@ -141,7 +142,7 @@ export class ManuelleKorrekturListComponent implements OnInit {
 		this._saveColumnsAsUserSettings(this.getAndSortCurrentColumns());
 	}
 
-	private _saveColumnsAsUserSettings(cols) {
+	private _saveColumnsAsUserSettings(cols: any) {
 		const existingSettings = this._cfg.getUserSettings() as ManagementUserSettings;
 		existingSettings.manuelleKorrekturSettings = <ManuelleKorrekturSettings> {
 			columns: cols
@@ -301,7 +302,7 @@ export class ManuelleKorrekturListComponent implements OnInit {
 	}
 
 	// eslint-disable-next-line
-	public onFilterApplied(ev) {
+	public onFilterApplied(ev: any) {
 		if (!_util.isEmpty(this.baseFilterString)) {
 			const filterBefore = this.manuelleKorrekturItems.filterDefinition.toString();
 			if (_util.isEmpty(filterBefore) || filterBefore.indexOf(this.baseFilterString) < 0) {
@@ -358,16 +359,18 @@ export class ManuelleKorrekturListComponent implements OnInit {
 		this.veIds = this.myForm.controls['veIds'].value;
 		const myArray = this.veIds .split('\n');
 		this.loading = true;
-		const map = await this._service.BatchAddManuelleKorrektur(myArray) as  Map<string, string>;
-		let message = '' ;
+		const map = await this._service.BatchAddManuelleKorrektur(myArray) as Record<string, string>;
 
-		const maxLength = myArray.length;
-		for (let i = 0; i < maxLength; i++) {
-			if (map[i]) {
-				message = message + map[i] + '<br/>' + (i === maxLength - 1 ? '' : '-----------<br/>');
-			} else {
+		let message = '';
+		const maxLength:number = myArray.length;
+		for (let i: number = 0; i < maxLength; i++) {
+			const value = map[i.toString()];
+
+			if (value == null) {
 				break;
 			}
+
+			message += value + '<br/>' + (i === myArray.length - 1 ? '' : '-----------<br/>');
 		}
 
 		if (message.length > 0) {

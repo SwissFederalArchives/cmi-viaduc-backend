@@ -1,6 +1,6 @@
-﻿﻿using CMI.Access.Harvest.ActaPro;
+﻿using CMI.Access.Harvest.ActaPro;
 using CMI.Access.Harvest.ActaPro.Mapping;
-using FluentAssertions;
+using Shouldly;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
@@ -33,8 +33,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = mapper.MapTitle(document.Block.Fields, level);
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die Id");
 
         }
 
@@ -55,8 +55,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = mapper.MapTitle(document.Block.Fields, level);
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die Id");
 
         }
 
@@ -77,8 +77,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = mapper.MapTitle(document.Block.Fields, level);
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die Id");
 
         }
 
@@ -100,8 +100,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die Klas Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die Klas Id");
 
         }
 
@@ -123,8 +123,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die TBest Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die TBest Id");
 
         }
 
@@ -146,8 +146,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die neue Id");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die neue Id");
 
         }
 
@@ -169,8 +169,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Die Hauptabteilung");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Die Hauptabteilung");
 
         }
 
@@ -192,8 +192,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementName.Should().Be("TITEL");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Das Archiv");
+            result.ElementName.ShouldBe("TITEL");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Das Archiv");
 
         }
 
@@ -216,7 +216,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.MapTitle(document.Block.Fields, level);
 
             // Assert
-            result.ElementValue.Count.Should().Be(0, "Do not know the level");
+            result.ElementValue.Count.ShouldBe(0, "Do not know the level");
 
         }
 
@@ -257,9 +257,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Ich bin drin");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("Zweite Reihe");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Ich bin drin");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("Zweite Reihe");
         }
 
         [Test]
@@ -295,9 +295,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("1");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("2");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("1");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("2");
         }
 
         [Test]
@@ -328,8 +328,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Nur einer");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Nur einer");
 
         }
 
@@ -354,8 +354,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Nur einer");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Nur einer");
 
         }
 
@@ -392,9 +392,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
 
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Ich bin drin");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("Zweite Reihe");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Ich bin drin");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("Zweite Reihe");
         }
 
         [Test]
@@ -430,9 +430,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
 
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Ich bin drin");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("Zweite Reihe");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Ich bin drin");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("Zweite Reihe");
         }
 
         [Test]
@@ -463,8 +463,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
 
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Test");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Test");
         }
 
         [Test]
@@ -495,8 +495,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
 
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Tekt");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Tekt");
         }
 
         [Test]
@@ -527,8 +527,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.MapGroupFieldLevelDependent(fields, level, fieldName, elementName);
 
             // Assert
-            result.ElementName.Should().Be("DARIN");
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Arch 1");
+            result.ElementName.ShouldBe("DARIN");
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Arch 1");
 
         }
 
@@ -566,13 +566,13 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             catch (Exception e)
             {
                 // Assert
-                e.GetType().Should().Be(typeof(ArgumentException));
-                e.Message.Should().Be("Level is not supported: Level 3");
+                e.GetType().ShouldBe(typeof(ArgumentException));
+                e.Message.ShouldBe("Level is not supported: Level 3");
                 exceptionThrow = true;
             }
 
             // Assert
-            exceptionThrow.Should().BeTrue();
+            exceptionThrow.ShouldBeTrue();
         }
 
 
@@ -598,8 +598,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupField(fields, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be(elementName);
-            result.ElementValue[0].TextValues[0].Value.Should().Be("8,5 Meter");
+            result.ElementName.ShouldBe(elementName);
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("8,5 Meter");
 
         }
 
@@ -636,9 +636,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupField(fields, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be(elementName);
-            result.ElementValue[0].TextValues[0].Value.Should().Be("12 Laufmeter");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("17 Leitz Ordner");
+            result.ElementName.ShouldBe(elementName);
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("12 Laufmeter");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("17 Leitz Ordner");
 
         }
 
@@ -674,9 +674,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             // Act
             var result = MappingFunctions.MapGroupField(fields, fieldName, elementName);
             // Assert
-            result.ElementName.Should().Be(elementName);
-            result.ElementValue[0].TextValues[0].Value.Should().Be("Video");
-            result.ElementValue[1].TextValues[0].Value.Should().Be("Mikrofilm");
+            result.ElementName.ShouldBe(elementName);
+            result.ElementValue[0].TextValues[0].Value.ShouldBe("Video");
+            result.ElementValue[1].TextValues[0].Value.ShouldBe("Mikrofilm");
 
         }
 
@@ -691,8 +691,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result2 = MappingFunctions.FormatLaufzeitText(null);
 
             // Assert
-            result.Should().Be(string.Empty);
-            result2.Should().Be(string.Empty);
+            result.ShouldBe(string.Empty);
+            result2.ShouldBe(string.Empty);
         }
 
         [Test]
@@ -710,7 +710,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var action = (Action) (() => { MappingFunctions.FormatLaufzeitText(laufzeitText); });
 
             // assert
-            action.Should().Throw<ArgumentException>();
+            Should.Throw<ArgumentException>(action);
         }
 
         [Test]
@@ -724,7 +724,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.FormatLaufzeitText(laufzeitText);
 
             // assert
-            result.Should().Be("1950-1960");
+            result.ShouldBe("1950-1960");
         }
 
         [Test]
@@ -738,7 +738,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = MappingFunctions.FormatLaufzeitText(laufzeitText);
 
             // assert
-            result.Should().Be("1950");
+            result.ShouldBe("1950");
         }
 
         [Test]
@@ -758,16 +758,16 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = mapper.ExtractSecurityRelevantAttributes(documentVz1);
 
             // Assert
-            result.Stufe.Should().Be("Dossier");
-            result.SchutzfristEnde.Should().Be(new DateTime(2020, 1, 1, 23, 59, 59));
-            result.EntstehungszeitraumBis.Should().Be(new DateTime(1990, 12, 31, 00, 00, 00));
-            result.BearbeitungsStatus.Should().Be(ActaProClientValues.StatusInBearbeitung);
-            result.Zugaenglichkeit.Should().Be(ActaProClientValues.ZugaenglichkeitNichtOeffentlich);
-            result.MetadatenPublizierbar.Should().BeTrue();
-            result.Schutzfristkategorie.Should().Be(ActaProClientValues.SchutzfristKategorieArt91);
-            result.ZugaenglichkeitGemaessBga.Should().Be(ActaProClientValues.ZugaenglichkeitBGAPruefungNoetig);
-            result.Publikationsrechte.Should().Be(ActaProClientValues.PublikationsrechteBAR);
-            result.ZustaendigeStellenKeys.Count.Should().Be(2);
+            result.Stufe.ShouldBe("Dossier");
+            result.SchutzfristEnde.ShouldBe(new DateTime(2020, 1, 1, 23, 59, 59));
+            result.EntstehungszeitraumBis.ShouldBe(new DateTime(1990, 12, 31, 00, 00, 00));
+            result.BearbeitungsStatus.ShouldBe(ActaProClientValues.StatusInBearbeitung);
+            result.Zugaenglichkeit.ShouldBe(ActaProClientValues.ZugaenglichkeitNichtOeffentlich);
+            result.MetadatenPublizierbar.ShouldBeTrue();
+            result.Schutzfristkategorie.ShouldBe(ActaProClientValues.SchutzfristKategorieArt91);
+            result.ZugaenglichkeitGemaessBga.ShouldBe(ActaProClientValues.ZugaenglichkeitBGAPruefungNoetig);
+            result.Publikationsrechte.ShouldBe(ActaProClientValues.PublikationsrechteBAR);
+            result.ZustaendigeStellenKeys.Count.ShouldBe(2);
         }
     }
 }

@@ -13,20 +13,21 @@ import {DataType, SortDescription} from '@mescius/wijmo';
 import {OrderingFlatItem} from '../../model';
 import {WjMenu} from '@mescius/wijmo.angular2.input';
 import {Router} from '@angular/router';
-import {forkJoin} from 'rxjs';
+import {firstValueFrom, forkJoin} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {SessionStorageService} from '../../../client/services';
 import {DateUtilityService} from '../../../shared/services/date-utility.service';
 
 @Component({
-	selector: 'cmi-viaduc-orders-list',
-	templateUrl: 'ordersList.component.html',
-	encapsulation: ViewEncapsulation.None,
-	styleUrls: ['./ordersList.component.less']
+    selector: 'cmi-viaduc-orders-list',
+    templateUrl: 'ordersList.component.html',
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./ordersList.component.less'],
+    standalone: false
 })
 export class OrdersListComponent implements OnInit {
 	@Input()
-	public isEinsichtsGesuchListe: boolean;
+	public isEinsichtsGesuchListe!: boolean;
 	@Input()
 	public columns: any[] = [];
 	@Input()
@@ -63,13 +64,13 @@ export class OrdersListComponent implements OnInit {
 		return [];
 	}
 
-	public orderFlatItems: ODataCollectionView;
-	public baseFilterString;
-	public preFilterString;
+	public orderFlatItems!: ODataCollectionView;
+	public baseFilterString!: string;
+	public preFilterString!: string;
 	public valueFilters: any;
 
-	private _reasonList: DataMap = undefined;
-	private _artDerArbeitList: DataMap = undefined;
+	private _reasonList!: DataMap;
+	private _artDerArbeitList!: DataMap;
 
 	constructor(public _url: UrlService,
 				private _dec: EntityDecoratorService,
@@ -144,58 +145,119 @@ export class OrdersListComponent implements OnInit {
 		return [];
 	}
 
-	private _createFilterMaps(): Promise<any> {
-		const obs = forkJoin([
-			this._stamm.getReasons().pipe(map(r => {
-				const pairs = [];
-				r.forEach(item => pairs.push({ name: item.name}));
-				return new DataMap(pairs, 'name', 'name');
-			})),
-			this._stamm.getArtDerArbeiten().pipe(map(a => {
-				const pairs = [];
-				a.forEach(item => pairs.push({name: item.name}));
-				return new DataMap(pairs, 'name', 'name');
-			}))]);
+	private _createFilterMaps(): Promise<Record<string, DataMap>> {
+		const reasons$ = this._stamm.getReasons().pipe(
+			map(r => new DataMap(
+				r.map(item => ({ name: item.name })),
+				'name',
+				'name'
+			))
+		);
 
-		return obs.toPromise().then(res => {
-				this._reasonList = res[0] as DataMap;
-				this._artDerArbeitList = res[1] as DataMap;
+		const artDerArbeiten$ = this._stamm.getArtDerArbeiten().pipe(
+			map(a => new DataMap(
+				a.map(item => ({ name: item.name })),
+				'name',
+				'name'
+			))
+		);
 
-				const maps: { [id: string]: DataMap; } = {};
-				maps['orderingType'] = this._wjs.getDataMap(ShippingType, this._dec.translateOrderingType.bind(this));
-				maps['eingangsart'] = this._wjs.getDataMap( Eingangsart, this._dec.translateEingangsart.bind(this));
-				maps['status'] =  this._wjs.getDataMap(InternalStatus, this._dec.translateInternalStatus.bind(this));
-				maps['externalStatus'] =  this._wjs.getDataMap(ExternalStatus, this._dec.translateExternalStatus.bind(this));
-				maps['approveStatus'] =  this._wjs.getDataMap(ApproveStatus, this._dec.translateApproveStatus.bind(this));
-				maps['abbruchgrund'] =  this._wjs.getDataMap(Abbruchgrund, this._dec.translateAbbruchgrund.bind(this));
-				maps['digitalisierungsKategorie'] =  this._wjs.getDataMap(DigitalisierungsKategorie, this._dec.translateDigitalisierungsKategorie.bind(this));
-				maps['entscheidGesuch'] =  this._wjs.getDataMap(EntscheidGesuchStatus, this._dec.translateEntscheidGesuchStatus.bind(this));
-				maps['gebrauchskopieStatus'] =  this._wjs.getDataMap(GebrauchskopieStatus, this._dec.translateGebrauchskopieStatus.bind(this));
-				maps['orderingArtDerArbeit'] = this._artDerArbeitList;
-				maps['reason'] = this._reasonList;
+		return firstValueFrom(forkJoin([reasons$, artDerArbeiten$])).then(
+			([reasonsMap, artMap]) => {
 
-				// Zugänglichkeit ist ein Textfeld, weshalb die Namenseigenschaft gleichzeitif für die Anzeige und die Suche verwendet wird
-				const  zugaenglichkeitMap = this._wjs.getDataMap(ZugaenglichkeitGemaessBga, this._dec.translateZugaenglichkeitGemaessBga.bind(this));
-				maps['zugaenglichkeitGemaessBga'] = new DataMap(zugaenglichkeitMap.collectionView, 'name', 'name');
+				this._reasonList = reasonsMap;
+				this._artDerArbeitList = artMap;
 
-				maps['benutzungskopie'] = new DataMap([
-					{ key: null, name: 'Unbekannt'},
-					{ key: true, name: 'Ja'},
-					{ key: false, name: 'Nein'}
-				], 'key', 'name');
+				const maps: Record<string, DataMap> = {
+					orderingType: this._wjs.getDataMap(
+						ShippingType,
+						this._dec.translateOrderingType.bind(this)
+					),
+					eingangsart: this._wjs.getDataMap(
+						Eingangsart,
+						this._dec.translateEingangsart.bind(this)
+					),
+					status: this._wjs.getDataMap(
+						InternalStatus,
+						this._dec.translateInternalStatus.bind(this)
+					),
+					externalStatus: this._wjs.getDataMap(
+						ExternalStatus,
+						this._dec.translateExternalStatus.bind(this)
+					),
+					approveStatus: this._wjs.getDataMap(
+						ApproveStatus,
+						this._dec.translateApproveStatus.bind(this)
+					),
+					abbruchgrund: this._wjs.getDataMap(
+						Abbruchgrund,
+						this._dec.translateAbbruchgrund.bind(this)
+					),
+					digitalisierungsKategorie: this._wjs.getDataMap(
+						DigitalisierungsKategorie,
+						this._dec.translateDigitalisierungsKategorie.bind(this)
+					),
+					entscheidGesuch: this._wjs.getDataMap(
+						EntscheidGesuchStatus,
+						this._dec.translateEntscheidGesuchStatus.bind(this)
+					),
+					gebrauchskopieStatus: this._wjs.getDataMap(
+						GebrauchskopieStatus,
+						this._dec.translateGebrauchskopieStatus.bind(this)
+					),
 
-				maps['publikationsrechte'] = new DataMap([
-					{name: 'BAR'},
-					{name: 'Dritte'},
-					{name: 'Prüfung nötig'}
-				], 'name', 'name');
+					orderingArtDerArbeit: this._artDerArbeitList,
+					reason: this._reasonList,
+
+					zugaenglichkeitGemaessBga: this._wrapNameMap(
+						this._wjs.getDataMap(
+							ZugaenglichkeitGemaessBga,
+							this._dec.translateZugaenglichkeitGemaessBga.bind(this)
+						)
+					),
+
+					benutzungskopie: new DataMap(
+						[
+							{ key: null, name: 'Unbekannt' },
+							{ key: true, name: 'Ja' },
+							{ key: false, name: 'Nein' }
+						],
+						'key',
+						'name'
+					),
+
+					aushebungstyp: new DataMap(
+						[
+							{
+								key: 0,
+								name: this._txt.get('enums.aushebungstyp.dossier', 'Dossier')
+							},
+							{
+								key: 1,
+								name: this._txt.get('enums.aushebungstyp.behältnis', 'Behältnis')
+							}
+						],
+						'key',
+						'name'
+					),
+
+					publikationsrechte: new DataMap(
+						[
+							{ name: 'BAR' },
+							{ name: 'Dritte' },
+							{ name: 'Prüfung nötig' }
+						],
+						'name',
+						'name'
+					)
+				};
 
 				return maps;
-			});
+			}
+		);
 	}
-
 	// eslint-disable-next-line
-	public onFilterApplied(ev) {
+	public onFilterApplied(ev: any) {
 		if (!_util.isEmpty(this.baseFilterString)) {
 			const filterBefore = this.orderFlatItems.filterDefinition.toString();
 			if (_util.isEmpty(filterBefore) || filterBefore.indexOf(this.baseFilterString) < 0) {
@@ -243,7 +305,7 @@ export class OrdersListComponent implements OnInit {
 		this._setPreFilter(null, this.baseFilterString, true);
 	}
 
-	private _setPreFilter(preFilter, filterDef, refresh:boolean) {
+	private _setPreFilter(preFilter: any, filterDef: any, refresh:boolean) {
 		if (this.flexGrid && this.flexGrid.filter) {
 			this.flexGrid.filter.clear();
 		}
@@ -335,9 +397,13 @@ export class OrdersListComponent implements OnInit {
 	}
 
 	public formatDate(date: Date, format: string): string {
-		if(format=='dd.MM.yyyy HH:mm:ss') {
+		if(format === 'dd.MM.yyyy HH:mm:ss') {
 			return this._dateUtilityService.formatDate(date, 'DD.MM.YYYY HH:mm:ss');
 		}
 		return this._dateUtilityService.formatDate(date);
+	}
+
+	private _wrapNameMap(map: DataMap): DataMap {
+		return new DataMap(map.collectionView, 'name', 'name');
 	}
 }

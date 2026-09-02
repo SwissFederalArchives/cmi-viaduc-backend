@@ -1,5 +1,5 @@
 ﻿using CMI.Web.Frontend.api.Search;
-using Nest;
+using Elastic.Clients.Elasticsearch.QueryDsl;
 
 namespace CMI.Web.Frontend.api.Elastic
 {
@@ -10,7 +10,7 @@ namespace CMI.Web.Frontend.api.Elastic
             SearchParameters = new SearchParameters();
         }
 
-        public QueryContainer Query { get; set; }
+        public Query Query { get; set; }
 
         public SearchParameters SearchParameters { get; set; }
     }

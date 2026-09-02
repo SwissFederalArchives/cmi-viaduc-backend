@@ -1,7 +1,8 @@
-<div *ngIf="error">
-	<div class="content">
-		<div class="title">{{ error.title }}</div>
-
-		<p [innerHtml]="error.message"></p>
-	</div>
-</div>
+@if (error) {
+  <div>
+    <div class="content">
+      <div class="title">{{ error.title }}</div>
+      <p [innerHtml]="error.message"></p>
+    </div>
+  </div>
+}

@@ -7,9 +7,10 @@ import {
 import {SearchService} from '../../../services';
 import {UrlService} from '../../../services';
 @Component({
-	selector: 'cmi-viaduc-search-browser',
-	templateUrl: 'searchBrowser.component.html',
-	styleUrls: ['./searchBrowser.component.less']
+    selector: 'cmi-viaduc-search-browser',
+    templateUrl: 'searchBrowser.component.html',
+    styleUrls: ['./searchBrowser.component.less'],
+    standalone: false
 })
 export class SearchBrowserComponent implements OnInit {
 	public loading = false;

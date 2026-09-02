@@ -3,22 +3,24 @@ import {EntityDecoratorService, EntscheidGesuchStatus} from '@cmi/viaduc-web-cor
 import {OrderService} from '../../../services';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
-import * as moment from 'moment';
+import moment from 'moment';
 import {OrderingFlatItem} from '../../../model';
 import {forkJoin, Observable} from 'rxjs';
 
 @Component({
-	selector: 'cmi-viaduc-entscheid-hinterlegen-modal',
-	templateUrl: 'entscheidHinterlegenModal.component.html',
-	styleUrls: ['./entscheidHinterlegenModal.component.less']
+    selector: 'cmi-viaduc-entscheid-hinterlegen-modal',
+    templateUrl: 'entscheidHinterlegenModal.component.html',
+    styleUrls: ['./entscheidHinterlegenModal.component.less'],
+    standalone: false
 })
+
 export class EntscheidHinterlegenModalComponent implements OnInit {
 
 	@Input()
 	public items: OrderingFlatItem[] = [];
 
 	@Input()
-	public user: string;
+	public user!: string;
 
 	@Input()
 	public set open(val: boolean) {
@@ -44,16 +46,16 @@ export class EntscheidHinterlegenModalComponent implements OnInit {
 
 	public isValidDate = true;
 	public isLoading = false;
-	public entscheide = [];
-	public datumEntscheid: string;
-	public interneBemerkung: string;
+	public entscheide!: EntscheidGesuchStatus[];
+	public datumEntscheid: string = '';
+	public interneBemerkung: string= '';
 	public stepNr = 1;
-	public hint: string;
+	public hint: string= '';
 	public filteredItems: OrderingFlatItem[] = [];
 	public showUnHideDataButton = true;
 	private _open = true;
 
-	private _selectedEntscheid: EntscheidGesuchStatus = null;
+	private _selectedEntscheid!: EntscheidGesuchStatus;
 
 	constructor(private _dec: EntityDecoratorService,
 				private _ord: OrderService,
@@ -62,10 +64,12 @@ export class EntscheidHinterlegenModalComponent implements OnInit {
 	}
 
 	public ngOnInit(): void {
-		this.entscheide = Object.keys(EntscheidGesuchStatus)
-			.filter(k => isNaN(parseInt(k, 10)))
-			.map(k => EntscheidGesuchStatus[k])
-			.filter(k => k !== EntscheidGesuchStatus.NichtGeprueft);
+
+		this.entscheide = Object.values(EntscheidGesuchStatus)
+			.filter(value =>
+				typeof value === 'number' &&
+				value !== EntscheidGesuchStatus.NichtGeprueft
+			)  as EntscheidGesuchStatus[];
 
 		this.filteredItems = this.items;
 	}
@@ -79,7 +83,7 @@ export class EntscheidHinterlegenModalComponent implements OnInit {
 		event.stopPropagation();
 	}
 
-	public checkDate(isValid) {
+	public checkDate(isValid: boolean) {
 		this.isValidDate = isValid;
 	}
 

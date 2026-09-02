@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CMI.Engine.Asset.ParameterSettings;
+using Serilog;
+using SolrNet.Utils;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
-using CMI.Engine.Asset.ParameterSettings;
-using Serilog;
 using Image = System.Drawing.Image;
 
 
@@ -123,18 +124,18 @@ namespace CMI.Engine.Asset.PreProcess
             }
         }
 
-        public string ConvertToJpeg(string inputFile, int groesseInProzent, int qualitaetInProzent)
+        public string ConvertToJpeg(string inputFile, int groesseInProzent, int qualitaetInProzent, int? dpi = null)
         {
-            return Convert(inputFile, ".jpg", groesseInProzent, qualitaetInProzent);
+            return Convert(inputFile, ".jpg", groesseInProzent, qualitaetInProzent, dpi);
         }
 
-        public string ConvertToPdf(string inputFile, int groesseInProzent, int qualitaetInProzent)
+        public string ConvertToPdf(string inputFile, int groesseInProzent, int qualitaetInProzent, int? dpi = null)
         {
             // First convert to jpg as some huge TIFFs don't convert correctly to pdf
-            var jpgFile = Convert(inputFile, ".jpg", groesseInProzent, qualitaetInProzent);
+            var jpgFile = Convert(inputFile, ".jpg", groesseInProzent, qualitaetInProzent, dpi);
 
             // As we already reduced size and quality in the jpeg, we won't reduce it again
-            var outputFile = Convert(jpgFile, ".pdf", 100, 100);
+            var outputFile = Convert(jpgFile, ".pdf", 100, 100, dpi);
 
             // Delete temp jpg file
             File.Delete(jpgFile);
@@ -189,7 +190,12 @@ namespace CMI.Engine.Asset.PreProcess
             return retVal;
         }
 
-        private int GetBitmapResolution(string filePath)
+        /// <summary>
+        /// Returns the resolution of the bitmap in dpi.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public int GetBitmapResolution(string filePath)
         {
             var retVal = 0;
 
@@ -223,12 +229,17 @@ namespace CMI.Engine.Asset.PreProcess
             return retVal;
         }
 
+        /// <summary>
+        /// Returns the resolution of the bitmap in dpi, or the default resolution if the bitmap resolution is less than 150 dpi.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private int BitmapOrDefaultResolution(string path)
         {
             var bitmapResolution = GetBitmapResolution(path);
 
             // Min Resolution >  150
-            if (bitmapResolution > 150)
+            if (bitmapResolution >= 150)
             {
                 return bitmapResolution;
             }
@@ -244,15 +255,17 @@ namespace CMI.Engine.Asset.PreProcess
             return imageFileName.Remove(imageFileName.Length - Path.GetExtension(imageFileName).Length) + "_PREMIS.xml";
         }
 
-        private static string Convert(string inputFile, string destinationExtension, int groesseInProzent, int qualitaetInProzent)
+        private static string Convert(string inputFile, string destinationExtension, int groesseInProzent, int qualitaetInProzent, int? dpi = null)
         {
             var outputFile = Path.ChangeExtension(inputFile, destinationExtension);
 
             using (var process = new Process())
             {
+                // convert input.jp2 -units PixelsPerInch -density 300 -quality 90 output.jpg
+
                 process.StartInfo.FileName = "magick.exe";
                 process.StartInfo.Arguments =
-                    $"convert \"{inputFile}\" -quality {qualitaetInProzent} {(groesseInProzent != 100 && groesseInProzent > 0 ? $"-resize {groesseInProzent}%" : string.Empty)} \"{outputFile}\"";
+                    $"\"{inputFile}\" -quality {qualitaetInProzent} {(dpi.HasValue ? $"-units PixelsPerInch -density {dpi.Value}" : string.Empty)} {(groesseInProzent != 100 && groesseInProzent > 0 ? $"-resize {groesseInProzent}%" : string.Empty)} \"{outputFile}\"";
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.Start();

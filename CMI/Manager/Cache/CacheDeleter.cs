@@ -47,7 +47,7 @@ namespace CMI.Manager.Cache
                         {
                             foreach (var fileName in fileSystem.Directory.GetFiles(catDir))
                             {
-                                var fi = fileSystem.FileInfo.FromFileName(fileName);
+                                var fi = fileSystem.FileInfo.New(fileName);
                                 DateTime fileTime;
 
                                 if (category.CacheRetentionCategory == CacheRetentionCategory.UsageCopyEB)

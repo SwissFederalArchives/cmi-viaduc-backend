@@ -6,9 +6,10 @@ import {WjAutoComplete} from '@mescius/wijmo.angular2.input';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-	selector: 'cmi-viaduc-user-select-step',
-	templateUrl: 'checkOutUserSelectStep.component.html',
-	styleUrls: ['./checkOutUserSelectStep.component.less']
+    selector: 'cmi-viaduc-user-select-step',
+    templateUrl: 'checkOutUserSelectStep.component.html',
+    styleUrls: ['./checkOutUserSelectStep.component.less'],
+    standalone: false
 })
 export class CheckoutUserSelectStepComponent implements OnInit {
 	@ViewChild('autoComplete', { static: false})
@@ -172,7 +173,7 @@ export class CheckoutUserSelectStepComponent implements OnInit {
 	}
 
 	// eslint-disable-next-line
-	public async onTextChanged(event) {
+	public async onTextChanged(event: any) {
 		if (this.autoComplete.text.length > 2) {
 			let alreadySelected = false;
 			// Wenn ein Benutzer ausgewählt ist/wird, dann keine neue suche.

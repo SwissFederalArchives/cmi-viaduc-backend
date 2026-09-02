@@ -74,7 +74,7 @@ namespace CMI.Web.Frontend.api.Controllers
         }
 
         [HttpGet]
-        public JObject GetSettings([FromUri] ApiClientInfo info)
+        public async Task<JObject> GetSettings([FromUri] ApiClientInfo info)
         {
             var settings = Settings.GetSettings().DeepClone() as JObject;
             var archiveplan = JsonHelper.FindTokenValue<JToken>(settings, "archiveplan");
@@ -97,7 +97,7 @@ namespace CMI.Web.Frontend.api.Controllers
                         ids.Add(JsonHelper.FindTokenValue<string>(node, "archiveRecordId"));
                     }
 
-                    var result = entityProvider.GetEntities<TreeRecord>(ids, access);
+                    var result = await entityProvider.GetEntities<TreeRecord>(ids, access);
                     JsonHelper.Replace(entryNodes, JArray.FromObject(result.Items.Select(i => i.Data).ToArray()));
                 }
                 catch (Exception ex)
@@ -215,7 +215,7 @@ namespace CMI.Web.Frontend.api.Controllers
 
             try
             {
-                var elastictokens = elasticService.QueryTokensForId(id);
+                var elastictokens = await elasticService.QueryTokensForId(id);
                 if (elastictokens != null)
                 {
                     result.Elastic = elastictokens;

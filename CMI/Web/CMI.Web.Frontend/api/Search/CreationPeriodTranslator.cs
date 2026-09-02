@@ -1,12 +1,13 @@
-using System;
 using CMI.Access.Sql.Viaduc;
-using Nest;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using System;
 
 namespace CMI.Web.Frontend.api.Search
 {
     public class CreationPeriodTranslator : IFieldTranslator
     {
-        public QueryContainer CreateQueryForField(SearchField field, UserAccess access)
+        public Query CreateQueryForField(SearchField field, UserAccess access)
         {
             var startDateKey = "creationPeriod.startDate";
             var endDateKey = "creationPeriod.endDate";
@@ -36,20 +37,21 @@ namespace CMI.Web.Frontend.api.Search
                 searchTo = ConvertTo(searchFromString);
             }
 
-            var startQuery = new DateRangeQuery
+            var startQuery = new DateRangeQuery(startDateKey)
             {
-                Field = startDateKey,
                 Format = "dd.MM.yyyy",
-                LessThanOrEqualTo = searchTo.ToString("dd.MM.yyyy")
-            };
-            var endQuery = new DateRangeQuery
-            {
-                Field = endDateKey,
-                Format = "dd.MM.yyyy",
-                GreaterThanOrEqualTo = searchFrom.ToString("dd.MM.yyyy")
+                Lte = new DateMathExpression(searchTo.ToString("dd.MM.yyyy"))
             };
 
-            return new BoolQuery {Must = new QueryContainer[] {startQuery, endQuery}};
+
+            var endQuery = new DateRangeQuery(endDateKey)
+            {
+                Format = "dd.MM.yyyy",
+                Gte = new DateMathExpression(searchFrom.ToString("dd.MM.yyyy"))
+            };
+
+
+            return new BoolQuery {Must = new Query[] {startQuery, endQuery}};
         }
 
 

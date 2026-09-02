@@ -1,23 +1,26 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {ManuelleKorrekturFeldDto} from '@cmi/viaduc-web-core/lib/core/model/entityFramework-models';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ManuelleKorrekturFeldDto}  from '@cmi/viaduc-web-core';
+
+
 @Component({
-	selector: 'cmi-manuelle-korrektur-felder',
-	templateUrl: './manuelle-korrektur-felder.component.html',
-	styleUrls: ['./manuelle-korrektur-felder.component.less'],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cmi-manuelle-korrektur-felder',
+    templateUrl: './manuelle-korrektur-felder.component.html',
+    styleUrls: ['./manuelle-korrektur-felder.component.less'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 
 export class ManuelleKorrekturFelderComponent implements OnInit {
 	@Input()
-	public feld: ManuelleKorrekturFeldDto;
+	public feld!: ManuelleKorrekturFeldDto;
 	@Input()
-	public parentForm: FormGroup;
+	public parentForm!: FormGroup;
 
 	@Output()
 	public manuellTextChanged = new EventEmitter<string>();
 
-	public myForm: FormGroup;
+	public myForm!: FormGroup;
 	public contextmenuShow = false;
 	public contextmenuX = 0;
 	public contextmenuY = 0;
@@ -67,7 +70,7 @@ export class ManuelleKorrekturFelderComponent implements OnInit {
 		this.contextmenuShow = false;
 	}
 
-	public displayContextMenu(event) {
+	public displayContextMenu(event: any) {
 		if (this.isEditMode && this.selectionEnd - this.selectionStart > 0) {
 			this.contextmenuShow = true;
 			this.contextmenuY = event.offsetY;

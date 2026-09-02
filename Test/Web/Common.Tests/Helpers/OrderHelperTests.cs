@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Contract.Order;
 using CMI.Web.Common.Helpers;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Common.Tests.Helpers
@@ -49,7 +49,7 @@ namespace CMI.Web.Common.Tests.Helpers
                 .Where(p => p.PropertyType == typeof(string) && !exceptions.Contains(p.Name)))
             {
                 var value = prop.GetValue(snapshot);
-                value.Should().Be("HIDDEN", $"Field {prop.Name} must not leak secret details");
+                value.ShouldBe("HIDDEN", $"Field {prop.Name} must not leak secret details");
             }
         }
 
@@ -88,7 +88,7 @@ namespace CMI.Web.Common.Tests.Helpers
                     continue;
                 }
 
-                value.Should().Be("SECRET", $"Field {prop.Name} must have the value of the snapshot");
+                value.ShouldBe("SECRET", $"Field {prop.Name} must have the value of the snapshot");
             }
         }
 

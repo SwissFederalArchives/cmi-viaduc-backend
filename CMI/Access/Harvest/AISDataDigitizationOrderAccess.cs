@@ -1,9 +1,10 @@
-using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using CMI.Access.Harvest.ActaPro;
 using CMI.Contract.Common;
 using CMI.Contract.Harvest;
 using Serilog;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CMI.Access.Harvest
 {
@@ -29,6 +30,11 @@ namespace CMI.Access.Harvest
             {
                 retVal.DigitizationOrder = await digitizationOrderBuilder.Build(archiveRecordId);
                 retVal.Success = true;
+            }
+            catch (ApiException apiException)
+            {
+                Log.Error(apiException, "ApiException while getting digitization order data for id {archiveRecordId}. Record was not found in the database anymore.", archiveRecordId);
+                retVal.ErrorMessage = apiException.Message;
             }
             catch (AggregateException ex)
             {

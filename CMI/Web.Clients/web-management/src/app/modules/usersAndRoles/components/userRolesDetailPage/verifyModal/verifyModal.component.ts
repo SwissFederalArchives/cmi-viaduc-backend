@@ -2,16 +2,17 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TranslationService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-verify-modal',
-	templateUrl: 'verifyModal.component.html',
-	styleUrls: ['./verifyModal.component.less']
+    selector: 'cmi-viaduc-verify-modal',
+    templateUrl: 'verifyModal.component.html',
+    styleUrls: ['./verifyModal.component.less'],
+    standalone: false
 })
 export class VerifyModalComponent {
 	@Output()
 	public onSubmitted: EventEmitter<boolean> = new EventEmitter<boolean>();
 	@Output()
 	public openChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-	private _open: boolean;
+	private _open!: boolean;
 
 	public get open(): boolean {
 		return this._open;

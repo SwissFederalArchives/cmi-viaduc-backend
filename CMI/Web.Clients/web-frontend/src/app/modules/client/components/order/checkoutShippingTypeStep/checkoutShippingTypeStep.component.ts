@@ -6,9 +6,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {KontingentResult, OrderCreationRequest} from '../../../model';
 
 @Component({
-	selector: 'cmi-viaduc-shipping-type-step',
-	templateUrl: 'checkoutShippingTypeStep.component.html',
-	styleUrls: ['./checkoutShippingTypeStep.component.less']
+    selector: 'cmi-viaduc-shipping-type-step',
+    templateUrl: 'checkoutShippingTypeStep.component.html',
+    styleUrls: ['./checkoutShippingTypeStep.component.less'],
+    standalone: false
 })
 export class CheckoutShippingTypeStepComponent implements OnInit {
 

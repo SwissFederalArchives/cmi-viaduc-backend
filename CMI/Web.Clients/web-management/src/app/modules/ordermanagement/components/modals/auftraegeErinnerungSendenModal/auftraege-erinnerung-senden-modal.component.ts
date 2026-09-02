@@ -4,9 +4,10 @@ import {ErrorService} from '../../../../shared/services';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-	selector: 'cmi-viaduc-auftraege-erinnerung-senden-modal',
-	templateUrl: './auftraege-erinnerung-senden-modal.component.html',
-	styleUrls: ['./auftraege-erinnerung-senden-modal.component.less']
+    selector: 'cmi-viaduc-auftraege-erinnerung-senden-modal',
+    templateUrl: './auftraege-erinnerung-senden-modal.component.html',
+    styleUrls: ['./auftraege-erinnerung-senden-modal.component.less'],
+    standalone: false
 })
 export class AuftraegeErinnerungSendenModalComponent {
 

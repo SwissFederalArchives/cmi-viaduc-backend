@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ConfigService} from '@cmi/viaduc-web-core';
 
 @Component({
-  selector: 'cmi-cituro-floating-button',
-  templateUrl: './cituro-floating-button.component.html',
-  styleUrls: ['./cituro-floating-button.component.less']
+    selector: 'cmi-cituro-floating-button',
+    templateUrl: './cituro-floating-button.component.html',
+    styleUrls: ['./cituro-floating-button.component.less'],
+    standalone: false
 })
 export class CituroFloatingButtonComponent implements OnInit {
 	public link: string;

@@ -57,7 +57,7 @@ public class ActaProAISDataProvider : IAISDataProvider
         var titleFields = "Vz_Titel, Kl_Name, Bst_Name, Te_Name, Ar_Name";
 
         // Die zusätzlichen Felder sind teilweise für die Access-Token-Berechnung notwendig
-        var additionalFields = "Laufzeit, Vz_ZugaenglichkeitBGA, Vz_Schutzfristkategorie, Vz_Schutzfristende, Zugaenglichkeit";
+        var additionalFields = "Laufzeit, Vz_ZugaenglichkeitBGA, Vz_Schutzfristkategorie, Vz_Schutzfristende, Zugaenglichkeit, Status";
         var archiveRecordId = recordId;
         Log.Debug("Requesting document ancestors with archiveRecordId: {archiveRecordId}", archiveRecordId);
 

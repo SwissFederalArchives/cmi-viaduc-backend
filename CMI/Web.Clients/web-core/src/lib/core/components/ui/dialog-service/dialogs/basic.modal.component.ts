@@ -3,8 +3,8 @@ import { ModalBase } from '../modal/modal.base';
 import {CanDeactivateData} from '../../../../model';
 
 @Component({
-	selector: 'cmi-viaduc-basic-modal',
-	template: `
+    selector: 'cmi-viaduc-basic-modal',
+    template: `
     <cmi-viaduc-modal [modalTitle]="title" (closeClicked)="onClose()" opened="true">
 		<cmi-viaduc-modal-body>
 			<div [innerHTML]="content"></div>
@@ -18,7 +18,8 @@ import {CanDeactivateData} from '../../../../model';
 				</div>
 			</div>
 		</cmi-viaduc-modal-footer>
-    </cmi-viaduc-modal>`
+    </cmi-viaduc-modal>`,
+    standalone: false
 })
 export class BasicModalComponent extends ModalBase {
 	public title: string;

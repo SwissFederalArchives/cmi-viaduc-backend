@@ -336,7 +336,7 @@ namespace CMI.Engine.Asset
                         RemoveUnusedObjects = true,
                         RemoveUnusedStreams = true,
                         AllowReusePageContent = true,
-                        LinkDuplcateStreams = true,
+                        LinkDuplicateStreams = true,
                         UnembedFonts = false
                     };
 

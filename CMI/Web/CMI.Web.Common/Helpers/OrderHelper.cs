@@ -27,7 +27,8 @@ namespace CMI.Web.Common.Helpers
                 Schutzfristverzeichnung = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.GetSchutzfristenVerzeichnung(),
                 Publikationsrechte = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.Publikationsrechte(),
                 ZustaendigeStelle = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.ZuständigeStelle(),
-                Aktenzeichen = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.Aktenzeichen()
+                Aktenzeichen = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.Aktenzeichen(),
+                EntstehungDigitaleInhalte = !string.IsNullOrEmpty(unknowText) ? unknowText : entity.EntstehungDigitaleInhalte()
             };
 
             if (entity.Containers != null && entity.Containers.Any())

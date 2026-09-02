@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace CMI.Manager.Index
@@ -45,24 +46,24 @@ namespace CMI.Manager.Index
         /// </summary>
         /// <param name="elasticArchiveRecord"></param>
         /// <returns></returns>
-        public ElasticArchiveRecord UpdateArchiveRecord(ElasticArchiveRecord elasticArchiveRecord)
+        public async Task<ElasticArchiveRecord> UpdateArchiveRecord(ElasticArchiveRecord elasticArchiveRecord)
         {
             // Save in elastic
-            dbAccess.UpdateDocument(elasticArchiveRecord);
+            await dbAccess.UpdateDocument(elasticArchiveRecord);
             return elasticArchiveRecord;
         }
         
-        public void RemoveArchiveRecord(string archiveRecordId)
+        public async Task RemoveArchiveRecord(string archiveRecordId)
         {
-            dbAccess.RemoveDocument(archiveRecordId);
+            await dbAccess.RemoveDocument(archiveRecordId);
         }
 
-        public ElasticArchiveRecord FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData)
+        public async Task<ElasticArchiveRecord> FindArchiveRecord(string archiveRecordId, MetadataToExclude metadataToExclude, UseUnanonymizedData useUnanonymizedData)
         {
-            var document = dbAccess.FindDocument(archiveRecordId, metadataToExclude);
+            var document = await dbAccess.FindDocument(archiveRecordId, metadataToExclude);
             if (document != null && useUnanonymizedData != UseUnanonymizedData.No && document.IsAnonymized)
             {
-                var dbRecord = dbAccess.FindDbDocument(archiveRecordId, metadataToExclude);
+                var dbRecord = await dbAccess.FindDbDocument(archiveRecordId, metadataToExclude);
                
                 if (useUnanonymizedData == UseUnanonymizedData.NoButTitle)
                 {
@@ -77,18 +78,55 @@ namespace CMI.Manager.Index
             return document;
         }
 
+        /// <summary>
+        /// Finds a document by a set of query terms.
+        /// The key is the field name and the value is the value to search for.
+        /// The given terms are combined with AND.
+        /// </summary>
+        /// <param name="queryTerms"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="useUnanonymizedData"></param>
+        public async Task<List<ElasticArchiveRecord>> FindDocument(Dictionary<string, string> queryTerms, int pageSize, UseUnanonymizedData useUnanonymizedData)
+        {
+            var documents = await dbAccess.FindDocument(queryTerms, pageSize);
+            var result = new List<ElasticArchiveRecord>();
+            foreach (var document in documents)
+            {
+                if (document != null && useUnanonymizedData != UseUnanonymizedData.No && document.IsAnonymized)
+                {
+                    var dbRecord = await dbAccess.FindDbDocument(document.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+
+                    if (useUnanonymizedData == UseUnanonymizedData.NoButTitle)
+                    {
+                        document.Title = dbRecord.UnanonymizedFields.Title;
+                    }
+                    else
+                    {
+                        document.SetUnanonymizedValuesForAuthorizedUser(dbRecord);
+                    }
+                    result.Add(document);
+                }
+                else
+                {
+                    result.Add(document);
+                }
+            }
+
+            return result;
+        }
+
         // Returns all archive records for a given package, that is from dossier down to document
         // or in case of a document packageId all the items up to the dossier.
-        public List<ElasticArchiveRecord> GetArchiveRecordsForPackage(string archiveRecordId)
+        public async Task<List<ElasticArchiveRecord>> GetArchiveRecordsForPackage(string archiveRecordId)
         {
             var retVal = new List<ElasticArchiveRecord>();
-            var entryItem = dbAccess.FindDocumentWithoutSecurity(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
+            var entryItem = await dbAccess.FindDocumentWithoutSecurity(archiveRecordId, MetadataToExclude.OCRContentAndFiles);
 
             if (entryItem != null)
             {
                 retVal.Add(entryItem);
                 Log.Verbose("Added ordered item with id {ArchiveRecordId} to list", entryItem.ArchiveRecordId);
-                retVal.AddRange(dbAccess.GetChildrenWithoutSecurity(entryItem.ArchiveRecordId, entryItem.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true));
+                retVal.AddRange(await dbAccess.GetChildrenWithoutSecurity(entryItem.ArchiveRecordId, entryItem.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true));
                 Log.Verbose("Added the children of the ordered item with id {ArchiveRecordId} to list. Found {Count} children",
                     entryItem.ArchiveRecordId, retVal.Count - 1);
 
@@ -99,7 +137,7 @@ namespace CMI.Manager.Index
                     Log.Verbose("Ordered item is not dossier level. So we traverse up.");
                     if (!string.IsNullOrEmpty(entryItem.ParentArchiveRecordId))
                     {
-                        entryItem = dbAccess.FindDocumentWithoutSecurity(entryItem.ParentArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
+                        entryItem = await dbAccess.FindDocumentWithoutSecurity(entryItem.ParentArchiveRecordId, MetadataToExclude.OCRContentAndFiles);
                         if (entryItem != null)
                         {
                             Log.Verbose("Found parent item with id {ArchiveRecordId}. Adding to collection.", entryItem.ArchiveRecordId);
@@ -112,10 +150,10 @@ namespace CMI.Manager.Index
             return retVal;
         }
 
-        public void UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
+        public async Task UpdateTokens(string id, string[] primaryDataDownloadAccessTokens, string[] primaryDataFulltextAccessTokens,
             string[] metadataAccessTokens, string[] fieldAccessTokens)
         {
-            dbAccess.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens, fieldAccessTokens);
+            await dbAccess.UpdateTokens(id, primaryDataDownloadAccessTokens, primaryDataFulltextAccessTokens, metadataAccessTokens, fieldAccessTokens);
         }
 
         public async Task<ElasticArchiveDbRecord> AnonymizeArchiveRecordAsync(ElasticArchiveDbRecord elasticArchiveRecord)
@@ -276,15 +314,15 @@ namespace CMI.Manager.Index
             return elasticArchiveRecord;
         }
 
-        public void UpdateDependentRecords(string archiveRecordId)
+        public async Task UpdateDependentRecords(string archiveRecordId)
         {
-            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
+            var dbRecord = await dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
             anonymizationReferenceEngine.UpdateDependentRecords(dbRecord);
         }
 
-        public void UpdateReferencesOfUnprotectedRecord(string archiveRecordId)
+        public async Task UpdateReferencesOfUnprotectedRecord(string archiveRecordId)
         {
-            var dbRecord = dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
+            var dbRecord = await dbAccess.FindDbDocument(archiveRecordId, MetadataToExclude.Nothing);
             anonymizationReferenceEngine.UpdateReferencesOfUnprotectedRecord(dbRecord);
         }
 

@@ -19,5 +19,6 @@ namespace CMI.Access.Harvest.ActaPro.Security
         public List<string> ZustaendigeStellenKeys { get; set; } = new();
         public string Publikationsrechte { get; set; }
         public string DocKey { get; set; }
+        public string SynchronisationOnlineZugang { get; set; }
     }
 }

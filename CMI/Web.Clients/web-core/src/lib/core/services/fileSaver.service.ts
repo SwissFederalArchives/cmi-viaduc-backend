@@ -9,16 +9,16 @@ export class FileSaverService {
 	// tries to save the file. It always checks first whether there is a file name star
 	// that could contain special characters. This is always tried to save first.
 	// If the file name asterisk does not exist or if saving goes wrong, the file name is tried to be saved.
-	public saveDownloadResponseToFile (event) {
+	public saveDownloadResponseToFile (event: any) {
 		if (event.type === HttpEventType.Response) {
-			let filename: string;
-			let filenameStar: string;
+			let filename: string | undefined = undefined;
+			let filenameStar: string | undefined = undefined;
 			const blob = event.body;
 
 			try {
 
 				const parts = event.headers.get('content-disposition').split(';');
-				parts.forEach(name => {
+				parts.forEach((name: string) => {
 					if (name.indexOf('filename=') > -1) {
 						filename =  name.substring(('filename=').length + 1);
 					} else if (name.indexOf('filename*=utf-8\'\'') > -1) {

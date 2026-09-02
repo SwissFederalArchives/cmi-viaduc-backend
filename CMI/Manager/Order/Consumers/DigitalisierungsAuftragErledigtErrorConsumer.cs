@@ -14,11 +14,11 @@ namespace CMI.Manager.Order.Consumers
     public class DigitalisierungsAuftragErledigtErrorConsumer : IConsumer<IDigitalisierungsAuftragErledigt>
     {
         private readonly IBus bus;
-        private readonly DataBuilder dataBuilder;
+        private readonly IDataBuilder dataBuilder;
         private readonly IMailHelper mailHelper;
         private readonly IParameterHelper parameterHelper;
 
-        public DigitalisierungsAuftragErledigtErrorConsumer(IBus bus, DataBuilder dataBuilder, IParameterHelper parameterHelper,
+        public DigitalisierungsAuftragErledigtErrorConsumer(IBus bus, IDataBuilder dataBuilder, IParameterHelper parameterHelper,
             IMailHelper mailHelper)
         {
             this.bus = bus;

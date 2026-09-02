@@ -28,7 +28,7 @@ namespace CMI.Manager.Index.Consumer
                     await context.RespondAsync(new FindArchiveRecordResponse
                     {
                         ArchiveRecordId = context.Message.ArchiveRecordId,
-                        ElasticArchiveRecord = indexManager.FindArchiveRecord(
+                        ElasticArchiveRecord = await indexManager.FindArchiveRecord(
                             context.Message.ArchiveRecordId, 
                             context.Message.MetadataToExclude, 
                             context.Message.UseUnanonymizedData)

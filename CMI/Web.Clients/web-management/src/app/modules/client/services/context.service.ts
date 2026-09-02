@@ -71,9 +71,9 @@ export class ContextService {
 
 	private _onLanguageUpdated(language: string): void {
 		this._context.language = language;
-		this._context.loadingLanguage = undefined;
+		this._context.loadingLanguage = '';
 		this._txt.update();
-		this._seo.updatePageInfo(null);
+		this._seo.updatePageInfo('');
 		this.context.next(this._context);
 	}
 

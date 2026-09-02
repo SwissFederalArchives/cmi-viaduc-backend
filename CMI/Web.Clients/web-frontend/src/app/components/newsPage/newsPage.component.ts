@@ -3,9 +3,10 @@ import {NewsForOneLanguage} from '../../modules/client/model';
 import {NewsService} from '../../modules/client/services';
 
 @Component({
-	selector: 'cmi-viaduc-news-page',
-	templateUrl: 'newsPage.component.html',
-	styleUrls: ['./newsPage.component.less']
+    selector: 'cmi-viaduc-news-page',
+    templateUrl: 'newsPage.component.html',
+    styleUrls: ['./newsPage.component.less'],
+    standalone: false
 })
 
 export class NewsPageComponent implements OnInit {

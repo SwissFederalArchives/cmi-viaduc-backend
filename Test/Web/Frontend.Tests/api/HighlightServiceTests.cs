@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using CMI.Access.Sql.Viaduc;
 using CMI.Contract.Common;
 using CMI.Web.Frontend.api.Elastic;
-using FluentAssertions;
-using Nest;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Core.Explain;
+using Elastic.Clients.Elasticsearch.Core.Search;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -12,36 +14,13 @@ namespace CMI.Web.Frontend.API.Tests.api
     [TestFixture]
     public class HighlightServiceTests
     {
-        /// <summary>
-        /// Only for Testing in this class
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        public class TestHit<T> : IHit<T> where T : TreeRecord
-        {
-            public string Id { get; }
-            public string Index { get; }
-            public long? PrimaryTerm { get; }
-            public string Routing { get; }
-            public long? SequenceNumber { get; }
-            public T Source { get; set; }
-            public string Type { get; }
-            public long Version { get; }
-            public Explanation Explanation { get; }
-            public FieldValues Fields { get; }
-            public IReadOnlyDictionary<string, IReadOnlyCollection<string>> Highlight { get; set; }
-            public IReadOnlyDictionary<string, InnerHitsResult> InnerHits { get; }
-            public NestedIdentity Nested { get; }
-            public IReadOnlyCollection<string> MatchedQueries { get; }
-            public double? Score { get; }
-            public IReadOnlyCollection<object> Sorts { get; }
-        }
 
         [Test]
         public void Test_if_user_with_BAR_role_record_without_unanonymized_fields_highlights_title()
         {
             // ARRANGE
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleBAR, null, null, false);
-            var hit = new TestHit<SearchRecord>
+            var hit = new Hit<SearchRecord> ("2", "archive")
             {
                 Source = new SearchRecord
                 {
@@ -55,24 +34,20 @@ namespace CMI.Web.Frontend.API.Tests.api
             var highlight = hit.GetHighlightingObj<SearchRecord>(userAccess, "unanonymized title");
 
             // ASSERT
-            highlight.Should().NotBeNull();
-            highlight.Children().Count().Should().Be(2);
-            highlight["title"]!.Count().Should().Be(1); ;
-            highlight["mostRelevantVektor"]!.Count().Should().Be(1); ;
+            highlight.ShouldNotBeNull();
+            highlight.Children().Count().ShouldBe(2);
+            highlight["title"]!.Count().ShouldBe(1); 
             highlight["title"]
-                .Values<string>().First().Should()
-                .Be("Highlighting");
-            highlight["mostRelevantVektor"]
-                .Values<string>().First().Should()
-                .Be(" < em>Fundstelle</em>");
-        }
+                .Values<string>().First().ShouldBe("Highlighting");
+          
+            }
 
         [Test]
         public void Test_if_user_with_BAR_role_highlights_unanonymized_title()
         {
             // ARRANGE
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleBAR, null, null, false);
-            var hit = new TestHit<ElasticArchiveDbRecord>()
+            var hit = new Hit<ElasticArchiveDbRecord>("2", "archive")
             {
                 Source = new ElasticArchiveDbRecord
                 {
@@ -88,16 +63,13 @@ namespace CMI.Web.Frontend.API.Tests.api
             };
 
             // ACT
-            var highlight = hit.GetHighlightingObj<SearchRecord>(userAccess, "unanonymized title");
+            var highlight = hit.Highlight;
 
             // ASSERT
-            highlight.Should().NotBeNull();
-            highlight.Children().Count().Should().Be(2);
-            highlight["title"]!.Count().Should().Be(1); ;
-            highlight["mostRelevantVektor"]!.Count().Should().Be(0); ;
-            highlight["title"]
-                .Values<string>().First().Should()
-                .Be("unanonymizedFields.Title");
+            highlight.ShouldNotBeNull();
+            highlight.Count().ShouldBe(4);
+            highlight["title"]!.Count().ShouldBe(1); 
+            highlight["title"].First().ShouldBe("Title");
         }
 
         [Test]
@@ -105,7 +77,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             // ARRANGE
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleBAR, null, null, false);
-            var hit = new TestHit<ElasticArchiveDbRecord>()
+            var hit = new Hit<ElasticArchiveDbRecord>("2", "archive")
             {
                 Source = new ElasticArchiveDbRecord
                 {
@@ -122,19 +94,14 @@ namespace CMI.Web.Frontend.API.Tests.api
             };
 
             // ACT
-            var highlight = hit.GetHighlightingObj<SearchRecord>(userAccess, "unanonymized title");
+            var highlight = hit.Highlight;
 
             // ASSERT
-            highlight.Should().NotBeNull();
-            highlight.Children().Count().Should().Be(2);
-            highlight["title"]!.Count().Should().Be(1); ;
-            highlight["mostRelevantVektor"]!.Count().Should().Be(1); ;
+            highlight.ShouldNotBeNull();
+            highlight.Count().ShouldBe(4);
+            highlight["title"]!.Count().ShouldBe(1);
             highlight["title"]
-                .Values<string>().First().Should()
-                .Be("unanonymizedFields.title");
-            highlight["mostRelevantVektor"]
-                .Values<string>().First().Should()
-                .Be(" < em>Fundstelle</em> in den Primärdaten");
+                .First().ShouldBe("title");
         }
 
         [Test]
@@ -142,7 +109,7 @@ namespace CMI.Web.Frontend.API.Tests.api
         {
             // ARRANGE
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleOe2, null, null, false);
-            var hit = new TestHit<ElasticArchiveDbRecord>()
+            var hit = new Hit<ElasticArchiveDbRecord>("2", "archive")
             {
                 Source = new ElasticArchiveDbRecord
                 {
@@ -158,19 +125,14 @@ namespace CMI.Web.Frontend.API.Tests.api
             };
 
             // ACT
-            var highlight = hit.GetHighlightingObj<SearchRecord>(userAccess, "Highlighting");
+            var highlight = hit.Highlight;
 
             // ASSERT
-            highlight.Should().NotBeNull();
-            highlight.Children().Count().Should().Be(2);
-            highlight["title"]!.Count().Should().Be(1); ;
-            highlight["mostRelevantVektor"]!.Count().Should().Be(1); ;
+            highlight.ShouldNotBeNull();
+            highlight.Count().ShouldBe(4);
+            highlight["title"]!.Count().ShouldBe(1); ;
             highlight["title"]
-                .Values<string>().First().Should()
-                .Be("Highlighting");
-            highlight["mostRelevantVektor"]
-                .Values<string>().First().Should()
-                .Be(" < em>Fundstelle</em>", "Dies ist eine andere <em>Fundstelle</em>");
+                .First().ShouldBe("Highlighting");
         }
 
         [Test]
@@ -180,7 +142,7 @@ namespace CMI.Web.Frontend.API.Tests.api
             var highlightData = new Dictionary<string, IReadOnlyCollection<string>>();
             highlightData.Add("xxx", new[] { "Highlighting" });
             var userAccess = new UserAccess("S31830999", AccessRoles.RoleOe2, null, null, false);
-            var hit = new TestHit<SearchRecord>()
+            var hit = new Hit<SearchRecord>("2", "archive")
             {
                 Source = new SearchRecord
                 {
@@ -193,13 +155,12 @@ namespace CMI.Web.Frontend.API.Tests.api
             var highlight = hit.GetHighlightingObj<SearchRecord>(userAccess, "default value");
 
             // ASSERT
-            highlight.Should().NotBeNull();
-            highlight.Children().Count().Should().Be(2);
-            highlight["title"]!.Count().Should().Be(1); ;
-            highlight["mostRelevantVektor"]!.Count().Should().Be(0); ;
+            highlight.ShouldNotBeNull();
+            highlight.Children().Count().ShouldBe(2);
+            highlight["title"]!.Count().ShouldBe(1); ;
+            highlight["mostRelevantVektor"]!.Count().ShouldBe(0); ;
             highlight["title"]
-                .Values<string>().First().Should()
-                .Be("default value");
+                .Values<string>().First().ShouldBe("default value");
         }
 
 

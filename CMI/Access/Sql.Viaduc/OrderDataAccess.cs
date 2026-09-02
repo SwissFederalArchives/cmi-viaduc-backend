@@ -637,7 +637,7 @@ namespace CMI.Access.Sql.Viaduc
                                                ApproveStatus = @ApproveStatus, DigitalisierungsKategorie = @DigitalisierungsKategorie,
                                                TerminDigitalisierung = @TerminDigitalisierung, InternalComment = @InternalComment, DatumDesEntscheids = @DatumDesEntscheids, EntscheidGesuch = @EntscheidGesuch, 
                                                Ausgabedatum = @Ausgabedatum, Abschlussdatum = @Abschlussdatum, Abbruchgrund = @Abbruchgrund, DatumDerFreigabe = @DatumDerFreigabe, SachbearbeiterId = @SachbearbeiterId,
-                                               AnzahlMahnungen = @AnzahlMahnungen, Ausleihdauer = @Ausleihdauer, MahndatumInfo = @MahndatumInfo, HasAufbereitungsfehler = @HasAufbereitungsfehler
+                                               AnzahlMahnungen = @AnzahlMahnungen, Ausleihdauer = @Ausleihdauer, MahndatumInfo = @MahndatumInfo, HasAufbereitungsfehler = @HasAufbereitungsfehler, Aushebungstyp = @Aushebungstyp, EntstehungDigitaleInhalte = @EntstehungDigitaleInhalte
 	                                    WHERE  ID = @ID";
 
                     cmd.Parameters.Add(new SqlParameter
@@ -886,6 +886,19 @@ namespace CMI.Access.Sql.Viaduc
                         ParameterName = "HasAufbereitungsfehler",
                         Value = ToDb(orderItem.HasAufbereitungsfehler),
                         SqlDbType = SqlDbType.Bit
+                    });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "Aushebungstyp",
+                        Value = ToDb(orderItem.Aushebungstyp),
+                        SqlDbType = SqlDbType.Int
+                    });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        IsNullable = true,
+                        Value = ToDb(orderItem.EntstehungDigitaleInhalte),
+                        ParameterName = "EntstehungDigitaleInhalte",
+                        SqlDbType = SqlDbType.NVarChar
                     });
                     var recordsAffected = await cmd.ExecuteNonQueryAsync();
                     return recordsAffected;
@@ -1625,7 +1638,7 @@ namespace CMI.Access.Sql.Viaduc
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText =
-                        "INSERT INTO OrderItem (OrderId, Ve, Status, BehaeltnisNummer, Dossiertitel, ZeitraumDossier, Standort, Signatur, Darin, ZusaetzlicheInformationen, Hierarchiestufe, Schutzfristverzeichnung, ZugaenglichkeitGemaessBGA, Publikationsrechte, Behaeltnistyp, ZustaendigeStelle, IdentifikationDigitalesMagazin, Aktenzeichen) OUTPUT INSERTED.ID " +
+                        "INSERT INTO OrderItem (OrderId, Ve, Status, BehaeltnisNummer, Dossiertitel, ZeitraumDossier, Standort, Signatur, Darin, ZusaetzlicheInformationen, Hierarchiestufe, Schutzfristverzeichnung, ZugaenglichkeitGemaessBGA, Publikationsrechte, Behaeltnistyp, ZustaendigeStelle, IdentifikationDigitalesMagazin, Aktenzeichen, EntstehungDigitaleInhalte) OUTPUT INSERTED.ID " +
                         "VALUES (@basketId, " +
                         "@veId, " +
                         "0, " +
@@ -1643,7 +1656,8 @@ namespace CMI.Access.Sql.Viaduc
                         "@behaeltnistyp, " +
                         "@zustaendigeStelle, " +
                         "@identifikationDigitalesMagazin, " +
-                        "@aktenzeichen)";
+                        "@aktenzeichen, " +
+                        "@entstehungDigitaleInhalte)";
 
                     cmd.Parameters.Add(new SqlParameter
                     {
@@ -1745,6 +1759,13 @@ namespace CMI.Access.Sql.Viaduc
                     {
                         ParameterName = "aktenzeichen",
                         Value = ToDb(indexSnapshot.Aktenzeichen),
+                        SqlDbType = SqlDbType.NVarChar
+                    });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "entstehungDigitaleInhalte",
+                        IsNullable = true,
+                        Value = ToDb(indexSnapshot.EntstehungDigitaleInhalte),
                         SqlDbType = SqlDbType.NVarChar
                     });
                     return Convert.ToInt32(await cmd.ExecuteScalarAsync());
@@ -1883,7 +1904,8 @@ namespace CMI.Access.Sql.Viaduc
                 Zeitraum = reader["Zeitraum"] as string,
                 Schutzfrist = reader["Schutzfrist"] as string,
                 DatumErstellungToken = Convert.ToDateTime(reader["DatumErstellungToken"]),
-                DatumVorgang = Convert.ToDateTime(reader["DatumVorgang"])
+                DatumVorgang = Convert.ToDateTime(reader["DatumVorgang"]),
+                EntstehungDigitaleInhalte = reader["EntstehungDigitaleInhalte"] as string,
             };
         }
 
@@ -1937,7 +1959,9 @@ namespace CMI.Access.Sql.Viaduc
                 AnzahlMahnungen = Convert.ToInt32(reader["AnzahlMahnungen"]),
                 Ausleihdauer = Convert.ToInt32(reader["Ausleihdauer"]),
                 MahndatumInfo = reader["MahndatumInfo"] as string,
-                GebrauchskopieStatus = ToEnum<GebrauchskopieStatus>(reader["GebrauchskopieStatus"])
+                GebrauchskopieStatus = ToEnum<GebrauchskopieStatus>(reader["GebrauchskopieStatus"]),
+                Aushebungstyp = reader["Aushebungstyp"] == DBNull.Value ? null : ToEnum<Aushebungstyp>(reader["Aushebungstyp"]),
+                EntstehungDigitaleInhalte = reader["EntstehungDigitaleInhalte"] as string
             };
         }
 

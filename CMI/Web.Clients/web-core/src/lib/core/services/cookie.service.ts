@@ -53,12 +53,12 @@ export class CookieService implements ICookieService {
 	}
 
 	public remove(key: string, options?: CookieOptionsArgs): void {
-		this._cookieWriter(key, undefined, options);
+		this._cookieWriter(key, '', options);
 	}
 
 	public removeAll(): void {
 		const cookies = this.getAll();
-		Object.keys(cookies).forEach(key => {
+		Object.keys(cookies as object).forEach(key => {
 			this.remove(key);
 		});
 	}
@@ -90,7 +90,7 @@ export class CookieService implements ICookieService {
 		return lastCookies;
 	}
 
-	private _cookieWriter(name: string, value: string, options: CookieOptionsArgs) {
+	private _cookieWriter(name: string, value: string, options?: CookieOptionsArgs) {
 		document.cookie = this._buildCookieString(name, value, options);
 	}
 
@@ -103,7 +103,7 @@ export class CookieService implements ICookieService {
 		}
 	}
 
-	private _buildCookieString(name: string, value: string, options: CookieOptionsArgs): string {
+	private _buildCookieString(name: string, value: string, options?: CookieOptionsArgs): string {
 		const cookiePath = '/';
 		let expires: any;
 		const defaultOpts = this._defaultOptions || new CookieOptions(<CookieOptionsArgs>{path: cookiePath});

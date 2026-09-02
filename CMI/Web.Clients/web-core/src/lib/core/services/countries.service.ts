@@ -45,7 +45,7 @@ export class CountriesService {
 		return this._http.get<string[]>(url);
 	}
 
-	public loadCountries(language: string, defaultLanguage: string = null): Promise<Countries> {
+	public loadCountries(language: string, defaultLanguage: string | null = null): Promise<Countries> {
 		const promises: Promise<Countries>[] = [];
 
 		if (defaultLanguage && language !== defaultLanguage && !this.hasCountries(defaultLanguage)) {

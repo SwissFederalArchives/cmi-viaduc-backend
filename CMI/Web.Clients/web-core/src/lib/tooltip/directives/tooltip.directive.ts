@@ -2,7 +2,8 @@ import { Directive, HostListener, ComponentRef, ViewContainerRef, Input, Compone
 import {TooltipContentComponent} from '../components/tooltip-content.component';
 
 @Directive({
-	selector: '[tooltip]'
+    selector: '[tooltip]',
+    standalone: false
 })
 export class TooltipDirective {
 

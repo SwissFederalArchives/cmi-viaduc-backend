@@ -58,6 +58,21 @@ namespace CMI.Engine.MailTemplate
             return this;
         }
 
+        public IDataBuilder AddVesWithSameContainer(string[] containerCodes)
+        {
+            var behältnisList = new List<BehältnisWithEleasticRecords>();
+            foreach (var containerCode in containerCodes)
+            {
+                var records = GetElasticArchiveRecords(containerCode, useUnanonymizedData);
+                if (records.Count > 0 && records[0]?.Containers != null)
+                {
+                    behältnisList.Add(new BehältnisWithEleasticRecords(records, records[0].Containers.First(c => c.ContainerCode.Equals(containerCode))));
+                }
+            }
+            expando.BehältnisList = behältnisList;
+            return this;
+        }
+
         public IDataBuilder AddVeList(IEnumerable<string> archiveRecordIdList)
         {
             var veList = new List<InElasticIndexierteVe>();
@@ -75,6 +90,7 @@ namespace CMI.Engine.MailTemplate
         {
             expando.VeList = veList;
             expando.HatMehrereVe = veList.Count > 1;
+                        
             return this;
         }
 
@@ -266,6 +282,35 @@ namespace CMI.Engine.MailTemplate
 
             return retVal;
         }
+
+        private List<ElasticArchiveRecord> GetElasticArchiveRecords(string containerCode, DataBuilderProtectionStatus useUnanonymizedData)
+        {
+            List<ElasticArchiveRecord> retVal;
+            try
+            {
+                var requestClient =
+                    CreateRequestClient<FindAllArchiveRecordsFromContainerRequest>(bus, BusConstants.IndexManagerFindArchiveRecordsWithContainerCodeMessageQueue, 600);
+
+                var result = AsyncHelper.RunSync(() => requestClient.GetResponse<FindAllArchiveRecordsFromContainerResponse>(new FindAllArchiveRecordsFromContainerRequest
+                {
+                    ContainerCode = containerCode,
+                    UseUnanonymizedData = useUnanonymizedData == DataBuilderProtectionStatus.AllUnanonymized ? UseUnanonymizedData.Yes : 
+                        useUnanonymizedData == DataBuilderProtectionStatus.AllWithoutTitleAnonymized ? UseUnanonymizedData.NoButTitle : UseUnanonymizedData.No
+                }));
+
+                retVal = result.Message.ElasticArchiveRecords ?? new List<ElasticArchiveRecord>();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e,
+                    "Es gab ein Problem beim Zusammenbauen von einem Record mit der Container {containerCode},es wird ein leere Liste zurückgegeben. Fehler: {message}",
+                    containerCode, e.Message);
+                retVal = new List<ElasticArchiveRecord>();
+            }
+
+            return retVal;
+        }
+
 
         private Auftrag GetAuftrag(Ordering ordering, OrderItem orderItem)
         {

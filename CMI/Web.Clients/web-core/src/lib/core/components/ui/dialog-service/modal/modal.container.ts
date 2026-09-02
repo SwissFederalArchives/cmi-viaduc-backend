@@ -4,8 +4,9 @@ import {
 import {ModalService} from './modal.service';
 
 @Component({
-	selector: 'cmi-viaduc-modal-service-container',
-	template: `<div #modalcontainer></div>`
+    selector: 'cmi-viaduc-modal-service-container',
+    template: `<div #modalcontainer></div>`,
+    standalone: false
 })
 export class ModalContainerComponent implements OnInit {
 	@ViewChild('modalcontainer', {static: true, read: ViewContainerRef})

@@ -8,14 +8,15 @@ import {CollectionView} from '@mescius/wijmo';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-	selector: 'cmi-news-management-page',
-	templateUrl: 'newsManagementPage.component.html',
-	styleUrls: ['./newsManagementPage.component.less']
+    selector: 'cmi-news-management-page',
+    templateUrl: 'newsManagementPage.component.html',
+    styleUrls: ['./newsManagementPage.component.less'],
+    standalone: false
 })
 
 export class NewsManagementPageComponent implements OnInit {
 	public crumbs: any[] = [];
-	public newsForEditor: CollectionView;
+	public newsForEditor!: CollectionView;
 
 	@ViewChild('flexGrid', { static: true })
 	public flexGrid: CmiGridComponent;
@@ -54,7 +55,7 @@ export class NewsManagementPageComponent implements OnInit {
 		item.transferValues();
 	}
 
-	public get deleteButtonDisabledText(): string {
+	public get deleteButtonDisabledText(): string | null {
 		const disabled = 'disabled';
 
 		if (!this.flexGrid) {

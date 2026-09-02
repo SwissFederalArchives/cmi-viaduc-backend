@@ -174,4 +174,9 @@ export class OrderService {
 		};
 		return this._http.post<void>(this._orderApiUrl + '/ErinnerungVersenden', postbody);
 	}
+
+	public getBehaeltnisInhaltHtml(behaeltnisNummern: string[]): Observable<string> {
+		const queryParams = behaeltnisNummern.map(i => i).join('&behaeltnisNummern=');
+		return this._http.get<string>(this._orderApiUrl + '/GetBehaeltnisInhaltHtml?behaeltnisNummern=' + queryParams);
+	}
 }

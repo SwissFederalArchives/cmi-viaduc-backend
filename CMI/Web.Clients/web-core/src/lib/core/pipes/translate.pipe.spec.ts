@@ -1,6 +1,6 @@
 import {TranslatePipe} from './translate.pipe';
 import {Translations} from '../model';
-import { ClientContext, TranslationService, PreloadService, CoreOptions } from '../services/public_api';
+import {ClientContext, TranslationService, PreloadService, CoreOptions} from '../services/public_api';
 import { ClientModel } from '../services/clientModel';
 
 describe('TranslatePipe', () => {

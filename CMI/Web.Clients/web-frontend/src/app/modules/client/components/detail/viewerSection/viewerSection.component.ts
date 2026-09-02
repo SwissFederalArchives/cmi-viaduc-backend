@@ -3,9 +3,10 @@ import { TranslationService} from '@cmi/viaduc-web-core';
 import {DownloadTokenService} from '../../../services/downloadToken.service';
 
 @Component({
-	selector: 'cmi-viaduc-viewer-section',
-	templateUrl: './viewerSection.component.html',
-	styleUrls: ['./viewerSection.component.less']
+    selector: 'cmi-viaduc-viewer-section',
+    templateUrl: './viewerSection.component.html',
+    styleUrls: ['./viewerSection.component.less'],
+    standalone: false
 })
 export class ViewerSectionComponent implements OnInit {
 	@Input()

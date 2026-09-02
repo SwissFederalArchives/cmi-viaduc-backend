@@ -1,5 +1,5 @@
-﻿using CMI.Access.Harvest.ActaPro;
-using FluentAssertions;
+using CMI.Access.Harvest.ActaPro;
+using Shouldly;
 using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -163,8 +163,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      010efc87-3f8c-5fb5-947f-ee9ba4693020").Result;
 
             // Assert
-            result.Metadata.DetailData.Count.Should().Be(16);
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should().Be("Dossier");
+            result.Metadata.DetailData.Count.ShouldBe(16);
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Dossier");
         }
 
         [Test]
@@ -174,8 +174,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vor     75f9a935-da62-4497-b93f-2c3cef47d933").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("Subdossier");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Subdossier");
         }
 
         [Test]
@@ -185,8 +184,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Tekt    2d75a3e4-7ea8-5c35-a82e-b3a47cf31c69").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("Hauptabteilung");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Hauptabteilung");
         }
 
         [Test]
@@ -196,19 +194,17 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("TBest   c10befd9-9b9f-5ce6-aeac-76dbb1512828").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("Teilbestand");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Teilbestand");
         }
 
         [Test]
-        public void Test_PET_Level_Is_Null()
+        public async void Test_PET_Level_Is_Null()
         {
-            // Arrange
-            // ACT
-            var result = archiveRecordBuilder.Build("PET 0815").Result;
+            // Act
+            Func<Task> act = () => archiveRecordBuilder.Build("PET 0815");
 
             // Assert
-            result.Should().BeNull();
+            await act.ShouldThrowAsync<ArgumentException>();
         }
 
         [Test]
@@ -218,7 +214,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Klas    6c63ee5b-2afa-5d42-8d0a-60cd27464ebd").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should().Be("Serie");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Serie");
         }
 
         [Test]
@@ -228,7 +224,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Dokum   9881bd41-f832-5c11-912f-d278711d59da").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should().Be("Dokument");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Dokument");
         }
 
         [Test]
@@ -238,7 +234,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Dokum   9881bd41-f832-5c11-912f-d278711d59da").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("FORM")).ElementValue[0].TextValues[0].Value.Should().Be("Video");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("FORM")).ElementValue[0].TextValues[0].Value.ShouldBe("Video");
         }
 
         [Test]
@@ -248,7 +244,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Best    8a1d4ddf-e622-5b69-859f-2566e1a11da8").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should().Be("Bestand");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Bestand");
         }
 
         [Test]
@@ -258,7 +254,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Arch    b83a8ece-92dc-506d-9baa-4126a74c139f").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.Should().Be("Archiv");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("STUFE")).ElementValue[0].TextValues[0].Value.ShouldBe("Archiv");
         }
 
 
@@ -269,8 +265,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Arch    b83a8ece-92dc-506d-9baa-4126a74c139f").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("CH-BAR#Unterlagen*");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("CH-BAR#Unterlagen*");
         }
 
         [Test]
@@ -280,8 +275,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Best    8a1d4ddf-e622-5b69-859f-2566e1a11da8").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("J2.143*");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("J2.143*");
         }
         [Test]
         public void Test_Best_Darin_Is_Field()
@@ -290,8 +284,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Best    38b7baa9-59cd-5826-b9d2-be60d6395a9e").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("DARIN")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("Die Dokumente stammen aus den Jahren 1915 bis 1919. (Quelle: BAR interne Bestandesanalyse J I.216-Az. 561-16)");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("DARIN")).ElementValue[0].TextValues[0].Value.ShouldBe("Die Dokumente stammen aus den Jahren 1915 bis 1919. (Quelle: BAR interne Bestandesanalyse J I.216-Az. 561-16)");
         }
 
         [Test]
@@ -301,8 +294,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Dokum   9881bd41-f832-5c11-912f-d278711d59da").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("J2.143#1996/386#1119*");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("J2.143#1996/386#1119*");
         }
 
 
@@ -313,8 +305,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Klas    6c63ee5b-2afa-5d42-8d0a-60cd27464ebd").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("J2.143#20.1964");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("J2.143#20.1964");
         }
 
         [Test]
@@ -324,8 +315,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("TBest   c10befd9-9b9f-5ce6-aeac-76dbb1512828").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("E6400C*");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("E6400C*");
         }
 
         [Test]
@@ -335,7 +325,7 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Tekt    2d75a3e4-7ea8-5c35-a82e-b3a47cf31c69").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should().Be("J*");
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("J*");
         }
 
 
@@ -346,9 +336,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      010efc87-3f8c-5fb5-947f-ee9ba4693020").Result;
 
             // Assert
-            result.Metadata.DetailData.Count.Should().Be(16);
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should().Be("B0#1000/1483#1085*");
-            result.Metadata.Containers.Container.Count.Should().Be(0);
+            result.Metadata.DetailData.Count.ShouldBe(16);
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("B0#1000/1483#1085*");
+            result.Metadata.Containers.Container.Count.ShouldBe(0);
         }
 
         [Test]
@@ -358,11 +348,11 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      685f0872-f984-4f66-88a4-e6cd873fb1d0").Result;
 
             // Assert
-            result.Metadata.DetailData.Count.Should().Be(28);
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should().Be("1960/1*");
-            result.Metadata.Containers.Container.Count.Should().Be(2);
-            result.Metadata.Containers.Container.Any(c => c.IdName.Equals("Mg      39d4210a-d1ca-4106-a891-85875a4fd207 1234")).Should().BeTrue();
-            result.Metadata.Containers.Container.Any(c => c.IdName.Equals("Mg      79a2585b-be3a-58dd-8dd7-4abba0476e60 469393")).Should().BeTrue();
+            result.Metadata.DetailData.Count.ShouldBe(28);
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("1960/1*");
+            result.Metadata.Containers.Container.Count.ShouldBe(2);
+            result.Metadata.Containers.Container.Any(c => c.IdName.Equals("Mg      39d4210a-d1ca-4106-a891-85875a4fd207 1234")).ShouldBeTrue();
+            result.Metadata.Containers.Container.Any(c => c.IdName.Equals("Mg      79a2585b-be3a-58dd-8dd7-4abba0476e60 469393")).ShouldBeTrue();
         }
 
         [Test]
@@ -372,9 +362,8 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vor     75f9a935-da62-4497-b93f-2c3cef47d933").Result;
 
             // Assert
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.Should()
-                .Be("E1234#1000/721#8#3*");
-            result.Metadata.Containers.Container.Count.Should().Be(1);
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATUR")).ElementValue[0].TextValues[0].Value.ShouldBe("E1234#1000/721#8#3*");
+            result.Metadata.Containers.Container.Count.ShouldBe(1);
         }
 
 
@@ -390,11 +379,11 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result1 = archiveRecordBuilder.Build("21687162").Result;
             var result2 = archiveRecordBuilder.Build("Vz      010efc87-3f8c-5fb5-947f-ee9ba4693020").Result;
             // Assert
-            result1.ArchiveRecordId.Equals(result2.ArchiveRecordId).Should().BeTrue();
-            result1.Metadata.DetailData.Count.Equals(result2.Metadata.DetailData.Count).Should().BeTrue();
-            result1.Security.MetadataAccessToken.Count.Equals(result2.Security.MetadataAccessToken.Count).Should().BeTrue();
-            result1.Security.PrimaryDataDownloadAccessToken.Count.Equals(result2.Security.PrimaryDataDownloadAccessToken.Count).Should().BeTrue();
-            result1.Security.PrimaryDataFulltextAccessToken.Count.Equals(result2.Security.PrimaryDataFulltextAccessToken.Count).Should().BeTrue();
+            result1.ArchiveRecordId.Equals(result2.ArchiveRecordId).ShouldBeTrue();
+            result1.Metadata.DetailData.Count.Equals(result2.Metadata.DetailData.Count).ShouldBeTrue();
+            result1.Security.MetadataAccessToken.Count.Equals(result2.Security.MetadataAccessToken.Count).ShouldBeTrue();
+            result1.Security.PrimaryDataDownloadAccessToken.Count.Equals(result2.Security.PrimaryDataDownloadAccessToken.Count).ShouldBeTrue();
+            result1.Security.PrimaryDataFulltextAccessToken.Count.Equals(result2.Security.PrimaryDataFulltextAccessToken.Count).ShouldBeTrue();
 
         }
 
@@ -405,9 +394,9 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      010efc87-3f8c-5fb5-947f-ee9ba4693020").Result;
 
             // Assert
-            result.Metadata.DetailData.Count.Should().Be(16);
-            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("ZUSTÄNDIGE_STELLE_(LINK)"))?.ElementValue[0].TextValues[0].Value.Should().Be("Schweizerisches Bundesarchiv (nach 1979)");
-            result.Metadata.Containers.Container.Count.Should().Be(0);
+            result.Metadata.DetailData.Count.ShouldBe(16);
+            result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("ZUSTÄNDIGE_STELLE_(LINK)"))?.ElementValue[0].TextValues[0].Value.ShouldBe("Schweizerisches Bundesarchiv (nach 1979)");
+            result.Metadata.Containers.Container.Count.ShouldBe(0);
         }
 
         [Test]
@@ -417,12 +406,12 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("TBest   5d76f626-9df7-5d54-b08e-5289baa7dfe9").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VE_ABLIEFERUNG_LINK")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VE_ABLIEFERUNG_LINK")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("VE_ABLIEFERUNG_LINK"));
-            element?.ElementValue.Count.Should().Be(3);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("1971/185 Bundesverwaltung (1910-1950)");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("1991/111 Bundesverwaltung (1914-1951)");
-            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("1996/276 Bundesverwaltung (1924-1936)");
+            element?.ElementValue.Count.ShouldBe(3);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("1971/185 Bundesverwaltung (1910-1950)");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("1991/111 Bundesverwaltung (1914-1951)");
+            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("1996/276 Bundesverwaltung (1924-1936)");
         }
 
         [Test]
@@ -432,11 +421,11 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("TBest   5d76f626-9df7-5d54-b08e-5289baa7dfe9").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VE_ORDNUNGSKOMPONENTE_LINK")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VE_ORDNUNGSKOMPONENTE_LINK")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("VE_ORDNUNGSKOMPONENTE_LINK"));
-            element?.ElementValue.Count.Should().Be(2);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("CH-BAR*/611 Finanzverwaltung (Gliederungseinheit)");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("CH-BAR*/612 Finanzverwaltung (Gliederungseinheit)");
+            element?.ElementValue.Count.ShouldBe(2);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("CH-BAR*/611 Finanzverwaltung (Gliederungseinheit)");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("CH-BAR*/612 Finanzverwaltung (Gliederungseinheit)");
         }
 
         [Test]
@@ -446,12 +435,12 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("LAND")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("LAND")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("LAND"));
-            element?.ElementValue.Count.Should().Be(3);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Schweiz");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Luxemburg");
-            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Deutschland");
+            element?.ElementValue.Count.ShouldBe(3);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Schweiz");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Luxemburg");
+            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Deutschland");
         }
 
         [Test]
@@ -461,12 +450,12 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("SIGNATURHISTORY")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("SIGNATURHISTORY")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("SIGNATURHISTORY"));
-            element?.ElementValue.Count.Should().Be(3);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("B0#1000/1483#2649-2654*");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("B0#1000/1483#2650*");
-            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("B0#1000/1483#2651*");
+            element?.ElementValue.Count.ShouldBe(3);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("B0#1000/1483#2649-2654*");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("B0#1000/1483#2650*");
+            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("B0#1000/1483#2651*");
         }
 
         [Test]
@@ -476,11 +465,11 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VERWANDTE_VE")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("VERWANDTE_VE")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("VERWANDTE_VE"));
-            element?.ElementValue.Count.Should().Be(2);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Siehe auch B0#1000/1483#2654*");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Siehe auch B0#1000/1483#2655*");
+            element?.ElementValue.Count.ShouldBe(2);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Siehe auch B0#1000/1483#2654*");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Siehe auch B0#1000/1483#2655*");
         }
 
         [Test]
@@ -490,11 +479,11 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("FRÜHERES_AKTENZEICHEN")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("FRÜHERES_AKTENZEICHEN")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("FRÜHERES_AKTENZEICHEN"));
-            element?.ElementValue.Count.Should().Be(2);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("B0.14");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("B0.15");
+            element?.ElementValue.Count.ShouldBe(2);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("B0.14");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("B0.15");
         }
 
         [Test]
@@ -504,15 +493,15 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("DIGITALE_VERSION")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("DIGITALE_VERSION")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("DIGITALE_VERSION"));
-            element?.ElementValue.Count.Should().Be(2);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Stream SFW_0999, Start dieses Beitrags: 03:02; Ende: 04:46");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Start dieses Beitrags: 04:46; Ende: 06:17");
-            element?.ElementValue[0].Link.Value.Should().Be("Stream SFW_0999, Start dieses Beitrags: 03:02; Ende: 04:46");
-            element?.ElementValue[1].Link.Value.Should().Be("Start dieses Beitrags: 04:46; Ende: 06:17");
-            element?.ElementValue[0].Link.Href.Should().Be("https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=182,286");
-            element?.ElementValue[1].Link.Href.Should().Be("https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=286,377");
+            element?.ElementValue.Count.ShouldBe(2);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Stream SFW_0999, Start dieses Beitrags: 03:02; Ende: 04:46");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Start dieses Beitrags: 04:46; Ende: 06:17");
+            element?.ElementValue[0].Link.Value.ShouldBe("Stream SFW_0999, Start dieses Beitrags: 03:02; Ende: 04:46");
+            element?.ElementValue[1].Link.Value.ShouldBe("Start dieses Beitrags: 04:46; Ende: 06:17");
+            element?.ElementValue[0].Link.Href.ShouldBe("https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=182,286");
+            element?.ElementValue[1].Link.Href.ShouldBe("https://media.zem.ch/01WS/1962/SFW_0999.mp4#t=286,377");
         }
 
 
@@ -523,15 +512,15 @@ namespace CMI.Access.Harvest.Tests.ActaPro
             var result = archiveRecordBuilder.Build("Vz      76949ff4-e208-5858-809e-fbddb188c588").Result;
 
             // Assert
-            result.Metadata.DetailData.Count(d => d.ElementName.Equals("ZUSTÄNDIGE_STELLE_(LINK)")).Should().Be(1);
+            result.Metadata.DetailData.Count(d => d.ElementName.Equals("ZUSTÄNDIGE_STELLE_(LINK)")).ShouldBe(1);
             var element = result.Metadata.DetailData.FirstOrDefault(d => d.ElementName.Equals("ZUSTÄNDIGE_STELLE_(LINK)"));
-            element?.ElementValue.Count.Should().Be(3);
-            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Schweizerisches Bundesarchiv (nach 1979)");
-            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Bundesamt für Rüstung armasuisse (2004-)");
-            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.Should().Be("Kommando Operationen (2018-)");
-            element?.ElementValue[0].EntityLink.EntityRecordId.Should().Be("Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da");
-            element?.ElementValue[1].EntityLink.EntityRecordId.Should().Be("Part    200a5421-e3fc-54f3-b191-5c41ffd9b5e7");
-            element?.ElementValue[2].EntityLink.EntityRecordId.Should().Be("Part    2cedbfb1-a2a6-56bf-8cc6-2c0c66930a80");
+            element?.ElementValue.Count.ShouldBe(3);
+            element?.ElementValue[0].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Schweizerisches Bundesarchiv (nach 1979)");
+            element?.ElementValue[1].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Bundesamt für Rüstung armasuisse (2004-)");
+            element?.ElementValue[2].TextValues.FirstOrDefault(t => t.IsDefaultLang)?.Value.ShouldBe("Kommando Operationen (2018-)");
+            element?.ElementValue[0].EntityLink.EntityRecordId.ShouldBe("Part    5225f107-a42f-5ed3-98d1-71e74ae1b0da");
+            element?.ElementValue[1].EntityLink.EntityRecordId.ShouldBe("Part    200a5421-e3fc-54f3-b191-5c41ffd9b5e7");
+            element?.ElementValue[2].EntityLink.EntityRecordId.ShouldBe("Part    2cedbfb1-a2a6-56bf-8cc6-2c0c66930a80");
         }
     }
 }

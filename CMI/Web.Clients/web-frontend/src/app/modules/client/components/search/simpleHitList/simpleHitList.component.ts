@@ -4,9 +4,10 @@ import {UserUiSettings} from '../../../model';
 import {ClientContext, ConfigService, Entity, TranslationService} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-simple-hitlist',
-	templateUrl: 'simpleHitList.component.html',
-	styleUrls: ['./simpleHitList.component.less']
+    selector: 'cmi-viaduc-simple-hitlist',
+    templateUrl: 'simpleHitList.component.html',
+    styleUrls: ['./simpleHitList.component.less'],
+    standalone: false
 })
 export class SimpleHitListComponent implements OnInit {
 	@Input()

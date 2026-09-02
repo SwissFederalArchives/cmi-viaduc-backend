@@ -9,9 +9,10 @@ import {AdvancedSearchService} from '../../../../services/advancedSearch.service
 import {SearchSynonymeIconComponent} from '../../searchSynonyme/searchSynonymeIcon/searchSynonymeIcon.component';
 
 @Component({
-	selector: 'cmi-viaduc-advanced-search-field',
-	templateUrl: 'advancedSearchField.component.html',
-	styleUrls: ['./advancedSearchField.component.less']
+    selector: 'cmi-viaduc-advanced-search-field',
+    templateUrl: 'advancedSearchField.component.html',
+    styleUrls: ['./advancedSearchField.component.less'],
+    standalone: false
 })
 export class AdvancedSearchFieldComponent implements OnInit, AfterViewInit {
 

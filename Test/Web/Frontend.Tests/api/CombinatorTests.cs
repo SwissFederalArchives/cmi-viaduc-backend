@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using CMI.Web.Frontend.api;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Web.Frontend.API.Tests.api
@@ -16,13 +16,13 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = test.GetCombinations().ToArray();
 
-            result.Should().NotBeNull();
-            result.Length.Should().Be(6);
+            result.ShouldNotBeNull();
+            result.Length.ShouldBe(6);
 
-            result[0].Should().BeEquivalentTo(new List<int>(new[] {1, 2, 3}));
-            result[1].Should().BeEquivalentTo(new List<int>(new[] {1, 2}));
-            result[2].Should().BeEquivalentTo(new List<int>(new[] {2, 3}));
-            result[4].Should().BeEquivalentTo(new List<int>(new[] {2}));
+            result[0].ShouldBe(new List<int>(new[] {1, 2, 3}));
+            result[1].ShouldBe(new List<int>(new[] {1, 2}));
+            result[2].ShouldBe(new List<int>(new[] {2, 3}));
+            result[4].ShouldBe(new List<int>(new[] {2}));
         }
 
         [Test]
@@ -32,11 +32,11 @@ namespace CMI.Web.Frontend.API.Tests.api
 
             var result = Combinator.GetCombinationsWithLength(test.ToList(), 2).ToArray();
 
-            result.Should().NotBeNull();
-            result.Length.Should().Be(2);
+            result.ShouldNotBeNull();
+            result.Length.ShouldBe(2);
 
-            result[0].Should().BeEquivalentTo(new List<int>(new[] {1, 2}));
-            result[1].Should().BeEquivalentTo(new List<int>(new[] {2, 3}));
+            result[0].ShouldBe(new List<int>(new[] {1, 2}));
+            result[1].ShouldBe(new List<int>(new[] {2, 3}));
         }
     }
 }

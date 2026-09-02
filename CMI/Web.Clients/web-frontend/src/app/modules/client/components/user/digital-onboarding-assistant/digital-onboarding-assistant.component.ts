@@ -2,7 +2,7 @@ import { UserService } from '../../../services';
 import {Component, OnInit, AfterViewInit, ElementRef} from '@angular/core';
 import {Countries, CountriesService, ClientContext, TranslationService, Country} from '@cmi/viaduc-web-core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {User} from '../../../model';
 import {OnboardingModel} from '../../../model/account/onboardingModel';
 import {DigitalOnboardingAssistantErrorMessages} from './digital-onboarding-assistant.ErrorMessages';
@@ -13,9 +13,10 @@ import {Italian} from 'flatpickr/dist/l10n/it';
 import moment from 'moment';
 
 @Component({
-	selector: 'cmi-digital-onboarding-assistant',
-	templateUrl: './digital-onboarding-assistant.component.html',
-	styleUrls: ['./digital-onboarding-assistant.component.less']
+    selector: 'cmi-digital-onboarding-assistant',
+    templateUrl: './digital-onboarding-assistant.component.html',
+    styleUrls: ['./digital-onboarding-assistant.component.less'],
+    standalone: false
 })
 export class DigitalOnboardingAssistantComponent implements OnInit, AfterViewInit {
 	public currentStep: number;
@@ -242,7 +243,7 @@ export class DigitalOnboardingAssistantComponent implements OnInit, AfterViewIni
 				},
 				[Validators.required, Validators.maxLength(60)]),
 			firstName: new FormControl(this.user.firstName, [Validators.required, Validators.maxLength(60)]),
-			dateOfBirth: new FormControl(birth, [Validators.required, this.dateValidator.bind(this)]),
+			dateOfBirth: new FormControl<Date | null>(birth,[Validators.required, this.dateValidator]),
 			email: new FormControl(this.user.emailAddress, [Validators.required, Validators.maxLength(60)])
 		});
 		this.myForm.statusChanges.subscribe(() => this.updateErrorMessages());
@@ -286,12 +287,14 @@ export class DigitalOnboardingAssistantComponent implements OnInit, AfterViewIni
 		}
 	}
 
-	private dateValidator(control: FormControl): any | null {
+	private dateValidator(control: AbstractControl): ValidationErrors | null {
 		if (control.value !==  undefined && control.value !== null && control.value !== '') {
 			return null;
 		}
 		// return error object
 		return {'invalidDate': {'value': control.value}};
 	}
+
+
 
 }

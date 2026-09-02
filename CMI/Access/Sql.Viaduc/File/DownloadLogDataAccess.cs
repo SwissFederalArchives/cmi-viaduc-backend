@@ -16,18 +16,18 @@ namespace CMI.Access.Sql.Viaduc.File
         }
 
         public void LogTokenGeneration(string token, string userId, string userTokens, string signatur, string titel,
-            string schutzfrist, string zeitraum)
+            string schutzfrist, string zeitraum, string entstehungDigitaleInhalte)
         {
-            CreateLogEntry(token, userId, userTokens, signatur, titel, schutzfrist, zeitraum, "Download", null);
+            CreateLogEntry(token, userId, userTokens, signatur, titel, schutzfrist, zeitraum, "Download", entstehungDigitaleInhalte, null);
         }
 
         public void LogViewerClick(string token, string userId, string userTokens, string signatur, string titel,
-           string schutzfrist, string zeitraum)
+            string schutzfrist, string zeitraum, string entstehungDigitaleInhalte)
         {
-            CreateLogEntry(token, userId, userTokens, signatur, titel, schutzfrist, zeitraum, "Viewer", DateTime.Now);
+            CreateLogEntry(token, userId, userTokens, signatur, titel, schutzfrist, zeitraum, "Viewer", entstehungDigitaleInhalte, DateTime.Now);
         }
 
-        private void CreateLogEntry(string token, string userId, string userTokens, string signatur, string titel, string schutzfrist, string zeitraum, string vorgang, DateTime? datumVorgang)
+        private void CreateLogEntry(string token, string userId, string userTokens, string signatur, string titel, string schutzfrist, string zeitraum, string vorgang, string entstehungDigitaleInhalte, DateTime? datumVorgang)
         {
             using (var cn = new SqlConnection(connectionString))
             {
@@ -97,6 +97,13 @@ namespace CMI.Access.Sql.Viaduc.File
                         ParameterName = "pDatumErstellungToken",
                         SqlDbType = SqlDbType.DateTime
                     });
+                    cmd.Parameters.Add(new SqlParameter
+                    {
+                        IsNullable = true,
+                        Value = ToDb(entstehungDigitaleInhalte),
+                        ParameterName = "pEntstehungDigitaleInhalte",
+                        SqlDbType = SqlDbType.NVarChar
+                    });
                     if (datumVorgang != null)
                     {
                         cmd.Parameters.Add(new SqlParameter
@@ -107,18 +114,18 @@ namespace CMI.Access.Sql.Viaduc.File
                             SqlDbType = SqlDbType.DateTime
                         });
                         query.Append(
-                            "       (  Token,   UserId,   UserTokens, Vorgang,   Signatur,   Titel,   Schutzfrist, Zeitraum,   DatumErstellungToken, DatumVorgang)");
+                            "       (  Token,   UserId,   UserTokens, Vorgang,   Signatur,   Titel,   Schutzfrist, Zeitraum,   DatumErstellungToken, EntstehungDigitaleInhalte, DatumVorgang)");
 
                         query.Append(
-                            "VALUES (@pToken, @pUserId, @pUserTokens, @pVorgang,    @pSignatur, @pTitel, @pSchutzfrist, @pZeitraum, @pDatumErstellungToken, @pDatumVorgang)");
+                            "VALUES (@pToken, @pUserId, @pUserTokens, @pVorgang,    @pSignatur, @pTitel, @pSchutzfrist, @pZeitraum, @pDatumErstellungToken, @pEntstehungDigitaleInhalte, @pDatumVorgang)");
                     }
                     else
                     {
                         query.Append(
-                            "       (  Token,   UserId,   UserTokens, Vorgang,   Signatur,   Titel,   Schutzfrist, Zeitraum,   DatumErstellungToken, DatumVorgang)");
+                            "       (  Token,   UserId,   UserTokens, Vorgang,   Signatur,   Titel,   Schutzfrist, Zeitraum,   DatumErstellungToken, EntstehungDigitaleInhalte, DatumVorgang)");
 
                         query.Append(
-                            "VALUES (@pToken, @pUserId, @pUserTokens, @pVorgang,    @pSignatur, @pTitel, @pSchutzfrist, @pZeitraum, @pDatumErstellungToken, null)");
+                            "VALUES (@pToken, @pUserId, @pUserTokens, @pVorgang,    @pSignatur, @pTitel, @pSchutzfrist, @pZeitraum, @pDatumErstellungToken, @pEntstehungDigitaleInhalte, null)");
                     }
 
                     cmd.CommandText = query.ToString();

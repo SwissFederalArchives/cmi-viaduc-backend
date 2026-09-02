@@ -3,25 +3,25 @@ import {ApproveStatus, EntityDecoratorService} from '@cmi/viaduc-web-core';
 import {OrderService} from '../../../services';
 import {ToastrService} from 'ngx-toastr';
 import {ErrorService} from '../../../../shared/services';
-import {FlatPickrOutputOptions} from 'angularx-flatpickr/lib/flatpickr.directive';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
-	selector: 'cmi-viaduc-freigabekontrolle-modal',
-	templateUrl: 'freigabeKontrolleModal.component.html',
-	styleUrls: ['./freigabeKontrolleModal.component.less']
+    selector: 'cmi-viaduc-freigabekontrolle-modal',
+    templateUrl: 'freigabeKontrolleModal.component.html',
+    styleUrls: ['./freigabeKontrolleModal.component.less'],
+    standalone: false
 })
 export class FreigabeKontrolleModalComponent implements  OnInit{
 
 	@Input()
-	public ids: number[] = [];
+	public ids!: number[];
 	@Input()
-	public datumBewilligung:  Date;
+	public datumBewilligung!:  Date;
 
 	@Input()
-	public interneBemerkung: string;
+	public interneBemerkung!: string;
 	@Input()
-	public currentRolePublicClient: string;
+	public currentRolePublicClient!: string;
 	@Input()
 	public set open(val: boolean) {
 		this._open = val;
@@ -42,25 +42,28 @@ export class FreigabeKontrolleModalComponent implements  OnInit{
 	}
 	public set selectedEntscheid(val: ApproveStatus) {
 		this._selectedEntscheid = val;
-		this.haveToEnterBewilligungsDatum = (val && val === ApproveStatus.FreigegebenInSchutzfrist);
+		this.haveToEnterBewilligungsDatum = (val !== null && val === ApproveStatus.FreigegebenInSchutzfrist);
 	}
 	public isValidDate = false;
 	public isLoading = false;
-	public entscheide = [];
-	public haveToEnterBewilligungsDatum = false;
-	public isOe2UserConfirmed: boolean;
+	protected entscheide: ApproveStatus[] = [];
+	public haveToEnterBewilligungsDatum: boolean = false;
+	public isOe2UserConfirmed!: boolean;
 
 	private _open = true;
-	private _selectedEntscheid: ApproveStatus = null;
+	private _selectedEntscheid!: ApproveStatus;
 
 	constructor(private _dec: EntityDecoratorService,
 				private _ord: OrderService,
 				private _err: ErrorService,
 				private _toastr: ToastrService) {
-		this.entscheide = Object.keys(ApproveStatus)
-			.filter(k => isNaN(parseInt(k, 10)))
-			.map(k => ApproveStatus[k])
-			.filter(k => k !== ApproveStatus.NichtGeprueft && k !== ApproveStatus.FreigegebenDurchSystem);
+
+		this.entscheide = Object.values(ApproveStatus)
+			.filter(value =>
+				typeof value === 'number' &&
+				value !== ApproveStatus.NichtGeprueft &&
+				value !== ApproveStatus.FreigegebenDurchSystem
+			) as ApproveStatus[];
 	}
 
 	public ngOnInit(): void {
@@ -75,7 +78,7 @@ export class FreigabeKontrolleModalComponent implements  OnInit{
 		this.open = false;
 	}
 
-	public checkDate($event: FlatPickrOutputOptions) {
+	public checkDate($event: any) {
 		const isValid = $event.dateString !== '' && $event.dateString;
 		if (isValid) {
 			this.datumBewilligung = $event.selectedDates[0];
@@ -92,13 +95,20 @@ export class FreigabeKontrolleModalComponent implements  OnInit{
 
 		// Wir wandeln nach UTC um, behalten aber den Zeitteil. So wird aus 20.12.2022 00:00:00 GMT+1 nicht 19.12.2022 23:00:00Z sondern
 		// wird zu 20.12.2022 00:00:00Z
-		const bewilligungsDatum = this.haveToEnterBewilligungsDatum ? moment(this.datumBewilligung).utc(true).toDate() : null;
+		const bewilligungsDatum: Date | undefined = this.haveToEnterBewilligungsDatum
+			? moment(this.datumBewilligung).utc(true).toDate()
+			: undefined;
 		if (!bewilligungsDatum && this.haveToEnterBewilligungsDatum) {
 			return;
 		}
 
 		this.isLoading = true;
-		this._ord.auftraegeEntscheidFreigabeHinterlegen(this.ids, this.selectedEntscheid, bewilligungsDatum , this.interneBemerkung).subscribe(() => {
+		this._ord.auftraegeEntscheidFreigabeHinterlegen(
+			this.ids,
+			this.selectedEntscheid,
+			bewilligungsDatum,
+			this.interneBemerkung
+		).subscribe(() => {
 			this._toastr.success('Statusänderung erfolgreich durchgeführt', 'Erfolgreich');
 			this.open = false;
 			this.onSubmitted.emit(true);

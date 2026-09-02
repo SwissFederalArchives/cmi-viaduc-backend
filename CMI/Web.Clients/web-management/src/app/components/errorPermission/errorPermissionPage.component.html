@@ -1,13 +1,17 @@
 <div class="page page-error col-sm-12">
-	<cmi-viaduc-layout-left-content>
-		<div left>
-			<cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
-		</div>
-		<div content>
-			<div *ngIf="error">
-				<cmi-error-content [error]="error"></cmi-error-content>
-			</div>
-			<cmi-loader *ngIf="!error" class="cmi-visible"></cmi-loader>
-		</div>
-	</cmi-viaduc-layout-left-content>
+  <cmi-viaduc-layout-left-content>
+    <div left>
+      <cmi-viaduc-left-navigation></cmi-viaduc-left-navigation>
+    </div>
+    <div content>
+      @if (error) {
+        <div>
+          <cmi-error-content [error]="error"></cmi-error-content>
+        </div>
+      }
+      @if (!error) {
+        <cmi-loader class="cmi-visible"></cmi-loader>
+      }
+    </div>
+  </cmi-viaduc-layout-left-content>
 </div>

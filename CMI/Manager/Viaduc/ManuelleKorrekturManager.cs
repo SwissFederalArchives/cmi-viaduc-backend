@@ -28,13 +28,19 @@ namespace CMI.Manager.Viaduc
         public async Task<ManuelleKorrekturDetailItem> GetManuelleKorrektur(int manuelleKorrekturId)
         {
             var manuelleKorrektur = await dbManuelleKorrekturAccess.GetManuelleKorrektur(manuelleKorrekturId);
-            var elasticRecord = dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId, MetadataToExclude.OCRContentAndFiles);
+            var elasticRecord = await dbSearchAccess.FindDocumentWithoutSecurity(manuelleKorrektur.VeId, MetadataToExclude.OCRContentAndFiles);
             if (elasticRecord == null)
             {
                 return null;
             }
-            var verweise = elasticRecord.References.Select(r => dbSearchAccess.FindDocumentWithoutSecurity(r.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles)).ToList();
-            var elasticRecordChildren = dbSearchAccess.GetChildrenWithoutSecurity(elasticRecord.ArchiveRecordId, elasticRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true);
+
+            var verweise = (await Task.WhenAll(
+                    elasticRecord.References
+                        .Select(async r => await dbSearchAccess.FindDocumentWithoutSecurity(
+                            r.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles))))
+                .ToList();
+           // var verweise =  elasticRecord.References.Select(r =>  dbSearchAccess.FindDocumentWithoutSecurity(r.ArchiveRecordId, MetadataToExclude.OCRContentAndFiles)).ToList();
+            var elasticRecordChildren = await dbSearchAccess.GetChildrenWithoutSecurity(elasticRecord.ArchiveRecordId, elasticRecord.ExternalKeys.First(e => e.Key == "scopeArchiv").Value, true);
             return await Task.FromResult(new ManuelleKorrekturDetailItem
             {
                 ArchivplanKontext = elasticRecord.GetArchivePlanContext(),
@@ -58,7 +64,7 @@ namespace CMI.Manager.Viaduc
 
             if (mustBeReset)
             {
-                ResetRecordToAISValues(manuelleKorrektur);
+               await ResetRecordToAISValues(manuelleKorrektur);
             }
         }
 
@@ -95,14 +101,14 @@ namespace CMI.Manager.Viaduc
                         result.Add(result.Count.ToString(), $"VE mit der Signatur oder VE-ID '{identifier}' ist in der Liste schon vorhanden.");
                         continue;
                     }
-                    var archiveRecord = GetElasticArchiveDbRecord(identifier);
+                    var archiveRecord = await GetElasticArchiveDbRecord(identifier);
                     if (archiveRecord == null)
                     {
                         var scopeId = actaProMappingProvider.GetScopeId(identifier);
                         if (scopeId > 0)
                         {
                             result.Add(result.Count.ToString(), $"VE mit der ActaPro VE-ID '{identifier}' wurde mit Scope VE-ID '{scopeId}' gefunden.");
-                            archiveRecord = GetElasticArchiveDbRecord(scopeId.ToString());
+                            archiveRecord =  await GetElasticArchiveDbRecord(scopeId.ToString());
                         }
                     }
 
@@ -147,18 +153,18 @@ namespace CMI.Manager.Viaduc
         public async Task<ManuelleKorrekturDto> PublizierenManuelleKorrektur(int manuelleKorrekturId, string userId)
         {
             var manuelleKorrektur = await dbManuelleKorrekturAccess.Publizieren(manuelleKorrekturId, userId);
-            SetRecordToManualValues(manuelleKorrektur);
+            await SetRecordToManualValues(manuelleKorrektur);
             return manuelleKorrektur;
         }
         
-        private ElasticArchiveDbRecord GetElasticArchiveDbRecord(string id)
+        private async Task<ElasticArchiveDbRecord> GetElasticArchiveDbRecord(string id)
         {
-            return dbSearchAccess.FindDbDocument(id, MetadataToExclude.OCRContentAndFiles);
+            return await dbSearchAccess.FindDbDocument(id, MetadataToExclude.OCRContentAndFiles);
         }
 
-        private void ResetRecordToAISValues(ManuelleKorrekturDto manuelleKorrektur)
+        private async Task ResetRecordToAISValues(ManuelleKorrekturDto manuelleKorrektur)
         {
-            var archiveRecord = GetElasticArchiveDbRecord(manuelleKorrektur.VeId.ToString());
+            var archiveRecord = await GetElasticArchiveDbRecord(manuelleKorrektur.VeId);
             var mustTitleUpdate = false;
 
             foreach (var feld in manuelleKorrektur.ManuelleKorrekturFelder)
@@ -194,12 +200,12 @@ namespace CMI.Manager.Viaduc
                 anonymizationReferenceEngine.UpdateSelf(archiveRecord);
                 anonymizationReferenceEngine.UpdateDependentRecords(archiveRecord);
             }
-            dbSearchAccess.UpdateDocument(archiveRecord);
+            await dbSearchAccess.UpdateDocument(archiveRecord);
         }
 
-        private void SetRecordToManualValues(ManuelleKorrekturDto manuelleKorrektur)
+        private async Task SetRecordToManualValues(ManuelleKorrekturDto manuelleKorrektur)
         {
-            var archiveRecord = GetElasticArchiveDbRecord(manuelleKorrektur.VeId.ToString());
+            var archiveRecord = await GetElasticArchiveDbRecord(manuelleKorrektur.VeId);
             var containBlockNodes = false;
             var mustTitleUpdate = false;
             foreach (var feld in manuelleKorrektur.ManuelleKorrekturFelder)
@@ -296,7 +302,7 @@ namespace CMI.Manager.Viaduc
                 anonymizationReferenceEngine.UpdateSelf(archiveRecord);
                 anonymizationReferenceEngine.UpdateDependentRecords(archiveRecord);
             }
-            dbSearchAccess.UpdateDocument(archiveRecord);
+            await dbSearchAccess.UpdateDocument(archiveRecord);
         }
 
 

@@ -261,6 +261,29 @@ namespace CMI.Access.Harvest.ActaPro.Mapping
             return null;
         }
 
+        public static DataElement CreateFloatElement(string floatValue, string elementName, int factor = 1)
+        {
+            if (double.TryParse(floatValue, NumberStyles.Float, CultureInfo.InvariantCulture, out var rawValue))
+            {
+                var calculatedValue = rawValue * factor;
+
+                var elementValue = new DataElementElementValueFloatValue
+                {
+                    Value = calculatedValue > float.MaxValue ? float.MaxValue : Convert.ToSingle(calculatedValue), DecimalPositions = 2
+                };
+                var element = new DataElement
+                {
+                    ElementName = elementName,
+                    ElementType = DataElementElementType.@float,
+                    ElementValue = [new() { FloatValue = elementValue }]
+                };
+
+                return element;
+            }
+
+            return null;
+        }
+
         public static DataElement CreateBoolElement(ICollection<DocumentField> fields, string groupName, string fieldName, string elementName)
         {
             var group = fields.FirstOrDefault(f => f.Type.Equals(groupName, StringComparison.InvariantCultureIgnoreCase));
@@ -450,6 +473,9 @@ namespace CMI.Access.Harvest.ActaPro.Mapping
                     break;
                 case "arch": //Archiv
                     fieldValues = GetGroupOrFieldValues(fields, fieldName, "Ar");
+                    break;
+                case "datei": //Archiv
+                    fieldValues = GetGroupOrFieldValues(fields, fieldName, "Datei");
                     break;
                 default:
                     throw new ArgumentException($"Level is not supported: {levelValue}");

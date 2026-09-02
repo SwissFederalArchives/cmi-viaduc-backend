@@ -3,9 +3,10 @@ import {Ordering, OrderItem, ShippingType, TranslationService} from '@cmi/viaduc
 import {ShoppingCartService, UrlService, AuthorizationService} from '../../../services';
 
 @Component({
-	selector: 'cmi-viaduc-order-submitted-step',
-	templateUrl: 'checkoutSubmittedStep.component.html',
-	styleUrls: ['./checkoutSubmittedStep.component.less']
+    selector: 'cmi-viaduc-order-submitted-step',
+    templateUrl: 'checkoutSubmittedStep.component.html',
+    styleUrls: ['./checkoutSubmittedStep.component.less'],
+    standalone: false
 })
 export class CheckoutSubmittedStepComponent implements OnInit {
 

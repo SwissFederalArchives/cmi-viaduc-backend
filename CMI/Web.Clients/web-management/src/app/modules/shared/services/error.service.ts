@@ -4,24 +4,26 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {AuthorizationService} from './authorization.service';
 import {ApplicationFeatureEnum} from '@cmi/viaduc-web-core';
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
 export class ErrorService {
+
 	constructor(private _toastr: ToastrService, private _auth: AuthorizationService) {
 	}
 
 	public showError(e: any, title = '') {
-		const httpError = e as HttpErrorResponse;
 		title = title.trim().length === 0 ? 'Fehler' : title;
 
-		if (httpError) {
-			let msg = (httpError.error || {}).exceptionMessage;
-			msg = msg || httpError.message;
+		if (e && (e instanceof HttpErrorResponse || e.status !== undefined)) {
+			let msg = e.error?.exceptionMessage || e.message || 'Ein Netzwerkfehler ist aufgetreten.';
 
 			const index = msg.indexOf('faulted:');
 			if (index > 0) {
-				msg = msg.substr(index + 'faulted:'.length);
+				msg = msg.substring(index + 'faulted:'.length);
 			}
-			this._toastr.error(msg, title, { disableTimeOut: true, closeButton: true});
+			this._toastr.error(msg, title, { disableTimeOut: true, closeButton: true });
+
 			return;
 		}
 		if (e) {
@@ -32,7 +34,7 @@ export class ErrorService {
 		this._toastr.error('Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es später erneut', 'Fehler', { disableTimeOut: true, closeButton: true});
 	}
 
-	public showOdataErrorIfNecessary(error) {
+	public showOdataErrorIfNecessary(error: any) {
 		if (!(error.request && error.request.status > 399 && error.request.status < 500)) {
 			return;
 		}
@@ -44,6 +46,7 @@ export class ErrorService {
 		}
 		this._toastr.error(msg, 'Unzulässige Filterung', { disableTimeOut: true });
 	}
+
 	public verifyApplicationFeatureOrShowError(identifier:ApplicationFeatureEnum): boolean {
 		if (!this._auth.hasApplicationFeature(identifier)) {
 			this._toastr.error(`Um diese Aktion durchzuführen benötigen Sie das Feature '${ApplicationFeatureEnum[identifier]}'`, 'Fehlende Berechtigung', { tapToDismiss:true});

@@ -1,5 +1,5 @@
-﻿using System;
-using FluentAssertions;
+using System;
+using Shouldly;
 using NUnit.Framework;
 
 namespace CMI.Manager.Order.Tests
@@ -18,8 +18,8 @@ namespace CMI.Manager.Order.Tests
             var result = sut.Parse(input);
 
             // assert
-            result.AnzahlAuftraege.Should().Be(1);
-            result.InAnzahlTagen.Should().Be(1);
+            result.AnzahlAuftraege.ShouldBe(1);
+            result.InAnzahlTagen.ShouldBe(1);
         }
 
         [Test]
@@ -33,8 +33,8 @@ namespace CMI.Manager.Order.Tests
             var result = sut.Parse(input);
 
             // assert
-            result.AnzahlAuftraege.Should().Be(2);
-            result.InAnzahlTagen.Should().Be(2);
+            result.AnzahlAuftraege.ShouldBe(2);
+            result.InAnzahlTagen.ShouldBe(2);
         }
 
         [Test]
@@ -48,8 +48,8 @@ namespace CMI.Manager.Order.Tests
             var result = sut.Parse(input);
 
             // assert
-            result.AnzahlAuftraege.Should().Be(2);
-            result.InAnzahlTagen.Should().Be(1);
+            result.AnzahlAuftraege.ShouldBe(2);
+            result.InAnzahlTagen.ShouldBe(1);
         }
 
 
@@ -64,8 +64,8 @@ namespace CMI.Manager.Order.Tests
             var result = sut.Parse(input);
 
             // assert
-            result.AnzahlAuftraege.Should().Be(2);
-            result.InAnzahlTagen.Should().Be(1);
+            result.AnzahlAuftraege.ShouldBe(2);
+            result.InAnzahlTagen.ShouldBe(1);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace CMI.Manager.Order.Tests
             var action = (Action) (() => { sut.Parse(input); });
 
             // assert
-            action.Should().Throw<Exception>();
+            Should.Throw<Exception>(action);
         }
 
         [Test]
@@ -93,7 +93,7 @@ namespace CMI.Manager.Order.Tests
             var action = (Action) (() => { sut.Parse(input); });
 
             // assert
-            action.Should().Throw<Exception>();
+            Should.Throw<Exception>(action);
         }
     }
 }

@@ -4,9 +4,10 @@ import {AuthenticationService} from '../../../services/index';
 import {ClientContext, Utilities as _util} from '@cmi/viaduc-web-core';
 
 @Component({
-	selector: 'cmi-viaduc-nav-content',
-	templateUrl: 'navigationContent.component.html',
-	styleUrls: ['./navigationContent.component.less']
+    selector: 'cmi-viaduc-nav-content',
+    templateUrl: 'navigationContent.component.html',
+    styleUrls: ['./navigationContent.component.less'],
+    standalone: false
 })
 export class NavigationContentComponent implements AfterViewInit {
 	private _elem: any;

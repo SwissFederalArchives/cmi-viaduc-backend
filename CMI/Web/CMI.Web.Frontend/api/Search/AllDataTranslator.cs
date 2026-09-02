@@ -1,41 +1,39 @@
 using CMI.Access.Sql.Viaduc;
 using CMI.Utilities.Common.Helpers;
-using Nest;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.QueryDsl;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CMI.Web.Frontend.api.Search
 {
     public class AllDataTranslator : IFieldTranslator
     {
-        public QueryContainer CreateQueryForField(SearchField field, UserAccess access)
+        public Query CreateQueryForField(SearchField field, UserAccess access)
         {
+            var values = access.CombinedTokens.Select(token => (FieldValue) token).ToList();
+
+            var termQuery = new TermsQuery(new Field("primaryDataFulltextAccessTokens"), new TermsQueryField(values));
+
             return new BoolQuery
             {
                 MinimumShouldMatch = 1,
-                Should = new QueryContainer[]
+                Should = new List<Query>
                 {
                     new BoolQuery
                     {
-                        Filter = new QueryContainer[]
+                        Filter = new List<Query>{ termQuery },
+                        Must = new List<Query>
                         {
-                            new TermsQuery
+                            new QueryStringQuery(@"all_\*:(" + field.Value.Escape() + ")")
                             {
-                                Field = "primaryDataFulltextAccessTokens",
-                                Terms = access.CombinedTokens
-                            }
-                        },
-                        Must = new QueryContainer[]
-                        {
-                            new QueryStringQuery
-                            {
-                                Query = @"all_\*:(" + field.Value.Escape() + ")",
                                 DefaultOperator = Operator.And,
                                 AllowLeadingWildcard = false
                             }
                         }
                     },
-                    new QueryStringQuery
+                    new QueryStringQuery(@"all_Metadata_\*:(" + field.Value.Escape() + ")")
                     {
-                        Query = @"all_Metadata_\*:(" + field.Value.Escape() + ")",
                         DefaultOperator = Operator.And,
                         AllowLeadingWildcard = false
                     }
